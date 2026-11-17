@@ -2,9 +2,11 @@
 ---
 title: "getProductEvent"
 title_tag: "tencentcloud.Monitor.getProductEvent"
-meta_desc: "Documentation for the tencentcloud.Monitor.getProductEvent function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query monitor events(There is a lot of data and it is recommended to output to a file)"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,61 +18,56 @@ Use this data source to query monitor events(There is a lot of data and it is re
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const cvmEventData = tencentcloud.Monitor.getProductEvent({
+const cvmEventData = tencentcloud.monitor.getProductEvent({
+    startTime: 1588700283,
     isAlarmConfig: 0,
     productNames: ["cvm"],
-    startTime: 1588700283,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-cvm_event_data = tencentcloud.Monitor.get_product_event(is_alarm_config=0,
-    product_names=["cvm"],
-    start_time=1588700283)
+cvm_event_data = tencentcloud.monitor.get_product_event(start_time=1588700283,
+    is_alarm_config=0,
+    product_names=["cvm"])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var cvmEventData = Tencentcloud.Monitor.GetProductEvent.Invoke(new()
-    {
-        IsAlarmConfig = 0,
-        ProductNames = new[]
-        {
-            "cvm",
-        },
-        StartTime = 1588700283,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Monitor.GetProductEvent(ctx, &monitor.GetProductEventArgs{
+		_, err := monitor.GetProductEvent(ctx, &monitor.GetProductEventArgs{
+			StartTime:     pulumi.IntRef(1588700283),
 			IsAlarmConfig: pulumi.IntRef(0),
 			ProductNames: []string{
 				"cvm",
 			},
-			StartTime: pulumi.IntRef(1588700283),
 		}, nil)
 		if err != nil {
 			return err
@@ -79,6 +76,36 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var cvmEventData = Tencentcloud.Monitor.GetProductEvent.Invoke(new()
+    {
+        StartTime = 1588700283,
+        IsAlarmConfig = 0,
+        ProductNames = new[]
+        {
+            "cvm",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -87,8 +114,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Monitor.MonitorFunctions;
 import com.pulumi.tencentcloud.Monitor.inputs.GetProductEventArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -101,27 +128,59 @@ public class App {
 
     public static void stack(Context ctx) {
         final var cvmEventData = MonitorFunctions.getProductEvent(GetProductEventArgs.builder()
+            .startTime(1588700283)
             .isAlarmConfig(0)
             .productNames("cvm")
-            .startTime(1588700283)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   cvmEventData:
     fn::invoke:
-      Function: tencentcloud:Monitor:getProductEvent
-      Arguments:
+      function: tencentcloud:Monitor:getProductEvent
+      arguments:
+        startTime: 1.588700283e+09
         isAlarmConfig: 0
         productNames:
           - cvm
-        startTime: 1.588700283e+09
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_monitor_getproductevent" "cvmEventData" {
+  start_time      = 1588700283
+  is_alarm_config = 0
+  product_names   = ["cvm"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeProductEventList](https://www.tencentcloud.com/document/api/248/35976)
 
 
 
@@ -133,7 +192,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -141,9 +200,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getProductEvent<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProductEventArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProductEventResult</a></span>></span
+><span class="k">function </span>getProductEvent<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProductEventArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProductEventResult</a></span>></span
 ><span class="k">
-function </span>getProductEventOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProductEventOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProductEventResult</a></span>></span
+function </span>getProductEventOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProductEventOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProductEventResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -152,7 +211,7 @@ function </span>getProductEventOutput<span class="p">(</span><span class="nx">ar
 <div>
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
-><span class="k">def </span>get_product_event<span class="p">(</span><span class="nx">dimensions</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.GetProductEventDimension]]</span> = None<span class="p">,</span>
+><span class="k">def </span>get_product_event<span class="p">(</span><span class="nx">dimensions</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetProductEventDimension]]</span> = None<span class="p">,</span>
                       <span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                       <span class="nx">event_names</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                       <span class="nx">instance_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
@@ -166,19 +225,19 @@ function </span>getProductEventOutput<span class="p">(</span><span class="nx">ar
                       <span class="nx">types</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetProductEventResult</span
 ><span class="k">
-def </span>get_product_event_output<span class="p">(</span><span class="nx">dimensions</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_monitor.GetProductEventDimensionArgs]]]]</span> = None<span class="p">,</span>
-                      <span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                      <span class="nx">event_names</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                      <span class="nx">instance_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                      <span class="nx">is_alarm_config</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                      <span class="nx">product_names</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                      <span class="nx">project_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                      <span class="nx">region_lists</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                      <span class="nx">statuses</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                      <span class="nx">types</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProductEventResult]</span
+def </span>get_product_event_output<span class="p">(</span><span class="nx">dimensions</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetProductEventDimensionArgs]]]]</span> = None<span class="p">,</span>
+                      <span class="nx">end_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                      <span class="nx">event_names</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                      <span class="nx">instance_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                      <span class="nx">is_alarm_config</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                      <span class="nx">product_names</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                      <span class="nx">project_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                      <span class="nx">region_lists</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">start_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                      <span class="nx">statuses</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                      <span class="nx">types</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProductEventResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -203,7 +262,8 @@ func </span>GetProductEventOutput<span class="p">(</span><span class="nx">ctx</s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetProductEvent </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetProductEventResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetProductEventArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetProductEventResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProductEventInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProductEventResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProductEventInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProductEventResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProductEventInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -212,7 +272,8 @@ func </span>GetProductEventOutput<span class="p">(</span><span class="nx">ctx</s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetProductEventResult</a></span>> </span>getProductEvent<span class="p">(</span><span class="nx">GetProductEventArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProductEventResult</a></span>> </span>getProductEvent<span class="p">(</span><span class="nx">GetProductEventArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProductEventResult</a></span>> </span>getProductEvent<span class="p">(</span><span class="nx">GetProductEventArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -224,6 +285,15 @@ func </span>GetProductEventOutput<span class="p">(</span><span class="nx">ctx</s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Monitor/getProductEvent:getProductEvent
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_monitor_get_product_event&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -242,8 +312,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventdimension">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Get<wbr>Product<wbr>Event<wbr>Dimension&gt;</a></span>
     </dt>
-    <dd><p>Dimensional composition of instance objects.</p>
-</dd><dt class="property-optional"
+    <dd>Dimensional composition of instance objects.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -251,8 +320,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End timestamp for this query, eg:<code>1588232111</code>. Default start time is <code>now-3000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End timestamp for this query, eg:<code>1588232111</code>. Default start time is <code>now-3000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="eventnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventnames_csharp" style="color: inherit; text-decoration: inherit;">Event<wbr>Names</a>
@@ -260,8 +328,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Event name filtering, such as <code>guest_reboot</code> indicates that the machine restart.</p>
-</dd><dt class="property-optional"
+    <dd>Event name filtering, such as <code>guestReboot</code> indicates that the machine restart.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -269,8 +336,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Affect objects, such as <code>ins-19708ino</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Affect objects, such as <code>ins-19708ino</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isalarmconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isalarmconfig_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Alarm<wbr>Config</a>
@@ -278,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm status configuration filter, 1means configured, 0(default) means not configured.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm status configuration filter, 1means configured, 0(default) means not configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="productnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productnames_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Names</a>
@@ -287,8 +352,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Product type filtering, such as <code>cvm</code> for cloud server.</p>
-</dd><dt class="property-optional"
+    <dd>Product type filtering, such as <code>cvm</code> for cloud server.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectids_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Ids</a>
@@ -296,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Project ID filter.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="regionlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionlists_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Lists</a>
@@ -305,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Region filter, such as <code>gz</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region filter, such as <code>gz</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -314,8 +376,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -323,8 +384,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_csharp" style="color: inherit; text-decoration: inherit;">Statuses</a>
@@ -332,8 +392,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</p>
-</dd><dt class="property-optional"
+    <dd>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</dd><dt class="property-optional"
             title="Optional">
         <span id="types_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_csharp" style="color: inherit; text-decoration: inherit;">Types</a>
@@ -341,8 +400,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Event type filtering, with value range <code>abnormal</code>,<code>status_change</code>, indicating state change and abnormal events.</p>
-</dd></dl>
+    <dd>Event type filtering, with value range <code>abnormal</code>,<code>statusChange</code>, indicating state change and abnormal events.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -356,8 +414,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventdimension">[]Get<wbr>Product<wbr>Event<wbr>Dimension</a></span>
     </dt>
-    <dd><p>Dimensional composition of instance objects.</p>
-</dd><dt class="property-optional"
+    <dd>Dimensional composition of instance objects.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -365,8 +422,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End timestamp for this query, eg:<code>1588232111</code>. Default start time is <code>now-3000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End timestamp for this query, eg:<code>1588232111</code>. Default start time is <code>now-3000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="eventnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventnames_go" style="color: inherit; text-decoration: inherit;">Event<wbr>Names</a>
@@ -374,8 +430,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Event name filtering, such as <code>guest_reboot</code> indicates that the machine restart.</p>
-</dd><dt class="property-optional"
+    <dd>Event name filtering, such as <code>guestReboot</code> indicates that the machine restart.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -383,8 +438,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Affect objects, such as <code>ins-19708ino</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Affect objects, such as <code>ins-19708ino</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isalarmconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isalarmconfig_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Alarm<wbr>Config</a>
@@ -392,8 +446,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm status configuration filter, 1means configured, 0(default) means not configured.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm status configuration filter, 1means configured, 0(default) means not configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="productnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productnames_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Names</a>
@@ -401,8 +454,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Product type filtering, such as <code>cvm</code> for cloud server.</p>
-</dd><dt class="property-optional"
+    <dd>Product type filtering, such as <code>cvm</code> for cloud server.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectids_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Ids</a>
@@ -410,8 +462,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Project ID filter.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="regionlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionlists_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Lists</a>
@@ -419,8 +470,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Region filter, such as <code>gz</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region filter, such as <code>gz</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -428,8 +478,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -437,8 +486,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_go" style="color: inherit; text-decoration: inherit;">Statuses</a>
@@ -446,8 +494,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</p>
-</dd><dt class="property-optional"
+    <dd>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</dd><dt class="property-optional"
             title="Optional">
         <span id="types_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_go" style="color: inherit; text-decoration: inherit;">Types</a>
@@ -455,8 +502,109 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Event type filtering, with value range <code>abnormal</code>,<code>status_change</code>, indicating state change and abnormal events.</p>
-</dd></dl>
+    <dd>Event type filtering, with value range <code>abnormal</code>,<code>statusChange</code>, indicating state change and abnormal events.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dimensions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_hcl" style="color: inherit; text-decoration: inherit;">dimensions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproducteventdimension">list(object)</a></span>
+    </dt>
+    <dd>Dimensional composition of instance objects.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End timestamp for this query, eg:<code>1588232111</code>. Default start time is <code>now-3000</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="event_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_names_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Event name filtering, such as <code>guestReboot</code> indicates that the machine restart.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Affect objects, such as <code>ins-19708ino</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_alarm_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_alarm_config_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>alarm_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm status configuration filter, 1means configured, 0(default) means not configured.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="product_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_names_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Product type filtering, such as <code>cvm</code> for cloud server.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_ids_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Project ID filter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="region_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_lists_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Region filter, such as <code>gz</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to store results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="statuses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_hcl" style="color: inherit; text-decoration: inherit;">statuses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_hcl" style="color: inherit; text-decoration: inherit;">types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Event type filtering, with value range <code>abnormal</code>,<code>statusChange</code>, indicating state change and abnormal events.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -470,8 +618,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventdimension">List&lt;Get<wbr>Product<wbr>Event<wbr>Dimension&gt;</a></span>
     </dt>
-    <dd><p>Dimensional composition of instance objects.</p>
-</dd><dt class="property-optional"
+    <dd>Dimensional composition of instance objects.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -479,8 +626,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>End timestamp for this query, eg:<code>1588232111</code>. Default start time is <code>now-3000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End timestamp for this query, eg:<code>1588232111</code>. Default start time is <code>now-3000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="eventnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventnames_java" style="color: inherit; text-decoration: inherit;">event<wbr>Names</a>
@@ -488,8 +634,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Event name filtering, such as <code>guest_reboot</code> indicates that the machine restart.</p>
-</dd><dt class="property-optional"
+    <dd>Event name filtering, such as <code>guestReboot</code> indicates that the machine restart.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -497,8 +642,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Affect objects, such as <code>ins-19708ino</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Affect objects, such as <code>ins-19708ino</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isalarmconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isalarmconfig_java" style="color: inherit; text-decoration: inherit;">is<wbr>Alarm<wbr>Config</a>
@@ -506,8 +650,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm status configuration filter, 1means configured, 0(default) means not configured.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm status configuration filter, 1means configured, 0(default) means not configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="productnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productnames_java" style="color: inherit; text-decoration: inherit;">product<wbr>Names</a>
@@ -515,8 +658,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Product type filtering, such as <code>cvm</code> for cloud server.</p>
-</dd><dt class="property-optional"
+    <dd>Product type filtering, such as <code>cvm</code> for cloud server.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectids_java" style="color: inherit; text-decoration: inherit;">project<wbr>Ids</a>
@@ -524,8 +666,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Project ID filter.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="regionlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionlists_java" style="color: inherit; text-decoration: inherit;">region<wbr>Lists</a>
@@ -533,8 +674,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Region filter, such as <code>gz</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region filter, such as <code>gz</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -542,8 +682,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -551,8 +690,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_java" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -560,8 +698,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</p>
-</dd><dt class="property-optional"
+    <dd>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</dd><dt class="property-optional"
             title="Optional">
         <span id="types_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_java" style="color: inherit; text-decoration: inherit;">types</a>
@@ -569,8 +706,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Event type filtering, with value range <code>abnormal</code>,<code>status_change</code>, indicating state change and abnormal events.</p>
-</dd></dl>
+    <dd>Event type filtering, with value range <code>abnormal</code>,<code>statusChange</code>, indicating state change and abnormal events.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -584,8 +720,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventdimension">Get<wbr>Product<wbr>Event<wbr>Dimension[]</a></span>
     </dt>
-    <dd><p>Dimensional composition of instance objects.</p>
-</dd><dt class="property-optional"
+    <dd>Dimensional composition of instance objects.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -593,8 +728,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End timestamp for this query, eg:<code>1588232111</code>. Default start time is <code>now-3000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End timestamp for this query, eg:<code>1588232111</code>. Default start time is <code>now-3000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="eventnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventnames_nodejs" style="color: inherit; text-decoration: inherit;">event<wbr>Names</a>
@@ -602,8 +736,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Event name filtering, such as <code>guest_reboot</code> indicates that the machine restart.</p>
-</dd><dt class="property-optional"
+    <dd>Event name filtering, such as <code>guestReboot</code> indicates that the machine restart.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -611,8 +744,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Affect objects, such as <code>ins-19708ino</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Affect objects, such as <code>ins-19708ino</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isalarmconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isalarmconfig_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Alarm<wbr>Config</a>
@@ -620,8 +752,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm status configuration filter, 1means configured, 0(default) means not configured.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm status configuration filter, 1means configured, 0(default) means not configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="productnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productnames_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Names</a>
@@ -629,8 +760,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Product type filtering, such as <code>cvm</code> for cloud server.</p>
-</dd><dt class="property-optional"
+    <dd>Product type filtering, such as <code>cvm</code> for cloud server.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectids_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Ids</a>
@@ -638,8 +768,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Project ID filter.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="regionlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionlists_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Lists</a>
@@ -647,8 +776,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Region filter, such as <code>gz</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region filter, such as <code>gz</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -656,8 +784,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -665,8 +792,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_nodejs" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -674,8 +800,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</p>
-</dd><dt class="property-optional"
+    <dd>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</dd><dt class="property-optional"
             title="Optional">
         <span id="types_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_nodejs" style="color: inherit; text-decoration: inherit;">types</a>
@@ -683,8 +808,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Event type filtering, with value range <code>abnormal</code>,<code>status_change</code>, indicating state change and abnormal events.</p>
-</dd></dl>
+    <dd>Event type filtering, with value range <code>abnormal</code>,<code>statusChange</code>, indicating state change and abnormal events.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -696,10 +820,9 @@ The following arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_python" style="color: inherit; text-decoration: inherit;">dimensions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproducteventdimension">Get<wbr>Product<wbr>Event<wbr>Dimension]</a></span>
+        <span class="property-type"><a href="#getproducteventdimension">Sequence[Get<wbr>Product<wbr>Event<wbr>Dimension]</a></span>
     </dt>
-    <dd><p>Dimensional composition of instance objects.</p>
-</dd><dt class="property-optional"
+    <dd>Dimensional composition of instance objects.</dd><dt class="property-optional"
             title="Optional">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -707,8 +830,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End timestamp for this query, eg:<code>1588232111</code>. Default start time is <code>now-3000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End timestamp for this query, eg:<code>1588232111</code>. Default start time is <code>now-3000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="event_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_names_python" style="color: inherit; text-decoration: inherit;">event_<wbr>names</a>
@@ -716,8 +838,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Event name filtering, such as <code>guest_reboot</code> indicates that the machine restart.</p>
-</dd><dt class="property-optional"
+    <dd>Event name filtering, such as <code>guestReboot</code> indicates that the machine restart.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
@@ -725,8 +846,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Affect objects, such as <code>ins-19708ino</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Affect objects, such as <code>ins-19708ino</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_alarm_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_alarm_config_python" style="color: inherit; text-decoration: inherit;">is_<wbr>alarm_<wbr>config</a>
@@ -734,8 +854,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm status configuration filter, 1means configured, 0(default) means not configured.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm status configuration filter, 1means configured, 0(default) means not configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="product_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_names_python" style="color: inherit; text-decoration: inherit;">product_<wbr>names</a>
@@ -743,8 +862,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Product type filtering, such as <code>cvm</code> for cloud server.</p>
-</dd><dt class="property-optional"
+    <dd>Product type filtering, such as <code>cvm</code> for cloud server.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_ids_python" style="color: inherit; text-decoration: inherit;">project_<wbr>ids</a>
@@ -752,8 +870,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Project ID filter.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_lists_python" style="color: inherit; text-decoration: inherit;">region_<wbr>lists</a>
@@ -761,8 +878,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Region filter, such as <code>gz</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region filter, such as <code>gz</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -770,8 +886,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -779,8 +894,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_python" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -788,8 +902,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</p>
-</dd><dt class="property-optional"
+    <dd>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</dd><dt class="property-optional"
             title="Optional">
         <span id="types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_python" style="color: inherit; text-decoration: inherit;">types</a>
@@ -797,8 +910,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Event type filtering, with value range <code>abnormal</code>,<code>status_change</code>, indicating state change and abnormal events.</p>
-</dd></dl>
+    <dd>Event type filtering, with value range <code>abnormal</code>,<code>statusChange</code>, indicating state change and abnormal events.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -812,8 +924,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventdimension">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Dimensional composition of instance objects.</p>
-</dd><dt class="property-optional"
+    <dd>Dimensional composition of instance objects.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -821,8 +932,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End timestamp for this query, eg:<code>1588232111</code>. Default start time is <code>now-3000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End timestamp for this query, eg:<code>1588232111</code>. Default start time is <code>now-3000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="eventnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventnames_yaml" style="color: inherit; text-decoration: inherit;">event<wbr>Names</a>
@@ -830,8 +940,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Event name filtering, such as <code>guest_reboot</code> indicates that the machine restart.</p>
-</dd><dt class="property-optional"
+    <dd>Event name filtering, such as <code>guestReboot</code> indicates that the machine restart.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -839,8 +948,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Affect objects, such as <code>ins-19708ino</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Affect objects, such as <code>ins-19708ino</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isalarmconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isalarmconfig_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Alarm<wbr>Config</a>
@@ -848,8 +956,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm status configuration filter, 1means configured, 0(default) means not configured.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm status configuration filter, 1means configured, 0(default) means not configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="productnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productnames_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Names</a>
@@ -857,8 +964,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Product type filtering, such as <code>cvm</code> for cloud server.</p>
-</dd><dt class="property-optional"
+    <dd>Product type filtering, such as <code>cvm</code> for cloud server.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectids_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Ids</a>
@@ -866,8 +972,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Project ID filter.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="regionlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionlists_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Lists</a>
@@ -875,8 +980,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Region filter, such as <code>gz</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Region filter, such as <code>gz</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -884,8 +988,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -893,8 +996,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_yaml" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -902,8 +1004,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</p>
-</dd><dt class="property-optional"
+    <dd>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</dd><dt class="property-optional"
             title="Optional">
         <span id="types_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_yaml" style="color: inherit; text-decoration: inherit;">types</a>
@@ -911,8 +1012,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Event type filtering, with value range <code>abnormal</code>,<code>status_change</code>, indicating state change and abnormal events.</p>
-</dd></dl>
+    <dd>Event type filtering, with value range <code>abnormal</code>,<code>statusChange</code>, indicating state change and abnormal events.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -935,8 +1035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -944,8 +1043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Outputs.<wbr>Get<wbr>Product<wbr>Event<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list events. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list events. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="dimensions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_csharp" style="color: inherit; text-decoration: inherit;">Dimensions</a>
@@ -953,8 +1051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventdimension">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Outputs.<wbr>Get<wbr>Product<wbr>Event<wbr>Dimension&gt;</a></span>
     </dt>
-    <dd><p>A list of event dimensions. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of event dimensions. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -970,8 +1067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Event short name.</p>
-</dd><dt class="property-"
+    <dd>Event short name.</dd><dt class="property-"
             title="">
         <span id="instanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -979,8 +1075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The instance ID of this event.</p>
-</dd><dt class="property-"
+    <dd>The instance ID of this event.</dd><dt class="property-"
             title="">
         <span id="isalarmconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isalarmconfig_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Alarm<wbr>Config</a>
@@ -988,8 +1083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to configure alarm.</p>
-</dd><dt class="property-"
+    <dd>Whether to configure alarm.</dd><dt class="property-"
             title="">
         <span id="productnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productnames_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Names</a>
@@ -997,8 +1091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Product short name.</p>
-</dd><dt class="property-"
+    <dd>Product short name.</dd><dt class="property-"
             title="">
         <span id="projectids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectids_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Ids</a>
@@ -1006,8 +1099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Project ID of this instance.</p>
-</dd><dt class="property-"
+    <dd>Project ID of this instance.</dd><dt class="property-"
             title="">
         <span id="regionlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionlists_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Lists</a>
@@ -1031,8 +1123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The start timestamp of this event.</p>
-</dd><dt class="property-"
+    <dd>The start timestamp of this event.</dd><dt class="property-"
             title="">
         <span id="statuses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_csharp" style="color: inherit; text-decoration: inherit;">Statuses</a>
@@ -1040,8 +1131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The status of this event.</p>
-</dd><dt class="property-"
+    <dd>The status of this event.</dd><dt class="property-"
             title="">
         <span id="types_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_csharp" style="color: inherit; text-decoration: inherit;">Types</a>
@@ -1049,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The type of this event.</p>
-</dd></dl>
+    <dd>The type of this event.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1064,8 +1153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -1073,8 +1161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlist">[]Get<wbr>Product<wbr>Event<wbr>List</a></span>
     </dt>
-    <dd><p>A list events. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list events. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="dimensions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_go" style="color: inherit; text-decoration: inherit;">Dimensions</a>
@@ -1082,8 +1169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventdimension">[]Get<wbr>Product<wbr>Event<wbr>Dimension</a></span>
     </dt>
-    <dd><p>A list of event dimensions. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of event dimensions. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -1099,8 +1185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Event short name.</p>
-</dd><dt class="property-"
+    <dd>Event short name.</dd><dt class="property-"
             title="">
         <span id="instanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -1108,8 +1193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The instance ID of this event.</p>
-</dd><dt class="property-"
+    <dd>The instance ID of this event.</dd><dt class="property-"
             title="">
         <span id="isalarmconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isalarmconfig_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Alarm<wbr>Config</a>
@@ -1117,8 +1201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to configure alarm.</p>
-</dd><dt class="property-"
+    <dd>Whether to configure alarm.</dd><dt class="property-"
             title="">
         <span id="productnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productnames_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Names</a>
@@ -1126,8 +1209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Product short name.</p>
-</dd><dt class="property-"
+    <dd>Product short name.</dd><dt class="property-"
             title="">
         <span id="projectids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectids_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Ids</a>
@@ -1135,8 +1217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Project ID of this instance.</p>
-</dd><dt class="property-"
+    <dd>Project ID of this instance.</dd><dt class="property-"
             title="">
         <span id="regionlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionlists_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Lists</a>
@@ -1160,8 +1241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The start timestamp of this event.</p>
-</dd><dt class="property-"
+    <dd>The start timestamp of this event.</dd><dt class="property-"
             title="">
         <span id="statuses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_go" style="color: inherit; text-decoration: inherit;">Statuses</a>
@@ -1169,8 +1249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The status of this event.</p>
-</dd><dt class="property-"
+    <dd>The status of this event.</dd><dt class="property-"
             title="">
         <span id="types_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_go" style="color: inherit; text-decoration: inherit;">Types</a>
@@ -1178,8 +1257,125 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The type of this event.</p>
-</dd></dl>
+    <dd>The type of this event.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproducteventlist">list(object)</a></span>
+    </dt>
+    <dd>A list events. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="dimensions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_hcl" style="color: inherit; text-decoration: inherit;">dimensions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproducteventdimension">list(object)</a></span>
+    </dt>
+    <dd>A list of event dimensions. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="event_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_names_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Event short name.</dd><dt class="property-"
+            title="">
+        <span id="instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The instance ID of this event.</dd><dt class="property-"
+            title="">
+        <span id="is_alarm_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_alarm_config_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>alarm_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to configure alarm.</dd><dt class="property-"
+            title="">
+        <span id="product_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_names_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Product short name.</dd><dt class="property-"
+            title="">
+        <span id="project_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_ids_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Project ID of this instance.</dd><dt class="property-"
+            title="">
+        <span id="region_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_lists_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The start timestamp of this event.</dd><dt class="property-"
+            title="">
+        <span id="statuses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_hcl" style="color: inherit; text-decoration: inherit;">statuses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The status of this event.</dd><dt class="property-"
+            title="">
+        <span id="types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_hcl" style="color: inherit; text-decoration: inherit;">types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The type of this event.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1193,8 +1389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -1202,8 +1397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlist">List&lt;Get<wbr>Product<wbr>Event<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list events. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list events. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="dimensions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_java" style="color: inherit; text-decoration: inherit;">dimensions</a>
@@ -1211,8 +1405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventdimension">List&lt;Get<wbr>Product<wbr>Event<wbr>Dimension&gt;</a></span>
     </dt>
-    <dd><p>A list of event dimensions. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of event dimensions. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1228,8 +1421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Event short name.</p>
-</dd><dt class="property-"
+    <dd>Event short name.</dd><dt class="property-"
             title="">
         <span id="instanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -1237,8 +1429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The instance ID of this event.</p>
-</dd><dt class="property-"
+    <dd>The instance ID of this event.</dd><dt class="property-"
             title="">
         <span id="isalarmconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isalarmconfig_java" style="color: inherit; text-decoration: inherit;">is<wbr>Alarm<wbr>Config</a>
@@ -1246,8 +1437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to configure alarm.</p>
-</dd><dt class="property-"
+    <dd>Whether to configure alarm.</dd><dt class="property-"
             title="">
         <span id="productnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productnames_java" style="color: inherit; text-decoration: inherit;">product<wbr>Names</a>
@@ -1255,8 +1445,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Product short name.</p>
-</dd><dt class="property-"
+    <dd>Product short name.</dd><dt class="property-"
             title="">
         <span id="projectids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectids_java" style="color: inherit; text-decoration: inherit;">project<wbr>Ids</a>
@@ -1264,8 +1453,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Project ID of this instance.</p>
-</dd><dt class="property-"
+    <dd>Project ID of this instance.</dd><dt class="property-"
             title="">
         <span id="regionlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionlists_java" style="color: inherit; text-decoration: inherit;">region<wbr>Lists</a>
@@ -1289,8 +1477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The start timestamp of this event.</p>
-</dd><dt class="property-"
+    <dd>The start timestamp of this event.</dd><dt class="property-"
             title="">
         <span id="statuses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_java" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -1298,8 +1485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The status of this event.</p>
-</dd><dt class="property-"
+    <dd>The status of this event.</dd><dt class="property-"
             title="">
         <span id="types_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_java" style="color: inherit; text-decoration: inherit;">types</a>
@@ -1307,8 +1493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The type of this event.</p>
-</dd></dl>
+    <dd>The type of this event.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1322,8 +1507,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -1331,8 +1515,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlist">Get<wbr>Product<wbr>Event<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list events. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list events. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="dimensions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_nodejs" style="color: inherit; text-decoration: inherit;">dimensions</a>
@@ -1340,8 +1523,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventdimension">Get<wbr>Product<wbr>Event<wbr>Dimension[]</a></span>
     </dt>
-    <dd><p>A list of event dimensions. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of event dimensions. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1357,8 +1539,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Event short name.</p>
-</dd><dt class="property-"
+    <dd>Event short name.</dd><dt class="property-"
             title="">
         <span id="instanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -1366,8 +1547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The instance ID of this event.</p>
-</dd><dt class="property-"
+    <dd>The instance ID of this event.</dd><dt class="property-"
             title="">
         <span id="isalarmconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isalarmconfig_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Alarm<wbr>Config</a>
@@ -1375,8 +1555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to configure alarm.</p>
-</dd><dt class="property-"
+    <dd>Whether to configure alarm.</dd><dt class="property-"
             title="">
         <span id="productnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productnames_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Names</a>
@@ -1384,8 +1563,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Product short name.</p>
-</dd><dt class="property-"
+    <dd>Product short name.</dd><dt class="property-"
             title="">
         <span id="projectids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectids_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Ids</a>
@@ -1393,8 +1571,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Project ID of this instance.</p>
-</dd><dt class="property-"
+    <dd>Project ID of this instance.</dd><dt class="property-"
             title="">
         <span id="regionlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionlists_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Lists</a>
@@ -1418,8 +1595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The start timestamp of this event.</p>
-</dd><dt class="property-"
+    <dd>The start timestamp of this event.</dd><dt class="property-"
             title="">
         <span id="statuses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_nodejs" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -1427,8 +1603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The status of this event.</p>
-</dd><dt class="property-"
+    <dd>The status of this event.</dd><dt class="property-"
             title="">
         <span id="types_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_nodejs" style="color: inherit; text-decoration: inherit;">types</a>
@@ -1436,8 +1611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The type of this event.</p>
-</dd></dl>
+    <dd>The type of this event.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1451,26 +1625,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproducteventlist">Get<wbr>Product<wbr>Event<wbr>List]</a></span>
+        <span class="property-type"><a href="#getproducteventlist">Sequence[Get<wbr>Product<wbr>Event<wbr>List]</a></span>
     </dt>
-    <dd><p>A list events. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list events. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="dimensions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_python" style="color: inherit; text-decoration: inherit;">dimensions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproducteventdimension">Get<wbr>Product<wbr>Event<wbr>Dimension]</a></span>
+        <span class="property-type"><a href="#getproducteventdimension">Sequence[Get<wbr>Product<wbr>Event<wbr>Dimension]</a></span>
     </dt>
-    <dd><p>A list of event dimensions. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of event dimensions. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -1486,8 +1657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Event short name.</p>
-</dd><dt class="property-"
+    <dd>Event short name.</dd><dt class="property-"
             title="">
         <span id="instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
@@ -1495,8 +1665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The instance ID of this event.</p>
-</dd><dt class="property-"
+    <dd>The instance ID of this event.</dd><dt class="property-"
             title="">
         <span id="is_alarm_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_alarm_config_python" style="color: inherit; text-decoration: inherit;">is_<wbr>alarm_<wbr>config</a>
@@ -1504,8 +1673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to configure alarm.</p>
-</dd><dt class="property-"
+    <dd>Whether to configure alarm.</dd><dt class="property-"
             title="">
         <span id="product_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_names_python" style="color: inherit; text-decoration: inherit;">product_<wbr>names</a>
@@ -1513,8 +1681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Product short name.</p>
-</dd><dt class="property-"
+    <dd>Product short name.</dd><dt class="property-"
             title="">
         <span id="project_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_ids_python" style="color: inherit; text-decoration: inherit;">project_<wbr>ids</a>
@@ -1522,8 +1689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Project ID of this instance.</p>
-</dd><dt class="property-"
+    <dd>Project ID of this instance.</dd><dt class="property-"
             title="">
         <span id="region_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_lists_python" style="color: inherit; text-decoration: inherit;">region_<wbr>lists</a>
@@ -1547,8 +1713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The start timestamp of this event.</p>
-</dd><dt class="property-"
+    <dd>The start timestamp of this event.</dd><dt class="property-"
             title="">
         <span id="statuses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_python" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -1556,8 +1721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The status of this event.</p>
-</dd><dt class="property-"
+    <dd>The status of this event.</dd><dt class="property-"
             title="">
         <span id="types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_python" style="color: inherit; text-decoration: inherit;">types</a>
@@ -1565,8 +1729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The type of this event.</p>
-</dd></dl>
+    <dd>The type of this event.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1580,8 +1743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -1589,8 +1751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list events. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list events. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="dimensions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_yaml" style="color: inherit; text-decoration: inherit;">dimensions</a>
@@ -1598,8 +1759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventdimension">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of event dimensions. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of event dimensions. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1615,8 +1775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Event short name.</p>
-</dd><dt class="property-"
+    <dd>Event short name.</dd><dt class="property-"
             title="">
         <span id="instanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -1624,8 +1783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The instance ID of this event.</p>
-</dd><dt class="property-"
+    <dd>The instance ID of this event.</dd><dt class="property-"
             title="">
         <span id="isalarmconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isalarmconfig_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Alarm<wbr>Config</a>
@@ -1633,8 +1791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to configure alarm.</p>
-</dd><dt class="property-"
+    <dd>Whether to configure alarm.</dd><dt class="property-"
             title="">
         <span id="productnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productnames_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Names</a>
@@ -1642,8 +1799,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Product short name.</p>
-</dd><dt class="property-"
+    <dd>Product short name.</dd><dt class="property-"
             title="">
         <span id="projectids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectids_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Ids</a>
@@ -1651,8 +1807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Project ID of this instance.</p>
-</dd><dt class="property-"
+    <dd>Project ID of this instance.</dd><dt class="property-"
             title="">
         <span id="regionlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionlists_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Lists</a>
@@ -1676,8 +1831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The start timestamp of this event.</p>
-</dd><dt class="property-"
+    <dd>The start timestamp of this event.</dd><dt class="property-"
             title="">
         <span id="statuses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_yaml" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -1685,8 +1839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The status of this event.</p>
-</dd><dt class="property-"
+    <dd>The status of this event.</dd><dt class="property-"
             title="">
         <span id="types_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_yaml" style="color: inherit; text-decoration: inherit;">types</a>
@@ -1694,8 +1847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The type of this event.</p>
-</dd></dl>
+    <dd>The type of this event.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1719,8 +1871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-optional"
+    <dd>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1728,8 +1879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1743,8 +1893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-optional"
+    <dd>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1752,8 +1901,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1767,8 +1937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-optional"
+    <dd>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1776,8 +1945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1791,8 +1959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-optional"
+    <dd>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1800,8 +1967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1815,8 +1981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-optional"
+    <dd>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1824,8 +1989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1839,8 +2003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-optional"
+    <dd>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1848,8 +2011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1867,8 +2029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlistadditionmsg">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Get<wbr>Product<wbr>Event<wbr>List<wbr>Addition<wbr>Msg&gt;</a></span>
     </dt>
-    <dd><p>A list of addition message. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of addition message. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="dimensions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_csharp" style="color: inherit; text-decoration: inherit;">Dimensions</a>
@@ -1876,8 +2037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlistdimension">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Get<wbr>Product<wbr>Event<wbr>List<wbr>Dimension&gt;</a></span>
     </dt>
-    <dd><p>Dimensional composition of instance objects.</p>
-</dd><dt class="property-required"
+    <dd>Dimensional composition of instance objects.</dd><dt class="property-required"
             title="Required">
         <span id="eventcname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventcname_csharp" style="color: inherit; text-decoration: inherit;">Event<wbr>Cname</a>
@@ -1885,8 +2045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event chinese name.</p>
-</dd><dt class="property-required"
+    <dd>Event chinese name.</dd><dt class="property-required"
             title="Required">
         <span id="eventename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventename_csharp" style="color: inherit; text-decoration: inherit;">Event<wbr>Ename</a>
@@ -1894,8 +2053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event english name.</p>
-</dd><dt class="property-required"
+    <dd>Event english name.</dd><dt class="property-required"
             title="Required">
         <span id="eventid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventid_csharp" style="color: inherit; text-decoration: inherit;">Event<wbr>Id</a>
@@ -1903,8 +2061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Event ID.</p>
-</dd><dt class="property-required"
+    <dd>Event ID.</dd><dt class="property-required"
             title="Required">
         <span id="eventname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventname_csharp" style="color: inherit; text-decoration: inherit;">Event<wbr>Name</a>
@@ -1912,8 +2069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event name filtering, such as <code>guest_reboot</code> indicates that the machine restart.</p>
-</dd><dt class="property-required"
+    <dd>Event name filtering, such as <code>guestReboot</code> indicates that the machine restart.</dd><dt class="property-required"
             title="Required">
         <span id="groupinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupinfos_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Infos</a>
@@ -1921,8 +2077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlistgroupinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Get<wbr>Product<wbr>Event<wbr>List<wbr>Group<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>A list of group info. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of group info. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1930,8 +2085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Affect objects, such as <code>ins-19708ino</code>.</p>
-</dd><dt class="property-required"
+    <dd>Affect objects, such as <code>ins-19708ino</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1939,8 +2093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this instance.</p>
-</dd><dt class="property-required"
+    <dd>The name of this instance.</dd><dt class="property-required"
             title="Required">
         <span id="isalarmconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isalarmconfig_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Alarm<wbr>Config</a>
@@ -1948,8 +2101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm status configuration filter, 1means configured, 0(default) means not configured.</p>
-</dd><dt class="property-required"
+    <dd>Alarm status configuration filter, 1means configured, 0(default) means not configured.</dd><dt class="property-required"
             title="Required">
         <span id="productcname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productcname_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Cname</a>
@@ -1957,8 +2109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product chinese name.</p>
-</dd><dt class="property-required"
+    <dd>Product chinese name.</dd><dt class="property-required"
             title="Required">
         <span id="productename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productename_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Ename</a>
@@ -1966,8 +2117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product english name.</p>
-</dd><dt class="property-required"
+    <dd>Product english name.</dd><dt class="property-required"
             title="Required">
         <span id="productname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Name</a>
@@ -1975,8 +2125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product type filtering, such as <code>cvm</code> for cloud server.</p>
-</dd><dt class="property-required"
+    <dd>Product type filtering, such as <code>cvm</code> for cloud server.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1984,8 +2133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID filter.</p>
-</dd><dt class="property-required"
+    <dd>Project ID filter.</dd><dt class="property-required"
             title="Required">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -1993,8 +2141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region of this instance.</p>
-</dd><dt class="property-required"
+    <dd>The region of this instance.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -2002,8 +2149,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</p>
-</dd><dt class="property-required"
+    <dd>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2011,8 +2157,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</p>
-</dd><dt class="property-required"
+    <dd>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</dd><dt class="property-required"
             title="Required">
         <span id="supportalarm_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportalarm_csharp" style="color: inherit; text-decoration: inherit;">Support<wbr>Alarm</a>
@@ -2020,8 +2165,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to support alarm.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support alarm.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2029,8 +2173,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event type filtering, with value range <code>abnormal</code>,<code>status_change</code>, indicating state change and abnormal events.</p>
-</dd><dt class="property-required"
+    <dd>Event type filtering, with value range <code>abnormal</code>,<code>statusChange</code>, indicating state change and abnormal events.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -2038,8 +2181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The update timestamp of this event.</p>
-</dd></dl>
+    <dd>The update timestamp of this event.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2053,8 +2195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlistadditionmsg">[]Get<wbr>Product<wbr>Event<wbr>List<wbr>Addition<wbr>Msg</a></span>
     </dt>
-    <dd><p>A list of addition message. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of addition message. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="dimensions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_go" style="color: inherit; text-decoration: inherit;">Dimensions</a>
@@ -2062,8 +2203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlistdimension">[]Get<wbr>Product<wbr>Event<wbr>List<wbr>Dimension</a></span>
     </dt>
-    <dd><p>Dimensional composition of instance objects.</p>
-</dd><dt class="property-required"
+    <dd>Dimensional composition of instance objects.</dd><dt class="property-required"
             title="Required">
         <span id="eventcname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventcname_go" style="color: inherit; text-decoration: inherit;">Event<wbr>Cname</a>
@@ -2071,8 +2211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event chinese name.</p>
-</dd><dt class="property-required"
+    <dd>Event chinese name.</dd><dt class="property-required"
             title="Required">
         <span id="eventename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventename_go" style="color: inherit; text-decoration: inherit;">Event<wbr>Ename</a>
@@ -2080,8 +2219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event english name.</p>
-</dd><dt class="property-required"
+    <dd>Event english name.</dd><dt class="property-required"
             title="Required">
         <span id="eventid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventid_go" style="color: inherit; text-decoration: inherit;">Event<wbr>Id</a>
@@ -2089,8 +2227,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Event ID.</p>
-</dd><dt class="property-required"
+    <dd>Event ID.</dd><dt class="property-required"
             title="Required">
         <span id="eventname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventname_go" style="color: inherit; text-decoration: inherit;">Event<wbr>Name</a>
@@ -2098,8 +2235,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event name filtering, such as <code>guest_reboot</code> indicates that the machine restart.</p>
-</dd><dt class="property-required"
+    <dd>Event name filtering, such as <code>guestReboot</code> indicates that the machine restart.</dd><dt class="property-required"
             title="Required">
         <span id="groupinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupinfos_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Infos</a>
@@ -2107,8 +2243,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlistgroupinfo">[]Get<wbr>Product<wbr>Event<wbr>List<wbr>Group<wbr>Info</a></span>
     </dt>
-    <dd><p>A list of group info. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of group info. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -2116,8 +2251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Affect objects, such as <code>ins-19708ino</code>.</p>
-</dd><dt class="property-required"
+    <dd>Affect objects, such as <code>ins-19708ino</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -2125,8 +2259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this instance.</p>
-</dd><dt class="property-required"
+    <dd>The name of this instance.</dd><dt class="property-required"
             title="Required">
         <span id="isalarmconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isalarmconfig_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Alarm<wbr>Config</a>
@@ -2134,8 +2267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm status configuration filter, 1means configured, 0(default) means not configured.</p>
-</dd><dt class="property-required"
+    <dd>Alarm status configuration filter, 1means configured, 0(default) means not configured.</dd><dt class="property-required"
             title="Required">
         <span id="productcname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productcname_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Cname</a>
@@ -2143,8 +2275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product chinese name.</p>
-</dd><dt class="property-required"
+    <dd>Product chinese name.</dd><dt class="property-required"
             title="Required">
         <span id="productename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productename_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Ename</a>
@@ -2152,8 +2283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product english name.</p>
-</dd><dt class="property-required"
+    <dd>Product english name.</dd><dt class="property-required"
             title="Required">
         <span id="productname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Name</a>
@@ -2161,8 +2291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product type filtering, such as <code>cvm</code> for cloud server.</p>
-</dd><dt class="property-required"
+    <dd>Product type filtering, such as <code>cvm</code> for cloud server.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2170,8 +2299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID filter.</p>
-</dd><dt class="property-required"
+    <dd>Project ID filter.</dd><dt class="property-required"
             title="Required">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -2179,8 +2307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region of this instance.</p>
-</dd><dt class="property-required"
+    <dd>The region of this instance.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -2188,8 +2315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</p>
-</dd><dt class="property-required"
+    <dd>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2197,8 +2323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</p>
-</dd><dt class="property-required"
+    <dd>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</dd><dt class="property-required"
             title="Required">
         <span id="supportalarm_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportalarm_go" style="color: inherit; text-decoration: inherit;">Support<wbr>Alarm</a>
@@ -2206,8 +2331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to support alarm.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support alarm.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2215,8 +2339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event type filtering, with value range <code>abnormal</code>,<code>status_change</code>, indicating state change and abnormal events.</p>
-</dd><dt class="property-required"
+    <dd>Event type filtering, with value range <code>abnormal</code>,<code>statusChange</code>, indicating state change and abnormal events.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -2224,8 +2347,173 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The update timestamp of this event.</p>
-</dd></dl>
+    <dd>The update timestamp of this event.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="addition_msgs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addition_msgs_hcl" style="color: inherit; text-decoration: inherit;">addition_<wbr>msgs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproducteventlistadditionmsg">list(object)</a></span>
+    </dt>
+    <dd>A list of addition message. Each element contains the following attributes:</dd><dt class="property-required"
+            title="Required">
+        <span id="dimensions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_hcl" style="color: inherit; text-decoration: inherit;">dimensions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproducteventlistdimension">list(object)</a></span>
+    </dt>
+    <dd>Dimensional composition of instance objects.</dd><dt class="property-required"
+            title="Required">
+        <span id="event_cname_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_cname_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>cname</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Event chinese name.</dd><dt class="property-required"
+            title="Required">
+        <span id="event_ename_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_ename_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>ename</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Event english name.</dd><dt class="property-required"
+            title="Required">
+        <span id="event_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_id_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Event ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="event_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_name_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Event name filtering, such as <code>guestReboot</code> indicates that the machine restart.</dd><dt class="property-required"
+            title="Required">
+        <span id="group_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_infos_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproducteventlistgroupinfo">list(object)</a></span>
+    </dt>
+    <dd>A list of group info. Each element contains the following attributes:</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Affect objects, such as <code>ins-19708ino</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of this instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_alarm_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_alarm_config_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>alarm_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm status configuration filter, 1means configured, 0(default) means not configured.</dd><dt class="property-required"
+            title="Required">
+        <span id="product_cname_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_cname_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>cname</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Product chinese name.</dd><dt class="property-required"
+            title="Required">
+        <span id="product_ename_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_ename_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>ename</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Product english name.</dd><dt class="property-required"
+            title="Required">
+        <span id="product_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_name_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Product type filtering, such as <code>cvm</code> for cloud server.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Project ID filter.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The region of this instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</dd><dt class="property-required"
+            title="Required">
+        <span id="support_alarm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_alarm_hcl" style="color: inherit; text-decoration: inherit;">support_<wbr>alarm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to support alarm.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Event type filtering, with value range <code>abnormal</code>,<code>statusChange</code>, indicating state change and abnormal events.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The update timestamp of this event.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2239,8 +2527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlistadditionmsg">List&lt;Get<wbr>Product<wbr>Event<wbr>List<wbr>Addition<wbr>Msg&gt;</a></span>
     </dt>
-    <dd><p>A list of addition message. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of addition message. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="dimensions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_java" style="color: inherit; text-decoration: inherit;">dimensions</a>
@@ -2248,8 +2535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlistdimension">List&lt;Get<wbr>Product<wbr>Event<wbr>List<wbr>Dimension&gt;</a></span>
     </dt>
-    <dd><p>Dimensional composition of instance objects.</p>
-</dd><dt class="property-required"
+    <dd>Dimensional composition of instance objects.</dd><dt class="property-required"
             title="Required">
         <span id="eventcname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventcname_java" style="color: inherit; text-decoration: inherit;">event<wbr>Cname</a>
@@ -2257,8 +2543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event chinese name.</p>
-</dd><dt class="property-required"
+    <dd>Event chinese name.</dd><dt class="property-required"
             title="Required">
         <span id="eventename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventename_java" style="color: inherit; text-decoration: inherit;">event<wbr>Ename</a>
@@ -2266,8 +2551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event english name.</p>
-</dd><dt class="property-required"
+    <dd>Event english name.</dd><dt class="property-required"
             title="Required">
         <span id="eventid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventid_java" style="color: inherit; text-decoration: inherit;">event<wbr>Id</a>
@@ -2275,8 +2559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Event ID.</p>
-</dd><dt class="property-required"
+    <dd>Event ID.</dd><dt class="property-required"
             title="Required">
         <span id="eventname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventname_java" style="color: inherit; text-decoration: inherit;">event<wbr>Name</a>
@@ -2284,8 +2567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event name filtering, such as <code>guest_reboot</code> indicates that the machine restart.</p>
-</dd><dt class="property-required"
+    <dd>Event name filtering, such as <code>guestReboot</code> indicates that the machine restart.</dd><dt class="property-required"
             title="Required">
         <span id="groupinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupinfos_java" style="color: inherit; text-decoration: inherit;">group<wbr>Infos</a>
@@ -2293,8 +2575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlistgroupinfo">List&lt;Get<wbr>Product<wbr>Event<wbr>List<wbr>Group<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>A list of group info. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of group info. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2302,8 +2583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Affect objects, such as <code>ins-19708ino</code>.</p>
-</dd><dt class="property-required"
+    <dd>Affect objects, such as <code>ins-19708ino</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2311,8 +2591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of this instance.</p>
-</dd><dt class="property-required"
+    <dd>The name of this instance.</dd><dt class="property-required"
             title="Required">
         <span id="isalarmconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isalarmconfig_java" style="color: inherit; text-decoration: inherit;">is<wbr>Alarm<wbr>Config</a>
@@ -2320,8 +2599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm status configuration filter, 1means configured, 0(default) means not configured.</p>
-</dd><dt class="property-required"
+    <dd>Alarm status configuration filter, 1means configured, 0(default) means not configured.</dd><dt class="property-required"
             title="Required">
         <span id="productcname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productcname_java" style="color: inherit; text-decoration: inherit;">product<wbr>Cname</a>
@@ -2329,8 +2607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Product chinese name.</p>
-</dd><dt class="property-required"
+    <dd>Product chinese name.</dd><dt class="property-required"
             title="Required">
         <span id="productename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productename_java" style="color: inherit; text-decoration: inherit;">product<wbr>Ename</a>
@@ -2338,8 +2615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Product english name.</p>
-</dd><dt class="property-required"
+    <dd>Product english name.</dd><dt class="property-required"
             title="Required">
         <span id="productname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_java" style="color: inherit; text-decoration: inherit;">product<wbr>Name</a>
@@ -2347,8 +2623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Product type filtering, such as <code>cvm</code> for cloud server.</p>
-</dd><dt class="property-required"
+    <dd>Product type filtering, such as <code>cvm</code> for cloud server.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2356,8 +2631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project ID filter.</p>
-</dd><dt class="property-required"
+    <dd>Project ID filter.</dd><dt class="property-required"
             title="Required">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2365,8 +2639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The region of this instance.</p>
-</dd><dt class="property-required"
+    <dd>The region of this instance.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -2374,8 +2647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</p>
-</dd><dt class="property-required"
+    <dd>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2383,8 +2655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</p>
-</dd><dt class="property-required"
+    <dd>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</dd><dt class="property-required"
             title="Required">
         <span id="supportalarm_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportalarm_java" style="color: inherit; text-decoration: inherit;">support<wbr>Alarm</a>
@@ -2392,8 +2663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to support alarm.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support alarm.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2401,8 +2671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event type filtering, with value range <code>abnormal</code>,<code>status_change</code>, indicating state change and abnormal events.</p>
-</dd><dt class="property-required"
+    <dd>Event type filtering, with value range <code>abnormal</code>,<code>statusChange</code>, indicating state change and abnormal events.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2410,8 +2679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The update timestamp of this event.</p>
-</dd></dl>
+    <dd>The update timestamp of this event.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2425,8 +2693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlistadditionmsg">Get<wbr>Product<wbr>Event<wbr>List<wbr>Addition<wbr>Msg[]</a></span>
     </dt>
-    <dd><p>A list of addition message. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of addition message. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="dimensions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_nodejs" style="color: inherit; text-decoration: inherit;">dimensions</a>
@@ -2434,8 +2701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlistdimension">Get<wbr>Product<wbr>Event<wbr>List<wbr>Dimension[]</a></span>
     </dt>
-    <dd><p>Dimensional composition of instance objects.</p>
-</dd><dt class="property-required"
+    <dd>Dimensional composition of instance objects.</dd><dt class="property-required"
             title="Required">
         <span id="eventcname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventcname_nodejs" style="color: inherit; text-decoration: inherit;">event<wbr>Cname</a>
@@ -2443,8 +2709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event chinese name.</p>
-</dd><dt class="property-required"
+    <dd>Event chinese name.</dd><dt class="property-required"
             title="Required">
         <span id="eventename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventename_nodejs" style="color: inherit; text-decoration: inherit;">event<wbr>Ename</a>
@@ -2452,8 +2717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event english name.</p>
-</dd><dt class="property-required"
+    <dd>Event english name.</dd><dt class="property-required"
             title="Required">
         <span id="eventid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventid_nodejs" style="color: inherit; text-decoration: inherit;">event<wbr>Id</a>
@@ -2461,8 +2725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Event ID.</p>
-</dd><dt class="property-required"
+    <dd>Event ID.</dd><dt class="property-required"
             title="Required">
         <span id="eventname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventname_nodejs" style="color: inherit; text-decoration: inherit;">event<wbr>Name</a>
@@ -2470,8 +2733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event name filtering, such as <code>guest_reboot</code> indicates that the machine restart.</p>
-</dd><dt class="property-required"
+    <dd>Event name filtering, such as <code>guestReboot</code> indicates that the machine restart.</dd><dt class="property-required"
             title="Required">
         <span id="groupinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupinfos_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Infos</a>
@@ -2479,8 +2741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlistgroupinfo">Get<wbr>Product<wbr>Event<wbr>List<wbr>Group<wbr>Info[]</a></span>
     </dt>
-    <dd><p>A list of group info. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of group info. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2488,8 +2749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Affect objects, such as <code>ins-19708ino</code>.</p>
-</dd><dt class="property-required"
+    <dd>Affect objects, such as <code>ins-19708ino</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2497,8 +2757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this instance.</p>
-</dd><dt class="property-required"
+    <dd>The name of this instance.</dd><dt class="property-required"
             title="Required">
         <span id="isalarmconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isalarmconfig_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Alarm<wbr>Config</a>
@@ -2506,8 +2765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm status configuration filter, 1means configured, 0(default) means not configured.</p>
-</dd><dt class="property-required"
+    <dd>Alarm status configuration filter, 1means configured, 0(default) means not configured.</dd><dt class="property-required"
             title="Required">
         <span id="productcname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productcname_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Cname</a>
@@ -2515,8 +2773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product chinese name.</p>
-</dd><dt class="property-required"
+    <dd>Product chinese name.</dd><dt class="property-required"
             title="Required">
         <span id="productename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productename_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Ename</a>
@@ -2524,8 +2781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product english name.</p>
-</dd><dt class="property-required"
+    <dd>Product english name.</dd><dt class="property-required"
             title="Required">
         <span id="productname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Name</a>
@@ -2533,8 +2789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Product type filtering, such as <code>cvm</code> for cloud server.</p>
-</dd><dt class="property-required"
+    <dd>Product type filtering, such as <code>cvm</code> for cloud server.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2542,8 +2797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project ID filter.</p>
-</dd><dt class="property-required"
+    <dd>Project ID filter.</dd><dt class="property-required"
             title="Required">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2551,8 +2805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The region of this instance.</p>
-</dd><dt class="property-required"
+    <dd>The region of this instance.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -2560,8 +2813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</p>
-</dd><dt class="property-required"
+    <dd>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2569,8 +2821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</p>
-</dd><dt class="property-required"
+    <dd>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</dd><dt class="property-required"
             title="Required">
         <span id="supportalarm_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportalarm_nodejs" style="color: inherit; text-decoration: inherit;">support<wbr>Alarm</a>
@@ -2578,8 +2829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to support alarm.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support alarm.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2587,8 +2837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Event type filtering, with value range <code>abnormal</code>,<code>status_change</code>, indicating state change and abnormal events.</p>
-</dd><dt class="property-required"
+    <dd>Event type filtering, with value range <code>abnormal</code>,<code>statusChange</code>, indicating state change and abnormal events.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2596,8 +2845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The update timestamp of this event.</p>
-</dd></dl>
+    <dd>The update timestamp of this event.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2609,19 +2857,17 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addition_msgs_python" style="color: inherit; text-decoration: inherit;">addition_<wbr>msgs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproducteventlistadditionmsg">Get<wbr>Product<wbr>Event<wbr>List<wbr>Addition<wbr>Msg]</a></span>
+        <span class="property-type"><a href="#getproducteventlistadditionmsg">Sequence[Get<wbr>Product<wbr>Event<wbr>List<wbr>Addition<wbr>Msg]</a></span>
     </dt>
-    <dd><p>A list of addition message. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of addition message. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="dimensions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_python" style="color: inherit; text-decoration: inherit;">dimensions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproducteventlistdimension">Get<wbr>Product<wbr>Event<wbr>List<wbr>Dimension]</a></span>
+        <span class="property-type"><a href="#getproducteventlistdimension">Sequence[Get<wbr>Product<wbr>Event<wbr>List<wbr>Dimension]</a></span>
     </dt>
-    <dd><p>Dimensional composition of instance objects.</p>
-</dd><dt class="property-required"
+    <dd>Dimensional composition of instance objects.</dd><dt class="property-required"
             title="Required">
         <span id="event_cname_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_cname_python" style="color: inherit; text-decoration: inherit;">event_<wbr>cname</a>
@@ -2629,8 +2875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Event chinese name.</p>
-</dd><dt class="property-required"
+    <dd>Event chinese name.</dd><dt class="property-required"
             title="Required">
         <span id="event_ename_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_ename_python" style="color: inherit; text-decoration: inherit;">event_<wbr>ename</a>
@@ -2638,8 +2883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Event english name.</p>
-</dd><dt class="property-required"
+    <dd>Event english name.</dd><dt class="property-required"
             title="Required">
         <span id="event_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_id_python" style="color: inherit; text-decoration: inherit;">event_<wbr>id</a>
@@ -2647,8 +2891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Event ID.</p>
-</dd><dt class="property-required"
+    <dd>Event ID.</dd><dt class="property-required"
             title="Required">
         <span id="event_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_name_python" style="color: inherit; text-decoration: inherit;">event_<wbr>name</a>
@@ -2656,17 +2899,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Event name filtering, such as <code>guest_reboot</code> indicates that the machine restart.</p>
-</dd><dt class="property-required"
+    <dd>Event name filtering, such as <code>guestReboot</code> indicates that the machine restart.</dd><dt class="property-required"
             title="Required">
         <span id="group_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_infos_python" style="color: inherit; text-decoration: inherit;">group_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproducteventlistgroupinfo">Get<wbr>Product<wbr>Event<wbr>List<wbr>Group<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getproducteventlistgroupinfo">Sequence[Get<wbr>Product<wbr>Event<wbr>List<wbr>Group<wbr>Info]</a></span>
     </dt>
-    <dd><p>A list of group info. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of group info. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -2674,8 +2915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Affect objects, such as <code>ins-19708ino</code>.</p>
-</dd><dt class="property-required"
+    <dd>Affect objects, such as <code>ins-19708ino</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -2683,8 +2923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of this instance.</p>
-</dd><dt class="property-required"
+    <dd>The name of this instance.</dd><dt class="property-required"
             title="Required">
         <span id="is_alarm_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_alarm_config_python" style="color: inherit; text-decoration: inherit;">is_<wbr>alarm_<wbr>config</a>
@@ -2692,8 +2931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm status configuration filter, 1means configured, 0(default) means not configured.</p>
-</dd><dt class="property-required"
+    <dd>Alarm status configuration filter, 1means configured, 0(default) means not configured.</dd><dt class="property-required"
             title="Required">
         <span id="product_cname_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_cname_python" style="color: inherit; text-decoration: inherit;">product_<wbr>cname</a>
@@ -2701,8 +2939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Product chinese name.</p>
-</dd><dt class="property-required"
+    <dd>Product chinese name.</dd><dt class="property-required"
             title="Required">
         <span id="product_ename_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_ename_python" style="color: inherit; text-decoration: inherit;">product_<wbr>ename</a>
@@ -2710,8 +2947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Product english name.</p>
-</dd><dt class="property-required"
+    <dd>Product english name.</dd><dt class="property-required"
             title="Required">
         <span id="product_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_name_python" style="color: inherit; text-decoration: inherit;">product_<wbr>name</a>
@@ -2719,8 +2955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Product type filtering, such as <code>cvm</code> for cloud server.</p>
-</dd><dt class="property-required"
+    <dd>Product type filtering, such as <code>cvm</code> for cloud server.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -2728,8 +2963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Project ID filter.</p>
-</dd><dt class="property-required"
+    <dd>Project ID filter.</dd><dt class="property-required"
             title="Required">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2737,8 +2971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The region of this instance.</p>
-</dd><dt class="property-required"
+    <dd>The region of this instance.</dd><dt class="property-required"
             title="Required">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -2746,8 +2979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</p>
-</dd><dt class="property-required"
+    <dd>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2755,8 +2987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</p>
-</dd><dt class="property-required"
+    <dd>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</dd><dt class="property-required"
             title="Required">
         <span id="support_alarm_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_alarm_python" style="color: inherit; text-decoration: inherit;">support_<wbr>alarm</a>
@@ -2764,8 +2995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to support alarm.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support alarm.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2773,8 +3003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Event type filtering, with value range <code>abnormal</code>,<code>status_change</code>, indicating state change and abnormal events.</p>
-</dd><dt class="property-required"
+    <dd>Event type filtering, with value range <code>abnormal</code>,<code>statusChange</code>, indicating state change and abnormal events.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -2782,8 +3011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The update timestamp of this event.</p>
-</dd></dl>
+    <dd>The update timestamp of this event.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2797,8 +3025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlistadditionmsg">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of addition message. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of addition message. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="dimensions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_yaml" style="color: inherit; text-decoration: inherit;">dimensions</a>
@@ -2806,8 +3033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlistdimension">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Dimensional composition of instance objects.</p>
-</dd><dt class="property-required"
+    <dd>Dimensional composition of instance objects.</dd><dt class="property-required"
             title="Required">
         <span id="eventcname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventcname_yaml" style="color: inherit; text-decoration: inherit;">event<wbr>Cname</a>
@@ -2815,8 +3041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event chinese name.</p>
-</dd><dt class="property-required"
+    <dd>Event chinese name.</dd><dt class="property-required"
             title="Required">
         <span id="eventename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventename_yaml" style="color: inherit; text-decoration: inherit;">event<wbr>Ename</a>
@@ -2824,8 +3049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event english name.</p>
-</dd><dt class="property-required"
+    <dd>Event english name.</dd><dt class="property-required"
             title="Required">
         <span id="eventid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventid_yaml" style="color: inherit; text-decoration: inherit;">event<wbr>Id</a>
@@ -2833,8 +3057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Event ID.</p>
-</dd><dt class="property-required"
+    <dd>Event ID.</dd><dt class="property-required"
             title="Required">
         <span id="eventname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventname_yaml" style="color: inherit; text-decoration: inherit;">event<wbr>Name</a>
@@ -2842,8 +3065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event name filtering, such as <code>guest_reboot</code> indicates that the machine restart.</p>
-</dd><dt class="property-required"
+    <dd>Event name filtering, such as <code>guestReboot</code> indicates that the machine restart.</dd><dt class="property-required"
             title="Required">
         <span id="groupinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupinfos_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Infos</a>
@@ -2851,8 +3073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproducteventlistgroupinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of group info. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of group info. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2860,8 +3081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Affect objects, such as <code>ins-19708ino</code>.</p>
-</dd><dt class="property-required"
+    <dd>Affect objects, such as <code>ins-19708ino</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2869,8 +3089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of this instance.</p>
-</dd><dt class="property-required"
+    <dd>The name of this instance.</dd><dt class="property-required"
             title="Required">
         <span id="isalarmconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isalarmconfig_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Alarm<wbr>Config</a>
@@ -2878,8 +3097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm status configuration filter, 1means configured, 0(default) means not configured.</p>
-</dd><dt class="property-required"
+    <dd>Alarm status configuration filter, 1means configured, 0(default) means not configured.</dd><dt class="property-required"
             title="Required">
         <span id="productcname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productcname_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Cname</a>
@@ -2887,8 +3105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Product chinese name.</p>
-</dd><dt class="property-required"
+    <dd>Product chinese name.</dd><dt class="property-required"
             title="Required">
         <span id="productename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productename_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Ename</a>
@@ -2896,8 +3113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Product english name.</p>
-</dd><dt class="property-required"
+    <dd>Product english name.</dd><dt class="property-required"
             title="Required">
         <span id="productname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productname_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Name</a>
@@ -2905,8 +3121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Product type filtering, such as <code>cvm</code> for cloud server.</p>
-</dd><dt class="property-required"
+    <dd>Product type filtering, such as <code>cvm</code> for cloud server.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2914,8 +3129,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project ID filter.</p>
-</dd><dt class="property-required"
+    <dd>Project ID filter.</dd><dt class="property-required"
             title="Required">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2923,8 +3137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The region of this instance.</p>
-</dd><dt class="property-required"
+    <dd>The region of this instance.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -2932,8 +3145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</p>
-</dd><dt class="property-required"
+    <dd>Start timestamp for this query, eg:<code>1588230000</code>. Default start time is <code>now-3600</code>.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2941,8 +3153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</p>
-</dd><dt class="property-required"
+    <dd>Event status filter, value range <code>-</code>,<code>alarm</code>,<code>recover</code>, indicating recovered, unrecovered and stateless.</dd><dt class="property-required"
             title="Required">
         <span id="supportalarm_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportalarm_yaml" style="color: inherit; text-decoration: inherit;">support<wbr>Alarm</a>
@@ -2950,8 +3161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to support alarm.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support alarm.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2959,8 +3169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Event type filtering, with value range <code>abnormal</code>,<code>status_change</code>, indicating state change and abnormal events.</p>
-</dd><dt class="property-required"
+    <dd>Event type filtering, with value range <code>abnormal</code>,<code>statusChange</code>, indicating state change and abnormal events.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2968,8 +3177,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The update timestamp of this event.</p>
-</dd></dl>
+    <dd>The update timestamp of this event.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2987,8 +3195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key of this dimension.</p>
-</dd><dt class="property-required"
+    <dd>The key of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2996,8 +3203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-required"
+    <dd>The name of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -3005,8 +3211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>The value of this dimension.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3020,8 +3225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key of this dimension.</p>
-</dd><dt class="property-required"
+    <dd>The key of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -3029,8 +3233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-required"
+    <dd>The name of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -3038,8 +3241,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>The value of this dimension.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The key of this dimension.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of this dimension.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The value of this dimension.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3053,8 +3285,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The key of this dimension.</p>
-</dd><dt class="property-required"
+    <dd>The key of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3062,8 +3293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-required"
+    <dd>The name of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3071,8 +3301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>The value of this dimension.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3086,8 +3315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key of this dimension.</p>
-</dd><dt class="property-required"
+    <dd>The key of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3095,8 +3323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-required"
+    <dd>The name of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3104,8 +3331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>The value of this dimension.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3119,8 +3345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The key of this dimension.</p>
-</dd><dt class="property-required"
+    <dd>The key of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3128,8 +3353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-required"
+    <dd>The name of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3137,8 +3361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>The value of this dimension.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3152,8 +3375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The key of this dimension.</p>
-</dd><dt class="property-required"
+    <dd>The key of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3161,8 +3383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-required"
+    <dd>The name of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3170,8 +3391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>The value of this dimension.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3189,8 +3409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key of this dimension.</p>
-</dd><dt class="property-required"
+    <dd>The key of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -3198,8 +3417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-required"
+    <dd>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -3207,8 +3425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3222,8 +3439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key of this dimension.</p>
-</dd><dt class="property-required"
+    <dd>The key of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -3231,8 +3447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-required"
+    <dd>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -3240,8 +3455,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The key of this dimension.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3255,8 +3499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The key of this dimension.</p>
-</dd><dt class="property-required"
+    <dd>The key of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3264,8 +3507,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-required"
+    <dd>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3273,8 +3515,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3288,8 +3529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key of this dimension.</p>
-</dd><dt class="property-required"
+    <dd>The key of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3297,8 +3537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-required"
+    <dd>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3306,8 +3545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3321,8 +3559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The key of this dimension.</p>
-</dd><dt class="property-required"
+    <dd>The key of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3330,8 +3567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-required"
+    <dd>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3339,8 +3575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3354,8 +3589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The key of this dimension.</p>
-</dd><dt class="property-required"
+    <dd>The key of this dimension.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3363,8 +3597,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</p>
-</dd><dt class="property-required"
+    <dd>Instance dimension name, eg: <code>deviceWanIp</code> for internet ip.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3372,8 +3605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</p>
-</dd></dl>
+    <dd>Instance dimension value, eg: <code>119.119.119.119</code> for internet ip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3391,8 +3623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy group ID.</p>
-</dd><dt class="property-required"
+    <dd>Policy group ID.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Name</a>
@@ -3400,8 +3631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy group name.</p>
-</dd></dl>
+    <dd>Policy group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3415,8 +3645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy group ID.</p>
-</dd><dt class="property-required"
+    <dd>Policy group ID.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Name</a>
@@ -3424,8 +3653,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy group name.</p>
-</dd></dl>
+    <dd>Policy group name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy group ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_name_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3439,8 +3689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy group ID.</p>
-</dd><dt class="property-required"
+    <dd>Policy group ID.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_java" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -3448,8 +3697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy group name.</p>
-</dd></dl>
+    <dd>Policy group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3463,8 +3711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy group ID.</p>
-</dd><dt class="property-required"
+    <dd>Policy group ID.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -3472,8 +3719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy group name.</p>
-</dd></dl>
+    <dd>Policy group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3487,8 +3733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy group ID.</p>
-</dd><dt class="property-required"
+    <dd>Policy group ID.</dd><dt class="property-required"
             title="Required">
         <span id="group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_name_python" style="color: inherit; text-decoration: inherit;">group_<wbr>name</a>
@@ -3496,8 +3741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy group name.</p>
-</dd></dl>
+    <dd>Policy group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3511,8 +3755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy group ID.</p>
-</dd><dt class="property-required"
+    <dd>Policy group ID.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -3520,8 +3763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy group name.</p>
-</dd></dl>
+    <dd>Policy group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3536,7 +3778,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

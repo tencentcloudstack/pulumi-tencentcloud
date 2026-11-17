@@ -2,9 +2,11 @@
 ---
 title: "getSqlFilters"
 title_tag: "tencentcloud.Dbbrain.getSqlFilters"
-meta_desc: "Documentation for the tencentcloud.Dbbrain.getSqlFilters function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of dbbrain sqlFilters"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,13 +18,17 @@ Use this data source to query detailed information of dbbrain sqlFilters
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const sqlFilter = new tencentcloud.dbbrain.SqlFilter("sqlFilter", {
+const sqlFilter = new tencentcloud.dbbrain.SqlFilter("sql_filter", {
     instanceId: "mysql_ins_id",
     sessionToken: {
         user: "user",
@@ -33,39 +39,87 @@ const sqlFilter = new tencentcloud.dbbrain.SqlFilter("sqlFilter", {
     maxConcurrency: 10,
     duration: 3600,
 });
-const sqlFilters = tencentcloud.Dbbrain.getSqlFiltersOutput({
+const sqlFilters = tencentcloud.dbbrain.getSqlFiltersOutput({
     instanceId: "mysql_ins_id",
     filterIds: [sqlFilter.filterId],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-sql_filter = tencentcloud.dbbrain.SqlFilter("sqlFilter",
+sql_filter = tencentcloud.dbbrain.SqlFilter("sql_filter",
     instance_id="mysql_ins_id",
-    session_token=tencentcloud.dbbrain.SqlFilterSessionTokenArgs(
-        user="user",
-        password="password",
-    ),
+    session_token={
+        "user": "user",
+        "password": "password",
+    },
     sql_type="SELECT",
     filter_key="test",
     max_concurrency=10,
     duration=3600)
-sql_filters = tencentcloud.Dbbrain.get_sql_filters_output(instance_id="mysql_ins_id",
+sql_filters = tencentcloud.dbbrain.get_sql_filters_output(instance_id="mysql_ins_id",
     filter_ids=[sql_filter.filter_id])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dbbrain"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		sqlFilter, err := dbbrain.NewSqlFilter(ctx, "sql_filter", &dbbrain.SqlFilterArgs{
+			InstanceId: pulumi.String("mysql_ins_id"),
+			SessionToken: &dbbrain.SqlFilterSessionTokenArgs{
+				User:     pulumi.String("user"),
+				Password: pulumi.String("password"),
+			},
+			SqlType:        pulumi.String("SELECT"),
+			FilterKey:      pulumi.String("test"),
+			MaxConcurrency: pulumi.Int(10),
+			Duration:       pulumi.Int(3600),
+		})
+		if err != nil {
+			return err
+		}
+		_ = dbbrain.GetSqlFiltersOutput(ctx, dbbrain.GetSqlFiltersOutputArgs{
+			InstanceId: pulumi.String("mysql_ins_id"),
+			FilterIds: pulumi.IntArray{
+				sqlFilter.FilterId,
+			},
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var sqlFilter = new Tencentcloud.Dbbrain.SqlFilter("sqlFilter", new()
+    var sqlFilter = new Tencentcloud.Dbbrain.SqlFilter("sql_filter", new()
     {
         InstanceId = "mysql_ins_id",
         SessionToken = new Tencentcloud.Dbbrain.Inputs.SqlFilterSessionTokenArgs
@@ -90,40 +144,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		sqlFilter, err := Dbbrain.NewSqlFilter(ctx, "sqlFilter", &Dbbrain.SqlFilterArgs{
-			InstanceId: pulumi.String("mysql_ins_id"),
-			SessionToken: &dbbrain.SqlFilterSessionTokenArgs{
-				User:     pulumi.String("user"),
-				Password: pulumi.String("password"),
-			},
-			SqlType:        pulumi.String("SELECT"),
-			FilterKey:      pulumi.String("test"),
-			MaxConcurrency: pulumi.Int(10),
-			Duration:       pulumi.Int(3600),
-		})
-		if err != nil {
-			return err
-		}
-		_ = Dbbrain.GetSqlFiltersOutput(ctx, dbbrain.GetSqlFiltersOutputArgs{
-			InstanceId: pulumi.String("mysql_ins_id"),
-			FilterIds: pulumi.IntArray{
-				sqlFilter.FilterId,
-			},
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -135,8 +160,8 @@ import com.pulumi.tencentcloud.Dbbrain.SqlFilterArgs;
 import com.pulumi.tencentcloud.Dbbrain.inputs.SqlFilterSessionTokenArgs;
 import com.pulumi.tencentcloud.Dbbrain.DbbrainFunctions;
 import com.pulumi.tencentcloud.Dbbrain.inputs.GetSqlFiltersArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -148,7 +173,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var sqlFilter = new SqlFilter("sqlFilter", SqlFilterArgs.builder()        
+        var sqlFilter = new SqlFilter("sqlFilter", SqlFilterArgs.builder()
             .instanceId("mysql_ins_id")
             .sessionToken(SqlFilterSessionTokenArgs.builder()
                 .user("user")
@@ -168,10 +193,16 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   sqlFilter:
     type: tencentcloud:Dbbrain:SqlFilter
+    name: sql_filter
     properties:
       instanceId: mysql_ins_id
       sessionToken:
@@ -184,14 +215,52 @@ resources:
 variables:
   sqlFilters:
     fn::invoke:
-      Function: tencentcloud:Dbbrain:getSqlFilters
-      Arguments:
+      function: tencentcloud:Dbbrain:getSqlFilters
+      arguments:
         instanceId: mysql_ins_id
         filterIds:
           - ${sqlFilter.filterId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dbbrain_getsqlfilters" "sqlFilters" {
+  instance_id = "mysql_ins_id"
+  filter_ids  = [tencentcloud_dbbrain_sqlfilter.sql_filter.filter_id]
+}
+
+resource "tencentcloud_dbbrain_sqlfilter" "sql_filter" {
+  instance_id = "mysql_ins_id"
+  session_token = {
+    user     = "user"
+    password = "password"
+  }
+  sql_type        = "SELECT"
+  filter_key      = "test"
+  max_concurrency = 10
+  duration        = 3600
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeSqlFilters](https://www.tencentcloud.com/search/?wd=DescribeSqlFilters&type=document&lang=en)
 
 
 
@@ -203,7 +272,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -211,9 +280,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getSqlFilters<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSqlFiltersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSqlFiltersResult</a></span>></span
+><span class="k">function </span>getSqlFilters<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSqlFiltersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSqlFiltersResult</a></span>></span
 ><span class="k">
-function </span>getSqlFiltersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSqlFiltersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSqlFiltersResult</a></span>></span
+function </span>getSqlFiltersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSqlFiltersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSqlFiltersResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -228,11 +297,11 @@ function </span>getSqlFiltersOutput<span class="p">(</span><span class="nx">args
                     <span class="nx">statuses</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetSqlFiltersResult</span
 ><span class="k">
-def </span>get_sql_filters_output<span class="p">(</span><span class="nx">filter_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]</span> = None<span class="p">,</span>
-                    <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">statuses</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSqlFiltersResult]</span
+def </span>get_sql_filters_output<span class="p">(</span><span class="nx">filter_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[int]]]]</span> = None<span class="p">,</span>
+                    <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">statuses</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSqlFiltersResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -257,7 +326,8 @@ func </span>GetSqlFiltersOutput<span class="p">(</span><span class="nx">ctx</spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetSqlFilters </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetSqlFiltersResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetSqlFiltersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetSqlFiltersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSqlFiltersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSqlFiltersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSqlFiltersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSqlFiltersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSqlFiltersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -266,7 +336,8 @@ func </span>GetSqlFiltersOutput<span class="p">(</span><span class="nx">ctx</spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetSqlFiltersResult</a></span>> </span>getSqlFilters<span class="p">(</span><span class="nx">GetSqlFiltersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSqlFiltersResult</a></span>> </span>getSqlFilters<span class="p">(</span><span class="nx">GetSqlFiltersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSqlFiltersResult</a></span>> </span>getSqlFilters<span class="p">(</span><span class="nx">GetSqlFiltersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -278,6 +349,15 @@ func </span>GetSqlFiltersOutput<span class="p">(</span><span class="nx">ctx</spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dbbrain/getSqlFilters:getSqlFilters
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dbbrain_get_sql_filters&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -296,8 +376,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="filterids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterids_csharp" style="color: inherit; text-decoration: inherit;">Filter<wbr>Ids</a>
@@ -305,8 +384,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>filter id list.</p>
-</dd><dt class="property-optional"
+    <dd>filter id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -314,8 +392,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_csharp" style="color: inherit; text-decoration: inherit;">Statuses</a>
@@ -323,8 +400,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>status list.</p>
-</dd></dl>
+    <dd>status list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -338,8 +414,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="filterids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterids_go" style="color: inherit; text-decoration: inherit;">Filter<wbr>Ids</a>
@@ -347,8 +422,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>filter id list.</p>
-</dd><dt class="property-optional"
+    <dd>filter id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -356,8 +430,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_go" style="color: inherit; text-decoration: inherit;">Statuses</a>
@@ -365,8 +438,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>status list.</p>
-</dd></dl>
+    <dd>status list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_ids_hcl" style="color: inherit; text-decoration: inherit;">filter_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>filter id list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="statuses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_hcl" style="color: inherit; text-decoration: inherit;">statuses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>status list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -380,8 +490,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="filterids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterids_java" style="color: inherit; text-decoration: inherit;">filter<wbr>Ids</a>
@@ -389,8 +498,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>filter id list.</p>
-</dd><dt class="property-optional"
+    <dd>filter id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -398,8 +506,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_java" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -407,8 +514,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>status list.</p>
-</dd></dl>
+    <dd>status list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -422,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="filterids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterids_nodejs" style="color: inherit; text-decoration: inherit;">filter<wbr>Ids</a>
@@ -431,8 +536,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>filter id list.</p>
-</dd><dt class="property-optional"
+    <dd>filter id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -440,8 +544,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_nodejs" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -449,8 +552,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>status list.</p>
-</dd></dl>
+    <dd>status list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -464,8 +566,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_ids_python" style="color: inherit; text-decoration: inherit;">filter_<wbr>ids</a>
@@ -473,8 +574,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>filter id list.</p>
-</dd><dt class="property-optional"
+    <dd>filter id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -482,8 +582,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_python" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -491,8 +590,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>status list.</p>
-</dd></dl>
+    <dd>status list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -506,8 +604,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="filterids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterids_yaml" style="color: inherit; text-decoration: inherit;">filter<wbr>Ids</a>
@@ -515,8 +612,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>filter id list.</p>
-</dd><dt class="property-optional"
+    <dd>filter id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -524,8 +620,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="statuses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_yaml" style="color: inherit; text-decoration: inherit;">statuses</a>
@@ -533,8 +628,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>status list.</p>
-</dd></dl>
+    <dd>status list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -557,8 +651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -574,8 +667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsqlfilterslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dbbrain.<wbr>Outputs.<wbr>Get<wbr>Sql<wbr>Filters<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>sql filter list.</p>
-</dd><dt class="property-"
+    <dd>sql filter list.</dd><dt class="property-"
             title="">
         <span id="filterids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterids_csharp" style="color: inherit; text-decoration: inherit;">Filter<wbr>Ids</a>
@@ -613,8 +705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -630,8 +721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsqlfilterslist">[]Get<wbr>Sql<wbr>Filters<wbr>List</a></span>
     </dt>
-    <dd><p>sql filter list.</p>
-</dd><dt class="property-"
+    <dd>sql filter list.</dd><dt class="property-"
             title="">
         <span id="filterids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterids_go" style="color: inherit; text-decoration: inherit;">Filter<wbr>Ids</a>
@@ -660,6 +750,60 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsqlfilterslist">list(object)</a></span>
+    </dt>
+    <dd>sql filter list.</dd><dt class="property-"
+            title="">
+        <span id="filter_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_ids_hcl" style="color: inherit; text-decoration: inherit;">filter_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="statuses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statuses_hcl" style="color: inherit; text-decoration: inherit;">statuses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -669,8 +813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -686,8 +829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsqlfilterslist">List&lt;Get<wbr>Sql<wbr>Filters<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>sql filter list.</p>
-</dd><dt class="property-"
+    <dd>sql filter list.</dd><dt class="property-"
             title="">
         <span id="filterids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterids_java" style="color: inherit; text-decoration: inherit;">filter<wbr>Ids</a>
@@ -725,8 +867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -742,8 +883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsqlfilterslist">Get<wbr>Sql<wbr>Filters<wbr>List[]</a></span>
     </dt>
-    <dd><p>sql filter list.</p>
-</dd><dt class="property-"
+    <dd>sql filter list.</dd><dt class="property-"
             title="">
         <span id="filterids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterids_nodejs" style="color: inherit; text-decoration: inherit;">filter<wbr>Ids</a>
@@ -781,8 +921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -796,10 +935,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsqlfilterslist">Get<wbr>Sql<wbr>Filters<wbr>List]</a></span>
+        <span class="property-type"><a href="#getsqlfilterslist">Sequence[Get<wbr>Sql<wbr>Filters<wbr>List]</a></span>
     </dt>
-    <dd><p>sql filter list.</p>
-</dd><dt class="property-"
+    <dd>sql filter list.</dd><dt class="property-"
             title="">
         <span id="filter_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_ids_python" style="color: inherit; text-decoration: inherit;">filter_<wbr>ids</a>
@@ -837,8 +975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -854,8 +991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsqlfilterslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>sql filter list.</p>
-</dd><dt class="property-"
+    <dd>sql filter list.</dd><dt class="property-"
             title="">
         <span id="filterids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterids_yaml" style="color: inherit; text-decoration: inherit;">filter<wbr>Ids</a>
@@ -903,8 +1039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="currentconcurrency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currentconcurrency_csharp" style="color: inherit; text-decoration: inherit;">Current<wbr>Concurrency</a>
@@ -912,8 +1047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>current concurrency.</p>
-</dd><dt class="property-required"
+    <dd>current concurrency.</dd><dt class="property-required"
             title="Required">
         <span id="currenttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currenttime_csharp" style="color: inherit; text-decoration: inherit;">Current<wbr>Time</a>
@@ -921,8 +1055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>current time.</p>
-</dd><dt class="property-required"
+    <dd>current time.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_csharp" style="color: inherit; text-decoration: inherit;">Expire<wbr>Time</a>
@@ -930,8 +1063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>expire time.</p>
-</dd><dt class="property-required"
+    <dd>expire time.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -939,8 +1071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>task id.</p>
-</dd><dt class="property-required"
+    <dd>task id.</dd><dt class="property-required"
             title="Required">
         <span id="maxconcurrency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrency_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Concurrency</a>
@@ -948,8 +1079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>maxmum concurrency.</p>
-</dd><dt class="property-required"
+    <dd>maxmum concurrency.</dd><dt class="property-required"
             title="Required">
         <span id="originkeys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originkeys_csharp" style="color: inherit; text-decoration: inherit;">Origin<wbr>Keys</a>
@@ -957,8 +1087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>origin keys.</p>
-</dd><dt class="property-required"
+    <dd>origin keys.</dd><dt class="property-required"
             title="Required">
         <span id="originrule_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originrule_csharp" style="color: inherit; text-decoration: inherit;">Origin<wbr>Rule</a>
@@ -966,8 +1095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>origin rule.</p>
-</dd><dt class="property-required"
+    <dd>origin rule.</dd><dt class="property-required"
             title="Required">
         <span id="rejectedsqlcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rejectedsqlcount_csharp" style="color: inherit; text-decoration: inherit;">Rejected<wbr>Sql<wbr>Count</a>
@@ -975,8 +1103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>rejected sql count.</p>
-</dd><dt class="property-required"
+    <dd>rejected sql count.</dd><dt class="property-required"
             title="Required">
         <span id="sqltype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqltype_csharp" style="color: inherit; text-decoration: inherit;">Sql<wbr>Type</a>
@@ -984,8 +1111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-required"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -993,8 +1119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task status, optional value is RUNNING, FINISHED, TERMINATED.</p>
-</dd></dl>
+    <dd>task status, optional value is RUNNING, FINISHED, TERMINATED.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1008,8 +1133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="currentconcurrency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currentconcurrency_go" style="color: inherit; text-decoration: inherit;">Current<wbr>Concurrency</a>
@@ -1017,8 +1141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>current concurrency.</p>
-</dd><dt class="property-required"
+    <dd>current concurrency.</dd><dt class="property-required"
             title="Required">
         <span id="currenttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currenttime_go" style="color: inherit; text-decoration: inherit;">Current<wbr>Time</a>
@@ -1026,8 +1149,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>current time.</p>
-</dd><dt class="property-required"
+    <dd>current time.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_go" style="color: inherit; text-decoration: inherit;">Expire<wbr>Time</a>
@@ -1035,8 +1157,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>expire time.</p>
-</dd><dt class="property-required"
+    <dd>expire time.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1044,8 +1165,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>task id.</p>
-</dd><dt class="property-required"
+    <dd>task id.</dd><dt class="property-required"
             title="Required">
         <span id="maxconcurrency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrency_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Concurrency</a>
@@ -1053,8 +1173,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>maxmum concurrency.</p>
-</dd><dt class="property-required"
+    <dd>maxmum concurrency.</dd><dt class="property-required"
             title="Required">
         <span id="originkeys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originkeys_go" style="color: inherit; text-decoration: inherit;">Origin<wbr>Keys</a>
@@ -1062,8 +1181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>origin keys.</p>
-</dd><dt class="property-required"
+    <dd>origin keys.</dd><dt class="property-required"
             title="Required">
         <span id="originrule_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originrule_go" style="color: inherit; text-decoration: inherit;">Origin<wbr>Rule</a>
@@ -1071,8 +1189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>origin rule.</p>
-</dd><dt class="property-required"
+    <dd>origin rule.</dd><dt class="property-required"
             title="Required">
         <span id="rejectedsqlcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rejectedsqlcount_go" style="color: inherit; text-decoration: inherit;">Rejected<wbr>Sql<wbr>Count</a>
@@ -1080,8 +1197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>rejected sql count.</p>
-</dd><dt class="property-required"
+    <dd>rejected sql count.</dd><dt class="property-required"
             title="Required">
         <span id="sqltype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqltype_go" style="color: inherit; text-decoration: inherit;">Sql<wbr>Type</a>
@@ -1089,8 +1205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-required"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1098,8 +1213,101 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task status, optional value is RUNNING, FINISHED, TERMINATED.</p>
-</dd></dl>
+    <dd>task status, optional value is RUNNING, FINISHED, TERMINATED.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="current_concurrency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#current_concurrency_hcl" style="color: inherit; text-decoration: inherit;">current_<wbr>concurrency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>current concurrency.</dd><dt class="property-required"
+            title="Required">
+        <span id="current_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#current_time_hcl" style="color: inherit; text-decoration: inherit;">current_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>current time.</dd><dt class="property-required"
+            title="Required">
+        <span id="expire_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expire_time_hcl" style="color: inherit; text-decoration: inherit;">expire_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>expire time.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>task id.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_concurrency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_concurrency_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>concurrency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>maxmum concurrency.</dd><dt class="property-required"
+            title="Required">
+        <span id="origin_keys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_keys_hcl" style="color: inherit; text-decoration: inherit;">origin_<wbr>keys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>origin keys.</dd><dt class="property-required"
+            title="Required">
+        <span id="origin_rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_rule_hcl" style="color: inherit; text-decoration: inherit;">origin_<wbr>rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>origin rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="rejected_sql_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rejected_sql_count_hcl" style="color: inherit; text-decoration: inherit;">rejected_<wbr>sql_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>rejected sql count.</dd><dt class="property-required"
+            title="Required">
+        <span id="sql_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_type_hcl" style="color: inherit; text-decoration: inherit;">sql_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>task status, optional value is RUNNING, FINISHED, TERMINATED.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1113,8 +1321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="currentconcurrency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currentconcurrency_java" style="color: inherit; text-decoration: inherit;">current<wbr>Concurrency</a>
@@ -1122,8 +1329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>current concurrency.</p>
-</dd><dt class="property-required"
+    <dd>current concurrency.</dd><dt class="property-required"
             title="Required">
         <span id="currenttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currenttime_java" style="color: inherit; text-decoration: inherit;">current<wbr>Time</a>
@@ -1131,8 +1337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>current time.</p>
-</dd><dt class="property-required"
+    <dd>current time.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_java" style="color: inherit; text-decoration: inherit;">expire<wbr>Time</a>
@@ -1140,8 +1345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>expire time.</p>
-</dd><dt class="property-required"
+    <dd>expire time.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1149,8 +1353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>task id.</p>
-</dd><dt class="property-required"
+    <dd>task id.</dd><dt class="property-required"
             title="Required">
         <span id="maxconcurrency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrency_java" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrency</a>
@@ -1158,8 +1361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>maxmum concurrency.</p>
-</dd><dt class="property-required"
+    <dd>maxmum concurrency.</dd><dt class="property-required"
             title="Required">
         <span id="originkeys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originkeys_java" style="color: inherit; text-decoration: inherit;">origin<wbr>Keys</a>
@@ -1167,8 +1369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>origin keys.</p>
-</dd><dt class="property-required"
+    <dd>origin keys.</dd><dt class="property-required"
             title="Required">
         <span id="originrule_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originrule_java" style="color: inherit; text-decoration: inherit;">origin<wbr>Rule</a>
@@ -1176,8 +1377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>origin rule.</p>
-</dd><dt class="property-required"
+    <dd>origin rule.</dd><dt class="property-required"
             title="Required">
         <span id="rejectedsqlcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rejectedsqlcount_java" style="color: inherit; text-decoration: inherit;">rejected<wbr>Sql<wbr>Count</a>
@@ -1185,8 +1385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>rejected sql count.</p>
-</dd><dt class="property-required"
+    <dd>rejected sql count.</dd><dt class="property-required"
             title="Required">
         <span id="sqltype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqltype_java" style="color: inherit; text-decoration: inherit;">sql<wbr>Type</a>
@@ -1194,8 +1393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-required"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1203,8 +1401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task status, optional value is RUNNING, FINISHED, TERMINATED.</p>
-</dd></dl>
+    <dd>task status, optional value is RUNNING, FINISHED, TERMINATED.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1218,8 +1415,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="currentconcurrency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currentconcurrency_nodejs" style="color: inherit; text-decoration: inherit;">current<wbr>Concurrency</a>
@@ -1227,8 +1423,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>current concurrency.</p>
-</dd><dt class="property-required"
+    <dd>current concurrency.</dd><dt class="property-required"
             title="Required">
         <span id="currenttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currenttime_nodejs" style="color: inherit; text-decoration: inherit;">current<wbr>Time</a>
@@ -1236,8 +1431,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>current time.</p>
-</dd><dt class="property-required"
+    <dd>current time.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_nodejs" style="color: inherit; text-decoration: inherit;">expire<wbr>Time</a>
@@ -1245,8 +1439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>expire time.</p>
-</dd><dt class="property-required"
+    <dd>expire time.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1254,8 +1447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>task id.</p>
-</dd><dt class="property-required"
+    <dd>task id.</dd><dt class="property-required"
             title="Required">
         <span id="maxconcurrency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrency_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrency</a>
@@ -1263,8 +1455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>maxmum concurrency.</p>
-</dd><dt class="property-required"
+    <dd>maxmum concurrency.</dd><dt class="property-required"
             title="Required">
         <span id="originkeys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originkeys_nodejs" style="color: inherit; text-decoration: inherit;">origin<wbr>Keys</a>
@@ -1272,8 +1463,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>origin keys.</p>
-</dd><dt class="property-required"
+    <dd>origin keys.</dd><dt class="property-required"
             title="Required">
         <span id="originrule_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originrule_nodejs" style="color: inherit; text-decoration: inherit;">origin<wbr>Rule</a>
@@ -1281,8 +1471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>origin rule.</p>
-</dd><dt class="property-required"
+    <dd>origin rule.</dd><dt class="property-required"
             title="Required">
         <span id="rejectedsqlcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rejectedsqlcount_nodejs" style="color: inherit; text-decoration: inherit;">rejected<wbr>Sql<wbr>Count</a>
@@ -1290,8 +1479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>rejected sql count.</p>
-</dd><dt class="property-required"
+    <dd>rejected sql count.</dd><dt class="property-required"
             title="Required">
         <span id="sqltype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqltype_nodejs" style="color: inherit; text-decoration: inherit;">sql<wbr>Type</a>
@@ -1299,8 +1487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-required"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1308,8 +1495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task status, optional value is RUNNING, FINISHED, TERMINATED.</p>
-</dd></dl>
+    <dd>task status, optional value is RUNNING, FINISHED, TERMINATED.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1323,8 +1509,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="current_concurrency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#current_concurrency_python" style="color: inherit; text-decoration: inherit;">current_<wbr>concurrency</a>
@@ -1332,8 +1517,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>current concurrency.</p>
-</dd><dt class="property-required"
+    <dd>current concurrency.</dd><dt class="property-required"
             title="Required">
         <span id="current_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#current_time_python" style="color: inherit; text-decoration: inherit;">current_<wbr>time</a>
@@ -1341,8 +1525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>current time.</p>
-</dd><dt class="property-required"
+    <dd>current time.</dd><dt class="property-required"
             title="Required">
         <span id="expire_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expire_time_python" style="color: inherit; text-decoration: inherit;">expire_<wbr>time</a>
@@ -1350,8 +1533,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>expire time.</p>
-</dd><dt class="property-required"
+    <dd>expire time.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1359,8 +1541,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>task id.</p>
-</dd><dt class="property-required"
+    <dd>task id.</dd><dt class="property-required"
             title="Required">
         <span id="max_concurrency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_concurrency_python" style="color: inherit; text-decoration: inherit;">max_<wbr>concurrency</a>
@@ -1368,8 +1549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>maxmum concurrency.</p>
-</dd><dt class="property-required"
+    <dd>maxmum concurrency.</dd><dt class="property-required"
             title="Required">
         <span id="origin_keys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_keys_python" style="color: inherit; text-decoration: inherit;">origin_<wbr>keys</a>
@@ -1377,8 +1557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>origin keys.</p>
-</dd><dt class="property-required"
+    <dd>origin keys.</dd><dt class="property-required"
             title="Required">
         <span id="origin_rule_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#origin_rule_python" style="color: inherit; text-decoration: inherit;">origin_<wbr>rule</a>
@@ -1386,8 +1565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>origin rule.</p>
-</dd><dt class="property-required"
+    <dd>origin rule.</dd><dt class="property-required"
             title="Required">
         <span id="rejected_sql_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rejected_sql_count_python" style="color: inherit; text-decoration: inherit;">rejected_<wbr>sql_<wbr>count</a>
@@ -1395,8 +1573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>rejected sql count.</p>
-</dd><dt class="property-required"
+    <dd>rejected sql count.</dd><dt class="property-required"
             title="Required">
         <span id="sql_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_type_python" style="color: inherit; text-decoration: inherit;">sql_<wbr>type</a>
@@ -1404,8 +1581,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-required"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1413,8 +1589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>task status, optional value is RUNNING, FINISHED, TERMINATED.</p>
-</dd></dl>
+    <dd>task status, optional value is RUNNING, FINISHED, TERMINATED.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1428,8 +1603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="currentconcurrency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currentconcurrency_yaml" style="color: inherit; text-decoration: inherit;">current<wbr>Concurrency</a>
@@ -1437,8 +1611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>current concurrency.</p>
-</dd><dt class="property-required"
+    <dd>current concurrency.</dd><dt class="property-required"
             title="Required">
         <span id="currenttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currenttime_yaml" style="color: inherit; text-decoration: inherit;">current<wbr>Time</a>
@@ -1446,8 +1619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>current time.</p>
-</dd><dt class="property-required"
+    <dd>current time.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_yaml" style="color: inherit; text-decoration: inherit;">expire<wbr>Time</a>
@@ -1455,8 +1627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>expire time.</p>
-</dd><dt class="property-required"
+    <dd>expire time.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1464,8 +1635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>task id.</p>
-</dd><dt class="property-required"
+    <dd>task id.</dd><dt class="property-required"
             title="Required">
         <span id="maxconcurrency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrency_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrency</a>
@@ -1473,8 +1643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>maxmum concurrency.</p>
-</dd><dt class="property-required"
+    <dd>maxmum concurrency.</dd><dt class="property-required"
             title="Required">
         <span id="originkeys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originkeys_yaml" style="color: inherit; text-decoration: inherit;">origin<wbr>Keys</a>
@@ -1482,8 +1651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>origin keys.</p>
-</dd><dt class="property-required"
+    <dd>origin keys.</dd><dt class="property-required"
             title="Required">
         <span id="originrule_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originrule_yaml" style="color: inherit; text-decoration: inherit;">origin<wbr>Rule</a>
@@ -1491,8 +1659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>origin rule.</p>
-</dd><dt class="property-required"
+    <dd>origin rule.</dd><dt class="property-required"
             title="Required">
         <span id="rejectedsqlcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rejectedsqlcount_yaml" style="color: inherit; text-decoration: inherit;">rejected<wbr>Sql<wbr>Count</a>
@@ -1500,8 +1667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>rejected sql count.</p>
-</dd><dt class="property-required"
+    <dd>rejected sql count.</dd><dt class="property-required"
             title="Required">
         <span id="sqltype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqltype_yaml" style="color: inherit; text-decoration: inherit;">sql<wbr>Type</a>
@@ -1509,8 +1675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</p>
-</dd><dt class="property-required"
+    <dd>sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1518,8 +1683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task status, optional value is RUNNING, FINISHED, TERMINATED.</p>
-</dd></dl>
+    <dd>task status, optional value is RUNNING, FINISHED, TERMINATED.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1534,7 +1698,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

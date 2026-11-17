@@ -2,9 +2,11 @@
 ---
 title: "Topic"
 title_tag: "tencentcloud.Ckafka.Topic"
-meta_desc: "Documentation for the tencentcloud.Ckafka.Topic resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create ckafka topic."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,110 +18,79 @@ Use this resource to create ckafka topic.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.ckafka.Topic("foo", {
-    cleanUpPolicy: "delete",
-    enableWhiteList: true,
-    instanceId: "ckafka-f9ife4zz",
-    ipWhiteLists: [
-        "ip1",
-        "ip2",
-    ],
-    maxMessageBytes: 0,
+const example = new tencentcloud.ckafka.Topic("example", {
+    instanceId: "ckafka-bzmja3mb",
+    topicName: "tf-example",
     note: "topic note",
-    partitionNum: 1,
     replicaNum: 2,
-    retention: 60000,
-    segment: 3600000,
-    syncReplicaMinNum: 1,
-    topicName: "example",
+    partitionNum: 3,
+    cleanUpPolicy: "delete",
+    syncReplicaMinNum: 2,
     uncleanLeaderElectionEnable: false,
+    segment: 86400000,
+    retention: 60000,
+    maxMessageBytes: 4096,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.ckafka.Topic("foo",
-    clean_up_policy="delete",
-    enable_white_list=True,
-    instance_id="ckafka-f9ife4zz",
-    ip_white_lists=[
-        "ip1",
-        "ip2",
-    ],
-    max_message_bytes=0,
+example = tencentcloud.ckafka.Topic("example",
+    instance_id="ckafka-bzmja3mb",
+    topic_name="tf-example",
     note="topic note",
-    partition_num=1,
     replica_num=2,
+    partition_num=3,
+    clean_up_policy="delete",
+    sync_replica_min_num=2,
+    unclean_leader_election_enable=False,
+    segment=86400000,
     retention=60000,
-    segment=3600000,
-    sync_replica_min_num=1,
-    topic_name="example",
-    unclean_leader_election_enable=False)
+    max_message_bytes=4096)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Ckafka.Topic("foo", new()
-    {
-        CleanUpPolicy = "delete",
-        EnableWhiteList = true,
-        InstanceId = "ckafka-f9ife4zz",
-        IpWhiteLists = new[]
-        {
-            "ip1",
-            "ip2",
-        },
-        MaxMessageBytes = 0,
-        Note = "topic note",
-        PartitionNum = 1,
-        ReplicaNum = 2,
-        Retention = 60000,
-        Segment = 3600000,
-        SyncReplicaMinNum = 1,
-        TopicName = "example",
-        UncleanLeaderElectionEnable = false,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ckafka"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ckafka.NewTopic(ctx, "foo", &Ckafka.TopicArgs{
-			CleanUpPolicy:   pulumi.String("delete"),
-			EnableWhiteList: pulumi.Bool(true),
-			InstanceId:      pulumi.String("ckafka-f9ife4zz"),
-			IpWhiteLists: pulumi.StringArray{
-				pulumi.String("ip1"),
-				pulumi.String("ip2"),
-			},
-			MaxMessageBytes:             pulumi.Int(0),
+		_, err := ckafka.NewTopic(ctx, "example", &ckafka.TopicArgs{
+			InstanceId:                  pulumi.String("ckafka-bzmja3mb"),
+			TopicName:                   pulumi.String("tf-example"),
 			Note:                        pulumi.String("topic note"),
-			PartitionNum:                pulumi.Int(1),
 			ReplicaNum:                  pulumi.Int(2),
-			Retention:                   pulumi.Int(60000),
-			Segment:                     pulumi.Int(3600000),
-			SyncReplicaMinNum:           pulumi.Int(1),
-			TopicName:                   pulumi.String("example"),
+			PartitionNum:                pulumi.Int(3),
+			CleanUpPolicy:               pulumi.String("delete"),
+			SyncReplicaMinNum:           pulumi.Int(2),
 			UncleanLeaderElectionEnable: pulumi.Bool(false),
+			Segment:                     pulumi.Int(86400000),
+			Retention:                   pulumi.Int(60000),
+			MaxMessageBytes:             pulumi.Int(4096),
 		})
 		if err != nil {
 			return err
@@ -128,6 +99,41 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Ckafka.Topic("example", new()
+    {
+        InstanceId = "ckafka-bzmja3mb",
+        TopicName = "tf-example",
+        Note = "topic note",
+        ReplicaNum = 2,
+        PartitionNum = 3,
+        CleanUpPolicy = "delete",
+        SyncReplicaMinNum = 2,
+        UncleanLeaderElectionEnable = false,
+        Segment = 86400000,
+        Retention = 60000,
+        MaxMessageBytes = 4096,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -136,8 +142,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ckafka.Topic;
 import com.pulumi.tencentcloud.Ckafka.TopicArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -149,119 +155,183 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Topic("foo", TopicArgs.builder()        
-            .cleanUpPolicy("delete")
-            .enableWhiteList(true)
-            .instanceId("ckafka-f9ife4zz")
-            .ipWhiteLists(            
-                "ip1",
-                "ip2")
-            .maxMessageBytes(0)
+        var example = new Topic("example", TopicArgs.builder()
+            .instanceId("ckafka-bzmja3mb")
+            .topicName("tf-example")
             .note("topic note")
-            .partitionNum(1)
             .replicaNum(2)
-            .retention(60000)
-            .segment(3600000)
-            .syncReplicaMinNum(1)
-            .topicName("example")
+            .partitionNum(3)
+            .cleanUpPolicy("delete")
+            .syncReplicaMinNum(2)
             .uncleanLeaderElectionEnable(false)
+            .segment(86400000)
+            .retention(60000)
+            .maxMessageBytes(4096)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  foo:
+  example:
     type: tencentcloud:Ckafka:Topic
     properties:
-      cleanUpPolicy: delete
-      enableWhiteList: true
-      instanceId: ckafka-f9ife4zz
-      ipWhiteLists:
-        - ip1
-        - ip2
-      maxMessageBytes: 0
+      instanceId: ckafka-bzmja3mb
+      topicName: tf-example
       note: topic note
-      partitionNum: 1
       replicaNum: 2
-      retention: 60000
-      segment: 3.6e+06
-      syncReplicaMinNum: 1
-      topicName: example
+      partitionNum: 3
+      cleanUpPolicy: delete
+      syncReplicaMinNum: 2
       uncleanLeaderElectionEnable: false
+      segment: 8.64e+07
+      retention: 60000
+      maxMessageBytes: 4096
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_ckafka_topic" "example" {
+  instance_id                    = "ckafka-bzmja3mb"
+  topic_name                     = "tf-example"
+  note                           = "topic note"
+  replica_num                    = 2
+  partition_num                  = 3
+  clean_up_policy                = "delete"
+  sync_replica_min_num           = 2
+  unclean_leader_election_enable = false
+  segment                        = 86400000
+  retention                      = 60000
+  max_message_bytes              = 4096
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateTopic](https://www.tencentcloud.com/document/api/597/35347)
+  - [CreateTopicIpWhiteList](https://www.tencentcloud.com/document/api/597/35346)
+  - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+  - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
+* Read:
+  - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+  - [DescribeTopicAttributes](https://www.tencentcloud.com/document/api/597/35342)
+  - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
+* Update:
+  - [CreatePartition](https://www.tencentcloud.com/document/api/597/35348)
+  - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+  - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
+  - [ModifyTopicAttributes](https://www.tencentcloud.com/document/api/597/35340)
+* Delete:
+  - [DeleteTopic](https://www.tencentcloud.com/document/api/597/35345)
+  - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+  - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
 
 
 ## Create Topic Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p">,</span>
+          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-          <span class="nx">clean_up_policy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">enable_white_list</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-          <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">ip_white_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-          <span class="nx">max_message_bytes</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-          <span class="nx">note</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">partition_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">replica_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">ip_white_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+          <span class="nx">note</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">max_message_bytes</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">clean_up_policy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">retention</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">segment</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">sync_replica_min_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-          <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">unclean_leader_election_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p">,</span>
-          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+          <span class="nx">enable_white_list</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+          <span class="nx">unclean_leader_election_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTopic</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Topic</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTopic</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Topic</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ckafka:Topic</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ckafka:Topic</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_ckafka_topic&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -282,7 +352,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -399,11 +469,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Topic Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Topic resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -419,8 +497,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ckafka instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Ckafka instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="partitionnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitionnum_csharp" style="color: inherit; text-decoration: inherit;">Partition<wbr>Num</a>
@@ -428,8 +505,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of partition.</p>
-</dd><dt class="property-required"
+    <dd>The number of partition.</dd><dt class="property-required"
             title="Required">
         <span id="replicanum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicanum_csharp" style="color: inherit; text-decoration: inherit;">Replica<wbr>Num</a>
@@ -437,8 +513,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of replica.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The number of replica. Maximum is 3.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="topicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -446,8 +521,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</dd><dt class="property-optional"
             title="Optional">
         <span id="cleanuppolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cleanuppolicy_csharp" style="color: inherit; text-decoration: inherit;">Clean<wbr>Up<wbr>Policy</a>
@@ -455,8 +529,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</p>
-</dd><dt class="property-optional"
+    <dd>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablewhitelist_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablewhitelist_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>White<wbr>List</a>
@@ -464,8 +537,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipwhitelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipwhitelists_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>White<wbr>Lists</a>
@@ -473,8 +545,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Ip whitelist, quota limit, required when enableWhileList=true.</p>
-</dd><dt class="property-optional"
+    <dd>Ip whitelist, quota limit, required when enableWhileList=true.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxmessagebytes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmessagebytes_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Message<wbr>Bytes</a>
@@ -482,8 +553,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</p>
-</dd><dt class="property-optional"
+    <dd>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="note_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#note_csharp" style="color: inherit; text-decoration: inherit;">Note</a>
@@ -491,8 +561,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</p>
-</dd><dt class="property-optional"
+    <dd>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</dd><dt class="property-optional"
             title="Optional">
         <span id="retention_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retention_csharp" style="color: inherit; text-decoration: inherit;">Retention</a>
@@ -500,8 +569,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.</dd><dt class="property-optional"
             title="Optional">
         <span id="segment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segment_csharp" style="color: inherit; text-decoration: inherit;">Segment</a>
@@ -509,8 +577,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Segment scrolling time, in ms, the current minimum is 3600000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Segment scrolling time, in ms, the current minimum is 3600000ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="syncreplicaminnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncreplicaminnum_csharp" style="color: inherit; text-decoration: inherit;">Sync<wbr>Replica<wbr>Min<wbr>Num</a>
@@ -518,8 +585,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Min number of sync replicas, Default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Min number of sync replicas, Default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uncleanleaderelectionenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uncleanleaderelectionenable_csharp" style="color: inherit; text-decoration: inherit;">Unclean<wbr>Leader<wbr>Election<wbr>Enable</a>
@@ -527,8 +593,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</p>
-</dd></dl>
+    <dd>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -542,8 +607,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ckafka instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Ckafka instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="partitionnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitionnum_go" style="color: inherit; text-decoration: inherit;">Partition<wbr>Num</a>
@@ -551,8 +615,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of partition.</p>
-</dd><dt class="property-required"
+    <dd>The number of partition.</dd><dt class="property-required"
             title="Required">
         <span id="replicanum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicanum_go" style="color: inherit; text-decoration: inherit;">Replica<wbr>Num</a>
@@ -560,8 +623,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of replica.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The number of replica. Maximum is 3.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="topicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -569,8 +631,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</dd><dt class="property-optional"
             title="Optional">
         <span id="cleanuppolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cleanuppolicy_go" style="color: inherit; text-decoration: inherit;">Clean<wbr>Up<wbr>Policy</a>
@@ -578,8 +639,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</p>
-</dd><dt class="property-optional"
+    <dd>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablewhitelist_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablewhitelist_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>White<wbr>List</a>
@@ -587,8 +647,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipwhitelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipwhitelists_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>White<wbr>Lists</a>
@@ -596,8 +655,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Ip whitelist, quota limit, required when enableWhileList=true.</p>
-</dd><dt class="property-optional"
+    <dd>Ip whitelist, quota limit, required when enableWhileList=true.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxmessagebytes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmessagebytes_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Message<wbr>Bytes</a>
@@ -605,8 +663,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</p>
-</dd><dt class="property-optional"
+    <dd>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="note_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#note_go" style="color: inherit; text-decoration: inherit;">Note</a>
@@ -614,8 +671,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</p>
-</dd><dt class="property-optional"
+    <dd>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</dd><dt class="property-optional"
             title="Optional">
         <span id="retention_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retention_go" style="color: inherit; text-decoration: inherit;">Retention</a>
@@ -623,8 +679,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.</dd><dt class="property-optional"
             title="Optional">
         <span id="segment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segment_go" style="color: inherit; text-decoration: inherit;">Segment</a>
@@ -632,8 +687,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Segment scrolling time, in ms, the current minimum is 3600000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Segment scrolling time, in ms, the current minimum is 3600000ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="syncreplicaminnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncreplicaminnum_go" style="color: inherit; text-decoration: inherit;">Sync<wbr>Replica<wbr>Min<wbr>Num</a>
@@ -641,8 +695,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Min number of sync replicas, Default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Min number of sync replicas, Default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uncleanleaderelectionenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uncleanleaderelectionenable_go" style="color: inherit; text-decoration: inherit;">Unclean<wbr>Leader<wbr>Election<wbr>Enable</a>
@@ -650,8 +703,117 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</p>
-</dd></dl>
+    <dd>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ckafka instance ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="partition_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_num_hcl" style="color: inherit; text-decoration: inherit;">partition_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of partition.</dd><dt class="property-required"
+            title="Required">
+        <span id="replica_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replica_num_hcl" style="color: inherit; text-decoration: inherit;">replica_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of replica. Maximum is 3.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="clean_up_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clean_up_policy_hcl" style="color: inherit; text-decoration: inherit;">clean_<wbr>up_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_white_list_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_white_list_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>white_<wbr>list</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_white_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_white_lists_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>white_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Ip whitelist, quota limit, required when enableWhileList=true.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_message_bytes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_message_bytes_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>message_<wbr>bytes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="note_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#note_hcl" style="color: inherit; text-decoration: inherit;">note</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="retention_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retention_hcl" style="color: inherit; text-decoration: inherit;">retention</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="segment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segment_hcl" style="color: inherit; text-decoration: inherit;">segment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Segment scrolling time, in ms, the current minimum is 3600000ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sync_replica_min_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sync_replica_min_num_hcl" style="color: inherit; text-decoration: inherit;">sync_<wbr>replica_<wbr>min_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Min number of sync replicas, Default is <code>1</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="unclean_leader_election_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unclean_leader_election_enable_hcl" style="color: inherit; text-decoration: inherit;">unclean_<wbr>leader_<wbr>election_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -665,8 +827,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ckafka instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Ckafka instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="partitionnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitionnum_java" style="color: inherit; text-decoration: inherit;">partition<wbr>Num</a>
@@ -674,8 +835,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of partition.</p>
-</dd><dt class="property-required"
+    <dd>The number of partition.</dd><dt class="property-required"
             title="Required">
         <span id="replicanum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicanum_java" style="color: inherit; text-decoration: inherit;">replica<wbr>Num</a>
@@ -683,8 +843,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of replica.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The number of replica. Maximum is 3.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="topicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -692,8 +851,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</dd><dt class="property-optional"
             title="Optional">
         <span id="cleanuppolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cleanuppolicy_java" style="color: inherit; text-decoration: inherit;">clean<wbr>Up<wbr>Policy</a>
@@ -701,8 +859,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</p>
-</dd><dt class="property-optional"
+    <dd>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablewhitelist_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablewhitelist_java" style="color: inherit; text-decoration: inherit;">enable<wbr>White<wbr>List</a>
@@ -710,8 +867,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipwhitelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipwhitelists_java" style="color: inherit; text-decoration: inherit;">ip<wbr>White<wbr>Lists</a>
@@ -719,8 +875,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Ip whitelist, quota limit, required when enableWhileList=true.</p>
-</dd><dt class="property-optional"
+    <dd>Ip whitelist, quota limit, required when enableWhileList=true.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxmessagebytes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmessagebytes_java" style="color: inherit; text-decoration: inherit;">max<wbr>Message<wbr>Bytes</a>
@@ -728,8 +883,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</p>
-</dd><dt class="property-optional"
+    <dd>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="note_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#note_java" style="color: inherit; text-decoration: inherit;">note</a>
@@ -737,8 +891,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</p>
-</dd><dt class="property-optional"
+    <dd>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</dd><dt class="property-optional"
             title="Optional">
         <span id="retention_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retention_java" style="color: inherit; text-decoration: inherit;">retention</a>
@@ -746,8 +899,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.</dd><dt class="property-optional"
             title="Optional">
         <span id="segment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segment_java" style="color: inherit; text-decoration: inherit;">segment</a>
@@ -755,8 +907,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Segment scrolling time, in ms, the current minimum is 3600000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Segment scrolling time, in ms, the current minimum is 3600000ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="syncreplicaminnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncreplicaminnum_java" style="color: inherit; text-decoration: inherit;">sync<wbr>Replica<wbr>Min<wbr>Num</a>
@@ -764,8 +915,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Min number of sync replicas, Default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Min number of sync replicas, Default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uncleanleaderelectionenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uncleanleaderelectionenable_java" style="color: inherit; text-decoration: inherit;">unclean<wbr>Leader<wbr>Election<wbr>Enable</a>
@@ -773,8 +923,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</p>
-</dd></dl>
+    <dd>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -788,8 +937,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ckafka instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Ckafka instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="partitionnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitionnum_nodejs" style="color: inherit; text-decoration: inherit;">partition<wbr>Num</a>
@@ -797,8 +945,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of partition.</p>
-</dd><dt class="property-required"
+    <dd>The number of partition.</dd><dt class="property-required"
             title="Required">
         <span id="replicanum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicanum_nodejs" style="color: inherit; text-decoration: inherit;">replica<wbr>Num</a>
@@ -806,8 +953,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of replica.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The number of replica. Maximum is 3.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="topicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -815,8 +961,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</dd><dt class="property-optional"
             title="Optional">
         <span id="cleanuppolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cleanuppolicy_nodejs" style="color: inherit; text-decoration: inherit;">clean<wbr>Up<wbr>Policy</a>
@@ -824,8 +969,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</p>
-</dd><dt class="property-optional"
+    <dd>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablewhitelist_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablewhitelist_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>White<wbr>List</a>
@@ -833,8 +977,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipwhitelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipwhitelists_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>White<wbr>Lists</a>
@@ -842,8 +985,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Ip whitelist, quota limit, required when enableWhileList=true.</p>
-</dd><dt class="property-optional"
+    <dd>Ip whitelist, quota limit, required when enableWhileList=true.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxmessagebytes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmessagebytes_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Message<wbr>Bytes</a>
@@ -851,8 +993,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</p>
-</dd><dt class="property-optional"
+    <dd>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="note_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#note_nodejs" style="color: inherit; text-decoration: inherit;">note</a>
@@ -860,8 +1001,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</p>
-</dd><dt class="property-optional"
+    <dd>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</dd><dt class="property-optional"
             title="Optional">
         <span id="retention_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retention_nodejs" style="color: inherit; text-decoration: inherit;">retention</a>
@@ -869,8 +1009,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.</dd><dt class="property-optional"
             title="Optional">
         <span id="segment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segment_nodejs" style="color: inherit; text-decoration: inherit;">segment</a>
@@ -878,8 +1017,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Segment scrolling time, in ms, the current minimum is 3600000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Segment scrolling time, in ms, the current minimum is 3600000ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="syncreplicaminnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncreplicaminnum_nodejs" style="color: inherit; text-decoration: inherit;">sync<wbr>Replica<wbr>Min<wbr>Num</a>
@@ -887,8 +1025,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Min number of sync replicas, Default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Min number of sync replicas, Default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uncleanleaderelectionenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uncleanleaderelectionenable_nodejs" style="color: inherit; text-decoration: inherit;">unclean<wbr>Leader<wbr>Election<wbr>Enable</a>
@@ -896,8 +1033,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</p>
-</dd></dl>
+    <dd>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -911,8 +1047,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ckafka instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Ckafka instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="partition_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_num_python" style="color: inherit; text-decoration: inherit;">partition_<wbr>num</a>
@@ -920,8 +1055,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of partition.</p>
-</dd><dt class="property-required"
+    <dd>The number of partition.</dd><dt class="property-required"
             title="Required">
         <span id="replica_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replica_num_python" style="color: inherit; text-decoration: inherit;">replica_<wbr>num</a>
@@ -929,8 +1063,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of replica.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The number of replica. Maximum is 3.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
@@ -938,8 +1071,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</dd><dt class="property-optional"
             title="Optional">
         <span id="clean_up_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clean_up_policy_python" style="color: inherit; text-decoration: inherit;">clean_<wbr>up_<wbr>policy</a>
@@ -947,8 +1079,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</p>
-</dd><dt class="property-optional"
+    <dd>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_white_list_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_white_list_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>white_<wbr>list</a>
@@ -956,8 +1087,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_white_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_white_lists_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>white_<wbr>lists</a>
@@ -965,8 +1095,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Ip whitelist, quota limit, required when enableWhileList=true.</p>
-</dd><dt class="property-optional"
+    <dd>Ip whitelist, quota limit, required when enableWhileList=true.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_message_bytes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_message_bytes_python" style="color: inherit; text-decoration: inherit;">max_<wbr>message_<wbr>bytes</a>
@@ -974,8 +1103,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</p>
-</dd><dt class="property-optional"
+    <dd>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="note_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#note_python" style="color: inherit; text-decoration: inherit;">note</a>
@@ -983,8 +1111,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</p>
-</dd><dt class="property-optional"
+    <dd>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</dd><dt class="property-optional"
             title="Optional">
         <span id="retention_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retention_python" style="color: inherit; text-decoration: inherit;">retention</a>
@@ -992,8 +1119,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.</dd><dt class="property-optional"
             title="Optional">
         <span id="segment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segment_python" style="color: inherit; text-decoration: inherit;">segment</a>
@@ -1001,8 +1127,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Segment scrolling time, in ms, the current minimum is 3600000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Segment scrolling time, in ms, the current minimum is 3600000ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="sync_replica_min_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sync_replica_min_num_python" style="color: inherit; text-decoration: inherit;">sync_<wbr>replica_<wbr>min_<wbr>num</a>
@@ -1010,8 +1135,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Min number of sync replicas, Default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Min number of sync replicas, Default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="unclean_leader_election_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unclean_leader_election_enable_python" style="color: inherit; text-decoration: inherit;">unclean_<wbr>leader_<wbr>election_<wbr>enable</a>
@@ -1019,8 +1143,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</p>
-</dd></dl>
+    <dd>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1034,8 +1157,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ckafka instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Ckafka instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="partitionnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitionnum_yaml" style="color: inherit; text-decoration: inherit;">partition<wbr>Num</a>
@@ -1043,8 +1165,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of partition.</p>
-</dd><dt class="property-required"
+    <dd>The number of partition.</dd><dt class="property-required"
             title="Required">
         <span id="replicanum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicanum_yaml" style="color: inherit; text-decoration: inherit;">replica<wbr>Num</a>
@@ -1052,8 +1173,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of replica.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The number of replica. Maximum is 3.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="topicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1061,8 +1181,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</dd><dt class="property-optional"
             title="Optional">
         <span id="cleanuppolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cleanuppolicy_yaml" style="color: inherit; text-decoration: inherit;">clean<wbr>Up<wbr>Policy</a>
@@ -1070,8 +1189,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</p>
-</dd><dt class="property-optional"
+    <dd>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</dd><dt class="property-optional"
             title="Optional">
         <span id="enablewhitelist_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablewhitelist_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>White<wbr>List</a>
@@ -1079,8 +1197,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipwhitelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipwhitelists_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>White<wbr>Lists</a>
@@ -1088,8 +1205,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Ip whitelist, quota limit, required when enableWhileList=true.</p>
-</dd><dt class="property-optional"
+    <dd>Ip whitelist, quota limit, required when enableWhileList=true.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxmessagebytes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxmessagebytes_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Message<wbr>Bytes</a>
@@ -1097,8 +1213,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</p>
-</dd><dt class="property-optional"
+    <dd>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="note_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#note_yaml" style="color: inherit; text-decoration: inherit;">note</a>
@@ -1106,8 +1221,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</p>
-</dd><dt class="property-optional"
+    <dd>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</dd><dt class="property-optional"
             title="Optional">
         <span id="retention_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retention_yaml" style="color: inherit; text-decoration: inherit;">retention</a>
@@ -1115,8 +1229,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.</dd><dt class="property-optional"
             title="Optional">
         <span id="segment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segment_yaml" style="color: inherit; text-decoration: inherit;">segment</a>
@@ -1124,8 +1237,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Segment scrolling time, in ms, the current minimum is 3600000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Segment scrolling time, in ms, the current minimum is 3600000ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="syncreplicaminnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncreplicaminnum_yaml" style="color: inherit; text-decoration: inherit;">sync<wbr>Replica<wbr>Min<wbr>Num</a>
@@ -1133,8 +1245,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Min number of sync replicas, Default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Min number of sync replicas, Default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uncleanleaderelectionenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uncleanleaderelectionenable_yaml" style="color: inherit; text-decoration: inherit;">unclean<wbr>Leader<wbr>Election<wbr>Enable</a>
@@ -1142,8 +1253,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</p>
-</dd></dl>
+    <dd>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1164,8 +1274,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CKafka topic.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CKafka topic.</dd><dt class="property-"
             title="">
         <span id="forwardcosbucket_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardcosbucket_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Cos<wbr>Bucket</a>
@@ -1173,8 +1282,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data backup cos bucket: the bucket address that is dumped to cos.</p>
-</dd><dt class="property-"
+    <dd>Data backup cos bucket: the bucket address that is dumped to cos.</dd><dt class="property-"
             title="">
         <span id="forwardinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardinterval_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Interval</a>
@@ -1182,8 +1290,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Periodic frequency of data backup to cos.</p>
-</dd><dt class="property-"
+    <dd>Periodic frequency of data backup to cos.</dd><dt class="property-"
             title="">
         <span id="forwardstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardstatus_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Status</a>
@@ -1191,8 +1298,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</p>
-</dd><dt class="property-"
+    <dd>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1200,8 +1306,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="messagestoragelocation_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messagestoragelocation_csharp" style="color: inherit; text-decoration: inherit;">Message<wbr>Storage<wbr>Location</a>
@@ -1209,8 +1314,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message storage location.</p>
-</dd><dt class="property-"
+    <dd>Message storage location.</dd><dt class="property-"
             title="">
         <span id="segmentbytes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segmentbytes_csharp" style="color: inherit; text-decoration: inherit;">Segment<wbr>Bytes</a>
@@ -1218,8 +1322,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of bytes rolled by shard.</p>
-</dd></dl>
+    <dd>Number of bytes rolled by shard.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1233,8 +1336,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CKafka topic.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CKafka topic.</dd><dt class="property-"
             title="">
         <span id="forwardcosbucket_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardcosbucket_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Cos<wbr>Bucket</a>
@@ -1242,8 +1344,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data backup cos bucket: the bucket address that is dumped to cos.</p>
-</dd><dt class="property-"
+    <dd>Data backup cos bucket: the bucket address that is dumped to cos.</dd><dt class="property-"
             title="">
         <span id="forwardinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardinterval_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Interval</a>
@@ -1251,8 +1352,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Periodic frequency of data backup to cos.</p>
-</dd><dt class="property-"
+    <dd>Periodic frequency of data backup to cos.</dd><dt class="property-"
             title="">
         <span id="forwardstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardstatus_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Status</a>
@@ -1260,8 +1360,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</p>
-</dd><dt class="property-"
+    <dd>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1269,8 +1368,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="messagestoragelocation_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messagestoragelocation_go" style="color: inherit; text-decoration: inherit;">Message<wbr>Storage<wbr>Location</a>
@@ -1278,8 +1376,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message storage location.</p>
-</dd><dt class="property-"
+    <dd>Message storage location.</dd><dt class="property-"
             title="">
         <span id="segmentbytes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segmentbytes_go" style="color: inherit; text-decoration: inherit;">Segment<wbr>Bytes</a>
@@ -1287,8 +1384,69 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of bytes rolled by shard.</p>
-</dd></dl>
+    <dd>Number of bytes rolled by shard.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the CKafka topic.</dd><dt class="property-"
+            title="">
+        <span id="forward_cos_bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_cos_bucket_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>cos_<wbr>bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data backup cos bucket: the bucket address that is dumped to cos.</dd><dt class="property-"
+            title="">
+        <span id="forward_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_interval_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Periodic frequency of data backup to cos.</dd><dt class="property-"
+            title="">
+        <span id="forward_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_status_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="message_storage_location_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_storage_location_hcl" style="color: inherit; text-decoration: inherit;">message_<wbr>storage_<wbr>location</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Message storage location.</dd><dt class="property-"
+            title="">
+        <span id="segment_bytes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segment_bytes_hcl" style="color: inherit; text-decoration: inherit;">segment_<wbr>bytes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of bytes rolled by shard.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1302,8 +1460,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CKafka topic.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CKafka topic.</dd><dt class="property-"
             title="">
         <span id="forwardcosbucket_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardcosbucket_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Cos<wbr>Bucket</a>
@@ -1311,8 +1468,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data backup cos bucket: the bucket address that is dumped to cos.</p>
-</dd><dt class="property-"
+    <dd>Data backup cos bucket: the bucket address that is dumped to cos.</dd><dt class="property-"
             title="">
         <span id="forwardinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardinterval_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Interval</a>
@@ -1320,8 +1476,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Periodic frequency of data backup to cos.</p>
-</dd><dt class="property-"
+    <dd>Periodic frequency of data backup to cos.</dd><dt class="property-"
             title="">
         <span id="forwardstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardstatus_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Status</a>
@@ -1329,8 +1484,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</p>
-</dd><dt class="property-"
+    <dd>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1338,8 +1492,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="messagestoragelocation_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messagestoragelocation_java" style="color: inherit; text-decoration: inherit;">message<wbr>Storage<wbr>Location</a>
@@ -1347,8 +1500,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Message storage location.</p>
-</dd><dt class="property-"
+    <dd>Message storage location.</dd><dt class="property-"
             title="">
         <span id="segmentbytes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segmentbytes_java" style="color: inherit; text-decoration: inherit;">segment<wbr>Bytes</a>
@@ -1356,8 +1508,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of bytes rolled by shard.</p>
-</dd></dl>
+    <dd>Number of bytes rolled by shard.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1371,8 +1522,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CKafka topic.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CKafka topic.</dd><dt class="property-"
             title="">
         <span id="forwardcosbucket_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardcosbucket_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Cos<wbr>Bucket</a>
@@ -1380,8 +1530,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data backup cos bucket: the bucket address that is dumped to cos.</p>
-</dd><dt class="property-"
+    <dd>Data backup cos bucket: the bucket address that is dumped to cos.</dd><dt class="property-"
             title="">
         <span id="forwardinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardinterval_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Interval</a>
@@ -1389,8 +1538,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Periodic frequency of data backup to cos.</p>
-</dd><dt class="property-"
+    <dd>Periodic frequency of data backup to cos.</dd><dt class="property-"
             title="">
         <span id="forwardstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardstatus_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Status</a>
@@ -1398,8 +1546,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</p>
-</dd><dt class="property-"
+    <dd>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1407,8 +1554,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="messagestoragelocation_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messagestoragelocation_nodejs" style="color: inherit; text-decoration: inherit;">message<wbr>Storage<wbr>Location</a>
@@ -1416,8 +1562,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message storage location.</p>
-</dd><dt class="property-"
+    <dd>Message storage location.</dd><dt class="property-"
             title="">
         <span id="segmentbytes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segmentbytes_nodejs" style="color: inherit; text-decoration: inherit;">segment<wbr>Bytes</a>
@@ -1425,8 +1570,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of bytes rolled by shard.</p>
-</dd></dl>
+    <dd>Number of bytes rolled by shard.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1440,8 +1584,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the CKafka topic.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CKafka topic.</dd><dt class="property-"
             title="">
         <span id="forward_cos_bucket_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_cos_bucket_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>cos_<wbr>bucket</a>
@@ -1449,8 +1592,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data backup cos bucket: the bucket address that is dumped to cos.</p>
-</dd><dt class="property-"
+    <dd>Data backup cos bucket: the bucket address that is dumped to cos.</dd><dt class="property-"
             title="">
         <span id="forward_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_interval_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>interval</a>
@@ -1458,8 +1600,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Periodic frequency of data backup to cos.</p>
-</dd><dt class="property-"
+    <dd>Periodic frequency of data backup to cos.</dd><dt class="property-"
             title="">
         <span id="forward_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_status_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>status</a>
@@ -1467,8 +1608,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</p>
-</dd><dt class="property-"
+    <dd>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1476,8 +1616,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="message_storage_location_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_storage_location_python" style="color: inherit; text-decoration: inherit;">message_<wbr>storage_<wbr>location</a>
@@ -1485,8 +1624,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Message storage location.</p>
-</dd><dt class="property-"
+    <dd>Message storage location.</dd><dt class="property-"
             title="">
         <span id="segment_bytes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segment_bytes_python" style="color: inherit; text-decoration: inherit;">segment_<wbr>bytes</a>
@@ -1494,8 +1632,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of bytes rolled by shard.</p>
-</dd></dl>
+    <dd>Number of bytes rolled by shard.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1509,8 +1646,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CKafka topic.</p>
-</dd><dt class="property-"
+    <dd>Create time of the CKafka topic.</dd><dt class="property-"
             title="">
         <span id="forwardcosbucket_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardcosbucket_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Cos<wbr>Bucket</a>
@@ -1518,8 +1654,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data backup cos bucket: the bucket address that is dumped to cos.</p>
-</dd><dt class="property-"
+    <dd>Data backup cos bucket: the bucket address that is dumped to cos.</dd><dt class="property-"
             title="">
         <span id="forwardinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardinterval_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Interval</a>
@@ -1527,8 +1662,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Periodic frequency of data backup to cos.</p>
-</dd><dt class="property-"
+    <dd>Periodic frequency of data backup to cos.</dd><dt class="property-"
             title="">
         <span id="forwardstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardstatus_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Status</a>
@@ -1536,8 +1670,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</p>
-</dd><dt class="property-"
+    <dd>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1545,8 +1678,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="messagestoragelocation_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messagestoragelocation_yaml" style="color: inherit; text-decoration: inherit;">message<wbr>Storage<wbr>Location</a>
@@ -1554,8 +1686,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Message storage location.</p>
-</dd><dt class="property-"
+    <dd>Message storage location.</dd><dt class="property-"
             title="">
         <span id="segmentbytes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#segmentbytes_yaml" style="color: inherit; text-decoration: inherit;">segment<wbr>Bytes</a>
@@ -1563,8 +1694,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of bytes rolled by shard.</p>
-</dd></dl>
+    <dd>Number of bytes rolled by shard.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1574,18 +1704,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Topic resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TopicState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Topic</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TopicState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Topic</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1608,104 +1738,143 @@ Get an existing Topic resource's state with the given name, ID, and optional ext
         <span class="nx">sync_replica_min_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">unclean_leader_election_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">) -&gt;</span> Topic</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTopic<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TopicState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Topic</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTopic<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TopicState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Topic</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Topic</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TopicState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Topic</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TopicState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Topic</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TopicState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Topic</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TopicState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingTopic</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Ckafka:Topic</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_ckafka_topic</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TopicState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TopicState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1713,28 +1882,31 @@ Get an existing Topic resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TopicState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1742,28 +1914,31 @@ Get an existing Topic resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TopicState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1783,8 +1958,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</p>
-</dd><dt class="property-optional"
+    <dd>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1792,8 +1966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CKafka topic.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the CKafka topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablewhitelist_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablewhitelist_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>White<wbr>List</a>
@@ -1801,8 +1974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardcosbucket_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardcosbucket_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Cos<wbr>Bucket</a>
@@ -1810,8 +1982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data backup cos bucket: the bucket address that is dumped to cos.</p>
-</dd><dt class="property-optional"
+    <dd>Data backup cos bucket: the bucket address that is dumped to cos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardinterval_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Interval</a>
@@ -1819,8 +1990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Periodic frequency of data backup to cos.</p>
-</dd><dt class="property-optional"
+    <dd>Periodic frequency of data backup to cos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardstatus_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Status</a>
@@ -1828,8 +1998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1837,8 +2006,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ckafka instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Ckafka instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipwhitelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipwhitelists_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>White<wbr>Lists</a>
@@ -1846,8 +2014,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Ip whitelist, quota limit, required when enableWhileList=true.</p>
-</dd><dt class="property-optional"
+    <dd>Ip whitelist, quota limit, required when enableWhileList=true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxmessagebytes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxmessagebytes_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Message<wbr>Bytes</a>
@@ -1855,8 +2022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</p>
-</dd><dt class="property-optional"
+    <dd>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_messagestoragelocation_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_messagestoragelocation_csharp" style="color: inherit; text-decoration: inherit;">Message<wbr>Storage<wbr>Location</a>
@@ -1864,8 +2030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message storage location.</p>
-</dd><dt class="property-optional"
+    <dd>Message storage location.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_note_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_note_csharp" style="color: inherit; text-decoration: inherit;">Note</a>
@@ -1873,8 +2038,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</p>
-</dd><dt class="property-optional"
+    <dd>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partitionnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitionnum_csharp" style="color: inherit; text-decoration: inherit;">Partition<wbr>Num</a>
@@ -1882,8 +2046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of partition.</p>
-</dd><dt class="property-optional"
+    <dd>The number of partition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicanum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicanum_csharp" style="color: inherit; text-decoration: inherit;">Replica<wbr>Num</a>
@@ -1891,8 +2054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of replica.</p>
-</dd><dt class="property-optional"
+    <dd>The number of replica. Maximum is 3.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retention_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retention_csharp" style="color: inherit; text-decoration: inherit;">Retention</a>
@@ -1900,8 +2062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_segment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segment_csharp" style="color: inherit; text-decoration: inherit;">Segment</a>
@@ -1909,8 +2070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Segment scrolling time, in ms, the current minimum is 3600000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Segment scrolling time, in ms, the current minimum is 3600000ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_segmentbytes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segmentbytes_csharp" style="color: inherit; text-decoration: inherit;">Segment<wbr>Bytes</a>
@@ -1918,8 +2078,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of bytes rolled by shard.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bytes rolled by shard.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_syncreplicaminnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_syncreplicaminnum_csharp" style="color: inherit; text-decoration: inherit;">Sync<wbr>Replica<wbr>Min<wbr>Num</a>
@@ -1927,8 +2086,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Min number of sync replicas, Default is <code>1</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Min number of sync replicas, Default is <code>1</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_topicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -1936,8 +2094,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uncleanleaderelectionenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uncleanleaderelectionenable_csharp" style="color: inherit; text-decoration: inherit;">Unclean<wbr>Leader<wbr>Election<wbr>Enable</a>
@@ -1945,8 +2102,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</p>
-</dd></dl>
+    <dd>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1960,8 +2116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</p>
-</dd><dt class="property-optional"
+    <dd>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1969,8 +2124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CKafka topic.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the CKafka topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablewhitelist_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablewhitelist_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>White<wbr>List</a>
@@ -1978,8 +2132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardcosbucket_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardcosbucket_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Cos<wbr>Bucket</a>
@@ -1987,8 +2140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data backup cos bucket: the bucket address that is dumped to cos.</p>
-</dd><dt class="property-optional"
+    <dd>Data backup cos bucket: the bucket address that is dumped to cos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardinterval_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Interval</a>
@@ -1996,8 +2148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Periodic frequency of data backup to cos.</p>
-</dd><dt class="property-optional"
+    <dd>Periodic frequency of data backup to cos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardstatus_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Status</a>
@@ -2005,8 +2156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -2014,8 +2164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ckafka instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Ckafka instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipwhitelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipwhitelists_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>White<wbr>Lists</a>
@@ -2023,8 +2172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Ip whitelist, quota limit, required when enableWhileList=true.</p>
-</dd><dt class="property-optional"
+    <dd>Ip whitelist, quota limit, required when enableWhileList=true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxmessagebytes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxmessagebytes_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Message<wbr>Bytes</a>
@@ -2032,8 +2180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</p>
-</dd><dt class="property-optional"
+    <dd>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_messagestoragelocation_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_messagestoragelocation_go" style="color: inherit; text-decoration: inherit;">Message<wbr>Storage<wbr>Location</a>
@@ -2041,8 +2188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message storage location.</p>
-</dd><dt class="property-optional"
+    <dd>Message storage location.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_note_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_note_go" style="color: inherit; text-decoration: inherit;">Note</a>
@@ -2050,8 +2196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</p>
-</dd><dt class="property-optional"
+    <dd>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partitionnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitionnum_go" style="color: inherit; text-decoration: inherit;">Partition<wbr>Num</a>
@@ -2059,8 +2204,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of partition.</p>
-</dd><dt class="property-optional"
+    <dd>The number of partition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicanum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicanum_go" style="color: inherit; text-decoration: inherit;">Replica<wbr>Num</a>
@@ -2068,8 +2212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of replica.</p>
-</dd><dt class="property-optional"
+    <dd>The number of replica. Maximum is 3.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retention_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retention_go" style="color: inherit; text-decoration: inherit;">Retention</a>
@@ -2077,8 +2220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_segment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segment_go" style="color: inherit; text-decoration: inherit;">Segment</a>
@@ -2086,8 +2228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Segment scrolling time, in ms, the current minimum is 3600000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Segment scrolling time, in ms, the current minimum is 3600000ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_segmentbytes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segmentbytes_go" style="color: inherit; text-decoration: inherit;">Segment<wbr>Bytes</a>
@@ -2095,8 +2236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of bytes rolled by shard.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bytes rolled by shard.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_syncreplicaminnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_syncreplicaminnum_go" style="color: inherit; text-decoration: inherit;">Sync<wbr>Replica<wbr>Min<wbr>Num</a>
@@ -2104,8 +2244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Min number of sync replicas, Default is <code>1</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Min number of sync replicas, Default is <code>1</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_topicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -2113,8 +2252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uncleanleaderelectionenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uncleanleaderelectionenable_go" style="color: inherit; text-decoration: inherit;">Unclean<wbr>Leader<wbr>Election<wbr>Enable</a>
@@ -2122,8 +2260,165 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</p>
-</dd></dl>
+    <dd>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_clean_up_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clean_up_policy_hcl" style="color: inherit; text-decoration: inherit;">clean_<wbr>up_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the CKafka topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_white_list_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_white_list_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>white_<wbr>list</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_forward_cos_bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forward_cos_bucket_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>cos_<wbr>bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data backup cos bucket: the bucket address that is dumped to cos.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_forward_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forward_interval_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Periodic frequency of data backup to cos.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_forward_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forward_status_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ckafka instance ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ip_white_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_white_lists_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>white_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Ip whitelist, quota limit, required when enableWhileList=true.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_message_bytes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_message_bytes_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>message_<wbr>bytes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_message_storage_location_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_message_storage_location_hcl" style="color: inherit; text-decoration: inherit;">message_<wbr>storage_<wbr>location</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Message storage location.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_note_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_note_hcl" style="color: inherit; text-decoration: inherit;">note</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_partition_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partition_num_hcl" style="color: inherit; text-decoration: inherit;">partition_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of partition.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replica_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replica_num_hcl" style="color: inherit; text-decoration: inherit;">replica_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of replica. Maximum is 3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_retention_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retention_hcl" style="color: inherit; text-decoration: inherit;">retention</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_segment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segment_hcl" style="color: inherit; text-decoration: inherit;">segment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Segment scrolling time, in ms, the current minimum is 3600000ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_segment_bytes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segment_bytes_hcl" style="color: inherit; text-decoration: inherit;">segment_<wbr>bytes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of bytes rolled by shard.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sync_replica_min_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sync_replica_min_num_hcl" style="color: inherit; text-decoration: inherit;">sync_<wbr>replica_<wbr>min_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Min number of sync replicas, Default is <code>1</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_unclean_leader_election_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_unclean_leader_election_enable_hcl" style="color: inherit; text-decoration: inherit;">unclean_<wbr>leader_<wbr>election_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2137,8 +2432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</p>
-</dd><dt class="property-optional"
+    <dd>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2146,8 +2440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CKafka topic.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the CKafka topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablewhitelist_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablewhitelist_java" style="color: inherit; text-decoration: inherit;">enable<wbr>White<wbr>List</a>
@@ -2155,8 +2448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardcosbucket_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardcosbucket_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Cos<wbr>Bucket</a>
@@ -2164,8 +2456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data backup cos bucket: the bucket address that is dumped to cos.</p>
-</dd><dt class="property-optional"
+    <dd>Data backup cos bucket: the bucket address that is dumped to cos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardinterval_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Interval</a>
@@ -2173,8 +2464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Periodic frequency of data backup to cos.</p>
-</dd><dt class="property-optional"
+    <dd>Periodic frequency of data backup to cos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardstatus_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Status</a>
@@ -2182,8 +2472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2191,8 +2480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ckafka instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Ckafka instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipwhitelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipwhitelists_java" style="color: inherit; text-decoration: inherit;">ip<wbr>White<wbr>Lists</a>
@@ -2200,8 +2488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Ip whitelist, quota limit, required when enableWhileList=true.</p>
-</dd><dt class="property-optional"
+    <dd>Ip whitelist, quota limit, required when enableWhileList=true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxmessagebytes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxmessagebytes_java" style="color: inherit; text-decoration: inherit;">max<wbr>Message<wbr>Bytes</a>
@@ -2209,8 +2496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</p>
-</dd><dt class="property-optional"
+    <dd>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_messagestoragelocation_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_messagestoragelocation_java" style="color: inherit; text-decoration: inherit;">message<wbr>Storage<wbr>Location</a>
@@ -2218,8 +2504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Message storage location.</p>
-</dd><dt class="property-optional"
+    <dd>Message storage location.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_note_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_note_java" style="color: inherit; text-decoration: inherit;">note</a>
@@ -2227,8 +2512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</p>
-</dd><dt class="property-optional"
+    <dd>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partitionnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitionnum_java" style="color: inherit; text-decoration: inherit;">partition<wbr>Num</a>
@@ -2236,8 +2520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of partition.</p>
-</dd><dt class="property-optional"
+    <dd>The number of partition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicanum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicanum_java" style="color: inherit; text-decoration: inherit;">replica<wbr>Num</a>
@@ -2245,8 +2528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of replica.</p>
-</dd><dt class="property-optional"
+    <dd>The number of replica. Maximum is 3.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retention_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retention_java" style="color: inherit; text-decoration: inherit;">retention</a>
@@ -2254,8 +2536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_segment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segment_java" style="color: inherit; text-decoration: inherit;">segment</a>
@@ -2263,8 +2544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Segment scrolling time, in ms, the current minimum is 3600000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Segment scrolling time, in ms, the current minimum is 3600000ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_segmentbytes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segmentbytes_java" style="color: inherit; text-decoration: inherit;">segment<wbr>Bytes</a>
@@ -2272,8 +2552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of bytes rolled by shard.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bytes rolled by shard.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_syncreplicaminnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_syncreplicaminnum_java" style="color: inherit; text-decoration: inherit;">sync<wbr>Replica<wbr>Min<wbr>Num</a>
@@ -2281,8 +2560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Min number of sync replicas, Default is <code>1</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Min number of sync replicas, Default is <code>1</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_topicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -2290,8 +2568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uncleanleaderelectionenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uncleanleaderelectionenable_java" style="color: inherit; text-decoration: inherit;">unclean<wbr>Leader<wbr>Election<wbr>Enable</a>
@@ -2299,8 +2576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</p>
-</dd></dl>
+    <dd>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2314,8 +2590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</p>
-</dd><dt class="property-optional"
+    <dd>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2323,8 +2598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CKafka topic.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the CKafka topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablewhitelist_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablewhitelist_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>White<wbr>List</a>
@@ -2332,8 +2606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardcosbucket_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardcosbucket_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Cos<wbr>Bucket</a>
@@ -2341,8 +2614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data backup cos bucket: the bucket address that is dumped to cos.</p>
-</dd><dt class="property-optional"
+    <dd>Data backup cos bucket: the bucket address that is dumped to cos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardinterval_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Interval</a>
@@ -2350,8 +2622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Periodic frequency of data backup to cos.</p>
-</dd><dt class="property-optional"
+    <dd>Periodic frequency of data backup to cos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardstatus_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Status</a>
@@ -2359,8 +2630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2368,8 +2638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ckafka instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Ckafka instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipwhitelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipwhitelists_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>White<wbr>Lists</a>
@@ -2377,8 +2646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Ip whitelist, quota limit, required when enableWhileList=true.</p>
-</dd><dt class="property-optional"
+    <dd>Ip whitelist, quota limit, required when enableWhileList=true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxmessagebytes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxmessagebytes_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Message<wbr>Bytes</a>
@@ -2386,8 +2654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</p>
-</dd><dt class="property-optional"
+    <dd>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_messagestoragelocation_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_messagestoragelocation_nodejs" style="color: inherit; text-decoration: inherit;">message<wbr>Storage<wbr>Location</a>
@@ -2395,8 +2662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message storage location.</p>
-</dd><dt class="property-optional"
+    <dd>Message storage location.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_note_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_note_nodejs" style="color: inherit; text-decoration: inherit;">note</a>
@@ -2404,8 +2670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</p>
-</dd><dt class="property-optional"
+    <dd>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partitionnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitionnum_nodejs" style="color: inherit; text-decoration: inherit;">partition<wbr>Num</a>
@@ -2413,8 +2678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of partition.</p>
-</dd><dt class="property-optional"
+    <dd>The number of partition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicanum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicanum_nodejs" style="color: inherit; text-decoration: inherit;">replica<wbr>Num</a>
@@ -2422,8 +2686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of replica.</p>
-</dd><dt class="property-optional"
+    <dd>The number of replica. Maximum is 3.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retention_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retention_nodejs" style="color: inherit; text-decoration: inherit;">retention</a>
@@ -2431,8 +2694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_segment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segment_nodejs" style="color: inherit; text-decoration: inherit;">segment</a>
@@ -2440,8 +2702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Segment scrolling time, in ms, the current minimum is 3600000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Segment scrolling time, in ms, the current minimum is 3600000ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_segmentbytes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segmentbytes_nodejs" style="color: inherit; text-decoration: inherit;">segment<wbr>Bytes</a>
@@ -2449,8 +2710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of bytes rolled by shard.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bytes rolled by shard.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_syncreplicaminnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_syncreplicaminnum_nodejs" style="color: inherit; text-decoration: inherit;">sync<wbr>Replica<wbr>Min<wbr>Num</a>
@@ -2458,8 +2718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Min number of sync replicas, Default is <code>1</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Min number of sync replicas, Default is <code>1</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_topicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -2467,8 +2726,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uncleanleaderelectionenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uncleanleaderelectionenable_nodejs" style="color: inherit; text-decoration: inherit;">unclean<wbr>Leader<wbr>Election<wbr>Enable</a>
@@ -2476,8 +2734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</p>
-</dd></dl>
+    <dd>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2491,8 +2748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</p>
-</dd><dt class="property-optional"
+    <dd>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2500,8 +2756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the CKafka topic.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the CKafka topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_white_list_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_white_list_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>white_<wbr>list</a>
@@ -2509,8 +2764,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forward_cos_bucket_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forward_cos_bucket_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>cos_<wbr>bucket</a>
@@ -2518,8 +2772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data backup cos bucket: the bucket address that is dumped to cos.</p>
-</dd><dt class="property-optional"
+    <dd>Data backup cos bucket: the bucket address that is dumped to cos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forward_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forward_interval_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>interval</a>
@@ -2527,8 +2780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Periodic frequency of data backup to cos.</p>
-</dd><dt class="property-optional"
+    <dd>Periodic frequency of data backup to cos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forward_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forward_status_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>status</a>
@@ -2536,8 +2788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -2545,8 +2796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ckafka instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Ckafka instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_white_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_white_lists_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>white_<wbr>lists</a>
@@ -2554,8 +2804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Ip whitelist, quota limit, required when enableWhileList=true.</p>
-</dd><dt class="property-optional"
+    <dd>Ip whitelist, quota limit, required when enableWhileList=true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_message_bytes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_message_bytes_python" style="color: inherit; text-decoration: inherit;">max_<wbr>message_<wbr>bytes</a>
@@ -2563,8 +2812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</p>
-</dd><dt class="property-optional"
+    <dd>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_message_storage_location_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_message_storage_location_python" style="color: inherit; text-decoration: inherit;">message_<wbr>storage_<wbr>location</a>
@@ -2572,8 +2820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Message storage location.</p>
-</dd><dt class="property-optional"
+    <dd>Message storage location.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_note_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_note_python" style="color: inherit; text-decoration: inherit;">note</a>
@@ -2581,8 +2828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</p>
-</dd><dt class="property-optional"
+    <dd>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partition_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partition_num_python" style="color: inherit; text-decoration: inherit;">partition_<wbr>num</a>
@@ -2590,8 +2836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of partition.</p>
-</dd><dt class="property-optional"
+    <dd>The number of partition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replica_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replica_num_python" style="color: inherit; text-decoration: inherit;">replica_<wbr>num</a>
@@ -2599,8 +2844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of replica.</p>
-</dd><dt class="property-optional"
+    <dd>The number of replica. Maximum is 3.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retention_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retention_python" style="color: inherit; text-decoration: inherit;">retention</a>
@@ -2608,8 +2852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_segment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segment_python" style="color: inherit; text-decoration: inherit;">segment</a>
@@ -2617,8 +2860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Segment scrolling time, in ms, the current minimum is 3600000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Segment scrolling time, in ms, the current minimum is 3600000ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_segment_bytes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segment_bytes_python" style="color: inherit; text-decoration: inherit;">segment_<wbr>bytes</a>
@@ -2626,8 +2868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of bytes rolled by shard.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bytes rolled by shard.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sync_replica_min_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sync_replica_min_num_python" style="color: inherit; text-decoration: inherit;">sync_<wbr>replica_<wbr>min_<wbr>num</a>
@@ -2635,8 +2876,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Min number of sync replicas, Default is <code>1</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Min number of sync replicas, Default is <code>1</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_name_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
@@ -2644,8 +2884,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_unclean_leader_election_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_unclean_leader_election_enable_python" style="color: inherit; text-decoration: inherit;">unclean_<wbr>leader_<wbr>election_<wbr>enable</a>
@@ -2653,8 +2892,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</p>
-</dd></dl>
+    <dd>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2668,8 +2906,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</p>
-</dd><dt class="property-optional"
+    <dd>Clear log policy, log clear mode, default is <code>delete</code>. <code>delete</code>: logs are deleted according to the storage time. <code>compact</code>: logs are compressed according to the key. <code>compact, delete</code>: logs are compressed according to the key and will be deleted according to the storage time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2677,8 +2914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CKafka topic.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the CKafka topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enablewhitelist_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enablewhitelist_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>White<wbr>List</a>
@@ -2686,8 +2922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to open the ip whitelist, <code>true</code>: open, <code>false</code>: close.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardcosbucket_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardcosbucket_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Cos<wbr>Bucket</a>
@@ -2695,8 +2930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data backup cos bucket: the bucket address that is dumped to cos.</p>
-</dd><dt class="property-optional"
+    <dd>Data backup cos bucket: the bucket address that is dumped to cos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardinterval_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Interval</a>
@@ -2704,8 +2938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Periodic frequency of data backup to cos.</p>
-</dd><dt class="property-optional"
+    <dd>Periodic frequency of data backup to cos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardstatus_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Status</a>
@@ -2713,8 +2946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Data backup cos status. Valid values: <code>0</code>, <code>1</code>. <code>1</code>: do not open data backup, <code>0</code>: open data backup.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2722,8 +2954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ckafka instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Ckafka instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipwhitelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipwhitelists_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>White<wbr>Lists</a>
@@ -2731,8 +2962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Ip whitelist, quota limit, required when enableWhileList=true.</p>
-</dd><dt class="property-optional"
+    <dd>Ip whitelist, quota limit, required when enableWhileList=true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxmessagebytes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxmessagebytes_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Message<wbr>Bytes</a>
@@ -2740,8 +2970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</p>
-</dd><dt class="property-optional"
+    <dd>Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_messagestoragelocation_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_messagestoragelocation_yaml" style="color: inherit; text-decoration: inherit;">message<wbr>Storage<wbr>Location</a>
@@ -2749,8 +2978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Message storage location.</p>
-</dd><dt class="property-optional"
+    <dd>Message storage location.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_note_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_note_yaml" style="color: inherit; text-decoration: inherit;">note</a>
@@ -2758,8 +2986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</p>
-</dd><dt class="property-optional"
+    <dd>The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partitionnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitionnum_yaml" style="color: inherit; text-decoration: inherit;">partition<wbr>Num</a>
@@ -2767,8 +2994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of partition.</p>
-</dd><dt class="property-optional"
+    <dd>The number of partition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicanum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicanum_yaml" style="color: inherit; text-decoration: inherit;">replica<wbr>Num</a>
@@ -2776,8 +3002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of replica.</p>
-</dd><dt class="property-optional"
+    <dd>The number of replica. Maximum is 3.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retention_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retention_yaml" style="color: inherit; text-decoration: inherit;">retention</a>
@@ -2785,8 +3010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_segment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segment_yaml" style="color: inherit; text-decoration: inherit;">segment</a>
@@ -2794,8 +3018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Segment scrolling time, in ms, the current minimum is 3600000ms.</p>
-</dd><dt class="property-optional"
+    <dd>Segment scrolling time, in ms, the current minimum is 3600000ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_segmentbytes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_segmentbytes_yaml" style="color: inherit; text-decoration: inherit;">segment<wbr>Bytes</a>
@@ -2803,8 +3026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of bytes rolled by shard.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bytes rolled by shard.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_syncreplicaminnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_syncreplicaminnum_yaml" style="color: inherit; text-decoration: inherit;">sync<wbr>Replica<wbr>Min<wbr>Num</a>
@@ -2812,8 +3034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Min number of sync replicas, Default is <code>1</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Min number of sync replicas, Default is <code>1</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_topicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -2821,8 +3042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uncleanleaderelectionenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uncleanleaderelectionenable_yaml" style="color: inherit; text-decoration: inherit;">unclean<wbr>Leader<wbr>Election<wbr>Enable</a>
@@ -2830,8 +3050,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</p>
-</dd></dl>
+    <dd>Whether to allow unsynchronized replicas to be selected as leader, default is <code>false</code>, <code>true: </code>allowed, <code>false</code>: not allowed.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2849,9 +3068,12 @@ The following state arguments are supported:
 ckafka topic can be imported using the instance_id#topic_name, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Ckafka/topic:Topic foo ckafka-f9ife4zz#example
+$ pulumi import tencentcloud:Ckafka/topic:Topic example ckafka-bzmja3mb#tf-example
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2863,7 +3085,6 @@ $ pulumi import tencentcloud:Ckafka/topic:Topic foo ckafka-f9ife4zz#example
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

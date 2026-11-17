@@ -2,9 +2,11 @@
 ---
 title: "getPrice"
 title_tag: "tencentcloud.Mariadb.getPrice"
-meta_desc: "Documentation for the tencentcloud.Mariadb.getPrice function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of mariadb price"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,72 +18,66 @@ Use this data source to query detailed information of mariadb price
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const price = tencentcloud.Mariadb.getPrice({
-    buyCount: 1,
-    memory: 2,
-    nodeCount: 2,
-    paymode: "prepaid",
-    period: 1,
-    storage: 20,
+const price = tencentcloud.mariadb.getPrice({
     zone: "ap-guangzhou-3",
+    nodeCount: 2,
+    memory: 2,
+    storage: 20,
+    buyCount: 1,
+    period: 1,
+    paymode: "prepaid",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-price = tencentcloud.Mariadb.get_price(buy_count=1,
-    memory=2,
+price = tencentcloud.mariadb.get_price(zone="ap-guangzhou-3",
     node_count=2,
-    paymode="prepaid",
-    period=1,
+    memory=2,
     storage=20,
-    zone="ap-guangzhou-3")
+    buy_count=1,
+    period=1,
+    paymode="prepaid")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var price = Tencentcloud.Mariadb.GetPrice.Invoke(new()
-    {
-        BuyCount = 1,
-        Memory = 2,
-        NodeCount = 2,
-        Paymode = "prepaid",
-        Period = 1,
-        Storage = 20,
-        Zone = "ap-guangzhou-3",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mariadb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Mariadb.GetPrice(ctx, &mariadb.GetPriceArgs{
-			BuyCount:  1,
-			Memory:    2,
-			NodeCount: 2,
-			Paymode:   pulumi.StringRef("prepaid"),
-			Period:    pulumi.IntRef(1),
-			Storage:   20,
+		_, err := mariadb.GetPrice(ctx, &mariadb.GetPriceArgs{
 			Zone:      "ap-guangzhou-3",
+			NodeCount: 2,
+			Memory:    2,
+			Storage:   20,
+			BuyCount:  1,
+			Period:    pulumi.IntRef(1),
+			Paymode:   pulumi.StringRef("prepaid"),
 		}, nil)
 		if err != nil {
 			return err
@@ -90,6 +86,37 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var price = Tencentcloud.Mariadb.GetPrice.Invoke(new()
+    {
+        Zone = "ap-guangzhou-3",
+        NodeCount = 2,
+        Memory = 2,
+        Storage = 20,
+        BuyCount = 1,
+        Period = 1,
+        Paymode = "prepaid",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -98,8 +125,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Mariadb.MariadbFunctions;
 import com.pulumi.tencentcloud.Mariadb.inputs.GetPriceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -112,34 +139,70 @@ public class App {
 
     public static void stack(Context ctx) {
         final var price = MariadbFunctions.getPrice(GetPriceArgs.builder()
-            .buyCount(1)
-            .memory(2)
-            .nodeCount(2)
-            .paymode("prepaid")
-            .period(1)
-            .storage(20)
             .zone("ap-guangzhou-3")
+            .nodeCount(2)
+            .memory(2)
+            .storage(20)
+            .buyCount(1)
+            .period(1)
+            .paymode("prepaid")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   price:
     fn::invoke:
-      Function: tencentcloud:Mariadb:getPrice
-      Arguments:
-        buyCount: 1
-        memory: 2
-        nodeCount: 2
-        paymode: prepaid
-        period: 1
-        storage: 20
+      function: tencentcloud:Mariadb:getPrice
+      arguments:
         zone: ap-guangzhou-3
+        nodeCount: 2
+        memory: 2
+        storage: 20
+        buyCount: 1
+        period: 1
+        paymode: prepaid
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_mariadb_getprice" "price" {
+  zone       = "ap-guangzhou-3"
+  node_count = 2
+  memory     = 2
+  storage    = 20
+  buy_count  = 1
+  period     = 1
+  paymode    = "prepaid"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribePrice](https://www.tencentcloud.com/document/api/237/52233)
 
 
 
@@ -151,7 +214,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -159,9 +222,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getPrice<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPriceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPriceResult</a></span>></span
+><span class="k">function </span>getPrice<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPriceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPriceResult</a></span>></span
 ><span class="k">
-function </span>getPriceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPriceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPriceResult</a></span>></span
+function </span>getPriceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPriceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPriceResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -181,16 +244,16 @@ function </span>getPriceOutput<span class="p">(</span><span class="nx">args</spa
               <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetPriceResult</span
 ><span class="k">
-def </span>get_price_output<span class="p">(</span><span class="nx">amount_unit</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">buy_count</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-              <span class="nx">memory</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-              <span class="nx">node_count</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-              <span class="nx">paymode</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">period</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">storage</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-              <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPriceResult]</span
+def </span>get_price_output<span class="p">(</span><span class="nx">amount_unit</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">buy_count</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+              <span class="nx">memory</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+              <span class="nx">node_count</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+              <span class="nx">paymode</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">period</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">storage</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+              <span class="nx">zone</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPriceResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -215,7 +278,8 @@ func </span>GetPriceOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetPrice </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetPriceResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetPriceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetPriceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPriceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPriceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPriceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPriceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPriceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -224,7 +288,8 @@ func </span>GetPriceOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetPriceResult</a></span>> </span>getPrice<span class="p">(</span><span class="nx">GetPriceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPriceResult</a></span>> </span>getPrice<span class="p">(</span><span class="nx">GetPriceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPriceResult</a></span>> </span>getPrice<span class="p">(</span><span class="nx">GetPriceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -236,6 +301,15 @@ func </span>GetPriceOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Mariadb/getPrice:getPrice
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_mariadb_get_price&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -254,8 +328,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The quantity you want to purchase is queried by default for the price of purchasing 1 instance.</p>
-</dd><dt class="property-required"
+    <dd>The quantity you want to purchase is queried by default for the price of purchasing 1 instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -263,8 +336,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size in GB, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Count</a>
@@ -272,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of instance nodes, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Number of instance nodes, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="storage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_csharp" style="color: inherit; text-decoration: inherit;">Storage</a>
@@ -281,8 +352,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage capacity in GB. The maximum and minimum storage space can be obtained by querying instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Storage capacity in GB. The maximum and minimum storage space can be obtained by querying instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -290,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>AZ ID of the purchased instance.</p>
-</dd><dt class="property-optional"
+    <dd>AZ ID of the purchased instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="amountunit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#amountunit_csharp" style="color: inherit; text-decoration: inherit;">Amount<wbr>Unit</a>
@@ -299,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Price unit. Valid values: <code>* pent</code> (cent), <code>* microPent</code> (microcent).</p>
-</dd><dt class="property-optional"
+    <dd>Price unit. Valid values: <code>* pent</code> (cent), <code>* microPent</code> (microcent).</dd><dt class="property-optional"
             title="Optional">
         <span id="paymode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_csharp" style="color: inherit; text-decoration: inherit;">Paymode</a>
@@ -308,8 +376,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing type. Valid values: <code>postpaid</code> (pay-as-you-go), <code>prepaid</code> (monthly subscription).</p>
-</dd><dt class="property-optional"
+    <dd>Billing type. Valid values: <code>postpaid</code> (pay-as-you-go), <code>prepaid</code> (monthly subscription).</dd><dt class="property-optional"
             title="Optional">
         <span id="period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -317,8 +384,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Purchase period in months.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase period in months.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -326,8 +392,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -341,8 +406,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The quantity you want to purchase is queried by default for the price of purchasing 1 instance.</p>
-</dd><dt class="property-required"
+    <dd>The quantity you want to purchase is queried by default for the price of purchasing 1 instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -350,8 +414,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size in GB, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Count</a>
@@ -359,8 +422,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of instance nodes, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Number of instance nodes, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="storage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_go" style="color: inherit; text-decoration: inherit;">Storage</a>
@@ -368,8 +430,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage capacity in GB. The maximum and minimum storage space can be obtained by querying instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Storage capacity in GB. The maximum and minimum storage space can be obtained by querying instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -377,8 +438,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>AZ ID of the purchased instance.</p>
-</dd><dt class="property-optional"
+    <dd>AZ ID of the purchased instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="amountunit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#amountunit_go" style="color: inherit; text-decoration: inherit;">Amount<wbr>Unit</a>
@@ -386,8 +446,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Price unit. Valid values: <code>* pent</code> (cent), <code>* microPent</code> (microcent).</p>
-</dd><dt class="property-optional"
+    <dd>Price unit. Valid values: <code>* pent</code> (cent), <code>* microPent</code> (microcent).</dd><dt class="property-optional"
             title="Optional">
         <span id="paymode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_go" style="color: inherit; text-decoration: inherit;">Paymode</a>
@@ -395,8 +454,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing type. Valid values: <code>postpaid</code> (pay-as-you-go), <code>prepaid</code> (monthly subscription).</p>
-</dd><dt class="property-optional"
+    <dd>Billing type. Valid values: <code>postpaid</code> (pay-as-you-go), <code>prepaid</code> (monthly subscription).</dd><dt class="property-optional"
             title="Optional">
         <span id="period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -404,8 +462,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Purchase period in months.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase period in months.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -413,8 +470,85 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="buy_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#buy_count_hcl" style="color: inherit; text-decoration: inherit;">buy_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The quantity you want to purchase is queried by default for the price of purchasing 1 instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size in GB, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_count_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of instance nodes, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_hcl" style="color: inherit; text-decoration: inherit;">storage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Storage capacity in GB. The maximum and minimum storage space can be obtained by querying instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>AZ ID of the purchased instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="amount_unit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#amount_unit_hcl" style="color: inherit; text-decoration: inherit;">amount_<wbr>unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Price unit. Valid values: <code>* pent</code> (cent), <code>* microPent</code> (microcent).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="paymode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_hcl" style="color: inherit; text-decoration: inherit;">paymode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Billing type. Valid values: <code>postpaid</code> (pay-as-you-go), <code>prepaid</code> (monthly subscription).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Purchase period in months.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -428,8 +562,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The quantity you want to purchase is queried by default for the price of purchasing 1 instance.</p>
-</dd><dt class="property-required"
+    <dd>The quantity you want to purchase is queried by default for the price of purchasing 1 instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -437,8 +570,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size in GB, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_java" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -446,8 +578,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of instance nodes, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Number of instance nodes, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="storage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_java" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -455,8 +586,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Storage capacity in GB. The maximum and minimum storage space can be obtained by querying instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Storage capacity in GB. The maximum and minimum storage space can be obtained by querying instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -464,8 +594,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>AZ ID of the purchased instance.</p>
-</dd><dt class="property-optional"
+    <dd>AZ ID of the purchased instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="amountunit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#amountunit_java" style="color: inherit; text-decoration: inherit;">amount<wbr>Unit</a>
@@ -473,8 +602,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Price unit. Valid values: <code>* pent</code> (cent), <code>* microPent</code> (microcent).</p>
-</dd><dt class="property-optional"
+    <dd>Price unit. Valid values: <code>* pent</code> (cent), <code>* microPent</code> (microcent).</dd><dt class="property-optional"
             title="Optional">
         <span id="paymode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_java" style="color: inherit; text-decoration: inherit;">paymode</a>
@@ -482,8 +610,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing type. Valid values: <code>postpaid</code> (pay-as-you-go), <code>prepaid</code> (monthly subscription).</p>
-</dd><dt class="property-optional"
+    <dd>Billing type. Valid values: <code>postpaid</code> (pay-as-you-go), <code>prepaid</code> (monthly subscription).</dd><dt class="property-optional"
             title="Optional">
         <span id="period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -491,8 +618,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Purchase period in months.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase period in months.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -500,8 +626,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -515,8 +640,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The quantity you want to purchase is queried by default for the price of purchasing 1 instance.</p>
-</dd><dt class="property-required"
+    <dd>The quantity you want to purchase is queried by default for the price of purchasing 1 instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -524,8 +648,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size in GB, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -533,8 +656,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of instance nodes, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Number of instance nodes, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="storage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_nodejs" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -542,8 +664,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Storage capacity in GB. The maximum and minimum storage space can be obtained by querying instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Storage capacity in GB. The maximum and minimum storage space can be obtained by querying instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -551,8 +672,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>AZ ID of the purchased instance.</p>
-</dd><dt class="property-optional"
+    <dd>AZ ID of the purchased instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="amountunit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#amountunit_nodejs" style="color: inherit; text-decoration: inherit;">amount<wbr>Unit</a>
@@ -560,8 +680,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Price unit. Valid values: <code>* pent</code> (cent), <code>* microPent</code> (microcent).</p>
-</dd><dt class="property-optional"
+    <dd>Price unit. Valid values: <code>* pent</code> (cent), <code>* microPent</code> (microcent).</dd><dt class="property-optional"
             title="Optional">
         <span id="paymode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_nodejs" style="color: inherit; text-decoration: inherit;">paymode</a>
@@ -569,8 +688,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing type. Valid values: <code>postpaid</code> (pay-as-you-go), <code>prepaid</code> (monthly subscription).</p>
-</dd><dt class="property-optional"
+    <dd>Billing type. Valid values: <code>postpaid</code> (pay-as-you-go), <code>prepaid</code> (monthly subscription).</dd><dt class="property-optional"
             title="Optional">
         <span id="period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -578,8 +696,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Purchase period in months.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase period in months.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -587,8 +704,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -602,8 +718,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The quantity you want to purchase is queried by default for the price of purchasing 1 instance.</p>
-</dd><dt class="property-required"
+    <dd>The quantity you want to purchase is queried by default for the price of purchasing 1 instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -611,8 +726,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size in GB, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="node_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_count_python" style="color: inherit; text-decoration: inherit;">node_<wbr>count</a>
@@ -620,8 +734,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of instance nodes, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Number of instance nodes, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="storage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_python" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -629,8 +742,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage capacity in GB. The maximum and minimum storage space can be obtained by querying instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Storage capacity in GB. The maximum and minimum storage space can be obtained by querying instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -638,8 +750,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>AZ ID of the purchased instance.</p>
-</dd><dt class="property-optional"
+    <dd>AZ ID of the purchased instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="amount_unit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#amount_unit_python" style="color: inherit; text-decoration: inherit;">amount_<wbr>unit</a>
@@ -647,8 +758,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Price unit. Valid values: <code>* pent</code> (cent), <code>* microPent</code> (microcent).</p>
-</dd><dt class="property-optional"
+    <dd>Price unit. Valid values: <code>* pent</code> (cent), <code>* microPent</code> (microcent).</dd><dt class="property-optional"
             title="Optional">
         <span id="paymode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_python" style="color: inherit; text-decoration: inherit;">paymode</a>
@@ -656,8 +766,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Billing type. Valid values: <code>postpaid</code> (pay-as-you-go), <code>prepaid</code> (monthly subscription).</p>
-</dd><dt class="property-optional"
+    <dd>Billing type. Valid values: <code>postpaid</code> (pay-as-you-go), <code>prepaid</code> (monthly subscription).</dd><dt class="property-optional"
             title="Optional">
         <span id="period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -665,8 +774,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Purchase period in months.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase period in months.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -674,8 +782,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -689,8 +796,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The quantity you want to purchase is queried by default for the price of purchasing 1 instance.</p>
-</dd><dt class="property-required"
+    <dd>The quantity you want to purchase is queried by default for the price of purchasing 1 instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -698,8 +804,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size in GB, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="nodecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodecount_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Count</a>
@@ -707,8 +812,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of instance nodes, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Number of instance nodes, which can be obtained by querying the instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="storage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_yaml" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -716,8 +820,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Storage capacity in GB. The maximum and minimum storage space can be obtained by querying instance specification through the <code>DescribeDBInstanceSpecs</code> API.</p>
-</dd><dt class="property-required"
+    <dd>Storage capacity in GB. The maximum and minimum storage space can be obtained by querying instance specification through the <code>DescribeDBInstanceSpecs</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -725,8 +828,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>AZ ID of the purchased instance.</p>
-</dd><dt class="property-optional"
+    <dd>AZ ID of the purchased instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="amountunit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#amountunit_yaml" style="color: inherit; text-decoration: inherit;">amount<wbr>Unit</a>
@@ -734,8 +836,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Price unit. Valid values: <code>* pent</code> (cent), <code>* microPent</code> (microcent).</p>
-</dd><dt class="property-optional"
+    <dd>Price unit. Valid values: <code>* pent</code> (cent), <code>* microPent</code> (microcent).</dd><dt class="property-optional"
             title="Optional">
         <span id="paymode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_yaml" style="color: inherit; text-decoration: inherit;">paymode</a>
@@ -743,8 +844,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing type. Valid values: <code>postpaid</code> (pay-as-you-go), <code>prepaid</code> (monthly subscription).</p>
-</dd><dt class="property-optional"
+    <dd>Billing type. Valid values: <code>postpaid</code> (pay-as-you-go), <code>prepaid</code> (monthly subscription).</dd><dt class="property-optional"
             title="Optional">
         <span id="period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -752,8 +852,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Purchase period in months.</p>
-</dd><dt class="property-optional"
+    <dd>Purchase period in months.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -761,8 +860,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -793,8 +891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="mariadbprice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mariadbprice_csharp" style="color: inherit; text-decoration: inherit;">Mariadb<wbr>Price</a>
@@ -802,8 +899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The actual price may be different from the original price due to discounts. * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</p>
-</dd><dt class="property-"
+    <dd>The actual price may be different from the original price due to discounts. * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</dd><dt class="property-"
             title="">
         <span id="memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -827,8 +923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Original price * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</p>
-</dd><dt class="property-"
+    <dd>Original price * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</dd><dt class="property-"
             title="">
         <span id="storage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_csharp" style="color: inherit; text-decoration: inherit;">Storage</a>
@@ -898,8 +993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -923,8 +1017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Original price * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</p>
-</dd><dt class="property-"
+    <dd>Original price * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</dd><dt class="property-"
             title="">
         <span id="price_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#price_go" style="color: inherit; text-decoration: inherit;">Price</a>
@@ -932,8 +1025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The actual price may be different from the original price due to discounts. * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</p>
-</dd><dt class="property-"
+    <dd>The actual price may be different from the original price due to discounts. * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</dd><dt class="property-"
             title="">
         <span id="storage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_go" style="color: inherit; text-decoration: inherit;">Storage</a>
@@ -986,6 +1078,108 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="buy_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#buy_count_hcl" style="color: inherit; text-decoration: inherit;">buy_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="node_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_count_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="original_price_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#original_price_hcl" style="color: inherit; text-decoration: inherit;">original_<wbr>price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Original price * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</dd><dt class="property-"
+            title="">
+        <span id="price_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#price_hcl" style="color: inherit; text-decoration: inherit;">price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The actual price may be different from the original price due to discounts. * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</dd><dt class="property-"
+            title="">
+        <span id="storage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_hcl" style="color: inherit; text-decoration: inherit;">storage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="amount_unit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#amount_unit_hcl" style="color: inherit; text-decoration: inherit;">amount_<wbr>unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="paymode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paymode_hcl" style="color: inherit; text-decoration: inherit;">paymode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -1003,8 +1197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1028,8 +1221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Original price * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</p>
-</dd><dt class="property-"
+    <dd>Original price * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</dd><dt class="property-"
             title="">
         <span id="price_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#price_java" style="color: inherit; text-decoration: inherit;">price</a>
@@ -1037,8 +1229,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The actual price may be different from the original price due to discounts. * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</p>
-</dd><dt class="property-"
+    <dd>The actual price may be different from the original price due to discounts. * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</dd><dt class="property-"
             title="">
         <span id="storage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_java" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -1108,8 +1299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1133,8 +1323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Original price * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</p>
-</dd><dt class="property-"
+    <dd>Original price * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</dd><dt class="property-"
             title="">
         <span id="price_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#price_nodejs" style="color: inherit; text-decoration: inherit;">price</a>
@@ -1142,8 +1331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The actual price may be different from the original price due to discounts. * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</p>
-</dd><dt class="property-"
+    <dd>The actual price may be different from the original price due to discounts. * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</dd><dt class="property-"
             title="">
         <span id="storage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_nodejs" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -1213,8 +1401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1238,8 +1425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Original price * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</p>
-</dd><dt class="property-"
+    <dd>Original price * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</dd><dt class="property-"
             title="">
         <span id="price_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#price_python" style="color: inherit; text-decoration: inherit;">price</a>
@@ -1247,8 +1433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The actual price may be different from the original price due to discounts. * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</p>
-</dd><dt class="property-"
+    <dd>The actual price may be different from the original price due to discounts. * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</dd><dt class="property-"
             title="">
         <span id="storage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_python" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -1318,8 +1503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1343,8 +1527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Original price * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</p>
-</dd><dt class="property-"
+    <dd>Original price * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</dd><dt class="property-"
             title="">
         <span id="price_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#price_yaml" style="color: inherit; text-decoration: inherit;">price</a>
@@ -1352,8 +1535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The actual price may be different from the original price due to discounts. * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</p>
-</dd><dt class="property-"
+    <dd>The actual price may be different from the original price due to discounts. * Unit: Cent (default). If the request parameter contains <code>AmountUnit</code>, see <code>AmountUnit</code> description. * Currency: CNY (Chinese site), USD (international site).</dd><dt class="property-"
             title="">
         <span id="storage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_yaml" style="color: inherit; text-decoration: inherit;">storage</a>
@@ -1416,7 +1598,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

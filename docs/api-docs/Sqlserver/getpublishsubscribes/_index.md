@@ -2,9 +2,11 @@
 ---
 title: "getPublishSubscribes"
 title_tag: "tencentcloud.Sqlserver.getPublishSubscribes"
-meta_desc: "Documentation for the tencentcloud.Sqlserver.getPublishSubscribes function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query Publish Subscribe resources for the specific SQL Server instance."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,24 +18,36 @@ Use this data source to query Publish Subscribe resources for the specific SQL S
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
+const zones = tencentcloud.availability.getZonesByProduct({
     product: "sqlserver",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
+    name: "subnet-example",
     vpcId: vpc.id,
     cidrBlock: "10.0.0.0/16",
     isMulticast: false,
 });
-const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
-const examplePubGeneralCloudInstance = new tencentcloud.sqlserver.GeneralCloudInstance("examplePubGeneralCloudInstance", {
+const securityGroup = new tencentcloud.security.Group("security_group", {
+    name: "sg-example",
+    description: "desc.",
+});
+const examplePub = new tencentcloud.sqlserver.GeneralCloudInstance("example_pub", {
+    name: "tf-example-pub",
     zone: zones.then(zones => zones.zones?.[4]?.name),
     memory: 4,
     storage: 100,
@@ -62,7 +76,8 @@ const examplePubGeneralCloudInstance = new tencentcloud.sqlserver.GeneralCloudIn
     collation: "Chinese_PRC_CI_AS",
     timeZone: "China Standard Time",
 });
-const exampleSubGeneralCloudInstance = new tencentcloud.sqlserver.GeneralCloudInstance("exampleSubGeneralCloudInstance", {
+const exampleSub = new tencentcloud.sqlserver.GeneralCloudInstance("example_sub", {
+    name: "tf-example-sub",
     zone: zones.then(zones => zones.zones?.[4]?.name),
     memory: 4,
     storage: 100,
@@ -91,19 +106,21 @@ const exampleSubGeneralCloudInstance = new tencentcloud.sqlserver.GeneralCloudIn
     collation: "Chinese_PRC_CI_AS",
     timeZone: "China Standard Time",
 });
-const examplePubDb = new tencentcloud.sqlserver.Db("examplePubDb", {
-    instanceId: examplePubGeneralCloudInstance.id,
+const examplePubDb = new tencentcloud.sqlserver.Db("example_pub", {
+    instanceId: examplePub.id,
+    name: "tf_example_db_pub",
     charset: "Chinese_PRC_BIN",
     remark: "test-remark",
 });
-const exampleSubDb = new tencentcloud.sqlserver.Db("exampleSubDb", {
-    instanceId: exampleSubGeneralCloudInstance.id,
+const exampleSubDb = new tencentcloud.sqlserver.Db("example_sub", {
+    instanceId: exampleSub.id,
+    name: "tf_example_db_sub",
     charset: "Chinese_PRC_BIN",
     remark: "test-remark",
 });
-const examplePublishSubscribe = new tencentcloud.sqlserver.PublishSubscribe("examplePublishSubscribe", {
-    publishInstanceId: examplePubGeneralCloudInstance.id,
-    subscribeInstanceId: exampleSubGeneralCloudInstance.id,
+const examplePublishSubscribe = new tencentcloud.sqlserver.PublishSubscribe("example", {
+    publishInstanceId: examplePub.id,
+    subscribeInstanceId: exampleSub.id,
     publishSubscribeName: "example",
     deleteSubscribeDb: false,
     databaseTuples: [{
@@ -111,24 +128,35 @@ const examplePublishSubscribe = new tencentcloud.sqlserver.PublishSubscribe("exa
         subscribeDatabase: exampleSubDb.name,
     }],
 });
-const examplePublishSubscribes = tencentcloud.Sqlserver.getPublishSubscribesOutput({
+const example = tencentcloud.sqlserver.getPublishSubscribesOutput({
     instanceId: examplePublishSubscribe.publishInstanceId,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="sqlserver")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+zones = tencentcloud.availability.get_zones_by_product(product="sqlserver")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     availability_zone=zones.zones[4].name,
+    name="subnet-example",
     vpc_id=vpc.id,
     cidr_block="10.0.0.0/16",
     is_multicast=False)
-security_group = tencentcloud.security.Group("securityGroup", description="desc.")
-example_pub_general_cloud_instance = tencentcloud.sqlserver.GeneralCloudInstance("examplePubGeneralCloudInstance",
+security_group = tencentcloud.security.Group("security_group",
+    name="sg-example",
+    description="desc.")
+example_pub = tencentcloud.sqlserver.GeneralCloudInstance("example_pub",
+    name="tf-example-pub",
     zone=zones.zones[4].name,
     memory=4,
     storage=100,
@@ -150,13 +178,14 @@ example_pub_general_cloud_instance = tencentcloud.sqlserver.GeneralCloudInstance
     ],
     start_time="00:00",
     span=6,
-    resource_tags=[tencentcloud.sqlserver.GeneralCloudInstanceResourceTagArgs(
-        tag_key="test",
-        tag_value="test",
-    )],
+    resource_tags=[{
+        "tag_key": "test",
+        "tag_value": "test",
+    }],
     collation="Chinese_PRC_CI_AS",
     time_zone="China Standard Time")
-example_sub_general_cloud_instance = tencentcloud.sqlserver.GeneralCloudInstance("exampleSubGeneralCloudInstance",
+example_sub = tencentcloud.sqlserver.GeneralCloudInstance("example_sub",
+    name="tf-example-sub",
     zone=zones.zones[4].name,
     memory=4,
     storage=100,
@@ -178,220 +207,84 @@ example_sub_general_cloud_instance = tencentcloud.sqlserver.GeneralCloudInstance
     ],
     start_time="00:00",
     span=6,
-    resource_tags=[tencentcloud.sqlserver.GeneralCloudInstanceResourceTagArgs(
-        tag_key="test",
-        tag_value="test",
-    )],
+    resource_tags=[{
+        "tag_key": "test",
+        "tag_value": "test",
+    }],
     collation="Chinese_PRC_CI_AS",
     time_zone="China Standard Time")
-example_pub_db = tencentcloud.sqlserver.Db("examplePubDb",
-    instance_id=example_pub_general_cloud_instance.id,
+example_pub_db = tencentcloud.sqlserver.Db("example_pub",
+    instance_id=example_pub.id,
+    name="tf_example_db_pub",
     charset="Chinese_PRC_BIN",
     remark="test-remark")
-example_sub_db = tencentcloud.sqlserver.Db("exampleSubDb",
-    instance_id=example_sub_general_cloud_instance.id,
+example_sub_db = tencentcloud.sqlserver.Db("example_sub",
+    instance_id=example_sub.id,
+    name="tf_example_db_sub",
     charset="Chinese_PRC_BIN",
     remark="test-remark")
-example_publish_subscribe = tencentcloud.sqlserver.PublishSubscribe("examplePublishSubscribe",
-    publish_instance_id=example_pub_general_cloud_instance.id,
-    subscribe_instance_id=example_sub_general_cloud_instance.id,
+example_publish_subscribe = tencentcloud.sqlserver.PublishSubscribe("example",
+    publish_instance_id=example_pub.id,
+    subscribe_instance_id=example_sub.id,
     publish_subscribe_name="example",
     delete_subscribe_db=False,
-    database_tuples=[tencentcloud.sqlserver.PublishSubscribeDatabaseTupleArgs(
-        publish_database=example_pub_db.name,
-        subscribe_database=example_sub_db.name,
-    )])
-example_publish_subscribes = tencentcloud.Sqlserver.get_publish_subscribes_output(instance_id=example_publish_subscribe.publish_instance_id)
+    database_tuples=[{
+        "publish_database": example_pub_db.name,
+        "subscribe_database": example_sub_db.name,
+    }])
+example = tencentcloud.sqlserver.get_publish_subscribes_output(instance_id=example_publish_subscribe.publish_instance_id)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
-    {
-        Product = "sqlserver",
-    });
-
-    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
-    {
-        CidrBlock = "10.0.0.0/16",
-    });
-
-    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
-    {
-        AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
-        VpcId = vpc.Id,
-        CidrBlock = "10.0.0.0/16",
-        IsMulticast = false,
-    });
-
-    var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
-    {
-        Description = "desc.",
-    });
-
-    var examplePubGeneralCloudInstance = new Tencentcloud.Sqlserver.GeneralCloudInstance("examplePubGeneralCloudInstance", new()
-    {
-        Zone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
-        Memory = 4,
-        Storage = 100,
-        Cpu = 2,
-        MachineType = "CLOUD_HSSD",
-        InstanceChargeType = "POSTPAID",
-        ProjectId = 0,
-        SubnetId = subnet.Id,
-        VpcId = vpc.Id,
-        DbVersion = "2008R2",
-        SecurityGroupLists = new[]
-        {
-            securityGroup.Id,
-        },
-        Weeklies = new[]
-        {
-            1,
-            2,
-            3,
-            5,
-            6,
-            7,
-        },
-        StartTime = "00:00",
-        Span = 6,
-        ResourceTags = new[]
-        {
-            new Tencentcloud.Sqlserver.Inputs.GeneralCloudInstanceResourceTagArgs
-            {
-                TagKey = "test",
-                TagValue = "test",
-            },
-        },
-        Collation = "Chinese_PRC_CI_AS",
-        TimeZone = "China Standard Time",
-    });
-
-    var exampleSubGeneralCloudInstance = new Tencentcloud.Sqlserver.GeneralCloudInstance("exampleSubGeneralCloudInstance", new()
-    {
-        Zone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
-        Memory = 4,
-        Storage = 100,
-        Cpu = 2,
-        MachineType = "CLOUD_HSSD",
-        InstanceChargeType = "POSTPAID",
-        ProjectId = 0,
-        SubnetId = subnet.Id,
-        VpcId = vpc.Id,
-        DbVersion = "2008R2",
-        SecurityGroupLists = new[]
-        {
-            securityGroup.Id,
-        },
-        Weeklies = new[]
-        {
-            1,
-            2,
-            3,
-            5,
-            6,
-            7,
-        },
-        StartTime = "00:00",
-        Span = 6,
-        ResourceTags = new[]
-        {
-            new Tencentcloud.Sqlserver.Inputs.GeneralCloudInstanceResourceTagArgs
-            {
-                TagKey = "test",
-                TagValue = "test",
-            },
-        },
-        Collation = "Chinese_PRC_CI_AS",
-        TimeZone = "China Standard Time",
-    });
-
-    var examplePubDb = new Tencentcloud.Sqlserver.Db("examplePubDb", new()
-    {
-        InstanceId = examplePubGeneralCloudInstance.Id,
-        Charset = "Chinese_PRC_BIN",
-        Remark = "test-remark",
-    });
-
-    var exampleSubDb = new Tencentcloud.Sqlserver.Db("exampleSubDb", new()
-    {
-        InstanceId = exampleSubGeneralCloudInstance.Id,
-        Charset = "Chinese_PRC_BIN",
-        Remark = "test-remark",
-    });
-
-    var examplePublishSubscribe = new Tencentcloud.Sqlserver.PublishSubscribe("examplePublishSubscribe", new()
-    {
-        PublishInstanceId = examplePubGeneralCloudInstance.Id,
-        SubscribeInstanceId = exampleSubGeneralCloudInstance.Id,
-        PublishSubscribeName = "example",
-        DeleteSubscribeDb = false,
-        DatabaseTuples = new[]
-        {
-            new Tencentcloud.Sqlserver.Inputs.PublishSubscribeDatabaseTupleArgs
-            {
-                PublishDatabase = examplePubDb.Name,
-                SubscribeDatabase = exampleSubDb.Name,
-            },
-        },
-    });
-
-    var examplePublishSubscribes = Tencentcloud.Sqlserver.GetPublishSubscribes.Invoke(new()
-    {
-        InstanceId = examplePublishSubscribe.PublishInstanceId,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/sqlserver"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
 			Product: "sqlserver",
 		}, nil)
 		if err != nil {
 			return err
 		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
 			CidrBlock: pulumi.String("10.0.0.0/16"),
 		})
 		if err != nil {
 			return err
 		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-			VpcId:            vpc.ID(),
+			Name:             pulumi.String("subnet-example"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 			CidrBlock:        pulumi.String("10.0.0.0/16"),
 			IsMulticast:      pulumi.Bool(false),
 		})
 		if err != nil {
 			return err
 		}
-		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+		securityGroup, err := security.NewGroup(ctx, "security_group", &security.GroupArgs{
+			Name:        pulumi.String("sg-example"),
 			Description: pulumi.String("desc."),
 		})
 		if err != nil {
 			return err
 		}
-		examplePubGeneralCloudInstance, err := Sqlserver.NewGeneralCloudInstance(ctx, "examplePubGeneralCloudInstance", &Sqlserver.GeneralCloudInstanceArgs{
+		examplePub, err := sqlserver.NewGeneralCloudInstance(ctx, "example_pub", &sqlserver.GeneralCloudInstanceArgs{
+			Name:               pulumi.String("tf-example-pub"),
 			Zone:               pulumi.String(zones.Zones[4].Name),
 			Memory:             pulumi.Int(4),
 			Storage:            pulumi.Int(100),
@@ -399,11 +292,11 @@ func main() {
 			MachineType:        pulumi.String("CLOUD_HSSD"),
 			InstanceChargeType: pulumi.String("POSTPAID"),
 			ProjectId:          pulumi.Int(0),
-			SubnetId:           subnet.ID(),
-			VpcId:              vpc.ID(),
+			SubnetId:           subnet2.ID().ToIDOutput().ToStringOutput(),
+			VpcId:              vpc2.ID().ToIDOutput().ToStringOutput(),
 			DbVersion:          pulumi.String("2008R2"),
 			SecurityGroupLists: pulumi.StringArray{
-				securityGroup.ID(),
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
 			},
 			Weeklies: pulumi.IntArray{
 				pulumi.Int(1),
@@ -427,7 +320,8 @@ func main() {
 		if err != nil {
 			return err
 		}
-		exampleSubGeneralCloudInstance, err := Sqlserver.NewGeneralCloudInstance(ctx, "exampleSubGeneralCloudInstance", &Sqlserver.GeneralCloudInstanceArgs{
+		exampleSub, err := sqlserver.NewGeneralCloudInstance(ctx, "example_sub", &sqlserver.GeneralCloudInstanceArgs{
+			Name:               pulumi.String("tf-example-sub"),
 			Zone:               pulumi.String(zones.Zones[4].Name),
 			Memory:             pulumi.Int(4),
 			Storage:            pulumi.Int(100),
@@ -435,11 +329,11 @@ func main() {
 			MachineType:        pulumi.String("CLOUD_HSSD"),
 			InstanceChargeType: pulumi.String("POSTPAID"),
 			ProjectId:          pulumi.Int(0),
-			SubnetId:           subnet.ID(),
-			VpcId:              vpc.ID(),
+			SubnetId:           subnet2.ID().ToIDOutput().ToStringOutput(),
+			VpcId:              vpc2.ID().ToIDOutput().ToStringOutput(),
 			DbVersion:          pulumi.String("2008R2"),
 			SecurityGroupLists: pulumi.StringArray{
-				securityGroup.ID(),
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
 			},
 			Weeklies: pulumi.IntArray{
 				pulumi.Int(1),
@@ -463,25 +357,27 @@ func main() {
 		if err != nil {
 			return err
 		}
-		examplePubDb, err := Sqlserver.NewDb(ctx, "examplePubDb", &Sqlserver.DbArgs{
-			InstanceId: examplePubGeneralCloudInstance.ID(),
+		examplePubDb, err := sqlserver.NewDb(ctx, "example_pub", &sqlserver.DbArgs{
+			InstanceId: examplePub.ID().ToIDOutput().ToStringOutput(),
+			Name:       pulumi.String("tf_example_db_pub"),
 			Charset:    pulumi.String("Chinese_PRC_BIN"),
 			Remark:     pulumi.String("test-remark"),
 		})
 		if err != nil {
 			return err
 		}
-		exampleSubDb, err := Sqlserver.NewDb(ctx, "exampleSubDb", &Sqlserver.DbArgs{
-			InstanceId: exampleSubGeneralCloudInstance.ID(),
+		exampleSubDb, err := sqlserver.NewDb(ctx, "example_sub", &sqlserver.DbArgs{
+			InstanceId: exampleSub.ID().ToIDOutput().ToStringOutput(),
+			Name:       pulumi.String("tf_example_db_sub"),
 			Charset:    pulumi.String("Chinese_PRC_BIN"),
 			Remark:     pulumi.String("test-remark"),
 		})
 		if err != nil {
 			return err
 		}
-		examplePublishSubscribe, err := Sqlserver.NewPublishSubscribe(ctx, "examplePublishSubscribe", &Sqlserver.PublishSubscribeArgs{
-			PublishInstanceId:    examplePubGeneralCloudInstance.ID(),
-			SubscribeInstanceId:  exampleSubGeneralCloudInstance.ID(),
+		examplePublishSubscribe, err := sqlserver.NewPublishSubscribe(ctx, "example", &sqlserver.PublishSubscribeArgs{
+			PublishInstanceId:    examplePub.ID().ToIDOutput().ToStringOutput(),
+			SubscribeInstanceId:  exampleSub.ID().ToIDOutput().ToStringOutput(),
 			PublishSubscribeName: pulumi.String("example"),
 			DeleteSubscribeDb:    pulumi.Bool(false),
 			DatabaseTuples: sqlserver.PublishSubscribeDatabaseTupleArray{
@@ -494,13 +390,176 @@ func main() {
 		if err != nil {
 			return err
 		}
-		_ = Sqlserver.GetPublishSubscribesOutput(ctx, sqlserver.GetPublishSubscribesOutputArgs{
+		_ = sqlserver.GetPublishSubscribesOutput(ctx, sqlserver.GetPublishSubscribesOutputArgs{
 			InstanceId: examplePublishSubscribe.PublishInstanceId,
 		}, nil)
 		return nil
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
+    {
+        Product = "sqlserver",
+    });
+
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        Name = "vpc-example",
+        CidrBlock = "10.0.0.0/16",
+    });
+
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
+        Name = "subnet-example",
+        VpcId = vpc.Id,
+        CidrBlock = "10.0.0.0/16",
+        IsMulticast = false,
+    });
+
+    var securityGroup = new Tencentcloud.Security.Group("security_group", new()
+    {
+        Name = "sg-example",
+        Description = "desc.",
+    });
+
+    var examplePub = new Tencentcloud.Sqlserver.GeneralCloudInstance("example_pub", new()
+    {
+        Name = "tf-example-pub",
+        Zone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
+        Memory = 4,
+        Storage = 100,
+        Cpu = 2,
+        MachineType = "CLOUD_HSSD",
+        InstanceChargeType = "POSTPAID",
+        ProjectId = 0,
+        SubnetId = subnet.Id,
+        VpcId = vpc.Id,
+        DbVersion = "2008R2",
+        SecurityGroupLists = new[]
+        {
+            securityGroup.Id,
+        },
+        Weeklies = new[]
+        {
+            1,
+            2,
+            3,
+            5,
+            6,
+            7,
+        },
+        StartTime = "00:00",
+        Span = 6,
+        ResourceTags = new[]
+        {
+            new Tencentcloud.Sqlserver.Inputs.GeneralCloudInstanceResourceTagArgs
+            {
+                TagKey = "test",
+                TagValue = "test",
+            },
+        },
+        Collation = "Chinese_PRC_CI_AS",
+        TimeZone = "China Standard Time",
+    });
+
+    var exampleSub = new Tencentcloud.Sqlserver.GeneralCloudInstance("example_sub", new()
+    {
+        Name = "tf-example-sub",
+        Zone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[4]?.Name),
+        Memory = 4,
+        Storage = 100,
+        Cpu = 2,
+        MachineType = "CLOUD_HSSD",
+        InstanceChargeType = "POSTPAID",
+        ProjectId = 0,
+        SubnetId = subnet.Id,
+        VpcId = vpc.Id,
+        DbVersion = "2008R2",
+        SecurityGroupLists = new[]
+        {
+            securityGroup.Id,
+        },
+        Weeklies = new[]
+        {
+            1,
+            2,
+            3,
+            5,
+            6,
+            7,
+        },
+        StartTime = "00:00",
+        Span = 6,
+        ResourceTags = new[]
+        {
+            new Tencentcloud.Sqlserver.Inputs.GeneralCloudInstanceResourceTagArgs
+            {
+                TagKey = "test",
+                TagValue = "test",
+            },
+        },
+        Collation = "Chinese_PRC_CI_AS",
+        TimeZone = "China Standard Time",
+    });
+
+    var examplePubDb = new Tencentcloud.Sqlserver.Db("example_pub", new()
+    {
+        InstanceId = examplePub.Id,
+        Name = "tf_example_db_pub",
+        Charset = "Chinese_PRC_BIN",
+        Remark = "test-remark",
+    });
+
+    var exampleSubDb = new Tencentcloud.Sqlserver.Db("example_sub", new()
+    {
+        InstanceId = exampleSub.Id,
+        Name = "tf_example_db_sub",
+        Charset = "Chinese_PRC_BIN",
+        Remark = "test-remark",
+    });
+
+    var examplePublishSubscribe = new Tencentcloud.Sqlserver.PublishSubscribe("example", new()
+    {
+        PublishInstanceId = examplePub.Id,
+        SubscribeInstanceId = exampleSub.Id,
+        PublishSubscribeName = "example",
+        DeleteSubscribeDb = false,
+        DatabaseTuples = new[]
+        {
+            new Tencentcloud.Sqlserver.Inputs.PublishSubscribeDatabaseTupleArgs
+            {
+                PublishDatabase = examplePubDb.Name,
+                SubscribeDatabase = exampleSubDb.Name,
+            },
+        },
+    });
+
+    var example = Tencentcloud.Sqlserver.GetPublishSubscribes.Invoke(new()
+    {
+        InstanceId = examplePublishSubscribe.PublishInstanceId,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -509,10 +568,6 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.Security.Group;
 import com.pulumi.tencentcloud.Security.GroupArgs;
 import com.pulumi.tencentcloud.Sqlserver.GeneralCloudInstance;
@@ -525,8 +580,8 @@ import com.pulumi.tencentcloud.Sqlserver.PublishSubscribeArgs;
 import com.pulumi.tencentcloud.Sqlserver.inputs.PublishSubscribeDatabaseTupleArgs;
 import com.pulumi.tencentcloud.Sqlserver.SqlserverFunctions;
 import com.pulumi.tencentcloud.Sqlserver.inputs.GetPublishSubscribesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -542,23 +597,27 @@ public class App {
             .product("sqlserver")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[4].name()))
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .availabilityZone(zones.zones()[4].name())
+            .name("subnet-example")
             .vpcId(vpc.id())
             .cidrBlock("10.0.0.0/16")
             .isMulticast(false)
             .build());
 
-        var securityGroup = new Group("securityGroup", GroupArgs.builder()        
+        var securityGroup = new Group("securityGroup", GroupArgs.builder()
+            .name("sg-example")
             .description("desc.")
             .build());
 
-        var examplePubGeneralCloudInstance = new GeneralCloudInstance("examplePubGeneralCloudInstance", GeneralCloudInstanceArgs.builder()        
-            .zone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[4].name()))
+        var examplePub = new GeneralCloudInstance("examplePub", GeneralCloudInstanceArgs.builder()
+            .name("tf-example-pub")
+            .zone(zones.zones()[4].name())
             .memory(4)
             .storage(100)
             .cpu(2)
@@ -586,8 +645,9 @@ public class App {
             .timeZone("China Standard Time")
             .build());
 
-        var exampleSubGeneralCloudInstance = new GeneralCloudInstance("exampleSubGeneralCloudInstance", GeneralCloudInstanceArgs.builder()        
-            .zone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[4].name()))
+        var exampleSub = new GeneralCloudInstance("exampleSub", GeneralCloudInstanceArgs.builder()
+            .name("tf-example-sub")
+            .zone(zones.zones()[4].name())
             .memory(4)
             .storage(100)
             .cpu(2)
@@ -615,21 +675,23 @@ public class App {
             .timeZone("China Standard Time")
             .build());
 
-        var examplePubDb = new Db("examplePubDb", DbArgs.builder()        
-            .instanceId(examplePubGeneralCloudInstance.id())
+        var examplePubDb = new Db("examplePubDb", DbArgs.builder()
+            .instanceId(examplePub.id())
+            .name("tf_example_db_pub")
             .charset("Chinese_PRC_BIN")
             .remark("test-remark")
             .build());
 
-        var exampleSubDb = new Db("exampleSubDb", DbArgs.builder()        
-            .instanceId(exampleSubGeneralCloudInstance.id())
+        var exampleSubDb = new Db("exampleSubDb", DbArgs.builder()
+            .instanceId(exampleSub.id())
+            .name("tf_example_db_sub")
             .charset("Chinese_PRC_BIN")
             .remark("test-remark")
             .build());
 
-        var examplePublishSubscribe = new PublishSubscribe("examplePublishSubscribe", PublishSubscribeArgs.builder()        
-            .publishInstanceId(examplePubGeneralCloudInstance.id())
-            .subscribeInstanceId(exampleSubGeneralCloudInstance.id())
+        var examplePublishSubscribe = new PublishSubscribe("examplePublishSubscribe", PublishSubscribeArgs.builder()
+            .publishInstanceId(examplePub.id())
+            .subscribeInstanceId(exampleSub.id())
             .publishSubscribeName("example")
             .deleteSubscribeDb(false)
             .databaseTuples(PublishSubscribeDatabaseTupleArgs.builder()
@@ -638,33 +700,44 @@ public class App {
                 .build())
             .build());
 
-        final var examplePublishSubscribes = SqlserverFunctions.getPublishSubscribes(GetPublishSubscribesArgs.builder()
+        final var example = SqlserverFunctions.getPublishSubscribes(GetPublishSubscribesArgs.builder()
             .instanceId(examplePublishSubscribe.publishInstanceId())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-example
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       availabilityZone: ${zones.zones[4].name}
+      name: subnet-example
       vpcId: ${vpc.id}
       cidrBlock: 10.0.0.0/16
       isMulticast: false
   securityGroup:
     type: tencentcloud:Security:Group
+    name: security_group
     properties:
+      name: sg-example
       description: desc.
-  examplePubGeneralCloudInstance:
+  examplePub:
     type: tencentcloud:Sqlserver:GeneralCloudInstance
+    name: example_pub
     properties:
+      name: tf-example-pub
       zone: ${zones.zones[4].name}
       memory: 4
       storage: 100
@@ -691,9 +764,11 @@ resources:
           tagValue: test
       collation: Chinese_PRC_CI_AS
       timeZone: China Standard Time
-  exampleSubGeneralCloudInstance:
+  exampleSub:
     type: tencentcloud:Sqlserver:GeneralCloudInstance
+    name: example_sub
     properties:
+      name: tf-example-sub
       zone: ${zones.zones[4].name}
       memory: 4
       storage: 100
@@ -722,40 +797,157 @@ resources:
       timeZone: China Standard Time
   examplePubDb:
     type: tencentcloud:Sqlserver:Db
+    name: example_pub
     properties:
-      instanceId: ${examplePubGeneralCloudInstance.id}
+      instanceId: ${examplePub.id}
+      name: tf_example_db_pub
       charset: Chinese_PRC_BIN
       remark: test-remark
   exampleSubDb:
     type: tencentcloud:Sqlserver:Db
+    name: example_sub
     properties:
-      instanceId: ${exampleSubGeneralCloudInstance.id}
+      instanceId: ${exampleSub.id}
+      name: tf_example_db_sub
       charset: Chinese_PRC_BIN
       remark: test-remark
   examplePublishSubscribe:
     type: tencentcloud:Sqlserver:PublishSubscribe
+    name: example
     properties:
-      publishInstanceId: ${examplePubGeneralCloudInstance.id}
-      subscribeInstanceId: ${exampleSubGeneralCloudInstance.id}
+      publishInstanceId: ${examplePub.id}
+      subscribeInstanceId: ${exampleSub.id}
       publishSubscribeName: example
       deleteSubscribeDb: false
       databaseTuples:
         - publishDatabase: ${examplePubDb.name}
           subscribeDatabase: ${exampleSubDb.name}
 variables:
-  examplePublishSubscribes:
+  example:
     fn::invoke:
-      Function: tencentcloud:Sqlserver:getPublishSubscribes
-      Arguments:
+      function: tencentcloud:Sqlserver:getPublishSubscribes
+      arguments:
         instanceId: ${examplePublishSubscribe.publishInstanceId}
   zones:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: sqlserver
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_sqlserver_getpublishsubscribes" "example" {
+  instance_id = tencentcloud_sqlserver_publishsubscribe.example.publish_instance_id
+}
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "sqlserver"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[4].name
+  name              = "subnet-example"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.0.0/16"
+  is_multicast      = false
+}
+resource "tencentcloud_security_group" "security_group" {
+  name        = "sg-example"
+  description = "desc."
+}
+resource "tencentcloud_sqlserver_generalcloudinstance" "example_pub" {
+  name                 = "tf-example-pub"
+  zone                 = data.tencentcloud_availability_getzonesbyproduct.zones.zones[4].name
+  memory               = 4
+  storage              = 100
+  cpu                  = 2
+  machine_type         = "CLOUD_HSSD"
+  instance_charge_type = "POSTPAID"
+  project_id           = 0
+  subnet_id            = tencentcloud_subnet_instance.subnet.id
+  vpc_id               = tencentcloud_vpc_instance.vpc.id
+  db_version           = "2008R2"
+  security_group_lists = [tencentcloud_security_group.security_group.id]
+  weeklies             = [1, 2, 3, 5, 6, 7]
+  start_time           = "00:00"
+  span                 = 6
+  resource_tags {
+    tag_key   = "test"
+    tag_value = "test"
+  }
+  collation = "Chinese_PRC_CI_AS"
+  time_zone = "China Standard Time"
+}
+resource "tencentcloud_sqlserver_generalcloudinstance" "example_sub" {
+  name                 = "tf-example-sub"
+  zone                 = data.tencentcloud_availability_getzonesbyproduct.zones.zones[4].name
+  memory               = 4
+  storage              = 100
+  cpu                  = 2
+  machine_type         = "CLOUD_HSSD"
+  instance_charge_type = "POSTPAID"
+  project_id           = 0
+  subnet_id            = tencentcloud_subnet_instance.subnet.id
+  vpc_id               = tencentcloud_vpc_instance.vpc.id
+  db_version           = "2008R2"
+  security_group_lists = [tencentcloud_security_group.security_group.id]
+  weeklies             = [1, 2, 3, 5, 6, 7]
+  start_time           = "00:00"
+  span                 = 6
+  resource_tags {
+    tag_key   = "test"
+    tag_value = "test"
+  }
+  collation = "Chinese_PRC_CI_AS"
+  time_zone = "China Standard Time"
+}
+resource "tencentcloud_sqlserver_db" "example_pub" {
+  instance_id = tencentcloud_sqlserver_generalcloudinstance.example_pub.id
+  name        = "tf_example_db_pub"
+  charset     = "Chinese_PRC_BIN"
+  remark      = "test-remark"
+}
+resource "tencentcloud_sqlserver_db" "example_sub" {
+  instance_id = tencentcloud_sqlserver_generalcloudinstance.example_sub.id
+  name        = "tf_example_db_sub"
+  charset     = "Chinese_PRC_BIN"
+  remark      = "test-remark"
+}
+resource "tencentcloud_sqlserver_publishsubscribe" "example" {
+  publish_instance_id    = tencentcloud_sqlserver_generalcloudinstance.example_pub.id
+  subscribe_instance_id  = tencentcloud_sqlserver_generalcloudinstance.example_sub.id
+  publish_subscribe_name = "example"
+  delete_subscribe_db    = false
+  database_tuples {
+    publish_database   = tencentcloud_sqlserver_db.example_pub.name
+    subscribe_database = tencentcloud_sqlserver_db.example_sub.name
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
 
 
 
@@ -767,7 +959,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -775,9 +967,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getPublishSubscribes<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPublishSubscribesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPublishSubscribesResult</a></span>></span
+><span class="k">function </span>getPublishSubscribes<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPublishSubscribesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPublishSubscribesResult</a></span>></span
 ><span class="k">
-function </span>getPublishSubscribesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPublishSubscribesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPublishSubscribesResult</a></span>></span
+function </span>getPublishSubscribesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPublishSubscribesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPublishSubscribesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -796,15 +988,15 @@ function </span>getPublishSubscribesOutput<span class="p">(</span><span class="n
                            <span class="nx">subscribe_database</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetPublishSubscribesResult</span
 ><span class="k">
-def </span>get_publish_subscribes_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">pub_or_sub_instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">pub_or_sub_instance_ip</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">publish_database</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">publish_subscribe_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                           <span class="nx">publish_subscribe_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">subscribe_database</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPublishSubscribesResult]</span
+def </span>get_publish_subscribes_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">pub_or_sub_instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">pub_or_sub_instance_ip</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">publish_database</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">publish_subscribe_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                           <span class="nx">publish_subscribe_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">subscribe_database</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPublishSubscribesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -829,7 +1021,8 @@ func </span>GetPublishSubscribesOutput<span class="p">(</span><span class="nx">c
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetPublishSubscribes </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetPublishSubscribesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetPublishSubscribesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetPublishSubscribesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPublishSubscribesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPublishSubscribesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPublishSubscribesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPublishSubscribesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPublishSubscribesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -838,7 +1031,8 @@ func </span>GetPublishSubscribesOutput<span class="p">(</span><span class="nx">c
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetPublishSubscribesResult</a></span>> </span>getPublishSubscribes<span class="p">(</span><span class="nx">GetPublishSubscribesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPublishSubscribesResult</a></span>> </span>getPublishSubscribes<span class="p">(</span><span class="nx">GetPublishSubscribesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPublishSubscribesResult</a></span>> </span>getPublishSubscribes<span class="p">(</span><span class="nx">GetPublishSubscribesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -850,6 +1044,15 @@ func </span>GetPublishSubscribesOutput<span class="p">(</span><span class="nx">c
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Sqlserver/getPublishSubscribes:getPublishSubscribes
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_sqlserver_get_publish_subscribes&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -868,8 +1071,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="puborsubinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#puborsubinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Pub<wbr>Or<wbr>Sub<wbr>Instance<wbr>Id</a>
@@ -877,8 +1079,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The subscribe/publish instance ID. It is related to whether the <code>instance_id</code> is a publish instance or a subscribe instance. when <code>instance_id</code> is a publish instance, this field is filtered according to the subscribe instance ID; when <code>instance_id</code> is a subscribe instance, this field is filtering according to the publish instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>The subscribe/publish instance ID. It is related to whether the <code>instanceId</code> is a publish instance or a subscribe instance. when <code>instanceId</code> is a publish instance, this field is filtered according to the subscribe instance ID; when <code>instanceId</code> is a subscribe instance, this field is filtering according to the publish instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="puborsubinstanceip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#puborsubinstanceip_csharp" style="color: inherit; text-decoration: inherit;">Pub<wbr>Or<wbr>Sub<wbr>Instance<wbr>Ip</a>
@@ -886,8 +1087,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The intranet IP of the subscribe/publish instance. It is related to whether the <code>instance_id</code> is a publish instance or a subscribe instance. when <code>instance_id</code> is a publish instance, this field is filtered according to the intranet IP of the subscribe instance; when <code>instance_id</code> is a subscribe instance, this field is based on the publish instance intranet IP filter.</p>
-</dd><dt class="property-optional"
+    <dd>The intranet IP of the subscribe/publish instance. It is related to whether the <code>instanceId</code> is a publish instance or a subscribe instance. when <code>instanceId</code> is a publish instance, this field is filtered according to the intranet IP of the subscribe instance; when <code>instanceId</code> is a subscribe instance, this field is based on the publish instance intranet IP filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishdatabase_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishdatabase_csharp" style="color: inherit; text-decoration: inherit;">Publish<wbr>Database</a>
@@ -895,8 +1095,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of publish database.</p>
-</dd><dt class="property-optional"
+    <dd>Name of publish database.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishsubscribeid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribeid_csharp" style="color: inherit; text-decoration: inherit;">Publish<wbr>Subscribe<wbr>Id</a>
@@ -904,8 +1103,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishsubscribename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_csharp" style="color: inherit; text-decoration: inherit;">Publish<wbr>Subscribe<wbr>Name</a>
@@ -913,8 +1111,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -922,8 +1119,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subscribedatabase_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribedatabase_csharp" style="color: inherit; text-decoration: inherit;">Subscribe<wbr>Database</a>
@@ -931,8 +1127,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of subscribe database.</p>
-</dd></dl>
+    <dd>Name of subscribe database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -946,8 +1141,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="puborsubinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#puborsubinstanceid_go" style="color: inherit; text-decoration: inherit;">Pub<wbr>Or<wbr>Sub<wbr>Instance<wbr>Id</a>
@@ -955,8 +1149,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The subscribe/publish instance ID. It is related to whether the <code>instance_id</code> is a publish instance or a subscribe instance. when <code>instance_id</code> is a publish instance, this field is filtered according to the subscribe instance ID; when <code>instance_id</code> is a subscribe instance, this field is filtering according to the publish instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>The subscribe/publish instance ID. It is related to whether the <code>instanceId</code> is a publish instance or a subscribe instance. when <code>instanceId</code> is a publish instance, this field is filtered according to the subscribe instance ID; when <code>instanceId</code> is a subscribe instance, this field is filtering according to the publish instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="puborsubinstanceip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#puborsubinstanceip_go" style="color: inherit; text-decoration: inherit;">Pub<wbr>Or<wbr>Sub<wbr>Instance<wbr>Ip</a>
@@ -964,8 +1157,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The intranet IP of the subscribe/publish instance. It is related to whether the <code>instance_id</code> is a publish instance or a subscribe instance. when <code>instance_id</code> is a publish instance, this field is filtered according to the intranet IP of the subscribe instance; when <code>instance_id</code> is a subscribe instance, this field is based on the publish instance intranet IP filter.</p>
-</dd><dt class="property-optional"
+    <dd>The intranet IP of the subscribe/publish instance. It is related to whether the <code>instanceId</code> is a publish instance or a subscribe instance. when <code>instanceId</code> is a publish instance, this field is filtered according to the intranet IP of the subscribe instance; when <code>instanceId</code> is a subscribe instance, this field is based on the publish instance intranet IP filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishdatabase_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishdatabase_go" style="color: inherit; text-decoration: inherit;">Publish<wbr>Database</a>
@@ -973,8 +1165,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of publish database.</p>
-</dd><dt class="property-optional"
+    <dd>Name of publish database.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishsubscribeid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribeid_go" style="color: inherit; text-decoration: inherit;">Publish<wbr>Subscribe<wbr>Id</a>
@@ -982,8 +1173,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishsubscribename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_go" style="color: inherit; text-decoration: inherit;">Publish<wbr>Subscribe<wbr>Name</a>
@@ -991,8 +1181,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -1000,8 +1189,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subscribedatabase_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribedatabase_go" style="color: inherit; text-decoration: inherit;">Subscribe<wbr>Database</a>
@@ -1009,8 +1197,77 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of subscribe database.</p>
-</dd></dl>
+    <dd>Name of subscribe database.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the SQL Server instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="pub_or_sub_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pub_or_sub_instance_id_hcl" style="color: inherit; text-decoration: inherit;">pub_<wbr>or_<wbr>sub_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The subscribe/publish instance ID. It is related to whether the <code>instanceId</code> is a publish instance or a subscribe instance. when <code>instanceId</code> is a publish instance, this field is filtered according to the subscribe instance ID; when <code>instanceId</code> is a subscribe instance, this field is filtering according to the publish instance ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="pub_or_sub_instance_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pub_or_sub_instance_ip_hcl" style="color: inherit; text-decoration: inherit;">pub_<wbr>or_<wbr>sub_<wbr>instance_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The intranet IP of the subscribe/publish instance. It is related to whether the <code>instanceId</code> is a publish instance or a subscribe instance. when <code>instanceId</code> is a publish instance, this field is filtered according to the intranet IP of the subscribe instance; when <code>instanceId</code> is a subscribe instance, this field is based on the publish instance intranet IP filter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="publish_database_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_database_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>database</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of publish database.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="publish_subscribe_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_subscribe_id_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="publish_subscribe_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_subscribe_name_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to store results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subscribe_database_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribe_database_hcl" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>database</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of subscribe database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1024,8 +1281,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the SQL Server instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="puborsubinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#puborsubinstanceid_java" style="color: inherit; text-decoration: inherit;">pub<wbr>Or<wbr>Sub<wbr>Instance<wbr>Id</a>
@@ -1033,8 +1289,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The subscribe/publish instance ID. It is related to whether the <code>instance_id</code> is a publish instance or a subscribe instance. when <code>instance_id</code> is a publish instance, this field is filtered according to the subscribe instance ID; when <code>instance_id</code> is a subscribe instance, this field is filtering according to the publish instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>The subscribe/publish instance ID. It is related to whether the <code>instanceId</code> is a publish instance or a subscribe instance. when <code>instanceId</code> is a publish instance, this field is filtered according to the subscribe instance ID; when <code>instanceId</code> is a subscribe instance, this field is filtering according to the publish instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="puborsubinstanceip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#puborsubinstanceip_java" style="color: inherit; text-decoration: inherit;">pub<wbr>Or<wbr>Sub<wbr>Instance<wbr>Ip</a>
@@ -1042,8 +1297,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The intranet IP of the subscribe/publish instance. It is related to whether the <code>instance_id</code> is a publish instance or a subscribe instance. when <code>instance_id</code> is a publish instance, this field is filtered according to the intranet IP of the subscribe instance; when <code>instance_id</code> is a subscribe instance, this field is based on the publish instance intranet IP filter.</p>
-</dd><dt class="property-optional"
+    <dd>The intranet IP of the subscribe/publish instance. It is related to whether the <code>instanceId</code> is a publish instance or a subscribe instance. when <code>instanceId</code> is a publish instance, this field is filtered according to the intranet IP of the subscribe instance; when <code>instanceId</code> is a subscribe instance, this field is based on the publish instance intranet IP filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishdatabase_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishdatabase_java" style="color: inherit; text-decoration: inherit;">publish<wbr>Database</a>
@@ -1051,8 +1305,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of publish database.</p>
-</dd><dt class="property-optional"
+    <dd>Name of publish database.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishsubscribeid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribeid_java" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Id</a>
@@ -1060,8 +1313,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishsubscribename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_java" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Name</a>
@@ -1069,8 +1321,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1078,8 +1329,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subscribedatabase_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribedatabase_java" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Database</a>
@@ -1087,8 +1337,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of subscribe database.</p>
-</dd></dl>
+    <dd>Name of subscribe database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1102,8 +1351,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="puborsubinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#puborsubinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">pub<wbr>Or<wbr>Sub<wbr>Instance<wbr>Id</a>
@@ -1111,8 +1359,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The subscribe/publish instance ID. It is related to whether the <code>instance_id</code> is a publish instance or a subscribe instance. when <code>instance_id</code> is a publish instance, this field is filtered according to the subscribe instance ID; when <code>instance_id</code> is a subscribe instance, this field is filtering according to the publish instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>The subscribe/publish instance ID. It is related to whether the <code>instanceId</code> is a publish instance or a subscribe instance. when <code>instanceId</code> is a publish instance, this field is filtered according to the subscribe instance ID; when <code>instanceId</code> is a subscribe instance, this field is filtering according to the publish instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="puborsubinstanceip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#puborsubinstanceip_nodejs" style="color: inherit; text-decoration: inherit;">pub<wbr>Or<wbr>Sub<wbr>Instance<wbr>Ip</a>
@@ -1120,8 +1367,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The intranet IP of the subscribe/publish instance. It is related to whether the <code>instance_id</code> is a publish instance or a subscribe instance. when <code>instance_id</code> is a publish instance, this field is filtered according to the intranet IP of the subscribe instance; when <code>instance_id</code> is a subscribe instance, this field is based on the publish instance intranet IP filter.</p>
-</dd><dt class="property-optional"
+    <dd>The intranet IP of the subscribe/publish instance. It is related to whether the <code>instanceId</code> is a publish instance or a subscribe instance. when <code>instanceId</code> is a publish instance, this field is filtered according to the intranet IP of the subscribe instance; when <code>instanceId</code> is a subscribe instance, this field is based on the publish instance intranet IP filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishdatabase_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishdatabase_nodejs" style="color: inherit; text-decoration: inherit;">publish<wbr>Database</a>
@@ -1129,8 +1375,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of publish database.</p>
-</dd><dt class="property-optional"
+    <dd>Name of publish database.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishsubscribeid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribeid_nodejs" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Id</a>
@@ -1138,8 +1383,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishsubscribename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_nodejs" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Name</a>
@@ -1147,8 +1391,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1156,8 +1399,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subscribedatabase_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribedatabase_nodejs" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Database</a>
@@ -1165,8 +1407,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of subscribe database.</p>
-</dd></dl>
+    <dd>Name of subscribe database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1180,8 +1421,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the SQL Server instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="pub_or_sub_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pub_or_sub_instance_id_python" style="color: inherit; text-decoration: inherit;">pub_<wbr>or_<wbr>sub_<wbr>instance_<wbr>id</a>
@@ -1189,8 +1429,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The subscribe/publish instance ID. It is related to whether the <code>instance_id</code> is a publish instance or a subscribe instance. when <code>instance_id</code> is a publish instance, this field is filtered according to the subscribe instance ID; when <code>instance_id</code> is a subscribe instance, this field is filtering according to the publish instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>The subscribe/publish instance ID. It is related to whether the <code>instanceId</code> is a publish instance or a subscribe instance. when <code>instanceId</code> is a publish instance, this field is filtered according to the subscribe instance ID; when <code>instanceId</code> is a subscribe instance, this field is filtering according to the publish instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="pub_or_sub_instance_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pub_or_sub_instance_ip_python" style="color: inherit; text-decoration: inherit;">pub_<wbr>or_<wbr>sub_<wbr>instance_<wbr>ip</a>
@@ -1198,8 +1437,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The intranet IP of the subscribe/publish instance. It is related to whether the <code>instance_id</code> is a publish instance or a subscribe instance. when <code>instance_id</code> is a publish instance, this field is filtered according to the intranet IP of the subscribe instance; when <code>instance_id</code> is a subscribe instance, this field is based on the publish instance intranet IP filter.</p>
-</dd><dt class="property-optional"
+    <dd>The intranet IP of the subscribe/publish instance. It is related to whether the <code>instanceId</code> is a publish instance or a subscribe instance. when <code>instanceId</code> is a publish instance, this field is filtered according to the intranet IP of the subscribe instance; when <code>instanceId</code> is a subscribe instance, this field is based on the publish instance intranet IP filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="publish_database_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_database_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>database</a>
@@ -1207,8 +1445,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of publish database.</p>
-</dd><dt class="property-optional"
+    <dd>Name of publish database.</dd><dt class="property-optional"
             title="Optional">
         <span id="publish_subscribe_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_subscribe_id_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>id</a>
@@ -1216,8 +1453,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="publish_subscribe_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_subscribe_name_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>name</a>
@@ -1225,8 +1461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1234,8 +1469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subscribe_database_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribe_database_python" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>database</a>
@@ -1243,8 +1477,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of subscribe database.</p>
-</dd></dl>
+    <dd>Name of subscribe database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1258,8 +1491,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the SQL Server instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the SQL Server instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="puborsubinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#puborsubinstanceid_yaml" style="color: inherit; text-decoration: inherit;">pub<wbr>Or<wbr>Sub<wbr>Instance<wbr>Id</a>
@@ -1267,8 +1499,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The subscribe/publish instance ID. It is related to whether the <code>instance_id</code> is a publish instance or a subscribe instance. when <code>instance_id</code> is a publish instance, this field is filtered according to the subscribe instance ID; when <code>instance_id</code> is a subscribe instance, this field is filtering according to the publish instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>The subscribe/publish instance ID. It is related to whether the <code>instanceId</code> is a publish instance or a subscribe instance. when <code>instanceId</code> is a publish instance, this field is filtered according to the subscribe instance ID; when <code>instanceId</code> is a subscribe instance, this field is filtering according to the publish instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="puborsubinstanceip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#puborsubinstanceip_yaml" style="color: inherit; text-decoration: inherit;">pub<wbr>Or<wbr>Sub<wbr>Instance<wbr>Ip</a>
@@ -1276,8 +1507,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The intranet IP of the subscribe/publish instance. It is related to whether the <code>instance_id</code> is a publish instance or a subscribe instance. when <code>instance_id</code> is a publish instance, this field is filtered according to the intranet IP of the subscribe instance; when <code>instance_id</code> is a subscribe instance, this field is based on the publish instance intranet IP filter.</p>
-</dd><dt class="property-optional"
+    <dd>The intranet IP of the subscribe/publish instance. It is related to whether the <code>instanceId</code> is a publish instance or a subscribe instance. when <code>instanceId</code> is a publish instance, this field is filtered according to the intranet IP of the subscribe instance; when <code>instanceId</code> is a subscribe instance, this field is based on the publish instance intranet IP filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishdatabase_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishdatabase_yaml" style="color: inherit; text-decoration: inherit;">publish<wbr>Database</a>
@@ -1285,8 +1515,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of publish database.</p>
-</dd><dt class="property-optional"
+    <dd>Name of publish database.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishsubscribeid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribeid_yaml" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Id</a>
@@ -1294,8 +1523,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="publishsubscribename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_yaml" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Name</a>
@@ -1303,8 +1531,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1312,8 +1539,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subscribedatabase_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribedatabase_yaml" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Database</a>
@@ -1321,8 +1547,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of subscribe database.</p>
-</dd></dl>
+    <dd>Name of subscribe database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1345,8 +1570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1362,8 +1586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublishsubscribespublishsubscribelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Outputs.<wbr>Get<wbr>Publish<wbr>Subscribes<wbr>Publish<wbr>Subscribe<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Publish and subscribe list. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>Publish and subscribe list. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="puborsubinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#puborsubinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Pub<wbr>Or<wbr>Sub<wbr>Instance<wbr>Id</a>
@@ -1387,8 +1610,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the publish SQL Server instance.</p>
-</dd><dt class="property-"
+    <dd>Name of the publish SQL Server instance.</dd><dt class="property-"
             title="">
         <span id="publishsubscribeid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribeid_csharp" style="color: inherit; text-decoration: inherit;">Publish<wbr>Subscribe<wbr>Id</a>
@@ -1396,8 +1618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-"
             title="">
         <span id="publishsubscribename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_csharp" style="color: inherit; text-decoration: inherit;">Publish<wbr>Subscribe<wbr>Name</a>
@@ -1405,8 +1626,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -1422,8 +1642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the subscribe SQL Server instance.</p>
-</dd></dl>
+    <dd>Name of the subscribe SQL Server instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1437,8 +1656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1454,8 +1672,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublishsubscribespublishsubscribelist">[]Get<wbr>Publish<wbr>Subscribes<wbr>Publish<wbr>Subscribe<wbr>List</a></span>
     </dt>
-    <dd><p>Publish and subscribe list. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>Publish and subscribe list. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="puborsubinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#puborsubinstanceid_go" style="color: inherit; text-decoration: inherit;">Pub<wbr>Or<wbr>Sub<wbr>Instance<wbr>Id</a>
@@ -1479,8 +1696,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the publish SQL Server instance.</p>
-</dd><dt class="property-"
+    <dd>Name of the publish SQL Server instance.</dd><dt class="property-"
             title="">
         <span id="publishsubscribeid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribeid_go" style="color: inherit; text-decoration: inherit;">Publish<wbr>Subscribe<wbr>Id</a>
@@ -1488,8 +1704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-"
             title="">
         <span id="publishsubscribename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_go" style="color: inherit; text-decoration: inherit;">Publish<wbr>Subscribe<wbr>Name</a>
@@ -1497,8 +1712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -1514,8 +1728,93 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the subscribe SQL Server instance.</p>
-</dd></dl>
+    <dd>Name of the subscribe SQL Server instance.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="publish_subscribe_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_subscribe_lists_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpublishsubscribespublishsubscribelist">list(object)</a></span>
+    </dt>
+    <dd>Publish and subscribe list. Each element contains the following attributes.</dd><dt class="property-"
+            title="">
+        <span id="pub_or_sub_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pub_or_sub_instance_id_hcl" style="color: inherit; text-decoration: inherit;">pub_<wbr>or_<wbr>sub_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="pub_or_sub_instance_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pub_or_sub_instance_ip_hcl" style="color: inherit; text-decoration: inherit;">pub_<wbr>or_<wbr>sub_<wbr>instance_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="publish_database_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_database_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>database</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the publish SQL Server instance.</dd><dt class="property-"
+            title="">
+        <span id="publish_subscribe_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_subscribe_id_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-"
+            title="">
+        <span id="publish_subscribe_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_subscribe_name_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="subscribe_database_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribe_database_hcl" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>database</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the subscribe SQL Server instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1529,8 +1828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1546,8 +1844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublishsubscribespublishsubscribelist">List&lt;Get<wbr>Publish<wbr>Subscribes<wbr>Publish<wbr>Subscribe<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Publish and subscribe list. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>Publish and subscribe list. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="puborsubinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#puborsubinstanceid_java" style="color: inherit; text-decoration: inherit;">pub<wbr>Or<wbr>Sub<wbr>Instance<wbr>Id</a>
@@ -1571,8 +1868,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the publish SQL Server instance.</p>
-</dd><dt class="property-"
+    <dd>Name of the publish SQL Server instance.</dd><dt class="property-"
             title="">
         <span id="publishsubscribeid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribeid_java" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Id</a>
@@ -1580,8 +1876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-"
             title="">
         <span id="publishsubscribename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_java" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Name</a>
@@ -1589,8 +1884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1606,8 +1900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the subscribe SQL Server instance.</p>
-</dd></dl>
+    <dd>Name of the subscribe SQL Server instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1621,8 +1914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1638,8 +1930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublishsubscribespublishsubscribelist">Get<wbr>Publish<wbr>Subscribes<wbr>Publish<wbr>Subscribe<wbr>List[]</a></span>
     </dt>
-    <dd><p>Publish and subscribe list. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>Publish and subscribe list. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="puborsubinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#puborsubinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">pub<wbr>Or<wbr>Sub<wbr>Instance<wbr>Id</a>
@@ -1663,8 +1954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the publish SQL Server instance.</p>
-</dd><dt class="property-"
+    <dd>Name of the publish SQL Server instance.</dd><dt class="property-"
             title="">
         <span id="publishsubscribeid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribeid_nodejs" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Id</a>
@@ -1672,8 +1962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-"
             title="">
         <span id="publishsubscribename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_nodejs" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Name</a>
@@ -1681,8 +1970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1698,8 +1986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the subscribe SQL Server instance.</p>
-</dd></dl>
+    <dd>Name of the subscribe SQL Server instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1713,8 +2000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1728,10 +2014,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_subscribe_lists_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getpublishsubscribespublishsubscribelist">Get<wbr>Publish<wbr>Subscribes<wbr>Publish<wbr>Subscribe<wbr>List]</a></span>
+        <span class="property-type"><a href="#getpublishsubscribespublishsubscribelist">Sequence[Get<wbr>Publish<wbr>Subscribes<wbr>Publish<wbr>Subscribe<wbr>List]</a></span>
     </dt>
-    <dd><p>Publish and subscribe list. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>Publish and subscribe list. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="pub_or_sub_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pub_or_sub_instance_id_python" style="color: inherit; text-decoration: inherit;">pub_<wbr>or_<wbr>sub_<wbr>instance_<wbr>id</a>
@@ -1755,8 +2040,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the publish SQL Server instance.</p>
-</dd><dt class="property-"
+    <dd>Name of the publish SQL Server instance.</dd><dt class="property-"
             title="">
         <span id="publish_subscribe_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_subscribe_id_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>id</a>
@@ -1764,8 +2048,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-"
             title="">
         <span id="publish_subscribe_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_subscribe_name_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>name</a>
@@ -1773,8 +2056,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1790,8 +2072,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the subscribe SQL Server instance.</p>
-</dd></dl>
+    <dd>Name of the subscribe SQL Server instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1805,8 +2086,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1822,8 +2102,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublishsubscribespublishsubscribelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Publish and subscribe list. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>Publish and subscribe list. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="puborsubinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#puborsubinstanceid_yaml" style="color: inherit; text-decoration: inherit;">pub<wbr>Or<wbr>Sub<wbr>Instance<wbr>Id</a>
@@ -1847,8 +2126,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the publish SQL Server instance.</p>
-</dd><dt class="property-"
+    <dd>Name of the publish SQL Server instance.</dd><dt class="property-"
             title="">
         <span id="publishsubscribeid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribeid_yaml" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Id</a>
@@ -1856,8 +2134,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-"
             title="">
         <span id="publishsubscribename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_yaml" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Name</a>
@@ -1865,8 +2142,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1882,8 +2158,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the subscribe SQL Server instance.</p>
-</dd></dl>
+    <dd>Name of the subscribe SQL Server instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1907,8 +2182,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublishsubscribespublishsubscribelistdatabasetuple">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Inputs.<wbr>Get<wbr>Publish<wbr>Subscribes<wbr>Publish<wbr>Subscribe<wbr>List<wbr>Database<wbr>Tuple&gt;</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list.</p>
-</dd><dt class="property-required"
+    <dd>Database Publish and Publish relationship list.</dd><dt class="property-required"
             title="Required">
         <span id="publishinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Publish<wbr>Instance<wbr>Id</a>
@@ -1916,8 +2190,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publishinstanceip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstanceip_csharp" style="color: inherit; text-decoration: inherit;">Publish<wbr>Instance<wbr>Ip</a>
@@ -1925,8 +2198,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>IP of the the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publishinstancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstancename_csharp" style="color: inherit; text-decoration: inherit;">Publish<wbr>Instance<wbr>Name</a>
@@ -1934,8 +2206,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publishsubscribeid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribeid_csharp" style="color: inherit; text-decoration: inherit;">Publish<wbr>Subscribe<wbr>Id</a>
@@ -1943,8 +2214,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-required"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="publishsubscribename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_csharp" style="color: inherit; text-decoration: inherit;">Publish<wbr>Subscribe<wbr>Name</a>
@@ -1952,8 +2222,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-required"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribeinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Subscribe<wbr>Instance<wbr>Id</a>
@@ -1961,8 +2230,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SQL Server instance which subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribeinstanceip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstanceip_csharp" style="color: inherit; text-decoration: inherit;">Subscribe<wbr>Instance<wbr>Ip</a>
@@ -1970,8 +2238,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-required"
+    <dd>IP of the SQL Server instance which subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribeinstancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstancename_csharp" style="color: inherit; text-decoration: inherit;">Subscribe<wbr>Instance<wbr>Name</a>
@@ -1979,8 +2246,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server instance which subscribe.</p>
-</dd></dl>
+    <dd>Name of the SQL Server instance which subscribe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1994,8 +2260,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublishsubscribespublishsubscribelistdatabasetuple">[]Get<wbr>Publish<wbr>Subscribes<wbr>Publish<wbr>Subscribe<wbr>List<wbr>Database<wbr>Tuple</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list.</p>
-</dd><dt class="property-required"
+    <dd>Database Publish and Publish relationship list.</dd><dt class="property-required"
             title="Required">
         <span id="publishinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstanceid_go" style="color: inherit; text-decoration: inherit;">Publish<wbr>Instance<wbr>Id</a>
@@ -2003,8 +2268,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publishinstanceip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstanceip_go" style="color: inherit; text-decoration: inherit;">Publish<wbr>Instance<wbr>Ip</a>
@@ -2012,8 +2276,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>IP of the the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publishinstancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstancename_go" style="color: inherit; text-decoration: inherit;">Publish<wbr>Instance<wbr>Name</a>
@@ -2021,8 +2284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publishsubscribeid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribeid_go" style="color: inherit; text-decoration: inherit;">Publish<wbr>Subscribe<wbr>Id</a>
@@ -2030,8 +2292,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-required"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="publishsubscribename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_go" style="color: inherit; text-decoration: inherit;">Publish<wbr>Subscribe<wbr>Name</a>
@@ -2039,8 +2300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-required"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribeinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstanceid_go" style="color: inherit; text-decoration: inherit;">Subscribe<wbr>Instance<wbr>Id</a>
@@ -2048,8 +2308,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SQL Server instance which subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribeinstanceip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstanceip_go" style="color: inherit; text-decoration: inherit;">Subscribe<wbr>Instance<wbr>Ip</a>
@@ -2057,8 +2316,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-required"
+    <dd>IP of the SQL Server instance which subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribeinstancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstancename_go" style="color: inherit; text-decoration: inherit;">Subscribe<wbr>Instance<wbr>Name</a>
@@ -2066,8 +2324,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server instance which subscribe.</p>
-</dd></dl>
+    <dd>Name of the SQL Server instance which subscribe.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="database_tuples_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_tuples_hcl" style="color: inherit; text-decoration: inherit;">database_<wbr>tuples</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpublishsubscribespublishsubscribelistdatabasetuple">list(object)</a></span>
+    </dt>
+    <dd>Database Publish and Publish relationship list.</dd><dt class="property-required"
+            title="Required">
+        <span id="publish_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_instance_id_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-required"
+            title="Required">
+        <span id="publish_instance_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_instance_ip_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>instance_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP of the the SQL Server instance which publish.</dd><dt class="property-required"
+            title="Required">
+        <span id="publish_instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_instance_name_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SQL Server instance which publish.</dd><dt class="property-required"
+            title="Required">
+        <span id="publish_subscribe_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_subscribe_id_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-required"
+            title="Required">
+        <span id="publish_subscribe_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_subscribe_name_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-required"
+            title="Required">
+        <span id="subscribe_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribe_instance_id_hcl" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the SQL Server instance which subscribe.</dd><dt class="property-required"
+            title="Required">
+        <span id="subscribe_instance_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribe_instance_ip_hcl" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>instance_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP of the SQL Server instance which subscribe.</dd><dt class="property-required"
+            title="Required">
+        <span id="subscribe_instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribe_instance_name_hcl" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SQL Server instance which subscribe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2081,8 +2416,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublishsubscribespublishsubscribelistdatabasetuple">List&lt;Get<wbr>Publish<wbr>Subscribes<wbr>Publish<wbr>Subscribe<wbr>List<wbr>Database<wbr>Tuple&gt;</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list.</p>
-</dd><dt class="property-required"
+    <dd>Database Publish and Publish relationship list.</dd><dt class="property-required"
             title="Required">
         <span id="publishinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstanceid_java" style="color: inherit; text-decoration: inherit;">publish<wbr>Instance<wbr>Id</a>
@@ -2090,8 +2424,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publishinstanceip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstanceip_java" style="color: inherit; text-decoration: inherit;">publish<wbr>Instance<wbr>Ip</a>
@@ -2099,8 +2432,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>IP of the the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publishinstancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstancename_java" style="color: inherit; text-decoration: inherit;">publish<wbr>Instance<wbr>Name</a>
@@ -2108,8 +2440,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publishsubscribeid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribeid_java" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Id</a>
@@ -2117,8 +2448,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-required"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="publishsubscribename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_java" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Name</a>
@@ -2126,8 +2456,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-required"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribeinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstanceid_java" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Instance<wbr>Id</a>
@@ -2135,8 +2464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SQL Server instance which subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribeinstanceip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstanceip_java" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Instance<wbr>Ip</a>
@@ -2144,8 +2472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-required"
+    <dd>IP of the SQL Server instance which subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribeinstancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstancename_java" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Instance<wbr>Name</a>
@@ -2153,8 +2480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SQL Server instance which subscribe.</p>
-</dd></dl>
+    <dd>Name of the SQL Server instance which subscribe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2168,8 +2494,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublishsubscribespublishsubscribelistdatabasetuple">Get<wbr>Publish<wbr>Subscribes<wbr>Publish<wbr>Subscribe<wbr>List<wbr>Database<wbr>Tuple[]</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list.</p>
-</dd><dt class="property-required"
+    <dd>Database Publish and Publish relationship list.</dd><dt class="property-required"
             title="Required">
         <span id="publishinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">publish<wbr>Instance<wbr>Id</a>
@@ -2177,8 +2502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publishinstanceip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstanceip_nodejs" style="color: inherit; text-decoration: inherit;">publish<wbr>Instance<wbr>Ip</a>
@@ -2186,8 +2510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>IP of the the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publishinstancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstancename_nodejs" style="color: inherit; text-decoration: inherit;">publish<wbr>Instance<wbr>Name</a>
@@ -2195,8 +2518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publishsubscribeid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribeid_nodejs" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Id</a>
@@ -2204,8 +2526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-required"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="publishsubscribename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_nodejs" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Name</a>
@@ -2213,8 +2534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-required"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribeinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Instance<wbr>Id</a>
@@ -2222,8 +2542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SQL Server instance which subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribeinstanceip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstanceip_nodejs" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Instance<wbr>Ip</a>
@@ -2231,8 +2550,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-required"
+    <dd>IP of the SQL Server instance which subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribeinstancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstancename_nodejs" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Instance<wbr>Name</a>
@@ -2240,8 +2558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SQL Server instance which subscribe.</p>
-</dd></dl>
+    <dd>Name of the SQL Server instance which subscribe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2253,10 +2570,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_tuples_python" style="color: inherit; text-decoration: inherit;">database_<wbr>tuples</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getpublishsubscribespublishsubscribelistdatabasetuple">Get<wbr>Publish<wbr>Subscribes<wbr>Publish<wbr>Subscribe<wbr>List<wbr>Database<wbr>Tuple]</a></span>
+        <span class="property-type"><a href="#getpublishsubscribespublishsubscribelistdatabasetuple">Sequence[Get<wbr>Publish<wbr>Subscribes<wbr>Publish<wbr>Subscribe<wbr>List<wbr>Database<wbr>Tuple]</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list.</p>
-</dd><dt class="property-required"
+    <dd>Database Publish and Publish relationship list.</dd><dt class="property-required"
             title="Required">
         <span id="publish_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_instance_id_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>instance_<wbr>id</a>
@@ -2264,8 +2580,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publish_instance_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_instance_ip_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>instance_<wbr>ip</a>
@@ -2273,8 +2588,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP of the the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>IP of the the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publish_instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_instance_name_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>instance_<wbr>name</a>
@@ -2282,8 +2596,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publish_subscribe_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_subscribe_id_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>id</a>
@@ -2291,8 +2604,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-required"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="publish_subscribe_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_subscribe_name_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>subscribe_<wbr>name</a>
@@ -2300,8 +2612,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-required"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribe_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribe_instance_id_python" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>instance_<wbr>id</a>
@@ -2309,8 +2620,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SQL Server instance which subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribe_instance_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribe_instance_ip_python" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>instance_<wbr>ip</a>
@@ -2318,8 +2628,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-required"
+    <dd>IP of the SQL Server instance which subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribe_instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribe_instance_name_python" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>instance_<wbr>name</a>
@@ -2327,8 +2636,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SQL Server instance which subscribe.</p>
-</dd></dl>
+    <dd>Name of the SQL Server instance which subscribe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2342,8 +2650,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublishsubscribespublishsubscribelistdatabasetuple">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Database Publish and Publish relationship list.</p>
-</dd><dt class="property-required"
+    <dd>Database Publish and Publish relationship list.</dd><dt class="property-required"
             title="Required">
         <span id="publishinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstanceid_yaml" style="color: inherit; text-decoration: inherit;">publish<wbr>Instance<wbr>Id</a>
@@ -2351,8 +2658,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publishinstanceip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstanceip_yaml" style="color: inherit; text-decoration: inherit;">publish<wbr>Instance<wbr>Ip</a>
@@ -2360,8 +2666,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>IP of the the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publishinstancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishinstancename_yaml" style="color: inherit; text-decoration: inherit;">publish<wbr>Instance<wbr>Name</a>
@@ -2369,8 +2674,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SQL Server instance which publish.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SQL Server instance which publish.</dd><dt class="property-required"
             title="Required">
         <span id="publishsubscribeid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribeid_yaml" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Id</a>
@@ -2378,8 +2682,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The id of the Publish and Subscribe.</p>
-</dd><dt class="property-required"
+    <dd>The id of the Publish and Subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="publishsubscribename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishsubscribename_yaml" style="color: inherit; text-decoration: inherit;">publish<wbr>Subscribe<wbr>Name</a>
@@ -2387,8 +2690,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the Publish and Subscribe.</p>
-</dd><dt class="property-required"
+    <dd>The name of the Publish and Subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribeinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstanceid_yaml" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Instance<wbr>Id</a>
@@ -2396,8 +2698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-required"
+    <dd>ID of the SQL Server instance which subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribeinstanceip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstanceip_yaml" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Instance<wbr>Ip</a>
@@ -2405,8 +2706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the SQL Server instance which subscribe.</p>
-</dd><dt class="property-required"
+    <dd>IP of the SQL Server instance which subscribe.</dd><dt class="property-required"
             title="Required">
         <span id="subscribeinstancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribeinstancename_yaml" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Instance<wbr>Name</a>
@@ -2414,8 +2714,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SQL Server instance which subscribe.</p>
-</dd></dl>
+    <dd>Name of the SQL Server instance which subscribe.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2433,8 +2732,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last sync time.</p>
-</dd><dt class="property-required"
+    <dd>Last sync time.</dd><dt class="property-required"
             title="Required">
         <span id="publishdatabase_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishdatabase_csharp" style="color: inherit; text-decoration: inherit;">Publish<wbr>Database</a>
@@ -2442,8 +2740,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of publish database.</p>
-</dd><dt class="property-required"
+    <dd>Name of publish database.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2451,8 +2748,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Publish and subscribe status between databases, valid values are <code>running</code>, <code>success</code>, <code>fail</code>, <code>unknow</code>.</p>
-</dd><dt class="property-required"
+    <dd>Publish and subscribe status between databases, valid values are <code>running</code>, <code>success</code>, <code>fail</code>, <code>unknow</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subscribedatabase_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribedatabase_csharp" style="color: inherit; text-decoration: inherit;">Subscribe<wbr>Database</a>
@@ -2460,8 +2756,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of subscribe database.</p>
-</dd></dl>
+    <dd>Name of subscribe database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2475,8 +2770,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last sync time.</p>
-</dd><dt class="property-required"
+    <dd>Last sync time.</dd><dt class="property-required"
             title="Required">
         <span id="publishdatabase_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishdatabase_go" style="color: inherit; text-decoration: inherit;">Publish<wbr>Database</a>
@@ -2484,8 +2778,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of publish database.</p>
-</dd><dt class="property-required"
+    <dd>Name of publish database.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2493,8 +2786,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Publish and subscribe status between databases, valid values are <code>running</code>, <code>success</code>, <code>fail</code>, <code>unknow</code>.</p>
-</dd><dt class="property-required"
+    <dd>Publish and subscribe status between databases, valid values are <code>running</code>, <code>success</code>, <code>fail</code>, <code>unknow</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subscribedatabase_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribedatabase_go" style="color: inherit; text-decoration: inherit;">Subscribe<wbr>Database</a>
@@ -2502,8 +2794,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of subscribe database.</p>
-</dd></dl>
+    <dd>Name of subscribe database.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="last_sync_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#last_sync_time_hcl" style="color: inherit; text-decoration: inherit;">last_<wbr>sync_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last sync time.</dd><dt class="property-required"
+            title="Required">
+        <span id="publish_database_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_database_hcl" style="color: inherit; text-decoration: inherit;">publish_<wbr>database</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of publish database.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Publish and subscribe status between databases, valid values are <code>running</code>, <code>success</code>, <code>fail</code>, <code>unknow</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="subscribe_database_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribe_database_hcl" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>database</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of subscribe database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2517,8 +2846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last sync time.</p>
-</dd><dt class="property-required"
+    <dd>Last sync time.</dd><dt class="property-required"
             title="Required">
         <span id="publishdatabase_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishdatabase_java" style="color: inherit; text-decoration: inherit;">publish<wbr>Database</a>
@@ -2526,8 +2854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of publish database.</p>
-</dd><dt class="property-required"
+    <dd>Name of publish database.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2535,8 +2862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Publish and subscribe status between databases, valid values are <code>running</code>, <code>success</code>, <code>fail</code>, <code>unknow</code>.</p>
-</dd><dt class="property-required"
+    <dd>Publish and subscribe status between databases, valid values are <code>running</code>, <code>success</code>, <code>fail</code>, <code>unknow</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subscribedatabase_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribedatabase_java" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Database</a>
@@ -2544,8 +2870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of subscribe database.</p>
-</dd></dl>
+    <dd>Name of subscribe database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2559,8 +2884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last sync time.</p>
-</dd><dt class="property-required"
+    <dd>Last sync time.</dd><dt class="property-required"
             title="Required">
         <span id="publishdatabase_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishdatabase_nodejs" style="color: inherit; text-decoration: inherit;">publish<wbr>Database</a>
@@ -2568,8 +2892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of publish database.</p>
-</dd><dt class="property-required"
+    <dd>Name of publish database.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2577,8 +2900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Publish and subscribe status between databases, valid values are <code>running</code>, <code>success</code>, <code>fail</code>, <code>unknow</code>.</p>
-</dd><dt class="property-required"
+    <dd>Publish and subscribe status between databases, valid values are <code>running</code>, <code>success</code>, <code>fail</code>, <code>unknow</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subscribedatabase_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribedatabase_nodejs" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Database</a>
@@ -2586,8 +2908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of subscribe database.</p>
-</dd></dl>
+    <dd>Name of subscribe database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2601,8 +2922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last sync time.</p>
-</dd><dt class="property-required"
+    <dd>Last sync time.</dd><dt class="property-required"
             title="Required">
         <span id="publish_database_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publish_database_python" style="color: inherit; text-decoration: inherit;">publish_<wbr>database</a>
@@ -2610,8 +2930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of publish database.</p>
-</dd><dt class="property-required"
+    <dd>Name of publish database.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2619,8 +2938,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Publish and subscribe status between databases, valid values are <code>running</code>, <code>success</code>, <code>fail</code>, <code>unknow</code>.</p>
-</dd><dt class="property-required"
+    <dd>Publish and subscribe status between databases, valid values are <code>running</code>, <code>success</code>, <code>fail</code>, <code>unknow</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subscribe_database_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribe_database_python" style="color: inherit; text-decoration: inherit;">subscribe_<wbr>database</a>
@@ -2628,8 +2946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of subscribe database.</p>
-</dd></dl>
+    <dd>Name of subscribe database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2643,8 +2960,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last sync time.</p>
-</dd><dt class="property-required"
+    <dd>Last sync time.</dd><dt class="property-required"
             title="Required">
         <span id="publishdatabase_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishdatabase_yaml" style="color: inherit; text-decoration: inherit;">publish<wbr>Database</a>
@@ -2652,8 +2968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of publish database.</p>
-</dd><dt class="property-required"
+    <dd>Name of publish database.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2661,8 +2976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Publish and subscribe status between databases, valid values are <code>running</code>, <code>success</code>, <code>fail</code>, <code>unknow</code>.</p>
-</dd><dt class="property-required"
+    <dd>Publish and subscribe status between databases, valid values are <code>running</code>, <code>success</code>, <code>fail</code>, <code>unknow</code>.</dd><dt class="property-required"
             title="Required">
         <span id="subscribedatabase_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscribedatabase_yaml" style="color: inherit; text-decoration: inherit;">subscribe<wbr>Database</a>
@@ -2670,8 +2984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of subscribe database.</p>
-</dd></dl>
+    <dd>Name of subscribe database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2686,7 +2999,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

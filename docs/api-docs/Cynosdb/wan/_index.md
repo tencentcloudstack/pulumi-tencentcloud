@@ -2,9 +2,11 @@
 ---
 title: "Wan"
 title_tag: "tencentcloud.Cynosdb.Wan"
-meta_desc: "Documentation for the tencentcloud.Cynosdb.Wan resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a cynosdb wan"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,7 +18,12 @@ Provides a resource to create a cynosdb wan
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -26,6 +33,11 @@ const wan = new tencentcloud.cynosdb.Wan("wan", {
     instanceGrpId: "cynosdbmysql-grp-lxav0p9z",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -34,6 +46,37 @@ wan = tencentcloud.cynosdb.Wan("wan",
     cluster_id="cynosdbmysql-bws8h88b",
     instance_grp_id="cynosdbmysql-grp-lxav0p9z")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cynosdb.NewWan(ctx, "wan", &cynosdb.WanArgs{
+			ClusterId:     pulumi.String("cynosdbmysql-bws8h88b"),
+			InstanceGrpId: pulumi.String("cynosdbmysql-grp-lxav0p9z"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -50,27 +93,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cynosdb.NewWan(ctx, "wan", &Cynosdb.WanArgs{
-			ClusterId:     pulumi.String("cynosdbmysql-bws8h88b"),
-			InstanceGrpId: pulumi.String("cynosdbmysql-grp-lxav0p9z"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -79,8 +106,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cynosdb.Wan;
 import com.pulumi.tencentcloud.Cynosdb.WanArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,7 +119,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var wan = new Wan("wan", WanArgs.builder()        
+        var wan = new Wan("wan", WanArgs.builder()
             .clusterId("cynosdbmysql-bws8h88b")
             .instanceGrpId("cynosdbmysql-grp-lxav0p9z")
             .build());
@@ -100,6 +127,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   wan:
@@ -108,66 +140,113 @@ resources:
       clusterId: cynosdbmysql-bws8h88b
       instanceGrpId: cynosdbmysql-grp-lxav0p9z
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cynosdb_wan" "wan" {
+  cluster_id      = "cynosdbmysql-bws8h88b"
+  instance_grp_id = "cynosdbmysql-grp-lxav0p9z"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+  - [OpenWan](https://www.tencentcloud.com/document/api/1098/55909)
+* Read: [DescribeClusterInstanceGrps](https://www.tencentcloud.com/document/api/1098/40751)
+* Delete:
+  - [CloseWan](https://www.tencentcloud.com/document/api/1098/55915)
+  - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
 
 
 ## Create Wan Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Wan</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">WanArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Wan</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">WanArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Wan</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">WanArgs</a></span><span class="p">,</span>
+        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Wan</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">instance_grp_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Wan</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">WanArgs</a></span><span class="p">,</span>
-        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+        <span class="nx">instance_grp_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewWan</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">WanArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Wan</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewWan</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">WanArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Wan</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Wan</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">WanArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Wan</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">WanArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Wan</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">WanArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Wan</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">WanArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cynosdb:Wan</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cynosdb:Wan</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cynosdb_wan&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -188,7 +267,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -305,11 +384,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Wan Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Wan resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -325,8 +412,7 @@ The Wan resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="instancegrpid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancegrpid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Grp<wbr>Id</a>
@@ -334,8 +420,7 @@ The Wan resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Group ID.</p>
-</dd></dl>
+    <dd>Instance Group ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -349,8 +434,7 @@ The Wan resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="instancegrpid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancegrpid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Grp<wbr>Id</a>
@@ -358,8 +442,29 @@ The Wan resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Group ID.</p>
-</dd></dl>
+    <dd>Instance Group ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_grp_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_grp_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>grp_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance Group ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -373,8 +478,7 @@ The Wan resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="instancegrpid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancegrpid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Grp<wbr>Id</a>
@@ -382,8 +486,7 @@ The Wan resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance Group ID.</p>
-</dd></dl>
+    <dd>Instance Group ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -397,8 +500,7 @@ The Wan resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="instancegrpid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancegrpid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Grp<wbr>Id</a>
@@ -406,8 +508,7 @@ The Wan resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Group ID.</p>
-</dd></dl>
+    <dd>Instance Group ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -421,8 +522,7 @@ The Wan resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="instance_grp_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_grp_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>grp_<wbr>id</a>
@@ -430,8 +530,7 @@ The Wan resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance Group ID.</p>
-</dd></dl>
+    <dd>Instance Group ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -445,8 +544,7 @@ The Wan resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="instancegrpid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancegrpid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Grp<wbr>Id</a>
@@ -454,8 +552,7 @@ The Wan resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance Group ID.</p>
-</dd></dl>
+    <dd>Instance Group ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -476,8 +573,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="wandomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wandomain_csharp" style="color: inherit; text-decoration: inherit;">Wan<wbr>Domain</a>
@@ -485,8 +581,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-"
+    <dd>Domain name.</dd><dt class="property-"
             title="">
         <span id="wanip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanip_csharp" style="color: inherit; text-decoration: inherit;">Wan<wbr>Ip</a>
@@ -494,8 +589,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network ip.</p>
-</dd><dt class="property-"
+    <dd>Network ip.</dd><dt class="property-"
             title="">
         <span id="wanport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanport_csharp" style="color: inherit; text-decoration: inherit;">Wan<wbr>Port</a>
@@ -503,8 +597,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Internet port.</p>
-</dd><dt class="property-"
+    <dd>Internet port.</dd><dt class="property-"
             title="">
         <span id="wanstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanstatus_csharp" style="color: inherit; text-decoration: inherit;">Wan<wbr>Status</a>
@@ -512,8 +605,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet status.</p>
-</dd></dl>
+    <dd>Internet status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -527,8 +619,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="wandomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wandomain_go" style="color: inherit; text-decoration: inherit;">Wan<wbr>Domain</a>
@@ -536,8 +627,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-"
+    <dd>Domain name.</dd><dt class="property-"
             title="">
         <span id="wanip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanip_go" style="color: inherit; text-decoration: inherit;">Wan<wbr>Ip</a>
@@ -545,8 +635,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network ip.</p>
-</dd><dt class="property-"
+    <dd>Network ip.</dd><dt class="property-"
             title="">
         <span id="wanport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanport_go" style="color: inherit; text-decoration: inherit;">Wan<wbr>Port</a>
@@ -554,8 +643,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Internet port.</p>
-</dd><dt class="property-"
+    <dd>Internet port.</dd><dt class="property-"
             title="">
         <span id="wanstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanstatus_go" style="color: inherit; text-decoration: inherit;">Wan<wbr>Status</a>
@@ -563,8 +651,53 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet status.</p>
-</dd></dl>
+    <dd>Internet status.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="wan_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wan_domain_hcl" style="color: inherit; text-decoration: inherit;">wan_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name.</dd><dt class="property-"
+            title="">
+        <span id="wan_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wan_ip_hcl" style="color: inherit; text-decoration: inherit;">wan_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network ip.</dd><dt class="property-"
+            title="">
+        <span id="wan_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wan_port_hcl" style="color: inherit; text-decoration: inherit;">wan_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Internet port.</dd><dt class="property-"
+            title="">
+        <span id="wan_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wan_status_hcl" style="color: inherit; text-decoration: inherit;">wan_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -578,8 +711,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="wandomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wandomain_java" style="color: inherit; text-decoration: inherit;">wan<wbr>Domain</a>
@@ -587,8 +719,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-"
+    <dd>Domain name.</dd><dt class="property-"
             title="">
         <span id="wanip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanip_java" style="color: inherit; text-decoration: inherit;">wan<wbr>Ip</a>
@@ -596,8 +727,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network ip.</p>
-</dd><dt class="property-"
+    <dd>Network ip.</dd><dt class="property-"
             title="">
         <span id="wanport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanport_java" style="color: inherit; text-decoration: inherit;">wan<wbr>Port</a>
@@ -605,8 +735,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Internet port.</p>
-</dd><dt class="property-"
+    <dd>Internet port.</dd><dt class="property-"
             title="">
         <span id="wanstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanstatus_java" style="color: inherit; text-decoration: inherit;">wan<wbr>Status</a>
@@ -614,8 +743,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet status.</p>
-</dd></dl>
+    <dd>Internet status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -629,8 +757,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="wandomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wandomain_nodejs" style="color: inherit; text-decoration: inherit;">wan<wbr>Domain</a>
@@ -638,8 +765,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-"
+    <dd>Domain name.</dd><dt class="property-"
             title="">
         <span id="wanip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanip_nodejs" style="color: inherit; text-decoration: inherit;">wan<wbr>Ip</a>
@@ -647,8 +773,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network ip.</p>
-</dd><dt class="property-"
+    <dd>Network ip.</dd><dt class="property-"
             title="">
         <span id="wanport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanport_nodejs" style="color: inherit; text-decoration: inherit;">wan<wbr>Port</a>
@@ -656,8 +781,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Internet port.</p>
-</dd><dt class="property-"
+    <dd>Internet port.</dd><dt class="property-"
             title="">
         <span id="wanstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanstatus_nodejs" style="color: inherit; text-decoration: inherit;">wan<wbr>Status</a>
@@ -665,8 +789,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet status.</p>
-</dd></dl>
+    <dd>Internet status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -680,8 +803,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="wan_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wan_domain_python" style="color: inherit; text-decoration: inherit;">wan_<wbr>domain</a>
@@ -689,8 +811,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-"
+    <dd>Domain name.</dd><dt class="property-"
             title="">
         <span id="wan_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wan_ip_python" style="color: inherit; text-decoration: inherit;">wan_<wbr>ip</a>
@@ -698,8 +819,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network ip.</p>
-</dd><dt class="property-"
+    <dd>Network ip.</dd><dt class="property-"
             title="">
         <span id="wan_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wan_port_python" style="color: inherit; text-decoration: inherit;">wan_<wbr>port</a>
@@ -707,8 +827,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Internet port.</p>
-</dd><dt class="property-"
+    <dd>Internet port.</dd><dt class="property-"
             title="">
         <span id="wan_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wan_status_python" style="color: inherit; text-decoration: inherit;">wan_<wbr>status</a>
@@ -716,8 +835,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Internet status.</p>
-</dd></dl>
+    <dd>Internet status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -731,8 +849,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="wandomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wandomain_yaml" style="color: inherit; text-decoration: inherit;">wan<wbr>Domain</a>
@@ -740,8 +857,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-"
+    <dd>Domain name.</dd><dt class="property-"
             title="">
         <span id="wanip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanip_yaml" style="color: inherit; text-decoration: inherit;">wan<wbr>Ip</a>
@@ -749,8 +865,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network ip.</p>
-</dd><dt class="property-"
+    <dd>Network ip.</dd><dt class="property-"
             title="">
         <span id="wanport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanport_yaml" style="color: inherit; text-decoration: inherit;">wan<wbr>Port</a>
@@ -758,8 +873,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Internet port.</p>
-</dd><dt class="property-"
+    <dd>Internet port.</dd><dt class="property-"
             title="">
         <span id="wanstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanstatus_yaml" style="color: inherit; text-decoration: inherit;">wan<wbr>Status</a>
@@ -767,8 +881,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet status.</p>
-</dd></dl>
+    <dd>Internet status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -778,18 +891,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Wan resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">WanState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Wan</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">WanState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Wan</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -799,104 +912,143 @@ Get an existing Wan resource's state with the given name, ID, and optional extra
         <span class="nx">wan_ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">wan_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">wan_status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Wan</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetWan<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">WanState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Wan</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetWan<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">WanState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Wan</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Wan</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">WanState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Wan</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">WanState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Wan</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">WanState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Wan</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">WanState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingWan</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cynosdb:Wan</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cynosdb_wan</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">WanState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">WanState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -904,28 +1056,31 @@ Get an existing Wan resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">WanState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -933,28 +1088,31 @@ Get an existing Wan resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">WanState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -974,8 +1132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancegrpid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancegrpid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Grp<wbr>Id</a>
@@ -983,8 +1140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wandomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wandomain_csharp" style="color: inherit; text-decoration: inherit;">Wan<wbr>Domain</a>
@@ -992,8 +1148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wanip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanip_csharp" style="color: inherit; text-decoration: inherit;">Wan<wbr>Ip</a>
@@ -1001,8 +1156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network ip.</p>
-</dd><dt class="property-optional"
+    <dd>Network ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wanport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanport_csharp" style="color: inherit; text-decoration: inherit;">Wan<wbr>Port</a>
@@ -1010,8 +1164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Internet port.</p>
-</dd><dt class="property-optional"
+    <dd>Internet port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wanstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanstatus_csharp" style="color: inherit; text-decoration: inherit;">Wan<wbr>Status</a>
@@ -1019,8 +1172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet status.</p>
-</dd></dl>
+    <dd>Internet status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1034,8 +1186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancegrpid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancegrpid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Grp<wbr>Id</a>
@@ -1043,8 +1194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wandomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wandomain_go" style="color: inherit; text-decoration: inherit;">Wan<wbr>Domain</a>
@@ -1052,8 +1202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wanip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanip_go" style="color: inherit; text-decoration: inherit;">Wan<wbr>Ip</a>
@@ -1061,8 +1210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network ip.</p>
-</dd><dt class="property-optional"
+    <dd>Network ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wanport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanport_go" style="color: inherit; text-decoration: inherit;">Wan<wbr>Port</a>
@@ -1070,8 +1218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Internet port.</p>
-</dd><dt class="property-optional"
+    <dd>Internet port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wanstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanstatus_go" style="color: inherit; text-decoration: inherit;">Wan<wbr>Status</a>
@@ -1079,8 +1226,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet status.</p>
-</dd></dl>
+    <dd>Internet status.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_grp_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_grp_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>grp_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance Group ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wan_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wan_domain_hcl" style="color: inherit; text-decoration: inherit;">wan_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wan_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wan_ip_hcl" style="color: inherit; text-decoration: inherit;">wan_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network ip.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wan_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wan_port_hcl" style="color: inherit; text-decoration: inherit;">wan_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Internet port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wan_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wan_status_hcl" style="color: inherit; text-decoration: inherit;">wan_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1094,8 +1294,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancegrpid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancegrpid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Grp<wbr>Id</a>
@@ -1103,8 +1302,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance Group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wandomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wandomain_java" style="color: inherit; text-decoration: inherit;">wan<wbr>Domain</a>
@@ -1112,8 +1310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wanip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanip_java" style="color: inherit; text-decoration: inherit;">wan<wbr>Ip</a>
@@ -1121,8 +1318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network ip.</p>
-</dd><dt class="property-optional"
+    <dd>Network ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wanport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanport_java" style="color: inherit; text-decoration: inherit;">wan<wbr>Port</a>
@@ -1130,8 +1326,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Internet port.</p>
-</dd><dt class="property-optional"
+    <dd>Internet port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wanstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanstatus_java" style="color: inherit; text-decoration: inherit;">wan<wbr>Status</a>
@@ -1139,8 +1334,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet status.</p>
-</dd></dl>
+    <dd>Internet status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1154,8 +1348,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancegrpid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancegrpid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Grp<wbr>Id</a>
@@ -1163,8 +1356,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wandomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wandomain_nodejs" style="color: inherit; text-decoration: inherit;">wan<wbr>Domain</a>
@@ -1172,8 +1364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wanip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanip_nodejs" style="color: inherit; text-decoration: inherit;">wan<wbr>Ip</a>
@@ -1181,8 +1372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network ip.</p>
-</dd><dt class="property-optional"
+    <dd>Network ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wanport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanport_nodejs" style="color: inherit; text-decoration: inherit;">wan<wbr>Port</a>
@@ -1190,8 +1380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Internet port.</p>
-</dd><dt class="property-optional"
+    <dd>Internet port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wanstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanstatus_nodejs" style="color: inherit; text-decoration: inherit;">wan<wbr>Status</a>
@@ -1199,8 +1388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet status.</p>
-</dd></dl>
+    <dd>Internet status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1214,8 +1402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_grp_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_grp_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>grp_<wbr>id</a>
@@ -1223,8 +1410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance Group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wan_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wan_domain_python" style="color: inherit; text-decoration: inherit;">wan_<wbr>domain</a>
@@ -1232,8 +1418,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wan_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wan_ip_python" style="color: inherit; text-decoration: inherit;">wan_<wbr>ip</a>
@@ -1241,8 +1426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network ip.</p>
-</dd><dt class="property-optional"
+    <dd>Network ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wan_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wan_port_python" style="color: inherit; text-decoration: inherit;">wan_<wbr>port</a>
@@ -1250,8 +1434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Internet port.</p>
-</dd><dt class="property-optional"
+    <dd>Internet port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wan_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wan_status_python" style="color: inherit; text-decoration: inherit;">wan_<wbr>status</a>
@@ -1259,8 +1442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Internet status.</p>
-</dd></dl>
+    <dd>Internet status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1274,8 +1456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancegrpid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancegrpid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Grp<wbr>Id</a>
@@ -1283,8 +1464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance Group ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance Group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wandomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wandomain_yaml" style="color: inherit; text-decoration: inherit;">wan<wbr>Domain</a>
@@ -1292,8 +1472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-optional"
+    <dd>Domain name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wanip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanip_yaml" style="color: inherit; text-decoration: inherit;">wan<wbr>Ip</a>
@@ -1301,8 +1480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network ip.</p>
-</dd><dt class="property-optional"
+    <dd>Network ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wanport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanport_yaml" style="color: inherit; text-decoration: inherit;">wan<wbr>Port</a>
@@ -1310,8 +1488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Internet port.</p>
-</dd><dt class="property-optional"
+    <dd>Internet port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wanstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanstatus_yaml" style="color: inherit; text-decoration: inherit;">wan<wbr>Status</a>
@@ -1319,8 +1496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet status.</p>
-</dd></dl>
+    <dd>Internet status.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1343,6 +1519,9 @@ $ pulumi import tencentcloud:Cynosdb/wan:Wan wan cynosdbmysql-bws8h88b#cynosdbmy
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1352,7 +1531,6 @@ $ pulumi import tencentcloud:Cynosdb/wan:Wan wan cynosdbmysql-bws8h88b#cynosdbmy
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

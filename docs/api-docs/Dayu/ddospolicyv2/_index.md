@@ -2,9 +2,11 @@
 ---
 title: "DdosPolicyV2"
 title_tag: "tencentcloud.Dayu.DdosPolicyV2"
-meta_desc: "Documentation for the tencentcloud.Dayu.DdosPolicyV2 resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create dayu DDoS policy v2"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,180 +18,317 @@ Use this resource to create dayu DDoS policy v2
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const ddosV2 = new tencentcloud.dayu.DdosPolicyV2("ddosV2", {
-    acls: [{
-        action: "transmit",
-        dPortEnd: 10,
-        dPortStart: 1,
-        forwardProtocol: "all",
-        priority: 9,
-        sPortEnd: 20,
-        sPortStart: 10,
-    }],
+const ddosV2 = new tencentcloud.dayu.DdosPolicyV2("ddos_v2", {
+    resourceId: "bgpip-000004xf",
+    business: "bgpip",
+    ddosThreshold: 100,
+    ddosLevel: "low",
     blackWhiteIps: [{
         ip: "1.2.3.4",
         ipType: "black",
     }],
-    business: "bgpip",
-    ddosAi: "on",
+    acls: [{
+        action: "transmit",
+        dPortStart: 1,
+        dPortEnd: 10,
+        sPortStart: 10,
+        sPortEnd: 20,
+        priority: 9,
+        forwardProtocol: "all",
+    }],
+    protocolBlockConfigs: [{
+        dropIcmp: 1,
+        dropTcp: 0,
+        dropUdp: 0,
+        dropOther: 0,
+    }],
     ddosConnectLimit: {
-        badConnThreshold: 30,
-        connTimeout: 30,
-        dstConnLimit: 21,
-        dstNewLimit: 20,
-        nullConnEnable: 1,
-        sdConnLimit: 11,
         sdNewLimit: 10,
-        synLimit: 20,
+        sdConnLimit: 11,
+        dstNewLimit: 20,
+        dstConnLimit: 21,
+        badConnThreshold: 30,
         synRate: 10,
+        synLimit: 20,
+        connTimeout: 30,
+        nullConnEnable: 1,
     },
+    ddosAi: "on",
     ddosGeoIpBlockConfigs: [{
         action: "drop",
         areaLists: [100001],
         regionType: "customized",
     }],
-    ddosLevel: "low",
     ddosSpeedLimitConfigs: [{
-        bandwidth: 20,
+        protocolList: "TCP",
         dstPortList: "10",
         mode: 1,
         packetRate: 10,
-        protocolList: "TCP",
+        bandwidth: 20,
     }],
-    ddosThreshold: 100,
     packetFilters: [{
         action: "drop",
-        dPortEnd: 20,
+        protocol: "all",
+        sPortStart: 10,
+        sPortEnd: 10,
         dPortStart: 20,
-        depth: 2,
-        depth2: 3,
-        isNot: 0,
-        isNot2: 0,
-        matchBegin: "begin_l3",
-        matchBegin2: "begin_l3",
+        dPortEnd: 20,
+        pktlenMin: 30,
+        pktlenMax: 30,
+        str: "12",
+        str2: "30",
         matchLogic: "and",
         matchType: "pcre",
         matchType2: "pcre",
+        matchBegin: "begin_l3",
+        matchBegin2: "begin_l3",
+        depth: 2,
+        depth2: 3,
         offset: 1,
         offset2: 2,
-        pktlenMax: 30,
-        pktlenMin: 30,
-        protocol: "all",
-        sPortEnd: 10,
-        sPortStart: 10,
-        str: "12",
-        str2: "30",
+        isNot: 0,
+        isNot2: 0,
     }],
-    protocolBlockConfigs: [{
-        dropIcmp: 1,
-        dropOther: 0,
-        dropTcp: 0,
-        dropUdp: 0,
-    }],
-    resourceId: "bgpip-000004xf",
     waterPrintConfigs: [{
-        listeners: [{
-            forwardProtocol: "TCP",
-            frontendPort: 90,
-            frontendPortEnd: 90,
-        }],
         offset: 1,
         openStatus: 1,
+        listeners: [{
+            frontendPort: 90,
+            forwardProtocol: "TCP",
+            frontendPortEnd: 90,
+        }],
         verify: "checkall",
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-ddos_v2 = tencentcloud.dayu.DdosPolicyV2("ddosV2",
-    acls=[tencentcloud.dayu.DdosPolicyV2AclArgs(
-        action="transmit",
-        d_port_end=10,
-        d_port_start=1,
-        forward_protocol="all",
-        priority=9,
-        s_port_end=20,
-        s_port_start=10,
-    )],
-    black_white_ips=[tencentcloud.dayu.DdosPolicyV2BlackWhiteIpArgs(
-        ip="1.2.3.4",
-        ip_type="black",
-    )],
-    business="bgpip",
-    ddos_ai="on",
-    ddos_connect_limit=tencentcloud.dayu.DdosPolicyV2DdosConnectLimitArgs(
-        bad_conn_threshold=30,
-        conn_timeout=30,
-        dst_conn_limit=21,
-        dst_new_limit=20,
-        null_conn_enable=1,
-        sd_conn_limit=11,
-        sd_new_limit=10,
-        syn_limit=20,
-        syn_rate=10,
-    ),
-    ddos_geo_ip_block_configs=[tencentcloud.dayu.DdosPolicyV2DdosGeoIpBlockConfigArgs(
-        action="drop",
-        area_lists=[100001],
-        region_type="customized",
-    )],
-    ddos_level="low",
-    ddos_speed_limit_configs=[tencentcloud.dayu.DdosPolicyV2DdosSpeedLimitConfigArgs(
-        bandwidth=20,
-        dst_port_list="10",
-        mode=1,
-        packet_rate=10,
-        protocol_list="TCP",
-    )],
-    ddos_threshold=100,
-    packet_filters=[tencentcloud.dayu.DdosPolicyV2PacketFilterArgs(
-        action="drop",
-        d_port_end=20,
-        d_port_start=20,
-        depth=2,
-        depth2=3,
-        is_not=0,
-        is_not2=0,
-        match_begin="begin_l3",
-        match_begin2="begin_l3",
-        match_logic="and",
-        match_type="pcre",
-        match_type2="pcre",
-        offset=1,
-        offset2=2,
-        pktlen_max=30,
-        pktlen_min=30,
-        protocol="all",
-        s_port_end=10,
-        s_port_start=10,
-        str="12",
-        str2="30",
-    )],
-    protocol_block_configs=[tencentcloud.dayu.DdosPolicyV2ProtocolBlockConfigArgs(
-        drop_icmp=1,
-        drop_other=0,
-        drop_tcp=0,
-        drop_udp=0,
-    )],
+ddos_v2 = tencentcloud.dayu.DdosPolicyV2("ddos_v2",
     resource_id="bgpip-000004xf",
-    water_print_configs=[tencentcloud.dayu.DdosPolicyV2WaterPrintConfigArgs(
-        listeners=[tencentcloud.dayu.DdosPolicyV2WaterPrintConfigListenerArgs(
-            forward_protocol="TCP",
-            frontend_port=90,
-            frontend_port_end=90,
-        )],
-        offset=1,
-        open_status=1,
-        verify="checkall",
-    )])
+    business="bgpip",
+    ddos_threshold=100,
+    ddos_level="low",
+    black_white_ips=[{
+        "ip": "1.2.3.4",
+        "ip_type": "black",
+    }],
+    acls=[{
+        "action": "transmit",
+        "d_port_start": 1,
+        "d_port_end": 10,
+        "s_port_start": 10,
+        "s_port_end": 20,
+        "priority": 9,
+        "forward_protocol": "all",
+    }],
+    protocol_block_configs=[{
+        "drop_icmp": 1,
+        "drop_tcp": 0,
+        "drop_udp": 0,
+        "drop_other": 0,
+    }],
+    ddos_connect_limit={
+        "sd_new_limit": 10,
+        "sd_conn_limit": 11,
+        "dst_new_limit": 20,
+        "dst_conn_limit": 21,
+        "bad_conn_threshold": 30,
+        "syn_rate": 10,
+        "syn_limit": 20,
+        "conn_timeout": 30,
+        "null_conn_enable": 1,
+    },
+    ddos_ai="on",
+    ddos_geo_ip_block_configs=[{
+        "action": "drop",
+        "area_lists": [100001],
+        "region_type": "customized",
+    }],
+    ddos_speed_limit_configs=[{
+        "protocol_list": "TCP",
+        "dst_port_list": "10",
+        "mode": 1,
+        "packet_rate": 10,
+        "bandwidth": 20,
+    }],
+    packet_filters=[{
+        "action": "drop",
+        "protocol": "all",
+        "s_port_start": 10,
+        "s_port_end": 10,
+        "d_port_start": 20,
+        "d_port_end": 20,
+        "pktlen_min": 30,
+        "pktlen_max": 30,
+        "str": "12",
+        "str2": "30",
+        "match_logic": "and",
+        "match_type": "pcre",
+        "match_type2": "pcre",
+        "match_begin": "begin_l3",
+        "match_begin2": "begin_l3",
+        "depth": 2,
+        "depth2": 3,
+        "offset": 1,
+        "offset2": 2,
+        "is_not": 0,
+        "is_not2": 0,
+    }],
+    water_print_configs=[{
+        "offset": 1,
+        "open_status": 1,
+        "listeners": [{
+            "frontend_port": 90,
+            "forward_protocol": "TCP",
+            "frontend_port_end": 90,
+        }],
+        "verify": "checkall",
+    }])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dayu"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dayu.NewDdosPolicyV2(ctx, "ddos_v2", &dayu.DdosPolicyV2Args{
+			ResourceId:    pulumi.String("bgpip-000004xf"),
+			Business:      pulumi.String("bgpip"),
+			DdosThreshold: pulumi.Int(100),
+			DdosLevel:     pulumi.String("low"),
+			BlackWhiteIps: dayu.DdosPolicyV2BlackWhiteIpArray{
+				&dayu.DdosPolicyV2BlackWhiteIpArgs{
+					Ip:     pulumi.String("1.2.3.4"),
+					IpType: pulumi.String("black"),
+				},
+			},
+			Acls: dayu.DdosPolicyV2AclArray{
+				&dayu.DdosPolicyV2AclArgs{
+					Action:          pulumi.String("transmit"),
+					DPortStart:      pulumi.Int(1),
+					DPortEnd:        pulumi.Int(10),
+					SPortStart:      pulumi.Int(10),
+					SPortEnd:        pulumi.Int(20),
+					Priority:        pulumi.Int(9),
+					ForwardProtocol: pulumi.String("all"),
+				},
+			},
+			ProtocolBlockConfigs: dayu.DdosPolicyV2ProtocolBlockConfigArray{
+				&dayu.DdosPolicyV2ProtocolBlockConfigArgs{
+					DropIcmp:  pulumi.Int(1),
+					DropTcp:   pulumi.Int(0),
+					DropUdp:   pulumi.Int(0),
+					DropOther: pulumi.Int(0),
+				},
+			},
+			DdosConnectLimit: &dayu.DdosPolicyV2DdosConnectLimitArgs{
+				SdNewLimit:       pulumi.Int(10),
+				SdConnLimit:      pulumi.Int(11),
+				DstNewLimit:      pulumi.Int(20),
+				DstConnLimit:     pulumi.Int(21),
+				BadConnThreshold: pulumi.Int(30),
+				SynRate:          pulumi.Int(10),
+				SynLimit:         pulumi.Int(20),
+				ConnTimeout:      pulumi.Int(30),
+				NullConnEnable:   pulumi.Int(1),
+			},
+			DdosAi: pulumi.String("on"),
+			DdosGeoIpBlockConfigs: dayu.DdosPolicyV2DdosGeoIpBlockConfigArray{
+				&dayu.DdosPolicyV2DdosGeoIpBlockConfigArgs{
+					Action: pulumi.String("drop"),
+					AreaLists: pulumi.IntArray{
+						pulumi.Int(100001),
+					},
+					RegionType: pulumi.String("customized"),
+				},
+			},
+			DdosSpeedLimitConfigs: dayu.DdosPolicyV2DdosSpeedLimitConfigArray{
+				&dayu.DdosPolicyV2DdosSpeedLimitConfigArgs{
+					ProtocolList: pulumi.String("TCP"),
+					DstPortList:  pulumi.String("10"),
+					Mode:         pulumi.Int(1),
+					PacketRate:   pulumi.Int(10),
+					Bandwidth:    pulumi.Int(20),
+				},
+			},
+			PacketFilters: dayu.DdosPolicyV2PacketFilterArray{
+				&dayu.DdosPolicyV2PacketFilterArgs{
+					Action:      pulumi.String("drop"),
+					Protocol:    pulumi.String("all"),
+					SPortStart:  pulumi.Int(10),
+					SPortEnd:    pulumi.Int(10),
+					DPortStart:  pulumi.Int(20),
+					DPortEnd:    pulumi.Int(20),
+					PktlenMin:   pulumi.Int(30),
+					PktlenMax:   pulumi.Int(30),
+					Str:         pulumi.String("12"),
+					Str2:        pulumi.String("30"),
+					MatchLogic:  pulumi.String("and"),
+					MatchType:   pulumi.String("pcre"),
+					MatchType2:  pulumi.String("pcre"),
+					MatchBegin:  pulumi.String("begin_l3"),
+					MatchBegin2: pulumi.String("begin_l3"),
+					Depth:       pulumi.Int(2),
+					Depth2:      pulumi.Int(3),
+					Offset:      pulumi.Int(1),
+					Offset2:     pulumi.Int(2),
+					IsNot:       pulumi.Int(0),
+					IsNot2:      pulumi.Int(0),
+				},
+			},
+			WaterPrintConfigs: dayu.DdosPolicyV2WaterPrintConfigArray{
+				&dayu.DdosPolicyV2WaterPrintConfigArgs{
+					Offset:     pulumi.Int(1),
+					OpenStatus: pulumi.Int(1),
+					Listeners: dayu.DdosPolicyV2WaterPrintConfigListenerArray{
+						&dayu.DdosPolicyV2WaterPrintConfigListenerArgs{
+							FrontendPort:    pulumi.Int(90),
+							ForwardProtocol: pulumi.String("TCP"),
+							FrontendPortEnd: pulumi.Int(90),
+						},
+					},
+					Verify: pulumi.String("checkall"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -198,21 +337,12 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var ddosV2 = new Tencentcloud.Dayu.DdosPolicyV2("ddosV2", new()
+    var ddosV2 = new Tencentcloud.Dayu.DdosPolicyV2("ddos_v2", new()
     {
-        Acls = new[]
-        {
-            new Tencentcloud.Dayu.Inputs.DdosPolicyV2AclArgs
-            {
-                Action = "transmit",
-                DPortEnd = 10,
-                DPortStart = 1,
-                ForwardProtocol = "all",
-                Priority = 9,
-                SPortEnd = 20,
-                SPortStart = 10,
-            },
-        },
+        ResourceId = "bgpip-000004xf",
+        Business = "bgpip",
+        DdosThreshold = 100,
+        DdosLevel = "low",
         BlackWhiteIps = new[]
         {
             new Tencentcloud.Dayu.Inputs.DdosPolicyV2BlackWhiteIpArgs
@@ -221,20 +351,42 @@ return await Deployment.RunAsync(() =>
                 IpType = "black",
             },
         },
-        Business = "bgpip",
-        DdosAi = "on",
+        Acls = new[]
+        {
+            new Tencentcloud.Dayu.Inputs.DdosPolicyV2AclArgs
+            {
+                Action = "transmit",
+                DPortStart = 1,
+                DPortEnd = 10,
+                SPortStart = 10,
+                SPortEnd = 20,
+                Priority = 9,
+                ForwardProtocol = "all",
+            },
+        },
+        ProtocolBlockConfigs = new[]
+        {
+            new Tencentcloud.Dayu.Inputs.DdosPolicyV2ProtocolBlockConfigArgs
+            {
+                DropIcmp = 1,
+                DropTcp = 0,
+                DropUdp = 0,
+                DropOther = 0,
+            },
+        },
         DdosConnectLimit = new Tencentcloud.Dayu.Inputs.DdosPolicyV2DdosConnectLimitArgs
         {
-            BadConnThreshold = 30,
-            ConnTimeout = 30,
-            DstConnLimit = 21,
-            DstNewLimit = 20,
-            NullConnEnable = 1,
-            SdConnLimit = 11,
             SdNewLimit = 10,
-            SynLimit = 20,
+            SdConnLimit = 11,
+            DstNewLimit = 20,
+            DstConnLimit = 21,
+            BadConnThreshold = 30,
             SynRate = 10,
+            SynLimit = 20,
+            ConnTimeout = 30,
+            NullConnEnable = 1,
         },
+        DdosAi = "on",
         DdosGeoIpBlockConfigs = new[]
         {
             new Tencentcloud.Dayu.Inputs.DdosPolicyV2DdosGeoIpBlockConfigArgs
@@ -247,72 +399,59 @@ return await Deployment.RunAsync(() =>
                 RegionType = "customized",
             },
         },
-        DdosLevel = "low",
         DdosSpeedLimitConfigs = new[]
         {
             new Tencentcloud.Dayu.Inputs.DdosPolicyV2DdosSpeedLimitConfigArgs
             {
-                Bandwidth = 20,
+                ProtocolList = "TCP",
                 DstPortList = "10",
                 Mode = 1,
                 PacketRate = 10,
-                ProtocolList = "TCP",
+                Bandwidth = 20,
             },
         },
-        DdosThreshold = 100,
         PacketFilters = new[]
         {
             new Tencentcloud.Dayu.Inputs.DdosPolicyV2PacketFilterArgs
             {
                 Action = "drop",
-                DPortEnd = 20,
+                Protocol = "all",
+                SPortStart = 10,
+                SPortEnd = 10,
                 DPortStart = 20,
-                Depth = 2,
-                Depth2 = 3,
-                IsNot = 0,
-                IsNot2 = 0,
-                MatchBegin = "begin_l3",
-                MatchBegin2 = "begin_l3",
+                DPortEnd = 20,
+                PktlenMin = 30,
+                PktlenMax = 30,
+                Str = "12",
+                Str2 = "30",
                 MatchLogic = "and",
                 MatchType = "pcre",
                 MatchType2 = "pcre",
+                MatchBegin = "begin_l3",
+                MatchBegin2 = "begin_l3",
+                Depth = 2,
+                Depth2 = 3,
                 Offset = 1,
                 Offset2 = 2,
-                PktlenMax = 30,
-                PktlenMin = 30,
-                Protocol = "all",
-                SPortEnd = 10,
-                SPortStart = 10,
-                Str = "12",
-                Str2 = "30",
+                IsNot = 0,
+                IsNot2 = 0,
             },
         },
-        ProtocolBlockConfigs = new[]
-        {
-            new Tencentcloud.Dayu.Inputs.DdosPolicyV2ProtocolBlockConfigArgs
-            {
-                DropIcmp = 1,
-                DropOther = 0,
-                DropTcp = 0,
-                DropUdp = 0,
-            },
-        },
-        ResourceId = "bgpip-000004xf",
         WaterPrintConfigs = new[]
         {
             new Tencentcloud.Dayu.Inputs.DdosPolicyV2WaterPrintConfigArgs
             {
+                Offset = 1,
+                OpenStatus = 1,
                 Listeners = new[]
                 {
                     new Tencentcloud.Dayu.Inputs.DdosPolicyV2WaterPrintConfigListenerArgs
                     {
-                        ForwardProtocol = "TCP",
                         FrontendPort = 90,
+                        ForwardProtocol = "TCP",
                         FrontendPortEnd = 90,
                     },
                 },
-                Offset = 1,
-                OpenStatus = 1,
                 Verify = "checkall",
             },
         },
@@ -320,123 +459,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dayu.NewDdosPolicyV2(ctx, "ddosV2", &Dayu.DdosPolicyV2Args{
-			Acls: dayu.DdosPolicyV2AclArray{
-				&dayu.DdosPolicyV2AclArgs{
-					Action:          pulumi.String("transmit"),
-					DPortEnd:        pulumi.Int(10),
-					DPortStart:      pulumi.Int(1),
-					ForwardProtocol: pulumi.String("all"),
-					Priority:        pulumi.Int(9),
-					SPortEnd:        pulumi.Int(20),
-					SPortStart:      pulumi.Int(10),
-				},
-			},
-			BlackWhiteIps: dayu.DdosPolicyV2BlackWhiteIpArray{
-				&dayu.DdosPolicyV2BlackWhiteIpArgs{
-					Ip:     pulumi.String("1.2.3.4"),
-					IpType: pulumi.String("black"),
-				},
-			},
-			Business: pulumi.String("bgpip"),
-			DdosAi:   pulumi.String("on"),
-			DdosConnectLimit: &dayu.DdosPolicyV2DdosConnectLimitArgs{
-				BadConnThreshold: pulumi.Int(30),
-				ConnTimeout:      pulumi.Int(30),
-				DstConnLimit:     pulumi.Int(21),
-				DstNewLimit:      pulumi.Int(20),
-				NullConnEnable:   pulumi.Int(1),
-				SdConnLimit:      pulumi.Int(11),
-				SdNewLimit:       pulumi.Int(10),
-				SynLimit:         pulumi.Int(20),
-				SynRate:          pulumi.Int(10),
-			},
-			DdosGeoIpBlockConfigs: dayu.DdosPolicyV2DdosGeoIpBlockConfigArray{
-				&dayu.DdosPolicyV2DdosGeoIpBlockConfigArgs{
-					Action: pulumi.String("drop"),
-					AreaLists: pulumi.IntArray{
-						pulumi.Int(100001),
-					},
-					RegionType: pulumi.String("customized"),
-				},
-			},
-			DdosLevel: pulumi.String("low"),
-			DdosSpeedLimitConfigs: dayu.DdosPolicyV2DdosSpeedLimitConfigArray{
-				&dayu.DdosPolicyV2DdosSpeedLimitConfigArgs{
-					Bandwidth:    pulumi.Int(20),
-					DstPortList:  pulumi.String("10"),
-					Mode:         pulumi.Int(1),
-					PacketRate:   pulumi.Int(10),
-					ProtocolList: pulumi.String("TCP"),
-				},
-			},
-			DdosThreshold: pulumi.Int(100),
-			PacketFilters: dayu.DdosPolicyV2PacketFilterArray{
-				&dayu.DdosPolicyV2PacketFilterArgs{
-					Action:      pulumi.String("drop"),
-					DPortEnd:    pulumi.Int(20),
-					DPortStart:  pulumi.Int(20),
-					Depth:       pulumi.Int(2),
-					Depth2:      pulumi.Int(3),
-					IsNot:       pulumi.Int(0),
-					IsNot2:      pulumi.Int(0),
-					MatchBegin:  pulumi.String("begin_l3"),
-					MatchBegin2: pulumi.String("begin_l3"),
-					MatchLogic:  pulumi.String("and"),
-					MatchType:   pulumi.String("pcre"),
-					MatchType2:  pulumi.String("pcre"),
-					Offset:      pulumi.Int(1),
-					Offset2:     pulumi.Int(2),
-					PktlenMax:   pulumi.Int(30),
-					PktlenMin:   pulumi.Int(30),
-					Protocol:    pulumi.String("all"),
-					SPortEnd:    pulumi.Int(10),
-					SPortStart:  pulumi.Int(10),
-					Str:         pulumi.String("12"),
-					Str2:        pulumi.String("30"),
-				},
-			},
-			ProtocolBlockConfigs: dayu.DdosPolicyV2ProtocolBlockConfigArray{
-				&dayu.DdosPolicyV2ProtocolBlockConfigArgs{
-					DropIcmp:  pulumi.Int(1),
-					DropOther: pulumi.Int(0),
-					DropTcp:   pulumi.Int(0),
-					DropUdp:   pulumi.Int(0),
-				},
-			},
-			ResourceId: pulumi.String("bgpip-000004xf"),
-			WaterPrintConfigs: dayu.DdosPolicyV2WaterPrintConfigArray{
-				&dayu.DdosPolicyV2WaterPrintConfigArgs{
-					Listeners: dayu.DdosPolicyV2WaterPrintConfigListenerArray{
-						&dayu.DdosPolicyV2WaterPrintConfigListenerArgs{
-							ForwardProtocol: pulumi.String("TCP"),
-							FrontendPort:    pulumi.Int(90),
-							FrontendPortEnd: pulumi.Int(90),
-						},
-					},
-					Offset:     pulumi.Int(1),
-					OpenStatus: pulumi.Int(1),
-					Verify:     pulumi.String("checkall"),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -445,16 +472,17 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dayu.DdosPolicyV2;
 import com.pulumi.tencentcloud.Dayu.DdosPolicyV2Args;
-import com.pulumi.tencentcloud.Dayu.inputs.DdosPolicyV2AclArgs;
 import com.pulumi.tencentcloud.Dayu.inputs.DdosPolicyV2BlackWhiteIpArgs;
+import com.pulumi.tencentcloud.Dayu.inputs.DdosPolicyV2AclArgs;
+import com.pulumi.tencentcloud.Dayu.inputs.DdosPolicyV2ProtocolBlockConfigArgs;
 import com.pulumi.tencentcloud.Dayu.inputs.DdosPolicyV2DdosConnectLimitArgs;
 import com.pulumi.tencentcloud.Dayu.inputs.DdosPolicyV2DdosGeoIpBlockConfigArgs;
 import com.pulumi.tencentcloud.Dayu.inputs.DdosPolicyV2DdosSpeedLimitConfigArgs;
 import com.pulumi.tencentcloud.Dayu.inputs.DdosPolicyV2PacketFilterArgs;
-import com.pulumi.tencentcloud.Dayu.inputs.DdosPolicyV2ProtocolBlockConfigArgs;
 import com.pulumi.tencentcloud.Dayu.inputs.DdosPolicyV2WaterPrintConfigArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Dayu.inputs.DdosPolicyV2WaterPrintConfigListenerArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -466,85 +494,85 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var ddosV2 = new DdosPolicyV2("ddosV2", DdosPolicyV2Args.builder()        
-            .acls(DdosPolicyV2AclArgs.builder()
-                .action("transmit")
-                .dPortEnd(10)
-                .dPortStart(1)
-                .forwardProtocol("all")
-                .priority(9)
-                .sPortEnd(20)
-                .sPortStart(10)
-                .build())
+        var ddosV2 = new DdosPolicyV2("ddosV2", DdosPolicyV2Args.builder()
+            .resourceId("bgpip-000004xf")
+            .business("bgpip")
+            .ddosThreshold(100)
+            .ddosLevel("low")
             .blackWhiteIps(DdosPolicyV2BlackWhiteIpArgs.builder()
                 .ip("1.2.3.4")
                 .ipType("black")
                 .build())
-            .business("bgpip")
-            .ddosAi("on")
-            .ddosConnectLimit(DdosPolicyV2DdosConnectLimitArgs.builder()
-                .badConnThreshold(30)
-                .connTimeout(30)
-                .dstConnLimit(21)
-                .dstNewLimit(20)
-                .nullConnEnable(1)
-                .sdConnLimit(11)
-                .sdNewLimit(10)
-                .synLimit(20)
-                .synRate(10)
-                .build())
-            .ddosGeoIpBlockConfigs(DdosPolicyV2DdosGeoIpBlockConfigArgs.builder()
-                .action("drop")
-                .areaLists("100001")
-                .regionType("customized")
-                .build())
-            .ddosLevel("low")
-            .ddosSpeedLimitConfigs(DdosPolicyV2DdosSpeedLimitConfigArgs.builder()
-                .bandwidth(20)
-                .dstPortList("10")
-                .mode(1)
-                .packetRate(10)
-                .protocolList("TCP")
-                .build())
-            .ddosThreshold("100")
-            .packetFilters(DdosPolicyV2PacketFilterArgs.builder()
-                .action("drop")
-                .dPortEnd(20)
-                .dPortStart(20)
-                .depth(2)
-                .depth2(3)
-                .isNot(0)
-                .isNot2(0)
-                .matchBegin("begin_l3")
-                .matchBegin2("begin_l3")
-                .matchLogic("and")
-                .matchType("pcre")
-                .matchType2("pcre")
-                .offset(1)
-                .offset2(2)
-                .pktlenMax(30)
-                .pktlenMin(30)
-                .protocol("all")
-                .sPortEnd(10)
+            .acls(DdosPolicyV2AclArgs.builder()
+                .action("transmit")
+                .dPortStart(1)
+                .dPortEnd(10)
                 .sPortStart(10)
-                .str("12")
-                .str2("30")
+                .sPortEnd(20)
+                .priority(9)
+                .forwardProtocol("all")
                 .build())
             .protocolBlockConfigs(DdosPolicyV2ProtocolBlockConfigArgs.builder()
                 .dropIcmp(1)
-                .dropOther(0)
                 .dropTcp(0)
                 .dropUdp(0)
+                .dropOther(0)
                 .build())
-            .resourceId("bgpip-000004xf")
+            .ddosConnectLimit(DdosPolicyV2DdosConnectLimitArgs.builder()
+                .sdNewLimit(10)
+                .sdConnLimit(11)
+                .dstNewLimit(20)
+                .dstConnLimit(21)
+                .badConnThreshold(30)
+                .synRate(10)
+                .synLimit(20)
+                .connTimeout(30)
+                .nullConnEnable(1)
+                .build())
+            .ddosAi("on")
+            .ddosGeoIpBlockConfigs(DdosPolicyV2DdosGeoIpBlockConfigArgs.builder()
+                .action("drop")
+                .areaLists(100001)
+                .regionType("customized")
+                .build())
+            .ddosSpeedLimitConfigs(DdosPolicyV2DdosSpeedLimitConfigArgs.builder()
+                .protocolList("TCP")
+                .dstPortList("10")
+                .mode(1)
+                .packetRate(10)
+                .bandwidth(20)
+                .build())
+            .packetFilters(DdosPolicyV2PacketFilterArgs.builder()
+                .action("drop")
+                .protocol("all")
+                .sPortStart(10)
+                .sPortEnd(10)
+                .dPortStart(20)
+                .dPortEnd(20)
+                .pktlenMin(30)
+                .pktlenMax(30)
+                .str("12")
+                .str2("30")
+                .matchLogic("and")
+                .matchType("pcre")
+                .matchType2("pcre")
+                .matchBegin("begin_l3")
+                .matchBegin2("begin_l3")
+                .depth(2)
+                .depth2(3)
+                .offset(1)
+                .offset2(2)
+                .isNot(0)
+                .isNot2(0)
+                .build())
             .waterPrintConfigs(DdosPolicyV2WaterPrintConfigArgs.builder()
-                .listeners(DdosPolicyV2WaterPrintConfigListenerArgs.builder()
-                    .forwardProtocol("TCP")
-                    .frontendPort(90)
-                    .frontendPortEnd(90)
-                    .build())
                 .offset(1)
                 .openStatus(1)
+                .listeners(DdosPolicyV2WaterPrintConfigListenerArgs.builder()
+                    .frontendPort(90)
+                    .forwardProtocol("TCP")
+                    .frontendPortEnd(90)
+                    .build())
                 .verify("checkall")
                 .build())
             .build());
@@ -552,156 +580,346 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   ddosV2:
     type: tencentcloud:Dayu:DdosPolicyV2
+    name: ddos_v2
     properties:
-      acls:
-        - action: transmit
-          dPortEnd: 10
-          dPortStart: 1
-          forwardProtocol: all
-          priority: 9
-          sPortEnd: 20
-          sPortStart: 10
+      resourceId: bgpip-000004xf
+      business: bgpip
+      ddosThreshold: '100'
+      ddosLevel: low
       blackWhiteIps:
         - ip: 1.2.3.4
           ipType: black
-      business: bgpip
-      ddosAi: on
+      acls:
+        - action: transmit
+          dPortStart: 1
+          dPortEnd: 10
+          sPortStart: 10
+          sPortEnd: 20
+          priority: 9
+          forwardProtocol: all
+      protocolBlockConfigs:
+        - dropIcmp: 1
+          dropTcp: 0
+          dropUdp: 0
+          dropOther: 0
       ddosConnectLimit:
-        badConnThreshold: 30
-        connTimeout: 30
-        dstConnLimit: 21
-        dstNewLimit: 20
-        nullConnEnable: 1
-        sdConnLimit: 11
         sdNewLimit: 10
-        synLimit: 20
+        sdConnLimit: 11
+        dstNewLimit: 20
+        dstConnLimit: 21
+        badConnThreshold: 30
         synRate: 10
+        synLimit: 20
+        connTimeout: 30
+        nullConnEnable: 1
+      ddosAi: on
       ddosGeoIpBlockConfigs:
         - action: drop
           areaLists:
             - '100001'
           regionType: customized
-      ddosLevel: low
       ddosSpeedLimitConfigs:
-        - bandwidth: 20
+        - protocolList: TCP
           dstPortList: '10'
           mode: 1
           packetRate: 10
-          protocolList: TCP
-      ddosThreshold: '100'
+          bandwidth: 20
       packetFilters:
         - action: drop
-          dPortEnd: 20
+          protocol: all
+          sPortStart: 10
+          sPortEnd: 10
           dPortStart: 20
-          depth: 2
-          depth2: 3
-          isNot: 0
-          isNot2: 0
-          matchBegin: begin_l3
-          matchBegin2: begin_l3
+          dPortEnd: 20
+          pktlenMin: 30
+          pktlenMax: 30
+          str: '12'
+          str2: '30'
           matchLogic: and
           matchType: pcre
           matchType2: pcre
+          matchBegin: begin_l3
+          matchBegin2: begin_l3
+          depth: 2
+          depth2: 3
           offset: 1
           offset2: 2
-          pktlenMax: 30
-          pktlenMin: 30
-          protocol: all
-          sPortEnd: 10
-          sPortStart: 10
-          str: '12'
-          str2: '30'
-      protocolBlockConfigs:
-        - dropIcmp: 1
-          dropOther: 0
-          dropTcp: 0
-          dropUdp: 0
-      resourceId: bgpip-000004xf
+          isNot: 0
+          isNot2: 0
       waterPrintConfigs:
-        - listeners:
-            - forwardProtocol: TCP
-              frontendPort: 90
-              frontendPortEnd: 90
-          offset: 1
+        - offset: 1
           openStatus: 1
+          listeners:
+            - frontendPort: 90
+              forwardProtocol: TCP
+              frontendPortEnd: 90
           verify: checkall
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_dayu_ddospolicyv2" "ddos_v2" {
+  resource_id    = "bgpip-000004xf"
+  business       = "bgpip"
+  ddos_threshold = "100"
+  ddos_level     = "low"
+  black_white_ips {
+    ip      = "1.2.3.4"
+    ip_type = "black"
+  }
+  acls {
+    action           = "transmit"
+    d_port_start     = 1
+    d_port_end       = 10
+    s_port_start     = 10
+    s_port_end       = 20
+    priority         = 9
+    forward_protocol = "all"
+  }
+  protocol_block_configs {
+    drop_icmp  = 1
+    drop_tcp   = 0
+    drop_udp   = 0
+    drop_other = 0
+  }
+  ddos_connect_limit = {
+    sd_new_limit       = 10
+    sd_conn_limit      = 11
+    dst_new_limit      = 20
+    dst_conn_limit     = 21
+    bad_conn_threshold = 30
+    syn_rate           = 10
+    syn_limit          = 20
+    conn_timeout       = 30
+    null_conn_enable   = 1
+  }
+  ddos_ai = "on"
+  ddos_geo_ip_block_configs {
+    action      = "drop"
+    area_lists  = ["100001"]
+    region_type = "customized"
+  }
+  ddos_speed_limit_configs {
+    protocol_list = "TCP"
+    dst_port_list = "10"
+    mode          = 1
+    packet_rate   = 10
+    bandwidth     = 20
+  }
+  packet_filters {
+    action       = "drop"
+    protocol     = "all"
+    s_port_start = 10
+    s_port_end   = 10
+    d_port_start = 20
+    d_port_end   = 20
+    pktlen_min   = 30
+    pktlen_max   = 30
+    str          = "12"
+    str2         = "30"
+    match_logic  = "and"
+    match_type   = "pcre"
+    match_type2  = "pcre"
+    match_begin  = "begin_l3"
+    match_begin2 = "begin_l3"
+    depth        = 2
+    depth2       = 3
+    offset       = 1
+    offset2      = 2
+    is_not       = 0
+    is_not2      = 0
+  }
+  water_print_configs {
+    offset      = 1
+    open_status = 1
+    listeners {
+      frontend_port     = 90
+      forward_protocol  = "TCP"
+      frontend_port_end = 90
+    }
+    verify = "checkall"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateDDoSAI](https://www.tencentcloud.com/document/api/1213/61381)
+  - [CreateDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=CreateDDoSBlackWhiteIpList&type=document&lang=en)
+  - [CreateDDoSConnectLimit](https://www.tencentcloud.com/search/?wd=CreateDDoSConnectLimit&type=document&lang=en)
+  - [CreateDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61380)
+  - [CreateDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61379)
+  - [CreatePacketFilterConfig](https://www.tencentcloud.com/document/api/1213/61378)
+  - [CreatePortAclConfig](https://www.tencentcloud.com/search/?wd=CreatePortAclConfig&type=document&lang=en)
+  - [CreateProtocolBlockConfig](https://www.tencentcloud.com/document/api/1213/61377)
+  - [CreateWaterPrintConfig](https://www.tencentcloud.com/document/api/1213/61376)
+  - [ModifyDDoSLevel](https://www.tencentcloud.com/search/?wd=ModifyDDoSLevel&type=document&lang=en)
+  - [ModifyDDoSThreshold](https://www.tencentcloud.com/search/?wd=ModifyDDoSThreshold&type=document&lang=en)
+* Read:
+  - [DescribeDDoSConnectLimitList](https://www.tencentcloud.com/search/?wd=DescribeDDoSConnectLimitList&type=document&lang=en)
+  - [DescribeListBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61364)
+  - [DescribeListDDoSAI](https://www.tencentcloud.com/document/api/1213/61363)
+  - [DescribeListDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61362)
+  - [DescribeListDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61361)
+  - [DescribeListPacketFilterConfig](https://www.tencentcloud.com/document/api/1213/61360)
+  - [DescribeListPortAclList](https://www.tencentcloud.com/search/?wd=DescribeListPortAclList&type=document&lang=en)
+  - [DescribeListProtectThresholdConfigNew](https://www.tencentcloud.com/search/?wd=DescribeListProtectThresholdConfigNew&type=document&lang=en)
+  - [DescribeListProtocolBlockConfig](https://www.tencentcloud.com/document/api/1213/61358)
+  - [DescribeListWaterPrintConfig](https://www.tencentcloud.com/document/api/1213/61357)
+* Update:
+  - [CreateDDoSAI](https://www.tencentcloud.com/document/api/1213/61381)
+  - [CreateDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=CreateDDoSBlackWhiteIpList&type=document&lang=en)
+  - [CreateDDoSConnectLimit](https://www.tencentcloud.com/search/?wd=CreateDDoSConnectLimit&type=document&lang=en)
+  - [CreateDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61380)
+  - [CreateDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61379)
+  - [CreatePacketFilterConfig](https://www.tencentcloud.com/document/api/1213/61378)
+  - [CreatePortAclConfig](https://www.tencentcloud.com/search/?wd=CreatePortAclConfig&type=document&lang=en)
+  - [CreateProtocolBlockConfig](https://www.tencentcloud.com/document/api/1213/61377)
+  - [CreateWaterPrintConfig](https://www.tencentcloud.com/document/api/1213/61376)
+  - [DeleteDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=DeleteDDoSBlackWhiteIpList&type=document&lang=en)
+  - [DeleteDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61372)
+  - [DeleteDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61371)
+  - [DeletePacketFilterConfig](https://www.tencentcloud.com/document/api/1213/61370)
+  - [DeletePortAclConfig](https://www.tencentcloud.com/search/?wd=DeletePortAclConfig&type=document&lang=en)
+  - [DeleteWaterPrintConfig](https://www.tencentcloud.com/document/api/1213/61369)
+  - [DescribeListBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61364)
+  - [DescribeListDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61362)
+  - [DescribeListDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61361)
+  - [DescribeListPacketFilterConfig](https://www.tencentcloud.com/document/api/1213/61360)
+  - [DescribeListPortAclList](https://www.tencentcloud.com/search/?wd=DescribeListPortAclList&type=document&lang=en)
+  - [DescribeListWaterPrintConfig](https://www.tencentcloud.com/document/api/1213/61357)
+  - [ModifyDDoSLevel](https://www.tencentcloud.com/search/?wd=ModifyDDoSLevel&type=document&lang=en)
+  - [ModifyDDoSThreshold](https://www.tencentcloud.com/search/?wd=ModifyDDoSThreshold&type=document&lang=en)
+  - [SwitchWaterPrintConfig](https://www.tencentcloud.com/document/api/1213/61352)
+* Delete:
+  - [CreateDDoSAI](https://www.tencentcloud.com/document/api/1213/61381)
+  - [CreateDDoSConnectLimit](https://www.tencentcloud.com/search/?wd=CreateDDoSConnectLimit&type=document&lang=en)
+  - [CreateProtocolBlockConfig](https://www.tencentcloud.com/document/api/1213/61377)
+  - [DeleteDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=DeleteDDoSBlackWhiteIpList&type=document&lang=en)
+  - [DeleteDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61372)
+  - [DeleteDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61371)
+  - [DeletePacketFilterConfig](https://www.tencentcloud.com/document/api/1213/61370)
+  - [DeletePortAclConfig](https://www.tencentcloud.com/search/?wd=DeletePortAclConfig&type=document&lang=en)
+  - [DeleteWaterPrintConfig](https://www.tencentcloud.com/document/api/1213/61369)
+  - [DescribeListBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61364)
+  - [DescribeListDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61362)
+  - [DescribeListDDoSSpeedLimitConfig](https://www.tencentcloud.com/document/api/1213/61361)
+  - [DescribeListPacketFilterConfig](https://www.tencentcloud.com/document/api/1213/61360)
+  - [DescribeListPortAclList](https://www.tencentcloud.com/search/?wd=DescribeListPortAclList&type=document&lang=en)
+  - [DescribeListWaterPrintConfig](https://www.tencentcloud.com/document/api/1213/61357)
+  - [ModifyDDoSLevel](https://www.tencentcloud.com/search/?wd=ModifyDDoSLevel&type=document&lang=en)
+  - [ModifyDDoSThreshold](https://www.tencentcloud.com/search/?wd=ModifyDDoSThreshold&type=document&lang=en)
 
 
 
 ## Create DdosPolicyV2 Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">DdosPolicyV2</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DdosPolicyV2Args</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">DdosPolicyV2</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DdosPolicyV2Args</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">DdosPolicyV2</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                 <span class="nx">acls</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.DdosPolicyV2AclArgs]]</span> = None<span class="p">,</span>
-                 <span class="nx">black_white_ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.DdosPolicyV2BlackWhiteIpArgs]]</span> = None<span class="p">,</span>
-                 <span class="nx">business</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">ddos_ai</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">ddos_connect_limit</span><span class="p">:</span> <span class="nx">Optional[_dayu.DdosPolicyV2DdosConnectLimitArgs]</span> = None<span class="p">,</span>
-                 <span class="nx">ddos_geo_ip_block_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.DdosPolicyV2DdosGeoIpBlockConfigArgs]]</span> = None<span class="p">,</span>
-                 <span class="nx">ddos_level</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">ddos_speed_limit_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.DdosPolicyV2DdosSpeedLimitConfigArgs]]</span> = None<span class="p">,</span>
-                 <span class="nx">ddos_threshold</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                 <span class="nx">packet_filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.DdosPolicyV2PacketFilterArgs]]</span> = None<span class="p">,</span>
-                 <span class="nx">protocol_block_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.DdosPolicyV2ProtocolBlockConfigArgs]]</span> = None<span class="p">,</span>
-                 <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">water_print_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.DdosPolicyV2WaterPrintConfigArgs]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">DdosPolicyV2</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DdosPolicyV2Args</a></span><span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">DdosPolicyV2</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                 <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">ddos_level</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">business</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">ddos_ai</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">ddos_connect_limit</span><span class="p">:</span> <span class="nx">Optional[DdosPolicyV2DdosConnectLimitArgs]</span> = None<span class="p">,</span>
+                 <span class="nx">ddos_geo_ip_block_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[DdosPolicyV2DdosGeoIpBlockConfigArgs]]</span> = None<span class="p">,</span>
+                 <span class="nx">acls</span><span class="p">:</span> <span class="nx">Optional[Sequence[DdosPolicyV2AclArgs]]</span> = None<span class="p">,</span>
+                 <span class="nx">ddos_speed_limit_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[DdosPolicyV2DdosSpeedLimitConfigArgs]]</span> = None<span class="p">,</span>
+                 <span class="nx">ddos_threshold</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                 <span class="nx">packet_filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[DdosPolicyV2PacketFilterArgs]]</span> = None<span class="p">,</span>
+                 <span class="nx">protocol_block_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[DdosPolicyV2ProtocolBlockConfigArgs]]</span> = None<span class="p">,</span>
+                 <span class="nx">black_white_ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[DdosPolicyV2BlackWhiteIpArgs]]</span> = None<span class="p">,</span>
+                 <span class="nx">water_print_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[DdosPolicyV2WaterPrintConfigArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDdosPolicyV2</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DdosPolicyV2Args</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DdosPolicyV2</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDdosPolicyV2</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DdosPolicyV2Args</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DdosPolicyV2</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">DdosPolicyV2</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DdosPolicyV2Args</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">DdosPolicyV2</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DdosPolicyV2Args</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">DdosPolicyV2</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DdosPolicyV2Args</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">DdosPolicyV2</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DdosPolicyV2Args</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dayu:DdosPolicyV2</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dayu:DdosPolicyV2</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_dayu_ddos_policy_v2&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -722,7 +940,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -839,11 +1057,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## DdosPolicyV2 Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -859,26 +1085,23 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="acls_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acls_csharp" style="color: inherit; text-decoration: inherit;">Acls</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2acl">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Acl<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2acl">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Acl&gt;</a></span>
     </dt>
-    <dd><p>Port ACL policy for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Port ACL policy for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="blackwhiteips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blackwhiteips_csharp" style="color: inherit; text-decoration: inherit;">Black<wbr>White<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip&gt;</a></span>
     </dt>
-    <dd><p>DDoS-protected IP blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected IP blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="business_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#business_csharp" style="color: inherit; text-decoration: inherit;">Business</a>
@@ -886,8 +1109,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosai_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosai_csharp" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Ai</a>
@@ -895,26 +1117,23 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>AI protection switch, take the value [<code>on</code>, <code>off</code>].</p>
-</dd><dt class="property-optional"
+    <dd>AI protection switch, take the value [<code>on</code>, <code>off</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosconnectlimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosconnectlimit_csharp" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Connect<wbr>Limit</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit<wbr>Args</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit</a></span>
     </dt>
-    <dd><p>DDoS connection suppression options.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS connection suppression options.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosgeoipblockconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosgeoipblockconfigs_csharp" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>DDoS-protected area block configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected area block configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddoslevel_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddoslevel_csharp" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Level</a>
@@ -922,17 +1141,15 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</p>
-</dd><dt class="property-optional"
+    <dd>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosspeedlimitconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosspeedlimitconfigs_csharp" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Speed<wbr>Limit<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Access speed limit configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Access speed limit configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosthreshold_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosthreshold_csharp" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Threshold</a>
@@ -940,35 +1157,31 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</dd><dt class="property-optional"
             title="Optional">
         <span id="packetfilters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetfilters_csharp" style="color: inherit; text-decoration: inherit;">Packet<wbr>Filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2packetfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2packetfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Feature filtering rules for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Feature filtering rules for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocolblockconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocolblockconfigs_csharp" style="color: inherit; text-decoration: inherit;">Protocol<wbr>Block<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Protocol block configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol block configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="waterprintconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waterprintconfigs_csharp" style="color: inherit; text-decoration: inherit;">Water<wbr>Print<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Water print config.</p>
-</dd></dl>
+    <dd>Water print config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -982,8 +1195,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="acls_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acls_go" style="color: inherit; text-decoration: inherit;">Acls</a>
@@ -991,8 +1203,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2acl">[]Ddos<wbr>Policy<wbr>V2Acl<wbr>Args</a></span>
     </dt>
-    <dd><p>Port ACL policy for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Port ACL policy for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="blackwhiteips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blackwhiteips_go" style="color: inherit; text-decoration: inherit;">Black<wbr>White<wbr>Ips</a>
@@ -1000,8 +1211,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2blackwhiteip">[]Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip<wbr>Args</a></span>
     </dt>
-    <dd><p>DDoS-protected IP blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected IP blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="business_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#business_go" style="color: inherit; text-decoration: inherit;">Business</a>
@@ -1009,8 +1219,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosai_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosai_go" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Ai</a>
@@ -1018,8 +1227,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>AI protection switch, take the value [<code>on</code>, <code>off</code>].</p>
-</dd><dt class="property-optional"
+    <dd>AI protection switch, take the value [<code>on</code>, <code>off</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosconnectlimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosconnectlimit_go" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Connect<wbr>Limit</a>
@@ -1027,8 +1235,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit<wbr>Args</a></span>
     </dt>
-    <dd><p>DDoS connection suppression options.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS connection suppression options.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosgeoipblockconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosgeoipblockconfigs_go" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Configs</a>
@@ -1036,8 +1243,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">[]Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>DDoS-protected area block configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected area block configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddoslevel_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddoslevel_go" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Level</a>
@@ -1045,8 +1251,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</p>
-</dd><dt class="property-optional"
+    <dd>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosspeedlimitconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosspeedlimitconfigs_go" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Speed<wbr>Limit<wbr>Configs</a>
@@ -1054,8 +1259,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">[]Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Access speed limit configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Access speed limit configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosthreshold_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosthreshold_go" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Threshold</a>
@@ -1063,8 +1267,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</dd><dt class="property-optional"
             title="Optional">
         <span id="packetfilters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetfilters_go" style="color: inherit; text-decoration: inherit;">Packet<wbr>Filters</a>
@@ -1072,8 +1275,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2packetfilter">[]Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter<wbr>Args</a></span>
     </dt>
-    <dd><p>Feature filtering rules for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Feature filtering rules for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocolblockconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocolblockconfigs_go" style="color: inherit; text-decoration: inherit;">Protocol<wbr>Block<wbr>Configs</a>
@@ -1081,8 +1283,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">[]Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Protocol block configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol block configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="waterprintconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waterprintconfigs_go" style="color: inherit; text-decoration: inherit;">Water<wbr>Print<wbr>Configs</a>
@@ -1090,8 +1291,117 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2waterprintconfig">[]Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Water print config.</p>
-</dd></dl>
+    <dd>Water print config.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="acls_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acls_hcl" style="color: inherit; text-decoration: inherit;">acls</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2acl">list(object)</a></span>
+    </dt>
+    <dd>Port ACL policy for DDoS protection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="black_white_ips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#black_white_ips_hcl" style="color: inherit; text-decoration: inherit;">black_<wbr>white_<wbr>ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">list(object)</a></span>
+    </dt>
+    <dd>DDoS-protected IP blacklist and whitelist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="business_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#business_hcl" style="color: inherit; text-decoration: inherit;">business</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ddos_ai_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddos_ai_hcl" style="color: inherit; text-decoration: inherit;">ddos_<wbr>ai</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>AI protection switch, take the value [<code>on</code>, <code>off</code>].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ddos_connect_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddos_connect_limit_hcl" style="color: inherit; text-decoration: inherit;">ddos_<wbr>connect_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">object</a></span>
+    </dt>
+    <dd>DDoS connection suppression options.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ddos_geo_ip_block_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddos_geo_ip_block_configs_hcl" style="color: inherit; text-decoration: inherit;">ddos_<wbr>geo_<wbr>ip_<wbr>block_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">list(object)</a></span>
+    </dt>
+    <dd>DDoS-protected area block configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ddos_level_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddos_level_hcl" style="color: inherit; text-decoration: inherit;">ddos_<wbr>level</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ddos_speed_limit_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddos_speed_limit_configs_hcl" style="color: inherit; text-decoration: inherit;">ddos_<wbr>speed_<wbr>limit_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">list(object)</a></span>
+    </dt>
+    <dd>Access speed limit configuration for DDoS protection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ddos_threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddos_threshold_hcl" style="color: inherit; text-decoration: inherit;">ddos_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="packet_filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packet_filters_hcl" style="color: inherit; text-decoration: inherit;">packet_<wbr>filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2packetfilter">list(object)</a></span>
+    </dt>
+    <dd>Feature filtering rules for DDoS protection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_block_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_block_configs_hcl" style="color: inherit; text-decoration: inherit;">protocol_<wbr>block_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">list(object)</a></span>
+    </dt>
+    <dd>Protocol block configuration for DDoS protection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="water_print_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#water_print_configs_hcl" style="color: inherit; text-decoration: inherit;">water_<wbr>print_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">list(object)</a></span>
+    </dt>
+    <dd>Water print config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1105,26 +1415,23 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="acls_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acls_java" style="color: inherit; text-decoration: inherit;">acls</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2acl">List&lt;Ddos<wbr>Policy<wbr>V2Acl<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2acl">List&lt;Ddos<wbr>Policy<wbr>V2Acl&gt;</a></span>
     </dt>
-    <dd><p>Port ACL policy for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Port ACL policy for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="blackwhiteips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blackwhiteips_java" style="color: inherit; text-decoration: inherit;">black<wbr>White<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">List&lt;Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">List&lt;Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip&gt;</a></span>
     </dt>
-    <dd><p>DDoS-protected IP blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected IP blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="business_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#business_java" style="color: inherit; text-decoration: inherit;">business</a>
@@ -1132,8 +1439,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosai_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosai_java" style="color: inherit; text-decoration: inherit;">ddos<wbr>Ai</a>
@@ -1141,26 +1447,23 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>AI protection switch, take the value [<code>on</code>, <code>off</code>].</p>
-</dd><dt class="property-optional"
+    <dd>AI protection switch, take the value [<code>on</code>, <code>off</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosconnectlimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosconnectlimit_java" style="color: inherit; text-decoration: inherit;">ddos<wbr>Connect<wbr>Limit</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit<wbr>Args</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit</a></span>
     </dt>
-    <dd><p>DDoS connection suppression options.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS connection suppression options.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosgeoipblockconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosgeoipblockconfigs_java" style="color: inherit; text-decoration: inherit;">ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">List&lt;Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">List&lt;Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>DDoS-protected area block configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected area block configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddoslevel_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddoslevel_java" style="color: inherit; text-decoration: inherit;">ddos<wbr>Level</a>
@@ -1168,17 +1471,15 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</p>
-</dd><dt class="property-optional"
+    <dd>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosspeedlimitconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosspeedlimitconfigs_java" style="color: inherit; text-decoration: inherit;">ddos<wbr>Speed<wbr>Limit<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">List&lt;Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">List&lt;Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Access speed limit configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Access speed limit configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosthreshold_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosthreshold_java" style="color: inherit; text-decoration: inherit;">ddos<wbr>Threshold</a>
@@ -1186,35 +1487,31 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</dd><dt class="property-optional"
             title="Optional">
         <span id="packetfilters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetfilters_java" style="color: inherit; text-decoration: inherit;">packet<wbr>Filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2packetfilter">List&lt;Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2packetfilter">List&lt;Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Feature filtering rules for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Feature filtering rules for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocolblockconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocolblockconfigs_java" style="color: inherit; text-decoration: inherit;">protocol<wbr>Block<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">List&lt;Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">List&lt;Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Protocol block configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol block configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="waterprintconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waterprintconfigs_java" style="color: inherit; text-decoration: inherit;">water<wbr>Print<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">List&lt;Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">List&lt;Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Water print config.</p>
-</dd></dl>
+    <dd>Water print config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1228,26 +1525,23 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="acls_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acls_nodejs" style="color: inherit; text-decoration: inherit;">acls</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2acl">Ddos<wbr>Policy<wbr>V2Acl<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2acl">Ddos<wbr>Policy<wbr>V2Acl[]</a></span>
     </dt>
-    <dd><p>Port ACL policy for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Port ACL policy for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="blackwhiteips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blackwhiteips_nodejs" style="color: inherit; text-decoration: inherit;">black<wbr>White<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip[]</a></span>
     </dt>
-    <dd><p>DDoS-protected IP blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected IP blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="business_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#business_nodejs" style="color: inherit; text-decoration: inherit;">business</a>
@@ -1255,8 +1549,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosai_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosai_nodejs" style="color: inherit; text-decoration: inherit;">ddos<wbr>Ai</a>
@@ -1264,26 +1557,23 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>AI protection switch, take the value [<code>on</code>, <code>off</code>].</p>
-</dd><dt class="property-optional"
+    <dd>AI protection switch, take the value [<code>on</code>, <code>off</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosconnectlimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosconnectlimit_nodejs" style="color: inherit; text-decoration: inherit;">ddos<wbr>Connect<wbr>Limit</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit<wbr>Args</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit</a></span>
     </dt>
-    <dd><p>DDoS connection suppression options.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS connection suppression options.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosgeoipblockconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosgeoipblockconfigs_nodejs" style="color: inherit; text-decoration: inherit;">ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config[]</a></span>
     </dt>
-    <dd><p>DDoS-protected area block configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected area block configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddoslevel_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddoslevel_nodejs" style="color: inherit; text-decoration: inherit;">ddos<wbr>Level</a>
@@ -1291,17 +1581,15 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</p>
-</dd><dt class="property-optional"
+    <dd>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosspeedlimitconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosspeedlimitconfigs_nodejs" style="color: inherit; text-decoration: inherit;">ddos<wbr>Speed<wbr>Limit<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config[]</a></span>
     </dt>
-    <dd><p>Access speed limit configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Access speed limit configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosthreshold_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosthreshold_nodejs" style="color: inherit; text-decoration: inherit;">ddos<wbr>Threshold</a>
@@ -1309,35 +1597,31 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</dd><dt class="property-optional"
             title="Optional">
         <span id="packetfilters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetfilters_nodejs" style="color: inherit; text-decoration: inherit;">packet<wbr>Filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2packetfilter">Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2packetfilter">Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>Feature filtering rules for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Feature filtering rules for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocolblockconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocolblockconfigs_nodejs" style="color: inherit; text-decoration: inherit;">protocol<wbr>Block<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config[]</a></span>
     </dt>
-    <dd><p>Protocol block configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol block configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="waterprintconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waterprintconfigs_nodejs" style="color: inherit; text-decoration: inherit;">water<wbr>Print<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config[]</a></span>
     </dt>
-    <dd><p>Water print config.</p>
-</dd></dl>
+    <dd>Water print config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1351,26 +1635,23 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="acls_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acls_python" style="color: inherit; text-decoration: inherit;">acls</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2acl">Ddos<wbr>Policy<wbr>V2Acl<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2acl">Sequence[Ddos<wbr>Policy<wbr>V2Acl<wbr>Args]</a></span>
     </dt>
-    <dd><p>Port ACL policy for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Port ACL policy for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="black_white_ips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#black_white_ips_python" style="color: inherit; text-decoration: inherit;">black_<wbr>white_<wbr>ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">Sequence[Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip<wbr>Args]</a></span>
     </dt>
-    <dd><p>DDoS-protected IP blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected IP blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="business_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#business_python" style="color: inherit; text-decoration: inherit;">business</a>
@@ -1378,8 +1659,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddos_ai_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddos_ai_python" style="color: inherit; text-decoration: inherit;">ddos_<wbr>ai</a>
@@ -1387,8 +1667,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>AI protection switch, take the value [<code>on</code>, <code>off</code>].</p>
-</dd><dt class="property-optional"
+    <dd>AI protection switch, take the value [<code>on</code>, <code>off</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="ddos_connect_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddos_connect_limit_python" style="color: inherit; text-decoration: inherit;">ddos_<wbr>connect_<wbr>limit</a>
@@ -1396,17 +1675,15 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit<wbr>Args</a></span>
     </dt>
-    <dd><p>DDoS connection suppression options.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS connection suppression options.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddos_geo_ip_block_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddos_geo_ip_block_configs_python" style="color: inherit; text-decoration: inherit;">ddos_<wbr>geo_<wbr>ip_<wbr>block_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">Sequence[Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config<wbr>Args]</a></span>
     </dt>
-    <dd><p>DDoS-protected area block configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected area block configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddos_level_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddos_level_python" style="color: inherit; text-decoration: inherit;">ddos_<wbr>level</a>
@@ -1414,17 +1691,15 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</p>
-</dd><dt class="property-optional"
+    <dd>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="ddos_speed_limit_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddos_speed_limit_configs_python" style="color: inherit; text-decoration: inherit;">ddos_<wbr>speed_<wbr>limit_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">Sequence[Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args]</a></span>
     </dt>
-    <dd><p>Access speed limit configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Access speed limit configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddos_threshold_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddos_threshold_python" style="color: inherit; text-decoration: inherit;">ddos_<wbr>threshold</a>
@@ -1432,35 +1707,31 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</dd><dt class="property-optional"
             title="Optional">
         <span id="packet_filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packet_filters_python" style="color: inherit; text-decoration: inherit;">packet_<wbr>filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2packetfilter">Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2packetfilter">Sequence[Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter<wbr>Args]</a></span>
     </dt>
-    <dd><p>Feature filtering rules for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Feature filtering rules for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_block_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_block_configs_python" style="color: inherit; text-decoration: inherit;">protocol_<wbr>block_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">Sequence[Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config<wbr>Args]</a></span>
     </dt>
-    <dd><p>Protocol block configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol block configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="water_print_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#water_print_configs_python" style="color: inherit; text-decoration: inherit;">water_<wbr>print_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">Sequence[Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Args]</a></span>
     </dt>
-    <dd><p>Water print config.</p>
-</dd></dl>
+    <dd>Water print config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1474,8 +1745,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="acls_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acls_yaml" style="color: inherit; text-decoration: inherit;">acls</a>
@@ -1483,8 +1753,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2acl">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Port ACL policy for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Port ACL policy for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="blackwhiteips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blackwhiteips_yaml" style="color: inherit; text-decoration: inherit;">black<wbr>White<wbr>Ips</a>
@@ -1492,8 +1761,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2blackwhiteip">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>DDoS-protected IP blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected IP blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="business_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#business_yaml" style="color: inherit; text-decoration: inherit;">business</a>
@@ -1501,8 +1769,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosai_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosai_yaml" style="color: inherit; text-decoration: inherit;">ddos<wbr>Ai</a>
@@ -1510,8 +1777,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>AI protection switch, take the value [<code>on</code>, <code>off</code>].</p>
-</dd><dt class="property-optional"
+    <dd>AI protection switch, take the value [<code>on</code>, <code>off</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosconnectlimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosconnectlimit_yaml" style="color: inherit; text-decoration: inherit;">ddos<wbr>Connect<wbr>Limit</a>
@@ -1519,8 +1785,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Property Map</a></span>
     </dt>
-    <dd><p>DDoS connection suppression options.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS connection suppression options.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosgeoipblockconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosgeoipblockconfigs_yaml" style="color: inherit; text-decoration: inherit;">ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Configs</a>
@@ -1528,8 +1793,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>DDoS-protected area block configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected area block configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddoslevel_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddoslevel_yaml" style="color: inherit; text-decoration: inherit;">ddos<wbr>Level</a>
@@ -1537,8 +1801,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</p>
-</dd><dt class="property-optional"
+    <dd>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosspeedlimitconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosspeedlimitconfigs_yaml" style="color: inherit; text-decoration: inherit;">ddos<wbr>Speed<wbr>Limit<wbr>Configs</a>
@@ -1546,8 +1809,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Access speed limit configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Access speed limit configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="ddosthreshold_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ddosthreshold_yaml" style="color: inherit; text-decoration: inherit;">ddos<wbr>Threshold</a>
@@ -1555,8 +1817,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</dd><dt class="property-optional"
             title="Optional">
         <span id="packetfilters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetfilters_yaml" style="color: inherit; text-decoration: inherit;">packet<wbr>Filters</a>
@@ -1564,8 +1825,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2packetfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Feature filtering rules for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Feature filtering rules for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocolblockconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocolblockconfigs_yaml" style="color: inherit; text-decoration: inherit;">protocol<wbr>Block<wbr>Configs</a>
@@ -1573,8 +1833,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Protocol block configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol block configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="waterprintconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waterprintconfigs_yaml" style="color: inherit; text-decoration: inherit;">water<wbr>Print<wbr>Configs</a>
@@ -1582,8 +1841,7 @@ The DdosPolicyV2 resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2waterprintconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Water print config.</p>
-</dd></dl>
+    <dd>Water print config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1604,8 +1862,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1619,8 +1876,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1634,8 +1904,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1649,8 +1918,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1664,8 +1932,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1679,8 +1946,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1690,132 +1956,171 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing DdosPolicyV2 resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DdosPolicyV2State</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">DdosPolicyV2</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DdosPolicyV2State</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">DdosPolicyV2</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">acls</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.DdosPolicyV2AclArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">black_white_ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.DdosPolicyV2BlackWhiteIpArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">acls</span><span class="p">:</span> <span class="nx">Optional[Sequence[DdosPolicyV2AclArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">black_white_ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[DdosPolicyV2BlackWhiteIpArgs]]</span> = None<span class="p">,</span>
         <span class="nx">business</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">ddos_ai</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">ddos_connect_limit</span><span class="p">:</span> <span class="nx">Optional[_dayu.DdosPolicyV2DdosConnectLimitArgs]</span> = None<span class="p">,</span>
-        <span class="nx">ddos_geo_ip_block_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.DdosPolicyV2DdosGeoIpBlockConfigArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">ddos_connect_limit</span><span class="p">:</span> <span class="nx">Optional[DdosPolicyV2DdosConnectLimitArgs]</span> = None<span class="p">,</span>
+        <span class="nx">ddos_geo_ip_block_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[DdosPolicyV2DdosGeoIpBlockConfigArgs]]</span> = None<span class="p">,</span>
         <span class="nx">ddos_level</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">ddos_speed_limit_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.DdosPolicyV2DdosSpeedLimitConfigArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">ddos_speed_limit_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[DdosPolicyV2DdosSpeedLimitConfigArgs]]</span> = None<span class="p">,</span>
         <span class="nx">ddos_threshold</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">packet_filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.DdosPolicyV2PacketFilterArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">protocol_block_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.DdosPolicyV2ProtocolBlockConfigArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">packet_filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[DdosPolicyV2PacketFilterArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">protocol_block_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[DdosPolicyV2ProtocolBlockConfigArgs]]</span> = None<span class="p">,</span>
         <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">water_print_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.DdosPolicyV2WaterPrintConfigArgs]]</span> = None<span class="p">) -&gt;</span> DdosPolicyV2</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">water_print_configs</span><span class="p">:</span> <span class="nx">Optional[Sequence[DdosPolicyV2WaterPrintConfigArgs]]</span> = None<span class="p">) -&gt;</span> DdosPolicyV2</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDdosPolicyV2<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DdosPolicyV2State</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DdosPolicyV2</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDdosPolicyV2<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DdosPolicyV2State</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DdosPolicyV2</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">DdosPolicyV2</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DdosPolicyV2State</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">DdosPolicyV2</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DdosPolicyV2State</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">DdosPolicyV2</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DdosPolicyV2State</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">DdosPolicyV2</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DdosPolicyV2State</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingDdosPolicyV2</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Dayu:DdosPolicyV2</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_dayu_ddos_policy_v2</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DdosPolicyV2State</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DdosPolicyV2State</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1823,28 +2128,31 @@ Get an existing DdosPolicyV2 resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DdosPolicyV2State</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1852,28 +2160,31 @@ Get an existing DdosPolicyV2 resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DdosPolicyV2State</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1891,19 +2202,17 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acls_csharp" style="color: inherit; text-decoration: inherit;">Acls</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2acl">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Acl<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2acl">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Acl&gt;</a></span>
     </dt>
-    <dd><p>Port ACL policy for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Port ACL policy for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_blackwhiteips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_blackwhiteips_csharp" style="color: inherit; text-decoration: inherit;">Black<wbr>White<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip&gt;</a></span>
     </dt>
-    <dd><p>DDoS-protected IP blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected IP blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_business_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_business_csharp" style="color: inherit; text-decoration: inherit;">Business</a>
@@ -1911,8 +2220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosai_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosai_csharp" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Ai</a>
@@ -1920,26 +2228,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>AI protection switch, take the value [<code>on</code>, <code>off</code>].</p>
-</dd><dt class="property-optional"
+    <dd>AI protection switch, take the value [<code>on</code>, <code>off</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosconnectlimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosconnectlimit_csharp" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Connect<wbr>Limit</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit<wbr>Args</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit</a></span>
     </dt>
-    <dd><p>DDoS connection suppression options.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS connection suppression options.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosgeoipblockconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosgeoipblockconfigs_csharp" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>DDoS-protected area block configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected area block configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddoslevel_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddoslevel_csharp" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Level</a>
@@ -1947,17 +2252,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</p>
-</dd><dt class="property-optional"
+    <dd>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosspeedlimitconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosspeedlimitconfigs_csharp" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Speed<wbr>Limit<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Access speed limit configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Access speed limit configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosthreshold_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosthreshold_csharp" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Threshold</a>
@@ -1965,26 +2268,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packetfilters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packetfilters_csharp" style="color: inherit; text-decoration: inherit;">Packet<wbr>Filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2packetfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2packetfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Feature filtering rules for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Feature filtering rules for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocolblockconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocolblockconfigs_csharp" style="color: inherit; text-decoration: inherit;">Protocol<wbr>Block<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Protocol block configuration for DDoS protection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol block configuration for DDoS protection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1992,17 +2292,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_waterprintconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waterprintconfigs_csharp" style="color: inherit; text-decoration: inherit;">Water<wbr>Print<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Water print config.</p>
-</dd></dl>
+    <dd>Water print config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2016,8 +2314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2acl">[]Ddos<wbr>Policy<wbr>V2Acl<wbr>Args</a></span>
     </dt>
-    <dd><p>Port ACL policy for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Port ACL policy for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_blackwhiteips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_blackwhiteips_go" style="color: inherit; text-decoration: inherit;">Black<wbr>White<wbr>Ips</a>
@@ -2025,8 +2322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2blackwhiteip">[]Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip<wbr>Args</a></span>
     </dt>
-    <dd><p>DDoS-protected IP blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected IP blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_business_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_business_go" style="color: inherit; text-decoration: inherit;">Business</a>
@@ -2034,8 +2330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosai_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosai_go" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Ai</a>
@@ -2043,8 +2338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>AI protection switch, take the value [<code>on</code>, <code>off</code>].</p>
-</dd><dt class="property-optional"
+    <dd>AI protection switch, take the value [<code>on</code>, <code>off</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosconnectlimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosconnectlimit_go" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Connect<wbr>Limit</a>
@@ -2052,8 +2346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit<wbr>Args</a></span>
     </dt>
-    <dd><p>DDoS connection suppression options.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS connection suppression options.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosgeoipblockconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosgeoipblockconfigs_go" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Configs</a>
@@ -2061,8 +2354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">[]Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>DDoS-protected area block configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected area block configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddoslevel_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddoslevel_go" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Level</a>
@@ -2070,8 +2362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</p>
-</dd><dt class="property-optional"
+    <dd>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosspeedlimitconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosspeedlimitconfigs_go" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Speed<wbr>Limit<wbr>Configs</a>
@@ -2079,8 +2370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">[]Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Access speed limit configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Access speed limit configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosthreshold_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosthreshold_go" style="color: inherit; text-decoration: inherit;">Ddos<wbr>Threshold</a>
@@ -2088,8 +2378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packetfilters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packetfilters_go" style="color: inherit; text-decoration: inherit;">Packet<wbr>Filters</a>
@@ -2097,8 +2386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2packetfilter">[]Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter<wbr>Args</a></span>
     </dt>
-    <dd><p>Feature filtering rules for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Feature filtering rules for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocolblockconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocolblockconfigs_go" style="color: inherit; text-decoration: inherit;">Protocol<wbr>Block<wbr>Configs</a>
@@ -2106,8 +2394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">[]Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Protocol block configuration for DDoS protection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol block configuration for DDoS protection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -2115,8 +2402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_waterprintconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waterprintconfigs_go" style="color: inherit; text-decoration: inherit;">Water<wbr>Print<wbr>Configs</a>
@@ -2124,8 +2410,117 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2waterprintconfig">[]Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Args</a></span>
     </dt>
-    <dd><p>Water print config.</p>
-</dd></dl>
+    <dd>Water print config.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_acls_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acls_hcl" style="color: inherit; text-decoration: inherit;">acls</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2acl">list(object)</a></span>
+    </dt>
+    <dd>Port ACL policy for DDoS protection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_black_white_ips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_black_white_ips_hcl" style="color: inherit; text-decoration: inherit;">black_<wbr>white_<wbr>ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">list(object)</a></span>
+    </dt>
+    <dd>DDoS-protected IP blacklist and whitelist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_business_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_business_hcl" style="color: inherit; text-decoration: inherit;">business</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ddos_ai_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddos_ai_hcl" style="color: inherit; text-decoration: inherit;">ddos_<wbr>ai</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>AI protection switch, take the value [<code>on</code>, <code>off</code>].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ddos_connect_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddos_connect_limit_hcl" style="color: inherit; text-decoration: inherit;">ddos_<wbr>connect_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">object</a></span>
+    </dt>
+    <dd>DDoS connection suppression options.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ddos_geo_ip_block_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddos_geo_ip_block_configs_hcl" style="color: inherit; text-decoration: inherit;">ddos_<wbr>geo_<wbr>ip_<wbr>block_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">list(object)</a></span>
+    </dt>
+    <dd>DDoS-protected area block configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ddos_level_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddos_level_hcl" style="color: inherit; text-decoration: inherit;">ddos_<wbr>level</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ddos_speed_limit_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddos_speed_limit_configs_hcl" style="color: inherit; text-decoration: inherit;">ddos_<wbr>speed_<wbr>limit_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">list(object)</a></span>
+    </dt>
+    <dd>Access speed limit configuration for DDoS protection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ddos_threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddos_threshold_hcl" style="color: inherit; text-decoration: inherit;">ddos_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_packet_filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packet_filters_hcl" style="color: inherit; text-decoration: inherit;">packet_<wbr>filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2packetfilter">list(object)</a></span>
+    </dt>
+    <dd>Feature filtering rules for DDoS protection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_protocol_block_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_block_configs_hcl" style="color: inherit; text-decoration: inherit;">protocol_<wbr>block_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">list(object)</a></span>
+    </dt>
+    <dd>Protocol block configuration for DDoS protection.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_water_print_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_water_print_configs_hcl" style="color: inherit; text-decoration: inherit;">water_<wbr>print_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">list(object)</a></span>
+    </dt>
+    <dd>Water print config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2137,19 +2532,17 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acls_java" style="color: inherit; text-decoration: inherit;">acls</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2acl">List&lt;Ddos<wbr>Policy<wbr>V2Acl<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2acl">List&lt;Ddos<wbr>Policy<wbr>V2Acl&gt;</a></span>
     </dt>
-    <dd><p>Port ACL policy for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Port ACL policy for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_blackwhiteips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_blackwhiteips_java" style="color: inherit; text-decoration: inherit;">black<wbr>White<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">List&lt;Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">List&lt;Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip&gt;</a></span>
     </dt>
-    <dd><p>DDoS-protected IP blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected IP blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_business_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_business_java" style="color: inherit; text-decoration: inherit;">business</a>
@@ -2157,8 +2550,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosai_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosai_java" style="color: inherit; text-decoration: inherit;">ddos<wbr>Ai</a>
@@ -2166,26 +2558,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>AI protection switch, take the value [<code>on</code>, <code>off</code>].</p>
-</dd><dt class="property-optional"
+    <dd>AI protection switch, take the value [<code>on</code>, <code>off</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosconnectlimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosconnectlimit_java" style="color: inherit; text-decoration: inherit;">ddos<wbr>Connect<wbr>Limit</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit<wbr>Args</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit</a></span>
     </dt>
-    <dd><p>DDoS connection suppression options.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS connection suppression options.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosgeoipblockconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosgeoipblockconfigs_java" style="color: inherit; text-decoration: inherit;">ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">List&lt;Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">List&lt;Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>DDoS-protected area block configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected area block configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddoslevel_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddoslevel_java" style="color: inherit; text-decoration: inherit;">ddos<wbr>Level</a>
@@ -2193,17 +2582,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</p>
-</dd><dt class="property-optional"
+    <dd>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosspeedlimitconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosspeedlimitconfigs_java" style="color: inherit; text-decoration: inherit;">ddos<wbr>Speed<wbr>Limit<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">List&lt;Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">List&lt;Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Access speed limit configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Access speed limit configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosthreshold_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosthreshold_java" style="color: inherit; text-decoration: inherit;">ddos<wbr>Threshold</a>
@@ -2211,26 +2598,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packetfilters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packetfilters_java" style="color: inherit; text-decoration: inherit;">packet<wbr>Filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2packetfilter">List&lt;Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2packetfilter">List&lt;Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Feature filtering rules for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Feature filtering rules for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocolblockconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocolblockconfigs_java" style="color: inherit; text-decoration: inherit;">protocol<wbr>Block<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">List&lt;Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">List&lt;Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Protocol block configuration for DDoS protection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol block configuration for DDoS protection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -2238,17 +2622,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_waterprintconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waterprintconfigs_java" style="color: inherit; text-decoration: inherit;">water<wbr>Print<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">List&lt;Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">List&lt;Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Water print config.</p>
-</dd></dl>
+    <dd>Water print config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2260,19 +2642,17 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acls_nodejs" style="color: inherit; text-decoration: inherit;">acls</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2acl">Ddos<wbr>Policy<wbr>V2Acl<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2acl">Ddos<wbr>Policy<wbr>V2Acl[]</a></span>
     </dt>
-    <dd><p>Port ACL policy for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Port ACL policy for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_blackwhiteips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_blackwhiteips_nodejs" style="color: inherit; text-decoration: inherit;">black<wbr>White<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip[]</a></span>
     </dt>
-    <dd><p>DDoS-protected IP blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected IP blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_business_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_business_nodejs" style="color: inherit; text-decoration: inherit;">business</a>
@@ -2280,8 +2660,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosai_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosai_nodejs" style="color: inherit; text-decoration: inherit;">ddos<wbr>Ai</a>
@@ -2289,26 +2668,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>AI protection switch, take the value [<code>on</code>, <code>off</code>].</p>
-</dd><dt class="property-optional"
+    <dd>AI protection switch, take the value [<code>on</code>, <code>off</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosconnectlimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosconnectlimit_nodejs" style="color: inherit; text-decoration: inherit;">ddos<wbr>Connect<wbr>Limit</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit<wbr>Args</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit</a></span>
     </dt>
-    <dd><p>DDoS connection suppression options.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS connection suppression options.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosgeoipblockconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosgeoipblockconfigs_nodejs" style="color: inherit; text-decoration: inherit;">ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config[]</a></span>
     </dt>
-    <dd><p>DDoS-protected area block configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected area block configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddoslevel_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddoslevel_nodejs" style="color: inherit; text-decoration: inherit;">ddos<wbr>Level</a>
@@ -2316,17 +2692,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</p>
-</dd><dt class="property-optional"
+    <dd>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosspeedlimitconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosspeedlimitconfigs_nodejs" style="color: inherit; text-decoration: inherit;">ddos<wbr>Speed<wbr>Limit<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config[]</a></span>
     </dt>
-    <dd><p>Access speed limit configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Access speed limit configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosthreshold_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosthreshold_nodejs" style="color: inherit; text-decoration: inherit;">ddos<wbr>Threshold</a>
@@ -2334,26 +2708,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packetfilters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packetfilters_nodejs" style="color: inherit; text-decoration: inherit;">packet<wbr>Filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2packetfilter">Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2packetfilter">Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>Feature filtering rules for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Feature filtering rules for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocolblockconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocolblockconfigs_nodejs" style="color: inherit; text-decoration: inherit;">protocol<wbr>Block<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config[]</a></span>
     </dt>
-    <dd><p>Protocol block configuration for DDoS protection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol block configuration for DDoS protection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -2361,17 +2732,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_waterprintconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waterprintconfigs_nodejs" style="color: inherit; text-decoration: inherit;">water<wbr>Print<wbr>Configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config[]</a></span>
     </dt>
-    <dd><p>Water print config.</p>
-</dd></dl>
+    <dd>Water print config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2383,19 +2752,17 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_acls_python" style="color: inherit; text-decoration: inherit;">acls</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2acl">Ddos<wbr>Policy<wbr>V2Acl<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2acl">Sequence[Ddos<wbr>Policy<wbr>V2Acl<wbr>Args]</a></span>
     </dt>
-    <dd><p>Port ACL policy for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Port ACL policy for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_black_white_ips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_black_white_ips_python" style="color: inherit; text-decoration: inherit;">black_<wbr>white_<wbr>ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2blackwhiteip">Sequence[Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip<wbr>Args]</a></span>
     </dt>
-    <dd><p>DDoS-protected IP blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected IP blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_business_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_business_python" style="color: inherit; text-decoration: inherit;">business</a>
@@ -2403,8 +2770,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddos_ai_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddos_ai_python" style="color: inherit; text-decoration: inherit;">ddos_<wbr>ai</a>
@@ -2412,8 +2778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>AI protection switch, take the value [<code>on</code>, <code>off</code>].</p>
-</dd><dt class="property-optional"
+    <dd>AI protection switch, take the value [<code>on</code>, <code>off</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddos_connect_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddos_connect_limit_python" style="color: inherit; text-decoration: inherit;">ddos_<wbr>connect_<wbr>limit</a>
@@ -2421,17 +2786,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit<wbr>Args</a></span>
     </dt>
-    <dd><p>DDoS connection suppression options.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS connection suppression options.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddos_geo_ip_block_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddos_geo_ip_block_configs_python" style="color: inherit; text-decoration: inherit;">ddos_<wbr>geo_<wbr>ip_<wbr>block_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">Sequence[Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config<wbr>Args]</a></span>
     </dt>
-    <dd><p>DDoS-protected area block configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected area block configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddos_level_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddos_level_python" style="color: inherit; text-decoration: inherit;">ddos_<wbr>level</a>
@@ -2439,17 +2802,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</p>
-</dd><dt class="property-optional"
+    <dd>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddos_speed_limit_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddos_speed_limit_configs_python" style="color: inherit; text-decoration: inherit;">ddos_<wbr>speed_<wbr>limit_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">Sequence[Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args]</a></span>
     </dt>
-    <dd><p>Access speed limit configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Access speed limit configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddos_threshold_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddos_threshold_python" style="color: inherit; text-decoration: inherit;">ddos_<wbr>threshold</a>
@@ -2457,26 +2818,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packet_filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packet_filters_python" style="color: inherit; text-decoration: inherit;">packet_<wbr>filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2packetfilter">Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2packetfilter">Sequence[Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter<wbr>Args]</a></span>
     </dt>
-    <dd><p>Feature filtering rules for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Feature filtering rules for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_block_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_block_configs_python" style="color: inherit; text-decoration: inherit;">protocol_<wbr>block_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">Sequence[Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config<wbr>Args]</a></span>
     </dt>
-    <dd><p>Protocol block configuration for DDoS protection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol block configuration for DDoS protection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -2484,17 +2842,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_water_print_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_water_print_configs_python" style="color: inherit; text-decoration: inherit;">water_<wbr>print_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2waterprintconfig">Sequence[Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Args]</a></span>
     </dt>
-    <dd><p>Water print config.</p>
-</dd></dl>
+    <dd>Water print config.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2508,8 +2864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2acl">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Port ACL policy for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Port ACL policy for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_blackwhiteips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_blackwhiteips_yaml" style="color: inherit; text-decoration: inherit;">black<wbr>White<wbr>Ips</a>
@@ -2517,8 +2872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2blackwhiteip">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>DDoS-protected IP blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected IP blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_business_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_business_yaml" style="color: inherit; text-decoration: inherit;">business</a>
@@ -2526,8 +2880,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosai_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosai_yaml" style="color: inherit; text-decoration: inherit;">ddos<wbr>Ai</a>
@@ -2535,8 +2888,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>AI protection switch, take the value [<code>on</code>, <code>off</code>].</p>
-</dd><dt class="property-optional"
+    <dd>AI protection switch, take the value [<code>on</code>, <code>off</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosconnectlimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosconnectlimit_yaml" style="color: inherit; text-decoration: inherit;">ddos<wbr>Connect<wbr>Limit</a>
@@ -2544,8 +2896,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2ddosconnectlimit">Property Map</a></span>
     </dt>
-    <dd><p>DDoS connection suppression options.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS connection suppression options.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosgeoipblockconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosgeoipblockconfigs_yaml" style="color: inherit; text-decoration: inherit;">ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Configs</a>
@@ -2553,8 +2904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2ddosgeoipblockconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>DDoS-protected area block configuration.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS-protected area block configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddoslevel_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddoslevel_yaml" style="color: inherit; text-decoration: inherit;">ddos<wbr>Level</a>
@@ -2562,8 +2912,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</p>
-</dd><dt class="property-optional"
+    <dd>Protection class, value [<code>low</code>, <code>middle</code>, <code>high</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosspeedlimitconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosspeedlimitconfigs_yaml" style="color: inherit; text-decoration: inherit;">ddos<wbr>Speed<wbr>Limit<wbr>Configs</a>
@@ -2571,8 +2920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2ddosspeedlimitconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Access speed limit configuration for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Access speed limit configuration for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ddosthreshold_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ddosthreshold_yaml" style="color: inherit; text-decoration: inherit;">ddos<wbr>Threshold</a>
@@ -2580,8 +2928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</p>
-</dd><dt class="property-optional"
+    <dd>DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packetfilters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packetfilters_yaml" style="color: inherit; text-decoration: inherit;">packet<wbr>Filters</a>
@@ -2589,8 +2936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2packetfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Feature filtering rules for DDoS protection.</p>
-</dd><dt class="property-optional"
+    <dd>Feature filtering rules for DDoS protection.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocolblockconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocolblockconfigs_yaml" style="color: inherit; text-decoration: inherit;">protocol<wbr>Block<wbr>Configs</a>
@@ -2598,8 +2944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2protocolblockconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Protocol block configuration for DDoS protection.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Protocol block configuration for DDoS protection.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -2607,8 +2952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_waterprintconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waterprintconfigs_yaml" style="color: inherit; text-decoration: inherit;">water<wbr>Print<wbr>Configs</a>
@@ -2616,8 +2960,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2waterprintconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Water print config.</p>
-</dd></dl>
+    <dd>Water print config.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2632,7 +2975,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="ddospolicyv2acl">Ddos<wbr>Policy<wbr>V2Acl</h4>
+<h4 id="ddospolicyv2acl">
+Ddos<wbr>Policy<wbr>V2Acl<pulumi-choosable type="language" values="python,go" class="inline">, Ddos<wbr>Policy<wbr>V2Acl<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2644,8 +2989,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, optional values: drop, transmit, forward.</p>
-</dd><dt class="property-required"
+    <dd>Action, optional values: drop, transmit, forward.</dd><dt class="property-required"
             title="Required">
         <span id="dportend_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_csharp" style="color: inherit; text-decoration: inherit;">DPort<wbr>End</a>
@@ -2653,8 +2997,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The destination port ends, and the value range is 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>The destination port ends, and the value range is 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_csharp" style="color: inherit; text-decoration: inherit;">DPort<wbr>Start</a>
@@ -2662,8 +3005,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The destination port starts, and the value range is 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>The destination port starts, and the value range is 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="forwardprotocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Protocol</a>
@@ -2671,8 +3013,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol type, desirable values tcp, udp, all.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type, desirable values tcp, udp, all.</dd><dt class="property-required"
             title="Required">
         <span id="priority_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_csharp" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -2680,8 +3021,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="sportend_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_csharp" style="color: inherit; text-decoration: inherit;">SPort<wbr>End</a>
@@ -2689,8 +3029,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source port ends, and the acceptable value ranges from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>The source port ends, and the acceptable value ranges from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_csharp" style="color: inherit; text-decoration: inherit;">SPort<wbr>Start</a>
@@ -2698,8 +3037,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source port starts, and the value range is 0~65535.</p>
-</dd></dl>
+    <dd>The source port starts, and the value range is 0~65535.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2713,8 +3051,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, optional values: drop, transmit, forward.</p>
-</dd><dt class="property-required"
+    <dd>Action, optional values: drop, transmit, forward.</dd><dt class="property-required"
             title="Required">
         <span id="dportend_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_go" style="color: inherit; text-decoration: inherit;">DPort<wbr>End</a>
@@ -2722,8 +3059,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The destination port ends, and the value range is 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>The destination port ends, and the value range is 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_go" style="color: inherit; text-decoration: inherit;">DPort<wbr>Start</a>
@@ -2731,8 +3067,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The destination port starts, and the value range is 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>The destination port starts, and the value range is 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="forwardprotocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Protocol</a>
@@ -2740,8 +3075,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol type, desirable values tcp, udp, all.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type, desirable values tcp, udp, all.</dd><dt class="property-required"
             title="Required">
         <span id="priority_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_go" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -2749,8 +3083,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="sportend_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_go" style="color: inherit; text-decoration: inherit;">SPort<wbr>End</a>
@@ -2758,8 +3091,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source port ends, and the acceptable value ranges from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>The source port ends, and the acceptable value ranges from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_go" style="color: inherit; text-decoration: inherit;">SPort<wbr>Start</a>
@@ -2767,8 +3099,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source port starts, and the value range is 0~65535.</p>
-</dd></dl>
+    <dd>The source port starts, and the value range is 0~65535.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Action, optional values: drop, transmit, forward.</dd><dt class="property-required"
+            title="Required">
+        <span id="d_port_end_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_port_end_hcl" style="color: inherit; text-decoration: inherit;">d_<wbr>port_<wbr>end</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The destination port ends, and the value range is 0~65535.</dd><dt class="property-required"
+            title="Required">
+        <span id="d_port_start_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_port_start_hcl" style="color: inherit; text-decoration: inherit;">d_<wbr>port_<wbr>start</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The destination port starts, and the value range is 0~65535.</dd><dt class="property-required"
+            title="Required">
+        <span id="forward_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_protocol_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol type, desirable values tcp, udp, all.</dd><dt class="property-required"
+            title="Required">
+        <span id="priority_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_hcl" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
+            title="Required">
+        <span id="s_port_end_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_port_end_hcl" style="color: inherit; text-decoration: inherit;">s_<wbr>port_<wbr>end</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The source port ends, and the acceptable value ranges from 0 to 65535.</dd><dt class="property-required"
+            title="Required">
+        <span id="s_port_start_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_port_start_hcl" style="color: inherit; text-decoration: inherit;">s_<wbr>port_<wbr>start</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The source port starts, and the value range is 0~65535.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2782,8 +3175,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action, optional values: drop, transmit, forward.</p>
-</dd><dt class="property-required"
+    <dd>Action, optional values: drop, transmit, forward.</dd><dt class="property-required"
             title="Required">
         <span id="dportend_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_java" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>End</a>
@@ -2791,8 +3183,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The destination port ends, and the value range is 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>The destination port ends, and the value range is 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_java" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>Start</a>
@@ -2800,8 +3191,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The destination port starts, and the value range is 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>The destination port starts, and the value range is 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="forwardprotocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Protocol</a>
@@ -2809,8 +3199,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol type, desirable values tcp, udp, all.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type, desirable values tcp, udp, all.</dd><dt class="property-required"
             title="Required">
         <span id="priority_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_java" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -2818,8 +3207,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="sportend_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_java" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>End</a>
@@ -2827,8 +3215,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The source port ends, and the acceptable value ranges from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>The source port ends, and the acceptable value ranges from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_java" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>Start</a>
@@ -2836,8 +3223,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The source port starts, and the value range is 0~65535.</p>
-</dd></dl>
+    <dd>The source port starts, and the value range is 0~65535.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2851,8 +3237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, optional values: drop, transmit, forward.</p>
-</dd><dt class="property-required"
+    <dd>Action, optional values: drop, transmit, forward.</dd><dt class="property-required"
             title="Required">
         <span id="dportend_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_nodejs" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>End</a>
@@ -2860,8 +3245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The destination port ends, and the value range is 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>The destination port ends, and the value range is 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_nodejs" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>Start</a>
@@ -2869,8 +3253,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The destination port starts, and the value range is 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>The destination port starts, and the value range is 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="forwardprotocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Protocol</a>
@@ -2878,8 +3261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol type, desirable values tcp, udp, all.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type, desirable values tcp, udp, all.</dd><dt class="property-required"
             title="Required">
         <span id="priority_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_nodejs" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -2887,8 +3269,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="sportend_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_nodejs" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>End</a>
@@ -2896,8 +3277,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The source port ends, and the acceptable value ranges from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>The source port ends, and the acceptable value ranges from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_nodejs" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>Start</a>
@@ -2905,8 +3285,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The source port starts, and the value range is 0~65535.</p>
-</dd></dl>
+    <dd>The source port starts, and the value range is 0~65535.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2920,8 +3299,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Action, optional values: drop, transmit, forward.</p>
-</dd><dt class="property-required"
+    <dd>Action, optional values: drop, transmit, forward.</dd><dt class="property-required"
             title="Required">
         <span id="d_port_end_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_port_end_python" style="color: inherit; text-decoration: inherit;">d_<wbr>port_<wbr>end</a>
@@ -2929,8 +3307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The destination port ends, and the value range is 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>The destination port ends, and the value range is 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="d_port_start_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_port_start_python" style="color: inherit; text-decoration: inherit;">d_<wbr>port_<wbr>start</a>
@@ -2938,8 +3315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The destination port starts, and the value range is 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>The destination port starts, and the value range is 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="forward_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_protocol_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>protocol</a>
@@ -2947,8 +3323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol type, desirable values tcp, udp, all.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type, desirable values tcp, udp, all.</dd><dt class="property-required"
             title="Required">
         <span id="priority_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_python" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -2956,8 +3331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="s_port_end_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_port_end_python" style="color: inherit; text-decoration: inherit;">s_<wbr>port_<wbr>end</a>
@@ -2965,8 +3339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source port ends, and the acceptable value ranges from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>The source port ends, and the acceptable value ranges from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="s_port_start_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_port_start_python" style="color: inherit; text-decoration: inherit;">s_<wbr>port_<wbr>start</a>
@@ -2974,8 +3347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source port starts, and the value range is 0~65535.</p>
-</dd></dl>
+    <dd>The source port starts, and the value range is 0~65535.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2989,8 +3361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action, optional values: drop, transmit, forward.</p>
-</dd><dt class="property-required"
+    <dd>Action, optional values: drop, transmit, forward.</dd><dt class="property-required"
             title="Required">
         <span id="dportend_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_yaml" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>End</a>
@@ -2998,8 +3369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The destination port ends, and the value range is 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>The destination port ends, and the value range is 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_yaml" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>Start</a>
@@ -3007,8 +3377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The destination port starts, and the value range is 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>The destination port starts, and the value range is 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="forwardprotocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Protocol</a>
@@ -3016,8 +3385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol type, desirable values tcp, udp, all.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type, desirable values tcp, udp, all.</dd><dt class="property-required"
             title="Required">
         <span id="priority_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_yaml" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -3025,8 +3393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-required"
+    <dd>Policy priority, the lower the number, the higher the level, the higher the rule matches, taking a value of 1-1000.Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-required"
             title="Required">
         <span id="sportend_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_yaml" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>End</a>
@@ -3034,8 +3401,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The source port ends, and the acceptable value ranges from 0 to 65535.</p>
-</dd><dt class="property-required"
+    <dd>The source port ends, and the acceptable value ranges from 0 to 65535.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_yaml" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>Start</a>
@@ -3043,12 +3409,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The source port starts, and the value range is 0~65535.</p>
-</dd></dl>
+    <dd>The source port starts, and the value range is 0~65535.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="ddospolicyv2blackwhiteip">Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip</h4>
+<h4 id="ddospolicyv2blackwhiteip">
+Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip<pulumi-choosable type="language" values="python,go" class="inline">, Ddos<wbr>Policy<wbr>V2Black<wbr>White<wbr>Ip<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3060,8 +3427,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of resource instance.</p>
-</dd><dt class="property-required"
+    <dd>Ip of resource instance.</dd><dt class="property-required"
             title="Required">
         <span id="iptype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iptype_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Type</a>
@@ -3069,8 +3435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP type, value [<code>black</code>(blacklist IP), <code>white</code> (whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [<code>black</code>(blacklist IP), <code>white</code> (whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3084,8 +3449,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of resource instance.</p>
-</dd><dt class="property-required"
+    <dd>Ip of resource instance.</dd><dt class="property-required"
             title="Required">
         <span id="iptype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iptype_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Type</a>
@@ -3093,8 +3457,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP type, value [<code>black</code>(blacklist IP), <code>white</code> (whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [<code>black</code>(blacklist IP), <code>white</code> (whitelist IP)].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ip of resource instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="ip_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_type_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP type, value [<code>black</code>(blacklist IP), <code>white</code> (whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3108,8 +3493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip of resource instance.</p>
-</dd><dt class="property-required"
+    <dd>Ip of resource instance.</dd><dt class="property-required"
             title="Required">
         <span id="iptype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iptype_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Type</a>
@@ -3117,8 +3501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP type, value [<code>black</code>(blacklist IP), <code>white</code> (whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [<code>black</code>(blacklist IP), <code>white</code> (whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3132,8 +3515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of resource instance.</p>
-</dd><dt class="property-required"
+    <dd>Ip of resource instance.</dd><dt class="property-required"
             title="Required">
         <span id="iptype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iptype_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Type</a>
@@ -3141,8 +3523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP type, value [<code>black</code>(blacklist IP), <code>white</code> (whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [<code>black</code>(blacklist IP), <code>white</code> (whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3156,8 +3537,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ip of resource instance.</p>
-</dd><dt class="property-required"
+    <dd>Ip of resource instance.</dd><dt class="property-required"
             title="Required">
         <span id="ip_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_type_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>type</a>
@@ -3165,8 +3545,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP type, value [<code>black</code>(blacklist IP), <code>white</code> (whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [<code>black</code>(blacklist IP), <code>white</code> (whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3180,8 +3559,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip of resource instance.</p>
-</dd><dt class="property-required"
+    <dd>Ip of resource instance.</dd><dt class="property-required"
             title="Required">
         <span id="iptype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iptype_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Type</a>
@@ -3189,12 +3567,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP type, value [<code>black</code>(blacklist IP), <code>white</code> (whitelist IP)].</p>
-</dd></dl>
+    <dd>IP type, value [<code>black</code>(blacklist IP), <code>white</code> (whitelist IP)].</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="ddospolicyv2ddosconnectlimit">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit</h4>
+<h4 id="ddospolicyv2ddosconnectlimit">
+Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit<pulumi-choosable type="language" values="python,go" class="inline">, Ddos<wbr>Policy<wbr>V2Ddos<wbr>Connect<wbr>Limit<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3206,8 +3585,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Based on connection suppression trigger threshold, value range [0,4294967295].</p>
-</dd><dt class="property-required"
+    <dd>Based on connection suppression trigger threshold, value range [0,4294967295].</dd><dt class="property-required"
             title="Required">
         <span id="conntimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conntimeout_csharp" style="color: inherit; text-decoration: inherit;">Conn<wbr>Timeout</a>
@@ -3215,8 +3593,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Abnormal connection detection condition, connection timeout, value range [0,65535].</p>
-</dd><dt class="property-required"
+    <dd>Abnormal connection detection condition, connection timeout, value range [0,65535].</dd><dt class="property-required"
             title="Required">
         <span id="dstconnlimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstconnlimit_csharp" style="color: inherit; text-decoration: inherit;">Dst<wbr>Conn<wbr>Limit</a>
@@ -3224,8 +3601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Concurrent connection control based on destination IP+ destination port.</p>
-</dd><dt class="property-required"
+    <dd>Concurrent connection control based on destination IP+ destination port.</dd><dt class="property-required"
             title="Required">
         <span id="dstnewlimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstnewlimit_csharp" style="color: inherit; text-decoration: inherit;">Dst<wbr>New<wbr>Limit</a>
@@ -3233,8 +3609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Limit on the number of news per second based on the destination IP.</p>
-</dd><dt class="property-required"
+    <dd>Limit on the number of news per second based on the destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="nullconnenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nullconnenable_csharp" style="color: inherit; text-decoration: inherit;">Null<wbr>Conn<wbr>Enable</a>
@@ -3242,8 +3617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Abnormal connection detection conditions, empty connection guard switch, value range[0,1].</p>
-</dd><dt class="property-required"
+    <dd>Abnormal connection detection conditions, empty connection guard switch, value range[0,1].</dd><dt class="property-required"
             title="Required">
         <span id="sdconnlimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sdconnlimit_csharp" style="color: inherit; text-decoration: inherit;">Sd<wbr>Conn<wbr>Limit</a>
@@ -3251,8 +3625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Concurrent connection control based on source IP + destination IP.</p>
-</dd><dt class="property-required"
+    <dd>Concurrent connection control based on source IP + destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="sdnewlimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sdnewlimit_csharp" style="color: inherit; text-decoration: inherit;">Sd<wbr>New<wbr>Limit</a>
@@ -3260,8 +3633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit on the number of news per second based on source IP + destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit on the number of news per second based on source IP + destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="synlimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synlimit_csharp" style="color: inherit; text-decoration: inherit;">Syn<wbr>Limit</a>
@@ -3269,8 +3641,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Anomaly connection detection condition, syn threshold, value range [0,100].</p>
-</dd><dt class="property-required"
+    <dd>Anomaly connection detection condition, syn threshold, value range [0,100].</dd><dt class="property-required"
             title="Required">
         <span id="synrate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synrate_csharp" style="color: inherit; text-decoration: inherit;">Syn<wbr>Rate</a>
@@ -3278,8 +3649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Anomalous connection detection condition, percentage of syn ack, value range [0,100].</p>
-</dd></dl>
+    <dd>Anomalous connection detection condition, percentage of syn ack, value range [0,100].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3293,8 +3663,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Based on connection suppression trigger threshold, value range [0,4294967295].</p>
-</dd><dt class="property-required"
+    <dd>Based on connection suppression trigger threshold, value range [0,4294967295].</dd><dt class="property-required"
             title="Required">
         <span id="conntimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conntimeout_go" style="color: inherit; text-decoration: inherit;">Conn<wbr>Timeout</a>
@@ -3302,8 +3671,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Abnormal connection detection condition, connection timeout, value range [0,65535].</p>
-</dd><dt class="property-required"
+    <dd>Abnormal connection detection condition, connection timeout, value range [0,65535].</dd><dt class="property-required"
             title="Required">
         <span id="dstconnlimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstconnlimit_go" style="color: inherit; text-decoration: inherit;">Dst<wbr>Conn<wbr>Limit</a>
@@ -3311,8 +3679,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Concurrent connection control based on destination IP+ destination port.</p>
-</dd><dt class="property-required"
+    <dd>Concurrent connection control based on destination IP+ destination port.</dd><dt class="property-required"
             title="Required">
         <span id="dstnewlimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstnewlimit_go" style="color: inherit; text-decoration: inherit;">Dst<wbr>New<wbr>Limit</a>
@@ -3320,8 +3687,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Limit on the number of news per second based on the destination IP.</p>
-</dd><dt class="property-required"
+    <dd>Limit on the number of news per second based on the destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="nullconnenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nullconnenable_go" style="color: inherit; text-decoration: inherit;">Null<wbr>Conn<wbr>Enable</a>
@@ -3329,8 +3695,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Abnormal connection detection conditions, empty connection guard switch, value range[0,1].</p>
-</dd><dt class="property-required"
+    <dd>Abnormal connection detection conditions, empty connection guard switch, value range[0,1].</dd><dt class="property-required"
             title="Required">
         <span id="sdconnlimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sdconnlimit_go" style="color: inherit; text-decoration: inherit;">Sd<wbr>Conn<wbr>Limit</a>
@@ -3338,8 +3703,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Concurrent connection control based on source IP + destination IP.</p>
-</dd><dt class="property-required"
+    <dd>Concurrent connection control based on source IP + destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="sdnewlimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sdnewlimit_go" style="color: inherit; text-decoration: inherit;">Sd<wbr>New<wbr>Limit</a>
@@ -3347,8 +3711,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit on the number of news per second based on source IP + destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit on the number of news per second based on source IP + destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="synlimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synlimit_go" style="color: inherit; text-decoration: inherit;">Syn<wbr>Limit</a>
@@ -3356,8 +3719,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Anomaly connection detection condition, syn threshold, value range [0,100].</p>
-</dd><dt class="property-required"
+    <dd>Anomaly connection detection condition, syn threshold, value range [0,100].</dd><dt class="property-required"
             title="Required">
         <span id="synrate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synrate_go" style="color: inherit; text-decoration: inherit;">Syn<wbr>Rate</a>
@@ -3365,8 +3727,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Anomalous connection detection condition, percentage of syn ack, value range [0,100].</p>
-</dd></dl>
+    <dd>Anomalous connection detection condition, percentage of syn ack, value range [0,100].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bad_conn_threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bad_conn_threshold_hcl" style="color: inherit; text-decoration: inherit;">bad_<wbr>conn_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Based on connection suppression trigger threshold, value range [0,4294967295].</dd><dt class="property-required"
+            title="Required">
+        <span id="conn_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conn_timeout_hcl" style="color: inherit; text-decoration: inherit;">conn_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Abnormal connection detection condition, connection timeout, value range [0,65535].</dd><dt class="property-required"
+            title="Required">
+        <span id="dst_conn_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_conn_limit_hcl" style="color: inherit; text-decoration: inherit;">dst_<wbr>conn_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Concurrent connection control based on destination IP+ destination port.</dd><dt class="property-required"
+            title="Required">
+        <span id="dst_new_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_new_limit_hcl" style="color: inherit; text-decoration: inherit;">dst_<wbr>new_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Limit on the number of news per second based on the destination IP.</dd><dt class="property-required"
+            title="Required">
+        <span id="null_conn_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#null_conn_enable_hcl" style="color: inherit; text-decoration: inherit;">null_<wbr>conn_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Abnormal connection detection conditions, empty connection guard switch, value range[0,1].</dd><dt class="property-required"
+            title="Required">
+        <span id="sd_conn_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sd_conn_limit_hcl" style="color: inherit; text-decoration: inherit;">sd_<wbr>conn_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Concurrent connection control based on source IP + destination IP.</dd><dt class="property-required"
+            title="Required">
+        <span id="sd_new_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sd_new_limit_hcl" style="color: inherit; text-decoration: inherit;">sd_<wbr>new_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The limit on the number of news per second based on source IP + destination IP.</dd><dt class="property-required"
+            title="Required">
+        <span id="syn_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syn_limit_hcl" style="color: inherit; text-decoration: inherit;">syn_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Anomaly connection detection condition, syn threshold, value range [0,100].</dd><dt class="property-required"
+            title="Required">
+        <span id="syn_rate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syn_rate_hcl" style="color: inherit; text-decoration: inherit;">syn_<wbr>rate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Anomalous connection detection condition, percentage of syn ack, value range [0,100].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3380,8 +3819,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Based on connection suppression trigger threshold, value range [0,4294967295].</p>
-</dd><dt class="property-required"
+    <dd>Based on connection suppression trigger threshold, value range [0,4294967295].</dd><dt class="property-required"
             title="Required">
         <span id="conntimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conntimeout_java" style="color: inherit; text-decoration: inherit;">conn<wbr>Timeout</a>
@@ -3389,8 +3827,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Abnormal connection detection condition, connection timeout, value range [0,65535].</p>
-</dd><dt class="property-required"
+    <dd>Abnormal connection detection condition, connection timeout, value range [0,65535].</dd><dt class="property-required"
             title="Required">
         <span id="dstconnlimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstconnlimit_java" style="color: inherit; text-decoration: inherit;">dst<wbr>Conn<wbr>Limit</a>
@@ -3398,8 +3835,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Concurrent connection control based on destination IP+ destination port.</p>
-</dd><dt class="property-required"
+    <dd>Concurrent connection control based on destination IP+ destination port.</dd><dt class="property-required"
             title="Required">
         <span id="dstnewlimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstnewlimit_java" style="color: inherit; text-decoration: inherit;">dst<wbr>New<wbr>Limit</a>
@@ -3407,8 +3843,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Limit on the number of news per second based on the destination IP.</p>
-</dd><dt class="property-required"
+    <dd>Limit on the number of news per second based on the destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="nullconnenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nullconnenable_java" style="color: inherit; text-decoration: inherit;">null<wbr>Conn<wbr>Enable</a>
@@ -3416,8 +3851,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Abnormal connection detection conditions, empty connection guard switch, value range[0,1].</p>
-</dd><dt class="property-required"
+    <dd>Abnormal connection detection conditions, empty connection guard switch, value range[0,1].</dd><dt class="property-required"
             title="Required">
         <span id="sdconnlimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sdconnlimit_java" style="color: inherit; text-decoration: inherit;">sd<wbr>Conn<wbr>Limit</a>
@@ -3425,8 +3859,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Concurrent connection control based on source IP + destination IP.</p>
-</dd><dt class="property-required"
+    <dd>Concurrent connection control based on source IP + destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="sdnewlimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sdnewlimit_java" style="color: inherit; text-decoration: inherit;">sd<wbr>New<wbr>Limit</a>
@@ -3434,8 +3867,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The limit on the number of news per second based on source IP + destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit on the number of news per second based on source IP + destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="synlimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synlimit_java" style="color: inherit; text-decoration: inherit;">syn<wbr>Limit</a>
@@ -3443,8 +3875,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Anomaly connection detection condition, syn threshold, value range [0,100].</p>
-</dd><dt class="property-required"
+    <dd>Anomaly connection detection condition, syn threshold, value range [0,100].</dd><dt class="property-required"
             title="Required">
         <span id="synrate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synrate_java" style="color: inherit; text-decoration: inherit;">syn<wbr>Rate</a>
@@ -3452,8 +3883,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Anomalous connection detection condition, percentage of syn ack, value range [0,100].</p>
-</dd></dl>
+    <dd>Anomalous connection detection condition, percentage of syn ack, value range [0,100].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3467,8 +3897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Based on connection suppression trigger threshold, value range [0,4294967295].</p>
-</dd><dt class="property-required"
+    <dd>Based on connection suppression trigger threshold, value range [0,4294967295].</dd><dt class="property-required"
             title="Required">
         <span id="conntimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conntimeout_nodejs" style="color: inherit; text-decoration: inherit;">conn<wbr>Timeout</a>
@@ -3476,8 +3905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Abnormal connection detection condition, connection timeout, value range [0,65535].</p>
-</dd><dt class="property-required"
+    <dd>Abnormal connection detection condition, connection timeout, value range [0,65535].</dd><dt class="property-required"
             title="Required">
         <span id="dstconnlimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstconnlimit_nodejs" style="color: inherit; text-decoration: inherit;">dst<wbr>Conn<wbr>Limit</a>
@@ -3485,8 +3913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Concurrent connection control based on destination IP+ destination port.</p>
-</dd><dt class="property-required"
+    <dd>Concurrent connection control based on destination IP+ destination port.</dd><dt class="property-required"
             title="Required">
         <span id="dstnewlimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstnewlimit_nodejs" style="color: inherit; text-decoration: inherit;">dst<wbr>New<wbr>Limit</a>
@@ -3494,8 +3921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Limit on the number of news per second based on the destination IP.</p>
-</dd><dt class="property-required"
+    <dd>Limit on the number of news per second based on the destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="nullconnenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nullconnenable_nodejs" style="color: inherit; text-decoration: inherit;">null<wbr>Conn<wbr>Enable</a>
@@ -3503,8 +3929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Abnormal connection detection conditions, empty connection guard switch, value range[0,1].</p>
-</dd><dt class="property-required"
+    <dd>Abnormal connection detection conditions, empty connection guard switch, value range[0,1].</dd><dt class="property-required"
             title="Required">
         <span id="sdconnlimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sdconnlimit_nodejs" style="color: inherit; text-decoration: inherit;">sd<wbr>Conn<wbr>Limit</a>
@@ -3512,8 +3937,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Concurrent connection control based on source IP + destination IP.</p>
-</dd><dt class="property-required"
+    <dd>Concurrent connection control based on source IP + destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="sdnewlimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sdnewlimit_nodejs" style="color: inherit; text-decoration: inherit;">sd<wbr>New<wbr>Limit</a>
@@ -3521,8 +3945,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The limit on the number of news per second based on source IP + destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit on the number of news per second based on source IP + destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="synlimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synlimit_nodejs" style="color: inherit; text-decoration: inherit;">syn<wbr>Limit</a>
@@ -3530,8 +3953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Anomaly connection detection condition, syn threshold, value range [0,100].</p>
-</dd><dt class="property-required"
+    <dd>Anomaly connection detection condition, syn threshold, value range [0,100].</dd><dt class="property-required"
             title="Required">
         <span id="synrate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synrate_nodejs" style="color: inherit; text-decoration: inherit;">syn<wbr>Rate</a>
@@ -3539,8 +3961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Anomalous connection detection condition, percentage of syn ack, value range [0,100].</p>
-</dd></dl>
+    <dd>Anomalous connection detection condition, percentage of syn ack, value range [0,100].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3554,8 +3975,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Based on connection suppression trigger threshold, value range [0,4294967295].</p>
-</dd><dt class="property-required"
+    <dd>Based on connection suppression trigger threshold, value range [0,4294967295].</dd><dt class="property-required"
             title="Required">
         <span id="conn_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conn_timeout_python" style="color: inherit; text-decoration: inherit;">conn_<wbr>timeout</a>
@@ -3563,8 +3983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Abnormal connection detection condition, connection timeout, value range [0,65535].</p>
-</dd><dt class="property-required"
+    <dd>Abnormal connection detection condition, connection timeout, value range [0,65535].</dd><dt class="property-required"
             title="Required">
         <span id="dst_conn_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_conn_limit_python" style="color: inherit; text-decoration: inherit;">dst_<wbr>conn_<wbr>limit</a>
@@ -3572,8 +3991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Concurrent connection control based on destination IP+ destination port.</p>
-</dd><dt class="property-required"
+    <dd>Concurrent connection control based on destination IP+ destination port.</dd><dt class="property-required"
             title="Required">
         <span id="dst_new_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_new_limit_python" style="color: inherit; text-decoration: inherit;">dst_<wbr>new_<wbr>limit</a>
@@ -3581,8 +3999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Limit on the number of news per second based on the destination IP.</p>
-</dd><dt class="property-required"
+    <dd>Limit on the number of news per second based on the destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="null_conn_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#null_conn_enable_python" style="color: inherit; text-decoration: inherit;">null_<wbr>conn_<wbr>enable</a>
@@ -3590,8 +4007,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Abnormal connection detection conditions, empty connection guard switch, value range[0,1].</p>
-</dd><dt class="property-required"
+    <dd>Abnormal connection detection conditions, empty connection guard switch, value range[0,1].</dd><dt class="property-required"
             title="Required">
         <span id="sd_conn_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sd_conn_limit_python" style="color: inherit; text-decoration: inherit;">sd_<wbr>conn_<wbr>limit</a>
@@ -3599,8 +4015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Concurrent connection control based on source IP + destination IP.</p>
-</dd><dt class="property-required"
+    <dd>Concurrent connection control based on source IP + destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="sd_new_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sd_new_limit_python" style="color: inherit; text-decoration: inherit;">sd_<wbr>new_<wbr>limit</a>
@@ -3608,8 +4023,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit on the number of news per second based on source IP + destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit on the number of news per second based on source IP + destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="syn_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syn_limit_python" style="color: inherit; text-decoration: inherit;">syn_<wbr>limit</a>
@@ -3617,8 +4031,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Anomaly connection detection condition, syn threshold, value range [0,100].</p>
-</dd><dt class="property-required"
+    <dd>Anomaly connection detection condition, syn threshold, value range [0,100].</dd><dt class="property-required"
             title="Required">
         <span id="syn_rate_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syn_rate_python" style="color: inherit; text-decoration: inherit;">syn_<wbr>rate</a>
@@ -3626,8 +4039,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Anomalous connection detection condition, percentage of syn ack, value range [0,100].</p>
-</dd></dl>
+    <dd>Anomalous connection detection condition, percentage of syn ack, value range [0,100].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3641,8 +4053,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Based on connection suppression trigger threshold, value range [0,4294967295].</p>
-</dd><dt class="property-required"
+    <dd>Based on connection suppression trigger threshold, value range [0,4294967295].</dd><dt class="property-required"
             title="Required">
         <span id="conntimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conntimeout_yaml" style="color: inherit; text-decoration: inherit;">conn<wbr>Timeout</a>
@@ -3650,8 +4061,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Abnormal connection detection condition, connection timeout, value range [0,65535].</p>
-</dd><dt class="property-required"
+    <dd>Abnormal connection detection condition, connection timeout, value range [0,65535].</dd><dt class="property-required"
             title="Required">
         <span id="dstconnlimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstconnlimit_yaml" style="color: inherit; text-decoration: inherit;">dst<wbr>Conn<wbr>Limit</a>
@@ -3659,8 +4069,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Concurrent connection control based on destination IP+ destination port.</p>
-</dd><dt class="property-required"
+    <dd>Concurrent connection control based on destination IP+ destination port.</dd><dt class="property-required"
             title="Required">
         <span id="dstnewlimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstnewlimit_yaml" style="color: inherit; text-decoration: inherit;">dst<wbr>New<wbr>Limit</a>
@@ -3668,8 +4077,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Limit on the number of news per second based on the destination IP.</p>
-</dd><dt class="property-required"
+    <dd>Limit on the number of news per second based on the destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="nullconnenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nullconnenable_yaml" style="color: inherit; text-decoration: inherit;">null<wbr>Conn<wbr>Enable</a>
@@ -3677,8 +4085,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Abnormal connection detection conditions, empty connection guard switch, value range[0,1].</p>
-</dd><dt class="property-required"
+    <dd>Abnormal connection detection conditions, empty connection guard switch, value range[0,1].</dd><dt class="property-required"
             title="Required">
         <span id="sdconnlimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sdconnlimit_yaml" style="color: inherit; text-decoration: inherit;">sd<wbr>Conn<wbr>Limit</a>
@@ -3686,8 +4093,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Concurrent connection control based on source IP + destination IP.</p>
-</dd><dt class="property-required"
+    <dd>Concurrent connection control based on source IP + destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="sdnewlimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sdnewlimit_yaml" style="color: inherit; text-decoration: inherit;">sd<wbr>New<wbr>Limit</a>
@@ -3695,8 +4101,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The limit on the number of news per second based on source IP + destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit on the number of news per second based on source IP + destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="synlimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synlimit_yaml" style="color: inherit; text-decoration: inherit;">syn<wbr>Limit</a>
@@ -3704,8 +4109,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Anomaly connection detection condition, syn threshold, value range [0,100].</p>
-</dd><dt class="property-required"
+    <dd>Anomaly connection detection condition, syn threshold, value range [0,100].</dd><dt class="property-required"
             title="Required">
         <span id="synrate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synrate_yaml" style="color: inherit; text-decoration: inherit;">syn<wbr>Rate</a>
@@ -3713,12 +4117,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Anomalous connection detection condition, percentage of syn ack, value range [0,100].</p>
-</dd></dl>
+    <dd>Anomalous connection detection condition, percentage of syn ack, value range [0,100].</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="ddospolicyv2ddosgeoipblockconfig">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config</h4>
+<h4 id="ddospolicyv2ddosgeoipblockconfig">
+Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Ddos<wbr>Policy<wbr>V2Ddos<wbr>Geo<wbr>Ip<wbr>Block<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3730,8 +4135,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Block action, take the value [<code>drop</code>, <code>trans</code>].</p>
-</dd><dt class="property-required"
+    <dd>Block action, take the value [<code>drop</code>, <code>trans</code>].</dd><dt class="property-required"
             title="Required">
         <span id="arealists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arealists_csharp" style="color: inherit; text-decoration: inherit;">Area<wbr>Lists</a>
@@ -3739,8 +4143,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.</p>
-</dd><dt class="property-required"
+    <dd>When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.</dd><dt class="property-required"
             title="Required">
         <span id="regiontype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regiontype_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Type</a>
@@ -3748,8 +4151,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone type, value [oversea (overseas),china (domestic),customized (custom region)].</p>
-</dd></dl>
+    <dd>Zone type, value [oversea (overseas),china (domestic),customized (custom region)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3763,8 +4165,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Block action, take the value [<code>drop</code>, <code>trans</code>].</p>
-</dd><dt class="property-required"
+    <dd>Block action, take the value [<code>drop</code>, <code>trans</code>].</dd><dt class="property-required"
             title="Required">
         <span id="arealists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arealists_go" style="color: inherit; text-decoration: inherit;">Area<wbr>Lists</a>
@@ -3772,8 +4173,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.</p>
-</dd><dt class="property-required"
+    <dd>When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.</dd><dt class="property-required"
             title="Required">
         <span id="regiontype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regiontype_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Type</a>
@@ -3781,8 +4181,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone type, value [oversea (overseas),china (domestic),customized (custom region)].</p>
-</dd></dl>
+    <dd>Zone type, value [oversea (overseas),china (domestic),customized (custom region)].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Block action, take the value [<code>drop</code>, <code>trans</code>].</dd><dt class="property-required"
+            title="Required">
+        <span id="area_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_lists_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_type_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Zone type, value [oversea (overseas),china (domestic),customized (custom region)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3796,8 +4225,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Block action, take the value [<code>drop</code>, <code>trans</code>].</p>
-</dd><dt class="property-required"
+    <dd>Block action, take the value [<code>drop</code>, <code>trans</code>].</dd><dt class="property-required"
             title="Required">
         <span id="arealists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arealists_java" style="color: inherit; text-decoration: inherit;">area<wbr>Lists</a>
@@ -3805,8 +4233,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.</p>
-</dd><dt class="property-required"
+    <dd>When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.</dd><dt class="property-required"
             title="Required">
         <span id="regiontype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regiontype_java" style="color: inherit; text-decoration: inherit;">region<wbr>Type</a>
@@ -3814,8 +4241,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone type, value [oversea (overseas),china (domestic),customized (custom region)].</p>
-</dd></dl>
+    <dd>Zone type, value [oversea (overseas),china (domestic),customized (custom region)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3829,8 +4255,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Block action, take the value [<code>drop</code>, <code>trans</code>].</p>
-</dd><dt class="property-required"
+    <dd>Block action, take the value [<code>drop</code>, <code>trans</code>].</dd><dt class="property-required"
             title="Required">
         <span id="arealists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arealists_nodejs" style="color: inherit; text-decoration: inherit;">area<wbr>Lists</a>
@@ -3838,8 +4263,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.</p>
-</dd><dt class="property-required"
+    <dd>When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.</dd><dt class="property-required"
             title="Required">
         <span id="regiontype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regiontype_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Type</a>
@@ -3847,8 +4271,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Zone type, value [oversea (overseas),china (domestic),customized (custom region)].</p>
-</dd></dl>
+    <dd>Zone type, value [oversea (overseas),china (domestic),customized (custom region)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3862,8 +4285,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Block action, take the value [<code>drop</code>, <code>trans</code>].</p>
-</dd><dt class="property-required"
+    <dd>Block action, take the value [<code>drop</code>, <code>trans</code>].</dd><dt class="property-required"
             title="Required">
         <span id="area_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_lists_python" style="color: inherit; text-decoration: inherit;">area_<wbr>lists</a>
@@ -3871,8 +4293,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.</p>
-</dd><dt class="property-required"
+    <dd>When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.</dd><dt class="property-required"
             title="Required">
         <span id="region_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_type_python" style="color: inherit; text-decoration: inherit;">region_<wbr>type</a>
@@ -3880,8 +4301,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Zone type, value [oversea (overseas),china (domestic),customized (custom region)].</p>
-</dd></dl>
+    <dd>Zone type, value [oversea (overseas),china (domestic),customized (custom region)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3895,8 +4315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Block action, take the value [<code>drop</code>, <code>trans</code>].</p>
-</dd><dt class="property-required"
+    <dd>Block action, take the value [<code>drop</code>, <code>trans</code>].</dd><dt class="property-required"
             title="Required">
         <span id="arealists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arealists_yaml" style="color: inherit; text-decoration: inherit;">area<wbr>Lists</a>
@@ -3904,8 +4323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.</p>
-</dd><dt class="property-required"
+    <dd>When the RegionType is customized, the AreaList must be filled in, and a maximum of 128 must be filled in.</dd><dt class="property-required"
             title="Required">
         <span id="regiontype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regiontype_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Type</a>
@@ -3913,12 +4331,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Zone type, value [oversea (overseas),china (domestic),customized (custom region)].</p>
-</dd></dl>
+    <dd>Zone type, value [oversea (overseas),china (domestic),customized (custom region)].</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="ddospolicyv2ddosspeedlimitconfig">Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config</h4>
+<h4 id="ddospolicyv2ddosspeedlimitconfig">
+Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Ddos<wbr>Policy<wbr>V2Ddos<wbr>Speed<wbr>Limit<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3930,8 +4349,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth bps.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth bps.</dd><dt class="property-required"
             title="Required">
         <span id="dstportlist_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstportlist_csharp" style="color: inherit; text-decoration: inherit;">Dst<wbr>Port<wbr>List</a>
@@ -3939,8 +4357,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.</p>
-</dd><dt class="property-required"
+    <dd>List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.</dd><dt class="property-required"
             title="Required">
         <span id="mode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_csharp" style="color: inherit; text-decoration: inherit;">Mode</a>
@@ -3948,8 +4365,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].</dd><dt class="property-required"
             title="Required">
         <span id="packetrate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetrate_csharp" style="color: inherit; text-decoration: inherit;">Packet<wbr>Rate</a>
@@ -3957,8 +4373,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Packet rate pps.</p>
-</dd><dt class="property-required"
+    <dd>Packet rate pps.</dd><dt class="property-required"
             title="Required">
         <span id="protocollist_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocollist_csharp" style="color: inherit; text-decoration: inherit;">Protocol<wbr>List</a>
@@ -3966,8 +4381,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].</p>
-</dd></dl>
+    <dd>IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3981,8 +4395,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth bps.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth bps.</dd><dt class="property-required"
             title="Required">
         <span id="dstportlist_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstportlist_go" style="color: inherit; text-decoration: inherit;">Dst<wbr>Port<wbr>List</a>
@@ -3990,8 +4403,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.</p>
-</dd><dt class="property-required"
+    <dd>List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.</dd><dt class="property-required"
             title="Required">
         <span id="mode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_go" style="color: inherit; text-decoration: inherit;">Mode</a>
@@ -3999,8 +4411,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].</dd><dt class="property-required"
             title="Required">
         <span id="packetrate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetrate_go" style="color: inherit; text-decoration: inherit;">Packet<wbr>Rate</a>
@@ -4008,8 +4419,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Packet rate pps.</p>
-</dd><dt class="property-required"
+    <dd>Packet rate pps.</dd><dt class="property-required"
             title="Required">
         <span id="protocollist_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocollist_go" style="color: inherit; text-decoration: inherit;">Protocol<wbr>List</a>
@@ -4017,8 +4427,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].</p>
-</dd></dl>
+    <dd>IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_hcl" style="color: inherit; text-decoration: inherit;">bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Bandwidth bps.</dd><dt class="property-required"
+            title="Required">
+        <span id="dst_port_list_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_port_list_hcl" style="color: inherit; text-decoration: inherit;">dst_<wbr>port_<wbr>list</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.</dd><dt class="property-required"
+            title="Required">
+        <span id="mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_hcl" style="color: inherit; text-decoration: inherit;">mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].</dd><dt class="property-required"
+            title="Required">
+        <span id="packet_rate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packet_rate_hcl" style="color: inherit; text-decoration: inherit;">packet_<wbr>rate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Packet rate pps.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_list_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_list_hcl" style="color: inherit; text-decoration: inherit;">protocol_<wbr>list</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4032,8 +4487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Bandwidth bps.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth bps.</dd><dt class="property-required"
             title="Required">
         <span id="dstportlist_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstportlist_java" style="color: inherit; text-decoration: inherit;">dst<wbr>Port<wbr>List</a>
@@ -4041,8 +4495,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.</p>
-</dd><dt class="property-required"
+    <dd>List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.</dd><dt class="property-required"
             title="Required">
         <span id="mode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_java" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -4050,8 +4503,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].</dd><dt class="property-required"
             title="Required">
         <span id="packetrate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetrate_java" style="color: inherit; text-decoration: inherit;">packet<wbr>Rate</a>
@@ -4059,8 +4511,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Packet rate pps.</p>
-</dd><dt class="property-required"
+    <dd>Packet rate pps.</dd><dt class="property-required"
             title="Required">
         <span id="protocollist_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocollist_java" style="color: inherit; text-decoration: inherit;">protocol<wbr>List</a>
@@ -4068,8 +4519,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].</p>
-</dd></dl>
+    <dd>IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4083,8 +4533,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Bandwidth bps.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth bps.</dd><dt class="property-required"
             title="Required">
         <span id="dstportlist_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstportlist_nodejs" style="color: inherit; text-decoration: inherit;">dst<wbr>Port<wbr>List</a>
@@ -4092,8 +4541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.</p>
-</dd><dt class="property-required"
+    <dd>List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.</dd><dt class="property-required"
             title="Required">
         <span id="mode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_nodejs" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -4101,8 +4549,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].</dd><dt class="property-required"
             title="Required">
         <span id="packetrate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetrate_nodejs" style="color: inherit; text-decoration: inherit;">packet<wbr>Rate</a>
@@ -4110,8 +4557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Packet rate pps.</p>
-</dd><dt class="property-required"
+    <dd>Packet rate pps.</dd><dt class="property-required"
             title="Required">
         <span id="protocollist_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocollist_nodejs" style="color: inherit; text-decoration: inherit;">protocol<wbr>List</a>
@@ -4119,8 +4565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].</p>
-</dd></dl>
+    <dd>IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4134,8 +4579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Bandwidth bps.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth bps.</dd><dt class="property-required"
             title="Required">
         <span id="dst_port_list_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dst_port_list_python" style="color: inherit; text-decoration: inherit;">dst_<wbr>port_<wbr>list</a>
@@ -4143,8 +4587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.</p>
-</dd><dt class="property-required"
+    <dd>List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.</dd><dt class="property-required"
             title="Required">
         <span id="mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_python" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -4152,8 +4595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].</dd><dt class="property-required"
             title="Required">
         <span id="packet_rate_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packet_rate_python" style="color: inherit; text-decoration: inherit;">packet_<wbr>rate</a>
@@ -4161,8 +4603,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Packet rate pps.</p>
-</dd><dt class="property-required"
+    <dd>Packet rate pps.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_list_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_list_python" style="color: inherit; text-decoration: inherit;">protocol_<wbr>list</a>
@@ -4170,8 +4611,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].</p>
-</dd></dl>
+    <dd>IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4185,8 +4625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Bandwidth bps.</p>
-</dd><dt class="property-required"
+    <dd>Bandwidth bps.</dd><dt class="property-required"
             title="Required">
         <span id="dstportlist_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstportlist_yaml" style="color: inherit; text-decoration: inherit;">dst<wbr>Port<wbr>List</a>
@@ -4194,8 +4633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.</p>
-</dd><dt class="property-required"
+    <dd>List of port ranges, up to 8, multiple; Separated, the range is represented with -; this port range must be filled in; fill in the style 1:0-65535, style 2:80; 443; 1000-2000.</dd><dt class="property-required"
             title="Required">
         <span id="mode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_yaml" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -4203,8 +4641,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].</p>
-</dd><dt class="property-required"
+    <dd>Speed limit mode, take the value [1 (speed limit based on source IP),2 (speed limit based on destination port)].</dd><dt class="property-required"
             title="Required">
         <span id="packetrate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetrate_yaml" style="color: inherit; text-decoration: inherit;">packet<wbr>Rate</a>
@@ -4212,8 +4649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Packet rate pps.</p>
-</dd><dt class="property-required"
+    <dd>Packet rate pps.</dd><dt class="property-required"
             title="Required">
         <span id="protocollist_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocollist_yaml" style="color: inherit; text-decoration: inherit;">protocol<wbr>List</a>
@@ -4221,12 +4657,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].</p>
-</dd></dl>
+    <dd>IP protocol numbers, take the value[ ALL (all protocols),TCP (tcp protocol),UDP (udp protocol),SMP (smp protocol),1; 2-100 (custom protocol number range, up to 8)].</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="ddospolicyv2packetfilter">Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter</h4>
+<h4 id="ddospolicyv2packetfilter">
+Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter<pulumi-choosable type="language" values="python,go" class="inline">, Ddos<wbr>Policy<wbr>V2Packet<wbr>Filter<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4238,8 +4675,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].</p>
-</dd><dt class="property-required"
+    <dd>Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].</dd><dt class="property-required"
             title="Required">
         <span id="dportend_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_csharp" style="color: inherit; text-decoration: inherit;">DPort<wbr>End</a>
@@ -4247,8 +4683,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.</p>
-</dd><dt class="property-required"
+    <dd>The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_csharp" style="color: inherit; text-decoration: inherit;">DPort<wbr>Start</a>
@@ -4256,8 +4691,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>From the destination port, take the value 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>From the destination port, take the value 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="depth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_csharp" style="color: inherit; text-decoration: inherit;">Depth</a>
@@ -4265,8 +4699,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Detection depth from the detection position, value [0,1500].</p>
-</dd><dt class="property-required"
+    <dd>Detection depth from the detection position, value [0,1500].</dd><dt class="property-required"
             title="Required">
         <span id="depth2_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth2_csharp" style="color: inherit; text-decoration: inherit;">Depth2</a>
@@ -4274,8 +4707,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Second detection depth starting from the second detection position, value [0,1500].</p>
-</dd><dt class="property-required"
+    <dd>Second detection depth starting from the second detection position, value [0,1500].</dd><dt class="property-required"
             title="Required">
         <span id="isnot_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Not</a>
@@ -4283,8 +4715,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to include the detected value, take the value [0 (included),1 (not included)].</p>
-</dd><dt class="property-required"
+    <dd>Whether to include the detected value, take the value [0 (included),1 (not included)].</dd><dt class="property-required"
             title="Required">
         <span id="isnot2_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot2_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Not2</a>
@@ -4292,8 +4723,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the second detection contains the detected value, the value [0 (included),1 (not included)].</p>
-</dd><dt class="property-required"
+    <dd>Whether the second detection contains the detected value, the value [0 (included),1 (not included)].</dd><dt class="property-required"
             title="Required">
         <span id="matchbegin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin_csharp" style="color: inherit; text-decoration: inherit;">Match<wbr>Begin</a>
@@ -4301,8 +4731,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detect position, take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].</p>
-</dd><dt class="property-required"
+    <dd>Detect position, take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].</dd><dt class="property-required"
             title="Required">
         <span id="matchbegin2_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin2_csharp" style="color: inherit; text-decoration: inherit;">Match<wbr>Begin2</a>
@@ -4310,8 +4739,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The second detection position. take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].</p>
-</dd><dt class="property-required"
+    <dd>The second detection position. take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].</dd><dt class="property-required"
             title="Required">
         <span id="matchlogic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchlogic_csharp" style="color: inherit; text-decoration: inherit;">Match<wbr>Logic</a>
@@ -4319,8 +4747,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].</p>
-</dd><dt class="property-required"
+    <dd>When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].</dd><dt class="property-required"
             title="Required">
         <span id="matchtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype_csharp" style="color: inherit; text-decoration: inherit;">Match<wbr>Type</a>
@@ -4328,8 +4755,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detection type, value [sunday (keyword),pcre (regular expression)].</p>
-</dd><dt class="property-required"
+    <dd>Detection type, value [sunday (keyword),pcre (regular expression)].</dd><dt class="property-required"
             title="Required">
         <span id="matchtype2_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype2_csharp" style="color: inherit; text-decoration: inherit;">Match<wbr>Type2</a>
@@ -4337,8 +4763,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].</p>
-</dd><dt class="property-required"
+    <dd>The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].</dd><dt class="property-required"
             title="Required">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -4346,8 +4771,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset from detection position, value range [0, Depth].</p>
-</dd><dt class="property-required"
+    <dd>Offset from detection position, value range [0, Depth].</dd><dt class="property-required"
             title="Required">
         <span id="offset2_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset2_csharp" style="color: inherit; text-decoration: inherit;">Offset2</a>
@@ -4355,8 +4779,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset from the second detection position, value range [0,Depth2].</p>
-</dd><dt class="property-required"
+    <dd>Offset from the second detection position, value range [0,Depth2].</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmax_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmax_csharp" style="color: inherit; text-decoration: inherit;">Pktlen<wbr>Max</a>
@@ -4364,8 +4787,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.</p>
-</dd><dt class="property-required"
+    <dd>The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmin_csharp" style="color: inherit; text-decoration: inherit;">Pktlen<wbr>Min</a>
@@ -4373,8 +4795,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum message length, 1-1500.</p>
-</dd><dt class="property-required"
+    <dd>Minimum message length, 1-1500.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -4382,8 +4803,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, value [tcp udp icmp all].</p>
-</dd><dt class="property-required"
+    <dd>Protocol, value [tcp udp icmp all].</dd><dt class="property-required"
             title="Required">
         <span id="sportend_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_csharp" style="color: inherit; text-decoration: inherit;">SPort<wbr>End</a>
@@ -4391,8 +4811,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End source port, take the value 1~65535, must be greater than or equal to the starting source port.</p>
-</dd><dt class="property-required"
+    <dd>End source port, take the value 1~65535, must be greater than or equal to the starting source port.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_csharp" style="color: inherit; text-decoration: inherit;">SPort<wbr>Start</a>
@@ -4400,8 +4819,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start the source port, take the value 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>Start the source port, take the value 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="str_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str_csharp" style="color: inherit; text-decoration: inherit;">Str</a>
@@ -4409,8 +4827,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</p>
-</dd><dt class="property-required"
+    <dd>Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</dd><dt class="property-required"
             title="Required">
         <span id="str2_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str2_csharp" style="color: inherit; text-decoration: inherit;">Str2</a>
@@ -4418,8 +4835,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</p>
-</dd></dl>
+    <dd>The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4433,8 +4849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].</p>
-</dd><dt class="property-required"
+    <dd>Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].</dd><dt class="property-required"
             title="Required">
         <span id="dportend_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_go" style="color: inherit; text-decoration: inherit;">DPort<wbr>End</a>
@@ -4442,8 +4857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.</p>
-</dd><dt class="property-required"
+    <dd>The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_go" style="color: inherit; text-decoration: inherit;">DPort<wbr>Start</a>
@@ -4451,8 +4865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>From the destination port, take the value 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>From the destination port, take the value 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="depth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_go" style="color: inherit; text-decoration: inherit;">Depth</a>
@@ -4460,8 +4873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Detection depth from the detection position, value [0,1500].</p>
-</dd><dt class="property-required"
+    <dd>Detection depth from the detection position, value [0,1500].</dd><dt class="property-required"
             title="Required">
         <span id="depth2_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth2_go" style="color: inherit; text-decoration: inherit;">Depth2</a>
@@ -4469,8 +4881,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Second detection depth starting from the second detection position, value [0,1500].</p>
-</dd><dt class="property-required"
+    <dd>Second detection depth starting from the second detection position, value [0,1500].</dd><dt class="property-required"
             title="Required">
         <span id="isnot_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Not</a>
@@ -4478,8 +4889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to include the detected value, take the value [0 (included),1 (not included)].</p>
-</dd><dt class="property-required"
+    <dd>Whether to include the detected value, take the value [0 (included),1 (not included)].</dd><dt class="property-required"
             title="Required">
         <span id="isnot2_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot2_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Not2</a>
@@ -4487,8 +4897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the second detection contains the detected value, the value [0 (included),1 (not included)].</p>
-</dd><dt class="property-required"
+    <dd>Whether the second detection contains the detected value, the value [0 (included),1 (not included)].</dd><dt class="property-required"
             title="Required">
         <span id="matchbegin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin_go" style="color: inherit; text-decoration: inherit;">Match<wbr>Begin</a>
@@ -4496,8 +4905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detect position, take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].</p>
-</dd><dt class="property-required"
+    <dd>Detect position, take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].</dd><dt class="property-required"
             title="Required">
         <span id="matchbegin2_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin2_go" style="color: inherit; text-decoration: inherit;">Match<wbr>Begin2</a>
@@ -4505,8 +4913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The second detection position. take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].</p>
-</dd><dt class="property-required"
+    <dd>The second detection position. take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].</dd><dt class="property-required"
             title="Required">
         <span id="matchlogic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchlogic_go" style="color: inherit; text-decoration: inherit;">Match<wbr>Logic</a>
@@ -4514,8 +4921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].</p>
-</dd><dt class="property-required"
+    <dd>When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].</dd><dt class="property-required"
             title="Required">
         <span id="matchtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype_go" style="color: inherit; text-decoration: inherit;">Match<wbr>Type</a>
@@ -4523,8 +4929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detection type, value [sunday (keyword),pcre (regular expression)].</p>
-</dd><dt class="property-required"
+    <dd>Detection type, value [sunday (keyword),pcre (regular expression)].</dd><dt class="property-required"
             title="Required">
         <span id="matchtype2_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype2_go" style="color: inherit; text-decoration: inherit;">Match<wbr>Type2</a>
@@ -4532,8 +4937,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].</p>
-</dd><dt class="property-required"
+    <dd>The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].</dd><dt class="property-required"
             title="Required">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -4541,8 +4945,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset from detection position, value range [0, Depth].</p>
-</dd><dt class="property-required"
+    <dd>Offset from detection position, value range [0, Depth].</dd><dt class="property-required"
             title="Required">
         <span id="offset2_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset2_go" style="color: inherit; text-decoration: inherit;">Offset2</a>
@@ -4550,8 +4953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset from the second detection position, value range [0,Depth2].</p>
-</dd><dt class="property-required"
+    <dd>Offset from the second detection position, value range [0,Depth2].</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmax_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmax_go" style="color: inherit; text-decoration: inherit;">Pktlen<wbr>Max</a>
@@ -4559,8 +4961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.</p>
-</dd><dt class="property-required"
+    <dd>The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmin_go" style="color: inherit; text-decoration: inherit;">Pktlen<wbr>Min</a>
@@ -4568,8 +4969,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum message length, 1-1500.</p>
-</dd><dt class="property-required"
+    <dd>Minimum message length, 1-1500.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -4577,8 +4977,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, value [tcp udp icmp all].</p>
-</dd><dt class="property-required"
+    <dd>Protocol, value [tcp udp icmp all].</dd><dt class="property-required"
             title="Required">
         <span id="sportend_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_go" style="color: inherit; text-decoration: inherit;">SPort<wbr>End</a>
@@ -4586,8 +4985,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End source port, take the value 1~65535, must be greater than or equal to the starting source port.</p>
-</dd><dt class="property-required"
+    <dd>End source port, take the value 1~65535, must be greater than or equal to the starting source port.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_go" style="color: inherit; text-decoration: inherit;">SPort<wbr>Start</a>
@@ -4595,8 +4993,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start the source port, take the value 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>Start the source port, take the value 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="str_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str_go" style="color: inherit; text-decoration: inherit;">Str</a>
@@ -4604,8 +5001,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</p>
-</dd><dt class="property-required"
+    <dd>Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</dd><dt class="property-required"
             title="Required">
         <span id="str2_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str2_go" style="color: inherit; text-decoration: inherit;">Str2</a>
@@ -4613,8 +5009,181 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</p>
-</dd></dl>
+    <dd>The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].</dd><dt class="property-required"
+            title="Required">
+        <span id="d_port_end_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_port_end_hcl" style="color: inherit; text-decoration: inherit;">d_<wbr>port_<wbr>end</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.</dd><dt class="property-required"
+            title="Required">
+        <span id="d_port_start_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_port_start_hcl" style="color: inherit; text-decoration: inherit;">d_<wbr>port_<wbr>start</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>From the destination port, take the value 0~65535.</dd><dt class="property-required"
+            title="Required">
+        <span id="depth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_hcl" style="color: inherit; text-decoration: inherit;">depth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Detection depth from the detection position, value [0,1500].</dd><dt class="property-required"
+            title="Required">
+        <span id="depth2_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth2_hcl" style="color: inherit; text-decoration: inherit;">depth2</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Second detection depth starting from the second detection position, value [0,1500].</dd><dt class="property-required"
+            title="Required">
+        <span id="is_not_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_not_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>not</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to include the detected value, take the value [0 (included),1 (not included)].</dd><dt class="property-required"
+            title="Required">
+        <span id="is_not2_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_not2_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>not2</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether the second detection contains the detected value, the value [0 (included),1 (not included)].</dd><dt class="property-required"
+            title="Required">
+        <span id="match_begin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_begin_hcl" style="color: inherit; text-decoration: inherit;">match_<wbr>begin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Detect position, take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].</dd><dt class="property-required"
+            title="Required">
+        <span id="match_begin2_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_begin2_hcl" style="color: inherit; text-decoration: inherit;">match_<wbr>begin2</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The second detection position. take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].</dd><dt class="property-required"
+            title="Required">
+        <span id="match_logic_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_logic_hcl" style="color: inherit; text-decoration: inherit;">match_<wbr>logic</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].</dd><dt class="property-required"
+            title="Required">
+        <span id="match_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_type_hcl" style="color: inherit; text-decoration: inherit;">match_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Detection type, value [sunday (keyword),pcre (regular expression)].</dd><dt class="property-required"
+            title="Required">
+        <span id="match_type2_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_type2_hcl" style="color: inherit; text-decoration: inherit;">match_<wbr>type2</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].</dd><dt class="property-required"
+            title="Required">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Offset from detection position, value range [0, Depth].</dd><dt class="property-required"
+            title="Required">
+        <span id="offset2_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset2_hcl" style="color: inherit; text-decoration: inherit;">offset2</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Offset from the second detection position, value range [0,Depth2].</dd><dt class="property-required"
+            title="Required">
+        <span id="pktlen_max_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlen_max_hcl" style="color: inherit; text-decoration: inherit;">pktlen_<wbr>max</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.</dd><dt class="property-required"
+            title="Required">
+        <span id="pktlen_min_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlen_min_hcl" style="color: inherit; text-decoration: inherit;">pktlen_<wbr>min</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum message length, 1-1500.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol, value [tcp udp icmp all].</dd><dt class="property-required"
+            title="Required">
+        <span id="s_port_end_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_port_end_hcl" style="color: inherit; text-decoration: inherit;">s_<wbr>port_<wbr>end</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End source port, take the value 1~65535, must be greater than or equal to the starting source port.</dd><dt class="property-required"
+            title="Required">
+        <span id="s_port_start_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_port_start_hcl" style="color: inherit; text-decoration: inherit;">s_<wbr>port_<wbr>start</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start the source port, take the value 0~65535.</dd><dt class="property-required"
+            title="Required">
+        <span id="str_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str_hcl" style="color: inherit; text-decoration: inherit;">str</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</dd><dt class="property-required"
+            title="Required">
+        <span id="str2_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str2_hcl" style="color: inherit; text-decoration: inherit;">str2</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4628,8 +5197,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].</p>
-</dd><dt class="property-required"
+    <dd>Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].</dd><dt class="property-required"
             title="Required">
         <span id="dportend_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_java" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>End</a>
@@ -4637,8 +5205,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.</p>
-</dd><dt class="property-required"
+    <dd>The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_java" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>Start</a>
@@ -4646,8 +5213,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>From the destination port, take the value 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>From the destination port, take the value 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="depth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_java" style="color: inherit; text-decoration: inherit;">depth</a>
@@ -4655,8 +5221,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Detection depth from the detection position, value [0,1500].</p>
-</dd><dt class="property-required"
+    <dd>Detection depth from the detection position, value [0,1500].</dd><dt class="property-required"
             title="Required">
         <span id="depth2_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth2_java" style="color: inherit; text-decoration: inherit;">depth2</a>
@@ -4664,8 +5229,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Second detection depth starting from the second detection position, value [0,1500].</p>
-</dd><dt class="property-required"
+    <dd>Second detection depth starting from the second detection position, value [0,1500].</dd><dt class="property-required"
             title="Required">
         <span id="isnot_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot_java" style="color: inherit; text-decoration: inherit;">is<wbr>Not</a>
@@ -4673,8 +5237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to include the detected value, take the value [0 (included),1 (not included)].</p>
-</dd><dt class="property-required"
+    <dd>Whether to include the detected value, take the value [0 (included),1 (not included)].</dd><dt class="property-required"
             title="Required">
         <span id="isnot2_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot2_java" style="color: inherit; text-decoration: inherit;">is<wbr>Not2</a>
@@ -4682,8 +5245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether the second detection contains the detected value, the value [0 (included),1 (not included)].</p>
-</dd><dt class="property-required"
+    <dd>Whether the second detection contains the detected value, the value [0 (included),1 (not included)].</dd><dt class="property-required"
             title="Required">
         <span id="matchbegin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin_java" style="color: inherit; text-decoration: inherit;">match<wbr>Begin</a>
@@ -4691,8 +5253,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detect position, take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].</p>
-</dd><dt class="property-required"
+    <dd>Detect position, take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].</dd><dt class="property-required"
             title="Required">
         <span id="matchbegin2_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin2_java" style="color: inherit; text-decoration: inherit;">match<wbr>Begin2</a>
@@ -4700,8 +5261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The second detection position. take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].</p>
-</dd><dt class="property-required"
+    <dd>The second detection position. take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].</dd><dt class="property-required"
             title="Required">
         <span id="matchlogic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchlogic_java" style="color: inherit; text-decoration: inherit;">match<wbr>Logic</a>
@@ -4709,8 +5269,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].</p>
-</dd><dt class="property-required"
+    <dd>When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].</dd><dt class="property-required"
             title="Required">
         <span id="matchtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype_java" style="color: inherit; text-decoration: inherit;">match<wbr>Type</a>
@@ -4718,8 +5277,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detection type, value [sunday (keyword),pcre (regular expression)].</p>
-</dd><dt class="property-required"
+    <dd>Detection type, value [sunday (keyword),pcre (regular expression)].</dd><dt class="property-required"
             title="Required">
         <span id="matchtype2_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype2_java" style="color: inherit; text-decoration: inherit;">match<wbr>Type2</a>
@@ -4727,8 +5285,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].</p>
-</dd><dt class="property-required"
+    <dd>The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].</dd><dt class="property-required"
             title="Required">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -4736,8 +5293,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Offset from detection position, value range [0, Depth].</p>
-</dd><dt class="property-required"
+    <dd>Offset from detection position, value range [0, Depth].</dd><dt class="property-required"
             title="Required">
         <span id="offset2_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset2_java" style="color: inherit; text-decoration: inherit;">offset2</a>
@@ -4745,8 +5301,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Offset from the second detection position, value range [0,Depth2].</p>
-</dd><dt class="property-required"
+    <dd>Offset from the second detection position, value range [0,Depth2].</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmax_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmax_java" style="color: inherit; text-decoration: inherit;">pktlen<wbr>Max</a>
@@ -4754,8 +5309,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.</p>
-</dd><dt class="property-required"
+    <dd>The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmin_java" style="color: inherit; text-decoration: inherit;">pktlen<wbr>Min</a>
@@ -4763,8 +5317,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Minimum message length, 1-1500.</p>
-</dd><dt class="property-required"
+    <dd>Minimum message length, 1-1500.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -4772,8 +5325,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol, value [tcp udp icmp all].</p>
-</dd><dt class="property-required"
+    <dd>Protocol, value [tcp udp icmp all].</dd><dt class="property-required"
             title="Required">
         <span id="sportend_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_java" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>End</a>
@@ -4781,8 +5333,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>End source port, take the value 1~65535, must be greater than or equal to the starting source port.</p>
-</dd><dt class="property-required"
+    <dd>End source port, take the value 1~65535, must be greater than or equal to the starting source port.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_java" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>Start</a>
@@ -4790,8 +5341,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Start the source port, take the value 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>Start the source port, take the value 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="str_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str_java" style="color: inherit; text-decoration: inherit;">str</a>
@@ -4799,8 +5349,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</p>
-</dd><dt class="property-required"
+    <dd>Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</dd><dt class="property-required"
             title="Required">
         <span id="str2_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str2_java" style="color: inherit; text-decoration: inherit;">str2</a>
@@ -4808,8 +5357,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</p>
-</dd></dl>
+    <dd>The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4823,8 +5371,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].</p>
-</dd><dt class="property-required"
+    <dd>Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].</dd><dt class="property-required"
             title="Required">
         <span id="dportend_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_nodejs" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>End</a>
@@ -4832,8 +5379,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.</p>
-</dd><dt class="property-required"
+    <dd>The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_nodejs" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>Start</a>
@@ -4841,8 +5387,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>From the destination port, take the value 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>From the destination port, take the value 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="depth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_nodejs" style="color: inherit; text-decoration: inherit;">depth</a>
@@ -4850,8 +5395,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Detection depth from the detection position, value [0,1500].</p>
-</dd><dt class="property-required"
+    <dd>Detection depth from the detection position, value [0,1500].</dd><dt class="property-required"
             title="Required">
         <span id="depth2_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth2_nodejs" style="color: inherit; text-decoration: inherit;">depth2</a>
@@ -4859,8 +5403,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Second detection depth starting from the second detection position, value [0,1500].</p>
-</dd><dt class="property-required"
+    <dd>Second detection depth starting from the second detection position, value [0,1500].</dd><dt class="property-required"
             title="Required">
         <span id="isnot_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Not</a>
@@ -4868,8 +5411,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to include the detected value, take the value [0 (included),1 (not included)].</p>
-</dd><dt class="property-required"
+    <dd>Whether to include the detected value, take the value [0 (included),1 (not included)].</dd><dt class="property-required"
             title="Required">
         <span id="isnot2_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot2_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Not2</a>
@@ -4877,8 +5419,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether the second detection contains the detected value, the value [0 (included),1 (not included)].</p>
-</dd><dt class="property-required"
+    <dd>Whether the second detection contains the detected value, the value [0 (included),1 (not included)].</dd><dt class="property-required"
             title="Required">
         <span id="matchbegin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin_nodejs" style="color: inherit; text-decoration: inherit;">match<wbr>Begin</a>
@@ -4886,8 +5427,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detect position, take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].</p>
-</dd><dt class="property-required"
+    <dd>Detect position, take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].</dd><dt class="property-required"
             title="Required">
         <span id="matchbegin2_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin2_nodejs" style="color: inherit; text-decoration: inherit;">match<wbr>Begin2</a>
@@ -4895,8 +5435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The second detection position. take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].</p>
-</dd><dt class="property-required"
+    <dd>The second detection position. take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].</dd><dt class="property-required"
             title="Required">
         <span id="matchlogic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchlogic_nodejs" style="color: inherit; text-decoration: inherit;">match<wbr>Logic</a>
@@ -4904,8 +5443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].</p>
-</dd><dt class="property-required"
+    <dd>When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].</dd><dt class="property-required"
             title="Required">
         <span id="matchtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype_nodejs" style="color: inherit; text-decoration: inherit;">match<wbr>Type</a>
@@ -4913,8 +5451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detection type, value [sunday (keyword),pcre (regular expression)].</p>
-</dd><dt class="property-required"
+    <dd>Detection type, value [sunday (keyword),pcre (regular expression)].</dd><dt class="property-required"
             title="Required">
         <span id="matchtype2_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype2_nodejs" style="color: inherit; text-decoration: inherit;">match<wbr>Type2</a>
@@ -4922,8 +5459,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].</p>
-</dd><dt class="property-required"
+    <dd>The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].</dd><dt class="property-required"
             title="Required">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -4931,8 +5467,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Offset from detection position, value range [0, Depth].</p>
-</dd><dt class="property-required"
+    <dd>Offset from detection position, value range [0, Depth].</dd><dt class="property-required"
             title="Required">
         <span id="offset2_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset2_nodejs" style="color: inherit; text-decoration: inherit;">offset2</a>
@@ -4940,8 +5475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Offset from the second detection position, value range [0,Depth2].</p>
-</dd><dt class="property-required"
+    <dd>Offset from the second detection position, value range [0,Depth2].</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmax_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmax_nodejs" style="color: inherit; text-decoration: inherit;">pktlen<wbr>Max</a>
@@ -4949,8 +5483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.</p>
-</dd><dt class="property-required"
+    <dd>The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmin_nodejs" style="color: inherit; text-decoration: inherit;">pktlen<wbr>Min</a>
@@ -4958,8 +5491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Minimum message length, 1-1500.</p>
-</dd><dt class="property-required"
+    <dd>Minimum message length, 1-1500.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -4967,8 +5499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, value [tcp udp icmp all].</p>
-</dd><dt class="property-required"
+    <dd>Protocol, value [tcp udp icmp all].</dd><dt class="property-required"
             title="Required">
         <span id="sportend_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_nodejs" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>End</a>
@@ -4976,8 +5507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End source port, take the value 1~65535, must be greater than or equal to the starting source port.</p>
-</dd><dt class="property-required"
+    <dd>End source port, take the value 1~65535, must be greater than or equal to the starting source port.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_nodejs" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>Start</a>
@@ -4985,8 +5515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Start the source port, take the value 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>Start the source port, take the value 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="str_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str_nodejs" style="color: inherit; text-decoration: inherit;">str</a>
@@ -4994,8 +5523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</p>
-</dd><dt class="property-required"
+    <dd>Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</dd><dt class="property-required"
             title="Required">
         <span id="str2_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str2_nodejs" style="color: inherit; text-decoration: inherit;">str2</a>
@@ -5003,8 +5531,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</p>
-</dd></dl>
+    <dd>The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5018,8 +5545,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].</p>
-</dd><dt class="property-required"
+    <dd>Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].</dd><dt class="property-required"
             title="Required">
         <span id="d_port_end_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_port_end_python" style="color: inherit; text-decoration: inherit;">d_<wbr>port_<wbr>end</a>
@@ -5027,8 +5553,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.</p>
-</dd><dt class="property-required"
+    <dd>The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.</dd><dt class="property-required"
             title="Required">
         <span id="d_port_start_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_port_start_python" style="color: inherit; text-decoration: inherit;">d_<wbr>port_<wbr>start</a>
@@ -5036,8 +5561,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>From the destination port, take the value 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>From the destination port, take the value 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="depth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_python" style="color: inherit; text-decoration: inherit;">depth</a>
@@ -5045,8 +5569,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Detection depth from the detection position, value [0,1500].</p>
-</dd><dt class="property-required"
+    <dd>Detection depth from the detection position, value [0,1500].</dd><dt class="property-required"
             title="Required">
         <span id="depth2_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth2_python" style="color: inherit; text-decoration: inherit;">depth2</a>
@@ -5054,8 +5577,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Second detection depth starting from the second detection position, value [0,1500].</p>
-</dd><dt class="property-required"
+    <dd>Second detection depth starting from the second detection position, value [0,1500].</dd><dt class="property-required"
             title="Required">
         <span id="is_not_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_not_python" style="color: inherit; text-decoration: inherit;">is_<wbr>not</a>
@@ -5063,8 +5585,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to include the detected value, take the value [0 (included),1 (not included)].</p>
-</dd><dt class="property-required"
+    <dd>Whether to include the detected value, take the value [0 (included),1 (not included)].</dd><dt class="property-required"
             title="Required">
         <span id="is_not2_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_not2_python" style="color: inherit; text-decoration: inherit;">is_<wbr>not2</a>
@@ -5072,8 +5593,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the second detection contains the detected value, the value [0 (included),1 (not included)].</p>
-</dd><dt class="property-required"
+    <dd>Whether the second detection contains the detected value, the value [0 (included),1 (not included)].</dd><dt class="property-required"
             title="Required">
         <span id="match_begin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_begin_python" style="color: inherit; text-decoration: inherit;">match_<wbr>begin</a>
@@ -5081,8 +5601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Detect position, take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].</p>
-</dd><dt class="property-required"
+    <dd>Detect position, take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].</dd><dt class="property-required"
             title="Required">
         <span id="match_begin2_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_begin2_python" style="color: inherit; text-decoration: inherit;">match_<wbr>begin2</a>
@@ -5090,8 +5609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The second detection position. take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].</p>
-</dd><dt class="property-required"
+    <dd>The second detection position. take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].</dd><dt class="property-required"
             title="Required">
         <span id="match_logic_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_logic_python" style="color: inherit; text-decoration: inherit;">match_<wbr>logic</a>
@@ -5099,8 +5617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].</p>
-</dd><dt class="property-required"
+    <dd>When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].</dd><dt class="property-required"
             title="Required">
         <span id="match_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_type_python" style="color: inherit; text-decoration: inherit;">match_<wbr>type</a>
@@ -5108,8 +5625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Detection type, value [sunday (keyword),pcre (regular expression)].</p>
-</dd><dt class="property-required"
+    <dd>Detection type, value [sunday (keyword),pcre (regular expression)].</dd><dt class="property-required"
             title="Required">
         <span id="match_type2_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_type2_python" style="color: inherit; text-decoration: inherit;">match_<wbr>type2</a>
@@ -5117,8 +5633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].</p>
-</dd><dt class="property-required"
+    <dd>The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].</dd><dt class="property-required"
             title="Required">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -5126,8 +5641,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset from detection position, value range [0, Depth].</p>
-</dd><dt class="property-required"
+    <dd>Offset from detection position, value range [0, Depth].</dd><dt class="property-required"
             title="Required">
         <span id="offset2_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset2_python" style="color: inherit; text-decoration: inherit;">offset2</a>
@@ -5135,8 +5649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset from the second detection position, value range [0,Depth2].</p>
-</dd><dt class="property-required"
+    <dd>Offset from the second detection position, value range [0,Depth2].</dd><dt class="property-required"
             title="Required">
         <span id="pktlen_max_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlen_max_python" style="color: inherit; text-decoration: inherit;">pktlen_<wbr>max</a>
@@ -5144,8 +5657,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.</p>
-</dd><dt class="property-required"
+    <dd>The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.</dd><dt class="property-required"
             title="Required">
         <span id="pktlen_min_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlen_min_python" style="color: inherit; text-decoration: inherit;">pktlen_<wbr>min</a>
@@ -5153,8 +5665,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum message length, 1-1500.</p>
-</dd><dt class="property-required"
+    <dd>Minimum message length, 1-1500.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -5162,8 +5673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol, value [tcp udp icmp all].</p>
-</dd><dt class="property-required"
+    <dd>Protocol, value [tcp udp icmp all].</dd><dt class="property-required"
             title="Required">
         <span id="s_port_end_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_port_end_python" style="color: inherit; text-decoration: inherit;">s_<wbr>port_<wbr>end</a>
@@ -5171,8 +5681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End source port, take the value 1~65535, must be greater than or equal to the starting source port.</p>
-</dd><dt class="property-required"
+    <dd>End source port, take the value 1~65535, must be greater than or equal to the starting source port.</dd><dt class="property-required"
             title="Required">
         <span id="s_port_start_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_port_start_python" style="color: inherit; text-decoration: inherit;">s_<wbr>port_<wbr>start</a>
@@ -5180,8 +5689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start the source port, take the value 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>Start the source port, take the value 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="str_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str_python" style="color: inherit; text-decoration: inherit;">str</a>
@@ -5189,8 +5697,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</p>
-</dd><dt class="property-required"
+    <dd>Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</dd><dt class="property-required"
             title="Required">
         <span id="str2_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str2_python" style="color: inherit; text-decoration: inherit;">str2</a>
@@ -5198,8 +5705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</p>
-</dd></dl>
+    <dd>The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5213,8 +5719,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].</p>
-</dd><dt class="property-required"
+    <dd>Action, take the value [drop,transmit,drop_black (discard and black out),drop_rst (Interception),drop_black_rst (intercept and block),forward].</dd><dt class="property-required"
             title="Required">
         <span id="dportend_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportend_yaml" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>End</a>
@@ -5222,8 +5727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.</p>
-</dd><dt class="property-required"
+    <dd>The end destination port, take the value 1~65535, which must be greater than or equal to the starting destination port.</dd><dt class="property-required"
             title="Required">
         <span id="dportstart_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dportstart_yaml" style="color: inherit; text-decoration: inherit;">d<wbr>Port<wbr>Start</a>
@@ -5231,8 +5735,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>From the destination port, take the value 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>From the destination port, take the value 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="depth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_yaml" style="color: inherit; text-decoration: inherit;">depth</a>
@@ -5240,8 +5743,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Detection depth from the detection position, value [0,1500].</p>
-</dd><dt class="property-required"
+    <dd>Detection depth from the detection position, value [0,1500].</dd><dt class="property-required"
             title="Required">
         <span id="depth2_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth2_yaml" style="color: inherit; text-decoration: inherit;">depth2</a>
@@ -5249,8 +5751,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Second detection depth starting from the second detection position, value [0,1500].</p>
-</dd><dt class="property-required"
+    <dd>Second detection depth starting from the second detection position, value [0,1500].</dd><dt class="property-required"
             title="Required">
         <span id="isnot_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Not</a>
@@ -5258,8 +5759,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to include the detected value, take the value [0 (included),1 (not included)].</p>
-</dd><dt class="property-required"
+    <dd>Whether to include the detected value, take the value [0 (included),1 (not included)].</dd><dt class="property-required"
             title="Required">
         <span id="isnot2_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isnot2_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Not2</a>
@@ -5267,8 +5767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether the second detection contains the detected value, the value [0 (included),1 (not included)].</p>
-</dd><dt class="property-required"
+    <dd>Whether the second detection contains the detected value, the value [0 (included),1 (not included)].</dd><dt class="property-required"
             title="Required">
         <span id="matchbegin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin_yaml" style="color: inherit; text-decoration: inherit;">match<wbr>Begin</a>
@@ -5276,8 +5775,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detect position, take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].</p>
-</dd><dt class="property-required"
+    <dd>Detect position, take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].</dd><dt class="property-required"
             title="Required">
         <span id="matchbegin2_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin2_yaml" style="color: inherit; text-decoration: inherit;">match<wbr>Begin2</a>
@@ -5285,8 +5783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The second detection position. take the value [begin_l3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), no_match (mismatch)].</p>
-</dd><dt class="property-required"
+    <dd>The second detection position. take the value [beginL3 (IP header),begin_l4 (TCP/UDP header),begin_l5 (T load), noMatch (mismatch)].</dd><dt class="property-required"
             title="Required">
         <span id="matchlogic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchlogic_yaml" style="color: inherit; text-decoration: inherit;">match<wbr>Logic</a>
@@ -5294,8 +5791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].</p>
-</dd><dt class="property-required"
+    <dd>When there is a second detection condition, the and/or relationship with the first detection condition, takes the value [And (and relationship),none (fill in this value when there is no second detection condition)].</dd><dt class="property-required"
             title="Required">
         <span id="matchtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype_yaml" style="color: inherit; text-decoration: inherit;">match<wbr>Type</a>
@@ -5303,8 +5799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detection type, value [sunday (keyword),pcre (regular expression)].</p>
-</dd><dt class="property-required"
+    <dd>Detection type, value [sunday (keyword),pcre (regular expression)].</dd><dt class="property-required"
             title="Required">
         <span id="matchtype2_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype2_yaml" style="color: inherit; text-decoration: inherit;">match<wbr>Type2</a>
@@ -5312,8 +5807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].</p>
-</dd><dt class="property-required"
+    <dd>The second type of detection, takes the value [sunday (keyword),pcre (regular expression)].</dd><dt class="property-required"
             title="Required">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -5321,8 +5815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Offset from detection position, value range [0, Depth].</p>
-</dd><dt class="property-required"
+    <dd>Offset from detection position, value range [0, Depth].</dd><dt class="property-required"
             title="Required">
         <span id="offset2_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset2_yaml" style="color: inherit; text-decoration: inherit;">offset2</a>
@@ -5330,8 +5823,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Offset from the second detection position, value range [0,Depth2].</p>
-</dd><dt class="property-required"
+    <dd>Offset from the second detection position, value range [0,Depth2].</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmax_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmax_yaml" style="color: inherit; text-decoration: inherit;">pktlen<wbr>Max</a>
@@ -5339,8 +5831,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.</p>
-</dd><dt class="property-required"
+    <dd>The maximum message length, taken from 1 to 1500, must be greater than or equal to the minimum message length.</dd><dt class="property-required"
             title="Required">
         <span id="pktlenmin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlenmin_yaml" style="color: inherit; text-decoration: inherit;">pktlen<wbr>Min</a>
@@ -5348,8 +5839,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Minimum message length, 1-1500.</p>
-</dd><dt class="property-required"
+    <dd>Minimum message length, 1-1500.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -5357,8 +5847,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol, value [tcp udp icmp all].</p>
-</dd><dt class="property-required"
+    <dd>Protocol, value [tcp udp icmp all].</dd><dt class="property-required"
             title="Required">
         <span id="sportend_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportend_yaml" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>End</a>
@@ -5366,8 +5855,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End source port, take the value 1~65535, must be greater than or equal to the starting source port.</p>
-</dd><dt class="property-required"
+    <dd>End source port, take the value 1~65535, must be greater than or equal to the starting source port.</dd><dt class="property-required"
             title="Required">
         <span id="sportstart_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sportstart_yaml" style="color: inherit; text-decoration: inherit;">s<wbr>Port<wbr>Start</a>
@@ -5375,8 +5863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Start the source port, take the value 0~65535.</p>
-</dd><dt class="property-required"
+    <dd>Start the source port, take the value 0~65535.</dd><dt class="property-required"
             title="Required">
         <span id="str_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str_yaml" style="color: inherit; text-decoration: inherit;">str</a>
@@ -5384,8 +5871,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</p>
-</dd><dt class="property-required"
+    <dd>Detect values, key strings or regular expressions, take the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</dd><dt class="property-required"
             title="Required">
         <span id="str2_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#str2_yaml" style="color: inherit; text-decoration: inherit;">str2</a>
@@ -5393,12 +5879,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</p>
-</dd></dl>
+    <dd>The second detection value, the key string or regular expression, takes the value [When the detection type is sunday, please fill in the string or hexadecimal bytecode, for example 13233 corresponds to the hexadecimal bytecode of the string <code>123</code>;When the detection type is pcre, please fill in the regular expression string;].</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="ddospolicyv2protocolblockconfig">Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config</h4>
+<h4 id="ddospolicyv2protocolblockconfig">
+Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Ddos<wbr>Policy<wbr>V2Protocol<wbr>Block<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5410,8 +5897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ICMP block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>ICMP block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="dropother_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropother_csharp" style="color: inherit; text-decoration: inherit;">Drop<wbr>Other</a>
@@ -5419,8 +5905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Other block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>Other block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="droptcp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#droptcp_csharp" style="color: inherit; text-decoration: inherit;">Drop<wbr>Tcp</a>
@@ -5428,8 +5913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>TCP block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>TCP block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="dropudp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropudp_csharp" style="color: inherit; text-decoration: inherit;">Drop<wbr>Udp</a>
@@ -5437,8 +5921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>UDP block, value [0 (block off), 1 (block on)].</p>
-</dd></dl>
+    <dd>UDP block, value [0 (block off), 1 (block on)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5452,8 +5935,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ICMP block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>ICMP block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="dropother_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropother_go" style="color: inherit; text-decoration: inherit;">Drop<wbr>Other</a>
@@ -5461,8 +5943,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Other block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>Other block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="droptcp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#droptcp_go" style="color: inherit; text-decoration: inherit;">Drop<wbr>Tcp</a>
@@ -5470,8 +5951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>TCP block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>TCP block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="dropudp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropudp_go" style="color: inherit; text-decoration: inherit;">Drop<wbr>Udp</a>
@@ -5479,8 +5959,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>UDP block, value [0 (block off), 1 (block on)].</p>
-</dd></dl>
+    <dd>UDP block, value [0 (block off), 1 (block on)].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="drop_icmp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_icmp_hcl" style="color: inherit; text-decoration: inherit;">drop_<wbr>icmp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ICMP block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
+            title="Required">
+        <span id="drop_other_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_other_hcl" style="color: inherit; text-decoration: inherit;">drop_<wbr>other</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Other block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
+            title="Required">
+        <span id="drop_tcp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_tcp_hcl" style="color: inherit; text-decoration: inherit;">drop_<wbr>tcp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>TCP block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
+            title="Required">
+        <span id="drop_udp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_udp_hcl" style="color: inherit; text-decoration: inherit;">drop_<wbr>udp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>UDP block, value [0 (block off), 1 (block on)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5494,8 +6011,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ICMP block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>ICMP block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="dropother_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropother_java" style="color: inherit; text-decoration: inherit;">drop<wbr>Other</a>
@@ -5503,8 +6019,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Other block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>Other block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="droptcp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#droptcp_java" style="color: inherit; text-decoration: inherit;">drop<wbr>Tcp</a>
@@ -5512,8 +6027,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>TCP block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>TCP block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="dropudp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropudp_java" style="color: inherit; text-decoration: inherit;">drop<wbr>Udp</a>
@@ -5521,8 +6035,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>UDP block, value [0 (block off), 1 (block on)].</p>
-</dd></dl>
+    <dd>UDP block, value [0 (block off), 1 (block on)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5536,8 +6049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ICMP block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>ICMP block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="dropother_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropother_nodejs" style="color: inherit; text-decoration: inherit;">drop<wbr>Other</a>
@@ -5545,8 +6057,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Other block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>Other block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="droptcp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#droptcp_nodejs" style="color: inherit; text-decoration: inherit;">drop<wbr>Tcp</a>
@@ -5554,8 +6065,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>TCP block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>TCP block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="dropudp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropudp_nodejs" style="color: inherit; text-decoration: inherit;">drop<wbr>Udp</a>
@@ -5563,8 +6073,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>UDP block, value [0 (block off), 1 (block on)].</p>
-</dd></dl>
+    <dd>UDP block, value [0 (block off), 1 (block on)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5578,8 +6087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ICMP block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>ICMP block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="drop_other_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_other_python" style="color: inherit; text-decoration: inherit;">drop_<wbr>other</a>
@@ -5587,8 +6095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Other block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>Other block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="drop_tcp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_tcp_python" style="color: inherit; text-decoration: inherit;">drop_<wbr>tcp</a>
@@ -5596,8 +6103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>TCP block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>TCP block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="drop_udp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_udp_python" style="color: inherit; text-decoration: inherit;">drop_<wbr>udp</a>
@@ -5605,8 +6111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>UDP block, value [0 (block off), 1 (block on)].</p>
-</dd></dl>
+    <dd>UDP block, value [0 (block off), 1 (block on)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5620,8 +6125,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ICMP block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>ICMP block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="dropother_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropother_yaml" style="color: inherit; text-decoration: inherit;">drop<wbr>Other</a>
@@ -5629,8 +6133,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Other block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>Other block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="droptcp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#droptcp_yaml" style="color: inherit; text-decoration: inherit;">drop<wbr>Tcp</a>
@@ -5638,8 +6141,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>TCP block, value [0 (block off), 1 (block on)].</p>
-</dd><dt class="property-required"
+    <dd>TCP block, value [0 (block off), 1 (block on)].</dd><dt class="property-required"
             title="Required">
         <span id="dropudp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropudp_yaml" style="color: inherit; text-decoration: inherit;">drop<wbr>Udp</a>
@@ -5647,12 +6149,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>UDP block, value [0 (block off), 1 (block on)].</p>
-</dd></dl>
+    <dd>UDP block, value [0 (block off), 1 (block on)].</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="ddospolicyv2waterprintconfig">Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config</h4>
+<h4 id="ddospolicyv2waterprintconfig">
+Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<pulumi-choosable type="language" values="python,go" class="inline">, Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5664,8 +6167,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2waterprintconfiglistener">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Listener&gt;</a></span>
     </dt>
-    <dd><p>List of forwarding listeners to which the watermark belongs.</p>
-</dd><dt class="property-required"
+    <dd>List of forwarding listeners to which the watermark belongs.</dd><dt class="property-required"
             title="Required">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -5673,8 +6175,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Watermark offset, value range: [0-100].</p>
-</dd><dt class="property-required"
+    <dd>Watermark offset, value range: [0-100].</dd><dt class="property-required"
             title="Required">
         <span id="openstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openstatus_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Status</a>
@@ -5682,8 +6183,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether it is enabled, value [0 (manual open), 1 (immediate operation)].</p>
-</dd><dt class="property-required"
+    <dd>Whether it is enabled, value [0 (manual open), 1 (immediate operation)].</dd><dt class="property-required"
             title="Required">
         <span id="verify_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_csharp" style="color: inherit; text-decoration: inherit;">Verify</a>
@@ -5691,8 +6191,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark check mode, value [<code>checkall</code>(normal mode), <code>shortfpcheckall</code>(simplified mode)].</p>
-</dd></dl>
+    <dd>Watermark check mode, value [<code>checkall</code>(normal mode), <code>shortfpcheckall</code>(simplified mode)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5706,8 +6205,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2waterprintconfiglistener">[]Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Listener</a></span>
     </dt>
-    <dd><p>List of forwarding listeners to which the watermark belongs.</p>
-</dd><dt class="property-required"
+    <dd>List of forwarding listeners to which the watermark belongs.</dd><dt class="property-required"
             title="Required">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -5715,8 +6213,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Watermark offset, value range: [0-100].</p>
-</dd><dt class="property-required"
+    <dd>Watermark offset, value range: [0-100].</dd><dt class="property-required"
             title="Required">
         <span id="openstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openstatus_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Status</a>
@@ -5724,8 +6221,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether it is enabled, value [0 (manual open), 1 (immediate operation)].</p>
-</dd><dt class="property-required"
+    <dd>Whether it is enabled, value [0 (manual open), 1 (immediate operation)].</dd><dt class="property-required"
             title="Required">
         <span id="verify_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_go" style="color: inherit; text-decoration: inherit;">Verify</a>
@@ -5733,8 +6229,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark check mode, value [<code>checkall</code>(normal mode), <code>shortfpcheckall</code>(simplified mode)].</p>
-</dd></dl>
+    <dd>Watermark check mode, value [<code>checkall</code>(normal mode), <code>shortfpcheckall</code>(simplified mode)].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="listeners_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listeners_hcl" style="color: inherit; text-decoration: inherit;">listeners</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ddospolicyv2waterprintconfiglistener">list(object)</a></span>
+    </dt>
+    <dd>List of forwarding listeners to which the watermark belongs.</dd><dt class="property-required"
+            title="Required">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Watermark offset, value range: [0-100].</dd><dt class="property-required"
+            title="Required">
+        <span id="open_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_status_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether it is enabled, value [0 (manual open), 1 (immediate operation)].</dd><dt class="property-required"
+            title="Required">
+        <span id="verify_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_hcl" style="color: inherit; text-decoration: inherit;">verify</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermark check mode, value [<code>checkall</code>(normal mode), <code>shortfpcheckall</code>(simplified mode)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5748,8 +6281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2waterprintconfiglistener">List&lt;Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Listener&gt;</a></span>
     </dt>
-    <dd><p>List of forwarding listeners to which the watermark belongs.</p>
-</dd><dt class="property-required"
+    <dd>List of forwarding listeners to which the watermark belongs.</dd><dt class="property-required"
             title="Required">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -5757,8 +6289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Watermark offset, value range: [0-100].</p>
-</dd><dt class="property-required"
+    <dd>Watermark offset, value range: [0-100].</dd><dt class="property-required"
             title="Required">
         <span id="openstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openstatus_java" style="color: inherit; text-decoration: inherit;">open<wbr>Status</a>
@@ -5766,8 +6297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether it is enabled, value [0 (manual open), 1 (immediate operation)].</p>
-</dd><dt class="property-required"
+    <dd>Whether it is enabled, value [0 (manual open), 1 (immediate operation)].</dd><dt class="property-required"
             title="Required">
         <span id="verify_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_java" style="color: inherit; text-decoration: inherit;">verify</a>
@@ -5775,8 +6305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermark check mode, value [<code>checkall</code>(normal mode), <code>shortfpcheckall</code>(simplified mode)].</p>
-</dd></dl>
+    <dd>Watermark check mode, value [<code>checkall</code>(normal mode), <code>shortfpcheckall</code>(simplified mode)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5790,8 +6319,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2waterprintconfiglistener">Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Listener[]</a></span>
     </dt>
-    <dd><p>List of forwarding listeners to which the watermark belongs.</p>
-</dd><dt class="property-required"
+    <dd>List of forwarding listeners to which the watermark belongs.</dd><dt class="property-required"
             title="Required">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -5799,8 +6327,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Watermark offset, value range: [0-100].</p>
-</dd><dt class="property-required"
+    <dd>Watermark offset, value range: [0-100].</dd><dt class="property-required"
             title="Required">
         <span id="openstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openstatus_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Status</a>
@@ -5808,8 +6335,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether it is enabled, value [0 (manual open), 1 (immediate operation)].</p>
-</dd><dt class="property-required"
+    <dd>Whether it is enabled, value [0 (manual open), 1 (immediate operation)].</dd><dt class="property-required"
             title="Required">
         <span id="verify_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_nodejs" style="color: inherit; text-decoration: inherit;">verify</a>
@@ -5817,8 +6343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermark check mode, value [<code>checkall</code>(normal mode), <code>shortfpcheckall</code>(simplified mode)].</p>
-</dd></dl>
+    <dd>Watermark check mode, value [<code>checkall</code>(normal mode), <code>shortfpcheckall</code>(simplified mode)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5830,10 +6355,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listeners_python" style="color: inherit; text-decoration: inherit;">listeners</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ddospolicyv2waterprintconfiglistener">Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Listener]</a></span>
+        <span class="property-type"><a href="#ddospolicyv2waterprintconfiglistener">Sequence[Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Listener]</a></span>
     </dt>
-    <dd><p>List of forwarding listeners to which the watermark belongs.</p>
-</dd><dt class="property-required"
+    <dd>List of forwarding listeners to which the watermark belongs.</dd><dt class="property-required"
             title="Required">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -5841,8 +6365,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Watermark offset, value range: [0-100].</p>
-</dd><dt class="property-required"
+    <dd>Watermark offset, value range: [0-100].</dd><dt class="property-required"
             title="Required">
         <span id="open_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_status_python" style="color: inherit; text-decoration: inherit;">open_<wbr>status</a>
@@ -5850,8 +6373,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether it is enabled, value [0 (manual open), 1 (immediate operation)].</p>
-</dd><dt class="property-required"
+    <dd>Whether it is enabled, value [0 (manual open), 1 (immediate operation)].</dd><dt class="property-required"
             title="Required">
         <span id="verify_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_python" style="color: inherit; text-decoration: inherit;">verify</a>
@@ -5859,8 +6381,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Watermark check mode, value [<code>checkall</code>(normal mode), <code>shortfpcheckall</code>(simplified mode)].</p>
-</dd></dl>
+    <dd>Watermark check mode, value [<code>checkall</code>(normal mode), <code>shortfpcheckall</code>(simplified mode)].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5874,8 +6395,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ddospolicyv2waterprintconfiglistener">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of forwarding listeners to which the watermark belongs.</p>
-</dd><dt class="property-required"
+    <dd>List of forwarding listeners to which the watermark belongs.</dd><dt class="property-required"
             title="Required">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -5883,8 +6403,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Watermark offset, value range: [0-100].</p>
-</dd><dt class="property-required"
+    <dd>Watermark offset, value range: [0-100].</dd><dt class="property-required"
             title="Required">
         <span id="openstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openstatus_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Status</a>
@@ -5892,8 +6411,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether it is enabled, value [0 (manual open), 1 (immediate operation)].</p>
-</dd><dt class="property-required"
+    <dd>Whether it is enabled, value [0 (manual open), 1 (immediate operation)].</dd><dt class="property-required"
             title="Required">
         <span id="verify_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#verify_yaml" style="color: inherit; text-decoration: inherit;">verify</a>
@@ -5901,12 +6419,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermark check mode, value [<code>checkall</code>(normal mode), <code>shortfpcheckall</code>(simplified mode)].</p>
-</dd></dl>
+    <dd>Watermark check mode, value [<code>checkall</code>(normal mode), <code>shortfpcheckall</code>(simplified mode)].</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="ddospolicyv2waterprintconfiglistener">Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Listener</h4>
+<h4 id="ddospolicyv2waterprintconfiglistener">
+Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Listener<pulumi-choosable type="language" values="python,go" class="inline">, Ddos<wbr>Policy<wbr>V2Water<wbr>Print<wbr>Config<wbr>Listener<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5918,8 +6437,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forwarding protocol, value [TCP, UDP].</p>
-</dd><dt class="property-required"
+    <dd>Forwarding protocol, value [TCP, UDP].</dd><dt class="property-required"
             title="Required">
         <span id="frontendport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frontendport_csharp" style="color: inherit; text-decoration: inherit;">Frontend<wbr>Port</a>
@@ -5927,8 +6445,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Lower limit of forwarding listening port. Values: [1-65535].</p>
-</dd><dt class="property-required"
+    <dd>Lower limit of forwarding listening port. Values: [1-65535].</dd><dt class="property-required"
             title="Required">
         <span id="frontendportend_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frontendportend_csharp" style="color: inherit; text-decoration: inherit;">Frontend<wbr>Port<wbr>End</a>
@@ -5936,8 +6453,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Upper limit of forwarding listening port. Values: [1-65535].</p>
-</dd></dl>
+    <dd>Upper limit of forwarding listening port. Values: [1-65535].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5951,8 +6467,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forwarding protocol, value [TCP, UDP].</p>
-</dd><dt class="property-required"
+    <dd>Forwarding protocol, value [TCP, UDP].</dd><dt class="property-required"
             title="Required">
         <span id="frontendport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frontendport_go" style="color: inherit; text-decoration: inherit;">Frontend<wbr>Port</a>
@@ -5960,8 +6475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Lower limit of forwarding listening port. Values: [1-65535].</p>
-</dd><dt class="property-required"
+    <dd>Lower limit of forwarding listening port. Values: [1-65535].</dd><dt class="property-required"
             title="Required">
         <span id="frontendportend_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frontendportend_go" style="color: inherit; text-decoration: inherit;">Frontend<wbr>Port<wbr>End</a>
@@ -5969,8 +6483,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Upper limit of forwarding listening port. Values: [1-65535].</p>
-</dd></dl>
+    <dd>Upper limit of forwarding listening port. Values: [1-65535].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="forward_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_protocol_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Forwarding protocol, value [TCP, UDP].</dd><dt class="property-required"
+            title="Required">
+        <span id="frontend_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frontend_port_hcl" style="color: inherit; text-decoration: inherit;">frontend_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Lower limit of forwarding listening port. Values: [1-65535].</dd><dt class="property-required"
+            title="Required">
+        <span id="frontend_port_end_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frontend_port_end_hcl" style="color: inherit; text-decoration: inherit;">frontend_<wbr>port_<wbr>end</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Upper limit of forwarding listening port. Values: [1-65535].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5984,8 +6527,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forwarding protocol, value [TCP, UDP].</p>
-</dd><dt class="property-required"
+    <dd>Forwarding protocol, value [TCP, UDP].</dd><dt class="property-required"
             title="Required">
         <span id="frontendport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frontendport_java" style="color: inherit; text-decoration: inherit;">frontend<wbr>Port</a>
@@ -5993,8 +6535,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Lower limit of forwarding listening port. Values: [1-65535].</p>
-</dd><dt class="property-required"
+    <dd>Lower limit of forwarding listening port. Values: [1-65535].</dd><dt class="property-required"
             title="Required">
         <span id="frontendportend_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frontendportend_java" style="color: inherit; text-decoration: inherit;">frontend<wbr>Port<wbr>End</a>
@@ -6002,8 +6543,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Upper limit of forwarding listening port. Values: [1-65535].</p>
-</dd></dl>
+    <dd>Upper limit of forwarding listening port. Values: [1-65535].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6017,8 +6557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forwarding protocol, value [TCP, UDP].</p>
-</dd><dt class="property-required"
+    <dd>Forwarding protocol, value [TCP, UDP].</dd><dt class="property-required"
             title="Required">
         <span id="frontendport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frontendport_nodejs" style="color: inherit; text-decoration: inherit;">frontend<wbr>Port</a>
@@ -6026,8 +6565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Lower limit of forwarding listening port. Values: [1-65535].</p>
-</dd><dt class="property-required"
+    <dd>Lower limit of forwarding listening port. Values: [1-65535].</dd><dt class="property-required"
             title="Required">
         <span id="frontendportend_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frontendportend_nodejs" style="color: inherit; text-decoration: inherit;">frontend<wbr>Port<wbr>End</a>
@@ -6035,8 +6573,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Upper limit of forwarding listening port. Values: [1-65535].</p>
-</dd></dl>
+    <dd>Upper limit of forwarding listening port. Values: [1-65535].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6050,8 +6587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Forwarding protocol, value [TCP, UDP].</p>
-</dd><dt class="property-required"
+    <dd>Forwarding protocol, value [TCP, UDP].</dd><dt class="property-required"
             title="Required">
         <span id="frontend_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frontend_port_python" style="color: inherit; text-decoration: inherit;">frontend_<wbr>port</a>
@@ -6059,8 +6595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Lower limit of forwarding listening port. Values: [1-65535].</p>
-</dd><dt class="property-required"
+    <dd>Lower limit of forwarding listening port. Values: [1-65535].</dd><dt class="property-required"
             title="Required">
         <span id="frontend_port_end_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frontend_port_end_python" style="color: inherit; text-decoration: inherit;">frontend_<wbr>port_<wbr>end</a>
@@ -6068,8 +6603,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Upper limit of forwarding listening port. Values: [1-65535].</p>
-</dd></dl>
+    <dd>Upper limit of forwarding listening port. Values: [1-65535].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6083,8 +6617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forwarding protocol, value [TCP, UDP].</p>
-</dd><dt class="property-required"
+    <dd>Forwarding protocol, value [TCP, UDP].</dd><dt class="property-required"
             title="Required">
         <span id="frontendport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frontendport_yaml" style="color: inherit; text-decoration: inherit;">frontend<wbr>Port</a>
@@ -6092,8 +6625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Lower limit of forwarding listening port. Values: [1-65535].</p>
-</dd><dt class="property-required"
+    <dd>Lower limit of forwarding listening port. Values: [1-65535].</dd><dt class="property-required"
             title="Required">
         <span id="frontendportend_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frontendportend_yaml" style="color: inherit; text-decoration: inherit;">frontend<wbr>Port<wbr>End</a>
@@ -6101,8 +6633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Upper limit of forwarding listening port. Values: [1-65535].</p>
-</dd></dl>
+    <dd>Upper limit of forwarding listening port. Values: [1-65535].</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6114,7 +6645,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

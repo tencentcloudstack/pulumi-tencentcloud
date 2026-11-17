@@ -2,9 +2,11 @@
 ---
 title: "ParamTemplate"
 title_tag: "tencentcloud.Redis.ParamTemplate"
-meta_desc: "Documentation for the tencentcloud.Redis.ParamTemplate resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a redis parameter template"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,75 +18,69 @@ Provides a resource to create a redis parameter template
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const paramTemplate = new tencentcloud.redis.ParamTemplate("paramTemplate", {
+const example = new tencentcloud.redis.ParamTemplate("example", {
+    name: "tf_example",
     description: "This is an example redis param template.",
+    productType: 6,
     paramsOverrides: [{
         key: "timeout",
         value: "7200",
     }],
-    productType: 6,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-param_template = tencentcloud.redis.ParamTemplate("paramTemplate",
+example = tencentcloud.redis.ParamTemplate("example",
+    name="tf_example",
     description="This is an example redis param template.",
-    params_overrides=[tencentcloud.redis.ParamTemplateParamsOverrideArgs(
-        key="timeout",
-        value="7200",
-    )],
-    product_type=6)
+    product_type=6,
+    params_overrides=[{
+        "key": "timeout",
+        "value": "7200",
+    }])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var paramTemplate = new Tencentcloud.Redis.ParamTemplate("paramTemplate", new()
-    {
-        Description = "This is an example redis param template.",
-        ParamsOverrides = new[]
-        {
-            new Tencentcloud.Redis.Inputs.ParamTemplateParamsOverrideArgs
-            {
-                Key = "timeout",
-                Value = "7200",
-            },
-        },
-        ProductType = 6,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/redis"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Redis.NewParamTemplate(ctx, "paramTemplate", &Redis.ParamTemplateArgs{
+		_, err := redis.NewParamTemplate(ctx, "example", &redis.ParamTemplateArgs{
+			Name:        pulumi.String("tf_example"),
 			Description: pulumi.String("This is an example redis param template."),
+			ProductType: pulumi.Int(6),
 			ParamsOverrides: redis.ParamTemplateParamsOverrideArray{
 				&redis.ParamTemplateParamsOverrideArgs{
 					Key:   pulumi.String("timeout"),
 					Value: pulumi.String("7200"),
 				},
 			},
-			ProductType: pulumi.Int(6),
 		})
 		if err != nil {
 			return err
@@ -93,6 +89,41 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Redis.ParamTemplate("example", new()
+    {
+        Name = "tf_example",
+        Description = "This is an example redis param template.",
+        ProductType = 6,
+        ParamsOverrides = new[]
+        {
+            new Tencentcloud.Redis.Inputs.ParamTemplateParamsOverrideArgs
+            {
+                Key = "timeout",
+                Value = "7200",
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -102,8 +133,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Redis.ParamTemplate;
 import com.pulumi.tencentcloud.Redis.ParamTemplateArgs;
 import com.pulumi.tencentcloud.Redis.inputs.ParamTemplateParamsOverrideArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -115,39 +146,78 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var paramTemplate = new ParamTemplate("paramTemplate", ParamTemplateArgs.builder()        
+        var example = new ParamTemplate("example", ParamTemplateArgs.builder()
+            .name("tf_example")
             .description("This is an example redis param template.")
+            .productType(6)
             .paramsOverrides(ParamTemplateParamsOverrideArgs.builder()
                 .key("timeout")
                 .value("7200")
                 .build())
-            .productType(6)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  paramTemplate:
+  example:
     type: tencentcloud:Redis:ParamTemplate
     properties:
+      name: tf_example
       description: This is an example redis param template.
+      productType: 6
       paramsOverrides:
         - key: timeout
           value: '7200'
-      productType: 6
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_redis_paramtemplate" "example" {
+  name         = "tf_example"
+  description  = "This is an example redis param template."
+  product_type = 6
+  params_overrides {
+    key   = "timeout"
+    value = "7200"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Copy from another template
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.redis.ParamTemplate("foo", {
+const example = new tencentcloud.redis.ParamTemplate("example", {
+    name: "tf-template",
     description: "This is an example redis param template.",
     productType: 6,
     paramsOverrides: [{
@@ -155,67 +225,51 @@ const foo = new tencentcloud.redis.ParamTemplate("foo", {
         value: "7200",
     }],
 });
-const paramTemplate = new tencentcloud.redis.ParamTemplate("paramTemplate", {
+const exampleCopy = new tencentcloud.redis.ParamTemplate("example_copy", {
+    name: "tf-template-copied",
     description: "This is an copied redis param template from tf-template.",
-    templateId: foo.id,
+    templateId: example.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.redis.ParamTemplate("foo",
+example = tencentcloud.redis.ParamTemplate("example",
+    name="tf-template",
     description="This is an example redis param template.",
     product_type=6,
-    params_overrides=[tencentcloud.redis.ParamTemplateParamsOverrideArgs(
-        key="timeout",
-        value="7200",
-    )])
-param_template = tencentcloud.redis.ParamTemplate("paramTemplate",
+    params_overrides=[{
+        "key": "timeout",
+        "value": "7200",
+    }])
+example_copy = tencentcloud.redis.ParamTemplate("example_copy",
+    name="tf-template-copied",
     description="This is an copied redis param template from tf-template.",
-    template_id=foo.id)
+    template_id=example.id)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Redis.ParamTemplate("foo", new()
-    {
-        Description = "This is an example redis param template.",
-        ProductType = 6,
-        ParamsOverrides = new[]
-        {
-            new Tencentcloud.Redis.Inputs.ParamTemplateParamsOverrideArgs
-            {
-                Key = "timeout",
-                Value = "7200",
-            },
-        },
-    });
-
-    var paramTemplate = new Tencentcloud.Redis.ParamTemplate("paramTemplate", new()
-    {
-        Description = "This is an copied redis param template from tf-template.",
-        TemplateId = foo.Id,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/redis"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		foo, err := Redis.NewParamTemplate(ctx, "foo", &Redis.ParamTemplateArgs{
+		example, err := redis.NewParamTemplate(ctx, "example", &redis.ParamTemplateArgs{
+			Name:        pulumi.String("tf-template"),
 			Description: pulumi.String("This is an example redis param template."),
 			ProductType: pulumi.Int(6),
 			ParamsOverrides: redis.ParamTemplateParamsOverrideArray{
@@ -228,9 +282,10 @@ func main() {
 		if err != nil {
 			return err
 		}
-		_, err = Redis.NewParamTemplate(ctx, "paramTemplate", &Redis.ParamTemplateArgs{
+		_, err = redis.NewParamTemplate(ctx, "example_copy", &redis.ParamTemplateArgs{
+			Name:        pulumi.String("tf-template-copied"),
 			Description: pulumi.String("This is an copied redis param template from tf-template."),
-			TemplateId:  foo.ID(),
+			TemplateId:  example.ID().ToIDOutput().ToStringOutput(),
 		})
 		if err != nil {
 			return err
@@ -239,6 +294,48 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Redis.ParamTemplate("example", new()
+    {
+        Name = "tf-template",
+        Description = "This is an example redis param template.",
+        ProductType = 6,
+        ParamsOverrides = new[]
+        {
+            new Tencentcloud.Redis.Inputs.ParamTemplateParamsOverrideArgs
+            {
+                Key = "timeout",
+                Value = "7200",
+            },
+        },
+    });
+
+    var exampleCopy = new Tencentcloud.Redis.ParamTemplate("example_copy", new()
+    {
+        Name = "tf-template-copied",
+        Description = "This is an copied redis param template from tf-template.",
+        TemplateId = example.Id,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -248,8 +345,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Redis.ParamTemplate;
 import com.pulumi.tencentcloud.Redis.ParamTemplateArgs;
 import com.pulumi.tencentcloud.Redis.inputs.ParamTemplateParamsOverrideArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -261,7 +358,8 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new ParamTemplate("foo", ParamTemplateArgs.builder()        
+        var example = new ParamTemplate("example", ParamTemplateArgs.builder()
+            .name("tf-template")
             .description("This is an example redis param template.")
             .productType(6)
             .paramsOverrides(ParamTemplateParamsOverrideArgs.builder()
@@ -270,93 +368,156 @@ public class App {
                 .build())
             .build());
 
-        var paramTemplate = new ParamTemplate("paramTemplate", ParamTemplateArgs.builder()        
+        var exampleCopy = new ParamTemplate("exampleCopy", ParamTemplateArgs.builder()
+            .name("tf-template-copied")
             .description("This is an copied redis param template from tf-template.")
-            .templateId(foo.id())
+            .templateId(example.id())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  foo:
+  example:
     type: tencentcloud:Redis:ParamTemplate
     properties:
+      name: tf-template
       description: This is an example redis param template.
       productType: 6
       paramsOverrides:
         - key: timeout
           value: '7200'
-  paramTemplate:
+  exampleCopy:
     type: tencentcloud:Redis:ParamTemplate
+    name: example_copy
     properties:
+      name: tf-template-copied
       description: This is an copied redis param template from tf-template.
-      templateId: ${foo.id}
+      templateId: ${example.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_redis_paramtemplate" "example" {
+  name         = "tf-template"
+  description  = "This is an example redis param template."
+  product_type = 6
+  params_overrides {
+    key   = "timeout"
+    value = "7200"
+  }
+}
+resource "tencentcloud_redis_paramtemplate" "example_copy" {
+  name        = "tf-template-copied"
+  description = "This is an copied redis param template from tf-template."
+  template_id = tencentcloud_redis_paramtemplate.example.id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateParamTemplate](https://www.tencentcloud.com/document/api/239/41921)
+* Read: [DescribeParamTemplateInfo](https://www.tencentcloud.com/document/api/239/41926)
+* Update: [ModifyParamTemplate](https://www.tencentcloud.com/document/api/239/41918)
+* Delete: [DeleteParamTemplate](https://www.tencentcloud.com/document/api/239/41920)
 
 
 ## Create ParamTemplate Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">ParamTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">ParamTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[ParamTemplateArgs]</a></span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                   <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">params_overrides</span><span class="p">:</span> <span class="nx">Optional[Sequence[_redis.ParamTemplateParamsOverrideArgs]]</span> = None<span class="p">,</span>
+                  <span class="nx">params_overrides</span><span class="p">:</span> <span class="nx">Optional[Sequence[ParamTemplateParamsOverrideArgs]]</span> = None<span class="p">,</span>
                   <span class="nx">product_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                  <span class="nx">template_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[ParamTemplateArgs]</a></span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                  <span class="nx">template_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewParamTemplate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">ParamTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ParamTemplate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewParamTemplate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">ParamTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ParamTemplate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ParamTemplateArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ParamTemplateArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ParamTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ParamTemplate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ParamTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Redis:ParamTemplate</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Redis:ParamTemplate</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_redis_param_template&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -377,7 +538,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -494,11 +655,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## ParamTemplate Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ParamTemplate resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -514,8 +683,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -523,17 +691,15 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramsoverrides_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramsoverrides_csharp" style="color: inherit; text-decoration: inherit;">Params<wbr>Overrides</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamsoverride">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Redis.<wbr>Inputs.<wbr>Param<wbr>Template<wbr>Params<wbr>Override<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#paramtemplateparamsoverride">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Redis.<wbr>Inputs.<wbr>Param<wbr>Template<wbr>Params<wbr>Override&gt;</a></span>
     </dt>
-    <dd><p>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</p>
-</dd><dt class="property-optional"
+    <dd>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="producttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producttype_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Type</a>
@@ -541,8 +707,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>template_id</code> is specified, this parameter can be left blank; otherwise, it is required.</p>
-</dd><dt class="property-optional"
+    <dd>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>templateId</code> is specified, this parameter can be left blank; otherwise, it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_csharp" style="color: inherit; text-decoration: inherit;">Template<wbr>Id</a>
@@ -550,8 +715,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify which existed template import from.</p>
-</dd></dl>
+    <dd>Specify which existed template import from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -565,8 +729,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -574,8 +737,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramsoverrides_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramsoverrides_go" style="color: inherit; text-decoration: inherit;">Params<wbr>Overrides</a>
@@ -583,8 +745,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paramtemplateparamsoverride">[]Param<wbr>Template<wbr>Params<wbr>Override<wbr>Args</a></span>
     </dt>
-    <dd><p>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</p>
-</dd><dt class="property-optional"
+    <dd>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="producttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producttype_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Type</a>
@@ -592,8 +753,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>template_id</code> is specified, this parameter can be left blank; otherwise, it is required.</p>
-</dd><dt class="property-optional"
+    <dd>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>templateId</code> is specified, this parameter can be left blank; otherwise, it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_go" style="color: inherit; text-decoration: inherit;">Template<wbr>Id</a>
@@ -601,8 +761,53 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify which existed template import from.</p>
-</dd></dl>
+    <dd>Specify which existed template import from.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter template description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter template name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="params_overrides_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#params_overrides_hcl" style="color: inherit; text-decoration: inherit;">params_<wbr>overrides</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#paramtemplateparamsoverride">list(object)</a></span>
+    </dt>
+    <dd>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="product_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_type_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>templateId</code> is specified, this parameter can be left blank; otherwise, it is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_id_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify which existed template import from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -616,8 +821,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -625,17 +829,15 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramsoverrides_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramsoverrides_java" style="color: inherit; text-decoration: inherit;">params<wbr>Overrides</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamsoverride">List&lt;Param<wbr>Template<wbr>Params<wbr>Override<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#paramtemplateparamsoverride">List&lt;Param<wbr>Template<wbr>Params<wbr>Override&gt;</a></span>
     </dt>
-    <dd><p>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</p>
-</dd><dt class="property-optional"
+    <dd>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="producttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producttype_java" style="color: inherit; text-decoration: inherit;">product<wbr>Type</a>
@@ -643,8 +845,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>template_id</code> is specified, this parameter can be left blank; otherwise, it is required.</p>
-</dd><dt class="property-optional"
+    <dd>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>templateId</code> is specified, this parameter can be left blank; otherwise, it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_java" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -652,8 +853,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify which existed template import from.</p>
-</dd></dl>
+    <dd>Specify which existed template import from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -667,8 +867,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -676,17 +875,15 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramsoverrides_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramsoverrides_nodejs" style="color: inherit; text-decoration: inherit;">params<wbr>Overrides</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamsoverride">Param<wbr>Template<wbr>Params<wbr>Override<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#paramtemplateparamsoverride">Param<wbr>Template<wbr>Params<wbr>Override[]</a></span>
     </dt>
-    <dd><p>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</p>
-</dd><dt class="property-optional"
+    <dd>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="producttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producttype_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Type</a>
@@ -694,8 +891,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>template_id</code> is specified, this parameter can be left blank; otherwise, it is required.</p>
-</dd><dt class="property-optional"
+    <dd>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>templateId</code> is specified, this parameter can be left blank; otherwise, it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_nodejs" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -703,8 +899,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify which existed template import from.</p>
-</dd></dl>
+    <dd>Specify which existed template import from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -718,8 +913,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -727,17 +921,15 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="params_overrides_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#params_overrides_python" style="color: inherit; text-decoration: inherit;">params_<wbr>overrides</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamsoverride">Param<wbr>Template<wbr>Params<wbr>Override<wbr>Args]</a></span>
+        <span class="property-type"><a href="#paramtemplateparamsoverride">Sequence[Param<wbr>Template<wbr>Params<wbr>Override<wbr>Args]</a></span>
     </dt>
-    <dd><p>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</p>
-</dd><dt class="property-optional"
+    <dd>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="product_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_type_python" style="color: inherit; text-decoration: inherit;">product_<wbr>type</a>
@@ -745,8 +937,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>template_id</code> is specified, this parameter can be left blank; otherwise, it is required.</p>
-</dd><dt class="property-optional"
+    <dd>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>templateId</code> is specified, this parameter can be left blank; otherwise, it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_id_python" style="color: inherit; text-decoration: inherit;">template_<wbr>id</a>
@@ -754,8 +945,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify which existed template import from.</p>
-</dd></dl>
+    <dd>Specify which existed template import from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -769,8 +959,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -778,8 +967,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramsoverrides_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramsoverrides_yaml" style="color: inherit; text-decoration: inherit;">params<wbr>Overrides</a>
@@ -787,8 +975,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paramtemplateparamsoverride">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</p>
-</dd><dt class="property-optional"
+    <dd>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="producttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producttype_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Type</a>
@@ -796,8 +983,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>template_id</code> is specified, this parameter can be left blank; otherwise, it is required.</p>
-</dd><dt class="property-optional"
+    <dd>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>templateId</code> is specified, this parameter can be left blank; otherwise, it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_yaml" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -805,8 +991,7 @@ The ParamTemplate resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify which existed template import from.</p>
-</dd></dl>
+    <dd>Specify which existed template import from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -827,8 +1012,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="paramdetails_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramdetails_csharp" style="color: inherit; text-decoration: inherit;">Param<wbr>Details</a>
@@ -836,8 +1020,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paramtemplateparamdetail">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Redis.<wbr>Outputs.<wbr>Param<wbr>Template<wbr>Param<wbr>Detail&gt;</a></span>
     </dt>
-    <dd><p>Readonly full parameter list details.</p>
-</dd></dl>
+    <dd>Readonly full parameter list details.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -851,8 +1034,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="paramdetails_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramdetails_go" style="color: inherit; text-decoration: inherit;">Param<wbr>Details</a>
@@ -860,8 +1042,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paramtemplateparamdetail">[]Param<wbr>Template<wbr>Param<wbr>Detail</a></span>
     </dt>
-    <dd><p>Readonly full parameter list details.</p>
-</dd></dl>
+    <dd>Readonly full parameter list details.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="param_details_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_details_hcl" style="color: inherit; text-decoration: inherit;">param_<wbr>details</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#paramtemplateparamdetail">list(object)</a></span>
+    </dt>
+    <dd>Readonly full parameter list details.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -875,8 +1078,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="paramdetails_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramdetails_java" style="color: inherit; text-decoration: inherit;">param<wbr>Details</a>
@@ -884,8 +1086,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paramtemplateparamdetail">List&lt;Param<wbr>Template<wbr>Param<wbr>Detail&gt;</a></span>
     </dt>
-    <dd><p>Readonly full parameter list details.</p>
-</dd></dl>
+    <dd>Readonly full parameter list details.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -899,8 +1100,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="paramdetails_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramdetails_nodejs" style="color: inherit; text-decoration: inherit;">param<wbr>Details</a>
@@ -908,8 +1108,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paramtemplateparamdetail">Param<wbr>Template<wbr>Param<wbr>Detail[]</a></span>
     </dt>
-    <dd><p>Readonly full parameter list details.</p>
-</dd></dl>
+    <dd>Readonly full parameter list details.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -923,17 +1122,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="param_details_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_details_python" style="color: inherit; text-decoration: inherit;">param_<wbr>details</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamdetail">Param<wbr>Template<wbr>Param<wbr>Detail]</a></span>
+        <span class="property-type"><a href="#paramtemplateparamdetail">Sequence[Param<wbr>Template<wbr>Param<wbr>Detail]</a></span>
     </dt>
-    <dd><p>Readonly full parameter list details.</p>
-</dd></dl>
+    <dd>Readonly full parameter list details.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -947,8 +1144,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="paramdetails_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramdetails_yaml" style="color: inherit; text-decoration: inherit;">param<wbr>Details</a>
@@ -956,8 +1152,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paramtemplateparamdetail">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Readonly full parameter list details.</p>
-</dd></dl>
+    <dd>Readonly full parameter list details.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -967,125 +1162,164 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ParamTemplate resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ParamTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ParamTemplate</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ParamTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ParamTemplate</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">param_details</span><span class="p">:</span> <span class="nx">Optional[Sequence[_redis.ParamTemplateParamDetailArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">params_overrides</span><span class="p">:</span> <span class="nx">Optional[Sequence[_redis.ParamTemplateParamsOverrideArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">param_details</span><span class="p">:</span> <span class="nx">Optional[Sequence[ParamTemplateParamDetailArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">params_overrides</span><span class="p">:</span> <span class="nx">Optional[Sequence[ParamTemplateParamsOverrideArgs]]</span> = None<span class="p">,</span>
         <span class="nx">product_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">template_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> ParamTemplate</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetParamTemplate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ParamTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ParamTemplate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetParamTemplate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ParamTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ParamTemplate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ParamTemplate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ParamTemplateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ParamTemplate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ParamTemplateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ParamTemplate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ParamTemplateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ParamTemplate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ParamTemplateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingParamTemplate</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Redis:ParamTemplate</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_redis_param_template</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ParamTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ParamTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1093,28 +1327,31 @@ Get an existing ParamTemplate resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ParamTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1122,28 +1359,31 @@ Get an existing ParamTemplate resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ParamTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1163,8 +1403,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1172,26 +1411,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramdetails_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramdetails_csharp" style="color: inherit; text-decoration: inherit;">Param<wbr>Details</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamdetail">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Redis.<wbr>Inputs.<wbr>Param<wbr>Template<wbr>Param<wbr>Detail<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#paramtemplateparamdetail">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Redis.<wbr>Inputs.<wbr>Param<wbr>Template<wbr>Param<wbr>Detail&gt;</a></span>
     </dt>
-    <dd><p>Readonly full parameter list details.</p>
-</dd><dt class="property-optional"
+    <dd>Readonly full parameter list details.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramsoverrides_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramsoverrides_csharp" style="color: inherit; text-decoration: inherit;">Params<wbr>Overrides</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamsoverride">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Redis.<wbr>Inputs.<wbr>Param<wbr>Template<wbr>Params<wbr>Override<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#paramtemplateparamsoverride">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Redis.<wbr>Inputs.<wbr>Param<wbr>Template<wbr>Params<wbr>Override&gt;</a></span>
     </dt>
-    <dd><p>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</p>
-</dd><dt class="property-optional"
+    <dd>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_producttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_producttype_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Type</a>
@@ -1199,8 +1435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>template_id</code> is specified, this parameter can be left blank; otherwise, it is required.</p>
-</dd><dt class="property-optional"
+    <dd>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>templateId</code> is specified, this parameter can be left blank; otherwise, it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templateid_csharp" style="color: inherit; text-decoration: inherit;">Template<wbr>Id</a>
@@ -1208,8 +1443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify which existed template import from.</p>
-</dd></dl>
+    <dd>Specify which existed template import from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1223,8 +1457,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1232,8 +1465,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramdetails_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramdetails_go" style="color: inherit; text-decoration: inherit;">Param<wbr>Details</a>
@@ -1241,8 +1473,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paramtemplateparamdetail">[]Param<wbr>Template<wbr>Param<wbr>Detail<wbr>Args</a></span>
     </dt>
-    <dd><p>Readonly full parameter list details.</p>
-</dd><dt class="property-optional"
+    <dd>Readonly full parameter list details.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramsoverrides_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramsoverrides_go" style="color: inherit; text-decoration: inherit;">Params<wbr>Overrides</a>
@@ -1250,8 +1481,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paramtemplateparamsoverride">[]Param<wbr>Template<wbr>Params<wbr>Override<wbr>Args</a></span>
     </dt>
-    <dd><p>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</p>
-</dd><dt class="property-optional"
+    <dd>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_producttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_producttype_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Type</a>
@@ -1259,8 +1489,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>template_id</code> is specified, this parameter can be left blank; otherwise, it is required.</p>
-</dd><dt class="property-optional"
+    <dd>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>templateId</code> is specified, this parameter can be left blank; otherwise, it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templateid_go" style="color: inherit; text-decoration: inherit;">Template<wbr>Id</a>
@@ -1268,8 +1497,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify which existed template import from.</p>
-</dd></dl>
+    <dd>Specify which existed template import from.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter template description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter template name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_param_details_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_param_details_hcl" style="color: inherit; text-decoration: inherit;">param_<wbr>details</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#paramtemplateparamdetail">list(object)</a></span>
+    </dt>
+    <dd>Readonly full parameter list details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_params_overrides_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_params_overrides_hcl" style="color: inherit; text-decoration: inherit;">params_<wbr>overrides</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#paramtemplateparamsoverride">list(object)</a></span>
+    </dt>
+    <dd>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_product_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_type_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>templateId</code> is specified, this parameter can be left blank; otherwise, it is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_template_id_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify which existed template import from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1283,8 +1565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1292,26 +1573,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramdetails_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramdetails_java" style="color: inherit; text-decoration: inherit;">param<wbr>Details</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamdetail">List&lt;Param<wbr>Template<wbr>Param<wbr>Detail<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#paramtemplateparamdetail">List&lt;Param<wbr>Template<wbr>Param<wbr>Detail&gt;</a></span>
     </dt>
-    <dd><p>Readonly full parameter list details.</p>
-</dd><dt class="property-optional"
+    <dd>Readonly full parameter list details.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramsoverrides_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramsoverrides_java" style="color: inherit; text-decoration: inherit;">params<wbr>Overrides</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamsoverride">List&lt;Param<wbr>Template<wbr>Params<wbr>Override<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#paramtemplateparamsoverride">List&lt;Param<wbr>Template<wbr>Params<wbr>Override&gt;</a></span>
     </dt>
-    <dd><p>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</p>
-</dd><dt class="property-optional"
+    <dd>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_producttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_producttype_java" style="color: inherit; text-decoration: inherit;">product<wbr>Type</a>
@@ -1319,8 +1597,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>template_id</code> is specified, this parameter can be left blank; otherwise, it is required.</p>
-</dd><dt class="property-optional"
+    <dd>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>templateId</code> is specified, this parameter can be left blank; otherwise, it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templateid_java" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1328,8 +1605,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify which existed template import from.</p>
-</dd></dl>
+    <dd>Specify which existed template import from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1343,8 +1619,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1352,26 +1627,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramdetails_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramdetails_nodejs" style="color: inherit; text-decoration: inherit;">param<wbr>Details</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamdetail">Param<wbr>Template<wbr>Param<wbr>Detail<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#paramtemplateparamdetail">Param<wbr>Template<wbr>Param<wbr>Detail[]</a></span>
     </dt>
-    <dd><p>Readonly full parameter list details.</p>
-</dd><dt class="property-optional"
+    <dd>Readonly full parameter list details.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramsoverrides_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramsoverrides_nodejs" style="color: inherit; text-decoration: inherit;">params<wbr>Overrides</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamsoverride">Param<wbr>Template<wbr>Params<wbr>Override<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#paramtemplateparamsoverride">Param<wbr>Template<wbr>Params<wbr>Override[]</a></span>
     </dt>
-    <dd><p>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</p>
-</dd><dt class="property-optional"
+    <dd>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_producttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_producttype_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Type</a>
@@ -1379,8 +1651,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>template_id</code> is specified, this parameter can be left blank; otherwise, it is required.</p>
-</dd><dt class="property-optional"
+    <dd>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>templateId</code> is specified, this parameter can be left blank; otherwise, it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templateid_nodejs" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1388,8 +1659,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify which existed template import from.</p>
-</dd></dl>
+    <dd>Specify which existed template import from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1403,8 +1673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1412,26 +1681,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_param_details_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_param_details_python" style="color: inherit; text-decoration: inherit;">param_<wbr>details</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamdetail">Param<wbr>Template<wbr>Param<wbr>Detail<wbr>Args]</a></span>
+        <span class="property-type"><a href="#paramtemplateparamdetail">Sequence[Param<wbr>Template<wbr>Param<wbr>Detail<wbr>Args]</a></span>
     </dt>
-    <dd><p>Readonly full parameter list details.</p>
-</dd><dt class="property-optional"
+    <dd>Readonly full parameter list details.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_params_overrides_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_params_overrides_python" style="color: inherit; text-decoration: inherit;">params_<wbr>overrides</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#paramtemplateparamsoverride">Param<wbr>Template<wbr>Params<wbr>Override<wbr>Args]</a></span>
+        <span class="property-type"><a href="#paramtemplateparamsoverride">Sequence[Param<wbr>Template<wbr>Params<wbr>Override<wbr>Args]</a></span>
     </dt>
-    <dd><p>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</p>
-</dd><dt class="property-optional"
+    <dd>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_product_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_type_python" style="color: inherit; text-decoration: inherit;">product_<wbr>type</a>
@@ -1439,8 +1705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>template_id</code> is specified, this parameter can be left blank; otherwise, it is required.</p>
-</dd><dt class="property-optional"
+    <dd>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>templateId</code> is specified, this parameter can be left blank; otherwise, it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_template_id_python" style="color: inherit; text-decoration: inherit;">template_<wbr>id</a>
@@ -1448,8 +1713,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify which existed template import from.</p>
-</dd></dl>
+    <dd>Specify which existed template import from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1463,8 +1727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1472,8 +1735,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramdetails_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramdetails_yaml" style="color: inherit; text-decoration: inherit;">param<wbr>Details</a>
@@ -1481,8 +1743,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paramtemplateparamdetail">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Readonly full parameter list details.</p>
-</dd><dt class="property-optional"
+    <dd>Readonly full parameter list details.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramsoverrides_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramsoverrides_yaml" style="color: inherit; text-decoration: inherit;">params<wbr>Overrides</a>
@@ -1490,8 +1751,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#paramtemplateparamsoverride">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</p>
-</dd><dt class="property-optional"
+    <dd>Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_producttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_producttype_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Type</a>
@@ -1499,8 +1759,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>template_id</code> is specified, this parameter can be left blank; otherwise, it is required.</p>
-</dd><dt class="property-optional"
+    <dd>Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If <code>templateId</code> is specified, this parameter can be left blank; otherwise, it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_templateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_templateid_yaml" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1508,8 +1767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify which existed template import from.</p>
-</dd></dl>
+    <dd>Specify which existed template import from.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1524,7 +1782,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="paramtemplateparamdetail">Param<wbr>Template<wbr>Param<wbr>Detail</h4>
+<h4 id="paramtemplateparamdetail">
+Param<wbr>Template<wbr>Param<wbr>Detail<pulumi-choosable type="language" values="python,go" class="inline">, Param<wbr>Template<wbr>Param<wbr>Detail<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1536,8 +1796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current value.</p>
-</dd><dt class="property-optional"
+    <dd>Current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="default_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_csharp" style="color: inherit; text-decoration: inherit;">Default</a>
@@ -1545,8 +1804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default value.</p>
-</dd><dt class="property-optional"
+    <dd>Default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1554,8 +1812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="enumvalues_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enumvalues_csharp" style="color: inherit; text-decoration: inherit;">Enum<wbr>Values</a>
@@ -1563,8 +1820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Enum values.</p>
-</dd><dt class="property-optional"
+    <dd>Enum values.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_csharp" style="color: inherit; text-decoration: inherit;">Max</a>
@@ -1572,8 +1828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Maximum value.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value.</dd><dt class="property-optional"
             title="Optional">
         <span id="min_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_csharp" style="color: inherit; text-decoration: inherit;">Min</a>
@@ -1581,8 +1836,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Minimum value.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum value.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1590,8 +1844,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="needreboot_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needreboot_csharp" style="color: inherit; text-decoration: inherit;">Need<wbr>Reboot</a>
@@ -1599,8 +1852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether to reboot redis instance if modified.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to reboot redis instance if modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramtype_csharp" style="color: inherit; text-decoration: inherit;">Param<wbr>Type</a>
@@ -1608,8 +1860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter type.</p>
-</dd></dl>
+    <dd>Parameter type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1623,8 +1874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current value.</p>
-</dd><dt class="property-optional"
+    <dd>Current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="default_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_go" style="color: inherit; text-decoration: inherit;">Default</a>
@@ -1632,8 +1882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default value.</p>
-</dd><dt class="property-optional"
+    <dd>Default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1641,8 +1890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="enumvalues_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enumvalues_go" style="color: inherit; text-decoration: inherit;">Enum<wbr>Values</a>
@@ -1650,8 +1898,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Enum values.</p>
-</dd><dt class="property-optional"
+    <dd>Enum values.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_go" style="color: inherit; text-decoration: inherit;">Max</a>
@@ -1659,8 +1906,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Maximum value.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value.</dd><dt class="property-optional"
             title="Optional">
         <span id="min_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_go" style="color: inherit; text-decoration: inherit;">Min</a>
@@ -1668,8 +1914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Minimum value.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum value.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1677,8 +1922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="needreboot_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needreboot_go" style="color: inherit; text-decoration: inherit;">Need<wbr>Reboot</a>
@@ -1686,8 +1930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether to reboot redis instance if modified.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to reboot redis instance if modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramtype_go" style="color: inherit; text-decoration: inherit;">Param<wbr>Type</a>
@@ -1695,8 +1938,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter type.</p>
-</dd></dl>
+    <dd>Parameter type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="current_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#current_value_hcl" style="color: inherit; text-decoration: inherit;">current_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Current value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_hcl" style="color: inherit; text-decoration: inherit;">default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Default value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter template description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enum_values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enum_values_hcl" style="color: inherit; text-decoration: inherit;">enum_<wbr>values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Enum values.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_hcl" style="color: inherit; text-decoration: inherit;">max</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Maximum value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="min_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_hcl" style="color: inherit; text-decoration: inherit;">min</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Minimum value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter template name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="need_reboot_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#need_reboot_hcl" style="color: inherit; text-decoration: inherit;">need_<wbr>reboot</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Indicates whether to reboot redis instance if modified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="param_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_type_hcl" style="color: inherit; text-decoration: inherit;">param_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1710,8 +2030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current value.</p>
-</dd><dt class="property-optional"
+    <dd>Current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="default__java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default__java" style="color: inherit; text-decoration: inherit;">default_</a>
@@ -1719,8 +2038,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Default value.</p>
-</dd><dt class="property-optional"
+    <dd>Default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1728,8 +2046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="enumvalues_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enumvalues_java" style="color: inherit; text-decoration: inherit;">enum<wbr>Values</a>
@@ -1737,8 +2054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Enum values.</p>
-</dd><dt class="property-optional"
+    <dd>Enum values.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_java" style="color: inherit; text-decoration: inherit;">max</a>
@@ -1746,8 +2062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Maximum value.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value.</dd><dt class="property-optional"
             title="Optional">
         <span id="min_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_java" style="color: inherit; text-decoration: inherit;">min</a>
@@ -1755,8 +2070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Minimum value.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum value.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1764,8 +2078,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="needreboot_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needreboot_java" style="color: inherit; text-decoration: inherit;">need<wbr>Reboot</a>
@@ -1773,8 +2086,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Indicates whether to reboot redis instance if modified.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to reboot redis instance if modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramtype_java" style="color: inherit; text-decoration: inherit;">param<wbr>Type</a>
@@ -1782,8 +2094,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter type.</p>
-</dd></dl>
+    <dd>Parameter type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1797,8 +2108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current value.</p>
-</dd><dt class="property-optional"
+    <dd>Current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="default_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_nodejs" style="color: inherit; text-decoration: inherit;">default</a>
@@ -1806,8 +2116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Default value.</p>
-</dd><dt class="property-optional"
+    <dd>Default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1815,8 +2124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="enumvalues_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enumvalues_nodejs" style="color: inherit; text-decoration: inherit;">enum<wbr>Values</a>
@@ -1824,8 +2132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Enum values.</p>
-</dd><dt class="property-optional"
+    <dd>Enum values.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_nodejs" style="color: inherit; text-decoration: inherit;">max</a>
@@ -1833,8 +2140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Maximum value.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value.</dd><dt class="property-optional"
             title="Optional">
         <span id="min_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_nodejs" style="color: inherit; text-decoration: inherit;">min</a>
@@ -1842,8 +2148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Minimum value.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum value.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1851,8 +2156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="needreboot_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needreboot_nodejs" style="color: inherit; text-decoration: inherit;">need<wbr>Reboot</a>
@@ -1860,8 +2164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Indicates whether to reboot redis instance if modified.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to reboot redis instance if modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramtype_nodejs" style="color: inherit; text-decoration: inherit;">param<wbr>Type</a>
@@ -1869,8 +2172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter type.</p>
-</dd></dl>
+    <dd>Parameter type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1884,8 +2186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Current value.</p>
-</dd><dt class="property-optional"
+    <dd>Current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_python" style="color: inherit; text-decoration: inherit;">default</a>
@@ -1893,8 +2194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Default value.</p>
-</dd><dt class="property-optional"
+    <dd>Default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1902,8 +2202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="enum_values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enum_values_python" style="color: inherit; text-decoration: inherit;">enum_<wbr>values</a>
@@ -1911,8 +2210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Enum values.</p>
-</dd><dt class="property-optional"
+    <dd>Enum values.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_python" style="color: inherit; text-decoration: inherit;">max</a>
@@ -1920,8 +2218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Maximum value.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value.</dd><dt class="property-optional"
             title="Optional">
         <span id="min_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_python" style="color: inherit; text-decoration: inherit;">min</a>
@@ -1929,8 +2226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Minimum value.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum value.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1938,8 +2234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="need_reboot_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#need_reboot_python" style="color: inherit; text-decoration: inherit;">need_<wbr>reboot</a>
@@ -1947,8 +2242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether to reboot redis instance if modified.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to reboot redis instance if modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="param_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_type_python" style="color: inherit; text-decoration: inherit;">param_<wbr>type</a>
@@ -1956,8 +2250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter type.</p>
-</dd></dl>
+    <dd>Parameter type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1971,8 +2264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current value.</p>
-</dd><dt class="property-optional"
+    <dd>Current value.</dd><dt class="property-optional"
             title="Optional">
         <span id="default_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_yaml" style="color: inherit; text-decoration: inherit;">default</a>
@@ -1980,8 +2272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Default value.</p>
-</dd><dt class="property-optional"
+    <dd>Default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1989,8 +2280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter template description.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template description.</dd><dt class="property-optional"
             title="Optional">
         <span id="enumvalues_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enumvalues_yaml" style="color: inherit; text-decoration: inherit;">enum<wbr>Values</a>
@@ -1998,8 +2288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Enum values.</p>
-</dd><dt class="property-optional"
+    <dd>Enum values.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_yaml" style="color: inherit; text-decoration: inherit;">max</a>
@@ -2007,8 +2296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Maximum value.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum value.</dd><dt class="property-optional"
             title="Optional">
         <span id="min_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_yaml" style="color: inherit; text-decoration: inherit;">min</a>
@@ -2016,8 +2304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Minimum value.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum value.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2025,8 +2312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter template name.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter template name.</dd><dt class="property-optional"
             title="Optional">
         <span id="needreboot_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needreboot_yaml" style="color: inherit; text-decoration: inherit;">need<wbr>Reboot</a>
@@ -2034,8 +2320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Indicates whether to reboot redis instance if modified.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to reboot redis instance if modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramtype_yaml" style="color: inherit; text-decoration: inherit;">param<wbr>Type</a>
@@ -2043,12 +2328,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter type.</p>
-</dd></dl>
+    <dd>Parameter type.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="paramtemplateparamsoverride">Param<wbr>Template<wbr>Params<wbr>Override</h4>
+<h4 id="paramtemplateparamsoverride">
+Param<wbr>Template<wbr>Params<wbr>Override<pulumi-choosable type="language" values="python,go" class="inline">, Param<wbr>Template<wbr>Params<wbr>Override<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2060,8 +2346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter key e.g. <code>timeout</code>, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</p>
-</dd><dt class="property-required"
+    <dd>Parameter key e.g. <code>timeout</code>, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2069,8 +2354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter value, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</p>
-</dd></dl>
+    <dd>Parameter value, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2084,8 +2368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter key e.g. <code>timeout</code>, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</p>
-</dd><dt class="property-required"
+    <dd>Parameter key e.g. <code>timeout</code>, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2093,8 +2376,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter value, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</p>
-</dd></dl>
+    <dd>Parameter value, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter key e.g. <code>timeout</code>, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Parameter value, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2108,8 +2412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter key e.g. <code>timeout</code>, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</p>
-</dd><dt class="property-required"
+    <dd>Parameter key e.g. <code>timeout</code>, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2117,8 +2420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter value, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</p>
-</dd></dl>
+    <dd>Parameter value, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2132,8 +2434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter key e.g. <code>timeout</code>, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</p>
-</dd><dt class="property-required"
+    <dd>Parameter key e.g. <code>timeout</code>, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2141,8 +2442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Parameter value, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</p>
-</dd></dl>
+    <dd>Parameter value, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2156,8 +2456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter key e.g. <code>timeout</code>, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</p>
-</dd><dt class="property-required"
+    <dd>Parameter key e.g. <code>timeout</code>, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2165,8 +2464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Parameter value, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</p>
-</dd></dl>
+    <dd>Parameter value, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2180,8 +2478,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter key e.g. <code>timeout</code>, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</p>
-</dd><dt class="property-required"
+    <dd>Parameter key e.g. <code>timeout</code>, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2189,8 +2486,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Parameter value, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</p>
-</dd></dl>
+    <dd>Parameter value, check https://www.tencentcloud.com/document/product/239/39796 for more reference.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2198,12 +2494,14 @@ The following state arguments are supported:
 
 
 
-redis param_template can be imported using the id, e.g.
-
+redis paramTemplate can be imported using the id, e.g.
 ```sh
-$ pulumi import tencentcloud:Redis/paramTemplate:ParamTemplate param_template param_template_id
+$ pulumi import tencentcloud:Redis/paramTemplate:ParamTemplate example crs-cfg-oyyon8f6
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2215,7 +2513,6 @@ $ pulumi import tencentcloud:Redis/paramTemplate:ParamTemplate param_template pa
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

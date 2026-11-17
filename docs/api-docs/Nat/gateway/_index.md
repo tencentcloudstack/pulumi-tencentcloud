@@ -2,9 +2,11 @@
 ---
 title: "Gateway"
 title_tag: "tencentcloud.Nat.Gateway"
-meta_desc: "Documentation for the tencentcloud.Nat.Gateway resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a NAT gateway. NOTE: If natProductVersion is 1, maxConcurrent valid values is 1000000, 3000000, 10000000. NOTE: If set."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,20 +16,34 @@ no_edit_this_page: true
 
 Provides a resource to create a NAT gateway.
 
+> **NOTE:** If `natProductVersion` is `1`, `maxConcurrent` valid values is `1000000`, `3000000`, `10000000`.
+
+> **NOTE:** If set `stockPublicIpAddressesBandwidthOut`, do not set the `internetMaxBandwidthOut` parameter of resource `tencentcloud.Eip.Instance` at the same time, otherwise conflicts may occur.
+
 ## Example Usage
 
 ### Create a traditional NAT gateway.
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
-const eipExample1 = new tencentcloud.eip.Instance("eipExample1", {});
-const eipExample2 = new tencentcloud.eip.Instance("eipExample2", {});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_nat_gateway_vpc",
+});
+const eipExample1 = new tencentcloud.eip.Instance("eip_example1", {name: "tf_nat_gateway_eip1"});
+const eipExample2 = new tencentcloud.eip.Instance("eip_example2", {name: "tf_nat_gateway_eip2"});
 const example = new tencentcloud.nat.Gateway("example", {
+    name: "tf_example_nat_gateway",
     vpcId: vpc.id,
+    natProductVersion: 1,
     bandwidth: 100,
     maxConcurrent: 1000000,
     assignedEipSets: [
@@ -35,19 +51,28 @@ const example = new tencentcloud.nat.Gateway("example", {
         eipExample2.publicIp,
     ],
     tags: {
-        tf_tag_key: "tf_tag_value",
+        createBy: "terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
-eip_example1 = tencentcloud.eip.Instance("eipExample1")
-eip_example2 = tencentcloud.eip.Instance("eipExample2")
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_nat_gateway_vpc")
+eip_example1 = tencentcloud.eip.Instance("eip_example1", name="tf_nat_gateway_eip1")
+eip_example2 = tencentcloud.eip.Instance("eip_example2", name="tf_nat_gateway_eip2")
 example = tencentcloud.nat.Gateway("example",
+    name="tf_example_nat_gateway",
     vpc_id=vpc.id,
+    nat_product_version=1,
     bandwidth=100,
     max_concurrent=1000000,
     assigned_eip_sets=[
@@ -55,9 +80,71 @@ example = tencentcloud.nat.Gateway("example",
         eip_example2.public_ip,
     ],
     tags={
-        "tf_tag_key": "tf_tag_value",
+        "createBy": "terraform",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/eip"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/nat"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("tf_nat_gateway_vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		eipExample1, err := eip.NewInstance(ctx, "eip_example1", &eip.InstanceArgs{
+			Name: pulumi.String("tf_nat_gateway_eip1"),
+		})
+		if err != nil {
+			return err
+		}
+		eipExample2, err := eip.NewInstance(ctx, "eip_example2", &eip.InstanceArgs{
+			Name: pulumi.String("tf_nat_gateway_eip2"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = nat.NewGateway(ctx, "example", &nat.GatewayArgs{
+			Name:              pulumi.String("tf_example_nat_gateway"),
+			VpcId:             vpc2.ID().ToIDOutput().ToStringOutput(),
+			NatProductVersion: pulumi.Int(1),
+			Bandwidth:         pulumi.Int(100),
+			MaxConcurrent:     pulumi.Int(1000000),
+			AssignedEipSets: pulumi.StringArray{
+				eipExample1.PublicIp,
+				eipExample2.PublicIp,
+			},
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -69,15 +156,24 @@ return await Deployment.RunAsync(() =>
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
         CidrBlock = "10.0.0.0/16",
+        Name = "tf_nat_gateway_vpc",
     });
 
-    var eipExample1 = new Tencentcloud.Eip.Instance("eipExample1");
+    var eipExample1 = new Tencentcloud.Eip.Instance("eip_example1", new()
+    {
+        Name = "tf_nat_gateway_eip1",
+    });
 
-    var eipExample2 = new Tencentcloud.Eip.Instance("eipExample2");
+    var eipExample2 = new Tencentcloud.Eip.Instance("eip_example2", new()
+    {
+        Name = "tf_nat_gateway_eip2",
+    });
 
     var example = new Tencentcloud.Nat.Gateway("example", new()
     {
+        Name = "tf_example_nat_gateway",
         VpcId = vpc.Id,
+        NatProductVersion = 1,
         Bandwidth = 100,
         MaxConcurrent = 1000000,
         AssignedEipSets = new[]
@@ -87,70 +183,27 @@ return await Deployment.RunAsync(() =>
         },
         Tags = 
         {
-            { "tf_tag_key", "tf_tag_value" },
+            { "createBy", "terraform" },
         },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		eipExample1, err := Eip.NewInstance(ctx, "eipExample1", nil)
-		if err != nil {
-			return err
-		}
-		eipExample2, err := Eip.NewInstance(ctx, "eipExample2", nil)
-		if err != nil {
-			return err
-		}
-		_, err = Nat.NewGateway(ctx, "example", &Nat.GatewayArgs{
-			VpcId:         vpc.ID(),
-			Bandwidth:     pulumi.Int(100),
-			MaxConcurrent: pulumi.Int(1000000),
-			AssignedEipSets: pulumi.StringArray{
-				eipExample1.PublicIp,
-				eipExample2.PublicIp,
-			},
-			Tags: pulumi.Map{
-				"tf_tag_key": pulumi.Any("tf_tag_value"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Eip.Instance;
 import com.pulumi.tencentcloud.Nat.Gateway;
 import com.pulumi.tencentcloud.Nat.GatewayArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -162,91 +215,227 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
             .cidrBlock("10.0.0.0/16")
+            .name("tf_nat_gateway_vpc")
             .build());
 
-        var eipExample1 = new Instance("eipExample1");
+        var eipExample1 = new com.pulumi.tencentcloud.Eip.Instance("eipExample1", com.pulumi.tencentcloud.Eip.InstanceArgs.builder()
+            .name("tf_nat_gateway_eip1")
+            .build());
 
-        var eipExample2 = new Instance("eipExample2");
+        var eipExample2 = new com.pulumi.tencentcloud.Eip.Instance("eipExample2", com.pulumi.tencentcloud.Eip.InstanceArgs.builder()
+            .name("tf_nat_gateway_eip2")
+            .build());
 
-        var example = new Gateway("example", GatewayArgs.builder()        
+        var example = new Gateway("example", GatewayArgs.builder()
+            .name("tf_example_nat_gateway")
             .vpcId(vpc.id())
+            .natProductVersion(1)
             .bandwidth(100)
             .maxConcurrent(1000000)
             .assignedEipSets(            
                 eipExample1.publicIp(),
                 eipExample2.publicIp())
-            .tags(Map.of("tf_tag_key", "tf_tag_value"))
+            .tags(Map.of("createBy", "terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
       cidrBlock: 10.0.0.0/16
+      name: tf_nat_gateway_vpc
   eipExample1:
     type: tencentcloud:Eip:Instance
+    name: eip_example1
+    properties:
+      name: tf_nat_gateway_eip1
   eipExample2:
     type: tencentcloud:Eip:Instance
+    name: eip_example2
+    properties:
+      name: tf_nat_gateway_eip2
   example:
     type: tencentcloud:Nat:Gateway
     properties:
+      name: tf_example_nat_gateway
       vpcId: ${vpc.id}
+      natProductVersion: 1
       bandwidth: 100
       maxConcurrent: 1e+06
       assignedEipSets:
         - ${eipExample1.publicIp}
         - ${eipExample2.publicIp}
       tags:
-        tf_tag_key: tf_tag_value
+        createBy: terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_nat_gateway_vpc"
+}
+resource "tencentcloud_eip_instance" "eip_example1" {
+  name = "tf_nat_gateway_eip1"
+}
+resource "tencentcloud_eip_instance" "eip_example2" {
+  name = "tf_nat_gateway_eip2"
+}
+resource "tencentcloud_nat_gateway" "example" {
+  name                = "tf_example_nat_gateway"
+  vpc_id              = tencentcloud_vpc_instance.vpc.id
+  nat_product_version = 1
+  bandwidth           = 100
+  max_concurrent      = 1000000
+  assigned_eip_sets   = [tencentcloud_eip_instance.eip_example1.public_ip, tencentcloud_eip_instance.eip_example2.public_ip]
+  tags = {
+    "createBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Create a standard NAT gateway.
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
-const eipExample1 = new tencentcloud.eip.Instance("eipExample1", {});
-const eipExample2 = new tencentcloud.eip.Instance("eipExample2", {});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_nat_gateway_vpc",
+});
+const eipExample1 = new tencentcloud.eip.Instance("eip_example1", {name: "tf_nat_gateway_eip1"});
+const eipExample2 = new tencentcloud.eip.Instance("eip_example2", {name: "tf_nat_gateway_eip2"});
 const example = new tencentcloud.nat.Gateway("example", {
+    name: "tf_example_nat_gateway",
     vpcId: vpc.id,
+    natProductVersion: 2,
     assignedEipSets: [
         eipExample1.publicIp,
         eipExample2.publicIp,
     ],
-    natProductVersion: 2,
     tags: {
-        tf_tag_key: "tf_tag_value",
+        createBy: "terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
-eip_example1 = tencentcloud.eip.Instance("eipExample1")
-eip_example2 = tencentcloud.eip.Instance("eipExample2")
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_nat_gateway_vpc")
+eip_example1 = tencentcloud.eip.Instance("eip_example1", name="tf_nat_gateway_eip1")
+eip_example2 = tencentcloud.eip.Instance("eip_example2", name="tf_nat_gateway_eip2")
 example = tencentcloud.nat.Gateway("example",
+    name="tf_example_nat_gateway",
     vpc_id=vpc.id,
+    nat_product_version=2,
     assigned_eip_sets=[
         eip_example1.public_ip,
         eip_example2.public_ip,
     ],
-    nat_product_version=2,
     tags={
-        "tf_tag_key": "tf_tag_value",
+        "createBy": "terraform",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/eip"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/nat"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("tf_nat_gateway_vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		eipExample1, err := eip.NewInstance(ctx, "eip_example1", &eip.InstanceArgs{
+			Name: pulumi.String("tf_nat_gateway_eip1"),
+		})
+		if err != nil {
+			return err
+		}
+		eipExample2, err := eip.NewInstance(ctx, "eip_example2", &eip.InstanceArgs{
+			Name: pulumi.String("tf_nat_gateway_eip2"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = nat.NewGateway(ctx, "example", &nat.GatewayArgs{
+			Name:              pulumi.String("tf_example_nat_gateway"),
+			VpcId:             vpc2.ID().ToIDOutput().ToStringOutput(),
+			NatProductVersion: pulumi.Int(2),
+			AssignedEipSets: pulumi.StringArray{
+				eipExample1.PublicIp,
+				eipExample2.PublicIp,
+			},
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -258,86 +447,52 @@ return await Deployment.RunAsync(() =>
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
         CidrBlock = "10.0.0.0/16",
+        Name = "tf_nat_gateway_vpc",
     });
 
-    var eipExample1 = new Tencentcloud.Eip.Instance("eipExample1");
+    var eipExample1 = new Tencentcloud.Eip.Instance("eip_example1", new()
+    {
+        Name = "tf_nat_gateway_eip1",
+    });
 
-    var eipExample2 = new Tencentcloud.Eip.Instance("eipExample2");
+    var eipExample2 = new Tencentcloud.Eip.Instance("eip_example2", new()
+    {
+        Name = "tf_nat_gateway_eip2",
+    });
 
     var example = new Tencentcloud.Nat.Gateway("example", new()
     {
+        Name = "tf_example_nat_gateway",
         VpcId = vpc.Id,
+        NatProductVersion = 2,
         AssignedEipSets = new[]
         {
             eipExample1.PublicIp,
             eipExample2.PublicIp,
         },
-        NatProductVersion = 2,
         Tags = 
         {
-            { "tf_tag_key", "tf_tag_value" },
+            { "createBy", "terraform" },
         },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		eipExample1, err := Eip.NewInstance(ctx, "eipExample1", nil)
-		if err != nil {
-			return err
-		}
-		eipExample2, err := Eip.NewInstance(ctx, "eipExample2", nil)
-		if err != nil {
-			return err
-		}
-		_, err = Nat.NewGateway(ctx, "example", &Nat.GatewayArgs{
-			VpcId: vpc.ID(),
-			AssignedEipSets: pulumi.StringArray{
-				eipExample1.PublicIp,
-				eipExample2.PublicIp,
-			},
-			NatProductVersion: pulumi.Int(2),
-			Tags: pulumi.Map{
-				"tf_tag_key": pulumi.Any("tf_tag_value"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Eip.Instance;
 import com.pulumi.tencentcloud.Nat.Gateway;
 import com.pulumi.tencentcloud.Nat.GatewayArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -349,114 +504,502 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
             .cidrBlock("10.0.0.0/16")
+            .name("tf_nat_gateway_vpc")
             .build());
 
-        var eipExample1 = new Instance("eipExample1");
+        var eipExample1 = new com.pulumi.tencentcloud.Eip.Instance("eipExample1", com.pulumi.tencentcloud.Eip.InstanceArgs.builder()
+            .name("tf_nat_gateway_eip1")
+            .build());
 
-        var eipExample2 = new Instance("eipExample2");
+        var eipExample2 = new com.pulumi.tencentcloud.Eip.Instance("eipExample2", com.pulumi.tencentcloud.Eip.InstanceArgs.builder()
+            .name("tf_nat_gateway_eip2")
+            .build());
 
-        var example = new Gateway("example", GatewayArgs.builder()        
+        var example = new Gateway("example", GatewayArgs.builder()
+            .name("tf_example_nat_gateway")
             .vpcId(vpc.id())
+            .natProductVersion(2)
             .assignedEipSets(            
                 eipExample1.publicIp(),
                 eipExample2.publicIp())
-            .natProductVersion(2)
-            .tags(Map.of("tf_tag_key", "tf_tag_value"))
+            .tags(Map.of("createBy", "terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
       cidrBlock: 10.0.0.0/16
+      name: tf_nat_gateway_vpc
   eipExample1:
     type: tencentcloud:Eip:Instance
+    name: eip_example1
+    properties:
+      name: tf_nat_gateway_eip1
   eipExample2:
     type: tencentcloud:Eip:Instance
+    name: eip_example2
+    properties:
+      name: tf_nat_gateway_eip2
   example:
     type: tencentcloud:Nat:Gateway
     properties:
+      name: tf_example_nat_gateway
       vpcId: ${vpc.id}
+      natProductVersion: 2
       assignedEipSets:
         - ${eipExample1.publicIp}
         - ${eipExample2.publicIp}
-      natProductVersion: 2
       tags:
-        tf_tag_key: tf_tag_value
+        createBy: terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_nat_gateway_vpc"
+}
+resource "tencentcloud_eip_instance" "eip_example1" {
+  name = "tf_nat_gateway_eip1"
+}
+resource "tencentcloud_eip_instance" "eip_example2" {
+  name = "tf_nat_gateway_eip2"
+}
+resource "tencentcloud_nat_gateway" "example" {
+  name                = "tf_example_nat_gateway"
+  vpc_id              = tencentcloud_vpc_instance.vpc.id
+  nat_product_version = 2
+  assigned_eip_sets   = [tencentcloud_eip_instance.eip_example1.public_ip, tencentcloud_eip_instance.eip_example2.public_ip]
+  tags = {
+    "createBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Or set stock public ip addresses bandwidth out
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_nat_gateway_vpc",
+});
+const eipExample1 = new tencentcloud.eip.Instance("eip_example1", {name: "tf_nat_gateway_eip1"});
+const eipExample2 = new tencentcloud.eip.Instance("eip_example2", {name: "tf_nat_gateway_eip2"});
+const example = new tencentcloud.nat.Gateway("example", {
+    name: "tf_example_nat_gateway",
+    vpcId: vpc.id,
+    natProductVersion: 2,
+    stockPublicIpAddressesBandwidthOut: 100,
+    assignedEipSets: [
+        eipExample1.publicIp,
+        eipExample2.publicIp,
+    ],
+    tags: {
+        createBy: "terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_nat_gateway_vpc")
+eip_example1 = tencentcloud.eip.Instance("eip_example1", name="tf_nat_gateway_eip1")
+eip_example2 = tencentcloud.eip.Instance("eip_example2", name="tf_nat_gateway_eip2")
+example = tencentcloud.nat.Gateway("example",
+    name="tf_example_nat_gateway",
+    vpc_id=vpc.id,
+    nat_product_version=2,
+    stock_public_ip_addresses_bandwidth_out=100,
+    assigned_eip_sets=[
+        eip_example1.public_ip,
+        eip_example2.public_ip,
+    ],
+    tags={
+        "createBy": "terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/eip"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/nat"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("tf_nat_gateway_vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		eipExample1, err := eip.NewInstance(ctx, "eip_example1", &eip.InstanceArgs{
+			Name: pulumi.String("tf_nat_gateway_eip1"),
+		})
+		if err != nil {
+			return err
+		}
+		eipExample2, err := eip.NewInstance(ctx, "eip_example2", &eip.InstanceArgs{
+			Name: pulumi.String("tf_nat_gateway_eip2"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = nat.NewGateway(ctx, "example", &nat.GatewayArgs{
+			Name:                               pulumi.String("tf_example_nat_gateway"),
+			VpcId:                              vpc2.ID().ToIDOutput().ToStringOutput(),
+			NatProductVersion:                  pulumi.Int(2),
+			StockPublicIpAddressesBandwidthOut: pulumi.Int(100),
+			AssignedEipSets: pulumi.StringArray{
+				eipExample1.PublicIp,
+				eipExample2.PublicIp,
+			},
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "tf_nat_gateway_vpc",
+    });
+
+    var eipExample1 = new Tencentcloud.Eip.Instance("eip_example1", new()
+    {
+        Name = "tf_nat_gateway_eip1",
+    });
+
+    var eipExample2 = new Tencentcloud.Eip.Instance("eip_example2", new()
+    {
+        Name = "tf_nat_gateway_eip2",
+    });
+
+    var example = new Tencentcloud.Nat.Gateway("example", new()
+    {
+        Name = "tf_example_nat_gateway",
+        VpcId = vpc.Id,
+        NatProductVersion = 2,
+        StockPublicIpAddressesBandwidthOut = 100,
+        AssignedEipSets = new[]
+        {
+            eipExample1.PublicIp,
+            eipExample2.PublicIp,
+        },
+        Tags = 
+        {
+            { "createBy", "terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Nat.Gateway;
+import com.pulumi.tencentcloud.Nat.GatewayArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("tf_nat_gateway_vpc")
+            .build());
+
+        var eipExample1 = new com.pulumi.tencentcloud.Eip.Instance("eipExample1", com.pulumi.tencentcloud.Eip.InstanceArgs.builder()
+            .name("tf_nat_gateway_eip1")
+            .build());
+
+        var eipExample2 = new com.pulumi.tencentcloud.Eip.Instance("eipExample2", com.pulumi.tencentcloud.Eip.InstanceArgs.builder()
+            .name("tf_nat_gateway_eip2")
+            .build());
+
+        var example = new Gateway("example", GatewayArgs.builder()
+            .name("tf_example_nat_gateway")
+            .vpcId(vpc.id())
+            .natProductVersion(2)
+            .stockPublicIpAddressesBandwidthOut(100)
+            .assignedEipSets(            
+                eipExample1.publicIp(),
+                eipExample2.publicIp())
+            .tags(Map.of("createBy", "terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      cidrBlock: 10.0.0.0/16
+      name: tf_nat_gateway_vpc
+  eipExample1:
+    type: tencentcloud:Eip:Instance
+    name: eip_example1
+    properties:
+      name: tf_nat_gateway_eip1
+  eipExample2:
+    type: tencentcloud:Eip:Instance
+    name: eip_example2
+    properties:
+      name: tf_nat_gateway_eip2
+  example:
+    type: tencentcloud:Nat:Gateway
+    properties:
+      name: tf_example_nat_gateway
+      vpcId: ${vpc.id}
+      natProductVersion: 2
+      stockPublicIpAddressesBandwidthOut: 100
+      assignedEipSets:
+        - ${eipExample1.publicIp}
+        - ${eipExample2.publicIp}
+      tags:
+        createBy: terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_nat_gateway_vpc"
+}
+resource "tencentcloud_eip_instance" "eip_example1" {
+  name = "tf_nat_gateway_eip1"
+}
+resource "tencentcloud_eip_instance" "eip_example2" {
+  name = "tf_nat_gateway_eip2"
+}
+resource "tencentcloud_nat_gateway" "example" {
+  name                                    = "tf_example_nat_gateway"
+  vpc_id                                  = tencentcloud_vpc_instance.vpc.id
+  nat_product_version                     = 2
+  stock_public_ip_addresses_bandwidth_out = 100
+  assigned_eip_sets                       = [tencentcloud_eip_instance.eip_example1.public_ip, tencentcloud_eip_instance.eip_example2.public_ip]
+  tags = {
+    "createBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateNatGateway](https://www.tencentcloud.com/document/api/215/34757)
+  - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+  - [DescribeNatGateways](https://www.tencentcloud.com/document/api/215/34752)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+  - [DescribeNatGateways](https://www.tencentcloud.com/document/api/215/34752)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [AssociateNatGatewayAddress](https://www.tencentcloud.com/document/api/215/36905)
+  - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+  - [DescribeNatGateways](https://www.tencentcloud.com/document/api/215/34752)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+  - [DisassociateNatGatewayAddress](https://www.tencentcloud.com/document/api/215/34751)
+  - [ModifyNatGatewayAttribute](https://www.tencentcloud.com/document/api/215/34750)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [ResetNatGatewayConnection](https://www.tencentcloud.com/document/api/215/34748)
+* Delete:
+  - [DeleteNatGateway](https://www.tencentcloud.com/document/api/215/34755)
+  - [DescribeNatGateways](https://www.tencentcloud.com/document/api/215/34752)
 
 
 ## Create Gateway Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">,</span>
+            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
             <span class="nx">assigned_eip_sets</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+            <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">bandwidth</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
             <span class="nx">max_concurrent</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
             <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">nat_product_version</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+            <span class="nx">stock_public_ip_addresses_bandwidth_out</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
             <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-            <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">,</span>
-            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+            <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+            <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewGateway</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Gateway</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewGateway</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Gateway</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Nat:Gateway</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Nat:Gateway</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_nat_gateway&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -477,7 +1020,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -594,11 +1137,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Gateway Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -614,8 +1165,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>EIP IP address set bound to the gateway. The value of at least 1 and at most 10.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>EIP IP address set bound to the gateway. The value of at least 1 and at most 10 if do not apply for a whitelist.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -623,8 +1173,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -632,8 +1181,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is 100.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is <code>100</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>5000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxconcurrent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrent_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Concurrent</a>
@@ -641,8 +1189,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>2000000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -650,8 +1197,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="natproductversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natproductversion_csharp" style="color: inherit; text-decoration: inherit;">Nat<wbr>Product<wbr>Version</a>
@@ -659,8 +1205,15 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>1: traditional NAT, 2: standard NAT, default value is 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>1: traditional NAT, 2: standard NAT, default value is 1.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="stockpublicipaddressesbandwidthout_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stockpublicipaddressesbandwidthout_csharp" style="color: inherit; text-decoration: inherit;">Stock<wbr>Public<wbr>Ip<wbr>Addresses<wbr>Bandwidth<wbr>Out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -668,17 +1221,15 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet of NAT.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet of NAT.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The available tags within this NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -686,8 +1237,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The availability zone, such as <code>ap-guangzhou-3</code>.</p>
-</dd></dl>
+    <dd>The availability zone, such as <code>ap-guangzhou-3</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -701,8 +1251,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>EIP IP address set bound to the gateway. The value of at least 1 and at most 10.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>EIP IP address set bound to the gateway. The value of at least 1 and at most 10 if do not apply for a whitelist.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -710,8 +1259,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_go" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -719,8 +1267,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is 100.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is <code>100</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>5000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxconcurrent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrent_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Concurrent</a>
@@ -728,8 +1275,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>2000000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -737,8 +1283,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="natproductversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natproductversion_go" style="color: inherit; text-decoration: inherit;">Nat<wbr>Product<wbr>Version</a>
@@ -746,8 +1291,15 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>1: traditional NAT, 2: standard NAT, default value is 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>1: traditional NAT, 2: standard NAT, default value is 1.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="stockpublicipaddressesbandwidthout_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stockpublicipaddressesbandwidthout_go" style="color: inherit; text-decoration: inherit;">Stock<wbr>Public<wbr>Ip<wbr>Addresses<wbr>Bandwidth<wbr>Out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -755,17 +1307,15 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet of NAT.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet of NAT.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The available tags within this NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -773,8 +1323,93 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The availability zone, such as <code>ap-guangzhou-3</code>.</p>
-</dd></dl>
+    <dd>The availability zone, such as <code>ap-guangzhou-3</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="assigned_eip_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#assigned_eip_sets_hcl" style="color: inherit; text-decoration: inherit;">assigned_<wbr>eip_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>EIP IP address set bound to the gateway. The value of at least 1 and at most 10 if do not apply for a whitelist.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the vpc.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_hcl" style="color: inherit; text-decoration: inherit;">bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is <code>100</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>5000</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_concurrent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_concurrent_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>concurrent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>2000000</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the NAT gateway.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="nat_product_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nat_product_version_hcl" style="color: inherit; text-decoration: inherit;">nat_<wbr>product_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>1: traditional NAT, 2: standard NAT, default value is 1.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="stock_public_ip_addresses_bandwidth_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stock_public_ip_addresses_bandwidth_out_hcl" style="color: inherit; text-decoration: inherit;">stock_<wbr>public_<wbr>ip_<wbr>addresses_<wbr>bandwidth_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet of NAT.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The available tags within this NAT gateway.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The availability zone, such as <code>ap-guangzhou-3</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -788,8 +1423,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>EIP IP address set bound to the gateway. The value of at least 1 and at most 10.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>EIP IP address set bound to the gateway. The value of at least 1 and at most 10 if do not apply for a whitelist.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -797,8 +1431,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_java" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -806,8 +1439,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is 100.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is <code>100</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>5000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxconcurrent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrent_java" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrent</a>
@@ -815,8 +1447,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>2000000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -824,8 +1455,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="natproductversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natproductversion_java" style="color: inherit; text-decoration: inherit;">nat<wbr>Product<wbr>Version</a>
@@ -833,8 +1463,15 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>1: traditional NAT, 2: standard NAT, default value is 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>1: traditional NAT, 2: standard NAT, default value is 1.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="stockpublicipaddressesbandwidthout_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stockpublicipaddressesbandwidthout_java" style="color: inherit; text-decoration: inherit;">stock<wbr>Public<wbr>Ip<wbr>Addresses<wbr>Bandwidth<wbr>Out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -842,17 +1479,15 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet of NAT.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet of NAT.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The available tags within this NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -860,8 +1495,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The availability zone, such as <code>ap-guangzhou-3</code>.</p>
-</dd></dl>
+    <dd>The availability zone, such as <code>ap-guangzhou-3</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -875,8 +1509,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>EIP IP address set bound to the gateway. The value of at least 1 and at most 10.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>EIP IP address set bound to the gateway. The value of at least 1 and at most 10 if do not apply for a whitelist.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -884,8 +1517,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -893,8 +1525,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is 100.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is <code>100</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>5000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxconcurrent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrent_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrent</a>
@@ -902,8 +1533,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>2000000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -911,8 +1541,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="natproductversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natproductversion_nodejs" style="color: inherit; text-decoration: inherit;">nat<wbr>Product<wbr>Version</a>
@@ -920,8 +1549,15 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>1: traditional NAT, 2: standard NAT, default value is 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>1: traditional NAT, 2: standard NAT, default value is 1.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="stockpublicipaddressesbandwidthout_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stockpublicipaddressesbandwidthout_nodejs" style="color: inherit; text-decoration: inherit;">stock<wbr>Public<wbr>Ip<wbr>Addresses<wbr>Bandwidth<wbr>Out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -929,17 +1565,15 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet of NAT.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet of NAT.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The available tags within this NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -947,8 +1581,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The availability zone, such as <code>ap-guangzhou-3</code>.</p>
-</dd></dl>
+    <dd>The availability zone, such as <code>ap-guangzhou-3</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -962,8 +1595,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>EIP IP address set bound to the gateway. The value of at least 1 and at most 10.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>EIP IP address set bound to the gateway. The value of at least 1 and at most 10 if do not apply for a whitelist.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -971,8 +1603,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_python" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -980,8 +1611,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is 100.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is <code>100</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>5000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_concurrent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_concurrent_python" style="color: inherit; text-decoration: inherit;">max_<wbr>concurrent</a>
@@ -989,8 +1619,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>2000000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -998,8 +1627,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="nat_product_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nat_product_version_python" style="color: inherit; text-decoration: inherit;">nat_<wbr>product_<wbr>version</a>
@@ -1007,8 +1635,15 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>1: traditional NAT, 2: standard NAT, default value is 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>1: traditional NAT, 2: standard NAT, default value is 1.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="stock_public_ip_addresses_bandwidth_out_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stock_public_ip_addresses_bandwidth_out_python" style="color: inherit; text-decoration: inherit;">stock_<wbr>public_<wbr>ip_<wbr>addresses_<wbr>bandwidth_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1016,17 +1651,15 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet of NAT.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet of NAT.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The available tags within this NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1034,8 +1667,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The availability zone, such as <code>ap-guangzhou-3</code>.</p>
-</dd></dl>
+    <dd>The availability zone, such as <code>ap-guangzhou-3</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1049,8 +1681,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>EIP IP address set bound to the gateway. The value of at least 1 and at most 10.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>EIP IP address set bound to the gateway. The value of at least 1 and at most 10 if do not apply for a whitelist.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1058,8 +1689,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_yaml" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -1067,8 +1697,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is 100.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is <code>100</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>5000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxconcurrent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconcurrent_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrent</a>
@@ -1076,8 +1705,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>2000000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1085,8 +1713,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="natproductversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natproductversion_yaml" style="color: inherit; text-decoration: inherit;">nat<wbr>Product<wbr>Version</a>
@@ -1094,8 +1721,15 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>1: traditional NAT, 2: standard NAT, default value is 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>1: traditional NAT, 2: standard NAT, default value is 1.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="stockpublicipaddressesbandwidthout_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stockpublicipaddressesbandwidthout_yaml" style="color: inherit; text-decoration: inherit;">stock<wbr>Public<wbr>Ip<wbr>Addresses<wbr>Bandwidth<wbr>Out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1103,17 +1737,15 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet of NAT.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet of NAT.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The available tags within this NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>The available tags within this NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1121,8 +1753,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The availability zone, such as <code>ap-guangzhou-3</code>.</p>
-</dd></dl>
+    <dd>The availability zone, such as <code>ap-guangzhou-3</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1143,8 +1774,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the NAT gateway.</p>
-</dd><dt class="property-"
+    <dd>Create time of the NAT gateway.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1152,8 +1782,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1167,8 +1796,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the NAT gateway.</p>
-</dd><dt class="property-"
+    <dd>Create time of the NAT gateway.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1176,8 +1804,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="created_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#created_time_hcl" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the NAT gateway.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1191,8 +1840,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the NAT gateway.</p>
-</dd><dt class="property-"
+    <dd>Create time of the NAT gateway.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1200,8 +1848,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1215,8 +1862,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the NAT gateway.</p>
-</dd><dt class="property-"
+    <dd>Create time of the NAT gateway.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1224,8 +1870,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1239,8 +1884,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the NAT gateway.</p>
-</dd><dt class="property-"
+    <dd>Create time of the NAT gateway.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1248,8 +1892,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1263,8 +1906,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the NAT gateway.</p>
-</dd><dt class="property-"
+    <dd>Create time of the NAT gateway.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1272,8 +1914,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1283,18 +1924,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Gateway resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">GatewayState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Gateway</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">GatewayState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Gateway</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1304,108 +1945,148 @@ Get an existing Gateway resource's state with the given name, ID, and optional e
         <span class="nx">max_concurrent</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">nat_product_version</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">stock_public_ip_addresses_bandwidth_out</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Gateway</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetGateway<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">GatewayState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Gateway</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetGateway<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">GatewayState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Gateway</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Gateway</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GatewayState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Gateway</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GatewayState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Gateway</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GatewayState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Gateway</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GatewayState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingGateway</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Nat:Gateway</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_nat_gateway</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GatewayState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GatewayState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1413,28 +2094,31 @@ Get an existing Gateway resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GatewayState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1442,28 +2126,31 @@ Get an existing Gateway resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GatewayState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1483,8 +2170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>EIP IP address set bound to the gateway. The value of at least 1 and at most 10.</p>
-</dd><dt class="property-optional"
+    <dd>EIP IP address set bound to the gateway. The value of at least 1 and at most 10 if do not apply for a whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -1492,8 +2178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is 100.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is <code>100</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>5000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createdtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdtime_csharp" style="color: inherit; text-decoration: inherit;">Created<wbr>Time</a>
@@ -1501,8 +2186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxconcurrent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxconcurrent_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Concurrent</a>
@@ -1510,8 +2194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>2000000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1519,8 +2202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_natproductversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_natproductversion_csharp" style="color: inherit; text-decoration: inherit;">Nat<wbr>Product<wbr>Version</a>
@@ -1528,8 +2210,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>1: traditional NAT, 2: standard NAT, default value is 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>1: traditional NAT, 2: standard NAT, default value is 1.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_stockpublicipaddressesbandwidthout_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_stockpublicipaddressesbandwidthout_csharp" style="color: inherit; text-decoration: inherit;">Stock<wbr>Public<wbr>Ip<wbr>Addresses<wbr>Bandwidth<wbr>Out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1537,17 +2226,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet of NAT.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet of NAT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The available tags within this NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available tags within this NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1555,8 +2242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1564,8 +2250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The availability zone, such as <code>ap-guangzhou-3</code>.</p>
-</dd></dl>
+    <dd>The availability zone, such as <code>ap-guangzhou-3</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1579,8 +2264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>EIP IP address set bound to the gateway. The value of at least 1 and at most 10.</p>
-</dd><dt class="property-optional"
+    <dd>EIP IP address set bound to the gateway. The value of at least 1 and at most 10 if do not apply for a whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_go" style="color: inherit; text-decoration: inherit;">Bandwidth</a>
@@ -1588,8 +2272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is 100.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is <code>100</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>5000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createdtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdtime_go" style="color: inherit; text-decoration: inherit;">Created<wbr>Time</a>
@@ -1597,8 +2280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxconcurrent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxconcurrent_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Concurrent</a>
@@ -1606,8 +2288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>2000000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1615,8 +2296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_natproductversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_natproductversion_go" style="color: inherit; text-decoration: inherit;">Nat<wbr>Product<wbr>Version</a>
@@ -1624,8 +2304,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>1: traditional NAT, 2: standard NAT, default value is 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>1: traditional NAT, 2: standard NAT, default value is 1.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_stockpublicipaddressesbandwidthout_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_stockpublicipaddressesbandwidthout_go" style="color: inherit; text-decoration: inherit;">Stock<wbr>Public<wbr>Ip<wbr>Addresses<wbr>Bandwidth<wbr>Out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1633,17 +2320,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet of NAT.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet of NAT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The available tags within this NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available tags within this NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1651,8 +2336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1660,8 +2344,101 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The availability zone, such as <code>ap-guangzhou-3</code>.</p>
-</dd></dl>
+    <dd>The availability zone, such as <code>ap-guangzhou-3</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_assigned_eip_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_assigned_eip_sets_hcl" style="color: inherit; text-decoration: inherit;">assigned_<wbr>eip_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>EIP IP address set bound to the gateway. The value of at least 1 and at most 10 if do not apply for a whitelist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_hcl" style="color: inherit; text-decoration: inherit;">bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is <code>100</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>5000</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_created_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_created_time_hcl" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the NAT gateway.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_concurrent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_concurrent_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>concurrent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>2000000</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the NAT gateway.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_nat_product_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nat_product_version_hcl" style="color: inherit; text-decoration: inherit;">nat_<wbr>product_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>1: traditional NAT, 2: standard NAT, default value is 1.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_stock_public_ip_addresses_bandwidth_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_stock_public_ip_addresses_bandwidth_out_hcl" style="color: inherit; text-decoration: inherit;">stock_<wbr>public_<wbr>ip_<wbr>addresses_<wbr>bandwidth_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet of NAT.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The available tags within this NAT gateway.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the vpc.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The availability zone, such as <code>ap-guangzhou-3</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1675,8 +2452,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>EIP IP address set bound to the gateway. The value of at least 1 and at most 10.</p>
-</dd><dt class="property-optional"
+    <dd>EIP IP address set bound to the gateway. The value of at least 1 and at most 10 if do not apply for a whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_java" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -1684,8 +2460,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is 100.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is <code>100</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>5000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createdtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdtime_java" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
@@ -1693,8 +2468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxconcurrent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxconcurrent_java" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrent</a>
@@ -1702,8 +2476,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>2000000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1711,8 +2484,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_natproductversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_natproductversion_java" style="color: inherit; text-decoration: inherit;">nat<wbr>Product<wbr>Version</a>
@@ -1720,8 +2492,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>1: traditional NAT, 2: standard NAT, default value is 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>1: traditional NAT, 2: standard NAT, default value is 1.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_stockpublicipaddressesbandwidthout_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_stockpublicipaddressesbandwidthout_java" style="color: inherit; text-decoration: inherit;">stock<wbr>Public<wbr>Ip<wbr>Addresses<wbr>Bandwidth<wbr>Out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1729,17 +2508,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet of NAT.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet of NAT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The available tags within this NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available tags within this NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1747,8 +2524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1756,8 +2532,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The availability zone, such as <code>ap-guangzhou-3</code>.</p>
-</dd></dl>
+    <dd>The availability zone, such as <code>ap-guangzhou-3</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1771,8 +2546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>EIP IP address set bound to the gateway. The value of at least 1 and at most 10.</p>
-</dd><dt class="property-optional"
+    <dd>EIP IP address set bound to the gateway. The value of at least 1 and at most 10 if do not apply for a whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -1780,8 +2554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is 100.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is <code>100</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>5000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createdtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdtime_nodejs" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
@@ -1789,8 +2562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxconcurrent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxconcurrent_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrent</a>
@@ -1798,8 +2570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>2000000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1807,8 +2578,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_natproductversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_natproductversion_nodejs" style="color: inherit; text-decoration: inherit;">nat<wbr>Product<wbr>Version</a>
@@ -1816,8 +2586,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>1: traditional NAT, 2: standard NAT, default value is 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>1: traditional NAT, 2: standard NAT, default value is 1.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_stockpublicipaddressesbandwidthout_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_stockpublicipaddressesbandwidthout_nodejs" style="color: inherit; text-decoration: inherit;">stock<wbr>Public<wbr>Ip<wbr>Addresses<wbr>Bandwidth<wbr>Out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1825,17 +2602,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet of NAT.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet of NAT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The available tags within this NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available tags within this NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1843,8 +2618,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1852,8 +2626,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The availability zone, such as <code>ap-guangzhou-3</code>.</p>
-</dd></dl>
+    <dd>The availability zone, such as <code>ap-guangzhou-3</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1867,8 +2640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>EIP IP address set bound to the gateway. The value of at least 1 and at most 10.</p>
-</dd><dt class="property-optional"
+    <dd>EIP IP address set bound to the gateway. The value of at least 1 and at most 10 if do not apply for a whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_python" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -1876,8 +2648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is 100.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is <code>100</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>5000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_created_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_created_time_python" style="color: inherit; text-decoration: inherit;">created_<wbr>time</a>
@@ -1885,8 +2656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_concurrent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_concurrent_python" style="color: inherit; text-decoration: inherit;">max_<wbr>concurrent</a>
@@ -1894,8 +2664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>2000000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1903,8 +2672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_nat_product_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nat_product_version_python" style="color: inherit; text-decoration: inherit;">nat_<wbr>product_<wbr>version</a>
@@ -1912,8 +2680,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>1: traditional NAT, 2: standard NAT, default value is 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>1: traditional NAT, 2: standard NAT, default value is 1.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_stock_public_ip_addresses_bandwidth_out_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_stock_public_ip_addresses_bandwidth_out_python" style="color: inherit; text-decoration: inherit;">stock_<wbr>public_<wbr>ip_<wbr>addresses_<wbr>bandwidth_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1921,17 +2696,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet of NAT.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet of NAT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The available tags within this NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available tags within this NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1939,8 +2712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1948,8 +2720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The availability zone, such as <code>ap-guangzhou-3</code>.</p>
-</dd></dl>
+    <dd>The availability zone, such as <code>ap-guangzhou-3</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1963,8 +2734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>EIP IP address set bound to the gateway. The value of at least 1 and at most 10.</p>
-</dd><dt class="property-optional"
+    <dd>EIP IP address set bound to the gateway. The value of at least 1 and at most 10 if do not apply for a whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_yaml" style="color: inherit; text-decoration: inherit;">bandwidth</a>
@@ -1972,8 +2742,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is 100.</p>
-</dd><dt class="property-optional"
+    <dd>The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: <code>20</code>, <code>50</code>, <code>100</code>, <code>200</code>, <code>500</code>, <code>1000</code>, <code>2000</code>, <code>5000</code>. Default is <code>100</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>5000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createdtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createdtime_yaml" style="color: inherit; text-decoration: inherit;">created<wbr>Time</a>
@@ -1981,8 +2750,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the NAT gateway.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the NAT gateway.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxconcurrent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxconcurrent_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Concurrent</a>
@@ -1990,8 +2758,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of concurrent connection of NAT gateway. Valid values: <code>1000000</code>, <code>3000000</code>, <code>10000000</code>. Default is <code>1000000</code>. When the value of parameter <code>natProductVersion</code> is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to <code>2000000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1999,8 +2766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_natproductversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_natproductversion_yaml" style="color: inherit; text-decoration: inherit;">nat<wbr>Product<wbr>Version</a>
@@ -2008,8 +2774,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>1: traditional NAT, 2: standard NAT, default value is 1.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>1: traditional NAT, 2: standard NAT, default value is 1.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_stockpublicipaddressesbandwidthout_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_stockpublicipaddressesbandwidthout_yaml" style="color: inherit; text-decoration: inherit;">stock<wbr>Public<wbr>Ip<wbr>Addresses<wbr>Bandwidth<wbr>Out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2017,17 +2790,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet of NAT.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet of NAT.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The available tags within this NAT gateway.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available tags within this NAT gateway.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2035,8 +2806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2044,8 +2814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The availability zone, such as <code>ap-guangzhou-3</code>.</p>
-</dd></dl>
+    <dd>The availability zone, such as <code>ap-guangzhou-3</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2063,9 +2832,12 @@ The following state arguments are supported:
 NAT gateway can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
+$ pulumi import tencentcloud:Nat/gateway:Gateway example nat-1asg3t63
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2077,7 +2849,6 @@ $ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

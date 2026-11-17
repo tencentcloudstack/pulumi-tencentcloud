@@ -2,9 +2,11 @@
 ---
 title: "AccessRule"
 title_tag: "tencentcloud.Cfs.AccessRule"
-meta_desc: "Documentation for the tencentcloud.Cfs.AccessRule resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a CFS access rule."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,7 +18,12 @@ Provides a resource to create a CFS access rule.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -29,6 +36,11 @@ const foo = new tencentcloud.cfs.AccessRule("foo", {
     userPermission: "root_squash",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -40,6 +52,40 @@ foo = tencentcloud.cfs.AccessRule("foo",
     rw_permission="RO",
     user_permission="root_squash")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cfs"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cfs.NewAccessRule(ctx, "foo", &cfs.AccessRuleArgs{
+			AccessGroupId:  pulumi.String("pgroup-7nx89k7l"),
+			AuthClientIp:   pulumi.String("10.10.1.0/24"),
+			Priority:       pulumi.Int(1),
+			RwPermission:   pulumi.String("RO"),
+			UserPermission: pulumi.String("root_squash"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -59,30 +105,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cfs.NewAccessRule(ctx, "foo", &Cfs.AccessRuleArgs{
-			AccessGroupId:  pulumi.String("pgroup-7nx89k7l"),
-			AuthClientIp:   pulumi.String("10.10.1.0/24"),
-			Priority:       pulumi.Int(1),
-			RwPermission:   pulumi.String("RO"),
-			UserPermission: pulumi.String("root_squash"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -91,8 +118,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cfs.AccessRule;
 import com.pulumi.tencentcloud.Cfs.AccessRuleArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -104,7 +131,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new AccessRule("foo", AccessRuleArgs.builder()        
+        var foo = new AccessRule("foo", AccessRuleArgs.builder()
             .accessGroupId("pgroup-7nx89k7l")
             .authClientIp("10.10.1.0/24")
             .priority(1)
@@ -115,6 +142,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
@@ -126,70 +158,117 @@ resources:
       rwPermission: RO
       userPermission: root_squash
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cfs_accessrule" "foo" {
+  access_group_id = "pgroup-7nx89k7l"
+  auth_client_ip  = "10.10.1.0/24"
+  priority        = 1
+  rw_permission   = "RO"
+  user_permission = "root_squash"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateCfsRule](https://www.tencentcloud.com/document/api/582/34508)
+* Read: [DescribeCfsRules](https://www.tencentcloud.com/document/api/582/34504)
+* Update: [UpdateCfsRule](https://www.tencentcloud.com/document/api/582/34502)
+* Delete: [DeleteCfsRule](https://www.tencentcloud.com/document/api/582/34506)
 
 
 
 ## Create AccessRule Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">AccessRule</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AccessRuleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">AccessRule</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AccessRuleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">AccessRule</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AccessRuleArgs</a></span><span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">AccessRule</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                <span class="nx">access_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">auth_client_ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">priority</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                <span class="nx">rw_permission</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">user_permission</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">AccessRule</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AccessRuleArgs</a></span><span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+               <span class="nx">user_permission</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAccessRule</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AccessRuleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">AccessRule</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAccessRule</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AccessRuleArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">AccessRule</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">AccessRule</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AccessRuleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">AccessRule</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AccessRuleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">AccessRule</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AccessRuleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">AccessRule</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AccessRuleArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cfs:AccessRule</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cfs:AccessRule</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cfs_access_rule&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -210,7 +289,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -327,11 +406,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## AccessRule Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The AccessRule resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -347,8 +434,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a access group.</p>
-</dd><dt class="property-required"
+    <dd>ID of a access group.</dd><dt class="property-required"
             title="Required">
         <span id="authclientip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authclientip_csharp" style="color: inherit; text-decoration: inherit;">Auth<wbr>Client<wbr>Ip</a>
@@ -356,8 +442,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</p>
-</dd><dt class="property-required"
+    <dd>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</dd><dt class="property-required"
             title="Required">
         <span id="priority_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_csharp" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -365,8 +450,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="rwpermission_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwpermission_csharp" style="color: inherit; text-decoration: inherit;">Rw<wbr>Permission</a>
@@ -374,8 +458,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="userpermission_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userpermission_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Permission</a>
@@ -383,8 +466,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The permissions of accessing users. Valid values are <code>all_squash</code>, <code>no_all_squash</code>, <code>root_squash</code> and <code>no_root_squash</code>. and default is <code>root_squash</code>. <code>all_squash</code> indicates that all access users are mapped as anonymous users or user groups; <code>no_all_squash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>root_squash</code> indicates that map access root users to anonymous users or user groups; <code>no_root_squash</code> indicates that access root users keep root account permission.</p>
-</dd></dl>
+    <dd>The permissions of accessing users. Valid values are <code>allSquash</code>, <code>noAllSquash</code>, <code>rootSquash</code> and <code>noRootSquash</code>. and default is <code>rootSquash</code>. <code>allSquash</code> indicates that all access users are mapped as anonymous users or user groups; <code>noAllSquash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>rootSquash</code> indicates that map access root users to anonymous users or user groups; <code>noRootSquash</code> indicates that access root users keep root account permission.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -398,8 +480,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a access group.</p>
-</dd><dt class="property-required"
+    <dd>ID of a access group.</dd><dt class="property-required"
             title="Required">
         <span id="authclientip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authclientip_go" style="color: inherit; text-decoration: inherit;">Auth<wbr>Client<wbr>Ip</a>
@@ -407,8 +488,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</p>
-</dd><dt class="property-required"
+    <dd>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</dd><dt class="property-required"
             title="Required">
         <span id="priority_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_go" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -416,8 +496,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="rwpermission_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwpermission_go" style="color: inherit; text-decoration: inherit;">Rw<wbr>Permission</a>
@@ -425,8 +504,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="userpermission_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userpermission_go" style="color: inherit; text-decoration: inherit;">User<wbr>Permission</a>
@@ -434,8 +512,53 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The permissions of accessing users. Valid values are <code>all_squash</code>, <code>no_all_squash</code>, <code>root_squash</code> and <code>no_root_squash</code>. and default is <code>root_squash</code>. <code>all_squash</code> indicates that all access users are mapped as anonymous users or user groups; <code>no_all_squash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>root_squash</code> indicates that map access root users to anonymous users or user groups; <code>no_root_squash</code> indicates that access root users keep root account permission.</p>
-</dd></dl>
+    <dd>The permissions of accessing users. Valid values are <code>allSquash</code>, <code>noAllSquash</code>, <code>rootSquash</code> and <code>noRootSquash</code>. and default is <code>rootSquash</code>. <code>allSquash</code> indicates that all access users are mapped as anonymous users or user groups; <code>noAllSquash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>rootSquash</code> indicates that map access root users to anonymous users or user groups; <code>noRootSquash</code> indicates that access root users keep root account permission.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="access_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_group_id_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a access group.</dd><dt class="property-required"
+            title="Required">
+        <span id="auth_client_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_client_ip_hcl" style="color: inherit; text-decoration: inherit;">auth_<wbr>client_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</dd><dt class="property-required"
+            title="Required">
+        <span id="priority_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_hcl" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rw_permission_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rw_permission_hcl" style="color: inherit; text-decoration: inherit;">rw_<wbr>permission</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="user_permission_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_permission_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>permission</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The permissions of accessing users. Valid values are <code>allSquash</code>, <code>noAllSquash</code>, <code>rootSquash</code> and <code>noRootSquash</code>. and default is <code>rootSquash</code>. <code>allSquash</code> indicates that all access users are mapped as anonymous users or user groups; <code>noAllSquash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>rootSquash</code> indicates that map access root users to anonymous users or user groups; <code>noRootSquash</code> indicates that access root users keep root account permission.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -449,8 +572,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a access group.</p>
-</dd><dt class="property-required"
+    <dd>ID of a access group.</dd><dt class="property-required"
             title="Required">
         <span id="authclientip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authclientip_java" style="color: inherit; text-decoration: inherit;">auth<wbr>Client<wbr>Ip</a>
@@ -458,8 +580,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</p>
-</dd><dt class="property-required"
+    <dd>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</dd><dt class="property-required"
             title="Required">
         <span id="priority_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_java" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -467,8 +588,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="rwpermission_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwpermission_java" style="color: inherit; text-decoration: inherit;">rw<wbr>Permission</a>
@@ -476,8 +596,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="userpermission_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userpermission_java" style="color: inherit; text-decoration: inherit;">user<wbr>Permission</a>
@@ -485,8 +604,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The permissions of accessing users. Valid values are <code>all_squash</code>, <code>no_all_squash</code>, <code>root_squash</code> and <code>no_root_squash</code>. and default is <code>root_squash</code>. <code>all_squash</code> indicates that all access users are mapped as anonymous users or user groups; <code>no_all_squash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>root_squash</code> indicates that map access root users to anonymous users or user groups; <code>no_root_squash</code> indicates that access root users keep root account permission.</p>
-</dd></dl>
+    <dd>The permissions of accessing users. Valid values are <code>allSquash</code>, <code>noAllSquash</code>, <code>rootSquash</code> and <code>noRootSquash</code>. and default is <code>rootSquash</code>. <code>allSquash</code> indicates that all access users are mapped as anonymous users or user groups; <code>noAllSquash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>rootSquash</code> indicates that map access root users to anonymous users or user groups; <code>noRootSquash</code> indicates that access root users keep root account permission.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -500,8 +618,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a access group.</p>
-</dd><dt class="property-required"
+    <dd>ID of a access group.</dd><dt class="property-required"
             title="Required">
         <span id="authclientip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authclientip_nodejs" style="color: inherit; text-decoration: inherit;">auth<wbr>Client<wbr>Ip</a>
@@ -509,8 +626,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</p>
-</dd><dt class="property-required"
+    <dd>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</dd><dt class="property-required"
             title="Required">
         <span id="priority_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_nodejs" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -518,8 +634,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="rwpermission_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwpermission_nodejs" style="color: inherit; text-decoration: inherit;">rw<wbr>Permission</a>
@@ -527,8 +642,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="userpermission_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userpermission_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Permission</a>
@@ -536,8 +650,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The permissions of accessing users. Valid values are <code>all_squash</code>, <code>no_all_squash</code>, <code>root_squash</code> and <code>no_root_squash</code>. and default is <code>root_squash</code>. <code>all_squash</code> indicates that all access users are mapped as anonymous users or user groups; <code>no_all_squash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>root_squash</code> indicates that map access root users to anonymous users or user groups; <code>no_root_squash</code> indicates that access root users keep root account permission.</p>
-</dd></dl>
+    <dd>The permissions of accessing users. Valid values are <code>allSquash</code>, <code>noAllSquash</code>, <code>rootSquash</code> and <code>noRootSquash</code>. and default is <code>rootSquash</code>. <code>allSquash</code> indicates that all access users are mapped as anonymous users or user groups; <code>noAllSquash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>rootSquash</code> indicates that map access root users to anonymous users or user groups; <code>noRootSquash</code> indicates that access root users keep root account permission.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -551,8 +664,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a access group.</p>
-</dd><dt class="property-required"
+    <dd>ID of a access group.</dd><dt class="property-required"
             title="Required">
         <span id="auth_client_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_client_ip_python" style="color: inherit; text-decoration: inherit;">auth_<wbr>client_<wbr>ip</a>
@@ -560,8 +672,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</p>
-</dd><dt class="property-required"
+    <dd>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</dd><dt class="property-required"
             title="Required">
         <span id="priority_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_python" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -569,8 +680,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="rw_permission_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rw_permission_python" style="color: inherit; text-decoration: inherit;">rw_<wbr>permission</a>
@@ -578,8 +688,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="user_permission_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_permission_python" style="color: inherit; text-decoration: inherit;">user_<wbr>permission</a>
@@ -587,8 +696,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The permissions of accessing users. Valid values are <code>all_squash</code>, <code>no_all_squash</code>, <code>root_squash</code> and <code>no_root_squash</code>. and default is <code>root_squash</code>. <code>all_squash</code> indicates that all access users are mapped as anonymous users or user groups; <code>no_all_squash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>root_squash</code> indicates that map access root users to anonymous users or user groups; <code>no_root_squash</code> indicates that access root users keep root account permission.</p>
-</dd></dl>
+    <dd>The permissions of accessing users. Valid values are <code>allSquash</code>, <code>noAllSquash</code>, <code>rootSquash</code> and <code>noRootSquash</code>. and default is <code>rootSquash</code>. <code>allSquash</code> indicates that all access users are mapped as anonymous users or user groups; <code>noAllSquash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>rootSquash</code> indicates that map access root users to anonymous users or user groups; <code>noRootSquash</code> indicates that access root users keep root account permission.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -602,8 +710,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a access group.</p>
-</dd><dt class="property-required"
+    <dd>ID of a access group.</dd><dt class="property-required"
             title="Required">
         <span id="authclientip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authclientip_yaml" style="color: inherit; text-decoration: inherit;">auth<wbr>Client<wbr>Ip</a>
@@ -611,8 +718,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</p>
-</dd><dt class="property-required"
+    <dd>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</dd><dt class="property-required"
             title="Required">
         <span id="priority_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_yaml" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -620,8 +726,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="rwpermission_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwpermission_yaml" style="color: inherit; text-decoration: inherit;">rw<wbr>Permission</a>
@@ -629,8 +734,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="userpermission_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userpermission_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Permission</a>
@@ -638,8 +742,7 @@ The AccessRule resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The permissions of accessing users. Valid values are <code>all_squash</code>, <code>no_all_squash</code>, <code>root_squash</code> and <code>no_root_squash</code>. and default is <code>root_squash</code>. <code>all_squash</code> indicates that all access users are mapped as anonymous users or user groups; <code>no_all_squash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>root_squash</code> indicates that map access root users to anonymous users or user groups; <code>no_root_squash</code> indicates that access root users keep root account permission.</p>
-</dd></dl>
+    <dd>The permissions of accessing users. Valid values are <code>allSquash</code>, <code>noAllSquash</code>, <code>rootSquash</code> and <code>noRootSquash</code>. and default is <code>rootSquash</code>. <code>allSquash</code> indicates that all access users are mapped as anonymous users or user groups; <code>noAllSquash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>rootSquash</code> indicates that map access root users to anonymous users or user groups; <code>noRootSquash</code> indicates that access root users keep root account permission.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -660,8 +763,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -675,8 +777,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -690,8 +805,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -705,8 +819,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -720,8 +833,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -735,8 +847,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -746,18 +857,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing AccessRule resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AccessRuleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">AccessRule</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AccessRuleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">AccessRule</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -766,104 +877,143 @@ Get an existing AccessRule resource's state with the given name, ID, and optiona
         <span class="nx">priority</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">rw_permission</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">user_permission</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> AccessRule</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAccessRule<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AccessRuleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">AccessRule</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAccessRule<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AccessRuleState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">AccessRule</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">AccessRule</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AccessRuleState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">AccessRule</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AccessRuleState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">AccessRule</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AccessRuleState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">AccessRule</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AccessRuleState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingAccessRule</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cfs:AccessRule</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cfs_access_rule</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AccessRuleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AccessRuleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -871,28 +1021,31 @@ Get an existing AccessRule resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AccessRuleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -900,28 +1053,31 @@ Get an existing AccessRule resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AccessRuleState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -941,8 +1097,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a access group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a access group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_authclientip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_authclientip_csharp" style="color: inherit; text-decoration: inherit;">Auth<wbr>Client<wbr>Ip</a>
@@ -950,8 +1105,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</p>
-</dd><dt class="property-optional"
+    <dd>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_priority_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priority_csharp" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -959,8 +1113,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwpermission_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwpermission_csharp" style="color: inherit; text-decoration: inherit;">Rw<wbr>Permission</a>
@@ -968,8 +1121,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userpermission_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userpermission_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Permission</a>
@@ -977,8 +1129,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The permissions of accessing users. Valid values are <code>all_squash</code>, <code>no_all_squash</code>, <code>root_squash</code> and <code>no_root_squash</code>. and default is <code>root_squash</code>. <code>all_squash</code> indicates that all access users are mapped as anonymous users or user groups; <code>no_all_squash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>root_squash</code> indicates that map access root users to anonymous users or user groups; <code>no_root_squash</code> indicates that access root users keep root account permission.</p>
-</dd></dl>
+    <dd>The permissions of accessing users. Valid values are <code>allSquash</code>, <code>noAllSquash</code>, <code>rootSquash</code> and <code>noRootSquash</code>. and default is <code>rootSquash</code>. <code>allSquash</code> indicates that all access users are mapped as anonymous users or user groups; <code>noAllSquash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>rootSquash</code> indicates that map access root users to anonymous users or user groups; <code>noRootSquash</code> indicates that access root users keep root account permission.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -992,8 +1143,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a access group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a access group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_authclientip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_authclientip_go" style="color: inherit; text-decoration: inherit;">Auth<wbr>Client<wbr>Ip</a>
@@ -1001,8 +1151,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</p>
-</dd><dt class="property-optional"
+    <dd>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_priority_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priority_go" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -1010,8 +1159,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwpermission_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwpermission_go" style="color: inherit; text-decoration: inherit;">Rw<wbr>Permission</a>
@@ -1019,8 +1167,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userpermission_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userpermission_go" style="color: inherit; text-decoration: inherit;">User<wbr>Permission</a>
@@ -1028,8 +1175,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The permissions of accessing users. Valid values are <code>all_squash</code>, <code>no_all_squash</code>, <code>root_squash</code> and <code>no_root_squash</code>. and default is <code>root_squash</code>. <code>all_squash</code> indicates that all access users are mapped as anonymous users or user groups; <code>no_all_squash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>root_squash</code> indicates that map access root users to anonymous users or user groups; <code>no_root_squash</code> indicates that access root users keep root account permission.</p>
-</dd></dl>
+    <dd>The permissions of accessing users. Valid values are <code>allSquash</code>, <code>noAllSquash</code>, <code>rootSquash</code> and <code>noRootSquash</code>. and default is <code>rootSquash</code>. <code>allSquash</code> indicates that all access users are mapped as anonymous users or user groups; <code>noAllSquash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>rootSquash</code> indicates that map access root users to anonymous users or user groups; <code>noRootSquash</code> indicates that access root users keep root account permission.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_access_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_access_group_id_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a access group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_auth_client_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auth_client_ip_hcl" style="color: inherit; text-decoration: inherit;">auth_<wbr>client_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_priority_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priority_hcl" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rw_permission_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rw_permission_hcl" style="color: inherit; text-decoration: inherit;">rw_<wbr>permission</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_user_permission_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_permission_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>permission</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The permissions of accessing users. Valid values are <code>allSquash</code>, <code>noAllSquash</code>, <code>rootSquash</code> and <code>noRootSquash</code>. and default is <code>rootSquash</code>. <code>allSquash</code> indicates that all access users are mapped as anonymous users or user groups; <code>noAllSquash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>rootSquash</code> indicates that map access root users to anonymous users or user groups; <code>noRootSquash</code> indicates that access root users keep root account permission.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1043,8 +1235,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a access group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a access group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_authclientip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_authclientip_java" style="color: inherit; text-decoration: inherit;">auth<wbr>Client<wbr>Ip</a>
@@ -1052,8 +1243,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</p>
-</dd><dt class="property-optional"
+    <dd>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_priority_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priority_java" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1061,8 +1251,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwpermission_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwpermission_java" style="color: inherit; text-decoration: inherit;">rw<wbr>Permission</a>
@@ -1070,8 +1259,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userpermission_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userpermission_java" style="color: inherit; text-decoration: inherit;">user<wbr>Permission</a>
@@ -1079,8 +1267,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The permissions of accessing users. Valid values are <code>all_squash</code>, <code>no_all_squash</code>, <code>root_squash</code> and <code>no_root_squash</code>. and default is <code>root_squash</code>. <code>all_squash</code> indicates that all access users are mapped as anonymous users or user groups; <code>no_all_squash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>root_squash</code> indicates that map access root users to anonymous users or user groups; <code>no_root_squash</code> indicates that access root users keep root account permission.</p>
-</dd></dl>
+    <dd>The permissions of accessing users. Valid values are <code>allSquash</code>, <code>noAllSquash</code>, <code>rootSquash</code> and <code>noRootSquash</code>. and default is <code>rootSquash</code>. <code>allSquash</code> indicates that all access users are mapped as anonymous users or user groups; <code>noAllSquash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>rootSquash</code> indicates that map access root users to anonymous users or user groups; <code>noRootSquash</code> indicates that access root users keep root account permission.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1094,8 +1281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a access group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a access group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_authclientip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_authclientip_nodejs" style="color: inherit; text-decoration: inherit;">auth<wbr>Client<wbr>Ip</a>
@@ -1103,8 +1289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</p>
-</dd><dt class="property-optional"
+    <dd>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_priority_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priority_nodejs" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1112,8 +1297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwpermission_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwpermission_nodejs" style="color: inherit; text-decoration: inherit;">rw<wbr>Permission</a>
@@ -1121,8 +1305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userpermission_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userpermission_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Permission</a>
@@ -1130,8 +1313,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The permissions of accessing users. Valid values are <code>all_squash</code>, <code>no_all_squash</code>, <code>root_squash</code> and <code>no_root_squash</code>. and default is <code>root_squash</code>. <code>all_squash</code> indicates that all access users are mapped as anonymous users or user groups; <code>no_all_squash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>root_squash</code> indicates that map access root users to anonymous users or user groups; <code>no_root_squash</code> indicates that access root users keep root account permission.</p>
-</dd></dl>
+    <dd>The permissions of accessing users. Valid values are <code>allSquash</code>, <code>noAllSquash</code>, <code>rootSquash</code> and <code>noRootSquash</code>. and default is <code>rootSquash</code>. <code>allSquash</code> indicates that all access users are mapped as anonymous users or user groups; <code>noAllSquash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>rootSquash</code> indicates that map access root users to anonymous users or user groups; <code>noRootSquash</code> indicates that access root users keep root account permission.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1145,8 +1327,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a access group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a access group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_auth_client_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auth_client_ip_python" style="color: inherit; text-decoration: inherit;">auth_<wbr>client_<wbr>ip</a>
@@ -1154,8 +1335,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</p>
-</dd><dt class="property-optional"
+    <dd>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_priority_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priority_python" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1163,8 +1343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rw_permission_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rw_permission_python" style="color: inherit; text-decoration: inherit;">rw_<wbr>permission</a>
@@ -1172,8 +1351,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_user_permission_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_permission_python" style="color: inherit; text-decoration: inherit;">user_<wbr>permission</a>
@@ -1181,8 +1359,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The permissions of accessing users. Valid values are <code>all_squash</code>, <code>no_all_squash</code>, <code>root_squash</code> and <code>no_root_squash</code>. and default is <code>root_squash</code>. <code>all_squash</code> indicates that all access users are mapped as anonymous users or user groups; <code>no_all_squash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>root_squash</code> indicates that map access root users to anonymous users or user groups; <code>no_root_squash</code> indicates that access root users keep root account permission.</p>
-</dd></dl>
+    <dd>The permissions of accessing users. Valid values are <code>allSquash</code>, <code>noAllSquash</code>, <code>rootSquash</code> and <code>noRootSquash</code>. and default is <code>rootSquash</code>. <code>allSquash</code> indicates that all access users are mapped as anonymous users or user groups; <code>noAllSquash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>rootSquash</code> indicates that map access root users to anonymous users or user groups; <code>noRootSquash</code> indicates that access root users keep root account permission.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1196,8 +1373,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a access group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of a access group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_authclientip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_authclientip_yaml" style="color: inherit; text-decoration: inherit;">auth<wbr>Client<wbr>Ip</a>
@@ -1205,8 +1381,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</p>
-</dd><dt class="property-optional"
+    <dd>A single IP or a single IP address range such as 10.1.10.11 or 10.10.1.0/24 indicates that all IPs are allowed. Please note that the IP entered should be CVM's private IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_priority_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priority_yaml" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1214,8 +1389,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>The priority level of rule. Valid value ranges: (1~100). <code>1</code> indicates the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwpermission_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwpermission_yaml" style="color: inherit; text-decoration: inherit;">rw<wbr>Permission</a>
@@ -1223,8 +1397,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Read and write permissions. Valid values are <code>RO</code> and <code>RW</code>. and default is <code>RO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userpermission_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userpermission_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Permission</a>
@@ -1232,8 +1405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The permissions of accessing users. Valid values are <code>all_squash</code>, <code>no_all_squash</code>, <code>root_squash</code> and <code>no_root_squash</code>. and default is <code>root_squash</code>. <code>all_squash</code> indicates that all access users are mapped as anonymous users or user groups; <code>no_all_squash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>root_squash</code> indicates that map access root users to anonymous users or user groups; <code>no_root_squash</code> indicates that access root users keep root account permission.</p>
-</dd></dl>
+    <dd>The permissions of accessing users. Valid values are <code>allSquash</code>, <code>noAllSquash</code>, <code>rootSquash</code> and <code>noRootSquash</code>. and default is <code>rootSquash</code>. <code>allSquash</code> indicates that all access users are mapped as anonymous users or user groups; <code>noAllSquash</code> indicates that access users will match local users first and be mapped to anonymous users or user groups after matching failed; <code>rootSquash</code> indicates that map access root users to anonymous users or user groups; <code>noRootSquash</code> indicates that access root users keep root account permission.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1252,7 +1424,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

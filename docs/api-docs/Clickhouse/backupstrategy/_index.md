@@ -2,9 +2,11 @@
 ---
 title: "BackupStrategy"
 title_tag: "tencentcloud.Clickhouse.BackupStrategy"
-meta_desc: "Documentation for the tencentcloud.Clickhouse.BackupStrategy resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a clickhouse backup strategy"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,153 +18,118 @@ Provides a resource to create a clickhouse backup strategy
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const backup = new tencentcloud.clickhouse.Backup("backup", {
-    cosBucketName: "xxxxxx",
     instanceId: "cdwch-xxxxxx",
+    cosBucketName: "xxxxxx",
 });
-const backupStrategy = new tencentcloud.clickhouse.BackupStrategy("backupStrategy", {
+const backupStrategy = new tencentcloud.clickhouse.BackupStrategy("backup_strategy", {
+    instanceId: "cdwch-xxxxxx",
     dataBackupStrategies: [{
+        weekDays: "3",
+        retainDays: 2,
+        executeHour: 1,
         backUpTables: [{
             database: "iac",
-            ips: "10.0.0.35",
             table: "my_table",
             totalBytes: 0,
             vCluster: "default_cluster",
+            ips: "10.0.0.35",
         }],
-        executeHour: 1,
-        retainDays: 2,
-        weekDays: "3",
     }],
-    instanceId: "cdwch-xxxxxx",
     metaBackupStrategies: [{
-        executeHour: 3,
-        retainDays: 2,
         weekDays: "1",
+        retainDays: 2,
+        executeHour: 3,
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 backup = tencentcloud.clickhouse.Backup("backup",
-    cos_bucket_name="xxxxxx",
-    instance_id="cdwch-xxxxxx")
-backup_strategy = tencentcloud.clickhouse.BackupStrategy("backupStrategy",
-    data_backup_strategies=[tencentcloud.clickhouse.BackupStrategyDataBackupStrategyArgs(
-        back_up_tables=[tencentcloud.clickhouse.BackupStrategyDataBackupStrategyBackUpTableArgs(
-            database="iac",
-            ips="10.0.0.35",
-            table="my_table",
-            total_bytes=0,
-            v_cluster="default_cluster",
-        )],
-        execute_hour=1,
-        retain_days=2,
-        week_days="3",
-    )],
     instance_id="cdwch-xxxxxx",
-    meta_backup_strategies=[tencentcloud.clickhouse.BackupStrategyMetaBackupStrategyArgs(
-        execute_hour=3,
-        retain_days=2,
-        week_days="1",
-    )])
+    cos_bucket_name="xxxxxx")
+backup_strategy = tencentcloud.clickhouse.BackupStrategy("backup_strategy",
+    instance_id="cdwch-xxxxxx",
+    data_backup_strategies=[{
+        "week_days": "3",
+        "retain_days": 2,
+        "execute_hour": 1,
+        "back_up_tables": [{
+            "database": "iac",
+            "table": "my_table",
+            "total_bytes": 0,
+            "v_cluster": "default_cluster",
+            "ips": "10.0.0.35",
+        }],
+    }],
+    meta_backup_strategies=[{
+        "week_days": "1",
+        "retain_days": 2,
+        "execute_hour": 3,
+    }])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var backup = new Tencentcloud.Clickhouse.Backup("backup", new()
-    {
-        CosBucketName = "xxxxxx",
-        InstanceId = "cdwch-xxxxxx",
-    });
-
-    var backupStrategy = new Tencentcloud.Clickhouse.BackupStrategy("backupStrategy", new()
-    {
-        DataBackupStrategies = new[]
-        {
-            new Tencentcloud.Clickhouse.Inputs.BackupStrategyDataBackupStrategyArgs
-            {
-                BackUpTables = new[]
-                {
-                    new Tencentcloud.Clickhouse.Inputs.BackupStrategyDataBackupStrategyBackUpTableArgs
-                    {
-                        Database = "iac",
-                        Ips = "10.0.0.35",
-                        Table = "my_table",
-                        TotalBytes = 0,
-                        VCluster = "default_cluster",
-                    },
-                },
-                ExecuteHour = 1,
-                RetainDays = 2,
-                WeekDays = "3",
-            },
-        },
-        InstanceId = "cdwch-xxxxxx",
-        MetaBackupStrategies = new[]
-        {
-            new Tencentcloud.Clickhouse.Inputs.BackupStrategyMetaBackupStrategyArgs
-            {
-                ExecuteHour = 3,
-                RetainDays = 2,
-                WeekDays = "1",
-            },
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clickhouse"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clickhouse.NewBackup(ctx, "backup", &Clickhouse.BackupArgs{
-			CosBucketName: pulumi.String("xxxxxx"),
+		_, err := clickhouse.NewBackup(ctx, "backup", &clickhouse.BackupArgs{
 			InstanceId:    pulumi.String("cdwch-xxxxxx"),
+			CosBucketName: pulumi.String("xxxxxx"),
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Clickhouse.NewBackupStrategy(ctx, "backupStrategy", &Clickhouse.BackupStrategyArgs{
+		_, err = clickhouse.NewBackupStrategy(ctx, "backup_strategy", &clickhouse.BackupStrategyArgs{
+			InstanceId: pulumi.String("cdwch-xxxxxx"),
 			DataBackupStrategies: clickhouse.BackupStrategyDataBackupStrategyArray{
 				&clickhouse.BackupStrategyDataBackupStrategyArgs{
+					WeekDays:    pulumi.String("3"),
+					RetainDays:  pulumi.Int(2),
+					ExecuteHour: pulumi.Int(1),
 					BackUpTables: clickhouse.BackupStrategyDataBackupStrategyBackUpTableArray{
 						&clickhouse.BackupStrategyDataBackupStrategyBackUpTableArgs{
 							Database:   pulumi.String("iac"),
-							Ips:        pulumi.String("10.0.0.35"),
 							Table:      pulumi.String("my_table"),
 							TotalBytes: pulumi.Int(0),
 							VCluster:   pulumi.String("default_cluster"),
+							Ips:        pulumi.String("10.0.0.35"),
 						},
 					},
-					ExecuteHour: pulumi.Int(1),
-					RetainDays:  pulumi.Int(2),
-					WeekDays:    pulumi.String("3"),
 				},
 			},
-			InstanceId: pulumi.String("cdwch-xxxxxx"),
 			MetaBackupStrategies: clickhouse.BackupStrategyMetaBackupStrategyArray{
 				&clickhouse.BackupStrategyMetaBackupStrategyArgs{
-					ExecuteHour: pulumi.Int(3),
-					RetainDays:  pulumi.Int(2),
 					WeekDays:    pulumi.String("1"),
+					RetainDays:  pulumi.Int(2),
+					ExecuteHour: pulumi.Int(3),
 				},
 			},
 		})
@@ -173,6 +140,66 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var backup = new Tencentcloud.Clickhouse.Backup("backup", new()
+    {
+        InstanceId = "cdwch-xxxxxx",
+        CosBucketName = "xxxxxx",
+    });
+
+    var backupStrategy = new Tencentcloud.Clickhouse.BackupStrategy("backup_strategy", new()
+    {
+        InstanceId = "cdwch-xxxxxx",
+        DataBackupStrategies = new[]
+        {
+            new Tencentcloud.Clickhouse.Inputs.BackupStrategyDataBackupStrategyArgs
+            {
+                WeekDays = "3",
+                RetainDays = 2,
+                ExecuteHour = 1,
+                BackUpTables = new[]
+                {
+                    new Tencentcloud.Clickhouse.Inputs.BackupStrategyDataBackupStrategyBackUpTableArgs
+                    {
+                        Database = "iac",
+                        Table = "my_table",
+                        TotalBytes = 0,
+                        VCluster = "default_cluster",
+                        Ips = "10.0.0.35",
+                    },
+                },
+            },
+        },
+        MetaBackupStrategies = new[]
+        {
+            new Tencentcloud.Clickhouse.Inputs.BackupStrategyMetaBackupStrategyArgs
+            {
+                WeekDays = "1",
+                RetainDays = 2,
+                ExecuteHour = 3,
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -184,9 +211,10 @@ import com.pulumi.tencentcloud.Clickhouse.BackupArgs;
 import com.pulumi.tencentcloud.Clickhouse.BackupStrategy;
 import com.pulumi.tencentcloud.Clickhouse.BackupStrategyArgs;
 import com.pulumi.tencentcloud.Clickhouse.inputs.BackupStrategyDataBackupStrategyArgs;
+import com.pulumi.tencentcloud.Clickhouse.inputs.BackupStrategyDataBackupStrategyBackUpTableArgs;
 import com.pulumi.tencentcloud.Clickhouse.inputs.BackupStrategyMetaBackupStrategyArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -198,122 +226,195 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var backup = new Backup("backup", BackupArgs.builder()        
-            .cosBucketName("xxxxxx")
+        var backup = new Backup("backup", BackupArgs.builder()
             .instanceId("cdwch-xxxxxx")
+            .cosBucketName("xxxxxx")
             .build());
 
-        var backupStrategy = new BackupStrategy("backupStrategy", BackupStrategyArgs.builder()        
+        var backupStrategy = new BackupStrategy("backupStrategy", BackupStrategyArgs.builder()
+            .instanceId("cdwch-xxxxxx")
             .dataBackupStrategies(BackupStrategyDataBackupStrategyArgs.builder()
+                .weekDays("3")
+                .retainDays(2)
+                .executeHour(1)
                 .backUpTables(BackupStrategyDataBackupStrategyBackUpTableArgs.builder()
                     .database("iac")
-                    .ips("10.0.0.35")
                     .table("my_table")
                     .totalBytes(0)
                     .vCluster("default_cluster")
+                    .ips("10.0.0.35")
                     .build())
-                .executeHour(1)
-                .retainDays(2)
-                .weekDays("3")
                 .build())
-            .instanceId("cdwch-xxxxxx")
             .metaBackupStrategies(BackupStrategyMetaBackupStrategyArgs.builder()
-                .executeHour(3)
-                .retainDays(2)
                 .weekDays("1")
+                .retainDays(2)
+                .executeHour(3)
                 .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   backup:
     type: tencentcloud:Clickhouse:Backup
     properties:
-      cosBucketName: xxxxxx
       instanceId: cdwch-xxxxxx
+      cosBucketName: xxxxxx
   backupStrategy:
     type: tencentcloud:Clickhouse:BackupStrategy
+    name: backup_strategy
     properties:
+      instanceId: cdwch-xxxxxx
       dataBackupStrategies:
-        - backUpTables:
+        - weekDays: '3'
+          retainDays: 2
+          executeHour: 1
+          backUpTables:
             - database: iac
-              ips: 10.0.0.35
               table: my_table
               totalBytes: 0
               vCluster: default_cluster
-          executeHour: 1
-          retainDays: 2
-          weekDays: '3'
-      instanceId: cdwch-xxxxxx
+              ips: 10.0.0.35
       metaBackupStrategies:
-        - executeHour: 3
+        - weekDays: '1'
           retainDays: 2
-          weekDays: '1'
+          executeHour: 3
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clickhouse_backup" "backup" {
+  instance_id     = "cdwch-xxxxxx"
+  cos_bucket_name = "xxxxxx"
+}
+resource "tencentcloud_clickhouse_backupstrategy" "backup_strategy" {
+  instance_id = "cdwch-xxxxxx"
+  data_backup_strategies {
+    week_days    = "3"
+    retain_days  = 2
+    execute_hour = 1
+    back_up_tables {
+      database    = "iac"
+      table       = "my_table"
+      total_bytes = 0
+      v_cluster   = "default_cluster"
+      ips         = "10.0.0.35"
+    }
+  }
+  meta_backup_strategies {
+    week_days    = "1"
+    retain_days  = 2
+    execute_hour = 3
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateBackUpSchedule](https://www.tencentcloud.com/search/?wd=CreateBackUpSchedule&type=document&lang=en)
+  - [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&type=document&lang=en)
+* Read: [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&type=document&lang=en)
+* Update:
+  - [CreateBackUpSchedule](https://www.tencentcloud.com/search/?wd=CreateBackUpSchedule&type=document&lang=en)
+  - [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&type=document&lang=en)
 
 
 ## Create BackupStrategy Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">BackupStrategy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BackupStrategyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">BackupStrategy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BackupStrategyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">BackupStrategy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                   <span class="nx">data_backup_strategies</span><span class="p">:</span> <span class="nx">Optional[Sequence[_clickhouse.BackupStrategyDataBackupStrategyArgs]]</span> = None<span class="p">,</span>
-                   <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">meta_backup_strategies</span><span class="p">:</span> <span class="nx">Optional[Sequence[_clickhouse.BackupStrategyMetaBackupStrategyArgs]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">BackupStrategy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BackupStrategyArgs</a></span><span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">BackupStrategy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                   <span class="nx">data_backup_strategies</span><span class="p">:</span> <span class="nx">Optional[Sequence[BackupStrategyDataBackupStrategyArgs]]</span> = None<span class="p">,</span>
+                   <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                   <span class="nx">meta_backup_strategies</span><span class="p">:</span> <span class="nx">Optional[Sequence[BackupStrategyMetaBackupStrategyArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewBackupStrategy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">BackupStrategyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BackupStrategy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewBackupStrategy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">BackupStrategyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BackupStrategy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">BackupStrategy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BackupStrategyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">BackupStrategy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BackupStrategyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">BackupStrategy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BackupStrategyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">BackupStrategy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BackupStrategyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Clickhouse:BackupStrategy</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Clickhouse:BackupStrategy</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_clickhouse_backup_strategy&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -334,7 +435,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -451,11 +552,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## BackupStrategy Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The BackupStrategy resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -469,10 +578,9 @@ The BackupStrategy resource accepts the following [input](/docs/intro/concepts/i
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databackupstrategies_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Backup<wbr>Strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategydatabackupstrategy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clickhouse.<wbr>Inputs.<wbr>Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#backupstrategydatabackupstrategy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clickhouse.<wbr>Inputs.<wbr>Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy&gt;</a></span>
     </dt>
-    <dd><p>Data backup strategy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Data backup strategy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -480,17 +588,15 @@ The BackupStrategy resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="metabackupstrategies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metabackupstrategies_csharp" style="color: inherit; text-decoration: inherit;">Meta<wbr>Backup<wbr>Strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategymetabackupstrategy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clickhouse.<wbr>Inputs.<wbr>Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#backupstrategymetabackupstrategy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clickhouse.<wbr>Inputs.<wbr>Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy&gt;</a></span>
     </dt>
-    <dd><p>Metadata backup strategy.</p>
-</dd></dl>
+    <dd>Metadata backup strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -504,8 +610,7 @@ The BackupStrategy resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#backupstrategydatabackupstrategy">[]Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Args</a></span>
     </dt>
-    <dd><p>Data backup strategy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Data backup strategy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -513,8 +618,7 @@ The BackupStrategy resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="metabackupstrategies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metabackupstrategies_go" style="color: inherit; text-decoration: inherit;">Meta<wbr>Backup<wbr>Strategies</a>
@@ -522,8 +626,37 @@ The BackupStrategy resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#backupstrategymetabackupstrategy">[]Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy<wbr>Args</a></span>
     </dt>
-    <dd><p>Metadata backup strategy.</p>
-</dd></dl>
+    <dd>Metadata backup strategy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="data_backup_strategies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_backup_strategies_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>backup_<wbr>strategies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#backupstrategydatabackupstrategy">list(object)</a></span>
+    </dt>
+    <dd>Data backup strategy.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="meta_backup_strategies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meta_backup_strategies_hcl" style="color: inherit; text-decoration: inherit;">meta_<wbr>backup_<wbr>strategies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#backupstrategymetabackupstrategy">list(object)</a></span>
+    </dt>
+    <dd>Metadata backup strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -535,10 +668,9 @@ The BackupStrategy resource accepts the following [input](/docs/intro/concepts/i
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databackupstrategies_java" style="color: inherit; text-decoration: inherit;">data<wbr>Backup<wbr>Strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategydatabackupstrategy">List&lt;Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#backupstrategydatabackupstrategy">List&lt;Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy&gt;</a></span>
     </dt>
-    <dd><p>Data backup strategy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Data backup strategy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -546,17 +678,15 @@ The BackupStrategy resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="metabackupstrategies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metabackupstrategies_java" style="color: inherit; text-decoration: inherit;">meta<wbr>Backup<wbr>Strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategymetabackupstrategy">List&lt;Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#backupstrategymetabackupstrategy">List&lt;Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy&gt;</a></span>
     </dt>
-    <dd><p>Metadata backup strategy.</p>
-</dd></dl>
+    <dd>Metadata backup strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -568,10 +698,9 @@ The BackupStrategy resource accepts the following [input](/docs/intro/concepts/i
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#databackupstrategies_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Backup<wbr>Strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategydatabackupstrategy">Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#backupstrategydatabackupstrategy">Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy[]</a></span>
     </dt>
-    <dd><p>Data backup strategy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Data backup strategy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -579,17 +708,15 @@ The BackupStrategy resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="metabackupstrategies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metabackupstrategies_nodejs" style="color: inherit; text-decoration: inherit;">meta<wbr>Backup<wbr>Strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategymetabackupstrategy">Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#backupstrategymetabackupstrategy">Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy[]</a></span>
     </dt>
-    <dd><p>Metadata backup strategy.</p>
-</dd></dl>
+    <dd>Metadata backup strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -601,10 +728,9 @@ The BackupStrategy resource accepts the following [input](/docs/intro/concepts/i
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_backup_strategies_python" style="color: inherit; text-decoration: inherit;">data_<wbr>backup_<wbr>strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategydatabackupstrategy">Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Args]</a></span>
+        <span class="property-type"><a href="#backupstrategydatabackupstrategy">Sequence[Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Args]</a></span>
     </dt>
-    <dd><p>Data backup strategy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Data backup strategy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -612,17 +738,15 @@ The BackupStrategy resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="meta_backup_strategies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meta_backup_strategies_python" style="color: inherit; text-decoration: inherit;">meta_<wbr>backup_<wbr>strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategymetabackupstrategy">Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy<wbr>Args]</a></span>
+        <span class="property-type"><a href="#backupstrategymetabackupstrategy">Sequence[Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy<wbr>Args]</a></span>
     </dt>
-    <dd><p>Metadata backup strategy.</p>
-</dd></dl>
+    <dd>Metadata backup strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -636,8 +760,7 @@ The BackupStrategy resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#backupstrategydatabackupstrategy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Data backup strategy.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Data backup strategy.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -645,8 +768,7 @@ The BackupStrategy resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="metabackupstrategies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metabackupstrategies_yaml" style="color: inherit; text-decoration: inherit;">meta<wbr>Backup<wbr>Strategies</a>
@@ -654,8 +776,7 @@ The BackupStrategy resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#backupstrategymetabackupstrategy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Metadata backup strategy.</p>
-</dd></dl>
+    <dd>Metadata backup strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -676,8 +797,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -691,8 +811,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -706,8 +839,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -721,8 +853,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -736,8 +867,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -751,8 +881,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -762,122 +891,161 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing BackupStrategy resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">BackupStrategyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">BackupStrategy</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">BackupStrategyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">BackupStrategy</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">data_backup_strategies</span><span class="p">:</span> <span class="nx">Optional[Sequence[_clickhouse.BackupStrategyDataBackupStrategyArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">data_backup_strategies</span><span class="p">:</span> <span class="nx">Optional[Sequence[BackupStrategyDataBackupStrategyArgs]]</span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">meta_backup_strategies</span><span class="p">:</span> <span class="nx">Optional[Sequence[_clickhouse.BackupStrategyMetaBackupStrategyArgs]]</span> = None<span class="p">) -&gt;</span> BackupStrategy</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">meta_backup_strategies</span><span class="p">:</span> <span class="nx">Optional[Sequence[BackupStrategyMetaBackupStrategyArgs]]</span> = None<span class="p">) -&gt;</span> BackupStrategy</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetBackupStrategy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">BackupStrategyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BackupStrategy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetBackupStrategy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">BackupStrategyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BackupStrategy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">BackupStrategy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BackupStrategyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">BackupStrategy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BackupStrategyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">BackupStrategy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BackupStrategyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">BackupStrategy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BackupStrategyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingBackupStrategy</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Clickhouse:BackupStrategy</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_clickhouse_backup_strategy</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BackupStrategyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BackupStrategyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -885,28 +1053,31 @@ Get an existing BackupStrategy resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BackupStrategyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -914,28 +1085,31 @@ Get an existing BackupStrategy resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BackupStrategyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -953,10 +1127,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_databackupstrategies_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Backup<wbr>Strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategydatabackupstrategy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clickhouse.<wbr>Inputs.<wbr>Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#backupstrategydatabackupstrategy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clickhouse.<wbr>Inputs.<wbr>Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy&gt;</a></span>
     </dt>
-    <dd><p>Data backup strategy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Data backup strategy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -964,17 +1137,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metabackupstrategies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metabackupstrategies_csharp" style="color: inherit; text-decoration: inherit;">Meta<wbr>Backup<wbr>Strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategymetabackupstrategy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clickhouse.<wbr>Inputs.<wbr>Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#backupstrategymetabackupstrategy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clickhouse.<wbr>Inputs.<wbr>Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy&gt;</a></span>
     </dt>
-    <dd><p>Metadata backup strategy.</p>
-</dd></dl>
+    <dd>Metadata backup strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -988,8 +1159,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#backupstrategydatabackupstrategy">[]Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Args</a></span>
     </dt>
-    <dd><p>Data backup strategy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Data backup strategy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -997,8 +1167,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metabackupstrategies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metabackupstrategies_go" style="color: inherit; text-decoration: inherit;">Meta<wbr>Backup<wbr>Strategies</a>
@@ -1006,8 +1175,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#backupstrategymetabackupstrategy">[]Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy<wbr>Args</a></span>
     </dt>
-    <dd><p>Metadata backup strategy.</p>
-</dd></dl>
+    <dd>Metadata backup strategy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_data_backup_strategies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_data_backup_strategies_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>backup_<wbr>strategies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#backupstrategydatabackupstrategy">list(object)</a></span>
+    </dt>
+    <dd>Data backup strategy.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_meta_backup_strategies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_meta_backup_strategies_hcl" style="color: inherit; text-decoration: inherit;">meta_<wbr>backup_<wbr>strategies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#backupstrategymetabackupstrategy">list(object)</a></span>
+    </dt>
+    <dd>Metadata backup strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1019,10 +1217,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_databackupstrategies_java" style="color: inherit; text-decoration: inherit;">data<wbr>Backup<wbr>Strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategydatabackupstrategy">List&lt;Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#backupstrategydatabackupstrategy">List&lt;Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy&gt;</a></span>
     </dt>
-    <dd><p>Data backup strategy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Data backup strategy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1030,17 +1227,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metabackupstrategies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metabackupstrategies_java" style="color: inherit; text-decoration: inherit;">meta<wbr>Backup<wbr>Strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategymetabackupstrategy">List&lt;Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#backupstrategymetabackupstrategy">List&lt;Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy&gt;</a></span>
     </dt>
-    <dd><p>Metadata backup strategy.</p>
-</dd></dl>
+    <dd>Metadata backup strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1052,10 +1247,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_databackupstrategies_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Backup<wbr>Strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategydatabackupstrategy">Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#backupstrategydatabackupstrategy">Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy[]</a></span>
     </dt>
-    <dd><p>Data backup strategy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Data backup strategy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1063,17 +1257,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metabackupstrategies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metabackupstrategies_nodejs" style="color: inherit; text-decoration: inherit;">meta<wbr>Backup<wbr>Strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategymetabackupstrategy">Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#backupstrategymetabackupstrategy">Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy[]</a></span>
     </dt>
-    <dd><p>Metadata backup strategy.</p>
-</dd></dl>
+    <dd>Metadata backup strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1085,10 +1277,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_data_backup_strategies_python" style="color: inherit; text-decoration: inherit;">data_<wbr>backup_<wbr>strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategydatabackupstrategy">Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Args]</a></span>
+        <span class="property-type"><a href="#backupstrategydatabackupstrategy">Sequence[Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Args]</a></span>
     </dt>
-    <dd><p>Data backup strategy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Data backup strategy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1096,17 +1287,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_meta_backup_strategies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_meta_backup_strategies_python" style="color: inherit; text-decoration: inherit;">meta_<wbr>backup_<wbr>strategies</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategymetabackupstrategy">Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy<wbr>Args]</a></span>
+        <span class="property-type"><a href="#backupstrategymetabackupstrategy">Sequence[Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy<wbr>Args]</a></span>
     </dt>
-    <dd><p>Metadata backup strategy.</p>
-</dd></dl>
+    <dd>Metadata backup strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1120,8 +1309,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#backupstrategydatabackupstrategy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Data backup strategy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Data backup strategy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1129,8 +1317,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metabackupstrategies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metabackupstrategies_yaml" style="color: inherit; text-decoration: inherit;">meta<wbr>Backup<wbr>Strategies</a>
@@ -1138,8 +1325,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#backupstrategymetabackupstrategy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Metadata backup strategy.</p>
-</dd></dl>
+    <dd>Metadata backup strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1154,7 +1340,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="backupstrategydatabackupstrategy">Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy</h4>
+<h4 id="backupstrategydatabackupstrategy">
+Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<pulumi-choosable type="language" values="python,go" class="inline">, Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1166,8 +1354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#backupstrategydatabackupstrategybackuptable">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clickhouse.<wbr>Inputs.<wbr>Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Back<wbr>Up<wbr>Table&gt;</a></span>
     </dt>
-    <dd><p>Back up the list of tables.</p>
-</dd><dt class="property-required"
+    <dd>Back up the list of tables.</dd><dt class="property-required"
             title="Required">
         <span id="executehour_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#executehour_csharp" style="color: inherit; text-decoration: inherit;">Execute<wbr>Hour</a>
@@ -1175,8 +1362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Execution hour.</p>
-</dd><dt class="property-required"
+    <dd>Execution hour.</dd><dt class="property-required"
             title="Required">
         <span id="retaindays_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retaindays_csharp" style="color: inherit; text-decoration: inherit;">Retain<wbr>Days</a>
@@ -1184,8 +1370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retention days.</p>
-</dd><dt class="property-required"
+    <dd>Retention days.</dd><dt class="property-required"
             title="Required">
         <span id="weekdays_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weekdays_csharp" style="color: inherit; text-decoration: inherit;">Week<wbr>Days</a>
@@ -1193,8 +1378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The day of the week is separated by commas. For example: 2 represents Tuesday.</p>
-</dd></dl>
+    <dd>The day of the week is separated by commas. For example: 2 represents Tuesday.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1208,8 +1392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#backupstrategydatabackupstrategybackuptable">[]Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Back<wbr>Up<wbr>Table</a></span>
     </dt>
-    <dd><p>Back up the list of tables.</p>
-</dd><dt class="property-required"
+    <dd>Back up the list of tables.</dd><dt class="property-required"
             title="Required">
         <span id="executehour_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#executehour_go" style="color: inherit; text-decoration: inherit;">Execute<wbr>Hour</a>
@@ -1217,8 +1400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Execution hour.</p>
-</dd><dt class="property-required"
+    <dd>Execution hour.</dd><dt class="property-required"
             title="Required">
         <span id="retaindays_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retaindays_go" style="color: inherit; text-decoration: inherit;">Retain<wbr>Days</a>
@@ -1226,8 +1408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retention days.</p>
-</dd><dt class="property-required"
+    <dd>Retention days.</dd><dt class="property-required"
             title="Required">
         <span id="weekdays_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weekdays_go" style="color: inherit; text-decoration: inherit;">Week<wbr>Days</a>
@@ -1235,8 +1416,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The day of the week is separated by commas. For example: 2 represents Tuesday.</p>
-</dd></dl>
+    <dd>The day of the week is separated by commas. For example: 2 represents Tuesday.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="back_up_tables_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#back_up_tables_hcl" style="color: inherit; text-decoration: inherit;">back_<wbr>up_<wbr>tables</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#backupstrategydatabackupstrategybackuptable">list(object)</a></span>
+    </dt>
+    <dd>Back up the list of tables.</dd><dt class="property-required"
+            title="Required">
+        <span id="execute_hour_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#execute_hour_hcl" style="color: inherit; text-decoration: inherit;">execute_<wbr>hour</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Execution hour.</dd><dt class="property-required"
+            title="Required">
+        <span id="retain_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retain_days_hcl" style="color: inherit; text-decoration: inherit;">retain_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Retention days.</dd><dt class="property-required"
+            title="Required">
+        <span id="week_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#week_days_hcl" style="color: inherit; text-decoration: inherit;">week_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The day of the week is separated by commas. For example: 2 represents Tuesday.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1250,8 +1468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#backupstrategydatabackupstrategybackuptable">List&lt;Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Back<wbr>Up<wbr>Table&gt;</a></span>
     </dt>
-    <dd><p>Back up the list of tables.</p>
-</dd><dt class="property-required"
+    <dd>Back up the list of tables.</dd><dt class="property-required"
             title="Required">
         <span id="executehour_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#executehour_java" style="color: inherit; text-decoration: inherit;">execute<wbr>Hour</a>
@@ -1259,8 +1476,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Execution hour.</p>
-</dd><dt class="property-required"
+    <dd>Execution hour.</dd><dt class="property-required"
             title="Required">
         <span id="retaindays_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retaindays_java" style="color: inherit; text-decoration: inherit;">retain<wbr>Days</a>
@@ -1268,8 +1484,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Retention days.</p>
-</dd><dt class="property-required"
+    <dd>Retention days.</dd><dt class="property-required"
             title="Required">
         <span id="weekdays_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weekdays_java" style="color: inherit; text-decoration: inherit;">week<wbr>Days</a>
@@ -1277,8 +1492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The day of the week is separated by commas. For example: 2 represents Tuesday.</p>
-</dd></dl>
+    <dd>The day of the week is separated by commas. For example: 2 represents Tuesday.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1292,8 +1506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#backupstrategydatabackupstrategybackuptable">Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Back<wbr>Up<wbr>Table[]</a></span>
     </dt>
-    <dd><p>Back up the list of tables.</p>
-</dd><dt class="property-required"
+    <dd>Back up the list of tables.</dd><dt class="property-required"
             title="Required">
         <span id="executehour_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#executehour_nodejs" style="color: inherit; text-decoration: inherit;">execute<wbr>Hour</a>
@@ -1301,8 +1514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Execution hour.</p>
-</dd><dt class="property-required"
+    <dd>Execution hour.</dd><dt class="property-required"
             title="Required">
         <span id="retaindays_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retaindays_nodejs" style="color: inherit; text-decoration: inherit;">retain<wbr>Days</a>
@@ -1310,8 +1522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Retention days.</p>
-</dd><dt class="property-required"
+    <dd>Retention days.</dd><dt class="property-required"
             title="Required">
         <span id="weekdays_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weekdays_nodejs" style="color: inherit; text-decoration: inherit;">week<wbr>Days</a>
@@ -1319,8 +1530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The day of the week is separated by commas. For example: 2 represents Tuesday.</p>
-</dd></dl>
+    <dd>The day of the week is separated by commas. For example: 2 represents Tuesday.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1332,10 +1542,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#back_up_tables_python" style="color: inherit; text-decoration: inherit;">back_<wbr>up_<wbr>tables</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#backupstrategydatabackupstrategybackuptable">Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Back<wbr>Up<wbr>Table]</a></span>
+        <span class="property-type"><a href="#backupstrategydatabackupstrategybackuptable">Sequence[Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Back<wbr>Up<wbr>Table]</a></span>
     </dt>
-    <dd><p>Back up the list of tables.</p>
-</dd><dt class="property-required"
+    <dd>Back up the list of tables.</dd><dt class="property-required"
             title="Required">
         <span id="execute_hour_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#execute_hour_python" style="color: inherit; text-decoration: inherit;">execute_<wbr>hour</a>
@@ -1343,8 +1552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Execution hour.</p>
-</dd><dt class="property-required"
+    <dd>Execution hour.</dd><dt class="property-required"
             title="Required">
         <span id="retain_days_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retain_days_python" style="color: inherit; text-decoration: inherit;">retain_<wbr>days</a>
@@ -1352,8 +1560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retention days.</p>
-</dd><dt class="property-required"
+    <dd>Retention days.</dd><dt class="property-required"
             title="Required">
         <span id="week_days_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#week_days_python" style="color: inherit; text-decoration: inherit;">week_<wbr>days</a>
@@ -1361,8 +1568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The day of the week is separated by commas. For example: 2 represents Tuesday.</p>
-</dd></dl>
+    <dd>The day of the week is separated by commas. For example: 2 represents Tuesday.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1376,8 +1582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#backupstrategydatabackupstrategybackuptable">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Back up the list of tables.</p>
-</dd><dt class="property-required"
+    <dd>Back up the list of tables.</dd><dt class="property-required"
             title="Required">
         <span id="executehour_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#executehour_yaml" style="color: inherit; text-decoration: inherit;">execute<wbr>Hour</a>
@@ -1385,8 +1590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Execution hour.</p>
-</dd><dt class="property-required"
+    <dd>Execution hour.</dd><dt class="property-required"
             title="Required">
         <span id="retaindays_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retaindays_yaml" style="color: inherit; text-decoration: inherit;">retain<wbr>Days</a>
@@ -1394,8 +1598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Retention days.</p>
-</dd><dt class="property-required"
+    <dd>Retention days.</dd><dt class="property-required"
             title="Required">
         <span id="weekdays_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weekdays_yaml" style="color: inherit; text-decoration: inherit;">week<wbr>Days</a>
@@ -1403,12 +1606,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The day of the week is separated by commas. For example: 2 represents Tuesday.</p>
-</dd></dl>
+    <dd>The day of the week is separated by commas. For example: 2 represents Tuesday.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="backupstrategydatabackupstrategybackuptable">Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Back<wbr>Up<wbr>Table</h4>
+<h4 id="backupstrategydatabackupstrategybackuptable">
+Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Back<wbr>Up<wbr>Table<pulumi-choosable type="language" values="python,go" class="inline">, Backup<wbr>Strategy<wbr>Data<wbr>Backup<wbr>Strategy<wbr>Back<wbr>Up<wbr>Table<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1420,8 +1624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database.</p>
-</dd><dt class="property-required"
+    <dd>Database.</dd><dt class="property-required"
             title="Required">
         <span id="table_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_csharp" style="color: inherit; text-decoration: inherit;">Table</a>
@@ -1429,8 +1632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table.</p>
-</dd><dt class="property-required"
+    <dd>Table.</dd><dt class="property-required"
             title="Required">
         <span id="totalbytes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalbytes_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Bytes</a>
@@ -1438,8 +1640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Back up the list of tables.</p>
-</dd><dt class="property-optional"
+    <dd>Back up the list of tables.</dd><dt class="property-optional"
             title="Optional">
         <span id="ips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_csharp" style="color: inherit; text-decoration: inherit;">Ips</a>
@@ -1447,8 +1648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table ip.</p>
-</dd><dt class="property-optional"
+    <dd>Table ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="rip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rip_csharp" style="color: inherit; text-decoration: inherit;">Rip</a>
@@ -1456,8 +1656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip address of cvm.</p>
-</dd><dt class="property-optional"
+    <dd>Ip address of cvm.</dd><dt class="property-optional"
             title="Optional">
         <span id="vcluster_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcluster_csharp" style="color: inherit; text-decoration: inherit;">VCluster</a>
@@ -1465,8 +1664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual clusters.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="zoopath_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoopath_csharp" style="color: inherit; text-decoration: inherit;">Zoo<wbr>Path</a>
@@ -1474,8 +1672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ZK path.</p>
-</dd></dl>
+    <dd>ZK path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1489,8 +1686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database.</p>
-</dd><dt class="property-required"
+    <dd>Database.</dd><dt class="property-required"
             title="Required">
         <span id="table_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_go" style="color: inherit; text-decoration: inherit;">Table</a>
@@ -1498,8 +1694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table.</p>
-</dd><dt class="property-required"
+    <dd>Table.</dd><dt class="property-required"
             title="Required">
         <span id="totalbytes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalbytes_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Bytes</a>
@@ -1507,8 +1702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Back up the list of tables.</p>
-</dd><dt class="property-optional"
+    <dd>Back up the list of tables.</dd><dt class="property-optional"
             title="Optional">
         <span id="ips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_go" style="color: inherit; text-decoration: inherit;">Ips</a>
@@ -1516,8 +1710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table ip.</p>
-</dd><dt class="property-optional"
+    <dd>Table ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="rip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rip_go" style="color: inherit; text-decoration: inherit;">Rip</a>
@@ -1525,8 +1718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip address of cvm.</p>
-</dd><dt class="property-optional"
+    <dd>Ip address of cvm.</dd><dt class="property-optional"
             title="Optional">
         <span id="vcluster_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcluster_go" style="color: inherit; text-decoration: inherit;">VCluster</a>
@@ -1534,8 +1726,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual clusters.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="zoopath_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoopath_go" style="color: inherit; text-decoration: inherit;">Zoo<wbr>Path</a>
@@ -1543,8 +1734,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ZK path.</p>
-</dd></dl>
+    <dd>ZK path.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="database_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_hcl" style="color: inherit; text-decoration: inherit;">database</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database.</dd><dt class="property-required"
+            title="Required">
+        <span id="table_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_hcl" style="color: inherit; text-decoration: inherit;">table</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Table.</dd><dt class="property-required"
+            title="Required">
+        <span id="total_bytes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_bytes_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>bytes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Back up the list of tables.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_hcl" style="color: inherit; text-decoration: inherit;">ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Table ip.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rip_hcl" style="color: inherit; text-decoration: inherit;">rip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ip address of cvm.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="v_cluster_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#v_cluster_hcl" style="color: inherit; text-decoration: inherit;">v_<wbr>cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Virtual clusters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zoo_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoo_path_hcl" style="color: inherit; text-decoration: inherit;">zoo_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ZK path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1558,8 +1810,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database.</p>
-</dd><dt class="property-required"
+    <dd>Database.</dd><dt class="property-required"
             title="Required">
         <span id="table_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_java" style="color: inherit; text-decoration: inherit;">table</a>
@@ -1567,8 +1818,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table.</p>
-</dd><dt class="property-required"
+    <dd>Table.</dd><dt class="property-required"
             title="Required">
         <span id="totalbytes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalbytes_java" style="color: inherit; text-decoration: inherit;">total<wbr>Bytes</a>
@@ -1576,8 +1826,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Back up the list of tables.</p>
-</dd><dt class="property-optional"
+    <dd>Back up the list of tables.</dd><dt class="property-optional"
             title="Optional">
         <span id="ips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_java" style="color: inherit; text-decoration: inherit;">ips</a>
@@ -1585,8 +1834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table ip.</p>
-</dd><dt class="property-optional"
+    <dd>Table ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="rip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rip_java" style="color: inherit; text-decoration: inherit;">rip</a>
@@ -1594,8 +1842,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip address of cvm.</p>
-</dd><dt class="property-optional"
+    <dd>Ip address of cvm.</dd><dt class="property-optional"
             title="Optional">
         <span id="vcluster_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcluster_java" style="color: inherit; text-decoration: inherit;">v<wbr>Cluster</a>
@@ -1603,8 +1850,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual clusters.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="zoopath_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoopath_java" style="color: inherit; text-decoration: inherit;">zoo<wbr>Path</a>
@@ -1612,8 +1858,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ZK path.</p>
-</dd></dl>
+    <dd>ZK path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1627,8 +1872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database.</p>
-</dd><dt class="property-required"
+    <dd>Database.</dd><dt class="property-required"
             title="Required">
         <span id="table_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_nodejs" style="color: inherit; text-decoration: inherit;">table</a>
@@ -1636,8 +1880,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table.</p>
-</dd><dt class="property-required"
+    <dd>Table.</dd><dt class="property-required"
             title="Required">
         <span id="totalbytes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalbytes_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Bytes</a>
@@ -1645,8 +1888,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Back up the list of tables.</p>
-</dd><dt class="property-optional"
+    <dd>Back up the list of tables.</dd><dt class="property-optional"
             title="Optional">
         <span id="ips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_nodejs" style="color: inherit; text-decoration: inherit;">ips</a>
@@ -1654,8 +1896,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table ip.</p>
-</dd><dt class="property-optional"
+    <dd>Table ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="rip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rip_nodejs" style="color: inherit; text-decoration: inherit;">rip</a>
@@ -1663,8 +1904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip address of cvm.</p>
-</dd><dt class="property-optional"
+    <dd>Ip address of cvm.</dd><dt class="property-optional"
             title="Optional">
         <span id="vcluster_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcluster_nodejs" style="color: inherit; text-decoration: inherit;">v<wbr>Cluster</a>
@@ -1672,8 +1912,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual clusters.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="zoopath_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoopath_nodejs" style="color: inherit; text-decoration: inherit;">zoo<wbr>Path</a>
@@ -1681,8 +1920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ZK path.</p>
-</dd></dl>
+    <dd>ZK path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1696,8 +1934,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database.</p>
-</dd><dt class="property-required"
+    <dd>Database.</dd><dt class="property-required"
             title="Required">
         <span id="table_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_python" style="color: inherit; text-decoration: inherit;">table</a>
@@ -1705,8 +1942,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Table.</p>
-</dd><dt class="property-required"
+    <dd>Table.</dd><dt class="property-required"
             title="Required">
         <span id="total_bytes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_bytes_python" style="color: inherit; text-decoration: inherit;">total_<wbr>bytes</a>
@@ -1714,8 +1950,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Back up the list of tables.</p>
-</dd><dt class="property-optional"
+    <dd>Back up the list of tables.</dd><dt class="property-optional"
             title="Optional">
         <span id="ips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_python" style="color: inherit; text-decoration: inherit;">ips</a>
@@ -1723,8 +1958,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Table ip.</p>
-</dd><dt class="property-optional"
+    <dd>Table ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="rip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rip_python" style="color: inherit; text-decoration: inherit;">rip</a>
@@ -1732,8 +1966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ip address of cvm.</p>
-</dd><dt class="property-optional"
+    <dd>Ip address of cvm.</dd><dt class="property-optional"
             title="Optional">
         <span id="v_cluster_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#v_cluster_python" style="color: inherit; text-decoration: inherit;">v_<wbr>cluster</a>
@@ -1741,8 +1974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Virtual clusters.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="zoo_path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoo_path_python" style="color: inherit; text-decoration: inherit;">zoo_<wbr>path</a>
@@ -1750,8 +1982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ZK path.</p>
-</dd></dl>
+    <dd>ZK path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1765,8 +1996,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database.</p>
-</dd><dt class="property-required"
+    <dd>Database.</dd><dt class="property-required"
             title="Required">
         <span id="table_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_yaml" style="color: inherit; text-decoration: inherit;">table</a>
@@ -1774,8 +2004,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table.</p>
-</dd><dt class="property-required"
+    <dd>Table.</dd><dt class="property-required"
             title="Required">
         <span id="totalbytes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalbytes_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Bytes</a>
@@ -1783,8 +2012,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Back up the list of tables.</p>
-</dd><dt class="property-optional"
+    <dd>Back up the list of tables.</dd><dt class="property-optional"
             title="Optional">
         <span id="ips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ips_yaml" style="color: inherit; text-decoration: inherit;">ips</a>
@@ -1792,8 +2020,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table ip.</p>
-</dd><dt class="property-optional"
+    <dd>Table ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="rip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rip_yaml" style="color: inherit; text-decoration: inherit;">rip</a>
@@ -1801,8 +2028,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip address of cvm.</p>
-</dd><dt class="property-optional"
+    <dd>Ip address of cvm.</dd><dt class="property-optional"
             title="Optional">
         <span id="vcluster_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vcluster_yaml" style="color: inherit; text-decoration: inherit;">v<wbr>Cluster</a>
@@ -1810,8 +2036,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual clusters.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="zoopath_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoopath_yaml" style="color: inherit; text-decoration: inherit;">zoo<wbr>Path</a>
@@ -1819,12 +2044,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ZK path.</p>
-</dd></dl>
+    <dd>ZK path.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="backupstrategymetabackupstrategy">Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy</h4>
+<h4 id="backupstrategymetabackupstrategy">
+Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy<pulumi-choosable type="language" values="python,go" class="inline">, Backup<wbr>Strategy<wbr>Meta<wbr>Backup<wbr>Strategy<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1836,8 +2062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Execution hour.</p>
-</dd><dt class="property-optional"
+    <dd>Execution hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="retaindays_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retaindays_csharp" style="color: inherit; text-decoration: inherit;">Retain<wbr>Days</a>
@@ -1845,8 +2070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retention days.</p>
-</dd><dt class="property-optional"
+    <dd>Retention days.</dd><dt class="property-optional"
             title="Optional">
         <span id="weekdays_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weekdays_csharp" style="color: inherit; text-decoration: inherit;">Week<wbr>Days</a>
@@ -1854,8 +2078,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The day of the week is separated by commas. For example: 2 represents Tuesday.</p>
-</dd></dl>
+    <dd>The day of the week is separated by commas. For example: 2 represents Tuesday.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1869,8 +2092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Execution hour.</p>
-</dd><dt class="property-optional"
+    <dd>Execution hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="retaindays_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retaindays_go" style="color: inherit; text-decoration: inherit;">Retain<wbr>Days</a>
@@ -1878,8 +2100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retention days.</p>
-</dd><dt class="property-optional"
+    <dd>Retention days.</dd><dt class="property-optional"
             title="Optional">
         <span id="weekdays_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weekdays_go" style="color: inherit; text-decoration: inherit;">Week<wbr>Days</a>
@@ -1887,8 +2108,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The day of the week is separated by commas. For example: 2 represents Tuesday.</p>
-</dd></dl>
+    <dd>The day of the week is separated by commas. For example: 2 represents Tuesday.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="execute_hour_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#execute_hour_hcl" style="color: inherit; text-decoration: inherit;">execute_<wbr>hour</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Execution hour.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="retain_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retain_days_hcl" style="color: inherit; text-decoration: inherit;">retain_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Retention days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="week_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#week_days_hcl" style="color: inherit; text-decoration: inherit;">week_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The day of the week is separated by commas. For example: 2 represents Tuesday.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1902,8 +2152,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Execution hour.</p>
-</dd><dt class="property-optional"
+    <dd>Execution hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="retaindays_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retaindays_java" style="color: inherit; text-decoration: inherit;">retain<wbr>Days</a>
@@ -1911,8 +2160,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Retention days.</p>
-</dd><dt class="property-optional"
+    <dd>Retention days.</dd><dt class="property-optional"
             title="Optional">
         <span id="weekdays_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weekdays_java" style="color: inherit; text-decoration: inherit;">week<wbr>Days</a>
@@ -1920,8 +2168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The day of the week is separated by commas. For example: 2 represents Tuesday.</p>
-</dd></dl>
+    <dd>The day of the week is separated by commas. For example: 2 represents Tuesday.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1935,8 +2182,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Execution hour.</p>
-</dd><dt class="property-optional"
+    <dd>Execution hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="retaindays_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retaindays_nodejs" style="color: inherit; text-decoration: inherit;">retain<wbr>Days</a>
@@ -1944,8 +2190,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Retention days.</p>
-</dd><dt class="property-optional"
+    <dd>Retention days.</dd><dt class="property-optional"
             title="Optional">
         <span id="weekdays_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weekdays_nodejs" style="color: inherit; text-decoration: inherit;">week<wbr>Days</a>
@@ -1953,8 +2198,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The day of the week is separated by commas. For example: 2 represents Tuesday.</p>
-</dd></dl>
+    <dd>The day of the week is separated by commas. For example: 2 represents Tuesday.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1968,8 +2212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Execution hour.</p>
-</dd><dt class="property-optional"
+    <dd>Execution hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="retain_days_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retain_days_python" style="color: inherit; text-decoration: inherit;">retain_<wbr>days</a>
@@ -1977,8 +2220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retention days.</p>
-</dd><dt class="property-optional"
+    <dd>Retention days.</dd><dt class="property-optional"
             title="Optional">
         <span id="week_days_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#week_days_python" style="color: inherit; text-decoration: inherit;">week_<wbr>days</a>
@@ -1986,8 +2228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The day of the week is separated by commas. For example: 2 represents Tuesday.</p>
-</dd></dl>
+    <dd>The day of the week is separated by commas. For example: 2 represents Tuesday.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2001,8 +2242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Execution hour.</p>
-</dd><dt class="property-optional"
+    <dd>Execution hour.</dd><dt class="property-optional"
             title="Optional">
         <span id="retaindays_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retaindays_yaml" style="color: inherit; text-decoration: inherit;">retain<wbr>Days</a>
@@ -2010,8 +2250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Retention days.</p>
-</dd><dt class="property-optional"
+    <dd>Retention days.</dd><dt class="property-optional"
             title="Optional">
         <span id="weekdays_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weekdays_yaml" style="color: inherit; text-decoration: inherit;">week<wbr>Days</a>
@@ -2019,8 +2258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The day of the week is separated by commas. For example: 2 represents Tuesday.</p>
-</dd></dl>
+    <dd>The day of the week is separated by commas. For example: 2 represents Tuesday.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2028,12 +2266,15 @@ The following state arguments are supported:
 
 
 
-clickhouse backup_strategy can be imported using the id, e.g.
+clickhouse backupStrategy can be imported using the id, e.g.
 
 ```sh
 $ pulumi import tencentcloud:Clickhouse/backupStrategy:BackupStrategy backup_strategy instance_id
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2045,7 +2286,6 @@ $ pulumi import tencentcloud:Clickhouse/backupStrategy:BackupStrategy backup_str
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

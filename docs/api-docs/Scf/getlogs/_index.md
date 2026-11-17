@@ -2,9 +2,11 @@
 ---
 title: "getLogs"
 title_tag: "tencentcloud.Scf.getLogs"
-meta_desc: "Documentation for the tencentcloud.Scf.getLogs function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query SCF function logs."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,72 +18,64 @@ Use this data source to query SCF function logs.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooFunction = new tencentcloud.scf.Function("fooFunction", {
+const fooFunction = new tencentcloud.scf.Function("foo", {
+    name: "ci-test-function",
     handler: "main.do_it",
     runtime: "Python3.6",
     cosBucketName: "scf-code-1234567890",
     cosObjectName: "code.zip",
     cosBucketRegion: "ap-guangzhou",
 });
-const fooLogs = tencentcloud.Scf.getLogsOutput({
+const foo = tencentcloud.scf.getLogsOutput({
     functionName: fooFunction.name,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo_function = tencentcloud.scf.Function("fooFunction",
+foo_function = tencentcloud.scf.Function("foo",
+    name="ci-test-function",
     handler="main.do_it",
     runtime="Python3.6",
     cos_bucket_name="scf-code-1234567890",
     cos_object_name="code.zip",
     cos_bucket_region="ap-guangzhou")
-foo_logs = tencentcloud.Scf.get_logs_output(function_name=foo_function.name)
+foo = tencentcloud.scf.get_logs_output(function_name=foo_function.name)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var fooFunction = new Tencentcloud.Scf.Function("fooFunction", new()
-    {
-        Handler = "main.do_it",
-        Runtime = "Python3.6",
-        CosBucketName = "scf-code-1234567890",
-        CosObjectName = "code.zip",
-        CosBucketRegion = "ap-guangzhou",
-    });
-
-    var fooLogs = Tencentcloud.Scf.GetLogs.Invoke(new()
-    {
-        FunctionName = fooFunction.Name,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/scf"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooFunction, err := Scf.NewFunction(ctx, "fooFunction", &Scf.FunctionArgs{
+		fooFunction, err := scf.NewFunction(ctx, "foo", &scf.FunctionArgs{
+			Name:            pulumi.String("ci-test-function"),
 			Handler:         pulumi.String("main.do_it"),
 			Runtime:         pulumi.String("Python3.6"),
 			CosBucketName:   pulumi.String("scf-code-1234567890"),
@@ -91,13 +85,48 @@ func main() {
 		if err != nil {
 			return err
 		}
-		_ = Scf.GetLogsOutput(ctx, scf.GetLogsOutputArgs{
+		_ = scf.GetLogsOutput(ctx, scf.GetLogsOutputArgs{
 			FunctionName: fooFunction.Name,
 		}, nil)
 		return nil
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var fooFunction = new Tencentcloud.Scf.Function("foo", new()
+    {
+        Name = "ci-test-function",
+        Handler = "main.do_it",
+        Runtime = "Python3.6",
+        CosBucketName = "scf-code-1234567890",
+        CosObjectName = "code.zip",
+        CosBucketRegion = "ap-guangzhou",
+    });
+
+    var foo = Tencentcloud.Scf.GetLogs.Invoke(new()
+    {
+        FunctionName = fooFunction.Name,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -108,8 +137,8 @@ import com.pulumi.tencentcloud.Scf.Function;
 import com.pulumi.tencentcloud.Scf.FunctionArgs;
 import com.pulumi.tencentcloud.Scf.ScfFunctions;
 import com.pulumi.tencentcloud.Scf.inputs.GetLogsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -121,7 +150,8 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fooFunction = new Function("fooFunction", FunctionArgs.builder()        
+        var fooFunction = new Function("fooFunction", FunctionArgs.builder()
+            .name("ci-test-function")
             .handler("main.do_it")
             .runtime("Python3.6")
             .cosBucketName("scf-code-1234567890")
@@ -129,32 +159,73 @@ public class App {
             .cosBucketRegion("ap-guangzhou")
             .build());
 
-        final var fooLogs = ScfFunctions.getLogs(GetLogsArgs.builder()
+        final var foo = ScfFunctions.getLogs(GetLogsArgs.builder()
             .functionName(fooFunction.name())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   fooFunction:
     type: tencentcloud:Scf:Function
+    name: foo
     properties:
+      name: ci-test-function
       handler: main.do_it
       runtime: Python3.6
       cosBucketName: scf-code-1234567890
       cosObjectName: code.zip
       cosBucketRegion: ap-guangzhou
 variables:
-  fooLogs:
+  foo:
     fn::invoke:
-      Function: tencentcloud:Scf:getLogs
-      Arguments:
+      function: tencentcloud:Scf:getLogs
+      arguments:
         functionName: ${fooFunction.name}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_scf_getlogs" "foo" {
+  function_name = tencentcloud_scf_function.foo.name
+}
+
+resource "tencentcloud_scf_function" "foo" {
+  name              = "ci-test-function"
+  handler           = "main.do_it"
+  runtime           = "Python3.6"
+  cos_bucket_name   = "scf-code-1234567890"
+  cos_object_name   = "code.zip"
+  cos_bucket_region = "ap-guangzhou"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [GetFunctionLogs](https://www.tencentcloud.com/document/api/583/18583)
 
 
 
@@ -166,7 +237,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -174,9 +245,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getLogs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetLogsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetLogsResult</a></span>></span
+><span class="k">function </span>getLogs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetLogsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetLogsResult</a></span>></span
 ><span class="k">
-function </span>getLogsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetLogsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetLogsResult</a></span>></span
+function </span>getLogsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetLogsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetLogsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -198,18 +269,18 @@ function </span>getLogsOutput<span class="p">(</span><span class="nx">args</span
              <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetLogsResult</span
 ><span class="k">
-def </span>get_logs_output<span class="p">(</span><span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">function_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">invoke_request_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-             <span class="nx">namespace</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">offset</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-             <span class="nx">order</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">order_by</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">ret_code</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetLogsResult]</span
+def </span>get_logs_output<span class="p">(</span><span class="nx">end_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">function_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">invoke_request_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">limit</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+             <span class="nx">namespace</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">offset</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+             <span class="nx">order</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">order_by</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">ret_code</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">start_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetLogsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -234,7 +305,8 @@ func </span>GetLogsOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetLogs </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetLogsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetLogsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetLogsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetLogsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetLogsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetLogsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetLogsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetLogsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -243,7 +315,8 @@ func </span>GetLogsOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetLogsResult</a></span>> </span>getLogs<span class="p">(</span><span class="nx">GetLogsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetLogsResult</a></span>> </span>getLogs<span class="p">(</span><span class="nx">GetLogsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetLogsResult</a></span>> </span>getLogs<span class="p">(</span><span class="nx">GetLogsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -255,6 +328,15 @@ func </span>GetLogsOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Scf/getLogs:getLogs
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_scf_get_logs&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -273,8 +355,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF function to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -282,8 +363,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The end time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The end time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="invokerequestid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invokerequestid_csharp" style="color: inherit; text-decoration: inherit;">Invoke<wbr>Request<wbr>Id</a>
@@ -291,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Corresponding requestId when executing function.</p>
-</dd><dt class="property-optional"
+    <dd>Corresponding requestId when executing function.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -300,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of logs, the default is <code>10000</code>, offset+limit cannot be greater than 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Number of logs, the default is <code>10000</code>, offset+limit cannot be greater than 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -309,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace of the SCF function to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -318,8 +395,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Log offset, default is <code>0</code>, offset+limit cannot be greater than 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Log offset, default is <code>0</code>, offset+limit cannot be greater than 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_csharp" style="color: inherit; text-decoration: inherit;">Order</a>
@@ -327,8 +403,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Order to sort the log, optional values <code>desc</code> and <code>asc</code>, default <code>desc</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Order to sort the log, optional values <code>desc</code> and <code>asc</code>, default <code>desc</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>By</a>
@@ -336,8 +411,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sort the logs according to the following fields: <code>function_name</code>, <code>duration</code>, <code>mem_usage</code>, <code>start_time</code>, default <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Sort the logs according to the following fields: <code>functionName</code>, <code>duration</code>, <code>memUsage</code>, <code>startTime</code>, default <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -345,8 +419,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="retcode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retcode_csharp" style="color: inherit; text-decoration: inherit;">Ret<wbr>Code</a>
@@ -354,8 +427,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</p>
-</dd><dt class="property-optional"
+    <dd>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -363,8 +435,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>end_time</code>.</p>
-</dd></dl>
+    <dd>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>endTime</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -378,8 +449,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF function to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -387,8 +457,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The end time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The end time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="invokerequestid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invokerequestid_go" style="color: inherit; text-decoration: inherit;">Invoke<wbr>Request<wbr>Id</a>
@@ -396,8 +465,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Corresponding requestId when executing function.</p>
-</dd><dt class="property-optional"
+    <dd>Corresponding requestId when executing function.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -405,8 +473,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of logs, the default is <code>10000</code>, offset+limit cannot be greater than 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Number of logs, the default is <code>10000</code>, offset+limit cannot be greater than 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -414,8 +481,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace of the SCF function to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -423,8 +489,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Log offset, default is <code>0</code>, offset+limit cannot be greater than 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Log offset, default is <code>0</code>, offset+limit cannot be greater than 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_go" style="color: inherit; text-decoration: inherit;">Order</a>
@@ -432,8 +497,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Order to sort the log, optional values <code>desc</code> and <code>asc</code>, default <code>desc</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Order to sort the log, optional values <code>desc</code> and <code>asc</code>, default <code>desc</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_go" style="color: inherit; text-decoration: inherit;">Order<wbr>By</a>
@@ -441,8 +505,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sort the logs according to the following fields: <code>function_name</code>, <code>duration</code>, <code>mem_usage</code>, <code>start_time</code>, default <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Sort the logs according to the following fields: <code>functionName</code>, <code>duration</code>, <code>memUsage</code>, <code>startTime</code>, default <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -450,8 +513,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="retcode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retcode_go" style="color: inherit; text-decoration: inherit;">Ret<wbr>Code</a>
@@ -459,8 +521,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</p>
-</dd><dt class="property-optional"
+    <dd>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -468,8 +529,101 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>end_time</code>.</p>
-</dd></dl>
+    <dd>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>endTime</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="function_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#function_name_hcl" style="color: inherit; text-decoration: inherit;">function_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SCF function to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The end time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>startTime</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="invoke_request_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invoke_request_id_hcl" style="color: inherit; text-decoration: inherit;">invoke_<wbr>request_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Corresponding requestId when executing function.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of logs, the default is <code>10000</code>, offset+limit cannot be greater than 10000.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespace of the SCF function to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Log offset, default is <code>0</code>, offset+limit cannot be greater than 10000.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_hcl" style="color: inherit; text-decoration: inherit;">order</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Order to sort the log, optional values <code>desc</code> and <code>asc</code>, default <code>desc</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Sort the logs according to the following fields: <code>functionName</code>, <code>duration</code>, <code>memUsage</code>, <code>startTime</code>, default <code>startTime</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ret_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ret_code_hcl" style="color: inherit; text-decoration: inherit;">ret_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>endTime</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -483,8 +637,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF function to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF function to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -492,8 +645,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The end time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The end time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="invokerequestid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invokerequestid_java" style="color: inherit; text-decoration: inherit;">invoke<wbr>Request<wbr>Id</a>
@@ -501,8 +653,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Corresponding requestId when executing function.</p>
-</dd><dt class="property-optional"
+    <dd>Corresponding requestId when executing function.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -510,8 +661,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of logs, the default is <code>10000</code>, offset+limit cannot be greater than 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Number of logs, the default is <code>10000</code>, offset+limit cannot be greater than 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -519,8 +669,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace of the SCF function to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -528,8 +677,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Log offset, default is <code>0</code>, offset+limit cannot be greater than 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Log offset, default is <code>0</code>, offset+limit cannot be greater than 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_java" style="color: inherit; text-decoration: inherit;">order</a>
@@ -537,8 +685,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Order to sort the log, optional values <code>desc</code> and <code>asc</code>, default <code>desc</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Order to sort the log, optional values <code>desc</code> and <code>asc</code>, default <code>desc</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_java" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -546,8 +693,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sort the logs according to the following fields: <code>function_name</code>, <code>duration</code>, <code>mem_usage</code>, <code>start_time</code>, default <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Sort the logs according to the following fields: <code>functionName</code>, <code>duration</code>, <code>memUsage</code>, <code>startTime</code>, default <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -555,8 +701,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="retcode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retcode_java" style="color: inherit; text-decoration: inherit;">ret<wbr>Code</a>
@@ -564,8 +709,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</p>
-</dd><dt class="property-optional"
+    <dd>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -573,8 +717,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>end_time</code>.</p>
-</dd></dl>
+    <dd>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>endTime</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -588,8 +731,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF function to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -597,8 +739,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The end time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The end time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="invokerequestid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invokerequestid_nodejs" style="color: inherit; text-decoration: inherit;">invoke<wbr>Request<wbr>Id</a>
@@ -606,8 +747,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Corresponding requestId when executing function.</p>
-</dd><dt class="property-optional"
+    <dd>Corresponding requestId when executing function.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -615,8 +755,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of logs, the default is <code>10000</code>, offset+limit cannot be greater than 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Number of logs, the default is <code>10000</code>, offset+limit cannot be greater than 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -624,8 +763,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace of the SCF function to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -633,8 +771,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Log offset, default is <code>0</code>, offset+limit cannot be greater than 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Log offset, default is <code>0</code>, offset+limit cannot be greater than 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_nodejs" style="color: inherit; text-decoration: inherit;">order</a>
@@ -642,8 +779,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Order to sort the log, optional values <code>desc</code> and <code>asc</code>, default <code>desc</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Order to sort the log, optional values <code>desc</code> and <code>asc</code>, default <code>desc</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -651,8 +787,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sort the logs according to the following fields: <code>function_name</code>, <code>duration</code>, <code>mem_usage</code>, <code>start_time</code>, default <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Sort the logs according to the following fields: <code>functionName</code>, <code>duration</code>, <code>memUsage</code>, <code>startTime</code>, default <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -660,8 +795,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="retcode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retcode_nodejs" style="color: inherit; text-decoration: inherit;">ret<wbr>Code</a>
@@ -669,8 +803,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</p>
-</dd><dt class="property-optional"
+    <dd>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -678,8 +811,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>end_time</code>.</p>
-</dd></dl>
+    <dd>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>endTime</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -693,8 +825,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SCF function to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF function to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -702,8 +833,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The end time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The end time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="invoke_request_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invoke_request_id_python" style="color: inherit; text-decoration: inherit;">invoke_<wbr>request_<wbr>id</a>
@@ -711,8 +841,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Corresponding requestId when executing function.</p>
-</dd><dt class="property-optional"
+    <dd>Corresponding requestId when executing function.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -720,8 +849,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of logs, the default is <code>10000</code>, offset+limit cannot be greater than 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Number of logs, the default is <code>10000</code>, offset+limit cannot be greater than 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -729,8 +857,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace of the SCF function to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -738,8 +865,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Log offset, default is <code>0</code>, offset+limit cannot be greater than 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Log offset, default is <code>0</code>, offset+limit cannot be greater than 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_python" style="color: inherit; text-decoration: inherit;">order</a>
@@ -747,8 +873,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Order to sort the log, optional values <code>desc</code> and <code>asc</code>, default <code>desc</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Order to sort the log, optional values <code>desc</code> and <code>asc</code>, default <code>desc</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_by_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_python" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
@@ -756,8 +881,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Sort the logs according to the following fields: <code>function_name</code>, <code>duration</code>, <code>mem_usage</code>, <code>start_time</code>, default <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Sort the logs according to the following fields: <code>functionName</code>, <code>duration</code>, <code>memUsage</code>, <code>startTime</code>, default <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -765,8 +889,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="ret_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ret_code_python" style="color: inherit; text-decoration: inherit;">ret_<wbr>code</a>
@@ -774,8 +897,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</p>
-</dd><dt class="property-optional"
+    <dd>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</dd><dt class="property-optional"
             title="Optional">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -783,8 +905,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>end_time</code>.</p>
-</dd></dl>
+    <dd>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>endTime</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -798,8 +919,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF function to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the SCF function to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -807,8 +927,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The end time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The end time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="invokerequestid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invokerequestid_yaml" style="color: inherit; text-decoration: inherit;">invoke<wbr>Request<wbr>Id</a>
@@ -816,8 +935,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Corresponding requestId when executing function.</p>
-</dd><dt class="property-optional"
+    <dd>Corresponding requestId when executing function.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -825,8 +943,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of logs, the default is <code>10000</code>, offset+limit cannot be greater than 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Number of logs, the default is <code>10000</code>, offset+limit cannot be greater than 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -834,8 +951,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace of the SCF function to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Namespace of the SCF function to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -843,8 +959,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Log offset, default is <code>0</code>, offset+limit cannot be greater than 10000.</p>
-</dd><dt class="property-optional"
+    <dd>Log offset, default is <code>0</code>, offset+limit cannot be greater than 10000.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_yaml" style="color: inherit; text-decoration: inherit;">order</a>
@@ -852,8 +967,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Order to sort the log, optional values <code>desc</code> and <code>asc</code>, default <code>desc</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Order to sort the log, optional values <code>desc</code> and <code>asc</code>, default <code>desc</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -861,8 +975,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sort the logs according to the following fields: <code>function_name</code>, <code>duration</code>, <code>mem_usage</code>, <code>start_time</code>, default <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Sort the logs according to the following fields: <code>functionName</code>, <code>duration</code>, <code>memUsage</code>, <code>startTime</code>, default <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -870,8 +983,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="retcode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retcode_yaml" style="color: inherit; text-decoration: inherit;">ret<wbr>Code</a>
@@ -879,8 +991,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</p>
-</dd><dt class="property-optional"
+    <dd>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -888,8 +999,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>end_time</code>.</p>
-</dd></dl>
+    <dd>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>endTime</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -912,8 +1022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function.</p>
-</dd><dt class="property-"
+    <dd>Name of the SCF function.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -921,8 +1030,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scflogs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scflogs_csharp" style="color: inherit; text-decoration: inherit;">Scf<wbr>Logs</a>
@@ -930,8 +1038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlogslog">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Scf.<wbr>Outputs.<wbr>Get<wbr>Logs<wbr>Log&gt;</a></span>
     </dt>
-    <dd><p>An information list of logs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of logs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -1003,8 +1110,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Execution result of function, <code>0</code> means the execution is successful, other values indicate failure.</p>
-</dd><dt class="property-"
+    <dd>Execution result of function, <code>0</code> means the execution is successful, other values indicate failure.</dd><dt class="property-"
             title="">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -1012,8 +1118,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Point in time at which the function begins execution.</p>
-</dd></dl>
+    <dd>Point in time at which the function begins execution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1027,8 +1132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function.</p>
-</dd><dt class="property-"
+    <dd>Name of the SCF function.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1036,8 +1140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="logs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logs_go" style="color: inherit; text-decoration: inherit;">Logs</a>
@@ -1045,8 +1148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlogslog">[]Get<wbr>Logs<wbr>Log</a></span>
     </dt>
-    <dd><p>An information list of logs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of logs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -1118,8 +1220,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Execution result of function, <code>0</code> means the execution is successful, other values indicate failure.</p>
-</dd><dt class="property-"
+    <dd>Execution result of function, <code>0</code> means the execution is successful, other values indicate failure.</dd><dt class="property-"
             title="">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -1127,8 +1228,117 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Point in time at which the function begins execution.</p>
-</dd></dl>
+    <dd>Point in time at which the function begins execution.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="function_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#function_name_hcl" style="color: inherit; text-decoration: inherit;">function_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SCF function.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="logs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logs_hcl" style="color: inherit; text-decoration: inherit;">logs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getlogslog">list(object)</a></span>
+    </dt>
+    <dd>An information list of logs. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="invoke_request_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invoke_request_id_hcl" style="color: inherit; text-decoration: inherit;">invoke_<wbr>request_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="order_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_hcl" style="color: inherit; text-decoration: inherit;">order</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="order_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="ret_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ret_code_hcl" style="color: inherit; text-decoration: inherit;">ret_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Execution result of function, <code>0</code> means the execution is successful, other values indicate failure.</dd><dt class="property-"
+            title="">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Point in time at which the function begins execution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1142,8 +1352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF function.</p>
-</dd><dt class="property-"
+    <dd>Name of the SCF function.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1151,8 +1360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="logs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logs_java" style="color: inherit; text-decoration: inherit;">logs</a>
@@ -1160,8 +1368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlogslog">List&lt;Get<wbr>Logs<wbr>Log&gt;</a></span>
     </dt>
-    <dd><p>An information list of logs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of logs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1233,8 +1440,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Execution result of function, <code>0</code> means the execution is successful, other values indicate failure.</p>
-</dd><dt class="property-"
+    <dd>Execution result of function, <code>0</code> means the execution is successful, other values indicate failure.</dd><dt class="property-"
             title="">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1242,8 +1448,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Point in time at which the function begins execution.</p>
-</dd></dl>
+    <dd>Point in time at which the function begins execution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1257,8 +1462,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function.</p>
-</dd><dt class="property-"
+    <dd>Name of the SCF function.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1266,8 +1470,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="logs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logs_nodejs" style="color: inherit; text-decoration: inherit;">logs</a>
@@ -1275,8 +1478,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlogslog">Get<wbr>Logs<wbr>Log[]</a></span>
     </dt>
-    <dd><p>An information list of logs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of logs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1348,8 +1550,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Execution result of function, <code>0</code> means the execution is successful, other values indicate failure.</p>
-</dd><dt class="property-"
+    <dd>Execution result of function, <code>0</code> means the execution is successful, other values indicate failure.</dd><dt class="property-"
             title="">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1357,8 +1558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Point in time at which the function begins execution.</p>
-</dd></dl>
+    <dd>Point in time at which the function begins execution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1372,8 +1572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SCF function.</p>
-</dd><dt class="property-"
+    <dd>Name of the SCF function.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1381,17 +1580,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="logs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logs_python" style="color: inherit; text-decoration: inherit;">logs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getlogslog">Get<wbr>Logs<wbr>Log]</a></span>
+        <span class="property-type"><a href="#getlogslog">Sequence[Get<wbr>Logs<wbr>Log]</a></span>
     </dt>
-    <dd><p>An information list of logs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of logs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -1463,8 +1660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Execution result of function, <code>0</code> means the execution is successful, other values indicate failure.</p>
-</dd><dt class="property-"
+    <dd>Execution result of function, <code>0</code> means the execution is successful, other values indicate failure.</dd><dt class="property-"
             title="">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -1472,8 +1668,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Point in time at which the function begins execution.</p>
-</dd></dl>
+    <dd>Point in time at which the function begins execution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1487,8 +1682,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF function.</p>
-</dd><dt class="property-"
+    <dd>Name of the SCF function.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1496,8 +1690,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="logs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logs_yaml" style="color: inherit; text-decoration: inherit;">logs</a>
@@ -1505,8 +1698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlogslog">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of logs. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of logs. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1578,8 +1770,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Execution result of function, <code>0</code> means the execution is successful, other values indicate failure.</p>
-</dd><dt class="property-"
+    <dd>Execution result of function, <code>0</code> means the execution is successful, other values indicate failure.</dd><dt class="property-"
             title="">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1587,8 +1778,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Point in time at which the function begins execution.</p>
-</dd></dl>
+    <dd>Point in time at which the function begins execution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1612,8 +1802,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Function billing time, according to duration up to the last 100ms, unit is ms.</p>
-</dd><dt class="property-required"
+    <dd>Function billing time, according to duration up to the last 100ms, unit is ms.</dd><dt class="property-required"
             title="Required">
         <span id="duration_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_csharp" style="color: inherit; text-decoration: inherit;">Duration</a>
@@ -1621,8 +1810,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Function execution time-consuming, unit is ms.</p>
-</dd><dt class="property-required"
+    <dd>Function execution time-consuming, unit is ms.</dd><dt class="property-required"
             title="Required">
         <span id="functionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#functionname_csharp" style="color: inherit; text-decoration: inherit;">Function<wbr>Name</a>
@@ -1630,8 +1818,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF function to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="invokefinished_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invokefinished_csharp" style="color: inherit; text-decoration: inherit;">Invoke<wbr>Finished</a>
@@ -1639,8 +1826,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the function call ends, <code>1</code> means the execution ends, other values indicate the call exception.</p>
-</dd><dt class="property-required"
+    <dd>Whether the function call ends, <code>1</code> means the execution ends, other values indicate the call exception.</dd><dt class="property-required"
             title="Required">
         <span id="level_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_csharp" style="color: inherit; text-decoration: inherit;">Level</a>
@@ -1648,8 +1834,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log level.</p>
-</dd><dt class="property-required"
+    <dd>Log level.</dd><dt class="property-required"
             title="Required">
         <span id="log_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_csharp" style="color: inherit; text-decoration: inherit;">Log</a>
@@ -1657,8 +1842,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log output during function execution.</p>
-</dd><dt class="property-required"
+    <dd>Log output during function execution.</dd><dt class="property-required"
             title="Required">
         <span id="memusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memusage_csharp" style="color: inherit; text-decoration: inherit;">Mem<wbr>Usage</a>
@@ -1666,8 +1850,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The actual memory size consumed in the execution of the function, unit is Byte.</p>
-</dd><dt class="property-required"
+    <dd>The actual memory size consumed in the execution of the function, unit is Byte.</dd><dt class="property-required"
             title="Required">
         <span id="requestid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestid_csharp" style="color: inherit; text-decoration: inherit;">Request<wbr>Id</a>
@@ -1675,8 +1858,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Execute the requestId corresponding to the function.</p>
-</dd><dt class="property-required"
+    <dd>Execute the requestId corresponding to the function.</dd><dt class="property-required"
             title="Required">
         <span id="retcode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retcode_csharp" style="color: inherit; text-decoration: inherit;">Ret<wbr>Code</a>
@@ -1684,8 +1866,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</p>
-</dd><dt class="property-required"
+    <dd>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</dd><dt class="property-required"
             title="Required">
         <span id="retmsg_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retmsg_csharp" style="color: inherit; text-decoration: inherit;">Ret<wbr>Msg</a>
@@ -1693,8 +1874,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Return value after function execution is completed.</p>
-</dd><dt class="property-required"
+    <dd>Return value after function execution is completed.</dd><dt class="property-required"
             title="Required">
         <span id="source_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_csharp" style="color: inherit; text-decoration: inherit;">Source</a>
@@ -1702,8 +1882,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log source.</p>
-</dd><dt class="property-required"
+    <dd>Log source.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -1711,8 +1890,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>end_time</code>.</p>
-</dd></dl>
+    <dd>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>endTime</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1726,8 +1904,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Function billing time, according to duration up to the last 100ms, unit is ms.</p>
-</dd><dt class="property-required"
+    <dd>Function billing time, according to duration up to the last 100ms, unit is ms.</dd><dt class="property-required"
             title="Required">
         <span id="duration_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_go" style="color: inherit; text-decoration: inherit;">Duration</a>
@@ -1735,8 +1912,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Function execution time-consuming, unit is ms.</p>
-</dd><dt class="property-required"
+    <dd>Function execution time-consuming, unit is ms.</dd><dt class="property-required"
             title="Required">
         <span id="functionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#functionname_go" style="color: inherit; text-decoration: inherit;">Function<wbr>Name</a>
@@ -1744,8 +1920,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF function to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="invokefinished_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invokefinished_go" style="color: inherit; text-decoration: inherit;">Invoke<wbr>Finished</a>
@@ -1753,8 +1928,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the function call ends, <code>1</code> means the execution ends, other values indicate the call exception.</p>
-</dd><dt class="property-required"
+    <dd>Whether the function call ends, <code>1</code> means the execution ends, other values indicate the call exception.</dd><dt class="property-required"
             title="Required">
         <span id="level_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_go" style="color: inherit; text-decoration: inherit;">Level</a>
@@ -1762,8 +1936,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log level.</p>
-</dd><dt class="property-required"
+    <dd>Log level.</dd><dt class="property-required"
             title="Required">
         <span id="log_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_go" style="color: inherit; text-decoration: inherit;">Log</a>
@@ -1771,8 +1944,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log output during function execution.</p>
-</dd><dt class="property-required"
+    <dd>Log output during function execution.</dd><dt class="property-required"
             title="Required">
         <span id="memusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memusage_go" style="color: inherit; text-decoration: inherit;">Mem<wbr>Usage</a>
@@ -1780,8 +1952,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The actual memory size consumed in the execution of the function, unit is Byte.</p>
-</dd><dt class="property-required"
+    <dd>The actual memory size consumed in the execution of the function, unit is Byte.</dd><dt class="property-required"
             title="Required">
         <span id="requestid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestid_go" style="color: inherit; text-decoration: inherit;">Request<wbr>Id</a>
@@ -1789,8 +1960,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Execute the requestId corresponding to the function.</p>
-</dd><dt class="property-required"
+    <dd>Execute the requestId corresponding to the function.</dd><dt class="property-required"
             title="Required">
         <span id="retcode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retcode_go" style="color: inherit; text-decoration: inherit;">Ret<wbr>Code</a>
@@ -1798,8 +1968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</p>
-</dd><dt class="property-required"
+    <dd>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</dd><dt class="property-required"
             title="Required">
         <span id="retmsg_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retmsg_go" style="color: inherit; text-decoration: inherit;">Ret<wbr>Msg</a>
@@ -1807,8 +1976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Return value after function execution is completed.</p>
-</dd><dt class="property-required"
+    <dd>Return value after function execution is completed.</dd><dt class="property-required"
             title="Required">
         <span id="source_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_go" style="color: inherit; text-decoration: inherit;">Source</a>
@@ -1816,8 +1984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log source.</p>
-</dd><dt class="property-required"
+    <dd>Log source.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -1825,8 +1992,109 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>end_time</code>.</p>
-</dd></dl>
+    <dd>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>endTime</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bill_duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bill_duration_hcl" style="color: inherit; text-decoration: inherit;">bill_<wbr>duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Function billing time, according to duration up to the last 100ms, unit is ms.</dd><dt class="property-required"
+            title="Required">
+        <span id="duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_hcl" style="color: inherit; text-decoration: inherit;">duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Function execution time-consuming, unit is ms.</dd><dt class="property-required"
+            title="Required">
+        <span id="function_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#function_name_hcl" style="color: inherit; text-decoration: inherit;">function_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the SCF function to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="invoke_finished_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invoke_finished_hcl" style="color: inherit; text-decoration: inherit;">invoke_<wbr>finished</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether the function call ends, <code>1</code> means the execution ends, other values indicate the call exception.</dd><dt class="property-required"
+            title="Required">
+        <span id="level_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_hcl" style="color: inherit; text-decoration: inherit;">level</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log level.</dd><dt class="property-required"
+            title="Required">
+        <span id="log_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_hcl" style="color: inherit; text-decoration: inherit;">log</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log output during function execution.</dd><dt class="property-required"
+            title="Required">
+        <span id="mem_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_usage_hcl" style="color: inherit; text-decoration: inherit;">mem_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The actual memory size consumed in the execution of the function, unit is Byte.</dd><dt class="property-required"
+            title="Required">
+        <span id="request_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_id_hcl" style="color: inherit; text-decoration: inherit;">request_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Execute the requestId corresponding to the function.</dd><dt class="property-required"
+            title="Required">
+        <span id="ret_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ret_code_hcl" style="color: inherit; text-decoration: inherit;">ret_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</dd><dt class="property-required"
+            title="Required">
+        <span id="ret_msg_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ret_msg_hcl" style="color: inherit; text-decoration: inherit;">ret_<wbr>msg</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Return value after function execution is completed.</dd><dt class="property-required"
+            title="Required">
+        <span id="source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_hcl" style="color: inherit; text-decoration: inherit;">source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log source.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>endTime</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1840,8 +2108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Function billing time, according to duration up to the last 100ms, unit is ms.</p>
-</dd><dt class="property-required"
+    <dd>Function billing time, according to duration up to the last 100ms, unit is ms.</dd><dt class="property-required"
             title="Required">
         <span id="duration_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_java" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -1849,8 +2116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Function execution time-consuming, unit is ms.</p>
-</dd><dt class="property-required"
+    <dd>Function execution time-consuming, unit is ms.</dd><dt class="property-required"
             title="Required">
         <span id="functionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#functionname_java" style="color: inherit; text-decoration: inherit;">function<wbr>Name</a>
@@ -1858,8 +2124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF function to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF function to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="invokefinished_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invokefinished_java" style="color: inherit; text-decoration: inherit;">invoke<wbr>Finished</a>
@@ -1867,8 +2132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether the function call ends, <code>1</code> means the execution ends, other values indicate the call exception.</p>
-</dd><dt class="property-required"
+    <dd>Whether the function call ends, <code>1</code> means the execution ends, other values indicate the call exception.</dd><dt class="property-required"
             title="Required">
         <span id="level_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_java" style="color: inherit; text-decoration: inherit;">level</a>
@@ -1876,8 +2140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log level.</p>
-</dd><dt class="property-required"
+    <dd>Log level.</dd><dt class="property-required"
             title="Required">
         <span id="log_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_java" style="color: inherit; text-decoration: inherit;">log</a>
@@ -1885,8 +2148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log output during function execution.</p>
-</dd><dt class="property-required"
+    <dd>Log output during function execution.</dd><dt class="property-required"
             title="Required">
         <span id="memusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memusage_java" style="color: inherit; text-decoration: inherit;">mem<wbr>Usage</a>
@@ -1894,8 +2156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The actual memory size consumed in the execution of the function, unit is Byte.</p>
-</dd><dt class="property-required"
+    <dd>The actual memory size consumed in the execution of the function, unit is Byte.</dd><dt class="property-required"
             title="Required">
         <span id="requestid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestid_java" style="color: inherit; text-decoration: inherit;">request<wbr>Id</a>
@@ -1903,8 +2164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Execute the requestId corresponding to the function.</p>
-</dd><dt class="property-required"
+    <dd>Execute the requestId corresponding to the function.</dd><dt class="property-required"
             title="Required">
         <span id="retcode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retcode_java" style="color: inherit; text-decoration: inherit;">ret<wbr>Code</a>
@@ -1912,8 +2172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</p>
-</dd><dt class="property-required"
+    <dd>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</dd><dt class="property-required"
             title="Required">
         <span id="retmsg_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retmsg_java" style="color: inherit; text-decoration: inherit;">ret<wbr>Msg</a>
@@ -1921,8 +2180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Return value after function execution is completed.</p>
-</dd><dt class="property-required"
+    <dd>Return value after function execution is completed.</dd><dt class="property-required"
             title="Required">
         <span id="source_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_java" style="color: inherit; text-decoration: inherit;">source</a>
@@ -1930,8 +2188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log source.</p>
-</dd><dt class="property-required"
+    <dd>Log source.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1939,8 +2196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>end_time</code>.</p>
-</dd></dl>
+    <dd>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>endTime</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1954,8 +2210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Function billing time, according to duration up to the last 100ms, unit is ms.</p>
-</dd><dt class="property-required"
+    <dd>Function billing time, according to duration up to the last 100ms, unit is ms.</dd><dt class="property-required"
             title="Required">
         <span id="duration_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_nodejs" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -1963,8 +2218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Function execution time-consuming, unit is ms.</p>
-</dd><dt class="property-required"
+    <dd>Function execution time-consuming, unit is ms.</dd><dt class="property-required"
             title="Required">
         <span id="functionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#functionname_nodejs" style="color: inherit; text-decoration: inherit;">function<wbr>Name</a>
@@ -1972,8 +2226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the SCF function to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF function to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="invokefinished_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invokefinished_nodejs" style="color: inherit; text-decoration: inherit;">invoke<wbr>Finished</a>
@@ -1981,8 +2234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether the function call ends, <code>1</code> means the execution ends, other values indicate the call exception.</p>
-</dd><dt class="property-required"
+    <dd>Whether the function call ends, <code>1</code> means the execution ends, other values indicate the call exception.</dd><dt class="property-required"
             title="Required">
         <span id="level_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_nodejs" style="color: inherit; text-decoration: inherit;">level</a>
@@ -1990,8 +2242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log level.</p>
-</dd><dt class="property-required"
+    <dd>Log level.</dd><dt class="property-required"
             title="Required">
         <span id="log_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_nodejs" style="color: inherit; text-decoration: inherit;">log</a>
@@ -1999,8 +2250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log output during function execution.</p>
-</dd><dt class="property-required"
+    <dd>Log output during function execution.</dd><dt class="property-required"
             title="Required">
         <span id="memusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memusage_nodejs" style="color: inherit; text-decoration: inherit;">mem<wbr>Usage</a>
@@ -2008,8 +2258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The actual memory size consumed in the execution of the function, unit is Byte.</p>
-</dd><dt class="property-required"
+    <dd>The actual memory size consumed in the execution of the function, unit is Byte.</dd><dt class="property-required"
             title="Required">
         <span id="requestid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestid_nodejs" style="color: inherit; text-decoration: inherit;">request<wbr>Id</a>
@@ -2017,8 +2266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Execute the requestId corresponding to the function.</p>
-</dd><dt class="property-required"
+    <dd>Execute the requestId corresponding to the function.</dd><dt class="property-required"
             title="Required">
         <span id="retcode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retcode_nodejs" style="color: inherit; text-decoration: inherit;">ret<wbr>Code</a>
@@ -2026,8 +2274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</p>
-</dd><dt class="property-required"
+    <dd>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</dd><dt class="property-required"
             title="Required">
         <span id="retmsg_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retmsg_nodejs" style="color: inherit; text-decoration: inherit;">ret<wbr>Msg</a>
@@ -2035,8 +2282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Return value after function execution is completed.</p>
-</dd><dt class="property-required"
+    <dd>Return value after function execution is completed.</dd><dt class="property-required"
             title="Required">
         <span id="source_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_nodejs" style="color: inherit; text-decoration: inherit;">source</a>
@@ -2044,8 +2290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log source.</p>
-</dd><dt class="property-required"
+    <dd>Log source.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -2053,8 +2298,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>end_time</code>.</p>
-</dd></dl>
+    <dd>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>endTime</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2068,8 +2312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Function billing time, according to duration up to the last 100ms, unit is ms.</p>
-</dd><dt class="property-required"
+    <dd>Function billing time, according to duration up to the last 100ms, unit is ms.</dd><dt class="property-required"
             title="Required">
         <span id="duration_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_python" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -2077,8 +2320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Function execution time-consuming, unit is ms.</p>
-</dd><dt class="property-required"
+    <dd>Function execution time-consuming, unit is ms.</dd><dt class="property-required"
             title="Required">
         <span id="function_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#function_name_python" style="color: inherit; text-decoration: inherit;">function_<wbr>name</a>
@@ -2086,8 +2328,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the SCF function to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF function to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="invoke_finished_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invoke_finished_python" style="color: inherit; text-decoration: inherit;">invoke_<wbr>finished</a>
@@ -2095,8 +2336,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the function call ends, <code>1</code> means the execution ends, other values indicate the call exception.</p>
-</dd><dt class="property-required"
+    <dd>Whether the function call ends, <code>1</code> means the execution ends, other values indicate the call exception.</dd><dt class="property-required"
             title="Required">
         <span id="level_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_python" style="color: inherit; text-decoration: inherit;">level</a>
@@ -2104,8 +2344,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log level.</p>
-</dd><dt class="property-required"
+    <dd>Log level.</dd><dt class="property-required"
             title="Required">
         <span id="log_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_python" style="color: inherit; text-decoration: inherit;">log</a>
@@ -2113,8 +2352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log output during function execution.</p>
-</dd><dt class="property-required"
+    <dd>Log output during function execution.</dd><dt class="property-required"
             title="Required">
         <span id="mem_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_usage_python" style="color: inherit; text-decoration: inherit;">mem_<wbr>usage</a>
@@ -2122,8 +2360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The actual memory size consumed in the execution of the function, unit is Byte.</p>
-</dd><dt class="property-required"
+    <dd>The actual memory size consumed in the execution of the function, unit is Byte.</dd><dt class="property-required"
             title="Required">
         <span id="request_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_id_python" style="color: inherit; text-decoration: inherit;">request_<wbr>id</a>
@@ -2131,8 +2368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Execute the requestId corresponding to the function.</p>
-</dd><dt class="property-required"
+    <dd>Execute the requestId corresponding to the function.</dd><dt class="property-required"
             title="Required">
         <span id="ret_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ret_code_python" style="color: inherit; text-decoration: inherit;">ret_<wbr>code</a>
@@ -2140,8 +2376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</p>
-</dd><dt class="property-required"
+    <dd>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</dd><dt class="property-required"
             title="Required">
         <span id="ret_msg_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ret_msg_python" style="color: inherit; text-decoration: inherit;">ret_<wbr>msg</a>
@@ -2149,8 +2384,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Return value after function execution is completed.</p>
-</dd><dt class="property-required"
+    <dd>Return value after function execution is completed.</dd><dt class="property-required"
             title="Required">
         <span id="source_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_python" style="color: inherit; text-decoration: inherit;">source</a>
@@ -2158,8 +2392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log source.</p>
-</dd><dt class="property-required"
+    <dd>Log source.</dd><dt class="property-required"
             title="Required">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -2167,8 +2400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>end_time</code>.</p>
-</dd></dl>
+    <dd>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>endTime</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2182,8 +2414,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Function billing time, according to duration up to the last 100ms, unit is ms.</p>
-</dd><dt class="property-required"
+    <dd>Function billing time, according to duration up to the last 100ms, unit is ms.</dd><dt class="property-required"
             title="Required">
         <span id="duration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#duration_yaml" style="color: inherit; text-decoration: inherit;">duration</a>
@@ -2191,8 +2422,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Function execution time-consuming, unit is ms.</p>
-</dd><dt class="property-required"
+    <dd>Function execution time-consuming, unit is ms.</dd><dt class="property-required"
             title="Required">
         <span id="functionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#functionname_yaml" style="color: inherit; text-decoration: inherit;">function<wbr>Name</a>
@@ -2200,8 +2430,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the SCF function to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the SCF function to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="invokefinished_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#invokefinished_yaml" style="color: inherit; text-decoration: inherit;">invoke<wbr>Finished</a>
@@ -2209,8 +2438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether the function call ends, <code>1</code> means the execution ends, other values indicate the call exception.</p>
-</dd><dt class="property-required"
+    <dd>Whether the function call ends, <code>1</code> means the execution ends, other values indicate the call exception.</dd><dt class="property-required"
             title="Required">
         <span id="level_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_yaml" style="color: inherit; text-decoration: inherit;">level</a>
@@ -2218,8 +2446,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log level.</p>
-</dd><dt class="property-required"
+    <dd>Log level.</dd><dt class="property-required"
             title="Required">
         <span id="log_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_yaml" style="color: inherit; text-decoration: inherit;">log</a>
@@ -2227,8 +2454,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log output during function execution.</p>
-</dd><dt class="property-required"
+    <dd>Log output during function execution.</dd><dt class="property-required"
             title="Required">
         <span id="memusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memusage_yaml" style="color: inherit; text-decoration: inherit;">mem<wbr>Usage</a>
@@ -2236,8 +2462,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The actual memory size consumed in the execution of the function, unit is Byte.</p>
-</dd><dt class="property-required"
+    <dd>The actual memory size consumed in the execution of the function, unit is Byte.</dd><dt class="property-required"
             title="Required">
         <span id="requestid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestid_yaml" style="color: inherit; text-decoration: inherit;">request<wbr>Id</a>
@@ -2245,8 +2470,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Execute the requestId corresponding to the function.</p>
-</dd><dt class="property-required"
+    <dd>Execute the requestId corresponding to the function.</dd><dt class="property-required"
             title="Required">
         <span id="retcode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retcode_yaml" style="color: inherit; text-decoration: inherit;">ret<wbr>Code</a>
@@ -2254,8 +2478,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</p>
-</dd><dt class="property-required"
+    <dd>Use to filter log, optional value: <code>not0</code> only returns the error log. <code>is0</code> only returns the correct log. <code>TimeLimitExceeded</code> returns the log of the function call timeout. <code>ResourceLimitExceeded</code> returns the function call generation resource overrun log. <code>UserCodeException</code> returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.</dd><dt class="property-required"
             title="Required">
         <span id="retmsg_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retmsg_yaml" style="color: inherit; text-decoration: inherit;">ret<wbr>Msg</a>
@@ -2263,8 +2486,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Return value after function execution is completed.</p>
-</dd><dt class="property-required"
+    <dd>Return value after function execution is completed.</dd><dt class="property-required"
             title="Required">
         <span id="source_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_yaml" style="color: inherit; text-decoration: inherit;">source</a>
@@ -2272,8 +2494,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log source.</p>
-</dd><dt class="property-required"
+    <dd>Log source.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -2281,8 +2502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>end_time</code>.</p>
-</dd></dl>
+    <dd>The start time of the query, the format is <code>2017-05-16 20:00:00</code>, which can only be within one day from <code>endTime</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2297,7 +2517,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

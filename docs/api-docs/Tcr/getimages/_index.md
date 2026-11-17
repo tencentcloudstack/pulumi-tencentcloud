@@ -2,9 +2,11 @@
 ---
 title: "getImages"
 title_tag: "tencentcloud.Tcr.getImages"
-meta_desc: "Documentation for the tencentcloud.Tcr.getImages function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tcr images"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,68 +18,63 @@ Use this data source to query detailed information of tcr images
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const images = tencentcloud.Tcr.getImages({
+const images = tencentcloud.tcr.getImages({
+    registryId: "tcr-xxx",
+    namespaceName: "ns",
+    repositoryName: "repo",
+    imageVersion: "v1",
     digest: "sha256:xxxxx",
     exactMatch: false,
-    imageVersion: "v1",
-    namespaceName: "ns",
-    registryId: "tcr-xxx",
-    repositoryName: "repo",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-images = tencentcloud.Tcr.get_images(digest="sha256:xxxxx",
-    exact_match=False,
-    image_version="v1",
+images = tencentcloud.tcr.get_images(registry_id="tcr-xxx",
     namespace_name="ns",
-    registry_id="tcr-xxx",
-    repository_name="repo")
+    repository_name="repo",
+    image_version="v1",
+    digest="sha256:xxxxx",
+    exact_match=False)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var images = Tencentcloud.Tcr.GetImages.Invoke(new()
-    {
-        Digest = "sha256:xxxxx",
-        ExactMatch = false,
-        ImageVersion = "v1",
-        NamespaceName = "ns",
-        RegistryId = "tcr-xxx",
-        RepositoryName = "repo",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcr"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tcr.GetImages(ctx, &tcr.GetImagesArgs{
+		_, err := tcr.GetImages(ctx, &tcr.GetImagesArgs{
+			RegistryId:     "tcr-xxx",
+			NamespaceName:  "ns",
+			RepositoryName: "repo",
+			ImageVersion:   pulumi.StringRef("v1"),
 			Digest:         pulumi.StringRef("sha256:xxxxx"),
 			ExactMatch:     pulumi.BoolRef(false),
-			ImageVersion:   pulumi.StringRef("v1"),
-			NamespaceName:  "ns",
-			RegistryId:     "tcr-xxx",
-			RepositoryName: "repo",
 		}, nil)
 		if err != nil {
 			return err
@@ -86,6 +83,36 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var images = Tencentcloud.Tcr.GetImages.Invoke(new()
+    {
+        RegistryId = "tcr-xxx",
+        NamespaceName = "ns",
+        RepositoryName = "repo",
+        ImageVersion = "v1",
+        Digest = "sha256:xxxxx",
+        ExactMatch = false,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -94,8 +121,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tcr.TcrFunctions;
 import com.pulumi.tencentcloud.Tcr.inputs.GetImagesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -108,32 +135,67 @@ public class App {
 
     public static void stack(Context ctx) {
         final var images = TcrFunctions.getImages(GetImagesArgs.builder()
+            .registryId("tcr-xxx")
+            .namespaceName("ns")
+            .repositoryName("repo")
+            .imageVersion("v1")
             .digest("sha256:xxxxx")
             .exactMatch(false)
-            .imageVersion("v1")
-            .namespaceName("ns")
-            .registryId("tcr-xxx")
-            .repositoryName("repo")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   images:
     fn::invoke:
-      Function: tencentcloud:Tcr:getImages
-      Arguments:
+      function: tencentcloud:Tcr:getImages
+      arguments:
+        registryId: tcr-xxx
+        namespaceName: ns
+        repositoryName: repo
+        imageVersion: v1
         digest: sha256:xxxxx
         exactMatch: false
-        imageVersion: v1
-        namespaceName: ns
-        registryId: tcr-xxx
-        repositoryName: repo
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tcr_getimages" "images" {
+  registry_id     = "tcr-xxx"
+  namespace_name  = "ns"
+  repository_name = "repo"
+  image_version   = "v1"
+  digest          = "sha256:xxxxx"
+  exact_match     = false
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeImages](https://www.tencentcloud.com/document/api/1051/50721)
 
 
 
@@ -145,7 +207,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -153,9 +215,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getImages<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetImagesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetImagesResult</a></span>></span
+><span class="k">function </span>getImages<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetImagesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetImagesResult</a></span>></span
 ><span class="k">
-function </span>getImagesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetImagesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetImagesResult</a></span>></span
+function </span>getImagesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetImagesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetImagesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,14 +235,14 @@ function </span>getImagesOutput<span class="p">(</span><span class="nx">args</sp
                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetImagesResult</span
 ><span class="k">
-def </span>get_images_output<span class="p">(</span><span class="nx">digest</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">exact_match</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-               <span class="nx">image_version</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">namespace_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">registry_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">repository_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetImagesResult]</span
+def </span>get_images_output<span class="p">(</span><span class="nx">digest</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">exact_match</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+               <span class="nx">image_version</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">namespace_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">registry_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">repository_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetImagesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -205,7 +267,8 @@ func </span>GetImagesOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetImages </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetImagesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetImagesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetImagesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetImagesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetImagesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetImagesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetImagesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetImagesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -214,7 +277,8 @@ func </span>GetImagesOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetImagesResult</a></span>> </span>getImages<span class="p">(</span><span class="nx">GetImagesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetImagesResult</a></span>> </span>getImages<span class="p">(</span><span class="nx">GetImagesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetImagesResult</a></span>> </span>getImages<span class="p">(</span><span class="nx">GetImagesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -226,6 +290,15 @@ func </span>GetImagesOutput<span class="p">(</span><span class="nx">ctx</span><s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tcr/getImages:getImages
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tcr_get_images&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -244,8 +317,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required"
+    <dd>namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="registryid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_csharp" style="color: inherit; text-decoration: inherit;">Registry<wbr>Id</a>
@@ -253,8 +325,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="repositoryname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryname_csharp" style="color: inherit; text-decoration: inherit;">Repository<wbr>Name</a>
@@ -262,8 +333,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-optional"
+    <dd>repository name.</dd><dt class="property-optional"
             title="Optional">
         <span id="digest_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#digest_csharp" style="color: inherit; text-decoration: inherit;">Digest</a>
@@ -271,8 +341,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>specify image digest for lookup.</p>
-</dd><dt class="property-optional"
+    <dd>specify image digest for lookup.</dd><dt class="property-optional"
             title="Optional">
         <span id="exactmatch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exactmatch_csharp" style="color: inherit; text-decoration: inherit;">Exact<wbr>Match</a>
@@ -280,8 +349,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>specifies whether it is an exact match, true is an exact match, and not filled is a fuzzy match.</p>
-</dd><dt class="property-optional"
+    <dd>specifies whether it is an exact match, true is an exact match, and not filled is a fuzzy match.</dd><dt class="property-optional"
             title="Optional">
         <span id="imageversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageversion_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Version</a>
@@ -289,8 +357,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>image version name, default is fuzzy match.</p>
-</dd><dt class="property-optional"
+    <dd>image version name, default is fuzzy match.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -298,8 +365,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -313,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required"
+    <dd>namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="registryid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_go" style="color: inherit; text-decoration: inherit;">Registry<wbr>Id</a>
@@ -322,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="repositoryname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryname_go" style="color: inherit; text-decoration: inherit;">Repository<wbr>Name</a>
@@ -331,8 +395,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-optional"
+    <dd>repository name.</dd><dt class="property-optional"
             title="Optional">
         <span id="digest_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#digest_go" style="color: inherit; text-decoration: inherit;">Digest</a>
@@ -340,8 +403,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>specify image digest for lookup.</p>
-</dd><dt class="property-optional"
+    <dd>specify image digest for lookup.</dd><dt class="property-optional"
             title="Optional">
         <span id="exactmatch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exactmatch_go" style="color: inherit; text-decoration: inherit;">Exact<wbr>Match</a>
@@ -349,8 +411,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>specifies whether it is an exact match, true is an exact match, and not filled is a fuzzy match.</p>
-</dd><dt class="property-optional"
+    <dd>specifies whether it is an exact match, true is an exact match, and not filled is a fuzzy match.</dd><dt class="property-optional"
             title="Optional">
         <span id="imageversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageversion_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Version</a>
@@ -358,8 +419,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>image version name, default is fuzzy match.</p>
-</dd><dt class="property-optional"
+    <dd>image version name, default is fuzzy match.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -367,8 +427,69 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="namespace_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace name.</dd><dt class="property-required"
+            title="Required">
+        <span id="registry_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registry_id_hcl" style="color: inherit; text-decoration: inherit;">registry_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-required"
+            title="Required">
+        <span id="repository_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repository_name_hcl" style="color: inherit; text-decoration: inherit;">repository_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>repository name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="digest_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#digest_hcl" style="color: inherit; text-decoration: inherit;">digest</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>specify image digest for lookup.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="exact_match_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exact_match_hcl" style="color: inherit; text-decoration: inherit;">exact_<wbr>match</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>specifies whether it is an exact match, true is an exact match, and not filled is a fuzzy match.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="image_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_version_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>image version name, default is fuzzy match.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -382,8 +503,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required"
+    <dd>namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="registryid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_java" style="color: inherit; text-decoration: inherit;">registry<wbr>Id</a>
@@ -391,8 +511,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="repositoryname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryname_java" style="color: inherit; text-decoration: inherit;">repository<wbr>Name</a>
@@ -400,8 +519,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-optional"
+    <dd>repository name.</dd><dt class="property-optional"
             title="Optional">
         <span id="digest_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#digest_java" style="color: inherit; text-decoration: inherit;">digest</a>
@@ -409,8 +527,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>specify image digest for lookup.</p>
-</dd><dt class="property-optional"
+    <dd>specify image digest for lookup.</dd><dt class="property-optional"
             title="Optional">
         <span id="exactmatch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exactmatch_java" style="color: inherit; text-decoration: inherit;">exact<wbr>Match</a>
@@ -418,8 +535,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>specifies whether it is an exact match, true is an exact match, and not filled is a fuzzy match.</p>
-</dd><dt class="property-optional"
+    <dd>specifies whether it is an exact match, true is an exact match, and not filled is a fuzzy match.</dd><dt class="property-optional"
             title="Optional">
         <span id="imageversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageversion_java" style="color: inherit; text-decoration: inherit;">image<wbr>Version</a>
@@ -427,8 +543,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>image version name, default is fuzzy match.</p>
-</dd><dt class="property-optional"
+    <dd>image version name, default is fuzzy match.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -436,8 +551,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -451,8 +565,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required"
+    <dd>namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="registryid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_nodejs" style="color: inherit; text-decoration: inherit;">registry<wbr>Id</a>
@@ -460,8 +573,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="repositoryname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryname_nodejs" style="color: inherit; text-decoration: inherit;">repository<wbr>Name</a>
@@ -469,8 +581,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-optional"
+    <dd>repository name.</dd><dt class="property-optional"
             title="Optional">
         <span id="digest_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#digest_nodejs" style="color: inherit; text-decoration: inherit;">digest</a>
@@ -478,8 +589,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>specify image digest for lookup.</p>
-</dd><dt class="property-optional"
+    <dd>specify image digest for lookup.</dd><dt class="property-optional"
             title="Optional">
         <span id="exactmatch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exactmatch_nodejs" style="color: inherit; text-decoration: inherit;">exact<wbr>Match</a>
@@ -487,8 +597,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>specifies whether it is an exact match, true is an exact match, and not filled is a fuzzy match.</p>
-</dd><dt class="property-optional"
+    <dd>specifies whether it is an exact match, true is an exact match, and not filled is a fuzzy match.</dd><dt class="property-optional"
             title="Optional">
         <span id="imageversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageversion_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Version</a>
@@ -496,8 +605,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>image version name, default is fuzzy match.</p>
-</dd><dt class="property-optional"
+    <dd>image version name, default is fuzzy match.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -505,8 +613,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -520,8 +627,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required"
+    <dd>namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="registry_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registry_id_python" style="color: inherit; text-decoration: inherit;">registry_<wbr>id</a>
@@ -529,8 +635,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="repository_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repository_name_python" style="color: inherit; text-decoration: inherit;">repository_<wbr>name</a>
@@ -538,8 +643,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-optional"
+    <dd>repository name.</dd><dt class="property-optional"
             title="Optional">
         <span id="digest_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#digest_python" style="color: inherit; text-decoration: inherit;">digest</a>
@@ -547,8 +651,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>specify image digest for lookup.</p>
-</dd><dt class="property-optional"
+    <dd>specify image digest for lookup.</dd><dt class="property-optional"
             title="Optional">
         <span id="exact_match_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exact_match_python" style="color: inherit; text-decoration: inherit;">exact_<wbr>match</a>
@@ -556,8 +659,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>specifies whether it is an exact match, true is an exact match, and not filled is a fuzzy match.</p>
-</dd><dt class="property-optional"
+    <dd>specifies whether it is an exact match, true is an exact match, and not filled is a fuzzy match.</dd><dt class="property-optional"
             title="Optional">
         <span id="image_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_version_python" style="color: inherit; text-decoration: inherit;">image_<wbr>version</a>
@@ -565,8 +667,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>image version name, default is fuzzy match.</p>
-</dd><dt class="property-optional"
+    <dd>image version name, default is fuzzy match.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -574,8 +675,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -589,8 +689,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required"
+    <dd>namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="registryid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_yaml" style="color: inherit; text-decoration: inherit;">registry<wbr>Id</a>
@@ -598,8 +697,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required"
+    <dd>instance id.</dd><dt class="property-required"
             title="Required">
         <span id="repositoryname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryname_yaml" style="color: inherit; text-decoration: inherit;">repository<wbr>Name</a>
@@ -607,8 +705,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd><dt class="property-optional"
+    <dd>repository name.</dd><dt class="property-optional"
             title="Optional">
         <span id="digest_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#digest_yaml" style="color: inherit; text-decoration: inherit;">digest</a>
@@ -616,8 +713,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>specify image digest for lookup.</p>
-</dd><dt class="property-optional"
+    <dd>specify image digest for lookup.</dd><dt class="property-optional"
             title="Optional">
         <span id="exactmatch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exactmatch_yaml" style="color: inherit; text-decoration: inherit;">exact<wbr>Match</a>
@@ -625,8 +721,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>specifies whether it is an exact match, true is an exact match, and not filled is a fuzzy match.</p>
-</dd><dt class="property-optional"
+    <dd>specifies whether it is an exact match, true is an exact match, and not filled is a fuzzy match.</dd><dt class="property-optional"
             title="Optional">
         <span id="imageversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageversion_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Version</a>
@@ -634,8 +729,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>image version name, default is fuzzy match.</p>
-</dd><dt class="property-optional"
+    <dd>image version name, default is fuzzy match.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -643,8 +737,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -667,8 +760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="imageinfolists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageinfolists_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Info<wbr>Lists</a>
@@ -676,8 +768,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getimagesimageinfolist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcr.<wbr>Outputs.<wbr>Get<wbr>Images<wbr>Image<wbr>Info<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>container image information list.</p>
-</dd><dt class="property-"
+    <dd>container image information list.</dd><dt class="property-"
             title="">
         <span id="namespacename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -709,8 +800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>hash value.</p>
-</dd><dt class="property-"
+    <dd>hash value.</dd><dt class="property-"
             title="">
         <span id="exactmatch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exactmatch_csharp" style="color: inherit; text-decoration: inherit;">Exact<wbr>Match</a>
@@ -726,8 +816,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag name.</p>
-</dd><dt class="property-"
+    <dd>tag name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -749,8 +838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="imageinfolists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageinfolists_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Info<wbr>Lists</a>
@@ -758,8 +846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getimagesimageinfolist">[]Get<wbr>Images<wbr>Image<wbr>Info<wbr>List</a></span>
     </dt>
-    <dd><p>container image information list.</p>
-</dd><dt class="property-"
+    <dd>container image information list.</dd><dt class="property-"
             title="">
         <span id="namespacename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -791,8 +878,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>hash value.</p>
-</dd><dt class="property-"
+    <dd>hash value.</dd><dt class="property-"
             title="">
         <span id="exactmatch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exactmatch_go" style="color: inherit; text-decoration: inherit;">Exact<wbr>Match</a>
@@ -808,11 +894,88 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag name.</p>
-</dd><dt class="property-"
+    <dd>tag name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="image_info_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_info_lists_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>info_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getimagesimageinfolist">list(object)</a></span>
+    </dt>
+    <dd>container image information list.</dd><dt class="property-"
+            title="">
+        <span id="namespace_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="registry_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registry_id_hcl" style="color: inherit; text-decoration: inherit;">registry_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="repository_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repository_name_hcl" style="color: inherit; text-decoration: inherit;">repository_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="digest_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#digest_hcl" style="color: inherit; text-decoration: inherit;">digest</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>hash value.</dd><dt class="property-"
+            title="">
+        <span id="exact_match_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exact_match_hcl" style="color: inherit; text-decoration: inherit;">exact_<wbr>match</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="image_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_version_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>tag name.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -831,8 +994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="imageinfolists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageinfolists_java" style="color: inherit; text-decoration: inherit;">image<wbr>Info<wbr>Lists</a>
@@ -840,8 +1002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getimagesimageinfolist">List&lt;Get<wbr>Images<wbr>Image<wbr>Info<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>container image information list.</p>
-</dd><dt class="property-"
+    <dd>container image information list.</dd><dt class="property-"
             title="">
         <span id="namespacename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -873,8 +1034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>hash value.</p>
-</dd><dt class="property-"
+    <dd>hash value.</dd><dt class="property-"
             title="">
         <span id="exactmatch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exactmatch_java" style="color: inherit; text-decoration: inherit;">exact<wbr>Match</a>
@@ -890,8 +1050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tag name.</p>
-</dd><dt class="property-"
+    <dd>tag name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -913,8 +1072,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="imageinfolists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageinfolists_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Info<wbr>Lists</a>
@@ -922,8 +1080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getimagesimageinfolist">Get<wbr>Images<wbr>Image<wbr>Info<wbr>List[]</a></span>
     </dt>
-    <dd><p>container image information list.</p>
-</dd><dt class="property-"
+    <dd>container image information list.</dd><dt class="property-"
             title="">
         <span id="namespacename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -955,8 +1112,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>hash value.</p>
-</dd><dt class="property-"
+    <dd>hash value.</dd><dt class="property-"
             title="">
         <span id="exactmatch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exactmatch_nodejs" style="color: inherit; text-decoration: inherit;">exact<wbr>Match</a>
@@ -972,8 +1128,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag name.</p>
-</dd><dt class="property-"
+    <dd>tag name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -995,17 +1150,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="image_info_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_info_lists_python" style="color: inherit; text-decoration: inherit;">image_<wbr>info_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getimagesimageinfolist">Get<wbr>Images<wbr>Image<wbr>Info<wbr>List]</a></span>
+        <span class="property-type"><a href="#getimagesimageinfolist">Sequence[Get<wbr>Images<wbr>Image<wbr>Info<wbr>List]</a></span>
     </dt>
-    <dd><p>container image information list.</p>
-</dd><dt class="property-"
+    <dd>container image information list.</dd><dt class="property-"
             title="">
         <span id="namespace_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
@@ -1037,8 +1190,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>hash value.</p>
-</dd><dt class="property-"
+    <dd>hash value.</dd><dt class="property-"
             title="">
         <span id="exact_match_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exact_match_python" style="color: inherit; text-decoration: inherit;">exact_<wbr>match</a>
@@ -1054,8 +1206,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>tag name.</p>
-</dd><dt class="property-"
+    <dd>tag name.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1077,8 +1228,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="imageinfolists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageinfolists_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Info<wbr>Lists</a>
@@ -1086,8 +1236,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getimagesimageinfolist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>container image information list.</p>
-</dd><dt class="property-"
+    <dd>container image information list.</dd><dt class="property-"
             title="">
         <span id="namespacename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -1119,8 +1268,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>hash value.</p>
-</dd><dt class="property-"
+    <dd>hash value.</dd><dt class="property-"
             title="">
         <span id="exactmatch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exactmatch_yaml" style="color: inherit; text-decoration: inherit;">exact<wbr>Match</a>
@@ -1136,8 +1284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tag name.</p>
-</dd><dt class="property-"
+    <dd>tag name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1169,8 +1316,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>specify image digest for lookup.</p>
-</dd><dt class="property-required"
+    <dd>specify image digest for lookup.</dd><dt class="property-required"
             title="Required">
         <span id="imageversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageversion_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Version</a>
@@ -1178,8 +1324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>image version name, default is fuzzy match.</p>
-</dd><dt class="property-required"
+    <dd>image version name, default is fuzzy match.</dd><dt class="property-required"
             title="Required">
         <span id="kind_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_csharp" style="color: inherit; text-decoration: inherit;">Kind</a>
@@ -1187,8 +1332,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>product type,note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>product type,note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="kmssignature_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmssignature_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Signature</a>
@@ -1196,8 +1340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>kms signature information,note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>kms signature information,note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="size_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_csharp" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -1205,8 +1348,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>image size (unit: byte).</p>
-</dd><dt class="property-required"
+    <dd>image size (unit: byte).</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1214,8 +1356,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1229,8 +1370,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>specify image digest for lookup.</p>
-</dd><dt class="property-required"
+    <dd>specify image digest for lookup.</dd><dt class="property-required"
             title="Required">
         <span id="imageversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageversion_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Version</a>
@@ -1238,8 +1378,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>image version name, default is fuzzy match.</p>
-</dd><dt class="property-required"
+    <dd>image version name, default is fuzzy match.</dd><dt class="property-required"
             title="Required">
         <span id="kind_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_go" style="color: inherit; text-decoration: inherit;">Kind</a>
@@ -1247,8 +1386,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>product type,note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>product type,note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="kmssignature_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmssignature_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Signature</a>
@@ -1256,8 +1394,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>kms signature information,note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>kms signature information,note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="size_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_go" style="color: inherit; text-decoration: inherit;">Size</a>
@@ -1265,8 +1402,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>image size (unit: byte).</p>
-</dd><dt class="property-required"
+    <dd>image size (unit: byte).</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1274,8 +1410,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="digest_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#digest_hcl" style="color: inherit; text-decoration: inherit;">digest</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>specify image digest for lookup.</dd><dt class="property-required"
+            title="Required">
+        <span id="image_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_version_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>image version name, default is fuzzy match.</dd><dt class="property-required"
+            title="Required">
+        <span id="kind_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_hcl" style="color: inherit; text-decoration: inherit;">kind</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>product type,note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="kms_signature_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_signature_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>signature</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>kms signature information,note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_hcl" style="color: inherit; text-decoration: inherit;">size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>image size (unit: byte).</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1289,8 +1478,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>specify image digest for lookup.</p>
-</dd><dt class="property-required"
+    <dd>specify image digest for lookup.</dd><dt class="property-required"
             title="Required">
         <span id="imageversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageversion_java" style="color: inherit; text-decoration: inherit;">image<wbr>Version</a>
@@ -1298,8 +1486,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>image version name, default is fuzzy match.</p>
-</dd><dt class="property-required"
+    <dd>image version name, default is fuzzy match.</dd><dt class="property-required"
             title="Required">
         <span id="kind_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_java" style="color: inherit; text-decoration: inherit;">kind</a>
@@ -1307,8 +1494,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>product type,note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>product type,note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="kmssignature_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmssignature_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Signature</a>
@@ -1316,8 +1502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>kms signature information,note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>kms signature information,note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="size_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_java" style="color: inherit; text-decoration: inherit;">size</a>
@@ -1325,8 +1510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>image size (unit: byte).</p>
-</dd><dt class="property-required"
+    <dd>image size (unit: byte).</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1334,8 +1518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1349,8 +1532,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>specify image digest for lookup.</p>
-</dd><dt class="property-required"
+    <dd>specify image digest for lookup.</dd><dt class="property-required"
             title="Required">
         <span id="imageversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageversion_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Version</a>
@@ -1358,8 +1540,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>image version name, default is fuzzy match.</p>
-</dd><dt class="property-required"
+    <dd>image version name, default is fuzzy match.</dd><dt class="property-required"
             title="Required">
         <span id="kind_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_nodejs" style="color: inherit; text-decoration: inherit;">kind</a>
@@ -1367,8 +1548,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>product type,note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>product type,note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="kmssignature_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmssignature_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Signature</a>
@@ -1376,8 +1556,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>kms signature information,note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>kms signature information,note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="size_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_nodejs" style="color: inherit; text-decoration: inherit;">size</a>
@@ -1385,8 +1564,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>image size (unit: byte).</p>
-</dd><dt class="property-required"
+    <dd>image size (unit: byte).</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1394,8 +1572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1409,8 +1586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>specify image digest for lookup.</p>
-</dd><dt class="property-required"
+    <dd>specify image digest for lookup.</dd><dt class="property-required"
             title="Required">
         <span id="image_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_version_python" style="color: inherit; text-decoration: inherit;">image_<wbr>version</a>
@@ -1418,8 +1594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>image version name, default is fuzzy match.</p>
-</dd><dt class="property-required"
+    <dd>image version name, default is fuzzy match.</dd><dt class="property-required"
             title="Required">
         <span id="kind_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_python" style="color: inherit; text-decoration: inherit;">kind</a>
@@ -1427,8 +1602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>product type,note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>product type,note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="kms_signature_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_signature_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>signature</a>
@@ -1436,8 +1610,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>kms signature information,note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>kms signature information,note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_python" style="color: inherit; text-decoration: inherit;">size</a>
@@ -1445,8 +1618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>image size (unit: byte).</p>
-</dd><dt class="property-required"
+    <dd>image size (unit: byte).</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1454,8 +1626,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1469,8 +1640,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>specify image digest for lookup.</p>
-</dd><dt class="property-required"
+    <dd>specify image digest for lookup.</dd><dt class="property-required"
             title="Required">
         <span id="imageversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageversion_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Version</a>
@@ -1478,8 +1648,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>image version name, default is fuzzy match.</p>
-</dd><dt class="property-required"
+    <dd>image version name, default is fuzzy match.</dd><dt class="property-required"
             title="Required">
         <span id="kind_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_yaml" style="color: inherit; text-decoration: inherit;">kind</a>
@@ -1487,8 +1656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>product type,note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>product type,note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="kmssignature_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmssignature_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Signature</a>
@@ -1496,8 +1664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>kms signature information,note: this field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>kms signature information,note: this field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="size_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_yaml" style="color: inherit; text-decoration: inherit;">size</a>
@@ -1505,8 +1672,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>image size (unit: byte).</p>
-</dd><dt class="property-required"
+    <dd>image size (unit: byte).</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1514,8 +1680,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>update time.</p>
-</dd></dl>
+    <dd>update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1530,7 +1695,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

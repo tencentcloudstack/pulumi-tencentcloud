@@ -2,9 +2,11 @@
 ---
 title: "TargetGroupAttachment"
 title_tag: "tencentcloud.Clb.TargetGroupAttachment"
-meta_desc: "Documentation for the tencentcloud.Clb.TargetGroupAttachment resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a CLB target group attachment is bound to the load balancing listener or forwarding rule."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,162 +18,213 @@ Provides a resource to create a CLB target group attachment is bound to the load
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const clbBasic = new tencentcloud.clb.Instance("clbBasic", {
-    networkType: "OPEN",
-    clbName: "tf-clb-rule-basic",
+const config = new pulumi.Config();
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-6";
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "vpc",
 });
-const listenerBasic = new tencentcloud.clb.Listener("listenerBasic", {
-    clbId: clbBasic.id,
-    port: 1,
+// create subnet
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    vpcId: vpc.id,
+    availabilityZone: availabilityZone,
+    name: "subnet",
+    cidrBlock: "10.0.1.0/24",
+    isMulticast: false,
+});
+// create clb instance
+const example = new tencentcloud.clb.Instance("example", {
+    clbName: "tf-example",
+    networkType: "INTERNAL",
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+});
+// create clb listener
+const exampleListener = new tencentcloud.clb.Listener("example", {
+    clbId: example.id,
+    listenerName: "tf-example",
+    port: 8080,
     protocol: "HTTP",
-    listenerName: "listener_basic",
 });
-const ruleBasic = new tencentcloud.clb.ListenerRule("ruleBasic", {
-    clbId: clbBasic.id,
-    listenerId: listenerBasic.listenerId,
-    domain: "abc.com",
+// create clb listener rule
+const exampleListenerRule = new tencentcloud.clb.ListenerRule("example", {
+    clbId: example.id,
+    listenerId: exampleListener.listenerId,
+    domain: "example.com",
     url: "/",
-    sessionExpireTime: 30,
+    sessionExpireTime: 60,
     scheduler: "WRR",
     targetType: "TARGETGROUP",
 });
-const test = new tencentcloud.clb.TargetGroup("test", {targetGroupName: "test-target-keep-1"});
-const group = new tencentcloud.clb.TargetGroupAttachment("group", {
-    clbId: clbBasic.id,
-    listenerId: listenerBasic.listenerId,
-    ruleId: ruleBasic.ruleId,
-    targetGroupId: test.id,
+// create clb target group
+const exampleTargetGroup = new tencentcloud.clb.TargetGroup("example", {
+    targetGroupName: "tf-example",
+    vpcId: vpc.id,
+});
+// create clb target group attachment
+const exampleTargetGroupAttachment = new tencentcloud.clb.TargetGroupAttachment("example", {
+    clbId: example.id,
+    targetGroupId: exampleTargetGroup.id,
+    listenerId: exampleListener.listenerId,
+    ruleId: exampleListenerRule.ruleId,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-clb_basic = tencentcloud.clb.Instance("clbBasic",
-    network_type="OPEN",
-    clb_name="tf-clb-rule-basic")
-listener_basic = tencentcloud.clb.Listener("listenerBasic",
-    clb_id=clb_basic.id,
-    port=1,
-    protocol="HTTP",
-    listener_name="listener_basic")
-rule_basic = tencentcloud.clb.ListenerRule("ruleBasic",
-    clb_id=clb_basic.id,
-    listener_id=listener_basic.listener_id,
-    domain="abc.com",
+config = pulumi.Config()
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-6"
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="vpc")
+# create subnet
+subnet = tencentcloud.subnet.Instance("subnet",
+    vpc_id=vpc.id,
+    availability_zone=availability_zone,
+    name="subnet",
+    cidr_block="10.0.1.0/24",
+    is_multicast=False)
+# create clb instance
+example = tencentcloud.clb.Instance("example",
+    clb_name="tf-example",
+    network_type="INTERNAL",
+    vpc_id=vpc.id,
+    subnet_id=subnet.id)
+# create clb listener
+example_listener = tencentcloud.clb.Listener("example",
+    clb_id=example.id,
+    listener_name="tf-example",
+    port=8080,
+    protocol="HTTP")
+# create clb listener rule
+example_listener_rule = tencentcloud.clb.ListenerRule("example",
+    clb_id=example.id,
+    listener_id=example_listener.listener_id,
+    domain="example.com",
     url="/",
-    session_expire_time=30,
+    session_expire_time=60,
     scheduler="WRR",
     target_type="TARGETGROUP")
-test = tencentcloud.clb.TargetGroup("test", target_group_name="test-target-keep-1")
-group = tencentcloud.clb.TargetGroupAttachment("group",
-    clb_id=clb_basic.id,
-    listener_id=listener_basic.listener_id,
-    rule_id=rule_basic.rule_id,
-    target_group_id=test.id)
+# create clb target group
+example_target_group = tencentcloud.clb.TargetGroup("example",
+    target_group_name="tf-example",
+    vpc_id=vpc.id)
+# create clb target group attachment
+example_target_group_attachment = tencentcloud.clb.TargetGroupAttachment("example",
+    clb_id=example.id,
+    target_group_id=example_target_group.id,
+    listener_id=example_listener.listener_id,
+    rule_id=example_listener_rule.rule_id)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var clbBasic = new Tencentcloud.Clb.Instance("clbBasic", new()
-    {
-        NetworkType = "OPEN",
-        ClbName = "tf-clb-rule-basic",
-    });
-
-    var listenerBasic = new Tencentcloud.Clb.Listener("listenerBasic", new()
-    {
-        ClbId = clbBasic.Id,
-        Port = 1,
-        Protocol = "HTTP",
-        ListenerName = "listener_basic",
-    });
-
-    var ruleBasic = new Tencentcloud.Clb.ListenerRule("ruleBasic", new()
-    {
-        ClbId = clbBasic.Id,
-        ListenerId = listenerBasic.ListenerId,
-        Domain = "abc.com",
-        Url = "/",
-        SessionExpireTime = 30,
-        Scheduler = "WRR",
-        TargetType = "TARGETGROUP",
-    });
-
-    var test = new Tencentcloud.Clb.TargetGroup("test", new()
-    {
-        TargetGroupName = "test-target-keep-1",
-    });
-
-    var @group = new Tencentcloud.Clb.TargetGroupAttachment("group", new()
-    {
-        ClbId = clbBasic.Id,
-        ListenerId = listenerBasic.ListenerId,
-        RuleId = ruleBasic.RuleId,
-        TargetGroupId = test.Id,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		clbBasic, err := Clb.NewInstance(ctx, "clbBasic", &Clb.InstanceArgs{
-			NetworkType: pulumi.String("OPEN"),
-			ClbName:     pulumi.String("tf-clb-rule-basic"),
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-6"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("vpc"),
 		})
 		if err != nil {
 			return err
 		}
-		listenerBasic, err := Clb.NewListener(ctx, "listenerBasic", &Clb.ListenerArgs{
-			ClbId:        clbBasic.ID(),
-			Port:         pulumi.Int(1),
+		// create subnet
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		// create clb instance
+		example, err := clb.NewInstance(ctx, "example", &clb.InstanceArgs{
+			ClbName:     pulumi.String("tf-example"),
+			NetworkType: pulumi.String("INTERNAL"),
+			VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
+		})
+		if err != nil {
+			return err
+		}
+		// create clb listener
+		exampleListener, err := clb.NewListener(ctx, "example", &clb.ListenerArgs{
+			ClbId:        example.ID().ToIDOutput().ToStringOutput(),
+			ListenerName: pulumi.String("tf-example"),
+			Port:         pulumi.Int(8080),
 			Protocol:     pulumi.String("HTTP"),
-			ListenerName: pulumi.String("listener_basic"),
 		})
 		if err != nil {
 			return err
 		}
-		ruleBasic, err := Clb.NewListenerRule(ctx, "ruleBasic", &Clb.ListenerRuleArgs{
-			ClbId:             clbBasic.ID(),
-			ListenerId:        listenerBasic.ListenerId,
-			Domain:            pulumi.String("abc.com"),
+		// create clb listener rule
+		exampleListenerRule, err := clb.NewListenerRule(ctx, "example", &clb.ListenerRuleArgs{
+			ClbId:             example.ID().ToIDOutput().ToStringOutput(),
+			ListenerId:        exampleListener.ListenerId,
+			Domain:            pulumi.String("example.com"),
 			Url:               pulumi.String("/"),
-			SessionExpireTime: pulumi.Int(30),
+			SessionExpireTime: pulumi.Int(60),
 			Scheduler:         pulumi.String("WRR"),
 			TargetType:        pulumi.String("TARGETGROUP"),
 		})
 		if err != nil {
 			return err
 		}
-		test, err := Clb.NewTargetGroup(ctx, "test", &Clb.TargetGroupArgs{
-			TargetGroupName: pulumi.String("test-target-keep-1"),
+		// create clb target group
+		exampleTargetGroup, err := clb.NewTargetGroup(ctx, "example", &clb.TargetGroupArgs{
+			TargetGroupName: pulumi.String("tf-example"),
+			VpcId:           vpc2.ID().ToIDOutput().ToStringOutput(),
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Clb.NewTargetGroupAttachment(ctx, "group", &Clb.TargetGroupAttachmentArgs{
-			ClbId:         clbBasic.ID(),
-			ListenerId:    listenerBasic.ListenerId,
-			RuleId:        ruleBasic.RuleId,
-			TargetGroupId: test.ID(),
+		// create clb target group attachment
+		_, err = clb.NewTargetGroupAttachment(ctx, "example", &clb.TargetGroupAttachmentArgs{
+			ClbId:         example.ID().ToIDOutput().ToStringOutput(),
+			TargetGroupId: exampleTargetGroup.ID().ToIDOutput().ToStringOutput(),
+			ListenerId:    exampleListener.ListenerId,
+			RuleId:        exampleListenerRule.RuleId,
 		})
 		if err != nil {
 			return err
@@ -180,14 +233,97 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "vpc",
+    });
+
+    // create subnet
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        AvailabilityZone = availabilityZone,
+        Name = "subnet",
+        CidrBlock = "10.0.1.0/24",
+        IsMulticast = false,
+    });
+
+    // create clb instance
+    var example = new Tencentcloud.Clb.Instance("example", new()
+    {
+        ClbName = "tf-example",
+        NetworkType = "INTERNAL",
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+    });
+
+    // create clb listener
+    var exampleListener = new Tencentcloud.Clb.Listener("example", new()
+    {
+        ClbId = example.Id,
+        ListenerName = "tf-example",
+        Port = 8080,
+        Protocol = "HTTP",
+    });
+
+    // create clb listener rule
+    var exampleListenerRule = new Tencentcloud.Clb.ListenerRule("example", new()
+    {
+        ClbId = example.Id,
+        ListenerId = exampleListener.ListenerId,
+        Domain = "example.com",
+        Url = "/",
+        SessionExpireTime = 60,
+        Scheduler = "WRR",
+        TargetType = "TARGETGROUP",
+    });
+
+    // create clb target group
+    var exampleTargetGroup = new Tencentcloud.Clb.TargetGroup("example", new()
+    {
+        TargetGroupName = "tf-example",
+        VpcId = vpc.Id,
+    });
+
+    // create clb target group attachment
+    var exampleTargetGroupAttachment = new Tencentcloud.Clb.TargetGroupAttachment("example", new()
+    {
+        ClbId = example.Id,
+        TargetGroupId = exampleTargetGroup.Id,
+        ListenerId = exampleListener.ListenerId,
+        RuleId = exampleListenerRule.RuleId,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Clb.Instance;
-import com.pulumi.tencentcloud.Clb.InstanceArgs;
 import com.pulumi.tencentcloud.Clb.Listener;
 import com.pulumi.tencentcloud.Clb.ListenerArgs;
 import com.pulumi.tencentcloud.Clb.ListenerRule;
@@ -196,8 +332,8 @@ import com.pulumi.tencentcloud.Clb.TargetGroup;
 import com.pulumi.tencentcloud.Clb.TargetGroupArgs;
 import com.pulumi.tencentcloud.Clb.TargetGroupAttachment;
 import com.pulumi.tencentcloud.Clb.TargetGroupAttachmentArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -209,141 +345,298 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var clbBasic = new Instance("clbBasic", InstanceArgs.builder()        
-            .networkType("OPEN")
-            .clbName("tf-clb-rule-basic")
+        final var config = ctx.config();
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-6");
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("vpc")
             .build());
 
-        var listenerBasic = new Listener("listenerBasic", ListenerArgs.builder()        
-            .clbId(clbBasic.id())
-            .port(1)
+        // create subnet
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .availabilityZone(availabilityZone)
+            .name("subnet")
+            .cidrBlock("10.0.1.0/24")
+            .isMulticast(false)
+            .build());
+
+        // create clb instance
+        var example = new com.pulumi.tencentcloud.Clb.Instance("example", com.pulumi.tencentcloud.Clb.InstanceArgs.builder()
+            .clbName("tf-example")
+            .networkType("INTERNAL")
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .build());
+
+        // create clb listener
+        var exampleListener = new Listener("exampleListener", ListenerArgs.builder()
+            .clbId(example.id())
+            .listenerName("tf-example")
+            .port(8080)
             .protocol("HTTP")
-            .listenerName("listener_basic")
             .build());
 
-        var ruleBasic = new ListenerRule("ruleBasic", ListenerRuleArgs.builder()        
-            .clbId(clbBasic.id())
-            .listenerId(listenerBasic.listenerId())
-            .domain("abc.com")
+        // create clb listener rule
+        var exampleListenerRule = new ListenerRule("exampleListenerRule", ListenerRuleArgs.builder()
+            .clbId(example.id())
+            .listenerId(exampleListener.listenerId())
+            .domain("example.com")
             .url("/")
-            .sessionExpireTime(30)
+            .sessionExpireTime(60)
             .scheduler("WRR")
             .targetType("TARGETGROUP")
             .build());
 
-        var test = new TargetGroup("test", TargetGroupArgs.builder()        
-            .targetGroupName("test-target-keep-1")
+        // create clb target group
+        var exampleTargetGroup = new TargetGroup("exampleTargetGroup", TargetGroupArgs.builder()
+            .targetGroupName("tf-example")
+            .vpcId(vpc.id())
             .build());
 
-        var group = new TargetGroupAttachment("group", TargetGroupAttachmentArgs.builder()        
-            .clbId(clbBasic.id())
-            .listenerId(listenerBasic.listenerId())
-            .ruleId(ruleBasic.ruleId())
-            .targetGroupId(test.id())
+        // create clb target group attachment
+        var exampleTargetGroupAttachment = new TargetGroupAttachment("exampleTargetGroupAttachment", TargetGroupAttachmentArgs.builder()
+            .clbId(example.id())
+            .targetGroupId(exampleTargetGroup.id())
+            .listenerId(exampleListener.listenerId())
+            .ruleId(exampleListenerRule.ruleId())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
+configuration:
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-6
 resources:
-  clbBasic:
+  # create vpc
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      cidrBlock: 10.0.0.0/16
+      name: vpc
+  # create subnet
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      vpcId: ${vpc.id}
+      availabilityZone: ${availabilityZone}
+      name: subnet
+      cidrBlock: 10.0.1.0/24
+      isMulticast: false
+  # create clb instance
+  example:
     type: tencentcloud:Clb:Instance
     properties:
-      networkType: OPEN
-      clbName: tf-clb-rule-basic
-  listenerBasic:
+      clbName: tf-example
+      networkType: INTERNAL
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+  # create clb listener
+  exampleListener:
     type: tencentcloud:Clb:Listener
+    name: example
     properties:
-      clbId: ${clbBasic.id}
-      port: 1
+      clbId: ${example.id}
+      listenerName: tf-example
+      port: 8080
       protocol: HTTP
-      listenerName: listener_basic
-  ruleBasic:
+  # create clb listener rule
+  exampleListenerRule:
     type: tencentcloud:Clb:ListenerRule
+    name: example
     properties:
-      clbId: ${clbBasic.id}
-      listenerId: ${listenerBasic.listenerId}
-      domain: abc.com
+      clbId: ${example.id}
+      listenerId: ${exampleListener.listenerId}
+      domain: example.com
       url: /
-      sessionExpireTime: 30
+      sessionExpireTime: 60
       scheduler: WRR
       targetType: TARGETGROUP
-  test:
+  # create clb target group
+  exampleTargetGroup:
     type: tencentcloud:Clb:TargetGroup
+    name: example
     properties:
-      targetGroupName: test-target-keep-1
-  group:
+      targetGroupName: tf-example
+      vpcId: ${vpc.id}
+  # create clb target group attachment
+  exampleTargetGroupAttachment:
     type: tencentcloud:Clb:TargetGroupAttachment
+    name: example
     properties:
-      clbId: ${clbBasic.id}
-      listenerId: ${listenerBasic.listenerId}
-      ruleId: ${ruleBasic.ruleId}
-      targetGroupId: ${test.id}
+      clbId: ${example.id}
+      targetGroupId: ${exampleTargetGroup.id}
+      listenerId: ${exampleListener.listenerId}
+      ruleId: ${exampleListenerRule.ruleId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+// create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "vpc"
+}
+// create subnet
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = var.availabilityZone
+  name              = "subnet"
+  cidr_block        = "10.0.1.0/24"
+  is_multicast      = false
+}
+// create clb instance
+resource "tencentcloud_clb_instance" "example" {
+  clb_name     = "tf-example"
+  network_type = "INTERNAL"
+  vpc_id       = tencentcloud_vpc_instance.vpc.id
+  subnet_id    = tencentcloud_subnet_instance.subnet.id
+}
+// create clb listener
+resource "tencentcloud_clb_listener" "example" {
+  clb_id        = tencentcloud_clb_instance.example.id
+  listener_name = "tf-example"
+  port          = 8080
+  protocol      = "HTTP"
+}
+// create clb listener rule
+resource "tencentcloud_clb_listenerrule" "example" {
+  clb_id              = tencentcloud_clb_instance.example.id
+  listener_id         = tencentcloud_clb_listener.example.listener_id
+  domain              = "example.com"
+  url                 = "/"
+  session_expire_time = 60
+  scheduler           = "WRR"
+  target_type         = "TARGETGROUP"
+}
+// create clb target group
+resource "tencentcloud_clb_targetgroup" "example" {
+  target_group_name = "tf-example"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+}
+// create clb target group attachment
+resource "tencentcloud_clb_targetgroupattachment" "example" {
+  clb_id          = tencentcloud_clb_instance.example.id
+  target_group_id = tencentcloud_clb_targetgroup.example.id
+  listener_id     = tencentcloud_clb_listener.example.listener_id
+  rule_id         = tencentcloud_clb_listenerrule.example.rule_id
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-6"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [AssociateTargetGroups](https://www.tencentcloud.com/document/api/214/33847)
+  - [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+  - [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
+* Read: [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
+* Delete:
+  - [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
+  - [DisassociateTargetGroups](https://www.tencentcloud.com/document/api/214/33822)
 
 
 ## Create TargetGroupAttachment Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">TargetGroupAttachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TargetGroupAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">TargetGroupAttachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TargetGroupAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">TargetGroupAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TargetGroupAttachmentArgs</a></span><span class="p">,</span>
+                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">TargetGroupAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                           <span class="nx">clb_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                          <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                          <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                           <span class="nx">target_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                          <span class="nx">targrt_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">TargetGroupAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TargetGroupAttachmentArgs</a></span><span class="p">,</span>
-                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                          <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                          <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTargetGroupAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TargetGroupAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TargetGroupAttachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTargetGroupAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TargetGroupAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TargetGroupAttachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">TargetGroupAttachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TargetGroupAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">TargetGroupAttachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TargetGroupAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">TargetGroupAttachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TargetGroupAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">TargetGroupAttachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TargetGroupAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Clb:TargetGroupAttachment</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Clb:TargetGroupAttachment</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_clb_target_group_attachment&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -364,7 +657,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -481,11 +774,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## TargetGroupAttachment Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The TargetGroupAttachment resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -501,17 +802,23 @@ The TargetGroupAttachment resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-required property-replacement"
             title="Required">
+        <span id="targetgroupid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupid_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB target group.</dd><dt class="property-optional property-replacement"
+            title="Optional">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -519,27 +826,7 @@ The TargetGroupAttachment resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd><dt class="property-optional property-replacement"
-            title="Optional">
-        <span id="targetgroupid_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupid_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Group<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>ID of the CLB target group.</p>
-</dd><dt class="property-optional property-deprecated"
-            title="Optional, Deprecated">
-        <span id="targrtgroupid_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targrtgroupid_csharp" style="color: inherit; text-decoration: inherit;">Targrt<wbr>Group<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead. ID of the CLB target group.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead.</p>
-</p></dd></dl>
+    <dd>ID of the CLB listener rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -553,17 +840,23 @@ The TargetGroupAttachment resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-required property-replacement"
             title="Required">
+        <span id="targetgroupid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupid_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB target group.</dd><dt class="property-optional property-replacement"
+            title="Optional">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -571,27 +864,45 @@ The TargetGroupAttachment resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener rule.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="target_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_group_id_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB target group.</dd><dt class="property-optional property-replacement"
             title="Optional">
-        <span id="targetgroupid_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupid_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Group<wbr>Id</a>
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB target group.</p>
-</dd><dt class="property-optional property-deprecated"
-            title="Optional, Deprecated">
-        <span id="targrtgroupid_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targrtgroupid_go" style="color: inherit; text-decoration: inherit;">Targrt<wbr>Group<wbr>Id</a>
+    <dd>ID of the CLB listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead. ID of the CLB target group.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead.</p>
-</p></dd></dl>
+    <dd>ID of the CLB listener rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -605,17 +916,23 @@ The TargetGroupAttachment resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-required property-replacement"
             title="Required">
+        <span id="targetgroupid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupid_java" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of the CLB target group.</dd><dt class="property-optional property-replacement"
+            title="Optional">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -623,27 +940,7 @@ The TargetGroupAttachment resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd><dt class="property-optional property-replacement"
-            title="Optional">
-        <span id="targetgroupid_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupid_java" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>ID of the CLB target group.</p>
-</dd><dt class="property-optional property-deprecated"
-            title="Optional, Deprecated">
-        <span id="targrtgroupid_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targrtgroupid_java" style="color: inherit; text-decoration: inherit;">targrt<wbr>Group<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead. ID of the CLB target group.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead.</p>
-</p></dd></dl>
+    <dd>ID of the CLB listener rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -657,17 +954,23 @@ The TargetGroupAttachment resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-required property-replacement"
             title="Required">
+        <span id="targetgroupid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupid_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB target group.</dd><dt class="property-optional property-replacement"
+            title="Optional">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -675,27 +978,7 @@ The TargetGroupAttachment resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd><dt class="property-optional property-replacement"
-            title="Optional">
-        <span id="targetgroupid_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupid_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>ID of the CLB target group.</p>
-</dd><dt class="property-optional property-deprecated"
-            title="Optional, Deprecated">
-        <span id="targrtgroupid_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targrtgroupid_nodejs" style="color: inherit; text-decoration: inherit;">targrt<wbr>Group<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead. ID of the CLB target group.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead.</p>
-</p></dd></dl>
+    <dd>ID of the CLB listener rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -709,17 +992,23 @@ The TargetGroupAttachment resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-required property-replacement"
             title="Required">
+        <span id="target_group_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_group_id_python" style="color: inherit; text-decoration: inherit;">target_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ID of the CLB target group.</dd><dt class="property-optional property-replacement"
+            title="Optional">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -727,27 +1016,7 @@ The TargetGroupAttachment resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd><dt class="property-optional property-replacement"
-            title="Optional">
-        <span id="target_group_id_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_group_id_python" style="color: inherit; text-decoration: inherit;">target_<wbr>group_<wbr>id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">str</span>
-    </dt>
-    <dd><p>ID of the CLB target group.</p>
-</dd><dt class="property-optional property-deprecated"
-            title="Optional, Deprecated">
-        <span id="targrt_group_id_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targrt_group_id_python" style="color: inherit; text-decoration: inherit;">targrt_<wbr>group_<wbr>id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">str</span>
-    </dt>
-    <dd><p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead. ID of the CLB target group.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead.</p>
-</p></dd></dl>
+    <dd>ID of the CLB listener rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -761,17 +1030,23 @@ The TargetGroupAttachment resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-required property-replacement"
             title="Required">
+        <span id="targetgroupid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupid_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of the CLB target group.</dd><dt class="property-optional property-replacement"
+            title="Optional">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -779,27 +1054,7 @@ The TargetGroupAttachment resource accepts the following [input](/docs/intro/con
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd><dt class="property-optional property-replacement"
-            title="Optional">
-        <span id="targetgroupid_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupid_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>ID of the CLB target group.</p>
-</dd><dt class="property-optional property-deprecated"
-            title="Optional, Deprecated">
-        <span id="targrtgroupid_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targrtgroupid_yaml" style="color: inherit; text-decoration: inherit;">targrt<wbr>Group<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead. ID of the CLB target group.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead.</p>
-</p></dd></dl>
+    <dd>ID of the CLB listener rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -820,8 +1075,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -835,8 +1089,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -850,8 +1117,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -865,8 +1131,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -880,8 +1145,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -895,8 +1159,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -906,124 +1169,162 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing TargetGroupAttachment resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TargetGroupAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">TargetGroupAttachment</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TargetGroupAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">TargetGroupAttachment</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">clb_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">target_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">targrt_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> TargetGroupAttachment</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">target_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> TargetGroupAttachment</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTargetGroupAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TargetGroupAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TargetGroupAttachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTargetGroupAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TargetGroupAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TargetGroupAttachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">TargetGroupAttachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TargetGroupAttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">TargetGroupAttachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TargetGroupAttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">TargetGroupAttachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TargetGroupAttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">TargetGroupAttachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TargetGroupAttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingTargetGroupAttachment</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Clb:TargetGroupAttachment</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_clb_target_group_attachment</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TargetGroupAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TargetGroupAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1031,28 +1332,31 @@ Get an existing TargetGroupAttachment resource's state with the given name, ID, 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TargetGroupAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1060,28 +1364,31 @@ Get an existing TargetGroupAttachment resource's state with the given name, ID, 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TargetGroupAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1101,8 +1408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -1110,8 +1416,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -1119,8 +1424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener rule.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_targetgroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetgroupid_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Group<wbr>Id</a>
@@ -1128,18 +1432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB target group.</p>
-</dd><dt class="property-optional property-deprecated"
-            title="Optional, Deprecated">
-        <span id="state_targrtgroupid_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targrtgroupid_csharp" style="color: inherit; text-decoration: inherit;">Targrt<wbr>Group<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead. ID of the CLB target group.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead.</p>
-</p></dd></dl>
+    <dd>ID of the CLB target group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1153,8 +1446,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -1162,8 +1454,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -1171,8 +1462,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener rule.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_targetgroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetgroupid_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Group<wbr>Id</a>
@@ -1180,18 +1470,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB target group.</p>
-</dd><dt class="property-optional property-deprecated"
-            title="Optional, Deprecated">
-        <span id="state_targrtgroupid_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targrtgroupid_go" style="color: inherit; text-decoration: inherit;">Targrt<wbr>Group<wbr>Id</a>
+    <dd>ID of the CLB target group.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead. ID of the CLB target group.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead.</p>
-</p></dd></dl>
+    <dd>ID of the CLB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB listener rule.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_target_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_group_id_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB target group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1205,8 +1522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1214,8 +1530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1223,8 +1538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener rule.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_targetgroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetgroupid_java" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Id</a>
@@ -1232,18 +1546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB target group.</p>
-</dd><dt class="property-optional property-deprecated"
-            title="Optional, Deprecated">
-        <span id="state_targrtgroupid_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targrtgroupid_java" style="color: inherit; text-decoration: inherit;">targrt<wbr>Group<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead. ID of the CLB target group.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead.</p>
-</p></dd></dl>
+    <dd>ID of the CLB target group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1257,8 +1560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1266,8 +1568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1275,8 +1576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener rule.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_targetgroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetgroupid_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Id</a>
@@ -1284,18 +1584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB target group.</p>
-</dd><dt class="property-optional property-deprecated"
-            title="Optional, Deprecated">
-        <span id="state_targrtgroupid_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targrtgroupid_nodejs" style="color: inherit; text-decoration: inherit;">targrt<wbr>Group<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead. ID of the CLB target group.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead.</p>
-</p></dd></dl>
+    <dd>ID of the CLB target group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1309,8 +1598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -1318,8 +1606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -1327,8 +1614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener rule.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_target_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_group_id_python" style="color: inherit; text-decoration: inherit;">target_<wbr>group_<wbr>id</a>
@@ -1336,18 +1622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB target group.</p>
-</dd><dt class="property-optional property-deprecated"
-            title="Optional, Deprecated">
-        <span id="state_targrt_group_id_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targrt_group_id_python" style="color: inherit; text-decoration: inherit;">targrt_<wbr>group_<wbr>id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">str</span>
-    </dt>
-    <dd><p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead. ID of the CLB target group.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead.</p>
-</p></dd></dl>
+    <dd>ID of the CLB target group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1361,8 +1636,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1370,8 +1644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1379,8 +1652,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener rule.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB listener rule.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_targetgroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetgroupid_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Id</a>
@@ -1388,18 +1660,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB target group.</p>
-</dd><dt class="property-optional property-deprecated"
-            title="Optional, Deprecated">
-        <span id="state_targrtgroupid_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targrtgroupid_yaml" style="color: inherit; text-decoration: inherit;">targrt<wbr>Group<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead. ID of the CLB target group.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.47.1. Use <code>target_group_id</code> instead.</p>
-</p></dd></dl>
+    <dd>ID of the CLB target group.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1417,9 +1678,12 @@ The following state arguments are supported:
 CLB target group attachment can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment group lbtg-odareyb2#lbl-bicjmx3i#lb-cv0iz74c#loc-ac6uk7b6
+$ pulumi import tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment example lbtg-odareyb2#lbl-bicjmx3i#lb-cv0iz74c#loc-ac6uk7b6
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1431,7 +1695,6 @@ $ pulumi import tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment gro
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

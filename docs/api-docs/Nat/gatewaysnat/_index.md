@@ -2,9 +2,11 @@
 ---
 title: "GatewaySnat"
 title_tag: "tencentcloud.Nat.GatewaySnat"
-meta_desc: "Documentation for the tencentcloud.Nat.GatewaySnat resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a NAT Gateway SNat rule."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,482 +18,119 @@ Provides a resource to create a NAT Gateway SNat rule.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### If resourceType is SUBNET
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
-    product: "nat",
-});
-const image = tencentcloud.Images.getInstance({
-    osName: "centos",
-});
-const instanceTypes = zones.then(zones => tencentcloud.Instance.getTypes({
-    filters: [
-        {
-            name: "zone",
-            values: [zones.zones?.[0]?.name],
-        },
-        {
-            name: "instance-family",
-            values: ["S5"],
-        },
-    ],
-    cpuCoreCount: 2,
-    excludeSoldOut: true,
-}));
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
-// Create route_table and entry
-const routeTable = new tencentcloud.route.Table("routeTable", {vpcId: vpc.id});
-const subnet = new tencentcloud.subnet.Instance("subnet", {
-    vpcId: vpc.id,
-    cidrBlock: "10.0.0.0/16",
-    availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
-    routeTableId: routeTable.id,
-});
-const eipExample1 = new tencentcloud.eip.Instance("eipExample1", {});
-const eipExample2 = new tencentcloud.eip.Instance("eipExample2", {});
-// Create NAT Gateway
-const myNat = new tencentcloud.nat.Gateway("myNat", {
-    vpcId: vpc.id,
-    maxConcurrent: 3000000,
-    bandwidth: 500,
-    assignedEipSets: [
-        eipExample1.publicIp,
-        eipExample2.publicIp,
-    ],
-});
-const routeEntry = new tencentcloud.route.TableEntry("routeEntry", {
-    routeTableId: routeTable.id,
-    destinationCidrBlock: "10.0.0.0/8",
-    nextType: "NAT",
-    nextHub: myNat.id,
-});
-// Subnet Nat gateway snat
-const subnetSnat = new tencentcloud.nat.GatewaySnat("subnetSnat", {
-    natGatewayId: myNat.id,
+const example = new tencentcloud.nat.GatewaySnat("example", {
+    natGatewayId: "nat-jmf9955g",
     resourceType: "SUBNET",
-    subnetId: subnet.id,
-    subnetCidrBlock: subnet.cidrBlock,
-    description: "terraform test",
-    publicIpAddrs: [
-        eipExample1.publicIp,
-        eipExample2.publicIp,
-    ],
-});
-// Create instance
-const example = new tencentcloud.instance.Instance("example", {
-    instanceName: "tf_example",
-    availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
-    imageId: image.then(image => image.images?.[0]?.imageId),
-    instanceType: instanceTypes.then(instanceTypes => instanceTypes.instanceTypes?.[0]?.instanceType),
-    systemDiskType: "CLOUD_PREMIUM",
-    systemDiskSize: 50,
-    hostname: "user",
-    projectId: 0,
-    vpcId: vpc.id,
-    subnetId: subnet.id,
-});
-// NetWorkInterface Nat gateway snat
-const myInstanceSnat = new tencentcloud.nat.GatewaySnat("myInstanceSnat", {
-    natGatewayId: myNat.id,
-    resourceType: "NETWORKINTERFACE",
-    instanceId: example.id,
-    instancePrivateIpAddr: example.privateIp,
-    description: "terraform test",
-    publicIpAddrs: [eipExample1.publicIp],
+    subnetId: "subnet-hhi88a58",
+    subnetCidrBlock: "10.0.30.0/24",
+    description: "remark.",
+    publicIpAddrs: ["106.55.167.123"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
-import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="nat")
-image = tencentcloud.Images.get_instance(os_name="centos")
-instance_types = tencentcloud.Instance.get_types(filters=[
-        tencentcloud.instance.GetTypesFilterArgs(
-            name="zone",
-            values=[zones.zones[0].name],
-        ),
-        tencentcloud.instance.GetTypesFilterArgs(
-            name="instance-family",
-            values=["S5"],
-        ),
-    ],
-    cpu_core_count=2,
-    exclude_sold_out=True)
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
-# Create route_table and entry
-route_table = tencentcloud.route.Table("routeTable", vpc_id=vpc.id)
-subnet = tencentcloud.subnet.Instance("subnet",
-    vpc_id=vpc.id,
-    cidr_block="10.0.0.0/16",
-    availability_zone=zones.zones[0].name,
-    route_table_id=route_table.id)
-eip_example1 = tencentcloud.eip.Instance("eipExample1")
-eip_example2 = tencentcloud.eip.Instance("eipExample2")
-# Create NAT Gateway
-my_nat = tencentcloud.nat.Gateway("myNat",
-    vpc_id=vpc.id,
-    max_concurrent=3000000,
-    bandwidth=500,
-    assigned_eip_sets=[
-        eip_example1.public_ip,
-        eip_example2.public_ip,
-    ])
-route_entry = tencentcloud.route.TableEntry("routeEntry",
-    route_table_id=route_table.id,
-    destination_cidr_block="10.0.0.0/8",
-    next_type="NAT",
-    next_hub=my_nat.id)
-# Subnet Nat gateway snat
-subnet_snat = tencentcloud.nat.GatewaySnat("subnetSnat",
-    nat_gateway_id=my_nat.id,
+example = tencentcloud.nat.GatewaySnat("example",
+    nat_gateway_id="nat-jmf9955g",
     resource_type="SUBNET",
-    subnet_id=subnet.id,
-    subnet_cidr_block=subnet.cidr_block,
-    description="terraform test",
-    public_ip_addrs=[
-        eip_example1.public_ip,
-        eip_example2.public_ip,
-    ])
-# Create instance
-example = tencentcloud.instance.Instance("example",
-    instance_name="tf_example",
-    availability_zone=zones.zones[0].name,
-    image_id=image.images[0].image_id,
-    instance_type=instance_types.instance_types[0].instance_type,
-    system_disk_type="CLOUD_PREMIUM",
-    system_disk_size=50,
-    hostname="user",
-    project_id=0,
-    vpc_id=vpc.id,
-    subnet_id=subnet.id)
-# NetWorkInterface Nat gateway snat
-my_instance_snat = tencentcloud.nat.GatewaySnat("myInstanceSnat",
-    nat_gateway_id=my_nat.id,
-    resource_type="NETWORKINTERFACE",
-    instance_id=example.id,
-    instance_private_ip_addr=example.private_ip,
-    description="terraform test",
-    public_ip_addrs=[eip_example1.public_ip])
+    subnet_id="subnet-hhi88a58",
+    subnet_cidr_block="10.0.30.0/24",
+    description="remark.",
+    public_ip_addrs=["106.55.167.123"])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
-    {
-        Product = "nat",
-    });
-
-    var image = Tencentcloud.Images.GetInstance.Invoke(new()
-    {
-        OsName = "centos",
-    });
-
-    var instanceTypes = Tencentcloud.Instance.GetTypes.Invoke(new()
-    {
-        Filters = new[]
-        {
-            new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
-            {
-                Name = "zone",
-                Values = new[]
-                {
-                    zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
-                },
-            },
-            new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
-            {
-                Name = "instance-family",
-                Values = new[]
-                {
-                    "S5",
-                },
-            },
-        },
-        CpuCoreCount = 2,
-        ExcludeSoldOut = true,
-    });
-
-    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
-    {
-        CidrBlock = "10.0.0.0/16",
-    });
-
-    // Create route_table and entry
-    var routeTable = new Tencentcloud.Route.Table("routeTable", new()
-    {
-        VpcId = vpc.Id,
-    });
-
-    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
-    {
-        VpcId = vpc.Id,
-        CidrBlock = "10.0.0.0/16",
-        AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
-        RouteTableId = routeTable.Id,
-    });
-
-    var eipExample1 = new Tencentcloud.Eip.Instance("eipExample1");
-
-    var eipExample2 = new Tencentcloud.Eip.Instance("eipExample2");
-
-    // Create NAT Gateway
-    var myNat = new Tencentcloud.Nat.Gateway("myNat", new()
-    {
-        VpcId = vpc.Id,
-        MaxConcurrent = 3000000,
-        Bandwidth = 500,
-        AssignedEipSets = new[]
-        {
-            eipExample1.PublicIp,
-            eipExample2.PublicIp,
-        },
-    });
-
-    var routeEntry = new Tencentcloud.Route.TableEntry("routeEntry", new()
-    {
-        RouteTableId = routeTable.Id,
-        DestinationCidrBlock = "10.0.0.0/8",
-        NextType = "NAT",
-        NextHub = myNat.Id,
-    });
-
-    // Subnet Nat gateway snat
-    var subnetSnat = new Tencentcloud.Nat.GatewaySnat("subnetSnat", new()
-    {
-        NatGatewayId = myNat.Id,
-        ResourceType = "SUBNET",
-        SubnetId = subnet.Id,
-        SubnetCidrBlock = subnet.CidrBlock,
-        Description = "terraform test",
-        PublicIpAddrs = new[]
-        {
-            eipExample1.PublicIp,
-            eipExample2.PublicIp,
-        },
-    });
-
-    // Create instance
-    var example = new Tencentcloud.Instance.Instance("example", new()
-    {
-        InstanceName = "tf_example",
-        AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
-        ImageId = image.Apply(getInstanceResult => getInstanceResult.Images[0]?.ImageId),
-        InstanceType = instanceTypes.Apply(getTypesResult => getTypesResult.InstanceTypes[0]?.InstanceType),
-        SystemDiskType = "CLOUD_PREMIUM",
-        SystemDiskSize = 50,
-        Hostname = "user",
-        ProjectId = 0,
-        VpcId = vpc.Id,
-        SubnetId = subnet.Id,
-    });
-
-    // NetWorkInterface Nat gateway snat
-    var myInstanceSnat = new Tencentcloud.Nat.GatewaySnat("myInstanceSnat", new()
-    {
-        NatGatewayId = myNat.Id,
-        ResourceType = "NETWORKINTERFACE",
-        InstanceId = example.Id,
-        InstancePrivateIpAddr = example.PrivateIp,
-        Description = "terraform test",
-        PublicIpAddrs = new[]
-        {
-            eipExample1.PublicIp,
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Route"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/nat"
 )
+
 func main() {
-pulumi.Run(func(ctx *pulumi.Context) error {
-zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-Product: "nat",
-}, nil);
-if err != nil {
-return err
-}
-image, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-OsName: pulumi.StringRef("centos"),
-}, nil);
-if err != nil {
-return err
-}
-instanceTypes, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
-Filters: []instance.GetTypesFilter{
-{
-Name: "zone",
-Values: interface{}{
-zones.Zones[0].Name,
-},
-},
-{
-Name: "instance-family",
-Values: []string{
-"S5",
-},
-},
-},
-CpuCoreCount: pulumi.IntRef(2),
-ExcludeSoldOut: pulumi.BoolRef(true),
-}, nil);
-if err != nil {
-return err
-}
-vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-CidrBlock: pulumi.String("10.0.0.0/16"),
-})
-if err != nil {
-return err
-}
-// Create route_table and entry
-routeTable, err := Route.NewTable(ctx, "routeTable", &Route.TableArgs{
-VpcId: vpc.ID(),
-})
-if err != nil {
-return err
-}
-subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-VpcId: vpc.ID(),
-CidrBlock: pulumi.String("10.0.0.0/16"),
-AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-RouteTableId: routeTable.ID(),
-})
-if err != nil {
-return err
-}
-eipExample1, err := Eip.NewInstance(ctx, "eipExample1", nil)
-if err != nil {
-return err
-}
-eipExample2, err := Eip.NewInstance(ctx, "eipExample2", nil)
-if err != nil {
-return err
-}
-// Create NAT Gateway
-myNat, err := Nat.NewGateway(ctx, "myNat", &Nat.GatewayArgs{
-VpcId: vpc.ID(),
-MaxConcurrent: pulumi.Int(3000000),
-Bandwidth: pulumi.Int(500),
-AssignedEipSets: pulumi.StringArray{
-eipExample1.PublicIp,
-eipExample2.PublicIp,
-},
-})
-if err != nil {
-return err
-}
-_, err = Route.NewTableEntry(ctx, "routeEntry", &Route.TableEntryArgs{
-RouteTableId: routeTable.ID(),
-DestinationCidrBlock: pulumi.String("10.0.0.0/8"),
-NextType: pulumi.String("NAT"),
-NextHub: myNat.ID(),
-})
-if err != nil {
-return err
-}
-// Subnet Nat gateway snat
-_, err = Nat.NewGatewaySnat(ctx, "subnetSnat", &Nat.GatewaySnatArgs{
-NatGatewayId: myNat.ID(),
-ResourceType: pulumi.String("SUBNET"),
-SubnetId: subnet.ID(),
-SubnetCidrBlock: subnet.CidrBlock,
-Description: pulumi.String("terraform test"),
-PublicIpAddrs: pulumi.StringArray{
-eipExample1.PublicIp,
-eipExample2.PublicIp,
-},
-})
-if err != nil {
-return err
-}
-// Create instance
-example, err := Instance.NewInstance(ctx, "example", &Instance.InstanceArgs{
-InstanceName: pulumi.String("tf_example"),
-AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-ImageId: pulumi.String(image.Images[0].ImageId),
-InstanceType: pulumi.String(instanceTypes.InstanceTypes[0].InstanceType),
-SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
-SystemDiskSize: pulumi.Int(50),
-Hostname: pulumi.String("user"),
-ProjectId: pulumi.Int(0),
-VpcId: vpc.ID(),
-SubnetId: subnet.ID(),
-})
-if err != nil {
-return err
-}
-// NetWorkInterface Nat gateway snat
-_, err = Nat.NewGatewaySnat(ctx, "myInstanceSnat", &Nat.GatewaySnatArgs{
-NatGatewayId: myNat.ID(),
-ResourceType: pulumi.String("NETWORKINTERFACE"),
-InstanceId: example.ID(),
-InstancePrivateIpAddr: example.PrivateIp,
-Description: pulumi.String("terraform test"),
-PublicIpAddrs: pulumi.StringArray{
-eipExample1.PublicIp,
-},
-})
-if err != nil {
-return err
-}
-return nil
-})
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := nat.NewGatewaySnat(ctx, "example", &nat.GatewaySnatArgs{
+			NatGatewayId:    pulumi.String("nat-jmf9955g"),
+			ResourceType:    pulumi.String("SUBNET"),
+			SubnetId:        pulumi.String("subnet-hhi88a58"),
+			SubnetCidrBlock: pulumi.String("10.0.30.0/24"),
+			Description:     pulumi.String("remark."),
+			PublicIpAddrs: pulumi.StringArray{
+				pulumi.String("106.55.167.123"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Nat.GatewaySnat("example", new()
+    {
+        NatGatewayId = "nat-jmf9955g",
+        ResourceType = "SUBNET",
+        SubnetId = "subnet-hhi88a58",
+        SubnetCidrBlock = "10.0.30.0/24",
+        Description = "remark.",
+        PublicIpAddrs = new[]
+        {
+            "106.55.167.123",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
-import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
-import com.pulumi.tencentcloud.Images.ImagesFunctions;
-import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
-import com.pulumi.tencentcloud.Instance.InstanceFunctions;
-import com.pulumi.tencentcloud.Instance.inputs.GetTypesArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Route.Table;
-import com.pulumi.tencentcloud.Route.TableArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
-import com.pulumi.tencentcloud.Eip.Instance;
-import com.pulumi.tencentcloud.Nat.Gateway;
-import com.pulumi.tencentcloud.Nat.GatewayArgs;
-import com.pulumi.tencentcloud.Route.TableEntry;
-import com.pulumi.tencentcloud.Route.TableEntryArgs;
 import com.pulumi.tencentcloud.Nat.GatewaySnat;
 import com.pulumi.tencentcloud.Nat.GatewaySnatArgs;
-import com.pulumi.tencentcloud.Instance.Instance;
-import com.pulumi.tencentcloud.Instance.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -503,271 +142,507 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var zones = AvailabilityFunctions.getZonesByProduct(GetZonesByProductArgs.builder()
-            .product("nat")
-            .build());
-
-        final var image = ImagesFunctions.getInstance(GetInstanceArgs.builder()
-            .osName("centos")
-            .build());
-
-        final var instanceTypes = InstanceFunctions.getTypes(GetTypesArgs.builder()
-            .filters(            
-                GetTypesFilterArgs.builder()
-                    .name("zone")
-                    .values(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
-                    .build(),
-                GetTypesFilterArgs.builder()
-                    .name("instance-family")
-                    .values("S5")
-                    .build())
-            .cpuCoreCount(2)
-            .excludeSoldOut(true)
-            .build());
-
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
-            .cidrBlock("10.0.0.0/16")
-            .build());
-
-        // Create route_table and entry
-        var routeTable = new Table("routeTable", TableArgs.builder()        
-            .vpcId(vpc.id())
-            .build());
-
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
-            .vpcId(vpc.id())
-            .cidrBlock("10.0.0.0/16")
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
-            .routeTableId(routeTable.id())
-            .build());
-
-        var eipExample1 = new Instance("eipExample1");
-
-        var eipExample2 = new Instance("eipExample2");
-
-        // Create NAT Gateway
-        var myNat = new Gateway("myNat", GatewayArgs.builder()        
-            .vpcId(vpc.id())
-            .maxConcurrent(3000000)
-            .bandwidth(500)
-            .assignedEipSets(            
-                eipExample1.publicIp(),
-                eipExample2.publicIp())
-            .build());
-
-        var routeEntry = new TableEntry("routeEntry", TableEntryArgs.builder()        
-            .routeTableId(routeTable.id())
-            .destinationCidrBlock("10.0.0.0/8")
-            .nextType("NAT")
-            .nextHub(myNat.id())
-            .build());
-
-        // Subnet Nat gateway snat
-        var subnetSnat = new GatewaySnat("subnetSnat", GatewaySnatArgs.builder()        
-            .natGatewayId(myNat.id())
+        var example = new GatewaySnat("example", GatewaySnatArgs.builder()
+            .natGatewayId("nat-jmf9955g")
             .resourceType("SUBNET")
-            .subnetId(subnet.id())
-            .subnetCidrBlock(subnet.cidrBlock())
-            .description("terraform test")
-            .publicIpAddrs(            
-                eipExample1.publicIp(),
-                eipExample2.publicIp())
-            .build());
-
-        // Create instance
-        var example = new Instance("example", InstanceArgs.builder()        
-            .instanceName("tf_example")
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
-            .imageId(image.applyValue(getInstanceResult -> getInstanceResult.images()[0].imageId()))
-            .instanceType(instanceTypes.applyValue(getTypesResult -> getTypesResult.instanceTypes()[0].instanceType()))
-            .systemDiskType("CLOUD_PREMIUM")
-            .systemDiskSize(50)
-            .hostname("user")
-            .projectId(0)
-            .vpcId(vpc.id())
-            .subnetId(subnet.id())
-            .build());
-
-        // NetWorkInterface Nat gateway snat
-        var myInstanceSnat = new GatewaySnat("myInstanceSnat", GatewaySnatArgs.builder()        
-            .natGatewayId(myNat.id())
-            .resourceType("NETWORKINTERFACE")
-            .instanceId(example.id())
-            .instancePrivateIpAddr(example.privateIp())
-            .description("terraform test")
-            .publicIpAddrs(eipExample1.publicIp())
+            .subnetId("subnet-hhi88a58")
+            .subnetCidrBlock("10.0.30.0/24")
+            .description("remark.")
+            .publicIpAddrs("106.55.167.123")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  vpc:
-    type: tencentcloud:Vpc:Instance
-    properties:
-      cidrBlock: 10.0.0.0/16
-  subnet:
-    type: tencentcloud:Subnet:Instance
-    properties:
-      vpcId: ${vpc.id}
-      cidrBlock: 10.0.0.0/16
-      availabilityZone: ${zones.zones[0].name}
-      routeTableId: ${routeTable.id}
-  eipExample1:
-    type: tencentcloud:Eip:Instance
-  eipExample2:
-    type: tencentcloud:Eip:Instance
-  # Create NAT Gateway
-  myNat:
-    type: tencentcloud:Nat:Gateway
-    properties:
-      vpcId: ${vpc.id}
-      maxConcurrent: 3e+06
-      bandwidth: 500
-      assignedEipSets:
-        - ${eipExample1.publicIp}
-        - ${eipExample2.publicIp}
-  # Create route_table and entry
-  routeTable:
-    type: tencentcloud:Route:Table
-    properties:
-      vpcId: ${vpc.id}
-  routeEntry:
-    type: tencentcloud:Route:TableEntry
-    properties:
-      routeTableId: ${routeTable.id}
-      destinationCidrBlock: 10.0.0.0/8
-      nextType: NAT
-      nextHub: ${myNat.id}
-  # Subnet Nat gateway snat
-  subnetSnat:
-    type: tencentcloud:Nat:GatewaySnat
-    properties:
-      natGatewayId: ${myNat.id}
-      resourceType: SUBNET
-      subnetId: ${subnet.id}
-      subnetCidrBlock: ${subnet.cidrBlock}
-      description: terraform test
-      publicIpAddrs:
-        - ${eipExample1.publicIp}
-        - ${eipExample2.publicIp}
-  # Create instance
   example:
-    type: tencentcloud:Instance:Instance
-    properties:
-      instanceName: tf_example
-      availabilityZone: ${zones.zones[0].name}
-      imageId: ${image.images[0].imageId}
-      instanceType: ${instanceTypes.instanceTypes[0].instanceType}
-      systemDiskType: CLOUD_PREMIUM
-      systemDiskSize: 50
-      hostname: user
-      projectId: 0
-      vpcId: ${vpc.id}
-      subnetId: ${subnet.id}
-  # NetWorkInterface Nat gateway snat
-  myInstanceSnat:
     type: tencentcloud:Nat:GatewaySnat
     properties:
-      natGatewayId: ${myNat.id}
-      resourceType: NETWORKINTERFACE
-      instanceId: ${example.id}
-      instancePrivateIpAddr: ${example.privateIp}
-      description: terraform test
+      natGatewayId: nat-jmf9955g
+      resourceType: SUBNET
+      subnetId: subnet-hhi88a58
+      subnetCidrBlock: 10.0.30.0/24
+      description: remark.
       publicIpAddrs:
-        - ${eipExample1.publicIp}
-variables:
-  zones:
-    fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
-        product: nat
-  image:
-    fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments:
-        osName: centos
-  instanceTypes:
-    fn::invoke:
-      Function: tencentcloud:Instance:getTypes
-      Arguments:
-        filters:
-          - name: zone
-            values:
-              - ${zones.zones[0].name}
-          - name: instance-family
-            values:
-              - S5
-        cpuCoreCount: 2
-        excludeSoldOut: true
+        - 106.55.167.123
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_nat_gatewaysnat" "example" {
+  nat_gateway_id    = "nat-jmf9955g"
+  resource_type     = "SUBNET"
+  subnet_id         = "subnet-hhi88a58"
+  subnet_cidr_block = "10.0.30.0/24"
+  description       = "remark."
+  public_ip_addrs   = ["106.55.167.123"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### If resourceType is NETWORKINTERFACE
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.nat.GatewaySnat("example", {
+    natGatewayId: "nat-jmf9955g",
+    resourceType: "NETWORKINTERFACE",
+    instanceId: "ins-p97oyxt6",
+    instancePrivateIpAddr: "10.0.30.62",
+    description: "remark.",
+    publicIpAddrs: ["106.55.167.123"],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.nat.GatewaySnat("example",
+    nat_gateway_id="nat-jmf9955g",
+    resource_type="NETWORKINTERFACE",
+    instance_id="ins-p97oyxt6",
+    instance_private_ip_addr="10.0.30.62",
+    description="remark.",
+    public_ip_addrs=["106.55.167.123"])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/nat"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := nat.NewGatewaySnat(ctx, "example", &nat.GatewaySnatArgs{
+			NatGatewayId:          pulumi.String("nat-jmf9955g"),
+			ResourceType:          pulumi.String("NETWORKINTERFACE"),
+			InstanceId:            pulumi.String("ins-p97oyxt6"),
+			InstancePrivateIpAddr: pulumi.String("10.0.30.62"),
+			Description:           pulumi.String("remark."),
+			PublicIpAddrs: pulumi.StringArray{
+				pulumi.String("106.55.167.123"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Nat.GatewaySnat("example", new()
+    {
+        NatGatewayId = "nat-jmf9955g",
+        ResourceType = "NETWORKINTERFACE",
+        InstanceId = "ins-p97oyxt6",
+        InstancePrivateIpAddr = "10.0.30.62",
+        Description = "remark.",
+        PublicIpAddrs = new[]
+        {
+            "106.55.167.123",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Nat.GatewaySnat;
+import com.pulumi.tencentcloud.Nat.GatewaySnatArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new GatewaySnat("example", GatewaySnatArgs.builder()
+            .natGatewayId("nat-jmf9955g")
+            .resourceType("NETWORKINTERFACE")
+            .instanceId("ins-p97oyxt6")
+            .instancePrivateIpAddr("10.0.30.62")
+            .description("remark.")
+            .publicIpAddrs("106.55.167.123")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Nat:GatewaySnat
+    properties:
+      natGatewayId: nat-jmf9955g
+      resourceType: NETWORKINTERFACE
+      instanceId: ins-p97oyxt6
+      instancePrivateIpAddr: 10.0.30.62
+      description: remark.
+      publicIpAddrs:
+        - 106.55.167.123
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_nat_gatewaysnat" "example" {
+  nat_gateway_id           = "nat-jmf9955g"
+  resource_type            = "NETWORKINTERFACE"
+  instance_id              = "ins-p97oyxt6"
+  instance_private_ip_addr = "10.0.30.62"
+  description              = "remark."
+  public_ip_addrs          = ["106.55.167.123"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### If resourceType is USERDEFINED
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.nat.GatewaySnat("example", {
+    natGatewayId: "nat-jmf9955g",
+    resourceType: "USERDEFINED",
+    instancePrivateIpAddr: "10.0.40.0/24",
+    description: "remark.",
+    publicIpAddrs: ["106.55.167.123"],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.nat.GatewaySnat("example",
+    nat_gateway_id="nat-jmf9955g",
+    resource_type="USERDEFINED",
+    instance_private_ip_addr="10.0.40.0/24",
+    description="remark.",
+    public_ip_addrs=["106.55.167.123"])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/nat"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := nat.NewGatewaySnat(ctx, "example", &nat.GatewaySnatArgs{
+			NatGatewayId:          pulumi.String("nat-jmf9955g"),
+			ResourceType:          pulumi.String("USERDEFINED"),
+			InstancePrivateIpAddr: pulumi.String("10.0.40.0/24"),
+			Description:           pulumi.String("remark."),
+			PublicIpAddrs: pulumi.StringArray{
+				pulumi.String("106.55.167.123"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Nat.GatewaySnat("example", new()
+    {
+        NatGatewayId = "nat-jmf9955g",
+        ResourceType = "USERDEFINED",
+        InstancePrivateIpAddr = "10.0.40.0/24",
+        Description = "remark.",
+        PublicIpAddrs = new[]
+        {
+            "106.55.167.123",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Nat.GatewaySnat;
+import com.pulumi.tencentcloud.Nat.GatewaySnatArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new GatewaySnat("example", GatewaySnatArgs.builder()
+            .natGatewayId("nat-jmf9955g")
+            .resourceType("USERDEFINED")
+            .instancePrivateIpAddr("10.0.40.0/24")
+            .description("remark.")
+            .publicIpAddrs("106.55.167.123")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Nat:GatewaySnat
+    properties:
+      natGatewayId: nat-jmf9955g
+      resourceType: USERDEFINED
+      instancePrivateIpAddr: 10.0.40.0/24
+      description: remark.
+      publicIpAddrs:
+        - 106.55.167.123
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_nat_gatewaysnat" "example" {
+  nat_gateway_id           = "nat-jmf9955g"
+  resource_type            = "USERDEFINED"
+  instance_private_ip_addr = "10.0.40.0/24"
+  description              = "remark."
+  public_ip_addrs          = ["106.55.167.123"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39646)
+  - [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
+* Read: [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
+* Update: [ModifyNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39643)
+* Delete: [DeleteNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39645)
 
 
 ## Create GatewaySnat Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">GatewaySnat</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GatewaySnatArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">GatewaySnat</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GatewaySnatArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">GatewaySnat</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GatewaySnatArgs</a></span><span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">GatewaySnat</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                 <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">instance_private_ip_addr</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">nat_gateway_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">public_ip_addrs</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                 <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">instance_private_ip_addr</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">subnet_cidr_block</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">GatewaySnat</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GatewaySnatArgs</a></span><span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewGatewaySnat</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">GatewaySnatArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">GatewaySnat</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewGatewaySnat</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">GatewaySnatArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">GatewaySnat</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">GatewaySnat</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GatewaySnatArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">GatewaySnat</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GatewaySnatArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">GatewaySnat</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GatewaySnatArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">GatewaySnat</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GatewaySnatArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Nat:GatewaySnat</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Nat:GatewaySnat</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_nat_gateway_snat&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -788,7 +663,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -905,11 +780,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## GatewaySnat Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -925,8 +808,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Description.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="natgatewayid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natgatewayid_csharp" style="color: inherit; text-decoration: inherit;">Nat<wbr>Gateway<wbr>Id</a>
@@ -934,8 +816,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>NAT gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddrs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddrs_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Addrs</a>
@@ -943,8 +824,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Elastic IP address pool.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -952,8 +832,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -961,8 +840,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID, required when <code>resourceType</code> is NETWORKINTERFACE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceprivateipaddr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceprivateipaddr_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Private<wbr>Ip<wbr>Addr</a>
@@ -970,8 +848,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetcidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetcidrblock_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Cidr<wbr>Block</a>
@@ -979,8 +856,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -988,8 +864,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet instance ID, required when <code>resource_type</code> is SUBNET.</p>
-</dd></dl>
+    <dd>Subnet instance ID, required when <code>resourceType</code> is SUBNET.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1003,8 +878,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Description.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="natgatewayid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natgatewayid_go" style="color: inherit; text-decoration: inherit;">Nat<wbr>Gateway<wbr>Id</a>
@@ -1012,8 +886,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>NAT gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddrs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddrs_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Addrs</a>
@@ -1021,8 +894,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Elastic IP address pool.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1030,8 +902,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1039,8 +910,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID, required when <code>resourceType</code> is NETWORKINTERFACE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceprivateipaddr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceprivateipaddr_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Private<wbr>Ip<wbr>Addr</a>
@@ -1048,8 +918,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetcidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetcidrblock_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Cidr<wbr>Block</a>
@@ -1057,8 +926,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1066,8 +934,77 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet instance ID, required when <code>resource_type</code> is SUBNET.</p>
-</dd></dl>
+    <dd>Subnet instance ID, required when <code>resourceType</code> is SUBNET.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="nat_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nat_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">nat_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>NAT gateway ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="public_ip_addrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_addrs_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>addrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Elastic IP address pool.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID, required when <code>resourceType</code> is NETWORKINTERFACE.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instance_private_ip_addr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_private_ip_addr_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>private_<wbr>ip_<wbr>addr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="subnet_cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_cidr_block_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet instance ID, required when <code>resourceType</code> is SUBNET.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1081,8 +1018,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Description.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="natgatewayid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natgatewayid_java" style="color: inherit; text-decoration: inherit;">nat<wbr>Gateway<wbr>Id</a>
@@ -1090,8 +1026,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>NAT gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddrs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddrs_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Addrs</a>
@@ -1099,8 +1034,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Elastic IP address pool.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1108,8 +1042,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1117,8 +1050,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID, required when <code>resourceType</code> is NETWORKINTERFACE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceprivateipaddr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceprivateipaddr_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Private<wbr>Ip<wbr>Addr</a>
@@ -1126,8 +1058,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetcidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetcidrblock_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Cidr<wbr>Block</a>
@@ -1135,8 +1066,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1144,8 +1074,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet instance ID, required when <code>resource_type</code> is SUBNET.</p>
-</dd></dl>
+    <dd>Subnet instance ID, required when <code>resourceType</code> is SUBNET.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1159,8 +1088,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Description.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="natgatewayid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natgatewayid_nodejs" style="color: inherit; text-decoration: inherit;">nat<wbr>Gateway<wbr>Id</a>
@@ -1168,8 +1096,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>NAT gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddrs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddrs_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Addrs</a>
@@ -1177,8 +1104,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Elastic IP address pool.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1186,8 +1112,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1195,8 +1120,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID, required when <code>resourceType</code> is NETWORKINTERFACE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceprivateipaddr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceprivateipaddr_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Private<wbr>Ip<wbr>Addr</a>
@@ -1204,8 +1128,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetcidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetcidrblock_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Cidr<wbr>Block</a>
@@ -1213,8 +1136,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1222,8 +1144,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet instance ID, required when <code>resource_type</code> is SUBNET.</p>
-</dd></dl>
+    <dd>Subnet instance ID, required when <code>resourceType</code> is SUBNET.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1237,8 +1158,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Description.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="nat_gateway_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nat_gateway_id_python" style="color: inherit; text-decoration: inherit;">nat_<wbr>gateway_<wbr>id</a>
@@ -1246,8 +1166,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>NAT gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="public_ip_addrs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_addrs_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>addrs</a>
@@ -1255,8 +1174,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Elastic IP address pool.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -1264,8 +1182,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1273,8 +1190,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID, required when <code>resourceType</code> is NETWORKINTERFACE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instance_private_ip_addr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_private_ip_addr_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>private_<wbr>ip_<wbr>addr</a>
@@ -1282,8 +1198,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnet_cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_cidr_block_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>cidr_<wbr>block</a>
@@ -1291,8 +1206,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1300,8 +1214,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet instance ID, required when <code>resource_type</code> is SUBNET.</p>
-</dd></dl>
+    <dd>Subnet instance ID, required when <code>resourceType</code> is SUBNET.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1315,8 +1228,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Description.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="natgatewayid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natgatewayid_yaml" style="color: inherit; text-decoration: inherit;">nat<wbr>Gateway<wbr>Id</a>
@@ -1324,8 +1236,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>NAT gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddrs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddrs_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Addrs</a>
@@ -1333,8 +1244,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Elastic IP address pool.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1342,8 +1252,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1351,8 +1260,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID, required when <code>resourceType</code> is NETWORKINTERFACE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="instanceprivateipaddr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceprivateipaddr_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Private<wbr>Ip<wbr>Addr</a>
@@ -1360,8 +1268,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetcidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetcidrblock_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Cidr<wbr>Block</a>
@@ -1369,8 +1276,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1378,8 +1284,7 @@ The GatewaySnat resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet instance ID, required when <code>resource_type</code> is SUBNET.</p>
-</dd></dl>
+    <dd>Subnet instance ID, required when <code>resourceType</code> is SUBNET.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1400,8 +1305,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-"
+    <dd>Create time.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1409,8 +1313,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="snatid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatid_csharp" style="color: inherit; text-decoration: inherit;">Snat<wbr>Id</a>
@@ -1418,8 +1321,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd></dl>
+    <dd>SNAT rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1433,8 +1335,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-"
+    <dd>Create time.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1442,8 +1343,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="snatid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatid_go" style="color: inherit; text-decoration: inherit;">Snat<wbr>Id</a>
@@ -1451,8 +1351,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd></dl>
+    <dd>SNAT rule ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="snat_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_id_hcl" style="color: inherit; text-decoration: inherit;">snat_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SNAT rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1466,8 +1395,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-"
+    <dd>Create time.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1475,8 +1403,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="snatid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatid_java" style="color: inherit; text-decoration: inherit;">snat<wbr>Id</a>
@@ -1484,8 +1411,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd></dl>
+    <dd>SNAT rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1499,8 +1425,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-"
+    <dd>Create time.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1508,8 +1433,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="snatid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatid_nodejs" style="color: inherit; text-decoration: inherit;">snat<wbr>Id</a>
@@ -1517,8 +1441,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd></dl>
+    <dd>SNAT rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1532,8 +1455,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-"
+    <dd>Create time.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1541,8 +1463,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="snat_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_id_python" style="color: inherit; text-decoration: inherit;">snat_<wbr>id</a>
@@ -1550,8 +1471,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd></dl>
+    <dd>SNAT rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1565,8 +1485,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-"
+    <dd>Create time.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1574,8 +1493,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="snatid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatid_yaml" style="color: inherit; text-decoration: inherit;">snat<wbr>Id</a>
@@ -1583,8 +1501,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd></dl>
+    <dd>SNAT rule ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1594,18 +1511,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing GatewaySnat resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">GatewaySnatState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">GatewaySnat</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">GatewaySnatState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">GatewaySnat</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1619,104 +1536,143 @@ Get an existing GatewaySnat resource's state with the given name, ID, and option
         <span class="nx">snat_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">subnet_cidr_block</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> GatewaySnat</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetGatewaySnat<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">GatewaySnatState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">GatewaySnat</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetGatewaySnat<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">GatewaySnatState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">GatewaySnat</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">GatewaySnat</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GatewaySnatState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">GatewaySnat</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GatewaySnatState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">GatewaySnat</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GatewaySnatState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">GatewaySnat</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GatewaySnatState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingGatewaySnat</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Nat:GatewaySnat</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_nat_gateway_snat</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GatewaySnatState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GatewaySnatState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1724,28 +1680,31 @@ Get an existing GatewaySnat resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GatewaySnatState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1753,28 +1712,31 @@ Get an existing GatewaySnat resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GatewaySnatState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1794,8 +1756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1803,8 +1764,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Description.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1812,8 +1772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID, required when <code>resourceType</code> is NETWORKINTERFACE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceprivateipaddr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceprivateipaddr_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Private<wbr>Ip<wbr>Addr</a>
@@ -1821,8 +1780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_natgatewayid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_natgatewayid_csharp" style="color: inherit; text-decoration: inherit;">Nat<wbr>Gateway<wbr>Id</a>
@@ -1830,8 +1788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>NAT gateway ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicipaddrs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicipaddrs_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Addrs</a>
@@ -1839,8 +1796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Elastic IP address pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1848,8 +1804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snatid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatid_csharp" style="color: inherit; text-decoration: inherit;">Snat<wbr>Id</a>
@@ -1857,8 +1812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SNAT rule ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetcidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetcidrblock_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Cidr<wbr>Block</a>
@@ -1866,8 +1820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1875,8 +1828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet instance ID, required when <code>resource_type</code> is SUBNET.</p>
-</dd></dl>
+    <dd>Subnet instance ID, required when <code>resourceType</code> is SUBNET.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1890,8 +1842,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1899,8 +1850,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Description.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1908,8 +1858,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID, required when <code>resourceType</code> is NETWORKINTERFACE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceprivateipaddr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceprivateipaddr_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Private<wbr>Ip<wbr>Addr</a>
@@ -1917,8 +1866,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_natgatewayid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_natgatewayid_go" style="color: inherit; text-decoration: inherit;">Nat<wbr>Gateway<wbr>Id</a>
@@ -1926,8 +1874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>NAT gateway ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicipaddrs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicipaddrs_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Addrs</a>
@@ -1935,8 +1882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Elastic IP address pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1944,8 +1890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snatid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatid_go" style="color: inherit; text-decoration: inherit;">Snat<wbr>Id</a>
@@ -1953,8 +1898,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SNAT rule ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetcidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetcidrblock_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Cidr<wbr>Block</a>
@@ -1962,8 +1906,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1971,8 +1914,93 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet instance ID, required when <code>resource_type</code> is SUBNET.</p>
-</dd></dl>
+    <dd>Subnet instance ID, required when <code>resourceType</code> is SUBNET.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID, required when <code>resourceType</code> is NETWORKINTERFACE.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_private_ip_addr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_private_ip_addr_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>private_<wbr>ip_<wbr>addr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_nat_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nat_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">nat_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>NAT gateway ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_public_ip_addrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_ip_addrs_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>addrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Elastic IP address pool.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snat_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snat_id_hcl" style="color: inherit; text-decoration: inherit;">snat_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SNAT rule ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subnet_cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_cidr_block_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet instance ID, required when <code>resourceType</code> is SUBNET.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1986,8 +2014,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1995,8 +2022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Description.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2004,8 +2030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID, required when <code>resourceType</code> is NETWORKINTERFACE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceprivateipaddr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceprivateipaddr_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Private<wbr>Ip<wbr>Addr</a>
@@ -2013,8 +2038,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_natgatewayid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_natgatewayid_java" style="color: inherit; text-decoration: inherit;">nat<wbr>Gateway<wbr>Id</a>
@@ -2022,8 +2046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>NAT gateway ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicipaddrs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicipaddrs_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Addrs</a>
@@ -2031,8 +2054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Elastic IP address pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -2040,8 +2062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snatid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatid_java" style="color: inherit; text-decoration: inherit;">snat<wbr>Id</a>
@@ -2049,8 +2070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SNAT rule ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetcidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetcidrblock_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Cidr<wbr>Block</a>
@@ -2058,8 +2078,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2067,8 +2086,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet instance ID, required when <code>resource_type</code> is SUBNET.</p>
-</dd></dl>
+    <dd>Subnet instance ID, required when <code>resourceType</code> is SUBNET.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2082,8 +2100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2091,8 +2108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Description.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2100,8 +2116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID, required when <code>resourceType</code> is NETWORKINTERFACE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceprivateipaddr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceprivateipaddr_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Private<wbr>Ip<wbr>Addr</a>
@@ -2109,8 +2124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_natgatewayid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_natgatewayid_nodejs" style="color: inherit; text-decoration: inherit;">nat<wbr>Gateway<wbr>Id</a>
@@ -2118,8 +2132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>NAT gateway ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicipaddrs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicipaddrs_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Addrs</a>
@@ -2127,8 +2140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Elastic IP address pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -2136,8 +2148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snatid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatid_nodejs" style="color: inherit; text-decoration: inherit;">snat<wbr>Id</a>
@@ -2145,8 +2156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SNAT rule ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetcidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetcidrblock_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Cidr<wbr>Block</a>
@@ -2154,8 +2164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2163,8 +2172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet instance ID, required when <code>resource_type</code> is SUBNET.</p>
-</dd></dl>
+    <dd>Subnet instance ID, required when <code>resourceType</code> is SUBNET.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2178,8 +2186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2187,8 +2194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Description.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -2196,8 +2202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID, required when <code>resourceType</code> is NETWORKINTERFACE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instance_private_ip_addr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_private_ip_addr_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>private_<wbr>ip_<wbr>addr</a>
@@ -2205,8 +2210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_nat_gateway_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nat_gateway_id_python" style="color: inherit; text-decoration: inherit;">nat_<wbr>gateway_<wbr>id</a>
@@ -2214,8 +2218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>NAT gateway ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_public_ip_addrs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_ip_addrs_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>addrs</a>
@@ -2223,8 +2226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Elastic IP address pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -2232,8 +2234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snat_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snat_id_python" style="color: inherit; text-decoration: inherit;">snat_<wbr>id</a>
@@ -2241,8 +2242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SNAT rule ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnet_cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_cidr_block_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>cidr_<wbr>block</a>
@@ -2250,8 +2250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -2259,8 +2258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet instance ID, required when <code>resource_type</code> is SUBNET.</p>
-</dd></dl>
+    <dd>Subnet instance ID, required when <code>resourceType</code> is SUBNET.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2274,8 +2272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2283,8 +2280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Description.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2292,8 +2288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID, required when <code>resourceType</code> is NETWORKINTERFACE.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceprivateipaddr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceprivateipaddr_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Private<wbr>Ip<wbr>Addr</a>
@@ -2301,8 +2296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_natgatewayid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_natgatewayid_yaml" style="color: inherit; text-decoration: inherit;">nat<wbr>Gateway<wbr>Id</a>
@@ -2310,8 +2304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>NAT gateway ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicipaddrs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicipaddrs_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Addrs</a>
@@ -2319,8 +2312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Elastic IP address pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -2328,8 +2320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_snatid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatid_yaml" style="color: inherit; text-decoration: inherit;">snat<wbr>Id</a>
@@ -2337,8 +2328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>SNAT rule ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetcidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetcidrblock_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Cidr<wbr>Block</a>
@@ -2346,8 +2336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2355,8 +2344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet instance ID, required when <code>resource_type</code> is SUBNET.</p>
-</dd></dl>
+    <dd>Subnet instance ID, required when <code>resourceType</code> is SUBNET.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2371,19 +2359,29 @@ The following state arguments are supported:
 
 
 
-VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g.
+VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resourceId range `subnetId`, `instanceId` and `""`, e.g.
 
 SUBNET SNat
 
 ```sh
-$ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
+$ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#subnet-hhi88a58
 ```
+
 NETWORKINTERFACT SNat
 
 ```sh
-$ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
+$ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#ins-p97oyxt6
 ```
 
+USERDEFINED SNat
+
+```sh
+$ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#
+```
+
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2395,7 +2393,6 @@ $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#in
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getProjects"
 title_tag: "tencentcloud.Dcdb.getProjects"
-meta_desc: "Documentation for the tencentcloud.Dcdb.getProjects function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of dcdb projects"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,42 +18,45 @@ Use this data source to query detailed information of dcdb projects
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const projects = tencentcloud.Dcdb.getProjects({});
+const projects = tencentcloud.dcdb.getProjects({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-projects = tencentcloud.Dcdb.get_projects()
+projects = tencentcloud.dcdb.get_projects()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var projects = Tencentcloud.Dcdb.GetProjects.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dcdb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dcdb.GetProjects(ctx, nil, nil)
+		_, err := dcdb.GetProjects(ctx, &dcdb.GetProjectsArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -59,6 +64,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var projects = Tencentcloud.Dcdb.GetProjects.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -67,8 +94,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dcdb.DcdbFunctions;
 import com.pulumi.tencentcloud.Dcdb.inputs.GetProjectsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -80,20 +107,50 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var projects = DcdbFunctions.getProjects();
+        final var projects = DcdbFunctions.getProjects(GetProjectsArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   projects:
     fn::invoke:
-      Function: tencentcloud:Dcdb:getProjects
-      Arguments: {}
+      function: tencentcloud:Dcdb:getProjects
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dcdb_getprojects" "projects" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeProjects](https://www.tencentcloud.com/search/?wd=DescribeProjects&type=document&lang=en)
 
 
 
@@ -105,7 +162,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -113,9 +170,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getProjects<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProjectsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProjectsResult</a></span>></span
+><span class="k">function </span>getProjects<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProjectsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProjectsResult</a></span>></span
 ><span class="k">
-function </span>getProjectsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProjectsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProjectsResult</a></span>></span
+function </span>getProjectsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProjectsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProjectsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -127,8 +184,8 @@ function </span>getProjectsOutput<span class="p">(</span><span class="nx">args</
 ><span class="k">def </span>get_projects<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetProjectsResult</span
 ><span class="k">
-def </span>get_projects_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProjectsResult]</span
+def </span>get_projects_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProjectsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -153,7 +210,8 @@ func </span>GetProjectsOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetProjects </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetProjectsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetProjectsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetProjectsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProjectsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProjectsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProjectsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProjectsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProjectsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -162,7 +220,8 @@ func </span>GetProjectsOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetProjectsResult</a></span>> </span>getProjects<span class="p">(</span><span class="nx">GetProjectsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProjectsResult</a></span>> </span>getProjects<span class="p">(</span><span class="nx">GetProjectsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProjectsResult</a></span>> </span>getProjects<span class="p">(</span><span class="nx">GetProjectsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,6 +233,15 @@ func </span>GetProjectsOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dcdb/getProjects:getProjects
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dcdb_get_projects&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -192,8 +260,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -207,8 +274,21 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -222,8 +302,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -237,8 +316,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -267,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -291,8 +367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprojectsproject">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dcdb.<wbr>Outputs.<wbr>Get<wbr>Projects<wbr>Project&gt;</a></span>
     </dt>
-    <dd><p>Project list.</p>
-</dd><dt class="property-"
+    <dd>Project list.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -300,8 +375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -323,8 +397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projects_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projects_go" style="color: inherit; text-decoration: inherit;">Projects</a>
@@ -332,11 +405,40 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprojectsproject">[]Get<wbr>Projects<wbr>Project</a></span>
     </dt>
-    <dd><p>Project list.</p>
-</dd><dt class="property-"
+    <dd>Project list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="projects_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projects_hcl" style="color: inherit; text-decoration: inherit;">projects</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getprojectsproject">list(object)</a></span>
+    </dt>
+    <dd>Project list.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -355,8 +457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projects_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projects_java" style="color: inherit; text-decoration: inherit;">projects</a>
@@ -364,8 +465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprojectsproject">List&lt;Get<wbr>Projects<wbr>Project&gt;</a></span>
     </dt>
-    <dd><p>Project list.</p>
-</dd><dt class="property-"
+    <dd>Project list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -387,8 +487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projects_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projects_nodejs" style="color: inherit; text-decoration: inherit;">projects</a>
@@ -396,8 +495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprojectsproject">Get<wbr>Projects<wbr>Project[]</a></span>
     </dt>
-    <dd><p>Project list.</p>
-</dd><dt class="property-"
+    <dd>Project list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -419,17 +517,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projects_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projects_python" style="color: inherit; text-decoration: inherit;">projects</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getprojectsproject">Get<wbr>Projects<wbr>Project]</a></span>
+        <span class="property-type"><a href="#getprojectsproject">Sequence[Get<wbr>Projects<wbr>Project]</a></span>
     </dt>
-    <dd><p>Project list.</p>
-</dd><dt class="property-"
+    <dd>Project list.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -451,8 +547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projects_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projects_yaml" style="color: inherit; text-decoration: inherit;">projects</a>
@@ -460,8 +555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprojectsproject">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Project list.</p>
-</dd><dt class="property-"
+    <dd>Project list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -493,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Application ID.</p>
-</dd><dt class="property-required"
+    <dd>Application ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -502,8 +595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="creatoruin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creatoruin_csharp" style="color: inherit; text-decoration: inherit;">Creator<wbr>Uin</a>
@@ -511,8 +603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creator UIN.</p>
-</dd><dt class="property-required"
+    <dd>Creator UIN.</dd><dt class="property-required"
             title="Required">
         <span id="info_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#info_csharp" style="color: inherit; text-decoration: inherit;">Info</a>
@@ -520,8 +611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required"
+    <dd>Description.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -529,8 +619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether it is the default project. Valid values: <code>1</code> (yes), <code>0</code> (no).</p>
-</dd><dt class="property-required"
+    <dd>Whether it is the default project. Valid values: <code>1</code> (yes), <code>0</code> (no).</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -538,8 +627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project name.</p>
-</dd><dt class="property-required"
+    <dd>Project name.</dd><dt class="property-required"
             title="Required">
         <span id="owneruin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owneruin_csharp" style="color: inherit; text-decoration: inherit;">Owner<wbr>Uin</a>
@@ -547,8 +635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The UIN of the resource owner (root account).</p>
-</dd><dt class="property-required"
+    <dd>The UIN of the resource owner (root account).</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -556,8 +643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="srcappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcappid_csharp" style="color: inherit; text-decoration: inherit;">Src<wbr>App<wbr>Id</a>
@@ -565,8 +651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source APPID.</p>
-</dd><dt class="property-required"
+    <dd>Source APPID.</dd><dt class="property-required"
             title="Required">
         <span id="srcplat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcplat_csharp" style="color: inherit; text-decoration: inherit;">Src<wbr>Plat</a>
@@ -574,8 +659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source platform.</p>
-</dd><dt class="property-required"
+    <dd>Source platform.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -583,8 +667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project status. Valid values: <code>0</code> (normal), <code>-1</code> (disabled), <code>3</code> (default project).</p>
-</dd></dl>
+    <dd>Project status. Valid values: <code>0</code> (normal), <code>-1</code> (disabled), <code>3</code> (default project).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -598,8 +681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Application ID.</p>
-</dd><dt class="property-required"
+    <dd>Application ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -607,8 +689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="creatoruin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creatoruin_go" style="color: inherit; text-decoration: inherit;">Creator<wbr>Uin</a>
@@ -616,8 +697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creator UIN.</p>
-</dd><dt class="property-required"
+    <dd>Creator UIN.</dd><dt class="property-required"
             title="Required">
         <span id="info_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#info_go" style="color: inherit; text-decoration: inherit;">Info</a>
@@ -625,8 +705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required"
+    <dd>Description.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Default</a>
@@ -634,8 +713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether it is the default project. Valid values: <code>1</code> (yes), <code>0</code> (no).</p>
-</dd><dt class="property-required"
+    <dd>Whether it is the default project. Valid values: <code>1</code> (yes), <code>0</code> (no).</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -643,8 +721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project name.</p>
-</dd><dt class="property-required"
+    <dd>Project name.</dd><dt class="property-required"
             title="Required">
         <span id="owneruin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owneruin_go" style="color: inherit; text-decoration: inherit;">Owner<wbr>Uin</a>
@@ -652,8 +729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The UIN of the resource owner (root account).</p>
-</dd><dt class="property-required"
+    <dd>The UIN of the resource owner (root account).</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -661,8 +737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="srcappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcappid_go" style="color: inherit; text-decoration: inherit;">Src<wbr>App<wbr>Id</a>
@@ -670,8 +745,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source APPID.</p>
-</dd><dt class="property-required"
+    <dd>Source APPID.</dd><dt class="property-required"
             title="Required">
         <span id="srcplat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcplat_go" style="color: inherit; text-decoration: inherit;">Src<wbr>Plat</a>
@@ -679,8 +753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source platform.</p>
-</dd><dt class="property-required"
+    <dd>Source platform.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -688,8 +761,101 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project status. Valid values: <code>0</code> (normal), <code>-1</code> (disabled), <code>3</code> (default project).</p>
-</dd></dl>
+    <dd>Project status. Valid values: <code>0</code> (normal), <code>-1</code> (disabled), <code>3</code> (default project).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#app_id_hcl" style="color: inherit; text-decoration: inherit;">app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Application ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time.</dd><dt class="property-required"
+            title="Required">
+        <span id="creator_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creator_uin_hcl" style="color: inherit; text-decoration: inherit;">creator_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Creator UIN.</dd><dt class="property-required"
+            title="Required">
+        <span id="info_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#info_hcl" style="color: inherit; text-decoration: inherit;">info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether it is the default project. Valid values: <code>1</code> (yes), <code>0</code> (no).</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Project name.</dd><dt class="property-required"
+            title="Required">
+        <span id="owner_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owner_uin_hcl" style="color: inherit; text-decoration: inherit;">owner_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The UIN of the resource owner (root account).</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="src_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_app_id_hcl" style="color: inherit; text-decoration: inherit;">src_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Source APPID.</dd><dt class="property-required"
+            title="Required">
+        <span id="src_plat_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_plat_hcl" style="color: inherit; text-decoration: inherit;">src_<wbr>plat</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Source platform.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project status. Valid values: <code>0</code> (normal), <code>-1</code> (disabled), <code>3</code> (default project).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -703,8 +869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Application ID.</p>
-</dd><dt class="property-required"
+    <dd>Application ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -712,8 +877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="creatoruin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creatoruin_java" style="color: inherit; text-decoration: inherit;">creator<wbr>Uin</a>
@@ -721,8 +885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Creator UIN.</p>
-</dd><dt class="property-required"
+    <dd>Creator UIN.</dd><dt class="property-required"
             title="Required">
         <span id="info_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#info_java" style="color: inherit; text-decoration: inherit;">info</a>
@@ -730,8 +893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required"
+    <dd>Description.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_java" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -739,8 +901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether it is the default project. Valid values: <code>1</code> (yes), <code>0</code> (no).</p>
-</dd><dt class="property-required"
+    <dd>Whether it is the default project. Valid values: <code>1</code> (yes), <code>0</code> (no).</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -748,8 +909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project name.</p>
-</dd><dt class="property-required"
+    <dd>Project name.</dd><dt class="property-required"
             title="Required">
         <span id="owneruin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owneruin_java" style="color: inherit; text-decoration: inherit;">owner<wbr>Uin</a>
@@ -757,8 +917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The UIN of the resource owner (root account).</p>
-</dd><dt class="property-required"
+    <dd>The UIN of the resource owner (root account).</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -766,8 +925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="srcappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcappid_java" style="color: inherit; text-decoration: inherit;">src<wbr>App<wbr>Id</a>
@@ -775,8 +933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Source APPID.</p>
-</dd><dt class="property-required"
+    <dd>Source APPID.</dd><dt class="property-required"
             title="Required">
         <span id="srcplat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcplat_java" style="color: inherit; text-decoration: inherit;">src<wbr>Plat</a>
@@ -784,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Source platform.</p>
-</dd><dt class="property-required"
+    <dd>Source platform.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -793,8 +949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project status. Valid values: <code>0</code> (normal), <code>-1</code> (disabled), <code>3</code> (default project).</p>
-</dd></dl>
+    <dd>Project status. Valid values: <code>0</code> (normal), <code>-1</code> (disabled), <code>3</code> (default project).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -808,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Application ID.</p>
-</dd><dt class="property-required"
+    <dd>Application ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -817,8 +971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="creatoruin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creatoruin_nodejs" style="color: inherit; text-decoration: inherit;">creator<wbr>Uin</a>
@@ -826,8 +979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Creator UIN.</p>
-</dd><dt class="property-required"
+    <dd>Creator UIN.</dd><dt class="property-required"
             title="Required">
         <span id="info_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#info_nodejs" style="color: inherit; text-decoration: inherit;">info</a>
@@ -835,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required"
+    <dd>Description.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -844,8 +995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether it is the default project. Valid values: <code>1</code> (yes), <code>0</code> (no).</p>
-</dd><dt class="property-required"
+    <dd>Whether it is the default project. Valid values: <code>1</code> (yes), <code>0</code> (no).</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -853,8 +1003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Project name.</p>
-</dd><dt class="property-required"
+    <dd>Project name.</dd><dt class="property-required"
             title="Required">
         <span id="owneruin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owneruin_nodejs" style="color: inherit; text-decoration: inherit;">owner<wbr>Uin</a>
@@ -862,8 +1011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The UIN of the resource owner (root account).</p>
-</dd><dt class="property-required"
+    <dd>The UIN of the resource owner (root account).</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -871,8 +1019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="srcappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcappid_nodejs" style="color: inherit; text-decoration: inherit;">src<wbr>App<wbr>Id</a>
@@ -880,8 +1027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Source APPID.</p>
-</dd><dt class="property-required"
+    <dd>Source APPID.</dd><dt class="property-required"
             title="Required">
         <span id="srcplat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcplat_nodejs" style="color: inherit; text-decoration: inherit;">src<wbr>Plat</a>
@@ -889,8 +1035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source platform.</p>
-</dd><dt class="property-required"
+    <dd>Source platform.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -898,8 +1043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project status. Valid values: <code>0</code> (normal), <code>-1</code> (disabled), <code>3</code> (default project).</p>
-</dd></dl>
+    <dd>Project status. Valid values: <code>0</code> (normal), <code>-1</code> (disabled), <code>3</code> (default project).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -913,8 +1057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Application ID.</p>
-</dd><dt class="property-required"
+    <dd>Application ID.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -922,8 +1065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="creator_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creator_uin_python" style="color: inherit; text-decoration: inherit;">creator_<wbr>uin</a>
@@ -931,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Creator UIN.</p>
-</dd><dt class="property-required"
+    <dd>Creator UIN.</dd><dt class="property-required"
             title="Required">
         <span id="info_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#info_python" style="color: inherit; text-decoration: inherit;">info</a>
@@ -940,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required"
+    <dd>Description.</dd><dt class="property-required"
             title="Required">
         <span id="is_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_default_python" style="color: inherit; text-decoration: inherit;">is_<wbr>default</a>
@@ -949,8 +1089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether it is the default project. Valid values: <code>1</code> (yes), <code>0</code> (no).</p>
-</dd><dt class="property-required"
+    <dd>Whether it is the default project. Valid values: <code>1</code> (yes), <code>0</code> (no).</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -958,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Project name.</p>
-</dd><dt class="property-required"
+    <dd>Project name.</dd><dt class="property-required"
             title="Required">
         <span id="owner_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owner_uin_python" style="color: inherit; text-decoration: inherit;">owner_<wbr>uin</a>
@@ -967,8 +1105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The UIN of the resource owner (root account).</p>
-</dd><dt class="property-required"
+    <dd>The UIN of the resource owner (root account).</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -976,8 +1113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="src_app_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_app_id_python" style="color: inherit; text-decoration: inherit;">src_<wbr>app_<wbr>id</a>
@@ -985,8 +1121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source APPID.</p>
-</dd><dt class="property-required"
+    <dd>Source APPID.</dd><dt class="property-required"
             title="Required">
         <span id="src_plat_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#src_plat_python" style="color: inherit; text-decoration: inherit;">src_<wbr>plat</a>
@@ -994,8 +1129,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Source platform.</p>
-</dd><dt class="property-required"
+    <dd>Source platform.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1003,8 +1137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project status. Valid values: <code>0</code> (normal), <code>-1</code> (disabled), <code>3</code> (default project).</p>
-</dd></dl>
+    <dd>Project status. Valid values: <code>0</code> (normal), <code>-1</code> (disabled), <code>3</code> (default project).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1018,8 +1151,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Application ID.</p>
-</dd><dt class="property-required"
+    <dd>Application ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1027,8 +1159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="creatoruin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creatoruin_yaml" style="color: inherit; text-decoration: inherit;">creator<wbr>Uin</a>
@@ -1036,8 +1167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Creator UIN.</p>
-</dd><dt class="property-required"
+    <dd>Creator UIN.</dd><dt class="property-required"
             title="Required">
         <span id="info_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#info_yaml" style="color: inherit; text-decoration: inherit;">info</a>
@@ -1045,8 +1175,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required"
+    <dd>Description.</dd><dt class="property-required"
             title="Required">
         <span id="isdefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isdefault_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Default</a>
@@ -1054,8 +1183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether it is the default project. Valid values: <code>1</code> (yes), <code>0</code> (no).</p>
-</dd><dt class="property-required"
+    <dd>Whether it is the default project. Valid values: <code>1</code> (yes), <code>0</code> (no).</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1063,8 +1191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Project name.</p>
-</dd><dt class="property-required"
+    <dd>Project name.</dd><dt class="property-required"
             title="Required">
         <span id="owneruin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#owneruin_yaml" style="color: inherit; text-decoration: inherit;">owner<wbr>Uin</a>
@@ -1072,8 +1199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The UIN of the resource owner (root account).</p>
-</dd><dt class="property-required"
+    <dd>The UIN of the resource owner (root account).</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1081,8 +1207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID.</p>
-</dd><dt class="property-required"
+    <dd>Project ID.</dd><dt class="property-required"
             title="Required">
         <span id="srcappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcappid_yaml" style="color: inherit; text-decoration: inherit;">src<wbr>App<wbr>Id</a>
@@ -1090,8 +1215,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Source APPID.</p>
-</dd><dt class="property-required"
+    <dd>Source APPID.</dd><dt class="property-required"
             title="Required">
         <span id="srcplat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#srcplat_yaml" style="color: inherit; text-decoration: inherit;">src<wbr>Plat</a>
@@ -1099,8 +1223,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Source platform.</p>
-</dd><dt class="property-required"
+    <dd>Source platform.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1108,8 +1231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project status. Valid values: <code>0</code> (normal), <code>-1</code> (disabled), <code>3</code> (default project).</p>
-</dd></dl>
+    <dd>Project status. Valid values: <code>0</code> (normal), <code>-1</code> (disabled), <code>3</code> (default project).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1124,7 +1246,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

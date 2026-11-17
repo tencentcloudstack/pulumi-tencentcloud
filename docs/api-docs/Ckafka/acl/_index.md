@@ -2,9 +2,11 @@
 ---
 title: "Acl"
 title_tag: "tencentcloud.Ckafka.Acl"
-meta_desc: "Documentation for the tencentcloud.Ckafka.Acl resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a Ckafka Acl. Note: When creating the ACL, if the cloud API CreateAcl returns a FailedOperation error (e.g. the instance is."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,77 +16,90 @@ no_edit_this_page: true
 
 Provides a resource to create a Ckafka Acl.
 
+> **Note:** When creating the ACL, if the cloud API `CreateAcl` returns a `FailedOperation` error (e.g. the instance is being modified or the cluster is busy), the provider will automatically retry the request using `resource.Retry` with `WriteRetryTimeout` as the timeout. A maximum of 5 `FailedOperation` errors are tolerated before giving up to avoid indefinite retries.
+
 ## Example Usage
 
 ### Ckafka Acl
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.ckafka.Acl("foo", {
-    instanceId: "ckafka-f9ife4zz",
+const example = new tencentcloud.ckafka.User("example", {
+    instanceId: "ckafka-7k5nbnem",
+    accountName: "tf-example",
+    password: "Password@123",
+});
+const exampleAcl = new tencentcloud.ckafka.Acl("example", {
+    instanceId: "ckafka-7k5nbnem",
     resourceType: "TOPIC",
-    resourceName: "topic-tf-test",
+    resourceName: "tf-example-resource",
     operationType: "WRITE",
     permissionType: "ALLOW",
     host: "*",
-    principal: tencentcloud_ckafka_user.foo.account_name,
+    principal: example.accountName,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.ckafka.Acl("foo",
-    instance_id="ckafka-f9ife4zz",
+example = tencentcloud.ckafka.User("example",
+    instance_id="ckafka-7k5nbnem",
+    account_name="tf-example",
+    password="Password@123")
+example_acl = tencentcloud.ckafka.Acl("example",
+    instance_id="ckafka-7k5nbnem",
     resource_type="TOPIC",
-    resource_name_="topic-tf-test",
+    resource_name_="tf-example-resource",
     operation_type="WRITE",
     permission_type="ALLOW",
     host="*",
-    principal=tencentcloud_ckafka_user["foo"]["account_name"])
+    principal=example.account_name)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Ckafka.Acl("foo", new()
-    {
-        InstanceId = "ckafka-f9ife4zz",
-        ResourceType = "TOPIC",
-        ResourceName = "topic-tf-test",
-        OperationType = "WRITE",
-        PermissionType = "ALLOW",
-        Host = "*",
-        Principal = tencentcloud_ckafka_user.Foo.Account_name,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ckafka"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ckafka.NewAcl(ctx, "foo", &Ckafka.AclArgs{
-			InstanceId:     pulumi.String("ckafka-f9ife4zz"),
+		example, err := ckafka.NewUser(ctx, "example", &ckafka.UserArgs{
+			InstanceId:  pulumi.String("ckafka-7k5nbnem"),
+			AccountName: pulumi.String("tf-example"),
+			Password:    pulumi.String("Password@123"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = ckafka.NewAcl(ctx, "example", &ckafka.AclArgs{
+			InstanceId:     pulumi.String("ckafka-7k5nbnem"),
 			ResourceType:   pulumi.String("TOPIC"),
-			ResourceName:   pulumi.String("topic-tf-test"),
+			ResourceName:   pulumi.String("tf-example-resource"),
 			OperationType:  pulumi.String("WRITE"),
 			PermissionType: pulumi.String("ALLOW"),
 			Host:           pulumi.String("*"),
-			Principal:      pulumi.Any(tencentcloud_ckafka_user.Foo.Account_name),
+			Principal:      example.AccountName,
 		})
 		if err != nil {
 			return err
@@ -93,16 +108,56 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Ckafka.User("example", new()
+    {
+        InstanceId = "ckafka-7k5nbnem",
+        AccountName = "tf-example",
+        Password = "Password@123",
+    });
+
+    var exampleAcl = new Tencentcloud.Ckafka.Acl("example", new()
+    {
+        InstanceId = "ckafka-7k5nbnem",
+        ResourceType = "TOPIC",
+        ResourceName = "tf-example-resource",
+        OperationType = "WRITE",
+        PermissionType = "ALLOW",
+        Host = "*",
+        Principal = example.AccountName,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Ckafka.User;
+import com.pulumi.tencentcloud.Ckafka.UserArgs;
 import com.pulumi.tencentcloud.Ckafka.Acl;
 import com.pulumi.tencentcloud.Ckafka.AclArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -114,97 +169,171 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Acl("foo", AclArgs.builder()        
-            .instanceId("ckafka-f9ife4zz")
+        var example = new User("example", UserArgs.builder()
+            .instanceId("ckafka-7k5nbnem")
+            .accountName("tf-example")
+            .password("Password@123")
+            .build());
+
+        var exampleAcl = new Acl("exampleAcl", AclArgs.builder()
+            .instanceId("ckafka-7k5nbnem")
             .resourceType("TOPIC")
-            .resourceName("topic-tf-test")
+            .resourceName("tf-example-resource")
             .operationType("WRITE")
             .permissionType("ALLOW")
             .host("*")
-            .principal(tencentcloud_ckafka_user.foo().account_name())
+            .principal(example.accountName())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  foo:
-    type: tencentcloud:Ckafka:Acl
+  example:
+    type: tencentcloud:Ckafka:User
     properties:
-      instanceId: ckafka-f9ife4zz
+      instanceId: ckafka-7k5nbnem
+      accountName: tf-example
+      password: Password@123
+  exampleAcl:
+    type: tencentcloud:Ckafka:Acl
+    name: example
+    properties:
+      instanceId: ckafka-7k5nbnem
       resourceType: TOPIC
-      resourceName: topic-tf-test
+      resourceName: tf-example-resource
       operationType: WRITE
       permissionType: ALLOW
       host: '*'
-      principal: ${tencentcloud_ckafka_user.foo.account_name}
+      principal: ${example.accountName}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_ckafka_user" "example" {
+  instance_id  = "ckafka-7k5nbnem"
+  account_name = "tf-example"
+  password     = "Password@123"
+}
+resource "tencentcloud_ckafka_acl" "example" {
+  instance_id     = "ckafka-7k5nbnem"
+  resource_type   = "TOPIC"
+  resource_name   = "tf-example-resource"
+  operation_type  = "WRITE"
+  permission_type = "ALLOW"
+  host            = "*"
+  principal       = tencentcloud_ckafka_user.example.account_name
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateAcl](https://www.tencentcloud.com/document/api/597/35368)
+* Read:
+  - [DescribeACL](https://www.tencentcloud.com/document/api/597/35364)
+  - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+  - [DescribeTopicAttributes](https://www.tencentcloud.com/document/api/597/35342)
+* Delete: [DeleteAcl](https://www.tencentcloud.com/document/api/597/35366)
 
 
 ## Create Acl Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">host</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">operation_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">permission_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">principal</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">resource_name_</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span>
-        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+        <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">operation_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">resource_name_</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">host</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">permission_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">principal</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAcl</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Acl</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAcl</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Acl</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ckafka:Acl</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ckafka:Acl</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_ckafka_acl&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -225,7 +354,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -342,11 +471,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Acl Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -362,8 +499,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the ckafka instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the ckafka instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="operationtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationtype_csharp" style="color: inherit; text-decoration: inherit;">Operation<wbr>Type</a>
@@ -371,8 +507,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Name</a>
@@ -380,8 +515,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="host_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_csharp" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -389,8 +523,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="permissiontype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permissiontype_csharp" style="color: inherit; text-decoration: inherit;">Permission<wbr>Type</a>
@@ -398,8 +531,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="principal_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_csharp" style="color: inherit; text-decoration: inherit;">Principal</a>
@@ -407,8 +539,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -416,8 +547,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -431,8 +561,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the ckafka instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the ckafka instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="operationtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationtype_go" style="color: inherit; text-decoration: inherit;">Operation<wbr>Type</a>
@@ -440,8 +569,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Name</a>
@@ -449,8 +577,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="host_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_go" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -458,8 +585,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="permissiontype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permissiontype_go" style="color: inherit; text-decoration: inherit;">Permission<wbr>Type</a>
@@ -467,8 +593,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="principal_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_go" style="color: inherit; text-decoration: inherit;">Principal</a>
@@ -476,8 +601,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -485,8 +609,69 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the ckafka instance.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="operation_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_type_hcl" style="color: inherit; text-decoration: inherit;">operation_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="resource_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_name_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="permission_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permission_type_hcl" style="color: inherit; text-decoration: inherit;">permission_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="principal_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_hcl" style="color: inherit; text-decoration: inherit;">principal</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -500,8 +685,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the ckafka instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the ckafka instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="operationtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationtype_java" style="color: inherit; text-decoration: inherit;">operation<wbr>Type</a>
@@ -509,8 +693,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Name</a>
@@ -518,8 +701,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="host_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_java" style="color: inherit; text-decoration: inherit;">host</a>
@@ -527,8 +709,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="permissiontype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permissiontype_java" style="color: inherit; text-decoration: inherit;">permission<wbr>Type</a>
@@ -536,8 +717,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="principal_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_java" style="color: inherit; text-decoration: inherit;">principal</a>
@@ -545,8 +725,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -554,8 +733,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -569,8 +747,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the ckafka instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the ckafka instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="operationtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationtype_nodejs" style="color: inherit; text-decoration: inherit;">operation<wbr>Type</a>
@@ -578,8 +755,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Name</a>
@@ -587,8 +763,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="host_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_nodejs" style="color: inherit; text-decoration: inherit;">host</a>
@@ -596,8 +771,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="permissiontype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permissiontype_nodejs" style="color: inherit; text-decoration: inherit;">permission<wbr>Type</a>
@@ -605,8 +779,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="principal_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_nodejs" style="color: inherit; text-decoration: inherit;">principal</a>
@@ -614,8 +787,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -623,8 +795,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -638,8 +809,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the ckafka instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the ckafka instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="operation_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_type_python" style="color: inherit; text-decoration: inherit;">operation_<wbr>type</a>
@@ -647,8 +817,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resource_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_name_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>name</a>
@@ -656,8 +825,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_python" style="color: inherit; text-decoration: inherit;">host</a>
@@ -665,8 +833,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="permission_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permission_type_python" style="color: inherit; text-decoration: inherit;">permission_<wbr>type</a>
@@ -674,8 +841,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="principal_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_python" style="color: inherit; text-decoration: inherit;">principal</a>
@@ -683,8 +849,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -692,8 +857,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -707,8 +871,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the ckafka instance.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the ckafka instance.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="operationtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationtype_yaml" style="color: inherit; text-decoration: inherit;">operation<wbr>Type</a>
@@ -716,8 +879,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Name</a>
@@ -725,8 +887,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="host_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_yaml" style="color: inherit; text-decoration: inherit;">host</a>
@@ -734,8 +895,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="permissiontype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permissiontype_yaml" style="color: inherit; text-decoration: inherit;">permission<wbr>Type</a>
@@ -743,8 +903,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="principal_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_yaml" style="color: inherit; text-decoration: inherit;">principal</a>
@@ -752,8 +911,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -761,8 +919,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -783,8 +940,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -798,8 +954,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -813,8 +982,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -828,8 +996,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -843,8 +1010,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -858,8 +1024,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -869,18 +1034,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Acl resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AclState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Acl</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AclState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Acl</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -891,104 +1056,143 @@ Get an existing Acl resource's state with the given name, ID, and optional extra
         <span class="nx">principal</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">resource_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Acl</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAcl<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AclState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Acl</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAcl<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AclState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Acl</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Acl</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AclState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Acl</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AclState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Acl</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AclState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Acl</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AclState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingAcl</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Ckafka:Acl</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_ckafka_acl</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AclState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AclState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -996,28 +1200,31 @@ Get an existing Acl resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AclState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1025,28 +1232,31 @@ Get an existing Acl resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AclState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1066,8 +1276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1075,8 +1284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the ckafka instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the ckafka instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_operationtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationtype_csharp" style="color: inherit; text-decoration: inherit;">Operation<wbr>Type</a>
@@ -1084,8 +1292,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_permissiontype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_permissiontype_csharp" style="color: inherit; text-decoration: inherit;">Permission<wbr>Type</a>
@@ -1093,8 +1300,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_principal_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_principal_csharp" style="color: inherit; text-decoration: inherit;">Principal</a>
@@ -1102,8 +1308,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcename_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Name</a>
@@ -1111,8 +1316,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1120,8 +1324,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1135,8 +1338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1144,8 +1346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the ckafka instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the ckafka instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_operationtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationtype_go" style="color: inherit; text-decoration: inherit;">Operation<wbr>Type</a>
@@ -1153,8 +1354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_permissiontype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_permissiontype_go" style="color: inherit; text-decoration: inherit;">Permission<wbr>Type</a>
@@ -1162,8 +1362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_principal_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_principal_go" style="color: inherit; text-decoration: inherit;">Principal</a>
@@ -1171,8 +1370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcename_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Name</a>
@@ -1180,8 +1378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1189,8 +1386,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the ckafka instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_operation_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operation_type_hcl" style="color: inherit; text-decoration: inherit;">operation_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_permission_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_permission_type_hcl" style="color: inherit; text-decoration: inherit;">permission_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_principal_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_principal_hcl" style="color: inherit; text-decoration: inherit;">principal</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_resource_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_name_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1204,8 +1462,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1213,8 +1470,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the ckafka instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the ckafka instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_operationtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationtype_java" style="color: inherit; text-decoration: inherit;">operation<wbr>Type</a>
@@ -1222,8 +1478,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_permissiontype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_permissiontype_java" style="color: inherit; text-decoration: inherit;">permission<wbr>Type</a>
@@ -1231,8 +1486,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_principal_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_principal_java" style="color: inherit; text-decoration: inherit;">principal</a>
@@ -1240,8 +1494,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcename_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Name</a>
@@ -1249,8 +1502,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1258,8 +1510,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1273,8 +1524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1282,8 +1532,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the ckafka instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the ckafka instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_operationtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationtype_nodejs" style="color: inherit; text-decoration: inherit;">operation<wbr>Type</a>
@@ -1291,8 +1540,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_permissiontype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_permissiontype_nodejs" style="color: inherit; text-decoration: inherit;">permission<wbr>Type</a>
@@ -1300,8 +1548,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_principal_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_principal_nodejs" style="color: inherit; text-decoration: inherit;">principal</a>
@@ -1309,8 +1556,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcename_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Name</a>
@@ -1318,8 +1564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1327,8 +1572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1342,8 +1586,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1351,8 +1594,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the ckafka instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the ckafka instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_operation_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operation_type_python" style="color: inherit; text-decoration: inherit;">operation_<wbr>type</a>
@@ -1360,8 +1602,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_permission_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_permission_type_python" style="color: inherit; text-decoration: inherit;">permission_<wbr>type</a>
@@ -1369,8 +1610,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_principal_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_principal_python" style="color: inherit; text-decoration: inherit;">principal</a>
@@ -1378,8 +1618,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resource_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_name_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>name</a>
@@ -1387,8 +1626,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -1396,8 +1634,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1411,8 +1648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The default is *, which means that any host can access it. Support filling in IP or network segment, and support <code>;</code>separation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1420,8 +1656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the ckafka instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the ckafka instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_operationtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationtype_yaml" style="color: inherit; text-decoration: inherit;">operation<wbr>Type</a>
@@ -1429,8 +1664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL operation mode. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>ALL</code>, <code>READ</code>, <code>WRITE</code>, <code>CREATE</code>, <code>DELETE</code>, <code>ALTER</code>, <code>DESCRIBE</code>, <code>CLUSTER_ACTION</code>, <code>DESCRIBE_CONFIGS</code> and <code>ALTER_CONFIGS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_permissiontype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_permissiontype_yaml" style="color: inherit; text-decoration: inherit;">permission<wbr>Type</a>
@@ -1438,8 +1672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL permission type. Valid values: <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>. and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_principal_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_principal_yaml" style="color: inherit; text-decoration: inherit;">principal</a>
@@ -1447,8 +1680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User list. The default value is <code>*</code>, which means that any user can access. The current user can only be one included in the user list. For example: <code>root</code> meaning user root can access.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcename_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Name</a>
@@ -1456,8 +1688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1465,8 +1696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. and <code>TOPIC</code> by default. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1481,12 +1711,15 @@ The following state arguments are supported:
 
 
 
-Ckafka acl can be imported using the instance_id#permission_type#principal#host#operation_type#resource_type#resource_name, e.g.
+Ckafka Acl can be imported using the instance_id#permission_type#principal#host#operation_type#resource_type#resource_name, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Ckafka/acl:Acl foo ckafka-f9ife4zz#ALLOW#test#*#WRITE#TOPIC#topic-tf-test
+$ pulumi import tencentcloud:Ckafka/acl:Acl example ckafka-7k5nbnem#ALLOW#tf-example#*#WRITE#TOPIC#tf-example-resource
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1498,7 +1731,6 @@ $ pulumi import tencentcloud:Ckafka/acl:Acl foo ckafka-f9ife4zz#ALLOW#test#*#WRI
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

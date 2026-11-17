@@ -2,9 +2,11 @@
 ---
 title: "Index"
 title_tag: "tencentcloud.Cls.Index"
-meta_desc: "Documentation for the tencentcloud.Cls.Index resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a cls index."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,20 +18,25 @@ Provides a resource to create a cls index.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleLogset = new tencentcloud.cls.Logset("exampleLogset", {
+const example = new tencentcloud.cls.Logset("example", {
     logsetName: "tf_example",
     tags: {
         demo: "test",
     },
 });
-const exampleTopic = new tencentcloud.cls.Topic("exampleTopic", {
+const exampleTopic = new tencentcloud.cls.Topic("example", {
     topicName: "tf_example",
-    logsetId: exampleLogset.id,
+    logsetId: example.id,
     autoSplit: false,
     maxSplitPartitions: 20,
     partitionCount: 1,
@@ -41,9 +48,11 @@ const exampleTopic = new tencentcloud.cls.Topic("exampleTopic", {
         test: "test",
     },
 });
-const tokenizerValue = "@&?|#()='\",;:<>[]{}";
-const exampleIndex = new tencentcloud.cls.Index("exampleIndex", {
-    topicId: exampleTopic.id,
+const tokenizerValue = `@&?|#()='\\\\\\",;:<>[]{}/ \\
+\\\\t\\\\r\\\\\\\\
+`;
+const exampleIndex = new tencentcloud.cls.Index("example", {
+    topicId: "abc97756-e620-47a4-aa2b-08561e79f086",
     rule: {
         fullText: {
             caseSensitive: true,
@@ -54,21 +63,67 @@ const exampleIndex = new tencentcloud.cls.Index("exampleIndex", {
             caseSensitive: true,
             keyValues: [
                 {
-                    key: "hello",
+                    key: "key1",
                     value: {
                         containZH: true,
                         sqlFlag: true,
                         tokenizer: tokenizerValue,
                         type: "text",
+                        alias: "alias1",
                     },
                 },
                 {
-                    key: "world",
+                    key: "key2",
                     value: {
                         containZH: true,
                         sqlFlag: true,
                         tokenizer: tokenizerValue,
-                        type: "text",
+                        type: "json",
+                        alias: "alias2",
+                        childNodes: [
+                            {
+                                key: "key3",
+                                value: {
+                                    containZH: true,
+                                    sqlFlag: true,
+                                    tokenizer: tokenizerValue,
+                                    type: "json",
+                                    alias: "alias3",
+                                    childNodes: [
+                                        {
+                                            key: "key4",
+                                            value: {
+                                                containZH: true,
+                                                sqlFlag: true,
+                                                tokenizer: tokenizerValue,
+                                                type: "text",
+                                                alias: "alias4",
+                                            },
+                                        },
+                                        {
+                                            key: "key5",
+                                            value: {
+                                                containZH: true,
+                                                sqlFlag: true,
+                                                tokenizer: tokenizerValue,
+                                                type: "text",
+                                                alias: "name5",
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                            {
+                                key: "key6",
+                                value: {
+                                    containZH: true,
+                                    sqlFlag: true,
+                                    tokenizer: tokenizerValue,
+                                    type: "text",
+                                    alias: "name6",
+                                },
+                            },
+                        ],
                     },
                 },
             ],
@@ -94,18 +149,23 @@ const exampleIndex = new tencentcloud.cls.Index("exampleIndex", {
     metadataFlag: 1,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_logset = tencentcloud.cls.Logset("exampleLogset",
+example = tencentcloud.cls.Logset("example",
     logset_name="tf_example",
     tags={
         "demo": "test",
     })
-example_topic = tencentcloud.cls.Topic("exampleTopic",
+example_topic = tencentcloud.cls.Topic("example",
     topic_name="tf_example",
-    logset_id=example_logset.id,
+    logset_id=example.id,
     auto_split=False,
     max_split_partitions=20,
     partition_count=1,
@@ -116,58 +176,259 @@ example_topic = tencentcloud.cls.Topic("exampleTopic",
     tags={
         "test": "test",
     })
-tokenizer_value = "@&?|#()='\",;:<>[]{}"
-example_index = tencentcloud.cls.Index("exampleIndex",
-    topic_id=example_topic.id,
-    rule=tencentcloud.cls.IndexRuleArgs(
-        full_text=tencentcloud.cls.IndexRuleFullTextArgs(
-            case_sensitive=True,
-            tokenizer=tokenizer_value,
-            contain_zh=True,
-        ),
-        key_value=tencentcloud.cls.IndexRuleKeyValueArgs(
-            case_sensitive=True,
-            key_values=[
-                tencentcloud.cls.IndexRuleKeyValueKeyValueArgs(
-                    key="hello",
-                    value=tencentcloud.cls.IndexRuleKeyValueKeyValueValueArgs(
-                        contain_zh=True,
-                        sql_flag=True,
-                        tokenizer=tokenizer_value,
-                        type="text",
-                    ),
-                ),
-                tencentcloud.cls.IndexRuleKeyValueKeyValueArgs(
-                    key="world",
-                    value=tencentcloud.cls.IndexRuleKeyValueKeyValueValueArgs(
-                        contain_zh=True,
-                        sql_flag=True,
-                        tokenizer=tokenizer_value,
-                        type="text",
-                    ),
-                ),
+tokenizer_value = """@&?|#()='\\\",;:<>[]{}/ \
+\\t\\r\\\\
+"""
+example_index = tencentcloud.cls.Index("example",
+    topic_id="abc97756-e620-47a4-aa2b-08561e79f086",
+    rule={
+        "full_text": {
+            "case_sensitive": True,
+            "tokenizer": tokenizer_value,
+            "contain_zh": True,
+        },
+        "key_value": {
+            "case_sensitive": True,
+            "key_values": [
+                {
+                    "key": "key1",
+                    "value": {
+                        "contain_zh": True,
+                        "sql_flag": True,
+                        "tokenizer": tokenizer_value,
+                        "type": "text",
+                        "alias": "alias1",
+                    },
+                },
+                {
+                    "key": "key2",
+                    "value": {
+                        "contain_zh": True,
+                        "sql_flag": True,
+                        "tokenizer": tokenizer_value,
+                        "type": "json",
+                        "alias": "alias2",
+                        "child_nodes": [
+                            {
+                                "key": "key3",
+                                "value": {
+                                    "contain_zh": True,
+                                    "sql_flag": True,
+                                    "tokenizer": tokenizer_value,
+                                    "type": "json",
+                                    "alias": "alias3",
+                                    "child_nodes": [
+                                        {
+                                            "key": "key4",
+                                            "value": {
+                                                "contain_zh": True,
+                                                "sql_flag": True,
+                                                "tokenizer": tokenizer_value,
+                                                "type": "text",
+                                                "alias": "alias4",
+                                            },
+                                        },
+                                        {
+                                            "key": "key5",
+                                            "value": {
+                                                "contain_zh": True,
+                                                "sql_flag": True,
+                                                "tokenizer": tokenizer_value,
+                                                "type": "text",
+                                                "alias": "name5",
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                            {
+                                "key": "key6",
+                                "value": {
+                                    "contain_zh": True,
+                                    "sql_flag": True,
+                                    "tokenizer": tokenizer_value,
+                                    "type": "text",
+                                    "alias": "name6",
+                                },
+                            },
+                        ],
+                    },
+                },
             ],
-        ),
-        tag=tencentcloud.cls.IndexRuleTagArgs(
-            case_sensitive=True,
-            key_values=[tencentcloud.cls.IndexRuleTagKeyValueArgs(
-                key="terraform",
-                value=tencentcloud.cls.IndexRuleTagKeyValueValueArgs(
-                    contain_zh=True,
-                    sql_flag=True,
-                    tokenizer=tokenizer_value,
-                    type="text",
-                ),
-            )],
-        ),
-        dynamic_index=tencentcloud.cls.IndexRuleDynamicIndexArgs(
-            status=True,
-        ),
-    ),
+        },
+        "tag": {
+            "case_sensitive": True,
+            "key_values": [{
+                "key": "terraform",
+                "value": {
+                    "contain_zh": True,
+                    "sql_flag": True,
+                    "tokenizer": tokenizer_value,
+                    "type": "text",
+                },
+            }],
+        },
+        "dynamic_index": {
+            "status": True,
+        },
+    },
     status=True,
     include_internal_fields=True,
     metadata_flag=1)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example, err := cls.NewLogset(ctx, "example", &cls.LogsetArgs{
+			LogsetName: pulumi.String("tf_example"),
+			Tags: pulumi.StringMap{
+				"demo": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = cls.NewTopic(ctx, "example", &cls.TopicArgs{
+			TopicName:          pulumi.String("tf_example"),
+			LogsetId:           example.ID().ToIDOutput().ToStringOutput(),
+			AutoSplit:          pulumi.Bool(false),
+			MaxSplitPartitions: pulumi.Int(20),
+			PartitionCount:     pulumi.Int(1),
+			Period:             pulumi.Int(30),
+			StorageType:        pulumi.String("hot"),
+			Describes:          pulumi.String("Test Demo."),
+			HotPeriod:          pulumi.Int(10),
+			Tags: pulumi.StringMap{
+				"test": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		tokenizerValue := "@&?|#()='\\\\\\\",;:<>[]{}/ \\\n\\\\t\\\\r\\\\\\\\\n"
+		_, err = cls.NewIndex(ctx, "example", &cls.IndexArgs{
+			TopicId: pulumi.String("abc97756-e620-47a4-aa2b-08561e79f086"),
+			Rule: &cls.IndexRuleArgs{
+				FullText: &cls.IndexRuleFullTextArgs{
+					CaseSensitive: pulumi.Bool(true),
+					Tokenizer:     pulumi.String(tokenizerValue),
+					ContainZH:     pulumi.Bool(true),
+				},
+				KeyValue: &cls.IndexRuleKeyValueArgs{
+					CaseSensitive: pulumi.Bool(true),
+					KeyValues: cls.IndexRuleKeyValueKeyValueArray{
+						&cls.IndexRuleKeyValueKeyValueArgs{
+							Key: pulumi.String("key1"),
+							Value: &cls.IndexRuleKeyValueKeyValueValueArgs{
+								ContainZH: pulumi.Bool(true),
+								SqlFlag:   pulumi.Bool(true),
+								Tokenizer: pulumi.String(tokenizerValue),
+								Type:      pulumi.String("text"),
+								Alias:     pulumi.String("alias1"),
+							},
+						},
+						&cls.IndexRuleKeyValueKeyValueArgs{
+							Key: pulumi.String("key2"),
+							Value: &cls.IndexRuleKeyValueKeyValueValueArgs{
+								ContainZH: pulumi.Bool(true),
+								SqlFlag:   pulumi.Bool(true),
+								Tokenizer: pulumi.String(tokenizerValue),
+								Type:      pulumi.String("json"),
+								Alias:     pulumi.String("alias2"),
+								ChildNodes: cls.IndexRuleKeyValueKeyValueValueChildNodeArray{
+									&cls.IndexRuleKeyValueKeyValueValueChildNodeArgs{
+										Key: pulumi.String("key3"),
+										Value: &cls.IndexRuleKeyValueKeyValueValueChildNodeValueArgs{
+											ContainZH: pulumi.Bool(true),
+											SqlFlag:   pulumi.Bool(true),
+											Tokenizer: pulumi.String(tokenizerValue),
+											Type:      pulumi.String("json"),
+											Alias:     pulumi.String("alias3"),
+											ChildNodes: cls.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArray{
+												&cls.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs{
+													Key: pulumi.String("key4"),
+													Value: &cls.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs{
+														ContainZH: pulumi.Bool(true),
+														SqlFlag:   pulumi.Bool(true),
+														Tokenizer: pulumi.String(tokenizerValue),
+														Type:      pulumi.String("text"),
+														Alias:     pulumi.String("alias4"),
+													},
+												},
+												&cls.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs{
+													Key: pulumi.String("key5"),
+													Value: &cls.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs{
+														ContainZH: pulumi.Bool(true),
+														SqlFlag:   pulumi.Bool(true),
+														Tokenizer: pulumi.String(tokenizerValue),
+														Type:      pulumi.String("text"),
+														Alias:     pulumi.String("name5"),
+													},
+												},
+											},
+										},
+									},
+									&cls.IndexRuleKeyValueKeyValueValueChildNodeArgs{
+										Key: pulumi.String("key6"),
+										Value: &cls.IndexRuleKeyValueKeyValueValueChildNodeValueArgs{
+											ContainZH: pulumi.Bool(true),
+											SqlFlag:   pulumi.Bool(true),
+											Tokenizer: pulumi.String(tokenizerValue),
+											Type:      pulumi.String("text"),
+											Alias:     pulumi.String("name6"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				Tag: &cls.IndexRuleTagArgs{
+					CaseSensitive: pulumi.Bool(true),
+					KeyValues: cls.IndexRuleTagKeyValueArray{
+						&cls.IndexRuleTagKeyValueArgs{
+							Key: pulumi.String("terraform"),
+							Value: &cls.IndexRuleTagKeyValueValueArgs{
+								ContainZH: pulumi.Bool(true),
+								SqlFlag:   pulumi.Bool(true),
+								Tokenizer: pulumi.String(tokenizerValue),
+								Type:      pulumi.String("text"),
+							},
+						},
+					},
+				},
+				DynamicIndex: &cls.IndexRuleDynamicIndexArgs{
+					Status: pulumi.Bool(true),
+				},
+			},
+			Status:                pulumi.Bool(true),
+			IncludeInternalFields: pulumi.Bool(true),
+			MetadataFlag:          pulumi.Int(1),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -176,7 +437,7 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var exampleLogset = new Tencentcloud.Cls.Logset("exampleLogset", new()
+    var example = new Tencentcloud.Cls.Logset("example", new()
     {
         LogsetName = "tf_example",
         Tags = 
@@ -185,10 +446,10 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleTopic = new Tencentcloud.Cls.Topic("exampleTopic", new()
+    var exampleTopic = new Tencentcloud.Cls.Topic("example", new()
     {
         TopicName = "tf_example",
-        LogsetId = exampleLogset.Id,
+        LogsetId = example.Id,
         AutoSplit = false,
         MaxSplitPartitions = 20,
         PartitionCount = 1,
@@ -202,11 +463,13 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var tokenizerValue = "@&?|#()='\",;:<>[]{}";
+    var tokenizerValue = @"@&?|#()='\\\"",;:<>[]{}/ \
+\\t\\r\\\\
+";
 
-    var exampleIndex = new Tencentcloud.Cls.Index("exampleIndex", new()
+    var exampleIndex = new Tencentcloud.Cls.Index("example", new()
     {
-        TopicId = exampleTopic.Id,
+        TopicId = "abc97756-e620-47a4-aa2b-08561e79f086",
         Rule = new Tencentcloud.Cls.Inputs.IndexRuleArgs
         {
             FullText = new Tencentcloud.Cls.Inputs.IndexRuleFullTextArgs
@@ -222,24 +485,80 @@ return await Deployment.RunAsync(() =>
                 {
                     new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueArgs
                     {
-                        Key = "hello",
+                        Key = "key1",
                         Value = new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueArgs
                         {
                             ContainZH = true,
                             SqlFlag = true,
                             Tokenizer = tokenizerValue,
                             Type = "text",
+                            Alias = "alias1",
                         },
                     },
                     new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueArgs
                     {
-                        Key = "world",
+                        Key = "key2",
                         Value = new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueArgs
                         {
                             ContainZH = true,
                             SqlFlag = true,
                             Tokenizer = tokenizerValue,
-                            Type = "text",
+                            Type = "json",
+                            Alias = "alias2",
+                            ChildNodes = new[]
+                            {
+                                new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueChildNodeArgs
+                                {
+                                    Key = "key3",
+                                    Value = new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueChildNodeValueArgs
+                                    {
+                                        ContainZH = true,
+                                        SqlFlag = true,
+                                        Tokenizer = tokenizerValue,
+                                        Type = "json",
+                                        Alias = "alias3",
+                                        ChildNodes = new[]
+                                        {
+                                            new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs
+                                            {
+                                                Key = "key4",
+                                                Value = new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs
+                                                {
+                                                    ContainZH = true,
+                                                    SqlFlag = true,
+                                                    Tokenizer = tokenizerValue,
+                                                    Type = "text",
+                                                    Alias = "alias4",
+                                                },
+                                            },
+                                            new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs
+                                            {
+                                                Key = "key5",
+                                                Value = new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs
+                                                {
+                                                    ContainZH = true,
+                                                    SqlFlag = true,
+                                                    Tokenizer = tokenizerValue,
+                                                    Type = "text",
+                                                    Alias = "name5",
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
+                                new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueChildNodeArgs
+                                {
+                                    Key = "key6",
+                                    Value = new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueChildNodeValueArgs
+                                    {
+                                        ContainZH = true,
+                                        SqlFlag = true,
+                                        Tokenizer = tokenizerValue,
+                                        Type = "text",
+                                        Alias = "name6",
+                                    },
+                                },
+                            },
                         },
                     },
                 },
@@ -274,103 +593,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		exampleLogset, err := Cls.NewLogset(ctx, "exampleLogset", &Cls.LogsetArgs{
-			LogsetName: pulumi.String("tf_example"),
-			Tags: pulumi.Map{
-				"demo": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		exampleTopic, err := Cls.NewTopic(ctx, "exampleTopic", &Cls.TopicArgs{
-			TopicName:          pulumi.String("tf_example"),
-			LogsetId:           exampleLogset.ID(),
-			AutoSplit:          pulumi.Bool(false),
-			MaxSplitPartitions: pulumi.Int(20),
-			PartitionCount:     pulumi.Int(1),
-			Period:             pulumi.Int(30),
-			StorageType:        pulumi.String("hot"),
-			Describes:          pulumi.String("Test Demo."),
-			HotPeriod:          pulumi.Int(10),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		tokenizerValue := "@&?|#()='\",;:<>[]{}"
-		_, err = Cls.NewIndex(ctx, "exampleIndex", &Cls.IndexArgs{
-			TopicId: exampleTopic.ID(),
-			Rule: &cls.IndexRuleArgs{
-				FullText: &cls.IndexRuleFullTextArgs{
-					CaseSensitive: pulumi.Bool(true),
-					Tokenizer:     pulumi.String(tokenizerValue),
-					ContainZH:     pulumi.Bool(true),
-				},
-				KeyValue: &cls.IndexRuleKeyValueArgs{
-					CaseSensitive: pulumi.Bool(true),
-					KeyValues: cls.IndexRuleKeyValueKeyValueArray{
-						&cls.IndexRuleKeyValueKeyValueArgs{
-							Key: pulumi.String("hello"),
-							Value: &cls.IndexRuleKeyValueKeyValueValueArgs{
-								ContainZH: pulumi.Bool(true),
-								SqlFlag:   pulumi.Bool(true),
-								Tokenizer: pulumi.String(tokenizerValue),
-								Type:      pulumi.String("text"),
-							},
-						},
-						&cls.IndexRuleKeyValueKeyValueArgs{
-							Key: pulumi.String("world"),
-							Value: &cls.IndexRuleKeyValueKeyValueValueArgs{
-								ContainZH: pulumi.Bool(true),
-								SqlFlag:   pulumi.Bool(true),
-								Tokenizer: pulumi.String(tokenizerValue),
-								Type:      pulumi.String("text"),
-							},
-						},
-					},
-				},
-				Tag: &cls.IndexRuleTagArgs{
-					CaseSensitive: pulumi.Bool(true),
-					KeyValues: cls.IndexRuleTagKeyValueArray{
-						&cls.IndexRuleTagKeyValueArgs{
-							Key: pulumi.String("terraform"),
-							Value: &cls.IndexRuleTagKeyValueValueArgs{
-								ContainZH: pulumi.Bool(true),
-								SqlFlag:   pulumi.Bool(true),
-								Tokenizer: pulumi.String(tokenizerValue),
-								Type:      pulumi.String("text"),
-							},
-						},
-					},
-				},
-				DynamicIndex: &cls.IndexRuleDynamicIndexArgs{
-					Status: pulumi.Bool(true),
-				},
-			},
-			Status:                pulumi.Bool(true),
-			IncludeInternalFields: pulumi.Bool(true),
-			MetadataFlag:          pulumi.Int(1),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -386,10 +613,18 @@ import com.pulumi.tencentcloud.Cls.IndexArgs;
 import com.pulumi.tencentcloud.Cls.inputs.IndexRuleArgs;
 import com.pulumi.tencentcloud.Cls.inputs.IndexRuleFullTextArgs;
 import com.pulumi.tencentcloud.Cls.inputs.IndexRuleKeyValueArgs;
+import com.pulumi.tencentcloud.Cls.inputs.IndexRuleKeyValueKeyValueArgs;
+import com.pulumi.tencentcloud.Cls.inputs.IndexRuleKeyValueKeyValueValueArgs;
+import com.pulumi.tencentcloud.Cls.inputs.IndexRuleKeyValueKeyValueValueChildNodeArgs;
+import com.pulumi.tencentcloud.Cls.inputs.IndexRuleKeyValueKeyValueValueChildNodeValueArgs;
+import com.pulumi.tencentcloud.Cls.inputs.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs;
+import com.pulumi.tencentcloud.Cls.inputs.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs;
 import com.pulumi.tencentcloud.Cls.inputs.IndexRuleTagArgs;
+import com.pulumi.tencentcloud.Cls.inputs.IndexRuleTagKeyValueArgs;
+import com.pulumi.tencentcloud.Cls.inputs.IndexRuleTagKeyValueValueArgs;
 import com.pulumi.tencentcloud.Cls.inputs.IndexRuleDynamicIndexArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -401,14 +636,14 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var exampleLogset = new Logset("exampleLogset", LogsetArgs.builder()        
+        var example = new Logset("example", LogsetArgs.builder()
             .logsetName("tf_example")
             .tags(Map.of("demo", "test"))
             .build());
 
-        var exampleTopic = new Topic("exampleTopic", TopicArgs.builder()        
+        var exampleTopic = new Topic("exampleTopic", TopicArgs.builder()
             .topicName("tf_example")
-            .logsetId(exampleLogset.id())
+            .logsetId(example.id())
             .autoSplit(false)
             .maxSplitPartitions(20)
             .partitionCount(1)
@@ -419,10 +654,13 @@ public class App {
             .tags(Map.of("test", "test"))
             .build());
 
-        final var tokenizerValue = "@&?|#()='\",;:<>[]{}";
+        final var tokenizerValue = """
+@&?|#()='\\\",;:<>[]{}/ \
+\\t\\r\\\\
+        """;
 
-        var exampleIndex = new Index("exampleIndex", IndexArgs.builder()        
-            .topicId(exampleTopic.id())
+        var exampleIndex = new Index("exampleIndex", IndexArgs.builder()
+            .topicId("abc97756-e620-47a4-aa2b-08561e79f086")
             .rule(IndexRuleArgs.builder()
                 .fullText(IndexRuleFullTextArgs.builder()
                     .caseSensitive(true)
@@ -433,21 +671,65 @@ public class App {
                     .caseSensitive(true)
                     .keyValues(                    
                         IndexRuleKeyValueKeyValueArgs.builder()
-                            .key("hello")
+                            .key("key1")
                             .value(IndexRuleKeyValueKeyValueValueArgs.builder()
                                 .containZH(true)
                                 .sqlFlag(true)
                                 .tokenizer(tokenizerValue)
                                 .type("text")
+                                .alias("alias1")
                                 .build())
                             .build(),
                         IndexRuleKeyValueKeyValueArgs.builder()
-                            .key("world")
+                            .key("key2")
                             .value(IndexRuleKeyValueKeyValueValueArgs.builder()
                                 .containZH(true)
                                 .sqlFlag(true)
                                 .tokenizer(tokenizerValue)
-                                .type("text")
+                                .type("json")
+                                .alias("alias2")
+                                .childNodes(                                
+                                    IndexRuleKeyValueKeyValueValueChildNodeArgs.builder()
+                                        .key("key3")
+                                        .value(IndexRuleKeyValueKeyValueValueChildNodeValueArgs.builder()
+                                            .containZH(true)
+                                            .sqlFlag(true)
+                                            .tokenizer(tokenizerValue)
+                                            .type("json")
+                                            .alias("alias3")
+                                            .childNodes(                                            
+                                                IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs.builder()
+                                                    .key("key4")
+                                                    .value(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs.builder()
+                                                        .containZH(true)
+                                                        .sqlFlag(true)
+                                                        .tokenizer(tokenizerValue)
+                                                        .type("text")
+                                                        .alias("alias4")
+                                                        .build())
+                                                    .build(),
+                                                IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs.builder()
+                                                    .key("key5")
+                                                    .value(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs.builder()
+                                                        .containZH(true)
+                                                        .sqlFlag(true)
+                                                        .tokenizer(tokenizerValue)
+                                                        .type("text")
+                                                        .alias("name5")
+                                                        .build())
+                                                    .build())
+                                            .build())
+                                        .build(),
+                                    IndexRuleKeyValueKeyValueValueChildNodeArgs.builder()
+                                        .key("key6")
+                                        .value(IndexRuleKeyValueKeyValueValueChildNodeValueArgs.builder()
+                                            .containZH(true)
+                                            .sqlFlag(true)
+                                            .tokenizer(tokenizerValue)
+                                            .type("text")
+                                            .alias("name6")
+                                            .build())
+                                        .build())
                                 .build())
                             .build())
                     .build())
@@ -475,9 +757,14 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  exampleLogset:
+  example:
     type: tencentcloud:Cls:Logset
     properties:
       logsetName: tf_example
@@ -485,9 +772,10 @@ resources:
         demo: test
   exampleTopic:
     type: tencentcloud:Cls:Topic
+    name: example
     properties:
       topicName: tf_example
-      logsetId: ${exampleLogset.id}
+      logsetId: ${example.id}
       autoSplit: false
       maxSplitPartitions: 20
       partitionCount: 1
@@ -499,8 +787,9 @@ resources:
         test: test
   exampleIndex:
     type: tencentcloud:Cls:Index
+    name: example
     properties:
-      topicId: ${exampleTopic.id}
+      topicId: abc97756-e620-47a4-aa2b-08561e79f086
       rule:
         fullText:
           caseSensitive: true
@@ -509,18 +798,50 @@ resources:
         keyValue:
           caseSensitive: true
           keyValues:
-            - key: hello
+            - key: key1
               value:
                 containZH: true
                 sqlFlag: true
                 tokenizer: ${tokenizerValue}
                 type: text
-            - key: world
+                alias: alias1
+            - key: key2
               value:
                 containZH: true
                 sqlFlag: true
                 tokenizer: ${tokenizerValue}
-                type: text
+                type: json
+                alias: alias2
+                childNodes:
+                  - key: key3
+                    value:
+                      containZH: true
+                      sqlFlag: true
+                      tokenizer: ${tokenizerValue}
+                      type: json
+                      alias: alias3
+                      childNodes:
+                        - key: key4
+                          value:
+                            containZH: true
+                            sqlFlag: true
+                            tokenizer: ${tokenizerValue}
+                            type: text
+                            alias: alias4
+                        - key: key5
+                          value:
+                            containZH: true
+                            sqlFlag: true
+                            tokenizer: ${tokenizerValue}
+                            type: text
+                            alias: name5
+                  - key: key6
+                    value:
+                      containZH: true
+                      sqlFlag: true
+                      tokenizer: ${tokenizerValue}
+                      type: text
+                      alias: name6
         tag:
           caseSensitive: true
           keyValues:
@@ -536,71 +857,228 @@ resources:
       includeInternalFields: true
       metadataFlag: 1
 variables:
-  tokenizerValue: '@&?|#()=''",;:<>[]{}'
+  tokenizerValue: |
+    @&?|#()='\\\",;:<>[]{}/ \
+    \\t\\r\\\\
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cls_logset" "example" {
+  logset_name = "tf_example"
+  tags = {
+    "demo" = "test"
+  }
+}
+resource "tencentcloud_cls_topic" "example" {
+  topic_name           = "tf_example"
+  logset_id            = tencentcloud_cls_logset.example.id
+  auto_split           = false
+  max_split_partitions = 20
+  partition_count      = 1
+  period               = 30
+  storage_type         = "hot"
+  describes            = "Test Demo."
+  hot_period           = 10
+  tags = {
+    "test" = "test"
+  }
+}
+resource "tencentcloud_cls_index" "example" {
+  topic_id = "abc97756-e620-47a4-aa2b-08561e79f086"
+  rule = {
+    full_text = {
+      case_sensitive = true
+      tokenizer      = local.tokenizerValue
+      contain_zh     = true
+    }
+    key_value = {
+      case_sensitive = true
+      key_values = [{
+        "key" = "key1"
+        "value" = {
+          "containZH" = true
+          "sqlFlag"   = true
+          "tokenizer" = local.tokenizerValue
+          "type"      = "text"
+          "alias"     = "alias1"
+        }
+        }, {
+        "key" = "key2"
+        "value" = {
+          "containZH" = true
+          "sqlFlag"   = true
+          "tokenizer" = local.tokenizerValue
+          "type"      = "json"
+          "alias"     = "alias2"
+          "childNodes" = [{
+            "key" = "key3"
+            "value" = {
+              "containZH" = true
+              "sqlFlag"   = true
+              "tokenizer" = local.tokenizerValue
+              "type"      = "json"
+              "alias"     = "alias3"
+              "childNodes" = [{
+                "key" = "key4"
+                "value" = {
+                  "containZH" = true
+                  "sqlFlag"   = true
+                  "tokenizer" = local.tokenizerValue
+                  "type"      = "text"
+                  "alias"     = "alias4"
+                }
+                }, {
+                "key" = "key5"
+                "value" = {
+                  "containZH" = true
+                  "sqlFlag"   = true
+                  "tokenizer" = local.tokenizerValue
+                  "type"      = "text"
+                  "alias"     = "name5"
+                }
+              }]
+            }
+            }, {
+            "key" = "key6"
+            "value" = {
+              "containZH" = true
+              "sqlFlag"   = true
+              "tokenizer" = local.tokenizerValue
+              "type"      = "text"
+              "alias"     = "name6"
+            }
+          }]
+        }
+      }]
+    }
+    tag = {
+      case_sensitive = true
+      key_values = [{
+        "key" = "terraform"
+        "value" = {
+          "containZH" = true
+          "sqlFlag"   = true
+          "tokenizer" = local.tokenizerValue
+          "type"      = "text"
+        }
+      }]
+    }
+    dynamic_index = {
+      status = true
+    }
+  }
+  status                  = true
+  include_internal_fields = true
+  metadata_flag           = 1
+}
+locals {
+  tokenizerValue = "@&?|#()='\\\\\\\",;:<>[]{}/ \\\n\\\\t\\\\r\\\\\\\\\n"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateIndex](https://www.tencentcloud.com/document/api/614/42805)
+  - [DescribeIndex](https://www.tencentcloud.com/document/api/614/42803)
+* Read: [DescribeIndex](https://www.tencentcloud.com/document/api/614/42803)
+* Update:
+  - [DescribeIndex](https://www.tencentcloud.com/document/api/614/42803)
+  - [ModifyIndex](https://www.tencentcloud.com/document/api/614/42802)
+* Delete: [DeleteIndex](https://www.tencentcloud.com/document/api/614/42804)
 
 
 ## Create Index Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Index</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">IndexArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Index</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">IndexArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Index</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-          <span class="nx">include_internal_fields</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-          <span class="nx">metadata_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-          <span class="nx">rule</span><span class="p">:</span> <span class="nx">Optional[_cls.IndexRuleArgs]</span> = None<span class="p">,</span>
-          <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-          <span class="nx">topic_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Index</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">IndexArgs</a></span><span class="p">,</span>
-          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Index</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+          <span class="nx">topic_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">include_internal_fields</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+          <span class="nx">metadata_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">rule</span><span class="p">:</span> <span class="nx">Optional[IndexRuleArgs]</span> = None<span class="p">,</span>
+          <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewIndex</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">IndexArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Index</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewIndex</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">IndexArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Index</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Index</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">IndexArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Index</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">IndexArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Index</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">IndexArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Index</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">IndexArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cls:Index</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cls:Index</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cls_index&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -621,7 +1099,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -738,11 +1216,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Index Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Index resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -758,8 +1244,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic ID.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="includeinternalfields_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includeinternalfields_csharp" style="color: inherit; text-decoration: inherit;">Include<wbr>Internal<wbr>Fields</a>
@@ -767,8 +1252,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</p>
-</dd><dt class="property-optional"
+    <dd>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</dd><dt class="property-optional"
             title="Optional">
         <span id="metadataflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metadataflag_csharp" style="color: inherit; text-decoration: inherit;">Metadata<wbr>Flag</a>
@@ -776,17 +1260,15 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</p>
-</dd><dt class="property-optional"
+    <dd>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</dd><dt class="property-optional"
             title="Optional">
         <span id="rule_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_csharp" style="color: inherit; text-decoration: inherit;">Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#indexrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#indexrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule</a></span>
     </dt>
-    <dd><p>Index rule.</p>
-</dd><dt class="property-optional"
+    <dd>Index rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -794,8 +1276,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to take effect. Default value: true.</p>
-</dd></dl>
+    <dd>Whether to take effect. Default value: true.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -809,8 +1290,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic ID.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="includeinternalfields_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includeinternalfields_go" style="color: inherit; text-decoration: inherit;">Include<wbr>Internal<wbr>Fields</a>
@@ -818,8 +1298,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</p>
-</dd><dt class="property-optional"
+    <dd>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</dd><dt class="property-optional"
             title="Optional">
         <span id="metadataflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metadataflag_go" style="color: inherit; text-decoration: inherit;">Metadata<wbr>Flag</a>
@@ -827,8 +1306,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</p>
-</dd><dt class="property-optional"
+    <dd>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</dd><dt class="property-optional"
             title="Optional">
         <span id="rule_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_go" style="color: inherit; text-decoration: inherit;">Rule</a>
@@ -836,8 +1314,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrule">Index<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Index rule.</p>
-</dd><dt class="property-optional"
+    <dd>Index rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -845,8 +1322,53 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to take effect. Default value: true.</p>
-</dd></dl>
+    <dd>Whether to take effect. Default value: true.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="topic_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_id_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log topic ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="include_internal_fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#include_internal_fields_hcl" style="color: inherit; text-decoration: inherit;">include_<wbr>internal_<wbr>fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="metadata_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metadata_flag_hcl" style="color: inherit; text-decoration: inherit;">metadata_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_hcl" style="color: inherit; text-decoration: inherit;">rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrule">object</a></span>
+    </dt>
+    <dd>Index rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to take effect. Default value: true.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -860,8 +1382,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log topic ID.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="includeinternalfields_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includeinternalfields_java" style="color: inherit; text-decoration: inherit;">include<wbr>Internal<wbr>Fields</a>
@@ -869,8 +1390,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</p>
-</dd><dt class="property-optional"
+    <dd>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</dd><dt class="property-optional"
             title="Optional">
         <span id="metadataflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metadataflag_java" style="color: inherit; text-decoration: inherit;">metadata<wbr>Flag</a>
@@ -878,17 +1398,15 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</p>
-</dd><dt class="property-optional"
+    <dd>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</dd><dt class="property-optional"
             title="Optional">
         <span id="rule_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_java" style="color: inherit; text-decoration: inherit;">rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#indexrule">Index<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#indexrule">Index<wbr>Rule</a></span>
     </dt>
-    <dd><p>Index rule.</p>
-</dd><dt class="property-optional"
+    <dd>Index rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -896,8 +1414,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to take effect. Default value: true.</p>
-</dd></dl>
+    <dd>Whether to take effect. Default value: true.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -911,8 +1428,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic ID.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="includeinternalfields_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includeinternalfields_nodejs" style="color: inherit; text-decoration: inherit;">include<wbr>Internal<wbr>Fields</a>
@@ -920,8 +1436,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</p>
-</dd><dt class="property-optional"
+    <dd>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</dd><dt class="property-optional"
             title="Optional">
         <span id="metadataflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metadataflag_nodejs" style="color: inherit; text-decoration: inherit;">metadata<wbr>Flag</a>
@@ -929,17 +1444,15 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</p>
-</dd><dt class="property-optional"
+    <dd>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</dd><dt class="property-optional"
             title="Optional">
         <span id="rule_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_nodejs" style="color: inherit; text-decoration: inherit;">rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#indexrule">Index<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#indexrule">Index<wbr>Rule</a></span>
     </dt>
-    <dd><p>Index rule.</p>
-</dd><dt class="property-optional"
+    <dd>Index rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -947,8 +1460,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to take effect. Default value: true.</p>
-</dd></dl>
+    <dd>Whether to take effect. Default value: true.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -962,8 +1474,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log topic ID.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="include_internal_fields_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#include_internal_fields_python" style="color: inherit; text-decoration: inherit;">include_<wbr>internal_<wbr>fields</a>
@@ -971,8 +1482,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</p>
-</dd><dt class="property-optional"
+    <dd>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</dd><dt class="property-optional"
             title="Optional">
         <span id="metadata_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metadata_flag_python" style="color: inherit; text-decoration: inherit;">metadata_<wbr>flag</a>
@@ -980,8 +1490,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</p>
-</dd><dt class="property-optional"
+    <dd>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</dd><dt class="property-optional"
             title="Optional">
         <span id="rule_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_python" style="color: inherit; text-decoration: inherit;">rule</a>
@@ -989,8 +1498,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrule">Index<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Index rule.</p>
-</dd><dt class="property-optional"
+    <dd>Index rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -998,8 +1506,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to take effect. Default value: true.</p>
-</dd></dl>
+    <dd>Whether to take effect. Default value: true.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1013,8 +1520,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log topic ID.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="includeinternalfields_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includeinternalfields_yaml" style="color: inherit; text-decoration: inherit;">include<wbr>Internal<wbr>Fields</a>
@@ -1022,8 +1528,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</p>
-</dd><dt class="property-optional"
+    <dd>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</dd><dt class="property-optional"
             title="Optional">
         <span id="metadataflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metadataflag_yaml" style="color: inherit; text-decoration: inherit;">metadata<wbr>Flag</a>
@@ -1031,8 +1536,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</p>
-</dd><dt class="property-optional"
+    <dd>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</dd><dt class="property-optional"
             title="Optional">
         <span id="rule_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_yaml" style="color: inherit; text-decoration: inherit;">rule</a>
@@ -1040,8 +1544,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrule">Property Map</a></span>
     </dt>
-    <dd><p>Index rule.</p>
-</dd><dt class="property-optional"
+    <dd>Index rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1049,8 +1552,7 @@ The Index resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to take effect. Default value: true.</p>
-</dd></dl>
+    <dd>Whether to take effect. Default value: true.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1071,8 +1573,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1086,8 +1587,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1101,8 +1615,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1116,8 +1629,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1131,8 +1643,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1146,8 +1657,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1157,124 +1667,163 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Index resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">IndexState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Index</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">IndexState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Index</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">include_internal_fields</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">metadata_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">rule</span><span class="p">:</span> <span class="nx">Optional[_cls.IndexRuleArgs]</span> = None<span class="p">,</span>
+        <span class="nx">rule</span><span class="p">:</span> <span class="nx">Optional[IndexRuleArgs]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">topic_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Index</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetIndex<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">IndexState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Index</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetIndex<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">IndexState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Index</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Index</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">IndexState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Index</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">IndexState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Index</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">IndexState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Index</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">IndexState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingIndex</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cls:Index</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cls_index</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">IndexState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">IndexState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1282,28 +1831,31 @@ Get an existing Index resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">IndexState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1311,28 +1863,31 @@ Get an existing Index resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">IndexState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1352,8 +1907,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</p>
-</dd><dt class="property-optional"
+    <dd>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metadataflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metadataflag_csharp" style="color: inherit; text-decoration: inherit;">Metadata<wbr>Flag</a>
@@ -1361,17 +1915,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</p>
-</dd><dt class="property-optional"
+    <dd>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_csharp" style="color: inherit; text-decoration: inherit;">Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#indexrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#indexrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule</a></span>
     </dt>
-    <dd><p>Index rule.</p>
-</dd><dt class="property-optional"
+    <dd>Index rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1379,8 +1931,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to take effect. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to take effect. Default value: true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicid_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Id</a>
@@ -1388,8 +1939,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic ID.</p>
-</dd></dl>
+    <dd>Log topic ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1403,8 +1953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</p>
-</dd><dt class="property-optional"
+    <dd>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metadataflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metadataflag_go" style="color: inherit; text-decoration: inherit;">Metadata<wbr>Flag</a>
@@ -1412,8 +1961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</p>
-</dd><dt class="property-optional"
+    <dd>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_go" style="color: inherit; text-decoration: inherit;">Rule</a>
@@ -1421,8 +1969,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrule">Index<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Index rule.</p>
-</dd><dt class="property-optional"
+    <dd>Index rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1430,8 +1977,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to take effect. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to take effect. Default value: true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicid_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Id</a>
@@ -1439,8 +1985,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic ID.</p>
-</dd></dl>
+    <dd>Log topic ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_include_internal_fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_include_internal_fields_hcl" style="color: inherit; text-decoration: inherit;">include_<wbr>internal_<wbr>fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_metadata_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metadata_flag_hcl" style="color: inherit; text-decoration: inherit;">metadata_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_hcl" style="color: inherit; text-decoration: inherit;">rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrule">object</a></span>
+    </dt>
+    <dd>Index rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to take effect. Default value: true.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_topic_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_id_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log topic ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1454,8 +2045,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</p>
-</dd><dt class="property-optional"
+    <dd>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metadataflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metadataflag_java" style="color: inherit; text-decoration: inherit;">metadata<wbr>Flag</a>
@@ -1463,17 +2053,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</p>
-</dd><dt class="property-optional"
+    <dd>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_java" style="color: inherit; text-decoration: inherit;">rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#indexrule">Index<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#indexrule">Index<wbr>Rule</a></span>
     </dt>
-    <dd><p>Index rule.</p>
-</dd><dt class="property-optional"
+    <dd>Index rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1481,8 +2069,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to take effect. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to take effect. Default value: true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicid_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -1490,8 +2077,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log topic ID.</p>
-</dd></dl>
+    <dd>Log topic ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1505,8 +2091,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</p>
-</dd><dt class="property-optional"
+    <dd>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metadataflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metadataflag_nodejs" style="color: inherit; text-decoration: inherit;">metadata<wbr>Flag</a>
@@ -1514,17 +2099,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</p>
-</dd><dt class="property-optional"
+    <dd>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_nodejs" style="color: inherit; text-decoration: inherit;">rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#indexrule">Index<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#indexrule">Index<wbr>Rule</a></span>
     </dt>
-    <dd><p>Index rule.</p>
-</dd><dt class="property-optional"
+    <dd>Index rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1532,8 +2115,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to take effect. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to take effect. Default value: true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicid_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -1541,8 +2123,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic ID.</p>
-</dd></dl>
+    <dd>Log topic ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1556,8 +2137,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</p>
-</dd><dt class="property-optional"
+    <dd>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metadata_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metadata_flag_python" style="color: inherit; text-decoration: inherit;">metadata_<wbr>flag</a>
@@ -1565,8 +2145,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</p>
-</dd><dt class="property-optional"
+    <dd>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_python" style="color: inherit; text-decoration: inherit;">rule</a>
@@ -1574,8 +2153,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrule">Index<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Index rule.</p>
-</dd><dt class="property-optional"
+    <dd>Index rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1583,8 +2161,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to take effect. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to take effect. Default value: true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topic_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_id_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>id</a>
@@ -1592,8 +2169,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log topic ID.</p>
-</dd></dl>
+    <dd>Log topic ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1607,8 +2183,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</p>
-</dd><dt class="property-optional"
+    <dd>Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_metadataflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_metadataflag_yaml" style="color: inherit; text-decoration: inherit;">metadata<wbr>Flag</a>
@@ -1616,8 +2191,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</p>
-</dd><dt class="property-optional"
+    <dd>Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_yaml" style="color: inherit; text-decoration: inherit;">rule</a>
@@ -1625,8 +2199,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrule">Property Map</a></span>
     </dt>
-    <dd><p>Index rule.</p>
-</dd><dt class="property-optional"
+    <dd>Index rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1634,8 +2207,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to take effect. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to take effect. Default value: true.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicid_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -1643,8 +2215,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log topic ID.</p>
-</dd></dl>
+    <dd>Log topic ID.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1659,7 +2230,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="indexrule">Index<wbr>Rule</h4>
+<h4 id="indexrule">
+Index<wbr>Rule<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1671,8 +2244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruledynamicindex">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Dynamic<wbr>Index</a></span>
     </dt>
-    <dd><p>The key value index is automatically configured. If it is empty, it means that the function is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>The key value index is automatically configured. If it is empty, it means that the function is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="fulltext_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fulltext_csharp" style="color: inherit; text-decoration: inherit;">Full<wbr>Text</a>
@@ -1680,8 +2252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulefulltext">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Full<wbr>Text</a></span>
     </dt>
-    <dd><p>Full-Text index configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Full-Text index configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyvalue_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Value</a>
@@ -1689,8 +2260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvalue">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Key<wbr>Value</a></span>
     </dt>
-    <dd><p>Key-Value index configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Key-Value index configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_csharp" style="color: inherit; text-decoration: inherit;">Tag</a>
@@ -1698,8 +2268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletag">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Tag</a></span>
     </dt>
-    <dd><p>Metafield index configuration.</p>
-</dd></dl>
+    <dd>Metafield index configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1713,8 +2282,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruledynamicindex">Index<wbr>Rule<wbr>Dynamic<wbr>Index</a></span>
     </dt>
-    <dd><p>The key value index is automatically configured. If it is empty, it means that the function is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>The key value index is automatically configured. If it is empty, it means that the function is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="fulltext_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fulltext_go" style="color: inherit; text-decoration: inherit;">Full<wbr>Text</a>
@@ -1722,8 +2290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulefulltext">Index<wbr>Rule<wbr>Full<wbr>Text</a></span>
     </dt>
-    <dd><p>Full-Text index configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Full-Text index configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyvalue_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Value</a>
@@ -1731,8 +2298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvalue">Index<wbr>Rule<wbr>Key<wbr>Value</a></span>
     </dt>
-    <dd><p>Key-Value index configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Key-Value index configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_go" style="color: inherit; text-decoration: inherit;">Tag</a>
@@ -1740,8 +2306,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletag">Index<wbr>Rule<wbr>Tag</a></span>
     </dt>
-    <dd><p>Metafield index configuration.</p>
-</dd></dl>
+    <dd>Metafield index configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dynamic_index_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dynamic_index_hcl" style="color: inherit; text-decoration: inherit;">dynamic_<wbr>index</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruledynamicindex">object</a></span>
+    </dt>
+    <dd>The key value index is automatically configured. If it is empty, it means that the function is not enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="full_text_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#full_text_hcl" style="color: inherit; text-decoration: inherit;">full_<wbr>text</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulefulltext">object</a></span>
+    </dt>
+    <dd>Full-Text index configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_value_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvalue">object</a></span>
+    </dt>
+    <dd>Key-Value index configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_hcl" style="color: inherit; text-decoration: inherit;">tag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletag">object</a></span>
+    </dt>
+    <dd>Metafield index configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1755,8 +2358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruledynamicindex">Index<wbr>Rule<wbr>Dynamic<wbr>Index</a></span>
     </dt>
-    <dd><p>The key value index is automatically configured. If it is empty, it means that the function is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>The key value index is automatically configured. If it is empty, it means that the function is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="fulltext_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fulltext_java" style="color: inherit; text-decoration: inherit;">full<wbr>Text</a>
@@ -1764,8 +2366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulefulltext">Index<wbr>Rule<wbr>Full<wbr>Text</a></span>
     </dt>
-    <dd><p>Full-Text index configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Full-Text index configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyvalue_java" style="color: inherit; text-decoration: inherit;">key<wbr>Value</a>
@@ -1773,8 +2374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvalue">Index<wbr>Rule<wbr>Key<wbr>Value</a></span>
     </dt>
-    <dd><p>Key-Value index configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Key-Value index configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_java" style="color: inherit; text-decoration: inherit;">tag</a>
@@ -1782,8 +2382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletag">Index<wbr>Rule<wbr>Tag</a></span>
     </dt>
-    <dd><p>Metafield index configuration.</p>
-</dd></dl>
+    <dd>Metafield index configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1797,8 +2396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruledynamicindex">Index<wbr>Rule<wbr>Dynamic<wbr>Index</a></span>
     </dt>
-    <dd><p>The key value index is automatically configured. If it is empty, it means that the function is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>The key value index is automatically configured. If it is empty, it means that the function is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="fulltext_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fulltext_nodejs" style="color: inherit; text-decoration: inherit;">full<wbr>Text</a>
@@ -1806,8 +2404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulefulltext">Index<wbr>Rule<wbr>Full<wbr>Text</a></span>
     </dt>
-    <dd><p>Full-Text index configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Full-Text index configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyvalue_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Value</a>
@@ -1815,8 +2412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvalue">Index<wbr>Rule<wbr>Key<wbr>Value</a></span>
     </dt>
-    <dd><p>Key-Value index configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Key-Value index configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_nodejs" style="color: inherit; text-decoration: inherit;">tag</a>
@@ -1824,8 +2420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletag">Index<wbr>Rule<wbr>Tag</a></span>
     </dt>
-    <dd><p>Metafield index configuration.</p>
-</dd></dl>
+    <dd>Metafield index configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1839,8 +2434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruledynamicindex">Index<wbr>Rule<wbr>Dynamic<wbr>Index</a></span>
     </dt>
-    <dd><p>The key value index is automatically configured. If it is empty, it means that the function is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>The key value index is automatically configured. If it is empty, it means that the function is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="full_text_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#full_text_python" style="color: inherit; text-decoration: inherit;">full_<wbr>text</a>
@@ -1848,8 +2442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulefulltext">Index<wbr>Rule<wbr>Full<wbr>Text</a></span>
     </dt>
-    <dd><p>Full-Text index configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Full-Text index configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_value_python" style="color: inherit; text-decoration: inherit;">key_<wbr>value</a>
@@ -1857,8 +2450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvalue">Index<wbr>Rule<wbr>Key<wbr>Value</a></span>
     </dt>
-    <dd><p>Key-Value index configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Key-Value index configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_python" style="color: inherit; text-decoration: inherit;">tag</a>
@@ -1866,8 +2458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletag">Index<wbr>Rule<wbr>Tag</a></span>
     </dt>
-    <dd><p>Metafield index configuration.</p>
-</dd></dl>
+    <dd>Metafield index configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1881,8 +2472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruledynamicindex">Property Map</a></span>
     </dt>
-    <dd><p>The key value index is automatically configured. If it is empty, it means that the function is not enabled.</p>
-</dd><dt class="property-optional"
+    <dd>The key value index is automatically configured. If it is empty, it means that the function is not enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="fulltext_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fulltext_yaml" style="color: inherit; text-decoration: inherit;">full<wbr>Text</a>
@@ -1890,8 +2480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulefulltext">Property Map</a></span>
     </dt>
-    <dd><p>Full-Text index configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Full-Text index configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyvalue_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Value</a>
@@ -1899,8 +2488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvalue">Property Map</a></span>
     </dt>
-    <dd><p>Key-Value index configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Key-Value index configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="tag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_yaml" style="color: inherit; text-decoration: inherit;">tag</a>
@@ -1908,12 +2496,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletag">Property Map</a></span>
     </dt>
-    <dd><p>Metafield index configuration.</p>
-</dd></dl>
+    <dd>Metafield index configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="indexruledynamicindex">Index<wbr>Rule<wbr>Dynamic<wbr>Index</h4>
+<h4 id="indexruledynamicindex">
+Index<wbr>Rule<wbr>Dynamic<wbr>Index<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Dynamic<wbr>Index<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1925,8 +2514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>index automatic configuration switch.</p>
-</dd></dl>
+    <dd>index automatic configuration switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1940,8 +2528,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>index automatic configuration switch.</p>
-</dd></dl>
+    <dd>index automatic configuration switch.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>index automatic configuration switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1955,8 +2556,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>index automatic configuration switch.</p>
-</dd></dl>
+    <dd>index automatic configuration switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1970,8 +2570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>index automatic configuration switch.</p>
-</dd></dl>
+    <dd>index automatic configuration switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1985,8 +2584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>index automatic configuration switch.</p>
-</dd></dl>
+    <dd>index automatic configuration switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2000,12 +2598,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>index automatic configuration switch.</p>
-</dd></dl>
+    <dd>index automatic configuration switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="indexrulefulltext">Index<wbr>Rule<wbr>Full<wbr>Text</h4>
+<h4 id="indexrulefulltext">
+Index<wbr>Rule<wbr>Full<wbr>Text<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Full<wbr>Text<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2017,8 +2616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-required"
+    <dd>Case sensitivity.</dd><dt class="property-required"
             title="Required">
         <span id="containzh_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_csharp" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
@@ -2026,8 +2624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-required"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-required"
             title="Required">
         <span id="tokenizer_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_csharp" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
@@ -2035,8 +2632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Full-Text index delimiter. Each character in the string represents a delimiter.</p>
-</dd></dl>
+    <dd>Full-Text index delimiter. Each character in the string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2050,8 +2646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-required"
+    <dd>Case sensitivity.</dd><dt class="property-required"
             title="Required">
         <span id="containzh_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_go" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
@@ -2059,8 +2654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-required"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-required"
             title="Required">
         <span id="tokenizer_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_go" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
@@ -2068,8 +2662,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Full-Text index delimiter. Each character in the string represents a delimiter.</p>
-</dd></dl>
+    <dd>Full-Text index delimiter. Each character in the string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="case_sensitive_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#case_sensitive_hcl" style="color: inherit; text-decoration: inherit;">case_<wbr>sensitive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Case sensitivity.</dd><dt class="property-required"
+            title="Required">
+        <span id="contain_zh_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_hcl" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-required"
+            title="Required">
+        <span id="tokenizer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_hcl" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Full-Text index delimiter. Each character in the string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2083,8 +2706,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-required"
+    <dd>Case sensitivity.</dd><dt class="property-required"
             title="Required">
         <span id="containzh_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_java" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
@@ -2092,8 +2714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-required"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-required"
             title="Required">
         <span id="tokenizer_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_java" style="color: inherit; text-decoration: inherit;">tokenizer</a>
@@ -2101,8 +2722,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Full-Text index delimiter. Each character in the string represents a delimiter.</p>
-</dd></dl>
+    <dd>Full-Text index delimiter. Each character in the string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2116,8 +2736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-required"
+    <dd>Case sensitivity.</dd><dt class="property-required"
             title="Required">
         <span id="containzh_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_nodejs" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
@@ -2125,8 +2744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-required"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-required"
             title="Required">
         <span id="tokenizer_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_nodejs" style="color: inherit; text-decoration: inherit;">tokenizer</a>
@@ -2134,8 +2752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Full-Text index delimiter. Each character in the string represents a delimiter.</p>
-</dd></dl>
+    <dd>Full-Text index delimiter. Each character in the string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2149,8 +2766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-required"
+    <dd>Case sensitivity.</dd><dt class="property-required"
             title="Required">
         <span id="contain_zh_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_python" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
@@ -2158,8 +2774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-required"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-required"
             title="Required">
         <span id="tokenizer_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_python" style="color: inherit; text-decoration: inherit;">tokenizer</a>
@@ -2167,8 +2782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Full-Text index delimiter. Each character in the string represents a delimiter.</p>
-</dd></dl>
+    <dd>Full-Text index delimiter. Each character in the string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2182,8 +2796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-required"
+    <dd>Case sensitivity.</dd><dt class="property-required"
             title="Required">
         <span id="containzh_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_yaml" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
@@ -2191,8 +2804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-required"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-required"
             title="Required">
         <span id="tokenizer_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_yaml" style="color: inherit; text-decoration: inherit;">tokenizer</a>
@@ -2200,12 +2812,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Full-Text index delimiter. Each character in the string represents a delimiter.</p>
-</dd></dl>
+    <dd>Full-Text index delimiter. Each character in the string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="indexrulekeyvalue">Index<wbr>Rule<wbr>Key<wbr>Value</h4>
+<h4 id="indexrulekeyvalue">
+Index<wbr>Rule<wbr>Key<wbr>Value<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2217,8 +2830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-optional"
+    <dd>Case sensitivity.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyvalues_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyvalues_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Values</a>
@@ -2226,8 +2838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvaluekeyvalue">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value&gt;</a></span>
     </dt>
-    <dd><p>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</p>
-</dd></dl>
+    <dd>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2241,8 +2852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-optional"
+    <dd>Case sensitivity.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyvalues_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyvalues_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Values</a>
@@ -2250,8 +2860,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvaluekeyvalue">[]Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value</a></span>
     </dt>
-    <dd><p>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</p>
-</dd></dl>
+    <dd>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="case_sensitive_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#case_sensitive_hcl" style="color: inherit; text-decoration: inherit;">case_<wbr>sensitive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Case sensitivity.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_values_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvalue">list(object)</a></span>
+    </dt>
+    <dd>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2265,8 +2896,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-optional"
+    <dd>Case sensitivity.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyvalues_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyvalues_java" style="color: inherit; text-decoration: inherit;">key<wbr>Values</a>
@@ -2274,8 +2904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvaluekeyvalue">List&lt;Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value&gt;</a></span>
     </dt>
-    <dd><p>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</p>
-</dd></dl>
+    <dd>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2289,8 +2918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-optional"
+    <dd>Case sensitivity.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyvalues_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyvalues_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Values</a>
@@ -2298,8 +2926,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvaluekeyvalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value[]</a></span>
     </dt>
-    <dd><p>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</p>
-</dd></dl>
+    <dd>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2313,17 +2940,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-optional"
+    <dd>Case sensitivity.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_values_python" style="color: inherit; text-decoration: inherit;">key_<wbr>values</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#indexrulekeyvaluekeyvalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value]</a></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvalue">Sequence[Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value]</a></span>
     </dt>
-    <dd><p>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</p>
-</dd></dl>
+    <dd>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2337,8 +2962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-optional"
+    <dd>Case sensitivity.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyvalues_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyvalues_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Values</a>
@@ -2346,12 +2970,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvaluekeyvalue">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</p>
-</dd></dl>
+    <dd>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="indexrulekeyvaluekeyvalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value</h4>
+<h4 id="indexrulekeyvaluekeyvalue">
+Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2363,8 +2988,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</p>
-</dd><dt class="property-optional"
+    <dd>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</dd><dt class="property-optional"
             title="Optional">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2372,8 +2996,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevalue">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value</a></span>
     </dt>
-    <dd><p>Field index description information.</p>
-</dd></dl>
+    <dd>Field index description information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2387,8 +3010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</p>
-</dd><dt class="property-optional"
+    <dd>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</dd><dt class="property-optional"
             title="Optional">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2396,8 +3018,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value</a></span>
     </dt>
-    <dd><p>Field index description information.</p>
-</dd></dl>
+    <dd>Field index description information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevalue">object</a></span>
+    </dt>
+    <dd>Field index description information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2411,8 +3054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</p>
-</dd><dt class="property-optional"
+    <dd>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</dd><dt class="property-optional"
             title="Optional">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2420,8 +3062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value</a></span>
     </dt>
-    <dd><p>Field index description information.</p>
-</dd></dl>
+    <dd>Field index description information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2435,8 +3076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</p>
-</dd><dt class="property-optional"
+    <dd>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</dd><dt class="property-optional"
             title="Optional">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2444,8 +3084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value</a></span>
     </dt>
-    <dd><p>Field index description information.</p>
-</dd></dl>
+    <dd>Field index description information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2459,8 +3098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</p>
-</dd><dt class="property-optional"
+    <dd>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</dd><dt class="property-optional"
             title="Optional">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2468,8 +3106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value</a></span>
     </dt>
-    <dd><p>Field index description information.</p>
-</dd></dl>
+    <dd>Field index description information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2483,8 +3120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</p>
-</dd><dt class="property-optional"
+    <dd>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</dd><dt class="property-optional"
             title="Optional">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2492,12 +3128,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevalue">Property Map</a></span>
     </dt>
-    <dd><p>Field index description information.</p>
-</dd></dl>
+    <dd>Field index description information.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="indexrulekeyvaluekeyvaluevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value</h4>
+<h4 id="indexrulekeyvaluekeyvaluevalue">
+Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2509,8 +3146,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field type. Valid values: long, text, double.</p>
-</dd><dt class="property-optional"
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_csharp" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_csharp" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="containzh_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_csharp" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
@@ -2518,8 +3170,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="sqlflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_csharp" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
@@ -2527,8 +3186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the analysis feature is enabled for the field.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenizer_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_csharp" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
@@ -2536,8 +3194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</p>
-</dd></dl>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2551,8 +3208,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field type. Valid values: long, text, double.</p>
-</dd><dt class="property-optional"
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_go" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_go" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnode">[]Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="containzh_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_go" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
@@ -2560,8 +3232,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="sqlflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_go" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
@@ -2569,8 +3248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the analysis feature is enabled for the field.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenizer_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_go" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
@@ -2578,8 +3256,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</p>
-</dd></dl>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_hcl" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnode">list(object)</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_hcl" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_hcl" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_hcl" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2593,8 +3332,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Field type. Valid values: long, text, double.</p>
-</dd><dt class="property-optional"
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_java" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_java" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnode">List&lt;Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="containzh_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_java" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
@@ -2602,8 +3356,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_java" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="sqlflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_java" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
@@ -2611,8 +3372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the analysis feature is enabled for the field.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenizer_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_java" style="color: inherit; text-decoration: inherit;">tokenizer</a>
@@ -2620,8 +3380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</p>
-</dd></dl>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2635,8 +3394,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field type. Valid values: long, text, double.</p>
-</dd><dt class="property-optional"
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_nodejs" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_nodejs" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnode">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node[]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="containzh_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_nodejs" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
@@ -2644,8 +3418,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="sqlflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_nodejs" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
@@ -2653,8 +3434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the analysis feature is enabled for the field.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenizer_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_nodejs" style="color: inherit; text-decoration: inherit;">tokenizer</a>
@@ -2662,8 +3442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</p>
-</dd></dl>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2677,8 +3456,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Field type. Valid values: long, text, double.</p>
-</dd><dt class="property-optional"
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_python" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_python" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnode">Sequence[Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="contain_zh_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_python" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
@@ -2686,8 +3480,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_python" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="sql_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_python" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
@@ -2695,8 +3496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the analysis feature is enabled for the field.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenizer_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_python" style="color: inherit; text-decoration: inherit;">tokenizer</a>
@@ -2704,8 +3504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</p>
-</dd></dl>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2719,8 +3518,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Field type. Valid values: long, text, double.</p>
-</dd><dt class="property-optional"
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_yaml" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_yaml" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnode">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="containzh_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_yaml" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
@@ -2728,8 +3542,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="sqlflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_yaml" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
@@ -2737,8 +3558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the analysis feature is enabled for the field.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenizer_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_yaml" style="color: inherit; text-decoration: inherit;">tokenizer</a>
@@ -2746,12 +3566,2937 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</p>
-</dd></dl>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="indexruletag">Index<wbr>Rule<wbr>Tag</h4>
+<h4 id="indexrulekeyvaluekeyvaluevaluechildnode">
+Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevalue">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevalue">object</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevalue">Property Map</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexrulekeyvaluekeyvaluevaluechildnodevalue">
+Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_csharp" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_csharp" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_csharp" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_csharp" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_csharp" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_go" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_go" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnode">[]Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_go" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_go" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_go" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_hcl" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnode">list(object)</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_hcl" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_hcl" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_hcl" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_java" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_java" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnode">List&lt;Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_java" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_java" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_java" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_java" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_nodejs" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_nodejs" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnode">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node[]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_nodejs" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_nodejs" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_nodejs" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_python" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_python" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnode">Sequence[Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_python" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_python" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_python" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_python" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_yaml" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_yaml" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnode">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_yaml" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_yaml" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_yaml" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexrulekeyvaluekeyvaluevaluechildnodevaluechildnode">
+Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevalue">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevalue">object</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevalue">Property Map</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevalue">
+Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_csharp" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_csharp" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_csharp" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_csharp" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_csharp" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_go" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_go" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnode">[]Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_go" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_go" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_go" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_hcl" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnode">list(object)</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_hcl" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_hcl" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_hcl" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_java" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_java" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnode">List&lt;Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_java" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_java" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_java" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_java" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_nodejs" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_nodejs" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnode">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node[]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_nodejs" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_nodejs" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_nodejs" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_python" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_python" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnode">Sequence[Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_python" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_python" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_python" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_python" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_yaml" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_yaml" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnode">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_yaml" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_yaml" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_yaml" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnode">
+Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevalue">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevalue">object</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevalue">Property Map</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevalue">
+Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_csharp" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_csharp" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_csharp" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_csharp" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_csharp" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_go" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_go" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnode">[]Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_go" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_go" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_go" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_hcl" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnode">list(object)</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_hcl" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_hcl" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_hcl" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_java" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_java" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnode">List&lt;Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_java" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_java" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_java" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_java" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_nodejs" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_nodejs" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnode">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node[]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_nodejs" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_nodejs" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_nodejs" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_python" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_python" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnode">Sequence[Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_python" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_python" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_python" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_python" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_yaml" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_yaml" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnode">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_yaml" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_yaml" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_yaml" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnode">
+Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">object</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Property Map</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">
+Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_csharp" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_csharp" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_csharp" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_csharp" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_csharp" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_go" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_go" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnode">[]Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_go" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_go" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_go" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_hcl" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnode">list(object)</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_hcl" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_hcl" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_hcl" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_java" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_java" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnode">List&lt;Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_java" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_java" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_java" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_java" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_nodejs" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_nodejs" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnode">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node[]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_nodejs" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_nodejs" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_nodejs" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_python" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_python" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnode">Sequence[Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_python" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_python" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_python" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_python" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_yaml" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_yaml" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnode">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_yaml" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_yaml" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_yaml" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnode">
+Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">object</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Property Map</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexrulekeyvaluekeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">
+Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Key<wbr>Value<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_csharp" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_csharp" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_csharp" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_csharp" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_go" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_go" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_go" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_go" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_hcl" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_hcl" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_hcl" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_java" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_java" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_java" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_java" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_java" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_nodejs" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_nodejs" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_nodejs" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_nodejs" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_python" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_python" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_python" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_python" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_python" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_yaml" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_yaml" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_yaml" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_yaml" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexruletag">
+Index<wbr>Rule<wbr>Tag<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Tag<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2763,8 +6508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-optional"
+    <dd>Case sensitivity.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyvalues_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyvalues_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Values</a>
@@ -2772,8 +6516,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletagkeyvalue">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value&gt;</a></span>
     </dt>
-    <dd><p>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</p>
-</dd></dl>
+    <dd>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2787,8 +6530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-optional"
+    <dd>Case sensitivity.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyvalues_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyvalues_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Values</a>
@@ -2796,8 +6538,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletagkeyvalue">[]Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value</a></span>
     </dt>
-    <dd><p>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</p>
-</dd></dl>
+    <dd>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="case_sensitive_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#case_sensitive_hcl" style="color: inherit; text-decoration: inherit;">case_<wbr>sensitive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Case sensitivity.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_values_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvalue">list(object)</a></span>
+    </dt>
+    <dd>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2811,8 +6574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-optional"
+    <dd>Case sensitivity.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyvalues_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyvalues_java" style="color: inherit; text-decoration: inherit;">key<wbr>Values</a>
@@ -2820,8 +6582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletagkeyvalue">List&lt;Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value&gt;</a></span>
     </dt>
-    <dd><p>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</p>
-</dd></dl>
+    <dd>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2835,8 +6596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-optional"
+    <dd>Case sensitivity.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyvalues_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyvalues_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Values</a>
@@ -2844,8 +6604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletagkeyvalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value[]</a></span>
     </dt>
-    <dd><p>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</p>
-</dd></dl>
+    <dd>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2859,17 +6618,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-optional"
+    <dd>Case sensitivity.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_values_python" style="color: inherit; text-decoration: inherit;">key_<wbr>values</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#indexruletagkeyvalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value]</a></span>
+        <span class="property-type"><a href="#indexruletagkeyvalue">Sequence[Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value]</a></span>
     </dt>
-    <dd><p>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</p>
-</dd></dl>
+    <dd>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2883,8 +6640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Case sensitivity.</p>
-</dd><dt class="property-optional"
+    <dd>Case sensitivity.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyvalues_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyvalues_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Values</a>
@@ -2892,12 +6648,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletagkeyvalue">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</p>
-</dd></dl>
+    <dd>Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="indexruletagkeyvalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value</h4>
+<h4 id="indexruletagkeyvalue">
+Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2909,8 +6666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</p>
-</dd><dt class="property-optional"
+    <dd>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</dd><dt class="property-optional"
             title="Optional">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2918,8 +6674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletagkeyvaluevalue">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value</a></span>
     </dt>
-    <dd><p>Field index description information.</p>
-</dd></dl>
+    <dd>Field index description information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2933,8 +6688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</p>
-</dd><dt class="property-optional"
+    <dd>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</dd><dt class="property-optional"
             title="Optional">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2942,8 +6696,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletagkeyvaluevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value</a></span>
     </dt>
-    <dd><p>Field index description information.</p>
-</dd></dl>
+    <dd>Field index description information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevalue">object</a></span>
+    </dt>
+    <dd>Field index description information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2957,8 +6732,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</p>
-</dd><dt class="property-optional"
+    <dd>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</dd><dt class="property-optional"
             title="Optional">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2966,8 +6740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletagkeyvaluevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value</a></span>
     </dt>
-    <dd><p>Field index description information.</p>
-</dd></dl>
+    <dd>Field index description information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2981,8 +6754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</p>
-</dd><dt class="property-optional"
+    <dd>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</dd><dt class="property-optional"
             title="Optional">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2990,8 +6762,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletagkeyvaluevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value</a></span>
     </dt>
-    <dd><p>Field index description information.</p>
-</dd></dl>
+    <dd>Field index description information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3005,8 +6776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</p>
-</dd><dt class="property-optional"
+    <dd>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</dd><dt class="property-optional"
             title="Optional">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3014,8 +6784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletagkeyvaluevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value</a></span>
     </dt>
-    <dd><p>Field index description information.</p>
-</dd></dl>
+    <dd>Field index description information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3029,8 +6798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</p>
-</dd><dt class="property-optional"
+    <dd>When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with <strong>TAG</strong>. and is consistent with the one when logs are uploaded. <strong>TAG</strong>. will be prefixed automatically for display in the console..</dd><dt class="property-optional"
             title="Optional">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3038,12 +6806,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#indexruletagkeyvaluevalue">Property Map</a></span>
     </dt>
-    <dd><p>Field index description information.</p>
-</dd></dl>
+    <dd>Field index description information.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="indexruletagkeyvaluevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value</h4>
+<h4 id="indexruletagkeyvaluevalue">
+Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3055,8 +6824,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field type. Valid values: long, text, double.</p>
-</dd><dt class="property-optional"
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_csharp" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_csharp" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="containzh_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_csharp" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
@@ -3064,8 +6848,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="sqlflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_csharp" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
@@ -3073,8 +6864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the analysis feature is enabled for the field.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenizer_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_csharp" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
@@ -3082,8 +6872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</p>
-</dd></dl>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3097,8 +6886,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field type. Valid values: long, text, double.</p>
-</dd><dt class="property-optional"
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_go" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_go" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnode">[]Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="containzh_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_go" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
@@ -3106,8 +6910,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="sqlflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_go" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
@@ -3115,8 +6926,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the analysis feature is enabled for the field.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenizer_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_go" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
@@ -3124,8 +6934,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</p>
-</dd></dl>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_hcl" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnode">list(object)</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_hcl" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_hcl" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_hcl" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3139,8 +7010,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Field type. Valid values: long, text, double.</p>
-</dd><dt class="property-optional"
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_java" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_java" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnode">List&lt;Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="containzh_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_java" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
@@ -3148,8 +7034,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_java" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="sqlflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_java" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
@@ -3157,8 +7050,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the analysis feature is enabled for the field.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenizer_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_java" style="color: inherit; text-decoration: inherit;">tokenizer</a>
@@ -3166,8 +7058,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</p>
-</dd></dl>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3181,8 +7072,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field type. Valid values: long, text, double.</p>
-</dd><dt class="property-optional"
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_nodejs" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_nodejs" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnode">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node[]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="containzh_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_nodejs" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
@@ -3190,8 +7096,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="sqlflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_nodejs" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
@@ -3199,8 +7112,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the analysis feature is enabled for the field.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenizer_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_nodejs" style="color: inherit; text-decoration: inherit;">tokenizer</a>
@@ -3208,8 +7120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</p>
-</dd></dl>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3223,8 +7134,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Field type. Valid values: long, text, double.</p>
-</dd><dt class="property-optional"
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_python" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_python" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnode">Sequence[Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="contain_zh_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_python" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
@@ -3232,8 +7158,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_python" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="sql_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_python" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
@@ -3241,8 +7174,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the analysis feature is enabled for the field.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenizer_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_python" style="color: inherit; text-decoration: inherit;">tokenizer</a>
@@ -3250,8 +7182,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</p>
-</dd></dl>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3265,8 +7196,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Field type. Valid values: long, text, double.</p>
-</dd><dt class="property-optional"
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_yaml" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_yaml" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnode">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="containzh_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_yaml" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
@@ -3274,8 +7220,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether Chinese characters are contained.</p>
-</dd><dt class="property-optional"
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="sqlflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_yaml" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
@@ -3283,8 +7236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the analysis feature is enabled for the field.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
             title="Optional">
         <span id="tokenizer_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_yaml" style="color: inherit; text-decoration: inherit;">tokenizer</a>
@@ -3292,8 +7244,2931 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</p>
-</dd></dl>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexruletagkeyvaluevaluechildnode">
+Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevalue">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevalue">object</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevalue">Property Map</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexruletagkeyvaluevaluechildnodevalue">
+Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_csharp" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_csharp" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_csharp" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_csharp" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_csharp" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_go" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_go" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnode">[]Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_go" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_go" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_go" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_hcl" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnode">list(object)</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_hcl" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_hcl" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_hcl" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_java" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_java" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnode">List&lt;Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_java" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_java" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_java" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_java" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_nodejs" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_nodejs" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnode">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node[]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_nodejs" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_nodejs" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_nodejs" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_python" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_python" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnode">Sequence[Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_python" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_python" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_python" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_python" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_yaml" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_yaml" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnode">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_yaml" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_yaml" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_yaml" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexruletagkeyvaluevaluechildnodevaluechildnode">
+Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevalue">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevalue">object</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevalue">Property Map</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexruletagkeyvaluevaluechildnodevaluechildnodevalue">
+Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_csharp" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_csharp" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_csharp" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_csharp" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_csharp" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_go" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_go" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnode">[]Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_go" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_go" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_go" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_hcl" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnode">list(object)</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_hcl" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_hcl" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_hcl" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_java" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_java" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnode">List&lt;Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_java" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_java" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_java" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_java" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_nodejs" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_nodejs" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnode">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node[]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_nodejs" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_nodejs" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_nodejs" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_python" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_python" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnode">Sequence[Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_python" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_python" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_python" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_python" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_yaml" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_yaml" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnode">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_yaml" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_yaml" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_yaml" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnode">
+Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevalue">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevalue">object</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevalue">Property Map</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevalue">
+Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_csharp" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_csharp" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_csharp" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_csharp" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_csharp" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_go" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_go" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnode">[]Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_go" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_go" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_go" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_hcl" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnode">list(object)</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_hcl" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_hcl" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_hcl" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_java" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_java" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnode">List&lt;Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_java" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_java" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_java" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_java" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_nodejs" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_nodejs" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnode">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node[]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_nodejs" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_nodejs" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_nodejs" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_python" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_python" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnode">Sequence[Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_python" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_python" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_python" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_python" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_yaml" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_yaml" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnode">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_yaml" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_yaml" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_yaml" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnode">
+Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">object</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Property Map</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">
+Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_csharp" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_csharp" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_csharp" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_csharp" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_csharp" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_go" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_go" style="color: inherit; text-decoration: inherit;">Child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnode">[]Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_go" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_go" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_go" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_hcl" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnode">list(object)</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_hcl" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_hcl" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_hcl" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_java" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_java" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnode">List&lt;Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_java" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_java" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_java" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_java" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_nodejs" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_nodejs" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnode">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node[]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_nodejs" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_nodejs" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_nodejs" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_python" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="child_nodes_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#child_nodes_python" style="color: inherit; text-decoration: inherit;">child_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnode">Sequence[Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node]</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_python" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_python" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_python" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_python" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_yaml" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="childnodes_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#childnodes_yaml" style="color: inherit; text-decoration: inherit;">child<wbr>Nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnode">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_yaml" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_yaml" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_yaml" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnode">
+Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">object</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field name of the json child node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">Property Map</a></span>
+    </dt>
+    <dd>Field index description information of the json child node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="indexruletagkeyvaluevaluechildnodevaluechildnodevaluechildnodevaluechildnodevaluechildnodevalue">
+Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<pulumi-choosable type="language" values="python,go" class="inline">, Index<wbr>Rule<wbr>Tag<wbr>Key<wbr>Value<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Child<wbr>Node<wbr>Value<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_csharp" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_csharp" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_csharp" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_csharp" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_go" style="color: inherit; text-decoration: inherit;">Alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_go" style="color: inherit; text-decoration: inherit;">Contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_go" style="color: inherit; text-decoration: inherit;">Sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_go" style="color: inherit; text-decoration: inherit;">Tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_hcl" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_hcl" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_hcl" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_java" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_java" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_java" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_java" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_java" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_nodejs" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_nodejs" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_nodejs" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_nodejs" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_python" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contain_zh_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contain_zh_python" style="color: inherit; text-decoration: inherit;">contain_<wbr>zh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="open_index_for_child_only_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_index_for_child_only_python" style="color: inherit; text-decoration: inherit;">open_<wbr>index_<wbr>for_<wbr>child_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sql_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sql_flag_python" style="color: inherit; text-decoration: inherit;">sql_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_python" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field type. Valid values: long, text, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alias_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_yaml" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field alias.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="containzh_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containzh_yaml" style="color: inherit; text-decoration: inherit;">contain<wbr>ZH</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Chinese characters are contained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="openindexforchildonly_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openindexforchildonly_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Index<wbr>For<wbr>Child<wbr>Only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sqlflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sqlflag_yaml" style="color: inherit; text-decoration: inherit;">sql<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the analysis feature is enabled for the field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tokenizer_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tokenizer_yaml" style="color: inherit; text-decoration: inherit;">tokenizer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3309,6 +10184,9 @@ $ pulumi import tencentcloud:Cls/index:Index example 0937e56f-4008-49d2-ad2d-69c
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -3318,7 +10196,6 @@ $ pulumi import tencentcloud:Cls/index:Index example 0937e56f-4008-49d2-ad2d-69c
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

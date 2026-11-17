@@ -2,9 +2,11 @@
 ---
 title: "CosShipper"
 title_tag: "tencentcloud.Cls.CosShipper"
-meta_desc: "Documentation for the tencentcloud.Cls.CosShipper resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a cls cos shipper."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,13 +18,49 @@ Provides a resource to create a cls cos shipper.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const shipper = new tencentcloud.cls.CosShipper("shipper", {
-    bucket: "preset-scf-bucket-1308919341",
+const info = tencentcloud.user.getInfo({});
+const appId = info.then(info => info.appId);
+const example = new tencentcloud.cos.Bucket("example", {
+    bucket: appId.then(appId => `private-bucket-${appId}`),
+    acl: "private",
+});
+const exampleLogset = new tencentcloud.cls.Logset("example", {
+    logsetName: "tf-example",
+    tags: {
+        createBy: "Terraform",
+    },
+});
+const exampleTopic = new tencentcloud.cls.Topic("example", {
+    topicName: "tf-example",
+    logsetId: exampleLogset.id,
+    autoSplit: false,
+    maxSplitPartitions: 20,
+    partitionCount: 1,
+    period: 10,
+    storageType: "hot",
+    tags: {
+        createBy: "Terraform",
+    },
+});
+const exampleCosShipper = new tencentcloud.cls.CosShipper("example", {
+    bucket: example.id,
+    topicId: exampleTopic.id,
+    interval: 300,
+    maxSize: 200,
+    partition: "/%Y/%m/%d/%H/",
+    prefix: "ap-guangzhou-fffsasad-1649734752",
+    shipperName: "ap-guangzhou-fffsasad-1649734752",
+    timeZone: "GMT+08:00",
     compress: {
         format: "lzop",
     },
@@ -37,41 +75,152 @@ const shipper = new tencentcloud.cls.CosShipper("shipper", {
             ],
         },
     },
-    interval: 300,
-    maxSize: 200,
-    partition: "/%Y/%m/%d/%H/",
-    prefix: "ap-guangzhou-fffsasad-1649734752",
-    shipperName: "ap-guangzhou-fffsasad-1649734752",
-    topicId: "4d07fba0-b93e-4e0b-9a7f-d58542560bbb",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
+import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-shipper = tencentcloud.cls.CosShipper("shipper",
-    bucket="preset-scf-bucket-1308919341",
-    compress=tencentcloud.cls.CosShipperCompressArgs(
-        format="lzop",
-    ),
-    content=tencentcloud.cls.CosShipperContentArgs(
-        format="json",
-        json=tencentcloud.cls.CosShipperContentJsonArgs(
-            enable_tag=True,
-            meta_fields=[
-                "__FILENAME__",
-                "__SOURCE__",
-                "__TIMESTAMP__",
-            ],
-        ),
-    ),
+info = tencentcloud.user.get_info()
+app_id = info.app_id
+example = tencentcloud.cos.Bucket("example",
+    bucket=f"private-bucket-{app_id}",
+    acl="private")
+example_logset = tencentcloud.cls.Logset("example",
+    logset_name="tf-example",
+    tags={
+        "createBy": "Terraform",
+    })
+example_topic = tencentcloud.cls.Topic("example",
+    topic_name="tf-example",
+    logset_id=example_logset.id,
+    auto_split=False,
+    max_split_partitions=20,
+    partition_count=1,
+    period=10,
+    storage_type="hot",
+    tags={
+        "createBy": "Terraform",
+    })
+example_cos_shipper = tencentcloud.cls.CosShipper("example",
+    bucket=example.id,
+    topic_id=example_topic.id,
     interval=300,
     max_size=200,
     partition="/%Y/%m/%d/%H/",
     prefix="ap-guangzhou-fffsasad-1649734752",
     shipper_name="ap-guangzhou-fffsasad-1649734752",
-    topic_id="4d07fba0-b93e-4e0b-9a7f-d58542560bbb")
+    time_zone="GMT+08:00",
+    compress={
+        "format": "lzop",
+    },
+    content={
+        "format": "json",
+        "json": {
+            "enable_tag": True,
+            "meta_fields": [
+                "__FILENAME__",
+                "__SOURCE__",
+                "__TIMESTAMP__",
+            ],
+        },
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		appId := info.AppId
+		example, err := cos.NewBucket(ctx, "example", &cos.BucketArgs{
+			Bucket: pulumi.Sprintf("private-bucket-%v", appId),
+			Acl:    pulumi.String("private"),
+		})
+		if err != nil {
+			return err
+		}
+		exampleLogset, err := cls.NewLogset(ctx, "example", &cls.LogsetArgs{
+			LogsetName: pulumi.String("tf-example"),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		exampleTopic, err := cls.NewTopic(ctx, "example", &cls.TopicArgs{
+			TopicName:          pulumi.String("tf-example"),
+			LogsetId:           exampleLogset.ID().ToIDOutput().ToStringOutput(),
+			AutoSplit:          pulumi.Bool(false),
+			MaxSplitPartitions: pulumi.Int(20),
+			PartitionCount:     pulumi.Int(1),
+			Period:             pulumi.Int(10),
+			StorageType:        pulumi.String("hot"),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = cls.NewCosShipper(ctx, "example", &cls.CosShipperArgs{
+			Bucket:      example.ID().ToIDOutput().ToStringOutput(),
+			TopicId:     exampleTopic.ID().ToIDOutput().ToStringOutput(),
+			Interval:    pulumi.Int(300),
+			MaxSize:     pulumi.Int(200),
+			Partition:   pulumi.String("/%Y/%m/%d/%H/"),
+			Prefix:      pulumi.String("ap-guangzhou-fffsasad-1649734752"),
+			ShipperName: pulumi.String("ap-guangzhou-fffsasad-1649734752"),
+			TimeZone:    pulumi.String("GMT+08:00"),
+			Compress: &cls.CosShipperCompressArgs{
+				Format: pulumi.String("lzop"),
+			},
+			Content: &cls.CosShipperContentArgs{
+				Format: pulumi.String("json"),
+				Json: &cls.CosShipperContentJsonArgs{
+					EnableTag: pulumi.Bool(true),
+					MetaFields: pulumi.StringArray{
+						pulumi.String("__FILENAME__"),
+						pulumi.String("__SOURCE__"),
+						pulumi.String("__TIMESTAMP__"),
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -80,9 +229,50 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var shipper = new Tencentcloud.Cls.CosShipper("shipper", new()
+    var info = Tencentcloud.User.GetInfo.Invoke();
+
+    var appId = info.Apply(getInfoResult => getInfoResult.AppId);
+
+    var example = new Tencentcloud.Cos.Bucket("example", new()
     {
-        Bucket = "preset-scf-bucket-1308919341",
+        CosBucket = appId.Apply(appId => $"private-bucket-{appId}"),
+        Acl = "private",
+    });
+
+    var exampleLogset = new Tencentcloud.Cls.Logset("example", new()
+    {
+        LogsetName = "tf-example",
+        Tags = 
+        {
+            { "createBy", "Terraform" },
+        },
+    });
+
+    var exampleTopic = new Tencentcloud.Cls.Topic("example", new()
+    {
+        TopicName = "tf-example",
+        LogsetId = exampleLogset.Id,
+        AutoSplit = false,
+        MaxSplitPartitions = 20,
+        PartitionCount = 1,
+        Period = 10,
+        StorageType = "hot",
+        Tags = 
+        {
+            { "createBy", "Terraform" },
+        },
+    });
+
+    var exampleCosShipper = new Tencentcloud.Cls.CosShipper("example", new()
+    {
+        Bucket = example.Id,
+        TopicId = exampleTopic.Id,
+        Interval = 300,
+        MaxSize = 200,
+        Partition = "/%Y/%m/%d/%H/",
+        Prefix = "ap-guangzhou-fffsasad-1649734752",
+        ShipperName = "ap-guangzhou-fffsasad-1649734752",
+        TimeZone = "GMT+08:00",
         Compress = new Tencentcloud.Cls.Inputs.CosShipperCompressArgs
         {
             Format = "lzop",
@@ -101,69 +291,36 @@ return await Deployment.RunAsync(() =>
                 },
             },
         },
-        Interval = 300,
-        MaxSize = 200,
-        Partition = "/%Y/%m/%d/%H/",
-        Prefix = "ap-guangzhou-fffsasad-1649734752",
-        ShipperName = "ap-guangzhou-fffsasad-1649734752",
-        TopicId = "4d07fba0-b93e-4e0b-9a7f-d58542560bbb",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cls.NewCosShipper(ctx, "shipper", &Cls.CosShipperArgs{
-			Bucket: pulumi.String("preset-scf-bucket-1308919341"),
-			Compress: &cls.CosShipperCompressArgs{
-				Format: pulumi.String("lzop"),
-			},
-			Content: &cls.CosShipperContentArgs{
-				Format: pulumi.String("json"),
-				Json: &cls.CosShipperContentJsonArgs{
-					EnableTag: pulumi.Bool(true),
-					MetaFields: pulumi.StringArray{
-						pulumi.String("__FILENAME__"),
-						pulumi.String("__SOURCE__"),
-						pulumi.String("__TIMESTAMP__"),
-					},
-				},
-			},
-			Interval:    pulumi.Int(300),
-			MaxSize:     pulumi.Int(200),
-			Partition:   pulumi.String("/%Y/%m/%d/%H/"),
-			Prefix:      pulumi.String("ap-guangzhou-fffsasad-1649734752"),
-			ShipperName: pulumi.String("ap-guangzhou-fffsasad-1649734752"),
-			TopicId:     pulumi.String("4d07fba0-b93e-4e0b-9a7f-d58542560bbb"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.User.UserFunctions;
+import com.pulumi.tencentcloud.User.inputs.GetInfoArgs;
+import com.pulumi.tencentcloud.Cos.Bucket;
+import com.pulumi.tencentcloud.Cos.BucketArgs;
+import com.pulumi.tencentcloud.Cls.Logset;
+import com.pulumi.tencentcloud.Cls.LogsetArgs;
+import com.pulumi.tencentcloud.Cls.Topic;
+import com.pulumi.tencentcloud.Cls.TopicArgs;
 import com.pulumi.tencentcloud.Cls.CosShipper;
 import com.pulumi.tencentcloud.Cls.CosShipperArgs;
 import com.pulumi.tencentcloud.Cls.inputs.CosShipperCompressArgs;
 import com.pulumi.tencentcloud.Cls.inputs.CosShipperContentArgs;
 import com.pulumi.tencentcloud.Cls.inputs.CosShipperContentJsonArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -175,8 +332,41 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var shipper = new CosShipper("shipper", CosShipperArgs.builder()        
-            .bucket("preset-scf-bucket-1308919341")
+        final var info = UserFunctions.getInfo(GetInfoArgs.builder()
+            .build());
+
+        final var appId = info.appId();
+
+        var example = new Bucket("example", BucketArgs.builder()
+            .bucket(String.format("private-bucket-%s", appId))
+            .acl("private")
+            .build());
+
+        var exampleLogset = new Logset("exampleLogset", LogsetArgs.builder()
+            .logsetName("tf-example")
+            .tags(Map.of("createBy", "Terraform"))
+            .build());
+
+        var exampleTopic = new Topic("exampleTopic", TopicArgs.builder()
+            .topicName("tf-example")
+            .logsetId(exampleLogset.id())
+            .autoSplit(false)
+            .maxSplitPartitions(20)
+            .partitionCount(1)
+            .period(10)
+            .storageType("hot")
+            .tags(Map.of("createBy", "Terraform"))
+            .build());
+
+        var exampleCosShipper = new CosShipper("exampleCosShipper", CosShipperArgs.builder()
+            .bucket(example.id())
+            .topicId(exampleTopic.id())
+            .interval(300)
+            .maxSize(200)
+            .partition("/%Y/%m/%d/%H/")
+            .prefix("ap-guangzhou-fffsasad-1649734752")
+            .shipperName("ap-guangzhou-fffsasad-1649734752")
+            .timeZone("GMT+08:00")
             .compress(CosShipperCompressArgs.builder()
                 .format("lzop")
                 .build())
@@ -190,23 +380,55 @@ public class App {
                         "__TIMESTAMP__")
                     .build())
                 .build())
-            .interval(300)
-            .maxSize(200)
-            .partition("/%Y/%m/%d/%H/")
-            .prefix("ap-guangzhou-fffsasad-1649734752")
-            .shipperName("ap-guangzhou-fffsasad-1649734752")
-            .topicId("4d07fba0-b93e-4e0b-9a7f-d58542560bbb")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  shipper:
-    type: tencentcloud:Cls:CosShipper
+  example:
+    type: tencentcloud:Cos:Bucket
     properties:
-      bucket: preset-scf-bucket-1308919341
+      bucket: private-bucket-${appId}
+      acl: private
+  exampleLogset:
+    type: tencentcloud:Cls:Logset
+    name: example
+    properties:
+      logsetName: tf-example
+      tags:
+        createBy: Terraform
+  exampleTopic:
+    type: tencentcloud:Cls:Topic
+    name: example
+    properties:
+      topicName: tf-example
+      logsetId: ${exampleLogset.id}
+      autoSplit: false
+      maxSplitPartitions: 20
+      partitionCount: 1
+      period: 10
+      storageType: hot
+      tags:
+        createBy: Terraform
+  exampleCosShipper:
+    type: tencentcloud:Cls:CosShipper
+    name: example
+    properties:
+      bucket: ${example.id}
+      topicId: ${exampleTopic.id}
+      interval: 300
+      maxSize: 200
+      partition: /%Y/%m/%d/%H/
+      prefix: ap-guangzhou-fffsasad-1649734752
+      shipperName: ap-guangzhou-fffsasad-1649734752
+      timeZone: GMT+08:00
       compress:
         format: lzop
       content:
@@ -217,81 +439,495 @@ resources:
             - __FILENAME__
             - __SOURCE__
             - __TIMESTAMP__
-      interval: 300
-      maxSize: 200
-      partition: /%Y/%m/%d/%H/
-      prefix: ap-guangzhou-fffsasad-1649734752
-      shipperName: ap-guangzhou-fffsasad-1649734752
-      topicId: 4d07fba0-b93e-4e0b-9a7f-d58542560bbb
+variables:
+  info:
+    fn::invoke:
+      function: tencentcloud:User:getInfo
+      arguments: {}
+  appId: ${info.appId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_user_getinfo" "info" {
+}
+
+resource "tencentcloud_cos_bucket" "example" {
+  bucket ="private-bucket-${local.appId}"
+  acl    = "private"
+}
+resource "tencentcloud_cls_logset" "example" {
+  logset_name = "tf-example"
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+resource "tencentcloud_cls_topic" "example" {
+  topic_name           = "tf-example"
+  logset_id            = tencentcloud_cls_logset.example.id
+  auto_split           = false
+  max_split_partitions = 20
+  partition_count      = 1
+  period               = 10
+  storage_type         = "hot"
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+resource "tencentcloud_cls_cosshipper" "example" {
+  bucket       = tencentcloud_cos_bucket.example.id
+  topic_id     = tencentcloud_cls_topic.example.id
+  interval     = 300
+  max_size     = 200
+  partition    = "/%Y/%m/%d/%H/"
+  prefix       = "ap-guangzhou-fffsasad-1649734752"
+  shipper_name = "ap-guangzhou-fffsasad-1649734752"
+  time_zone    = "GMT+08:00"
+  compress = {
+    format = "lzop"
+  }
+  content = {
+    format = "json"
+    json = {
+      enable_tag  = true
+      meta_fields = ["__FILENAME__", "__SOURCE__", "__TIMESTAMP__"]
+    }
+  }
+}
+locals {
+  appId = data.tencentcloud_user_getinfo.info.app_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Example with Parquet format:
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const parquetExample = new tencentcloud.cls.CosShipper("parquet_example", {
+    bucket: example.id,
+    topicId: exampleTencentcloudClsTopic.id,
+    interval: 300,
+    maxSize: 256,
+    partition: "/%Y/%m/%d/%H/",
+    prefix: "logs/parquet/",
+    shipperName: "parquet-shipper",
+    compress: {
+        format: "gzip",
+    },
+    content: {
+        format: "parquet",
+        parquet: {
+            parquetKeyInfos: [
+                {
+                    keyName: "level",
+                    keyType: "string",
+                    keyNonExistingField: "INFO",
+                },
+                {
+                    keyName: "user_id",
+                    keyType: "int64",
+                    keyNonExistingField: "0",
+                },
+            ],
+        },
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+parquet_example = tencentcloud.cls.CosShipper("parquet_example",
+    bucket=example["id"],
+    topic_id=example_tencentcloud_cls_topic["id"],
+    interval=300,
+    max_size=256,
+    partition="/%Y/%m/%d/%H/",
+    prefix="logs/parquet/",
+    shipper_name="parquet-shipper",
+    compress={
+        "format": "gzip",
+    },
+    content={
+        "format": "parquet",
+        "parquet": {
+            "parquet_key_infos": [
+                {
+                    "key_name": "level",
+                    "key_type": "string",
+                    "key_non_existing_field": "INFO",
+                },
+                {
+                    "key_name": "user_id",
+                    "key_type": "int64",
+                    "key_non_existing_field": "0",
+                },
+            ],
+        },
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cls.NewCosShipper(ctx, "parquet_example", &cls.CosShipperArgs{
+			Bucket:      pulumi.Any(example.Id),
+			TopicId:     pulumi.Any(exampleTencentcloudClsTopic.Id),
+			Interval:    pulumi.Int(300),
+			MaxSize:     pulumi.Int(256),
+			Partition:   pulumi.String("/%Y/%m/%d/%H/"),
+			Prefix:      pulumi.String("logs/parquet/"),
+			ShipperName: pulumi.String("parquet-shipper"),
+			Compress: &cls.CosShipperCompressArgs{
+				Format: pulumi.String("gzip"),
+			},
+			Content: &cls.CosShipperContentArgs{
+				Format: pulumi.String("parquet"),
+				Parquet: &cls.CosShipperContentParquetArgs{
+					ParquetKeyInfos: cls.CosShipperContentParquetParquetKeyInfoArray{
+						&cls.CosShipperContentParquetParquetKeyInfoArgs{
+							KeyName:             pulumi.String("level"),
+							KeyType:             pulumi.String("string"),
+							KeyNonExistingField: pulumi.String("INFO"),
+						},
+						&cls.CosShipperContentParquetParquetKeyInfoArgs{
+							KeyName:             pulumi.String("user_id"),
+							KeyType:             pulumi.String("int64"),
+							KeyNonExistingField: pulumi.String("0"),
+						},
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var parquetExample = new Tencentcloud.Cls.CosShipper("parquet_example", new()
+    {
+        Bucket = example.Id,
+        TopicId = exampleTencentcloudClsTopic.Id,
+        Interval = 300,
+        MaxSize = 256,
+        Partition = "/%Y/%m/%d/%H/",
+        Prefix = "logs/parquet/",
+        ShipperName = "parquet-shipper",
+        Compress = new Tencentcloud.Cls.Inputs.CosShipperCompressArgs
+        {
+            Format = "gzip",
+        },
+        Content = new Tencentcloud.Cls.Inputs.CosShipperContentArgs
+        {
+            Format = "parquet",
+            Parquet = new Tencentcloud.Cls.Inputs.CosShipperContentParquetArgs
+            {
+                ParquetKeyInfos = new[]
+                {
+                    new Tencentcloud.Cls.Inputs.CosShipperContentParquetParquetKeyInfoArgs
+                    {
+                        KeyName = "level",
+                        KeyType = "string",
+                        KeyNonExistingField = "INFO",
+                    },
+                    new Tencentcloud.Cls.Inputs.CosShipperContentParquetParquetKeyInfoArgs
+                    {
+                        KeyName = "user_id",
+                        KeyType = "int64",
+                        KeyNonExistingField = "0",
+                    },
+                },
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cls.CosShipper;
+import com.pulumi.tencentcloud.Cls.CosShipperArgs;
+import com.pulumi.tencentcloud.Cls.inputs.CosShipperCompressArgs;
+import com.pulumi.tencentcloud.Cls.inputs.CosShipperContentArgs;
+import com.pulumi.tencentcloud.Cls.inputs.CosShipperContentParquetArgs;
+import com.pulumi.tencentcloud.Cls.inputs.CosShipperContentParquetParquetKeyInfoArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var parquetExample = new CosShipper("parquetExample", CosShipperArgs.builder()
+            .bucket(example.id())
+            .topicId(exampleTencentcloudClsTopic.id())
+            .interval(300)
+            .maxSize(256)
+            .partition("/%Y/%m/%d/%H/")
+            .prefix("logs/parquet/")
+            .shipperName("parquet-shipper")
+            .compress(CosShipperCompressArgs.builder()
+                .format("gzip")
+                .build())
+            .content(CosShipperContentArgs.builder()
+                .format("parquet")
+                .parquet(CosShipperContentParquetArgs.builder()
+                    .parquetKeyInfos(                    
+                        CosShipperContentParquetParquetKeyInfoArgs.builder()
+                            .keyName("level")
+                            .keyType("string")
+                            .keyNonExistingField("INFO")
+                            .build(),
+                        CosShipperContentParquetParquetKeyInfoArgs.builder()
+                            .keyName("user_id")
+                            .keyType("int64")
+                            .keyNonExistingField("0")
+                            .build())
+                    .build())
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  parquetExample:
+    type: tencentcloud:Cls:CosShipper
+    name: parquet_example
+    properties:
+      bucket: ${example.id}
+      topicId: ${exampleTencentcloudClsTopic.id}
+      interval: 300
+      maxSize: 256
+      partition: /%Y/%m/%d/%H/
+      prefix: logs/parquet/
+      shipperName: parquet-shipper
+      compress:
+        format: gzip
+      content:
+        format: parquet
+        parquet:
+          parquetKeyInfos:
+            - keyName: level
+              keyType: string
+              keyNonExistingField: INFO
+            - keyName: user_id
+              keyType: int64
+              keyNonExistingField: '0'
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cls_cosshipper" "parquet_example" {
+  bucket       = example.id
+  topic_id     = exampleTencentcloudClsTopic.id
+  interval     = 300
+  max_size     = 256
+  partition    = "/%Y/%m/%d/%H/"
+  prefix       = "logs/parquet/"
+  shipper_name = "parquet-shipper"
+  compress = {
+    format = "gzip"
+  }
+  content = {
+    format = "parquet"
+    parquet = {
+      parquet_key_infos = [{
+        "keyName"             = "level"
+        "keyType"             = "string"
+        "keyNonExistingField" = "INFO"
+        }, {
+        "keyName"             = "user_id"
+        "keyType"             = "int64"
+        "keyNonExistingField" = "0"
+      }]
+    }
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateShipper](https://www.tencentcloud.com/document/api/614/42775)
+* Read: [DescribeShippers](https://www.tencentcloud.com/document/api/614/42772)
+* Update: [ModifyShipper](https://www.tencentcloud.com/document/api/614/42771)
+* Delete: [DeleteShipper](https://www.tencentcloud.com/document/api/614/42774)
 
 
 ## Create CosShipper Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">CosShipper</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CosShipperArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">CosShipper</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CosShipperArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">CosShipper</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CosShipperArgs</a></span><span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">CosShipper</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+               <span class="nx">prefix</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">topic_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">shipper_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">bucket</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">compress</span><span class="p">:</span> <span class="nx">Optional[_cls.CosShipperCompressArgs]</span> = None<span class="p">,</span>
-               <span class="nx">content</span><span class="p">:</span> <span class="nx">Optional[_cls.CosShipperContentArgs]</span> = None<span class="p">,</span>
-               <span class="nx">filter_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cls.CosShipperFilterRuleArgs]]</span> = None<span class="p">,</span>
+               <span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+               <span class="nx">filter_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[CosShipperFilterRuleArgs]]</span> = None<span class="p">,</span>
                <span class="nx">interval</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                <span class="nx">max_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                <span class="nx">partition</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">prefix</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">shipper_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">topic_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">CosShipper</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CosShipperArgs</a></span><span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+               <span class="nx">filename_mode</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+               <span class="nx">content</span><span class="p">:</span> <span class="nx">Optional[CosShipperContentArgs]</span> = None<span class="p">,</span>
+               <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+               <span class="nx">storage_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">time_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">compress</span><span class="p">:</span> <span class="nx">Optional[CosShipperCompressArgs]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCosShipper</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">CosShipperArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CosShipper</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCosShipper</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">CosShipperArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CosShipper</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">CosShipper</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CosShipperArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">CosShipper</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CosShipperArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">CosShipper</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CosShipperArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">CosShipper</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CosShipperArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cls:CosShipper</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cls:CosShipper</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cls_cos_shipper&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -312,7 +948,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -429,11 +1065,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## CosShipper Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The CosShipper resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -449,8 +1093,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination bucket in the shipping rule to be created.</p>
-</dd><dt class="property-required"
+    <dd>Destination bucket in the shipping rule to be created.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_csharp" style="color: inherit; text-decoration: inherit;">Prefix</a>
@@ -458,8 +1101,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix of the shipping directory in the shipping rule to be created.</p>
-</dd><dt class="property-required"
+    <dd>Prefix of the shipping directory in the shipping rule to be created.</dd><dt class="property-required"
             title="Required">
         <span id="shippername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shippername_csharp" style="color: inherit; text-decoration: inherit;">Shipper<wbr>Name</a>
@@ -467,8 +1109,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Shipping rule name.</p>
-</dd><dt class="property-required"
+    <dd>Shipping rule name.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Id</a>
@@ -476,35 +1117,47 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the log topic to which the shipping rule to be created belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the log topic to which the shipping rule to be created belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="compress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_csharp" style="color: inherit; text-decoration: inherit;">Compress</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshippercompress">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Cos<wbr>Shipper<wbr>Compress<wbr>Args</a></span>
+        <span class="property-type"><a href="#cosshippercompress">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Cos<wbr>Shipper<wbr>Compress</a></span>
     </dt>
-    <dd><p>Compression configuration of shipped log.</p>
-</dd><dt class="property-optional"
+    <dd>Compression configuration of shipped log.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_csharp" style="color: inherit; text-decoration: inherit;">Content</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshippercontent">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Cos<wbr>Shipper<wbr>Content<wbr>Args</a></span>
+        <span class="property-type"><a href="#cosshippercontent">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Cos<wbr>Shipper<wbr>Content</a></span>
     </dt>
-    <dd><p>Format configuration of shipped log content.</p>
-</dd><dt class="property-optional"
+    <dd>Format configuration of shipped log content.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="endtime_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filenamemode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filenamemode_csharp" style="color: inherit; text-decoration: inherit;">Filename<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Naming a shipping file. Valid values: 0 (by random number); 1 (by shipping time). Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="filterrules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterrules_csharp" style="color: inherit; text-decoration: inherit;">Filter<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshipperfilterrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Cos<wbr>Shipper<wbr>Filter<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#cosshipperfilterrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Cos<wbr>Shipper<wbr>Filter<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</p>
-</dd><dt class="property-optional"
+    <dd>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</dd><dt class="property-optional"
             title="Optional">
         <span id="interval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_csharp" style="color: inherit; text-decoration: inherit;">Interval</a>
@@ -512,8 +1165,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -521,8 +1173,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</dd><dt class="property-optional"
             title="Optional">
         <span id="partition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_csharp" style="color: inherit; text-decoration: inherit;">Partition</a>
@@ -530,8 +1181,31 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Partition rule of shipped log, which can be represented in strftime time format.</p>
-</dd></dl>
+    <dd>Partition rule of shipped log, which can be represented in strftime time format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="starttime_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storagetype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timezone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timezone_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., <code>GMT+08:00</code>, <code>UTC+08:00</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -545,8 +1219,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination bucket in the shipping rule to be created.</p>
-</dd><dt class="property-required"
+    <dd>Destination bucket in the shipping rule to be created.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_go" style="color: inherit; text-decoration: inherit;">Prefix</a>
@@ -554,8 +1227,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix of the shipping directory in the shipping rule to be created.</p>
-</dd><dt class="property-required"
+    <dd>Prefix of the shipping directory in the shipping rule to be created.</dd><dt class="property-required"
             title="Required">
         <span id="shippername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shippername_go" style="color: inherit; text-decoration: inherit;">Shipper<wbr>Name</a>
@@ -563,8 +1235,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Shipping rule name.</p>
-</dd><dt class="property-required"
+    <dd>Shipping rule name.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Id</a>
@@ -572,8 +1243,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the log topic to which the shipping rule to be created belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the log topic to which the shipping rule to be created belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="compress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_go" style="color: inherit; text-decoration: inherit;">Compress</a>
@@ -581,8 +1251,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercompress">Cos<wbr>Shipper<wbr>Compress<wbr>Args</a></span>
     </dt>
-    <dd><p>Compression configuration of shipped log.</p>
-</dd><dt class="property-optional"
+    <dd>Compression configuration of shipped log.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_go" style="color: inherit; text-decoration: inherit;">Content</a>
@@ -590,8 +1259,23 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontent">Cos<wbr>Shipper<wbr>Content<wbr>Args</a></span>
     </dt>
-    <dd><p>Format configuration of shipped log content.</p>
-</dd><dt class="property-optional"
+    <dd>Format configuration of shipped log content.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="endtime_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filenamemode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filenamemode_go" style="color: inherit; text-decoration: inherit;">Filename<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Naming a shipping file. Valid values: 0 (by random number); 1 (by shipping time). Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="filterrules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterrules_go" style="color: inherit; text-decoration: inherit;">Filter<wbr>Rules</a>
@@ -599,8 +1283,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshipperfilterrule">[]Cos<wbr>Shipper<wbr>Filter<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</p>
-</dd><dt class="property-optional"
+    <dd>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</dd><dt class="property-optional"
             title="Optional">
         <span id="interval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_go" style="color: inherit; text-decoration: inherit;">Interval</a>
@@ -608,8 +1291,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -617,8 +1299,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</dd><dt class="property-optional"
             title="Optional">
         <span id="partition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_go" style="color: inherit; text-decoration: inherit;">Partition</a>
@@ -626,8 +1307,157 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Partition rule of shipped log, which can be represented in strftime time format.</p>
-</dd></dl>
+    <dd>Partition rule of shipped log, which can be represented in strftime time format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="starttime_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storagetype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timezone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timezone_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., <code>GMT+08:00</code>, <code>UTC+08:00</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Destination bucket in the shipping rule to be created.</dd><dt class="property-required"
+            title="Required">
+        <span id="prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_hcl" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Prefix of the shipping directory in the shipping rule to be created.</dd><dt class="property-required"
+            title="Required">
+        <span id="shipper_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shipper_name_hcl" style="color: inherit; text-decoration: inherit;">shipper_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Shipping rule name.</dd><dt class="property-required"
+            title="Required">
+        <span id="topic_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_id_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the log topic to which the shipping rule to be created belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="compress_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_hcl" style="color: inherit; text-decoration: inherit;">compress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercompress">object</a></span>
+    </dt>
+    <dd>Compression configuration of shipped log.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_hcl" style="color: inherit; text-decoration: inherit;">content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontent">object</a></span>
+    </dt>
+    <dd>Format configuration of shipped log content.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filename_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filename_mode_hcl" style="color: inherit; text-decoration: inherit;">filename_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Naming a shipping file. Valid values: 0 (by random number); 1 (by shipping time). Default value: 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_rules_hcl" style="color: inherit; text-decoration: inherit;">filter_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshipperfilterrule">list(object)</a></span>
+    </dt>
+    <dd>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_hcl" style="color: inherit; text-decoration: inherit;">interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="partition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_hcl" style="color: inherit; text-decoration: inherit;">partition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Partition rule of shipped log, which can be represented in strftime time format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="time_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_zone_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., <code>GMT+08:00</code>, <code>UTC+08:00</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -641,8 +1471,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Destination bucket in the shipping rule to be created.</p>
-</dd><dt class="property-required"
+    <dd>Destination bucket in the shipping rule to be created.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_java" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -650,8 +1479,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Prefix of the shipping directory in the shipping rule to be created.</p>
-</dd><dt class="property-required"
+    <dd>Prefix of the shipping directory in the shipping rule to be created.</dd><dt class="property-required"
             title="Required">
         <span id="shippername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shippername_java" style="color: inherit; text-decoration: inherit;">shipper<wbr>Name</a>
@@ -659,8 +1487,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Shipping rule name.</p>
-</dd><dt class="property-required"
+    <dd>Shipping rule name.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -668,35 +1495,47 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the log topic to which the shipping rule to be created belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the log topic to which the shipping rule to be created belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="compress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_java" style="color: inherit; text-decoration: inherit;">compress</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshippercompress">Cos<wbr>Shipper<wbr>Compress<wbr>Args</a></span>
+        <span class="property-type"><a href="#cosshippercompress">Cos<wbr>Shipper<wbr>Compress</a></span>
     </dt>
-    <dd><p>Compression configuration of shipped log.</p>
-</dd><dt class="property-optional"
+    <dd>Compression configuration of shipped log.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_java" style="color: inherit; text-decoration: inherit;">content</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshippercontent">Cos<wbr>Shipper<wbr>Content<wbr>Args</a></span>
+        <span class="property-type"><a href="#cosshippercontent">Cos<wbr>Shipper<wbr>Content</a></span>
     </dt>
-    <dd><p>Format configuration of shipped log content.</p>
-</dd><dt class="property-optional"
+    <dd>Format configuration of shipped log content.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="endtime_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filenamemode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filenamemode_java" style="color: inherit; text-decoration: inherit;">filename<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Naming a shipping file. Valid values: 0 (by random number); 1 (by shipping time). Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="filterrules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterrules_java" style="color: inherit; text-decoration: inherit;">filter<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshipperfilterrule">List&lt;Cos<wbr>Shipper<wbr>Filter<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#cosshipperfilterrule">List&lt;Cos<wbr>Shipper<wbr>Filter<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</p>
-</dd><dt class="property-optional"
+    <dd>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</dd><dt class="property-optional"
             title="Optional">
         <span id="interval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_java" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -704,8 +1543,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -713,8 +1551,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</dd><dt class="property-optional"
             title="Optional">
         <span id="partition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_java" style="color: inherit; text-decoration: inherit;">partition</a>
@@ -722,8 +1559,31 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Partition rule of shipped log, which can be represented in strftime time format.</p>
-</dd></dl>
+    <dd>Partition rule of shipped log, which can be represented in strftime time format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="starttime_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storagetype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timezone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timezone_java" style="color: inherit; text-decoration: inherit;">time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., <code>GMT+08:00</code>, <code>UTC+08:00</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -737,8 +1597,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination bucket in the shipping rule to be created.</p>
-</dd><dt class="property-required"
+    <dd>Destination bucket in the shipping rule to be created.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_nodejs" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -746,8 +1605,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix of the shipping directory in the shipping rule to be created.</p>
-</dd><dt class="property-required"
+    <dd>Prefix of the shipping directory in the shipping rule to be created.</dd><dt class="property-required"
             title="Required">
         <span id="shippername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shippername_nodejs" style="color: inherit; text-decoration: inherit;">shipper<wbr>Name</a>
@@ -755,8 +1613,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Shipping rule name.</p>
-</dd><dt class="property-required"
+    <dd>Shipping rule name.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -764,35 +1621,47 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the log topic to which the shipping rule to be created belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the log topic to which the shipping rule to be created belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="compress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_nodejs" style="color: inherit; text-decoration: inherit;">compress</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshippercompress">Cos<wbr>Shipper<wbr>Compress<wbr>Args</a></span>
+        <span class="property-type"><a href="#cosshippercompress">Cos<wbr>Shipper<wbr>Compress</a></span>
     </dt>
-    <dd><p>Compression configuration of shipped log.</p>
-</dd><dt class="property-optional"
+    <dd>Compression configuration of shipped log.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_nodejs" style="color: inherit; text-decoration: inherit;">content</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshippercontent">Cos<wbr>Shipper<wbr>Content<wbr>Args</a></span>
+        <span class="property-type"><a href="#cosshippercontent">Cos<wbr>Shipper<wbr>Content</a></span>
     </dt>
-    <dd><p>Format configuration of shipped log content.</p>
-</dd><dt class="property-optional"
+    <dd>Format configuration of shipped log content.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="endtime_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filenamemode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filenamemode_nodejs" style="color: inherit; text-decoration: inherit;">filename<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Naming a shipping file. Valid values: 0 (by random number); 1 (by shipping time). Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="filterrules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterrules_nodejs" style="color: inherit; text-decoration: inherit;">filter<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshipperfilterrule">Cos<wbr>Shipper<wbr>Filter<wbr>Rule<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#cosshipperfilterrule">Cos<wbr>Shipper<wbr>Filter<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</p>
-</dd><dt class="property-optional"
+    <dd>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</dd><dt class="property-optional"
             title="Optional">
         <span id="interval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_nodejs" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -800,8 +1669,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -809,8 +1677,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</dd><dt class="property-optional"
             title="Optional">
         <span id="partition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_nodejs" style="color: inherit; text-decoration: inherit;">partition</a>
@@ -818,8 +1685,31 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Partition rule of shipped log, which can be represented in strftime time format.</p>
-</dd></dl>
+    <dd>Partition rule of shipped log, which can be represented in strftime time format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="starttime_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storagetype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timezone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timezone_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., <code>GMT+08:00</code>, <code>UTC+08:00</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -833,8 +1723,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Destination bucket in the shipping rule to be created.</p>
-</dd><dt class="property-required"
+    <dd>Destination bucket in the shipping rule to be created.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_python" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -842,8 +1731,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Prefix of the shipping directory in the shipping rule to be created.</p>
-</dd><dt class="property-required"
+    <dd>Prefix of the shipping directory in the shipping rule to be created.</dd><dt class="property-required"
             title="Required">
         <span id="shipper_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shipper_name_python" style="color: inherit; text-decoration: inherit;">shipper_<wbr>name</a>
@@ -851,8 +1739,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Shipping rule name.</p>
-</dd><dt class="property-required"
+    <dd>Shipping rule name.</dd><dt class="property-required"
             title="Required">
         <span id="topic_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_id_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>id</a>
@@ -860,8 +1747,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the log topic to which the shipping rule to be created belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the log topic to which the shipping rule to be created belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="compress_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_python" style="color: inherit; text-decoration: inherit;">compress</a>
@@ -869,8 +1755,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercompress">Cos<wbr>Shipper<wbr>Compress<wbr>Args</a></span>
     </dt>
-    <dd><p>Compression configuration of shipped log.</p>
-</dd><dt class="property-optional"
+    <dd>Compression configuration of shipped log.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_python" style="color: inherit; text-decoration: inherit;">content</a>
@@ -878,17 +1763,31 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontent">Cos<wbr>Shipper<wbr>Content<wbr>Args</a></span>
     </dt>
-    <dd><p>Format configuration of shipped log content.</p>
-</dd><dt class="property-optional"
+    <dd>Format configuration of shipped log content.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="end_time_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filename_mode_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filename_mode_python" style="color: inherit; text-decoration: inherit;">filename_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Naming a shipping file. Valid values: 0 (by random number); 1 (by shipping time). Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_rules_python" style="color: inherit; text-decoration: inherit;">filter_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshipperfilterrule">Cos<wbr>Shipper<wbr>Filter<wbr>Rule<wbr>Args]</a></span>
+        <span class="property-type"><a href="#cosshipperfilterrule">Sequence[Cos<wbr>Shipper<wbr>Filter<wbr>Rule<wbr>Args]</a></span>
     </dt>
-    <dd><p>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</p>
-</dd><dt class="property-optional"
+    <dd>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</dd><dt class="property-optional"
             title="Optional">
         <span id="interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_python" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -896,8 +1795,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
@@ -905,8 +1803,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</dd><dt class="property-optional"
             title="Optional">
         <span id="partition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_python" style="color: inherit; text-decoration: inherit;">partition</a>
@@ -914,8 +1811,31 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Partition rule of shipped log, which can be represented in strftime time format.</p>
-</dd></dl>
+    <dd>Partition rule of shipped log, which can be represented in strftime time format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="start_time_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="time_zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_zone_python" style="color: inherit; text-decoration: inherit;">time_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., <code>GMT+08:00</code>, <code>UTC+08:00</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -929,8 +1849,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Destination bucket in the shipping rule to be created.</p>
-</dd><dt class="property-required"
+    <dd>Destination bucket in the shipping rule to be created.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_yaml" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -938,8 +1857,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Prefix of the shipping directory in the shipping rule to be created.</p>
-</dd><dt class="property-required"
+    <dd>Prefix of the shipping directory in the shipping rule to be created.</dd><dt class="property-required"
             title="Required">
         <span id="shippername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shippername_yaml" style="color: inherit; text-decoration: inherit;">shipper<wbr>Name</a>
@@ -947,8 +1865,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Shipping rule name.</p>
-</dd><dt class="property-required"
+    <dd>Shipping rule name.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -956,8 +1873,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the log topic to which the shipping rule to be created belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the log topic to which the shipping rule to be created belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="compress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#compress_yaml" style="color: inherit; text-decoration: inherit;">compress</a>
@@ -965,8 +1881,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercompress">Property Map</a></span>
     </dt>
-    <dd><p>Compression configuration of shipped log.</p>
-</dd><dt class="property-optional"
+    <dd>Compression configuration of shipped log.</dd><dt class="property-optional"
             title="Optional">
         <span id="content_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_yaml" style="color: inherit; text-decoration: inherit;">content</a>
@@ -974,8 +1889,23 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontent">Property Map</a></span>
     </dt>
-    <dd><p>Format configuration of shipped log content.</p>
-</dd><dt class="property-optional"
+    <dd>Format configuration of shipped log content.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="endtime_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filenamemode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filenamemode_yaml" style="color: inherit; text-decoration: inherit;">filename<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Naming a shipping file. Valid values: 0 (by random number); 1 (by shipping time). Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="filterrules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterrules_yaml" style="color: inherit; text-decoration: inherit;">filter<wbr>Rules</a>
@@ -983,8 +1913,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshipperfilterrule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</p>
-</dd><dt class="property-optional"
+    <dd>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</dd><dt class="property-optional"
             title="Optional">
         <span id="interval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_yaml" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -992,8 +1921,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -1001,8 +1929,7 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</dd><dt class="property-optional"
             title="Optional">
         <span id="partition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_yaml" style="color: inherit; text-decoration: inherit;">partition</a>
@@ -1010,8 +1937,31 @@ The CosShipper resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Partition rule of shipped log, which can be represented in strftime time format.</p>
-</dd></dl>
+    <dd>Partition rule of shipped log, which can be represented in strftime time format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="starttime_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storagetype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timezone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timezone_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., <code>GMT+08:00</code>, <code>UTC+08:00</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1032,8 +1982,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1047,8 +1996,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1062,8 +2024,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1077,8 +2038,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1092,8 +2052,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1107,8 +2066,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1118,129 +2076,173 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing CosShipper resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">CosShipperState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">CosShipper</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">CosShipperState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">CosShipper</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">bucket</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">compress</span><span class="p">:</span> <span class="nx">Optional[_cls.CosShipperCompressArgs]</span> = None<span class="p">,</span>
-        <span class="nx">content</span><span class="p">:</span> <span class="nx">Optional[_cls.CosShipperContentArgs]</span> = None<span class="p">,</span>
-        <span class="nx">filter_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cls.CosShipperFilterRuleArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">compress</span><span class="p">:</span> <span class="nx">Optional[CosShipperCompressArgs]</span> = None<span class="p">,</span>
+        <span class="nx">content</span><span class="p">:</span> <span class="nx">Optional[CosShipperContentArgs]</span> = None<span class="p">,</span>
+        <span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">filename_mode</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">filter_rules</span><span class="p">:</span> <span class="nx">Optional[Sequence[CosShipperFilterRuleArgs]]</span> = None<span class="p">,</span>
         <span class="nx">interval</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">max_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">partition</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">prefix</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">shipper_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">storage_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">time_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">topic_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> CosShipper</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCosShipper<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">CosShipperState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CosShipper</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCosShipper<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">CosShipperState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CosShipper</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">CosShipper</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CosShipperState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">CosShipper</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CosShipperState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">CosShipper</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CosShipperState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">CosShipper</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CosShipperState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingCosShipper</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cls:CosShipper</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cls_cos_shipper</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CosShipperState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CosShipperState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1248,28 +2250,31 @@ Get an existing CosShipper resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CosShipperState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1277,28 +2282,31 @@ Get an existing CosShipper resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CosShipperState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1318,35 +2326,47 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination bucket in the shipping rule to be created.</p>
-</dd><dt class="property-optional"
+    <dd>Destination bucket in the shipping rule to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_compress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_compress_csharp" style="color: inherit; text-decoration: inherit;">Compress</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshippercompress">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Cos<wbr>Shipper<wbr>Compress<wbr>Args</a></span>
+        <span class="property-type"><a href="#cosshippercompress">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Cos<wbr>Shipper<wbr>Compress</a></span>
     </dt>
-    <dd><p>Compression configuration of shipped log.</p>
-</dd><dt class="property-optional"
+    <dd>Compression configuration of shipped log.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_content_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_csharp" style="color: inherit; text-decoration: inherit;">Content</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshippercontent">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Cos<wbr>Shipper<wbr>Content<wbr>Args</a></span>
+        <span class="property-type"><a href="#cosshippercontent">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Cos<wbr>Shipper<wbr>Content</a></span>
     </dt>
-    <dd><p>Format configuration of shipped log content.</p>
-</dd><dt class="property-optional"
+    <dd>Format configuration of shipped log content.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_endtime_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_filenamemode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filenamemode_csharp" style="color: inherit; text-decoration: inherit;">Filename<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Naming a shipping file. Valid values: 0 (by random number); 1 (by shipping time). Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filterrules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filterrules_csharp" style="color: inherit; text-decoration: inherit;">Filter<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshipperfilterrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Cos<wbr>Shipper<wbr>Filter<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#cosshipperfilterrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Cos<wbr>Shipper<wbr>Filter<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</p>
-</dd><dt class="property-optional"
+    <dd>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_interval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_interval_csharp" style="color: inherit; text-decoration: inherit;">Interval</a>
@@ -1354,8 +2374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -1363,8 +2382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partition_csharp" style="color: inherit; text-decoration: inherit;">Partition</a>
@@ -1372,8 +2390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Partition rule of shipped log, which can be represented in strftime time format.</p>
-</dd><dt class="property-optional"
+    <dd>Partition rule of shipped log, which can be represented in strftime time format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prefix_csharp" style="color: inherit; text-decoration: inherit;">Prefix</a>
@@ -1381,8 +2398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix of the shipping directory in the shipping rule to be created.</p>
-</dd><dt class="property-optional"
+    <dd>Prefix of the shipping directory in the shipping rule to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shippername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shippername_csharp" style="color: inherit; text-decoration: inherit;">Shipper<wbr>Name</a>
@@ -1390,8 +2406,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Shipping rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping rule name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_starttime_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storagetype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_timezone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timezone_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., <code>GMT+08:00</code>, <code>UTC+08:00</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicid_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Id</a>
@@ -1399,8 +2438,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the log topic to which the shipping rule to be created belongs.</p>
-</dd></dl>
+    <dd>ID of the log topic to which the shipping rule to be created belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1414,8 +2452,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination bucket in the shipping rule to be created.</p>
-</dd><dt class="property-optional"
+    <dd>Destination bucket in the shipping rule to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_compress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_compress_go" style="color: inherit; text-decoration: inherit;">Compress</a>
@@ -1423,8 +2460,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercompress">Cos<wbr>Shipper<wbr>Compress<wbr>Args</a></span>
     </dt>
-    <dd><p>Compression configuration of shipped log.</p>
-</dd><dt class="property-optional"
+    <dd>Compression configuration of shipped log.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_content_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_go" style="color: inherit; text-decoration: inherit;">Content</a>
@@ -1432,8 +2468,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontent">Cos<wbr>Shipper<wbr>Content<wbr>Args</a></span>
     </dt>
-    <dd><p>Format configuration of shipped log content.</p>
-</dd><dt class="property-optional"
+    <dd>Format configuration of shipped log content.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_endtime_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_filenamemode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filenamemode_go" style="color: inherit; text-decoration: inherit;">Filename<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Naming a shipping file. Valid values: 0 (by random number); 1 (by shipping time). Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filterrules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filterrules_go" style="color: inherit; text-decoration: inherit;">Filter<wbr>Rules</a>
@@ -1441,8 +2492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshipperfilterrule">[]Cos<wbr>Shipper<wbr>Filter<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</p>
-</dd><dt class="property-optional"
+    <dd>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_interval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_interval_go" style="color: inherit; text-decoration: inherit;">Interval</a>
@@ -1450,8 +2500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -1459,8 +2508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partition_go" style="color: inherit; text-decoration: inherit;">Partition</a>
@@ -1468,8 +2516,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Partition rule of shipped log, which can be represented in strftime time format.</p>
-</dd><dt class="property-optional"
+    <dd>Partition rule of shipped log, which can be represented in strftime time format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prefix_go" style="color: inherit; text-decoration: inherit;">Prefix</a>
@@ -1477,8 +2524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix of the shipping directory in the shipping rule to be created.</p>
-</dd><dt class="property-optional"
+    <dd>Prefix of the shipping directory in the shipping rule to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shippername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shippername_go" style="color: inherit; text-decoration: inherit;">Shipper<wbr>Name</a>
@@ -1486,8 +2532,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Shipping rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping rule name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_starttime_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storagetype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_timezone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timezone_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., <code>GMT+08:00</code>, <code>UTC+08:00</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicid_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Id</a>
@@ -1495,8 +2564,133 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the log topic to which the shipping rule to be created belongs.</p>
-</dd></dl>
+    <dd>ID of the log topic to which the shipping rule to be created belongs.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Destination bucket in the shipping rule to be created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_compress_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_compress_hcl" style="color: inherit; text-decoration: inherit;">compress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercompress">object</a></span>
+    </dt>
+    <dd>Compression configuration of shipped log.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_hcl" style="color: inherit; text-decoration: inherit;">content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontent">object</a></span>
+    </dt>
+    <dd>Format configuration of shipped log content.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_filename_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filename_mode_hcl" style="color: inherit; text-decoration: inherit;">filename_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Naming a shipping file. Valid values: 0 (by random number); 1 (by shipping time). Default value: 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_filter_rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filter_rules_hcl" style="color: inherit; text-decoration: inherit;">filter_<wbr>rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshipperfilterrule">list(object)</a></span>
+    </dt>
+    <dd>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_interval_hcl" style="color: inherit; text-decoration: inherit;">interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_partition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partition_hcl" style="color: inherit; text-decoration: inherit;">partition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Partition rule of shipped log, which can be represented in strftime time format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prefix_hcl" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Prefix of the shipping directory in the shipping rule to be created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_shipper_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shipper_name_hcl" style="color: inherit; text-decoration: inherit;">shipper_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Shipping rule name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storage_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_type_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_time_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_zone_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., <code>GMT+08:00</code>, <code>UTC+08:00</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_topic_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_id_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the log topic to which the shipping rule to be created belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1510,35 +2704,47 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Destination bucket in the shipping rule to be created.</p>
-</dd><dt class="property-optional"
+    <dd>Destination bucket in the shipping rule to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_compress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_compress_java" style="color: inherit; text-decoration: inherit;">compress</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshippercompress">Cos<wbr>Shipper<wbr>Compress<wbr>Args</a></span>
+        <span class="property-type"><a href="#cosshippercompress">Cos<wbr>Shipper<wbr>Compress</a></span>
     </dt>
-    <dd><p>Compression configuration of shipped log.</p>
-</dd><dt class="property-optional"
+    <dd>Compression configuration of shipped log.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_content_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_java" style="color: inherit; text-decoration: inherit;">content</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshippercontent">Cos<wbr>Shipper<wbr>Content<wbr>Args</a></span>
+        <span class="property-type"><a href="#cosshippercontent">Cos<wbr>Shipper<wbr>Content</a></span>
     </dt>
-    <dd><p>Format configuration of shipped log content.</p>
-</dd><dt class="property-optional"
+    <dd>Format configuration of shipped log content.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_endtime_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_filenamemode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filenamemode_java" style="color: inherit; text-decoration: inherit;">filename<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Naming a shipping file. Valid values: 0 (by random number); 1 (by shipping time). Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filterrules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filterrules_java" style="color: inherit; text-decoration: inherit;">filter<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshipperfilterrule">List&lt;Cos<wbr>Shipper<wbr>Filter<wbr>Rule<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#cosshipperfilterrule">List&lt;Cos<wbr>Shipper<wbr>Filter<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</p>
-</dd><dt class="property-optional"
+    <dd>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_interval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_interval_java" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1546,8 +2752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -1555,8 +2760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partition_java" style="color: inherit; text-decoration: inherit;">partition</a>
@@ -1564,8 +2768,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Partition rule of shipped log, which can be represented in strftime time format.</p>
-</dd><dt class="property-optional"
+    <dd>Partition rule of shipped log, which can be represented in strftime time format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prefix_java" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -1573,8 +2776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Prefix of the shipping directory in the shipping rule to be created.</p>
-</dd><dt class="property-optional"
+    <dd>Prefix of the shipping directory in the shipping rule to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shippername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shippername_java" style="color: inherit; text-decoration: inherit;">shipper<wbr>Name</a>
@@ -1582,8 +2784,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Shipping rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping rule name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_starttime_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storagetype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_timezone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timezone_java" style="color: inherit; text-decoration: inherit;">time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., <code>GMT+08:00</code>, <code>UTC+08:00</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicid_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -1591,8 +2816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the log topic to which the shipping rule to be created belongs.</p>
-</dd></dl>
+    <dd>ID of the log topic to which the shipping rule to be created belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1606,35 +2830,47 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Destination bucket in the shipping rule to be created.</p>
-</dd><dt class="property-optional"
+    <dd>Destination bucket in the shipping rule to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_compress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_compress_nodejs" style="color: inherit; text-decoration: inherit;">compress</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshippercompress">Cos<wbr>Shipper<wbr>Compress<wbr>Args</a></span>
+        <span class="property-type"><a href="#cosshippercompress">Cos<wbr>Shipper<wbr>Compress</a></span>
     </dt>
-    <dd><p>Compression configuration of shipped log.</p>
-</dd><dt class="property-optional"
+    <dd>Compression configuration of shipped log.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_content_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_nodejs" style="color: inherit; text-decoration: inherit;">content</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshippercontent">Cos<wbr>Shipper<wbr>Content<wbr>Args</a></span>
+        <span class="property-type"><a href="#cosshippercontent">Cos<wbr>Shipper<wbr>Content</a></span>
     </dt>
-    <dd><p>Format configuration of shipped log content.</p>
-</dd><dt class="property-optional"
+    <dd>Format configuration of shipped log content.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_endtime_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_filenamemode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filenamemode_nodejs" style="color: inherit; text-decoration: inherit;">filename<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Naming a shipping file. Valid values: 0 (by random number); 1 (by shipping time). Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filterrules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filterrules_nodejs" style="color: inherit; text-decoration: inherit;">filter<wbr>Rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshipperfilterrule">Cos<wbr>Shipper<wbr>Filter<wbr>Rule<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#cosshipperfilterrule">Cos<wbr>Shipper<wbr>Filter<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</p>
-</dd><dt class="property-optional"
+    <dd>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_interval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_interval_nodejs" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1642,8 +2878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -1651,8 +2886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partition_nodejs" style="color: inherit; text-decoration: inherit;">partition</a>
@@ -1660,8 +2894,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Partition rule of shipped log, which can be represented in strftime time format.</p>
-</dd><dt class="property-optional"
+    <dd>Partition rule of shipped log, which can be represented in strftime time format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prefix_nodejs" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -1669,8 +2902,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix of the shipping directory in the shipping rule to be created.</p>
-</dd><dt class="property-optional"
+    <dd>Prefix of the shipping directory in the shipping rule to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shippername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shippername_nodejs" style="color: inherit; text-decoration: inherit;">shipper<wbr>Name</a>
@@ -1678,8 +2910,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Shipping rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping rule name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_starttime_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storagetype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_timezone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timezone_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., <code>GMT+08:00</code>, <code>UTC+08:00</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicid_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -1687,8 +2942,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the log topic to which the shipping rule to be created belongs.</p>
-</dd></dl>
+    <dd>ID of the log topic to which the shipping rule to be created belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1702,8 +2956,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Destination bucket in the shipping rule to be created.</p>
-</dd><dt class="property-optional"
+    <dd>Destination bucket in the shipping rule to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_compress_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_compress_python" style="color: inherit; text-decoration: inherit;">compress</a>
@@ -1711,8 +2964,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercompress">Cos<wbr>Shipper<wbr>Compress<wbr>Args</a></span>
     </dt>
-    <dd><p>Compression configuration of shipped log.</p>
-</dd><dt class="property-optional"
+    <dd>Compression configuration of shipped log.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_python" style="color: inherit; text-decoration: inherit;">content</a>
@@ -1720,17 +2972,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontent">Cos<wbr>Shipper<wbr>Content<wbr>Args</a></span>
     </dt>
-    <dd><p>Format configuration of shipped log content.</p>
-</dd><dt class="property-optional"
+    <dd>Format configuration of shipped log content.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_end_time_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_filename_mode_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filename_mode_python" style="color: inherit; text-decoration: inherit;">filename_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Naming a shipping file. Valid values: 0 (by random number); 1 (by shipping time). Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filter_rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filter_rules_python" style="color: inherit; text-decoration: inherit;">filter_<wbr>rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#cosshipperfilterrule">Cos<wbr>Shipper<wbr>Filter<wbr>Rule<wbr>Args]</a></span>
+        <span class="property-type"><a href="#cosshipperfilterrule">Sequence[Cos<wbr>Shipper<wbr>Filter<wbr>Rule<wbr>Args]</a></span>
     </dt>
-    <dd><p>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</p>
-</dd><dt class="property-optional"
+    <dd>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_interval_python" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1738,8 +3004,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
@@ -1747,8 +3012,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partition_python" style="color: inherit; text-decoration: inherit;">partition</a>
@@ -1756,8 +3020,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Partition rule of shipped log, which can be represented in strftime time format.</p>
-</dd><dt class="property-optional"
+    <dd>Partition rule of shipped log, which can be represented in strftime time format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prefix_python" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -1765,8 +3028,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Prefix of the shipping directory in the shipping rule to be created.</p>
-</dd><dt class="property-optional"
+    <dd>Prefix of the shipping directory in the shipping rule to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shipper_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shipper_name_python" style="color: inherit; text-decoration: inherit;">shipper_<wbr>name</a>
@@ -1774,8 +3036,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Shipping rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping rule name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_start_time_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storage_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_type_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_time_zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_zone_python" style="color: inherit; text-decoration: inherit;">time_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., <code>GMT+08:00</code>, <code>UTC+08:00</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topic_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_id_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>id</a>
@@ -1783,8 +3068,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the log topic to which the shipping rule to be created belongs.</p>
-</dd></dl>
+    <dd>ID of the log topic to which the shipping rule to be created belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1798,8 +3082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Destination bucket in the shipping rule to be created.</p>
-</dd><dt class="property-optional"
+    <dd>Destination bucket in the shipping rule to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_compress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_compress_yaml" style="color: inherit; text-decoration: inherit;">compress</a>
@@ -1807,8 +3090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercompress">Property Map</a></span>
     </dt>
-    <dd><p>Compression configuration of shipped log.</p>
-</dd><dt class="property-optional"
+    <dd>Compression configuration of shipped log.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_content_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_content_yaml" style="color: inherit; text-decoration: inherit;">content</a>
@@ -1816,8 +3098,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontent">Property Map</a></span>
     </dt>
-    <dd><p>Format configuration of shipped log content.</p>
-</dd><dt class="property-optional"
+    <dd>Format configuration of shipped log content.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_endtime_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_filenamemode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filenamemode_yaml" style="color: inherit; text-decoration: inherit;">filename<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Naming a shipping file. Valid values: 0 (by random number); 1 (by shipping time). Default value: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filterrules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filterrules_yaml" style="color: inherit; text-decoration: inherit;">filter<wbr>Rules</a>
@@ -1825,8 +3122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshipperfilterrule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</p>
-</dd><dt class="property-optional"
+    <dd>Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_interval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_interval_yaml" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1834,8 +3130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping time interval in seconds. Default value: 300. Value range: 300~900.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -1843,8 +3138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partition_yaml" style="color: inherit; text-decoration: inherit;">partition</a>
@@ -1852,8 +3146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Partition rule of shipped log, which can be represented in strftime time format.</p>
-</dd><dt class="property-optional"
+    <dd>Partition rule of shipped log, which can be represented in strftime time format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prefix_yaml" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -1861,8 +3154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Prefix of the shipping directory in the shipping rule to be created.</p>
-</dd><dt class="property-optional"
+    <dd>Prefix of the shipping directory in the shipping rule to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shippername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shippername_yaml" style="color: inherit; text-decoration: inherit;">shipper<wbr>Name</a>
@@ -1870,8 +3162,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Shipping rule name.</p>
-</dd><dt class="property-optional"
+    <dd>Shipping rule name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_starttime_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storagetype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_timezone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timezone_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., <code>GMT+08:00</code>, <code>UTC+08:00</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicid_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -1879,8 +3194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the log topic to which the shipping rule to be created belongs.</p>
-</dd></dl>
+    <dd>ID of the log topic to which the shipping rule to be created belongs.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1895,7 +3209,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="cosshippercompress">Cos<wbr>Shipper<wbr>Compress</h4>
+<h4 id="cosshippercompress">
+Cos<wbr>Shipper<wbr>Compress<pulumi-choosable type="language" values="python,go" class="inline">, Cos<wbr>Shipper<wbr>Compress<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1907,8 +3223,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Compression format. Valid values: gzip, lzop, none (no compression).</p>
-</dd></dl>
+    <dd>Compression format. Valid values: gzip, lzop, none (no compression).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1922,8 +3237,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Compression format. Valid values: gzip, lzop, none (no compression).</p>
-</dd></dl>
+    <dd>Compression format. Valid values: gzip, lzop, none (no compression).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="format_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_hcl" style="color: inherit; text-decoration: inherit;">format</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Compression format. Valid values: gzip, lzop, none (no compression).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1937,8 +3265,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Compression format. Valid values: gzip, lzop, none (no compression).</p>
-</dd></dl>
+    <dd>Compression format. Valid values: gzip, lzop, none (no compression).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1952,8 +3279,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Compression format. Valid values: gzip, lzop, none (no compression).</p>
-</dd></dl>
+    <dd>Compression format. Valid values: gzip, lzop, none (no compression).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1967,8 +3293,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Compression format. Valid values: gzip, lzop, none (no compression).</p>
-</dd></dl>
+    <dd>Compression format. Valid values: gzip, lzop, none (no compression).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1982,12 +3307,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Compression format. Valid values: gzip, lzop, none (no compression).</p>
-</dd></dl>
+    <dd>Compression format. Valid values: gzip, lzop, none (no compression).</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="cosshippercontent">Cos<wbr>Shipper<wbr>Content</h4>
+<h4 id="cosshippercontent">
+Cos<wbr>Shipper<wbr>Content<pulumi-choosable type="language" values="python,go" class="inline">, Cos<wbr>Shipper<wbr>Content<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1999,8 +3325,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content format. Valid values: json, csv.</p>
-</dd><dt class="property-optional"
+    <dd>Content format. Valid values: json, csv, parquet.</dd><dt class="property-optional"
             title="Optional">
         <span id="csv_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csv_csharp" style="color: inherit; text-decoration: inherit;">Csv</a>
@@ -2008,8 +3333,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontentcsv">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Cos<wbr>Shipper<wbr>Content<wbr>Csv</a></span>
     </dt>
-    <dd><p>CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="json_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#json_csharp" style="color: inherit; text-decoration: inherit;">Json</a>
@@ -2017,8 +3341,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontentjson">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Cos<wbr>Shipper<wbr>Content<wbr>Json</a></span>
     </dt>
-    <dd><p>JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="parquet_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parquet_csharp" style="color: inherit; text-decoration: inherit;">Parquet</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontentparquet">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Cos<wbr>Shipper<wbr>Content<wbr>Parquet</a></span>
+    </dt>
+    <dd>Parquet format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2032,8 +3363,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content format. Valid values: json, csv.</p>
-</dd><dt class="property-optional"
+    <dd>Content format. Valid values: json, csv, parquet.</dd><dt class="property-optional"
             title="Optional">
         <span id="csv_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csv_go" style="color: inherit; text-decoration: inherit;">Csv</a>
@@ -2041,8 +3371,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontentcsv">Cos<wbr>Shipper<wbr>Content<wbr>Csv</a></span>
     </dt>
-    <dd><p>CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="json_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#json_go" style="color: inherit; text-decoration: inherit;">Json</a>
@@ -2050,8 +3379,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontentjson">Cos<wbr>Shipper<wbr>Content<wbr>Json</a></span>
     </dt>
-    <dd><p>JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="parquet_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parquet_go" style="color: inherit; text-decoration: inherit;">Parquet</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontentparquet">Cos<wbr>Shipper<wbr>Content<wbr>Parquet</a></span>
+    </dt>
+    <dd>Parquet format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="format_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_hcl" style="color: inherit; text-decoration: inherit;">format</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Content format. Valid values: json, csv, parquet.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="csv_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csv_hcl" style="color: inherit; text-decoration: inherit;">csv</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontentcsv">object</a></span>
+    </dt>
+    <dd>CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="json_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#json_hcl" style="color: inherit; text-decoration: inherit;">json</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontentjson">object</a></span>
+    </dt>
+    <dd>JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="parquet_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parquet_hcl" style="color: inherit; text-decoration: inherit;">parquet</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontentparquet">object</a></span>
+    </dt>
+    <dd>Parquet format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2065,8 +3439,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Content format. Valid values: json, csv.</p>
-</dd><dt class="property-optional"
+    <dd>Content format. Valid values: json, csv, parquet.</dd><dt class="property-optional"
             title="Optional">
         <span id="csv_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csv_java" style="color: inherit; text-decoration: inherit;">csv</a>
@@ -2074,8 +3447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontentcsv">Cos<wbr>Shipper<wbr>Content<wbr>Csv</a></span>
     </dt>
-    <dd><p>CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="json_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#json_java" style="color: inherit; text-decoration: inherit;">json</a>
@@ -2083,8 +3455,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontentjson">Cos<wbr>Shipper<wbr>Content<wbr>Json</a></span>
     </dt>
-    <dd><p>JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="parquet_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parquet_java" style="color: inherit; text-decoration: inherit;">parquet</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontentparquet">Cos<wbr>Shipper<wbr>Content<wbr>Parquet</a></span>
+    </dt>
+    <dd>Parquet format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2098,8 +3477,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content format. Valid values: json, csv.</p>
-</dd><dt class="property-optional"
+    <dd>Content format. Valid values: json, csv, parquet.</dd><dt class="property-optional"
             title="Optional">
         <span id="csv_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csv_nodejs" style="color: inherit; text-decoration: inherit;">csv</a>
@@ -2107,8 +3485,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontentcsv">Cos<wbr>Shipper<wbr>Content<wbr>Csv</a></span>
     </dt>
-    <dd><p>CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="json_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#json_nodejs" style="color: inherit; text-decoration: inherit;">json</a>
@@ -2116,8 +3493,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontentjson">Cos<wbr>Shipper<wbr>Content<wbr>Json</a></span>
     </dt>
-    <dd><p>JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="parquet_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parquet_nodejs" style="color: inherit; text-decoration: inherit;">parquet</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontentparquet">Cos<wbr>Shipper<wbr>Content<wbr>Parquet</a></span>
+    </dt>
+    <dd>Parquet format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2131,8 +3515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Content format. Valid values: json, csv.</p>
-</dd><dt class="property-optional"
+    <dd>Content format. Valid values: json, csv, parquet.</dd><dt class="property-optional"
             title="Optional">
         <span id="csv_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csv_python" style="color: inherit; text-decoration: inherit;">csv</a>
@@ -2140,8 +3523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontentcsv">Cos<wbr>Shipper<wbr>Content<wbr>Csv</a></span>
     </dt>
-    <dd><p>CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="json_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#json_python" style="color: inherit; text-decoration: inherit;">json</a>
@@ -2149,8 +3531,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontentjson">Cos<wbr>Shipper<wbr>Content<wbr>Json</a></span>
     </dt>
-    <dd><p>JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="parquet_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parquet_python" style="color: inherit; text-decoration: inherit;">parquet</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontentparquet">Cos<wbr>Shipper<wbr>Content<wbr>Parquet</a></span>
+    </dt>
+    <dd>Parquet format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2164,8 +3553,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Content format. Valid values: json, csv.</p>
-</dd><dt class="property-optional"
+    <dd>Content format. Valid values: json, csv, parquet.</dd><dt class="property-optional"
             title="Optional">
         <span id="csv_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#csv_yaml" style="color: inherit; text-decoration: inherit;">csv</a>
@@ -2173,8 +3561,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontentcsv">Property Map</a></span>
     </dt>
-    <dd><p>CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="json_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#json_yaml" style="color: inherit; text-decoration: inherit;">json</a>
@@ -2182,12 +3569,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#cosshippercontentjson">Property Map</a></span>
     </dt>
-    <dd><p>JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="parquet_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parquet_yaml" style="color: inherit; text-decoration: inherit;">parquet</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontentparquet">Property Map</a></span>
+    </dt>
+    <dd>Parquet format content description.Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="cosshippercontentcsv">Cos<wbr>Shipper<wbr>Content<wbr>Csv</h4>
+<h4 id="cosshippercontentcsv">
+Cos<wbr>Shipper<wbr>Content<wbr>Csv<pulumi-choosable type="language" values="python,go" class="inline">, Cos<wbr>Shipper<wbr>Content<wbr>Csv<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2199,8 +3595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field delimiter.</p>
-</dd><dt class="property-required"
+    <dd>Field delimiter.</dd><dt class="property-required"
             title="Required">
         <span id="escapechar_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#escapechar_csharp" style="color: inherit; text-decoration: inherit;">Escape<wbr>Char</a>
@@ -2208,8 +3603,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field delimiter.</p>
-</dd><dt class="property-required"
+    <dd>Field delimiter.</dd><dt class="property-required"
             title="Required">
         <span id="keys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keys_csharp" style="color: inherit; text-decoration: inherit;">Keys</a>
@@ -2217,8 +3611,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Names of keys.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Names of keys.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nonexistingfield_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nonexistingfield_csharp" style="color: inherit; text-decoration: inherit;">Non<wbr>Existing<wbr>Field</a>
@@ -2226,8 +3619,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content used to populate non-existing fields.</p>
-</dd><dt class="property-required"
+    <dd>Content used to populate non-existing fields.</dd><dt class="property-required"
             title="Required">
         <span id="printkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#printkey_csharp" style="color: inherit; text-decoration: inherit;">Print<wbr>Key</a>
@@ -2235,8 +3627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to print key on the first row of the CSV file.</p>
-</dd></dl>
+    <dd>Whether to print key on the first row of the CSV file.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2250,8 +3641,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field delimiter.</p>
-</dd><dt class="property-required"
+    <dd>Field delimiter.</dd><dt class="property-required"
             title="Required">
         <span id="escapechar_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#escapechar_go" style="color: inherit; text-decoration: inherit;">Escape<wbr>Char</a>
@@ -2259,8 +3649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field delimiter.</p>
-</dd><dt class="property-required"
+    <dd>Field delimiter.</dd><dt class="property-required"
             title="Required">
         <span id="keys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keys_go" style="color: inherit; text-decoration: inherit;">Keys</a>
@@ -2268,8 +3657,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Names of keys.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Names of keys.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nonexistingfield_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nonexistingfield_go" style="color: inherit; text-decoration: inherit;">Non<wbr>Existing<wbr>Field</a>
@@ -2277,8 +3665,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content used to populate non-existing fields.</p>
-</dd><dt class="property-required"
+    <dd>Content used to populate non-existing fields.</dd><dt class="property-required"
             title="Required">
         <span id="printkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#printkey_go" style="color: inherit; text-decoration: inherit;">Print<wbr>Key</a>
@@ -2286,8 +3673,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to print key on the first row of the CSV file.</p>
-</dd></dl>
+    <dd>Whether to print key on the first row of the CSV file.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="delimiter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_hcl" style="color: inherit; text-decoration: inherit;">delimiter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter.</dd><dt class="property-required"
+            title="Required">
+        <span id="escape_char_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#escape_char_hcl" style="color: inherit; text-decoration: inherit;">escape_<wbr>char</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field delimiter.</dd><dt class="property-required"
+            title="Required">
+        <span id="keys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keys_hcl" style="color: inherit; text-decoration: inherit;">keys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Names of keys.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="non_existing_field_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_existing_field_hcl" style="color: inherit; text-decoration: inherit;">non_<wbr>existing_<wbr>field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Content used to populate non-existing fields.</dd><dt class="property-required"
+            title="Required">
+        <span id="print_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#print_key_hcl" style="color: inherit; text-decoration: inherit;">print_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to print key on the first row of the CSV file.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2301,8 +3733,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Field delimiter.</p>
-</dd><dt class="property-required"
+    <dd>Field delimiter.</dd><dt class="property-required"
             title="Required">
         <span id="escapechar_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#escapechar_java" style="color: inherit; text-decoration: inherit;">escape<wbr>Char</a>
@@ -2310,8 +3741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Field delimiter.</p>
-</dd><dt class="property-required"
+    <dd>Field delimiter.</dd><dt class="property-required"
             title="Required">
         <span id="keys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keys_java" style="color: inherit; text-decoration: inherit;">keys</a>
@@ -2319,8 +3749,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Names of keys.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Names of keys.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nonexistingfield_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nonexistingfield_java" style="color: inherit; text-decoration: inherit;">non<wbr>Existing<wbr>Field</a>
@@ -2328,8 +3757,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Content used to populate non-existing fields.</p>
-</dd><dt class="property-required"
+    <dd>Content used to populate non-existing fields.</dd><dt class="property-required"
             title="Required">
         <span id="printkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#printkey_java" style="color: inherit; text-decoration: inherit;">print<wbr>Key</a>
@@ -2337,8 +3765,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to print key on the first row of the CSV file.</p>
-</dd></dl>
+    <dd>Whether to print key on the first row of the CSV file.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2352,8 +3779,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field delimiter.</p>
-</dd><dt class="property-required"
+    <dd>Field delimiter.</dd><dt class="property-required"
             title="Required">
         <span id="escapechar_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#escapechar_nodejs" style="color: inherit; text-decoration: inherit;">escape<wbr>Char</a>
@@ -2361,8 +3787,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field delimiter.</p>
-</dd><dt class="property-required"
+    <dd>Field delimiter.</dd><dt class="property-required"
             title="Required">
         <span id="keys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keys_nodejs" style="color: inherit; text-decoration: inherit;">keys</a>
@@ -2370,8 +3795,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Names of keys.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Names of keys.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nonexistingfield_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nonexistingfield_nodejs" style="color: inherit; text-decoration: inherit;">non<wbr>Existing<wbr>Field</a>
@@ -2379,8 +3803,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content used to populate non-existing fields.</p>
-</dd><dt class="property-required"
+    <dd>Content used to populate non-existing fields.</dd><dt class="property-required"
             title="Required">
         <span id="printkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#printkey_nodejs" style="color: inherit; text-decoration: inherit;">print<wbr>Key</a>
@@ -2388,8 +3811,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to print key on the first row of the CSV file.</p>
-</dd></dl>
+    <dd>Whether to print key on the first row of the CSV file.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2403,8 +3825,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Field delimiter.</p>
-</dd><dt class="property-required"
+    <dd>Field delimiter.</dd><dt class="property-required"
             title="Required">
         <span id="escape_char_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#escape_char_python" style="color: inherit; text-decoration: inherit;">escape_<wbr>char</a>
@@ -2412,8 +3833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Field delimiter.</p>
-</dd><dt class="property-required"
+    <dd>Field delimiter.</dd><dt class="property-required"
             title="Required">
         <span id="keys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keys_python" style="color: inherit; text-decoration: inherit;">keys</a>
@@ -2421,8 +3841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Names of keys.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Names of keys.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="non_existing_field_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#non_existing_field_python" style="color: inherit; text-decoration: inherit;">non_<wbr>existing_<wbr>field</a>
@@ -2430,8 +3849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Content used to populate non-existing fields.</p>
-</dd><dt class="property-required"
+    <dd>Content used to populate non-existing fields.</dd><dt class="property-required"
             title="Required">
         <span id="print_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#print_key_python" style="color: inherit; text-decoration: inherit;">print_<wbr>key</a>
@@ -2439,8 +3857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to print key on the first row of the CSV file.</p>
-</dd></dl>
+    <dd>Whether to print key on the first row of the CSV file.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2454,8 +3871,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Field delimiter.</p>
-</dd><dt class="property-required"
+    <dd>Field delimiter.</dd><dt class="property-required"
             title="Required">
         <span id="escapechar_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#escapechar_yaml" style="color: inherit; text-decoration: inherit;">escape<wbr>Char</a>
@@ -2463,8 +3879,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Field delimiter.</p>
-</dd><dt class="property-required"
+    <dd>Field delimiter.</dd><dt class="property-required"
             title="Required">
         <span id="keys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keys_yaml" style="color: inherit; text-decoration: inherit;">keys</a>
@@ -2472,8 +3887,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Names of keys.Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Names of keys.Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="nonexistingfield_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nonexistingfield_yaml" style="color: inherit; text-decoration: inherit;">non<wbr>Existing<wbr>Field</a>
@@ -2481,8 +3895,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Content used to populate non-existing fields.</p>
-</dd><dt class="property-required"
+    <dd>Content used to populate non-existing fields.</dd><dt class="property-required"
             title="Required">
         <span id="printkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#printkey_yaml" style="color: inherit; text-decoration: inherit;">print<wbr>Key</a>
@@ -2490,12 +3903,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to print key on the first row of the CSV file.</p>
-</dd></dl>
+    <dd>Whether to print key on the first row of the CSV file.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="cosshippercontentjson">Cos<wbr>Shipper<wbr>Content<wbr>Json</h4>
+<h4 id="cosshippercontentjson">
+Cos<wbr>Shipper<wbr>Content<wbr>Json<pulumi-choosable type="language" values="python,go" class="inline">, Cos<wbr>Shipper<wbr>Content<wbr>Json<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2507,8 +3921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enablement flag.</p>
-</dd><dt class="property-required"
+    <dd>Enablement flag.</dd><dt class="property-required"
             title="Required">
         <span id="metafields_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metafields_csharp" style="color: inherit; text-decoration: inherit;">Meta<wbr>Fields</a>
@@ -2516,9 +3929,8 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Metadata information list
-Note: this field may return null, indicating that no valid values can be obtained..</p>
-</dd></dl>
+    <dd>Metadata information list
+Note: this field may return null, indicating that no valid values can be obtained..</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2532,8 +3944,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enablement flag.</p>
-</dd><dt class="property-required"
+    <dd>Enablement flag.</dd><dt class="property-required"
             title="Required">
         <span id="metafields_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metafields_go" style="color: inherit; text-decoration: inherit;">Meta<wbr>Fields</a>
@@ -2541,9 +3952,31 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Metadata information list
-Note: this field may return null, indicating that no valid values can be obtained..</p>
-</dd></dl>
+    <dd>Metadata information list
+Note: this field may return null, indicating that no valid values can be obtained..</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="enable_tag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_tag_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>tag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enablement flag.</dd><dt class="property-required"
+            title="Required">
+        <span id="meta_fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meta_fields_hcl" style="color: inherit; text-decoration: inherit;">meta_<wbr>fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Metadata information list
+Note: this field may return null, indicating that no valid values can be obtained..</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2557,8 +3990,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enablement flag.</p>
-</dd><dt class="property-required"
+    <dd>Enablement flag.</dd><dt class="property-required"
             title="Required">
         <span id="metafields_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metafields_java" style="color: inherit; text-decoration: inherit;">meta<wbr>Fields</a>
@@ -2566,9 +3998,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Metadata information list
-Note: this field may return null, indicating that no valid values can be obtained..</p>
-</dd></dl>
+    <dd>Metadata information list
+Note: this field may return null, indicating that no valid values can be obtained..</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2582,8 +4013,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enablement flag.</p>
-</dd><dt class="property-required"
+    <dd>Enablement flag.</dd><dt class="property-required"
             title="Required">
         <span id="metafields_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metafields_nodejs" style="color: inherit; text-decoration: inherit;">meta<wbr>Fields</a>
@@ -2591,9 +4021,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Metadata information list
-Note: this field may return null, indicating that no valid values can be obtained..</p>
-</dd></dl>
+    <dd>Metadata information list
+Note: this field may return null, indicating that no valid values can be obtained..</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2607,8 +4036,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enablement flag.</p>
-</dd><dt class="property-required"
+    <dd>Enablement flag.</dd><dt class="property-required"
             title="Required">
         <span id="meta_fields_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#meta_fields_python" style="color: inherit; text-decoration: inherit;">meta_<wbr>fields</a>
@@ -2616,9 +4044,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Metadata information list
-Note: this field may return null, indicating that no valid values can be obtained..</p>
-</dd></dl>
+    <dd>Metadata information list
+Note: this field may return null, indicating that no valid values can be obtained..</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2632,8 +4059,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enablement flag.</p>
-</dd><dt class="property-required"
+    <dd>Enablement flag.</dd><dt class="property-required"
             title="Required">
         <span id="metafields_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metafields_yaml" style="color: inherit; text-decoration: inherit;">meta<wbr>Fields</a>
@@ -2641,13 +4067,330 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Metadata information list
-Note: this field may return null, indicating that no valid values can be obtained..</p>
-</dd></dl>
+    <dd>Metadata information list
+Note: this field may return null, indicating that no valid values can be obtained..</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="cosshipperfilterrule">Cos<wbr>Shipper<wbr>Filter<wbr>Rule</h4>
+<h4 id="cosshippercontentparquet">
+Cos<wbr>Shipper<wbr>Content<wbr>Parquet<pulumi-choosable type="language" values="python,go" class="inline">, Cos<wbr>Shipper<wbr>Content<wbr>Parquet<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="parquetkeyinfos_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parquetkeyinfos_csharp" style="color: inherit; text-decoration: inherit;">Parquet<wbr>Key<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontentparquetparquetkeyinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Cos<wbr>Shipper<wbr>Content<wbr>Parquet<wbr>Parquet<wbr>Key<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Array of Parquet column definitions.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="parquetkeyinfos_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parquetkeyinfos_go" style="color: inherit; text-decoration: inherit;">Parquet<wbr>Key<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontentparquetparquetkeyinfo">[]Cos<wbr>Shipper<wbr>Content<wbr>Parquet<wbr>Parquet<wbr>Key<wbr>Info</a></span>
+    </dt>
+    <dd>Array of Parquet column definitions.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="parquet_key_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parquet_key_infos_hcl" style="color: inherit; text-decoration: inherit;">parquet_<wbr>key_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontentparquetparquetkeyinfo">list(object)</a></span>
+    </dt>
+    <dd>Array of Parquet column definitions.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="parquetkeyinfos_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parquetkeyinfos_java" style="color: inherit; text-decoration: inherit;">parquet<wbr>Key<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontentparquetparquetkeyinfo">List&lt;Cos<wbr>Shipper<wbr>Content<wbr>Parquet<wbr>Parquet<wbr>Key<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Array of Parquet column definitions.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="parquetkeyinfos_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parquetkeyinfos_nodejs" style="color: inherit; text-decoration: inherit;">parquet<wbr>Key<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontentparquetparquetkeyinfo">Cos<wbr>Shipper<wbr>Content<wbr>Parquet<wbr>Parquet<wbr>Key<wbr>Info[]</a></span>
+    </dt>
+    <dd>Array of Parquet column definitions.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="parquet_key_infos_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parquet_key_infos_python" style="color: inherit; text-decoration: inherit;">parquet_<wbr>key_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontentparquetparquetkeyinfo">Sequence[Cos<wbr>Shipper<wbr>Content<wbr>Parquet<wbr>Parquet<wbr>Key<wbr>Info]</a></span>
+    </dt>
+    <dd>Array of Parquet column definitions.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="parquetkeyinfos_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#parquetkeyinfos_yaml" style="color: inherit; text-decoration: inherit;">parquet<wbr>Key<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#cosshippercontentparquetparquetkeyinfo">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Array of Parquet column definitions.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="cosshippercontentparquetparquetkeyinfo">
+Cos<wbr>Shipper<wbr>Content<wbr>Parquet<wbr>Parquet<wbr>Key<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Cos<wbr>Shipper<wbr>Content<wbr>Parquet<wbr>Parquet<wbr>Key<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="keyname_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Column name in the Parquet file.</dd><dt class="property-required"
+            title="Required">
+        <span id="keytype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keytype_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data type of the column. Valid values: string, boolean, int32, int64, float, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keynonexistingfield_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keynonexistingfield_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Non<wbr>Existing<wbr>Field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value to assign when the field does not exist or parsing fails.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="keyname_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Column name in the Parquet file.</dd><dt class="property-required"
+            title="Required">
+        <span id="keytype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keytype_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data type of the column. Valid values: string, boolean, int32, int64, float, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keynonexistingfield_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keynonexistingfield_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Non<wbr>Existing<wbr>Field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value to assign when the field does not exist or parsing fails.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_name_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Column name in the Parquet file.</dd><dt class="property-required"
+            title="Required">
+        <span id="key_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_type_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data type of the column. Valid values: string, boolean, int32, int64, float, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_non_existing_field_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_non_existing_field_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>non_<wbr>existing_<wbr>field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value to assign when the field does not exist or parsing fails.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="keyname_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_java" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Column name in the Parquet file.</dd><dt class="property-required"
+            title="Required">
+        <span id="keytype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keytype_java" style="color: inherit; text-decoration: inherit;">key<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Data type of the column. Valid values: string, boolean, int32, int64, float, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keynonexistingfield_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keynonexistingfield_java" style="color: inherit; text-decoration: inherit;">key<wbr>Non<wbr>Existing<wbr>Field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Value to assign when the field does not exist or parsing fails.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="keyname_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Column name in the Parquet file.</dd><dt class="property-required"
+            title="Required">
+        <span id="keytype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keytype_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data type of the column. Valid values: string, boolean, int32, int64, float, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keynonexistingfield_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keynonexistingfield_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Non<wbr>Existing<wbr>Field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value to assign when the field does not exist or parsing fails.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_name_python" style="color: inherit; text-decoration: inherit;">key_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Column name in the Parquet file.</dd><dt class="property-required"
+            title="Required">
+        <span id="key_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_type_python" style="color: inherit; text-decoration: inherit;">key_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Data type of the column. Valid values: string, boolean, int32, int64, float, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_non_existing_field_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_non_existing_field_python" style="color: inherit; text-decoration: inherit;">key_<wbr>non_<wbr>existing_<wbr>field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Value to assign when the field does not exist or parsing fails.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="keyname_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyname_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Column name in the Parquet file.</dd><dt class="property-required"
+            title="Required">
+        <span id="keytype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keytype_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Data type of the column. Valid values: string, boolean, int32, int64, float, double.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keynonexistingfield_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keynonexistingfield_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Non<wbr>Existing<wbr>Field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Value to assign when the field does not exist or parsing fails.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="cosshipperfilterrule">
+Cos<wbr>Shipper<wbr>Filter<wbr>Rule<pulumi-choosable type="language" values="python,go" class="inline">, Cos<wbr>Shipper<wbr>Filter<wbr>Rule<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2659,8 +4402,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter rule key.</p>
-</dd><dt class="property-required"
+    <dd>Filter rule key.</dd><dt class="property-required"
             title="Required">
         <span id="regex_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regex_csharp" style="color: inherit; text-decoration: inherit;">Regex</a>
@@ -2668,8 +4410,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter rule.</p>
-</dd><dt class="property-required"
+    <dd>Filter rule.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2677,8 +4418,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter rule value.</p>
-</dd></dl>
+    <dd>Filter rule value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2692,8 +4432,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter rule key.</p>
-</dd><dt class="property-required"
+    <dd>Filter rule key.</dd><dt class="property-required"
             title="Required">
         <span id="regex_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regex_go" style="color: inherit; text-decoration: inherit;">Regex</a>
@@ -2701,8 +4440,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter rule.</p>
-</dd><dt class="property-required"
+    <dd>Filter rule.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2710,8 +4448,37 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter rule value.</p>
-</dd></dl>
+    <dd>Filter rule value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter rule key.</dd><dt class="property-required"
+            title="Required">
+        <span id="regex_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regex_hcl" style="color: inherit; text-decoration: inherit;">regex</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter rule value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2725,8 +4492,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter rule key.</p>
-</dd><dt class="property-required"
+    <dd>Filter rule key.</dd><dt class="property-required"
             title="Required">
         <span id="regex_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regex_java" style="color: inherit; text-decoration: inherit;">regex</a>
@@ -2734,8 +4500,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter rule.</p>
-</dd><dt class="property-required"
+    <dd>Filter rule.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2743,8 +4508,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter rule value.</p>
-</dd></dl>
+    <dd>Filter rule value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2758,8 +4522,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter rule key.</p>
-</dd><dt class="property-required"
+    <dd>Filter rule key.</dd><dt class="property-required"
             title="Required">
         <span id="regex_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regex_nodejs" style="color: inherit; text-decoration: inherit;">regex</a>
@@ -2767,8 +4530,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter rule.</p>
-</dd><dt class="property-required"
+    <dd>Filter rule.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2776,8 +4538,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter rule value.</p>
-</dd></dl>
+    <dd>Filter rule value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2791,8 +4552,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter rule key.</p>
-</dd><dt class="property-required"
+    <dd>Filter rule key.</dd><dt class="property-required"
             title="Required">
         <span id="regex_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regex_python" style="color: inherit; text-decoration: inherit;">regex</a>
@@ -2800,8 +4560,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter rule.</p>
-</dd><dt class="property-required"
+    <dd>Filter rule.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2809,8 +4568,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter rule value.</p>
-</dd></dl>
+    <dd>Filter rule value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2824,8 +4582,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter rule key.</p>
-</dd><dt class="property-required"
+    <dd>Filter rule key.</dd><dt class="property-required"
             title="Required">
         <span id="regex_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regex_yaml" style="color: inherit; text-decoration: inherit;">regex</a>
@@ -2833,8 +4590,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter rule.</p>
-</dd><dt class="property-required"
+    <dd>Filter rule.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2842,8 +4598,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter rule value.</p>
-</dd></dl>
+    <dd>Filter rule value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2854,9 +4609,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
 cls cos shipper can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Cls/cosShipper:CosShipper shipper 5d1b7b2a-c163-4c48-bb01-9ee00584d761
+$ pulumi import tencentcloud:Cls/cosShipper:CosShipper example 5d1b7b2a-c163-4c48-bb01-9ee00584d761
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2868,7 +4626,6 @@ $ pulumi import tencentcloud:Cls/cosShipper:CosShipper shipper 5d1b7b2a-c163-4c4
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Eip.Instance"
 meta_desc: "Documentation for the tencentcloud.Eip.Instance resource with examples, input properties, output properties, lookup functions, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,54 +20,55 @@ Provides an EIP resource.
 
 ### Paid by the bandwidth package
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const foo = new tencentcloud.eip.Instance("foo", {
+    name: "awesome_gateway_ip",
     bandwidthPackageId: "bwp-jtvzuky6",
     internetChargeType: "BANDWIDTH_PACKAGE",
     type: "EIP",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 foo = tencentcloud.eip.Instance("foo",
+    name="awesome_gateway_ip",
     bandwidth_package_id="bwp-jtvzuky6",
     internet_charge_type="BANDWIDTH_PACKAGE",
     type="EIP")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Eip.Instance("foo", new()
-    {
-        BandwidthPackageId = "bwp-jtvzuky6",
-        InternetChargeType = "BANDWIDTH_PACKAGE",
-        Type = "EIP",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/eip"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Eip.NewInstance(ctx, "foo", &Eip.InstanceArgs{
+		_, err := eip.NewInstance(ctx, "foo", &eip.InstanceArgs{
+			Name:               pulumi.String("awesome_gateway_ip"),
 			BandwidthPackageId: pulumi.String("bwp-jtvzuky6"),
 			InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
 			Type:               pulumi.String("EIP"),
@@ -77,6 +80,34 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = new Tencentcloud.Eip.Instance("foo", new()
+    {
+        Name = "awesome_gateway_ip",
+        BandwidthPackageId = "bwp-jtvzuky6",
+        InternetChargeType = "BANDWIDTH_PACKAGE",
+        Type = "EIP",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -85,8 +116,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Eip.Instance;
 import com.pulumi.tencentcloud.Eip.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -98,7 +129,8 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Instance("foo", InstanceArgs.builder()        
+        var foo = new Instance("foo", InstanceArgs.builder()
+            .name("awesome_gateway_ip")
             .bandwidthPackageId("bwp-jtvzuky6")
             .internetChargeType("BANDWIDTH_PACKAGE")
             .type("EIP")
@@ -107,47 +139,125 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
     type: tencentcloud:Eip:Instance
     properties:
+      name: awesome_gateway_ip
       bandwidthPackageId: bwp-jtvzuky6
       internetChargeType: BANDWIDTH_PACKAGE
       type: EIP
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_eip_instance" "foo" {
+  name                 = "awesome_gateway_ip"
+  bandwidth_package_id = "bwp-jtvzuky6"
+  internet_charge_type = "BANDWIDTH_PACKAGE"
+  type                 = "EIP"
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### AntiDDos Eip
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const foo = new tencentcloud.eip.Instance("foo", {
-    antiDdosPackageId: "xxxxxxxx",
+    name: "awesome_gateway_ip",
     bandwidthPackageId: "bwp-4ocyia9s",
     internetChargeType: "BANDWIDTH_PACKAGE",
+    type: "AntiDDoSEIP",
+    antiDdosPackageId: "xxxxxxxx",
     tags: {
         test: "test",
     },
-    type: "AntiDDoSEIP",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 foo = tencentcloud.eip.Instance("foo",
-    anti_ddos_package_id="xxxxxxxx",
+    name="awesome_gateway_ip",
     bandwidth_package_id="bwp-4ocyia9s",
     internet_charge_type="BANDWIDTH_PACKAGE",
+    type="AntiDDoSEIP",
+    anti_ddos_package_id="xxxxxxxx",
     tags={
         "test": "test",
-    },
-    type="AntiDDoSEIP")
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/eip"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := eip.NewInstance(ctx, "foo", &eip.InstanceArgs{
+			Name:               pulumi.String("awesome_gateway_ip"),
+			BandwidthPackageId: pulumi.String("bwp-4ocyia9s"),
+			InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
+			Type:               pulumi.String("AntiDDoSEIP"),
+			AntiDdosPackageId:  pulumi.String("xxxxxxxx"),
+			Tags: pulumi.StringMap{
+				"test": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -158,44 +268,24 @@ return await Deployment.RunAsync(() =>
 {
     var foo = new Tencentcloud.Eip.Instance("foo", new()
     {
-        AntiDdosPackageId = "xxxxxxxx",
+        Name = "awesome_gateway_ip",
         BandwidthPackageId = "bwp-4ocyia9s",
         InternetChargeType = "BANDWIDTH_PACKAGE",
+        Type = "AntiDDoSEIP",
+        AntiDdosPackageId = "xxxxxxxx",
         Tags = 
         {
             { "test", "test" },
         },
-        Type = "AntiDDoSEIP",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Eip.NewInstance(ctx, "foo", &Eip.InstanceArgs{
-			AntiDdosPackageId:  pulumi.String("xxxxxxxx"),
-			BandwidthPackageId: pulumi.String("bwp-4ocyia9s"),
-			InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
-			},
-			Type: pulumi.String("AntiDDoSEIP"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -204,8 +294,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Eip.Instance;
 import com.pulumi.tencentcloud.Eip.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -217,91 +307,124 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Instance("foo", InstanceArgs.builder()        
-            .antiDdosPackageId("xxxxxxxx")
+        var foo = new Instance("foo", InstanceArgs.builder()
+            .name("awesome_gateway_ip")
             .bandwidthPackageId("bwp-4ocyia9s")
             .internetChargeType("BANDWIDTH_PACKAGE")
-            .tags(Map.of("test", "test"))
             .type("AntiDDoSEIP")
+            .antiDdosPackageId("xxxxxxxx")
+            .tags(Map.of("test", "test"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
     type: tencentcloud:Eip:Instance
     properties:
-      antiDdosPackageId: xxxxxxxx
+      name: awesome_gateway_ip
       bandwidthPackageId: bwp-4ocyia9s
       internetChargeType: BANDWIDTH_PACKAGE
+      type: AntiDDoSEIP
+      antiDdosPackageId: xxxxxxxx
       tags:
         test: test
-      type: AntiDDoSEIP
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_eip_instance" "foo" {
+  name                 = "awesome_gateway_ip"
+  bandwidth_package_id = "bwp-4ocyia9s"
+  internet_charge_type = "BANDWIDTH_PACKAGE"
+  type                 = "AntiDDoSEIP"
+  anti_ddos_package_id = "xxxxxxxx"
+  tags = {
+    "test" = "test"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Eip With Network Egress
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const foo = new tencentcloud.eip.Instance("foo", {
+    name: "egress_eip",
     egress: "center_egress2",
     internetChargeType: "BANDWIDTH_PACKAGE",
-    internetMaxBandwidthOut: 1,
     internetServiceProvider: "CMCC",
+    internetMaxBandwidthOut: 1,
     type: "EIP",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 foo = tencentcloud.eip.Instance("foo",
+    name="egress_eip",
     egress="center_egress2",
     internet_charge_type="BANDWIDTH_PACKAGE",
-    internet_max_bandwidth_out=1,
     internet_service_provider="CMCC",
+    internet_max_bandwidth_out=1,
     type="EIP")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Eip.Instance("foo", new()
-    {
-        Egress = "center_egress2",
-        InternetChargeType = "BANDWIDTH_PACKAGE",
-        InternetMaxBandwidthOut = 1,
-        InternetServiceProvider = "CMCC",
-        Type = "EIP",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/eip"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Eip.NewInstance(ctx, "foo", &Eip.InstanceArgs{
+		_, err := eip.NewInstance(ctx, "foo", &eip.InstanceArgs{
+			Name:                    pulumi.String("egress_eip"),
 			Egress:                  pulumi.String("center_egress2"),
 			InternetChargeType:      pulumi.String("BANDWIDTH_PACKAGE"),
-			InternetMaxBandwidthOut: pulumi.Int(1),
 			InternetServiceProvider: pulumi.String("CMCC"),
+			InternetMaxBandwidthOut: pulumi.Int(1),
 			Type:                    pulumi.String("EIP"),
 		})
 		if err != nil {
@@ -311,6 +434,36 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = new Tencentcloud.Eip.Instance("foo", new()
+    {
+        Name = "egress_eip",
+        Egress = "center_egress2",
+        InternetChargeType = "BANDWIDTH_PACKAGE",
+        InternetServiceProvider = "CMCC",
+        InternetMaxBandwidthOut = 1,
+        Type = "EIP",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -319,8 +472,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Eip.Instance;
 import com.pulumi.tencentcloud.Eip.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -332,47 +485,113 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Instance("foo", InstanceArgs.builder()        
+        var foo = new Instance("foo", InstanceArgs.builder()
+            .name("egress_eip")
             .egress("center_egress2")
             .internetChargeType("BANDWIDTH_PACKAGE")
-            .internetMaxBandwidthOut(1)
             .internetServiceProvider("CMCC")
+            .internetMaxBandwidthOut(1)
             .type("EIP")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
     type: tencentcloud:Eip:Instance
     properties:
+      name: egress_eip
       egress: center_egress2
       internetChargeType: BANDWIDTH_PACKAGE
-      internetMaxBandwidthOut: 1
       internetServiceProvider: CMCC
+      internetMaxBandwidthOut: 1
       type: EIP
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_eip_instance" "foo" {
+  name                       = "egress_eip"
+  egress                     = "center_egress2"
+  internet_charge_type       = "BANDWIDTH_PACKAGE"
+  internet_service_provider  = "CMCC"
+  internet_max_bandwidth_out = 1
+  type                       = "EIP"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [AllocateAddresses](https://www.tencentcloud.com/document/api/215/16699)
+  - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+  - [DescribeTaskResult](https://www.tencentcloud.com/document/api/215/34772)
+* Read:
+  - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+  - [DescribeBandwidthPackages](https://www.tencentcloud.com/document/api/215/36919)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [ModifyAddressAttribute](https://www.tencentcloud.com/document/api/215/16704)
+  - [ModifyAddressInternetChargeType](https://www.tencentcloud.com/document/api/215/36091)
+  - [ModifyAddressesBandwidth](https://www.tencentcloud.com/document/api/215/34771)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [RenewAddresses](https://www.tencentcloud.com/search/?wd=RenewAddresses&type=document&lang=en)
+* Delete:
+  - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+  - [DescribeNatGateways](https://www.tencentcloud.com/document/api/215/34752)
+  - [DescribeTaskResult](https://www.tencentcloud.com/document/api/215/34772)
+  - [DisassociateAddress](https://www.tencentcloud.com/document/api/215/16703)
+  - [DisassociateNatGatewayAddress](https://www.tencentcloud.com/document/api/215/34751)
+  - [ReleaseAddresses](https://www.tencentcloud.com/document/api/215/16705)
 
 
 ## Create Instance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[InstanceArgs]</a></span> = None<span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
              <span class="nx">anti_ddos_package_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -380,51 +599,58 @@ resources:
              <span class="nx">applicable_for_clb</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">auto_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">bandwidth_package_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">cdc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">egress</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">internet_charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">internet_max_bandwidth_out</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">internet_service_provider</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-             <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[InstanceArgs]</a></span> = None<span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+             <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Eip:Instance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Eip:Instance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_eip_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -445,7 +671,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -562,11 +788,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Instance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Instance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -582,8 +816,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="anycastzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anycastzone_csharp" style="color: inherit; text-decoration: inherit;">Anycast<wbr>Zone</a>
@@ -591,8 +824,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="applicableforclb_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicableforclb_csharp" style="color: inherit; text-decoration: inherit;">Applicable<wbr>For<wbr>Clb</a>
@@ -600,9 +832,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.27.0.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.<p class="property-message">Deprecated: It has been deprecated from version 1.27.0.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -610,8 +840,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
@@ -619,8 +848,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of bandwidth package, it will set when <code>internet_charge_type</code> is <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of bandwidth package, it will set when <code>internetChargeType</code> is <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cdcid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="egress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egress_csharp" style="color: inherit; text-decoration: inherit;">Egress</a>
@@ -628,8 +864,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network egress. It defaults to <code>center_egress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Network egress. It defaults to <code>centerEgress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -637,8 +872,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -646,8 +880,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The bandwidth limit of EIP, unit is Mbps.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The bandwidth limit of EIP, unit is Mbps.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="internetserviceprovider_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetserviceprovider_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Service<wbr>Provider</a>
@@ -655,8 +888,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -664,8 +896,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of eip.</p>
-</dd><dt class="property-optional"
+    <dd>The name of eip.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -673,17 +904,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internet_charge_type</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internetChargeType</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The tags of eip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of eip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -691,8 +920,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code>. Default is <code>EIP</code>.</p>
-</dd></dl>
+    <dd>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code> and <code>ResidentialEIP</code>. Default is <code>EIP</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -706,8 +934,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="anycastzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anycastzone_go" style="color: inherit; text-decoration: inherit;">Anycast<wbr>Zone</a>
@@ -715,8 +942,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="applicableforclb_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicableforclb_go" style="color: inherit; text-decoration: inherit;">Applicable<wbr>For<wbr>Clb</a>
@@ -724,9 +950,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.27.0.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.<p class="property-message">Deprecated: It has been deprecated from version 1.27.0.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -734,8 +958,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_go" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
@@ -743,8 +966,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of bandwidth package, it will set when <code>internet_charge_type</code> is <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of bandwidth package, it will set when <code>internetChargeType</code> is <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cdcid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="egress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egress_go" style="color: inherit; text-decoration: inherit;">Egress</a>
@@ -752,8 +982,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network egress. It defaults to <code>center_egress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Network egress. It defaults to <code>centerEgress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -761,8 +990,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -770,8 +998,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The bandwidth limit of EIP, unit is Mbps.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The bandwidth limit of EIP, unit is Mbps.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="internetserviceprovider_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetserviceprovider_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Service<wbr>Provider</a>
@@ -779,8 +1006,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -788,8 +1014,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of eip.</p>
-</dd><dt class="property-optional"
+    <dd>The name of eip.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -797,17 +1022,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internet_charge_type</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internetChargeType</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The tags of eip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of eip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -815,8 +1038,125 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code>. Default is <code>EIP</code>.</p>
-</dd></dl>
+    <dd>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code> and <code>ResidentialEIP</code>. Default is <code>EIP</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="anti_ddos_package_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anti_ddos_package_id_hcl" style="color: inherit; text-decoration: inherit;">anti_<wbr>ddos_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="anycast_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anycast_zone_hcl" style="color: inherit; text-decoration: inherit;">anycast_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="applicable_for_clb_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicable_for_clb_hcl" style="color: inherit; text-decoration: inherit;">applicable_<wbr>for_<wbr>clb</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.<p class="property-message">Deprecated: It has been deprecated from version 1.27.0.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bandwidth_package_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_package_id_hcl" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of bandwidth package, it will set when <code>internetChargeType</code> is <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC Unique ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="egress_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egress_hcl" style="color: inherit; text-decoration: inherit;">egress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network egress. It defaults to <code>centerEgress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="internet_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="internet_max_bandwidth_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_max_bandwidth_out_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The bandwidth limit of EIP, unit is Mbps.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="internet_service_provider_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_service_provider_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>service_<wbr>provider</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of eip.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internetChargeType</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The tags of eip.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code> and <code>ResidentialEIP</code>. Default is <code>EIP</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -830,8 +1170,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="anycastzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anycastzone_java" style="color: inherit; text-decoration: inherit;">anycast<wbr>Zone</a>
@@ -839,8 +1178,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="applicableforclb_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicableforclb_java" style="color: inherit; text-decoration: inherit;">applicable<wbr>For<wbr>Clb</a>
@@ -848,9 +1186,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.27.0.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.<p class="property-message">Deprecated: It has been deprecated from version 1.27.0.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -858,8 +1194,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_java" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -867,8 +1202,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of bandwidth package, it will set when <code>internet_charge_type</code> is <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of bandwidth package, it will set when <code>internetChargeType</code> is <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cdcid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="egress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egress_java" style="color: inherit; text-decoration: inherit;">egress</a>
@@ -876,8 +1218,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network egress. It defaults to <code>center_egress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Network egress. It defaults to <code>centerEgress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -885,8 +1226,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -894,8 +1234,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The bandwidth limit of EIP, unit is Mbps.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The bandwidth limit of EIP, unit is Mbps.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="internetserviceprovider_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetserviceprovider_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Service<wbr>Provider</a>
@@ -903,8 +1242,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -912,8 +1250,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of eip.</p>
-</dd><dt class="property-optional"
+    <dd>The name of eip.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -921,17 +1258,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internet_charge_type</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internetChargeType</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The tags of eip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of eip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -939,8 +1274,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code>. Default is <code>EIP</code>.</p>
-</dd></dl>
+    <dd>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code> and <code>ResidentialEIP</code>. Default is <code>EIP</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -954,8 +1288,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="anycastzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anycastzone_nodejs" style="color: inherit; text-decoration: inherit;">anycast<wbr>Zone</a>
@@ -963,8 +1296,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="applicableforclb_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicableforclb_nodejs" style="color: inherit; text-decoration: inherit;">applicable<wbr>For<wbr>Clb</a>
@@ -972,9 +1304,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.27.0.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.<p class="property-message">Deprecated: It has been deprecated from version 1.27.0.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -982,8 +1312,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -991,8 +1320,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of bandwidth package, it will set when <code>internet_charge_type</code> is <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of bandwidth package, it will set when <code>internetChargeType</code> is <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cdcid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="egress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egress_nodejs" style="color: inherit; text-decoration: inherit;">egress</a>
@@ -1000,8 +1336,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network egress. It defaults to <code>center_egress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Network egress. It defaults to <code>centerEgress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -1009,8 +1344,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1018,8 +1352,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The bandwidth limit of EIP, unit is Mbps.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The bandwidth limit of EIP, unit is Mbps.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="internetserviceprovider_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetserviceprovider_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Service<wbr>Provider</a>
@@ -1027,8 +1360,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1036,8 +1368,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of eip.</p>
-</dd><dt class="property-optional"
+    <dd>The name of eip.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -1045,17 +1376,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internet_charge_type</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internetChargeType</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The tags of eip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of eip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1063,8 +1392,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code>. Default is <code>EIP</code>.</p>
-</dd></dl>
+    <dd>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code> and <code>ResidentialEIP</code>. Default is <code>EIP</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1078,8 +1406,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="anycast_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anycast_zone_python" style="color: inherit; text-decoration: inherit;">anycast_<wbr>zone</a>
@@ -1087,8 +1414,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="applicable_for_clb_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicable_for_clb_python" style="color: inherit; text-decoration: inherit;">applicable_<wbr>for_<wbr>clb</a>
@@ -1096,9 +1422,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.27.0.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.<p class="property-message">Deprecated: It has been deprecated from version 1.27.0.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="auto_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
@@ -1106,8 +1430,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidth_package_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_package_id_python" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
@@ -1115,8 +1438,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of bandwidth package, it will set when <code>internet_charge_type</code> is <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of bandwidth package, it will set when <code>internetChargeType</code> is <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cdc_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>CDC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="egress_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egress_python" style="color: inherit; text-decoration: inherit;">egress</a>
@@ -1124,8 +1454,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network egress. It defaults to <code>center_egress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Network egress. It defaults to <code>centerEgress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internet_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
@@ -1133,8 +1462,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internet_max_bandwidth_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_max_bandwidth_out_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
@@ -1142,8 +1470,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The bandwidth limit of EIP, unit is Mbps.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The bandwidth limit of EIP, unit is Mbps.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="internet_service_provider_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_service_provider_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>service_<wbr>provider</a>
@@ -1151,8 +1478,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1160,8 +1486,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of eip.</p>
-</dd><dt class="property-optional"
+    <dd>The name of eip.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_period_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
@@ -1169,17 +1494,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internet_charge_type</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internetChargeType</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The tags of eip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of eip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1187,8 +1510,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code>. Default is <code>EIP</code>.</p>
-</dd></dl>
+    <dd>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code> and <code>ResidentialEIP</code>. Default is <code>EIP</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1202,8 +1524,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="anycastzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anycastzone_yaml" style="color: inherit; text-decoration: inherit;">anycast<wbr>Zone</a>
@@ -1211,8 +1532,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="applicableforclb_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#applicableforclb_yaml" style="color: inherit; text-decoration: inherit;">applicable<wbr>For<wbr>Clb</a>
@@ -1220,9 +1540,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.27.0.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.<p class="property-message">Deprecated: It has been deprecated from version 1.27.0.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -1230,8 +1548,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="bandwidthpackageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_yaml" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -1239,8 +1556,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of bandwidth package, it will set when <code>internet_charge_type</code> is <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of bandwidth package, it will set when <code>internetChargeType</code> is <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cdcid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="egress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egress_yaml" style="color: inherit; text-decoration: inherit;">egress</a>
@@ -1248,8 +1572,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network egress. It defaults to <code>center_egress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Network egress. It defaults to <code>centerEgress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -1257,8 +1580,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1266,8 +1588,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The bandwidth limit of EIP, unit is Mbps.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The bandwidth limit of EIP, unit is Mbps.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="internetserviceprovider_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetserviceprovider_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Service<wbr>Provider</a>
@@ -1275,8 +1596,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1284,8 +1604,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of eip.</p>
-</dd><dt class="property-optional"
+    <dd>The name of eip.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -1293,17 +1612,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internet_charge_type</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internetChargeType</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The tags of eip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of eip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1311,8 +1628,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code>. Default is <code>EIP</code>.</p>
-</dd></dl>
+    <dd>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code> and <code>ResidentialEIP</code>. Default is <code>EIP</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1333,8 +1649,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="publicip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip</a>
@@ -1342,8 +1657,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The elastic IP address.</p>
-</dd><dt class="property-"
+    <dd>The elastic IP address.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1351,8 +1665,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd></dl>
+    <dd>The EIP current status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1366,8 +1679,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="publicip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip</a>
@@ -1375,8 +1687,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The elastic IP address.</p>
-</dd><dt class="property-"
+    <dd>The elastic IP address.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1384,8 +1695,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd></dl>
+    <dd>The EIP current status.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="public_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The elastic IP address.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The EIP current status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1399,8 +1739,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="publicip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -1408,8 +1747,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The elastic IP address.</p>
-</dd><dt class="property-"
+    <dd>The elastic IP address.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1417,8 +1755,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd></dl>
+    <dd>The EIP current status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1432,8 +1769,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="publicip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -1441,8 +1777,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The elastic IP address.</p>
-</dd><dt class="property-"
+    <dd>The elastic IP address.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1450,8 +1785,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd></dl>
+    <dd>The EIP current status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1465,8 +1799,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="public_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip</a>
@@ -1474,8 +1807,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The elastic IP address.</p>
-</dd><dt class="property-"
+    <dd>The elastic IP address.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1483,8 +1815,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd></dl>
+    <dd>The EIP current status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1498,8 +1829,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="publicip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicip_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -1507,8 +1837,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The elastic IP address.</p>
-</dd><dt class="property-"
+    <dd>The elastic IP address.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1516,8 +1845,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd></dl>
+    <dd>The EIP current status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1527,18 +1855,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Instance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1547,6 +1875,7 @@ Get an existing Instance resource's state with the given name, ID, and optional 
         <span class="nx">applicable_for_clb</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">auto_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">bandwidth_package_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">cdc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">egress</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">internet_charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">internet_max_bandwidth_out</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
@@ -1555,106 +1884,145 @@ Get an existing Instance resource's state with the given name, ID, and optional 
         <span class="nx">prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">public_ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Eip:Instance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_eip_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1662,28 +2030,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1691,28 +2062,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1732,8 +2106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_anycastzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_anycastzone_csharp" style="color: inherit; text-decoration: inherit;">Anycast<wbr>Zone</a>
@@ -1741,8 +2114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_applicableforclb_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicableforclb_csharp" style="color: inherit; text-decoration: inherit;">Applicable<wbr>For<wbr>Clb</a>
@@ -1750,9 +2122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.27.0.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.<p class="property-message">Deprecated: It has been deprecated from version 1.27.0.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_autorenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autorenewflag_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -1760,8 +2130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidthpackageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
@@ -1769,8 +2138,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of bandwidth package, it will set when <code>internet_charge_type</code> is <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of bandwidth package, it will set when <code>internetChargeType</code> is <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cdcid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_egress_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egress_csharp" style="color: inherit; text-decoration: inherit;">Egress</a>
@@ -1778,8 +2154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network egress. It defaults to <code>center_egress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Network egress. It defaults to <code>centerEgress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetchargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -1787,8 +2162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetmaxbandwidthout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetmaxbandwidthout_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1796,8 +2170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The bandwidth limit of EIP, unit is Mbps.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The bandwidth limit of EIP, unit is Mbps.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_internetserviceprovider_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetserviceprovider_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Service<wbr>Provider</a>
@@ -1805,8 +2178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1814,8 +2186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of eip.</p>
-</dd><dt class="property-optional"
+    <dd>The name of eip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -1823,8 +2194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internet_charge_type</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internetChargeType</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicip_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip</a>
@@ -1832,8 +2202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The elastic IP address.</p>
-</dd><dt class="property-optional"
+    <dd>The elastic IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1841,17 +2210,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd><dt class="property-optional"
+    <dd>The EIP current status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The tags of eip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of eip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1859,8 +2226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code>. Default is <code>EIP</code>.</p>
-</dd></dl>
+    <dd>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code> and <code>ResidentialEIP</code>. Default is <code>EIP</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1874,8 +2240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_anycastzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_anycastzone_go" style="color: inherit; text-decoration: inherit;">Anycast<wbr>Zone</a>
@@ -1883,8 +2248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_applicableforclb_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicableforclb_go" style="color: inherit; text-decoration: inherit;">Applicable<wbr>For<wbr>Clb</a>
@@ -1892,9 +2256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.27.0.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.<p class="property-message">Deprecated: It has been deprecated from version 1.27.0.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_autorenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autorenewflag_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -1902,8 +2264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidthpackageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_go" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
@@ -1911,8 +2272,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of bandwidth package, it will set when <code>internet_charge_type</code> is <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of bandwidth package, it will set when <code>internetChargeType</code> is <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cdcid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_egress_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egress_go" style="color: inherit; text-decoration: inherit;">Egress</a>
@@ -1920,8 +2288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network egress. It defaults to <code>center_egress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Network egress. It defaults to <code>centerEgress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetchargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -1929,8 +2296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetmaxbandwidthout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetmaxbandwidthout_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1938,8 +2304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The bandwidth limit of EIP, unit is Mbps.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The bandwidth limit of EIP, unit is Mbps.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_internetserviceprovider_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetserviceprovider_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Service<wbr>Provider</a>
@@ -1947,8 +2312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1956,8 +2320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of eip.</p>
-</dd><dt class="property-optional"
+    <dd>The name of eip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -1965,8 +2328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internet_charge_type</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internetChargeType</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicip_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip</a>
@@ -1974,8 +2336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The elastic IP address.</p>
-</dd><dt class="property-optional"
+    <dd>The elastic IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1983,17 +2344,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd><dt class="property-optional"
+    <dd>The EIP current status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The tags of eip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of eip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2001,8 +2360,141 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code>. Default is <code>EIP</code>.</p>
-</dd></dl>
+    <dd>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code> and <code>ResidentialEIP</code>. Default is <code>EIP</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_anti_ddos_package_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_anti_ddos_package_id_hcl" style="color: inherit; text-decoration: inherit;">anti_<wbr>ddos_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_anycast_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_anycast_zone_hcl" style="color: inherit; text-decoration: inherit;">anycast_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="state_applicable_for_clb_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicable_for_clb_hcl" style="color: inherit; text-decoration: inherit;">applicable_<wbr>for_<wbr>clb</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.<p class="property-message">Deprecated: It has been deprecated from version 1.27.0.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_bandwidth_package_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_package_id_hcl" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of bandwidth package, it will set when <code>internetChargeType</code> is <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC Unique ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_egress_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egress_hcl" style="color: inherit; text-decoration: inherit;">egress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network egress. It defaults to <code>centerEgress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_internet_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_charge_type_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_internet_max_bandwidth_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_max_bandwidth_out_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The bandwidth limit of EIP, unit is Mbps.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_internet_service_provider_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_service_provider_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>service_<wbr>provider</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of eip.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internetChargeType</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_public_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_ip_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The elastic IP address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The EIP current status.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The tags of eip.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code> and <code>ResidentialEIP</code>. Default is <code>EIP</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2016,8 +2508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_anycastzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_anycastzone_java" style="color: inherit; text-decoration: inherit;">anycast<wbr>Zone</a>
@@ -2025,8 +2516,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_applicableforclb_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicableforclb_java" style="color: inherit; text-decoration: inherit;">applicable<wbr>For<wbr>Clb</a>
@@ -2034,9 +2524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.27.0.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.<p class="property-message">Deprecated: It has been deprecated from version 1.27.0.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_autorenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autorenewflag_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -2044,8 +2532,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidthpackageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_java" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -2053,8 +2540,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of bandwidth package, it will set when <code>internet_charge_type</code> is <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of bandwidth package, it will set when <code>internetChargeType</code> is <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cdcid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_egress_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egress_java" style="color: inherit; text-decoration: inherit;">egress</a>
@@ -2062,8 +2556,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network egress. It defaults to <code>center_egress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Network egress. It defaults to <code>centerEgress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetchargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -2071,8 +2564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetmaxbandwidthout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetmaxbandwidthout_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -2080,8 +2572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The bandwidth limit of EIP, unit is Mbps.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The bandwidth limit of EIP, unit is Mbps.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_internetserviceprovider_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetserviceprovider_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Service<wbr>Provider</a>
@@ -2089,8 +2580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2098,8 +2588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of eip.</p>
-</dd><dt class="property-optional"
+    <dd>The name of eip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -2107,8 +2596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internet_charge_type</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internetChargeType</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicip_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -2116,8 +2604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The elastic IP address.</p>
-</dd><dt class="property-optional"
+    <dd>The elastic IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2125,17 +2612,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd><dt class="property-optional"
+    <dd>The EIP current status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The tags of eip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of eip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2143,8 +2628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code>. Default is <code>EIP</code>.</p>
-</dd></dl>
+    <dd>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code> and <code>ResidentialEIP</code>. Default is <code>EIP</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2158,8 +2642,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_anycastzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_anycastzone_nodejs" style="color: inherit; text-decoration: inherit;">anycast<wbr>Zone</a>
@@ -2167,8 +2650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_applicableforclb_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicableforclb_nodejs" style="color: inherit; text-decoration: inherit;">applicable<wbr>For<wbr>Clb</a>
@@ -2176,9 +2658,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.27.0.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.<p class="property-message">Deprecated: It has been deprecated from version 1.27.0.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_autorenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autorenewflag_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -2186,8 +2666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidthpackageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -2195,8 +2674,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of bandwidth package, it will set when <code>internet_charge_type</code> is <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of bandwidth package, it will set when <code>internetChargeType</code> is <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cdcid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CDC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_egress_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egress_nodejs" style="color: inherit; text-decoration: inherit;">egress</a>
@@ -2204,8 +2690,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network egress. It defaults to <code>center_egress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Network egress. It defaults to <code>centerEgress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetchargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -2213,8 +2698,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetmaxbandwidthout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetmaxbandwidthout_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -2222,8 +2706,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The bandwidth limit of EIP, unit is Mbps.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The bandwidth limit of EIP, unit is Mbps.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_internetserviceprovider_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetserviceprovider_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Service<wbr>Provider</a>
@@ -2231,8 +2714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2240,8 +2722,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of eip.</p>
-</dd><dt class="property-optional"
+    <dd>The name of eip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -2249,8 +2730,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internet_charge_type</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internetChargeType</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicip_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -2258,8 +2738,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The elastic IP address.</p>
-</dd><dt class="property-optional"
+    <dd>The elastic IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2267,17 +2746,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd><dt class="property-optional"
+    <dd>The EIP current status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The tags of eip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of eip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2285,8 +2762,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code>. Default is <code>EIP</code>.</p>
-</dd></dl>
+    <dd>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code> and <code>ResidentialEIP</code>. Default is <code>EIP</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2300,8 +2776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_anycast_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_anycast_zone_python" style="color: inherit; text-decoration: inherit;">anycast_<wbr>zone</a>
@@ -2309,8 +2784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_applicable_for_clb_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicable_for_clb_python" style="color: inherit; text-decoration: inherit;">applicable_<wbr>for_<wbr>clb</a>
@@ -2318,9 +2792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.27.0.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.<p class="property-message">Deprecated: It has been deprecated from version 1.27.0.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_auto_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_renew_flag_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
@@ -2328,8 +2800,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidth_package_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_package_id_python" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
@@ -2337,8 +2808,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of bandwidth package, it will set when <code>internet_charge_type</code> is <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of bandwidth package, it will set when <code>internetChargeType</code> is <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cdc_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdc_id_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>CDC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_egress_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egress_python" style="color: inherit; text-decoration: inherit;">egress</a>
@@ -2346,8 +2824,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network egress. It defaults to <code>center_egress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Network egress. It defaults to <code>centerEgress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internet_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_charge_type_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
@@ -2355,8 +2832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internet_max_bandwidth_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_max_bandwidth_out_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
@@ -2364,8 +2840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The bandwidth limit of EIP, unit is Mbps.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The bandwidth limit of EIP, unit is Mbps.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_internet_service_provider_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_service_provider_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>service_<wbr>provider</a>
@@ -2373,8 +2848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2382,8 +2856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of eip.</p>
-</dd><dt class="property-optional"
+    <dd>The name of eip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_period_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
@@ -2391,8 +2864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internet_charge_type</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internetChargeType</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_public_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_ip_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip</a>
@@ -2400,8 +2872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The elastic IP address.</p>
-</dd><dt class="property-optional"
+    <dd>The elastic IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2409,17 +2880,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd><dt class="property-optional"
+    <dd>The EIP current status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The tags of eip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of eip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2427,8 +2896,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code>. Default is <code>EIP</code>.</p>
-</dd></dl>
+    <dd>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code> and <code>ResidentialEIP</code>. Default is <code>EIP</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2442,8 +2910,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of anti DDos package, it must set when <code>type</code> is <code>AntiDDoSEIP</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_anycastzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_anycastzone_yaml" style="color: inherit; text-decoration: inherit;">anycast<wbr>Zone</a>
@@ -2451,8 +2918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The zone of anycast. Valid value: <code>ANYCAST_ZONE_GLOBAL</code> and <code>ANYCAST_ZONE_OVERSEAS</code>.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_applicableforclb_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_applicableforclb_yaml" style="color: inherit; text-decoration: inherit;">applicable<wbr>For<wbr>Clb</a>
@@ -2460,9 +2926,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.27.0.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.<p class="property-message">Deprecated: It has been deprecated from version 1.27.0.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_autorenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autorenewflag_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -2470,8 +2934,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_bandwidthpackageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_yaml" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
@@ -2479,8 +2942,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of bandwidth package, it will set when <code>internet_charge_type</code> is <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of bandwidth package, it will set when <code>internetChargeType</code> is <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cdcid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cdcid_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CDC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_egress_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egress_yaml" style="color: inherit; text-decoration: inherit;">egress</a>
@@ -2488,8 +2958,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network egress. It defaults to <code>center_egress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>Network egress. It defaults to <code>centerEgress1</code>. If you want to try the egress feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetchargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -2497,8 +2966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of eip. Valid values: <code>BANDWIDTH_PACKAGE</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_PREPAID_BY_MONTH</code> and <code>TRAFFIC_POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetmaxbandwidthout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetmaxbandwidthout_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -2506,8 +2974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The bandwidth limit of EIP, unit is Mbps.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The bandwidth limit of EIP, unit is Mbps.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_internetserviceprovider_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetserviceprovider_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Service<wbr>Provider</a>
@@ -2515,8 +2982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Internet service provider of eip. Valid value: <code>BGP</code>, <code>CMCC</code>, <code>CTCC</code> and <code>CUCC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2524,8 +2990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of eip.</p>
-</dd><dt class="property-optional"
+    <dd>The name of eip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -2533,8 +2998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internet_charge_type</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Period of instance. Default value: <code>1</code>. Valid value: <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTES: must set when <code>internetChargeType</code> is <code>BANDWIDTH_PREPAID_BY_MONTH</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicip_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip</a>
@@ -2542,8 +3006,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The elastic IP address.</p>
-</dd><dt class="property-optional"
+    <dd>The elastic IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2551,17 +3014,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The EIP current status.</p>
-</dd><dt class="property-optional"
+    <dd>The EIP current status.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The tags of eip.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of eip.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2569,8 +3030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code>. Default is <code>EIP</code>.</p>
-</dd></dl>
+    <dd>The type of eip. Valid value:  <code>EIP</code> and <code>AnycastEIP</code> and <code>HighQualityEIP</code> and <code>AntiDDoSEIP</code> and <code>ResidentialEIP</code>. Default is <code>EIP</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2593,6 +3053,9 @@ $ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -2602,7 +3065,6 @@ $ pulumi import tencentcloud:Eip/instance:Instance foo eip-nyvf60va
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

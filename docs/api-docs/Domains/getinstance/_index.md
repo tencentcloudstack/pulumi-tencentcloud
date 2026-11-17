@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Domains.getInstance"
 meta_desc: "Documentation for the tencentcloud.Domains.getInstance function with examples, input properties, output properties, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,42 +18,45 @@ Provide a datasource to query Domains.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Domains.getInstance({});
+const foo = tencentcloud.domains.getInstance({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Domains.get_instance()
+foo = tencentcloud.domains.get_instance()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Domains.GetInstance.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Domains"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/domains"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Domains.GetInstance(ctx, nil, nil)
+		_, err := domains.GetInstance(ctx, &domains.GetInstanceArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -59,6 +64,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = Tencentcloud.Domains.GetInstance.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -67,8 +94,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Domains.DomainsFunctions;
 import com.pulumi.tencentcloud.Domains.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -80,20 +107,50 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var foo = DomainsFunctions.getInstance();
+        final var foo = DomainsFunctions.getInstance(GetInstanceArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   foo:
     fn::invoke:
-      Function: tencentcloud:Domains:getInstance
-      Arguments: {}
+      function: tencentcloud:Domains:getInstance
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_domains_getinstance" "foo" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDomainNameList](https://www.tencentcloud.com/search/?wd=DescribeDomainNameList&type=document&lang=en)
 
 
 
@@ -105,7 +162,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -113,9 +170,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstance<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
+><span class="k">function </span>getInstance<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
 ><span class="k">
-function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
+function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -129,10 +186,10 @@ function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</
                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstanceResult</span
 ><span class="k">
-def </span>get_instance_output<span class="p">(</span><span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                 <span class="nx">offset</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstanceResult]</span
+def </span>get_instance_output<span class="p">(</span><span class="nx">limit</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                 <span class="nx">offset</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstanceResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -157,7 +214,8 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstance </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -166,7 +224,8 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -178,6 +237,15 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Domains/getInstance:getInstance
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_domains_get_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -196,8 +264,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify data limit in range [1, 100]. Default: 20.</p>
-</dd><dt class="property-optional"
+    <dd>Specify data limit in range [1, 100]. Default: 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -205,8 +272,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify data offset. Default: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Specify data offset. Default: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -214,8 +280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for save response as file locally.</p>
-</dd></dl>
+    <dd>Used for save response as file locally.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -229,8 +294,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify data limit in range [1, 100]. Default: 20.</p>
-</dd><dt class="property-optional"
+    <dd>Specify data limit in range [1, 100]. Default: 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -238,8 +302,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify data offset. Default: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Specify data offset. Default: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -247,8 +310,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for save response as file locally.</p>
-</dd></dl>
+    <dd>Used for save response as file locally.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify data limit in range [1, 100]. Default: 20.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify data offset. Default: 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used for save response as file locally.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -262,8 +354,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify data limit in range [1, 100]. Default: 20.</p>
-</dd><dt class="property-optional"
+    <dd>Specify data limit in range [1, 100]. Default: 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -271,8 +362,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify data offset. Default: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Specify data offset. Default: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -280,8 +370,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used for save response as file locally.</p>
-</dd></dl>
+    <dd>Used for save response as file locally.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -295,8 +384,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify data limit in range [1, 100]. Default: 20.</p>
-</dd><dt class="property-optional"
+    <dd>Specify data limit in range [1, 100]. Default: 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -304,8 +392,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify data offset. Default: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Specify data offset. Default: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -313,8 +400,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used for save response as file locally.</p>
-</dd></dl>
+    <dd>Used for save response as file locally.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -328,8 +414,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify data limit in range [1, 100]. Default: 20.</p>
-</dd><dt class="property-optional"
+    <dd>Specify data limit in range [1, 100]. Default: 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -337,8 +422,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify data offset. Default: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Specify data offset. Default: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -346,8 +430,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used for save response as file locally.</p>
-</dd></dl>
+    <dd>Used for save response as file locally.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -361,8 +444,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify data limit in range [1, 100]. Default: 20.</p>
-</dd><dt class="property-optional"
+    <dd>Specify data limit in range [1, 100]. Default: 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -370,8 +452,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify data offset. Default: 0.</p>
-</dd><dt class="property-optional"
+    <dd>Specify data offset. Default: 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -379,8 +460,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used for save response as file locally.</p>
-</dd></dl>
+    <dd>Used for save response as file locally.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -403,8 +483,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -412,8 +491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Domains.<wbr>Outputs.<wbr>Get<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Domain result list.</p>
-</dd><dt class="property-"
+    <dd>Domain result list.</dd><dt class="property-"
             title="">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -451,8 +529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -460,8 +537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancelist">[]Get<wbr>Instance<wbr>List</a></span>
     </dt>
-    <dd><p>Domain result list.</p>
-</dd><dt class="property-"
+    <dd>Domain result list.</dd><dt class="property-"
             title="">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -490,6 +566,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancelist">list(object)</a></span>
+    </dt>
+    <dd>Domain result list.</dd><dt class="property-"
+            title="">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -499,8 +621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -508,8 +629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancelist">List&lt;Get<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Domain result list.</p>
-</dd><dt class="property-"
+    <dd>Domain result list.</dd><dt class="property-"
             title="">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -547,8 +667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -556,8 +675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancelist">Get<wbr>Instance<wbr>List[]</a></span>
     </dt>
-    <dd><p>Domain result list.</p>
-</dd><dt class="property-"
+    <dd>Domain result list.</dd><dt class="property-"
             title="">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -595,17 +713,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancelist">Get<wbr>Instance<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstancelist">Sequence[Get<wbr>Instance<wbr>List]</a></span>
     </dt>
-    <dd><p>Domain result list.</p>
-</dd><dt class="property-"
+    <dd>Domain result list.</dd><dt class="property-"
             title="">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -643,8 +759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -652,8 +767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Domain result list.</p>
-</dd><dt class="property-"
+    <dd>Domain result list.</dd><dt class="property-"
             title="">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -701,8 +815,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the domain auto renew, 0 - manual renew, 1 - auto renew.</p>
-</dd><dt class="property-required"
+    <dd>Whether the domain auto renew, 0 - manual renew, 1 - auto renew.</dd><dt class="property-required"
             title="Required">
         <span id="buystatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#buystatus_csharp" style="color: inherit; text-decoration: inherit;">Buy<wbr>Status</a>
@@ -710,8 +823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain buy status.</p>
-</dd><dt class="property-required"
+    <dd>Domain buy status.</dd><dt class="property-required"
             title="Required">
         <span id="codetld_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codetld_csharp" style="color: inherit; text-decoration: inherit;">Code<wbr>Tld</a>
@@ -719,8 +831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain code ltd.</p>
-</dd><dt class="property-required"
+    <dd>Domain code ltd.</dd><dt class="property-required"
             title="Required">
         <span id="creationdate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creationdate_csharp" style="color: inherit; text-decoration: inherit;">Creation<wbr>Date</a>
@@ -728,8 +839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain create time.</p>
-</dd><dt class="property-required"
+    <dd>Domain create time.</dd><dt class="property-required"
             title="Required">
         <span id="domainid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainid_csharp" style="color: inherit; text-decoration: inherit;">Domain<wbr>Id</a>
@@ -737,8 +847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain ID.</dd><dt class="property-required"
             title="Required">
         <span id="domainname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainname_csharp" style="color: inherit; text-decoration: inherit;">Domain<wbr>Name</a>
@@ -746,8 +855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="expirationdate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expirationdate_csharp" style="color: inherit; text-decoration: inherit;">Expiration<wbr>Date</a>
@@ -755,8 +863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain expiration date.</p>
-</dd><dt class="property-required"
+    <dd>Domain expiration date.</dd><dt class="property-required"
             title="Required">
         <span id="ispremium_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispremium_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Premium</a>
@@ -764,8 +871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the domain is premium.</p>
-</dd><dt class="property-required"
+    <dd>Whether the domain is premium.</dd><dt class="property-required"
             title="Required">
         <span id="tld_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tld_csharp" style="color: inherit; text-decoration: inherit;">Tld</a>
@@ -773,8 +879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain ltd.</p>
-</dd></dl>
+    <dd>Domain ltd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -788,8 +893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the domain auto renew, 0 - manual renew, 1 - auto renew.</p>
-</dd><dt class="property-required"
+    <dd>Whether the domain auto renew, 0 - manual renew, 1 - auto renew.</dd><dt class="property-required"
             title="Required">
         <span id="buystatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#buystatus_go" style="color: inherit; text-decoration: inherit;">Buy<wbr>Status</a>
@@ -797,8 +901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain buy status.</p>
-</dd><dt class="property-required"
+    <dd>Domain buy status.</dd><dt class="property-required"
             title="Required">
         <span id="codetld_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codetld_go" style="color: inherit; text-decoration: inherit;">Code<wbr>Tld</a>
@@ -806,8 +909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain code ltd.</p>
-</dd><dt class="property-required"
+    <dd>Domain code ltd.</dd><dt class="property-required"
             title="Required">
         <span id="creationdate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creationdate_go" style="color: inherit; text-decoration: inherit;">Creation<wbr>Date</a>
@@ -815,8 +917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain create time.</p>
-</dd><dt class="property-required"
+    <dd>Domain create time.</dd><dt class="property-required"
             title="Required">
         <span id="domainid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainid_go" style="color: inherit; text-decoration: inherit;">Domain<wbr>Id</a>
@@ -824,8 +925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain ID.</dd><dt class="property-required"
             title="Required">
         <span id="domainname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainname_go" style="color: inherit; text-decoration: inherit;">Domain<wbr>Name</a>
@@ -833,8 +933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="expirationdate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expirationdate_go" style="color: inherit; text-decoration: inherit;">Expiration<wbr>Date</a>
@@ -842,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain expiration date.</p>
-</dd><dt class="property-required"
+    <dd>Domain expiration date.</dd><dt class="property-required"
             title="Required">
         <span id="ispremium_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispremium_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Premium</a>
@@ -851,8 +949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the domain is premium.</p>
-</dd><dt class="property-required"
+    <dd>Whether the domain is premium.</dd><dt class="property-required"
             title="Required">
         <span id="tld_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tld_go" style="color: inherit; text-decoration: inherit;">Tld</a>
@@ -860,8 +957,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain ltd.</p>
-</dd></dl>
+    <dd>Domain ltd.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="auto_renew_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether the domain auto renew, 0 - manual renew, 1 - auto renew.</dd><dt class="property-required"
+            title="Required">
+        <span id="buy_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#buy_status_hcl" style="color: inherit; text-decoration: inherit;">buy_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain buy status.</dd><dt class="property-required"
+            title="Required">
+        <span id="code_tld_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_tld_hcl" style="color: inherit; text-decoration: inherit;">code_<wbr>tld</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain code ltd.</dd><dt class="property-required"
+            title="Required">
+        <span id="creation_date_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creation_date_hcl" style="color: inherit; text-decoration: inherit;">creation_<wbr>date</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_id_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_name_hcl" style="color: inherit; text-decoration: inherit;">domain_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain name.</dd><dt class="property-required"
+            title="Required">
+        <span id="expiration_date_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiration_date_hcl" style="color: inherit; text-decoration: inherit;">expiration_<wbr>date</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain expiration date.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_premium_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_premium_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>premium</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the domain is premium.</dd><dt class="property-required"
+            title="Required">
+        <span id="tld_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tld_hcl" style="color: inherit; text-decoration: inherit;">tld</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain ltd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -875,8 +1049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether the domain auto renew, 0 - manual renew, 1 - auto renew.</p>
-</dd><dt class="property-required"
+    <dd>Whether the domain auto renew, 0 - manual renew, 1 - auto renew.</dd><dt class="property-required"
             title="Required">
         <span id="buystatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#buystatus_java" style="color: inherit; text-decoration: inherit;">buy<wbr>Status</a>
@@ -884,8 +1057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain buy status.</p>
-</dd><dt class="property-required"
+    <dd>Domain buy status.</dd><dt class="property-required"
             title="Required">
         <span id="codetld_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codetld_java" style="color: inherit; text-decoration: inherit;">code<wbr>Tld</a>
@@ -893,8 +1065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain code ltd.</p>
-</dd><dt class="property-required"
+    <dd>Domain code ltd.</dd><dt class="property-required"
             title="Required">
         <span id="creationdate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creationdate_java" style="color: inherit; text-decoration: inherit;">creation<wbr>Date</a>
@@ -902,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain create time.</p>
-</dd><dt class="property-required"
+    <dd>Domain create time.</dd><dt class="property-required"
             title="Required">
         <span id="domainid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainid_java" style="color: inherit; text-decoration: inherit;">domain<wbr>Id</a>
@@ -911,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain ID.</dd><dt class="property-required"
             title="Required">
         <span id="domainname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainname_java" style="color: inherit; text-decoration: inherit;">domain<wbr>Name</a>
@@ -920,8 +1089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="expirationdate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expirationdate_java" style="color: inherit; text-decoration: inherit;">expiration<wbr>Date</a>
@@ -929,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain expiration date.</p>
-</dd><dt class="property-required"
+    <dd>Domain expiration date.</dd><dt class="property-required"
             title="Required">
         <span id="ispremium_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispremium_java" style="color: inherit; text-decoration: inherit;">is<wbr>Premium</a>
@@ -938,8 +1105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the domain is premium.</p>
-</dd><dt class="property-required"
+    <dd>Whether the domain is premium.</dd><dt class="property-required"
             title="Required">
         <span id="tld_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tld_java" style="color: inherit; text-decoration: inherit;">tld</a>
@@ -947,8 +1113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain ltd.</p>
-</dd></dl>
+    <dd>Domain ltd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -962,8 +1127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether the domain auto renew, 0 - manual renew, 1 - auto renew.</p>
-</dd><dt class="property-required"
+    <dd>Whether the domain auto renew, 0 - manual renew, 1 - auto renew.</dd><dt class="property-required"
             title="Required">
         <span id="buystatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#buystatus_nodejs" style="color: inherit; text-decoration: inherit;">buy<wbr>Status</a>
@@ -971,8 +1135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain buy status.</p>
-</dd><dt class="property-required"
+    <dd>Domain buy status.</dd><dt class="property-required"
             title="Required">
         <span id="codetld_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codetld_nodejs" style="color: inherit; text-decoration: inherit;">code<wbr>Tld</a>
@@ -980,8 +1143,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain code ltd.</p>
-</dd><dt class="property-required"
+    <dd>Domain code ltd.</dd><dt class="property-required"
             title="Required">
         <span id="creationdate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creationdate_nodejs" style="color: inherit; text-decoration: inherit;">creation<wbr>Date</a>
@@ -989,8 +1151,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain create time.</p>
-</dd><dt class="property-required"
+    <dd>Domain create time.</dd><dt class="property-required"
             title="Required">
         <span id="domainid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainid_nodejs" style="color: inherit; text-decoration: inherit;">domain<wbr>Id</a>
@@ -998,8 +1159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain ID.</dd><dt class="property-required"
             title="Required">
         <span id="domainname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainname_nodejs" style="color: inherit; text-decoration: inherit;">domain<wbr>Name</a>
@@ -1007,8 +1167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="expirationdate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expirationdate_nodejs" style="color: inherit; text-decoration: inherit;">expiration<wbr>Date</a>
@@ -1016,8 +1175,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain expiration date.</p>
-</dd><dt class="property-required"
+    <dd>Domain expiration date.</dd><dt class="property-required"
             title="Required">
         <span id="ispremium_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispremium_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Premium</a>
@@ -1025,8 +1183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the domain is premium.</p>
-</dd><dt class="property-required"
+    <dd>Whether the domain is premium.</dd><dt class="property-required"
             title="Required">
         <span id="tld_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tld_nodejs" style="color: inherit; text-decoration: inherit;">tld</a>
@@ -1034,8 +1191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain ltd.</p>
-</dd></dl>
+    <dd>Domain ltd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1049,8 +1205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the domain auto renew, 0 - manual renew, 1 - auto renew.</p>
-</dd><dt class="property-required"
+    <dd>Whether the domain auto renew, 0 - manual renew, 1 - auto renew.</dd><dt class="property-required"
             title="Required">
         <span id="buy_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#buy_status_python" style="color: inherit; text-decoration: inherit;">buy_<wbr>status</a>
@@ -1058,8 +1213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain buy status.</p>
-</dd><dt class="property-required"
+    <dd>Domain buy status.</dd><dt class="property-required"
             title="Required">
         <span id="code_tld_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#code_tld_python" style="color: inherit; text-decoration: inherit;">code_<wbr>tld</a>
@@ -1067,8 +1221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain code ltd.</p>
-</dd><dt class="property-required"
+    <dd>Domain code ltd.</dd><dt class="property-required"
             title="Required">
         <span id="creation_date_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creation_date_python" style="color: inherit; text-decoration: inherit;">creation_<wbr>date</a>
@@ -1076,8 +1229,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain create time.</p>
-</dd><dt class="property-required"
+    <dd>Domain create time.</dd><dt class="property-required"
             title="Required">
         <span id="domain_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_id_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>id</a>
@@ -1085,8 +1237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain ID.</dd><dt class="property-required"
             title="Required">
         <span id="domain_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_name_python" style="color: inherit; text-decoration: inherit;">domain_<wbr>name</a>
@@ -1094,8 +1245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="expiration_date_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiration_date_python" style="color: inherit; text-decoration: inherit;">expiration_<wbr>date</a>
@@ -1103,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain expiration date.</p>
-</dd><dt class="property-required"
+    <dd>Domain expiration date.</dd><dt class="property-required"
             title="Required">
         <span id="is_premium_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_premium_python" style="color: inherit; text-decoration: inherit;">is_<wbr>premium</a>
@@ -1112,8 +1261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the domain is premium.</p>
-</dd><dt class="property-required"
+    <dd>Whether the domain is premium.</dd><dt class="property-required"
             title="Required">
         <span id="tld_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tld_python" style="color: inherit; text-decoration: inherit;">tld</a>
@@ -1121,8 +1269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain ltd.</p>
-</dd></dl>
+    <dd>Domain ltd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1136,8 +1283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether the domain auto renew, 0 - manual renew, 1 - auto renew.</p>
-</dd><dt class="property-required"
+    <dd>Whether the domain auto renew, 0 - manual renew, 1 - auto renew.</dd><dt class="property-required"
             title="Required">
         <span id="buystatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#buystatus_yaml" style="color: inherit; text-decoration: inherit;">buy<wbr>Status</a>
@@ -1145,8 +1291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain buy status.</p>
-</dd><dt class="property-required"
+    <dd>Domain buy status.</dd><dt class="property-required"
             title="Required">
         <span id="codetld_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codetld_yaml" style="color: inherit; text-decoration: inherit;">code<wbr>Tld</a>
@@ -1154,8 +1299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain code ltd.</p>
-</dd><dt class="property-required"
+    <dd>Domain code ltd.</dd><dt class="property-required"
             title="Required">
         <span id="creationdate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creationdate_yaml" style="color: inherit; text-decoration: inherit;">creation<wbr>Date</a>
@@ -1163,8 +1307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain create time.</p>
-</dd><dt class="property-required"
+    <dd>Domain create time.</dd><dt class="property-required"
             title="Required">
         <span id="domainid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainid_yaml" style="color: inherit; text-decoration: inherit;">domain<wbr>Id</a>
@@ -1172,8 +1315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain ID.</p>
-</dd><dt class="property-required"
+    <dd>Domain ID.</dd><dt class="property-required"
             title="Required">
         <span id="domainname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domainname_yaml" style="color: inherit; text-decoration: inherit;">domain<wbr>Name</a>
@@ -1181,8 +1323,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain name.</p>
-</dd><dt class="property-required"
+    <dd>Domain name.</dd><dt class="property-required"
             title="Required">
         <span id="expirationdate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expirationdate_yaml" style="color: inherit; text-decoration: inherit;">expiration<wbr>Date</a>
@@ -1190,8 +1331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain expiration date.</p>
-</dd><dt class="property-required"
+    <dd>Domain expiration date.</dd><dt class="property-required"
             title="Required">
         <span id="ispremium_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispremium_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Premium</a>
@@ -1199,8 +1339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the domain is premium.</p>
-</dd><dt class="property-required"
+    <dd>Whether the domain is premium.</dd><dt class="property-required"
             title="Required">
         <span id="tld_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tld_yaml" style="color: inherit; text-decoration: inherit;">tld</a>
@@ -1208,8 +1347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain ltd.</p>
-</dd></dl>
+    <dd>Domain ltd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1224,7 +1362,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

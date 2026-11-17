@@ -2,9 +2,11 @@
 ---
 title: "getInstance"
 title_tag: "tencentcloud.Image.getInstance"
-meta_desc: "Documentation for the tencentcloud.Image.getInstance function with examples, input properties, output properties, and supporting types."
+meta_desc: "Provides an available image for the user. The Images data source fetch proper image, which could be one of the private images of the user and images of."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -23,42 +25,45 @@ resources provided by TencentCloud, as well as other public images and those ava
 
 ### Query image
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Image.getInstance({});
+const example = tencentcloud.image.getInstance({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Image.get_instance()
+example = tencentcloud.image.get_instance()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var example = Tencentcloud.Image.GetInstance.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Image"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/image"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Image.GetInstance(ctx, nil, nil)
+		_, err := image.GetInstance(ctx, &image.GetInstanceArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -66,6 +71,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Image.GetInstance.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Image.ImageFunctions;
 import com.pulumi.tencentcloud.Image.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -87,48 +114,120 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var example = ImageFunctions.getInstance();
+        final var example = ImageFunctions.getInstance(GetInstanceArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Image:getInstance
-      Arguments: {}
+      function: tencentcloud:Image:getInstance
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_image_getinstance" "example" {
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Query image by filter
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Image.getInstance({
+const example = tencentcloud.image.getInstance({
     filters: [{
         name: "image-type",
         values: ["PUBLIC_IMAGE"],
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Image.get_instance(filters=[tencentcloud.image.GetInstanceFilterArgs(
-    name="image-type",
-    values=["PUBLIC_IMAGE"],
-)])
+example = tencentcloud.image.get_instance(filters=[{
+    "name": "image-type",
+    "values": ["PUBLIC_IMAGE"],
+}])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/image"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := image.GetInstance(ctx, &image.GetInstanceArgs{
+			Filters: []image.GetInstanceFilter{
+				{
+					Name: "image-type",
+					Values: []string{
+						"PUBLIC_IMAGE",
+					},
+				},
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -149,33 +248,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Image"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Image.GetInstance(ctx, &image.GetInstanceArgs{
-			Filters: []image.GetInstanceFilter{
-				{
-					Name: "image-type",
-					Values: []string{
-						"PUBLIC_IMAGE",
-					},
-				},
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -184,8 +261,9 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Image.ImageFunctions;
 import com.pulumi.tencentcloud.Image.inputs.GetInstanceArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Image.inputs.GetInstanceFilterArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -207,41 +285,109 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Image:getInstance
-      Arguments:
+      function: tencentcloud:Image:getInstance
+      arguments:
         filters:
           - name: image-type
             values:
               - PUBLIC_IMAGE
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_image_getinstance" "example" {
+  filters {
+    name   = "image-type"
+    values = ["PUBLIC_IMAGE"]
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Query image by os name
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Image.getInstance({
+const example = tencentcloud.image.getInstance({
     osName: "centos",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Image.get_instance(os_name="centos")
+example = tencentcloud.image.get_instance(os_name="centos")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/image"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := image.GetInstance(ctx, &image.GetInstanceArgs{
+			OsName: pulumi.StringRef("centos"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -252,26 +398,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Image"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Image.GetInstance(ctx, &image.GetInstanceArgs{
-			OsName: pulumi.StringRef("centos"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -280,8 +411,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Image.ImageFunctions;
 import com.pulumi.tencentcloud.Image.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -300,38 +431,103 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Image:getInstance
-      Arguments:
+      function: tencentcloud:Image:getInstance
+      arguments:
         osName: centos
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_image_getinstance" "example" {
+  os_name = "centos"
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Query image by image name regex
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Image.getInstance({
+const example = tencentcloud.image.getInstance({
     imageNameRegex: "^Windows\\s.*$",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Image.get_instance(image_name_regex="^Windows\\s.*$")
+example = tencentcloud.image.get_instance(image_name_regex="^Windows\\s.*$")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/image"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := image.GetInstance(ctx, &image.GetInstanceArgs{
+			ImageNameRegex: pulumi.StringRef("^Windows\\s.*$"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -342,26 +538,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Image"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Image.GetInstance(ctx, &image.GetInstanceArgs{
-			ImageNameRegex: pulumi.StringRef("^Windows\\s.*$"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -370,8 +551,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Image.ImageFunctions;
 import com.pulumi.tencentcloud.Image.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -390,16 +571,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Image:getInstance
-      Arguments:
+      function: tencentcloud:Image:getInstance
+      arguments:
         imageNameRegex: ^Windows\s.*$
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_image_getinstance" "example" {
+  image_name_regex = "^Windows\\s.*$"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
 
 
 
@@ -411,7 +622,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -419,9 +630,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstance<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
+><span class="k">function </span>getInstance<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
 ><span class="k">
-function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
+function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -430,17 +641,17 @@ function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</
 <div>
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
-><span class="k">def </span>get_instance<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_image.GetInstanceFilter]]</span> = None<span class="p">,</span>
+><span class="k">def </span>get_instance<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetInstanceFilter]]</span> = None<span class="p">,</span>
                  <span class="nx">image_name_regex</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">os_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstanceResult</span
 ><span class="k">
-def </span>get_instance_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_image.GetInstanceFilterArgs]]]]</span> = None<span class="p">,</span>
-                 <span class="nx">image_name_regex</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">os_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstanceResult]</span
+def </span>get_instance_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetInstanceFilterArgs]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">image_name_regex</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">os_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstanceResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -449,12 +660,12 @@ def </span>get_instance_output<span class="p">(</span><span class="nx">filters</
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetInstanceResult</a></span>, error)</span
+><span class="k">func </span>LookupInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupInstanceResult</a></span>, error)</span
 ><span class="k">
-func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetInstanceResultOutput</span
+func </span>LookupInstanceOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupInstanceResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetInstance` in the Go SDK.
+&gt; Note: This function is named `LookupInstance` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -465,7 +676,8 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstance </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -474,7 +686,8 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -486,6 +699,15 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Image/getInstance:getInstance
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_image_get_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -504,8 +726,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancefilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Image.<wbr>Inputs.<wbr>Get<wbr>Instance<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>One or more name/value pairs to filter.</p>
-</dd><dt class="property-optional"
+    <dd>One or more name/value pairs to filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagenameregex_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagenameregex_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Name<wbr>Regex</a>
@@ -513,8 +734,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A regex string to apply to the image list returned by TencentCloud. <strong>NOTE</strong>: it is not wildcard, should look like <code>image_name_regex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A regex string to apply to the image list returned by TencentCloud. <strong>NOTE</strong>: it is not wildcard, should look like <code>imageNameRegex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="osname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#osname_csharp" style="color: inherit; text-decoration: inherit;">Os<wbr>Name</a>
@@ -522,8 +742,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud. <strong>NOTE</strong>: when os_name is provided, highest priority is applied in this field instead of <code>image_name_regex</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud. <strong>NOTE</strong>: when osName is provided, highest priority is applied in this field instead of <code>imageNameRegex</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -531,8 +750,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -546,8 +764,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancefilter">[]Get<wbr>Instance<wbr>Filter</a></span>
     </dt>
-    <dd><p>One or more name/value pairs to filter.</p>
-</dd><dt class="property-optional"
+    <dd>One or more name/value pairs to filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagenameregex_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagenameregex_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Name<wbr>Regex</a>
@@ -555,8 +772,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A regex string to apply to the image list returned by TencentCloud. <strong>NOTE</strong>: it is not wildcard, should look like <code>image_name_regex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A regex string to apply to the image list returned by TencentCloud. <strong>NOTE</strong>: it is not wildcard, should look like <code>imageNameRegex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="osname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#osname_go" style="color: inherit; text-decoration: inherit;">Os<wbr>Name</a>
@@ -564,8 +780,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud. <strong>NOTE</strong>: when os_name is provided, highest priority is applied in this field instead of <code>image_name_regex</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud. <strong>NOTE</strong>: when osName is provided, highest priority is applied in this field instead of <code>imageNameRegex</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -573,8 +788,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancefilter">list(object)</a></span>
+    </dt>
+    <dd>One or more name/value pairs to filter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="image_name_regex_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_name_regex_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>name_<wbr>regex</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A regex string to apply to the image list returned by TencentCloud. <strong>NOTE</strong>: it is not wildcard, should look like <code>imageNameRegex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="os_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#os_name_hcl" style="color: inherit; text-decoration: inherit;">os_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud. <strong>NOTE</strong>: when osName is provided, highest priority is applied in this field instead of <code>imageNameRegex</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -588,8 +840,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancefilter">List&lt;Get<wbr>Instance<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>One or more name/value pairs to filter.</p>
-</dd><dt class="property-optional"
+    <dd>One or more name/value pairs to filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagenameregex_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagenameregex_java" style="color: inherit; text-decoration: inherit;">image<wbr>Name<wbr>Regex</a>
@@ -597,8 +848,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A regex string to apply to the image list returned by TencentCloud. <strong>NOTE</strong>: it is not wildcard, should look like <code>image_name_regex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A regex string to apply to the image list returned by TencentCloud. <strong>NOTE</strong>: it is not wildcard, should look like <code>imageNameRegex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="osname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#osname_java" style="color: inherit; text-decoration: inherit;">os<wbr>Name</a>
@@ -606,8 +856,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud. <strong>NOTE</strong>: when os_name is provided, highest priority is applied in this field instead of <code>image_name_regex</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud. <strong>NOTE</strong>: when osName is provided, highest priority is applied in this field instead of <code>imageNameRegex</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -615,8 +864,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -630,8 +878,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancefilter">Get<wbr>Instance<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>One or more name/value pairs to filter.</p>
-</dd><dt class="property-optional"
+    <dd>One or more name/value pairs to filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagenameregex_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagenameregex_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Name<wbr>Regex</a>
@@ -639,8 +886,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A regex string to apply to the image list returned by TencentCloud. <strong>NOTE</strong>: it is not wildcard, should look like <code>image_name_regex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A regex string to apply to the image list returned by TencentCloud. <strong>NOTE</strong>: it is not wildcard, should look like <code>imageNameRegex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="osname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#osname_nodejs" style="color: inherit; text-decoration: inherit;">os<wbr>Name</a>
@@ -648,8 +894,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud. <strong>NOTE</strong>: when os_name is provided, highest priority is applied in this field instead of <code>image_name_regex</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud. <strong>NOTE</strong>: when osName is provided, highest priority is applied in this field instead of <code>imageNameRegex</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -657,8 +902,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -670,10 +914,9 @@ The following arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancefilter">Get<wbr>Instance<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getinstancefilter">Sequence[Get<wbr>Instance<wbr>Filter]</a></span>
     </dt>
-    <dd><p>One or more name/value pairs to filter.</p>
-</dd><dt class="property-optional"
+    <dd>One or more name/value pairs to filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="image_name_regex_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_name_regex_python" style="color: inherit; text-decoration: inherit;">image_<wbr>name_<wbr>regex</a>
@@ -681,8 +924,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A regex string to apply to the image list returned by TencentCloud. <strong>NOTE</strong>: it is not wildcard, should look like <code>image_name_regex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A regex string to apply to the image list returned by TencentCloud. <strong>NOTE</strong>: it is not wildcard, should look like <code>imageNameRegex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="os_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#os_name_python" style="color: inherit; text-decoration: inherit;">os_<wbr>name</a>
@@ -690,8 +932,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud. <strong>NOTE</strong>: when os_name is provided, highest priority is applied in this field instead of <code>image_name_regex</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud. <strong>NOTE</strong>: when osName is provided, highest priority is applied in this field instead of <code>imageNameRegex</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -699,8 +940,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -714,8 +954,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancefilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>One or more name/value pairs to filter.</p>
-</dd><dt class="property-optional"
+    <dd>One or more name/value pairs to filter.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagenameregex_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagenameregex_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Name<wbr>Regex</a>
@@ -723,8 +962,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A regex string to apply to the image list returned by TencentCloud. <strong>NOTE</strong>: it is not wildcard, should look like <code>image_name_regex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A regex string to apply to the image list returned by TencentCloud. <strong>NOTE</strong>: it is not wildcard, should look like <code>imageNameRegex = &quot;^CentOS\s+6\.8\s+64\w*&quot;</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="osname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#osname_yaml" style="color: inherit; text-decoration: inherit;">os<wbr>Name</a>
@@ -732,8 +970,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A string to apply with fuzzy match to the os_name attribute on the image list returned by TencentCloud. <strong>NOTE</strong>: when os_name is provided, highest priority is applied in this field instead of <code>image_name_regex</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud. <strong>NOTE</strong>: when osName is provided, highest priority is applied in this field instead of <code>imageNameRegex</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -741,8 +978,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -765,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="imageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
@@ -774,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An image id indicate the uniqueness of a certain image,  which can be used for instance creation or resetting.</p>
-</dd><dt class="property-"
+    <dd>An image id indicate the uniqueness of a certain image,  which can be used for instance creation or resetting.</dd><dt class="property-"
             title="">
         <span id="imagename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagename_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Name</a>
@@ -783,8 +1017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of this image.</p>
-</dd><dt class="property-"
+    <dd>Name of this image.</dd><dt class="property-"
             title="">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -830,8 +1063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="imageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
@@ -839,8 +1071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An image id indicate the uniqueness of a certain image,  which can be used for instance creation or resetting.</p>
-</dd><dt class="property-"
+    <dd>An image id indicate the uniqueness of a certain image,  which can be used for instance creation or resetting.</dd><dt class="property-"
             title="">
         <span id="imagename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagename_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Name</a>
@@ -848,8 +1079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of this image.</p>
-</dd><dt class="property-"
+    <dd>Name of this image.</dd><dt class="property-"
             title="">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -886,6 +1116,68 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="image_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_id_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An image id indicate the uniqueness of a certain image,  which can be used for instance creation or resetting.</dd><dt class="property-"
+            title="">
+        <span id="image_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_name_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of this image.</dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancefilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="image_name_regex_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_name_regex_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>name_<wbr>regex</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="os_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#os_name_hcl" style="color: inherit; text-decoration: inherit;">os_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -895,8 +1187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="imageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_java" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -904,8 +1195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An image id indicate the uniqueness of a certain image,  which can be used for instance creation or resetting.</p>
-</dd><dt class="property-"
+    <dd>An image id indicate the uniqueness of a certain image,  which can be used for instance creation or resetting.</dd><dt class="property-"
             title="">
         <span id="imagename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagename_java" style="color: inherit; text-decoration: inherit;">image<wbr>Name</a>
@@ -913,8 +1203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of this image.</p>
-</dd><dt class="property-"
+    <dd>Name of this image.</dd><dt class="property-"
             title="">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -960,8 +1249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="imageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -969,8 +1257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An image id indicate the uniqueness of a certain image,  which can be used for instance creation or resetting.</p>
-</dd><dt class="property-"
+    <dd>An image id indicate the uniqueness of a certain image,  which can be used for instance creation or resetting.</dd><dt class="property-"
             title="">
         <span id="imagename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagename_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Name</a>
@@ -978,8 +1265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of this image.</p>
-</dd><dt class="property-"
+    <dd>Name of this image.</dd><dt class="property-"
             title="">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -1025,8 +1311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="image_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_id_python" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
@@ -1034,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>An image id indicate the uniqueness of a certain image,  which can be used for instance creation or resetting.</p>
-</dd><dt class="property-"
+    <dd>An image id indicate the uniqueness of a certain image,  which can be used for instance creation or resetting.</dd><dt class="property-"
             title="">
         <span id="image_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_name_python" style="color: inherit; text-decoration: inherit;">image_<wbr>name</a>
@@ -1043,14 +1327,13 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of this image.</p>
-</dd><dt class="property-"
+    <dd>Name of this image.</dd><dt class="property-"
             title="">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancefilter">Get<wbr>Instance<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getinstancefilter">Sequence[Get<wbr>Instance<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -1090,8 +1373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="imageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -1099,8 +1381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An image id indicate the uniqueness of a certain image,  which can be used for instance creation or resetting.</p>
-</dd><dt class="property-"
+    <dd>An image id indicate the uniqueness of a certain image,  which can be used for instance creation or resetting.</dd><dt class="property-"
             title="">
         <span id="imagename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagename_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Name</a>
@@ -1108,8 +1389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of this image.</p>
-</dd><dt class="property-"
+    <dd>Name of this image.</dd><dt class="property-"
             title="">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -1165,8 +1445,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the filter, valid keys: <code>image-id</code>, <code>image-type</code>, <code>image-name</code>.</p>
-</dd><dt class="property-required"
+    <dd>Key of the filter, valid keys: <code>image-id</code>, <code>image-type</code>, <code>image-name</code>.</dd><dt class="property-required"
             title="Required">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1174,8 +1453,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Values of the filter.</p>
-</dd></dl>
+    <dd>Values of the filter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1189,8 +1467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the filter, valid keys: <code>image-id</code>, <code>image-type</code>, <code>image-name</code>.</p>
-</dd><dt class="property-required"
+    <dd>Key of the filter, valid keys: <code>image-id</code>, <code>image-type</code>, <code>image-name</code>.</dd><dt class="property-required"
             title="Required">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1198,8 +1475,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Values of the filter.</p>
-</dd></dl>
+    <dd>Values of the filter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key of the filter, valid keys: <code>image-id</code>, <code>image-type</code>, <code>image-name</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Values of the filter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1213,8 +1511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the filter, valid keys: <code>image-id</code>, <code>image-type</code>, <code>image-name</code>.</p>
-</dd><dt class="property-required"
+    <dd>Key of the filter, valid keys: <code>image-id</code>, <code>image-type</code>, <code>image-name</code>.</dd><dt class="property-required"
             title="Required">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1222,8 +1519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Values of the filter.</p>
-</dd></dl>
+    <dd>Values of the filter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1237,8 +1533,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the filter, valid keys: <code>image-id</code>, <code>image-type</code>, <code>image-name</code>.</p>
-</dd><dt class="property-required"
+    <dd>Key of the filter, valid keys: <code>image-id</code>, <code>image-type</code>, <code>image-name</code>.</dd><dt class="property-required"
             title="Required">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1246,8 +1541,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Values of the filter.</p>
-</dd></dl>
+    <dd>Values of the filter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1261,8 +1555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key of the filter, valid keys: <code>image-id</code>, <code>image-type</code>, <code>image-name</code>.</p>
-</dd><dt class="property-required"
+    <dd>Key of the filter, valid keys: <code>image-id</code>, <code>image-type</code>, <code>image-name</code>.</dd><dt class="property-required"
             title="Required">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1270,8 +1563,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Values of the filter.</p>
-</dd></dl>
+    <dd>Values of the filter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1285,8 +1577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the filter, valid keys: <code>image-id</code>, <code>image-type</code>, <code>image-name</code>.</p>
-</dd><dt class="property-required"
+    <dd>Key of the filter, valid keys: <code>image-id</code>, <code>image-type</code>, <code>image-name</code>.</dd><dt class="property-required"
             title="Required">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1294,8 +1585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Values of the filter.</p>
-</dd></dl>
+    <dd>Values of the filter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1310,7 +1600,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "Route"
 title_tag: "tencentcloud.Ckafka.Route"
-meta_desc: "Documentation for the tencentcloud.Ckafka.Route resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a ckafka route"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,32 +18,92 @@ Provides a resource to create a ckafka route
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.ckafka.Route("example", {
-    accessType: 0,
-    instanceId: "ckafka-8j4rodrr",
-    publicNetwork: 3,
-    subnetId: "subnet-j5vja918",
+    instanceId: "ckafka-8j4ra928",
     vipType: 3,
-    vpcId: "vpc-axrsmmrv",
+    vpcId: "vpc-i5yyodl9",
+    subnetId: "subnet-hhi88a58",
+    accessType: 0,
+    publicNetwork: 3,
+    securityGroupIds: [
+        "sg-8ztqghor",
+        "sg-rc9644tr",
+        "sg-n8zf5ry9",
+    ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.ckafka.Route("example",
-    access_type=0,
-    instance_id="ckafka-8j4rodrr",
-    public_network=3,
-    subnet_id="subnet-j5vja918",
+    instance_id="ckafka-8j4ra928",
     vip_type=3,
-    vpc_id="vpc-axrsmmrv")
+    vpc_id="vpc-i5yyodl9",
+    subnet_id="subnet-hhi88a58",
+    access_type=0,
+    public_network=3,
+    security_group_ids=[
+        "sg-8ztqghor",
+        "sg-rc9644tr",
+        "sg-n8zf5ry9",
+    ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ckafka"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := ckafka.NewRoute(ctx, "example", &ckafka.RouteArgs{
+			InstanceId:    pulumi.String("ckafka-8j4ra928"),
+			VipType:       pulumi.Int(3),
+			VpcId:         pulumi.String("vpc-i5yyodl9"),
+			SubnetId:      pulumi.String("subnet-hhi88a58"),
+			AccessType:    pulumi.Int(0),
+			PublicNetwork: pulumi.Int(3),
+			SecurityGroupIds: pulumi.StringArray{
+				pulumi.String("sg-8ztqghor"),
+				pulumi.String("sg-rc9644tr"),
+				pulumi.String("sg-n8zf5ry9"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -52,41 +114,27 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Ckafka.Route("example", new()
     {
-        AccessType = 0,
-        InstanceId = "ckafka-8j4rodrr",
-        PublicNetwork = 3,
-        SubnetId = "subnet-j5vja918",
+        InstanceId = "ckafka-8j4ra928",
         VipType = 3,
-        VpcId = "vpc-axrsmmrv",
+        VpcId = "vpc-i5yyodl9",
+        SubnetId = "subnet-hhi88a58",
+        AccessType = 0,
+        PublicNetwork = 3,
+        SecurityGroupIds = new[]
+        {
+            "sg-8ztqghor",
+            "sg-rc9644tr",
+            "sg-n8zf5ry9",
+        },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ckafka.NewRoute(ctx, "example", &Ckafka.RouteArgs{
-			AccessType:    pulumi.Int(0),
-			InstanceId:    pulumi.String("ckafka-8j4rodrr"),
-			PublicNetwork: pulumi.Int(3),
-			SubnetId:      pulumi.String("subnet-j5vja918"),
-			VipType:       pulumi.Int(3),
-			VpcId:         pulumi.String("vpc-axrsmmrv"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -95,8 +143,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ckafka.Route;
 import com.pulumi.tencentcloud.Ckafka.RouteArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -108,97 +156,164 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Route("example", RouteArgs.builder()        
-            .accessType(0)
-            .instanceId("ckafka-8j4rodrr")
-            .publicNetwork(3)
-            .subnetId("subnet-j5vja918")
+        var example = new Route("example", RouteArgs.builder()
+            .instanceId("ckafka-8j4ra928")
             .vipType(3)
-            .vpcId("vpc-axrsmmrv")
+            .vpcId("vpc-i5yyodl9")
+            .subnetId("subnet-hhi88a58")
+            .accessType(0)
+            .publicNetwork(3)
+            .securityGroupIds(            
+                "sg-8ztqghor",
+                "sg-rc9644tr",
+                "sg-n8zf5ry9")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Ckafka:Route
     properties:
-      accessType: 0
-      instanceId: ckafka-8j4rodrr
-      publicNetwork: 3
-      subnetId: subnet-j5vja918
+      instanceId: ckafka-8j4ra928
       vipType: 3
-      vpcId: vpc-axrsmmrv
+      vpcId: vpc-i5yyodl9
+      subnetId: subnet-hhi88a58
+      accessType: 0
+      publicNetwork: 3
+      securityGroupIds:
+        - sg-8ztqghor
+        - sg-rc9644tr
+        - sg-n8zf5ry9
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_ckafka_route" "example" {
+  instance_id        = "ckafka-8j4ra928"
+  vip_type           = 3
+  vpc_id             = "vpc-i5yyodl9"
+  subnet_id          = "subnet-hhi88a58"
+  access_type        = 0
+  public_network     = 3
+  security_group_ids = ["sg-8ztqghor", "sg-rc9644tr", "sg-n8zf5ry9"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateRoute](https://www.tencentcloud.com/document/api/597/74258)
+  - [DescribeTaskStatus](https://www.tencentcloud.com/document/api/597/55881)
+* Read:
+  - [DescribeRoute](https://www.tencentcloud.com/document/api/597/37090)
+  - [DescribeSecurityGroupRoutes](https://www.tencentcloud.com/document/api/597/74257)
+* Update: [ModifyRouteSecurityGroups](https://www.tencentcloud.com/search/?wd=ModifyRouteSecurityGroups&type=document&lang=en)
+* Delete: [DeleteRoute](https://www.tencentcloud.com/document/api/597/47140)
 
 
 ## Create Route Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Route</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">RouteArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Route</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">RouteArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Route</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">RouteArgs</a></span><span class="p">,</span>
+          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Route</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+          <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">vip_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">access_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">auth_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">caller_appid</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-          <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
           <span class="nx">public_network</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">security_group_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
           <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">vip_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-          <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Route</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">RouteArgs</a></span><span class="p">,</span>
-          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+          <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewRoute</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">RouteArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Route</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewRoute</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">RouteArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Route</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Route</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">RouteArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Route</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">RouteArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Route</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">RouteArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Route</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">RouteArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ckafka:Route</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ckafka:Route</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_ckafka_route&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -219,7 +334,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -336,11 +451,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Route Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Route resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -356,8 +479,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="viptype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viptype_csharp" style="color: inherit; text-decoration: inherit;">Vip<wbr>Type</a>
@@ -365,8 +487,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</p>
-</dd><dt class="property-optional"
+    <dd>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</dd><dt class="property-optional"
             title="Optional">
         <span id="accesstype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesstype_csharp" style="color: inherit; text-decoration: inherit;">Access<wbr>Type</a>
@@ -374,14 +495,13 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Access type. Valid values:</p>
+    <dd>Access type. Valid values:</p>
 <ul>
 <li>0: PLAINTEXT (in clear text, supported by both the old version and the community version without user information)</li>
 <li>1: SASL_PLAINTEXT (in clear text, but at the beginning of the data, authentication will be logged in through SASL, which is only supported by the community version)</li>
 <li>2: SSL (SSL encrypted communication without user information, supported by both older and community versions)</li>
 <li>3: SASL_SSL (SSL encrypted communication. When the data starts, authentication will be logged in through SASL. Only the community version supports it).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="authflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authflag_csharp" style="color: inherit; text-decoration: inherit;">Auth<wbr>Flag</a>
@@ -389,8 +509,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auth flag.</p>
-</dd><dt class="property-optional"
+    <dd>Auth flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="callerappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#callerappid_csharp" style="color: inherit; text-decoration: inherit;">Caller<wbr>Appid</a>
@@ -398,8 +517,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Caller appid.</p>
-</dd><dt class="property-optional"
+    <dd>Caller appid.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -407,8 +525,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip.</p>
-</dd><dt class="property-optional"
+    <dd>Ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicnetwork_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetwork_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Network</a>
@@ -416,8 +533,15 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public network.</p>
-</dd><dt class="property-optional"
+    <dd>Public network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="securitygroupids_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>List of associated security group IDs in order.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -425,8 +549,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -434,8 +557,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -449,8 +571,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="viptype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viptype_go" style="color: inherit; text-decoration: inherit;">Vip<wbr>Type</a>
@@ -458,8 +579,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</p>
-</dd><dt class="property-optional"
+    <dd>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</dd><dt class="property-optional"
             title="Optional">
         <span id="accesstype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesstype_go" style="color: inherit; text-decoration: inherit;">Access<wbr>Type</a>
@@ -467,14 +587,13 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Access type. Valid values:</p>
+    <dd>Access type. Valid values:</p>
 <ul>
 <li>0: PLAINTEXT (in clear text, supported by both the old version and the community version without user information)</li>
 <li>1: SASL_PLAINTEXT (in clear text, but at the beginning of the data, authentication will be logged in through SASL, which is only supported by the community version)</li>
 <li>2: SSL (SSL encrypted communication without user information, supported by both older and community versions)</li>
 <li>3: SASL_SSL (SSL encrypted communication. When the data starts, authentication will be logged in through SASL. Only the community version supports it).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="authflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authflag_go" style="color: inherit; text-decoration: inherit;">Auth<wbr>Flag</a>
@@ -482,8 +601,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auth flag.</p>
-</dd><dt class="property-optional"
+    <dd>Auth flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="callerappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#callerappid_go" style="color: inherit; text-decoration: inherit;">Caller<wbr>Appid</a>
@@ -491,8 +609,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Caller appid.</p>
-</dd><dt class="property-optional"
+    <dd>Caller appid.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -500,8 +617,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip.</p>
-</dd><dt class="property-optional"
+    <dd>Ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicnetwork_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetwork_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Network</a>
@@ -509,8 +625,15 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public network.</p>
-</dd><dt class="property-optional"
+    <dd>Public network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="securitygroupids_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>List of associated security group IDs in order.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -518,8 +641,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -527,8 +649,99 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-required"
+            title="Required">
+        <span id="vip_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_type_hcl" style="color: inherit; text-decoration: inherit;">vip_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="access_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_type_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Access type. Valid values:</p>
+<ul>
+<li>0: PLAINTEXT (in clear text, supported by both the old version and the community version without user information)</li>
+<li>1: SASL_PLAINTEXT (in clear text, but at the beginning of the data, authentication will be logged in through SASL, which is only supported by the community version)</li>
+<li>2: SSL (SSL encrypted communication without user information, supported by both older and community versions)</li>
+<li>3: SASL_SSL (SSL encrypted communication. When the data starts, authentication will be logged in through SASL. Only the community version supports it).</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="auth_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_flag_hcl" style="color: inherit; text-decoration: inherit;">auth_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auth flag.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="caller_appid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#caller_appid_hcl" style="color: inherit; text-decoration: inherit;">caller_<wbr>appid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Caller appid.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ip.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="public_network_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_network_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>network</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Public network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_ids_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of associated security group IDs in order.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -542,8 +755,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="viptype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viptype_java" style="color: inherit; text-decoration: inherit;">vip<wbr>Type</a>
@@ -551,8 +763,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</p>
-</dd><dt class="property-optional"
+    <dd>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</dd><dt class="property-optional"
             title="Optional">
         <span id="accesstype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesstype_java" style="color: inherit; text-decoration: inherit;">access<wbr>Type</a>
@@ -560,14 +771,13 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Access type. Valid values:</p>
+    <dd>Access type. Valid values:</p>
 <ul>
 <li>0: PLAINTEXT (in clear text, supported by both the old version and the community version without user information)</li>
 <li>1: SASL_PLAINTEXT (in clear text, but at the beginning of the data, authentication will be logged in through SASL, which is only supported by the community version)</li>
 <li>2: SSL (SSL encrypted communication without user information, supported by both older and community versions)</li>
 <li>3: SASL_SSL (SSL encrypted communication. When the data starts, authentication will be logged in through SASL. Only the community version supports it).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="authflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authflag_java" style="color: inherit; text-decoration: inherit;">auth<wbr>Flag</a>
@@ -575,8 +785,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auth flag.</p>
-</dd><dt class="property-optional"
+    <dd>Auth flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="callerappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#callerappid_java" style="color: inherit; text-decoration: inherit;">caller<wbr>Appid</a>
@@ -584,8 +793,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Caller appid.</p>
-</dd><dt class="property-optional"
+    <dd>Caller appid.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -593,8 +801,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip.</p>
-</dd><dt class="property-optional"
+    <dd>Ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicnetwork_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetwork_java" style="color: inherit; text-decoration: inherit;">public<wbr>Network</a>
@@ -602,8 +809,15 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Public network.</p>
-</dd><dt class="property-optional"
+    <dd>Public network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="securitygroupids_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>List of associated security group IDs in order.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -611,8 +825,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -620,8 +833,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -635,8 +847,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="viptype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viptype_nodejs" style="color: inherit; text-decoration: inherit;">vip<wbr>Type</a>
@@ -644,8 +855,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</p>
-</dd><dt class="property-optional"
+    <dd>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</dd><dt class="property-optional"
             title="Optional">
         <span id="accesstype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesstype_nodejs" style="color: inherit; text-decoration: inherit;">access<wbr>Type</a>
@@ -653,14 +863,13 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Access type. Valid values:</p>
+    <dd>Access type. Valid values:</p>
 <ul>
 <li>0: PLAINTEXT (in clear text, supported by both the old version and the community version without user information)</li>
 <li>1: SASL_PLAINTEXT (in clear text, but at the beginning of the data, authentication will be logged in through SASL, which is only supported by the community version)</li>
 <li>2: SSL (SSL encrypted communication without user information, supported by both older and community versions)</li>
 <li>3: SASL_SSL (SSL encrypted communication. When the data starts, authentication will be logged in through SASL. Only the community version supports it).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="authflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authflag_nodejs" style="color: inherit; text-decoration: inherit;">auth<wbr>Flag</a>
@@ -668,8 +877,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auth flag.</p>
-</dd><dt class="property-optional"
+    <dd>Auth flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="callerappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#callerappid_nodejs" style="color: inherit; text-decoration: inherit;">caller<wbr>Appid</a>
@@ -677,8 +885,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Caller appid.</p>
-</dd><dt class="property-optional"
+    <dd>Caller appid.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -686,8 +893,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip.</p>
-</dd><dt class="property-optional"
+    <dd>Ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicnetwork_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetwork_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Network</a>
@@ -695,8 +901,15 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Public network.</p>
-</dd><dt class="property-optional"
+    <dd>Public network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="securitygroupids_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>List of associated security group IDs in order.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -704,8 +917,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -713,8 +925,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -728,8 +939,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="vip_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_type_python" style="color: inherit; text-decoration: inherit;">vip_<wbr>type</a>
@@ -737,8 +947,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</p>
-</dd><dt class="property-optional"
+    <dd>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</dd><dt class="property-optional"
             title="Optional">
         <span id="access_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#access_type_python" style="color: inherit; text-decoration: inherit;">access_<wbr>type</a>
@@ -746,14 +955,13 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Access type. Valid values:</p>
+    <dd>Access type. Valid values:</p>
 <ul>
 <li>0: PLAINTEXT (in clear text, supported by both the old version and the community version without user information)</li>
 <li>1: SASL_PLAINTEXT (in clear text, but at the beginning of the data, authentication will be logged in through SASL, which is only supported by the community version)</li>
 <li>2: SSL (SSL encrypted communication without user information, supported by both older and community versions)</li>
 <li>3: SASL_SSL (SSL encrypted communication. When the data starts, authentication will be logged in through SASL. Only the community version supports it).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="auth_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_flag_python" style="color: inherit; text-decoration: inherit;">auth_<wbr>flag</a>
@@ -761,8 +969,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auth flag.</p>
-</dd><dt class="property-optional"
+    <dd>Auth flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="caller_appid_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#caller_appid_python" style="color: inherit; text-decoration: inherit;">caller_<wbr>appid</a>
@@ -770,8 +977,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Caller appid.</p>
-</dd><dt class="property-optional"
+    <dd>Caller appid.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -779,8 +985,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ip.</p>
-</dd><dt class="property-optional"
+    <dd>Ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="public_network_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_network_python" style="color: inherit; text-decoration: inherit;">public_<wbr>network</a>
@@ -788,8 +993,15 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public network.</p>
-</dd><dt class="property-optional"
+    <dd>Public network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_group_ids_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_ids_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>List of associated security group IDs in order.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -797,8 +1009,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -806,8 +1017,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -821,8 +1031,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="viptype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viptype_yaml" style="color: inherit; text-decoration: inherit;">vip<wbr>Type</a>
@@ -830,8 +1039,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</p>
-</dd><dt class="property-optional"
+    <dd>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</dd><dt class="property-optional"
             title="Optional">
         <span id="accesstype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accesstype_yaml" style="color: inherit; text-decoration: inherit;">access<wbr>Type</a>
@@ -839,14 +1047,13 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Access type. Valid values:</p>
+    <dd>Access type. Valid values:</p>
 <ul>
 <li>0: PLAINTEXT (in clear text, supported by both the old version and the community version without user information)</li>
 <li>1: SASL_PLAINTEXT (in clear text, but at the beginning of the data, authentication will be logged in through SASL, which is only supported by the community version)</li>
 <li>2: SSL (SSL encrypted communication without user information, supported by both older and community versions)</li>
 <li>3: SASL_SSL (SSL encrypted communication. When the data starts, authentication will be logged in through SASL. Only the community version supports it).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="authflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#authflag_yaml" style="color: inherit; text-decoration: inherit;">auth<wbr>Flag</a>
@@ -854,8 +1061,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auth flag.</p>
-</dd><dt class="property-optional"
+    <dd>Auth flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="callerappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#callerappid_yaml" style="color: inherit; text-decoration: inherit;">caller<wbr>Appid</a>
@@ -863,8 +1069,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Caller appid.</p>
-</dd><dt class="property-optional"
+    <dd>Caller appid.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -872,8 +1077,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip.</p>
-</dd><dt class="property-optional"
+    <dd>Ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicnetwork_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicnetwork_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Network</a>
@@ -881,8 +1085,15 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Public network.</p>
-</dd><dt class="property-optional"
+    <dd>Public network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="securitygroupids_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>List of associated security group IDs in order.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -890,8 +1101,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -899,8 +1109,7 @@ The Route resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -921,8 +1130,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#routebrokerviplist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Outputs.<wbr>Route<wbr>Broker<wbr>Vip<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Virtual IP list (1 to 1 broker nodes).</p>
-</dd><dt class="property-"
+    <dd>Virtual IP list (1 to 1 broker nodes).</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -930,8 +1138,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="routeid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routeid_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Route ID.</dd><dt class="property-"
             title="">
         <span id="viplists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viplists_csharp" style="color: inherit; text-decoration: inherit;">Vip<wbr>Lists</a>
@@ -939,8 +1154,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#routeviplist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Outputs.<wbr>Route<wbr>Vip<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Virtual IP list.</p>
-</dd></dl>
+    <dd>Virtual IP list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -954,8 +1168,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#routebrokerviplist">[]Route<wbr>Broker<wbr>Vip<wbr>List</a></span>
     </dt>
-    <dd><p>Virtual IP list (1 to 1 broker nodes).</p>
-</dd><dt class="property-"
+    <dd>Virtual IP list (1 to 1 broker nodes).</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -963,8 +1176,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="routeid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routeid_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Route ID.</dd><dt class="property-"
             title="">
         <span id="viplists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viplists_go" style="color: inherit; text-decoration: inherit;">Vip<wbr>Lists</a>
@@ -972,8 +1192,45 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#routeviplist">[]Route<wbr>Vip<wbr>List</a></span>
     </dt>
-    <dd><p>Virtual IP list.</p>
-</dd></dl>
+    <dd>Virtual IP list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="broker_vip_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#broker_vip_lists_hcl" style="color: inherit; text-decoration: inherit;">broker_<wbr>vip_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#routebrokerviplist">list(object)</a></span>
+    </dt>
+    <dd>Virtual IP list (1 to 1 broker nodes).</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="route_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_id_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Route ID.</dd><dt class="property-"
+            title="">
+        <span id="vip_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_lists_hcl" style="color: inherit; text-decoration: inherit;">vip_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#routeviplist">list(object)</a></span>
+    </dt>
+    <dd>Virtual IP list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -987,8 +1244,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#routebrokerviplist">List&lt;Route<wbr>Broker<wbr>Vip<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Virtual IP list (1 to 1 broker nodes).</p>
-</dd><dt class="property-"
+    <dd>Virtual IP list (1 to 1 broker nodes).</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -996,8 +1252,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="routeid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routeid_java" style="color: inherit; text-decoration: inherit;">route<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Route ID.</dd><dt class="property-"
             title="">
         <span id="viplists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viplists_java" style="color: inherit; text-decoration: inherit;">vip<wbr>Lists</a>
@@ -1005,8 +1268,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#routeviplist">List&lt;Route<wbr>Vip<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Virtual IP list.</p>
-</dd></dl>
+    <dd>Virtual IP list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1020,8 +1282,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#routebrokerviplist">Route<wbr>Broker<wbr>Vip<wbr>List[]</a></span>
     </dt>
-    <dd><p>Virtual IP list (1 to 1 broker nodes).</p>
-</dd><dt class="property-"
+    <dd>Virtual IP list (1 to 1 broker nodes).</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1029,8 +1290,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="routeid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routeid_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Route ID.</dd><dt class="property-"
             title="">
         <span id="viplists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viplists_nodejs" style="color: inherit; text-decoration: inherit;">vip<wbr>Lists</a>
@@ -1038,8 +1306,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#routeviplist">Route<wbr>Vip<wbr>List[]</a></span>
     </dt>
-    <dd><p>Virtual IP list.</p>
-</dd></dl>
+    <dd>Virtual IP list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1051,10 +1318,9 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#broker_vip_lists_python" style="color: inherit; text-decoration: inherit;">broker_<wbr>vip_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#routebrokerviplist">Route<wbr>Broker<wbr>Vip<wbr>List]</a></span>
+        <span class="property-type"><a href="#routebrokerviplist">Sequence[Route<wbr>Broker<wbr>Vip<wbr>List]</a></span>
     </dt>
-    <dd><p>Virtual IP list (1 to 1 broker nodes).</p>
-</dd><dt class="property-"
+    <dd>Virtual IP list (1 to 1 broker nodes).</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1062,17 +1328,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="route_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#route_id_python" style="color: inherit; text-decoration: inherit;">route_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Route ID.</dd><dt class="property-"
             title="">
         <span id="vip_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_lists_python" style="color: inherit; text-decoration: inherit;">vip_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#routeviplist">Route<wbr>Vip<wbr>List]</a></span>
+        <span class="property-type"><a href="#routeviplist">Sequence[Route<wbr>Vip<wbr>List]</a></span>
     </dt>
-    <dd><p>Virtual IP list.</p>
-</dd></dl>
+    <dd>Virtual IP list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1086,8 +1358,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#routebrokerviplist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Virtual IP list (1 to 1 broker nodes).</p>
-</dd><dt class="property-"
+    <dd>Virtual IP list (1 to 1 broker nodes).</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1095,8 +1366,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="routeid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#routeid_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Route ID.</dd><dt class="property-"
             title="">
         <span id="viplists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#viplists_yaml" style="color: inherit; text-decoration: inherit;">vip<wbr>Lists</a>
@@ -1104,8 +1382,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#routeviplist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Virtual IP list.</p>
-</dd></dl>
+    <dd>Virtual IP list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1115,130 +1392,171 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Route resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">RouteState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Route</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">RouteState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Route</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">access_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">auth_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">broker_vip_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_ckafka.RouteBrokerVipListArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">broker_vip_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[RouteBrokerVipListArgs]]</span> = None<span class="p">,</span>
         <span class="nx">caller_appid</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">public_network</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">route_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">security_group_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">vip_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[_ckafka.RouteVipListArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">vip_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[RouteVipListArgs]]</span> = None<span class="p">,</span>
         <span class="nx">vip_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Route</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetRoute<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">RouteState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Route</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetRoute<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">RouteState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Route</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Route</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">RouteState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Route</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">RouteState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Route</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">RouteState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Route</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">RouteState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingRoute</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Ckafka:Route</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_ckafka_route</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">RouteState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">RouteState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1246,28 +1564,31 @@ Get an existing Route resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">RouteState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1275,28 +1596,31 @@ Get an existing Route resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">RouteState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1316,14 +1640,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Access type. Valid values:</p>
+    <dd>Access type. Valid values:</p>
 <ul>
 <li>0: PLAINTEXT (in clear text, supported by both the old version and the community version without user information)</li>
 <li>1: SASL_PLAINTEXT (in clear text, but at the beginning of the data, authentication will be logged in through SASL, which is only supported by the community version)</li>
 <li>2: SSL (SSL encrypted communication without user information, supported by both older and community versions)</li>
 <li>3: SASL_SSL (SSL encrypted communication. When the data starts, authentication will be logged in through SASL. Only the community version supports it).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_authflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_authflag_csharp" style="color: inherit; text-decoration: inherit;">Auth<wbr>Flag</a>
@@ -1331,17 +1654,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auth flag.</p>
-</dd><dt class="property-optional"
+    <dd>Auth flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_brokerviplists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_brokerviplists_csharp" style="color: inherit; text-decoration: inherit;">Broker<wbr>Vip<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#routebrokerviplist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Inputs.<wbr>Route<wbr>Broker<wbr>Vip<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#routebrokerviplist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Inputs.<wbr>Route<wbr>Broker<wbr>Vip<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Virtual IP list (1 to 1 broker nodes).</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP list (1 to 1 broker nodes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_callerappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_callerappid_csharp" style="color: inherit; text-decoration: inherit;">Caller<wbr>Appid</a>
@@ -1349,8 +1670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Caller appid.</p>
-</dd><dt class="property-optional"
+    <dd>Caller appid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1358,8 +1678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -1367,8 +1686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip.</p>
-</dd><dt class="property-optional"
+    <dd>Ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicnetwork_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicnetwork_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Network</a>
@@ -1376,8 +1694,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public network.</p>
-</dd><dt class="property-optional"
+    <dd>Public network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_routeid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routeid_csharp" style="color: inherit; text-decoration: inherit;">Route<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Route ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_securitygroupids_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>List of associated security group IDs in order.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1385,17 +1718,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_viplists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_viplists_csharp" style="color: inherit; text-decoration: inherit;">Vip<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#routeviplist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Inputs.<wbr>Route<wbr>Vip<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#routeviplist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Inputs.<wbr>Route<wbr>Vip<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Virtual IP list.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_viptype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_viptype_csharp" style="color: inherit; text-decoration: inherit;">Vip<wbr>Type</a>
@@ -1403,8 +1734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</p>
-</dd><dt class="property-optional"
+    <dd>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1412,8 +1742,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1427,14 +1756,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Access type. Valid values:</p>
+    <dd>Access type. Valid values:</p>
 <ul>
 <li>0: PLAINTEXT (in clear text, supported by both the old version and the community version without user information)</li>
 <li>1: SASL_PLAINTEXT (in clear text, but at the beginning of the data, authentication will be logged in through SASL, which is only supported by the community version)</li>
 <li>2: SSL (SSL encrypted communication without user information, supported by both older and community versions)</li>
 <li>3: SASL_SSL (SSL encrypted communication. When the data starts, authentication will be logged in through SASL. Only the community version supports it).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_authflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_authflag_go" style="color: inherit; text-decoration: inherit;">Auth<wbr>Flag</a>
@@ -1442,8 +1770,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auth flag.</p>
-</dd><dt class="property-optional"
+    <dd>Auth flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_brokerviplists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_brokerviplists_go" style="color: inherit; text-decoration: inherit;">Broker<wbr>Vip<wbr>Lists</a>
@@ -1451,8 +1778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#routebrokerviplist">[]Route<wbr>Broker<wbr>Vip<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>Virtual IP list (1 to 1 broker nodes).</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP list (1 to 1 broker nodes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_callerappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_callerappid_go" style="color: inherit; text-decoration: inherit;">Caller<wbr>Appid</a>
@@ -1460,8 +1786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Caller appid.</p>
-</dd><dt class="property-optional"
+    <dd>Caller appid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1469,8 +1794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -1478,8 +1802,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip.</p>
-</dd><dt class="property-optional"
+    <dd>Ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicnetwork_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicnetwork_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Network</a>
@@ -1487,8 +1810,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public network.</p>
-</dd><dt class="property-optional"
+    <dd>Public network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_routeid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routeid_go" style="color: inherit; text-decoration: inherit;">Route<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Route ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_securitygroupids_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>List of associated security group IDs in order.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1496,8 +1834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_viplists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_viplists_go" style="color: inherit; text-decoration: inherit;">Vip<wbr>Lists</a>
@@ -1505,8 +1842,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#routeviplist">[]Route<wbr>Vip<wbr>List<wbr>Args</a></span>
     </dt>
-    <dd><p>Virtual IP list.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_viptype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_viptype_go" style="color: inherit; text-decoration: inherit;">Vip<wbr>Type</a>
@@ -1514,8 +1850,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</p>
-</dd><dt class="property-optional"
+    <dd>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1523,8 +1858,123 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_access_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_access_type_hcl" style="color: inherit; text-decoration: inherit;">access_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Access type. Valid values:</p>
+<ul>
+<li>0: PLAINTEXT (in clear text, supported by both the old version and the community version without user information)</li>
+<li>1: SASL_PLAINTEXT (in clear text, but at the beginning of the data, authentication will be logged in through SASL, which is only supported by the community version)</li>
+<li>2: SSL (SSL encrypted communication without user information, supported by both older and community versions)</li>
+<li>3: SASL_SSL (SSL encrypted communication. When the data starts, authentication will be logged in through SASL. Only the community version supports it).</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_auth_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auth_flag_hcl" style="color: inherit; text-decoration: inherit;">auth_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auth flag.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_broker_vip_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_broker_vip_lists_hcl" style="color: inherit; text-decoration: inherit;">broker_<wbr>vip_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#routebrokerviplist">list(object)</a></span>
+    </dt>
+    <dd>Virtual IP list (1 to 1 broker nodes).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_caller_appid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_caller_appid_hcl" style="color: inherit; text-decoration: inherit;">caller_<wbr>appid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Caller appid.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ip.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_public_network_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_network_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>network</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Public network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_route_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_route_id_hcl" style="color: inherit; text-decoration: inherit;">route_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Route ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_security_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_group_ids_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of associated security group IDs in order.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vip_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_lists_hcl" style="color: inherit; text-decoration: inherit;">vip_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#routeviplist">list(object)</a></span>
+    </dt>
+    <dd>Virtual IP list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vip_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_type_hcl" style="color: inherit; text-decoration: inherit;">vip_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1538,14 +1988,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Access type. Valid values:</p>
+    <dd>Access type. Valid values:</p>
 <ul>
 <li>0: PLAINTEXT (in clear text, supported by both the old version and the community version without user information)</li>
 <li>1: SASL_PLAINTEXT (in clear text, but at the beginning of the data, authentication will be logged in through SASL, which is only supported by the community version)</li>
 <li>2: SSL (SSL encrypted communication without user information, supported by both older and community versions)</li>
 <li>3: SASL_SSL (SSL encrypted communication. When the data starts, authentication will be logged in through SASL. Only the community version supports it).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_authflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_authflag_java" style="color: inherit; text-decoration: inherit;">auth<wbr>Flag</a>
@@ -1553,17 +2002,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auth flag.</p>
-</dd><dt class="property-optional"
+    <dd>Auth flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_brokerviplists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_brokerviplists_java" style="color: inherit; text-decoration: inherit;">broker<wbr>Vip<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#routebrokerviplist">List&lt;Route<wbr>Broker<wbr>Vip<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#routebrokerviplist">List&lt;Route<wbr>Broker<wbr>Vip<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Virtual IP list (1 to 1 broker nodes).</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP list (1 to 1 broker nodes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_callerappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_callerappid_java" style="color: inherit; text-decoration: inherit;">caller<wbr>Appid</a>
@@ -1571,8 +2018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Caller appid.</p>
-</dd><dt class="property-optional"
+    <dd>Caller appid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1580,8 +2026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1589,8 +2034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip.</p>
-</dd><dt class="property-optional"
+    <dd>Ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicnetwork_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicnetwork_java" style="color: inherit; text-decoration: inherit;">public<wbr>Network</a>
@@ -1598,8 +2042,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Public network.</p>
-</dd><dt class="property-optional"
+    <dd>Public network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_routeid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routeid_java" style="color: inherit; text-decoration: inherit;">route<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Route ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_securitygroupids_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>List of associated security group IDs in order.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1607,17 +2066,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_viplists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_viplists_java" style="color: inherit; text-decoration: inherit;">vip<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#routeviplist">List&lt;Route<wbr>Vip<wbr>List<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#routeviplist">List&lt;Route<wbr>Vip<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Virtual IP list.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_viptype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_viptype_java" style="color: inherit; text-decoration: inherit;">vip<wbr>Type</a>
@@ -1625,8 +2082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</p>
-</dd><dt class="property-optional"
+    <dd>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1634,8 +2090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1649,14 +2104,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Access type. Valid values:</p>
+    <dd>Access type. Valid values:</p>
 <ul>
 <li>0: PLAINTEXT (in clear text, supported by both the old version and the community version without user information)</li>
 <li>1: SASL_PLAINTEXT (in clear text, but at the beginning of the data, authentication will be logged in through SASL, which is only supported by the community version)</li>
 <li>2: SSL (SSL encrypted communication without user information, supported by both older and community versions)</li>
 <li>3: SASL_SSL (SSL encrypted communication. When the data starts, authentication will be logged in through SASL. Only the community version supports it).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_authflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_authflag_nodejs" style="color: inherit; text-decoration: inherit;">auth<wbr>Flag</a>
@@ -1664,17 +2118,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auth flag.</p>
-</dd><dt class="property-optional"
+    <dd>Auth flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_brokerviplists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_brokerviplists_nodejs" style="color: inherit; text-decoration: inherit;">broker<wbr>Vip<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#routebrokerviplist">Route<wbr>Broker<wbr>Vip<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#routebrokerviplist">Route<wbr>Broker<wbr>Vip<wbr>List[]</a></span>
     </dt>
-    <dd><p>Virtual IP list (1 to 1 broker nodes).</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP list (1 to 1 broker nodes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_callerappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_callerappid_nodejs" style="color: inherit; text-decoration: inherit;">caller<wbr>Appid</a>
@@ -1682,8 +2134,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Caller appid.</p>
-</dd><dt class="property-optional"
+    <dd>Caller appid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1691,8 +2142,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1700,8 +2150,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip.</p>
-</dd><dt class="property-optional"
+    <dd>Ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicnetwork_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicnetwork_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Network</a>
@@ -1709,8 +2158,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Public network.</p>
-</dd><dt class="property-optional"
+    <dd>Public network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_routeid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routeid_nodejs" style="color: inherit; text-decoration: inherit;">route<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Route ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_securitygroupids_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>List of associated security group IDs in order.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1718,17 +2182,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_viplists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_viplists_nodejs" style="color: inherit; text-decoration: inherit;">vip<wbr>Lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#routeviplist">Route<wbr>Vip<wbr>List<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#routeviplist">Route<wbr>Vip<wbr>List[]</a></span>
     </dt>
-    <dd><p>Virtual IP list.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_viptype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_viptype_nodejs" style="color: inherit; text-decoration: inherit;">vip<wbr>Type</a>
@@ -1736,8 +2198,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</p>
-</dd><dt class="property-optional"
+    <dd>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1745,8 +2206,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1760,14 +2220,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Access type. Valid values:</p>
+    <dd>Access type. Valid values:</p>
 <ul>
 <li>0: PLAINTEXT (in clear text, supported by both the old version and the community version without user information)</li>
 <li>1: SASL_PLAINTEXT (in clear text, but at the beginning of the data, authentication will be logged in through SASL, which is only supported by the community version)</li>
 <li>2: SSL (SSL encrypted communication without user information, supported by both older and community versions)</li>
 <li>3: SASL_SSL (SSL encrypted communication. When the data starts, authentication will be logged in through SASL. Only the community version supports it).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_auth_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auth_flag_python" style="color: inherit; text-decoration: inherit;">auth_<wbr>flag</a>
@@ -1775,17 +2234,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auth flag.</p>
-</dd><dt class="property-optional"
+    <dd>Auth flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_broker_vip_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_broker_vip_lists_python" style="color: inherit; text-decoration: inherit;">broker_<wbr>vip_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#routebrokerviplist">Route<wbr>Broker<wbr>Vip<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#routebrokerviplist">Sequence[Route<wbr>Broker<wbr>Vip<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>Virtual IP list (1 to 1 broker nodes).</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP list (1 to 1 broker nodes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_caller_appid_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_caller_appid_python" style="color: inherit; text-decoration: inherit;">caller_<wbr>appid</a>
@@ -1793,8 +2250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Caller appid.</p>
-</dd><dt class="property-optional"
+    <dd>Caller appid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1802,8 +2258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1811,8 +2266,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ip.</p>
-</dd><dt class="property-optional"
+    <dd>Ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_public_network_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_network_python" style="color: inherit; text-decoration: inherit;">public_<wbr>network</a>
@@ -1820,8 +2274,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public network.</p>
-</dd><dt class="property-optional"
+    <dd>Public network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_route_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_route_id_python" style="color: inherit; text-decoration: inherit;">route_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Route ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_security_group_ids_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_group_ids_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>List of associated security group IDs in order.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1829,17 +2298,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_lists_python" style="color: inherit; text-decoration: inherit;">vip_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#routeviplist">Route<wbr>Vip<wbr>List<wbr>Args]</a></span>
+        <span class="property-type"><a href="#routeviplist">Sequence[Route<wbr>Vip<wbr>List<wbr>Args]</a></span>
     </dt>
-    <dd><p>Virtual IP list.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_type_python" style="color: inherit; text-decoration: inherit;">vip_<wbr>type</a>
@@ -1847,8 +2314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</p>
-</dd><dt class="property-optional"
+    <dd>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1856,8 +2322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1871,14 +2336,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Access type. Valid values:</p>
+    <dd>Access type. Valid values:</p>
 <ul>
 <li>0: PLAINTEXT (in clear text, supported by both the old version and the community version without user information)</li>
 <li>1: SASL_PLAINTEXT (in clear text, but at the beginning of the data, authentication will be logged in through SASL, which is only supported by the community version)</li>
 <li>2: SSL (SSL encrypted communication without user information, supported by both older and community versions)</li>
 <li>3: SASL_SSL (SSL encrypted communication. When the data starts, authentication will be logged in through SASL. Only the community version supports it).</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_authflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_authflag_yaml" style="color: inherit; text-decoration: inherit;">auth<wbr>Flag</a>
@@ -1886,8 +2350,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auth flag.</p>
-</dd><dt class="property-optional"
+    <dd>Auth flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_brokerviplists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_brokerviplists_yaml" style="color: inherit; text-decoration: inherit;">broker<wbr>Vip<wbr>Lists</a>
@@ -1895,8 +2358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#routebrokerviplist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Virtual IP list (1 to 1 broker nodes).</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP list (1 to 1 broker nodes).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_callerappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_callerappid_yaml" style="color: inherit; text-decoration: inherit;">caller<wbr>Appid</a>
@@ -1904,8 +2366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Caller appid.</p>
-</dd><dt class="property-optional"
+    <dd>Caller appid.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1913,8 +2374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1922,8 +2382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip.</p>
-</dd><dt class="property-optional"
+    <dd>Ip.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicnetwork_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicnetwork_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Network</a>
@@ -1931,8 +2390,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Public network.</p>
-</dd><dt class="property-optional"
+    <dd>Public network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_routeid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_routeid_yaml" style="color: inherit; text-decoration: inherit;">route<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Route ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_securitygroupids_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>List of associated security group IDs in order.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1940,8 +2414,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet id.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_viplists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_viplists_yaml" style="color: inherit; text-decoration: inherit;">vip<wbr>Lists</a>
@@ -1949,8 +2422,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#routeviplist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Virtual IP list.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_viptype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_viptype_yaml" style="color: inherit; text-decoration: inherit;">vip<wbr>Type</a>
@@ -1958,8 +2430,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</p>
-</dd><dt class="property-optional"
+    <dd>Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1967,8 +2438,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vpc id.</p>
-</dd></dl>
+    <dd>Vpc id.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1983,7 +2453,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="routebrokerviplist">Route<wbr>Broker<wbr>Vip<wbr>List</h4>
+<h4 id="routebrokerviplist">
+Route<wbr>Broker<wbr>Vip<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Route<wbr>Broker<wbr>Vip<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1995,8 +2467,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_csharp" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -2004,8 +2475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual port.</p>
-</dd></dl>
+    <dd>Virtual port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2019,8 +2489,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_go" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -2028,8 +2497,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual port.</p>
-</dd></dl>
+    <dd>Virtual port.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Virtual IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vport_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_hcl" style="color: inherit; text-decoration: inherit;">vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Virtual port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2043,8 +2533,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_java" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2052,8 +2541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual port.</p>
-</dd></dl>
+    <dd>Virtual port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2067,8 +2555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_nodejs" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2076,8 +2563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual port.</p>
-</dd></dl>
+    <dd>Virtual port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2091,8 +2577,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_python" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2100,8 +2585,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Virtual port.</p>
-</dd></dl>
+    <dd>Virtual port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2115,8 +2599,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_yaml" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2124,12 +2607,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual port.</p>
-</dd></dl>
+    <dd>Virtual port.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="routeviplist">Route<wbr>Vip<wbr>List</h4>
+<h4 id="routeviplist">
+Route<wbr>Vip<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Route<wbr>Vip<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2141,8 +2625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_csharp" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -2150,8 +2633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual port.</p>
-</dd></dl>
+    <dd>Virtual port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2165,8 +2647,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_go" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -2174,8 +2655,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual port.</p>
-</dd></dl>
+    <dd>Virtual port.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Virtual IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vport_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_hcl" style="color: inherit; text-decoration: inherit;">vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Virtual port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2189,8 +2691,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_java" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2198,8 +2699,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual port.</p>
-</dd></dl>
+    <dd>Virtual port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2213,8 +2713,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_nodejs" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2222,8 +2721,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual port.</p>
-</dd></dl>
+    <dd>Virtual port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2237,8 +2735,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_python" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2246,8 +2743,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Virtual port.</p>
-</dd></dl>
+    <dd>Virtual port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2261,8 +2757,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual IP.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="vport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_yaml" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2270,8 +2765,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual port.</p>
-</dd></dl>
+    <dd>Virtual port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2279,12 +2773,15 @@ The following state arguments are supported:
 
 
 
-ckafka route can be imported using the id, e.g.
+ckafka route can be imported using the instanceId#routeId, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Ckafka/route:Route example ckafka-8j4rodrr#135912
+$ pulumi import tencentcloud:Ckafka/route:Route example ckafka-8j4ra928#135912
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2296,7 +2793,6 @@ $ pulumi import tencentcloud:Ckafka/route:Route example ckafka-8j4rodrr#135912
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

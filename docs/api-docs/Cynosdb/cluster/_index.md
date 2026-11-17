@@ -2,9 +2,11 @@
 ---
 title: "Cluster"
 title_tag: "tencentcloud.Cynosdb.Cluster"
-meta_desc: "Documentation for the tencentcloud.Cynosdb.Cluster resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a CynosDB cluster. NOTE: Compared to Resource tencentcloud.Cynosdb.Cluster, Resource tencentcloud.Cynosdb.ClusterV2 places."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,19 +16,459 @@ no_edit_this_page: true
 
 Provide a resource to create a CynosDB cluster.
 
+> **NOTE:** Compared to Resource `tencentcloud.Cynosdb.Cluster`, Resource `tencentcloud.Cynosdb.ClusterV2` places greater emphasis on optimizing security group configurations for read-only groups and read-only instances, making them more precise and efficient. `rwGroupSg` represents the read-write instance security group, `roGroupSg` represents the read-only group security group, and `singleRoGroupSg` represents the read-only instance security group. notably, to configure `roGroupSg`, ``openRoGroup` must be set `true` first. If you need to configure `roGroupSg` or `singleRoGroupSg` security group, please use Resource `tencentcloud.Cynosdb.ClusterV2`.
+
+> **NOTE:** params `instanceCount` and `instanceInitInfos` only choose one. If neither parameter is set, the CynosDB cluster is created with parameter `instanceCount` set to `2` by default(one RW instance + one Ro instance). If you only need to create a master instance, explicitly set the `instanceCount` field to `1`, or configure the RW instance information in the `instanceInitInfos` field.
+
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Create a single availability zone NORMAL CynosDB cluster
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const config = new pulumi.Config();
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc",
+    cidrBlock: "10.0.0.0/16",
+});
+// create subnet
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    availabilityZone: availabilityZone,
+    name: "subnet",
+    vpcId: vpc.id,
+    cidrBlock: "10.0.20.0/28",
+    isMulticast: false,
+});
+// create security group
+const example = new tencentcloud.security.Group("example", {
+    name: "tf-example",
+    description: "sg desc.",
+    projectId: 0,
+    tags: {
+        example: "test",
+    },
+});
+// create cynosdb cluster
+const exampleCluster = new tencentcloud.cynosdb.Cluster("example", {
+    availableZone: availabilityZone,
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    dbMode: "NORMAL",
+    dbType: "MYSQL",
+    dbVersion: "5.7",
+    port: 3306,
+    clusterName: "tf-example",
+    password: "cynosDB@123",
+    instanceMaintainDuration: 7200,
+    instanceMaintainStartTime: 10800,
+    instanceCpuCore: 2,
+    instanceMemorySize: 4,
+    forceDelete: false,
+    instanceMaintainWeekdays: [
+        "Fri",
+        "Mon",
+        "Sat",
+        "Sun",
+        "Thu",
+        "Wed",
+        "Tue",
+    ],
+    paramItems: [
+        {
+            name: "character_set_server",
+            currentValue: "utf8mb4",
+        },
+        {
+            name: "lower_case_table_names",
+            currentValue: "0",
+        },
+    ],
+    rwGroupSgs: [example.id],
+    instanceInitInfos: [
+        {
+            cpu: 2,
+            memory: 4,
+            instanceType: "rw",
+            instanceCount: 1,
+            deviceType: "common",
+        },
+        {
+            cpu: 2,
+            memory: 4,
+            instanceType: "ro",
+            instanceCount: 1,
+            deviceType: "exclusive",
+        },
+    ],
+    syncWay: "async",
+    semiSyncTimeout: 10000,
+    cynosVersion: "2.1.14.001",
+    tags: {
+        createBy: "terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+config = pulumi.Config()
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-3"
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc",
+    cidr_block="10.0.0.0/16")
+# create subnet
+subnet = tencentcloud.subnet.Instance("subnet",
+    availability_zone=availability_zone,
+    name="subnet",
+    vpc_id=vpc.id,
+    cidr_block="10.0.20.0/28",
+    is_multicast=False)
+# create security group
+example = tencentcloud.security.Group("example",
+    name="tf-example",
+    description="sg desc.",
+    project_id=0,
+    tags={
+        "example": "test",
+    })
+# create cynosdb cluster
+example_cluster = tencentcloud.cynosdb.Cluster("example",
+    available_zone=availability_zone,
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
+    db_mode="NORMAL",
+    db_type="MYSQL",
+    db_version="5.7",
+    port=3306,
+    cluster_name="tf-example",
+    password="cynosDB@123",
+    instance_maintain_duration=7200,
+    instance_maintain_start_time=10800,
+    instance_cpu_core=2,
+    instance_memory_size=4,
+    force_delete=False,
+    instance_maintain_weekdays=[
+        "Fri",
+        "Mon",
+        "Sat",
+        "Sun",
+        "Thu",
+        "Wed",
+        "Tue",
+    ],
+    param_items=[
+        {
+            "name": "character_set_server",
+            "current_value": "utf8mb4",
+        },
+        {
+            "name": "lower_case_table_names",
+            "current_value": "0",
+        },
+    ],
+    rw_group_sgs=[example.id],
+    instance_init_infos=[
+        {
+            "cpu": 2,
+            "memory": 4,
+            "instance_type": "rw",
+            "instance_count": 1,
+            "device_type": "common",
+        },
+        {
+            "cpu": 2,
+            "memory": 4,
+            "instance_type": "ro",
+            "instance_count": 1,
+            "device_type": "exclusive",
+        },
+    ],
+    sync_way="async",
+    semi_sync_timeout=10000,
+    cynos_version="2.1.14.001",
+    tags={
+        "createBy": "terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-3"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		// create subnet
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("subnet"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			CidrBlock:        pulumi.String("10.0.20.0/28"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		// create security group
+		example, err := security.NewGroup(ctx, "example", &security.GroupArgs{
+			Name:        pulumi.String("tf-example"),
+			Description: pulumi.String("sg desc."),
+			ProjectId:   pulumi.Int(0),
+			Tags: pulumi.StringMap{
+				"example": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		// create cynosdb cluster
+		_, err = cynosdb.NewCluster(ctx, "example", &cynosdb.ClusterArgs{
+			AvailableZone:             pulumi.String(availabilityZone),
+			VpcId:                     vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:                  subnet2.ID().ToIDOutput().ToStringOutput(),
+			DbMode:                    pulumi.String("NORMAL"),
+			DbType:                    pulumi.String("MYSQL"),
+			DbVersion:                 pulumi.String("5.7"),
+			Port:                      pulumi.Int(3306),
+			ClusterName:               pulumi.String("tf-example"),
+			Password:                  pulumi.String("cynosDB@123"),
+			InstanceMaintainDuration:  pulumi.Int(7200),
+			InstanceMaintainStartTime: pulumi.Int(10800),
+			InstanceCpuCore:           pulumi.Int(2),
+			InstanceMemorySize:        pulumi.Int(4),
+			ForceDelete:               pulumi.Bool(false),
+			InstanceMaintainWeekdays: pulumi.StringArray{
+				pulumi.String("Fri"),
+				pulumi.String("Mon"),
+				pulumi.String("Sat"),
+				pulumi.String("Sun"),
+				pulumi.String("Thu"),
+				pulumi.String("Wed"),
+				pulumi.String("Tue"),
+			},
+			ParamItems: cynosdb.ClusterParamItemArray{
+				&cynosdb.ClusterParamItemArgs{
+					Name:         pulumi.String("character_set_server"),
+					CurrentValue: pulumi.String("utf8mb4"),
+				},
+				&cynosdb.ClusterParamItemArgs{
+					Name:         pulumi.String("lower_case_table_names"),
+					CurrentValue: pulumi.String("0"),
+				},
+			},
+			RwGroupSgs: pulumi.StringArray{
+				example.ID().ToIDOutput().ToStringOutput(),
+			},
+			InstanceInitInfos: cynosdb.ClusterInstanceInitInfoArray{
+				&cynosdb.ClusterInstanceInitInfoArgs{
+					Cpu:           pulumi.Int(2),
+					Memory:        pulumi.Int(4),
+					InstanceType:  pulumi.String("rw"),
+					InstanceCount: pulumi.Int(1),
+					DeviceType:    pulumi.String("common"),
+				},
+				&cynosdb.ClusterInstanceInitInfoArgs{
+					Cpu:           pulumi.Int(2),
+					Memory:        pulumi.Int(4),
+					InstanceType:  pulumi.String("ro"),
+					InstanceCount: pulumi.Int(1),
+					DeviceType:    pulumi.String("exclusive"),
+				},
+			},
+			SyncWay:         pulumi.String("async"),
+			SemiSyncTimeout: pulumi.Int(10000),
+			CynosVersion:    pulumi.String("2.1.14.001"),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        Name = "vpc",
+        CidrBlock = "10.0.0.0/16",
+    });
+
+    // create subnet
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        AvailabilityZone = availabilityZone,
+        Name = "subnet",
+        VpcId = vpc.Id,
+        CidrBlock = "10.0.20.0/28",
+        IsMulticast = false,
+    });
+
+    // create security group
+    var example = new Tencentcloud.Security.Group("example", new()
+    {
+        Name = "tf-example",
+        Description = "sg desc.",
+        ProjectId = 0,
+        Tags = 
+        {
+            { "example", "test" },
+        },
+    });
+
+    // create cynosdb cluster
+    var exampleCluster = new Tencentcloud.Cynosdb.Cluster("example", new()
+    {
+        AvailableZone = availabilityZone,
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        DbMode = "NORMAL",
+        DbType = "MYSQL",
+        DbVersion = "5.7",
+        Port = 3306,
+        ClusterName = "tf-example",
+        Password = "cynosDB@123",
+        InstanceMaintainDuration = 7200,
+        InstanceMaintainStartTime = 10800,
+        InstanceCpuCore = 2,
+        InstanceMemorySize = 4,
+        ForceDelete = false,
+        InstanceMaintainWeekdays = new[]
+        {
+            "Fri",
+            "Mon",
+            "Sat",
+            "Sun",
+            "Thu",
+            "Wed",
+            "Tue",
+        },
+        ParamItems = new[]
+        {
+            new Tencentcloud.Cynosdb.Inputs.ClusterParamItemArgs
+            {
+                Name = "character_set_server",
+                CurrentValue = "utf8mb4",
+            },
+            new Tencentcloud.Cynosdb.Inputs.ClusterParamItemArgs
+            {
+                Name = "lower_case_table_names",
+                CurrentValue = "0",
+            },
+        },
+        RwGroupSgs = new[]
+        {
+            example.Id,
+        },
+        InstanceInitInfos = new[]
+        {
+            new Tencentcloud.Cynosdb.Inputs.ClusterInstanceInitInfoArgs
+            {
+                Cpu = 2,
+                Memory = 4,
+                InstanceType = "rw",
+                InstanceCount = 1,
+                DeviceType = "common",
+            },
+            new Tencentcloud.Cynosdb.Inputs.ClusterInstanceInitInfoArgs
+            {
+                Cpu = 2,
+                Memory = 4,
+                InstanceType = "ro",
+                InstanceCount = 1,
+                DeviceType = "exclusive",
+            },
+        },
+        SyncWay = "async",
+        SemiSyncTimeout = 10000,
+        CynosVersion = "2.1.14.001",
+        Tags = 
+        {
+            { "createBy", "terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Security.Group;
+import com.pulumi.tencentcloud.Security.GroupArgs;
 import com.pulumi.tencentcloud.Cynosdb.Cluster;
 import com.pulumi.tencentcloud.Cynosdb.ClusterArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Cynosdb.inputs.ClusterParamItemArgs;
+import com.pulumi.tencentcloud.Cynosdb.inputs.ClusterInstanceInitInfoArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -38,15 +480,47 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Cluster("foo", ClusterArgs.builder()        
-            .availableZone("ap-guangzhou-4")
-            .clusterName("tf-cynosdb")
+        final var config = ctx.config();
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-3");
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc")
+            .cidrBlock("10.0.0.0/16")
+            .build());
+
+        // create subnet
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .availabilityZone(availabilityZone)
+            .name("subnet")
+            .vpcId(vpc.id())
+            .cidrBlock("10.0.20.0/28")
+            .isMulticast(false)
+            .build());
+
+        // create security group
+        var example = new Group("example", GroupArgs.builder()
+            .name("tf-example")
+            .description("sg desc.")
+            .projectId(0)
+            .tags(Map.of("example", "test"))
+            .build());
+
+        // create cynosdb cluster
+        var exampleCluster = new Cluster("exampleCluster", ClusterArgs.builder()
+            .availableZone(availabilityZone)
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .dbMode("NORMAL")
             .dbType("MYSQL")
             .dbVersion("5.7")
-            .forceDelete(false)
-            .instanceCpuCore(1)
+            .port(3306)
+            .clusterName("tf-example")
+            .password("cynosDB@123")
             .instanceMaintainDuration(7200)
             .instanceMaintainStartTime(10800)
+            .instanceCpuCore(2)
+            .instanceMemorySize(4)
+            .forceDelete(false)
             .instanceMaintainWeekdays(            
                 "Fri",
                 "Mon",
@@ -55,34 +529,94 @@ public class App {
                 "Thu",
                 "Wed",
                 "Tue")
-            .instanceMemorySize(2)
-            .paramItem(%!v(PANIC=Format method: runtime error: invalid memory address or nil pointer dereference))
-            .password("cynos@123")
-            .prarmTemplateId("12345")
-            .roGroupSgs("sg-ibyjkl6r")
-            .rwGroupSgs("sg-ibyjkl6r")
-            .storageLimit(1000)
-            .subnetId("subnet-q6fhy1mi")
-            .tags(Map.of("test", "test"))
-            .vpcId("vpc-h70b6b49")
+            .paramItems(            
+                ClusterParamItemArgs.builder()
+                    .name("character_set_server")
+                    .currentValue("utf8mb4")
+                    .build(),
+                ClusterParamItemArgs.builder()
+                    .name("lower_case_table_names")
+                    .currentValue("0")
+                    .build())
+            .rwGroupSgs(example.id())
+            .instanceInitInfos(            
+                ClusterInstanceInitInfoArgs.builder()
+                    .cpu(2)
+                    .memory(4)
+                    .instanceType("rw")
+                    .instanceCount(1)
+                    .deviceType("common")
+                    .build(),
+                ClusterInstanceInitInfoArgs.builder()
+                    .cpu(2)
+                    .memory(4)
+                    .instanceType("ro")
+                    .instanceCount(1)
+                    .deviceType("exclusive")
+                    .build())
+            .syncWay("async")
+            .semiSyncTimeout(10000)
+            .cynosVersion("2.1.14.001")
+            .tags(Map.of("createBy", "terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
+configuration:
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-3
 resources:
-  foo:
-    type: tencentcloud:Cynosdb:Cluster
+  # create vpc
+  vpc:
+    type: tencentcloud:Vpc:Instance
     properties:
-      availableZone: ap-guangzhou-4
-      clusterName: tf-cynosdb
+      name: vpc
+      cidrBlock: 10.0.0.0/16
+  # create subnet
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      availabilityZone: ${availabilityZone}
+      name: subnet
+      vpcId: ${vpc.id}
+      cidrBlock: 10.0.20.0/28
+      isMulticast: false
+  # create security group
+  example:
+    type: tencentcloud:Security:Group
+    properties:
+      name: tf-example
+      description: sg desc.
+      projectId: 0
+      tags:
+        example: test
+  # create cynosdb cluster
+  exampleCluster:
+    type: tencentcloud:Cynosdb:Cluster
+    name: example
+    properties:
+      availableZone: ${availabilityZone}
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      dbMode: NORMAL
       dbType: MYSQL
       dbVersion: '5.7'
-      forceDelete: false
-      instanceCpuCore: 1
+      port: 3306
+      clusterName: tf-example
+      password: cynosDB@123
       instanceMaintainDuration: 7200
       instanceMaintainStartTime: 10800
+      instanceCpuCore: 2
+      instanceMemorySize: 4
+      forceDelete: false
       instanceMaintainWeekdays:
         - Fri
         - Mon
@@ -91,112 +625,954 @@ resources:
         - Thu
         - Wed
         - Tue
-      instanceMemorySize: 2
-      paramItem:
-        - currentValue: utf8mb4
-          name: character_set_server
-      password: cynos@123
-      prarmTemplateId: '12345'
-      roGroupSgs:
-        - sg-ibyjkl6r
+      paramItems:
+        - name: character_set_server
+          currentValue: utf8mb4
+        - name: lower_case_table_names
+          currentValue: '0'
       rwGroupSgs:
-        - sg-ibyjkl6r
-      storageLimit: 1000
-      subnetId: subnet-q6fhy1mi
+        - ${example.id}
+      instanceInitInfos:
+        - cpu: 2
+          memory: 4
+          instanceType: rw
+          instanceCount: 1
+          deviceType: common
+        - cpu: 2
+          memory: 4
+          instanceType: ro
+          instanceCount: 1
+          deviceType: exclusive
+      syncWay: async
+      semiSyncTimeout: 10000
+      cynosVersion: 2.1.14.001
       tags:
-        test: test
-      vpcId: vpc-h70b6b49
+        createBy: terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+# create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc"
+  cidr_block = "10.0.0.0/16"
+}
+# create subnet
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = var.availabilityZone
+  name              = "subnet"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.20.0/28"
+  is_multicast      = false
+}
+# create security group
+resource "tencentcloud_security_group" "example" {
+  name        = "tf-example"
+  description = "sg desc."
+  project_id  = 0
+  tags = {
+    "example" = "test"
+  }
+}
+# create cynosdb cluster
+resource "tencentcloud_cynosdb_cluster" "example" {
+  available_zone               = var.availabilityZone
+  vpc_id                       = tencentcloud_vpc_instance.vpc.id
+  subnet_id                    = tencentcloud_subnet_instance.subnet.id
+  db_mode                      = "NORMAL"
+  db_type                      = "MYSQL"
+  db_version                   = "5.7"
+  port                         = 3306
+  cluster_name                 = "tf-example"
+  password                     = "cynosDB@123"
+  instance_maintain_duration   = 7200
+  instance_maintain_start_time = 10800
+  instance_cpu_core            = 2
+  instance_memory_size         = 4
+  force_delete                 = false
+  instance_maintain_weekdays   = ["Fri", "Mon", "Sat", "Sun", "Thu", "Wed", "Tue"]
+  param_items {
+    name          = "character_set_server"
+    current_value = "utf8mb4"
+  }
+  param_items {
+    name          = "lower_case_table_names"
+    current_value = "0"
+  }
+  rw_group_sgs = [tencentcloud_security_group.example.id]
+  instance_init_infos {
+    cpu            = 2
+    memory         = 4
+    instance_type  = "rw"
+    instance_count = 1
+    device_type    = "common"
+  }
+  instance_init_infos {
+    cpu            = 2
+    memory         = 4
+    instance_type  = "ro"
+    instance_count = 1
+    device_type    = "exclusive"
+  }
+  sync_way          = "async"
+  semi_sync_timeout = 10000
+  cynos_version     = "2.1.14.001"
+  tags = {
+    "createBy" = "terraform"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-3"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### ) is not supported.
+
+Create a multiple availability zone SERVERLESS CynosDB cluster
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const config = new pulumi.Config();
+const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+const slaveZone = config.get("slaveZone") || "ap-guangzhou-6";
+// create vpc
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc",
+    cidrBlock: "10.0.0.0/16",
+});
+// create subnet
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    availabilityZone: availabilityZone,
+    name: "subnet",
+    vpcId: vpc.id,
+    cidrBlock: "10.0.20.0/28",
+    isMulticast: false,
+});
+// create security group
+const example = new tencentcloud.security.Group("example", {
+    name: "tf-example",
+    description: "sg desc.",
+    projectId: 0,
+    tags: {
+        example: "test",
+    },
+});
+// create param template
+const exampleParamTemplate = new tencentcloud.cynosdb.ParamTemplate("example", {
+    dbMode: "SERVERLESS",
+    engineVersion: "8.0",
+    templateName: "tf-example",
+    templateDescription: "terraform-template",
+    paramLists: [{
+        currentValue: "-1",
+        paramName: "optimizer_trace_offset",
+    }],
+});
+// create cynosdb cluster
+const exampleCluster = new tencentcloud.cynosdb.Cluster("example", {
+    availableZone: availabilityZone,
+    slaveZone: slaveZone,
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    dbMode: "SERVERLESS",
+    dbType: "MYSQL",
+    dbVersion: "8.0",
+    port: 3306,
+    clusterName: "tf-example",
+    password: "cynosDB@123",
+    instanceMaintainDuration: 7200,
+    instanceMaintainStartTime: 10800,
+    minCpu: 2,
+    maxCpu: 4,
+    paramTemplateId: exampleParamTemplate.templateId,
+    forceDelete: false,
+    syncWay: "async",
+    semiSyncTimeout: 10000,
+    instanceMaintainWeekdays: [
+        "Fri",
+        "Mon",
+        "Sat",
+        "Sun",
+        "Thu",
+        "Wed",
+        "Tue",
+    ],
+    rwGroupSgs: [example.id],
+    tags: {
+        createBy: "terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+config = pulumi.Config()
+availability_zone = config.get("availabilityZone")
+if availability_zone is None:
+    availability_zone = "ap-guangzhou-4"
+slave_zone = config.get("slaveZone")
+if slave_zone is None:
+    slave_zone = "ap-guangzhou-6"
+# create vpc
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc",
+    cidr_block="10.0.0.0/16")
+# create subnet
+subnet = tencentcloud.subnet.Instance("subnet",
+    availability_zone=availability_zone,
+    name="subnet",
+    vpc_id=vpc.id,
+    cidr_block="10.0.20.0/28",
+    is_multicast=False)
+# create security group
+example = tencentcloud.security.Group("example",
+    name="tf-example",
+    description="sg desc.",
+    project_id=0,
+    tags={
+        "example": "test",
+    })
+# create param template
+example_param_template = tencentcloud.cynosdb.ParamTemplate("example",
+    db_mode="SERVERLESS",
+    engine_version="8.0",
+    template_name="tf-example",
+    template_description="terraform-template",
+    param_lists=[{
+        "current_value": "-1",
+        "param_name": "optimizer_trace_offset",
+    }])
+# create cynosdb cluster
+example_cluster = tencentcloud.cynosdb.Cluster("example",
+    available_zone=availability_zone,
+    slave_zone=slave_zone,
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
+    db_mode="SERVERLESS",
+    db_type="MYSQL",
+    db_version="8.0",
+    port=3306,
+    cluster_name="tf-example",
+    password="cynosDB@123",
+    instance_maintain_duration=7200,
+    instance_maintain_start_time=10800,
+    min_cpu=float(2),
+    max_cpu=float(4),
+    param_template_id=example_param_template.template_id,
+    force_delete=False,
+    sync_way="async",
+    semi_sync_timeout=10000,
+    instance_maintain_weekdays=[
+        "Fri",
+        "Mon",
+        "Sat",
+        "Sun",
+        "Thu",
+        "Wed",
+        "Tue",
+    ],
+    rw_group_sgs=[example.id],
+    tags={
+        "createBy": "terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-4"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		slaveZone := "ap-guangzhou-6"
+		if param := cfg.Get("slaveZone"); param != "" {
+			slaveZone = param
+		}
+		// create vpc
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		// create subnet
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("subnet"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			CidrBlock:        pulumi.String("10.0.20.0/28"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		// create security group
+		example, err := security.NewGroup(ctx, "example", &security.GroupArgs{
+			Name:        pulumi.String("tf-example"),
+			Description: pulumi.String("sg desc."),
+			ProjectId:   pulumi.Int(0),
+			Tags: pulumi.StringMap{
+				"example": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		// create param template
+		exampleParamTemplate, err := cynosdb.NewParamTemplate(ctx, "example", &cynosdb.ParamTemplateArgs{
+			DbMode:              pulumi.String("SERVERLESS"),
+			EngineVersion:       pulumi.String("8.0"),
+			TemplateName:        pulumi.String("tf-example"),
+			TemplateDescription: pulumi.String("terraform-template"),
+			ParamLists: cynosdb.ParamTemplateParamListArray{
+				&cynosdb.ParamTemplateParamListArgs{
+					CurrentValue: pulumi.String("-1"),
+					ParamName:    pulumi.String("optimizer_trace_offset"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		// create cynosdb cluster
+		_, err = cynosdb.NewCluster(ctx, "example", &cynosdb.ClusterArgs{
+			AvailableZone:             pulumi.String(availabilityZone),
+			SlaveZone:                 pulumi.String(slaveZone),
+			VpcId:                     vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:                  subnet2.ID().ToIDOutput().ToStringOutput(),
+			DbMode:                    pulumi.String("SERVERLESS"),
+			DbType:                    pulumi.String("MYSQL"),
+			DbVersion:                 pulumi.String("8.0"),
+			Port:                      pulumi.Int(3306),
+			ClusterName:               pulumi.String("tf-example"),
+			Password:                  pulumi.String("cynosDB@123"),
+			InstanceMaintainDuration:  pulumi.Int(7200),
+			InstanceMaintainStartTime: pulumi.Int(10800),
+			MinCpu:                    pulumi.Float64(2),
+			MaxCpu:                    pulumi.Float64(4),
+			ParamTemplateId:           exampleParamTemplate.TemplateId,
+			ForceDelete:               pulumi.Bool(false),
+			SyncWay:                   pulumi.String("async"),
+			SemiSyncTimeout:           pulumi.Int(10000),
+			InstanceMaintainWeekdays: pulumi.StringArray{
+				pulumi.String("Fri"),
+				pulumi.String("Mon"),
+				pulumi.String("Sat"),
+				pulumi.String("Sun"),
+				pulumi.String("Thu"),
+				pulumi.String("Wed"),
+				pulumi.String("Tue"),
+			},
+			RwGroupSgs: pulumi.StringArray{
+				example.ID().ToIDOutput().ToStringOutput(),
+			},
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    var slaveZone = config.Get("slaveZone") ?? "ap-guangzhou-6";
+    // create vpc
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        Name = "vpc",
+        CidrBlock = "10.0.0.0/16",
+    });
+
+    // create subnet
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        AvailabilityZone = availabilityZone,
+        Name = "subnet",
+        VpcId = vpc.Id,
+        CidrBlock = "10.0.20.0/28",
+        IsMulticast = false,
+    });
+
+    // create security group
+    var example = new Tencentcloud.Security.Group("example", new()
+    {
+        Name = "tf-example",
+        Description = "sg desc.",
+        ProjectId = 0,
+        Tags = 
+        {
+            { "example", "test" },
+        },
+    });
+
+    // create param template
+    var exampleParamTemplate = new Tencentcloud.Cynosdb.ParamTemplate("example", new()
+    {
+        DbMode = "SERVERLESS",
+        EngineVersion = "8.0",
+        TemplateName = "tf-example",
+        TemplateDescription = "terraform-template",
+        ParamLists = new[]
+        {
+            new Tencentcloud.Cynosdb.Inputs.ParamTemplateParamListArgs
+            {
+                CurrentValue = "-1",
+                ParamName = "optimizer_trace_offset",
+            },
+        },
+    });
+
+    // create cynosdb cluster
+    var exampleCluster = new Tencentcloud.Cynosdb.Cluster("example", new()
+    {
+        AvailableZone = availabilityZone,
+        SlaveZone = slaveZone,
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        DbMode = "SERVERLESS",
+        DbType = "MYSQL",
+        DbVersion = "8.0",
+        Port = 3306,
+        ClusterName = "tf-example",
+        Password = "cynosDB@123",
+        InstanceMaintainDuration = 7200,
+        InstanceMaintainStartTime = 10800,
+        MinCpu = 2,
+        MaxCpu = 4,
+        ParamTemplateId = exampleParamTemplate.TemplateId,
+        ForceDelete = false,
+        SyncWay = "async",
+        SemiSyncTimeout = 10000,
+        InstanceMaintainWeekdays = new[]
+        {
+            "Fri",
+            "Mon",
+            "Sat",
+            "Sun",
+            "Thu",
+            "Wed",
+            "Tue",
+        },
+        RwGroupSgs = new[]
+        {
+            example.Id,
+        },
+        Tags = 
+        {
+            { "createBy", "terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Security.Group;
+import com.pulumi.tencentcloud.Security.GroupArgs;
+import com.pulumi.tencentcloud.Cynosdb.ParamTemplate;
+import com.pulumi.tencentcloud.Cynosdb.ParamTemplateArgs;
+import com.pulumi.tencentcloud.Cynosdb.inputs.ParamTemplateParamListArgs;
+import com.pulumi.tencentcloud.Cynosdb.Cluster;
+import com.pulumi.tencentcloud.Cynosdb.ClusterArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var config = ctx.config();
+        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-4");
+        final var slaveZone = config.get("slaveZone").orElse("ap-guangzhou-6");
+        // create vpc
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc")
+            .cidrBlock("10.0.0.0/16")
+            .build());
+
+        // create subnet
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .availabilityZone(availabilityZone)
+            .name("subnet")
+            .vpcId(vpc.id())
+            .cidrBlock("10.0.20.0/28")
+            .isMulticast(false)
+            .build());
+
+        // create security group
+        var example = new Group("example", GroupArgs.builder()
+            .name("tf-example")
+            .description("sg desc.")
+            .projectId(0)
+            .tags(Map.of("example", "test"))
+            .build());
+
+        // create param template
+        var exampleParamTemplate = new ParamTemplate("exampleParamTemplate", ParamTemplateArgs.builder()
+            .dbMode("SERVERLESS")
+            .engineVersion("8.0")
+            .templateName("tf-example")
+            .templateDescription("terraform-template")
+            .paramLists(ParamTemplateParamListArgs.builder()
+                .currentValue("-1")
+                .paramName("optimizer_trace_offset")
+                .build())
+            .build());
+
+        // create cynosdb cluster
+        var exampleCluster = new Cluster("exampleCluster", ClusterArgs.builder()
+            .availableZone(availabilityZone)
+            .slaveZone(slaveZone)
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .dbMode("SERVERLESS")
+            .dbType("MYSQL")
+            .dbVersion("8.0")
+            .port(3306)
+            .clusterName("tf-example")
+            .password("cynosDB@123")
+            .instanceMaintainDuration(7200)
+            .instanceMaintainStartTime(10800)
+            .minCpu(2.0)
+            .maxCpu(4.0)
+            .paramTemplateId(exampleParamTemplate.templateId())
+            .forceDelete(false)
+            .syncWay("async")
+            .semiSyncTimeout(10000)
+            .instanceMaintainWeekdays(            
+                "Fri",
+                "Mon",
+                "Sat",
+                "Sun",
+                "Thu",
+                "Wed",
+                "Tue")
+            .rwGroupSgs(example.id())
+            .tags(Map.of("createBy", "terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+configuration:
+  availabilityZone:
+    type: string
+    default: ap-guangzhou-4
+  slaveZone:
+    type: string
+    default: ap-guangzhou-6
+resources:
+  # create vpc
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      name: vpc
+      cidrBlock: 10.0.0.0/16
+  # create subnet
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      availabilityZone: ${availabilityZone}
+      name: subnet
+      vpcId: ${vpc.id}
+      cidrBlock: 10.0.20.0/28
+      isMulticast: false
+  # create security group
+  example:
+    type: tencentcloud:Security:Group
+    properties:
+      name: tf-example
+      description: sg desc.
+      projectId: 0
+      tags:
+        example: test
+  # create param template
+  exampleParamTemplate:
+    type: tencentcloud:Cynosdb:ParamTemplate
+    name: example
+    properties:
+      dbMode: SERVERLESS
+      engineVersion: '8.0'
+      templateName: tf-example
+      templateDescription: terraform-template
+      paramLists:
+        - currentValue: '-1'
+          paramName: optimizer_trace_offset
+  # create cynosdb cluster
+  exampleCluster:
+    type: tencentcloud:Cynosdb:Cluster
+    name: example
+    properties:
+      availableZone: ${availabilityZone}
+      slaveZone: ${slaveZone}
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      dbMode: SERVERLESS
+      dbType: MYSQL
+      dbVersion: '8.0'
+      port: 3306
+      clusterName: tf-example
+      password: cynosDB@123
+      instanceMaintainDuration: 7200
+      instanceMaintainStartTime: 10800
+      minCpu: 2
+      maxCpu: 4
+      paramTemplateId: ${exampleParamTemplate.templateId}
+      forceDelete: false
+      syncWay: async
+      semiSyncTimeout: 10000
+      instanceMaintainWeekdays:
+        - Fri
+        - Mon
+        - Sat
+        - Sun
+        - Thu
+        - Wed
+        - Tue
+      rwGroupSgs:
+        - ${example.id}
+      tags:
+        createBy: terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+# create vpc
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc"
+  cidr_block = "10.0.0.0/16"
+}
+# create subnet
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = var.availabilityZone
+  name              = "subnet"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.20.0/28"
+  is_multicast      = false
+}
+# create security group
+resource "tencentcloud_security_group" "example" {
+  name        = "tf-example"
+  description = "sg desc."
+  project_id  = 0
+  tags = {
+    "example" = "test"
+  }
+}
+# create param template
+resource "tencentcloud_cynosdb_paramtemplate" "example" {
+  db_mode              = "SERVERLESS"
+  engine_version       = "8.0"
+  template_name        = "tf-example"
+  template_description = "terraform-template"
+  param_lists {
+    current_value = "-1"
+    param_name    = "optimizer_trace_offset"
+  }
+}
+# create cynosdb cluster
+resource "tencentcloud_cynosdb_cluster" "example" {
+  available_zone               = var.availabilityZone
+  slave_zone                   = var.slaveZone
+  vpc_id                       = tencentcloud_vpc_instance.vpc.id
+  subnet_id                    = tencentcloud_subnet_instance.subnet.id
+  db_mode                      = "SERVERLESS"
+  db_type                      = "MYSQL"
+  db_version                   = "8.0"
+  port                         = 3306
+  cluster_name                 = "tf-example"
+  password                     = "cynosDB@123"
+  instance_maintain_duration   = 7200
+  instance_maintain_start_time = 10800
+  min_cpu                      = 2
+  max_cpu                      = 4
+  param_template_id            = tencentcloud_cynosdb_paramtemplate.example.template_id
+  force_delete                 = false
+  sync_way                     = "async"
+  semi_sync_timeout            = 10000
+  instance_maintain_weekdays   = ["Fri", "Mon", "Sat", "Sun", "Thu", "Wed", "Tue"]
+  rw_group_sgs                 = [tencentcloud_security_group.example.id]
+  tags = {
+    "createBy" = "terraform"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-4"
+}
+variable "slaveZone" {
+  type    = string
+  default = "ap-guangzhou-6"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateClusters](https://www.tencentcloud.com/document/api/1098/40753)
+  - [DescribeClusterDetail](https://www.tencentcloud.com/document/api/1098/40752)
+  - [DescribeClusterInstanceGrps](https://www.tencentcloud.com/document/api/1098/40751)
+  - [DescribeClusters](https://www.tencentcloud.com/document/api/1098/40750)
+  - [DescribeInstanceDetail](https://www.tencentcloud.com/document/api/1098/40749)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/1098/40747)
+  - [DescribeResourcesByDealName](https://www.tencentcloud.com/document/api/1098/40735)
+  - [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/1098/40734)
+  - [ModifyMaintainPeriodConfig](https://www.tencentcloud.com/document/api/1098/40743)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [PauseServerless](https://www.tencentcloud.com/document/api/1098/45567)
+  - [ResumeServerless](https://www.tencentcloud.com/document/api/1098/45566)
+* Read:
+  - [DescribeClusterDetail](https://www.tencentcloud.com/document/api/1098/40752)
+  - [DescribeClusterInstanceGrps](https://www.tencentcloud.com/document/api/1098/40751)
+  - [DescribeClusterParams](https://www.tencentcloud.com/document/api/1098/50011)
+  - [DescribeClusters](https://www.tencentcloud.com/document/api/1098/40750)
+  - [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/1098/40737)
+  - [DescribeInstanceDetail](https://www.tencentcloud.com/document/api/1098/40749)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/1098/40747)
+  - [DescribeMaintainPeriod](https://www.tencentcloud.com/document/api/1098/40746)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [AddClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50016)
+  - [DescribeClusterDetail](https://www.tencentcloud.com/document/api/1098/40752)
+  - [DescribeClusterParams](https://www.tencentcloud.com/document/api/1098/50011)
+  - [DescribeClusters](https://www.tencentcloud.com/document/api/1098/40750)
+  - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+  - [DescribeInstanceDetail](https://www.tencentcloud.com/document/api/1098/40749)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/1098/40747)
+  - [DescribeResourcesByDealName](https://www.tencentcloud.com/document/api/1098/40735)
+  - [ModifyClusterName](https://www.tencentcloud.com/document/api/1098/46318)
+  - [ModifyClusterParam](https://www.tencentcloud.com/document/api/1098/42961)
+  - [ModifyClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50015)
+  - [ModifyClusterStorage](https://www.tencentcloud.com/search/?wd=ModifyClusterStorage&type=document&lang=en)
+  - [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/1098/40734)
+  - [ModifyInstanceName](https://www.tencentcloud.com/document/api/1098/46317)
+  - [ModifyMaintainPeriodConfig](https://www.tencentcloud.com/document/api/1098/40743)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [PauseServerless](https://www.tencentcloud.com/document/api/1098/45567)
+  - [RemoveClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50014)
+  - [ResetAccountPassword](https://www.tencentcloud.com/document/api/1098/52496)
+  - [ResumeServerless](https://www.tencentcloud.com/document/api/1098/45566)
+  - [SetRenewFlag](https://www.tencentcloud.com/document/api/1098/40740)
+  - [SwitchClusterVpc](https://www.tencentcloud.com/document/api/1098/53647)
+  - [TransferStoragePrepayToPostpay](https://www.tencentcloud.com/document/api/1098/81950)
+  - [UpgradeClusterVersion](https://www.tencentcloud.com/document/api/1098/55916)
+  - [UpgradeInstance](https://www.tencentcloud.com/document/api/1098/40739)
+* Delete:
+  - [DescribeClusterDetail](https://www.tencentcloud.com/document/api/1098/40752)
+  - [DescribeClusters](https://www.tencentcloud.com/document/api/1098/40750)
+  - [IsolateCluster](https://www.tencentcloud.com/document/api/1098/40745)
+  - [OfflineCluster](https://www.tencentcloud.com/document/api/1098/40742)
 
 
 ## Create Cluster Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p">,</span>
+            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-            <span class="nx">auto_pause</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">auto_pause_delay</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-            <span class="nx">auto_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-            <span class="nx">available_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">cluster_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">db_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">db_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">available_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">cluster_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">db_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">min_cpu</span><span class="p">:</span> <span class="nx">Optional[float]</span> = None<span class="p">,</span>
+            <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">cynos_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">force_delete</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+            <span class="nx">instance_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
             <span class="nx">instance_cpu_core</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+            <span class="nx">instance_init_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[ClusterInstanceInitInfoArgs]]</span> = None<span class="p">,</span>
             <span class="nx">instance_maintain_duration</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
             <span class="nx">instance_maintain_start_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
             <span class="nx">instance_maintain_weekdays</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
             <span class="nx">instance_memory_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+            <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">max_cpu</span><span class="p">:</span> <span class="nx">Optional[float]</span> = None<span class="p">,</span>
-            <span class="nx">min_cpu</span><span class="p">:</span> <span class="nx">Optional[float]</span> = None<span class="p">,</span>
+            <span class="nx">auto_pause</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">old_ip_reserve_hours</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-            <span class="nx">param_items</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cynosdb.ClusterParamItemArgs]]</span> = None<span class="p">,</span>
-            <span class="nx">password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">param_items</span><span class="p">:</span> <span class="nx">Optional[Sequence[ClusterParamItemArgs]]</span> = None<span class="p">,</span>
+            <span class="nx">param_template_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+            <span class="nx">db_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
             <span class="nx">prarm_template_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
             <span class="nx">prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
             <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
             <span class="nx">ro_group_sgs</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
             <span class="nx">rw_group_sgs</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+            <span class="nx">semi_sync_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
             <span class="nx">serverless_status_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">slave_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
             <span class="nx">storage_limit</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
             <span class="nx">storage_pay_mode</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-            <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-            <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-            <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p">,</span>
-            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+            <span class="nx">auto_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+            <span class="nx">sync_way</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+            <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+            <span class="nx">auto_pause_delay</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCluster</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Cluster</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCluster</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Cluster</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Cluster</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ClusterArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cynosdb:Cluster</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cynosdb:Cluster</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cynosdb_cluster&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -217,7 +1593,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -334,11 +1710,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Cluster Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -354,8 +1738,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -363,8 +1746,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="dbtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Type</a>
@@ -372,8 +1754,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="dbversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversion_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Version</a>
@@ -381,8 +1762,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>, <code>8.0</code>.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -390,8 +1770,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of <code>root</code> account.</p>
-</dd><dt class="property-required"
+    <dd>Password of <code>root</code> account.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -399,8 +1778,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -408,8 +1786,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="autopause_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autopause_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Pause</a>
@@ -417,8 +1794,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify whether the cluster can auto-pause while <code>db_mode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the cluster can auto-pause while <code>dbMode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autopausedelay_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autopausedelay_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Pause<wbr>Delay</a>
@@ -426,8 +1802,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify auto-pause delay in second while <code>db_mode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify auto-pause delay in second while <code>dbMode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -435,8 +1810,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -444,8 +1818,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cynosversion_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cynosversion_csharp" style="color: inherit; text-decoration: inherit;">Cynos<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kernel minor version, like <code>3.1.16.002</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbmode_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Mode</a>
@@ -453,8 +1834,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify DB mode, only available when <code>db_type</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DB mode, only available when <code>dbType</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_csharp" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -462,8 +1842,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instancecount_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The number of instances, the range is (0,16], the default value is 2 (i.e. one RW instance + one Ro instance), the passed n means 1 RW instance + n-1 Ro instances (with the same specifications), if you need a more accurate cluster composition, please use InstanceInitInfos.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancecpucore_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecpucore_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Cpu<wbr>Core</a>
@@ -471,8 +1858,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instanceinitinfos_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceinitinfos_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Init<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterinstanceinitinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Cluster<wbr>Instance<wbr>Init<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Instance initialization configuration information, mainly used to select instances of different specifications when purchasing a cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainduration_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainduration_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Duration</a>
@@ -480,8 +1874,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainstarttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainstarttime_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -489,8 +1882,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainweekdays_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainweekdays_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Weekdays</a>
@@ -498,8 +1890,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancememorysize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancememorysize_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Memory<wbr>Size</a>
@@ -507,8 +1898,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instancename_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of instance. Only supported when modifying.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxcpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxcpu_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Cpu</a>
@@ -516,8 +1914,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Maximum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="mincpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mincpu_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Cpu</a>
@@ -525,8 +1922,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Minimum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="oldipreservehours_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldipreservehours_csharp" style="color: inherit; text-decoration: inherit;">Old<wbr>Ip<wbr>Reserve<wbr>Hours</a>
@@ -534,17 +1930,23 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramitems_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramitems_csharp" style="color: inherit; text-decoration: inherit;">Param<wbr>Items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterparamitem">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Cluster<wbr>Param<wbr>Item<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#clusterparamitem">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Cluster<wbr>Param<wbr>Item&gt;</a></span>
     </dt>
-    <dd><p>Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify parameter list of database. It is valid when <code>paramTemplateId</code> is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="paramtemplateid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramtemplateid_csharp" style="color: inherit; text-decoration: inherit;">Param<wbr>Template<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The ID of the parameter template.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -552,17 +1954,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Port of CynosDB cluster.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="prarmtemplateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prarmtemplateid_csharp" style="color: inherit; text-decoration: inherit;">Prarm<wbr>Template<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the parameter template.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>It will be deprecated. Use <code>paramTemplateId</code> instead. The ID of the parameter template.<p class="property-message">Deprecated: It will be deprecated. Use <code>paramTemplateId</code> instead.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="prepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -570,8 +1970,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -579,8 +1978,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project. <code>0</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project. <code>0</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="rogroupsgs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupsgs_csharp" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Sgs</a>
@@ -588,8 +1986,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>IDs of security group for <code>ro_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>roGroup</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="rwgroupsgs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupsgs_csharp" style="color: inherit; text-decoration: inherit;">Rw<wbr>Group<wbr>Sgs</a>
@@ -597,8 +1994,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>IDs of security group for <code>rw_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>rwGroup</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="semisynctimeout_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#semisynctimeout_csharp" style="color: inherit; text-decoration: inherit;">Semi<wbr>Sync<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Semi-sync timeout in ms. Value range: <code>[1000, 4294967295]</code>, default <code>10000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="serverlessstatusflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverlessstatusflag_csharp" style="color: inherit; text-decoration: inherit;">Serverless<wbr>Status<wbr>Flag</a>
@@ -606,8 +2010,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="slavezone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavezone_csharp" style="color: inherit; text-decoration: inherit;">Slave<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Multi zone Addresses of the CynosDB Cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagelimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagelimit_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Limit</a>
@@ -615,8 +2026,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is <code>MYSQL</code> and charge_type is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when charge_type is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</p>
-</dd><dt class="property-optional"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is <code>MYSQL</code> and chargeType is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when chargeType is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagepaymode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagepaymode_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Pay<wbr>Mode</a>
@@ -624,17 +2034,23 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="syncway_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncway_csharp" style="color: inherit; text-decoration: inherit;">Sync<wbr>Way</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Synchronization way. Valid values: <code>async</code>, <code>semisync</code>, <code>sync</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The tags of the CynosDB cluster.</p>
-</dd></dl>
+    <dd>The tags of the CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -648,8 +2064,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -657,8 +2072,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="dbtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Type</a>
@@ -666,8 +2080,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="dbversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversion_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Version</a>
@@ -675,8 +2088,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>, <code>8.0</code>.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -684,8 +2096,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of <code>root</code> account.</p>
-</dd><dt class="property-required"
+    <dd>Password of <code>root</code> account.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -693,8 +2104,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -702,8 +2112,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="autopause_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autopause_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Pause</a>
@@ -711,8 +2120,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify whether the cluster can auto-pause while <code>db_mode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the cluster can auto-pause while <code>dbMode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autopausedelay_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autopausedelay_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Pause<wbr>Delay</a>
@@ -720,8 +2128,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify auto-pause delay in second while <code>db_mode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify auto-pause delay in second while <code>dbMode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -729,8 +2136,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -738,8 +2144,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cynosversion_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cynosversion_go" style="color: inherit; text-decoration: inherit;">Cynos<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kernel minor version, like <code>3.1.16.002</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbmode_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Mode</a>
@@ -747,8 +2160,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify DB mode, only available when <code>db_type</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DB mode, only available when <code>dbType</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_go" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -756,8 +2168,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instancecount_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The number of instances, the range is (0,16], the default value is 2 (i.e. one RW instance + one Ro instance), the passed n means 1 RW instance + n-1 Ro instances (with the same specifications), if you need a more accurate cluster composition, please use InstanceInitInfos.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancecpucore_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecpucore_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Cpu<wbr>Core</a>
@@ -765,8 +2184,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instanceinitinfos_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceinitinfos_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Init<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterinstanceinitinfo">[]Cluster<wbr>Instance<wbr>Init<wbr>Info<wbr>Args</a></span>
+    </dt>
+    <dd>Instance initialization configuration information, mainly used to select instances of different specifications when purchasing a cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainduration_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainduration_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Duration</a>
@@ -774,8 +2200,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainstarttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainstarttime_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -783,8 +2208,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainweekdays_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainweekdays_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Weekdays</a>
@@ -792,8 +2216,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancememorysize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancememorysize_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Memory<wbr>Size</a>
@@ -801,8 +2224,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instancename_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of instance. Only supported when modifying.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxcpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxcpu_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Cpu</a>
@@ -810,8 +2240,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Maximum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="mincpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mincpu_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Cpu</a>
@@ -819,8 +2248,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Minimum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="oldipreservehours_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldipreservehours_go" style="color: inherit; text-decoration: inherit;">Old<wbr>Ip<wbr>Reserve<wbr>Hours</a>
@@ -828,8 +2256,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramitems_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramitems_go" style="color: inherit; text-decoration: inherit;">Param<wbr>Items</a>
@@ -837,8 +2264,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterparamitem">[]Cluster<wbr>Param<wbr>Item<wbr>Args</a></span>
     </dt>
-    <dd><p>Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify parameter list of database. It is valid when <code>paramTemplateId</code> is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="paramtemplateid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramtemplateid_go" style="color: inherit; text-decoration: inherit;">Param<wbr>Template<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The ID of the parameter template.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -846,17 +2280,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Port of CynosDB cluster.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="prarmtemplateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prarmtemplateid_go" style="color: inherit; text-decoration: inherit;">Prarm<wbr>Template<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the parameter template.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>It will be deprecated. Use <code>paramTemplateId</code> instead. The ID of the parameter template.<p class="property-message">Deprecated: It will be deprecated. Use <code>paramTemplateId</code> instead.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="prepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -864,8 +2296,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -873,8 +2304,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project. <code>0</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project. <code>0</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="rogroupsgs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupsgs_go" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Sgs</a>
@@ -882,8 +2312,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>IDs of security group for <code>ro_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>roGroup</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="rwgroupsgs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupsgs_go" style="color: inherit; text-decoration: inherit;">Rw<wbr>Group<wbr>Sgs</a>
@@ -891,8 +2320,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>IDs of security group for <code>rw_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>rwGroup</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="semisynctimeout_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#semisynctimeout_go" style="color: inherit; text-decoration: inherit;">Semi<wbr>Sync<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Semi-sync timeout in ms. Value range: <code>[1000, 4294967295]</code>, default <code>10000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="serverlessstatusflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverlessstatusflag_go" style="color: inherit; text-decoration: inherit;">Serverless<wbr>Status<wbr>Flag</a>
@@ -900,8 +2336,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="slavezone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavezone_go" style="color: inherit; text-decoration: inherit;">Slave<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Multi zone Addresses of the CynosDB Cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagelimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagelimit_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Limit</a>
@@ -909,8 +2352,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is <code>MYSQL</code> and charge_type is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when charge_type is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</p>
-</dd><dt class="property-optional"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is <code>MYSQL</code> and chargeType is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when chargeType is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagepaymode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagepaymode_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Pay<wbr>Mode</a>
@@ -918,17 +2360,349 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="syncway_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncway_go" style="color: inherit; text-decoration: inherit;">Sync<wbr>Way</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Synchronization way. Valid values: <code>async</code>, <code>semisync</code>, <code>sync</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The tags of the CynosDB cluster.</p>
-</dd></dl>
+    <dd>The tags of the CynosDB cluster.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="available_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_zone_hcl" style="color: inherit; text-decoration: inherit;">available_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CynosDB cluster.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="db_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_type_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="db_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_version_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>, <code>8.0</code>.</dd><dt class="property-required property-secret"
+            title="Required">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password of <code>root</code> account.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_pause_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_pause_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>pause</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify whether the cluster can auto-pause while <code>dbMode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_pause_delay_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_pause_delay_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>pause_<wbr>delay</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify auto-pause delay in second while <code>dbMode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cynos_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cynos_version_hcl" style="color: inherit; text-decoration: inherit;">cynos_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kernel minor version, like <code>3.1.16.002</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="db_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_mode_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify DB mode, only available when <code>dbType</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_delete_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_delete_hcl" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of instances, the range is (0,16], the default value is 2 (i.e. one RW instance + one Ro instance), the passed n means 1 RW instance + n-1 Ro instances (with the same specifications), if you need a more accurate cluster composition, please use InstanceInitInfos.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_cpu_core_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_cpu_core_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>cpu_<wbr>core</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instance_init_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_init_infos_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>init_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterinstanceinitinfo">list(object)</a></span>
+    </dt>
+    <dd>Instance initialization configuration information, mainly used to select instances of different specifications when purchasing a cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_maintain_duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_maintain_duration_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_maintain_start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_maintain_start_time_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_maintain_weekdays_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_maintain_weekdays_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>weekdays</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_memory_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_memory_size_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>memory_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of instance. Only supported when modifying.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_cpu_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="min_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_cpu_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="old_ip_reserve_hours_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#old_ip_reserve_hours_hcl" style="color: inherit; text-decoration: inherit;">old_<wbr>ip_<wbr>reserve_<wbr>hours</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="param_items_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_items_hcl" style="color: inherit; text-decoration: inherit;">param_<wbr>items</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterparamitem">list(object)</a></span>
+    </dt>
+    <dd>Specify parameter list of database. It is valid when <code>paramTemplateId</code> is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="param_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_template_id_hcl" style="color: inherit; text-decoration: inherit;">param_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of the parameter template.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of CynosDB cluster.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="prarm_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prarm_template_id_hcl" style="color: inherit; text-decoration: inherit;">prarm_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>It will be deprecated. Use <code>paramTemplateId</code> instead. The ID of the parameter template.<p class="property-message">Deprecated: It will be deprecated. Use <code>paramTemplateId</code> instead.</p></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project. <code>0</code> by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ro_group_sgs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_group_sgs_hcl" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>sgs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>IDs of security group for <code>roGroup</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rw_group_sgs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rw_group_sgs_hcl" style="color: inherit; text-decoration: inherit;">rw_<wbr>group_<wbr>sgs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>IDs of security group for <code>rwGroup</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="semi_sync_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#semi_sync_timeout_hcl" style="color: inherit; text-decoration: inherit;">semi_<wbr>sync_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Semi-sync timeout in ms. Value range: <code>[1000, 4294967295]</code>, default <code>10000</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="serverless_status_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverless_status_flag_hcl" style="color: inherit; text-decoration: inherit;">serverless_<wbr>status_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="slave_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slave_zone_hcl" style="color: inherit; text-decoration: inherit;">slave_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Multi zone Addresses of the CynosDB Cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_limit_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is <code>MYSQL</code> and chargeType is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when chargeType is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_pay_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_pay_mode_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>pay_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sync_way_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sync_way_hcl" style="color: inherit; text-decoration: inherit;">sync_<wbr>way</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Synchronization way. Valid values: <code>async</code>, <code>semisync</code>, <code>sync</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The tags of the CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -942,8 +2716,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -951,8 +2724,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="dbtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_java" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -960,8 +2732,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="dbversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversion_java" style="color: inherit; text-decoration: inherit;">db<wbr>Version</a>
@@ -969,8 +2740,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>, <code>8.0</code>.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -978,8 +2748,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password of <code>root</code> account.</p>
-</dd><dt class="property-required"
+    <dd>Password of <code>root</code> account.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -987,8 +2756,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -996,8 +2764,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="autopause_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autopause_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Pause</a>
@@ -1005,8 +2772,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify whether the cluster can auto-pause while <code>db_mode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the cluster can auto-pause while <code>dbMode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autopausedelay_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autopausedelay_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Pause<wbr>Delay</a>
@@ -1014,8 +2780,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify auto-pause delay in second while <code>db_mode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify auto-pause delay in second while <code>dbMode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -1023,8 +2788,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1032,8 +2796,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cynosversion_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cynosversion_java" style="color: inherit; text-decoration: inherit;">cynos<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kernel minor version, like <code>3.1.16.002</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbmode_java" style="color: inherit; text-decoration: inherit;">db<wbr>Mode</a>
@@ -1041,8 +2812,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify DB mode, only available when <code>db_type</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DB mode, only available when <code>dbType</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_java" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -1050,8 +2820,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instancecount_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>The number of instances, the range is (0,16], the default value is 2 (i.e. one RW instance + one Ro instance), the passed n means 1 RW instance + n-1 Ro instances (with the same specifications), if you need a more accurate cluster composition, please use InstanceInitInfos.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancecpucore_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecpucore_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Cpu<wbr>Core</a>
@@ -1059,8 +2836,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instanceinitinfos_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceinitinfos_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Init<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterinstanceinitinfo">List&lt;Cluster<wbr>Instance<wbr>Init<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Instance initialization configuration information, mainly used to select instances of different specifications when purchasing a cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainduration_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainduration_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Duration</a>
@@ -1068,8 +2852,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainstarttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainstarttime_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -1077,8 +2860,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainweekdays_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainweekdays_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Weekdays</a>
@@ -1086,8 +2868,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancememorysize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancememorysize_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Memory<wbr>Size</a>
@@ -1095,8 +2876,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instancename_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Name of instance. Only supported when modifying.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxcpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxcpu_java" style="color: inherit; text-decoration: inherit;">max<wbr>Cpu</a>
@@ -1104,8 +2892,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Maximum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="mincpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mincpu_java" style="color: inherit; text-decoration: inherit;">min<wbr>Cpu</a>
@@ -1113,8 +2900,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Minimum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="oldipreservehours_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldipreservehours_java" style="color: inherit; text-decoration: inherit;">old<wbr>Ip<wbr>Reserve<wbr>Hours</a>
@@ -1122,17 +2908,23 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramitems_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramitems_java" style="color: inherit; text-decoration: inherit;">param<wbr>Items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterparamitem">List&lt;Cluster<wbr>Param<wbr>Item<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#clusterparamitem">List&lt;Cluster<wbr>Param<wbr>Item&gt;</a></span>
     </dt>
-    <dd><p>Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify parameter list of database. It is valid when <code>paramTemplateId</code> is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="paramtemplateid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramtemplateid_java" style="color: inherit; text-decoration: inherit;">param<wbr>Template<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>The ID of the parameter template.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1140,17 +2932,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Port of CynosDB cluster.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="prarmtemplateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prarmtemplateid_java" style="color: inherit; text-decoration: inherit;">prarm<wbr>Template<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The ID of the parameter template.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>It will be deprecated. Use <code>paramTemplateId</code> instead. The ID of the parameter template.<p class="property-message">Deprecated: It will be deprecated. Use <code>paramTemplateId</code> instead.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="prepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -1158,8 +2948,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1167,8 +2956,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project. <code>0</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project. <code>0</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="rogroupsgs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupsgs_java" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Sgs</a>
@@ -1176,8 +2964,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>IDs of security group for <code>ro_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>roGroup</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="rwgroupsgs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupsgs_java" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Sgs</a>
@@ -1185,8 +2972,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>IDs of security group for <code>rw_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>rwGroup</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="semisynctimeout_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#semisynctimeout_java" style="color: inherit; text-decoration: inherit;">semi<wbr>Sync<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Semi-sync timeout in ms. Value range: <code>[1000, 4294967295]</code>, default <code>10000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="serverlessstatusflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverlessstatusflag_java" style="color: inherit; text-decoration: inherit;">serverless<wbr>Status<wbr>Flag</a>
@@ -1194,8 +2988,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="slavezone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavezone_java" style="color: inherit; text-decoration: inherit;">slave<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Multi zone Addresses of the CynosDB Cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagelimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagelimit_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Limit</a>
@@ -1203,8 +3004,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is <code>MYSQL</code> and charge_type is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when charge_type is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</p>
-</dd><dt class="property-optional"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is <code>MYSQL</code> and chargeType is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when chargeType is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagepaymode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagepaymode_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Pay<wbr>Mode</a>
@@ -1212,17 +3012,23 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="syncway_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncway_java" style="color: inherit; text-decoration: inherit;">sync<wbr>Way</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Synchronization way. Valid values: <code>async</code>, <code>semisync</code>, <code>sync</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The tags of the CynosDB cluster.</p>
-</dd></dl>
+    <dd>The tags of the CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1236,8 +3042,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -1245,8 +3050,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="dbtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -1254,8 +3058,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="dbversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversion_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Version</a>
@@ -1263,8 +3066,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>, <code>8.0</code>.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1272,8 +3074,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of <code>root</code> account.</p>
-</dd><dt class="property-required"
+    <dd>Password of <code>root</code> account.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1281,8 +3082,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1290,8 +3090,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="autopause_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autopause_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Pause</a>
@@ -1299,8 +3098,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify whether the cluster can auto-pause while <code>db_mode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the cluster can auto-pause while <code>dbMode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autopausedelay_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autopausedelay_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Pause<wbr>Delay</a>
@@ -1308,8 +3106,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify auto-pause delay in second while <code>db_mode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify auto-pause delay in second while <code>dbMode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -1317,8 +3114,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1326,8 +3122,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cynosversion_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cynosversion_nodejs" style="color: inherit; text-decoration: inherit;">cynos<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kernel minor version, like <code>3.1.16.002</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbmode_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Mode</a>
@@ -1335,8 +3138,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify DB mode, only available when <code>db_type</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DB mode, only available when <code>dbType</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_nodejs" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -1344,8 +3146,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instancecount_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of instances, the range is (0,16], the default value is 2 (i.e. one RW instance + one Ro instance), the passed n means 1 RW instance + n-1 Ro instances (with the same specifications), if you need a more accurate cluster composition, please use InstanceInitInfos.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancecpucore_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecpucore_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Cpu<wbr>Core</a>
@@ -1353,8 +3162,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instanceinitinfos_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceinitinfos_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Init<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterinstanceinitinfo">Cluster<wbr>Instance<wbr>Init<wbr>Info[]</a></span>
+    </dt>
+    <dd>Instance initialization configuration information, mainly used to select instances of different specifications when purchasing a cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainduration_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainduration_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Duration</a>
@@ -1362,8 +3178,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainstarttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainstarttime_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -1371,8 +3186,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainweekdays_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainweekdays_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Weekdays</a>
@@ -1380,8 +3194,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancememorysize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancememorysize_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Memory<wbr>Size</a>
@@ -1389,8 +3202,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instancename_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of instance. Only supported when modifying.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxcpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxcpu_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Cpu</a>
@@ -1398,8 +3218,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="mincpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mincpu_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Cpu</a>
@@ -1407,8 +3226,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Minimum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="oldipreservehours_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldipreservehours_nodejs" style="color: inherit; text-decoration: inherit;">old<wbr>Ip<wbr>Reserve<wbr>Hours</a>
@@ -1416,17 +3234,23 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramitems_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramitems_nodejs" style="color: inherit; text-decoration: inherit;">param<wbr>Items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterparamitem">Cluster<wbr>Param<wbr>Item<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#clusterparamitem">Cluster<wbr>Param<wbr>Item[]</a></span>
     </dt>
-    <dd><p>Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify parameter list of database. It is valid when <code>paramTemplateId</code> is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="paramtemplateid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramtemplateid_nodejs" style="color: inherit; text-decoration: inherit;">param<wbr>Template<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of the parameter template.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1434,17 +3258,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Port of CynosDB cluster.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="prarmtemplateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prarmtemplateid_nodejs" style="color: inherit; text-decoration: inherit;">prarm<wbr>Template<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The ID of the parameter template.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>It will be deprecated. Use <code>paramTemplateId</code> instead. The ID of the parameter template.<p class="property-message">Deprecated: It will be deprecated. Use <code>paramTemplateId</code> instead.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="prepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -1452,8 +3274,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1461,8 +3282,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project. <code>0</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project. <code>0</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="rogroupsgs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupsgs_nodejs" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Sgs</a>
@@ -1470,8 +3290,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>IDs of security group for <code>ro_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>roGroup</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="rwgroupsgs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupsgs_nodejs" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Sgs</a>
@@ -1479,8 +3298,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>IDs of security group for <code>rw_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>rwGroup</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="semisynctimeout_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#semisynctimeout_nodejs" style="color: inherit; text-decoration: inherit;">semi<wbr>Sync<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Semi-sync timeout in ms. Value range: <code>[1000, 4294967295]</code>, default <code>10000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="serverlessstatusflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverlessstatusflag_nodejs" style="color: inherit; text-decoration: inherit;">serverless<wbr>Status<wbr>Flag</a>
@@ -1488,8 +3314,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="slavezone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavezone_nodejs" style="color: inherit; text-decoration: inherit;">slave<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Multi zone Addresses of the CynosDB Cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagelimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagelimit_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Limit</a>
@@ -1497,8 +3330,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is <code>MYSQL</code> and charge_type is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when charge_type is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</p>
-</dd><dt class="property-optional"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is <code>MYSQL</code> and chargeType is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when chargeType is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagepaymode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagepaymode_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Pay<wbr>Mode</a>
@@ -1506,17 +3338,23 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="syncway_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncway_nodejs" style="color: inherit; text-decoration: inherit;">sync<wbr>Way</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Synchronization way. Valid values: <code>async</code>, <code>semisync</code>, <code>sync</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The tags of the CynosDB cluster.</p>
-</dd></dl>
+    <dd>The tags of the CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1530,8 +3368,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-required"
             title="Required">
         <span id="cluster_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
@@ -1539,8 +3376,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="db_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_type_python" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
@@ -1548,8 +3384,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="db_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_version_python" style="color: inherit; text-decoration: inherit;">db_<wbr>version</a>
@@ -1557,8 +3392,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>, <code>8.0</code>.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1566,8 +3400,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password of <code>root</code> account.</p>
-</dd><dt class="property-required"
+    <dd>Password of <code>root</code> account.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1575,8 +3408,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1584,8 +3416,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_pause_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_pause_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>pause</a>
@@ -1593,8 +3424,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify whether the cluster can auto-pause while <code>db_mode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the cluster can auto-pause while <code>dbMode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_pause_delay_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_pause_delay_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>pause_<wbr>delay</a>
@@ -1602,8 +3432,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify auto-pause delay in second while <code>db_mode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify auto-pause delay in second while <code>dbMode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
@@ -1611,8 +3440,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -1620,8 +3448,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cynos_version_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cynos_version_python" style="color: inherit; text-decoration: inherit;">cynos_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Kernel minor version, like <code>3.1.16.002</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="db_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_mode_python" style="color: inherit; text-decoration: inherit;">db_<wbr>mode</a>
@@ -1629,8 +3464,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify DB mode, only available when <code>db_type</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DB mode, only available when <code>dbType</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="force_delete_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_delete_python" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
@@ -1638,8 +3472,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instance_count_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The number of instances, the range is (0,16], the default value is 2 (i.e. one RW instance + one Ro instance), the passed n means 1 RW instance + n-1 Ro instances (with the same specifications), if you need a more accurate cluster composition, please use InstanceInitInfos.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_cpu_core_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_cpu_core_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>cpu_<wbr>core</a>
@@ -1647,8 +3488,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instance_init_infos_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_init_infos_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>init_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterinstanceinitinfo">Sequence[Cluster<wbr>Instance<wbr>Init<wbr>Info<wbr>Args]</a></span>
+    </dt>
+    <dd>Instance initialization configuration information, mainly used to select instances of different specifications when purchasing a cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_maintain_duration_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_maintain_duration_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>duration</a>
@@ -1656,8 +3504,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_maintain_start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_maintain_start_time_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>start_<wbr>time</a>
@@ -1665,8 +3512,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_maintain_weekdays_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_maintain_weekdays_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>weekdays</a>
@@ -1674,8 +3520,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_memory_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_memory_size_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>memory_<wbr>size</a>
@@ -1683,8 +3528,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Name of instance. Only supported when modifying.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_cpu_python" style="color: inherit; text-decoration: inherit;">max_<wbr>cpu</a>
@@ -1692,8 +3544,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Maximum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="min_cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_cpu_python" style="color: inherit; text-decoration: inherit;">min_<wbr>cpu</a>
@@ -1701,8 +3552,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Minimum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="old_ip_reserve_hours_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#old_ip_reserve_hours_python" style="color: inherit; text-decoration: inherit;">old_<wbr>ip_<wbr>reserve_<wbr>hours</a>
@@ -1710,17 +3560,23 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="param_items_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_items_python" style="color: inherit; text-decoration: inherit;">param_<wbr>items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterparamitem">Cluster<wbr>Param<wbr>Item<wbr>Args]</a></span>
+        <span class="property-type"><a href="#clusterparamitem">Sequence[Cluster<wbr>Param<wbr>Item<wbr>Args]</a></span>
     </dt>
-    <dd><p>Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify parameter list of database. It is valid when <code>paramTemplateId</code> is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="param_template_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_template_id_python" style="color: inherit; text-decoration: inherit;">param_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The ID of the parameter template.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1728,17 +3584,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Port of CynosDB cluster.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="prarm_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prarm_template_id_python" style="color: inherit; text-decoration: inherit;">prarm_<wbr>template_<wbr>id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the parameter template.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>It will be deprecated. Use <code>paramTemplateId</code> instead. The ID of the parameter template.<p class="property-message">Deprecated: It will be deprecated. Use <code>paramTemplateId</code> instead.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_period_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
@@ -1746,8 +3600,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1755,8 +3608,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project. <code>0</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project. <code>0</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="ro_group_sgs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_group_sgs_python" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>sgs</a>
@@ -1764,8 +3616,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>IDs of security group for <code>ro_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>roGroup</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="rw_group_sgs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rw_group_sgs_python" style="color: inherit; text-decoration: inherit;">rw_<wbr>group_<wbr>sgs</a>
@@ -1773,8 +3624,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>IDs of security group for <code>rw_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>rwGroup</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="semi_sync_timeout_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#semi_sync_timeout_python" style="color: inherit; text-decoration: inherit;">semi_<wbr>sync_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Semi-sync timeout in ms. Value range: <code>[1000, 4294967295]</code>, default <code>10000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="serverless_status_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverless_status_flag_python" style="color: inherit; text-decoration: inherit;">serverless_<wbr>status_<wbr>flag</a>
@@ -1782,8 +3640,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="slave_zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slave_zone_python" style="color: inherit; text-decoration: inherit;">slave_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Multi zone Addresses of the CynosDB Cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_limit_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>limit</a>
@@ -1791,8 +3656,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is <code>MYSQL</code> and charge_type is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when charge_type is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</p>
-</dd><dt class="property-optional"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is <code>MYSQL</code> and chargeType is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when chargeType is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_pay_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_pay_mode_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>pay_<wbr>mode</a>
@@ -1800,17 +3664,23 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sync_way_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sync_way_python" style="color: inherit; text-decoration: inherit;">sync_<wbr>way</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Synchronization way. Valid values: <code>async</code>, <code>semisync</code>, <code>sync</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The tags of the CynosDB cluster.</p>
-</dd></dl>
+    <dd>The tags of the CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1824,8 +3694,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-required"
             title="Required">
         <span id="clustername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -1833,8 +3702,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="dbtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -1842,8 +3710,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="dbversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbversion_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Version</a>
@@ -1851,8 +3718,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>, <code>8.0</code>.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1860,8 +3726,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password of <code>root</code> account.</p>
-</dd><dt class="property-required"
+    <dd>Password of <code>root</code> account.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1869,8 +3734,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1878,8 +3742,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="autopause_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autopause_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Pause</a>
@@ -1887,8 +3750,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify whether the cluster can auto-pause while <code>db_mode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the cluster can auto-pause while <code>dbMode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autopausedelay_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autopausedelay_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Pause<wbr>Delay</a>
@@ -1896,8 +3758,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify auto-pause delay in second while <code>db_mode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify auto-pause delay in second while <code>dbMode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -1905,8 +3766,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1914,8 +3774,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cynosversion_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cynosversion_yaml" style="color: inherit; text-decoration: inherit;">cynos<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kernel minor version, like <code>3.1.16.002</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbmode_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Mode</a>
@@ -1923,8 +3790,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify DB mode, only available when <code>db_type</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify DB mode, only available when <code>dbType</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_yaml" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -1932,8 +3798,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instancecount_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>The number of instances, the range is (0,16], the default value is 2 (i.e. one RW instance + one Ro instance), the passed n means 1 RW instance + n-1 Ro instances (with the same specifications), if you need a more accurate cluster composition, please use InstanceInitInfos.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancecpucore_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecpucore_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Cpu<wbr>Core</a>
@@ -1941,8 +3814,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="instanceinitinfos_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceinitinfos_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Init<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterinstanceinitinfo">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Instance initialization configuration information, mainly used to select instances of different specifications when purchasing a cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainduration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainduration_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Duration</a>
@@ -1950,8 +3830,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainstarttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainstarttime_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -1959,8 +3838,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancemaintainweekdays_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancemaintainweekdays_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Weekdays</a>
@@ -1968,8 +3846,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancememorysize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancememorysize_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Memory<wbr>Size</a>
@@ -1977,8 +3854,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instancename_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Name of instance. Only supported when modifying.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxcpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxcpu_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Cpu</a>
@@ -1986,8 +3870,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="mincpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mincpu_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Cpu</a>
@@ -1995,8 +3878,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Minimum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="oldipreservehours_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldipreservehours_yaml" style="color: inherit; text-decoration: inherit;">old<wbr>Ip<wbr>Reserve<wbr>Hours</a>
@@ -2004,8 +3886,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramitems_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramitems_yaml" style="color: inherit; text-decoration: inherit;">param<wbr>Items</a>
@@ -2013,8 +3894,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterparamitem">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify parameter list of database. It is valid when <code>paramTemplateId</code> is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="paramtemplateid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramtemplateid_yaml" style="color: inherit; text-decoration: inherit;">param<wbr>Template<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>The ID of the parameter template.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2022,17 +3910,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Port of CynosDB cluster.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="prarmtemplateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prarmtemplateid_yaml" style="color: inherit; text-decoration: inherit;">prarm<wbr>Template<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The ID of the parameter template.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>It will be deprecated. Use <code>paramTemplateId</code> instead. The ID of the parameter template.<p class="property-message">Deprecated: It will be deprecated. Use <code>paramTemplateId</code> instead.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="prepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -2040,8 +3926,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2049,8 +3934,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project. <code>0</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project. <code>0</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="rogroupsgs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupsgs_yaml" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Sgs</a>
@@ -2058,8 +3942,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>IDs of security group for <code>ro_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>roGroup</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="rwgroupsgs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupsgs_yaml" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Sgs</a>
@@ -2067,8 +3950,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>IDs of security group for <code>rw_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>rwGroup</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="semisynctimeout_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#semisynctimeout_yaml" style="color: inherit; text-decoration: inherit;">semi<wbr>Sync<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Semi-sync timeout in ms. Value range: <code>[1000, 4294967295]</code>, default <code>10000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="serverlessstatusflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverlessstatusflag_yaml" style="color: inherit; text-decoration: inherit;">serverless<wbr>Status<wbr>Flag</a>
@@ -2076,8 +3966,15 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="slavezone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavezone_yaml" style="color: inherit; text-decoration: inherit;">slave<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Multi zone Addresses of the CynosDB Cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagelimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagelimit_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Limit</a>
@@ -2085,8 +3982,7 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is <code>MYSQL</code> and charge_type is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when charge_type is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</p>
-</dd><dt class="property-optional"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is <code>MYSQL</code> and chargeType is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when chargeType is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagepaymode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagepaymode_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Pay<wbr>Mode</a>
@@ -2094,17 +3990,23 @@ The Cluster resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="syncway_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syncway_yaml" style="color: inherit; text-decoration: inherit;">sync<wbr>Way</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Synchronization way. Valid values: <code>async</code>, <code>semisync</code>, <code>sync</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The tags of the CynosDB cluster.</p>
-</dd></dl>
+    <dd>The tags of the CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2125,8 +4027,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset used by CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Charset used by CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="clusterstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Status</a>
@@ -2134,8 +4035,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-"
             title="">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2143,8 +4043,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2152,8 +4051,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -2161,17 +4059,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-"
-            title="">
-        <span id="instancename_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-"
+    <dd>ID of instance.</dd><dt class="property-"
             title="">
         <span id="instancestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Status</a>
@@ -2179,8 +4067,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Status of the instance.</dd><dt class="property-"
             title="">
         <span id="instancestoragesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestoragesize_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Storage<wbr>Size</a>
@@ -2188,8 +4075,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-"
             title="">
         <span id="rogroupaddrs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupaddrs_csharp" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Addrs</a>
@@ -2197,8 +4083,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrogroupaddr">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Outputs.<wbr>Cluster<wbr>Ro<wbr>Group<wbr>Addr&gt;</a></span>
     </dt>
-    <dd><p>Readonly addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>Readonly addresses. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="rogroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupid_csharp" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Id</a>
@@ -2206,8 +4091,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of read-only instance group.</p>
-</dd><dt class="property-"
+    <dd>ID of read-only instance group.</dd><dt class="property-"
             title="">
         <span id="rogroupinstances_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupinstances_csharp" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Instances</a>
@@ -2215,8 +4099,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrogroupinstance">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Outputs.<wbr>Cluster<wbr>Ro<wbr>Group<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>List of instances in the read-only instance group.</p>
-</dd><dt class="property-"
+    <dd>List of instances in the read-only instance group.</dd><dt class="property-"
             title="">
         <span id="rwgroupaddrs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupaddrs_csharp" style="color: inherit; text-decoration: inherit;">Rw<wbr>Group<wbr>Addrs</a>
@@ -2224,8 +4107,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrwgroupaddr">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Outputs.<wbr>Cluster<wbr>Rw<wbr>Group<wbr>Addr&gt;</a></span>
     </dt>
-    <dd><p>Read-write addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>Read-write addresses. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="rwgroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupid_csharp" style="color: inherit; text-decoration: inherit;">Rw<wbr>Group<wbr>Id</a>
@@ -2233,8 +4115,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of read-write instance group.</p>
-</dd><dt class="property-"
+    <dd>ID of read-write instance group.</dd><dt class="property-"
             title="">
         <span id="rwgroupinstances_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupinstances_csharp" style="color: inherit; text-decoration: inherit;">Rw<wbr>Group<wbr>Instances</a>
@@ -2242,8 +4123,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrwgroupinstance">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Outputs.<wbr>Cluster<wbr>Rw<wbr>Group<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>List of instances in the read-write instance group.</p>
-</dd><dt class="property-"
+    <dd>List of instances in the read-write instance group.</dd><dt class="property-"
             title="">
         <span id="serverlessstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverlessstatus_csharp" style="color: inherit; text-decoration: inherit;">Serverless<wbr>Status</a>
@@ -2251,8 +4131,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverless_status_flag</code>.</p>
-</dd><dt class="property-"
+    <dd>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverlessStatusFlag</code>.</dd><dt class="property-"
             title="">
         <span id="storageused_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageused_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Used</a>
@@ -2260,8 +4139,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Used storage of CynosDB cluster, unit in MB.</p>
-</dd></dl>
+    <dd>Used storage of CynosDB cluster, unit in MB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2275,8 +4153,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset used by CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Charset used by CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="clusterstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Status</a>
@@ -2284,8 +4161,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-"
             title="">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2293,8 +4169,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2302,8 +4177,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -2311,17 +4185,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-"
-            title="">
-        <span id="instancename_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-"
+    <dd>ID of instance.</dd><dt class="property-"
             title="">
         <span id="instancestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Status</a>
@@ -2329,8 +4193,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Status of the instance.</dd><dt class="property-"
             title="">
         <span id="instancestoragesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestoragesize_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Storage<wbr>Size</a>
@@ -2338,8 +4201,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-"
             title="">
         <span id="rogroupaddrs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupaddrs_go" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Addrs</a>
@@ -2347,8 +4209,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrogroupaddr">[]Cluster<wbr>Ro<wbr>Group<wbr>Addr</a></span>
     </dt>
-    <dd><p>Readonly addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>Readonly addresses. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="rogroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupid_go" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Id</a>
@@ -2356,8 +4217,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of read-only instance group.</p>
-</dd><dt class="property-"
+    <dd>ID of read-only instance group.</dd><dt class="property-"
             title="">
         <span id="rogroupinstances_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupinstances_go" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Instances</a>
@@ -2365,8 +4225,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrogroupinstance">[]Cluster<wbr>Ro<wbr>Group<wbr>Instance</a></span>
     </dt>
-    <dd><p>List of instances in the read-only instance group.</p>
-</dd><dt class="property-"
+    <dd>List of instances in the read-only instance group.</dd><dt class="property-"
             title="">
         <span id="rwgroupaddrs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupaddrs_go" style="color: inherit; text-decoration: inherit;">Rw<wbr>Group<wbr>Addrs</a>
@@ -2374,8 +4233,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrwgroupaddr">[]Cluster<wbr>Rw<wbr>Group<wbr>Addr</a></span>
     </dt>
-    <dd><p>Read-write addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>Read-write addresses. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="rwgroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupid_go" style="color: inherit; text-decoration: inherit;">Rw<wbr>Group<wbr>Id</a>
@@ -2383,8 +4241,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of read-write instance group.</p>
-</dd><dt class="property-"
+    <dd>ID of read-write instance group.</dd><dt class="property-"
             title="">
         <span id="rwgroupinstances_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupinstances_go" style="color: inherit; text-decoration: inherit;">Rw<wbr>Group<wbr>Instances</a>
@@ -2392,8 +4249,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrwgroupinstance">[]Cluster<wbr>Rw<wbr>Group<wbr>Instance</a></span>
     </dt>
-    <dd><p>List of instances in the read-write instance group.</p>
-</dd><dt class="property-"
+    <dd>List of instances in the read-write instance group.</dd><dt class="property-"
             title="">
         <span id="serverlessstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverlessstatus_go" style="color: inherit; text-decoration: inherit;">Serverless<wbr>Status</a>
@@ -2401,8 +4257,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverless_status_flag</code>.</p>
-</dd><dt class="property-"
+    <dd>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverlessStatusFlag</code>.</dd><dt class="property-"
             title="">
         <span id="storageused_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageused_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Used</a>
@@ -2410,8 +4265,133 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Used storage of CynosDB cluster, unit in MB.</p>
-</dd></dl>
+    <dd>Used storage of CynosDB cluster, unit in MB.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="charset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charset_hcl" style="color: inherit; text-decoration: inherit;">charset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charset used by CynosDB cluster.</dd><dt class="property-"
+            title="">
+        <span id="cluster_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_status_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of instance.</dd><dt class="property-"
+            title="">
+        <span id="instance_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_status_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the instance.</dd><dt class="property-"
+            title="">
+        <span id="instance_storage_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_storage_size_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>storage_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-"
+            title="">
+        <span id="ro_group_addrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_group_addrs_hcl" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>addrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterrogroupaddr">list(object)</a></span>
+    </dt>
+    <dd>Readonly addresses. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="ro_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_group_id_hcl" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of read-only instance group.</dd><dt class="property-"
+            title="">
+        <span id="ro_group_instances_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_group_instances_hcl" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>instances</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterrogroupinstance">list(object)</a></span>
+    </dt>
+    <dd>List of instances in the read-only instance group.</dd><dt class="property-"
+            title="">
+        <span id="rw_group_addrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rw_group_addrs_hcl" style="color: inherit; text-decoration: inherit;">rw_<wbr>group_<wbr>addrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterrwgroupaddr">list(object)</a></span>
+    </dt>
+    <dd>Read-write addresses. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="rw_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rw_group_id_hcl" style="color: inherit; text-decoration: inherit;">rw_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of read-write instance group.</dd><dt class="property-"
+            title="">
+        <span id="rw_group_instances_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rw_group_instances_hcl" style="color: inherit; text-decoration: inherit;">rw_<wbr>group_<wbr>instances</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterrwgroupinstance">list(object)</a></span>
+    </dt>
+    <dd>List of instances in the read-write instance group.</dd><dt class="property-"
+            title="">
+        <span id="serverless_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverless_status_hcl" style="color: inherit; text-decoration: inherit;">serverless_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverlessStatusFlag</code>.</dd><dt class="property-"
+            title="">
+        <span id="storage_used_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_used_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>used</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Used storage of CynosDB cluster, unit in MB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2425,8 +4405,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charset used by CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Charset used by CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="clusterstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -2434,8 +4413,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-"
             title="">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2443,8 +4421,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2452,8 +4429,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2461,17 +4437,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-"
-            title="">
-        <span id="instancename_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-"
+    <dd>ID of instance.</dd><dt class="property-"
             title="">
         <span id="instancestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -2479,8 +4445,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Status of the instance.</dd><dt class="property-"
             title="">
         <span id="instancestoragesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestoragesize_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Storage<wbr>Size</a>
@@ -2488,8 +4453,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-"
             title="">
         <span id="rogroupaddrs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupaddrs_java" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Addrs</a>
@@ -2497,8 +4461,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrogroupaddr">List&lt;Cluster<wbr>Ro<wbr>Group<wbr>Addr&gt;</a></span>
     </dt>
-    <dd><p>Readonly addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>Readonly addresses. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="rogroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupid_java" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Id</a>
@@ -2506,8 +4469,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of read-only instance group.</p>
-</dd><dt class="property-"
+    <dd>ID of read-only instance group.</dd><dt class="property-"
             title="">
         <span id="rogroupinstances_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupinstances_java" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Instances</a>
@@ -2515,8 +4477,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrogroupinstance">List&lt;Cluster<wbr>Ro<wbr>Group<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>List of instances in the read-only instance group.</p>
-</dd><dt class="property-"
+    <dd>List of instances in the read-only instance group.</dd><dt class="property-"
             title="">
         <span id="rwgroupaddrs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupaddrs_java" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Addrs</a>
@@ -2524,8 +4485,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrwgroupaddr">List&lt;Cluster<wbr>Rw<wbr>Group<wbr>Addr&gt;</a></span>
     </dt>
-    <dd><p>Read-write addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>Read-write addresses. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="rwgroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupid_java" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Id</a>
@@ -2533,8 +4493,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of read-write instance group.</p>
-</dd><dt class="property-"
+    <dd>ID of read-write instance group.</dd><dt class="property-"
             title="">
         <span id="rwgroupinstances_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupinstances_java" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Instances</a>
@@ -2542,8 +4501,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrwgroupinstance">List&lt;Cluster<wbr>Rw<wbr>Group<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>List of instances in the read-write instance group.</p>
-</dd><dt class="property-"
+    <dd>List of instances in the read-write instance group.</dd><dt class="property-"
             title="">
         <span id="serverlessstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverlessstatus_java" style="color: inherit; text-decoration: inherit;">serverless<wbr>Status</a>
@@ -2551,8 +4509,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverless_status_flag</code>.</p>
-</dd><dt class="property-"
+    <dd>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverlessStatusFlag</code>.</dd><dt class="property-"
             title="">
         <span id="storageused_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageused_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Used</a>
@@ -2560,8 +4517,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Used storage of CynosDB cluster, unit in MB.</p>
-</dd></dl>
+    <dd>Used storage of CynosDB cluster, unit in MB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2575,8 +4531,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset used by CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Charset used by CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="clusterstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -2584,8 +4539,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-"
             title="">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2593,8 +4547,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2602,8 +4555,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2611,17 +4563,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-"
-            title="">
-        <span id="instancename_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-"
+    <dd>ID of instance.</dd><dt class="property-"
             title="">
         <span id="instancestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -2629,8 +4571,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Status of the instance.</dd><dt class="property-"
             title="">
         <span id="instancestoragesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestoragesize_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Storage<wbr>Size</a>
@@ -2638,8 +4579,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-"
             title="">
         <span id="rogroupaddrs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupaddrs_nodejs" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Addrs</a>
@@ -2647,8 +4587,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrogroupaddr">Cluster<wbr>Ro<wbr>Group<wbr>Addr[]</a></span>
     </dt>
-    <dd><p>Readonly addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>Readonly addresses. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="rogroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupid_nodejs" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Id</a>
@@ -2656,8 +4595,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of read-only instance group.</p>
-</dd><dt class="property-"
+    <dd>ID of read-only instance group.</dd><dt class="property-"
             title="">
         <span id="rogroupinstances_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupinstances_nodejs" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Instances</a>
@@ -2665,8 +4603,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrogroupinstance">Cluster<wbr>Ro<wbr>Group<wbr>Instance[]</a></span>
     </dt>
-    <dd><p>List of instances in the read-only instance group.</p>
-</dd><dt class="property-"
+    <dd>List of instances in the read-only instance group.</dd><dt class="property-"
             title="">
         <span id="rwgroupaddrs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupaddrs_nodejs" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Addrs</a>
@@ -2674,8 +4611,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrwgroupaddr">Cluster<wbr>Rw<wbr>Group<wbr>Addr[]</a></span>
     </dt>
-    <dd><p>Read-write addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>Read-write addresses. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="rwgroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupid_nodejs" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Id</a>
@@ -2683,8 +4619,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of read-write instance group.</p>
-</dd><dt class="property-"
+    <dd>ID of read-write instance group.</dd><dt class="property-"
             title="">
         <span id="rwgroupinstances_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupinstances_nodejs" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Instances</a>
@@ -2692,8 +4627,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrwgroupinstance">Cluster<wbr>Rw<wbr>Group<wbr>Instance[]</a></span>
     </dt>
-    <dd><p>List of instances in the read-write instance group.</p>
-</dd><dt class="property-"
+    <dd>List of instances in the read-write instance group.</dd><dt class="property-"
             title="">
         <span id="serverlessstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverlessstatus_nodejs" style="color: inherit; text-decoration: inherit;">serverless<wbr>Status</a>
@@ -2701,8 +4635,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverless_status_flag</code>.</p>
-</dd><dt class="property-"
+    <dd>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverlessStatusFlag</code>.</dd><dt class="property-"
             title="">
         <span id="storageused_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageused_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Used</a>
@@ -2710,8 +4643,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Used storage of CynosDB cluster, unit in MB.</p>
-</dd></dl>
+    <dd>Used storage of CynosDB cluster, unit in MB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2725,8 +4657,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charset used by CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Charset used by CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="cluster_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_status_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>status</a>
@@ -2734,8 +4665,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-"
             title="">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2743,8 +4673,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2752,8 +4681,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -2761,17 +4689,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-"
-            title="">
-        <span id="instance_name_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">str</span>
-    </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-"
+    <dd>ID of instance.</dd><dt class="property-"
             title="">
         <span id="instance_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_status_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>status</a>
@@ -2779,8 +4697,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Status of the instance.</dd><dt class="property-"
             title="">
         <span id="instance_storage_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_storage_size_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>storage_<wbr>size</a>
@@ -2788,17 +4705,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-"
             title="">
         <span id="ro_group_addrs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_group_addrs_python" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>addrs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrogroupaddr">Cluster<wbr>Ro<wbr>Group<wbr>Addr]</a></span>
+        <span class="property-type"><a href="#clusterrogroupaddr">Sequence[Cluster<wbr>Ro<wbr>Group<wbr>Addr]</a></span>
     </dt>
-    <dd><p>Readonly addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>Readonly addresses. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="ro_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_group_id_python" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>id</a>
@@ -2806,26 +4721,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of read-only instance group.</p>
-</dd><dt class="property-"
+    <dd>ID of read-only instance group.</dd><dt class="property-"
             title="">
         <span id="ro_group_instances_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_group_instances_python" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrogroupinstance">Cluster<wbr>Ro<wbr>Group<wbr>Instance]</a></span>
+        <span class="property-type"><a href="#clusterrogroupinstance">Sequence[Cluster<wbr>Ro<wbr>Group<wbr>Instance]</a></span>
     </dt>
-    <dd><p>List of instances in the read-only instance group.</p>
-</dd><dt class="property-"
+    <dd>List of instances in the read-only instance group.</dd><dt class="property-"
             title="">
         <span id="rw_group_addrs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rw_group_addrs_python" style="color: inherit; text-decoration: inherit;">rw_<wbr>group_<wbr>addrs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrwgroupaddr">Cluster<wbr>Rw<wbr>Group<wbr>Addr]</a></span>
+        <span class="property-type"><a href="#clusterrwgroupaddr">Sequence[Cluster<wbr>Rw<wbr>Group<wbr>Addr]</a></span>
     </dt>
-    <dd><p>Read-write addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>Read-write addresses. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="rw_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rw_group_id_python" style="color: inherit; text-decoration: inherit;">rw_<wbr>group_<wbr>id</a>
@@ -2833,17 +4745,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of read-write instance group.</p>
-</dd><dt class="property-"
+    <dd>ID of read-write instance group.</dd><dt class="property-"
             title="">
         <span id="rw_group_instances_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rw_group_instances_python" style="color: inherit; text-decoration: inherit;">rw_<wbr>group_<wbr>instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrwgroupinstance">Cluster<wbr>Rw<wbr>Group<wbr>Instance]</a></span>
+        <span class="property-type"><a href="#clusterrwgroupinstance">Sequence[Cluster<wbr>Rw<wbr>Group<wbr>Instance]</a></span>
     </dt>
-    <dd><p>List of instances in the read-write instance group.</p>
-</dd><dt class="property-"
+    <dd>List of instances in the read-write instance group.</dd><dt class="property-"
             title="">
         <span id="serverless_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverless_status_python" style="color: inherit; text-decoration: inherit;">serverless_<wbr>status</a>
@@ -2851,8 +4761,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverless_status_flag</code>.</p>
-</dd><dt class="property-"
+    <dd>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverlessStatusFlag</code>.</dd><dt class="property-"
             title="">
         <span id="storage_used_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_used_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>used</a>
@@ -2860,8 +4769,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Used storage of CynosDB cluster, unit in MB.</p>
-</dd></dl>
+    <dd>Used storage of CynosDB cluster, unit in MB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2875,8 +4783,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charset used by CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Charset used by CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="clusterstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterstatus_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -2884,8 +4791,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-"
             title="">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2893,8 +4799,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2902,8 +4807,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -2911,17 +4815,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-"
-            title="">
-        <span id="instancename_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-"
+    <dd>ID of instance.</dd><dt class="property-"
             title="">
         <span id="instancestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -2929,8 +4823,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-"
+    <dd>Status of the instance.</dd><dt class="property-"
             title="">
         <span id="instancestoragesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestoragesize_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Storage<wbr>Size</a>
@@ -2938,8 +4831,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-"
             title="">
         <span id="rogroupaddrs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupaddrs_yaml" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Addrs</a>
@@ -2947,8 +4839,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrogroupaddr">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Readonly addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>Readonly addresses. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="rogroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupid_yaml" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Id</a>
@@ -2956,8 +4847,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of read-only instance group.</p>
-</dd><dt class="property-"
+    <dd>ID of read-only instance group.</dd><dt class="property-"
             title="">
         <span id="rogroupinstances_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroupinstances_yaml" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Instances</a>
@@ -2965,8 +4855,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrogroupinstance">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of instances in the read-only instance group.</p>
-</dd><dt class="property-"
+    <dd>List of instances in the read-only instance group.</dd><dt class="property-"
             title="">
         <span id="rwgroupaddrs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupaddrs_yaml" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Addrs</a>
@@ -2974,8 +4863,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrwgroupaddr">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Read-write addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>Read-write addresses. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="rwgroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupid_yaml" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Id</a>
@@ -2983,8 +4871,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of read-write instance group.</p>
-</dd><dt class="property-"
+    <dd>ID of read-write instance group.</dd><dt class="property-"
             title="">
         <span id="rwgroupinstances_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rwgroupinstances_yaml" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Instances</a>
@@ -2992,8 +4879,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrwgroupinstance">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of instances in the read-write instance group.</p>
-</dd><dt class="property-"
+    <dd>List of instances in the read-write instance group.</dd><dt class="property-"
             title="">
         <span id="serverlessstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverlessstatus_yaml" style="color: inherit; text-decoration: inherit;">serverless<wbr>Status</a>
@@ -3001,8 +4887,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverless_status_flag</code>.</p>
-</dd><dt class="property-"
+    <dd>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverlessStatusFlag</code>.</dd><dt class="property-"
             title="">
         <span id="storageused_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageused_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Used</a>
@@ -3010,8 +4895,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Used storage of CynosDB cluster, unit in MB.</p>
-</dd></dl>
+    <dd>Used storage of CynosDB cluster, unit in MB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3021,18 +4905,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Cluster resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ClusterState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Cluster</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ClusterState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Cluster</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -3045,12 +4929,15 @@ Get an existing Cluster resource's state with the given name, ID, and optional e
         <span class="nx">cluster_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">cluster_status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">cynos_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">db_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">db_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">db_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">force_delete</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">instance_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">instance_cpu_core</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">instance_init_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[ClusterInstanceInitInfoArgs]]</span> = None<span class="p">,</span>
         <span class="nx">instance_maintain_duration</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">instance_maintain_start_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">instance_maintain_weekdays</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
@@ -3061,126 +4948,169 @@ Get an existing Cluster resource's state with the given name, ID, and optional e
         <span class="nx">max_cpu</span><span class="p">:</span> <span class="nx">Optional[float]</span> = None<span class="p">,</span>
         <span class="nx">min_cpu</span><span class="p">:</span> <span class="nx">Optional[float]</span> = None<span class="p">,</span>
         <span class="nx">old_ip_reserve_hours</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">param_items</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cynosdb.ClusterParamItemArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">param_items</span><span class="p">:</span> <span class="nx">Optional[Sequence[ClusterParamItemArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">param_template_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">prarm_template_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">ro_group_addrs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cynosdb.ClusterRoGroupAddrArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">ro_group_addrs</span><span class="p">:</span> <span class="nx">Optional[Sequence[ClusterRoGroupAddrArgs]]</span> = None<span class="p">,</span>
         <span class="nx">ro_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">ro_group_instances</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cynosdb.ClusterRoGroupInstanceArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">ro_group_instances</span><span class="p">:</span> <span class="nx">Optional[Sequence[ClusterRoGroupInstanceArgs]]</span> = None<span class="p">,</span>
         <span class="nx">ro_group_sgs</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-        <span class="nx">rw_group_addrs</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cynosdb.ClusterRwGroupAddrArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">rw_group_addrs</span><span class="p">:</span> <span class="nx">Optional[Sequence[ClusterRwGroupAddrArgs]]</span> = None<span class="p">,</span>
         <span class="nx">rw_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">rw_group_instances</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cynosdb.ClusterRwGroupInstanceArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">rw_group_instances</span><span class="p">:</span> <span class="nx">Optional[Sequence[ClusterRwGroupInstanceArgs]]</span> = None<span class="p">,</span>
         <span class="nx">rw_group_sgs</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+        <span class="nx">semi_sync_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">serverless_status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">serverless_status_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">slave_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">storage_limit</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">storage_pay_mode</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">storage_used</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">sync_way</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Cluster</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCluster<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ClusterState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Cluster</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCluster<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ClusterState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Cluster</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Cluster</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ClusterState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Cluster</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ClusterState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Cluster</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ClusterState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Cluster</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ClusterState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingCluster</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cynosdb:Cluster</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cynosdb_cluster</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ClusterState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ClusterState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3188,28 +5118,31 @@ Get an existing Cluster resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ClusterState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3217,28 +5150,31 @@ Get an existing Cluster resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ClusterState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3258,8 +5194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify whether the cluster can auto-pause while <code>db_mode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the cluster can auto-pause while <code>dbMode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autopausedelay_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autopausedelay_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Pause<wbr>Delay</a>
@@ -3267,8 +5202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify auto-pause delay in second while <code>db_mode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify auto-pause delay in second while <code>dbMode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autorenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autorenewflag_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -3276,8 +5210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availablezone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availablezone_csharp" style="color: inherit; text-decoration: inherit;">Available<wbr>Zone</a>
@@ -3285,8 +5218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -3294,8 +5226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_csharp" style="color: inherit; text-decoration: inherit;">Charset</a>
@@ -3303,8 +5234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset used by CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Charset used by CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustername_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -3312,8 +5242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterstatus_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Status</a>
@@ -3321,8 +5250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -3330,8 +5258,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cynosversion_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cynosversion_csharp" style="color: inherit; text-decoration: inherit;">Cynos<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kernel minor version, like <code>3.1.16.002</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbmode_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Mode</a>
@@ -3339,8 +5274,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify DB mode, only available when <code>db_type</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify DB mode, only available when <code>dbType</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dbtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbtype_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Type</a>
@@ -3348,8 +5282,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dbversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbversion_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Version</a>
@@ -3357,8 +5290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>, <code>8.0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_csharp" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -3366,8 +5298,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instancecount_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The number of instances, the range is (0,16], the default value is 2 (i.e. one RW instance + one Ro instance), the passed n means 1 RW instance + n-1 Ro instances (with the same specifications), if you need a more accurate cluster composition, please use InstanceInitInfos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecpucore_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecpucore_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Cpu<wbr>Core</a>
@@ -3375,8 +5314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -3384,8 +5322,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instanceinitinfos_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceinitinfos_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Init<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterinstanceinitinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Cluster<wbr>Instance<wbr>Init<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Instance initialization configuration information, mainly used to select instances of different specifications when purchasing a cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainduration_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainduration_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Duration</a>
@@ -3393,8 +5338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainstarttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainstarttime_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -3402,8 +5346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainweekdays_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainweekdays_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Weekdays</a>
@@ -3411,8 +5354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancememorysize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancememorysize_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Memory<wbr>Size</a>
@@ -3420,8 +5362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -3429,8 +5370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of instance. Only supported when modifying.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestatus_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Status</a>
@@ -3438,8 +5378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestoragesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestoragesize_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Storage<wbr>Size</a>
@@ -3447,8 +5386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxcpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxcpu_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Cpu</a>
@@ -3456,8 +5394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Maximum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mincpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mincpu_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Cpu</a>
@@ -3465,8 +5402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Minimum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_oldipreservehours_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_oldipreservehours_csharp" style="color: inherit; text-decoration: inherit;">Old<wbr>Ip<wbr>Reserve<wbr>Hours</a>
@@ -3474,17 +5410,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramitems_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramitems_csharp" style="color: inherit; text-decoration: inherit;">Param<wbr>Items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterparamitem">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Cluster<wbr>Param<wbr>Item<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#clusterparamitem">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Cluster<wbr>Param<wbr>Item&gt;</a></span>
     </dt>
-    <dd><p>Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify parameter list of database. It is valid when <code>paramTemplateId</code> is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_paramtemplateid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramtemplateid_csharp" style="color: inherit; text-decoration: inherit;">Param<wbr>Template<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The ID of the parameter template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -3492,8 +5434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of <code>root</code> account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password of <code>root</code> account.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -3501,17 +5442,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Port of CynosDB cluster.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_prarmtemplateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prarmtemplateid_csharp" style="color: inherit; text-decoration: inherit;">Prarm<wbr>Template<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the parameter template.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>It will be deprecated. Use <code>paramTemplateId</code> instead. The ID of the parameter template.<p class="property-message">Deprecated: It will be deprecated. Use <code>paramTemplateId</code> instead.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_prepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -3519,8 +5458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -3528,17 +5466,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project. <code>0</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project. <code>0</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupaddrs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupaddrs_csharp" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Addrs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrogroupaddr">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Cluster<wbr>Ro<wbr>Group<wbr>Addr<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#clusterrogroupaddr">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Cluster<wbr>Ro<wbr>Group<wbr>Addr&gt;</a></span>
     </dt>
-    <dd><p>Readonly addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Readonly addresses. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupid_csharp" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Id</a>
@@ -3546,17 +5482,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of read-only instance group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of read-only instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupinstances_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupinstances_csharp" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrogroupinstance">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Cluster<wbr>Ro<wbr>Group<wbr>Instance<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#clusterrogroupinstance">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Cluster<wbr>Ro<wbr>Group<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>List of instances in the read-only instance group.</p>
-</dd><dt class="property-optional"
+    <dd>List of instances in the read-only instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupsgs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupsgs_csharp" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Sgs</a>
@@ -3564,17 +5498,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>IDs of security group for <code>ro_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>roGroup</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupaddrs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupaddrs_csharp" style="color: inherit; text-decoration: inherit;">Rw<wbr>Group<wbr>Addrs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrwgroupaddr">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Cluster<wbr>Rw<wbr>Group<wbr>Addr<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#clusterrwgroupaddr">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Cluster<wbr>Rw<wbr>Group<wbr>Addr&gt;</a></span>
     </dt>
-    <dd><p>Read-write addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Read-write addresses. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupid_csharp" style="color: inherit; text-decoration: inherit;">Rw<wbr>Group<wbr>Id</a>
@@ -3582,17 +5514,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of read-write instance group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of read-write instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupinstances_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupinstances_csharp" style="color: inherit; text-decoration: inherit;">Rw<wbr>Group<wbr>Instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrwgroupinstance">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Cluster<wbr>Rw<wbr>Group<wbr>Instance<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#clusterrwgroupinstance">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Cluster<wbr>Rw<wbr>Group<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>List of instances in the read-write instance group.</p>
-</dd><dt class="property-optional"
+    <dd>List of instances in the read-write instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupsgs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupsgs_csharp" style="color: inherit; text-decoration: inherit;">Rw<wbr>Group<wbr>Sgs</a>
@@ -3600,8 +5530,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>IDs of security group for <code>rw_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>rwGroup</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_semisynctimeout_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_semisynctimeout_csharp" style="color: inherit; text-decoration: inherit;">Semi<wbr>Sync<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Semi-sync timeout in ms. Value range: <code>[1000, 4294967295]</code>, default <code>10000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serverlessstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverlessstatus_csharp" style="color: inherit; text-decoration: inherit;">Serverless<wbr>Status</a>
@@ -3609,8 +5546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverless_status_flag</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverlessStatusFlag</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serverlessstatusflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverlessstatusflag_csharp" style="color: inherit; text-decoration: inherit;">Serverless<wbr>Status<wbr>Flag</a>
@@ -3618,8 +5554,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_slavezone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slavezone_csharp" style="color: inherit; text-decoration: inherit;">Slave<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Multi zone Addresses of the CynosDB Cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagelimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagelimit_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Limit</a>
@@ -3627,8 +5570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is <code>MYSQL</code> and charge_type is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when charge_type is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</p>
-</dd><dt class="property-optional"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is <code>MYSQL</code> and chargeType is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when chargeType is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagepaymode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagepaymode_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Pay<wbr>Mode</a>
@@ -3636,8 +5578,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storageused_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageused_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Used</a>
@@ -3645,8 +5586,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Used storage of CynosDB cluster, unit in MB.</p>
-</dd><dt class="property-optional"
+    <dd>Used storage of CynosDB cluster, unit in MB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -3654,17 +5594,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_syncway_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_syncway_csharp" style="color: inherit; text-decoration: inherit;">Sync<wbr>Way</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Synchronization way. Valid values: <code>async</code>, <code>semisync</code>, <code>sync</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The tags of the CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -3672,8 +5618,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3687,8 +5632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify whether the cluster can auto-pause while <code>db_mode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the cluster can auto-pause while <code>dbMode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autopausedelay_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autopausedelay_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Pause<wbr>Delay</a>
@@ -3696,8 +5640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify auto-pause delay in second while <code>db_mode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify auto-pause delay in second while <code>dbMode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autorenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autorenewflag_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -3705,8 +5648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availablezone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availablezone_go" style="color: inherit; text-decoration: inherit;">Available<wbr>Zone</a>
@@ -3714,8 +5656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -3723,8 +5664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_go" style="color: inherit; text-decoration: inherit;">Charset</a>
@@ -3732,8 +5672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset used by CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Charset used by CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustername_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Name</a>
@@ -3741,8 +5680,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterstatus_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Status</a>
@@ -3750,8 +5688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -3759,8 +5696,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cynosversion_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cynosversion_go" style="color: inherit; text-decoration: inherit;">Cynos<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kernel minor version, like <code>3.1.16.002</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbmode_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Mode</a>
@@ -3768,8 +5712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify DB mode, only available when <code>db_type</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify DB mode, only available when <code>dbType</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dbtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbtype_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Type</a>
@@ -3777,8 +5720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dbversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbversion_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Version</a>
@@ -3786,8 +5728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>, <code>8.0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_go" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -3795,8 +5736,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instancecount_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The number of instances, the range is (0,16], the default value is 2 (i.e. one RW instance + one Ro instance), the passed n means 1 RW instance + n-1 Ro instances (with the same specifications), if you need a more accurate cluster composition, please use InstanceInitInfos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecpucore_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecpucore_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Cpu<wbr>Core</a>
@@ -3804,8 +5752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -3813,8 +5760,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instanceinitinfos_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceinitinfos_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Init<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterinstanceinitinfo">[]Cluster<wbr>Instance<wbr>Init<wbr>Info<wbr>Args</a></span>
+    </dt>
+    <dd>Instance initialization configuration information, mainly used to select instances of different specifications when purchasing a cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainduration_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainduration_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Duration</a>
@@ -3822,8 +5776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainstarttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainstarttime_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -3831,8 +5784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainweekdays_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainweekdays_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Maintain<wbr>Weekdays</a>
@@ -3840,8 +5792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancememorysize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancememorysize_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Memory<wbr>Size</a>
@@ -3849,8 +5800,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -3858,8 +5808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of instance. Only supported when modifying.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestatus_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Status</a>
@@ -3867,8 +5816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestoragesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestoragesize_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Storage<wbr>Size</a>
@@ -3876,8 +5824,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxcpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxcpu_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Cpu</a>
@@ -3885,8 +5832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Maximum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mincpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mincpu_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Cpu</a>
@@ -3894,8 +5840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Minimum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_oldipreservehours_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_oldipreservehours_go" style="color: inherit; text-decoration: inherit;">Old<wbr>Ip<wbr>Reserve<wbr>Hours</a>
@@ -3903,8 +5848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramitems_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramitems_go" style="color: inherit; text-decoration: inherit;">Param<wbr>Items</a>
@@ -3912,8 +5856,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterparamitem">[]Cluster<wbr>Param<wbr>Item<wbr>Args</a></span>
     </dt>
-    <dd><p>Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify parameter list of database. It is valid when <code>paramTemplateId</code> is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_paramtemplateid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramtemplateid_go" style="color: inherit; text-decoration: inherit;">Param<wbr>Template<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The ID of the parameter template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -3921,8 +5872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of <code>root</code> account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password of <code>root</code> account.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -3930,17 +5880,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Port of CynosDB cluster.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_prarmtemplateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prarmtemplateid_go" style="color: inherit; text-decoration: inherit;">Prarm<wbr>Template<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the parameter template.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>It will be deprecated. Use <code>paramTemplateId</code> instead. The ID of the parameter template.<p class="property-message">Deprecated: It will be deprecated. Use <code>paramTemplateId</code> instead.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_prepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -3948,8 +5896,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -3957,8 +5904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project. <code>0</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project. <code>0</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupaddrs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupaddrs_go" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Addrs</a>
@@ -3966,8 +5912,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrogroupaddr">[]Cluster<wbr>Ro<wbr>Group<wbr>Addr<wbr>Args</a></span>
     </dt>
-    <dd><p>Readonly addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Readonly addresses. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupid_go" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Id</a>
@@ -3975,8 +5920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of read-only instance group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of read-only instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupinstances_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupinstances_go" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Instances</a>
@@ -3984,8 +5928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrogroupinstance">[]Cluster<wbr>Ro<wbr>Group<wbr>Instance<wbr>Args</a></span>
     </dt>
-    <dd><p>List of instances in the read-only instance group.</p>
-</dd><dt class="property-optional"
+    <dd>List of instances in the read-only instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupsgs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupsgs_go" style="color: inherit; text-decoration: inherit;">Ro<wbr>Group<wbr>Sgs</a>
@@ -3993,8 +5936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>IDs of security group for <code>ro_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>roGroup</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupaddrs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupaddrs_go" style="color: inherit; text-decoration: inherit;">Rw<wbr>Group<wbr>Addrs</a>
@@ -4002,8 +5944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrwgroupaddr">[]Cluster<wbr>Rw<wbr>Group<wbr>Addr<wbr>Args</a></span>
     </dt>
-    <dd><p>Read-write addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Read-write addresses. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupid_go" style="color: inherit; text-decoration: inherit;">Rw<wbr>Group<wbr>Id</a>
@@ -4011,8 +5952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of read-write instance group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of read-write instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupinstances_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupinstances_go" style="color: inherit; text-decoration: inherit;">Rw<wbr>Group<wbr>Instances</a>
@@ -4020,8 +5960,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrwgroupinstance">[]Cluster<wbr>Rw<wbr>Group<wbr>Instance<wbr>Args</a></span>
     </dt>
-    <dd><p>List of instances in the read-write instance group.</p>
-</dd><dt class="property-optional"
+    <dd>List of instances in the read-write instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupsgs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupsgs_go" style="color: inherit; text-decoration: inherit;">Rw<wbr>Group<wbr>Sgs</a>
@@ -4029,8 +5968,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>IDs of security group for <code>rw_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>rwGroup</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_semisynctimeout_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_semisynctimeout_go" style="color: inherit; text-decoration: inherit;">Semi<wbr>Sync<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Semi-sync timeout in ms. Value range: <code>[1000, 4294967295]</code>, default <code>10000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serverlessstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverlessstatus_go" style="color: inherit; text-decoration: inherit;">Serverless<wbr>Status</a>
@@ -4038,8 +5984,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverless_status_flag</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverlessStatusFlag</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serverlessstatusflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverlessstatusflag_go" style="color: inherit; text-decoration: inherit;">Serverless<wbr>Status<wbr>Flag</a>
@@ -4047,8 +5992,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_slavezone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slavezone_go" style="color: inherit; text-decoration: inherit;">Slave<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Multi zone Addresses of the CynosDB Cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagelimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagelimit_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Limit</a>
@@ -4056,8 +6008,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is <code>MYSQL</code> and charge_type is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when charge_type is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</p>
-</dd><dt class="property-optional"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is <code>MYSQL</code> and chargeType is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when chargeType is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagepaymode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagepaymode_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Pay<wbr>Mode</a>
@@ -4065,8 +6016,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storageused_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageused_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Used</a>
@@ -4074,8 +6024,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Used storage of CynosDB cluster, unit in MB.</p>
-</dd><dt class="property-optional"
+    <dd>Used storage of CynosDB cluster, unit in MB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -4083,17 +6032,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_syncway_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_syncway_go" style="color: inherit; text-decoration: inherit;">Sync<wbr>Way</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Synchronization way. Valid values: <code>async</code>, <code>semisync</code>, <code>sync</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The tags of the CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -4101,8 +6056,445 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_pause_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_pause_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>pause</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify whether the cluster can auto-pause while <code>dbMode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_pause_delay_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_pause_delay_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>pause_<wbr>delay</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify auto-pause delay in second while <code>dbMode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_available_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_available_zone_hcl" style="color: inherit; text-decoration: inherit;">available_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_charset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_hcl" style="color: inherit; text-decoration: inherit;">charset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charset used by CynosDB cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_name_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CynosDB cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_status_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cynos_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cynos_version_hcl" style="color: inherit; text-decoration: inherit;">cynos_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kernel minor version, like <code>3.1.16.002</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_db_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_mode_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify DB mode, only available when <code>dbType</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_db_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_type_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_db_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_version_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>, <code>8.0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_delete_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_delete_hcl" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_count_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of instances, the range is (0,16], the default value is 2 (i.e. one RW instance + one Ro instance), the passed n means 1 RW instance + n-1 Ro instances (with the same specifications), if you need a more accurate cluster composition, please use InstanceInitInfos.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_cpu_core_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_cpu_core_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>cpu_<wbr>core</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_init_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_init_infos_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>init_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterinstanceinitinfo">list(object)</a></span>
+    </dt>
+    <dd>Instance initialization configuration information, mainly used to select instances of different specifications when purchasing a cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_maintain_duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_maintain_duration_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_maintain_start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_maintain_start_time_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_maintain_weekdays_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_maintain_weekdays_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>weekdays</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_memory_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_memory_size_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>memory_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of instance. Only supported when modifying.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_status_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_storage_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_storage_size_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>storage_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_cpu_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_min_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_min_cpu_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_old_ip_reserve_hours_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_old_ip_reserve_hours_hcl" style="color: inherit; text-decoration: inherit;">old_<wbr>ip_<wbr>reserve_<wbr>hours</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_param_items_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_param_items_hcl" style="color: inherit; text-decoration: inherit;">param_<wbr>items</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterparamitem">list(object)</a></span>
+    </dt>
+    <dd>Specify parameter list of database. It is valid when <code>paramTemplateId</code> is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_param_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_param_template_id_hcl" style="color: inherit; text-decoration: inherit;">param_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of the parameter template.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="state_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password of <code>root</code> account.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of CynosDB cluster.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="state_prarm_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prarm_template_id_hcl" style="color: inherit; text-decoration: inherit;">prarm_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>It will be deprecated. Use <code>paramTemplateId</code> instead. The ID of the parameter template.<p class="property-message">Deprecated: It will be deprecated. Use <code>paramTemplateId</code> instead.</p></dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project. <code>0</code> by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ro_group_addrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ro_group_addrs_hcl" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>addrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterrogroupaddr">list(object)</a></span>
+    </dt>
+    <dd>Readonly addresses. Each element contains the following attributes:</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ro_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ro_group_id_hcl" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of read-only instance group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ro_group_instances_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ro_group_instances_hcl" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>instances</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterrogroupinstance">list(object)</a></span>
+    </dt>
+    <dd>List of instances in the read-only instance group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ro_group_sgs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ro_group_sgs_hcl" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>sgs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>IDs of security group for <code>roGroup</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rw_group_addrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rw_group_addrs_hcl" style="color: inherit; text-decoration: inherit;">rw_<wbr>group_<wbr>addrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterrwgroupaddr">list(object)</a></span>
+    </dt>
+    <dd>Read-write addresses. Each element contains the following attributes:</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rw_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rw_group_id_hcl" style="color: inherit; text-decoration: inherit;">rw_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of read-write instance group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rw_group_instances_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rw_group_instances_hcl" style="color: inherit; text-decoration: inherit;">rw_<wbr>group_<wbr>instances</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterrwgroupinstance">list(object)</a></span>
+    </dt>
+    <dd>List of instances in the read-write instance group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rw_group_sgs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rw_group_sgs_hcl" style="color: inherit; text-decoration: inherit;">rw_<wbr>group_<wbr>sgs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>IDs of security group for <code>rwGroup</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_semi_sync_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_semi_sync_timeout_hcl" style="color: inherit; text-decoration: inherit;">semi_<wbr>sync_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Semi-sync timeout in ms. Value range: <code>[1000, 4294967295]</code>, default <code>10000</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_serverless_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverless_status_hcl" style="color: inherit; text-decoration: inherit;">serverless_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverlessStatusFlag</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_serverless_status_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverless_status_flag_hcl" style="color: inherit; text-decoration: inherit;">serverless_<wbr>status_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_slave_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slave_zone_hcl" style="color: inherit; text-decoration: inherit;">slave_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Multi zone Addresses of the CynosDB Cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storage_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_limit_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is <code>MYSQL</code> and chargeType is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when chargeType is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storage_pay_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_pay_mode_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>pay_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storage_used_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_used_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>used</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Used storage of CynosDB cluster, unit in MB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sync_way_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sync_way_hcl" style="color: inherit; text-decoration: inherit;">sync_<wbr>way</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Synchronization way. Valid values: <code>async</code>, <code>semisync</code>, <code>sync</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The tags of the CynosDB cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4116,8 +6508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify whether the cluster can auto-pause while <code>db_mode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the cluster can auto-pause while <code>dbMode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autopausedelay_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autopausedelay_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Pause<wbr>Delay</a>
@@ -4125,8 +6516,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify auto-pause delay in second while <code>db_mode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify auto-pause delay in second while <code>dbMode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autorenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autorenewflag_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -4134,8 +6524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availablezone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availablezone_java" style="color: inherit; text-decoration: inherit;">available<wbr>Zone</a>
@@ -4143,8 +6532,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -4152,8 +6540,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_java" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -4161,8 +6548,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charset used by CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Charset used by CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustername_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -4170,8 +6556,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterstatus_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -4179,8 +6564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -4188,8 +6572,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cynosversion_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cynosversion_java" style="color: inherit; text-decoration: inherit;">cynos<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kernel minor version, like <code>3.1.16.002</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbmode_java" style="color: inherit; text-decoration: inherit;">db<wbr>Mode</a>
@@ -4197,8 +6588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify DB mode, only available when <code>db_type</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify DB mode, only available when <code>dbType</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dbtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbtype_java" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -4206,8 +6596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dbversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbversion_java" style="color: inherit; text-decoration: inherit;">db<wbr>Version</a>
@@ -4215,8 +6604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>, <code>8.0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_java" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -4224,8 +6612,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instancecount_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>The number of instances, the range is (0,16], the default value is 2 (i.e. one RW instance + one Ro instance), the passed n means 1 RW instance + n-1 Ro instances (with the same specifications), if you need a more accurate cluster composition, please use InstanceInitInfos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecpucore_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecpucore_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Cpu<wbr>Core</a>
@@ -4233,8 +6628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -4242,8 +6636,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instanceinitinfos_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceinitinfos_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Init<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterinstanceinitinfo">List&lt;Cluster<wbr>Instance<wbr>Init<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Instance initialization configuration information, mainly used to select instances of different specifications when purchasing a cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainduration_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainduration_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Duration</a>
@@ -4251,8 +6652,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainstarttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainstarttime_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -4260,8 +6660,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainweekdays_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainweekdays_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Weekdays</a>
@@ -4269,8 +6668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancememorysize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancememorysize_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Memory<wbr>Size</a>
@@ -4278,8 +6676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -4287,8 +6684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of instance. Only supported when modifying.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestatus_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -4296,8 +6692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestoragesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestoragesize_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Storage<wbr>Size</a>
@@ -4305,8 +6700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxcpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxcpu_java" style="color: inherit; text-decoration: inherit;">max<wbr>Cpu</a>
@@ -4314,8 +6708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Maximum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mincpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mincpu_java" style="color: inherit; text-decoration: inherit;">min<wbr>Cpu</a>
@@ -4323,8 +6716,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Minimum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_oldipreservehours_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_oldipreservehours_java" style="color: inherit; text-decoration: inherit;">old<wbr>Ip<wbr>Reserve<wbr>Hours</a>
@@ -4332,17 +6724,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramitems_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramitems_java" style="color: inherit; text-decoration: inherit;">param<wbr>Items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterparamitem">List&lt;Cluster<wbr>Param<wbr>Item<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#clusterparamitem">List&lt;Cluster<wbr>Param<wbr>Item&gt;</a></span>
     </dt>
-    <dd><p>Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify parameter list of database. It is valid when <code>paramTemplateId</code> is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_paramtemplateid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramtemplateid_java" style="color: inherit; text-decoration: inherit;">param<wbr>Template<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>The ID of the parameter template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -4350,8 +6748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password of <code>root</code> account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password of <code>root</code> account.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4359,17 +6756,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Port of CynosDB cluster.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_prarmtemplateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prarmtemplateid_java" style="color: inherit; text-decoration: inherit;">prarm<wbr>Template<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The ID of the parameter template.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>It will be deprecated. Use <code>paramTemplateId</code> instead. The ID of the parameter template.<p class="property-message">Deprecated: It will be deprecated. Use <code>paramTemplateId</code> instead.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_prepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -4377,8 +6772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -4386,17 +6780,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project. <code>0</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project. <code>0</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupaddrs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupaddrs_java" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Addrs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrogroupaddr">List&lt;Cluster<wbr>Ro<wbr>Group<wbr>Addr<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#clusterrogroupaddr">List&lt;Cluster<wbr>Ro<wbr>Group<wbr>Addr&gt;</a></span>
     </dt>
-    <dd><p>Readonly addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Readonly addresses. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupid_java" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Id</a>
@@ -4404,17 +6796,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of read-only instance group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of read-only instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupinstances_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupinstances_java" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrogroupinstance">List&lt;Cluster<wbr>Ro<wbr>Group<wbr>Instance<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#clusterrogroupinstance">List&lt;Cluster<wbr>Ro<wbr>Group<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>List of instances in the read-only instance group.</p>
-</dd><dt class="property-optional"
+    <dd>List of instances in the read-only instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupsgs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupsgs_java" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Sgs</a>
@@ -4422,17 +6812,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>IDs of security group for <code>ro_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>roGroup</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupaddrs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupaddrs_java" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Addrs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrwgroupaddr">List&lt;Cluster<wbr>Rw<wbr>Group<wbr>Addr<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#clusterrwgroupaddr">List&lt;Cluster<wbr>Rw<wbr>Group<wbr>Addr&gt;</a></span>
     </dt>
-    <dd><p>Read-write addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Read-write addresses. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupid_java" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Id</a>
@@ -4440,17 +6828,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of read-write instance group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of read-write instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupinstances_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupinstances_java" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrwgroupinstance">List&lt;Cluster<wbr>Rw<wbr>Group<wbr>Instance<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#clusterrwgroupinstance">List&lt;Cluster<wbr>Rw<wbr>Group<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>List of instances in the read-write instance group.</p>
-</dd><dt class="property-optional"
+    <dd>List of instances in the read-write instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupsgs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupsgs_java" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Sgs</a>
@@ -4458,8 +6844,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>IDs of security group for <code>rw_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>rwGroup</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_semisynctimeout_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_semisynctimeout_java" style="color: inherit; text-decoration: inherit;">semi<wbr>Sync<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Semi-sync timeout in ms. Value range: <code>[1000, 4294967295]</code>, default <code>10000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serverlessstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverlessstatus_java" style="color: inherit; text-decoration: inherit;">serverless<wbr>Status</a>
@@ -4467,8 +6860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverless_status_flag</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverlessStatusFlag</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serverlessstatusflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverlessstatusflag_java" style="color: inherit; text-decoration: inherit;">serverless<wbr>Status<wbr>Flag</a>
@@ -4476,8 +6868,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_slavezone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slavezone_java" style="color: inherit; text-decoration: inherit;">slave<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Multi zone Addresses of the CynosDB Cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagelimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagelimit_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Limit</a>
@@ -4485,8 +6884,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is <code>MYSQL</code> and charge_type is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when charge_type is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</p>
-</dd><dt class="property-optional"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is <code>MYSQL</code> and chargeType is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when chargeType is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagepaymode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagepaymode_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Pay<wbr>Mode</a>
@@ -4494,8 +6892,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storageused_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageused_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Used</a>
@@ -4503,8 +6900,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Used storage of CynosDB cluster, unit in MB.</p>
-</dd><dt class="property-optional"
+    <dd>Used storage of CynosDB cluster, unit in MB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -4512,17 +6908,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_syncway_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_syncway_java" style="color: inherit; text-decoration: inherit;">sync<wbr>Way</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Synchronization way. Valid values: <code>async</code>, <code>semisync</code>, <code>sync</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The tags of the CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -4530,8 +6932,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4545,8 +6946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify whether the cluster can auto-pause while <code>db_mode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the cluster can auto-pause while <code>dbMode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autopausedelay_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autopausedelay_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Pause<wbr>Delay</a>
@@ -4554,8 +6954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify auto-pause delay in second while <code>db_mode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify auto-pause delay in second while <code>dbMode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autorenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autorenewflag_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -4563,8 +6962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availablezone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availablezone_nodejs" style="color: inherit; text-decoration: inherit;">available<wbr>Zone</a>
@@ -4572,8 +6970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -4581,8 +6978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_nodejs" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -4590,8 +6986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset used by CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Charset used by CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustername_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -4599,8 +6994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterstatus_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -4608,8 +7002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -4617,8 +7010,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cynosversion_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cynosversion_nodejs" style="color: inherit; text-decoration: inherit;">cynos<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Kernel minor version, like <code>3.1.16.002</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbmode_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Mode</a>
@@ -4626,8 +7026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify DB mode, only available when <code>db_type</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify DB mode, only available when <code>dbType</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dbtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbtype_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -4635,8 +7034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dbversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbversion_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Version</a>
@@ -4644,8 +7042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>, <code>8.0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_nodejs" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -4653,8 +7050,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instancecount_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of instances, the range is (0,16], the default value is 2 (i.e. one RW instance + one Ro instance), the passed n means 1 RW instance + n-1 Ro instances (with the same specifications), if you need a more accurate cluster composition, please use InstanceInitInfos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecpucore_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecpucore_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Cpu<wbr>Core</a>
@@ -4662,8 +7066,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -4671,8 +7074,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instanceinitinfos_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceinitinfos_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Init<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterinstanceinitinfo">Cluster<wbr>Instance<wbr>Init<wbr>Info[]</a></span>
+    </dt>
+    <dd>Instance initialization configuration information, mainly used to select instances of different specifications when purchasing a cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainduration_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainduration_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Duration</a>
@@ -4680,8 +7090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainstarttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainstarttime_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -4689,8 +7098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainweekdays_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainweekdays_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Weekdays</a>
@@ -4698,8 +7106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancememorysize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancememorysize_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Memory<wbr>Size</a>
@@ -4707,8 +7114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -4716,8 +7122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of instance. Only supported when modifying.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestatus_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -4725,8 +7130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestoragesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestoragesize_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Storage<wbr>Size</a>
@@ -4734,8 +7138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxcpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxcpu_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Cpu</a>
@@ -4743,8 +7146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mincpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mincpu_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Cpu</a>
@@ -4752,8 +7154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Minimum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_oldipreservehours_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_oldipreservehours_nodejs" style="color: inherit; text-decoration: inherit;">old<wbr>Ip<wbr>Reserve<wbr>Hours</a>
@@ -4761,17 +7162,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramitems_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramitems_nodejs" style="color: inherit; text-decoration: inherit;">param<wbr>Items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterparamitem">Cluster<wbr>Param<wbr>Item<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#clusterparamitem">Cluster<wbr>Param<wbr>Item[]</a></span>
     </dt>
-    <dd><p>Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify parameter list of database. It is valid when <code>paramTemplateId</code> is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_paramtemplateid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramtemplateid_nodejs" style="color: inherit; text-decoration: inherit;">param<wbr>Template<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of the parameter template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -4779,8 +7186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password of <code>root</code> account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password of <code>root</code> account.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4788,17 +7194,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Port of CynosDB cluster.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_prarmtemplateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prarmtemplateid_nodejs" style="color: inherit; text-decoration: inherit;">prarm<wbr>Template<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The ID of the parameter template.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>It will be deprecated. Use <code>paramTemplateId</code> instead. The ID of the parameter template.<p class="property-message">Deprecated: It will be deprecated. Use <code>paramTemplateId</code> instead.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_prepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -4806,8 +7210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -4815,17 +7218,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project. <code>0</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project. <code>0</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupaddrs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupaddrs_nodejs" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Addrs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrogroupaddr">Cluster<wbr>Ro<wbr>Group<wbr>Addr<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#clusterrogroupaddr">Cluster<wbr>Ro<wbr>Group<wbr>Addr[]</a></span>
     </dt>
-    <dd><p>Readonly addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Readonly addresses. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupid_nodejs" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Id</a>
@@ -4833,17 +7234,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of read-only instance group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of read-only instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupinstances_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupinstances_nodejs" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrogroupinstance">Cluster<wbr>Ro<wbr>Group<wbr>Instance<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#clusterrogroupinstance">Cluster<wbr>Ro<wbr>Group<wbr>Instance[]</a></span>
     </dt>
-    <dd><p>List of instances in the read-only instance group.</p>
-</dd><dt class="property-optional"
+    <dd>List of instances in the read-only instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupsgs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupsgs_nodejs" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Sgs</a>
@@ -4851,17 +7250,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>IDs of security group for <code>ro_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>roGroup</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupaddrs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupaddrs_nodejs" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Addrs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrwgroupaddr">Cluster<wbr>Rw<wbr>Group<wbr>Addr<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#clusterrwgroupaddr">Cluster<wbr>Rw<wbr>Group<wbr>Addr[]</a></span>
     </dt>
-    <dd><p>Read-write addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Read-write addresses. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupid_nodejs" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Id</a>
@@ -4869,17 +7266,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of read-write instance group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of read-write instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupinstances_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupinstances_nodejs" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrwgroupinstance">Cluster<wbr>Rw<wbr>Group<wbr>Instance<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#clusterrwgroupinstance">Cluster<wbr>Rw<wbr>Group<wbr>Instance[]</a></span>
     </dt>
-    <dd><p>List of instances in the read-write instance group.</p>
-</dd><dt class="property-optional"
+    <dd>List of instances in the read-write instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupsgs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupsgs_nodejs" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Sgs</a>
@@ -4887,8 +7282,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>IDs of security group for <code>rw_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>rwGroup</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_semisynctimeout_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_semisynctimeout_nodejs" style="color: inherit; text-decoration: inherit;">semi<wbr>Sync<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Semi-sync timeout in ms. Value range: <code>[1000, 4294967295]</code>, default <code>10000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serverlessstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverlessstatus_nodejs" style="color: inherit; text-decoration: inherit;">serverless<wbr>Status</a>
@@ -4896,8 +7298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverless_status_flag</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverlessStatusFlag</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serverlessstatusflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverlessstatusflag_nodejs" style="color: inherit; text-decoration: inherit;">serverless<wbr>Status<wbr>Flag</a>
@@ -4905,8 +7306,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_slavezone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slavezone_nodejs" style="color: inherit; text-decoration: inherit;">slave<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Multi zone Addresses of the CynosDB Cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagelimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagelimit_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Limit</a>
@@ -4914,8 +7322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is <code>MYSQL</code> and charge_type is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when charge_type is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</p>
-</dd><dt class="property-optional"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is <code>MYSQL</code> and chargeType is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when chargeType is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagepaymode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagepaymode_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Pay<wbr>Mode</a>
@@ -4923,8 +7330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storageused_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageused_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Used</a>
@@ -4932,8 +7338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Used storage of CynosDB cluster, unit in MB.</p>
-</dd><dt class="property-optional"
+    <dd>Used storage of CynosDB cluster, unit in MB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -4941,17 +7346,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_syncway_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_syncway_nodejs" style="color: inherit; text-decoration: inherit;">sync<wbr>Way</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Synchronization way. Valid values: <code>async</code>, <code>semisync</code>, <code>sync</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The tags of the CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -4959,8 +7370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4974,8 +7384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify whether the cluster can auto-pause while <code>db_mode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the cluster can auto-pause while <code>dbMode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_auto_pause_delay_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_pause_delay_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>pause_<wbr>delay</a>
@@ -4983,8 +7392,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify auto-pause delay in second while <code>db_mode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify auto-pause delay in second while <code>dbMode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_auto_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_renew_flag_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
@@ -4992,8 +7400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_available_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_available_zone_python" style="color: inherit; text-decoration: inherit;">available_<wbr>zone</a>
@@ -5001,8 +7408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -5010,8 +7416,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_python" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -5019,8 +7424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charset used by CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Charset used by CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_name_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>name</a>
@@ -5028,8 +7432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_status_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>status</a>
@@ -5037,8 +7440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -5046,8 +7448,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cynos_version_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cynos_version_python" style="color: inherit; text-decoration: inherit;">cynos_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Kernel minor version, like <code>3.1.16.002</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_db_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_mode_python" style="color: inherit; text-decoration: inherit;">db_<wbr>mode</a>
@@ -5055,8 +7464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify DB mode, only available when <code>db_type</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify DB mode, only available when <code>dbType</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_db_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_type_python" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
@@ -5064,8 +7472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_db_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_version_python" style="color: inherit; text-decoration: inherit;">db_<wbr>version</a>
@@ -5073,8 +7480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>, <code>8.0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_force_delete_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_delete_python" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
@@ -5082,8 +7488,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_count_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_count_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The number of instances, the range is (0,16], the default value is 2 (i.e. one RW instance + one Ro instance), the passed n means 1 RW instance + n-1 Ro instances (with the same specifications), if you need a more accurate cluster composition, please use InstanceInitInfos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_cpu_core_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_cpu_core_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>cpu_<wbr>core</a>
@@ -5091,8 +7504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -5100,8 +7512,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_init_infos_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_init_infos_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>init_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterinstanceinitinfo">Sequence[Cluster<wbr>Instance<wbr>Init<wbr>Info<wbr>Args]</a></span>
+    </dt>
+    <dd>Instance initialization configuration information, mainly used to select instances of different specifications when purchasing a cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_maintain_duration_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_maintain_duration_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>duration</a>
@@ -5109,8 +7528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_maintain_start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_maintain_start_time_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>start_<wbr>time</a>
@@ -5118,8 +7536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_maintain_weekdays_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_maintain_weekdays_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>maintain_<wbr>weekdays</a>
@@ -5127,8 +7544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_memory_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_memory_size_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>memory_<wbr>size</a>
@@ -5136,8 +7552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -5145,8 +7560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of instance. Only supported when modifying.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_status_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>status</a>
@@ -5154,8 +7568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_storage_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_storage_size_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>storage_<wbr>size</a>
@@ -5163,8 +7576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_cpu_python" style="color: inherit; text-decoration: inherit;">max_<wbr>cpu</a>
@@ -5172,8 +7584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Maximum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_min_cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_min_cpu_python" style="color: inherit; text-decoration: inherit;">min_<wbr>cpu</a>
@@ -5181,8 +7592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Minimum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_old_ip_reserve_hours_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_old_ip_reserve_hours_python" style="color: inherit; text-decoration: inherit;">old_<wbr>ip_<wbr>reserve_<wbr>hours</a>
@@ -5190,17 +7600,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_param_items_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_param_items_python" style="color: inherit; text-decoration: inherit;">param_<wbr>items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterparamitem">Cluster<wbr>Param<wbr>Item<wbr>Args]</a></span>
+        <span class="property-type"><a href="#clusterparamitem">Sequence[Cluster<wbr>Param<wbr>Item<wbr>Args]</a></span>
     </dt>
-    <dd><p>Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify parameter list of database. It is valid when <code>paramTemplateId</code> is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_param_template_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_param_template_id_python" style="color: inherit; text-decoration: inherit;">param_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The ID of the parameter template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -5208,8 +7624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password of <code>root</code> account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password of <code>root</code> account.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -5217,17 +7632,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Port of CynosDB cluster.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_prarm_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prarm_template_id_python" style="color: inherit; text-decoration: inherit;">prarm_<wbr>template_<wbr>id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of the parameter template.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>It will be deprecated. Use <code>paramTemplateId</code> instead. The ID of the parameter template.<p class="property-message">Deprecated: It will be deprecated. Use <code>paramTemplateId</code> instead.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_period_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
@@ -5235,8 +7648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -5244,17 +7656,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project. <code>0</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project. <code>0</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ro_group_addrs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ro_group_addrs_python" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>addrs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrogroupaddr">Cluster<wbr>Ro<wbr>Group<wbr>Addr<wbr>Args]</a></span>
+        <span class="property-type"><a href="#clusterrogroupaddr">Sequence[Cluster<wbr>Ro<wbr>Group<wbr>Addr<wbr>Args]</a></span>
     </dt>
-    <dd><p>Readonly addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Readonly addresses. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ro_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ro_group_id_python" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>id</a>
@@ -5262,17 +7672,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of read-only instance group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of read-only instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ro_group_instances_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ro_group_instances_python" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrogroupinstance">Cluster<wbr>Ro<wbr>Group<wbr>Instance<wbr>Args]</a></span>
+        <span class="property-type"><a href="#clusterrogroupinstance">Sequence[Cluster<wbr>Ro<wbr>Group<wbr>Instance<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of instances in the read-only instance group.</p>
-</dd><dt class="property-optional"
+    <dd>List of instances in the read-only instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ro_group_sgs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ro_group_sgs_python" style="color: inherit; text-decoration: inherit;">ro_<wbr>group_<wbr>sgs</a>
@@ -5280,17 +7688,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>IDs of security group for <code>ro_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>roGroup</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rw_group_addrs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rw_group_addrs_python" style="color: inherit; text-decoration: inherit;">rw_<wbr>group_<wbr>addrs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrwgroupaddr">Cluster<wbr>Rw<wbr>Group<wbr>Addr<wbr>Args]</a></span>
+        <span class="property-type"><a href="#clusterrwgroupaddr">Sequence[Cluster<wbr>Rw<wbr>Group<wbr>Addr<wbr>Args]</a></span>
     </dt>
-    <dd><p>Read-write addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Read-write addresses. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rw_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rw_group_id_python" style="color: inherit; text-decoration: inherit;">rw_<wbr>group_<wbr>id</a>
@@ -5298,17 +7704,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of read-write instance group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of read-write instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rw_group_instances_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rw_group_instances_python" style="color: inherit; text-decoration: inherit;">rw_<wbr>group_<wbr>instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#clusterrwgroupinstance">Cluster<wbr>Rw<wbr>Group<wbr>Instance<wbr>Args]</a></span>
+        <span class="property-type"><a href="#clusterrwgroupinstance">Sequence[Cluster<wbr>Rw<wbr>Group<wbr>Instance<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of instances in the read-write instance group.</p>
-</dd><dt class="property-optional"
+    <dd>List of instances in the read-write instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rw_group_sgs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rw_group_sgs_python" style="color: inherit; text-decoration: inherit;">rw_<wbr>group_<wbr>sgs</a>
@@ -5316,8 +7720,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>IDs of security group for <code>rw_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>rwGroup</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_semi_sync_timeout_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_semi_sync_timeout_python" style="color: inherit; text-decoration: inherit;">semi_<wbr>sync_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Semi-sync timeout in ms. Value range: <code>[1000, 4294967295]</code>, default <code>10000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serverless_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverless_status_python" style="color: inherit; text-decoration: inherit;">serverless_<wbr>status</a>
@@ -5325,8 +7736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverless_status_flag</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverlessStatusFlag</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serverless_status_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverless_status_flag_python" style="color: inherit; text-decoration: inherit;">serverless_<wbr>status_<wbr>flag</a>
@@ -5334,8 +7744,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_slave_zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slave_zone_python" style="color: inherit; text-decoration: inherit;">slave_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Multi zone Addresses of the CynosDB Cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_limit_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>limit</a>
@@ -5343,8 +7760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is <code>MYSQL</code> and charge_type is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when charge_type is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</p>
-</dd><dt class="property-optional"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is <code>MYSQL</code> and chargeType is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when chargeType is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_pay_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_pay_mode_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>pay_<wbr>mode</a>
@@ -5352,8 +7768,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_used_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_used_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>used</a>
@@ -5361,8 +7776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Used storage of CynosDB cluster, unit in MB.</p>
-</dd><dt class="property-optional"
+    <dd>Used storage of CynosDB cluster, unit in MB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -5370,17 +7784,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sync_way_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sync_way_python" style="color: inherit; text-decoration: inherit;">sync_<wbr>way</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Synchronization way. Valid values: <code>async</code>, <code>semisync</code>, <code>sync</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The tags of the CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -5388,8 +7808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5403,8 +7822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify whether the cluster can auto-pause while <code>db_mode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether the cluster can auto-pause while <code>dbMode</code> is <code>SERVERLESS</code>. Values: <code>yes</code> (default), <code>no</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autopausedelay_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autopausedelay_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Pause<wbr>Delay</a>
@@ -5412,8 +7830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify auto-pause delay in second while <code>db_mode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify auto-pause delay in second while <code>dbMode</code> is <code>SERVERLESS</code>. Value range: <code>[600, 691200]</code>. Default: <code>600</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autorenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autorenewflag_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -5421,8 +7838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(MANUAL_RENEW), <code>1</code>(AUTO_RENEW). Default value is <code>0</code>. Only works for PREPAID cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availablezone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availablezone_yaml" style="color: inherit; text-decoration: inherit;">available<wbr>Zone</a>
@@ -5430,8 +7846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone of the CynosDB Cluster.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of the CynosDB Cluster.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -5439,8 +7854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_yaml" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -5448,8 +7862,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charset used by CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Charset used by CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustername_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Name</a>
@@ -5457,8 +7870,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clusterstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterstatus_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Status</a>
@@ -5466,8 +7878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the Cynosdb cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the Cynosdb cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -5475,8 +7886,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the CynosDB cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cynosversion_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cynosversion_yaml" style="color: inherit; text-decoration: inherit;">cynos<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Kernel minor version, like <code>3.1.16.002</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbmode_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Mode</a>
@@ -5484,8 +7902,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify DB mode, only available when <code>db_type</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify DB mode, only available when <code>dbType</code> is <code>MYSQL</code>. Values: <code>NORMAL</code> (Default), <code>SERVERLESS</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dbtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbtype_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -5493,8 +7910,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dbversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbversion_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Version</a>
@@ -5502,8 +7918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of CynosDB, which is related to <code>db_type</code>. For <code>MYSQL</code>, available value is <code>5.7</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Version of CynosDB, which is related to <code>dbType</code>. For <code>MYSQL</code>, available value is <code>5.7</code>, <code>8.0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_yaml" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -5511,8 +7926,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its <code>All RELATED INSTANCES</code> will be deleted instead of staying recycle bin. Note: works for both <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code> cluster.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instancecount_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>The number of instances, the range is (0,16], the default value is 2 (i.e. one RW instance + one Ro instance), the passed n means 1 RW instance + n-1 Ro instances (with the same specifications), if you need a more accurate cluster composition, please use InstanceInitInfos.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecpucore_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecpucore_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Cpu<wbr>Core</a>
@@ -5520,8 +7942,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -5529,8 +7950,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instanceinitinfos_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceinitinfos_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Init<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#clusterinstanceinitinfo">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Instance initialization configuration information, mainly used to select instances of different specifications when purchasing a cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainduration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainduration_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Duration</a>
@@ -5538,8 +7966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Duration time for maintenance, unit in second. <code>3600</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Duration time for maintenance, unit in second. <code>3600</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainstarttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainstarttime_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Start<wbr>Time</a>
@@ -5547,8 +7974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Offset time from 00:00, unit in second. For example, 03:00am should be <code>10800</code>. <code>10800</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancemaintainweekdays_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancemaintainweekdays_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Maintain<wbr>Weekdays</a>
@@ -5556,8 +7982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>Weekdays for maintenance. <code>[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancememorysize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancememorysize_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Memory<wbr>Size</a>
@@ -5565,8 +7990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</p>
-</dd><dt class="property-optional"
+    <dd>Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -5574,8 +7998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of instance. Only supported when modifying.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestatus_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -5583,8 +8006,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the instance.</p>
-</dd><dt class="property-optional"
+    <dd>Status of the instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancestoragesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancestoragesize_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Storage<wbr>Size</a>
@@ -5592,8 +8014,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Storage size of the instance, unit in GB.</p>
-</dd><dt class="property-optional"
+    <dd>Storage size of the instance, unit in GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxcpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxcpu_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Cpu</a>
@@ -5601,8 +8022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mincpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mincpu_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Cpu</a>
@@ -5610,8 +8030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Minimum CPU core count, required while <code>db_mode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</p>
-</dd><dt class="property-optional"
+    <dd>Minimum CPU core count, required while <code>dbMode</code> is <code>SERVERLESS</code>, request DescribeServerlessInstanceSpecs for more reference.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_oldipreservehours_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_oldipreservehours_yaml" style="color: inherit; text-decoration: inherit;">old<wbr>Ip<wbr>Reserve<wbr>Hours</a>
@@ -5619,8 +8038,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</p>
-</dd><dt class="property-optional"
+    <dd>Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramitems_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramitems_yaml" style="color: inherit; text-decoration: inherit;">param<wbr>Items</a>
@@ -5628,8 +8046,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterparamitem">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify parameter list of database. It is valid when <code>paramTemplateId</code> is set in create cluster. Use <code>data.tencentcloud_mysql_default_params</code> to query available parameter details.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_paramtemplateid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramtemplateid_yaml" style="color: inherit; text-decoration: inherit;">param<wbr>Template<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>The ID of the parameter template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -5637,8 +8062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password of <code>root</code> account.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Password of <code>root</code> account.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -5646,17 +8070,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd><dt class="property-optional"
-            title="Optional">
+    <dd>Port of CynosDB cluster.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
         <span id="state_prarmtemplateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prarmtemplateid_yaml" style="color: inherit; text-decoration: inherit;">prarm<wbr>Template<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The ID of the parameter template.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>It will be deprecated. Use <code>paramTemplateId</code> instead. The ID of the parameter template.<p class="property-message">Deprecated: It will be deprecated. Use <code>paramTemplateId</code> instead.</p></dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_prepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -5664,8 +8086,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -5673,8 +8094,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project. <code>0</code> by default.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project. <code>0</code> by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupaddrs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupaddrs_yaml" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Addrs</a>
@@ -5682,8 +8102,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrogroupaddr">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Readonly addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Readonly addresses. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupid_yaml" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Id</a>
@@ -5691,8 +8110,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of read-only instance group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of read-only instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupinstances_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupinstances_yaml" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Instances</a>
@@ -5700,8 +8118,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrogroupinstance">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of instances in the read-only instance group.</p>
-</dd><dt class="property-optional"
+    <dd>List of instances in the read-only instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rogroupsgs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rogroupsgs_yaml" style="color: inherit; text-decoration: inherit;">ro<wbr>Group<wbr>Sgs</a>
@@ -5709,8 +8126,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>IDs of security group for <code>ro_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>roGroup</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupaddrs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupaddrs_yaml" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Addrs</a>
@@ -5718,8 +8134,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrwgroupaddr">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Read-write addresses. Each element contains the following attributes:</p>
-</dd><dt class="property-optional"
+    <dd>Read-write addresses. Each element contains the following attributes:</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupid_yaml" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Id</a>
@@ -5727,8 +8142,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of read-write instance group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of read-write instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupinstances_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupinstances_yaml" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Instances</a>
@@ -5736,8 +8150,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#clusterrwgroupinstance">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of instances in the read-write instance group.</p>
-</dd><dt class="property-optional"
+    <dd>List of instances in the read-write instance group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rwgroupsgs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rwgroupsgs_yaml" style="color: inherit; text-decoration: inherit;">rw<wbr>Group<wbr>Sgs</a>
@@ -5745,8 +8158,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>IDs of security group for <code>rw_group</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IDs of security group for <code>rwGroup</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_semisynctimeout_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_semisynctimeout_yaml" style="color: inherit; text-decoration: inherit;">semi<wbr>Sync<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Semi-sync timeout in ms. Value range: <code>[1000, 4294967295]</code>, default <code>10000</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serverlessstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverlessstatus_yaml" style="color: inherit; text-decoration: inherit;">serverless<wbr>Status</a>
@@ -5754,8 +8174,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverless_status_flag</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set <code>serverlessStatusFlag</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_serverlessstatusflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverlessstatusflag_yaml" style="color: inherit; text-decoration: inherit;">serverless<wbr>Status<wbr>Flag</a>
@@ -5763,8 +8182,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to pause or resume serverless cluster. values: <code>resume</code>, <code>pause</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_slavezone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_slavezone_yaml" style="color: inherit; text-decoration: inherit;">slave<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Multi zone Addresses of the CynosDB Cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagelimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagelimit_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Limit</a>
@@ -5772,8 +8198,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is <code>MYSQL</code> and charge_type is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when charge_type is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</p>
-</dd><dt class="property-optional"
+    <dd>Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is <code>MYSQL</code> and chargeType is <code>PREPAID</code>, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is <code>order and pay</code>. when chargeType is <code>POSTPAID_BY_HOUR</code>, this argument is unnecessary.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagepaymode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagepaymode_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Pay<wbr>Mode</a>
@@ -5781,8 +8206,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster storage billing mode, pay-as-you-go: <code>0</code>-yearly/monthly: <code>1</code>-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storageused_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storageused_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Used</a>
@@ -5790,8 +8214,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Used storage of CynosDB cluster, unit in MB.</p>
-</dd><dt class="property-optional"
+    <dd>Used storage of CynosDB cluster, unit in MB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -5799,17 +8222,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_syncway_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_syncway_yaml" style="color: inherit; text-decoration: inherit;">sync<wbr>Way</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Synchronization way. Valid values: <code>async</code>, <code>semisync</code>, <code>sync</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The tags of the CynosDB cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the CynosDB cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -5817,8 +8246,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -5833,7 +8261,559 @@ The following state arguments are supported:
 
 
 
-<h4 id="clusterparamitem">Cluster<wbr>Param<wbr>Item</h4>
+<h4 id="clusterinstanceinitinfo">
+Cluster<wbr>Instance<wbr>Init<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Cluster<wbr>Instance<wbr>Init<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cpu_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_csharp" style="color: inherit; text-decoration: inherit;">Cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>CPU of instance.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instancecount_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Instance count. Range: [1, 15].</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instancetype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance type. Value: <code>rw</code>, <code>ro</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="memory_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Memory of instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="devicetype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_csharp" style="color: inherit; text-decoration: inherit;">Device<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance machine type. Values: <code>common</code>, <code>exclusive</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="maxrocount_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrocount_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Ro<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Maximum number of Serverless instances. Range [1,15].</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="maxrocpu_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrocpu_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Ro<wbr>Cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">double</span>
+    </dt>
+    <dd>Maximum Serverless Instance Specifications.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="minrocount_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minrocount_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Ro<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Minimum number of Serverless instances. Range [1,15].</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="minrocpu_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minrocpu_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Ro<wbr>Cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">double</span>
+    </dt>
+    <dd>Minimum Serverless Instance Specifications.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cpu_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_go" style="color: inherit; text-decoration: inherit;">Cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>CPU of instance.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instancecount_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Instance count. Range: [1, 15].</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instancetype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance type. Value: <code>rw</code>, <code>ro</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="memory_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Memory of instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="devicetype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_go" style="color: inherit; text-decoration: inherit;">Device<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance machine type. Values: <code>common</code>, <code>exclusive</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="maxrocount_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrocount_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Ro<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Maximum number of Serverless instances. Range [1,15].</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="maxrocpu_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrocpu_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Ro<wbr>Cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float64</span>
+    </dt>
+    <dd>Maximum Serverless Instance Specifications.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="minrocount_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minrocount_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Ro<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Minimum number of Serverless instances. Range [1,15].</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="minrocpu_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minrocpu_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Ro<wbr>Cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float64</span>
+    </dt>
+    <dd>Minimum Serverless Instance Specifications.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>CPU of instance.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance count. Range: [1, 15].</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance type. Value: <code>rw</code>, <code>ro</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory of instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="device_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_type_hcl" style="color: inherit; text-decoration: inherit;">device_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance machine type. Values: <code>common</code>, <code>exclusive</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="max_ro_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_ro_count_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>ro_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of Serverless instances. Range [1,15].</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="max_ro_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_ro_cpu_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>ro_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum Serverless Instance Specifications.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="min_ro_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_ro_count_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>ro_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum number of Serverless instances. Range [1,15].</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="min_ro_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_ro_cpu_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>ro_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum Serverless Instance Specifications.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cpu_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_java" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>CPU of instance.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instancecount_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Instance count. Range: [1, 15].</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instancetype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance type. Value: <code>rw</code>, <code>ro</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="memory_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Memory of instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="devicetype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_java" style="color: inherit; text-decoration: inherit;">device<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance machine type. Values: <code>common</code>, <code>exclusive</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="maxrocount_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrocount_java" style="color: inherit; text-decoration: inherit;">max<wbr>Ro<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Maximum number of Serverless instances. Range [1,15].</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="maxrocpu_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrocpu_java" style="color: inherit; text-decoration: inherit;">max<wbr>Ro<wbr>Cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Double</span>
+    </dt>
+    <dd>Maximum Serverless Instance Specifications.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="minrocount_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minrocount_java" style="color: inherit; text-decoration: inherit;">min<wbr>Ro<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Minimum number of Serverless instances. Range [1,15].</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="minrocpu_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minrocpu_java" style="color: inherit; text-decoration: inherit;">min<wbr>Ro<wbr>Cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Double</span>
+    </dt>
+    <dd>Minimum Serverless Instance Specifications.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cpu_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_nodejs" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>CPU of instance.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instancecount_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance count. Range: [1, 15].</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instancetype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance type. Value: <code>rw</code>, <code>ro</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="memory_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory of instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="devicetype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_nodejs" style="color: inherit; text-decoration: inherit;">device<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance machine type. Values: <code>common</code>, <code>exclusive</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="maxrocount_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrocount_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Ro<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of Serverless instances. Range [1,15].</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="maxrocpu_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrocpu_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Ro<wbr>Cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum Serverless Instance Specifications.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="minrocount_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minrocount_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Ro<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum number of Serverless instances. Range [1,15].</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="minrocpu_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minrocpu_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Ro<wbr>Cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum Serverless Instance Specifications.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cpu_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_python" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>CPU of instance.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_count_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Instance count. Range: [1, 15].</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Instance type. Value: <code>rw</code>, <code>ro</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="memory_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Memory of instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="device_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_type_python" style="color: inherit; text-decoration: inherit;">device_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Instance machine type. Values: <code>common</code>, <code>exclusive</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="max_ro_count_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_ro_count_python" style="color: inherit; text-decoration: inherit;">max_<wbr>ro_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Maximum number of Serverless instances. Range [1,15].</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="max_ro_cpu_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_ro_cpu_python" style="color: inherit; text-decoration: inherit;">max_<wbr>ro_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float</span>
+    </dt>
+    <dd>Maximum Serverless Instance Specifications.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="min_ro_count_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_ro_count_python" style="color: inherit; text-decoration: inherit;">min_<wbr>ro_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Minimum number of Serverless instances. Range [1,15].</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="min_ro_cpu_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_ro_cpu_python" style="color: inherit; text-decoration: inherit;">min_<wbr>ro_<wbr>cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">float</span>
+    </dt>
+    <dd>Minimum Serverless Instance Specifications.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cpu_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_yaml" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>CPU of instance.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instancecount_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Instance count. Range: [1, 15].</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instancetype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance type. Value: <code>rw</code>, <code>ro</code>.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="memory_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Memory of instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="devicetype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_yaml" style="color: inherit; text-decoration: inherit;">device<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance machine type. Values: <code>common</code>, <code>exclusive</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="maxrocount_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrocount_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Ro<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Maximum number of Serverless instances. Range [1,15].</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="maxrocpu_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrocpu_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Ro<wbr>Cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Maximum Serverless Instance Specifications.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="minrocount_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minrocount_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Ro<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Minimum number of Serverless instances. Range [1,15].</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="minrocpu_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minrocpu_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Ro<wbr>Cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Minimum Serverless Instance Specifications.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="clusterparamitem">
+Cluster<wbr>Param<wbr>Item<pulumi-choosable type="language" values="python,go" class="inline">, Cluster<wbr>Param<wbr>Item<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5845,8 +8825,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Param expected value to set.</p>
-</dd><dt class="property-required"
+    <dd>Param expected value to set.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -5854,8 +8833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of param, e.g. <code>character_set_server</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of param, e.g. <code>characterSetServer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="oldvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldvalue_csharp" style="color: inherit; text-decoration: inherit;">Old<wbr>Value</a>
@@ -5863,8 +8841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Param old value, indicates the value which already set, this value is required when modifying current_value.</p>
-</dd></dl>
+    <dd>Param old value, indicates the value which already set, this value is required when modifying current_value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5878,8 +8855,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Param expected value to set.</p>
-</dd><dt class="property-required"
+    <dd>Param expected value to set.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -5887,8 +8863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of param, e.g. <code>character_set_server</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of param, e.g. <code>characterSetServer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="oldvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldvalue_go" style="color: inherit; text-decoration: inherit;">Old<wbr>Value</a>
@@ -5896,8 +8871,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Param old value, indicates the value which already set, this value is required when modifying current_value.</p>
-</dd></dl>
+    <dd>Param old value, indicates the value which already set, this value is required when modifying current_value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="current_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#current_value_hcl" style="color: inherit; text-decoration: inherit;">current_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Param expected value to set.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of param, e.g. <code>characterSetServer</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="old_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#old_value_hcl" style="color: inherit; text-decoration: inherit;">old_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Param old value, indicates the value which already set, this value is required when modifying current_value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5911,8 +8915,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Param expected value to set.</p>
-</dd><dt class="property-required"
+    <dd>Param expected value to set.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -5920,8 +8923,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of param, e.g. <code>character_set_server</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of param, e.g. <code>characterSetServer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="oldvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldvalue_java" style="color: inherit; text-decoration: inherit;">old<wbr>Value</a>
@@ -5929,8 +8931,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Param old value, indicates the value which already set, this value is required when modifying current_value.</p>
-</dd></dl>
+    <dd>Param old value, indicates the value which already set, this value is required when modifying current_value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5944,8 +8945,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Param expected value to set.</p>
-</dd><dt class="property-required"
+    <dd>Param expected value to set.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -5953,8 +8953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of param, e.g. <code>character_set_server</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of param, e.g. <code>characterSetServer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="oldvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldvalue_nodejs" style="color: inherit; text-decoration: inherit;">old<wbr>Value</a>
@@ -5962,8 +8961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Param old value, indicates the value which already set, this value is required when modifying current_value.</p>
-</dd></dl>
+    <dd>Param old value, indicates the value which already set, this value is required when modifying current_value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5977,8 +8975,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Param expected value to set.</p>
-</dd><dt class="property-required"
+    <dd>Param expected value to set.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -5986,8 +8983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of param, e.g. <code>character_set_server</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of param, e.g. <code>characterSetServer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="old_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#old_value_python" style="color: inherit; text-decoration: inherit;">old_<wbr>value</a>
@@ -5995,8 +8991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Param old value, indicates the value which already set, this value is required when modifying current_value.</p>
-</dd></dl>
+    <dd>Param old value, indicates the value which already set, this value is required when modifying current_value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6010,8 +9005,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Param expected value to set.</p>
-</dd><dt class="property-required"
+    <dd>Param expected value to set.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -6019,8 +9013,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of param, e.g. <code>character_set_server</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of param, e.g. <code>characterSetServer</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="oldvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#oldvalue_yaml" style="color: inherit; text-decoration: inherit;">old<wbr>Value</a>
@@ -6028,12 +9021,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Param old value, indicates the value which already set, this value is required when modifying current_value.</p>
-</dd></dl>
+    <dd>Param old value, indicates the value which already set, this value is required when modifying current_value.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="clusterrogroupaddr">Cluster<wbr>Ro<wbr>Group<wbr>Addr</h4>
+<h4 id="clusterrogroupaddr">
+Cluster<wbr>Ro<wbr>Group<wbr>Addr<pulumi-choosable type="language" values="python,go" class="inline">, Cluster<wbr>Ro<wbr>Group<wbr>Addr<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -6045,8 +9039,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address for read-write connection.</p>
-</dd><dt class="property-optional"
+    <dd>IP address for read-write connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -6054,8 +9047,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd></dl>
+    <dd>Port of CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6069,8 +9061,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address for read-write connection.</p>
-</dd><dt class="property-optional"
+    <dd>IP address for read-write connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -6078,8 +9069,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd></dl>
+    <dd>Port of CynosDB cluster.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP address for read-write connection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6093,8 +9105,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address for read-write connection.</p>
-</dd><dt class="property-optional"
+    <dd>IP address for read-write connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -6102,8 +9113,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd></dl>
+    <dd>Port of CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6117,8 +9127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address for read-write connection.</p>
-</dd><dt class="property-optional"
+    <dd>IP address for read-write connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -6126,8 +9135,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd></dl>
+    <dd>Port of CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6141,8 +9149,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP address for read-write connection.</p>
-</dd><dt class="property-optional"
+    <dd>IP address for read-write connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -6150,8 +9157,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd></dl>
+    <dd>Port of CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6165,8 +9171,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address for read-write connection.</p>
-</dd><dt class="property-optional"
+    <dd>IP address for read-write connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -6174,12 +9179,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd></dl>
+    <dd>Port of CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="clusterrogroupinstance">Cluster<wbr>Ro<wbr>Group<wbr>Instance</h4>
+<h4 id="clusterrogroupinstance">
+Cluster<wbr>Ro<wbr>Group<wbr>Instance<pulumi-choosable type="language" values="python,go" class="inline">, Cluster<wbr>Ro<wbr>Group<wbr>Instance<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -6191,8 +9197,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -6200,8 +9205,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd></dl>
+    <dd>Name of instance. Only supported when modifying.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6215,8 +9219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -6224,8 +9227,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd></dl>
+    <dd>Name of instance. Only supported when modifying.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of instance. Only supported when modifying.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6239,8 +9263,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -6248,8 +9271,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd></dl>
+    <dd>Name of instance. Only supported when modifying.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6263,8 +9285,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -6272,8 +9293,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd></dl>
+    <dd>Name of instance. Only supported when modifying.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6287,8 +9307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -6296,8 +9315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd></dl>
+    <dd>Name of instance. Only supported when modifying.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6311,8 +9329,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -6320,12 +9337,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd></dl>
+    <dd>Name of instance. Only supported when modifying.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="clusterrwgroupaddr">Cluster<wbr>Rw<wbr>Group<wbr>Addr</h4>
+<h4 id="clusterrwgroupaddr">
+Cluster<wbr>Rw<wbr>Group<wbr>Addr<pulumi-choosable type="language" values="python,go" class="inline">, Cluster<wbr>Rw<wbr>Group<wbr>Addr<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -6337,8 +9355,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address for read-write connection.</p>
-</dd><dt class="property-optional"
+    <dd>IP address for read-write connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -6346,8 +9363,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd></dl>
+    <dd>Port of CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6361,8 +9377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address for read-write connection.</p>
-</dd><dt class="property-optional"
+    <dd>IP address for read-write connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -6370,8 +9385,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd></dl>
+    <dd>Port of CynosDB cluster.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP address for read-write connection.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6385,8 +9421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address for read-write connection.</p>
-</dd><dt class="property-optional"
+    <dd>IP address for read-write connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -6394,8 +9429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd></dl>
+    <dd>Port of CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6409,8 +9443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address for read-write connection.</p>
-</dd><dt class="property-optional"
+    <dd>IP address for read-write connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -6418,8 +9451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd></dl>
+    <dd>Port of CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6433,8 +9465,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP address for read-write connection.</p>
-</dd><dt class="property-optional"
+    <dd>IP address for read-write connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -6442,8 +9473,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd></dl>
+    <dd>Port of CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6457,8 +9487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address for read-write connection.</p>
-</dd><dt class="property-optional"
+    <dd>IP address for read-write connection.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -6466,12 +9495,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of CynosDB cluster.</p>
-</dd></dl>
+    <dd>Port of CynosDB cluster.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="clusterrwgroupinstance">Cluster<wbr>Rw<wbr>Group<wbr>Instance</h4>
+<h4 id="clusterrwgroupinstance">
+Cluster<wbr>Rw<wbr>Group<wbr>Instance<pulumi-choosable type="language" values="python,go" class="inline">, Cluster<wbr>Rw<wbr>Group<wbr>Instance<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -6483,8 +9513,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -6492,8 +9521,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd></dl>
+    <dd>Name of instance. Only supported when modifying.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6507,8 +9535,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -6516,8 +9543,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd></dl>
+    <dd>Name of instance. Only supported when modifying.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of instance. Only supported when modifying.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6531,8 +9579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -6540,8 +9587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd></dl>
+    <dd>Name of instance. Only supported when modifying.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6555,8 +9601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -6564,8 +9609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd></dl>
+    <dd>Name of instance. Only supported when modifying.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6579,8 +9623,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -6588,8 +9631,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd></dl>
+    <dd>Name of instance. Only supported when modifying.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6603,8 +9645,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -6612,8 +9653,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of instance.</p>
-</dd></dl>
+    <dd>Name of instance. Only supported when modifying.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6624,9 +9664,12 @@ The following state arguments are supported:
 CynosDB cluster can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Cynosdb/cluster:Cluster foo cynosdbmysql-dzj5l8gz
+$ pulumi import tencentcloud:Cynosdb/cluster:Cluster example cynosdbmysql-dzj5l8gz
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -6638,7 +9681,6 @@ $ pulumi import tencentcloud:Cynosdb/cluster:Cluster foo cynosdbmysql-dzj5l8gz
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

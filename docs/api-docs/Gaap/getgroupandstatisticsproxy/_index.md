@@ -2,9 +2,11 @@
 ---
 title: "getGroupAndStatisticsProxy"
 title_tag: "tencentcloud.Gaap.getGroupAndStatisticsProxy"
-meta_desc: "Documentation for the tencentcloud.Gaap.getGroupAndStatisticsProxy function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of gaap and statistics proxy"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query detailed information of gaap and statistics proxy
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const groupAndStatisticsProxy = tencentcloud.Gaap.getGroupAndStatisticsProxy({
+const groupAndStatisticsProxy = tencentcloud.gaap.getGroupAndStatisticsProxy({
     projectId: 0,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-group_and_statistics_proxy = tencentcloud.Gaap.get_group_and_statistics_proxy(project_id=0)
+group_and_statistics_proxy = tencentcloud.gaap.get_group_and_statistics_proxy(project_id=0)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := gaap.GetGroupAndStatisticsProxy(ctx, &gaap.GetGroupAndStatisticsProxyArgs{
+			ProjectId: 0,
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Gaap.GetGroupAndStatisticsProxy(ctx, &gaap.GetGroupAndStatisticsProxyArgs{
-			ProjectId: 0,
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetGroupAndStatisticsProxyArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   groupAndStatisticsProxy:
     fn::invoke:
-      Function: tencentcloud:Gaap:getGroupAndStatisticsProxy
-      Arguments:
+      function: tencentcloud:Gaap:getGroupAndStatisticsProxy
+      arguments:
         projectId: 0
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getgroupandstatisticsproxy" "groupAndStatisticsProxy" {
+  project_id = 0
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeGroupAndStatisticsProxy](https://www.tencentcloud.com/document/api/608/33055)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getGroupAndStatisticsProxy<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGroupAndStatisticsProxyArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetGroupAndStatisticsProxyResult</a></span>></span
+><span class="k">function </span>getGroupAndStatisticsProxy<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGroupAndStatisticsProxyArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetGroupAndStatisticsProxyResult</a></span>></span
 ><span class="k">
-function </span>getGroupAndStatisticsProxyOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGroupAndStatisticsProxyOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetGroupAndStatisticsProxyResult</a></span>></span
+function </span>getGroupAndStatisticsProxyOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGroupAndStatisticsProxyOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetGroupAndStatisticsProxyResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -138,9 +195,9 @@ function </span>getGroupAndStatisticsProxyOutput<span class="p">(</span><span cl
                                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetGroupAndStatisticsProxyResult</span
 ><span class="k">
-def </span>get_group_and_statistics_proxy_output<span class="p">(</span><span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetGroupAndStatisticsProxyResult]</span
+def </span>get_group_and_statistics_proxy_output<span class="p">(</span><span class="nx">project_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetGroupAndStatisticsProxyResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,7 +222,8 @@ func </span>GetGroupAndStatisticsProxyOutput<span class="p">(</span><span class=
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetGroupAndStatisticsProxy </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetGroupAndStatisticsProxyResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetGroupAndStatisticsProxyArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetGroupAndStatisticsProxyResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGroupAndStatisticsProxyInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetGroupAndStatisticsProxyResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGroupAndStatisticsProxyInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetGroupAndStatisticsProxyResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGroupAndStatisticsProxyInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,7 +232,8 @@ func </span>GetGroupAndStatisticsProxyOutput<span class="p">(</span><span class=
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetGroupAndStatisticsProxyResult</a></span>> </span>getGroupAndStatisticsProxy<span class="p">(</span><span class="nx">GetGroupAndStatisticsProxyArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetGroupAndStatisticsProxyResult</a></span>> </span>getGroupAndStatisticsProxy<span class="p">(</span><span class="nx">GetGroupAndStatisticsProxyArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetGroupAndStatisticsProxyResult</a></span>> </span>getGroupAndStatisticsProxy<span class="p">(</span><span class="nx">GetGroupAndStatisticsProxyArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,6 +245,15 @@ func </span>GetGroupAndStatisticsProxyOutput<span class="p">(</span><span class=
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getGroupAndStatisticsProxy:getGroupAndStatisticsProxy
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_group_and_statistics_proxy&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -204,8 +272,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-optional"
+    <dd>Project Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -213,8 +280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +294,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-optional"
+    <dd>Project Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -237,8 +302,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project Id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-optional"
+    <dd>Project Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -261,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -276,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-optional"
+    <dd>Project Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -285,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-optional"
+    <dd>Project Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -309,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project Id.</p>
-</dd><dt class="property-optional"
+    <dd>Project Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -333,8 +412,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupandstatisticsproxygroupset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Channel group information that can be counted.</p>
-</dd><dt class="property-"
+    <dd>Channel group information that can be counted.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -366,8 +443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -397,8 +473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupandstatisticsproxygroupset">[]Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set</a></span>
     </dt>
-    <dd><p>Channel group information that can be counted.</p>
-</dd><dt class="property-"
+    <dd>Channel group information that can be counted.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -406,8 +481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -428,6 +502,44 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="group_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_sets_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgroupandstatisticsproxygroupset">list(object)</a></span>
+    </dt>
+    <dd>Channel group information that can be counted.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -437,8 +549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupandstatisticsproxygroupset">List&lt;Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Channel group information that can be counted.</p>
-</dd><dt class="property-"
+    <dd>Channel group information that can be counted.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -446,8 +557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -477,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupandstatisticsproxygroupset">Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Channel group information that can be counted.</p>
-</dd><dt class="property-"
+    <dd>Channel group information that can be counted.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -486,8 +595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -515,10 +623,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_sets_python" style="color: inherit; text-decoration: inherit;">group_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgroupandstatisticsproxygroupset">Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getgroupandstatisticsproxygroupset">Sequence[Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set]</a></span>
     </dt>
-    <dd><p>Channel group information that can be counted.</p>
-</dd><dt class="property-"
+    <dd>Channel group information that can be counted.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -526,8 +633,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -557,8 +663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupandstatisticsproxygroupset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Channel group information that can be counted.</p>
-</dd><dt class="property-"
+    <dd>Channel group information that can be counted.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -566,8 +671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -607,8 +711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel Group ID.</p>
-</dd><dt class="property-required"
+    <dd>Channel Group ID.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Name</a>
@@ -616,8 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel Group name.</p>
-</dd><dt class="property-required"
+    <dd>Channel Group name.</dd><dt class="property-required"
             title="Required">
         <span id="proxysets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxysets_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Sets</a>
@@ -625,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupandstatisticsproxygroupsetproxyset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Inputs.<wbr>Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set<wbr>Proxy<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Channel list in the proxy group.</p>
-</dd></dl>
+    <dd>Channel list in the proxy group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -640,8 +741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel Group ID.</p>
-</dd><dt class="property-required"
+    <dd>Channel Group ID.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Name</a>
@@ -649,8 +749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel Group name.</p>
-</dd><dt class="property-required"
+    <dd>Channel Group name.</dd><dt class="property-required"
             title="Required">
         <span id="proxysets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxysets_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Sets</a>
@@ -658,8 +757,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupandstatisticsproxygroupsetproxyset">[]Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set<wbr>Proxy<wbr>Set</a></span>
     </dt>
-    <dd><p>Channel list in the proxy group.</p>
-</dd></dl>
+    <dd>Channel list in the proxy group.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Channel Group ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_name_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Channel Group name.</dd><dt class="property-required"
+            title="Required">
+        <span id="proxy_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_sets_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgroupandstatisticsproxygroupsetproxyset">list(object)</a></span>
+    </dt>
+    <dd>Channel list in the proxy group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -673,8 +801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Channel Group ID.</p>
-</dd><dt class="property-required"
+    <dd>Channel Group ID.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_java" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -682,8 +809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Channel Group name.</p>
-</dd><dt class="property-required"
+    <dd>Channel Group name.</dd><dt class="property-required"
             title="Required">
         <span id="proxysets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxysets_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Sets</a>
@@ -691,8 +817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupandstatisticsproxygroupsetproxyset">List&lt;Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set<wbr>Proxy<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Channel list in the proxy group.</p>
-</dd></dl>
+    <dd>Channel list in the proxy group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -706,8 +831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel Group ID.</p>
-</dd><dt class="property-required"
+    <dd>Channel Group ID.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -715,8 +839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel Group name.</p>
-</dd><dt class="property-required"
+    <dd>Channel Group name.</dd><dt class="property-required"
             title="Required">
         <span id="proxysets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxysets_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Sets</a>
@@ -724,8 +847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupandstatisticsproxygroupsetproxyset">Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set<wbr>Proxy<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Channel list in the proxy group.</p>
-</dd></dl>
+    <dd>Channel list in the proxy group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -739,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Channel Group ID.</p>
-</dd><dt class="property-required"
+    <dd>Channel Group ID.</dd><dt class="property-required"
             title="Required">
         <span id="group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_name_python" style="color: inherit; text-decoration: inherit;">group_<wbr>name</a>
@@ -748,17 +869,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Channel Group name.</p>
-</dd><dt class="property-required"
+    <dd>Channel Group name.</dd><dt class="property-required"
             title="Required">
         <span id="proxy_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_sets_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgroupandstatisticsproxygroupsetproxyset">Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set<wbr>Proxy<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getgroupandstatisticsproxygroupsetproxyset">Sequence[Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set<wbr>Proxy<wbr>Set]</a></span>
     </dt>
-    <dd><p>Channel list in the proxy group.</p>
-</dd></dl>
+    <dd>Channel list in the proxy group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -772,8 +891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Channel Group ID.</p>
-</dd><dt class="property-required"
+    <dd>Channel Group ID.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -781,8 +899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Channel Group name.</p>
-</dd><dt class="property-required"
+    <dd>Channel Group name.</dd><dt class="property-required"
             title="Required">
         <span id="proxysets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxysets_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Sets</a>
@@ -790,8 +907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupandstatisticsproxygroupsetproxyset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Channel list in the proxy group.</p>
-</dd></dl>
+    <dd>Channel list in the proxy group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -809,8 +925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupandstatisticsproxygroupsetproxysetlistenerlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Inputs.<wbr>Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set<wbr>Proxy<wbr>Set<wbr>Listener<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>listener list.</p>
-</dd><dt class="property-required"
+    <dd>listener list.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -818,8 +933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel Id.</p>
-</dd><dt class="property-required"
+    <dd>Channel Id.</dd><dt class="property-required"
             title="Required">
         <span id="proxyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyname_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Name</a>
@@ -827,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel name.</p>
-</dd></dl>
+    <dd>Channel name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -842,8 +955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupandstatisticsproxygroupsetproxysetlistenerlist">[]Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set<wbr>Proxy<wbr>Set<wbr>Listener<wbr>List</a></span>
     </dt>
-    <dd><p>listener list.</p>
-</dd><dt class="property-required"
+    <dd>listener list.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -851,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel Id.</p>
-</dd><dt class="property-required"
+    <dd>Channel Id.</dd><dt class="property-required"
             title="Required">
         <span id="proxyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyname_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Name</a>
@@ -860,8 +971,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel name.</p>
-</dd></dl>
+    <dd>Channel name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="listener_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_lists_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgroupandstatisticsproxygroupsetproxysetlistenerlist">list(object)</a></span>
+    </dt>
+    <dd>listener list.</dd><dt class="property-required"
+            title="Required">
+        <span id="proxy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Channel Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="proxy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_name_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Channel name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -875,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupandstatisticsproxygroupsetproxysetlistenerlist">List&lt;Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set<wbr>Proxy<wbr>Set<wbr>Listener<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>listener list.</p>
-</dd><dt class="property-required"
+    <dd>listener list.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -884,8 +1023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Channel Id.</p>
-</dd><dt class="property-required"
+    <dd>Channel Id.</dd><dt class="property-required"
             title="Required">
         <span id="proxyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyname_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Name</a>
@@ -893,8 +1031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Channel name.</p>
-</dd></dl>
+    <dd>Channel name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -908,8 +1045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupandstatisticsproxygroupsetproxysetlistenerlist">Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set<wbr>Proxy<wbr>Set<wbr>Listener<wbr>List[]</a></span>
     </dt>
-    <dd><p>listener list.</p>
-</dd><dt class="property-required"
+    <dd>listener list.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -917,8 +1053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel Id.</p>
-</dd><dt class="property-required"
+    <dd>Channel Id.</dd><dt class="property-required"
             title="Required">
         <span id="proxyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyname_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Name</a>
@@ -926,8 +1061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Channel name.</p>
-</dd></dl>
+    <dd>Channel name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -939,10 +1073,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_lists_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgroupandstatisticsproxygroupsetproxysetlistenerlist">Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set<wbr>Proxy<wbr>Set<wbr>Listener<wbr>List]</a></span>
+        <span class="property-type"><a href="#getgroupandstatisticsproxygroupsetproxysetlistenerlist">Sequence[Get<wbr>Group<wbr>And<wbr>Statistics<wbr>Proxy<wbr>Group<wbr>Set<wbr>Proxy<wbr>Set<wbr>Listener<wbr>List]</a></span>
     </dt>
-    <dd><p>listener list.</p>
-</dd><dt class="property-required"
+    <dd>listener list.</dd><dt class="property-required"
             title="Required">
         <span id="proxy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
@@ -950,8 +1083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Channel Id.</p>
-</dd><dt class="property-required"
+    <dd>Channel Id.</dd><dt class="property-required"
             title="Required">
         <span id="proxy_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_name_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>name</a>
@@ -959,8 +1091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Channel name.</p>
-</dd></dl>
+    <dd>Channel name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -974,8 +1105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupandstatisticsproxygroupsetproxysetlistenerlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>listener list.</p>
-</dd><dt class="property-required"
+    <dd>listener list.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -983,8 +1113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Channel Id.</p>
-</dd><dt class="property-required"
+    <dd>Channel Id.</dd><dt class="property-required"
             title="Required">
         <span id="proxyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyname_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Name</a>
@@ -992,8 +1121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Channel name.</p>
-</dd></dl>
+    <dd>Channel name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1011,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>listener Id.</p>
-</dd><dt class="property-required"
+    <dd>listener Id.</dd><dt class="property-required"
             title="Required">
         <span id="listenername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Name</a>
@@ -1020,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>listener name.</p>
-</dd><dt class="property-required"
+    <dd>listener name.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1029,8 +1155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>listened port.</p>
-</dd><dt class="property-required"
+    <dd>listened port.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1038,8 +1163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener protocol type.</p>
-</dd></dl>
+    <dd>Listener protocol type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1053,8 +1177,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>listener Id.</p>
-</dd><dt class="property-required"
+    <dd>listener Id.</dd><dt class="property-required"
             title="Required">
         <span id="listenername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Name</a>
@@ -1062,8 +1185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>listener name.</p>
-</dd><dt class="property-required"
+    <dd>listener name.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1071,8 +1193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>listened port.</p>
-</dd><dt class="property-required"
+    <dd>listened port.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1080,8 +1201,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener protocol type.</p>
-</dd></dl>
+    <dd>Listener protocol type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>listener Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="listener_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_name_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>listener name.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>listened port.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Listener protocol type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1095,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>listener Id.</p>
-</dd><dt class="property-required"
+    <dd>listener Id.</dd><dt class="property-required"
             title="Required">
         <span id="listenername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -1104,8 +1261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>listener name.</p>
-</dd><dt class="property-required"
+    <dd>listener name.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1113,8 +1269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>listened port.</p>
-</dd><dt class="property-required"
+    <dd>listened port.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1122,8 +1277,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Listener protocol type.</p>
-</dd></dl>
+    <dd>Listener protocol type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1137,8 +1291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>listener Id.</p>
-</dd><dt class="property-required"
+    <dd>listener Id.</dd><dt class="property-required"
             title="Required">
         <span id="listenername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -1146,8 +1299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>listener name.</p>
-</dd><dt class="property-required"
+    <dd>listener name.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1155,8 +1307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>listened port.</p>
-</dd><dt class="property-required"
+    <dd>listened port.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1164,8 +1315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener protocol type.</p>
-</dd></dl>
+    <dd>Listener protocol type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1179,8 +1329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>listener Id.</p>
-</dd><dt class="property-required"
+    <dd>listener Id.</dd><dt class="property-required"
             title="Required">
         <span id="listener_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_name_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>name</a>
@@ -1188,8 +1337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>listener name.</p>
-</dd><dt class="property-required"
+    <dd>listener name.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1197,8 +1345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>listened port.</p>
-</dd><dt class="property-required"
+    <dd>listened port.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1206,8 +1353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Listener protocol type.</p>
-</dd></dl>
+    <dd>Listener protocol type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1221,8 +1367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>listener Id.</p>
-</dd><dt class="property-required"
+    <dd>listener Id.</dd><dt class="property-required"
             title="Required">
         <span id="listenername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -1230,8 +1375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>listener name.</p>
-</dd><dt class="property-required"
+    <dd>listener name.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1239,8 +1383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>listened port.</p>
-</dd><dt class="property-required"
+    <dd>listened port.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1248,8 +1391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Listener protocol type.</p>
-</dd></dl>
+    <dd>Listener protocol type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1264,7 +1406,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

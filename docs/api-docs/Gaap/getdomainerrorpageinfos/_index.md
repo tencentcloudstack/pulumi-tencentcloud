@@ -2,9 +2,11 @@
 ---
 title: "getDomainErrorPageInfos"
 title_tag: "tencentcloud.Gaap.getDomainErrorPageInfos"
-meta_desc: "Documentation for the tencentcloud.Gaap.getDomainErrorPageInfos function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of gaap domain error page infos"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,68 @@ Use this data source to query detailed information of gaap domain error page inf
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const domainErrorPageInfos = tencentcloud.Gaap.getDomainErrorPageInfos({
+const domainErrorPageInfos = tencentcloud.gaap.getDomainErrorPageInfos({
     errorPageIds: ["errorPage-xxxxxx"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-domain_error_page_infos = tencentcloud.Gaap.get_domain_error_page_infos(error_page_ids=["errorPage-xxxxxx"])
+domain_error_page_infos = tencentcloud.gaap.get_domain_error_page_infos(error_page_ids=["errorPage-xxxxxx"])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := gaap.GetDomainErrorPageInfos(ctx, &gaap.GetDomainErrorPageInfosArgs{
+			ErrorPageIds: []string{
+				"errorPage-xxxxxx",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,28 +93,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Gaap.GetDomainErrorPageInfos(ctx, &gaap.GetDomainErrorPageInfosArgs{
-			ErrorPageIds: []string{
-				"errorPage-xxxxxx",
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -79,8 +106,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetDomainErrorPageInfosArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,47 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   domainErrorPageInfos:
     fn::invoke:
-      Function: tencentcloud:Gaap:getDomainErrorPageInfos
-      Arguments:
+      function: tencentcloud:Gaap:getDomainErrorPageInfos
+      arguments:
         errorPageIds:
           - errorPage-xxxxxx
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getdomainerrorpageinfos" "domainErrorPageInfos" {
+  error_page_ids = ["errorPage-xxxxxx"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDomainErrorPageInfoByIds](https://www.tencentcloud.com/document/api/608/37590)
 
 
 
@@ -121,7 +178,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +186,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getDomainErrorPageInfos<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainErrorPageInfosArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDomainErrorPageInfosResult</a></span>></span
+><span class="k">function </span>getDomainErrorPageInfos<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainErrorPageInfosArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDomainErrorPageInfosResult</a></span>></span
 ><span class="k">
-function </span>getDomainErrorPageInfosOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainErrorPageInfosOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDomainErrorPageInfosResult</a></span>></span
+function </span>getDomainErrorPageInfosOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDomainErrorPageInfosOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDomainErrorPageInfosResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -144,9 +201,9 @@ function </span>getDomainErrorPageInfosOutput<span class="p">(</span><span class
                                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetDomainErrorPageInfosResult</span
 ><span class="k">
-def </span>get_domain_error_page_infos_output<span class="p">(</span><span class="nx">error_page_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDomainErrorPageInfosResult]</span
+def </span>get_domain_error_page_infos_output<span class="p">(</span><span class="nx">error_page_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDomainErrorPageInfosResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -171,7 +228,8 @@ func </span>GetDomainErrorPageInfosOutput<span class="p">(</span><span class="nx
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetDomainErrorPageInfos </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetDomainErrorPageInfosResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetDomainErrorPageInfosArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainErrorPageInfosResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainErrorPageInfosInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainErrorPageInfosResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainErrorPageInfosInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDomainErrorPageInfosResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDomainErrorPageInfosInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -180,7 +238,8 @@ func </span>GetDomainErrorPageInfosOutput<span class="p">(</span><span class="nx
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetDomainErrorPageInfosResult</a></span>> </span>getDomainErrorPageInfos<span class="p">(</span><span class="nx">GetDomainErrorPageInfosArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDomainErrorPageInfosResult</a></span>> </span>getDomainErrorPageInfos<span class="p">(</span><span class="nx">GetDomainErrorPageInfosArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDomainErrorPageInfosResult</a></span>> </span>getDomainErrorPageInfos<span class="p">(</span><span class="nx">GetDomainErrorPageInfosArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -192,6 +251,15 @@ func </span>GetDomainErrorPageInfosOutput<span class="p">(</span><span class="nx
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getDomainErrorPageInfos:getDomainErrorPageInfos
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_domain_error_page_infos&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -210,8 +278,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Customized error ID list, supporting up to 10.</p>
-</dd><dt class="property-optional"
+    <dd>Customized error ID list, supporting up to 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -219,8 +286,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -234,8 +300,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Customized error ID list, supporting up to 10.</p>
-</dd><dt class="property-optional"
+    <dd>Customized error ID list, supporting up to 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -243,8 +308,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="error_page_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_page_ids_hcl" style="color: inherit; text-decoration: inherit;">error_<wbr>page_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Customized error ID list, supporting up to 10.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -258,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Customized error ID list, supporting up to 10.</p>
-</dd><dt class="property-optional"
+    <dd>Customized error ID list, supporting up to 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -267,8 +352,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -282,8 +366,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Customized error ID list, supporting up to 10.</p>
-</dd><dt class="property-optional"
+    <dd>Customized error ID list, supporting up to 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -291,8 +374,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -306,8 +388,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Customized error ID list, supporting up to 10.</p>
-</dd><dt class="property-optional"
+    <dd>Customized error ID list, supporting up to 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -315,8 +396,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -330,8 +410,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Customized error ID list, supporting up to 10.</p>
-</dd><dt class="property-optional"
+    <dd>Customized error ID list, supporting up to 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -339,8 +418,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -371,8 +449,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainerrorpageinfoserrorpageset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Domain<wbr>Error<wbr>Page<wbr>Infos<wbr>Error<wbr>Page<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Custom error response configuration setNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Custom error response configuration setNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -380,8 +457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -411,8 +487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainerrorpageinfoserrorpageset">[]Get<wbr>Domain<wbr>Error<wbr>Page<wbr>Infos<wbr>Error<wbr>Page<wbr>Set</a></span>
     </dt>
-    <dd><p>Custom error response configuration setNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Custom error response configuration setNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -420,11 +495,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="error_page_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_page_ids_hcl" style="color: inherit; text-decoration: inherit;">error_<wbr>page_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="error_page_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_page_sets_hcl" style="color: inherit; text-decoration: inherit;">error_<wbr>page_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdomainerrorpageinfoserrorpageset">list(object)</a></span>
+    </dt>
+    <dd>Custom error response configuration setNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -451,8 +563,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainerrorpageinfoserrorpageset">List&lt;Get<wbr>Domain<wbr>Error<wbr>Page<wbr>Infos<wbr>Error<wbr>Page<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Custom error response configuration setNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Custom error response configuration setNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -460,8 +571,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -491,8 +601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainerrorpageinfoserrorpageset">Get<wbr>Domain<wbr>Error<wbr>Page<wbr>Infos<wbr>Error<wbr>Page<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Custom error response configuration setNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Custom error response configuration setNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -500,8 +609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -529,10 +637,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_page_sets_python" style="color: inherit; text-decoration: inherit;">error_<wbr>page_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainerrorpageinfoserrorpageset">Get<wbr>Domain<wbr>Error<wbr>Page<wbr>Infos<wbr>Error<wbr>Page<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getdomainerrorpageinfoserrorpageset">Sequence[Get<wbr>Domain<wbr>Error<wbr>Page<wbr>Infos<wbr>Error<wbr>Page<wbr>Set]</a></span>
     </dt>
-    <dd><p>Custom error response configuration setNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Custom error response configuration setNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -540,8 +647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -571,8 +677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainerrorpageinfoserrorpageset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Custom error response configuration setNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Custom error response configuration setNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -580,8 +685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -613,8 +717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clearheaders_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clearheaders_csharp" style="color: inherit; text-decoration: inherit;">Clear<wbr>Headers</a>
@@ -622,8 +725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -631,8 +733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain name.</p>
-</dd><dt class="property-required"
+    <dd>domain name.</dd><dt class="property-required"
             title="Required">
         <span id="errornos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errornos_csharp" style="color: inherit; text-decoration: inherit;">Error<wbr>Nos</a>
@@ -640,8 +741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Original error code.</p>
-</dd><dt class="property-required"
+    <dd>Original error code.</dd><dt class="property-required"
             title="Required">
         <span id="errorpageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorpageid_csharp" style="color: inherit; text-decoration: inherit;">Error<wbr>Page<wbr>Id</a>
@@ -649,8 +749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration ID for error customization response.</p>
-</dd><dt class="property-required"
+    <dd>Configuration ID for error customization response.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -658,8 +757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener ID.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID.</dd><dt class="property-required"
             title="Required">
         <span id="newerrorno_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newerrorno_csharp" style="color: inherit; text-decoration: inherit;">New<wbr>Error<wbr>No</a>
@@ -667,8 +765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>New error codeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>New error codeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="setheaders_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setheaders_csharp" style="color: inherit; text-decoration: inherit;">Set<wbr>Headers</a>
@@ -676,8 +773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainerrorpageinfoserrorpagesetsetheader">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Inputs.<wbr>Get<wbr>Domain<wbr>Error<wbr>Page<wbr>Infos<wbr>Error<wbr>Page<wbr>Set<wbr>Set<wbr>Header&gt;</a></span>
     </dt>
-    <dd><p>Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -685,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -700,8 +795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clearheaders_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clearheaders_go" style="color: inherit; text-decoration: inherit;">Clear<wbr>Headers</a>
@@ -709,8 +803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -718,8 +811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain name.</p>
-</dd><dt class="property-required"
+    <dd>domain name.</dd><dt class="property-required"
             title="Required">
         <span id="errornos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errornos_go" style="color: inherit; text-decoration: inherit;">Error<wbr>Nos</a>
@@ -727,8 +819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Original error code.</p>
-</dd><dt class="property-required"
+    <dd>Original error code.</dd><dt class="property-required"
             title="Required">
         <span id="errorpageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorpageid_go" style="color: inherit; text-decoration: inherit;">Error<wbr>Page<wbr>Id</a>
@@ -736,8 +827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration ID for error customization response.</p>
-</dd><dt class="property-required"
+    <dd>Configuration ID for error customization response.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -745,8 +835,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener ID.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID.</dd><dt class="property-required"
             title="Required">
         <span id="newerrorno_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newerrorno_go" style="color: inherit; text-decoration: inherit;">New<wbr>Error<wbr>No</a>
@@ -754,8 +843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>New error codeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>New error codeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="setheaders_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setheaders_go" style="color: inherit; text-decoration: inherit;">Set<wbr>Headers</a>
@@ -763,8 +851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainerrorpageinfoserrorpagesetsetheader">[]Get<wbr>Domain<wbr>Error<wbr>Page<wbr>Infos<wbr>Error<wbr>Page<wbr>Set<wbr>Set<wbr>Header</a></span>
     </dt>
-    <dd><p>Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -772,8 +859,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="body_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#body_hcl" style="color: inherit; text-decoration: inherit;">body</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="clear_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clear_headers_hcl" style="color: inherit; text-decoration: inherit;">clear_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>domain name.</dd><dt class="property-required"
+            title="Required">
+        <span id="error_nos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_nos_hcl" style="color: inherit; text-decoration: inherit;">error_<wbr>nos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Original error code.</dd><dt class="property-required"
+            title="Required">
+        <span id="error_page_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_page_id_hcl" style="color: inherit; text-decoration: inherit;">error_<wbr>page_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Configuration ID for error customization response.</dd><dt class="property-required"
+            title="Required">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Listener ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="new_error_no_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_error_no_hcl" style="color: inherit; text-decoration: inherit;">new_<wbr>error_<wbr>no</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>New error codeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="set_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#set_headers_hcl" style="color: inherit; text-decoration: inherit;">set_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdomainerrorpageinfoserrorpagesetsetheader">list(object)</a></span>
+    </dt>
+    <dd>Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -787,8 +951,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clearheaders_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clearheaders_java" style="color: inherit; text-decoration: inherit;">clear<wbr>Headers</a>
@@ -796,8 +959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -805,8 +967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>domain name.</p>
-</dd><dt class="property-required"
+    <dd>domain name.</dd><dt class="property-required"
             title="Required">
         <span id="errornos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errornos_java" style="color: inherit; text-decoration: inherit;">error<wbr>Nos</a>
@@ -814,8 +975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Original error code.</p>
-</dd><dt class="property-required"
+    <dd>Original error code.</dd><dt class="property-required"
             title="Required">
         <span id="errorpageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorpageid_java" style="color: inherit; text-decoration: inherit;">error<wbr>Page<wbr>Id</a>
@@ -823,8 +983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configuration ID for error customization response.</p>
-</dd><dt class="property-required"
+    <dd>Configuration ID for error customization response.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -832,8 +991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Listener ID.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID.</dd><dt class="property-required"
             title="Required">
         <span id="newerrorno_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newerrorno_java" style="color: inherit; text-decoration: inherit;">new<wbr>Error<wbr>No</a>
@@ -841,8 +999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>New error codeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>New error codeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="setheaders_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setheaders_java" style="color: inherit; text-decoration: inherit;">set<wbr>Headers</a>
@@ -850,8 +1007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainerrorpageinfoserrorpagesetsetheader">List&lt;Get<wbr>Domain<wbr>Error<wbr>Page<wbr>Infos<wbr>Error<wbr>Page<wbr>Set<wbr>Set<wbr>Header&gt;</a></span>
     </dt>
-    <dd><p>Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -859,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -874,8 +1029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clearheaders_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clearheaders_nodejs" style="color: inherit; text-decoration: inherit;">clear<wbr>Headers</a>
@@ -883,8 +1037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -892,8 +1045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain name.</p>
-</dd><dt class="property-required"
+    <dd>domain name.</dd><dt class="property-required"
             title="Required">
         <span id="errornos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errornos_nodejs" style="color: inherit; text-decoration: inherit;">error<wbr>Nos</a>
@@ -901,8 +1053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Original error code.</p>
-</dd><dt class="property-required"
+    <dd>Original error code.</dd><dt class="property-required"
             title="Required">
         <span id="errorpageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorpageid_nodejs" style="color: inherit; text-decoration: inherit;">error<wbr>Page<wbr>Id</a>
@@ -910,8 +1061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration ID for error customization response.</p>
-</dd><dt class="property-required"
+    <dd>Configuration ID for error customization response.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -919,8 +1069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener ID.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID.</dd><dt class="property-required"
             title="Required">
         <span id="newerrorno_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newerrorno_nodejs" style="color: inherit; text-decoration: inherit;">new<wbr>Error<wbr>No</a>
@@ -928,8 +1077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>New error codeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>New error codeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="setheaders_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setheaders_nodejs" style="color: inherit; text-decoration: inherit;">set<wbr>Headers</a>
@@ -937,8 +1085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainerrorpageinfoserrorpagesetsetheader">Get<wbr>Domain<wbr>Error<wbr>Page<wbr>Infos<wbr>Error<wbr>Page<wbr>Set<wbr>Set<wbr>Header[]</a></span>
     </dt>
-    <dd><p>Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -946,8 +1093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -961,8 +1107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clear_headers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clear_headers_python" style="color: inherit; text-decoration: inherit;">clear_<wbr>headers</a>
@@ -970,8 +1115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -979,8 +1123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>domain name.</p>
-</dd><dt class="property-required"
+    <dd>domain name.</dd><dt class="property-required"
             title="Required">
         <span id="error_nos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_nos_python" style="color: inherit; text-decoration: inherit;">error_<wbr>nos</a>
@@ -988,8 +1131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Original error code.</p>
-</dd><dt class="property-required"
+    <dd>Original error code.</dd><dt class="property-required"
             title="Required">
         <span id="error_page_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_page_id_python" style="color: inherit; text-decoration: inherit;">error_<wbr>page_<wbr>id</a>
@@ -997,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Configuration ID for error customization response.</p>
-</dd><dt class="property-required"
+    <dd>Configuration ID for error customization response.</dd><dt class="property-required"
             title="Required">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -1006,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Listener ID.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID.</dd><dt class="property-required"
             title="Required">
         <span id="new_error_no_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_error_no_python" style="color: inherit; text-decoration: inherit;">new_<wbr>error_<wbr>no</a>
@@ -1015,17 +1155,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>New error codeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>New error codeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="set_headers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#set_headers_python" style="color: inherit; text-decoration: inherit;">set_<wbr>headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdomainerrorpageinfoserrorpagesetsetheader">Get<wbr>Domain<wbr>Error<wbr>Page<wbr>Infos<wbr>Error<wbr>Page<wbr>Set<wbr>Set<wbr>Header]</a></span>
+        <span class="property-type"><a href="#getdomainerrorpageinfoserrorpagesetsetheader">Sequence[Get<wbr>Domain<wbr>Error<wbr>Page<wbr>Infos<wbr>Error<wbr>Page<wbr>Set<wbr>Set<wbr>Header]</a></span>
     </dt>
-    <dd><p>Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1033,8 +1171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1048,8 +1185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response body set (excluding HTTP header)Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clearheaders_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clearheaders_yaml" style="color: inherit; text-decoration: inherit;">clear<wbr>Headers</a>
@@ -1057,8 +1193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response headers that need to be cleanedNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1066,8 +1201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>domain name.</p>
-</dd><dt class="property-required"
+    <dd>domain name.</dd><dt class="property-required"
             title="Required">
         <span id="errornos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errornos_yaml" style="color: inherit; text-decoration: inherit;">error<wbr>Nos</a>
@@ -1075,8 +1209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Original error code.</p>
-</dd><dt class="property-required"
+    <dd>Original error code.</dd><dt class="property-required"
             title="Required">
         <span id="errorpageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorpageid_yaml" style="color: inherit; text-decoration: inherit;">error<wbr>Page<wbr>Id</a>
@@ -1084,8 +1217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configuration ID for error customization response.</p>
-</dd><dt class="property-required"
+    <dd>Configuration ID for error customization response.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1093,8 +1225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Listener ID.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID.</dd><dt class="property-required"
             title="Required">
         <span id="newerrorno_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newerrorno_yaml" style="color: inherit; text-decoration: inherit;">new<wbr>Error<wbr>No</a>
@@ -1102,8 +1233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>New error codeNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>New error codeNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="setheaders_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setheaders_yaml" style="color: inherit; text-decoration: inherit;">set<wbr>Headers</a>
@@ -1111,8 +1241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdomainerrorpageinfoserrorpagesetsetheader">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Response header to be setNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1120,8 +1249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Rule status, 0 indicates successNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1139,8 +1267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP header name.</p>
-</dd><dt class="property-required"
+    <dd>HTTP header name.</dd><dt class="property-required"
             title="Required">
         <span id="headervalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headervalue_csharp" style="color: inherit; text-decoration: inherit;">Header<wbr>Value</a>
@@ -1148,8 +1275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP header value.</p>
-</dd></dl>
+    <dd>HTTP header value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1163,8 +1289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP header name.</p>
-</dd><dt class="property-required"
+    <dd>HTTP header name.</dd><dt class="property-required"
             title="Required">
         <span id="headervalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headervalue_go" style="color: inherit; text-decoration: inherit;">Header<wbr>Value</a>
@@ -1172,8 +1297,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP header value.</p>
-</dd></dl>
+    <dd>HTTP header value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="header_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#header_name_hcl" style="color: inherit; text-decoration: inherit;">header_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTP header name.</dd><dt class="property-required"
+            title="Required">
+        <span id="header_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#header_value_hcl" style="color: inherit; text-decoration: inherit;">header_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTP header value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1187,8 +1333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP header name.</p>
-</dd><dt class="property-required"
+    <dd>HTTP header name.</dd><dt class="property-required"
             title="Required">
         <span id="headervalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headervalue_java" style="color: inherit; text-decoration: inherit;">header<wbr>Value</a>
@@ -1196,8 +1341,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP header value.</p>
-</dd></dl>
+    <dd>HTTP header value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1211,8 +1355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP header name.</p>
-</dd><dt class="property-required"
+    <dd>HTTP header name.</dd><dt class="property-required"
             title="Required">
         <span id="headervalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headervalue_nodejs" style="color: inherit; text-decoration: inherit;">header<wbr>Value</a>
@@ -1220,8 +1363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP header value.</p>
-</dd></dl>
+    <dd>HTTP header value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1235,8 +1377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTP header name.</p>
-</dd><dt class="property-required"
+    <dd>HTTP header name.</dd><dt class="property-required"
             title="Required">
         <span id="header_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#header_value_python" style="color: inherit; text-decoration: inherit;">header_<wbr>value</a>
@@ -1244,8 +1385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTP header value.</p>
-</dd></dl>
+    <dd>HTTP header value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1259,8 +1399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP header name.</p>
-</dd><dt class="property-required"
+    <dd>HTTP header name.</dd><dt class="property-required"
             title="Required">
         <span id="headervalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headervalue_yaml" style="color: inherit; text-decoration: inherit;">header<wbr>Value</a>
@@ -1268,8 +1407,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP header value.</p>
-</dd></dl>
+    <dd>HTTP header value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1284,7 +1422,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

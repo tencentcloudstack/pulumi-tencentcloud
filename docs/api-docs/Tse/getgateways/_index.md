@@ -2,9 +2,11 @@
 ---
 title: "getGateways"
 title_tag: "tencentcloud.Tse.getGateways"
-meta_desc: "Documentation for the tencentcloud.Tse.getGateways function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tse gateways"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,32 +18,79 @@ Use this data source to query detailed information of tse gateways
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const gateways = tencentcloud.Tse.getGateways({
+const gateways = tencentcloud.tse.getGateways({
     filters: [{
         name: "GatewayId",
         values: ["gateway-ddbb709b"],
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-gateways = tencentcloud.Tse.get_gateways(filters=[tencentcloud.tse.GetGatewaysFilterArgs(
-    name="GatewayId",
-    values=["gateway-ddbb709b"],
-)])
+gateways = tencentcloud.tse.get_gateways(filters=[{
+    "name": "GatewayId",
+    "values": ["gateway-ddbb709b"],
+}])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tse"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tse.GetGateways(ctx, &tse.GetGatewaysArgs{
+			Filters: []tse.GetGatewaysFilter{
+				{
+					Name: "GatewayId",
+					Values: []string{
+						"gateway-ddbb709b",
+					},
+				},
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -62,33 +111,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tse.GetGateways(ctx, &tse.GetGatewaysArgs{
-			Filters: []tse.GetGatewaysFilter{
-				{
-					Name: "GatewayId",
-					Values: []string{
-						"gateway-ddbb709b",
-					},
-				},
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -97,8 +124,9 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tse.TseFunctions;
 import com.pulumi.tencentcloud.Tse.inputs.GetGatewaysArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Tse.inputs.GetGatewaysFilterArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -120,19 +148,52 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   gateways:
     fn::invoke:
-      Function: tencentcloud:Tse:getGateways
-      Arguments:
+      function: tencentcloud:Tse:getGateways
+      arguments:
         filters:
           - name: GatewayId
             values:
               - gateway-ddbb709b
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tse_getgateways" "gateways" {
+  filters {
+    name   = "GatewayId"
+    values = ["gateway-ddbb709b"]
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeCloudNativeAPIGateways](https://www.tencentcloud.com/document/api/1290/79254)
 
 
 
@@ -144,7 +205,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -152,9 +213,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getGateways<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGatewaysArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>></span
+><span class="k">function </span>getGateways<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGatewaysArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>></span
 ><span class="k">
-function </span>getGatewaysOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGatewaysOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>></span
+function </span>getGatewaysOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGatewaysOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -163,13 +224,13 @@ function </span>getGatewaysOutput<span class="p">(</span><span class="nx">args</
 <div>
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
-><span class="k">def </span>get_gateways<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tse.GetGatewaysFilter]]</span> = None<span class="p">,</span>
+><span class="k">def </span>get_gateways<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetGatewaysFilter]]</span> = None<span class="p">,</span>
                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetGatewaysResult</span
 ><span class="k">
-def </span>get_gateways_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_tse.GetGatewaysFilterArgs]]]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetGatewaysResult]</span
+def </span>get_gateways_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetGatewaysFilterArgs]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetGatewaysResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -178,12 +239,12 @@ def </span>get_gateways_output<span class="p">(</span><span class="nx">filters</
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetGateways<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetGatewaysArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetGatewaysResult</a></span>, error)</span
+><span class="k">func </span>LookupGateways<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupGatewaysArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupGatewaysResult</a></span>, error)</span
 ><span class="k">
-func </span>GetGatewaysOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetGatewaysOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetGatewaysResultOutput</span
+func </span>LookupGatewaysOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupGatewaysOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupGatewaysResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetGateways` in the Go SDK.
+&gt; Note: This function is named `LookupGateways` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -194,7 +255,8 @@ func </span>GetGatewaysOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetGateways </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetGatewaysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGatewaysInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGatewaysInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGatewaysInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -203,7 +265,8 @@ func </span>GetGatewaysOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>> </span>getGateways<span class="p">(</span><span class="nx">GetGatewaysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>> </span>getGateways<span class="p">(</span><span class="nx">GetGatewaysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetGatewaysResult</a></span>> </span>getGateways<span class="p">(</span><span class="nx">GetGatewaysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -215,6 +278,15 @@ func </span>GetGatewaysOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tse/getGateways:getGateways
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tse_get_gateways&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -233,8 +305,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tse.<wbr>Inputs.<wbr>Get<wbr>Gateways<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>filter conditions, valid value:Type,Name,GatewayId,Tag,TradeType,InternetPaymode,Region.</p>
-</dd><dt class="property-optional"
+    <dd>filter conditions, valid value:Type,Name,GatewayId,Tag,TradeType,InternetPaymode,Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -242,8 +313,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -257,8 +327,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysfilter">[]Get<wbr>Gateways<wbr>Filter</a></span>
     </dt>
-    <dd><p>filter conditions, valid value:Type,Name,GatewayId,Tag,TradeType,InternetPaymode,Region.</p>
-</dd><dt class="property-optional"
+    <dd>filter conditions, valid value:Type,Name,GatewayId,Tag,TradeType,InternetPaymode,Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -266,8 +335,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgatewaysfilter">list(object)</a></span>
+    </dt>
+    <dd>filter conditions, valid value:Type,Name,GatewayId,Tag,TradeType,InternetPaymode,Region.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -281,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysfilter">List&lt;Get<wbr>Gateways<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>filter conditions, valid value:Type,Name,GatewayId,Tag,TradeType,InternetPaymode,Region.</p>
-</dd><dt class="property-optional"
+    <dd>filter conditions, valid value:Type,Name,GatewayId,Tag,TradeType,InternetPaymode,Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -290,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -305,8 +393,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysfilter">Get<wbr>Gateways<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>filter conditions, valid value:Type,Name,GatewayId,Tag,TradeType,InternetPaymode,Region.</p>
-</dd><dt class="property-optional"
+    <dd>filter conditions, valid value:Type,Name,GatewayId,Tag,TradeType,InternetPaymode,Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -314,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -327,10 +413,9 @@ The following arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgatewaysfilter">Get<wbr>Gateways<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getgatewaysfilter">Sequence[Get<wbr>Gateways<wbr>Filter]</a></span>
     </dt>
-    <dd><p>filter conditions, valid value:Type,Name,GatewayId,Tag,TradeType,InternetPaymode,Region.</p>
-</dd><dt class="property-optional"
+    <dd>filter conditions, valid value:Type,Name,GatewayId,Tag,TradeType,InternetPaymode,Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -338,8 +423,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -353,8 +437,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>filter conditions, valid value:Type,Name,GatewayId,Tag,TradeType,InternetPaymode,Region.</p>
-</dd><dt class="property-optional"
+    <dd>filter conditions, valid value:Type,Name,GatewayId,Tag,TradeType,InternetPaymode,Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -362,8 +445,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -386,8 +468,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_csharp" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -395,8 +476,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresult">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tse.<wbr>Outputs.<wbr>Get<wbr>Gateways<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>gateways information.</p>
-</dd><dt class="property-"
+    <dd>gateways information.</dd><dt class="property-"
             title="">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -426,8 +506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_go" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -435,8 +514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresult">[]Get<wbr>Gateways<wbr>Result</a></span>
     </dt>
-    <dd><p>gateways information.</p>
-</dd><dt class="property-"
+    <dd>gateways information.</dd><dt class="property-"
             title="">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -457,6 +535,44 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="results_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_hcl" style="color: inherit; text-decoration: inherit;">results</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgatewaysresult">list(object)</a></span>
+    </dt>
+    <dd>gateways information.</dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgatewaysfilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -466,8 +582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_java" style="color: inherit; text-decoration: inherit;">results</a>
@@ -475,8 +590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresult">List&lt;Get<wbr>Gateways<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>gateways information.</p>
-</dd><dt class="property-"
+    <dd>gateways information.</dd><dt class="property-"
             title="">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -506,8 +620,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_nodejs" style="color: inherit; text-decoration: inherit;">results</a>
@@ -515,8 +628,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresult">Get<wbr>Gateways<wbr>Result[]</a></span>
     </dt>
-    <dd><p>gateways information.</p>
-</dd><dt class="property-"
+    <dd>gateways information.</dd><dt class="property-"
             title="">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -546,23 +658,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_python" style="color: inherit; text-decoration: inherit;">results</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgatewaysresult">Get<wbr>Gateways<wbr>Result]</a></span>
+        <span class="property-type"><a href="#getgatewaysresult">Sequence[Get<wbr>Gateways<wbr>Result]</a></span>
     </dt>
-    <dd><p>gateways information.</p>
-</dd><dt class="property-"
+    <dd>gateways information.</dd><dt class="property-"
             title="">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgatewaysfilter">Get<wbr>Gateways<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getgatewaysfilter">Sequence[Get<wbr>Gateways<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -586,8 +696,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_yaml" style="color: inherit; text-decoration: inherit;">results</a>
@@ -595,8 +704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresult">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>gateways information.</p>
-</dd><dt class="property-"
+    <dd>gateways information.</dd><dt class="property-"
             title="">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -636,8 +744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter name.</p>
-</dd><dt class="property-required"
+    <dd>filter name.</dd><dt class="property-required"
             title="Required">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -645,8 +752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>filter value.</p>
-</dd></dl>
+    <dd>filter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -660,8 +766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter name.</p>
-</dd><dt class="property-required"
+    <dd>filter name.</dd><dt class="property-required"
             title="Required">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -669,8 +774,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>filter value.</p>
-</dd></dl>
+    <dd>filter value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>filter name.</dd><dt class="property-required"
+            title="Required">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>filter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -684,8 +810,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>filter name.</p>
-</dd><dt class="property-required"
+    <dd>filter name.</dd><dt class="property-required"
             title="Required">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -693,8 +818,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>filter value.</p>
-</dd></dl>
+    <dd>filter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -708,8 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter name.</p>
-</dd><dt class="property-required"
+    <dd>filter name.</dd><dt class="property-required"
             title="Required">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -717,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>filter value.</p>
-</dd></dl>
+    <dd>filter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -732,8 +854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>filter name.</p>
-</dd><dt class="property-required"
+    <dd>filter name.</dd><dt class="property-required"
             title="Required">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -741,8 +862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>filter value.</p>
-</dd></dl>
+    <dd>filter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -756,8 +876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>filter name.</p>
-</dd><dt class="property-required"
+    <dd>filter name.</dd><dt class="property-required"
             title="Required">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -765,8 +884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>filter value.</p>
-</dd></dl>
+    <dd>filter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -784,8 +902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tse.<wbr>Inputs.<wbr>Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>gateway list.</p>
-</dd><dt class="property-required"
+    <dd>gateway list.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Count</a>
@@ -793,8 +910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>total count.</p>
-</dd></dl>
+    <dd>total count.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -808,8 +924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylist">[]Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List</a></span>
     </dt>
-    <dd><p>gateway list.</p>
-</dd><dt class="property-required"
+    <dd>gateway list.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Count</a>
@@ -817,8 +932,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>total count.</p>
-</dd></dl>
+    <dd>total count.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="gateway_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gateway_lists_hcl" style="color: inherit; text-decoration: inherit;">gateway_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgatewaysresultgatewaylist">list(object)</a></span>
+    </dt>
+    <dd>gateway list.</dd><dt class="property-required"
+            title="Required">
+        <span id="total_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_count_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>total count.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -832,8 +968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylist">List&lt;Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>gateway list.</p>
-</dd><dt class="property-required"
+    <dd>gateway list.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_java" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -841,8 +976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>total count.</p>
-</dd></dl>
+    <dd>total count.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -856,8 +990,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylist">Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List[]</a></span>
     </dt>
-    <dd><p>gateway list.</p>
-</dd><dt class="property-required"
+    <dd>gateway list.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -865,8 +998,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>total count.</p>
-</dd></dl>
+    <dd>total count.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -878,10 +1010,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gateway_lists_python" style="color: inherit; text-decoration: inherit;">gateway_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgatewaysresultgatewaylist">Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List]</a></span>
+        <span class="property-type"><a href="#getgatewaysresultgatewaylist">Sequence[Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List]</a></span>
     </dt>
-    <dd><p>gateway list.</p>
-</dd><dt class="property-required"
+    <dd>gateway list.</dd><dt class="property-required"
             title="Required">
         <span id="total_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_count_python" style="color: inherit; text-decoration: inherit;">total_<wbr>count</a>
@@ -889,8 +1020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>total count.</p>
-</dd></dl>
+    <dd>total count.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -904,8 +1034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>gateway list.</p>
-</dd><dt class="property-required"
+    <dd>gateway list.</dd><dt class="property-required"
             title="Required">
         <span id="totalcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalcount_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Count</a>
@@ -913,8 +1042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>total count.</p>
-</dd></dl>
+    <dd>total count.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -932,8 +1060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>auto renew flag, <code>0</code>: default status, <code>1</code>: auto renew, <code>2</code>: auto not renew.</p>
-</dd><dt class="property-required"
+    <dd>auto renew flag, <code>0</code>: default status, <code>1</code>: auto renew, <code>2</code>: auto not renew.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -941,8 +1068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="curdeadline_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#curdeadline_csharp" style="color: inherit; text-decoration: inherit;">Cur<wbr>Deadline</a>
@@ -950,8 +1076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -959,8 +1084,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>description of gateway.</p>
-</dd><dt class="property-required"
+    <dd>description of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="enablecls_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecls_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Cls</a>
@@ -968,8 +1092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to enable CLS log.</p>
-</dd><dt class="property-required"
+    <dd>whether to enable CLS log.</dd><dt class="property-required"
             title="Required">
         <span id="enableinternet_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableinternet_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Internet</a>
@@ -977,8 +1100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="engineregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineregion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Region</a>
@@ -986,8 +1108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine region of gateway.</p>
-</dd><dt class="property-required"
+    <dd>engine region of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="featureversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#featureversion_csharp" style="color: inherit; text-decoration: inherit;">Feature<wbr>Version</a>
@@ -995,8 +1116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>product version. <code>TRIAL</code>, <code>STANDARD</code>(default value), <code>PROFESSIONAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>product version. <code>TRIAL</code>, <code>STANDARD</code>(default value), <code>PROFESSIONAL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="gatewayid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayid_csharp" style="color: inherit; text-decoration: inherit;">Gateway<wbr>Id</a>
@@ -1004,8 +1124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="gatewayminorversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayminorversion_csharp" style="color: inherit; text-decoration: inherit;">Gateway<wbr>Minor<wbr>Version</a>
@@ -1013,8 +1132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>minor version of gateway.</p>
-</dd><dt class="property-required"
+    <dd>minor version of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="gatewayversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayversion_csharp" style="color: inherit; text-decoration: inherit;">Gateway<wbr>Version</a>
@@ -1022,8 +1140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway version. Reference value: <code>2.4.1</code>, <code>2.5.1</code>.</p>
-</dd><dt class="property-required"
+    <dd>gateway version. Reference value: <code>2.4.1</code>, <code>2.5.1</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ingressclassname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingressclassname_csharp" style="color: inherit; text-decoration: inherit;">Ingress<wbr>Class<wbr>Name</a>
@@ -1031,8 +1148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ingress class name.</p>
-</dd><dt class="property-required"
+    <dd>ingress class name.</dd><dt class="property-required"
             title="Required">
         <span id="instanceports_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceports_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ports</a>
@@ -1040,8 +1156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylistinstanceport">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tse.<wbr>Inputs.<wbr>Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Instance<wbr>Port&gt;</a></span>
     </dt>
-    <dd><p>the port information that the instance monitors.</p>
-</dd><dt class="property-required"
+    <dd>the port information that the instance monitors.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1049,8 +1164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>public network outbound traffic bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>public network outbound traffic bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="internetpaymode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetpaymode_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Pay<wbr>Mode</a>
@@ -1058,8 +1172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>trade type of internet. <code>BANDWIDTH</code>, <code>TRAFFIC</code>.</p>
-</dd><dt class="property-required"
+    <dd>trade type of internet. <code>BANDWIDTH</code>, <code>TRAFFIC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="isolatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatetime_csharp" style="color: inherit; text-decoration: inherit;">Isolate<wbr>Time</a>
@@ -1067,8 +1180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>isolation time, used when the gateway is isolated.</p>
-</dd><dt class="property-required"
+    <dd>isolation time, used when the gateway is isolated.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancertype_csharp" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Type</a>
@@ -1076,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>load balance type of public internet.</p>
-</dd><dt class="property-required"
+    <dd>load balance type of public internet.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1085,8 +1196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter name.</p>
-</dd><dt class="property-required"
+    <dd>gateway name.</dd><dt class="property-required"
             title="Required">
         <span id="nodeconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeconfigs_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Configs</a>
@@ -1094,8 +1204,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylistnodeconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tse.<wbr>Inputs.<wbr>Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Node<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>original node config.</p>
-</dd><dt class="property-required"
+    <dd>original node config.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddresses_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Addresses</a>
@@ -1103,8 +1212,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>addresses of public internet.</p>
-</dd><dt class="property-required"
+    <dd>addresses of public internet.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1112,8 +1220,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>status of gateway. May return values: <code>Creating</code>, <code>CreateFailed</code>, <code>Running</code>, <code>Modifying</code>, <code>UpdatingSpec</code>, <code>UpdateFailed</code>, <code>Deleting</code>, <code>DeleteFailed</code>, <code>Isolating</code>.</p>
-</dd><dt class="property-required"
+    <dd>status of gateway. May return values: <code>Creating</code>, <code>CreateFailed</code>, <code>Running</code>, <code>Modifying</code>, <code>UpdatingSpec</code>, <code>UpdateFailed</code>, <code>Deleting</code>, <code>DeleteFailed</code>, <code>Isolating</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
@@ -1121,8 +1228,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylisttag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tse.<wbr>Inputs.<wbr>Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Tag&gt;</a></span>
     </dt>
-    <dd><p>tags information of gatewayNote: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>tags information of gatewayNote: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="tradetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradetype_csharp" style="color: inherit; text-decoration: inherit;">Trade<wbr>Type</a>
@@ -1130,8 +1236,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trade type. <code>0</code>: postpaid, <code>1</code>: Prepaid.</p>
-</dd><dt class="property-required"
+    <dd>trade type. <code>0</code>: postpaid, <code>1</code>: Prepaid.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1139,8 +1244,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway type.</p>
-</dd><dt class="property-required"
+    <dd>gateway type.</dd><dt class="property-required"
             title="Required">
         <span id="vpcconfigs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcconfigs_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Configs</a>
@@ -1148,8 +1252,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylistvpcconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tse.<wbr>Inputs.<wbr>Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Vpc<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>vpc information.</p>
-</dd></dl>
+    <dd>vpc information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1163,8 +1266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>auto renew flag, <code>0</code>: default status, <code>1</code>: auto renew, <code>2</code>: auto not renew.</p>
-</dd><dt class="property-required"
+    <dd>auto renew flag, <code>0</code>: default status, <code>1</code>: auto renew, <code>2</code>: auto not renew.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1172,8 +1274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="curdeadline_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#curdeadline_go" style="color: inherit; text-decoration: inherit;">Cur<wbr>Deadline</a>
@@ -1181,8 +1282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1190,8 +1290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>description of gateway.</p>
-</dd><dt class="property-required"
+    <dd>description of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="enablecls_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecls_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Cls</a>
@@ -1199,8 +1298,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to enable CLS log.</p>
-</dd><dt class="property-required"
+    <dd>whether to enable CLS log.</dd><dt class="property-required"
             title="Required">
         <span id="enableinternet_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableinternet_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Internet</a>
@@ -1208,8 +1306,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="engineregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineregion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Region</a>
@@ -1217,8 +1314,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine region of gateway.</p>
-</dd><dt class="property-required"
+    <dd>engine region of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="featureversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#featureversion_go" style="color: inherit; text-decoration: inherit;">Feature<wbr>Version</a>
@@ -1226,8 +1322,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>product version. <code>TRIAL</code>, <code>STANDARD</code>(default value), <code>PROFESSIONAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>product version. <code>TRIAL</code>, <code>STANDARD</code>(default value), <code>PROFESSIONAL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="gatewayid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayid_go" style="color: inherit; text-decoration: inherit;">Gateway<wbr>Id</a>
@@ -1235,8 +1330,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="gatewayminorversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayminorversion_go" style="color: inherit; text-decoration: inherit;">Gateway<wbr>Minor<wbr>Version</a>
@@ -1244,8 +1338,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>minor version of gateway.</p>
-</dd><dt class="property-required"
+    <dd>minor version of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="gatewayversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayversion_go" style="color: inherit; text-decoration: inherit;">Gateway<wbr>Version</a>
@@ -1253,8 +1346,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway version. Reference value: <code>2.4.1</code>, <code>2.5.1</code>.</p>
-</dd><dt class="property-required"
+    <dd>gateway version. Reference value: <code>2.4.1</code>, <code>2.5.1</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ingressclassname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingressclassname_go" style="color: inherit; text-decoration: inherit;">Ingress<wbr>Class<wbr>Name</a>
@@ -1262,8 +1354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ingress class name.</p>
-</dd><dt class="property-required"
+    <dd>ingress class name.</dd><dt class="property-required"
             title="Required">
         <span id="instanceports_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceports_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ports</a>
@@ -1271,8 +1362,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylistinstanceport">[]Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Instance<wbr>Port</a></span>
     </dt>
-    <dd><p>the port information that the instance monitors.</p>
-</dd><dt class="property-required"
+    <dd>the port information that the instance monitors.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1280,8 +1370,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>public network outbound traffic bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>public network outbound traffic bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="internetpaymode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetpaymode_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Pay<wbr>Mode</a>
@@ -1289,8 +1378,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>trade type of internet. <code>BANDWIDTH</code>, <code>TRAFFIC</code>.</p>
-</dd><dt class="property-required"
+    <dd>trade type of internet. <code>BANDWIDTH</code>, <code>TRAFFIC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="isolatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatetime_go" style="color: inherit; text-decoration: inherit;">Isolate<wbr>Time</a>
@@ -1298,8 +1386,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>isolation time, used when the gateway is isolated.</p>
-</dd><dt class="property-required"
+    <dd>isolation time, used when the gateway is isolated.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancertype_go" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Type</a>
@@ -1307,8 +1394,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>load balance type of public internet.</p>
-</dd><dt class="property-required"
+    <dd>load balance type of public internet.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1316,8 +1402,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter name.</p>
-</dd><dt class="property-required"
+    <dd>gateway name.</dd><dt class="property-required"
             title="Required">
         <span id="nodeconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeconfigs_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Configs</a>
@@ -1325,8 +1410,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylistnodeconfig">[]Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Node<wbr>Config</a></span>
     </dt>
-    <dd><p>original node config.</p>
-</dd><dt class="property-required"
+    <dd>original node config.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddresses_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Addresses</a>
@@ -1334,8 +1418,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>addresses of public internet.</p>
-</dd><dt class="property-required"
+    <dd>addresses of public internet.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1343,8 +1426,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>status of gateway. May return values: <code>Creating</code>, <code>CreateFailed</code>, <code>Running</code>, <code>Modifying</code>, <code>UpdatingSpec</code>, <code>UpdateFailed</code>, <code>Deleting</code>, <code>DeleteFailed</code>, <code>Isolating</code>.</p>
-</dd><dt class="property-required"
+    <dd>status of gateway. May return values: <code>Creating</code>, <code>CreateFailed</code>, <code>Running</code>, <code>Modifying</code>, <code>UpdatingSpec</code>, <code>UpdateFailed</code>, <code>Deleting</code>, <code>DeleteFailed</code>, <code>Isolating</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
@@ -1352,8 +1434,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylisttag">[]Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Tag</a></span>
     </dt>
-    <dd><p>tags information of gatewayNote: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>tags information of gatewayNote: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="tradetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradetype_go" style="color: inherit; text-decoration: inherit;">Trade<wbr>Type</a>
@@ -1361,8 +1442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trade type. <code>0</code>: postpaid, <code>1</code>: Prepaid.</p>
-</dd><dt class="property-required"
+    <dd>trade type. <code>0</code>: postpaid, <code>1</code>: Prepaid.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1370,8 +1450,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway type.</p>
-</dd><dt class="property-required"
+    <dd>gateway type.</dd><dt class="property-required"
             title="Required">
         <span id="vpcconfigs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcconfigs_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Configs</a>
@@ -1379,8 +1458,213 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylistvpcconfig">[]Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Vpc<wbr>Config</a></span>
     </dt>
-    <dd><p>vpc information.</p>
-</dd></dl>
+    <dd>vpc information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>auto renew flag, <code>0</code>: default status, <code>1</code>: auto renew, <code>2</code>: auto not renew.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="cur_deadline_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cur_deadline_hcl" style="color: inherit; text-decoration: inherit;">cur_<wbr>deadline</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>description of gateway.</dd><dt class="property-required"
+            title="Required">
+        <span id="enable_cls_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_cls_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>cls</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>whether to enable CLS log.</dd><dt class="property-required"
+            title="Required">
+        <span id="enable_internet_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_internet_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>internet</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
+            title="Required">
+        <span id="engine_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_region_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>engine region of gateway.</dd><dt class="property-required"
+            title="Required">
+        <span id="feature_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#feature_version_hcl" style="color: inherit; text-decoration: inherit;">feature_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>product version. <code>TRIAL</code>, <code>STANDARD</code>(default value), <code>PROFESSIONAL</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gateway_id_hcl" style="color: inherit; text-decoration: inherit;">gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>gateway ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="gateway_minor_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gateway_minor_version_hcl" style="color: inherit; text-decoration: inherit;">gateway_<wbr>minor_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>minor version of gateway.</dd><dt class="property-required"
+            title="Required">
+        <span id="gateway_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gateway_version_hcl" style="color: inherit; text-decoration: inherit;">gateway_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>gateway version. Reference value: <code>2.4.1</code>, <code>2.5.1</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="ingress_class_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingress_class_name_hcl" style="color: inherit; text-decoration: inherit;">ingress_<wbr>class_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ingress class name.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_ports_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ports_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ports</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgatewaysresultgatewaylistinstanceport">list(object)</a></span>
+    </dt>
+    <dd>the port information that the instance monitors.</dd><dt class="property-required"
+            title="Required">
+        <span id="internet_max_bandwidth_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_max_bandwidth_out_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>public network outbound traffic bandwidth.</dd><dt class="property-required"
+            title="Required">
+        <span id="internet_pay_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_pay_mode_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>pay_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>trade type of internet. <code>BANDWIDTH</code>, <code>TRAFFIC</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolate_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolate_time_hcl" style="color: inherit; text-decoration: inherit;">isolate_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>isolation time, used when the gateway is isolated.</dd><dt class="property-required"
+            title="Required">
+        <span id="load_balancer_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_type_hcl" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>load balance type of public internet.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>gateway name.</dd><dt class="property-required"
+            title="Required">
+        <span id="node_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_configs_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgatewaysresultgatewaylistnodeconfig">list(object)</a></span>
+    </dt>
+    <dd>original node config.</dd><dt class="property-required"
+            title="Required">
+        <span id="public_ip_addresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_addresses_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>addresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>addresses of public internet.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>status of gateway. May return values: <code>Creating</code>, <code>CreateFailed</code>, <code>Running</code>, <code>Modifying</code>, <code>UpdatingSpec</code>, <code>UpdateFailed</code>, <code>Deleting</code>, <code>DeleteFailed</code>, <code>Isolating</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgatewaysresultgatewaylisttag">list(object)</a></span>
+    </dt>
+    <dd>tags information of gatewayNote: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
+            title="Required">
+        <span id="trade_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trade_type_hcl" style="color: inherit; text-decoration: inherit;">trade_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>trade type. <code>0</code>: postpaid, <code>1</code>: Prepaid.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>gateway type.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_configs_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgatewaysresultgatewaylistvpcconfig">list(object)</a></span>
+    </dt>
+    <dd>vpc information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1394,8 +1678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>auto renew flag, <code>0</code>: default status, <code>1</code>: auto renew, <code>2</code>: auto not renew.</p>
-</dd><dt class="property-required"
+    <dd>auto renew flag, <code>0</code>: default status, <code>1</code>: auto renew, <code>2</code>: auto not renew.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1403,8 +1686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="curdeadline_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#curdeadline_java" style="color: inherit; text-decoration: inherit;">cur<wbr>Deadline</a>
@@ -1412,8 +1694,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1421,8 +1702,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>description of gateway.</p>
-</dd><dt class="property-required"
+    <dd>description of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="enablecls_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecls_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Cls</a>
@@ -1430,8 +1710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>whether to enable CLS log.</p>
-</dd><dt class="property-required"
+    <dd>whether to enable CLS log.</dd><dt class="property-required"
             title="Required">
         <span id="enableinternet_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableinternet_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Internet</a>
@@ -1439,8 +1718,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="engineregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineregion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Region</a>
@@ -1448,8 +1726,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine region of gateway.</p>
-</dd><dt class="property-required"
+    <dd>engine region of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="featureversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#featureversion_java" style="color: inherit; text-decoration: inherit;">feature<wbr>Version</a>
@@ -1457,8 +1734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>product version. <code>TRIAL</code>, <code>STANDARD</code>(default value), <code>PROFESSIONAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>product version. <code>TRIAL</code>, <code>STANDARD</code>(default value), <code>PROFESSIONAL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="gatewayid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayid_java" style="color: inherit; text-decoration: inherit;">gateway<wbr>Id</a>
@@ -1466,8 +1742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="gatewayminorversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayminorversion_java" style="color: inherit; text-decoration: inherit;">gateway<wbr>Minor<wbr>Version</a>
@@ -1475,8 +1750,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>minor version of gateway.</p>
-</dd><dt class="property-required"
+    <dd>minor version of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="gatewayversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayversion_java" style="color: inherit; text-decoration: inherit;">gateway<wbr>Version</a>
@@ -1484,8 +1758,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>gateway version. Reference value: <code>2.4.1</code>, <code>2.5.1</code>.</p>
-</dd><dt class="property-required"
+    <dd>gateway version. Reference value: <code>2.4.1</code>, <code>2.5.1</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ingressclassname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingressclassname_java" style="color: inherit; text-decoration: inherit;">ingress<wbr>Class<wbr>Name</a>
@@ -1493,8 +1766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ingress class name.</p>
-</dd><dt class="property-required"
+    <dd>ingress class name.</dd><dt class="property-required"
             title="Required">
         <span id="instanceports_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceports_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Ports</a>
@@ -1502,8 +1774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylistinstanceport">List&lt;Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Instance<wbr>Port&gt;</a></span>
     </dt>
-    <dd><p>the port information that the instance monitors.</p>
-</dd><dt class="property-required"
+    <dd>the port information that the instance monitors.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1511,8 +1782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>public network outbound traffic bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>public network outbound traffic bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="internetpaymode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetpaymode_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Pay<wbr>Mode</a>
@@ -1520,8 +1790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>trade type of internet. <code>BANDWIDTH</code>, <code>TRAFFIC</code>.</p>
-</dd><dt class="property-required"
+    <dd>trade type of internet. <code>BANDWIDTH</code>, <code>TRAFFIC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="isolatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatetime_java" style="color: inherit; text-decoration: inherit;">isolate<wbr>Time</a>
@@ -1529,8 +1798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>isolation time, used when the gateway is isolated.</p>
-</dd><dt class="property-required"
+    <dd>isolation time, used when the gateway is isolated.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancertype_java" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Type</a>
@@ -1538,8 +1806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>load balance type of public internet.</p>
-</dd><dt class="property-required"
+    <dd>load balance type of public internet.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1547,8 +1814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>filter name.</p>
-</dd><dt class="property-required"
+    <dd>gateway name.</dd><dt class="property-required"
             title="Required">
         <span id="nodeconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeconfigs_java" style="color: inherit; text-decoration: inherit;">node<wbr>Configs</a>
@@ -1556,8 +1822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylistnodeconfig">List&lt;Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Node<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>original node config.</p>
-</dd><dt class="property-required"
+    <dd>original node config.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddresses_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Addresses</a>
@@ -1565,8 +1830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>addresses of public internet.</p>
-</dd><dt class="property-required"
+    <dd>addresses of public internet.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1574,8 +1838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>status of gateway. May return values: <code>Creating</code>, <code>CreateFailed</code>, <code>Running</code>, <code>Modifying</code>, <code>UpdatingSpec</code>, <code>UpdateFailed</code>, <code>Deleting</code>, <code>DeleteFailed</code>, <code>Isolating</code>.</p>
-</dd><dt class="property-required"
+    <dd>status of gateway. May return values: <code>Creating</code>, <code>CreateFailed</code>, <code>Running</code>, <code>Modifying</code>, <code>UpdatingSpec</code>, <code>UpdateFailed</code>, <code>Deleting</code>, <code>DeleteFailed</code>, <code>Isolating</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -1583,8 +1846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylisttag">List&lt;Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Tag&gt;</a></span>
     </dt>
-    <dd><p>tags information of gatewayNote: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>tags information of gatewayNote: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="tradetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradetype_java" style="color: inherit; text-decoration: inherit;">trade<wbr>Type</a>
@@ -1592,8 +1854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>trade type. <code>0</code>: postpaid, <code>1</code>: Prepaid.</p>
-</dd><dt class="property-required"
+    <dd>trade type. <code>0</code>: postpaid, <code>1</code>: Prepaid.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1601,8 +1862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>gateway type.</p>
-</dd><dt class="property-required"
+    <dd>gateway type.</dd><dt class="property-required"
             title="Required">
         <span id="vpcconfigs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcconfigs_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Configs</a>
@@ -1610,8 +1870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylistvpcconfig">List&lt;Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Vpc<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>vpc information.</p>
-</dd></dl>
+    <dd>vpc information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1625,8 +1884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>auto renew flag, <code>0</code>: default status, <code>1</code>: auto renew, <code>2</code>: auto not renew.</p>
-</dd><dt class="property-required"
+    <dd>auto renew flag, <code>0</code>: default status, <code>1</code>: auto renew, <code>2</code>: auto not renew.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1634,8 +1892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="curdeadline_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#curdeadline_nodejs" style="color: inherit; text-decoration: inherit;">cur<wbr>Deadline</a>
@@ -1643,8 +1900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1652,8 +1908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>description of gateway.</p>
-</dd><dt class="property-required"
+    <dd>description of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="enablecls_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecls_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Cls</a>
@@ -1661,8 +1916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>whether to enable CLS log.</p>
-</dd><dt class="property-required"
+    <dd>whether to enable CLS log.</dd><dt class="property-required"
             title="Required">
         <span id="enableinternet_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableinternet_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Internet</a>
@@ -1670,8 +1924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="engineregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineregion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Region</a>
@@ -1679,8 +1932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>engine region of gateway.</p>
-</dd><dt class="property-required"
+    <dd>engine region of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="featureversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#featureversion_nodejs" style="color: inherit; text-decoration: inherit;">feature<wbr>Version</a>
@@ -1688,8 +1940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>product version. <code>TRIAL</code>, <code>STANDARD</code>(default value), <code>PROFESSIONAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>product version. <code>TRIAL</code>, <code>STANDARD</code>(default value), <code>PROFESSIONAL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="gatewayid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayid_nodejs" style="color: inherit; text-decoration: inherit;">gateway<wbr>Id</a>
@@ -1697,8 +1948,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="gatewayminorversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayminorversion_nodejs" style="color: inherit; text-decoration: inherit;">gateway<wbr>Minor<wbr>Version</a>
@@ -1706,8 +1956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>minor version of gateway.</p>
-</dd><dt class="property-required"
+    <dd>minor version of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="gatewayversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayversion_nodejs" style="color: inherit; text-decoration: inherit;">gateway<wbr>Version</a>
@@ -1715,8 +1964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway version. Reference value: <code>2.4.1</code>, <code>2.5.1</code>.</p>
-</dd><dt class="property-required"
+    <dd>gateway version. Reference value: <code>2.4.1</code>, <code>2.5.1</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ingressclassname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingressclassname_nodejs" style="color: inherit; text-decoration: inherit;">ingress<wbr>Class<wbr>Name</a>
@@ -1724,8 +1972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ingress class name.</p>
-</dd><dt class="property-required"
+    <dd>ingress class name.</dd><dt class="property-required"
             title="Required">
         <span id="instanceports_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceports_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Ports</a>
@@ -1733,8 +1980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylistinstanceport">Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Instance<wbr>Port[]</a></span>
     </dt>
-    <dd><p>the port information that the instance monitors.</p>
-</dd><dt class="property-required"
+    <dd>the port information that the instance monitors.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1742,8 +1988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>public network outbound traffic bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>public network outbound traffic bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="internetpaymode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetpaymode_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Pay<wbr>Mode</a>
@@ -1751,8 +1996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>trade type of internet. <code>BANDWIDTH</code>, <code>TRAFFIC</code>.</p>
-</dd><dt class="property-required"
+    <dd>trade type of internet. <code>BANDWIDTH</code>, <code>TRAFFIC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="isolatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatetime_nodejs" style="color: inherit; text-decoration: inherit;">isolate<wbr>Time</a>
@@ -1760,8 +2004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>isolation time, used when the gateway is isolated.</p>
-</dd><dt class="property-required"
+    <dd>isolation time, used when the gateway is isolated.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancertype_nodejs" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Type</a>
@@ -1769,8 +2012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>load balance type of public internet.</p>
-</dd><dt class="property-required"
+    <dd>load balance type of public internet.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1778,8 +2020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>filter name.</p>
-</dd><dt class="property-required"
+    <dd>gateway name.</dd><dt class="property-required"
             title="Required">
         <span id="nodeconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeconfigs_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Configs</a>
@@ -1787,8 +2028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylistnodeconfig">Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Node<wbr>Config[]</a></span>
     </dt>
-    <dd><p>original node config.</p>
-</dd><dt class="property-required"
+    <dd>original node config.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddresses_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Addresses</a>
@@ -1796,8 +2036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>addresses of public internet.</p>
-</dd><dt class="property-required"
+    <dd>addresses of public internet.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1805,8 +2044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>status of gateway. May return values: <code>Creating</code>, <code>CreateFailed</code>, <code>Running</code>, <code>Modifying</code>, <code>UpdatingSpec</code>, <code>UpdateFailed</code>, <code>Deleting</code>, <code>DeleteFailed</code>, <code>Isolating</code>.</p>
-</dd><dt class="property-required"
+    <dd>status of gateway. May return values: <code>Creating</code>, <code>CreateFailed</code>, <code>Running</code>, <code>Modifying</code>, <code>UpdatingSpec</code>, <code>UpdateFailed</code>, <code>Deleting</code>, <code>DeleteFailed</code>, <code>Isolating</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -1814,8 +2052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylisttag">Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Tag[]</a></span>
     </dt>
-    <dd><p>tags information of gatewayNote: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>tags information of gatewayNote: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="tradetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradetype_nodejs" style="color: inherit; text-decoration: inherit;">trade<wbr>Type</a>
@@ -1823,8 +2060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>trade type. <code>0</code>: postpaid, <code>1</code>: Prepaid.</p>
-</dd><dt class="property-required"
+    <dd>trade type. <code>0</code>: postpaid, <code>1</code>: Prepaid.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1832,8 +2068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway type.</p>
-</dd><dt class="property-required"
+    <dd>gateway type.</dd><dt class="property-required"
             title="Required">
         <span id="vpcconfigs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcconfigs_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Configs</a>
@@ -1841,8 +2076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylistvpcconfig">Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Vpc<wbr>Config[]</a></span>
     </dt>
-    <dd><p>vpc information.</p>
-</dd></dl>
+    <dd>vpc information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1856,8 +2090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>auto renew flag, <code>0</code>: default status, <code>1</code>: auto renew, <code>2</code>: auto not renew.</p>
-</dd><dt class="property-required"
+    <dd>auto renew flag, <code>0</code>: default status, <code>1</code>: auto renew, <code>2</code>: auto not renew.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1865,8 +2098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="cur_deadline_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cur_deadline_python" style="color: inherit; text-decoration: inherit;">cur_<wbr>deadline</a>
@@ -1874,8 +2106,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1883,8 +2114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>description of gateway.</p>
-</dd><dt class="property-required"
+    <dd>description of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="enable_cls_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_cls_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>cls</a>
@@ -1892,8 +2122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to enable CLS log.</p>
-</dd><dt class="property-required"
+    <dd>whether to enable CLS log.</dd><dt class="property-required"
             title="Required">
         <span id="enable_internet_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_internet_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>internet</a>
@@ -1901,8 +2130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="engine_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_region_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>region</a>
@@ -1910,8 +2138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>engine region of gateway.</p>
-</dd><dt class="property-required"
+    <dd>engine region of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="feature_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#feature_version_python" style="color: inherit; text-decoration: inherit;">feature_<wbr>version</a>
@@ -1919,8 +2146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>product version. <code>TRIAL</code>, <code>STANDARD</code>(default value), <code>PROFESSIONAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>product version. <code>TRIAL</code>, <code>STANDARD</code>(default value), <code>PROFESSIONAL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="gateway_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gateway_id_python" style="color: inherit; text-decoration: inherit;">gateway_<wbr>id</a>
@@ -1928,8 +2154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="gateway_minor_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gateway_minor_version_python" style="color: inherit; text-decoration: inherit;">gateway_<wbr>minor_<wbr>version</a>
@@ -1937,8 +2162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>minor version of gateway.</p>
-</dd><dt class="property-required"
+    <dd>minor version of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="gateway_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gateway_version_python" style="color: inherit; text-decoration: inherit;">gateway_<wbr>version</a>
@@ -1946,8 +2170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>gateway version. Reference value: <code>2.4.1</code>, <code>2.5.1</code>.</p>
-</dd><dt class="property-required"
+    <dd>gateway version. Reference value: <code>2.4.1</code>, <code>2.5.1</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ingress_class_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingress_class_name_python" style="color: inherit; text-decoration: inherit;">ingress_<wbr>class_<wbr>name</a>
@@ -1955,17 +2178,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ingress class name.</p>
-</dd><dt class="property-required"
+    <dd>ingress class name.</dd><dt class="property-required"
             title="Required">
         <span id="instance_ports_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ports_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>ports</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgatewaysresultgatewaylistinstanceport">Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Instance<wbr>Port]</a></span>
+        <span class="property-type"><a href="#getgatewaysresultgatewaylistinstanceport">Sequence[Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Instance<wbr>Port]</a></span>
     </dt>
-    <dd><p>the port information that the instance monitors.</p>
-</dd><dt class="property-required"
+    <dd>the port information that the instance monitors.</dd><dt class="property-required"
             title="Required">
         <span id="internet_max_bandwidth_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_max_bandwidth_out_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
@@ -1973,8 +2194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>public network outbound traffic bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>public network outbound traffic bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="internet_pay_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_pay_mode_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>pay_<wbr>mode</a>
@@ -1982,8 +2202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>trade type of internet. <code>BANDWIDTH</code>, <code>TRAFFIC</code>.</p>
-</dd><dt class="property-required"
+    <dd>trade type of internet. <code>BANDWIDTH</code>, <code>TRAFFIC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="isolate_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolate_time_python" style="color: inherit; text-decoration: inherit;">isolate_<wbr>time</a>
@@ -1991,8 +2210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>isolation time, used when the gateway is isolated.</p>
-</dd><dt class="property-required"
+    <dd>isolation time, used when the gateway is isolated.</dd><dt class="property-required"
             title="Required">
         <span id="load_balancer_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_type_python" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>type</a>
@@ -2000,8 +2218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>load balance type of public internet.</p>
-</dd><dt class="property-required"
+    <dd>load balance type of public internet.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2009,17 +2226,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>filter name.</p>
-</dd><dt class="property-required"
+    <dd>gateway name.</dd><dt class="property-required"
             title="Required">
         <span id="node_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_configs_python" style="color: inherit; text-decoration: inherit;">node_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgatewaysresultgatewaylistnodeconfig">Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Node<wbr>Config]</a></span>
+        <span class="property-type"><a href="#getgatewaysresultgatewaylistnodeconfig">Sequence[Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Node<wbr>Config]</a></span>
     </dt>
-    <dd><p>original node config.</p>
-</dd><dt class="property-required"
+    <dd>original node config.</dd><dt class="property-required"
             title="Required">
         <span id="public_ip_addresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_addresses_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>addresses</a>
@@ -2027,8 +2242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>addresses of public internet.</p>
-</dd><dt class="property-required"
+    <dd>addresses of public internet.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2036,17 +2250,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>status of gateway. May return values: <code>Creating</code>, <code>CreateFailed</code>, <code>Running</code>, <code>Modifying</code>, <code>UpdatingSpec</code>, <code>UpdateFailed</code>, <code>Deleting</code>, <code>DeleteFailed</code>, <code>Isolating</code>.</p>
-</dd><dt class="property-required"
+    <dd>status of gateway. May return values: <code>Creating</code>, <code>CreateFailed</code>, <code>Running</code>, <code>Modifying</code>, <code>UpdatingSpec</code>, <code>UpdateFailed</code>, <code>Deleting</code>, <code>DeleteFailed</code>, <code>Isolating</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgatewaysresultgatewaylisttag">Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Tag]</a></span>
+        <span class="property-type"><a href="#getgatewaysresultgatewaylisttag">Sequence[Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Tag]</a></span>
     </dt>
-    <dd><p>tags information of gatewayNote: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>tags information of gatewayNote: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="trade_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trade_type_python" style="color: inherit; text-decoration: inherit;">trade_<wbr>type</a>
@@ -2054,8 +2266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>trade type. <code>0</code>: postpaid, <code>1</code>: Prepaid.</p>
-</dd><dt class="property-required"
+    <dd>trade type. <code>0</code>: postpaid, <code>1</code>: Prepaid.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2063,17 +2274,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>gateway type.</p>
-</dd><dt class="property-required"
+    <dd>gateway type.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_configs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_configs_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgatewaysresultgatewaylistvpcconfig">Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Vpc<wbr>Config]</a></span>
+        <span class="property-type"><a href="#getgatewaysresultgatewaylistvpcconfig">Sequence[Get<wbr>Gateways<wbr>Result<wbr>Gateway<wbr>List<wbr>Vpc<wbr>Config]</a></span>
     </dt>
-    <dd><p>vpc information.</p>
-</dd></dl>
+    <dd>vpc information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2087,8 +2296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>auto renew flag, <code>0</code>: default status, <code>1</code>: auto renew, <code>2</code>: auto not renew.</p>
-</dd><dt class="property-required"
+    <dd>auto renew flag, <code>0</code>: default status, <code>1</code>: auto renew, <code>2</code>: auto not renew.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2096,8 +2304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="curdeadline_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#curdeadline_yaml" style="color: inherit; text-decoration: inherit;">cur<wbr>Deadline</a>
@@ -2105,8 +2312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>expire date, for prepaid type.Note: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2114,8 +2320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>description of gateway.</p>
-</dd><dt class="property-required"
+    <dd>description of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="enablecls_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablecls_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Cls</a>
@@ -2123,8 +2328,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>whether to enable CLS log.</p>
-</dd><dt class="property-required"
+    <dd>whether to enable CLS log.</dd><dt class="property-required"
             title="Required">
         <span id="enableinternet_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enableinternet_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Internet</a>
@@ -2132,8 +2336,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>whether to open the public network of client.Note: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="engineregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineregion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Region</a>
@@ -2141,8 +2344,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>engine region of gateway.</p>
-</dd><dt class="property-required"
+    <dd>engine region of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="featureversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#featureversion_yaml" style="color: inherit; text-decoration: inherit;">feature<wbr>Version</a>
@@ -2150,8 +2352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>product version. <code>TRIAL</code>, <code>STANDARD</code>(default value), <code>PROFESSIONAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>product version. <code>TRIAL</code>, <code>STANDARD</code>(default value), <code>PROFESSIONAL</code>.</dd><dt class="property-required"
             title="Required">
         <span id="gatewayid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayid_yaml" style="color: inherit; text-decoration: inherit;">gateway<wbr>Id</a>
@@ -2159,8 +2360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="gatewayminorversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayminorversion_yaml" style="color: inherit; text-decoration: inherit;">gateway<wbr>Minor<wbr>Version</a>
@@ -2168,8 +2368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>minor version of gateway.</p>
-</dd><dt class="property-required"
+    <dd>minor version of gateway.</dd><dt class="property-required"
             title="Required">
         <span id="gatewayversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gatewayversion_yaml" style="color: inherit; text-decoration: inherit;">gateway<wbr>Version</a>
@@ -2177,8 +2376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>gateway version. Reference value: <code>2.4.1</code>, <code>2.5.1</code>.</p>
-</dd><dt class="property-required"
+    <dd>gateway version. Reference value: <code>2.4.1</code>, <code>2.5.1</code>.</dd><dt class="property-required"
             title="Required">
         <span id="ingressclassname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingressclassname_yaml" style="color: inherit; text-decoration: inherit;">ingress<wbr>Class<wbr>Name</a>
@@ -2186,8 +2384,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ingress class name.</p>
-</dd><dt class="property-required"
+    <dd>ingress class name.</dd><dt class="property-required"
             title="Required">
         <span id="instanceports_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceports_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Ports</a>
@@ -2195,8 +2392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylistinstanceport">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>the port information that the instance monitors.</p>
-</dd><dt class="property-required"
+    <dd>the port information that the instance monitors.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -2204,8 +2400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>public network outbound traffic bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>public network outbound traffic bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="internetpaymode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetpaymode_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Pay<wbr>Mode</a>
@@ -2213,8 +2408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>trade type of internet. <code>BANDWIDTH</code>, <code>TRAFFIC</code>.</p>
-</dd><dt class="property-required"
+    <dd>trade type of internet. <code>BANDWIDTH</code>, <code>TRAFFIC</code>.</dd><dt class="property-required"
             title="Required">
         <span id="isolatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatetime_yaml" style="color: inherit; text-decoration: inherit;">isolate<wbr>Time</a>
@@ -2222,8 +2416,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>isolation time, used when the gateway is isolated.</p>
-</dd><dt class="property-required"
+    <dd>isolation time, used when the gateway is isolated.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancertype_yaml" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Type</a>
@@ -2231,8 +2424,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>load balance type of public internet.</p>
-</dd><dt class="property-required"
+    <dd>load balance type of public internet.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2240,8 +2432,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>filter name.</p>
-</dd><dt class="property-required"
+    <dd>gateway name.</dd><dt class="property-required"
             title="Required">
         <span id="nodeconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeconfigs_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Configs</a>
@@ -2249,8 +2440,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylistnodeconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>original node config.</p>
-</dd><dt class="property-required"
+    <dd>original node config.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddresses_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Addresses</a>
@@ -2258,8 +2448,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>addresses of public internet.</p>
-</dd><dt class="property-required"
+    <dd>addresses of public internet.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2267,8 +2456,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>status of gateway. May return values: <code>Creating</code>, <code>CreateFailed</code>, <code>Running</code>, <code>Modifying</code>, <code>UpdatingSpec</code>, <code>UpdateFailed</code>, <code>Deleting</code>, <code>DeleteFailed</code>, <code>Isolating</code>.</p>
-</dd><dt class="property-required"
+    <dd>status of gateway. May return values: <code>Creating</code>, <code>CreateFailed</code>, <code>Running</code>, <code>Modifying</code>, <code>UpdatingSpec</code>, <code>UpdateFailed</code>, <code>Deleting</code>, <code>DeleteFailed</code>, <code>Isolating</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -2276,8 +2464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylisttag">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>tags information of gatewayNote: This field may return null, indicating that a valid value is not available.</p>
-</dd><dt class="property-required"
+    <dd>tags information of gatewayNote: This field may return null, indicating that a valid value is not available.</dd><dt class="property-required"
             title="Required">
         <span id="tradetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tradetype_yaml" style="color: inherit; text-decoration: inherit;">trade<wbr>Type</a>
@@ -2285,8 +2472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>trade type. <code>0</code>: postpaid, <code>1</code>: Prepaid.</p>
-</dd><dt class="property-required"
+    <dd>trade type. <code>0</code>: postpaid, <code>1</code>: Prepaid.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2294,8 +2480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>gateway type.</p>
-</dd><dt class="property-required"
+    <dd>gateway type.</dd><dt class="property-required"
             title="Required">
         <span id="vpcconfigs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcconfigs_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Configs</a>
@@ -2303,8 +2488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysresultgatewaylistvpcconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>vpc information.</p>
-</dd></dl>
+    <dd>vpc information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2322,8 +2506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>http port.</p>
-</dd><dt class="property-required"
+    <dd>http port.</dd><dt class="property-required"
             title="Required">
         <span id="httpsport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsport_csharp" style="color: inherit; text-decoration: inherit;">Https<wbr>Port</a>
@@ -2331,8 +2514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>https port.</p>
-</dd></dl>
+    <dd>https port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2346,8 +2528,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>http port.</p>
-</dd><dt class="property-required"
+    <dd>http port.</dd><dt class="property-required"
             title="Required">
         <span id="httpsport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsport_go" style="color: inherit; text-decoration: inherit;">Https<wbr>Port</a>
@@ -2355,8 +2536,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>https port.</p>
-</dd></dl>
+    <dd>https port.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="http_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_port_hcl" style="color: inherit; text-decoration: inherit;">http_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>http port.</dd><dt class="property-required"
+            title="Required">
+        <span id="https_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#https_port_hcl" style="color: inherit; text-decoration: inherit;">https_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>https port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2370,8 +2572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>http port.</p>
-</dd><dt class="property-required"
+    <dd>http port.</dd><dt class="property-required"
             title="Required">
         <span id="httpsport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsport_java" style="color: inherit; text-decoration: inherit;">https<wbr>Port</a>
@@ -2379,8 +2580,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>https port.</p>
-</dd></dl>
+    <dd>https port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2394,8 +2594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>http port.</p>
-</dd><dt class="property-required"
+    <dd>http port.</dd><dt class="property-required"
             title="Required">
         <span id="httpsport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsport_nodejs" style="color: inherit; text-decoration: inherit;">https<wbr>Port</a>
@@ -2403,8 +2602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>https port.</p>
-</dd></dl>
+    <dd>https port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2418,8 +2616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>http port.</p>
-</dd><dt class="property-required"
+    <dd>http port.</dd><dt class="property-required"
             title="Required">
         <span id="https_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#https_port_python" style="color: inherit; text-decoration: inherit;">https_<wbr>port</a>
@@ -2427,8 +2624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>https port.</p>
-</dd></dl>
+    <dd>https port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2442,8 +2638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>http port.</p>
-</dd><dt class="property-required"
+    <dd>http port.</dd><dt class="property-required"
             title="Required">
         <span id="httpsport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpsport_yaml" style="color: inherit; text-decoration: inherit;">https<wbr>Port</a>
@@ -2451,8 +2646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>https port.</p>
-</dd></dl>
+    <dd>https port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2470,8 +2664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>node number, 2-50.</p>
-</dd><dt class="property-required"
+    <dd>node number, 2-50.</dd><dt class="property-required"
             title="Required">
         <span id="specification_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specification_csharp" style="color: inherit; text-decoration: inherit;">Specification</a>
@@ -2479,8 +2672,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>specification, 1c2g|2c4g|4c8g|8c16g.</p>
-</dd></dl>
+    <dd>specification, 1c2g|2c4g|4c8g|8c16g.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2494,8 +2686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>node number, 2-50.</p>
-</dd><dt class="property-required"
+    <dd>node number, 2-50.</dd><dt class="property-required"
             title="Required">
         <span id="specification_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specification_go" style="color: inherit; text-decoration: inherit;">Specification</a>
@@ -2503,8 +2694,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>specification, 1c2g|2c4g|4c8g|8c16g.</p>
-</dd></dl>
+    <dd>specification, 1c2g|2c4g|4c8g|8c16g.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_hcl" style="color: inherit; text-decoration: inherit;">number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>node number, 2-50.</dd><dt class="property-required"
+            title="Required">
+        <span id="specification_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specification_hcl" style="color: inherit; text-decoration: inherit;">specification</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>specification, 1c2g|2c4g|4c8g|8c16g.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2518,8 +2730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>node number, 2-50.</p>
-</dd><dt class="property-required"
+    <dd>node number, 2-50.</dd><dt class="property-required"
             title="Required">
         <span id="specification_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specification_java" style="color: inherit; text-decoration: inherit;">specification</a>
@@ -2527,8 +2738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>specification, 1c2g|2c4g|4c8g|8c16g.</p>
-</dd></dl>
+    <dd>specification, 1c2g|2c4g|4c8g|8c16g.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2542,8 +2752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>node number, 2-50.</p>
-</dd><dt class="property-required"
+    <dd>node number, 2-50.</dd><dt class="property-required"
             title="Required">
         <span id="specification_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specification_nodejs" style="color: inherit; text-decoration: inherit;">specification</a>
@@ -2551,8 +2760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>specification, 1c2g|2c4g|4c8g|8c16g.</p>
-</dd></dl>
+    <dd>specification, 1c2g|2c4g|4c8g|8c16g.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2566,8 +2774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>node number, 2-50.</p>
-</dd><dt class="property-required"
+    <dd>node number, 2-50.</dd><dt class="property-required"
             title="Required">
         <span id="specification_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specification_python" style="color: inherit; text-decoration: inherit;">specification</a>
@@ -2575,8 +2782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>specification, 1c2g|2c4g|4c8g|8c16g.</p>
-</dd></dl>
+    <dd>specification, 1c2g|2c4g|4c8g|8c16g.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2590,8 +2796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>node number, 2-50.</p>
-</dd><dt class="property-required"
+    <dd>node number, 2-50.</dd><dt class="property-required"
             title="Required">
         <span id="specification_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#specification_yaml" style="color: inherit; text-decoration: inherit;">specification</a>
@@ -2599,8 +2804,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>specification, 1c2g|2c4g|4c8g|8c16g.</p>
-</dd></dl>
+    <dd>specification, 1c2g|2c4g|4c8g|8c16g.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2618,8 +2822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-required"
+    <dd>tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -2627,8 +2830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2642,8 +2844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-required"
+    <dd>tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
@@ -2651,8 +2852,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tag_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2666,8 +2888,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-required"
+    <dd>tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -2675,8 +2896,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2690,8 +2910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-required"
+    <dd>tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -2699,8 +2918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2714,8 +2932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-required"
+    <dd>tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tag_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
@@ -2723,8 +2940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2738,8 +2954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tag key.</p>
-</dd><dt class="property-required"
+    <dd>tag key.</dd><dt class="property-required"
             title="Required">
         <span id="tagvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
@@ -2747,8 +2962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>tag value.</p>
-</dd></dl>
+    <dd>tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2766,8 +2980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet.</p>
-</dd><dt class="property-required"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2775,8 +2988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet.</p>
-</dd></dl>
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2790,8 +3002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet.</p>
-</dd><dt class="property-required"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2799,8 +3010,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet.</p>
-</dd></dl>
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2814,8 +3046,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet.</p>
-</dd><dt class="property-required"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2823,8 +3054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet.</p>
-</dd></dl>
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2838,8 +3068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet.</p>
-</dd><dt class="property-required"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2847,8 +3076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet.</p>
-</dd></dl>
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2862,8 +3090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet.</p>
-</dd><dt class="property-required"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2871,8 +3098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet.</p>
-</dd></dl>
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2886,8 +3112,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet.</p>
-</dd><dt class="property-required"
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2895,8 +3120,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet ID. Assign an IP address to the engine in the VPC subnet.</p>
-</dd></dl>
+    <dd>subnet ID. Assign an IP address to the engine in the VPC subnet.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2911,7 +3135,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

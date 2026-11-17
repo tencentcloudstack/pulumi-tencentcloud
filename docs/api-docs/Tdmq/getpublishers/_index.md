@@ -2,9 +2,11 @@
 ---
 title: "getPublishers"
 title_tag: "tencentcloud.Tdmq.getPublishers"
-meta_desc: "Documentation for the tencentcloud.Tdmq.getPublishers function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tdmq publishers"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,52 +18,108 @@ Use this data source to query detailed information of tdmq publishers
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const publishers = tencentcloud.Tdmq.getPublishers({
+const publishers = tencentcloud.tdmq.getPublishers({
     clusterId: "pulsar-9n95ax58b9vn",
+    namespace: "keep-ns",
+    topic: "keep-topic",
     filters: [{
         name: "ProducerName",
         values: ["test"],
     }],
-    namespace: "keep-ns",
     sort: {
         name: "ProducerName",
         order: "DESC",
     },
-    topic: "keep-topic",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-publishers = tencentcloud.Tdmq.get_publishers(cluster_id="pulsar-9n95ax58b9vn",
-    filters=[tencentcloud.tdmq.GetPublishersFilterArgs(
-        name="ProducerName",
-        values=["test"],
-    )],
+publishers = tencentcloud.tdmq.get_publishers(cluster_id="pulsar-9n95ax58b9vn",
     namespace="keep-ns",
-    sort=tencentcloud.tdmq.GetPublishersSortArgs(
-        name="ProducerName",
-        order="DESC",
-    ),
-    topic="keep-topic")
+    topic="keep-topic",
+    filters=[{
+        "name": "ProducerName",
+        "values": ["test"],
+    }],
+    sort={
+        "name": "ProducerName",
+        "order": "DESC",
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tdmq"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tdmq.GetPublishers(ctx, &tdmq.GetPublishersArgs{
+			ClusterId: "pulsar-9n95ax58b9vn",
+			Namespace: "keep-ns",
+			Topic:     "keep-topic",
+			Filters: []tdmq.GetPublishersFilter{
+				{
+					Name: pulumi.StringRef("ProducerName"),
+					Values: []string{
+						"test",
+					},
+				},
+			},
+			Sort: tdmq.GetPublishersSort{
+				Name:  "ProducerName",
+				Order: "DESC",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
     var publishers = Tencentcloud.Tdmq.GetPublishers.Invoke(new()
     {
         ClusterId = "pulsar-9n95ax58b9vn",
+        Namespace = "keep-ns",
+        Topic = "keep-topic",
         Filters = new[]
         {
             new Tencentcloud.Tdmq.Inputs.GetPublishersFilterInputArgs
@@ -73,51 +131,20 @@ return await Deployment.RunAsync(() =>
                 },
             },
         },
-        Namespace = "keep-ns",
         Sort = new Tencentcloud.Tdmq.Inputs.GetPublishersSortInputArgs
         {
             Name = "ProducerName",
             Order = "DESC",
         },
-        Topic = "keep-topic",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tdmq.GetPublishers(ctx, &tdmq.GetPublishersArgs{
-			ClusterId: "pulsar-9n95ax58b9vn",
-			Filters: []tdmq.GetPublishersFilter{
-				{
-					Name: pulumi.StringRef("ProducerName"),
-					Values: []string{
-						"test",
-					},
-				},
-			},
-			Namespace: "keep-ns",
-			Sort: tdmq.GetPublishersSort{
-				Name:  "ProducerName",
-				Order: "DESC",
-			},
-			Topic: "keep-topic",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -126,9 +153,10 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tdmq.TdmqFunctions;
 import com.pulumi.tencentcloud.Tdmq.inputs.GetPublishersArgs;
+import com.pulumi.tencentcloud.Tdmq.inputs.GetPublishersFilterArgs;
 import com.pulumi.tencentcloud.Tdmq.inputs.GetPublishersSortArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -142,40 +170,80 @@ public class App {
     public static void stack(Context ctx) {
         final var publishers = TdmqFunctions.getPublishers(GetPublishersArgs.builder()
             .clusterId("pulsar-9n95ax58b9vn")
+            .namespace("keep-ns")
+            .topic("keep-topic")
             .filters(GetPublishersFilterArgs.builder()
                 .name("ProducerName")
                 .values("test")
                 .build())
-            .namespace("keep-ns")
             .sort(GetPublishersSortArgs.builder()
                 .name("ProducerName")
                 .order("DESC")
                 .build())
-            .topic("keep-topic")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   publishers:
     fn::invoke:
-      Function: tencentcloud:Tdmq:getPublishers
-      Arguments:
+      function: tencentcloud:Tdmq:getPublishers
+      arguments:
         clusterId: pulsar-9n95ax58b9vn
+        namespace: keep-ns
+        topic: keep-topic
         filters:
           - name: ProducerName
             values:
               - test
-        namespace: keep-ns
         sort:
           name: ProducerName
           order: DESC
-        topic: keep-topic
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tdmq_getpublishers" "publishers" {
+  cluster_id = "pulsar-9n95ax58b9vn"
+  namespace  = "keep-ns"
+  topic      = "keep-topic"
+  filters {
+    name   = "ProducerName"
+    values = ["test"]
+  }
+  sort = {
+    name  = "ProducerName"
+    order = "DESC"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribePublishers](https://www.tencentcloud.com/search/?wd=DescribePublishers&type=document&lang=en)
 
 
 
@@ -187,7 +255,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -195,9 +263,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getPublishers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPublishersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPublishersResult</a></span>></span
+><span class="k">function </span>getPublishers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPublishersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPublishersResult</a></span>></span
 ><span class="k">
-function </span>getPublishersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPublishersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPublishersResult</a></span>></span
+function </span>getPublishersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPublishersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPublishersResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -207,20 +275,20 @@ function </span>getPublishersOutput<span class="p">(</span><span class="nx">args
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
 ><span class="k">def </span>get_publishers<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tdmq.GetPublishersFilter]]</span> = None<span class="p">,</span>
+                   <span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetPublishersFilter]]</span> = None<span class="p">,</span>
                    <span class="nx">namespace</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">sort</span><span class="p">:</span> <span class="nx">Optional[_tdmq.GetPublishersSort]</span> = None<span class="p">,</span>
+                   <span class="nx">sort</span><span class="p">:</span> <span class="nx">Optional[GetPublishersSort]</span> = None<span class="p">,</span>
                    <span class="nx">topic</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetPublishersResult</span
 ><span class="k">
-def </span>get_publishers_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_tdmq.GetPublishersFilterArgs]]]]</span> = None<span class="p">,</span>
-                   <span class="nx">namespace</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">sort</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[_tdmq.GetPublishersSortArgs]]</span> = None<span class="p">,</span>
-                   <span class="nx">topic</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPublishersResult]</span
+def </span>get_publishers_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetPublishersFilterArgs]]]]</span> = None<span class="p">,</span>
+                   <span class="nx">namespace</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">sort</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[GetPublishersSortArgs]]</span> = None<span class="p">,</span>
+                   <span class="nx">topic</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPublishersResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -245,7 +313,8 @@ func </span>GetPublishersOutput<span class="p">(</span><span class="nx">ctx</spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetPublishers </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetPublishersResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetPublishersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetPublishersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPublishersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPublishersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPublishersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPublishersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPublishersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -254,7 +323,8 @@ func </span>GetPublishersOutput<span class="p">(</span><span class="nx">ctx</spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetPublishersResult</a></span>> </span>getPublishers<span class="p">(</span><span class="nx">GetPublishersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPublishersResult</a></span>> </span>getPublishers<span class="p">(</span><span class="nx">GetPublishersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPublishersResult</a></span>> </span>getPublishers<span class="p">(</span><span class="nx">GetPublishersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -266,6 +336,15 @@ func </span>GetPublishersOutput<span class="p">(</span><span class="nx">ctx</spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tdmq/getPublishers:getPublishers
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tdmq_get_publishers&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -284,8 +363,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -293,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required"
+    <dd>namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="topic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_csharp" style="color: inherit; text-decoration: inherit;">Topic</a>
@@ -302,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>topic name.</p>
-</dd><dt class="property-optional"
+    <dd>topic name.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -311,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublishersfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tdmq.<wbr>Inputs.<wbr>Get<wbr>Publishers<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Parameter filter, support ProducerName, Address field.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter filter, support ProducerName, Address field.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -320,8 +395,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sort_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_csharp" style="color: inherit; text-decoration: inherit;">Sort</a>
@@ -329,8 +403,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublisherssort">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tdmq.<wbr>Inputs.<wbr>Get<wbr>Publishers<wbr>Sort</a></span>
     </dt>
-    <dd><p>sorter.</p>
-</dd></dl>
+    <dd>sorter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -353,8 +425,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required"
+    <dd>namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="topic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_go" style="color: inherit; text-decoration: inherit;">Topic</a>
@@ -362,8 +433,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>topic name.</p>
-</dd><dt class="property-optional"
+    <dd>topic name.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -371,8 +441,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublishersfilter">[]Get<wbr>Publishers<wbr>Filter</a></span>
     </dt>
-    <dd><p>Parameter filter, support ProducerName, Address field.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter filter, support ProducerName, Address field.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -380,8 +449,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sort_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_go" style="color: inherit; text-decoration: inherit;">Sort</a>
@@ -389,8 +457,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublisherssort">Get<wbr>Publishers<wbr>Sort</a></span>
     </dt>
-    <dd><p>sorter.</p>
-</dd></dl>
+    <dd>sorter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace name.</dd><dt class="property-required"
+            title="Required">
+        <span id="topic_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_hcl" style="color: inherit; text-decoration: inherit;">topic</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>topic name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpublishersfilter">list(object)</a></span>
+    </dt>
+    <dd>Parameter filter, support ProducerName, Address field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sort_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_hcl" style="color: inherit; text-decoration: inherit;">sort</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpublisherssort">object</a></span>
+    </dt>
+    <dd>sorter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -404,8 +525,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -413,8 +533,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required"
+    <dd>namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="topic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_java" style="color: inherit; text-decoration: inherit;">topic</a>
@@ -422,8 +541,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>topic name.</p>
-</dd><dt class="property-optional"
+    <dd>topic name.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -431,8 +549,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublishersfilter">List&lt;Get<wbr>Publishers<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Parameter filter, support ProducerName, Address field.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter filter, support ProducerName, Address field.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -440,8 +557,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sort_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_java" style="color: inherit; text-decoration: inherit;">sort</a>
@@ -449,8 +565,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublisherssort">Get<wbr>Publishers<wbr>Sort</a></span>
     </dt>
-    <dd><p>sorter.</p>
-</dd></dl>
+    <dd>sorter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -464,8 +579,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -473,8 +587,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required"
+    <dd>namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="topic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_nodejs" style="color: inherit; text-decoration: inherit;">topic</a>
@@ -482,8 +595,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>topic name.</p>
-</dd><dt class="property-optional"
+    <dd>topic name.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -491,8 +603,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublishersfilter">Get<wbr>Publishers<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>Parameter filter, support ProducerName, Address field.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter filter, support ProducerName, Address field.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -500,8 +611,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sort_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_nodejs" style="color: inherit; text-decoration: inherit;">sort</a>
@@ -509,8 +619,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublisherssort">Get<wbr>Publishers<wbr>Sort</a></span>
     </dt>
-    <dd><p>sorter.</p>
-</dd></dl>
+    <dd>sorter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -524,8 +633,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -533,8 +641,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required"
+    <dd>namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="topic_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_python" style="color: inherit; text-decoration: inherit;">topic</a>
@@ -542,17 +649,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>topic name.</p>
-</dd><dt class="property-optional"
+    <dd>topic name.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getpublishersfilter">Get<wbr>Publishers<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getpublishersfilter">Sequence[Get<wbr>Publishers<wbr>Filter]</a></span>
     </dt>
-    <dd><p>Parameter filter, support ProducerName, Address field.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter filter, support ProducerName, Address field.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -560,8 +665,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sort_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_python" style="color: inherit; text-decoration: inherit;">sort</a>
@@ -569,8 +673,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublisherssort">Get<wbr>Publishers<wbr>Sort</a></span>
     </dt>
-    <dd><p>sorter.</p>
-</dd></dl>
+    <dd>sorter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -584,8 +687,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>Cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -593,8 +695,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required"
+    <dd>namespace name.</dd><dt class="property-required"
             title="Required">
         <span id="topic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_yaml" style="color: inherit; text-decoration: inherit;">topic</a>
@@ -602,8 +703,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>topic name.</p>
-</dd><dt class="property-optional"
+    <dd>topic name.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -611,8 +711,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublishersfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Parameter filter, support ProducerName, Address field.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter filter, support ProducerName, Address field.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -620,8 +719,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sort_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_yaml" style="color: inherit; text-decoration: inherit;">sort</a>
@@ -629,8 +727,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublisherssort">Property Map</a></span>
     </dt>
-    <dd><p>sorter.</p>
-</dd></dl>
+    <dd>sorter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -661,8 +758,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -678,8 +774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublisherspublisher">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tdmq.<wbr>Outputs.<wbr>Get<wbr>Publishers<wbr>Publisher&gt;</a></span>
     </dt>
-    <dd><p>Producer Information ListNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Producer Information ListNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="topic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_csharp" style="color: inherit; text-decoration: inherit;">Topic</a>
@@ -733,8 +828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -750,8 +844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublisherspublisher">[]Get<wbr>Publishers<wbr>Publisher</a></span>
     </dt>
-    <dd><p>Producer Information ListNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Producer Information ListNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="topic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_go" style="color: inherit; text-decoration: inherit;">Topic</a>
@@ -788,6 +881,76 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="publishers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishers_hcl" style="color: inherit; text-decoration: inherit;">publishers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpublisherspublisher">list(object)</a></span>
+    </dt>
+    <dd>Producer Information ListNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
+            title="">
+        <span id="topic_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_hcl" style="color: inherit; text-decoration: inherit;">topic</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpublishersfilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="sort_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_hcl" style="color: inherit; text-decoration: inherit;">sort</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpublisherssort">object</a></span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -805,8 +968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -822,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublisherspublisher">List&lt;Get<wbr>Publishers<wbr>Publisher&gt;</a></span>
     </dt>
-    <dd><p>Producer Information ListNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Producer Information ListNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="topic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_java" style="color: inherit; text-decoration: inherit;">topic</a>
@@ -877,8 +1038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -894,8 +1054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublisherspublisher">Get<wbr>Publishers<wbr>Publisher[]</a></span>
     </dt>
-    <dd><p>Producer Information ListNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Producer Information ListNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="topic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_nodejs" style="color: inherit; text-decoration: inherit;">topic</a>
@@ -949,8 +1108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -964,10 +1122,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publishers_python" style="color: inherit; text-decoration: inherit;">publishers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getpublisherspublisher">Get<wbr>Publishers<wbr>Publisher]</a></span>
+        <span class="property-type"><a href="#getpublisherspublisher">Sequence[Get<wbr>Publishers<wbr>Publisher]</a></span>
     </dt>
-    <dd><p>Producer Information ListNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Producer Information ListNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="topic_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_python" style="color: inherit; text-decoration: inherit;">topic</a>
@@ -981,7 +1138,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getpublishersfilter">Get<wbr>Publishers<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getpublishersfilter">Sequence[Get<wbr>Publishers<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -1021,8 +1178,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -1038,8 +1194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpublisherspublisher">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Producer Information ListNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Producer Information ListNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="topic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_yaml" style="color: inherit; text-decoration: inherit;">topic</a>
@@ -1095,8 +1250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the filter parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the filter parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1104,8 +1258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1119,8 +1272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the filter parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the filter parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1128,8 +1280,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the filter parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1143,8 +1316,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the filter parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the filter parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1152,8 +1324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1167,8 +1338,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the filter parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the filter parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1176,8 +1346,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1191,8 +1360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the filter parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the filter parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1200,8 +1368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1215,8 +1382,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the filter parameter.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the filter parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1224,8 +1390,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1243,8 +1408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>producer addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>producer addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="averagemsgsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#averagemsgsize_csharp" style="color: inherit; text-decoration: inherit;">Average<wbr>Msg<wbr>Size</a>
@@ -1252,8 +1416,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clientversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientversion_csharp" style="color: inherit; text-decoration: inherit;">Client<wbr>Version</a>
@@ -1261,8 +1424,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>client versionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>client versionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="connectedsince_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connectedsince_csharp" style="color: inherit; text-decoration: inherit;">Connected<wbr>Since</a>
@@ -1270,8 +1432,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>connection timeNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>connection timeNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="msgratein_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgratein_csharp" style="color: inherit; text-decoration: inherit;">Msg<wbr>Rate<wbr>In</a>
@@ -1279,8 +1440,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="msgthroughputin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgthroughputin_csharp" style="color: inherit; text-decoration: inherit;">Msg<wbr>Throughput<wbr>In</a>
@@ -1288,8 +1448,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="partition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_csharp" style="color: inherit; text-decoration: inherit;">Partition</a>
@@ -1297,8 +1456,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="producerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producerid_csharp" style="color: inherit; text-decoration: inherit;">Producer<wbr>Id</a>
@@ -1306,8 +1464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>producer idNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>producer idNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="producername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producername_csharp" style="color: inherit; text-decoration: inherit;">Producer<wbr>Name</a>
@@ -1315,8 +1472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>producer nameNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>producer nameNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1330,8 +1486,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>producer addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>producer addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="averagemsgsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#averagemsgsize_go" style="color: inherit; text-decoration: inherit;">Average<wbr>Msg<wbr>Size</a>
@@ -1339,8 +1494,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clientversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientversion_go" style="color: inherit; text-decoration: inherit;">Client<wbr>Version</a>
@@ -1348,8 +1502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>client versionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>client versionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="connectedsince_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connectedsince_go" style="color: inherit; text-decoration: inherit;">Connected<wbr>Since</a>
@@ -1357,8 +1510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>connection timeNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>connection timeNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="msgratein_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgratein_go" style="color: inherit; text-decoration: inherit;">Msg<wbr>Rate<wbr>In</a>
@@ -1366,8 +1518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="msgthroughputin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgthroughputin_go" style="color: inherit; text-decoration: inherit;">Msg<wbr>Throughput<wbr>In</a>
@@ -1375,8 +1526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="partition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_go" style="color: inherit; text-decoration: inherit;">Partition</a>
@@ -1384,8 +1534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="producerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producerid_go" style="color: inherit; text-decoration: inherit;">Producer<wbr>Id</a>
@@ -1393,8 +1542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>producer idNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>producer idNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="producername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producername_go" style="color: inherit; text-decoration: inherit;">Producer<wbr>Name</a>
@@ -1402,8 +1550,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>producer nameNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>producer nameNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_hcl" style="color: inherit; text-decoration: inherit;">address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>producer addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="average_msg_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#average_msg_size_hcl" style="color: inherit; text-decoration: inherit;">average_<wbr>msg_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="client_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_version_hcl" style="color: inherit; text-decoration: inherit;">client_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>client versionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="connected_since_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connected_since_hcl" style="color: inherit; text-decoration: inherit;">connected_<wbr>since</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>connection timeNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="msg_rate_in_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_rate_in_hcl" style="color: inherit; text-decoration: inherit;">msg_<wbr>rate_<wbr>in</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="msg_throughput_in_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_throughput_in_hcl" style="color: inherit; text-decoration: inherit;">msg_<wbr>throughput_<wbr>in</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="partition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_hcl" style="color: inherit; text-decoration: inherit;">partition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="producer_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producer_id_hcl" style="color: inherit; text-decoration: inherit;">producer_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>producer idNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="producer_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producer_name_hcl" style="color: inherit; text-decoration: inherit;">producer_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>producer nameNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1417,8 +1642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>producer addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>producer addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="averagemsgsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#averagemsgsize_java" style="color: inherit; text-decoration: inherit;">average<wbr>Msg<wbr>Size</a>
@@ -1426,8 +1650,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clientversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientversion_java" style="color: inherit; text-decoration: inherit;">client<wbr>Version</a>
@@ -1435,8 +1658,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>client versionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>client versionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="connectedsince_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connectedsince_java" style="color: inherit; text-decoration: inherit;">connected<wbr>Since</a>
@@ -1444,8 +1666,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>connection timeNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>connection timeNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="msgratein_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgratein_java" style="color: inherit; text-decoration: inherit;">msg<wbr>Rate<wbr>In</a>
@@ -1453,8 +1674,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="msgthroughputin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgthroughputin_java" style="color: inherit; text-decoration: inherit;">msg<wbr>Throughput<wbr>In</a>
@@ -1462,8 +1682,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="partition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_java" style="color: inherit; text-decoration: inherit;">partition</a>
@@ -1471,8 +1690,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="producerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producerid_java" style="color: inherit; text-decoration: inherit;">producer<wbr>Id</a>
@@ -1480,8 +1698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>producer idNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>producer idNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="producername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producername_java" style="color: inherit; text-decoration: inherit;">producer<wbr>Name</a>
@@ -1489,8 +1706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>producer nameNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>producer nameNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1504,8 +1720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>producer addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>producer addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="averagemsgsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#averagemsgsize_nodejs" style="color: inherit; text-decoration: inherit;">average<wbr>Msg<wbr>Size</a>
@@ -1513,8 +1728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clientversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientversion_nodejs" style="color: inherit; text-decoration: inherit;">client<wbr>Version</a>
@@ -1522,8 +1736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>client versionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>client versionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="connectedsince_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connectedsince_nodejs" style="color: inherit; text-decoration: inherit;">connected<wbr>Since</a>
@@ -1531,8 +1744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>connection timeNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>connection timeNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="msgratein_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgratein_nodejs" style="color: inherit; text-decoration: inherit;">msg<wbr>Rate<wbr>In</a>
@@ -1540,8 +1752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="msgthroughputin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgthroughputin_nodejs" style="color: inherit; text-decoration: inherit;">msg<wbr>Throughput<wbr>In</a>
@@ -1549,8 +1760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="partition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_nodejs" style="color: inherit; text-decoration: inherit;">partition</a>
@@ -1558,8 +1768,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="producerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producerid_nodejs" style="color: inherit; text-decoration: inherit;">producer<wbr>Id</a>
@@ -1567,8 +1776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>producer idNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>producer idNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="producername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producername_nodejs" style="color: inherit; text-decoration: inherit;">producer<wbr>Name</a>
@@ -1576,8 +1784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>producer nameNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>producer nameNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1591,8 +1798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>producer addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>producer addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="average_msg_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#average_msg_size_python" style="color: inherit; text-decoration: inherit;">average_<wbr>msg_<wbr>size</a>
@@ -1600,8 +1806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="client_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_version_python" style="color: inherit; text-decoration: inherit;">client_<wbr>version</a>
@@ -1609,8 +1814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>client versionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>client versionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="connected_since_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connected_since_python" style="color: inherit; text-decoration: inherit;">connected_<wbr>since</a>
@@ -1618,8 +1822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>connection timeNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>connection timeNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="msg_rate_in_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_rate_in_python" style="color: inherit; text-decoration: inherit;">msg_<wbr>rate_<wbr>in</a>
@@ -1627,8 +1830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="msg_throughput_in_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_throughput_in_python" style="color: inherit; text-decoration: inherit;">msg_<wbr>throughput_<wbr>in</a>
@@ -1636,8 +1838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="partition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_python" style="color: inherit; text-decoration: inherit;">partition</a>
@@ -1645,8 +1846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="producer_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producer_id_python" style="color: inherit; text-decoration: inherit;">producer_<wbr>id</a>
@@ -1654,8 +1854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>producer idNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>producer idNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="producer_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producer_name_python" style="color: inherit; text-decoration: inherit;">producer_<wbr>name</a>
@@ -1663,8 +1862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>producer nameNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>producer nameNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1678,8 +1876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>producer addressNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>producer addressNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="averagemsgsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#averagemsgsize_yaml" style="color: inherit; text-decoration: inherit;">average<wbr>Msg<wbr>Size</a>
@@ -1687,8 +1884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Average message size (bytes)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="clientversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientversion_yaml" style="color: inherit; text-decoration: inherit;">client<wbr>Version</a>
@@ -1696,8 +1892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>client versionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>client versionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="connectedsince_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connectedsince_yaml" style="color: inherit; text-decoration: inherit;">connected<wbr>Since</a>
@@ -1705,8 +1900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>connection timeNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>connection timeNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="msgratein_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgratein_yaml" style="color: inherit; text-decoration: inherit;">msg<wbr>Rate<wbr>In</a>
@@ -1714,8 +1908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Message production rate (articles/second)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="msgthroughputin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgthroughputin_yaml" style="color: inherit; text-decoration: inherit;">msg<wbr>Throughput<wbr>In</a>
@@ -1723,8 +1916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Message production throughput rate (bytes/second)Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="partition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_yaml" style="color: inherit; text-decoration: inherit;">partition</a>
@@ -1732,8 +1924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>The topic partition number of the producer connectionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="producerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producerid_yaml" style="color: inherit; text-decoration: inherit;">producer<wbr>Id</a>
@@ -1741,8 +1932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>producer idNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>producer idNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="producername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producername_yaml" style="color: inherit; text-decoration: inherit;">producer<wbr>Name</a>
@@ -1750,8 +1940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>producer nameNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd></dl>
+    <dd>producer nameNote: This field may return null, indicating that no valid value can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1769,8 +1958,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sorter.</p>
-</dd><dt class="property-required"
+    <dd>sorter.</dd><dt class="property-required"
             title="Required">
         <span id="order_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_csharp" style="color: inherit; text-decoration: inherit;">Order</a>
@@ -1778,8 +1966,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ascending ASC, descending DESC.</p>
-</dd></dl>
+    <dd>Ascending ASC, descending DESC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1793,8 +1980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sorter.</p>
-</dd><dt class="property-required"
+    <dd>sorter.</dd><dt class="property-required"
             title="Required">
         <span id="order_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_go" style="color: inherit; text-decoration: inherit;">Order</a>
@@ -1802,8 +1988,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ascending ASC, descending DESC.</p>
-</dd></dl>
+    <dd>Ascending ASC, descending DESC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>sorter.</dd><dt class="property-required"
+            title="Required">
+        <span id="order_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_hcl" style="color: inherit; text-decoration: inherit;">order</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ascending ASC, descending DESC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1817,8 +2024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>sorter.</p>
-</dd><dt class="property-required"
+    <dd>sorter.</dd><dt class="property-required"
             title="Required">
         <span id="order_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_java" style="color: inherit; text-decoration: inherit;">order</a>
@@ -1826,8 +2032,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ascending ASC, descending DESC.</p>
-</dd></dl>
+    <dd>Ascending ASC, descending DESC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1841,8 +2046,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sorter.</p>
-</dd><dt class="property-required"
+    <dd>sorter.</dd><dt class="property-required"
             title="Required">
         <span id="order_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_nodejs" style="color: inherit; text-decoration: inherit;">order</a>
@@ -1850,8 +2054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ascending ASC, descending DESC.</p>
-</dd></dl>
+    <dd>Ascending ASC, descending DESC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1865,8 +2068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>sorter.</p>
-</dd><dt class="property-required"
+    <dd>sorter.</dd><dt class="property-required"
             title="Required">
         <span id="order_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_python" style="color: inherit; text-decoration: inherit;">order</a>
@@ -1874,8 +2076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ascending ASC, descending DESC.</p>
-</dd></dl>
+    <dd>Ascending ASC, descending DESC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1889,8 +2090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>sorter.</p>
-</dd><dt class="property-required"
+    <dd>sorter.</dd><dt class="property-required"
             title="Required">
         <span id="order_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_yaml" style="color: inherit; text-decoration: inherit;">order</a>
@@ -1898,8 +2098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ascending ASC, descending DESC.</p>
-</dd></dl>
+    <dd>Ascending ASC, descending DESC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1914,7 +2113,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

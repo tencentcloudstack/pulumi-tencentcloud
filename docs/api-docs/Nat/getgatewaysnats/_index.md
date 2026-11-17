@@ -2,9 +2,11 @@
 ---
 title: "getGatewaySnats"
 title_tag: "tencentcloud.Nat.getGatewaySnats"
-meta_desc: "Documentation for the tencentcloud.Nat.getGatewaySnats function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of VPN gateways."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,64 +18,57 @@ Use this data source to query detailed information of VPN gateways.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const snat = tencentcloud.Nat.getGatewaySnats({
-    natGatewayId: tencentcloud_nat_gateway.my_nat.id,
-    subnetId: tencentcloud_nat_gateway_snat.my_subnet.id,
+const snat = tencentcloud.nat.getGatewaySnats({
+    natGatewayId: myNat.id,
+    subnetId: mySubnet.id,
     publicIpAddrs: ["50.29.23.234"],
     description: "snat demo",
     resultOutputFile: "./snat.txt",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-snat = tencentcloud.Nat.get_gateway_snats(nat_gateway_id=tencentcloud_nat_gateway["my_nat"]["id"],
-    subnet_id=tencentcloud_nat_gateway_snat["my_subnet"]["id"],
+snat = tencentcloud.nat.get_gateway_snats(nat_gateway_id=my_nat["id"],
+    subnet_id=my_subnet["id"],
     public_ip_addrs=["50.29.23.234"],
     description="snat demo",
     result_output_file="./snat.txt")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var snat = Tencentcloud.Nat.GetGatewaySnats.Invoke(new()
-    {
-        NatGatewayId = tencentcloud_nat_gateway.My_nat.Id,
-        SubnetId = tencentcloud_nat_gateway_snat.My_subnet.Id,
-        PublicIpAddrs = new[]
-        {
-            "50.29.23.234",
-        },
-        Description = "snat demo",
-        ResultOutputFile = "./snat.txt",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Nat"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/nat"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Nat.GetGatewaySnats(ctx, &nat.GetGatewaySnatsArgs{
-			NatGatewayId: tencentcloud_nat_gateway.My_nat.Id,
-			SubnetId:     pulumi.StringRef(tencentcloud_nat_gateway_snat.My_subnet.Id),
+		_, err := nat.GetGatewaySnats(ctx, &nat.GetGatewaySnatsArgs{
+			NatGatewayId: myNat.Id,
+			SubnetId:     pulumi.StringRef(mySubnet.Id),
 			PublicIpAddrs: []string{
 				"50.29.23.234",
 			},
@@ -87,6 +82,38 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var snat = Tencentcloud.Nat.GetGatewaySnats.Invoke(new()
+    {
+        NatGatewayId = myNat.Id,
+        SubnetId = mySubnet.Id,
+        PublicIpAddrs = new[]
+        {
+            "50.29.23.234",
+        },
+        Description = "snat demo",
+        ResultOutputFile = "./snat.txt",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -95,8 +122,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Nat.NatFunctions;
 import com.pulumi.tencentcloud.Nat.inputs.GetGatewaySnatsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -109,8 +136,8 @@ public class App {
 
     public static void stack(Context ctx) {
         final var snat = NatFunctions.getGatewaySnats(GetGatewaySnatsArgs.builder()
-            .natGatewayId(tencentcloud_nat_gateway.my_nat().id())
-            .subnetId(tencentcloud_nat_gateway_snat.my_subnet().id())
+            .natGatewayId(myNat.id())
+            .subnetId(mySubnet.id())
             .publicIpAddrs("50.29.23.234")
             .description("snat demo")
             .resultOutputFile("./snat.txt")
@@ -119,21 +146,55 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   snat:
     fn::invoke:
-      Function: tencentcloud:Nat:getGatewaySnats
-      Arguments:
-        natGatewayId: ${tencentcloud_nat_gateway.my_nat.id}
-        subnetId: ${tencentcloud_nat_gateway_snat.my_subnet.id}
+      function: tencentcloud:Nat:getGatewaySnats
+      arguments:
+        natGatewayId: ${myNat.id}
+        subnetId: ${mySubnet.id}
         publicIpAddrs:
           - 50.29.23.234
         description: snat demo
         resultOutputFile: ./snat.txt
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_nat_getgatewaysnats" "snat" {
+  nat_gateway_id     = myNat.id
+  subnet_id          = mySubnet.id
+  public_ip_addrs    = ["50.29.23.234"]
+  description        = "snat demo"
+  result_output_file = "./snat.txt"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
 
 
 
@@ -145,7 +206,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -153,9 +214,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getGatewaySnats<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGatewaySnatsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetGatewaySnatsResult</a></span>></span
+><span class="k">function </span>getGatewaySnats<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGatewaySnatsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetGatewaySnatsResult</a></span>></span
 ><span class="k">
-function </span>getGatewaySnatsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGatewaySnatsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetGatewaySnatsResult</a></span>></span
+function </span>getGatewaySnatsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGatewaySnatsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetGatewaySnatsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -172,13 +233,13 @@ function </span>getGatewaySnatsOutput<span class="p">(</span><span class="nx">ar
                       <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetGatewaySnatsResult</span
 ><span class="k">
-def </span>get_gateway_snats_output<span class="p">(</span><span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">nat_gateway_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">public_ip_addrs</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetGatewaySnatsResult]</span
+def </span>get_gateway_snats_output<span class="p">(</span><span class="nx">description</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">nat_gateway_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">public_ip_addrs</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetGatewaySnatsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -203,7 +264,8 @@ func </span>GetGatewaySnatsOutput<span class="p">(</span><span class="nx">ctx</s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetGatewaySnats </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetGatewaySnatsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetGatewaySnatsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetGatewaySnatsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGatewaySnatsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetGatewaySnatsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGatewaySnatsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetGatewaySnatsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGatewaySnatsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -212,7 +274,8 @@ func </span>GetGatewaySnatsOutput<span class="p">(</span><span class="nx">ctx</s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetGatewaySnatsResult</a></span>> </span>getGatewaySnats<span class="p">(</span><span class="nx">GetGatewaySnatsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetGatewaySnatsResult</a></span>> </span>getGatewaySnats<span class="p">(</span><span class="nx">GetGatewaySnatsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetGatewaySnatsResult</a></span>> </span>getGatewaySnats<span class="p">(</span><span class="nx">GetGatewaySnatsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -224,6 +287,15 @@ func </span>GetGatewaySnatsOutput<span class="p">(</span><span class="nx">ctx</s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Nat/getGatewaySnats:getGatewaySnats
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_nat_get_gateway_snats&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -242,8 +314,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>NAT gateway ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -251,8 +322,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -260,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipaddrs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddrs_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Addrs</a>
@@ -269,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-optional"
+    <dd>Elastic IP address pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -278,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -287,8 +354,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet instance ID.</p>
-</dd></dl>
+    <dd>Subnet instance ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -302,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>NAT gateway ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -311,8 +376,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -320,8 +384,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipaddrs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddrs_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Addrs</a>
@@ -329,8 +392,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-optional"
+    <dd>Elastic IP address pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -338,8 +400,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -347,8 +408,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet instance ID.</p>
-</dd></dl>
+    <dd>Subnet instance ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="nat_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nat_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">nat_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>NAT gateway ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="public_ip_addrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_addrs_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>addrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Elastic IP address pool.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet instance ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -362,8 +476,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>NAT gateway ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -371,8 +484,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -380,8 +492,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipaddrs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddrs_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Addrs</a>
@@ -389,8 +500,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-optional"
+    <dd>Elastic IP address pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -398,8 +508,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -407,8 +516,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet instance ID.</p>
-</dd></dl>
+    <dd>Subnet instance ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -422,8 +530,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>NAT gateway ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -431,8 +538,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -440,8 +546,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipaddrs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddrs_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Addrs</a>
@@ -449,8 +554,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-optional"
+    <dd>Elastic IP address pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -458,8 +562,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -467,8 +570,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet instance ID.</p>
-</dd></dl>
+    <dd>Subnet instance ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -482,8 +584,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>NAT gateway ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -491,8 +592,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -500,8 +600,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="public_ip_addrs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_addrs_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>addrs</a>
@@ -509,8 +608,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-optional"
+    <dd>Elastic IP address pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -518,8 +616,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -527,8 +624,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet instance ID.</p>
-</dd></dl>
+    <dd>Subnet instance ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -542,8 +638,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-optional"
+    <dd>NAT gateway ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -551,8 +646,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-optional"
+    <dd>Description.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -560,8 +654,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipaddrs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddrs_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Addrs</a>
@@ -569,8 +662,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-optional"
+    <dd>Elastic IP address pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -578,8 +670,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -587,8 +678,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet instance ID.</p>
-</dd></dl>
+    <dd>Subnet instance ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -611,8 +701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="natgatewayid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natgatewayid_csharp" style="color: inherit; text-decoration: inherit;">Nat<wbr>Gateway<wbr>Id</a>
@@ -628,8 +717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysnatssnatlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Nat.<wbr>Outputs.<wbr>Get<wbr>Gateway<wbr>Snats<wbr>Snat<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the nat gateway snat.</p>
-</dd><dt class="property-"
+    <dd>Information list of the nat gateway snat.</dd><dt class="property-"
             title="">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -683,8 +771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="natgatewayid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natgatewayid_go" style="color: inherit; text-decoration: inherit;">Nat<wbr>Gateway<wbr>Id</a>
@@ -700,8 +787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysnatssnatlist">[]Get<wbr>Gateway<wbr>Snats<wbr>Snat<wbr>List</a></span>
     </dt>
-    <dd><p>Information list of the nat gateway snat.</p>
-</dd><dt class="property-"
+    <dd>Information list of the nat gateway snat.</dd><dt class="property-"
             title="">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -746,6 +832,76 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="nat_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nat_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">nat_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="snat_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_lists_hcl" style="color: inherit; text-decoration: inherit;">snat_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgatewaysnatssnatlist">list(object)</a></span>
+    </dt>
+    <dd>Information list of the nat gateway snat.</dd><dt class="property-"
+            title="">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="public_ip_addrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_addrs_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>addrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -755,8 +911,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="natgatewayid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natgatewayid_java" style="color: inherit; text-decoration: inherit;">nat<wbr>Gateway<wbr>Id</a>
@@ -772,8 +927,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysnatssnatlist">List&lt;Get<wbr>Gateway<wbr>Snats<wbr>Snat<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Information list of the nat gateway snat.</p>
-</dd><dt class="property-"
+    <dd>Information list of the nat gateway snat.</dd><dt class="property-"
             title="">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -827,8 +981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="natgatewayid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natgatewayid_nodejs" style="color: inherit; text-decoration: inherit;">nat<wbr>Gateway<wbr>Id</a>
@@ -844,8 +997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysnatssnatlist">Get<wbr>Gateway<wbr>Snats<wbr>Snat<wbr>List[]</a></span>
     </dt>
-    <dd><p>Information list of the nat gateway snat.</p>
-</dd><dt class="property-"
+    <dd>Information list of the nat gateway snat.</dd><dt class="property-"
             title="">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -899,8 +1051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="nat_gateway_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nat_gateway_id_python" style="color: inherit; text-decoration: inherit;">nat_<wbr>gateway_<wbr>id</a>
@@ -914,10 +1065,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_lists_python" style="color: inherit; text-decoration: inherit;">snat_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgatewaysnatssnatlist">Get<wbr>Gateway<wbr>Snats<wbr>Snat<wbr>List]</a></span>
+        <span class="property-type"><a href="#getgatewaysnatssnatlist">Sequence[Get<wbr>Gateway<wbr>Snats<wbr>Snat<wbr>List]</a></span>
     </dt>
-    <dd><p>Information list of the nat gateway snat.</p>
-</dd><dt class="property-"
+    <dd>Information list of the nat gateway snat.</dd><dt class="property-"
             title="">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -971,8 +1121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="natgatewayid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natgatewayid_yaml" style="color: inherit; text-decoration: inherit;">nat<wbr>Gateway<wbr>Id</a>
@@ -988,8 +1137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgatewaysnatssnatlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information list of the nat gateway snat.</p>
-</dd><dt class="property-"
+    <dd>Information list of the nat gateway snat.</dd><dt class="property-"
             title="">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1053,8 +1201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1062,8 +1209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required"
+    <dd>Description.</dd><dt class="property-required"
             title="Required">
         <span id="natgatewayid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natgatewayid_csharp" style="color: inherit; text-decoration: inherit;">Nat<wbr>Gateway<wbr>Id</a>
@@ -1071,8 +1217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>NAT gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddrs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddrs_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Addrs</a>
@@ -1080,8 +1225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-required"
+    <dd>Elastic IP address pool.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1089,8 +1233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-required"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-required"
             title="Required">
         <span id="snatid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatid_csharp" style="color: inherit; text-decoration: inherit;">Snat<wbr>Id</a>
@@ -1098,8 +1241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd><dt class="property-optional"
+    <dd>SNAT rule ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1107,8 +1249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceprivateipaddr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceprivateipaddr_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Private<wbr>Ip<wbr>Addr</a>
@@ -1116,8 +1257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetcidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetcidrblock_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Cidr<wbr>Block</a>
@@ -1125,8 +1265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1134,8 +1273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet instance ID.</p>
-</dd></dl>
+    <dd>Subnet instance ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1149,8 +1287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1158,8 +1295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required"
+    <dd>Description.</dd><dt class="property-required"
             title="Required">
         <span id="natgatewayid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natgatewayid_go" style="color: inherit; text-decoration: inherit;">Nat<wbr>Gateway<wbr>Id</a>
@@ -1167,8 +1303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>NAT gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddrs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddrs_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Addrs</a>
@@ -1176,8 +1311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-required"
+    <dd>Elastic IP address pool.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1185,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-required"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-required"
             title="Required">
         <span id="snatid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatid_go" style="color: inherit; text-decoration: inherit;">Snat<wbr>Id</a>
@@ -1194,8 +1327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd><dt class="property-optional"
+    <dd>SNAT rule ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1203,8 +1335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceprivateipaddr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceprivateipaddr_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Private<wbr>Ip<wbr>Addr</a>
@@ -1212,8 +1343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetcidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetcidrblock_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Cidr<wbr>Block</a>
@@ -1221,8 +1351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1230,8 +1359,93 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet instance ID.</p>
-</dd></dl>
+    <dd>Subnet instance ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description.</dd><dt class="property-required"
+            title="Required">
+        <span id="nat_gateway_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nat_gateway_id_hcl" style="color: inherit; text-decoration: inherit;">nat_<wbr>gateway_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>NAT gateway ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="public_ip_addrs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_addrs_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>addrs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Elastic IP address pool.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-required"
+            title="Required">
+        <span id="snat_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_id_hcl" style="color: inherit; text-decoration: inherit;">snat_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SNAT rule ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_private_ip_addr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_private_ip_addr_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>private_<wbr>ip_<wbr>addr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_cidr_block_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet instance ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1245,8 +1459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1254,8 +1467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required"
+    <dd>Description.</dd><dt class="property-required"
             title="Required">
         <span id="natgatewayid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natgatewayid_java" style="color: inherit; text-decoration: inherit;">nat<wbr>Gateway<wbr>Id</a>
@@ -1263,8 +1475,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>NAT gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddrs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddrs_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Addrs</a>
@@ -1272,8 +1483,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-required"
+    <dd>Elastic IP address pool.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1281,8 +1491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-required"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-required"
             title="Required">
         <span id="snatid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatid_java" style="color: inherit; text-decoration: inherit;">snat<wbr>Id</a>
@@ -1290,8 +1499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd><dt class="property-optional"
+    <dd>SNAT rule ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1299,8 +1507,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceprivateipaddr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceprivateipaddr_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Private<wbr>Ip<wbr>Addr</a>
@@ -1308,8 +1515,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetcidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetcidrblock_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Cidr<wbr>Block</a>
@@ -1317,8 +1523,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1326,8 +1531,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet instance ID.</p>
-</dd></dl>
+    <dd>Subnet instance ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1341,8 +1545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1350,8 +1553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required"
+    <dd>Description.</dd><dt class="property-required"
             title="Required">
         <span id="natgatewayid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natgatewayid_nodejs" style="color: inherit; text-decoration: inherit;">nat<wbr>Gateway<wbr>Id</a>
@@ -1359,8 +1561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>NAT gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddrs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddrs_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Addrs</a>
@@ -1368,8 +1569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-required"
+    <dd>Elastic IP address pool.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1377,8 +1577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-required"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-required"
             title="Required">
         <span id="snatid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatid_nodejs" style="color: inherit; text-decoration: inherit;">snat<wbr>Id</a>
@@ -1386,8 +1585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd><dt class="property-optional"
+    <dd>SNAT rule ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1395,8 +1593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceprivateipaddr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceprivateipaddr_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Private<wbr>Ip<wbr>Addr</a>
@@ -1404,8 +1601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetcidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetcidrblock_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Cidr<wbr>Block</a>
@@ -1413,8 +1609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1422,8 +1617,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet instance ID.</p>
-</dd></dl>
+    <dd>Subnet instance ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1437,8 +1631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1446,8 +1639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required"
+    <dd>Description.</dd><dt class="property-required"
             title="Required">
         <span id="nat_gateway_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nat_gateway_id_python" style="color: inherit; text-decoration: inherit;">nat_<wbr>gateway_<wbr>id</a>
@@ -1455,8 +1647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>NAT gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="public_ip_addrs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_addrs_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>addrs</a>
@@ -1464,8 +1655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-required"
+    <dd>Elastic IP address pool.</dd><dt class="property-required"
             title="Required">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -1473,8 +1663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-required"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-required"
             title="Required">
         <span id="snat_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_id_python" style="color: inherit; text-decoration: inherit;">snat_<wbr>id</a>
@@ -1482,8 +1671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd><dt class="property-optional"
+    <dd>SNAT rule ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1491,8 +1679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_private_ip_addr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_private_ip_addr_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>private_<wbr>ip_<wbr>addr</a>
@@ -1500,8 +1687,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_cidr_block_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>cidr_<wbr>block</a>
@@ -1509,8 +1695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1518,8 +1703,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet instance ID.</p>
-</dd></dl>
+    <dd>Subnet instance ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1533,8 +1717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1542,8 +1725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description.</p>
-</dd><dt class="property-required"
+    <dd>Description.</dd><dt class="property-required"
             title="Required">
         <span id="natgatewayid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#natgatewayid_yaml" style="color: inherit; text-decoration: inherit;">nat<wbr>Gateway<wbr>Id</a>
@@ -1551,8 +1733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>NAT gateway ID.</p>
-</dd><dt class="property-required"
+    <dd>NAT gateway ID.</dd><dt class="property-required"
             title="Required">
         <span id="publicipaddrs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipaddrs_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Addrs</a>
@@ -1560,8 +1741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Elastic IP address pool.</p>
-</dd><dt class="property-required"
+    <dd>Elastic IP address pool.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1569,8 +1749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type. Valid values: SUBNET, NETWORKINTERFACE.</p>
-</dd><dt class="property-required"
+    <dd>Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.</dd><dt class="property-required"
             title="Required">
         <span id="snatid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatid_yaml" style="color: inherit; text-decoration: inherit;">snat<wbr>Id</a>
@@ -1578,8 +1757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SNAT rule ID.</p>
-</dd><dt class="property-optional"
+    <dd>SNAT rule ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1587,8 +1765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceprivateipaddr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceprivateipaddr_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Private<wbr>Ip<wbr>Addr</a>
@@ -1596,8 +1773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Private IPs of the instance's primary ENI, required when <code>resource_type</code> is NETWORKINTERFACE.</p>
-</dd><dt class="property-optional"
+    <dd>Private IPs of the instance's primary ENI, required when <code>resourceType</code> is NETWORKINTERFACE or USERDEFINED.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetcidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetcidrblock_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Cidr<wbr>Block</a>
@@ -1605,8 +1781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The IPv4 CIDR of the subnet, required when <code>resource_type</code> is SUBNET.</p>
-</dd><dt class="property-optional"
+    <dd>The IPv4 CIDR of the subnet, required when <code>resourceType</code> is SUBNET.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1614,8 +1789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet instance ID.</p>
-</dd></dl>
+    <dd>Subnet instance ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1630,7 +1804,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

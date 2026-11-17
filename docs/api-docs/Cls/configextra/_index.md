@@ -2,9 +2,11 @@
 ---
 title: "ConfigExtra"
 title_tag: "tencentcloud.Cls.ConfigExtra"
-meta_desc: "Documentation for the tencentcloud.Cls.ConfigExtra resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a cls config extra"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,7 +18,12 @@ Provides a resource to create a cls config extra
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -54,6 +61,7 @@ const group = new tencentcloud.cls.MachineGroup("group", {
     },
 });
 const extra = new tencentcloud.cls.ConfigExtra("extra", {
+    name: "helloworld-test",
     topicId: topic.id,
     type: "container_file",
     logType: "json_log",
@@ -76,6 +84,11 @@ const extra = new tencentcloud.cls.ConfigExtra("extra", {
     groupId: group.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -102,14 +115,15 @@ group = tencentcloud.cls.MachineGroup("group",
     auto_update=True,
     update_end_time="19:05:00",
     update_start_time="17:05:00",
-    machine_group_type=tencentcloud.cls.MachineGroupMachineGroupTypeArgs(
-        type="ip",
-        values=[
+    machine_group_type={
+        "type": "ip",
+        "values": [
             "192.168.1.1",
             "192.168.1.2",
         ],
-    ))
+    })
 extra = tencentcloud.cls.ConfigExtra("extra",
+    name="helloworld-test",
     topic_id=topic.id,
     type="container_file",
     log_type="json_log",
@@ -117,20 +131,111 @@ extra = tencentcloud.cls.ConfigExtra("extra",
     logset_id=logset.id,
     logset_name=logset.logset_name,
     topic_name=topic.topic_name,
-    container_file=tencentcloud.cls.ConfigExtraContainerFileArgs(
-        container="nginx",
-        file_pattern="log",
-        log_path="/nginx",
-        namespace="default",
-        workload=tencentcloud.cls.ConfigExtraContainerFileWorkloadArgs(
-            container="nginx",
-            kind="deployment",
-            name="nginx",
-            namespace="default",
-        ),
-    ),
+    container_file={
+        "container": "nginx",
+        "file_pattern": "log",
+        "log_path": "/nginx",
+        "namespace": "default",
+        "workload": {
+            "container": "nginx",
+            "kind": "deployment",
+            "name": "nginx",
+            "namespace": "default",
+        },
+    },
     group_id=group.id)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		logset, err := cls.NewLogset(ctx, "logset", &cls.LogsetArgs{
+			LogsetName: pulumi.String("tf-config-extra-test"),
+			Tags: pulumi.StringMap{
+				"test": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		topic, err := cls.NewTopic(ctx, "topic", &cls.TopicArgs{
+			AutoSplit:          pulumi.Bool(true),
+			LogsetId:           logset.ID().ToIDOutput().ToStringOutput(),
+			MaxSplitPartitions: pulumi.Int(20),
+			PartitionCount:     pulumi.Int(1),
+			Period:             pulumi.Int(10),
+			StorageType:        pulumi.String("hot"),
+			Tags: pulumi.StringMap{
+				"test": pulumi.String("test"),
+			},
+			TopicName: pulumi.String("tf-config-extra-test"),
+		})
+		if err != nil {
+			return err
+		}
+		group, err := cls.NewMachineGroup(ctx, "group", &cls.MachineGroupArgs{
+			GroupName:       pulumi.String("tf-config-extra-test"),
+			ServiceLogging:  pulumi.Bool(true),
+			AutoUpdate:      pulumi.Bool(true),
+			UpdateEndTime:   pulumi.String("19:05:00"),
+			UpdateStartTime: pulumi.String("17:05:00"),
+			MachineGroupType: &cls.MachineGroupMachineGroupTypeArgs{
+				Type: pulumi.String("ip"),
+				Values: pulumi.StringArray{
+					pulumi.String("192.168.1.1"),
+					pulumi.String("192.168.1.2"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = cls.NewConfigExtra(ctx, "extra", &cls.ConfigExtraArgs{
+			Name:       pulumi.String("helloworld-test"),
+			TopicId:    topic.ID().ToIDOutput().ToStringOutput(),
+			Type:       pulumi.String("container_file"),
+			LogType:    pulumi.String("json_log"),
+			ConfigFlag: pulumi.String("label_k8s"),
+			LogsetId:   logset.ID().ToIDOutput().ToStringOutput(),
+			LogsetName: logset.LogsetName,
+			TopicName:  topic.TopicName,
+			ContainerFile: &cls.ConfigExtraContainerFileArgs{
+				Container:   pulumi.String("nginx"),
+				FilePattern: pulumi.String("log"),
+				LogPath:     pulumi.String("/nginx"),
+				Namespace:   pulumi.String("default"),
+				Workload: &cls.ConfigExtraContainerFileWorkloadArgs{
+					Container: pulumi.String("nginx"),
+					Kind:      pulumi.String("deployment"),
+					Name:      pulumi.String("nginx"),
+					Namespace: pulumi.String("default"),
+				},
+			},
+			GroupId: group.ID().ToIDOutput().ToStringOutput(),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -183,6 +288,7 @@ return await Deployment.RunAsync(() =>
 
     var extra = new Tencentcloud.Cls.ConfigExtra("extra", new()
     {
+        Name = "helloworld-test",
         TopicId = topic.Id,
         Type = "container_file",
         LogType = "json_log",
@@ -209,86 +315,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		logset, err := Cls.NewLogset(ctx, "logset", &Cls.LogsetArgs{
-			LogsetName: pulumi.String("tf-config-extra-test"),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		topic, err := Cls.NewTopic(ctx, "topic", &Cls.TopicArgs{
-			AutoSplit:          pulumi.Bool(true),
-			LogsetId:           logset.ID(),
-			MaxSplitPartitions: pulumi.Int(20),
-			PartitionCount:     pulumi.Int(1),
-			Period:             pulumi.Int(10),
-			StorageType:        pulumi.String("hot"),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
-			},
-			TopicName: pulumi.String("tf-config-extra-test"),
-		})
-		if err != nil {
-			return err
-		}
-		group, err := Cls.NewMachineGroup(ctx, "group", &Cls.MachineGroupArgs{
-			GroupName:       pulumi.String("tf-config-extra-test"),
-			ServiceLogging:  pulumi.Bool(true),
-			AutoUpdate:      pulumi.Bool(true),
-			UpdateEndTime:   pulumi.String("19:05:00"),
-			UpdateStartTime: pulumi.String("17:05:00"),
-			MachineGroupType: &cls.MachineGroupMachineGroupTypeArgs{
-				Type: pulumi.String("ip"),
-				Values: pulumi.StringArray{
-					pulumi.String("192.168.1.1"),
-					pulumi.String("192.168.1.2"),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Cls.NewConfigExtra(ctx, "extra", &Cls.ConfigExtraArgs{
-			TopicId:    topic.ID(),
-			Type:       pulumi.String("container_file"),
-			LogType:    pulumi.String("json_log"),
-			ConfigFlag: pulumi.String("label_k8s"),
-			LogsetId:   logset.ID(),
-			LogsetName: logset.LogsetName,
-			TopicName:  topic.TopicName,
-			ContainerFile: &cls.ConfigExtraContainerFileArgs{
-				Container:   pulumi.String("nginx"),
-				FilePattern: pulumi.String("log"),
-				LogPath:     pulumi.String("/nginx"),
-				Namespace:   pulumi.String("default"),
-				Workload: &cls.ConfigExtraContainerFileWorkloadArgs{
-					Container: pulumi.String("nginx"),
-					Kind:      pulumi.String("deployment"),
-					Name:      pulumi.String("nginx"),
-					Namespace: pulumi.String("default"),
-				},
-			},
-			GroupId: group.ID(),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -306,8 +337,8 @@ import com.pulumi.tencentcloud.Cls.ConfigExtra;
 import com.pulumi.tencentcloud.Cls.ConfigExtraArgs;
 import com.pulumi.tencentcloud.Cls.inputs.ConfigExtraContainerFileArgs;
 import com.pulumi.tencentcloud.Cls.inputs.ConfigExtraContainerFileWorkloadArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -319,12 +350,12 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var logset = new Logset("logset", LogsetArgs.builder()        
+        var logset = new Logset("logset", LogsetArgs.builder()
             .logsetName("tf-config-extra-test")
             .tags(Map.of("test", "test"))
             .build());
 
-        var topic = new Topic("topic", TopicArgs.builder()        
+        var topic = new Topic("topic", TopicArgs.builder()
             .autoSplit(true)
             .logsetId(logset.id())
             .maxSplitPartitions(20)
@@ -335,7 +366,7 @@ public class App {
             .topicName("tf-config-extra-test")
             .build());
 
-        var group = new MachineGroup("group", MachineGroupArgs.builder()        
+        var group = new MachineGroup("group", MachineGroupArgs.builder()
             .groupName("tf-config-extra-test")
             .serviceLogging(true)
             .autoUpdate(true)
@@ -349,7 +380,8 @@ public class App {
                 .build())
             .build());
 
-        var extra = new ConfigExtra("extra", ConfigExtraArgs.builder()        
+        var extra = new ConfigExtra("extra", ConfigExtraArgs.builder()
+            .name("helloworld-test")
             .topicId(topic.id())
             .type("container_file")
             .logType("json_log")
@@ -375,6 +407,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   logset:
@@ -411,6 +448,7 @@ resources:
   extra:
     type: tencentcloud:Cls:ConfigExtra
     properties:
+      name: helloworld-test
       topicId: ${topic.id}
       type: container_file
       logType: json_log
@@ -430,81 +468,173 @@ resources:
           namespace: default
       groupId: ${group.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cls_logset" "logset" {
+  logset_name = "tf-config-extra-test"
+  tags = {
+    "test" = "test"
+  }
+}
+resource "tencentcloud_cls_topic" "topic" {
+  auto_split           = true
+  logset_id            = tencentcloud_cls_logset.logset.id
+  max_split_partitions = 20
+  partition_count      = 1
+  period               = 10
+  storage_type         = "hot"
+  tags = {
+    "test" = "test"
+  }
+  topic_name = "tf-config-extra-test"
+}
+resource "tencentcloud_cls_machinegroup" "group" {
+  group_name        = "tf-config-extra-test"
+  service_logging   = true
+  auto_update       = true
+  update_end_time   = "19:05:00"
+  update_start_time = "17:05:00"
+  machine_group_type = {
+    type   = "ip"
+    values = ["192.168.1.1", "192.168.1.2"]
+  }
+}
+resource "tencentcloud_cls_configextra" "extra" {
+  name        = "helloworld-test"
+  topic_id    = tencentcloud_cls_topic.topic.id
+  type        = "container_file"
+  log_type    = "json_log"
+  config_flag = "label_k8s"
+  logset_id   = tencentcloud_cls_logset.logset.id
+  logset_name = tencentcloud_cls_logset.logset.logset_name
+  topic_name  = tencentcloud_cls_topic.topic.topic_name
+  container_file = {
+    container    = "nginx"
+    file_pattern = "log"
+    log_path     = "/nginx"
+    namespace    = "default"
+    workload = {
+      container = "nginx"
+      kind      = "deployment"
+      name      = "nginx"
+      namespace = "default"
+    }
+  }
+  group_id = tencentcloud_cls_machinegroup.group.id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateConfigExtra](https://www.tencentcloud.com/search/?wd=CreateConfigExtra&type=document&lang=en)
+* Read: [DescribeConfigExtras](https://www.tencentcloud.com/search/?wd=DescribeConfigExtras&type=document&lang=en)
+* Update: [ModifyConfigExtra](https://www.tencentcloud.com/search/?wd=ModifyConfigExtra&type=document&lang=en)
+* Delete: [DeleteConfigExtra](https://www.tencentcloud.com/search/?wd=DeleteConfigExtra&type=document&lang=en)
 
 
 ## Create ConfigExtra Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ConfigExtra</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ConfigExtraArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ConfigExtra</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ConfigExtraArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ConfigExtra</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ConfigExtraArgs</a></span><span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ConfigExtra</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                 <span class="nx">config_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">container_file</span><span class="p">:</span> <span class="nx">Optional[_cls.ConfigExtraContainerFileArgs]</span> = None<span class="p">,</span>
-                <span class="nx">container_stdout</span><span class="p">:</span> <span class="nx">Optional[_cls.ConfigExtraContainerStdoutArgs]</span> = None<span class="p">,</span>
-                <span class="nx">exclude_paths</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cls.ConfigExtraExcludePathArgs]]</span> = None<span class="p">,</span>
-                <span class="nx">extract_rule</span><span class="p">:</span> <span class="nx">Optional[_cls.ConfigExtraExtractRuleArgs]</span> = None<span class="p">,</span>
-                <span class="nx">group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">group_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                <span class="nx">host_file</span><span class="p">:</span> <span class="nx">Optional[_cls.ConfigExtraHostFileArgs]</span> = None<span class="p">,</span>
-                <span class="nx">log_format</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">log_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">logset_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">logset_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">topic_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">user_define_rule</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ConfigExtra</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ConfigExtraArgs</a></span><span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">topic_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">logset_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">logset_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">log_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">log_format</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">host_file</span><span class="p">:</span> <span class="nx">Optional[ConfigExtraHostFileArgs]</span> = None<span class="p">,</span>
+                <span class="nx">group_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+                <span class="nx">group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">extract_rule</span><span class="p">:</span> <span class="nx">Optional[ConfigExtraExtractRuleArgs]</span> = None<span class="p">,</span>
+                <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">exclude_paths</span><span class="p">:</span> <span class="nx">Optional[Sequence[ConfigExtraExcludePathArgs]]</span> = None<span class="p">,</span>
+                <span class="nx">container_stdout</span><span class="p">:</span> <span class="nx">Optional[ConfigExtraContainerStdoutArgs]</span> = None<span class="p">,</span>
+                <span class="nx">container_file</span><span class="p">:</span> <span class="nx">Optional[ConfigExtraContainerFileArgs]</span> = None<span class="p">,</span>
+                <span class="nx">user_define_rule</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewConfigExtra</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ConfigExtraArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ConfigExtra</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewConfigExtra</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ConfigExtraArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ConfigExtra</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ConfigExtra</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ConfigExtraArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ConfigExtra</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ConfigExtraArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ConfigExtra</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ConfigExtraArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ConfigExtra</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ConfigExtraArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cls:ConfigExtra</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cls:ConfigExtra</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cls_config_extra&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -525,7 +655,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -642,11 +772,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## ConfigExtra Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -662,8 +800,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Collection configuration flag.</p>
-</dd><dt class="property-required"
+    <dd>Collection configuration flag.</dd><dt class="property-required"
             title="Required">
         <span id="logtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtype_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Type</a>
@@ -671,8 +808,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</p>
-</dd><dt class="property-required"
+    <dd>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</dd><dt class="property-required"
             title="Required">
         <span id="logsetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_csharp" style="color: inherit; text-decoration: inherit;">Logset<wbr>Id</a>
@@ -680,8 +816,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset Id.</p>
-</dd><dt class="property-required"
+    <dd>Logset Id.</dd><dt class="property-required"
             title="Required">
         <span id="logsetname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetname_csharp" style="color: inherit; text-decoration: inherit;">Logset<wbr>Name</a>
@@ -689,8 +824,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset Name.</p>
-</dd><dt class="property-required"
+    <dd>Logset Name.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Id</a>
@@ -698,8 +832,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic ID (TopicId) of collection configuration.</p>
-</dd><dt class="property-required"
+    <dd>Log topic ID (TopicId) of collection configuration.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -707,8 +840,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic Name.</p>
-</dd><dt class="property-required"
+    <dd>Topic Name.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -716,44 +848,39 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type. Valid values: container_stdout; container_file; host_file.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: container_stdout; container_file; host_file.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerfile_csharp" style="color: inherit; text-decoration: inherit;">Container<wbr>File</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextracontainerfile">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Container<wbr>File<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextracontainerfile">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Container<wbr>File</a></span>
     </dt>
-    <dd><p>Container file path info.</p>
-</dd><dt class="property-optional"
+    <dd>Container file path info.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerstdout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerstdout_csharp" style="color: inherit; text-decoration: inherit;">Container<wbr>Stdout</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextracontainerstdout">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextracontainerstdout">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Container<wbr>Stdout</a></span>
     </dt>
-    <dd><p>Container stdout info.</p>
-</dd><dt class="property-optional"
+    <dd>Container stdout info.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludepaths_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludepaths_csharp" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Paths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextraexcludepath">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Exclude<wbr>Path<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#configextraexcludepath">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Exclude<wbr>Path&gt;</a></span>
     </dt>
-    <dd><p>Collection path blocklist.</p>
-</dd><dt class="property-optional"
+    <dd>Collection path blocklist.</dd><dt class="property-optional"
             title="Optional">
         <span id="extractrule_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extractrule_csharp" style="color: inherit; text-decoration: inherit;">Extract<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextraextractrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextraextractrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Extract<wbr>Rule</a></span>
     </dt>
-    <dd><p>Extraction rule. If ExtractRule is set, LogType must be set.</p>
-</dd><dt class="property-optional"
+    <dd>Extraction rule. If ExtractRule is set, LogType must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -761,8 +888,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding group id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="groupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupids_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Ids</a>
@@ -770,17 +896,15 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Binding group ids.</p>
-</dd><dt class="property-optional"
+    <dd>Binding group ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostfile_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>File</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextrahostfile">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Host<wbr>File<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextrahostfile">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Host<wbr>File</a></span>
     </dt>
-    <dd><p>Node file config info.</p>
-</dd><dt class="property-optional"
+    <dd>Node file config info.</dd><dt class="property-optional"
             title="Optional">
         <span id="logformat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logformat_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Format</a>
@@ -788,8 +912,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log format.</p>
-</dd><dt class="property-optional"
+    <dd>Log format.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -797,8 +920,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Collection configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="userdefinerule_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdefinerule_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Define<wbr>Rule</a>
@@ -806,8 +928,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom collection rule, which is a serialized JSON string.</p>
-</dd></dl>
+    <dd>Custom collection rule, which is a serialized JSON string.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -821,8 +942,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Collection configuration flag.</p>
-</dd><dt class="property-required"
+    <dd>Collection configuration flag.</dd><dt class="property-required"
             title="Required">
         <span id="logtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtype_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Type</a>
@@ -830,8 +950,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</p>
-</dd><dt class="property-required"
+    <dd>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</dd><dt class="property-required"
             title="Required">
         <span id="logsetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_go" style="color: inherit; text-decoration: inherit;">Logset<wbr>Id</a>
@@ -839,8 +958,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset Id.</p>
-</dd><dt class="property-required"
+    <dd>Logset Id.</dd><dt class="property-required"
             title="Required">
         <span id="logsetname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetname_go" style="color: inherit; text-decoration: inherit;">Logset<wbr>Name</a>
@@ -848,8 +966,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset Name.</p>
-</dd><dt class="property-required"
+    <dd>Logset Name.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Id</a>
@@ -857,8 +974,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic ID (TopicId) of collection configuration.</p>
-</dd><dt class="property-required"
+    <dd>Log topic ID (TopicId) of collection configuration.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -866,8 +982,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic Name.</p>
-</dd><dt class="property-required"
+    <dd>Topic Name.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -875,8 +990,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type. Valid values: container_stdout; container_file; host_file.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: container_stdout; container_file; host_file.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerfile_go" style="color: inherit; text-decoration: inherit;">Container<wbr>File</a>
@@ -884,8 +998,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerfile">Config<wbr>Extra<wbr>Container<wbr>File<wbr>Args</a></span>
     </dt>
-    <dd><p>Container file path info.</p>
-</dd><dt class="property-optional"
+    <dd>Container file path info.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerstdout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerstdout_go" style="color: inherit; text-decoration: inherit;">Container<wbr>Stdout</a>
@@ -893,8 +1006,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerstdout">Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Args</a></span>
     </dt>
-    <dd><p>Container stdout info.</p>
-</dd><dt class="property-optional"
+    <dd>Container stdout info.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludepaths_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludepaths_go" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Paths</a>
@@ -902,8 +1014,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextraexcludepath">[]Config<wbr>Extra<wbr>Exclude<wbr>Path<wbr>Args</a></span>
     </dt>
-    <dd><p>Collection path blocklist.</p>
-</dd><dt class="property-optional"
+    <dd>Collection path blocklist.</dd><dt class="property-optional"
             title="Optional">
         <span id="extractrule_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extractrule_go" style="color: inherit; text-decoration: inherit;">Extract<wbr>Rule</a>
@@ -911,8 +1022,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextraextractrule">Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Extraction rule. If ExtractRule is set, LogType must be set.</p>
-</dd><dt class="property-optional"
+    <dd>Extraction rule. If ExtractRule is set, LogType must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -920,8 +1030,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding group id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="groupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupids_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Ids</a>
@@ -929,8 +1038,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Binding group ids.</p>
-</dd><dt class="property-optional"
+    <dd>Binding group ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostfile_go" style="color: inherit; text-decoration: inherit;">Host<wbr>File</a>
@@ -938,8 +1046,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextrahostfile">Config<wbr>Extra<wbr>Host<wbr>File<wbr>Args</a></span>
     </dt>
-    <dd><p>Node file config info.</p>
-</dd><dt class="property-optional"
+    <dd>Node file config info.</dd><dt class="property-optional"
             title="Optional">
         <span id="logformat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logformat_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Format</a>
@@ -947,8 +1054,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log format.</p>
-</dd><dt class="property-optional"
+    <dd>Log format.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -956,8 +1062,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Collection configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="userdefinerule_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdefinerule_go" style="color: inherit; text-decoration: inherit;">User<wbr>Define<wbr>Rule</a>
@@ -965,8 +1070,149 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom collection rule, which is a serialized JSON string.</p>
-</dd></dl>
+    <dd>Custom collection rule, which is a serialized JSON string.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="config_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_flag_hcl" style="color: inherit; text-decoration: inherit;">config_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Collection configuration flag.</dd><dt class="property-required"
+            title="Required">
+        <span id="log_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_type_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</dd><dt class="property-required"
+            title="Required">
+        <span id="logset_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logset_id_hcl" style="color: inherit; text-decoration: inherit;">logset_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Logset Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="logset_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logset_name_hcl" style="color: inherit; text-decoration: inherit;">logset_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Logset Name.</dd><dt class="property-required"
+            title="Required">
+        <span id="topic_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_id_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log topic ID (TopicId) of collection configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Topic Name.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type. Valid values: container_stdout; container_file; host_file.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="container_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_file_hcl" style="color: inherit; text-decoration: inherit;">container_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#configextracontainerfile">object</a></span>
+    </dt>
+    <dd>Container file path info.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="container_stdout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_stdout_hcl" style="color: inherit; text-decoration: inherit;">container_<wbr>stdout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#configextracontainerstdout">object</a></span>
+    </dt>
+    <dd>Container stdout info.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="exclude_paths_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_paths_hcl" style="color: inherit; text-decoration: inherit;">exclude_<wbr>paths</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#configextraexcludepath">list(object)</a></span>
+    </dt>
+    <dd>Collection path blocklist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="extract_rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extract_rule_hcl" style="color: inherit; text-decoration: inherit;">extract_<wbr>rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#configextraextractrule">object</a></span>
+    </dt>
+    <dd>Extraction rule. If ExtractRule is set, LogType must be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Binding group id.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_ids_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Binding group ids.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="host_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_file_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#configextrahostfile">object</a></span>
+    </dt>
+    <dd>Node file config info.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="log_format_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_format_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>format</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Collection configuration name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="user_define_rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_define_rule_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>define_<wbr>rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom collection rule, which is a serialized JSON string.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -980,8 +1226,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Collection configuration flag.</p>
-</dd><dt class="property-required"
+    <dd>Collection configuration flag.</dd><dt class="property-required"
             title="Required">
         <span id="logtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtype_java" style="color: inherit; text-decoration: inherit;">log<wbr>Type</a>
@@ -989,8 +1234,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</p>
-</dd><dt class="property-required"
+    <dd>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</dd><dt class="property-required"
             title="Required">
         <span id="logsetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_java" style="color: inherit; text-decoration: inherit;">logset<wbr>Id</a>
@@ -998,8 +1242,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Logset Id.</p>
-</dd><dt class="property-required"
+    <dd>Logset Id.</dd><dt class="property-required"
             title="Required">
         <span id="logsetname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetname_java" style="color: inherit; text-decoration: inherit;">logset<wbr>Name</a>
@@ -1007,8 +1250,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Logset Name.</p>
-</dd><dt class="property-required"
+    <dd>Logset Name.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -1016,8 +1258,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log topic ID (TopicId) of collection configuration.</p>
-</dd><dt class="property-required"
+    <dd>Log topic ID (TopicId) of collection configuration.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1025,8 +1266,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic Name.</p>
-</dd><dt class="property-required"
+    <dd>Topic Name.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1034,44 +1274,39 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type. Valid values: container_stdout; container_file; host_file.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: container_stdout; container_file; host_file.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerfile_java" style="color: inherit; text-decoration: inherit;">container<wbr>File</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextracontainerfile">Config<wbr>Extra<wbr>Container<wbr>File<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextracontainerfile">Config<wbr>Extra<wbr>Container<wbr>File</a></span>
     </dt>
-    <dd><p>Container file path info.</p>
-</dd><dt class="property-optional"
+    <dd>Container file path info.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerstdout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerstdout_java" style="color: inherit; text-decoration: inherit;">container<wbr>Stdout</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextracontainerstdout">Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextracontainerstdout">Config<wbr>Extra<wbr>Container<wbr>Stdout</a></span>
     </dt>
-    <dd><p>Container stdout info.</p>
-</dd><dt class="property-optional"
+    <dd>Container stdout info.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludepaths_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludepaths_java" style="color: inherit; text-decoration: inherit;">exclude<wbr>Paths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextraexcludepath">List&lt;Config<wbr>Extra<wbr>Exclude<wbr>Path<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#configextraexcludepath">List&lt;Config<wbr>Extra<wbr>Exclude<wbr>Path&gt;</a></span>
     </dt>
-    <dd><p>Collection path blocklist.</p>
-</dd><dt class="property-optional"
+    <dd>Collection path blocklist.</dd><dt class="property-optional"
             title="Optional">
         <span id="extractrule_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extractrule_java" style="color: inherit; text-decoration: inherit;">extract<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextraextractrule">Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextraextractrule">Config<wbr>Extra<wbr>Extract<wbr>Rule</a></span>
     </dt>
-    <dd><p>Extraction rule. If ExtractRule is set, LogType must be set.</p>
-</dd><dt class="property-optional"
+    <dd>Extraction rule. If ExtractRule is set, LogType must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -1079,8 +1314,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Binding group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding group id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="groupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupids_java" style="color: inherit; text-decoration: inherit;">group<wbr>Ids</a>
@@ -1088,17 +1322,15 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Binding group ids.</p>
-</dd><dt class="property-optional"
+    <dd>Binding group ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostfile_java" style="color: inherit; text-decoration: inherit;">host<wbr>File</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextrahostfile">Config<wbr>Extra<wbr>Host<wbr>File<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextrahostfile">Config<wbr>Extra<wbr>Host<wbr>File</a></span>
     </dt>
-    <dd><p>Node file config info.</p>
-</dd><dt class="property-optional"
+    <dd>Node file config info.</dd><dt class="property-optional"
             title="Optional">
         <span id="logformat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logformat_java" style="color: inherit; text-decoration: inherit;">log<wbr>Format</a>
@@ -1106,8 +1338,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log format.</p>
-</dd><dt class="property-optional"
+    <dd>Log format.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1115,8 +1346,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Collection configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="userdefinerule_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdefinerule_java" style="color: inherit; text-decoration: inherit;">user<wbr>Define<wbr>Rule</a>
@@ -1124,8 +1354,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom collection rule, which is a serialized JSON string.</p>
-</dd></dl>
+    <dd>Custom collection rule, which is a serialized JSON string.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1139,8 +1368,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Collection configuration flag.</p>
-</dd><dt class="property-required"
+    <dd>Collection configuration flag.</dd><dt class="property-required"
             title="Required">
         <span id="logtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtype_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Type</a>
@@ -1148,8 +1376,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</p>
-</dd><dt class="property-required"
+    <dd>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</dd><dt class="property-required"
             title="Required">
         <span id="logsetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_nodejs" style="color: inherit; text-decoration: inherit;">logset<wbr>Id</a>
@@ -1157,8 +1384,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset Id.</p>
-</dd><dt class="property-required"
+    <dd>Logset Id.</dd><dt class="property-required"
             title="Required">
         <span id="logsetname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetname_nodejs" style="color: inherit; text-decoration: inherit;">logset<wbr>Name</a>
@@ -1166,8 +1392,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset Name.</p>
-</dd><dt class="property-required"
+    <dd>Logset Name.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -1175,8 +1400,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic ID (TopicId) of collection configuration.</p>
-</dd><dt class="property-required"
+    <dd>Log topic ID (TopicId) of collection configuration.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1184,8 +1408,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic Name.</p>
-</dd><dt class="property-required"
+    <dd>Topic Name.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1193,44 +1416,39 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type. Valid values: container_stdout; container_file; host_file.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: container_stdout; container_file; host_file.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerfile_nodejs" style="color: inherit; text-decoration: inherit;">container<wbr>File</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextracontainerfile">Config<wbr>Extra<wbr>Container<wbr>File<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextracontainerfile">Config<wbr>Extra<wbr>Container<wbr>File</a></span>
     </dt>
-    <dd><p>Container file path info.</p>
-</dd><dt class="property-optional"
+    <dd>Container file path info.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerstdout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerstdout_nodejs" style="color: inherit; text-decoration: inherit;">container<wbr>Stdout</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextracontainerstdout">Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextracontainerstdout">Config<wbr>Extra<wbr>Container<wbr>Stdout</a></span>
     </dt>
-    <dd><p>Container stdout info.</p>
-</dd><dt class="property-optional"
+    <dd>Container stdout info.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludepaths_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludepaths_nodejs" style="color: inherit; text-decoration: inherit;">exclude<wbr>Paths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextraexcludepath">Config<wbr>Extra<wbr>Exclude<wbr>Path<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#configextraexcludepath">Config<wbr>Extra<wbr>Exclude<wbr>Path[]</a></span>
     </dt>
-    <dd><p>Collection path blocklist.</p>
-</dd><dt class="property-optional"
+    <dd>Collection path blocklist.</dd><dt class="property-optional"
             title="Optional">
         <span id="extractrule_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extractrule_nodejs" style="color: inherit; text-decoration: inherit;">extract<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextraextractrule">Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextraextractrule">Config<wbr>Extra<wbr>Extract<wbr>Rule</a></span>
     </dt>
-    <dd><p>Extraction rule. If ExtractRule is set, LogType must be set.</p>
-</dd><dt class="property-optional"
+    <dd>Extraction rule. If ExtractRule is set, LogType must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -1238,8 +1456,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding group id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="groupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupids_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Ids</a>
@@ -1247,17 +1464,15 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Binding group ids.</p>
-</dd><dt class="property-optional"
+    <dd>Binding group ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostfile_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>File</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextrahostfile">Config<wbr>Extra<wbr>Host<wbr>File<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextrahostfile">Config<wbr>Extra<wbr>Host<wbr>File</a></span>
     </dt>
-    <dd><p>Node file config info.</p>
-</dd><dt class="property-optional"
+    <dd>Node file config info.</dd><dt class="property-optional"
             title="Optional">
         <span id="logformat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logformat_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Format</a>
@@ -1265,8 +1480,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log format.</p>
-</dd><dt class="property-optional"
+    <dd>Log format.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1274,8 +1488,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Collection configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="userdefinerule_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdefinerule_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Define<wbr>Rule</a>
@@ -1283,8 +1496,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom collection rule, which is a serialized JSON string.</p>
-</dd></dl>
+    <dd>Custom collection rule, which is a serialized JSON string.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1298,8 +1510,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Collection configuration flag.</p>
-</dd><dt class="property-required"
+    <dd>Collection configuration flag.</dd><dt class="property-required"
             title="Required">
         <span id="log_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_type_python" style="color: inherit; text-decoration: inherit;">log_<wbr>type</a>
@@ -1307,8 +1518,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</p>
-</dd><dt class="property-required"
+    <dd>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</dd><dt class="property-required"
             title="Required">
         <span id="logset_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logset_id_python" style="color: inherit; text-decoration: inherit;">logset_<wbr>id</a>
@@ -1316,8 +1526,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Logset Id.</p>
-</dd><dt class="property-required"
+    <dd>Logset Id.</dd><dt class="property-required"
             title="Required">
         <span id="logset_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logset_name_python" style="color: inherit; text-decoration: inherit;">logset_<wbr>name</a>
@@ -1325,8 +1534,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Logset Name.</p>
-</dd><dt class="property-required"
+    <dd>Logset Name.</dd><dt class="property-required"
             title="Required">
         <span id="topic_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_id_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>id</a>
@@ -1334,8 +1542,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log topic ID (TopicId) of collection configuration.</p>
-</dd><dt class="property-required"
+    <dd>Log topic ID (TopicId) of collection configuration.</dd><dt class="property-required"
             title="Required">
         <span id="topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
@@ -1343,8 +1550,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Topic Name.</p>
-</dd><dt class="property-required"
+    <dd>Topic Name.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1352,8 +1558,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type. Valid values: container_stdout; container_file; host_file.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: container_stdout; container_file; host_file.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_file_python" style="color: inherit; text-decoration: inherit;">container_<wbr>file</a>
@@ -1361,8 +1566,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerfile">Config<wbr>Extra<wbr>Container<wbr>File<wbr>Args</a></span>
     </dt>
-    <dd><p>Container file path info.</p>
-</dd><dt class="property-optional"
+    <dd>Container file path info.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_stdout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_stdout_python" style="color: inherit; text-decoration: inherit;">container_<wbr>stdout</a>
@@ -1370,17 +1574,15 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerstdout">Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Args</a></span>
     </dt>
-    <dd><p>Container stdout info.</p>
-</dd><dt class="property-optional"
+    <dd>Container stdout info.</dd><dt class="property-optional"
             title="Optional">
         <span id="exclude_paths_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_paths_python" style="color: inherit; text-decoration: inherit;">exclude_<wbr>paths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextraexcludepath">Config<wbr>Extra<wbr>Exclude<wbr>Path<wbr>Args]</a></span>
+        <span class="property-type"><a href="#configextraexcludepath">Sequence[Config<wbr>Extra<wbr>Exclude<wbr>Path<wbr>Args]</a></span>
     </dt>
-    <dd><p>Collection path blocklist.</p>
-</dd><dt class="property-optional"
+    <dd>Collection path blocklist.</dd><dt class="property-optional"
             title="Optional">
         <span id="extract_rule_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extract_rule_python" style="color: inherit; text-decoration: inherit;">extract_<wbr>rule</a>
@@ -1388,8 +1590,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextraextractrule">Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Extraction rule. If ExtractRule is set, LogType must be set.</p>
-</dd><dt class="property-optional"
+    <dd>Extraction rule. If ExtractRule is set, LogType must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
@@ -1397,8 +1598,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Binding group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding group id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_ids_python" style="color: inherit; text-decoration: inherit;">group_<wbr>ids</a>
@@ -1406,8 +1606,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Binding group ids.</p>
-</dd><dt class="property-optional"
+    <dd>Binding group ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_file_python" style="color: inherit; text-decoration: inherit;">host_<wbr>file</a>
@@ -1415,8 +1614,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextrahostfile">Config<wbr>Extra<wbr>Host<wbr>File<wbr>Args</a></span>
     </dt>
-    <dd><p>Node file config info.</p>
-</dd><dt class="property-optional"
+    <dd>Node file config info.</dd><dt class="property-optional"
             title="Optional">
         <span id="log_format_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_format_python" style="color: inherit; text-decoration: inherit;">log_<wbr>format</a>
@@ -1424,8 +1622,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log format.</p>
-</dd><dt class="property-optional"
+    <dd>Log format.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1433,8 +1630,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Collection configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="user_define_rule_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_define_rule_python" style="color: inherit; text-decoration: inherit;">user_<wbr>define_<wbr>rule</a>
@@ -1442,8 +1638,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom collection rule, which is a serialized JSON string.</p>
-</dd></dl>
+    <dd>Custom collection rule, which is a serialized JSON string.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1457,8 +1652,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Collection configuration flag.</p>
-</dd><dt class="property-required"
+    <dd>Collection configuration flag.</dd><dt class="property-required"
             title="Required">
         <span id="logtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtype_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Type</a>
@@ -1466,8 +1660,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</p>
-</dd><dt class="property-required"
+    <dd>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</dd><dt class="property-required"
             title="Required">
         <span id="logsetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_yaml" style="color: inherit; text-decoration: inherit;">logset<wbr>Id</a>
@@ -1475,8 +1668,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Logset Id.</p>
-</dd><dt class="property-required"
+    <dd>Logset Id.</dd><dt class="property-required"
             title="Required">
         <span id="logsetname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetname_yaml" style="color: inherit; text-decoration: inherit;">logset<wbr>Name</a>
@@ -1484,8 +1676,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Logset Name.</p>
-</dd><dt class="property-required"
+    <dd>Logset Name.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -1493,8 +1684,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log topic ID (TopicId) of collection configuration.</p>
-</dd><dt class="property-required"
+    <dd>Log topic ID (TopicId) of collection configuration.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1502,8 +1692,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic Name.</p>
-</dd><dt class="property-required"
+    <dd>Topic Name.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1511,8 +1700,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type. Valid values: container_stdout; container_file; host_file.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: container_stdout; container_file; host_file.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerfile_yaml" style="color: inherit; text-decoration: inherit;">container<wbr>File</a>
@@ -1520,8 +1708,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerfile">Property Map</a></span>
     </dt>
-    <dd><p>Container file path info.</p>
-</dd><dt class="property-optional"
+    <dd>Container file path info.</dd><dt class="property-optional"
             title="Optional">
         <span id="containerstdout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#containerstdout_yaml" style="color: inherit; text-decoration: inherit;">container<wbr>Stdout</a>
@@ -1529,8 +1716,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerstdout">Property Map</a></span>
     </dt>
-    <dd><p>Container stdout info.</p>
-</dd><dt class="property-optional"
+    <dd>Container stdout info.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludepaths_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludepaths_yaml" style="color: inherit; text-decoration: inherit;">exclude<wbr>Paths</a>
@@ -1538,8 +1724,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextraexcludepath">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Collection path blocklist.</p>
-</dd><dt class="property-optional"
+    <dd>Collection path blocklist.</dd><dt class="property-optional"
             title="Optional">
         <span id="extractrule_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extractrule_yaml" style="color: inherit; text-decoration: inherit;">extract<wbr>Rule</a>
@@ -1547,8 +1732,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextraextractrule">Property Map</a></span>
     </dt>
-    <dd><p>Extraction rule. If ExtractRule is set, LogType must be set.</p>
-</dd><dt class="property-optional"
+    <dd>Extraction rule. If ExtractRule is set, LogType must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -1556,8 +1740,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Binding group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding group id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="groupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupids_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Ids</a>
@@ -1565,8 +1748,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Binding group ids.</p>
-</dd><dt class="property-optional"
+    <dd>Binding group ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostfile_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>File</a>
@@ -1574,8 +1756,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextrahostfile">Property Map</a></span>
     </dt>
-    <dd><p>Node file config info.</p>
-</dd><dt class="property-optional"
+    <dd>Node file config info.</dd><dt class="property-optional"
             title="Optional">
         <span id="logformat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logformat_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Format</a>
@@ -1583,8 +1764,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log format.</p>
-</dd><dt class="property-optional"
+    <dd>Log format.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1592,8 +1772,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Collection configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="userdefinerule_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdefinerule_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Define<wbr>Rule</a>
@@ -1601,8 +1780,7 @@ The ConfigExtra resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom collection rule, which is a serialized JSON string.</p>
-</dd></dl>
+    <dd>Custom collection rule, which is a serialized JSON string.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1623,8 +1801,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1638,8 +1815,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1653,8 +1843,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1668,8 +1857,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1683,8 +1871,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1698,8 +1885,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1709,29 +1895,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ConfigExtra resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ConfigExtraState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ConfigExtra</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ConfigExtraState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ConfigExtra</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">config_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">container_file</span><span class="p">:</span> <span class="nx">Optional[_cls.ConfigExtraContainerFileArgs]</span> = None<span class="p">,</span>
-        <span class="nx">container_stdout</span><span class="p">:</span> <span class="nx">Optional[_cls.ConfigExtraContainerStdoutArgs]</span> = None<span class="p">,</span>
-        <span class="nx">exclude_paths</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cls.ConfigExtraExcludePathArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">extract_rule</span><span class="p">:</span> <span class="nx">Optional[_cls.ConfigExtraExtractRuleArgs]</span> = None<span class="p">,</span>
+        <span class="nx">container_file</span><span class="p">:</span> <span class="nx">Optional[ConfigExtraContainerFileArgs]</span> = None<span class="p">,</span>
+        <span class="nx">container_stdout</span><span class="p">:</span> <span class="nx">Optional[ConfigExtraContainerStdoutArgs]</span> = None<span class="p">,</span>
+        <span class="nx">exclude_paths</span><span class="p">:</span> <span class="nx">Optional[Sequence[ConfigExtraExcludePathArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">extract_rule</span><span class="p">:</span> <span class="nx">Optional[ConfigExtraExtractRuleArgs]</span> = None<span class="p">,</span>
         <span class="nx">group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">group_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-        <span class="nx">host_file</span><span class="p">:</span> <span class="nx">Optional[_cls.ConfigExtraHostFileArgs]</span> = None<span class="p">,</span>
+        <span class="nx">host_file</span><span class="p">:</span> <span class="nx">Optional[ConfigExtraHostFileArgs]</span> = None<span class="p">,</span>
         <span class="nx">log_format</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">log_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">logset_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -1741,104 +1927,143 @@ Get an existing ConfigExtra resource's state with the given name, ID, and option
         <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">user_define_rule</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> ConfigExtra</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetConfigExtra<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ConfigExtraState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ConfigExtra</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetConfigExtra<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ConfigExtraState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ConfigExtra</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ConfigExtra</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ConfigExtraState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ConfigExtra</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ConfigExtraState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ConfigExtra</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ConfigExtraState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ConfigExtra</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ConfigExtraState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingConfigExtra</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cls:ConfigExtra</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cls_config_extra</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ConfigExtraState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ConfigExtraState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1846,28 +2071,31 @@ Get an existing ConfigExtra resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ConfigExtraState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1875,28 +2103,31 @@ Get an existing ConfigExtra resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ConfigExtraState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1916,44 +2147,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Collection configuration flag.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_containerfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containerfile_csharp" style="color: inherit; text-decoration: inherit;">Container<wbr>File</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextracontainerfile">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Container<wbr>File<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextracontainerfile">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Container<wbr>File</a></span>
     </dt>
-    <dd><p>Container file path info.</p>
-</dd><dt class="property-optional"
+    <dd>Container file path info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_containerstdout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containerstdout_csharp" style="color: inherit; text-decoration: inherit;">Container<wbr>Stdout</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextracontainerstdout">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextracontainerstdout">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Container<wbr>Stdout</a></span>
     </dt>
-    <dd><p>Container stdout info.</p>
-</dd><dt class="property-optional"
+    <dd>Container stdout info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_excludepaths_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_excludepaths_csharp" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Paths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextraexcludepath">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Exclude<wbr>Path<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#configextraexcludepath">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Exclude<wbr>Path&gt;</a></span>
     </dt>
-    <dd><p>Collection path blocklist.</p>
-</dd><dt class="property-optional"
+    <dd>Collection path blocklist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_extractrule_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_extractrule_csharp" style="color: inherit; text-decoration: inherit;">Extract<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextraextractrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextraextractrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Extract<wbr>Rule</a></span>
     </dt>
-    <dd><p>Extraction rule. If ExtractRule is set, LogType must be set.</p>
-</dd><dt class="property-optional"
+    <dd>Extraction rule. If ExtractRule is set, LogType must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -1961,8 +2187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding group id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_groupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupids_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Ids</a>
@@ -1970,17 +2195,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Binding group ids.</p>
-</dd><dt class="property-optional"
+    <dd>Binding group ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostfile_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>File</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextrahostfile">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Host<wbr>File<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextrahostfile">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Host<wbr>File</a></span>
     </dt>
-    <dd><p>Node file config info.</p>
-</dd><dt class="property-optional"
+    <dd>Node file config info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logformat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logformat_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Format</a>
@@ -1988,8 +2211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log format.</p>
-</dd><dt class="property-optional"
+    <dd>Log format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logtype_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Type</a>
@@ -1997,8 +2219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetid_csharp" style="color: inherit; text-decoration: inherit;">Logset<wbr>Id</a>
@@ -2006,8 +2227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset Id.</p>
-</dd><dt class="property-optional"
+    <dd>Logset Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetname_csharp" style="color: inherit; text-decoration: inherit;">Logset<wbr>Name</a>
@@ -2015,8 +2235,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset Name.</p>
-</dd><dt class="property-optional"
+    <dd>Logset Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2024,8 +2243,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Collection configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicid_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Id</a>
@@ -2033,8 +2251,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic ID (TopicId) of collection configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic ID (TopicId) of collection configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -2042,8 +2259,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic Name.</p>
-</dd><dt class="property-optional"
+    <dd>Topic Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2051,8 +2267,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type. Valid values: container_stdout; container_file; host_file.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: container_stdout; container_file; host_file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userdefinerule_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdefinerule_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Define<wbr>Rule</a>
@@ -2060,8 +2275,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom collection rule, which is a serialized JSON string.</p>
-</dd></dl>
+    <dd>Custom collection rule, which is a serialized JSON string.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2075,8 +2289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Collection configuration flag.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_containerfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containerfile_go" style="color: inherit; text-decoration: inherit;">Container<wbr>File</a>
@@ -2084,8 +2297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerfile">Config<wbr>Extra<wbr>Container<wbr>File<wbr>Args</a></span>
     </dt>
-    <dd><p>Container file path info.</p>
-</dd><dt class="property-optional"
+    <dd>Container file path info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_containerstdout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containerstdout_go" style="color: inherit; text-decoration: inherit;">Container<wbr>Stdout</a>
@@ -2093,8 +2305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerstdout">Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Args</a></span>
     </dt>
-    <dd><p>Container stdout info.</p>
-</dd><dt class="property-optional"
+    <dd>Container stdout info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_excludepaths_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_excludepaths_go" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Paths</a>
@@ -2102,8 +2313,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextraexcludepath">[]Config<wbr>Extra<wbr>Exclude<wbr>Path<wbr>Args</a></span>
     </dt>
-    <dd><p>Collection path blocklist.</p>
-</dd><dt class="property-optional"
+    <dd>Collection path blocklist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_extractrule_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_extractrule_go" style="color: inherit; text-decoration: inherit;">Extract<wbr>Rule</a>
@@ -2111,8 +2321,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextraextractrule">Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Extraction rule. If ExtractRule is set, LogType must be set.</p>
-</dd><dt class="property-optional"
+    <dd>Extraction rule. If ExtractRule is set, LogType must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupid_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -2120,8 +2329,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding group id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_groupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupids_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Ids</a>
@@ -2129,8 +2337,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Binding group ids.</p>
-</dd><dt class="property-optional"
+    <dd>Binding group ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostfile_go" style="color: inherit; text-decoration: inherit;">Host<wbr>File</a>
@@ -2138,8 +2345,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextrahostfile">Config<wbr>Extra<wbr>Host<wbr>File<wbr>Args</a></span>
     </dt>
-    <dd><p>Node file config info.</p>
-</dd><dt class="property-optional"
+    <dd>Node file config info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logformat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logformat_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Format</a>
@@ -2147,8 +2353,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log format.</p>
-</dd><dt class="property-optional"
+    <dd>Log format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logtype_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Type</a>
@@ -2156,8 +2361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetid_go" style="color: inherit; text-decoration: inherit;">Logset<wbr>Id</a>
@@ -2165,8 +2369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset Id.</p>
-</dd><dt class="property-optional"
+    <dd>Logset Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetname_go" style="color: inherit; text-decoration: inherit;">Logset<wbr>Name</a>
@@ -2174,8 +2377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset Name.</p>
-</dd><dt class="property-optional"
+    <dd>Logset Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2183,8 +2385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Collection configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicid_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Id</a>
@@ -2192,8 +2393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic ID (TopicId) of collection configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic ID (TopicId) of collection configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -2201,8 +2401,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic Name.</p>
-</dd><dt class="property-optional"
+    <dd>Topic Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2210,8 +2409,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type. Valid values: container_stdout; container_file; host_file.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: container_stdout; container_file; host_file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userdefinerule_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdefinerule_go" style="color: inherit; text-decoration: inherit;">User<wbr>Define<wbr>Rule</a>
@@ -2219,8 +2417,149 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom collection rule, which is a serialized JSON string.</p>
-</dd></dl>
+    <dd>Custom collection rule, which is a serialized JSON string.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_config_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_config_flag_hcl" style="color: inherit; text-decoration: inherit;">config_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Collection configuration flag.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_container_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_container_file_hcl" style="color: inherit; text-decoration: inherit;">container_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#configextracontainerfile">object</a></span>
+    </dt>
+    <dd>Container file path info.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_container_stdout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_container_stdout_hcl" style="color: inherit; text-decoration: inherit;">container_<wbr>stdout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#configextracontainerstdout">object</a></span>
+    </dt>
+    <dd>Container stdout info.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_exclude_paths_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclude_paths_hcl" style="color: inherit; text-decoration: inherit;">exclude_<wbr>paths</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#configextraexcludepath">list(object)</a></span>
+    </dt>
+    <dd>Collection path blocklist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_extract_rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_extract_rule_hcl" style="color: inherit; text-decoration: inherit;">extract_<wbr>rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#configextraextractrule">object</a></span>
+    </dt>
+    <dd>Extraction rule. If ExtractRule is set, LogType must be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Binding group id.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_group_ids_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Binding group ids.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_host_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_file_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#configextrahostfile">object</a></span>
+    </dt>
+    <dd>Node file config info.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_log_format_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_log_format_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>format</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_log_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_log_type_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_logset_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logset_id_hcl" style="color: inherit; text-decoration: inherit;">logset_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Logset Id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_logset_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logset_name_hcl" style="color: inherit; text-decoration: inherit;">logset_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Logset Name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Collection configuration name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_topic_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_id_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log topic ID (TopicId) of collection configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Topic Name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type. Valid values: container_stdout; container_file; host_file.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_user_define_rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_define_rule_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>define_<wbr>rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom collection rule, which is a serialized JSON string.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2234,44 +2573,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Collection configuration flag.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_containerfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containerfile_java" style="color: inherit; text-decoration: inherit;">container<wbr>File</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextracontainerfile">Config<wbr>Extra<wbr>Container<wbr>File<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextracontainerfile">Config<wbr>Extra<wbr>Container<wbr>File</a></span>
     </dt>
-    <dd><p>Container file path info.</p>
-</dd><dt class="property-optional"
+    <dd>Container file path info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_containerstdout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containerstdout_java" style="color: inherit; text-decoration: inherit;">container<wbr>Stdout</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextracontainerstdout">Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextracontainerstdout">Config<wbr>Extra<wbr>Container<wbr>Stdout</a></span>
     </dt>
-    <dd><p>Container stdout info.</p>
-</dd><dt class="property-optional"
+    <dd>Container stdout info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_excludepaths_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_excludepaths_java" style="color: inherit; text-decoration: inherit;">exclude<wbr>Paths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextraexcludepath">List&lt;Config<wbr>Extra<wbr>Exclude<wbr>Path<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#configextraexcludepath">List&lt;Config<wbr>Extra<wbr>Exclude<wbr>Path&gt;</a></span>
     </dt>
-    <dd><p>Collection path blocklist.</p>
-</dd><dt class="property-optional"
+    <dd>Collection path blocklist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_extractrule_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_extractrule_java" style="color: inherit; text-decoration: inherit;">extract<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextraextractrule">Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextraextractrule">Config<wbr>Extra<wbr>Extract<wbr>Rule</a></span>
     </dt>
-    <dd><p>Extraction rule. If ExtractRule is set, LogType must be set.</p>
-</dd><dt class="property-optional"
+    <dd>Extraction rule. If ExtractRule is set, LogType must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupid_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -2279,8 +2613,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Binding group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding group id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_groupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupids_java" style="color: inherit; text-decoration: inherit;">group<wbr>Ids</a>
@@ -2288,17 +2621,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Binding group ids.</p>
-</dd><dt class="property-optional"
+    <dd>Binding group ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostfile_java" style="color: inherit; text-decoration: inherit;">host<wbr>File</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextrahostfile">Config<wbr>Extra<wbr>Host<wbr>File<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextrahostfile">Config<wbr>Extra<wbr>Host<wbr>File</a></span>
     </dt>
-    <dd><p>Node file config info.</p>
-</dd><dt class="property-optional"
+    <dd>Node file config info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logformat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logformat_java" style="color: inherit; text-decoration: inherit;">log<wbr>Format</a>
@@ -2306,8 +2637,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log format.</p>
-</dd><dt class="property-optional"
+    <dd>Log format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logtype_java" style="color: inherit; text-decoration: inherit;">log<wbr>Type</a>
@@ -2315,8 +2645,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetid_java" style="color: inherit; text-decoration: inherit;">logset<wbr>Id</a>
@@ -2324,8 +2653,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Logset Id.</p>
-</dd><dt class="property-optional"
+    <dd>Logset Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetname_java" style="color: inherit; text-decoration: inherit;">logset<wbr>Name</a>
@@ -2333,8 +2661,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Logset Name.</p>
-</dd><dt class="property-optional"
+    <dd>Logset Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2342,8 +2669,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Collection configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicid_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -2351,8 +2677,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log topic ID (TopicId) of collection configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic ID (TopicId) of collection configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -2360,8 +2685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic Name.</p>
-</dd><dt class="property-optional"
+    <dd>Topic Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2369,8 +2693,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type. Valid values: container_stdout; container_file; host_file.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: container_stdout; container_file; host_file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userdefinerule_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdefinerule_java" style="color: inherit; text-decoration: inherit;">user<wbr>Define<wbr>Rule</a>
@@ -2378,8 +2701,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom collection rule, which is a serialized JSON string.</p>
-</dd></dl>
+    <dd>Custom collection rule, which is a serialized JSON string.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2393,44 +2715,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Collection configuration flag.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_containerfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containerfile_nodejs" style="color: inherit; text-decoration: inherit;">container<wbr>File</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextracontainerfile">Config<wbr>Extra<wbr>Container<wbr>File<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextracontainerfile">Config<wbr>Extra<wbr>Container<wbr>File</a></span>
     </dt>
-    <dd><p>Container file path info.</p>
-</dd><dt class="property-optional"
+    <dd>Container file path info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_containerstdout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containerstdout_nodejs" style="color: inherit; text-decoration: inherit;">container<wbr>Stdout</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextracontainerstdout">Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextracontainerstdout">Config<wbr>Extra<wbr>Container<wbr>Stdout</a></span>
     </dt>
-    <dd><p>Container stdout info.</p>
-</dd><dt class="property-optional"
+    <dd>Container stdout info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_excludepaths_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_excludepaths_nodejs" style="color: inherit; text-decoration: inherit;">exclude<wbr>Paths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextraexcludepath">Config<wbr>Extra<wbr>Exclude<wbr>Path<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#configextraexcludepath">Config<wbr>Extra<wbr>Exclude<wbr>Path[]</a></span>
     </dt>
-    <dd><p>Collection path blocklist.</p>
-</dd><dt class="property-optional"
+    <dd>Collection path blocklist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_extractrule_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_extractrule_nodejs" style="color: inherit; text-decoration: inherit;">extract<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextraextractrule">Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextraextractrule">Config<wbr>Extra<wbr>Extract<wbr>Rule</a></span>
     </dt>
-    <dd><p>Extraction rule. If ExtractRule is set, LogType must be set.</p>
-</dd><dt class="property-optional"
+    <dd>Extraction rule. If ExtractRule is set, LogType must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupid_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -2438,8 +2755,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Binding group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding group id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_groupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupids_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Ids</a>
@@ -2447,17 +2763,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Binding group ids.</p>
-</dd><dt class="property-optional"
+    <dd>Binding group ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostfile_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>File</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextrahostfile">Config<wbr>Extra<wbr>Host<wbr>File<wbr>Args</a></span>
+        <span class="property-type"><a href="#configextrahostfile">Config<wbr>Extra<wbr>Host<wbr>File</a></span>
     </dt>
-    <dd><p>Node file config info.</p>
-</dd><dt class="property-optional"
+    <dd>Node file config info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logformat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logformat_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Format</a>
@@ -2465,8 +2779,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log format.</p>
-</dd><dt class="property-optional"
+    <dd>Log format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logtype_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Type</a>
@@ -2474,8 +2787,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetid_nodejs" style="color: inherit; text-decoration: inherit;">logset<wbr>Id</a>
@@ -2483,8 +2795,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset Id.</p>
-</dd><dt class="property-optional"
+    <dd>Logset Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetname_nodejs" style="color: inherit; text-decoration: inherit;">logset<wbr>Name</a>
@@ -2492,8 +2803,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset Name.</p>
-</dd><dt class="property-optional"
+    <dd>Logset Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2501,8 +2811,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Collection configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicid_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -2510,8 +2819,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic ID (TopicId) of collection configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic ID (TopicId) of collection configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -2519,8 +2827,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic Name.</p>
-</dd><dt class="property-optional"
+    <dd>Topic Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2528,8 +2835,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type. Valid values: container_stdout; container_file; host_file.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: container_stdout; container_file; host_file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userdefinerule_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdefinerule_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Define<wbr>Rule</a>
@@ -2537,8 +2843,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom collection rule, which is a serialized JSON string.</p>
-</dd></dl>
+    <dd>Custom collection rule, which is a serialized JSON string.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2552,8 +2857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Collection configuration flag.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_container_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_container_file_python" style="color: inherit; text-decoration: inherit;">container_<wbr>file</a>
@@ -2561,8 +2865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerfile">Config<wbr>Extra<wbr>Container<wbr>File<wbr>Args</a></span>
     </dt>
-    <dd><p>Container file path info.</p>
-</dd><dt class="property-optional"
+    <dd>Container file path info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_container_stdout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_container_stdout_python" style="color: inherit; text-decoration: inherit;">container_<wbr>stdout</a>
@@ -2570,17 +2873,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerstdout">Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Args</a></span>
     </dt>
-    <dd><p>Container stdout info.</p>
-</dd><dt class="property-optional"
+    <dd>Container stdout info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_exclude_paths_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_exclude_paths_python" style="color: inherit; text-decoration: inherit;">exclude_<wbr>paths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextraexcludepath">Config<wbr>Extra<wbr>Exclude<wbr>Path<wbr>Args]</a></span>
+        <span class="property-type"><a href="#configextraexcludepath">Sequence[Config<wbr>Extra<wbr>Exclude<wbr>Path<wbr>Args]</a></span>
     </dt>
-    <dd><p>Collection path blocklist.</p>
-</dd><dt class="property-optional"
+    <dd>Collection path blocklist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_extract_rule_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_extract_rule_python" style="color: inherit; text-decoration: inherit;">extract_<wbr>rule</a>
@@ -2588,8 +2889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextraextractrule">Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Extraction rule. If ExtractRule is set, LogType must be set.</p>
-</dd><dt class="property-optional"
+    <dd>Extraction rule. If ExtractRule is set, LogType must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_group_id_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
@@ -2597,8 +2897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Binding group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding group id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_group_ids_python" style="color: inherit; text-decoration: inherit;">group_<wbr>ids</a>
@@ -2606,8 +2905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Binding group ids.</p>
-</dd><dt class="property-optional"
+    <dd>Binding group ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_file_python" style="color: inherit; text-decoration: inherit;">host_<wbr>file</a>
@@ -2615,8 +2913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextrahostfile">Config<wbr>Extra<wbr>Host<wbr>File<wbr>Args</a></span>
     </dt>
-    <dd><p>Node file config info.</p>
-</dd><dt class="property-optional"
+    <dd>Node file config info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_log_format_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_log_format_python" style="color: inherit; text-decoration: inherit;">log_<wbr>format</a>
@@ -2624,8 +2921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log format.</p>
-</dd><dt class="property-optional"
+    <dd>Log format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_log_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_log_type_python" style="color: inherit; text-decoration: inherit;">log_<wbr>type</a>
@@ -2633,8 +2929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logset_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logset_id_python" style="color: inherit; text-decoration: inherit;">logset_<wbr>id</a>
@@ -2642,8 +2937,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Logset Id.</p>
-</dd><dt class="property-optional"
+    <dd>Logset Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logset_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logset_name_python" style="color: inherit; text-decoration: inherit;">logset_<wbr>name</a>
@@ -2651,8 +2945,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Logset Name.</p>
-</dd><dt class="property-optional"
+    <dd>Logset Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2660,8 +2953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Collection configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topic_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_id_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>id</a>
@@ -2669,8 +2961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log topic ID (TopicId) of collection configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic ID (TopicId) of collection configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_name_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
@@ -2678,8 +2969,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Topic Name.</p>
-</dd><dt class="property-optional"
+    <dd>Topic Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2687,8 +2977,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type. Valid values: container_stdout; container_file; host_file.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: container_stdout; container_file; host_file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_user_define_rule_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_define_rule_python" style="color: inherit; text-decoration: inherit;">user_<wbr>define_<wbr>rule</a>
@@ -2696,8 +2985,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom collection rule, which is a serialized JSON string.</p>
-</dd></dl>
+    <dd>Custom collection rule, which is a serialized JSON string.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2711,8 +2999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Collection configuration flag.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration flag.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_containerfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containerfile_yaml" style="color: inherit; text-decoration: inherit;">container<wbr>File</a>
@@ -2720,8 +3007,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerfile">Property Map</a></span>
     </dt>
-    <dd><p>Container file path info.</p>
-</dd><dt class="property-optional"
+    <dd>Container file path info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_containerstdout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_containerstdout_yaml" style="color: inherit; text-decoration: inherit;">container<wbr>Stdout</a>
@@ -2729,8 +3015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerstdout">Property Map</a></span>
     </dt>
-    <dd><p>Container stdout info.</p>
-</dd><dt class="property-optional"
+    <dd>Container stdout info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_excludepaths_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_excludepaths_yaml" style="color: inherit; text-decoration: inherit;">exclude<wbr>Paths</a>
@@ -2738,8 +3023,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextraexcludepath">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Collection path blocklist.</p>
-</dd><dt class="property-optional"
+    <dd>Collection path blocklist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_extractrule_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_extractrule_yaml" style="color: inherit; text-decoration: inherit;">extract<wbr>Rule</a>
@@ -2747,8 +3031,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextraextractrule">Property Map</a></span>
     </dt>
-    <dd><p>Extraction rule. If ExtractRule is set, LogType must be set.</p>
-</dd><dt class="property-optional"
+    <dd>Extraction rule. If ExtractRule is set, LogType must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupid_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -2756,8 +3039,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Binding group id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Binding group id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_groupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupids_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Ids</a>
@@ -2765,8 +3047,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Binding group ids.</p>
-</dd><dt class="property-optional"
+    <dd>Binding group ids.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostfile_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>File</a>
@@ -2774,8 +3055,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextrahostfile">Property Map</a></span>
     </dt>
-    <dd><p>Node file config info.</p>
-</dd><dt class="property-optional"
+    <dd>Node file config info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logformat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logformat_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Format</a>
@@ -2783,8 +3063,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log format.</p>
-</dd><dt class="property-optional"
+    <dd>Log format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logtype_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Type</a>
@@ -2792,8 +3071,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetid_yaml" style="color: inherit; text-decoration: inherit;">logset<wbr>Id</a>
@@ -2801,8 +3079,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Logset Id.</p>
-</dd><dt class="property-optional"
+    <dd>Logset Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetname_yaml" style="color: inherit; text-decoration: inherit;">logset<wbr>Name</a>
@@ -2810,8 +3087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Logset Name.</p>
-</dd><dt class="property-optional"
+    <dd>Logset Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2819,8 +3095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Collection configuration name.</p>
-</dd><dt class="property-optional"
+    <dd>Collection configuration name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicid_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -2828,8 +3103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log topic ID (TopicId) of collection configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic ID (TopicId) of collection configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -2837,8 +3111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic Name.</p>
-</dd><dt class="property-optional"
+    <dd>Topic Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2846,8 +3119,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type. Valid values: container_stdout; container_file; host_file.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: container_stdout; container_file; host_file.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userdefinerule_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdefinerule_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Define<wbr>Rule</a>
@@ -2855,8 +3127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom collection rule, which is a serialized JSON string.</p>
-</dd></dl>
+    <dd>Custom collection rule, which is a serialized JSON string.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2871,7 +3142,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="configextracontainerfile">Config<wbr>Extra<wbr>Container<wbr>File</h4>
+<h4 id="configextracontainerfile">
+Config<wbr>Extra<wbr>Container<wbr>File<pulumi-choosable type="language" values="python,go" class="inline">, Config<wbr>Extra<wbr>Container<wbr>File<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2883,8 +3156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Container name.</p>
-</dd><dt class="property-required"
+    <dd>container name.</dd><dt class="property-required"
             title="Required">
         <span id="filepattern_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filepattern_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Pattern</a>
@@ -2892,8 +3164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>log name.</p>
-</dd><dt class="property-required"
+    <dd>log name.</dd><dt class="property-required"
             title="Required">
         <span id="logpath_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logpath_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Path</a>
@@ -2901,8 +3172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log Path.</p>
-</dd><dt class="property-required"
+    <dd>Log Path.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -2910,8 +3180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace. There can be multiple namespaces, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludelabels_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludelabels_csharp" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Labels</a>
@@ -2919,8 +3188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Pod label to be excluded.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label to be excluded.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludenamespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludenamespace_csharp" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Namespace</a>
@@ -2928,8 +3196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespaces to be excluded, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>Namespaces to be excluded, separated by separators, such as A, B.</dd><dt class="property-optional"
             title="Optional">
         <span id="includelabels_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includelabels_csharp" style="color: inherit; text-decoration: inherit;">Include<wbr>Labels</a>
@@ -2937,8 +3204,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Pod label info.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label info.</dd><dt class="property-optional"
             title="Optional">
         <span id="workload_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workload_csharp" style="color: inherit; text-decoration: inherit;">Workload</a>
@@ -2946,8 +3212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerfileworkload">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Container<wbr>File<wbr>Workload</a></span>
     </dt>
-    <dd><p>Workload info.</p>
-</dd></dl>
+    <dd>Workload info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2961,8 +3226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Container name.</p>
-</dd><dt class="property-required"
+    <dd>container name.</dd><dt class="property-required"
             title="Required">
         <span id="filepattern_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filepattern_go" style="color: inherit; text-decoration: inherit;">File<wbr>Pattern</a>
@@ -2970,8 +3234,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>log name.</p>
-</dd><dt class="property-required"
+    <dd>log name.</dd><dt class="property-required"
             title="Required">
         <span id="logpath_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logpath_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Path</a>
@@ -2979,8 +3242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log Path.</p>
-</dd><dt class="property-required"
+    <dd>Log Path.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -2988,8 +3250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace. There can be multiple namespaces, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludelabels_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludelabels_go" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Labels</a>
@@ -2997,8 +3258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Pod label to be excluded.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label to be excluded.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludenamespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludenamespace_go" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Namespace</a>
@@ -3006,8 +3266,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespaces to be excluded, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>Namespaces to be excluded, separated by separators, such as A, B.</dd><dt class="property-optional"
             title="Optional">
         <span id="includelabels_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includelabels_go" style="color: inherit; text-decoration: inherit;">Include<wbr>Labels</a>
@@ -3015,8 +3274,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Pod label info.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label info.</dd><dt class="property-optional"
             title="Optional">
         <span id="workload_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workload_go" style="color: inherit; text-decoration: inherit;">Workload</a>
@@ -3024,8 +3282,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerfileworkload">Config<wbr>Extra<wbr>Container<wbr>File<wbr>Workload</a></span>
     </dt>
-    <dd><p>Workload info.</p>
-</dd></dl>
+    <dd>Workload info.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="container_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_hcl" style="color: inherit; text-decoration: inherit;">container</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>container name.</dd><dt class="property-required"
+            title="Required">
+        <span id="file_pattern_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_pattern_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>pattern</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>log name.</dd><dt class="property-required"
+            title="Required">
+        <span id="log_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_path_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log Path.</dd><dt class="property-required"
+            title="Required">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="exclude_labels_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_labels_hcl" style="color: inherit; text-decoration: inherit;">exclude_<wbr>labels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Pod label to be excluded.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="exclude_namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_namespace_hcl" style="color: inherit; text-decoration: inherit;">exclude_<wbr>namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespaces to be excluded, separated by separators, such as A, B.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="include_labels_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#include_labels_hcl" style="color: inherit; text-decoration: inherit;">include_<wbr>labels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Pod label info.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="workload_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workload_hcl" style="color: inherit; text-decoration: inherit;">workload</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#configextracontainerfileworkload">object</a></span>
+    </dt>
+    <dd>Workload info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3039,8 +3366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Container name.</p>
-</dd><dt class="property-required"
+    <dd>container name.</dd><dt class="property-required"
             title="Required">
         <span id="filepattern_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filepattern_java" style="color: inherit; text-decoration: inherit;">file<wbr>Pattern</a>
@@ -3048,8 +3374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>log name.</p>
-</dd><dt class="property-required"
+    <dd>log name.</dd><dt class="property-required"
             title="Required">
         <span id="logpath_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logpath_java" style="color: inherit; text-decoration: inherit;">log<wbr>Path</a>
@@ -3057,8 +3382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log Path.</p>
-</dd><dt class="property-required"
+    <dd>Log Path.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3066,8 +3390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace. There can be multiple namespaces, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludelabels_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludelabels_java" style="color: inherit; text-decoration: inherit;">exclude<wbr>Labels</a>
@@ -3075,8 +3398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Pod label to be excluded.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label to be excluded.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludenamespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludenamespace_java" style="color: inherit; text-decoration: inherit;">exclude<wbr>Namespace</a>
@@ -3084,8 +3406,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespaces to be excluded, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>Namespaces to be excluded, separated by separators, such as A, B.</dd><dt class="property-optional"
             title="Optional">
         <span id="includelabels_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includelabels_java" style="color: inherit; text-decoration: inherit;">include<wbr>Labels</a>
@@ -3093,8 +3414,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Pod label info.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label info.</dd><dt class="property-optional"
             title="Optional">
         <span id="workload_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workload_java" style="color: inherit; text-decoration: inherit;">workload</a>
@@ -3102,8 +3422,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerfileworkload">Config<wbr>Extra<wbr>Container<wbr>File<wbr>Workload</a></span>
     </dt>
-    <dd><p>Workload info.</p>
-</dd></dl>
+    <dd>Workload info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3117,8 +3436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Container name.</p>
-</dd><dt class="property-required"
+    <dd>container name.</dd><dt class="property-required"
             title="Required">
         <span id="filepattern_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filepattern_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Pattern</a>
@@ -3126,8 +3444,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>log name.</p>
-</dd><dt class="property-required"
+    <dd>log name.</dd><dt class="property-required"
             title="Required">
         <span id="logpath_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logpath_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Path</a>
@@ -3135,8 +3452,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log Path.</p>
-</dd><dt class="property-required"
+    <dd>Log Path.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3144,8 +3460,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace. There can be multiple namespaces, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludelabels_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludelabels_nodejs" style="color: inherit; text-decoration: inherit;">exclude<wbr>Labels</a>
@@ -3153,8 +3468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Pod label to be excluded.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label to be excluded.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludenamespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludenamespace_nodejs" style="color: inherit; text-decoration: inherit;">exclude<wbr>Namespace</a>
@@ -3162,8 +3476,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespaces to be excluded, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>Namespaces to be excluded, separated by separators, such as A, B.</dd><dt class="property-optional"
             title="Optional">
         <span id="includelabels_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includelabels_nodejs" style="color: inherit; text-decoration: inherit;">include<wbr>Labels</a>
@@ -3171,8 +3484,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Pod label info.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label info.</dd><dt class="property-optional"
             title="Optional">
         <span id="workload_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workload_nodejs" style="color: inherit; text-decoration: inherit;">workload</a>
@@ -3180,8 +3492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerfileworkload">Config<wbr>Extra<wbr>Container<wbr>File<wbr>Workload</a></span>
     </dt>
-    <dd><p>Workload info.</p>
-</dd></dl>
+    <dd>Workload info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3195,8 +3506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Container name.</p>
-</dd><dt class="property-required"
+    <dd>container name.</dd><dt class="property-required"
             title="Required">
         <span id="file_pattern_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_pattern_python" style="color: inherit; text-decoration: inherit;">file_<wbr>pattern</a>
@@ -3204,8 +3514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>log name.</p>
-</dd><dt class="property-required"
+    <dd>log name.</dd><dt class="property-required"
             title="Required">
         <span id="log_path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_path_python" style="color: inherit; text-decoration: inherit;">log_<wbr>path</a>
@@ -3213,8 +3522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log Path.</p>
-</dd><dt class="property-required"
+    <dd>Log Path.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3222,8 +3530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace. There can be multiple namespaces, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="exclude_labels_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_labels_python" style="color: inherit; text-decoration: inherit;">exclude_<wbr>labels</a>
@@ -3231,8 +3538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Pod label to be excluded.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label to be excluded.</dd><dt class="property-optional"
             title="Optional">
         <span id="exclude_namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_namespace_python" style="color: inherit; text-decoration: inherit;">exclude_<wbr>namespace</a>
@@ -3240,8 +3546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespaces to be excluded, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>Namespaces to be excluded, separated by separators, such as A, B.</dd><dt class="property-optional"
             title="Optional">
         <span id="include_labels_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#include_labels_python" style="color: inherit; text-decoration: inherit;">include_<wbr>labels</a>
@@ -3249,8 +3554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Pod label info.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label info.</dd><dt class="property-optional"
             title="Optional">
         <span id="workload_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workload_python" style="color: inherit; text-decoration: inherit;">workload</a>
@@ -3258,8 +3562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerfileworkload">Config<wbr>Extra<wbr>Container<wbr>File<wbr>Workload</a></span>
     </dt>
-    <dd><p>Workload info.</p>
-</dd></dl>
+    <dd>Workload info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3273,8 +3576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Container name.</p>
-</dd><dt class="property-required"
+    <dd>container name.</dd><dt class="property-required"
             title="Required">
         <span id="filepattern_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filepattern_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Pattern</a>
@@ -3282,8 +3584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>log name.</p>
-</dd><dt class="property-required"
+    <dd>log name.</dd><dt class="property-required"
             title="Required">
         <span id="logpath_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logpath_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Path</a>
@@ -3291,8 +3592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log Path.</p>
-</dd><dt class="property-required"
+    <dd>Log Path.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3300,8 +3600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace. There can be multiple namespaces, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludelabels_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludelabels_yaml" style="color: inherit; text-decoration: inherit;">exclude<wbr>Labels</a>
@@ -3309,8 +3608,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Pod label to be excluded.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label to be excluded.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludenamespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludenamespace_yaml" style="color: inherit; text-decoration: inherit;">exclude<wbr>Namespace</a>
@@ -3318,8 +3616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespaces to be excluded, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>Namespaces to be excluded, separated by separators, such as A, B.</dd><dt class="property-optional"
             title="Optional">
         <span id="includelabels_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includelabels_yaml" style="color: inherit; text-decoration: inherit;">include<wbr>Labels</a>
@@ -3327,8 +3624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Pod label info.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label info.</dd><dt class="property-optional"
             title="Optional">
         <span id="workload_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workload_yaml" style="color: inherit; text-decoration: inherit;">workload</a>
@@ -3336,12 +3632,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerfileworkload">Property Map</a></span>
     </dt>
-    <dd><p>Workload info.</p>
-</dd></dl>
+    <dd>Workload info.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="configextracontainerfileworkload">Config<wbr>Extra<wbr>Container<wbr>File<wbr>Workload</h4>
+<h4 id="configextracontainerfileworkload">
+Config<wbr>Extra<wbr>Container<wbr>File<wbr>Workload<pulumi-choosable type="language" values="python,go" class="inline">, Config<wbr>Extra<wbr>Container<wbr>File<wbr>Workload<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3353,8 +3650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>workload type.</p>
-</dd><dt class="property-required"
+    <dd>workload type.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -3362,8 +3658,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>workload name.</p>
-</dd><dt class="property-optional"
+    <dd>workload name.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_csharp" style="color: inherit; text-decoration: inherit;">Container</a>
@@ -3371,8 +3666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>container name.</p>
-</dd><dt class="property-optional"
+    <dd>container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -3380,8 +3674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd></dl>
+    <dd>namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3395,8 +3688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>workload type.</p>
-</dd><dt class="property-required"
+    <dd>workload type.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -3404,8 +3696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>workload name.</p>
-</dd><dt class="property-optional"
+    <dd>workload name.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_go" style="color: inherit; text-decoration: inherit;">Container</a>
@@ -3413,8 +3704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>container name.</p>
-</dd><dt class="property-optional"
+    <dd>container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -3422,8 +3712,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd></dl>
+    <dd>namespace.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="kind_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_hcl" style="color: inherit; text-decoration: inherit;">kind</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>workload type.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>workload name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="container_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_hcl" style="color: inherit; text-decoration: inherit;">container</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>container name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3437,8 +3764,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>workload type.</p>
-</dd><dt class="property-required"
+    <dd>workload type.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3446,8 +3772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>workload name.</p>
-</dd><dt class="property-optional"
+    <dd>workload name.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_java" style="color: inherit; text-decoration: inherit;">container</a>
@@ -3455,8 +3780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>container name.</p>
-</dd><dt class="property-optional"
+    <dd>container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3464,8 +3788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd></dl>
+    <dd>namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3479,8 +3802,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>workload type.</p>
-</dd><dt class="property-required"
+    <dd>workload type.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3488,8 +3810,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>workload name.</p>
-</dd><dt class="property-optional"
+    <dd>workload name.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_nodejs" style="color: inherit; text-decoration: inherit;">container</a>
@@ -3497,8 +3818,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>container name.</p>
-</dd><dt class="property-optional"
+    <dd>container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3506,8 +3826,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd></dl>
+    <dd>namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3521,8 +3840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>workload type.</p>
-</dd><dt class="property-required"
+    <dd>workload type.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3530,8 +3848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>workload name.</p>
-</dd><dt class="property-optional"
+    <dd>workload name.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_python" style="color: inherit; text-decoration: inherit;">container</a>
@@ -3539,8 +3856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>container name.</p>
-</dd><dt class="property-optional"
+    <dd>container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3548,8 +3864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd></dl>
+    <dd>namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3563,8 +3878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>workload type.</p>
-</dd><dt class="property-required"
+    <dd>workload type.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3572,8 +3886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>workload name.</p>
-</dd><dt class="property-optional"
+    <dd>workload name.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_yaml" style="color: inherit; text-decoration: inherit;">container</a>
@@ -3581,8 +3894,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>container name.</p>
-</dd><dt class="property-optional"
+    <dd>container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3590,12 +3902,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd></dl>
+    <dd>namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="configextracontainerstdout">Config<wbr>Extra<wbr>Container<wbr>Stdout</h4>
+<h4 id="configextracontainerstdout">
+Config<wbr>Extra<wbr>Container<wbr>Stdout<pulumi-choosable type="language" values="python,go" class="inline">, Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3607,8 +3920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is all containers.</p>
-</dd><dt class="property-optional"
+    <dd>Is all containers.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludelabels_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludelabels_csharp" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Labels</a>
@@ -3616,8 +3928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Pod label to be excluded.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label to be excluded.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludenamespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludenamespace_csharp" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Namespace</a>
@@ -3625,8 +3936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespaces to be excluded, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>Namespaces to be excluded, separated by separators, such as A, B.</dd><dt class="property-optional"
             title="Optional">
         <span id="includelabels_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includelabels_csharp" style="color: inherit; text-decoration: inherit;">Include<wbr>Labels</a>
@@ -3634,8 +3944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Pod label info.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label info.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -3643,8 +3952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace. There can be multiple namespaces, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="workloads_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workloads_csharp" style="color: inherit; text-decoration: inherit;">Workloads</a>
@@ -3652,8 +3960,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerstdoutworkload">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Workload&gt;</a></span>
     </dt>
-    <dd><p>Workload info.</p>
-</dd></dl>
+    <dd>Workload info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3667,8 +3974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is all containers.</p>
-</dd><dt class="property-optional"
+    <dd>Is all containers.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludelabels_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludelabels_go" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Labels</a>
@@ -3676,8 +3982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Pod label to be excluded.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label to be excluded.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludenamespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludenamespace_go" style="color: inherit; text-decoration: inherit;">Exclude<wbr>Namespace</a>
@@ -3685,8 +3990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespaces to be excluded, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>Namespaces to be excluded, separated by separators, such as A, B.</dd><dt class="property-optional"
             title="Optional">
         <span id="includelabels_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includelabels_go" style="color: inherit; text-decoration: inherit;">Include<wbr>Labels</a>
@@ -3694,8 +3998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Pod label info.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label info.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -3703,8 +4006,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace. There can be multiple namespaces, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="workloads_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workloads_go" style="color: inherit; text-decoration: inherit;">Workloads</a>
@@ -3712,8 +4014,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerstdoutworkload">[]Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Workload</a></span>
     </dt>
-    <dd><p>Workload info.</p>
-</dd></dl>
+    <dd>Workload info.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="all_containers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#all_containers_hcl" style="color: inherit; text-decoration: inherit;">all_<wbr>containers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Is all containers.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="exclude_labels_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_labels_hcl" style="color: inherit; text-decoration: inherit;">exclude_<wbr>labels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Pod label to be excluded.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="exclude_namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_namespace_hcl" style="color: inherit; text-decoration: inherit;">exclude_<wbr>namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespaces to be excluded, separated by separators, such as A, B.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="include_labels_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#include_labels_hcl" style="color: inherit; text-decoration: inherit;">include_<wbr>labels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Pod label info.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="workloads_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workloads_hcl" style="color: inherit; text-decoration: inherit;">workloads</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#configextracontainerstdoutworkload">list(object)</a></span>
+    </dt>
+    <dd>Workload info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3727,8 +4082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Is all containers.</p>
-</dd><dt class="property-optional"
+    <dd>Is all containers.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludelabels_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludelabels_java" style="color: inherit; text-decoration: inherit;">exclude<wbr>Labels</a>
@@ -3736,8 +4090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Pod label to be excluded.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label to be excluded.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludenamespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludenamespace_java" style="color: inherit; text-decoration: inherit;">exclude<wbr>Namespace</a>
@@ -3745,8 +4098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespaces to be excluded, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>Namespaces to be excluded, separated by separators, such as A, B.</dd><dt class="property-optional"
             title="Optional">
         <span id="includelabels_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includelabels_java" style="color: inherit; text-decoration: inherit;">include<wbr>Labels</a>
@@ -3754,8 +4106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Pod label info.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label info.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3763,8 +4114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace. There can be multiple namespaces, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="workloads_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workloads_java" style="color: inherit; text-decoration: inherit;">workloads</a>
@@ -3772,8 +4122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerstdoutworkload">List&lt;Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Workload&gt;</a></span>
     </dt>
-    <dd><p>Workload info.</p>
-</dd></dl>
+    <dd>Workload info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3787,8 +4136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Is all containers.</p>
-</dd><dt class="property-optional"
+    <dd>Is all containers.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludelabels_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludelabels_nodejs" style="color: inherit; text-decoration: inherit;">exclude<wbr>Labels</a>
@@ -3796,8 +4144,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Pod label to be excluded.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label to be excluded.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludenamespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludenamespace_nodejs" style="color: inherit; text-decoration: inherit;">exclude<wbr>Namespace</a>
@@ -3805,8 +4152,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespaces to be excluded, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>Namespaces to be excluded, separated by separators, such as A, B.</dd><dt class="property-optional"
             title="Optional">
         <span id="includelabels_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includelabels_nodejs" style="color: inherit; text-decoration: inherit;">include<wbr>Labels</a>
@@ -3814,8 +4160,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Pod label info.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label info.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3823,8 +4168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace. There can be multiple namespaces, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="workloads_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workloads_nodejs" style="color: inherit; text-decoration: inherit;">workloads</a>
@@ -3832,8 +4176,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerstdoutworkload">Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Workload[]</a></span>
     </dt>
-    <dd><p>Workload info.</p>
-</dd></dl>
+    <dd>Workload info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3847,8 +4190,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is all containers.</p>
-</dd><dt class="property-optional"
+    <dd>Is all containers.</dd><dt class="property-optional"
             title="Optional">
         <span id="exclude_labels_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_labels_python" style="color: inherit; text-decoration: inherit;">exclude_<wbr>labels</a>
@@ -3856,8 +4198,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Pod label to be excluded.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label to be excluded.</dd><dt class="property-optional"
             title="Optional">
         <span id="exclude_namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclude_namespace_python" style="color: inherit; text-decoration: inherit;">exclude_<wbr>namespace</a>
@@ -3865,8 +4206,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespaces to be excluded, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>Namespaces to be excluded, separated by separators, such as A, B.</dd><dt class="property-optional"
             title="Optional">
         <span id="include_labels_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#include_labels_python" style="color: inherit; text-decoration: inherit;">include_<wbr>labels</a>
@@ -3874,8 +4214,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Pod label info.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label info.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3883,17 +4222,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace. There can be multiple namespaces, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="workloads_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workloads_python" style="color: inherit; text-decoration: inherit;">workloads</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextracontainerstdoutworkload">Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Workload]</a></span>
+        <span class="property-type"><a href="#configextracontainerstdoutworkload">Sequence[Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Workload]</a></span>
     </dt>
-    <dd><p>Workload info.</p>
-</dd></dl>
+    <dd>Workload info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3907,8 +4244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Is all containers.</p>
-</dd><dt class="property-optional"
+    <dd>Is all containers.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludelabels_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludelabels_yaml" style="color: inherit; text-decoration: inherit;">exclude<wbr>Labels</a>
@@ -3916,8 +4252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Pod label to be excluded.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label to be excluded.</dd><dt class="property-optional"
             title="Optional">
         <span id="excludenamespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#excludenamespace_yaml" style="color: inherit; text-decoration: inherit;">exclude<wbr>Namespace</a>
@@ -3925,8 +4260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespaces to be excluded, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>Namespaces to be excluded, separated by separators, such as A, B.</dd><dt class="property-optional"
             title="Optional">
         <span id="includelabels_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includelabels_yaml" style="color: inherit; text-decoration: inherit;">include<wbr>Labels</a>
@@ -3934,8 +4268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Pod label info.</p>
-</dd><dt class="property-optional"
+    <dd>Pod label info.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3943,8 +4276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace. There can be multiple namespaces, separated by separators, such as A, B.</p>
-</dd><dt class="property-optional"
+    <dd>namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="workloads_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workloads_yaml" style="color: inherit; text-decoration: inherit;">workloads</a>
@@ -3952,12 +4284,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextracontainerstdoutworkload">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Workload info.</p>
-</dd></dl>
+    <dd>Workload info.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="configextracontainerstdoutworkload">Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Workload</h4>
+<h4 id="configextracontainerstdoutworkload">
+Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Workload<pulumi-choosable type="language" values="python,go" class="inline">, Config<wbr>Extra<wbr>Container<wbr>Stdout<wbr>Workload<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3969,8 +4302,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>workload type.</p>
-</dd><dt class="property-required"
+    <dd>workload type.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -3978,8 +4310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>workload name.</p>
-</dd><dt class="property-optional"
+    <dd>workload name.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_csharp" style="color: inherit; text-decoration: inherit;">Container</a>
@@ -3987,8 +4318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>container name.</p>
-</dd><dt class="property-optional"
+    <dd>container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -3996,8 +4326,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd></dl>
+    <dd>namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4011,8 +4340,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>workload type.</p>
-</dd><dt class="property-required"
+    <dd>workload type.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -4020,8 +4348,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>workload name.</p>
-</dd><dt class="property-optional"
+    <dd>workload name.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_go" style="color: inherit; text-decoration: inherit;">Container</a>
@@ -4029,8 +4356,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>container name.</p>
-</dd><dt class="property-optional"
+    <dd>container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -4038,8 +4364,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd></dl>
+    <dd>namespace.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="kind_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_hcl" style="color: inherit; text-decoration: inherit;">kind</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>workload type.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>workload name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="container_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_hcl" style="color: inherit; text-decoration: inherit;">container</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>container name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4053,8 +4416,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>workload type.</p>
-</dd><dt class="property-required"
+    <dd>workload type.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4062,8 +4424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>workload name.</p>
-</dd><dt class="property-optional"
+    <dd>workload name.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_java" style="color: inherit; text-decoration: inherit;">container</a>
@@ -4071,8 +4432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>container name.</p>
-</dd><dt class="property-optional"
+    <dd>container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -4080,8 +4440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd></dl>
+    <dd>namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4095,8 +4454,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>workload type.</p>
-</dd><dt class="property-required"
+    <dd>workload type.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4104,8 +4462,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>workload name.</p>
-</dd><dt class="property-optional"
+    <dd>workload name.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_nodejs" style="color: inherit; text-decoration: inherit;">container</a>
@@ -4113,8 +4470,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>container name.</p>
-</dd><dt class="property-optional"
+    <dd>container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -4122,8 +4478,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd></dl>
+    <dd>namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4137,8 +4492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>workload type.</p>
-</dd><dt class="property-required"
+    <dd>workload type.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4146,8 +4500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>workload name.</p>
-</dd><dt class="property-optional"
+    <dd>workload name.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_python" style="color: inherit; text-decoration: inherit;">container</a>
@@ -4155,8 +4508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>container name.</p>
-</dd><dt class="property-optional"
+    <dd>container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -4164,8 +4516,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd></dl>
+    <dd>namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4179,8 +4530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>workload type.</p>
-</dd><dt class="property-required"
+    <dd>workload type.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -4188,8 +4538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>workload name.</p>
-</dd><dt class="property-optional"
+    <dd>workload name.</dd><dt class="property-optional"
             title="Optional">
         <span id="container_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#container_yaml" style="color: inherit; text-decoration: inherit;">container</a>
@@ -4197,8 +4546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>container name.</p>
-</dd><dt class="property-optional"
+    <dd>container name.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -4206,12 +4554,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace.</p>
-</dd></dl>
+    <dd>namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="configextraexcludepath">Config<wbr>Extra<wbr>Exclude<wbr>Path</h4>
+<h4 id="configextraexcludepath">
+Config<wbr>Extra<wbr>Exclude<wbr>Path<pulumi-choosable type="language" values="python,go" class="inline">, Config<wbr>Extra<wbr>Exclude<wbr>Path<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4223,8 +4572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type. Valid values: File, Path.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: File, Path.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -4232,8 +4580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specific content corresponding to Type.</p>
-</dd></dl>
+    <dd>Specific content corresponding to Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4247,8 +4594,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type. Valid values: File, Path.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: File, Path.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -4256,8 +4602,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specific content corresponding to Type.</p>
-</dd></dl>
+    <dd>Specific content corresponding to Type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type. Valid values: File, Path.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specific content corresponding to Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4271,8 +4638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type. Valid values: File, Path.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: File, Path.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4280,8 +4646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specific content corresponding to Type.</p>
-</dd></dl>
+    <dd>Specific content corresponding to Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4295,8 +4660,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type. Valid values: File, Path.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: File, Path.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4304,8 +4668,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specific content corresponding to Type.</p>
-</dd></dl>
+    <dd>Specific content corresponding to Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4319,8 +4682,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type. Valid values: File, Path.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: File, Path.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4328,8 +4690,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specific content corresponding to Type.</p>
-</dd></dl>
+    <dd>Specific content corresponding to Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4343,8 +4704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type. Valid values: File, Path.</p>
-</dd><dt class="property-optional"
+    <dd>Type. Valid values: File, Path.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4352,12 +4712,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specific content corresponding to Type.</p>
-</dd></dl>
+    <dd>Specific content corresponding to Type.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="configextraextractrule">Config<wbr>Extra<wbr>Extract<wbr>Rule</h4>
+<h4 id="configextraextractrule">
+Config<wbr>Extra<wbr>Extract<wbr>Rule<pulumi-choosable type="language" values="python,go" class="inline">, Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4369,8 +4730,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).</p>
-</dd><dt class="property-optional"
+    <dd>Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).</dd><dt class="property-optional"
             title="Optional">
         <span id="beginregex_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#beginregex_csharp" style="color: inherit; text-decoration: inherit;">Begin<wbr>Regex</a>
@@ -4378,8 +4738,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>First-Line matching rule, which is valid only if log_type is multiline_log or fullregex_log.</p>
-</dd><dt class="property-optional"
+    <dd>First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="delimiter_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_csharp" style="color: inherit; text-decoration: inherit;">Delimiter</a>
@@ -4387,8 +4746,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Delimiter for delimited log, which is valid only if log_type is delimiter_log.</p>
-</dd><dt class="property-optional"
+    <dd>Delimiter for delimited log, which is valid only if logType is delimiter_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="filterkeyregexes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterkeyregexes_csharp" style="color: inherit; text-decoration: inherit;">Filter<wbr>Key<wbr>Regexes</a>
@@ -4396,8 +4754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextraextractrulefilterkeyregex">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Filter<wbr>Key<wbr>Regex&gt;</a></span>
     </dt>
-    <dd><p>Log keys to be filtered and the corresponding regex.</p>
-</dd><dt class="property-optional"
+    <dd>Log keys to be filtered and the corresponding regex.</dd><dt class="property-optional"
             title="Optional">
         <span id="keys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keys_csharp" style="color: inherit; text-decoration: inherit;">Keys</a>
@@ -4405,8 +4762,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if log_type is delimiter_log. json_log logs use the key of JSON itself.</p>
-</dd><dt class="property-optional"
+    <dd>Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.</dd><dt class="property-optional"
             title="Optional">
         <span id="logregex_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logregex_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Regex</a>
@@ -4414,8 +4770,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Full log matching rule, which is valid only if log_type is fullregex_log.</p>
-</dd><dt class="property-optional"
+    <dd>Full log matching rule, which is valid only if logType is fullregex_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeformat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeformat_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Format</a>
@@ -4423,8 +4778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.</p>
-</dd><dt class="property-optional"
+    <dd>Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.</dd><dt class="property-optional"
             title="Optional">
         <span id="timekey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timekey_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Key</a>
@@ -4432,8 +4786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time field key name. time_key and time_format must appear in pair.</p>
-</dd><dt class="property-optional"
+    <dd>Time field key name. timeKey and timeFormat must appear in pair.</dd><dt class="property-optional"
             title="Optional">
         <span id="unmatchlogkey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmatchlogkey_csharp" style="color: inherit; text-decoration: inherit;">Un<wbr>Match<wbr>Log<wbr>Key</a>
@@ -4441,8 +4794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unmatched log key.</p>
-</dd><dt class="property-optional"
+    <dd>Unmatched log key.</dd><dt class="property-optional"
             title="Optional">
         <span id="unmatchuploadswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmatchuploadswitch_csharp" style="color: inherit; text-decoration: inherit;">Un<wbr>Match<wbr>Up<wbr>Load<wbr>Switch</a>
@@ -4450,8 +4802,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.</p>
-</dd></dl>
+    <dd>Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4465,8 +4816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).</p>
-</dd><dt class="property-optional"
+    <dd>Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).</dd><dt class="property-optional"
             title="Optional">
         <span id="beginregex_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#beginregex_go" style="color: inherit; text-decoration: inherit;">Begin<wbr>Regex</a>
@@ -4474,8 +4824,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>First-Line matching rule, which is valid only if log_type is multiline_log or fullregex_log.</p>
-</dd><dt class="property-optional"
+    <dd>First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="delimiter_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_go" style="color: inherit; text-decoration: inherit;">Delimiter</a>
@@ -4483,8 +4832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Delimiter for delimited log, which is valid only if log_type is delimiter_log.</p>
-</dd><dt class="property-optional"
+    <dd>Delimiter for delimited log, which is valid only if logType is delimiter_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="filterkeyregexes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterkeyregexes_go" style="color: inherit; text-decoration: inherit;">Filter<wbr>Key<wbr>Regexes</a>
@@ -4492,8 +4840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextraextractrulefilterkeyregex">[]Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Filter<wbr>Key<wbr>Regex</a></span>
     </dt>
-    <dd><p>Log keys to be filtered and the corresponding regex.</p>
-</dd><dt class="property-optional"
+    <dd>Log keys to be filtered and the corresponding regex.</dd><dt class="property-optional"
             title="Optional">
         <span id="keys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keys_go" style="color: inherit; text-decoration: inherit;">Keys</a>
@@ -4501,8 +4848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if log_type is delimiter_log. json_log logs use the key of JSON itself.</p>
-</dd><dt class="property-optional"
+    <dd>Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.</dd><dt class="property-optional"
             title="Optional">
         <span id="logregex_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logregex_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Regex</a>
@@ -4510,8 +4856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Full log matching rule, which is valid only if log_type is fullregex_log.</p>
-</dd><dt class="property-optional"
+    <dd>Full log matching rule, which is valid only if logType is fullregex_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeformat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeformat_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Format</a>
@@ -4519,8 +4864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.</p>
-</dd><dt class="property-optional"
+    <dd>Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.</dd><dt class="property-optional"
             title="Optional">
         <span id="timekey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timekey_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Key</a>
@@ -4528,8 +4872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time field key name. time_key and time_format must appear in pair.</p>
-</dd><dt class="property-optional"
+    <dd>Time field key name. timeKey and timeFormat must appear in pair.</dd><dt class="property-optional"
             title="Optional">
         <span id="unmatchlogkey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmatchlogkey_go" style="color: inherit; text-decoration: inherit;">Un<wbr>Match<wbr>Log<wbr>Key</a>
@@ -4537,8 +4880,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unmatched log key.</p>
-</dd><dt class="property-optional"
+    <dd>Unmatched log key.</dd><dt class="property-optional"
             title="Optional">
         <span id="unmatchuploadswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmatchuploadswitch_go" style="color: inherit; text-decoration: inherit;">Un<wbr>Match<wbr>Up<wbr>Load<wbr>Switch</a>
@@ -4546,8 +4888,93 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.</p>
-</dd></dl>
+    <dd>Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="backtracking_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backtracking_hcl" style="color: inherit; text-decoration: inherit;">backtracking</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="begin_regex_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begin_regex_hcl" style="color: inherit; text-decoration: inherit;">begin_<wbr>regex</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="delimiter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_hcl" style="color: inherit; text-decoration: inherit;">delimiter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Delimiter for delimited log, which is valid only if logType is delimiter_log.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_key_regexes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_key_regexes_hcl" style="color: inherit; text-decoration: inherit;">filter_<wbr>key_<wbr>regexes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#configextraextractrulefilterkeyregex">list(object)</a></span>
+    </dt>
+    <dd>Log keys to be filtered and the corresponding regex.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keys_hcl" style="color: inherit; text-decoration: inherit;">keys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="log_regex_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_regex_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>regex</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Full log matching rule, which is valid only if logType is fullregex_log.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="time_format_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_format_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>format</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="time_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_key_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Time field key name. timeKey and timeFormat must appear in pair.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="un_match_log_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#un_match_log_key_hcl" style="color: inherit; text-decoration: inherit;">un_<wbr>match_<wbr>log_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unmatched log key.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="un_match_up_load_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#un_match_up_load_switch_hcl" style="color: inherit; text-decoration: inherit;">un_<wbr>match_<wbr>up_<wbr>load_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4561,8 +4988,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).</p>
-</dd><dt class="property-optional"
+    <dd>Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).</dd><dt class="property-optional"
             title="Optional">
         <span id="beginregex_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#beginregex_java" style="color: inherit; text-decoration: inherit;">begin<wbr>Regex</a>
@@ -4570,8 +4996,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>First-Line matching rule, which is valid only if log_type is multiline_log or fullregex_log.</p>
-</dd><dt class="property-optional"
+    <dd>First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="delimiter_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_java" style="color: inherit; text-decoration: inherit;">delimiter</a>
@@ -4579,8 +5004,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Delimiter for delimited log, which is valid only if log_type is delimiter_log.</p>
-</dd><dt class="property-optional"
+    <dd>Delimiter for delimited log, which is valid only if logType is delimiter_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="filterkeyregexes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterkeyregexes_java" style="color: inherit; text-decoration: inherit;">filter<wbr>Key<wbr>Regexes</a>
@@ -4588,8 +5012,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextraextractrulefilterkeyregex">List&lt;Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Filter<wbr>Key<wbr>Regex&gt;</a></span>
     </dt>
-    <dd><p>Log keys to be filtered and the corresponding regex.</p>
-</dd><dt class="property-optional"
+    <dd>Log keys to be filtered and the corresponding regex.</dd><dt class="property-optional"
             title="Optional">
         <span id="keys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keys_java" style="color: inherit; text-decoration: inherit;">keys</a>
@@ -4597,8 +5020,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if log_type is delimiter_log. json_log logs use the key of JSON itself.</p>
-</dd><dt class="property-optional"
+    <dd>Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.</dd><dt class="property-optional"
             title="Optional">
         <span id="logregex_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logregex_java" style="color: inherit; text-decoration: inherit;">log<wbr>Regex</a>
@@ -4606,8 +5028,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Full log matching rule, which is valid only if log_type is fullregex_log.</p>
-</dd><dt class="property-optional"
+    <dd>Full log matching rule, which is valid only if logType is fullregex_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeformat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeformat_java" style="color: inherit; text-decoration: inherit;">time<wbr>Format</a>
@@ -4615,8 +5036,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.</p>
-</dd><dt class="property-optional"
+    <dd>Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.</dd><dt class="property-optional"
             title="Optional">
         <span id="timekey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timekey_java" style="color: inherit; text-decoration: inherit;">time<wbr>Key</a>
@@ -4624,8 +5044,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time field key name. time_key and time_format must appear in pair.</p>
-</dd><dt class="property-optional"
+    <dd>Time field key name. timeKey and timeFormat must appear in pair.</dd><dt class="property-optional"
             title="Optional">
         <span id="unmatchlogkey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmatchlogkey_java" style="color: inherit; text-decoration: inherit;">un<wbr>Match<wbr>Log<wbr>Key</a>
@@ -4633,8 +5052,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unmatched log key.</p>
-</dd><dt class="property-optional"
+    <dd>Unmatched log key.</dd><dt class="property-optional"
             title="Optional">
         <span id="unmatchuploadswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmatchuploadswitch_java" style="color: inherit; text-decoration: inherit;">un<wbr>Match<wbr>Up<wbr>Load<wbr>Switch</a>
@@ -4642,8 +5060,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.</p>
-</dd></dl>
+    <dd>Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4657,8 +5074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).</p>
-</dd><dt class="property-optional"
+    <dd>Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).</dd><dt class="property-optional"
             title="Optional">
         <span id="beginregex_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#beginregex_nodejs" style="color: inherit; text-decoration: inherit;">begin<wbr>Regex</a>
@@ -4666,8 +5082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>First-Line matching rule, which is valid only if log_type is multiline_log or fullregex_log.</p>
-</dd><dt class="property-optional"
+    <dd>First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="delimiter_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_nodejs" style="color: inherit; text-decoration: inherit;">delimiter</a>
@@ -4675,8 +5090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Delimiter for delimited log, which is valid only if log_type is delimiter_log.</p>
-</dd><dt class="property-optional"
+    <dd>Delimiter for delimited log, which is valid only if logType is delimiter_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="filterkeyregexes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterkeyregexes_nodejs" style="color: inherit; text-decoration: inherit;">filter<wbr>Key<wbr>Regexes</a>
@@ -4684,8 +5098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextraextractrulefilterkeyregex">Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Filter<wbr>Key<wbr>Regex[]</a></span>
     </dt>
-    <dd><p>Log keys to be filtered and the corresponding regex.</p>
-</dd><dt class="property-optional"
+    <dd>Log keys to be filtered and the corresponding regex.</dd><dt class="property-optional"
             title="Optional">
         <span id="keys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keys_nodejs" style="color: inherit; text-decoration: inherit;">keys</a>
@@ -4693,8 +5106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if log_type is delimiter_log. json_log logs use the key of JSON itself.</p>
-</dd><dt class="property-optional"
+    <dd>Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.</dd><dt class="property-optional"
             title="Optional">
         <span id="logregex_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logregex_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Regex</a>
@@ -4702,8 +5114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Full log matching rule, which is valid only if log_type is fullregex_log.</p>
-</dd><dt class="property-optional"
+    <dd>Full log matching rule, which is valid only if logType is fullregex_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeformat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeformat_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Format</a>
@@ -4711,8 +5122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.</p>
-</dd><dt class="property-optional"
+    <dd>Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.</dd><dt class="property-optional"
             title="Optional">
         <span id="timekey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timekey_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Key</a>
@@ -4720,8 +5130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time field key name. time_key and time_format must appear in pair.</p>
-</dd><dt class="property-optional"
+    <dd>Time field key name. timeKey and timeFormat must appear in pair.</dd><dt class="property-optional"
             title="Optional">
         <span id="unmatchlogkey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmatchlogkey_nodejs" style="color: inherit; text-decoration: inherit;">un<wbr>Match<wbr>Log<wbr>Key</a>
@@ -4729,8 +5138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unmatched log key.</p>
-</dd><dt class="property-optional"
+    <dd>Unmatched log key.</dd><dt class="property-optional"
             title="Optional">
         <span id="unmatchuploadswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmatchuploadswitch_nodejs" style="color: inherit; text-decoration: inherit;">un<wbr>Match<wbr>Up<wbr>Load<wbr>Switch</a>
@@ -4738,8 +5146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.</p>
-</dd></dl>
+    <dd>Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4753,8 +5160,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).</p>
-</dd><dt class="property-optional"
+    <dd>Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).</dd><dt class="property-optional"
             title="Optional">
         <span id="begin_regex_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begin_regex_python" style="color: inherit; text-decoration: inherit;">begin_<wbr>regex</a>
@@ -4762,8 +5168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>First-Line matching rule, which is valid only if log_type is multiline_log or fullregex_log.</p>
-</dd><dt class="property-optional"
+    <dd>First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="delimiter_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_python" style="color: inherit; text-decoration: inherit;">delimiter</a>
@@ -4771,17 +5176,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Delimiter for delimited log, which is valid only if log_type is delimiter_log.</p>
-</dd><dt class="property-optional"
+    <dd>Delimiter for delimited log, which is valid only if logType is delimiter_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_key_regexes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_key_regexes_python" style="color: inherit; text-decoration: inherit;">filter_<wbr>key_<wbr>regexes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#configextraextractrulefilterkeyregex">Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Filter<wbr>Key<wbr>Regex]</a></span>
+        <span class="property-type"><a href="#configextraextractrulefilterkeyregex">Sequence[Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Filter<wbr>Key<wbr>Regex]</a></span>
     </dt>
-    <dd><p>Log keys to be filtered and the corresponding regex.</p>
-</dd><dt class="property-optional"
+    <dd>Log keys to be filtered and the corresponding regex.</dd><dt class="property-optional"
             title="Optional">
         <span id="keys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keys_python" style="color: inherit; text-decoration: inherit;">keys</a>
@@ -4789,8 +5192,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if log_type is delimiter_log. json_log logs use the key of JSON itself.</p>
-</dd><dt class="property-optional"
+    <dd>Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.</dd><dt class="property-optional"
             title="Optional">
         <span id="log_regex_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_regex_python" style="color: inherit; text-decoration: inherit;">log_<wbr>regex</a>
@@ -4798,8 +5200,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Full log matching rule, which is valid only if log_type is fullregex_log.</p>
-</dd><dt class="property-optional"
+    <dd>Full log matching rule, which is valid only if logType is fullregex_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="time_format_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_format_python" style="color: inherit; text-decoration: inherit;">time_<wbr>format</a>
@@ -4807,8 +5208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.</p>
-</dd><dt class="property-optional"
+    <dd>Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.</dd><dt class="property-optional"
             title="Optional">
         <span id="time_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_key_python" style="color: inherit; text-decoration: inherit;">time_<wbr>key</a>
@@ -4816,8 +5216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Time field key name. time_key and time_format must appear in pair.</p>
-</dd><dt class="property-optional"
+    <dd>Time field key name. timeKey and timeFormat must appear in pair.</dd><dt class="property-optional"
             title="Optional">
         <span id="un_match_log_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#un_match_log_key_python" style="color: inherit; text-decoration: inherit;">un_<wbr>match_<wbr>log_<wbr>key</a>
@@ -4825,8 +5224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unmatched log key.</p>
-</dd><dt class="property-optional"
+    <dd>Unmatched log key.</dd><dt class="property-optional"
             title="Optional">
         <span id="un_match_up_load_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#un_match_up_load_switch_python" style="color: inherit; text-decoration: inherit;">un_<wbr>match_<wbr>up_<wbr>load_<wbr>switch</a>
@@ -4834,8 +5232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.</p>
-</dd></dl>
+    <dd>Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4849,8 +5246,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).</p>
-</dd><dt class="property-optional"
+    <dd>Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).</dd><dt class="property-optional"
             title="Optional">
         <span id="beginregex_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#beginregex_yaml" style="color: inherit; text-decoration: inherit;">begin<wbr>Regex</a>
@@ -4858,8 +5254,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>First-Line matching rule, which is valid only if log_type is multiline_log or fullregex_log.</p>
-</dd><dt class="property-optional"
+    <dd>First-Line matching rule, which is valid only if logType is multilineLog or fullregex_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="delimiter_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delimiter_yaml" style="color: inherit; text-decoration: inherit;">delimiter</a>
@@ -4867,8 +5262,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Delimiter for delimited log, which is valid only if log_type is delimiter_log.</p>
-</dd><dt class="property-optional"
+    <dd>Delimiter for delimited log, which is valid only if logType is delimiter_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="filterkeyregexes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filterkeyregexes_yaml" style="color: inherit; text-decoration: inherit;">filter<wbr>Key<wbr>Regexes</a>
@@ -4876,8 +5270,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#configextraextractrulefilterkeyregex">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Log keys to be filtered and the corresponding regex.</p>
-</dd><dt class="property-optional"
+    <dd>Log keys to be filtered and the corresponding regex.</dd><dt class="property-optional"
             title="Optional">
         <span id="keys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keys_yaml" style="color: inherit; text-decoration: inherit;">keys</a>
@@ -4885,8 +5278,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if log_type is delimiter_log. json_log logs use the key of JSON itself.</p>
-</dd><dt class="property-optional"
+    <dd>Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if logType is delimiter_log. jsonLog logs use the key of JSON itself.</dd><dt class="property-optional"
             title="Optional">
         <span id="logregex_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logregex_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Regex</a>
@@ -4894,8 +5286,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Full log matching rule, which is valid only if log_type is fullregex_log.</p>
-</dd><dt class="property-optional"
+    <dd>Full log matching rule, which is valid only if logType is fullregex_log.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeformat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeformat_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Format</a>
@@ -4903,8 +5294,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.</p>
-</dd><dt class="property-optional"
+    <dd>Time field format. For more information, please see the output parameters of the time format description of the strftime function in C language.</dd><dt class="property-optional"
             title="Optional">
         <span id="timekey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timekey_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Key</a>
@@ -4912,8 +5302,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time field key name. time_key and time_format must appear in pair.</p>
-</dd><dt class="property-optional"
+    <dd>Time field key name. timeKey and timeFormat must appear in pair.</dd><dt class="property-optional"
             title="Optional">
         <span id="unmatchlogkey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmatchlogkey_yaml" style="color: inherit; text-decoration: inherit;">un<wbr>Match<wbr>Log<wbr>Key</a>
@@ -4921,8 +5310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unmatched log key.</p>
-</dd><dt class="property-optional"
+    <dd>Unmatched log key.</dd><dt class="property-optional"
             title="Optional">
         <span id="unmatchuploadswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unmatchuploadswitch_yaml" style="color: inherit; text-decoration: inherit;">un<wbr>Match<wbr>Up<wbr>Load<wbr>Switch</a>
@@ -4930,12 +5318,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.</p>
-</dd></dl>
+    <dd>Whether to upload the logs that failed to be parsed. Valid values: true: yes; false: no.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="configextraextractrulefilterkeyregex">Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Filter<wbr>Key<wbr>Regex</h4>
+<h4 id="configextraextractrulefilterkeyregex">
+Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Filter<wbr>Key<wbr>Regex<pulumi-choosable type="language" values="python,go" class="inline">, Config<wbr>Extra<wbr>Extract<wbr>Rule<wbr>Filter<wbr>Key<wbr>Regex<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4947,8 +5336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log key to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>Log key to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="regex_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regex_csharp" style="color: inherit; text-decoration: inherit;">Regex</a>
@@ -4956,8 +5344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter rule regex corresponding to key.</p>
-</dd></dl>
+    <dd>Filter rule regex corresponding to key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4971,8 +5358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log key to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>Log key to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="regex_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regex_go" style="color: inherit; text-decoration: inherit;">Regex</a>
@@ -4980,8 +5366,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter rule regex corresponding to key.</p>
-</dd></dl>
+    <dd>Filter rule regex corresponding to key.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log key to be filtered.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="regex_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regex_hcl" style="color: inherit; text-decoration: inherit;">regex</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter rule regex corresponding to key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4995,8 +5402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log key to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>Log key to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="regex_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regex_java" style="color: inherit; text-decoration: inherit;">regex</a>
@@ -5004,8 +5410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter rule regex corresponding to key.</p>
-</dd></dl>
+    <dd>Filter rule regex corresponding to key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5019,8 +5424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log key to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>Log key to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="regex_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regex_nodejs" style="color: inherit; text-decoration: inherit;">regex</a>
@@ -5028,8 +5432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter rule regex corresponding to key.</p>
-</dd></dl>
+    <dd>Filter rule regex corresponding to key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5043,8 +5446,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log key to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>Log key to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="regex_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regex_python" style="color: inherit; text-decoration: inherit;">regex</a>
@@ -5052,8 +5454,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter rule regex corresponding to key.</p>
-</dd></dl>
+    <dd>Filter rule regex corresponding to key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5067,8 +5468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log key to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>Log key to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="regex_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regex_yaml" style="color: inherit; text-decoration: inherit;">regex</a>
@@ -5076,12 +5476,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter rule regex corresponding to key.</p>
-</dd></dl>
+    <dd>Filter rule regex corresponding to key.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="configextrahostfile">Config<wbr>Extra<wbr>Host<wbr>File</h4>
+<h4 id="configextrahostfile">
+Config<wbr>Extra<wbr>Host<wbr>File<pulumi-choosable type="language" values="python,go" class="inline">, Config<wbr>Extra<wbr>Host<wbr>File<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5093,8 +5494,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log file name.</p>
-</dd><dt class="property-required"
+    <dd>Log file name.</dd><dt class="property-required"
             title="Required">
         <span id="logpath_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logpath_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Path</a>
@@ -5102,8 +5502,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log file dir.</p>
-</dd><dt class="property-optional"
+    <dd>Log file dir.</dd><dt class="property-optional"
             title="Optional">
         <span id="customlabels_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customlabels_csharp" style="color: inherit; text-decoration: inherit;">Custom<wbr>Labels</a>
@@ -5111,8 +5510,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Metadata info.</p>
-</dd></dl>
+    <dd>Metadata info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5126,8 +5524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log file name.</p>
-</dd><dt class="property-required"
+    <dd>Log file name.</dd><dt class="property-required"
             title="Required">
         <span id="logpath_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logpath_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Path</a>
@@ -5135,8 +5532,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log file dir.</p>
-</dd><dt class="property-optional"
+    <dd>Log file dir.</dd><dt class="property-optional"
             title="Optional">
         <span id="customlabels_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customlabels_go" style="color: inherit; text-decoration: inherit;">Custom<wbr>Labels</a>
@@ -5144,8 +5540,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Metadata info.</p>
-</dd></dl>
+    <dd>Metadata info.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="file_pattern_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_pattern_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>pattern</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log file name.</dd><dt class="property-required"
+            title="Required">
+        <span id="log_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_path_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log file dir.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="custom_labels_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_labels_hcl" style="color: inherit; text-decoration: inherit;">custom_<wbr>labels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Metadata info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5159,8 +5584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log file name.</p>
-</dd><dt class="property-required"
+    <dd>Log file name.</dd><dt class="property-required"
             title="Required">
         <span id="logpath_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logpath_java" style="color: inherit; text-decoration: inherit;">log<wbr>Path</a>
@@ -5168,8 +5592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log file dir.</p>
-</dd><dt class="property-optional"
+    <dd>Log file dir.</dd><dt class="property-optional"
             title="Optional">
         <span id="customlabels_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customlabels_java" style="color: inherit; text-decoration: inherit;">custom<wbr>Labels</a>
@@ -5177,8 +5600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Metadata info.</p>
-</dd></dl>
+    <dd>Metadata info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5192,8 +5614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log file name.</p>
-</dd><dt class="property-required"
+    <dd>Log file name.</dd><dt class="property-required"
             title="Required">
         <span id="logpath_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logpath_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Path</a>
@@ -5201,8 +5622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log file dir.</p>
-</dd><dt class="property-optional"
+    <dd>Log file dir.</dd><dt class="property-optional"
             title="Optional">
         <span id="customlabels_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customlabels_nodejs" style="color: inherit; text-decoration: inherit;">custom<wbr>Labels</a>
@@ -5210,8 +5630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Metadata info.</p>
-</dd></dl>
+    <dd>Metadata info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5225,8 +5644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log file name.</p>
-</dd><dt class="property-required"
+    <dd>Log file name.</dd><dt class="property-required"
             title="Required">
         <span id="log_path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_path_python" style="color: inherit; text-decoration: inherit;">log_<wbr>path</a>
@@ -5234,8 +5652,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log file dir.</p>
-</dd><dt class="property-optional"
+    <dd>Log file dir.</dd><dt class="property-optional"
             title="Optional">
         <span id="custom_labels_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_labels_python" style="color: inherit; text-decoration: inherit;">custom_<wbr>labels</a>
@@ -5243,8 +5660,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Metadata info.</p>
-</dd></dl>
+    <dd>Metadata info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5258,8 +5674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log file name.</p>
-</dd><dt class="property-required"
+    <dd>Log file name.</dd><dt class="property-required"
             title="Required">
         <span id="logpath_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logpath_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Path</a>
@@ -5267,8 +5682,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log file dir.</p>
-</dd><dt class="property-optional"
+    <dd>Log file dir.</dd><dt class="property-optional"
             title="Optional">
         <span id="customlabels_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customlabels_yaml" style="color: inherit; text-decoration: inherit;">custom<wbr>Labels</a>
@@ -5276,8 +5690,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Metadata info.</p>
-</dd></dl>
+    <dd>Metadata info.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5285,12 +5698,15 @@ The following state arguments are supported:
 
 
 
-cls config_extra can be imported using the id, e.g.
+cls configExtra can be imported using the id, e.g.
 
 ```sh
 $ pulumi import tencentcloud:Cls/configExtra:ConfigExtra config_extra config_extra_id
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -5302,7 +5718,6 @@ $ pulumi import tencentcloud:Cls/configExtra:ConfigExtra config_extra config_ext
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

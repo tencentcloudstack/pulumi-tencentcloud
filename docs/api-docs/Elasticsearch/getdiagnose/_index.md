@@ -2,9 +2,11 @@
 ---
 title: "getDiagnose"
 title_tag: "tencentcloud.Elasticsearch.getDiagnose"
-meta_desc: "Documentation for the tencentcloud.Elasticsearch.getDiagnose function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of elasticsearch diagnose"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,55 +18,53 @@ Use this data source to query detailed information of elasticsearch diagnose
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const diagnose = tencentcloud.Elasticsearch.getDiagnose({
-    date: "20231030",
+const diagnose = tencentcloud.elasticsearch.getDiagnose({
     instanceId: "es-xxxxxx",
+    date: "20231030",
     limit: 1,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-diagnose = tencentcloud.Elasticsearch.get_diagnose(date="20231030",
-    instance_id="es-xxxxxx",
+diagnose = tencentcloud.elasticsearch.get_diagnose(instance_id="es-xxxxxx",
+    date="20231030",
     limit=1)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var diagnose = Tencentcloud.Elasticsearch.GetDiagnose.Invoke(new()
-    {
-        Date = "20231030",
-        InstanceId = "es-xxxxxx",
-        Limit = 1,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/elasticsearch"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Elasticsearch.GetDiagnose(ctx, &elasticsearch.GetDiagnoseArgs{
-			Date:       pulumi.StringRef("20231030"),
+		_, err := elasticsearch.GetDiagnose(ctx, &elasticsearch.GetDiagnoseArgs{
 			InstanceId: "es-xxxxxx",
+			Date:       pulumi.StringRef("20231030"),
 			Limit:      pulumi.IntRef(1),
 		}, nil)
 		if err != nil {
@@ -74,6 +74,33 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var diagnose = Tencentcloud.Elasticsearch.GetDiagnose.Invoke(new()
+    {
+        InstanceId = "es-xxxxxx",
+        Date = "20231030",
+        Limit = 1,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -82,8 +109,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Elasticsearch.ElasticsearchFunctions;
 import com.pulumi.tencentcloud.Elasticsearch.inputs.GetDiagnoseArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -96,26 +123,58 @@ public class App {
 
     public static void stack(Context ctx) {
         final var diagnose = ElasticsearchFunctions.getDiagnose(GetDiagnoseArgs.builder()
-            .date("20231030")
             .instanceId("es-xxxxxx")
+            .date("20231030")
             .limit(1)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   diagnose:
     fn::invoke:
-      Function: tencentcloud:Elasticsearch:getDiagnose
-      Arguments:
-        date: '20231030'
+      function: tencentcloud:Elasticsearch:getDiagnose
+      arguments:
         instanceId: es-xxxxxx
+        date: '20231030'
         limit: 1
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_elasticsearch_getdiagnose" "diagnose" {
+  instance_id = "es-xxxxxx"
+  date        = "20231030"
+  limit       = 1
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDiagnose](https://www.tencentcloud.com/search/?wd=DescribeDiagnose&type=document&lang=en)
 
 
 
@@ -127,7 +186,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -135,9 +194,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getDiagnose<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDiagnoseArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDiagnoseResult</a></span>></span
+><span class="k">function </span>getDiagnose<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDiagnoseArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDiagnoseResult</a></span>></span
 ><span class="k">
-function </span>getDiagnoseOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDiagnoseOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDiagnoseResult</a></span>></span
+function </span>getDiagnoseOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDiagnoseOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDiagnoseResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -152,11 +211,11 @@ function </span>getDiagnoseOutput<span class="p">(</span><span class="nx">args</
                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetDiagnoseResult</span
 ><span class="k">
-def </span>get_diagnose_output<span class="p">(</span><span class="nx">date</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDiagnoseResult]</span
+def </span>get_diagnose_output<span class="p">(</span><span class="nx">date</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">limit</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDiagnoseResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,12 +224,12 @@ def </span>get_diagnose_output<span class="p">(</span><span class="nx">date</spa
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetDiagnose<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetDiagnoseArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetDiagnoseResult</a></span>, error)</span
+><span class="k">func </span>LookupDiagnose<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupDiagnoseArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupDiagnoseResult</a></span>, error)</span
 ><span class="k">
-func </span>GetDiagnoseOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetDiagnoseOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetDiagnoseResultOutput</span
+func </span>LookupDiagnoseOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupDiagnoseOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupDiagnoseResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetDiagnose` in the Go SDK.
+&gt; Note: This function is named `LookupDiagnose` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -181,7 +240,8 @@ func </span>GetDiagnoseOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetDiagnose </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetDiagnoseResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetDiagnoseArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetDiagnoseResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDiagnoseInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDiagnoseResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDiagnoseInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDiagnoseResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDiagnoseInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -190,7 +250,8 @@ func </span>GetDiagnoseOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetDiagnoseResult</a></span>> </span>getDiagnose<span class="p">(</span><span class="nx">GetDiagnoseArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDiagnoseResult</a></span>> </span>getDiagnose<span class="p">(</span><span class="nx">GetDiagnoseArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDiagnoseResult</a></span>> </span>getDiagnose<span class="p">(</span><span class="nx">GetDiagnoseArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -202,6 +263,15 @@ func </span>GetDiagnoseOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Elasticsearch/getDiagnose:getDiagnose
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_elasticsearch_get_diagnose&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -220,8 +290,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="date_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_csharp" style="color: inherit; text-decoration: inherit;">Date</a>
@@ -229,8 +298,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Report date, format 20210301.</p>
-</dd><dt class="property-optional"
+    <dd>Report date, format 20210301.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -238,8 +306,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of copies returned in the report. Default value 1.</p>
-</dd><dt class="property-optional"
+    <dd>Number of copies returned in the report. Default value 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -247,8 +314,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -262,8 +328,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="date_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_go" style="color: inherit; text-decoration: inherit;">Date</a>
@@ -271,8 +336,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Report date, format 20210301.</p>
-</dd><dt class="property-optional"
+    <dd>Report date, format 20210301.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -280,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of copies returned in the report. Default value 1.</p>
-</dd><dt class="property-optional"
+    <dd>Number of copies returned in the report. Default value 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -289,8 +352,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="date_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_hcl" style="color: inherit; text-decoration: inherit;">date</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Report date, format 20210301.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of copies returned in the report. Default value 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -304,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="date_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_java" style="color: inherit; text-decoration: inherit;">date</a>
@@ -313,8 +412,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Report date, format 20210301.</p>
-</dd><dt class="property-optional"
+    <dd>Report date, format 20210301.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -322,8 +420,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of copies returned in the report. Default value 1.</p>
-</dd><dt class="property-optional"
+    <dd>Number of copies returned in the report. Default value 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -331,8 +428,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -346,8 +442,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="date_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_nodejs" style="color: inherit; text-decoration: inherit;">date</a>
@@ -355,8 +450,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Report date, format 20210301.</p>
-</dd><dt class="property-optional"
+    <dd>Report date, format 20210301.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -364,8 +458,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of copies returned in the report. Default value 1.</p>
-</dd><dt class="property-optional"
+    <dd>Number of copies returned in the report. Default value 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -373,8 +466,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -388,8 +480,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="date_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_python" style="color: inherit; text-decoration: inherit;">date</a>
@@ -397,8 +488,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Report date, format 20210301.</p>
-</dd><dt class="property-optional"
+    <dd>Report date, format 20210301.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -406,8 +496,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of copies returned in the report. Default value 1.</p>
-</dd><dt class="property-optional"
+    <dd>Number of copies returned in the report. Default value 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -415,8 +504,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -430,8 +518,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="date_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_yaml" style="color: inherit; text-decoration: inherit;">date</a>
@@ -439,8 +526,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Report date, format 20210301.</p>
-</dd><dt class="property-optional"
+    <dd>Report date, format 20210301.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -448,8 +534,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of copies returned in the report. Default value 1.</p>
-</dd><dt class="property-optional"
+    <dd>Number of copies returned in the report. Default value 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -457,8 +542,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -481,8 +565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresult">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Outputs.<wbr>Get<wbr>Diagnose<wbr>Diagnose<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>List of diagnostic reports.</p>
-</dd><dt class="property-"
+    <dd>List of diagnostic reports.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -490,8 +573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -499,8 +581,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-"
+    <dd>Instance id.</dd><dt class="property-"
             title="">
         <span id="date_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_csharp" style="color: inherit; text-decoration: inherit;">Date</a>
@@ -538,8 +619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresult">[]Get<wbr>Diagnose<wbr>Diagnose<wbr>Result</a></span>
     </dt>
-    <dd><p>List of diagnostic reports.</p>
-</dd><dt class="property-"
+    <dd>List of diagnostic reports.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -547,8 +627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -556,8 +635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-"
+    <dd>Instance id.</dd><dt class="property-"
             title="">
         <span id="date_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_go" style="color: inherit; text-decoration: inherit;">Date</a>
@@ -586,6 +664,60 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="diagnose_results_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diagnose_results_hcl" style="color: inherit; text-decoration: inherit;">diagnose_<wbr>results</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdiagnosediagnoseresult">list(object)</a></span>
+    </dt>
+    <dd>List of diagnostic reports.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-"
+            title="">
+        <span id="date_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_hcl" style="color: inherit; text-decoration: inherit;">date</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -595,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresult">List&lt;Get<wbr>Diagnose<wbr>Diagnose<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>List of diagnostic reports.</p>
-</dd><dt class="property-"
+    <dd>List of diagnostic reports.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -604,8 +735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -613,8 +743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-"
+    <dd>Instance id.</dd><dt class="property-"
             title="">
         <span id="date_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_java" style="color: inherit; text-decoration: inherit;">date</a>
@@ -652,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresult">Get<wbr>Diagnose<wbr>Diagnose<wbr>Result[]</a></span>
     </dt>
-    <dd><p>List of diagnostic reports.</p>
-</dd><dt class="property-"
+    <dd>List of diagnostic reports.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -661,8 +789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -670,8 +797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-"
+    <dd>Instance id.</dd><dt class="property-"
             title="">
         <span id="date_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_nodejs" style="color: inherit; text-decoration: inherit;">date</a>
@@ -707,10 +833,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diagnose_results_python" style="color: inherit; text-decoration: inherit;">diagnose_<wbr>results</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdiagnosediagnoseresult">Get<wbr>Diagnose<wbr>Diagnose<wbr>Result]</a></span>
+        <span class="property-type"><a href="#getdiagnosediagnoseresult">Sequence[Get<wbr>Diagnose<wbr>Diagnose<wbr>Result]</a></span>
     </dt>
-    <dd><p>List of diagnostic reports.</p>
-</dd><dt class="property-"
+    <dd>List of diagnostic reports.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -718,8 +843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -727,8 +851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-"
+    <dd>Instance id.</dd><dt class="property-"
             title="">
         <span id="date_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_python" style="color: inherit; text-decoration: inherit;">date</a>
@@ -766,8 +889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresult">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of diagnostic reports.</p>
-</dd><dt class="property-"
+    <dd>List of diagnostic reports.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -775,8 +897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -784,8 +905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-"
+    <dd>Instance id.</dd><dt class="property-"
             title="">
         <span id="date_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#date_yaml" style="color: inherit; text-decoration: inherit;">date</a>
@@ -833,8 +953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the diagnosis is complete or not.</p>
-</dd><dt class="property-required"
+    <dd>Whether the diagnosis is complete or not.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -842,8 +961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -851,8 +969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="jobparams_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobparams_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Params</a>
@@ -860,8 +977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobparam">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Param&gt;</a></span>
     </dt>
-    <dd><p>Diagnostic parameters such as diagnostic time, diagnostic index, etc.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic parameters such as diagnostic time, diagnostic index, etc.</dd><dt class="property-required"
             title="Required">
         <span id="jobresults_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobresults_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Results</a>
@@ -869,8 +985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresult">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>Diagnostic item result list.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item result list.</dd><dt class="property-required"
             title="Required">
         <span id="jobtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobtype_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Type</a>
@@ -878,8 +993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.</p>
-</dd><dt class="property-required"
+    <dd>Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.</dd><dt class="property-required"
             title="Required">
         <span id="requestid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestid_csharp" style="color: inherit; text-decoration: inherit;">Request<wbr>Id</a>
@@ -887,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Request id.</p>
-</dd><dt class="property-required"
+    <dd>Request id.</dd><dt class="property-required"
             title="Required">
         <span id="score_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#score_csharp" style="color: inherit; text-decoration: inherit;">Score</a>
@@ -896,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total diagnostic score.</p>
-</dd></dl>
+    <dd>Total diagnostic score.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -911,8 +1023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the diagnosis is complete or not.</p>
-</dd><dt class="property-required"
+    <dd>Whether the diagnosis is complete or not.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -920,8 +1031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -929,8 +1039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="jobparams_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobparams_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Params</a>
@@ -938,8 +1047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobparam">[]Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Param</a></span>
     </dt>
-    <dd><p>Diagnostic parameters such as diagnostic time, diagnostic index, etc.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic parameters such as diagnostic time, diagnostic index, etc.</dd><dt class="property-required"
             title="Required">
         <span id="jobresults_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobresults_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Results</a>
@@ -947,8 +1055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresult">[]Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result</a></span>
     </dt>
-    <dd><p>Diagnostic item result list.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item result list.</dd><dt class="property-required"
             title="Required">
         <span id="jobtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobtype_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Type</a>
@@ -956,8 +1063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.</p>
-</dd><dt class="property-required"
+    <dd>Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.</dd><dt class="property-required"
             title="Required">
         <span id="requestid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestid_go" style="color: inherit; text-decoration: inherit;">Request<wbr>Id</a>
@@ -965,8 +1071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Request id.</p>
-</dd><dt class="property-required"
+    <dd>Request id.</dd><dt class="property-required"
             title="Required">
         <span id="score_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#score_go" style="color: inherit; text-decoration: inherit;">Score</a>
@@ -974,8 +1079,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total diagnostic score.</p>
-</dd></dl>
+    <dd>Total diagnostic score.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="completed_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#completed_hcl" style="color: inherit; text-decoration: inherit;">completed</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the diagnosis is complete or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-required"
+            title="Required">
+        <span id="job_params_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_params_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>params</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdiagnosediagnoseresultjobparam">list(object)</a></span>
+    </dt>
+    <dd>Diagnostic parameters such as diagnostic time, diagnostic index, etc.</dd><dt class="property-required"
+            title="Required">
+        <span id="job_results_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_results_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>results</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresult">list(object)</a></span>
+    </dt>
+    <dd>Diagnostic item result list.</dd><dt class="property-required"
+            title="Required">
+        <span id="job_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_type_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.</dd><dt class="property-required"
+            title="Required">
+        <span id="request_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_id_hcl" style="color: inherit; text-decoration: inherit;">request_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Request id.</dd><dt class="property-required"
+            title="Required">
+        <span id="score_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#score_hcl" style="color: inherit; text-decoration: inherit;">score</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total diagnostic score.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -989,8 +1163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the diagnosis is complete or not.</p>
-</dd><dt class="property-required"
+    <dd>Whether the diagnosis is complete or not.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -998,8 +1171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1007,8 +1179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="jobparams_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobparams_java" style="color: inherit; text-decoration: inherit;">job<wbr>Params</a>
@@ -1016,8 +1187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobparam">List&lt;Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Param&gt;</a></span>
     </dt>
-    <dd><p>Diagnostic parameters such as diagnostic time, diagnostic index, etc.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic parameters such as diagnostic time, diagnostic index, etc.</dd><dt class="property-required"
             title="Required">
         <span id="jobresults_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobresults_java" style="color: inherit; text-decoration: inherit;">job<wbr>Results</a>
@@ -1025,8 +1195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresult">List&lt;Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>Diagnostic item result list.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item result list.</dd><dt class="property-required"
             title="Required">
         <span id="jobtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobtype_java" style="color: inherit; text-decoration: inherit;">job<wbr>Type</a>
@@ -1034,8 +1203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.</p>
-</dd><dt class="property-required"
+    <dd>Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.</dd><dt class="property-required"
             title="Required">
         <span id="requestid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestid_java" style="color: inherit; text-decoration: inherit;">request<wbr>Id</a>
@@ -1043,8 +1211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Request id.</p>
-</dd><dt class="property-required"
+    <dd>Request id.</dd><dt class="property-required"
             title="Required">
         <span id="score_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#score_java" style="color: inherit; text-decoration: inherit;">score</a>
@@ -1052,8 +1219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total diagnostic score.</p>
-</dd></dl>
+    <dd>Total diagnostic score.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1067,8 +1233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the diagnosis is complete or not.</p>
-</dd><dt class="property-required"
+    <dd>Whether the diagnosis is complete or not.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1076,8 +1241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1085,8 +1249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="jobparams_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobparams_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Params</a>
@@ -1094,8 +1257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobparam">Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Param[]</a></span>
     </dt>
-    <dd><p>Diagnostic parameters such as diagnostic time, diagnostic index, etc.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic parameters such as diagnostic time, diagnostic index, etc.</dd><dt class="property-required"
             title="Required">
         <span id="jobresults_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobresults_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Results</a>
@@ -1103,8 +1265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresult">Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result[]</a></span>
     </dt>
-    <dd><p>Diagnostic item result list.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item result list.</dd><dt class="property-required"
             title="Required">
         <span id="jobtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobtype_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Type</a>
@@ -1112,8 +1273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.</p>
-</dd><dt class="property-required"
+    <dd>Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.</dd><dt class="property-required"
             title="Required">
         <span id="requestid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestid_nodejs" style="color: inherit; text-decoration: inherit;">request<wbr>Id</a>
@@ -1121,8 +1281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Request id.</p>
-</dd><dt class="property-required"
+    <dd>Request id.</dd><dt class="property-required"
             title="Required">
         <span id="score_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#score_nodejs" style="color: inherit; text-decoration: inherit;">score</a>
@@ -1130,8 +1289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total diagnostic score.</p>
-</dd></dl>
+    <dd>Total diagnostic score.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1145,8 +1303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the diagnosis is complete or not.</p>
-</dd><dt class="property-required"
+    <dd>Whether the diagnosis is complete or not.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1154,8 +1311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1163,26 +1319,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="job_params_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_params_python" style="color: inherit; text-decoration: inherit;">job_<wbr>params</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdiagnosediagnoseresultjobparam">Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Param]</a></span>
+        <span class="property-type"><a href="#getdiagnosediagnoseresultjobparam">Sequence[Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Param]</a></span>
     </dt>
-    <dd><p>Diagnostic parameters such as diagnostic time, diagnostic index, etc.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic parameters such as diagnostic time, diagnostic index, etc.</dd><dt class="property-required"
             title="Required">
         <span id="job_results_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_results_python" style="color: inherit; text-decoration: inherit;">job_<wbr>results</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresult">Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result]</a></span>
+        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresult">Sequence[Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result]</a></span>
     </dt>
-    <dd><p>Diagnostic item result list.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item result list.</dd><dt class="property-required"
             title="Required">
         <span id="job_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_type_python" style="color: inherit; text-decoration: inherit;">job_<wbr>type</a>
@@ -1190,8 +1343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.</p>
-</dd><dt class="property-required"
+    <dd>Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.</dd><dt class="property-required"
             title="Required">
         <span id="request_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_id_python" style="color: inherit; text-decoration: inherit;">request_<wbr>id</a>
@@ -1199,8 +1351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Request id.</p>
-</dd><dt class="property-required"
+    <dd>Request id.</dd><dt class="property-required"
             title="Required">
         <span id="score_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#score_python" style="color: inherit; text-decoration: inherit;">score</a>
@@ -1208,8 +1359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total diagnostic score.</p>
-</dd></dl>
+    <dd>Total diagnostic score.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1223,8 +1373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the diagnosis is complete or not.</p>
-</dd><dt class="property-required"
+    <dd>Whether the diagnosis is complete or not.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1232,8 +1381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1241,8 +1389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-required"
+    <dd>Instance id.</dd><dt class="property-required"
             title="Required">
         <span id="jobparams_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobparams_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Params</a>
@@ -1250,8 +1397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobparam">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Diagnostic parameters such as diagnostic time, diagnostic index, etc.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic parameters such as diagnostic time, diagnostic index, etc.</dd><dt class="property-required"
             title="Required">
         <span id="jobresults_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobresults_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Results</a>
@@ -1259,8 +1405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresult">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Diagnostic item result list.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item result list.</dd><dt class="property-required"
             title="Required">
         <span id="jobtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobtype_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Type</a>
@@ -1268,8 +1413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.</p>
-</dd><dt class="property-required"
+    <dd>Diagnosis type, 2 timing diagnosis, 3 customer manual trigger diagnosis.</dd><dt class="property-required"
             title="Required">
         <span id="requestid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestid_yaml" style="color: inherit; text-decoration: inherit;">request<wbr>Id</a>
@@ -1277,8 +1421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Request id.</p>
-</dd><dt class="property-required"
+    <dd>Request id.</dd><dt class="property-required"
             title="Required">
         <span id="score_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#score_yaml" style="color: inherit; text-decoration: inherit;">score</a>
@@ -1286,8 +1429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total diagnostic score.</p>
-</dd></dl>
+    <dd>Total diagnostic score.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1305,8 +1447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Diagnostic indices.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic indices.</dd><dt class="property-required"
             title="Required">
         <span id="interval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_csharp" style="color: inherit; text-decoration: inherit;">Interval</a>
@@ -1314,8 +1455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Historical diagnosis time.</p>
-</dd><dt class="property-required"
+    <dd>Historical diagnosis time.</dd><dt class="property-required"
             title="Required">
         <span id="jobs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobs_csharp" style="color: inherit; text-decoration: inherit;">Jobs</a>
@@ -1323,8 +1463,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Diagnostic item list.</p>
-</dd></dl>
+    <dd>Diagnostic item list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1338,8 +1477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Diagnostic indices.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic indices.</dd><dt class="property-required"
             title="Required">
         <span id="interval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_go" style="color: inherit; text-decoration: inherit;">Interval</a>
@@ -1347,8 +1485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Historical diagnosis time.</p>
-</dd><dt class="property-required"
+    <dd>Historical diagnosis time.</dd><dt class="property-required"
             title="Required">
         <span id="jobs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobs_go" style="color: inherit; text-decoration: inherit;">Jobs</a>
@@ -1356,8 +1493,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Diagnostic item list.</p>
-</dd></dl>
+    <dd>Diagnostic item list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="indices_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#indices_hcl" style="color: inherit; text-decoration: inherit;">indices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Diagnostic indices.</dd><dt class="property-required"
+            title="Required">
+        <span id="interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_hcl" style="color: inherit; text-decoration: inherit;">interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Historical diagnosis time.</dd><dt class="property-required"
+            title="Required">
+        <span id="jobs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobs_hcl" style="color: inherit; text-decoration: inherit;">jobs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Diagnostic item list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1371,8 +1537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Diagnostic indices.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic indices.</dd><dt class="property-required"
             title="Required">
         <span id="interval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_java" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1380,8 +1545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Historical diagnosis time.</p>
-</dd><dt class="property-required"
+    <dd>Historical diagnosis time.</dd><dt class="property-required"
             title="Required">
         <span id="jobs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobs_java" style="color: inherit; text-decoration: inherit;">jobs</a>
@@ -1389,8 +1553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Diagnostic item list.</p>
-</dd></dl>
+    <dd>Diagnostic item list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1404,8 +1567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Diagnostic indices.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic indices.</dd><dt class="property-required"
             title="Required">
         <span id="interval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_nodejs" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1413,8 +1575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Historical diagnosis time.</p>
-</dd><dt class="property-required"
+    <dd>Historical diagnosis time.</dd><dt class="property-required"
             title="Required">
         <span id="jobs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobs_nodejs" style="color: inherit; text-decoration: inherit;">jobs</a>
@@ -1422,8 +1583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Diagnostic item list.</p>
-</dd></dl>
+    <dd>Diagnostic item list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1437,8 +1597,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Diagnostic indices.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic indices.</dd><dt class="property-required"
             title="Required">
         <span id="interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_python" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1446,8 +1605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Historical diagnosis time.</p>
-</dd><dt class="property-required"
+    <dd>Historical diagnosis time.</dd><dt class="property-required"
             title="Required">
         <span id="jobs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobs_python" style="color: inherit; text-decoration: inherit;">jobs</a>
@@ -1455,8 +1613,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Diagnostic item list.</p>
-</dd></dl>
+    <dd>Diagnostic item list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1470,8 +1627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Diagnostic indices.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic indices.</dd><dt class="property-required"
             title="Required">
         <span id="interval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_yaml" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1479,8 +1635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Historical diagnosis time.</p>
-</dd><dt class="property-required"
+    <dd>Historical diagnosis time.</dd><dt class="property-required"
             title="Required">
         <span id="jobs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobs_yaml" style="color: inherit; text-decoration: inherit;">jobs</a>
@@ -1488,8 +1643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Diagnostic item list.</p>
-</dd></dl>
+    <dd>Diagnostic item list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1507,8 +1661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="detail_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detail_csharp" style="color: inherit; text-decoration: inherit;">Detail</a>
@@ -1516,8 +1669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Diagnosis details.</p>
-</dd><dt class="property-required"
+    <dd>Diagnosis details.</dd><dt class="property-required"
             title="Required">
         <span id="jobname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Name</a>
@@ -1525,8 +1677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Diagnostic item name.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item name.</dd><dt class="property-required"
             title="Required">
         <span id="logdetails_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logdetails_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Details</a>
@@ -1534,8 +1685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultlogdetail">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Log<wbr>Detail&gt;</a></span>
     </dt>
-    <dd><p>Diagnostic log details.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic log details.</dd><dt class="property-required"
             title="Required">
         <span id="metricdetails_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricdetails_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Details</a>
@@ -1543,8 +1693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetail">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail&gt;</a></span>
     </dt>
-    <dd><p>Details of diagnostic metrics.</p>
-</dd><dt class="property-required"
+    <dd>Details of diagnostic metrics.</dd><dt class="property-required"
             title="Required">
         <span id="score_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#score_csharp" style="color: inherit; text-decoration: inherit;">Score</a>
@@ -1552,8 +1701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total diagnostic score.</p>
-</dd><dt class="property-required"
+    <dd>Total diagnostic score.</dd><dt class="property-required"
             title="Required">
         <span id="settingdetails_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#settingdetails_csharp" style="color: inherit; text-decoration: inherit;">Setting<wbr>Details</a>
@@ -1561,8 +1709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultsettingdetail">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Setting<wbr>Detail&gt;</a></span>
     </dt>
-    <dd><p>Diagnostic configuration detail.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic configuration detail.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1570,8 +1717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.</dd><dt class="property-required"
             title="Required">
         <span id="summary_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#summary_csharp" style="color: inherit; text-decoration: inherit;">Summary</a>
@@ -1579,8 +1725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Diagnostic summary.</p>
-</dd></dl>
+    <dd>Diagnostic summary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1594,8 +1739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="detail_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detail_go" style="color: inherit; text-decoration: inherit;">Detail</a>
@@ -1603,8 +1747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Diagnosis details.</p>
-</dd><dt class="property-required"
+    <dd>Diagnosis details.</dd><dt class="property-required"
             title="Required">
         <span id="jobname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Name</a>
@@ -1612,8 +1755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Diagnostic item name.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item name.</dd><dt class="property-required"
             title="Required">
         <span id="logdetails_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logdetails_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Details</a>
@@ -1621,8 +1763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultlogdetail">[]Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Log<wbr>Detail</a></span>
     </dt>
-    <dd><p>Diagnostic log details.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic log details.</dd><dt class="property-required"
             title="Required">
         <span id="metricdetails_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricdetails_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Details</a>
@@ -1630,8 +1771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetail">[]Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail</a></span>
     </dt>
-    <dd><p>Details of diagnostic metrics.</p>
-</dd><dt class="property-required"
+    <dd>Details of diagnostic metrics.</dd><dt class="property-required"
             title="Required">
         <span id="score_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#score_go" style="color: inherit; text-decoration: inherit;">Score</a>
@@ -1639,8 +1779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total diagnostic score.</p>
-</dd><dt class="property-required"
+    <dd>Total diagnostic score.</dd><dt class="property-required"
             title="Required">
         <span id="settingdetails_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#settingdetails_go" style="color: inherit; text-decoration: inherit;">Setting<wbr>Details</a>
@@ -1648,8 +1787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultsettingdetail">[]Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Setting<wbr>Detail</a></span>
     </dt>
-    <dd><p>Diagnostic configuration detail.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic configuration detail.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1657,8 +1795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.</dd><dt class="property-required"
             title="Required">
         <span id="summary_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#summary_go" style="color: inherit; text-decoration: inherit;">Summary</a>
@@ -1666,8 +1803,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Diagnostic summary.</p>
-</dd></dl>
+    <dd>Diagnostic summary.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="advise_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#advise_hcl" style="color: inherit; text-decoration: inherit;">advise</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
+            title="Required">
+        <span id="detail_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detail_hcl" style="color: inherit; text-decoration: inherit;">detail</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Diagnosis details.</dd><dt class="property-required"
+            title="Required">
+        <span id="job_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_name_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Diagnostic item name.</dd><dt class="property-required"
+            title="Required">
+        <span id="log_details_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_details_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>details</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultlogdetail">list(object)</a></span>
+    </dt>
+    <dd>Diagnostic log details.</dd><dt class="property-required"
+            title="Required">
+        <span id="metric_details_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_details_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>details</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetail">list(object)</a></span>
+    </dt>
+    <dd>Details of diagnostic metrics.</dd><dt class="property-required"
+            title="Required">
+        <span id="score_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#score_hcl" style="color: inherit; text-decoration: inherit;">score</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total diagnostic score.</dd><dt class="property-required"
+            title="Required">
+        <span id="setting_details_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setting_details_hcl" style="color: inherit; text-decoration: inherit;">setting_<wbr>details</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultsettingdetail">list(object)</a></span>
+    </dt>
+    <dd>Diagnostic configuration detail.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.</dd><dt class="property-required"
+            title="Required">
+        <span id="summary_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#summary_hcl" style="color: inherit; text-decoration: inherit;">summary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Diagnostic summary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1681,8 +1895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="detail_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detail_java" style="color: inherit; text-decoration: inherit;">detail</a>
@@ -1690,8 +1903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Diagnosis details.</p>
-</dd><dt class="property-required"
+    <dd>Diagnosis details.</dd><dt class="property-required"
             title="Required">
         <span id="jobname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_java" style="color: inherit; text-decoration: inherit;">job<wbr>Name</a>
@@ -1699,8 +1911,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Diagnostic item name.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item name.</dd><dt class="property-required"
             title="Required">
         <span id="logdetails_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logdetails_java" style="color: inherit; text-decoration: inherit;">log<wbr>Details</a>
@@ -1708,8 +1919,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultlogdetail">List&lt;Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Log<wbr>Detail&gt;</a></span>
     </dt>
-    <dd><p>Diagnostic log details.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic log details.</dd><dt class="property-required"
             title="Required">
         <span id="metricdetails_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricdetails_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Details</a>
@@ -1717,8 +1927,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetail">List&lt;Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail&gt;</a></span>
     </dt>
-    <dd><p>Details of diagnostic metrics.</p>
-</dd><dt class="property-required"
+    <dd>Details of diagnostic metrics.</dd><dt class="property-required"
             title="Required">
         <span id="score_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#score_java" style="color: inherit; text-decoration: inherit;">score</a>
@@ -1726,8 +1935,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total diagnostic score.</p>
-</dd><dt class="property-required"
+    <dd>Total diagnostic score.</dd><dt class="property-required"
             title="Required">
         <span id="settingdetails_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#settingdetails_java" style="color: inherit; text-decoration: inherit;">setting<wbr>Details</a>
@@ -1735,8 +1943,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultsettingdetail">List&lt;Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Setting<wbr>Detail&gt;</a></span>
     </dt>
-    <dd><p>Diagnostic configuration detail.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic configuration detail.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1744,8 +1951,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.</dd><dt class="property-required"
             title="Required">
         <span id="summary_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#summary_java" style="color: inherit; text-decoration: inherit;">summary</a>
@@ -1753,8 +1959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Diagnostic summary.</p>
-</dd></dl>
+    <dd>Diagnostic summary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1768,8 +1973,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="detail_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detail_nodejs" style="color: inherit; text-decoration: inherit;">detail</a>
@@ -1777,8 +1981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Diagnosis details.</p>
-</dd><dt class="property-required"
+    <dd>Diagnosis details.</dd><dt class="property-required"
             title="Required">
         <span id="jobname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Name</a>
@@ -1786,8 +1989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Diagnostic item name.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item name.</dd><dt class="property-required"
             title="Required">
         <span id="logdetails_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logdetails_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Details</a>
@@ -1795,8 +1997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultlogdetail">Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Log<wbr>Detail[]</a></span>
     </dt>
-    <dd><p>Diagnostic log details.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic log details.</dd><dt class="property-required"
             title="Required">
         <span id="metricdetails_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricdetails_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Details</a>
@@ -1804,8 +2005,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetail">Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail[]</a></span>
     </dt>
-    <dd><p>Details of diagnostic metrics.</p>
-</dd><dt class="property-required"
+    <dd>Details of diagnostic metrics.</dd><dt class="property-required"
             title="Required">
         <span id="score_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#score_nodejs" style="color: inherit; text-decoration: inherit;">score</a>
@@ -1813,8 +2013,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total diagnostic score.</p>
-</dd><dt class="property-required"
+    <dd>Total diagnostic score.</dd><dt class="property-required"
             title="Required">
         <span id="settingdetails_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#settingdetails_nodejs" style="color: inherit; text-decoration: inherit;">setting<wbr>Details</a>
@@ -1822,8 +2021,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultsettingdetail">Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Setting<wbr>Detail[]</a></span>
     </dt>
-    <dd><p>Diagnostic configuration detail.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic configuration detail.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1831,8 +2029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.</dd><dt class="property-required"
             title="Required">
         <span id="summary_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#summary_nodejs" style="color: inherit; text-decoration: inherit;">summary</a>
@@ -1840,8 +2037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Diagnostic summary.</p>
-</dd></dl>
+    <dd>Diagnostic summary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1855,8 +2051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="detail_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detail_python" style="color: inherit; text-decoration: inherit;">detail</a>
@@ -1864,8 +2059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Diagnosis details.</p>
-</dd><dt class="property-required"
+    <dd>Diagnosis details.</dd><dt class="property-required"
             title="Required">
         <span id="job_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_name_python" style="color: inherit; text-decoration: inherit;">job_<wbr>name</a>
@@ -1873,26 +2067,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Diagnostic item name.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item name.</dd><dt class="property-required"
             title="Required">
         <span id="log_details_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_details_python" style="color: inherit; text-decoration: inherit;">log_<wbr>details</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultlogdetail">Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Log<wbr>Detail]</a></span>
+        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultlogdetail">Sequence[Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Log<wbr>Detail]</a></span>
     </dt>
-    <dd><p>Diagnostic log details.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic log details.</dd><dt class="property-required"
             title="Required">
         <span id="metric_details_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_details_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>details</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetail">Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail]</a></span>
+        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetail">Sequence[Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail]</a></span>
     </dt>
-    <dd><p>Details of diagnostic metrics.</p>
-</dd><dt class="property-required"
+    <dd>Details of diagnostic metrics.</dd><dt class="property-required"
             title="Required">
         <span id="score_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#score_python" style="color: inherit; text-decoration: inherit;">score</a>
@@ -1900,17 +2091,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total diagnostic score.</p>
-</dd><dt class="property-required"
+    <dd>Total diagnostic score.</dd><dt class="property-required"
             title="Required">
         <span id="setting_details_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setting_details_python" style="color: inherit; text-decoration: inherit;">setting_<wbr>details</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultsettingdetail">Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Setting<wbr>Detail]</a></span>
+        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultsettingdetail">Sequence[Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Setting<wbr>Detail]</a></span>
     </dt>
-    <dd><p>Diagnostic configuration detail.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic configuration detail.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1918,8 +2107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.</dd><dt class="property-required"
             title="Required">
         <span id="summary_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#summary_python" style="color: inherit; text-decoration: inherit;">summary</a>
@@ -1927,8 +2115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Diagnostic summary.</p>
-</dd></dl>
+    <dd>Diagnostic summary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1942,8 +2129,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="detail_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detail_yaml" style="color: inherit; text-decoration: inherit;">detail</a>
@@ -1951,8 +2137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Diagnosis details.</p>
-</dd><dt class="property-required"
+    <dd>Diagnosis details.</dd><dt class="property-required"
             title="Required">
         <span id="jobname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobname_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Name</a>
@@ -1960,8 +2145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Diagnostic item name.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item name.</dd><dt class="property-required"
             title="Required">
         <span id="logdetails_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logdetails_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Details</a>
@@ -1969,8 +2153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultlogdetail">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Diagnostic log details.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic log details.</dd><dt class="property-required"
             title="Required">
         <span id="metricdetails_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricdetails_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Details</a>
@@ -1978,8 +2161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetail">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Details of diagnostic metrics.</p>
-</dd><dt class="property-required"
+    <dd>Details of diagnostic metrics.</dd><dt class="property-required"
             title="Required">
         <span id="score_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#score_yaml" style="color: inherit; text-decoration: inherit;">score</a>
@@ -1987,8 +2169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total diagnostic score.</p>
-</dd><dt class="property-required"
+    <dd>Total diagnostic score.</dd><dt class="property-required"
             title="Required">
         <span id="settingdetails_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#settingdetails_yaml" style="color: inherit; text-decoration: inherit;">setting<wbr>Details</a>
@@ -1996,8 +2177,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultsettingdetail">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Diagnostic configuration detail.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic configuration detail.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2005,8 +2185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.</p>
-</dd><dt class="property-required"
+    <dd>Diagnostic item status:-2 failed,-1 to be retried, 0 running, 1 successful.</dd><dt class="property-required"
             title="Required">
         <span id="summary_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#summary_yaml" style="color: inherit; text-decoration: inherit;">summary</a>
@@ -2014,8 +2193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Diagnostic summary.</p>
-</dd></dl>
+    <dd>Diagnostic summary.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2033,8 +2211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="count_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#count_csharp" style="color: inherit; text-decoration: inherit;">Count</a>
@@ -2042,8 +2219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of occurrences of log exception names.</p>
-</dd><dt class="property-required"
+    <dd>Number of occurrences of log exception names.</dd><dt class="property-required"
             title="Required">
         <span id="key_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -2051,8 +2227,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key.</p>
-</dd></dl>
+    <dd>Key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2066,8 +2241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="count_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#count_go" style="color: inherit; text-decoration: inherit;">Count</a>
@@ -2075,8 +2249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of occurrences of log exception names.</p>
-</dd><dt class="property-required"
+    <dd>Number of occurrences of log exception names.</dd><dt class="property-required"
             title="Required">
         <span id="key_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -2084,8 +2257,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key.</p>
-</dd></dl>
+    <dd>Key.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="advise_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#advise_hcl" style="color: inherit; text-decoration: inherit;">advise</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
+            title="Required">
+        <span id="count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#count_hcl" style="color: inherit; text-decoration: inherit;">count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of occurrences of log exception names.</dd><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2099,8 +2301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="count_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#count_java" style="color: inherit; text-decoration: inherit;">count</a>
@@ -2108,8 +2309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of occurrences of log exception names.</p>
-</dd><dt class="property-required"
+    <dd>Number of occurrences of log exception names.</dd><dt class="property-required"
             title="Required">
         <span id="key_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2117,8 +2317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key.</p>
-</dd></dl>
+    <dd>Key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2132,8 +2331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="count_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#count_nodejs" style="color: inherit; text-decoration: inherit;">count</a>
@@ -2141,8 +2339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of occurrences of log exception names.</p>
-</dd><dt class="property-required"
+    <dd>Number of occurrences of log exception names.</dd><dt class="property-required"
             title="Required">
         <span id="key_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2150,8 +2347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key.</p>
-</dd></dl>
+    <dd>Key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2165,8 +2361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#count_python" style="color: inherit; text-decoration: inherit;">count</a>
@@ -2174,8 +2369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of occurrences of log exception names.</p>
-</dd><dt class="property-required"
+    <dd>Number of occurrences of log exception names.</dd><dt class="property-required"
             title="Required">
         <span id="key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2183,8 +2377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key.</p>
-</dd></dl>
+    <dd>Key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2198,8 +2391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="count_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#count_yaml" style="color: inherit; text-decoration: inherit;">count</a>
@@ -2207,8 +2399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of occurrences of log exception names.</p>
-</dd><dt class="property-required"
+    <dd>Number of occurrences of log exception names.</dd><dt class="property-required"
             title="Required">
         <span id="key_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2216,8 +2407,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key.</p>
-</dd></dl>
+    <dd>Key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2235,8 +2425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_csharp" style="color: inherit; text-decoration: inherit;">Metrics</a>
@@ -2244,8 +2433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetailmetric">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail<wbr>Metric&gt;</a></span>
     </dt>
-    <dd><p>Metric detail value.</p>
-</dd></dl>
+    <dd>Metric detail value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2259,8 +2447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_go" style="color: inherit; text-decoration: inherit;">Metrics</a>
@@ -2268,8 +2455,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetailmetric">[]Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail<wbr>Metric</a></span>
     </dt>
-    <dd><p>Metric detail value.</p>
-</dd></dl>
+    <dd>Metric detail value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key.</dd><dt class="property-required"
+            title="Required">
+        <span id="metrics_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_hcl" style="color: inherit; text-decoration: inherit;">metrics</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetailmetric">list(object)</a></span>
+    </dt>
+    <dd>Metric detail value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2283,8 +2491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_java" style="color: inherit; text-decoration: inherit;">metrics</a>
@@ -2292,8 +2499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetailmetric">List&lt;Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail<wbr>Metric&gt;</a></span>
     </dt>
-    <dd><p>Metric detail value.</p>
-</dd></dl>
+    <dd>Metric detail value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2307,8 +2513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_nodejs" style="color: inherit; text-decoration: inherit;">metrics</a>
@@ -2316,8 +2521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetailmetric">Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail<wbr>Metric[]</a></span>
     </dt>
-    <dd><p>Metric detail value.</p>
-</dd></dl>
+    <dd>Metric detail value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2331,17 +2535,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_python" style="color: inherit; text-decoration: inherit;">metrics</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetailmetric">Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail<wbr>Metric]</a></span>
+        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetailmetric">Sequence[Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail<wbr>Metric]</a></span>
     </dt>
-    <dd><p>Metric detail value.</p>
-</dd></dl>
+    <dd>Metric detail value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2355,8 +2557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_yaml" style="color: inherit; text-decoration: inherit;">metrics</a>
@@ -2364,8 +2565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetailmetric">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Metric detail value.</p>
-</dd></dl>
+    <dd>Metric detail value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2383,8 +2583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetailmetricdimension">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Inputs.<wbr>Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail<wbr>Metric<wbr>Dimension&gt;</a></span>
     </dt>
-    <dd><p>Index dimension family.</p>
-</dd><dt class="property-required"
+    <dd>Index dimension family.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2392,8 +2591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2407,8 +2605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetailmetricdimension">[]Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail<wbr>Metric<wbr>Dimension</a></span>
     </dt>
-    <dd><p>Index dimension family.</p>
-</dd><dt class="property-required"
+    <dd>Index dimension family.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2416,8 +2613,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="dimensions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_hcl" style="color: inherit; text-decoration: inherit;">dimensions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetailmetricdimension">list(object)</a></span>
+    </dt>
+    <dd>Index dimension family.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2431,8 +2649,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetailmetricdimension">List&lt;Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail<wbr>Metric<wbr>Dimension&gt;</a></span>
     </dt>
-    <dd><p>Index dimension family.</p>
-</dd><dt class="property-required"
+    <dd>Index dimension family.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2440,8 +2657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2455,8 +2671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetailmetricdimension">Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail<wbr>Metric<wbr>Dimension[]</a></span>
     </dt>
-    <dd><p>Index dimension family.</p>
-</dd><dt class="property-required"
+    <dd>Index dimension family.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2464,8 +2679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2477,10 +2691,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_python" style="color: inherit; text-decoration: inherit;">dimensions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetailmetricdimension">Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail<wbr>Metric<wbr>Dimension]</a></span>
+        <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetailmetricdimension">Sequence[Get<wbr>Diagnose<wbr>Diagnose<wbr>Result<wbr>Job<wbr>Result<wbr>Metric<wbr>Detail<wbr>Metric<wbr>Dimension]</a></span>
     </dt>
-    <dd><p>Index dimension family.</p>
-</dd><dt class="property-required"
+    <dd>Index dimension family.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2488,8 +2701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2503,8 +2715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getdiagnosediagnoseresultjobresultmetricdetailmetricdimension">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Index dimension family.</p>
-</dd><dt class="property-required"
+    <dd>Index dimension family.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2512,8 +2723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2531,8 +2741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2540,8 +2749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2555,8 +2763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2564,8 +2771,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2579,8 +2807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2588,8 +2815,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2603,8 +2829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2612,8 +2837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2627,8 +2851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2636,8 +2859,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2651,8 +2873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2660,8 +2881,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2679,8 +2899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="key_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -2688,8 +2907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2697,8 +2915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2712,8 +2929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="key_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -2721,8 +2937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2730,8 +2945,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="advise_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#advise_hcl" style="color: inherit; text-decoration: inherit;">advise</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2745,8 +2989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="key_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2754,8 +2997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2763,8 +3005,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2778,8 +3019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="key_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2787,8 +3027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2796,8 +3035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2811,8 +3049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2820,8 +3057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2829,8 +3065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2844,8 +3079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configuration processing recommendations.</p>
-</dd><dt class="property-required"
+    <dd>Configuration processing recommendations.</dd><dt class="property-required"
             title="Required">
         <span id="key_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2853,8 +3087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key.</p>
-</dd><dt class="property-required"
+    <dd>Key.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2862,8 +3095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2878,7 +3110,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getAccounts"
 title_tag: "tencentcloud.Mariadb.getAccounts"
-meta_desc: "Documentation for the tencentcloud.Mariadb.getAccounts function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of mariadb accounts"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query detailed information of mariadb accounts
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const accounts = tencentcloud.Mariadb.getAccounts({
+const accounts = tencentcloud.mariadb.getAccounts({
     instanceId: "tdsql-4pzs5b67",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-accounts = tencentcloud.Mariadb.get_accounts(instance_id="tdsql-4pzs5b67")
+accounts = tencentcloud.mariadb.get_accounts(instance_id="tdsql-4pzs5b67")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mariadb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := mariadb.GetAccounts(ctx, &mariadb.GetAccountsArgs{
+			InstanceId: "tdsql-4pzs5b67",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Mariadb.GetAccounts(ctx, &mariadb.GetAccountsArgs{
-			InstanceId: "tdsql-4pzs5b67",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Mariadb.MariadbFunctions;
 import com.pulumi.tencentcloud.Mariadb.inputs.GetAccountsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   accounts:
     fn::invoke:
-      Function: tencentcloud:Mariadb:getAccounts
-      Arguments:
+      function: tencentcloud:Mariadb:getAccounts
+      arguments:
         instanceId: tdsql-4pzs5b67
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_mariadb_getaccounts" "accounts" {
+  instance_id = "tdsql-4pzs5b67"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/237/16167)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getAccounts<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccountsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>></span
+><span class="k">function </span>getAccounts<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccountsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>></span
 ><span class="k">
-function </span>getAccountsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccountsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>></span
+function </span>getAccountsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccountsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -138,9 +195,9 @@ function </span>getAccountsOutput<span class="p">(</span><span class="nx">args</
                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetAccountsResult</span
 ><span class="k">
-def </span>get_accounts_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAccountsResult]</span
+def </span>get_accounts_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAccountsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,7 +222,8 @@ func </span>GetAccountsOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetAccounts </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetAccountsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAccountsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAccountsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAccountsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,7 +232,8 @@ func </span>GetAccountsOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>> </span>getAccounts<span class="p">(</span><span class="nx">GetAccountsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>> </span>getAccounts<span class="p">(</span><span class="nx">GetAccountsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>> </span>getAccounts<span class="p">(</span><span class="nx">GetAccountsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,6 +245,15 @@ func </span>GetAccountsOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Mariadb/getAccounts:getAccounts
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_mariadb_get_accounts&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -204,8 +272,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -213,8 +280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +294,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -237,8 +302,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -261,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -276,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -285,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -309,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -333,8 +412,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -374,8 +451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccountslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mariadb.<wbr>Outputs.<wbr>Get<wbr>Accounts<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>account list.</p>
-</dd><dt class="property-"
+    <dd>account list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -397,8 +473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -414,11 +489,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccountslist">[]Get<wbr>Accounts<wbr>List</a></span>
     </dt>
-    <dd><p>account list.</p>
-</dd><dt class="property-"
+    <dd>account list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getaccountslist">list(object)</a></span>
+    </dt>
+    <dd>account list.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -437,8 +549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -454,8 +565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccountslist">List&lt;Get<wbr>Accounts<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>account list.</p>
-</dd><dt class="property-"
+    <dd>account list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -477,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -494,8 +603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccountslist">Get<wbr>Accounts<wbr>List[]</a></span>
     </dt>
-    <dd><p>account list.</p>
-</dd><dt class="property-"
+    <dd>account list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -517,8 +625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -532,10 +639,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getaccountslist">Get<wbr>Accounts<wbr>List]</a></span>
+        <span class="property-type"><a href="#getaccountslist">Sequence[Get<wbr>Accounts<wbr>List]</a></span>
     </dt>
-    <dd><p>account list.</p>
-</dd><dt class="property-"
+    <dd>account list.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -557,8 +663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -574,8 +679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccountslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>account list.</p>
-</dd><dt class="property-"
+    <dd>account list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -607,8 +711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-required"
+    <dd>creation time.</dd><dt class="property-required"
             title="Required">
         <span id="delaythresh_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delaythresh_csharp" style="color: inherit; text-decoration: inherit;">Delay<wbr>Thresh</a>
@@ -616,8 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>This field is meaningful for read-only accounts, indicating that the standby machine with the active-standby delay less than this value is selected.</p>
-</dd><dt class="property-required"
+    <dd>This field is meaningful for read-only accounts, indicating that the standby machine with the active-standby delay less than this value is selected.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -625,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User remarks.</p>
-</dd><dt class="property-required"
+    <dd>User remarks.</dd><dt class="property-required"
             title="Required">
         <span id="host_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_csharp" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -634,8 +735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host from which the user can log in (corresponding to the host field of MySQL users, UserName + Host uniquely identifies a user, in the form of IP, and the IP segment ends with %; supports filling in %; if it is empty, it defaults to %).</p>
-</dd><dt class="property-required"
+    <dd>The host from which the user can log in (corresponding to the host field of MySQL users, UserName + Host uniquely identifies a user, in the form of IP, and the IP segment ends with %; supports filling in %; if it is empty, it defaults to %).</dd><dt class="property-required"
             title="Required">
         <span id="readonly_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonly_csharp" style="color: inherit; text-decoration: inherit;">Read<wbr>Only</a>
@@ -643,8 +743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Read-only flag, <code>0</code>: No, <code>1</code>: The SQL request of this account is preferentially executed on the standby machine, and the host machine is selected for execution when the standby machine is unavailable, <code>2</code>: The standby machine is preferentially selected for execution, and the operation fails when the standby machine is unavailable.</p>
-</dd><dt class="property-required"
+    <dd>Read-only flag, <code>0</code>: No, <code>1</code>: The SQL request of this account is preferentially executed on the standby machine, and the host machine is selected for execution when the standby machine is unavailable, <code>2</code>: The standby machine is preferentially selected for execution, and the operation fails when the standby machine is unavailable.</dd><dt class="property-required"
             title="Required">
         <span id="slaveconst_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slaveconst_csharp" style="color: inherit; text-decoration: inherit;">Slave<wbr>Const</a>
@@ -652,8 +751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>For read-only accounts, set whether the policy is to fix the standby machine, <code>0</code>: The standby machine is not fixed, that is, the standby machine does not meet the conditions and will not disconnect from the client, and the Proxy selects other available standby machines, <code>1</code>: The standby machine does not meet the conditions Disconnect, make sure one connection secures the standby.</p>
-</dd><dt class="property-required"
+    <dd>For read-only accounts, set whether the policy is to fix the standby machine, <code>0</code>: The standby machine is not fixed, that is, the standby machine does not meet the conditions and will not disconnect from the client, and the Proxy selects other available standby machines, <code>1</code>: The standby machine does not meet the conditions Disconnect, make sure one connection secures the standby.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -661,8 +759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd><dt class="property-required"
+    <dd>Update time.</dd><dt class="property-required"
             title="Required">
         <span id="username_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -670,8 +767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>username.</p>
-</dd></dl>
+    <dd>username.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -685,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-required"
+    <dd>creation time.</dd><dt class="property-required"
             title="Required">
         <span id="delaythresh_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delaythresh_go" style="color: inherit; text-decoration: inherit;">Delay<wbr>Thresh</a>
@@ -694,8 +789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>This field is meaningful for read-only accounts, indicating that the standby machine with the active-standby delay less than this value is selected.</p>
-</dd><dt class="property-required"
+    <dd>This field is meaningful for read-only accounts, indicating that the standby machine with the active-standby delay less than this value is selected.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -703,8 +797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User remarks.</p>
-</dd><dt class="property-required"
+    <dd>User remarks.</dd><dt class="property-required"
             title="Required">
         <span id="host_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_go" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -712,8 +805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host from which the user can log in (corresponding to the host field of MySQL users, UserName + Host uniquely identifies a user, in the form of IP, and the IP segment ends with %; supports filling in %; if it is empty, it defaults to %).</p>
-</dd><dt class="property-required"
+    <dd>The host from which the user can log in (corresponding to the host field of MySQL users, UserName + Host uniquely identifies a user, in the form of IP, and the IP segment ends with %; supports filling in %; if it is empty, it defaults to %).</dd><dt class="property-required"
             title="Required">
         <span id="readonly_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonly_go" style="color: inherit; text-decoration: inherit;">Read<wbr>Only</a>
@@ -721,8 +813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Read-only flag, <code>0</code>: No, <code>1</code>: The SQL request of this account is preferentially executed on the standby machine, and the host machine is selected for execution when the standby machine is unavailable, <code>2</code>: The standby machine is preferentially selected for execution, and the operation fails when the standby machine is unavailable.</p>
-</dd><dt class="property-required"
+    <dd>Read-only flag, <code>0</code>: No, <code>1</code>: The SQL request of this account is preferentially executed on the standby machine, and the host machine is selected for execution when the standby machine is unavailable, <code>2</code>: The standby machine is preferentially selected for execution, and the operation fails when the standby machine is unavailable.</dd><dt class="property-required"
             title="Required">
         <span id="slaveconst_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slaveconst_go" style="color: inherit; text-decoration: inherit;">Slave<wbr>Const</a>
@@ -730,8 +821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>For read-only accounts, set whether the policy is to fix the standby machine, <code>0</code>: The standby machine is not fixed, that is, the standby machine does not meet the conditions and will not disconnect from the client, and the Proxy selects other available standby machines, <code>1</code>: The standby machine does not meet the conditions Disconnect, make sure one connection secures the standby.</p>
-</dd><dt class="property-required"
+    <dd>For read-only accounts, set whether the policy is to fix the standby machine, <code>0</code>: The standby machine is not fixed, that is, the standby machine does not meet the conditions and will not disconnect from the client, and the Proxy selects other available standby machines, <code>1</code>: The standby machine does not meet the conditions Disconnect, make sure one connection secures the standby.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -739,8 +829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd><dt class="property-required"
+    <dd>Update time.</dd><dt class="property-required"
             title="Required">
         <span id="username_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_go" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -748,8 +837,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>username.</p>
-</dd></dl>
+    <dd>username.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>creation time.</dd><dt class="property-required"
+            title="Required">
+        <span id="delay_thresh_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delay_thresh_hcl" style="color: inherit; text-decoration: inherit;">delay_<wbr>thresh</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>This field is meaningful for read-only accounts, indicating that the standby machine with the active-standby delay less than this value is selected.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User remarks.</dd><dt class="property-required"
+            title="Required">
+        <span id="host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The host from which the user can log in (corresponding to the host field of MySQL users, UserName + Host uniquely identifies a user, in the form of IP, and the IP segment ends with %; supports filling in %; if it is empty, it defaults to %).</dd><dt class="property-required"
+            title="Required">
+        <span id="read_only_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#read_only_hcl" style="color: inherit; text-decoration: inherit;">read_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Read-only flag, <code>0</code>: No, <code>1</code>: The SQL request of this account is preferentially executed on the standby machine, and the host machine is selected for execution when the standby machine is unavailable, <code>2</code>: The standby machine is preferentially selected for execution, and the operation fails when the standby machine is unavailable.</dd><dt class="property-required"
+            title="Required">
+        <span id="slave_const_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slave_const_hcl" style="color: inherit; text-decoration: inherit;">slave_<wbr>const</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>For read-only accounts, set whether the policy is to fix the standby machine, <code>0</code>: The standby machine is not fixed, that is, the standby machine does not meet the conditions and will not disconnect from the client, and the Proxy selects other available standby machines, <code>1</code>: The standby machine does not meet the conditions Disconnect, make sure one connection secures the standby.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Update time.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>username.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -763,8 +921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-required"
+    <dd>creation time.</dd><dt class="property-required"
             title="Required">
         <span id="delaythresh_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delaythresh_java" style="color: inherit; text-decoration: inherit;">delay<wbr>Thresh</a>
@@ -772,8 +929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>This field is meaningful for read-only accounts, indicating that the standby machine with the active-standby delay less than this value is selected.</p>
-</dd><dt class="property-required"
+    <dd>This field is meaningful for read-only accounts, indicating that the standby machine with the active-standby delay less than this value is selected.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -781,8 +937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User remarks.</p>
-</dd><dt class="property-required"
+    <dd>User remarks.</dd><dt class="property-required"
             title="Required">
         <span id="host_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_java" style="color: inherit; text-decoration: inherit;">host</a>
@@ -790,8 +945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The host from which the user can log in (corresponding to the host field of MySQL users, UserName + Host uniquely identifies a user, in the form of IP, and the IP segment ends with %; supports filling in %; if it is empty, it defaults to %).</p>
-</dd><dt class="property-required"
+    <dd>The host from which the user can log in (corresponding to the host field of MySQL users, UserName + Host uniquely identifies a user, in the form of IP, and the IP segment ends with %; supports filling in %; if it is empty, it defaults to %).</dd><dt class="property-required"
             title="Required">
         <span id="readonly_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonly_java" style="color: inherit; text-decoration: inherit;">read<wbr>Only</a>
@@ -799,8 +953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Read-only flag, <code>0</code>: No, <code>1</code>: The SQL request of this account is preferentially executed on the standby machine, and the host machine is selected for execution when the standby machine is unavailable, <code>2</code>: The standby machine is preferentially selected for execution, and the operation fails when the standby machine is unavailable.</p>
-</dd><dt class="property-required"
+    <dd>Read-only flag, <code>0</code>: No, <code>1</code>: The SQL request of this account is preferentially executed on the standby machine, and the host machine is selected for execution when the standby machine is unavailable, <code>2</code>: The standby machine is preferentially selected for execution, and the operation fails when the standby machine is unavailable.</dd><dt class="property-required"
             title="Required">
         <span id="slaveconst_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slaveconst_java" style="color: inherit; text-decoration: inherit;">slave<wbr>Const</a>
@@ -808,8 +961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>For read-only accounts, set whether the policy is to fix the standby machine, <code>0</code>: The standby machine is not fixed, that is, the standby machine does not meet the conditions and will not disconnect from the client, and the Proxy selects other available standby machines, <code>1</code>: The standby machine does not meet the conditions Disconnect, make sure one connection secures the standby.</p>
-</dd><dt class="property-required"
+    <dd>For read-only accounts, set whether the policy is to fix the standby machine, <code>0</code>: The standby machine is not fixed, that is, the standby machine does not meet the conditions and will not disconnect from the client, and the Proxy selects other available standby machines, <code>1</code>: The standby machine does not meet the conditions Disconnect, make sure one connection secures the standby.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -817,8 +969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd><dt class="property-required"
+    <dd>Update time.</dd><dt class="property-required"
             title="Required">
         <span id="username_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_java" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -826,8 +977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>username.</p>
-</dd></dl>
+    <dd>username.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -841,8 +991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-required"
+    <dd>creation time.</dd><dt class="property-required"
             title="Required">
         <span id="delaythresh_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delaythresh_nodejs" style="color: inherit; text-decoration: inherit;">delay<wbr>Thresh</a>
@@ -850,8 +999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>This field is meaningful for read-only accounts, indicating that the standby machine with the active-standby delay less than this value is selected.</p>
-</dd><dt class="property-required"
+    <dd>This field is meaningful for read-only accounts, indicating that the standby machine with the active-standby delay less than this value is selected.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -859,8 +1007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User remarks.</p>
-</dd><dt class="property-required"
+    <dd>User remarks.</dd><dt class="property-required"
             title="Required">
         <span id="host_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_nodejs" style="color: inherit; text-decoration: inherit;">host</a>
@@ -868,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host from which the user can log in (corresponding to the host field of MySQL users, UserName + Host uniquely identifies a user, in the form of IP, and the IP segment ends with %; supports filling in %; if it is empty, it defaults to %).</p>
-</dd><dt class="property-required"
+    <dd>The host from which the user can log in (corresponding to the host field of MySQL users, UserName + Host uniquely identifies a user, in the form of IP, and the IP segment ends with %; supports filling in %; if it is empty, it defaults to %).</dd><dt class="property-required"
             title="Required">
         <span id="readonly_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonly_nodejs" style="color: inherit; text-decoration: inherit;">read<wbr>Only</a>
@@ -877,8 +1023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Read-only flag, <code>0</code>: No, <code>1</code>: The SQL request of this account is preferentially executed on the standby machine, and the host machine is selected for execution when the standby machine is unavailable, <code>2</code>: The standby machine is preferentially selected for execution, and the operation fails when the standby machine is unavailable.</p>
-</dd><dt class="property-required"
+    <dd>Read-only flag, <code>0</code>: No, <code>1</code>: The SQL request of this account is preferentially executed on the standby machine, and the host machine is selected for execution when the standby machine is unavailable, <code>2</code>: The standby machine is preferentially selected for execution, and the operation fails when the standby machine is unavailable.</dd><dt class="property-required"
             title="Required">
         <span id="slaveconst_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slaveconst_nodejs" style="color: inherit; text-decoration: inherit;">slave<wbr>Const</a>
@@ -886,8 +1031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>For read-only accounts, set whether the policy is to fix the standby machine, <code>0</code>: The standby machine is not fixed, that is, the standby machine does not meet the conditions and will not disconnect from the client, and the Proxy selects other available standby machines, <code>1</code>: The standby machine does not meet the conditions Disconnect, make sure one connection secures the standby.</p>
-</dd><dt class="property-required"
+    <dd>For read-only accounts, set whether the policy is to fix the standby machine, <code>0</code>: The standby machine is not fixed, that is, the standby machine does not meet the conditions and will not disconnect from the client, and the Proxy selects other available standby machines, <code>1</code>: The standby machine does not meet the conditions Disconnect, make sure one connection secures the standby.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -895,8 +1039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd><dt class="property-required"
+    <dd>Update time.</dd><dt class="property-required"
             title="Required">
         <span id="username_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -904,8 +1047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>username.</p>
-</dd></dl>
+    <dd>username.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -919,8 +1061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-required"
+    <dd>creation time.</dd><dt class="property-required"
             title="Required">
         <span id="delay_thresh_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delay_thresh_python" style="color: inherit; text-decoration: inherit;">delay_<wbr>thresh</a>
@@ -928,8 +1069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>This field is meaningful for read-only accounts, indicating that the standby machine with the active-standby delay less than this value is selected.</p>
-</dd><dt class="property-required"
+    <dd>This field is meaningful for read-only accounts, indicating that the standby machine with the active-standby delay less than this value is selected.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -937,8 +1077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User remarks.</p>
-</dd><dt class="property-required"
+    <dd>User remarks.</dd><dt class="property-required"
             title="Required">
         <span id="host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_python" style="color: inherit; text-decoration: inherit;">host</a>
@@ -946,8 +1085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The host from which the user can log in (corresponding to the host field of MySQL users, UserName + Host uniquely identifies a user, in the form of IP, and the IP segment ends with %; supports filling in %; if it is empty, it defaults to %).</p>
-</dd><dt class="property-required"
+    <dd>The host from which the user can log in (corresponding to the host field of MySQL users, UserName + Host uniquely identifies a user, in the form of IP, and the IP segment ends with %; supports filling in %; if it is empty, it defaults to %).</dd><dt class="property-required"
             title="Required">
         <span id="read_only_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#read_only_python" style="color: inherit; text-decoration: inherit;">read_<wbr>only</a>
@@ -955,8 +1093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Read-only flag, <code>0</code>: No, <code>1</code>: The SQL request of this account is preferentially executed on the standby machine, and the host machine is selected for execution when the standby machine is unavailable, <code>2</code>: The standby machine is preferentially selected for execution, and the operation fails when the standby machine is unavailable.</p>
-</dd><dt class="property-required"
+    <dd>Read-only flag, <code>0</code>: No, <code>1</code>: The SQL request of this account is preferentially executed on the standby machine, and the host machine is selected for execution when the standby machine is unavailable, <code>2</code>: The standby machine is preferentially selected for execution, and the operation fails when the standby machine is unavailable.</dd><dt class="property-required"
             title="Required">
         <span id="slave_const_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slave_const_python" style="color: inherit; text-decoration: inherit;">slave_<wbr>const</a>
@@ -964,8 +1101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>For read-only accounts, set whether the policy is to fix the standby machine, <code>0</code>: The standby machine is not fixed, that is, the standby machine does not meet the conditions and will not disconnect from the client, and the Proxy selects other available standby machines, <code>1</code>: The standby machine does not meet the conditions Disconnect, make sure one connection secures the standby.</p>
-</dd><dt class="property-required"
+    <dd>For read-only accounts, set whether the policy is to fix the standby machine, <code>0</code>: The standby machine is not fixed, that is, the standby machine does not meet the conditions and will not disconnect from the client, and the Proxy selects other available standby machines, <code>1</code>: The standby machine does not meet the conditions Disconnect, make sure one connection secures the standby.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -973,8 +1109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd><dt class="property-required"
+    <dd>Update time.</dd><dt class="property-required"
             title="Required">
         <span id="user_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_python" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
@@ -982,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>username.</p>
-</dd></dl>
+    <dd>username.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -997,8 +1131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-required"
+    <dd>creation time.</dd><dt class="property-required"
             title="Required">
         <span id="delaythresh_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delaythresh_yaml" style="color: inherit; text-decoration: inherit;">delay<wbr>Thresh</a>
@@ -1006,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>This field is meaningful for read-only accounts, indicating that the standby machine with the active-standby delay less than this value is selected.</p>
-</dd><dt class="property-required"
+    <dd>This field is meaningful for read-only accounts, indicating that the standby machine with the active-standby delay less than this value is selected.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1015,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User remarks.</p>
-</dd><dt class="property-required"
+    <dd>User remarks.</dd><dt class="property-required"
             title="Required">
         <span id="host_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_yaml" style="color: inherit; text-decoration: inherit;">host</a>
@@ -1024,8 +1155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The host from which the user can log in (corresponding to the host field of MySQL users, UserName + Host uniquely identifies a user, in the form of IP, and the IP segment ends with %; supports filling in %; if it is empty, it defaults to %).</p>
-</dd><dt class="property-required"
+    <dd>The host from which the user can log in (corresponding to the host field of MySQL users, UserName + Host uniquely identifies a user, in the form of IP, and the IP segment ends with %; supports filling in %; if it is empty, it defaults to %).</dd><dt class="property-required"
             title="Required">
         <span id="readonly_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonly_yaml" style="color: inherit; text-decoration: inherit;">read<wbr>Only</a>
@@ -1033,8 +1163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Read-only flag, <code>0</code>: No, <code>1</code>: The SQL request of this account is preferentially executed on the standby machine, and the host machine is selected for execution when the standby machine is unavailable, <code>2</code>: The standby machine is preferentially selected for execution, and the operation fails when the standby machine is unavailable.</p>
-</dd><dt class="property-required"
+    <dd>Read-only flag, <code>0</code>: No, <code>1</code>: The SQL request of this account is preferentially executed on the standby machine, and the host machine is selected for execution when the standby machine is unavailable, <code>2</code>: The standby machine is preferentially selected for execution, and the operation fails when the standby machine is unavailable.</dd><dt class="property-required"
             title="Required">
         <span id="slaveconst_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slaveconst_yaml" style="color: inherit; text-decoration: inherit;">slave<wbr>Const</a>
@@ -1042,8 +1171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>For read-only accounts, set whether the policy is to fix the standby machine, <code>0</code>: The standby machine is not fixed, that is, the standby machine does not meet the conditions and will not disconnect from the client, and the Proxy selects other available standby machines, <code>1</code>: The standby machine does not meet the conditions Disconnect, make sure one connection secures the standby.</p>
-</dd><dt class="property-required"
+    <dd>For read-only accounts, set whether the policy is to fix the standby machine, <code>0</code>: The standby machine is not fixed, that is, the standby machine does not meet the conditions and will not disconnect from the client, and the Proxy selects other available standby machines, <code>1</code>: The standby machine does not meet the conditions Disconnect, make sure one connection secures the standby.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1051,8 +1179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd><dt class="property-required"
+    <dd>Update time.</dd><dt class="property-required"
             title="Required">
         <span id="username_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -1060,8 +1187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>username.</p>
-</dd></dl>
+    <dd>username.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1076,7 +1202,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

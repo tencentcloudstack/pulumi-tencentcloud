@@ -2,9 +2,11 @@
 ---
 title: "getPolicyConditions"
 title_tag: "tencentcloud.Monitor.getPolicyConditions"
-meta_desc: "Documentation for the tencentcloud.Monitor.getPolicyConditions function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query monitor policy conditions(There is a lot of data and it is recommended to output to a file)"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,28 +18,69 @@ Use this data source to query monitor policy conditions(There is a lot of data a
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const monitorPolicyConditions = tencentcloud.Monitor.getPolicyConditions({
+const monitorPolicyConditions = tencentcloud.monitor.getPolicyConditions({
     name: "Cloud Virtual Machine",
     resultOutputFile: "./tencentcloud_monitor_policy_conditions.txt",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-monitor_policy_conditions = tencentcloud.Monitor.get_policy_conditions(name="Cloud Virtual Machine",
+monitor_policy_conditions = tencentcloud.monitor.get_policy_conditions(name="Cloud Virtual Machine",
     result_output_file="./tencentcloud_monitor_policy_conditions.txt")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := monitor.GetPolicyConditions(ctx, &monitor.GetPolicyConditionsArgs{
+			Name:             pulumi.StringRef("Cloud Virtual Machine"),
+			ResultOutputFile: pulumi.StringRef("./tencentcloud_monitor_policy_conditions.txt"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,27 +92,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Monitor.GetPolicyConditions(ctx, &monitor.GetPolicyConditionsArgs{
-			Name:             pulumi.StringRef("Cloud Virtual Machine"),
-			ResultOutputFile: pulumi.StringRef("./tencentcloud_monitor_policy_conditions.txt"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Monitor.MonitorFunctions;
 import com.pulumi.tencentcloud.Monitor.inputs.GetPolicyConditionsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,48 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   monitorPolicyConditions:
     fn::invoke:
-      Function: tencentcloud:Monitor:getPolicyConditions
-      Arguments:
+      function: tencentcloud:Monitor:getPolicyConditions
+      arguments:
         name: Cloud Virtual Machine
         resultOutputFile: ./tencentcloud_monitor_policy_conditions.txt
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_monitor_getpolicyconditions" "monitorPolicyConditions" {
+  name               = "Cloud Virtual Machine"
+  result_output_file = "./tencentcloud_monitor_policy_conditions.txt"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribePolicyConditionList](https://www.tencentcloud.com/document/api/248/35979)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getPolicyConditions<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPolicyConditionsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPolicyConditionsResult</a></span>></span
+><span class="k">function </span>getPolicyConditions<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPolicyConditionsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPolicyConditionsResult</a></span>></span
 ><span class="k">
-function </span>getPolicyConditionsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPolicyConditionsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPolicyConditionsResult</a></span>></span
+function </span>getPolicyConditionsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPolicyConditionsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPolicyConditionsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -144,9 +202,9 @@ function </span>getPolicyConditionsOutput<span class="p">(</span><span class="nx
                           <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetPolicyConditionsResult</span
 ><span class="k">
-def </span>get_policy_conditions_output<span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPolicyConditionsResult]</span
+def </span>get_policy_conditions_output<span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPolicyConditionsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -171,7 +229,8 @@ func </span>GetPolicyConditionsOutput<span class="p">(</span><span class="nx">ct
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetPolicyConditions </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetPolicyConditionsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetPolicyConditionsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetPolicyConditionsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPolicyConditionsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPolicyConditionsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPolicyConditionsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPolicyConditionsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPolicyConditionsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -180,7 +239,8 @@ func </span>GetPolicyConditionsOutput<span class="p">(</span><span class="nx">ct
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetPolicyConditionsResult</a></span>> </span>getPolicyConditions<span class="p">(</span><span class="nx">GetPolicyConditionsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPolicyConditionsResult</a></span>> </span>getPolicyConditions<span class="p">(</span><span class="nx">GetPolicyConditionsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPolicyConditionsResult</a></span>> </span>getPolicyConditions<span class="p">(</span><span class="nx">GetPolicyConditionsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -192,6 +252,15 @@ func </span>GetPolicyConditionsOutput<span class="p">(</span><span class="nx">ct
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Monitor/getPolicyConditions:getPolicyConditions
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_monitor_get_policy_conditions&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -210,8 +279,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -219,8 +287,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -234,8 +301,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -243,8 +309,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -258,8 +345,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -267,8 +353,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -282,8 +367,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -291,8 +375,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -306,8 +389,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -315,8 +397,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -330,8 +411,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -339,8 +419,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -363,8 +442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -372,8 +450,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicyconditionslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Outputs.<wbr>Get<wbr>Policy<wbr>Conditions<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list policy condition. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list policy condition. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -381,8 +458,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of this policy name.</p>
-</dd><dt class="property-"
+    <dd>Name of this policy name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -404,8 +480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -413,8 +488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicyconditionslist">[]Get<wbr>Policy<wbr>Conditions<wbr>List</a></span>
     </dt>
-    <dd><p>A list policy condition. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list policy condition. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -422,11 +496,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of this policy name.</p>
-</dd><dt class="property-"
+    <dd>Name of this policy name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpolicyconditionslist">list(object)</a></span>
+    </dt>
+    <dd>A list policy condition. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of this policy name.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -445,8 +556,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -454,8 +564,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicyconditionslist">List&lt;Get<wbr>Policy<wbr>Conditions<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list policy condition. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list policy condition. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -463,8 +572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of this policy name.</p>
-</dd><dt class="property-"
+    <dd>Name of this policy name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -486,8 +594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -495,8 +602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicyconditionslist">Get<wbr>Policy<wbr>Conditions<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list policy condition. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list policy condition. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -504,8 +610,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of this policy name.</p>
-</dd><dt class="property-"
+    <dd>Name of this policy name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -527,17 +632,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getpolicyconditionslist">Get<wbr>Policy<wbr>Conditions<wbr>List]</a></span>
+        <span class="property-type"><a href="#getpolicyconditionslist">Sequence[Get<wbr>Policy<wbr>Conditions<wbr>List]</a></span>
     </dt>
-    <dd><p>A list policy condition. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list policy condition. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -545,8 +648,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of this policy name.</p>
-</dd><dt class="property-"
+    <dd>Name of this policy name.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -568,8 +670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -577,8 +678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicyconditionslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list policy condition. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list policy condition. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -586,8 +686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of this policy name.</p>
-</dd><dt class="property-"
+    <dd>Name of this policy name.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -619,8 +718,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicyconditionslisteventmetric">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Get<wbr>Policy<wbr>Conditions<wbr>List<wbr>Event<wbr>Metric&gt;</a></span>
     </dt>
-    <dd><p>A list of event condition metrics. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event condition metrics. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="issupportmultiregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issupportmultiregion_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Support<wbr>Multi<wbr>Region</a>
@@ -628,8 +726,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to support multi region.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support multi region.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_csharp" style="color: inherit; text-decoration: inherit;">Metrics</a>
@@ -637,8 +734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicyconditionslistmetric">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Get<wbr>Policy<wbr>Conditions<wbr>List<wbr>Metric&gt;</a></span>
     </dt>
-    <dd><p>A list of event condition metrics. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event condition metrics. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -646,8 +742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</dd><dt class="property-required"
             title="Required">
         <span id="policyviewname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyviewname_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>View<wbr>Name</a>
@@ -655,8 +750,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy view name, eg:<code>cvm_device</code>,<code>BANDWIDTHPACKAGE</code>, refer to <code>data.tencentcloud_monitor_policy_conditions(policy_view_name)</code>.</p>
-</dd><dt class="property-required"
+    <dd>Policy view name, eg:<code>cvmDevice</code>,<code>BANDWIDTHPACKAGE</code>, refer to <code>data.tencentcloud_monitor_policy_conditions(policy_view_name)</code>.</dd><dt class="property-required"
             title="Required">
         <span id="supportregions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportregions_csharp" style="color: inherit; text-decoration: inherit;">Support<wbr>Regions</a>
@@ -664,8 +758,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Support regions of this policy view.</p>
-</dd></dl>
+    <dd>Support regions of this policy view.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -679,8 +772,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicyconditionslisteventmetric">[]Get<wbr>Policy<wbr>Conditions<wbr>List<wbr>Event<wbr>Metric</a></span>
     </dt>
-    <dd><p>A list of event condition metrics. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event condition metrics. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="issupportmultiregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issupportmultiregion_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Support<wbr>Multi<wbr>Region</a>
@@ -688,8 +780,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to support multi region.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support multi region.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_go" style="color: inherit; text-decoration: inherit;">Metrics</a>
@@ -697,8 +788,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicyconditionslistmetric">[]Get<wbr>Policy<wbr>Conditions<wbr>List<wbr>Metric</a></span>
     </dt>
-    <dd><p>A list of event condition metrics. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event condition metrics. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -706,8 +796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</dd><dt class="property-required"
             title="Required">
         <span id="policyviewname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyviewname_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>View<wbr>Name</a>
@@ -715,8 +804,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy view name, eg:<code>cvm_device</code>,<code>BANDWIDTHPACKAGE</code>, refer to <code>data.tencentcloud_monitor_policy_conditions(policy_view_name)</code>.</p>
-</dd><dt class="property-required"
+    <dd>Policy view name, eg:<code>cvmDevice</code>,<code>BANDWIDTHPACKAGE</code>, refer to <code>data.tencentcloud_monitor_policy_conditions(policy_view_name)</code>.</dd><dt class="property-required"
             title="Required">
         <span id="supportregions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportregions_go" style="color: inherit; text-decoration: inherit;">Support<wbr>Regions</a>
@@ -724,8 +812,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Support regions of this policy view.</p>
-</dd></dl>
+    <dd>Support regions of this policy view.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="event_metrics_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_metrics_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>metrics</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpolicyconditionslisteventmetric">list(object)</a></span>
+    </dt>
+    <dd>A list of event condition metrics. Each element contains the following attributes:</dd><dt class="property-required"
+            title="Required">
+        <span id="is_support_multi_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_support_multi_region_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>support_<wbr>multi_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to support multi region.</dd><dt class="property-required"
+            title="Required">
+        <span id="metrics_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_hcl" style="color: inherit; text-decoration: inherit;">metrics</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpolicyconditionslistmetric">list(object)</a></span>
+    </dt>
+    <dd>A list of event condition metrics. Each element contains the following attributes:</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="policy_view_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_view_name_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>view_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy view name, eg:<code>cvmDevice</code>,<code>BANDWIDTHPACKAGE</code>, refer to <code>data.tencentcloud_monitor_policy_conditions(policy_view_name)</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="support_regions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_regions_hcl" style="color: inherit; text-decoration: inherit;">support_<wbr>regions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Support regions of this policy view.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -739,8 +880,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicyconditionslisteventmetric">List&lt;Get<wbr>Policy<wbr>Conditions<wbr>List<wbr>Event<wbr>Metric&gt;</a></span>
     </dt>
-    <dd><p>A list of event condition metrics. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event condition metrics. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="issupportmultiregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issupportmultiregion_java" style="color: inherit; text-decoration: inherit;">is<wbr>Support<wbr>Multi<wbr>Region</a>
@@ -748,8 +888,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to support multi region.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support multi region.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_java" style="color: inherit; text-decoration: inherit;">metrics</a>
@@ -757,8 +896,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicyconditionslistmetric">List&lt;Get<wbr>Policy<wbr>Conditions<wbr>List<wbr>Metric&gt;</a></span>
     </dt>
-    <dd><p>A list of event condition metrics. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event condition metrics. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -766,8 +904,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</dd><dt class="property-required"
             title="Required">
         <span id="policyviewname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyviewname_java" style="color: inherit; text-decoration: inherit;">policy<wbr>View<wbr>Name</a>
@@ -775,8 +912,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy view name, eg:<code>cvm_device</code>,<code>BANDWIDTHPACKAGE</code>, refer to <code>data.tencentcloud_monitor_policy_conditions(policy_view_name)</code>.</p>
-</dd><dt class="property-required"
+    <dd>Policy view name, eg:<code>cvmDevice</code>,<code>BANDWIDTHPACKAGE</code>, refer to <code>data.tencentcloud_monitor_policy_conditions(policy_view_name)</code>.</dd><dt class="property-required"
             title="Required">
         <span id="supportregions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportregions_java" style="color: inherit; text-decoration: inherit;">support<wbr>Regions</a>
@@ -784,8 +920,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Support regions of this policy view.</p>
-</dd></dl>
+    <dd>Support regions of this policy view.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -799,8 +934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicyconditionslisteventmetric">Get<wbr>Policy<wbr>Conditions<wbr>List<wbr>Event<wbr>Metric[]</a></span>
     </dt>
-    <dd><p>A list of event condition metrics. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event condition metrics. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="issupportmultiregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issupportmultiregion_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Support<wbr>Multi<wbr>Region</a>
@@ -808,8 +942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to support multi region.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support multi region.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_nodejs" style="color: inherit; text-decoration: inherit;">metrics</a>
@@ -817,8 +950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicyconditionslistmetric">Get<wbr>Policy<wbr>Conditions<wbr>List<wbr>Metric[]</a></span>
     </dt>
-    <dd><p>A list of event condition metrics. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event condition metrics. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -826,8 +958,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</dd><dt class="property-required"
             title="Required">
         <span id="policyviewname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyviewname_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>View<wbr>Name</a>
@@ -835,8 +966,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy view name, eg:<code>cvm_device</code>,<code>BANDWIDTHPACKAGE</code>, refer to <code>data.tencentcloud_monitor_policy_conditions(policy_view_name)</code>.</p>
-</dd><dt class="property-required"
+    <dd>Policy view name, eg:<code>cvmDevice</code>,<code>BANDWIDTHPACKAGE</code>, refer to <code>data.tencentcloud_monitor_policy_conditions(policy_view_name)</code>.</dd><dt class="property-required"
             title="Required">
         <span id="supportregions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportregions_nodejs" style="color: inherit; text-decoration: inherit;">support<wbr>Regions</a>
@@ -844,8 +974,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Support regions of this policy view.</p>
-</dd></dl>
+    <dd>Support regions of this policy view.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -857,10 +986,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_metrics_python" style="color: inherit; text-decoration: inherit;">event_<wbr>metrics</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getpolicyconditionslisteventmetric">Get<wbr>Policy<wbr>Conditions<wbr>List<wbr>Event<wbr>Metric]</a></span>
+        <span class="property-type"><a href="#getpolicyconditionslisteventmetric">Sequence[Get<wbr>Policy<wbr>Conditions<wbr>List<wbr>Event<wbr>Metric]</a></span>
     </dt>
-    <dd><p>A list of event condition metrics. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event condition metrics. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="is_support_multi_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_support_multi_region_python" style="color: inherit; text-decoration: inherit;">is_<wbr>support_<wbr>multi_<wbr>region</a>
@@ -868,17 +996,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to support multi region.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support multi region.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_python" style="color: inherit; text-decoration: inherit;">metrics</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getpolicyconditionslistmetric">Get<wbr>Policy<wbr>Conditions<wbr>List<wbr>Metric]</a></span>
+        <span class="property-type"><a href="#getpolicyconditionslistmetric">Sequence[Get<wbr>Policy<wbr>Conditions<wbr>List<wbr>Metric]</a></span>
     </dt>
-    <dd><p>A list of event condition metrics. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event condition metrics. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -886,8 +1012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</dd><dt class="property-required"
             title="Required">
         <span id="policy_view_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_view_name_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>view_<wbr>name</a>
@@ -895,8 +1020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy view name, eg:<code>cvm_device</code>,<code>BANDWIDTHPACKAGE</code>, refer to <code>data.tencentcloud_monitor_policy_conditions(policy_view_name)</code>.</p>
-</dd><dt class="property-required"
+    <dd>Policy view name, eg:<code>cvmDevice</code>,<code>BANDWIDTHPACKAGE</code>, refer to <code>data.tencentcloud_monitor_policy_conditions(policy_view_name)</code>.</dd><dt class="property-required"
             title="Required">
         <span id="support_regions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_regions_python" style="color: inherit; text-decoration: inherit;">support_<wbr>regions</a>
@@ -904,8 +1028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Support regions of this policy view.</p>
-</dd></dl>
+    <dd>Support regions of this policy view.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -919,8 +1042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicyconditionslisteventmetric">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of event condition metrics. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event condition metrics. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="issupportmultiregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issupportmultiregion_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Support<wbr>Multi<wbr>Region</a>
@@ -928,8 +1050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to support multi region.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support multi region.</dd><dt class="property-required"
             title="Required">
         <span id="metrics_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metrics_yaml" style="color: inherit; text-decoration: inherit;">metrics</a>
@@ -937,8 +1058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpolicyconditionslistmetric">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of event condition metrics. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>A list of event condition metrics. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -946,8 +1066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the policy name, support partial matching, eg:<code>Cloud Virtual Machine</code>,<code>Virtual</code>,<code>Cloud Load Banlancer-Private CLB Listener</code>.</dd><dt class="property-required"
             title="Required">
         <span id="policyviewname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyviewname_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>View<wbr>Name</a>
@@ -955,8 +1074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy view name, eg:<code>cvm_device</code>,<code>BANDWIDTHPACKAGE</code>, refer to <code>data.tencentcloud_monitor_policy_conditions(policy_view_name)</code>.</p>
-</dd><dt class="property-required"
+    <dd>Policy view name, eg:<code>cvmDevice</code>,<code>BANDWIDTHPACKAGE</code>, refer to <code>data.tencentcloud_monitor_policy_conditions(policy_view_name)</code>.</dd><dt class="property-required"
             title="Required">
         <span id="supportregions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportregions_yaml" style="color: inherit; text-decoration: inherit;">support<wbr>Regions</a>
@@ -964,8 +1082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Support regions of this policy view.</p>
-</dd></dl>
+    <dd>Support regions of this policy view.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -983,8 +1100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="eventshowname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventshowname_csharp" style="color: inherit; text-decoration: inherit;">Event<wbr>Show<wbr>Name</a>
@@ -992,8 +1108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="needrecovered_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needrecovered_csharp" style="color: inherit; text-decoration: inherit;">Need<wbr>Recovered</a>
@@ -1001,8 +1116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to recover.</p>
-</dd></dl>
+    <dd>Whether to recover.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1016,8 +1130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="eventshowname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventshowname_go" style="color: inherit; text-decoration: inherit;">Event<wbr>Show<wbr>Name</a>
@@ -1025,8 +1138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="needrecovered_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needrecovered_go" style="color: inherit; text-decoration: inherit;">Need<wbr>Recovered</a>
@@ -1034,8 +1146,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to recover.</p>
-</dd></dl>
+    <dd>Whether to recover.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="event_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_id_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of this event metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="event_show_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_show_name_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>show_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of this event metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="need_recovered_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#need_recovered_hcl" style="color: inherit; text-decoration: inherit;">need_<wbr>recovered</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to recover.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1049,8 +1190,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The ID of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="eventshowname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventshowname_java" style="color: inherit; text-decoration: inherit;">event<wbr>Show<wbr>Name</a>
@@ -1058,8 +1198,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="needrecovered_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needrecovered_java" style="color: inherit; text-decoration: inherit;">need<wbr>Recovered</a>
@@ -1067,8 +1206,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to recover.</p>
-</dd></dl>
+    <dd>Whether to recover.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1082,8 +1220,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The ID of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="eventshowname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventshowname_nodejs" style="color: inherit; text-decoration: inherit;">event<wbr>Show<wbr>Name</a>
@@ -1091,8 +1228,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="needrecovered_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needrecovered_nodejs" style="color: inherit; text-decoration: inherit;">need<wbr>Recovered</a>
@@ -1100,8 +1236,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to recover.</p>
-</dd></dl>
+    <dd>Whether to recover.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1115,8 +1250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="event_show_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_show_name_python" style="color: inherit; text-decoration: inherit;">event_<wbr>show_<wbr>name</a>
@@ -1124,8 +1258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="need_recovered_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#need_recovered_python" style="color: inherit; text-decoration: inherit;">need_<wbr>recovered</a>
@@ -1133,8 +1266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to recover.</p>
-</dd></dl>
+    <dd>Whether to recover.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1148,8 +1280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The ID of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="eventshowname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventshowname_yaml" style="color: inherit; text-decoration: inherit;">event<wbr>Show<wbr>Name</a>
@@ -1157,8 +1288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of this event metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this event metric.</dd><dt class="property-required"
             title="Required">
         <span id="needrecovered_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needrecovered_yaml" style="color: inherit; text-decoration: inherit;">need<wbr>Recovered</a>
@@ -1166,8 +1296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to recover.</p>
-</dd></dl>
+    <dd>Whether to recover.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1185,8 +1314,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Calculate type of this metric.</p>
-</dd><dt class="property-required"
+    <dd>Calculate type of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calctypeneed_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calctypeneed_csharp" style="color: inherit; text-decoration: inherit;">Calc<wbr>Type<wbr>Need</a>
@@ -1194,8 +1322,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether <code>calc_type</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>calcType</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluedefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluedefault_csharp" style="color: inherit; text-decoration: inherit;">Calc<wbr>Value<wbr>Default</a>
@@ -1203,8 +1330,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluefixed_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluefixed_csharp" style="color: inherit; text-decoration: inherit;">Calc<wbr>Value<wbr>Fixed</a>
@@ -1212,8 +1338,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The fixed calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluemax_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluemax_csharp" style="color: inherit; text-decoration: inherit;">Calc<wbr>Value<wbr>Max</a>
@@ -1221,8 +1346,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The max calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluemin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluemin_csharp" style="color: inherit; text-decoration: inherit;">Calc<wbr>Value<wbr>Min</a>
@@ -1230,8 +1354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The min calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The min calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvalueneed_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvalueneed_csharp" style="color: inherit; text-decoration: inherit;">Calc<wbr>Value<wbr>Need</a>
@@ -1239,8 +1362,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether <code>calc_value</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>calcValue</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="continuetimedefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetimedefault_csharp" style="color: inherit; text-decoration: inherit;">Continue<wbr>Time<wbr>Default</a>
@@ -1248,8 +1370,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The default continue time(seconds) config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default continue time(seconds) config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="continuetimekeys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetimekeys_csharp" style="color: inherit; text-decoration: inherit;">Continue<wbr>Time<wbr>Keys</a>
@@ -1257,8 +1378,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>The continue time(seconds) keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The continue time(seconds) keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="continuetimeneed_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetimeneed_csharp" style="color: inherit; text-decoration: inherit;">Continue<wbr>Time<wbr>Need</a>
@@ -1266,8 +1386,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether <code>continue_time</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>continueTime</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="metricid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricid_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Id</a>
@@ -1275,8 +1394,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricshowname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricshowname_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Show<wbr>Name</a>
@@ -1284,8 +1402,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricunit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricunit_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Unit</a>
@@ -1293,8 +1410,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The unit of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The unit of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="perioddefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#perioddefault_csharp" style="color: inherit; text-decoration: inherit;">Period<wbr>Default</a>
@@ -1302,8 +1418,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The default data time(seconds) config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default data time(seconds) config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodkeys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodkeys_csharp" style="color: inherit; text-decoration: inherit;">Period<wbr>Keys</a>
@@ -1311,8 +1426,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>The data time(seconds) keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The data time(seconds) keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodneed_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodneed_csharp" style="color: inherit; text-decoration: inherit;">Period<wbr>Need</a>
@@ -1320,8 +1434,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether <code>period</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>period</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="periodnumdefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodnumdefault_csharp" style="color: inherit; text-decoration: inherit;">Period<wbr>Num<wbr>Default</a>
@@ -1329,8 +1442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The default period number config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default period number config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodnumkeys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodnumkeys_csharp" style="color: inherit; text-decoration: inherit;">Period<wbr>Num<wbr>Keys</a>
@@ -1338,8 +1450,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>The period number keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The period number keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodnumneed_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodnumneed_csharp" style="color: inherit; text-decoration: inherit;">Period<wbr>Num<wbr>Need</a>
@@ -1347,8 +1458,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether <code>period_num</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>periodNum</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep10_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep10_csharp" style="color: inherit; text-decoration: inherit;">Stat<wbr>Type<wbr>P10</a>
@@ -1356,8 +1466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 10 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 10 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep1800_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep1800_csharp" style="color: inherit; text-decoration: inherit;">Stat<wbr>Type<wbr>P1800</a>
@@ -1365,8 +1474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 1800 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 1800 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep300_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep300_csharp" style="color: inherit; text-decoration: inherit;">Stat<wbr>Type<wbr>P300</a>
@@ -1374,8 +1482,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 300 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 300 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep3600_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep3600_csharp" style="color: inherit; text-decoration: inherit;">Stat<wbr>Type<wbr>P3600</a>
@@ -1383,8 +1490,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 3600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 3600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep5_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep5_csharp" style="color: inherit; text-decoration: inherit;">Stat<wbr>Type<wbr>P5</a>
@@ -1392,8 +1498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 5 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 5 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep60_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep60_csharp" style="color: inherit; text-decoration: inherit;">Stat<wbr>Type<wbr>P60</a>
@@ -1401,8 +1506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 60 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 60 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep600_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep600_csharp" style="color: inherit; text-decoration: inherit;">Stat<wbr>Type<wbr>P600</a>
@@ -1410,8 +1514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep86400_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep86400_csharp" style="color: inherit; text-decoration: inherit;">Stat<wbr>Type<wbr>P86400</a>
@@ -1419,8 +1522,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 86400 seconds.</p>
-</dd></dl>
+    <dd>Data aggregation mode, cycle of 86400 seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1434,8 +1536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Calculate type of this metric.</p>
-</dd><dt class="property-required"
+    <dd>Calculate type of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calctypeneed_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calctypeneed_go" style="color: inherit; text-decoration: inherit;">Calc<wbr>Type<wbr>Need</a>
@@ -1443,8 +1544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether <code>calc_type</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>calcType</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluedefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluedefault_go" style="color: inherit; text-decoration: inherit;">Calc<wbr>Value<wbr>Default</a>
@@ -1452,8 +1552,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluefixed_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluefixed_go" style="color: inherit; text-decoration: inherit;">Calc<wbr>Value<wbr>Fixed</a>
@@ -1461,8 +1560,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The fixed calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluemax_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluemax_go" style="color: inherit; text-decoration: inherit;">Calc<wbr>Value<wbr>Max</a>
@@ -1470,8 +1568,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The max calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluemin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluemin_go" style="color: inherit; text-decoration: inherit;">Calc<wbr>Value<wbr>Min</a>
@@ -1479,8 +1576,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The min calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The min calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvalueneed_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvalueneed_go" style="color: inherit; text-decoration: inherit;">Calc<wbr>Value<wbr>Need</a>
@@ -1488,8 +1584,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether <code>calc_value</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>calcValue</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="continuetimedefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetimedefault_go" style="color: inherit; text-decoration: inherit;">Continue<wbr>Time<wbr>Default</a>
@@ -1497,8 +1592,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The default continue time(seconds) config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default continue time(seconds) config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="continuetimekeys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetimekeys_go" style="color: inherit; text-decoration: inherit;">Continue<wbr>Time<wbr>Keys</a>
@@ -1506,8 +1600,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>The continue time(seconds) keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The continue time(seconds) keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="continuetimeneed_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetimeneed_go" style="color: inherit; text-decoration: inherit;">Continue<wbr>Time<wbr>Need</a>
@@ -1515,8 +1608,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether <code>continue_time</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>continueTime</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="metricid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricid_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Id</a>
@@ -1524,8 +1616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricshowname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricshowname_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Show<wbr>Name</a>
@@ -1533,8 +1624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricunit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricunit_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Unit</a>
@@ -1542,8 +1632,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The unit of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The unit of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="perioddefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#perioddefault_go" style="color: inherit; text-decoration: inherit;">Period<wbr>Default</a>
@@ -1551,8 +1640,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The default data time(seconds) config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default data time(seconds) config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodkeys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodkeys_go" style="color: inherit; text-decoration: inherit;">Period<wbr>Keys</a>
@@ -1560,8 +1648,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>The data time(seconds) keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The data time(seconds) keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodneed_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodneed_go" style="color: inherit; text-decoration: inherit;">Period<wbr>Need</a>
@@ -1569,8 +1656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether <code>period</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>period</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="periodnumdefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodnumdefault_go" style="color: inherit; text-decoration: inherit;">Period<wbr>Num<wbr>Default</a>
@@ -1578,8 +1664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The default period number config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default period number config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodnumkeys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodnumkeys_go" style="color: inherit; text-decoration: inherit;">Period<wbr>Num<wbr>Keys</a>
@@ -1587,8 +1672,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>The period number keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The period number keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodnumneed_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodnumneed_go" style="color: inherit; text-decoration: inherit;">Period<wbr>Num<wbr>Need</a>
@@ -1596,8 +1680,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether <code>period_num</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>periodNum</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep10_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep10_go" style="color: inherit; text-decoration: inherit;">Stat<wbr>Type<wbr>P10</a>
@@ -1605,8 +1688,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 10 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 10 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep1800_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep1800_go" style="color: inherit; text-decoration: inherit;">Stat<wbr>Type<wbr>P1800</a>
@@ -1614,8 +1696,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 1800 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 1800 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep300_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep300_go" style="color: inherit; text-decoration: inherit;">Stat<wbr>Type<wbr>P300</a>
@@ -1623,8 +1704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 300 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 300 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep3600_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep3600_go" style="color: inherit; text-decoration: inherit;">Stat<wbr>Type<wbr>P3600</a>
@@ -1632,8 +1712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 3600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 3600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep5_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep5_go" style="color: inherit; text-decoration: inherit;">Stat<wbr>Type<wbr>P5</a>
@@ -1641,8 +1720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 5 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 5 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep60_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep60_go" style="color: inherit; text-decoration: inherit;">Stat<wbr>Type<wbr>P60</a>
@@ -1650,8 +1728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 60 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 60 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep600_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep600_go" style="color: inherit; text-decoration: inherit;">Stat<wbr>Type<wbr>P600</a>
@@ -1659,8 +1736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep86400_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep86400_go" style="color: inherit; text-decoration: inherit;">Stat<wbr>Type<wbr>P86400</a>
@@ -1668,8 +1744,229 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 86400 seconds.</p>
-</dd></dl>
+    <dd>Data aggregation mode, cycle of 86400 seconds.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="calc_type_keys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_type_keys_hcl" style="color: inherit; text-decoration: inherit;">calc_<wbr>type_<wbr>keys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Calculate type of this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="calc_type_need_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_type_need_hcl" style="color: inherit; text-decoration: inherit;">calc_<wbr>type_<wbr>need</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether <code>calcType</code> required in the configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="calc_value_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_value_default_hcl" style="color: inherit; text-decoration: inherit;">calc_<wbr>value_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default calculate value of this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="calc_value_fixed_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_value_fixed_hcl" style="color: inherit; text-decoration: inherit;">calc_<wbr>value_<wbr>fixed</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The fixed calculate value of this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="calc_value_max_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_value_max_hcl" style="color: inherit; text-decoration: inherit;">calc_<wbr>value_<wbr>max</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The max calculate value of this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="calc_value_min_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_value_min_hcl" style="color: inherit; text-decoration: inherit;">calc_<wbr>value_<wbr>min</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The min calculate value of this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="calc_value_need_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_value_need_hcl" style="color: inherit; text-decoration: inherit;">calc_<wbr>value_<wbr>need</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether <code>calcValue</code> required in the configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="continue_time_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continue_time_default_hcl" style="color: inherit; text-decoration: inherit;">continue_<wbr>time_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The default continue time(seconds) config for this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="continue_time_keys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continue_time_keys_hcl" style="color: inherit; text-decoration: inherit;">continue_<wbr>time_<wbr>keys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>The continue time(seconds) keys for this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="continue_time_need_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continue_time_need_hcl" style="color: inherit; text-decoration: inherit;">continue_<wbr>time_<wbr>need</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether <code>continueTime</code> required in the configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="metric_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_id_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The ID of this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="metric_show_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_show_name_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>show_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="metric_unit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_unit_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The unit of this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="period_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_default_hcl" style="color: inherit; text-decoration: inherit;">period_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The default data time(seconds) config for this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="period_keys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_keys_hcl" style="color: inherit; text-decoration: inherit;">period_<wbr>keys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>The data time(seconds) keys for this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="period_need_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_need_hcl" style="color: inherit; text-decoration: inherit;">period_<wbr>need</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether <code>period</code> required in the configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="period_num_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_num_default_hcl" style="color: inherit; text-decoration: inherit;">period_<wbr>num_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The default period number config for this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="period_num_keys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_num_keys_hcl" style="color: inherit; text-decoration: inherit;">period_<wbr>num_<wbr>keys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>The period number keys for this metric.</dd><dt class="property-required"
+            title="Required">
+        <span id="period_num_need_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_num_need_hcl" style="color: inherit; text-decoration: inherit;">period_<wbr>num_<wbr>need</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether <code>periodNum</code> required in the configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="stat_type_p10_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stat_type_p10_hcl" style="color: inherit; text-decoration: inherit;">stat_<wbr>type_<wbr>p10</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data aggregation mode, cycle of 10 seconds.</dd><dt class="property-required"
+            title="Required">
+        <span id="stat_type_p1800_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stat_type_p1800_hcl" style="color: inherit; text-decoration: inherit;">stat_<wbr>type_<wbr>p1800</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data aggregation mode, cycle of 1800 seconds.</dd><dt class="property-required"
+            title="Required">
+        <span id="stat_type_p300_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stat_type_p300_hcl" style="color: inherit; text-decoration: inherit;">stat_<wbr>type_<wbr>p300</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data aggregation mode, cycle of 300 seconds.</dd><dt class="property-required"
+            title="Required">
+        <span id="stat_type_p3600_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stat_type_p3600_hcl" style="color: inherit; text-decoration: inherit;">stat_<wbr>type_<wbr>p3600</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data aggregation mode, cycle of 3600 seconds.</dd><dt class="property-required"
+            title="Required">
+        <span id="stat_type_p5_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stat_type_p5_hcl" style="color: inherit; text-decoration: inherit;">stat_<wbr>type_<wbr>p5</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data aggregation mode, cycle of 5 seconds.</dd><dt class="property-required"
+            title="Required">
+        <span id="stat_type_p60_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stat_type_p60_hcl" style="color: inherit; text-decoration: inherit;">stat_<wbr>type_<wbr>p60</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data aggregation mode, cycle of 60 seconds.</dd><dt class="property-required"
+            title="Required">
+        <span id="stat_type_p600_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stat_type_p600_hcl" style="color: inherit; text-decoration: inherit;">stat_<wbr>type_<wbr>p600</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data aggregation mode, cycle of 600 seconds.</dd><dt class="property-required"
+            title="Required">
+        <span id="stat_type_p86400_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stat_type_p86400_hcl" style="color: inherit; text-decoration: inherit;">stat_<wbr>type_<wbr>p86400</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data aggregation mode, cycle of 86400 seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1683,8 +1980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Calculate type of this metric.</p>
-</dd><dt class="property-required"
+    <dd>Calculate type of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calctypeneed_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calctypeneed_java" style="color: inherit; text-decoration: inherit;">calc<wbr>Type<wbr>Need</a>
@@ -1692,8 +1988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether <code>calc_type</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>calcType</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluedefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluedefault_java" style="color: inherit; text-decoration: inherit;">calc<wbr>Value<wbr>Default</a>
@@ -1701,8 +1996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluefixed_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluefixed_java" style="color: inherit; text-decoration: inherit;">calc<wbr>Value<wbr>Fixed</a>
@@ -1710,8 +2004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The fixed calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The fixed calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluemax_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluemax_java" style="color: inherit; text-decoration: inherit;">calc<wbr>Value<wbr>Max</a>
@@ -1719,8 +2012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The max calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The max calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluemin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluemin_java" style="color: inherit; text-decoration: inherit;">calc<wbr>Value<wbr>Min</a>
@@ -1728,8 +2020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The min calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The min calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvalueneed_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvalueneed_java" style="color: inherit; text-decoration: inherit;">calc<wbr>Value<wbr>Need</a>
@@ -1737,8 +2028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether <code>calc_value</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>calcValue</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="continuetimedefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetimedefault_java" style="color: inherit; text-decoration: inherit;">continue<wbr>Time<wbr>Default</a>
@@ -1746,8 +2036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The default continue time(seconds) config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default continue time(seconds) config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="continuetimekeys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetimekeys_java" style="color: inherit; text-decoration: inherit;">continue<wbr>Time<wbr>Keys</a>
@@ -1755,8 +2044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>The continue time(seconds) keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The continue time(seconds) keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="continuetimeneed_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetimeneed_java" style="color: inherit; text-decoration: inherit;">continue<wbr>Time<wbr>Need</a>
@@ -1764,8 +2052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether <code>continue_time</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>continueTime</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="metricid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricid_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Id</a>
@@ -1773,8 +2060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The ID of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricshowname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricshowname_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Show<wbr>Name</a>
@@ -1782,8 +2068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricunit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricunit_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Unit</a>
@@ -1791,8 +2076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The unit of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The unit of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="perioddefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#perioddefault_java" style="color: inherit; text-decoration: inherit;">period<wbr>Default</a>
@@ -1800,8 +2084,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The default data time(seconds) config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default data time(seconds) config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodkeys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodkeys_java" style="color: inherit; text-decoration: inherit;">period<wbr>Keys</a>
@@ -1809,8 +2092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>The data time(seconds) keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The data time(seconds) keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodneed_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodneed_java" style="color: inherit; text-decoration: inherit;">period<wbr>Need</a>
@@ -1818,8 +2100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether <code>period</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>period</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="periodnumdefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodnumdefault_java" style="color: inherit; text-decoration: inherit;">period<wbr>Num<wbr>Default</a>
@@ -1827,8 +2108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The default period number config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default period number config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodnumkeys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodnumkeys_java" style="color: inherit; text-decoration: inherit;">period<wbr>Num<wbr>Keys</a>
@@ -1836,8 +2116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>The period number keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The period number keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodnumneed_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodnumneed_java" style="color: inherit; text-decoration: inherit;">period<wbr>Num<wbr>Need</a>
@@ -1845,8 +2124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether <code>period_num</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>periodNum</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep10_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep10_java" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P10</a>
@@ -1854,8 +2132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 10 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 10 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep1800_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep1800_java" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P1800</a>
@@ -1863,8 +2140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 1800 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 1800 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep300_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep300_java" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P300</a>
@@ -1872,8 +2148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 300 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 300 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep3600_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep3600_java" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P3600</a>
@@ -1881,8 +2156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 3600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 3600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep5_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep5_java" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P5</a>
@@ -1890,8 +2164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 5 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 5 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep60_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep60_java" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P60</a>
@@ -1899,8 +2172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 60 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 60 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep600_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep600_java" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P600</a>
@@ -1908,8 +2180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep86400_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep86400_java" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P86400</a>
@@ -1917,8 +2188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 86400 seconds.</p>
-</dd></dl>
+    <dd>Data aggregation mode, cycle of 86400 seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1932,8 +2202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Calculate type of this metric.</p>
-</dd><dt class="property-required"
+    <dd>Calculate type of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calctypeneed_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calctypeneed_nodejs" style="color: inherit; text-decoration: inherit;">calc<wbr>Type<wbr>Need</a>
@@ -1941,8 +2210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether <code>calc_type</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>calcType</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluedefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluedefault_nodejs" style="color: inherit; text-decoration: inherit;">calc<wbr>Value<wbr>Default</a>
@@ -1950,8 +2218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluefixed_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluefixed_nodejs" style="color: inherit; text-decoration: inherit;">calc<wbr>Value<wbr>Fixed</a>
@@ -1959,8 +2226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The fixed calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluemax_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluemax_nodejs" style="color: inherit; text-decoration: inherit;">calc<wbr>Value<wbr>Max</a>
@@ -1968,8 +2234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The max calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluemin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluemin_nodejs" style="color: inherit; text-decoration: inherit;">calc<wbr>Value<wbr>Min</a>
@@ -1977,8 +2242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The min calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The min calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvalueneed_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvalueneed_nodejs" style="color: inherit; text-decoration: inherit;">calc<wbr>Value<wbr>Need</a>
@@ -1986,8 +2250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether <code>calc_value</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>calcValue</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="continuetimedefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetimedefault_nodejs" style="color: inherit; text-decoration: inherit;">continue<wbr>Time<wbr>Default</a>
@@ -1995,8 +2258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The default continue time(seconds) config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default continue time(seconds) config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="continuetimekeys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetimekeys_nodejs" style="color: inherit; text-decoration: inherit;">continue<wbr>Time<wbr>Keys</a>
@@ -2004,8 +2266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>The continue time(seconds) keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The continue time(seconds) keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="continuetimeneed_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetimeneed_nodejs" style="color: inherit; text-decoration: inherit;">continue<wbr>Time<wbr>Need</a>
@@ -2013,8 +2274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether <code>continue_time</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>continueTime</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="metricid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricid_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Id</a>
@@ -2022,8 +2282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The ID of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricshowname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricshowname_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Show<wbr>Name</a>
@@ -2031,8 +2290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricunit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricunit_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Unit</a>
@@ -2040,8 +2298,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The unit of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The unit of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="perioddefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#perioddefault_nodejs" style="color: inherit; text-decoration: inherit;">period<wbr>Default</a>
@@ -2049,8 +2306,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The default data time(seconds) config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default data time(seconds) config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodkeys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodkeys_nodejs" style="color: inherit; text-decoration: inherit;">period<wbr>Keys</a>
@@ -2058,8 +2314,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>The data time(seconds) keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The data time(seconds) keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodneed_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodneed_nodejs" style="color: inherit; text-decoration: inherit;">period<wbr>Need</a>
@@ -2067,8 +2322,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether <code>period</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>period</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="periodnumdefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodnumdefault_nodejs" style="color: inherit; text-decoration: inherit;">period<wbr>Num<wbr>Default</a>
@@ -2076,8 +2330,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The default period number config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default period number config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodnumkeys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodnumkeys_nodejs" style="color: inherit; text-decoration: inherit;">period<wbr>Num<wbr>Keys</a>
@@ -2085,8 +2338,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>The period number keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The period number keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodnumneed_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodnumneed_nodejs" style="color: inherit; text-decoration: inherit;">period<wbr>Num<wbr>Need</a>
@@ -2094,8 +2346,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether <code>period_num</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>periodNum</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep10_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep10_nodejs" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P10</a>
@@ -2103,8 +2354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 10 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 10 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep1800_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep1800_nodejs" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P1800</a>
@@ -2112,8 +2362,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 1800 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 1800 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep300_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep300_nodejs" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P300</a>
@@ -2121,8 +2370,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 300 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 300 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep3600_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep3600_nodejs" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P3600</a>
@@ -2130,8 +2378,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 3600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 3600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep5_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep5_nodejs" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P5</a>
@@ -2139,8 +2386,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 5 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 5 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep60_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep60_nodejs" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P60</a>
@@ -2148,8 +2394,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 60 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 60 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep600_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep600_nodejs" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P600</a>
@@ -2157,8 +2402,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep86400_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep86400_nodejs" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P86400</a>
@@ -2166,8 +2410,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 86400 seconds.</p>
-</dd></dl>
+    <dd>Data aggregation mode, cycle of 86400 seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2181,8 +2424,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Calculate type of this metric.</p>
-</dd><dt class="property-required"
+    <dd>Calculate type of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calc_type_need_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_type_need_python" style="color: inherit; text-decoration: inherit;">calc_<wbr>type_<wbr>need</a>
@@ -2190,8 +2432,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether <code>calc_type</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>calcType</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="calc_value_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_value_default_python" style="color: inherit; text-decoration: inherit;">calc_<wbr>value_<wbr>default</a>
@@ -2199,8 +2440,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The default calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calc_value_fixed_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_value_fixed_python" style="color: inherit; text-decoration: inherit;">calc_<wbr>value_<wbr>fixed</a>
@@ -2208,8 +2448,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The fixed calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The fixed calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calc_value_max_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_value_max_python" style="color: inherit; text-decoration: inherit;">calc_<wbr>value_<wbr>max</a>
@@ -2217,8 +2456,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The max calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The max calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calc_value_min_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_value_min_python" style="color: inherit; text-decoration: inherit;">calc_<wbr>value_<wbr>min</a>
@@ -2226,8 +2464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The min calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The min calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calc_value_need_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calc_value_need_python" style="color: inherit; text-decoration: inherit;">calc_<wbr>value_<wbr>need</a>
@@ -2235,8 +2472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether <code>calc_value</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>calcValue</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="continue_time_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continue_time_default_python" style="color: inherit; text-decoration: inherit;">continue_<wbr>time_<wbr>default</a>
@@ -2244,8 +2480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The default continue time(seconds) config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default continue time(seconds) config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="continue_time_keys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continue_time_keys_python" style="color: inherit; text-decoration: inherit;">continue_<wbr>time_<wbr>keys</a>
@@ -2253,8 +2488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>The continue time(seconds) keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The continue time(seconds) keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="continue_time_need_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continue_time_need_python" style="color: inherit; text-decoration: inherit;">continue_<wbr>time_<wbr>need</a>
@@ -2262,8 +2496,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether <code>continue_time</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>continueTime</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="metric_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_id_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>id</a>
@@ -2271,8 +2504,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The ID of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metric_show_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_show_name_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>show_<wbr>name</a>
@@ -2280,8 +2512,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metric_unit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_unit_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>unit</a>
@@ -2289,8 +2520,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The unit of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The unit of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="period_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_default_python" style="color: inherit; text-decoration: inherit;">period_<wbr>default</a>
@@ -2298,8 +2528,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The default data time(seconds) config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default data time(seconds) config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="period_keys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_keys_python" style="color: inherit; text-decoration: inherit;">period_<wbr>keys</a>
@@ -2307,8 +2536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>The data time(seconds) keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The data time(seconds) keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="period_need_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_need_python" style="color: inherit; text-decoration: inherit;">period_<wbr>need</a>
@@ -2316,8 +2544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether <code>period</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>period</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="period_num_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_num_default_python" style="color: inherit; text-decoration: inherit;">period_<wbr>num_<wbr>default</a>
@@ -2325,8 +2552,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The default period number config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default period number config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="period_num_keys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_num_keys_python" style="color: inherit; text-decoration: inherit;">period_<wbr>num_<wbr>keys</a>
@@ -2334,8 +2560,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>The period number keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The period number keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="period_num_need_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_num_need_python" style="color: inherit; text-decoration: inherit;">period_<wbr>num_<wbr>need</a>
@@ -2343,8 +2568,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether <code>period_num</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>periodNum</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="stat_type_p10_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stat_type_p10_python" style="color: inherit; text-decoration: inherit;">stat_<wbr>type_<wbr>p10</a>
@@ -2352,8 +2576,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 10 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 10 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stat_type_p1800_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stat_type_p1800_python" style="color: inherit; text-decoration: inherit;">stat_<wbr>type_<wbr>p1800</a>
@@ -2361,8 +2584,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 1800 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 1800 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stat_type_p300_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stat_type_p300_python" style="color: inherit; text-decoration: inherit;">stat_<wbr>type_<wbr>p300</a>
@@ -2370,8 +2592,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 300 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 300 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stat_type_p3600_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stat_type_p3600_python" style="color: inherit; text-decoration: inherit;">stat_<wbr>type_<wbr>p3600</a>
@@ -2379,8 +2600,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 3600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 3600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stat_type_p5_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stat_type_p5_python" style="color: inherit; text-decoration: inherit;">stat_<wbr>type_<wbr>p5</a>
@@ -2388,8 +2608,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 5 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 5 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stat_type_p60_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stat_type_p60_python" style="color: inherit; text-decoration: inherit;">stat_<wbr>type_<wbr>p60</a>
@@ -2397,8 +2616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 60 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 60 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stat_type_p600_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stat_type_p600_python" style="color: inherit; text-decoration: inherit;">stat_<wbr>type_<wbr>p600</a>
@@ -2406,8 +2624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stat_type_p86400_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stat_type_p86400_python" style="color: inherit; text-decoration: inherit;">stat_<wbr>type_<wbr>p86400</a>
@@ -2415,8 +2632,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 86400 seconds.</p>
-</dd></dl>
+    <dd>Data aggregation mode, cycle of 86400 seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2430,8 +2646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Calculate type of this metric.</p>
-</dd><dt class="property-required"
+    <dd>Calculate type of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calctypeneed_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calctypeneed_yaml" style="color: inherit; text-decoration: inherit;">calc<wbr>Type<wbr>Need</a>
@@ -2439,8 +2654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether <code>calc_type</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>calcType</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluedefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluedefault_yaml" style="color: inherit; text-decoration: inherit;">calc<wbr>Value<wbr>Default</a>
@@ -2448,8 +2662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluefixed_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluefixed_yaml" style="color: inherit; text-decoration: inherit;">calc<wbr>Value<wbr>Fixed</a>
@@ -2457,8 +2670,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The fixed calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The fixed calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluemax_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluemax_yaml" style="color: inherit; text-decoration: inherit;">calc<wbr>Value<wbr>Max</a>
@@ -2466,8 +2678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The max calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The max calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvaluemin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvaluemin_yaml" style="color: inherit; text-decoration: inherit;">calc<wbr>Value<wbr>Min</a>
@@ -2475,8 +2686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The min calculate value of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The min calculate value of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="calcvalueneed_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#calcvalueneed_yaml" style="color: inherit; text-decoration: inherit;">calc<wbr>Value<wbr>Need</a>
@@ -2484,8 +2694,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether <code>calc_value</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>calcValue</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="continuetimedefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetimedefault_yaml" style="color: inherit; text-decoration: inherit;">continue<wbr>Time<wbr>Default</a>
@@ -2493,8 +2702,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The default continue time(seconds) config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default continue time(seconds) config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="continuetimekeys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetimekeys_yaml" style="color: inherit; text-decoration: inherit;">continue<wbr>Time<wbr>Keys</a>
@@ -2502,8 +2710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>The continue time(seconds) keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The continue time(seconds) keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="continuetimeneed_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continuetimeneed_yaml" style="color: inherit; text-decoration: inherit;">continue<wbr>Time<wbr>Need</a>
@@ -2511,8 +2718,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether <code>continue_time</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>continueTime</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="metricid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricid_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Id</a>
@@ -2520,8 +2726,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The ID of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The ID of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricshowname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricshowname_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Show<wbr>Name</a>
@@ -2529,8 +2734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The name of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="metricunit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricunit_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Unit</a>
@@ -2538,8 +2742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The unit of this metric.</p>
-</dd><dt class="property-required"
+    <dd>The unit of this metric.</dd><dt class="property-required"
             title="Required">
         <span id="perioddefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#perioddefault_yaml" style="color: inherit; text-decoration: inherit;">period<wbr>Default</a>
@@ -2547,8 +2750,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The default data time(seconds) config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default data time(seconds) config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodkeys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodkeys_yaml" style="color: inherit; text-decoration: inherit;">period<wbr>Keys</a>
@@ -2556,8 +2758,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>The data time(seconds) keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The data time(seconds) keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodneed_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodneed_yaml" style="color: inherit; text-decoration: inherit;">period<wbr>Need</a>
@@ -2565,8 +2766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether <code>period</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>period</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="periodnumdefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodnumdefault_yaml" style="color: inherit; text-decoration: inherit;">period<wbr>Num<wbr>Default</a>
@@ -2574,8 +2774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The default period number config for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The default period number config for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodnumkeys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodnumkeys_yaml" style="color: inherit; text-decoration: inherit;">period<wbr>Num<wbr>Keys</a>
@@ -2583,8 +2782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>The period number keys for this metric.</p>
-</dd><dt class="property-required"
+    <dd>The period number keys for this metric.</dd><dt class="property-required"
             title="Required">
         <span id="periodnumneed_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periodnumneed_yaml" style="color: inherit; text-decoration: inherit;">period<wbr>Num<wbr>Need</a>
@@ -2592,8 +2790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether <code>period_num</code> required in the configuration.</p>
-</dd><dt class="property-required"
+    <dd>Whether <code>periodNum</code> required in the configuration.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep10_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep10_yaml" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P10</a>
@@ -2601,8 +2798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 10 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 10 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep1800_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep1800_yaml" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P1800</a>
@@ -2610,8 +2806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 1800 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 1800 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep300_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep300_yaml" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P300</a>
@@ -2619,8 +2814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 300 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 300 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep3600_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep3600_yaml" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P3600</a>
@@ -2628,8 +2822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 3600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 3600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep5_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep5_yaml" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P5</a>
@@ -2637,8 +2830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 5 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 5 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep60_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep60_yaml" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P60</a>
@@ -2646,8 +2838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 60 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 60 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep600_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep600_yaml" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P600</a>
@@ -2655,8 +2846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 600 seconds.</p>
-</dd><dt class="property-required"
+    <dd>Data aggregation mode, cycle of 600 seconds.</dd><dt class="property-required"
             title="Required">
         <span id="stattypep86400_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#stattypep86400_yaml" style="color: inherit; text-decoration: inherit;">stat<wbr>Type<wbr>P86400</a>
@@ -2664,8 +2854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data aggregation mode, cycle of 86400 seconds.</p>
-</dd></dl>
+    <dd>Data aggregation mode, cycle of 86400 seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2680,7 +2869,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

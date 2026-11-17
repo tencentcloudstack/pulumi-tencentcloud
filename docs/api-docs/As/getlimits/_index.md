@@ -2,9 +2,11 @@
 ---
 title: "getLimits"
 title_tag: "tencentcloud.As.getLimits"
-meta_desc: "Documentation for the tencentcloud.As.getLimits function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of as limits"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,42 +18,45 @@ Use this data source to query detailed information of as limits
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const limits = tencentcloud.As.getLimits({});
+const limits = tencentcloud.as.getLimits({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-limits = tencentcloud.As.get_limits()
+limits = tencentcloud.as_.get_limits()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var limits = Tencentcloud.As.GetLimits.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := As.GetLimits(ctx, nil, nil)
+		_, err := as.GetLimits(ctx, &as.GetLimitsArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -59,6 +64,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var limits = Tencentcloud.As.GetLimits.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -67,8 +94,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.As.AsFunctions;
 import com.pulumi.tencentcloud.As.inputs.GetLimitsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -80,20 +107,50 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var limits = AsFunctions.getLimits();
+        final var limits = AsFunctions.getLimits(GetLimitsArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   limits:
     fn::invoke:
-      Function: tencentcloud:As:getLimits
-      Arguments: {}
+      function: tencentcloud:As:getLimits
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_as_getlimits" "limits" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeAccountLimits](https://www.tencentcloud.com/document/api/377/31003)
 
 
 
@@ -105,7 +162,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -113,9 +170,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getLimits<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetLimitsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetLimitsResult</a></span>></span
+><span class="k">function </span>getLimits<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetLimitsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetLimitsResult</a></span>></span
 ><span class="k">
-function </span>getLimitsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetLimitsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetLimitsResult</a></span>></span
+function </span>getLimitsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetLimitsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetLimitsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -127,8 +184,8 @@ function </span>getLimitsOutput<span class="p">(</span><span class="nx">args</sp
 ><span class="k">def </span>get_limits<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetLimitsResult</span
 ><span class="k">
-def </span>get_limits_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetLimitsResult]</span
+def </span>get_limits_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetLimitsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -153,7 +210,8 @@ func </span>GetLimitsOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetLimits </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetLimitsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetLimitsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetLimitsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetLimitsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetLimitsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetLimitsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetLimitsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetLimitsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -162,7 +220,8 @@ func </span>GetLimitsOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetLimitsResult</a></span>> </span>getLimits<span class="p">(</span><span class="nx">GetLimitsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetLimitsResult</a></span>> </span>getLimits<span class="p">(</span><span class="nx">GetLimitsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetLimitsResult</a></span>> </span>getLimits<span class="p">(</span><span class="nx">GetLimitsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,6 +233,15 @@ func </span>GetLimitsOutput<span class="p">(</span><span class="nx">ctx</span><s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:As/getLimits:getLimits
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_as_get_limits&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -192,8 +260,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -207,8 +274,21 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -222,8 +302,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -237,8 +316,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -267,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -291,8 +367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="maxnumberofautoscalinggroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnumberofautoscalinggroups_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Number<wbr>Of<wbr>Auto<wbr>Scaling<wbr>Groups</a>
@@ -300,8 +375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of auto scaling groups allowed for creation by the user account.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of auto scaling groups allowed for creation by the user account.</dd><dt class="property-"
             title="">
         <span id="maxnumberoflaunchconfigurations_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnumberoflaunchconfigurations_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Number<wbr>Of<wbr>Launch<wbr>Configurations</a>
@@ -309,8 +383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of launch configurations allowed for creation by the user account.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of launch configurations allowed for creation by the user account.</dd><dt class="property-"
             title="">
         <span id="numberofautoscalinggroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberofautoscalinggroups_csharp" style="color: inherit; text-decoration: inherit;">Number<wbr>Of<wbr>Auto<wbr>Scaling<wbr>Groups</a>
@@ -318,8 +391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Current number of auto scaling groups under the user account.</p>
-</dd><dt class="property-"
+    <dd>Current number of auto scaling groups under the user account.</dd><dt class="property-"
             title="">
         <span id="numberoflaunchconfigurations_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberoflaunchconfigurations_csharp" style="color: inherit; text-decoration: inherit;">Number<wbr>Of<wbr>Launch<wbr>Configurations</a>
@@ -327,8 +399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Current number of launch configurations under the user account.</p>
-</dd><dt class="property-"
+    <dd>Current number of launch configurations under the user account.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -350,8 +421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="maxnumberofautoscalinggroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnumberofautoscalinggroups_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Number<wbr>Of<wbr>Auto<wbr>Scaling<wbr>Groups</a>
@@ -359,8 +429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of auto scaling groups allowed for creation by the user account.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of auto scaling groups allowed for creation by the user account.</dd><dt class="property-"
             title="">
         <span id="maxnumberoflaunchconfigurations_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnumberoflaunchconfigurations_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Number<wbr>Of<wbr>Launch<wbr>Configurations</a>
@@ -368,8 +437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of launch configurations allowed for creation by the user account.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of launch configurations allowed for creation by the user account.</dd><dt class="property-"
             title="">
         <span id="numberofautoscalinggroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberofautoscalinggroups_go" style="color: inherit; text-decoration: inherit;">Number<wbr>Of<wbr>Auto<wbr>Scaling<wbr>Groups</a>
@@ -377,8 +445,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Current number of auto scaling groups under the user account.</p>
-</dd><dt class="property-"
+    <dd>Current number of auto scaling groups under the user account.</dd><dt class="property-"
             title="">
         <span id="numberoflaunchconfigurations_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberoflaunchconfigurations_go" style="color: inherit; text-decoration: inherit;">Number<wbr>Of<wbr>Launch<wbr>Configurations</a>
@@ -386,11 +453,64 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Current number of launch configurations under the user account.</p>
-</dd><dt class="property-"
+    <dd>Current number of launch configurations under the user account.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="max_number_of_auto_scaling_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_number_of_auto_scaling_groups_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>number_<wbr>of_<wbr>auto_<wbr>scaling_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of auto scaling groups allowed for creation by the user account.</dd><dt class="property-"
+            title="">
+        <span id="max_number_of_launch_configurations_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_number_of_launch_configurations_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>number_<wbr>of_<wbr>launch_<wbr>configurations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of launch configurations allowed for creation by the user account.</dd><dt class="property-"
+            title="">
+        <span id="number_of_auto_scaling_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_of_auto_scaling_groups_hcl" style="color: inherit; text-decoration: inherit;">number_<wbr>of_<wbr>auto_<wbr>scaling_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Current number of auto scaling groups under the user account.</dd><dt class="property-"
+            title="">
+        <span id="number_of_launch_configurations_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_of_launch_configurations_hcl" style="color: inherit; text-decoration: inherit;">number_<wbr>of_<wbr>launch_<wbr>configurations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Current number of launch configurations under the user account.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -409,8 +529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="maxnumberofautoscalinggroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnumberofautoscalinggroups_java" style="color: inherit; text-decoration: inherit;">max<wbr>Number<wbr>Of<wbr>Auto<wbr>Scaling<wbr>Groups</a>
@@ -418,8 +537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of auto scaling groups allowed for creation by the user account.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of auto scaling groups allowed for creation by the user account.</dd><dt class="property-"
             title="">
         <span id="maxnumberoflaunchconfigurations_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnumberoflaunchconfigurations_java" style="color: inherit; text-decoration: inherit;">max<wbr>Number<wbr>Of<wbr>Launch<wbr>Configurations</a>
@@ -427,8 +545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of launch configurations allowed for creation by the user account.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of launch configurations allowed for creation by the user account.</dd><dt class="property-"
             title="">
         <span id="numberofautoscalinggroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberofautoscalinggroups_java" style="color: inherit; text-decoration: inherit;">number<wbr>Of<wbr>Auto<wbr>Scaling<wbr>Groups</a>
@@ -436,8 +553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Current number of auto scaling groups under the user account.</p>
-</dd><dt class="property-"
+    <dd>Current number of auto scaling groups under the user account.</dd><dt class="property-"
             title="">
         <span id="numberoflaunchconfigurations_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberoflaunchconfigurations_java" style="color: inherit; text-decoration: inherit;">number<wbr>Of<wbr>Launch<wbr>Configurations</a>
@@ -445,8 +561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Current number of launch configurations under the user account.</p>
-</dd><dt class="property-"
+    <dd>Current number of launch configurations under the user account.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -468,8 +583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="maxnumberofautoscalinggroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnumberofautoscalinggroups_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Number<wbr>Of<wbr>Auto<wbr>Scaling<wbr>Groups</a>
@@ -477,8 +591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of auto scaling groups allowed for creation by the user account.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of auto scaling groups allowed for creation by the user account.</dd><dt class="property-"
             title="">
         <span id="maxnumberoflaunchconfigurations_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnumberoflaunchconfigurations_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Number<wbr>Of<wbr>Launch<wbr>Configurations</a>
@@ -486,8 +599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of launch configurations allowed for creation by the user account.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of launch configurations allowed for creation by the user account.</dd><dt class="property-"
             title="">
         <span id="numberofautoscalinggroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberofautoscalinggroups_nodejs" style="color: inherit; text-decoration: inherit;">number<wbr>Of<wbr>Auto<wbr>Scaling<wbr>Groups</a>
@@ -495,8 +607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Current number of auto scaling groups under the user account.</p>
-</dd><dt class="property-"
+    <dd>Current number of auto scaling groups under the user account.</dd><dt class="property-"
             title="">
         <span id="numberoflaunchconfigurations_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberoflaunchconfigurations_nodejs" style="color: inherit; text-decoration: inherit;">number<wbr>Of<wbr>Launch<wbr>Configurations</a>
@@ -504,8 +615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Current number of launch configurations under the user account.</p>
-</dd><dt class="property-"
+    <dd>Current number of launch configurations under the user account.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -527,8 +637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="max_number_of_auto_scaling_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_number_of_auto_scaling_groups_python" style="color: inherit; text-decoration: inherit;">max_<wbr>number_<wbr>of_<wbr>auto_<wbr>scaling_<wbr>groups</a>
@@ -536,8 +645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of auto scaling groups allowed for creation by the user account.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of auto scaling groups allowed for creation by the user account.</dd><dt class="property-"
             title="">
         <span id="max_number_of_launch_configurations_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_number_of_launch_configurations_python" style="color: inherit; text-decoration: inherit;">max_<wbr>number_<wbr>of_<wbr>launch_<wbr>configurations</a>
@@ -545,8 +653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of launch configurations allowed for creation by the user account.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of launch configurations allowed for creation by the user account.</dd><dt class="property-"
             title="">
         <span id="number_of_auto_scaling_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_of_auto_scaling_groups_python" style="color: inherit; text-decoration: inherit;">number_<wbr>of_<wbr>auto_<wbr>scaling_<wbr>groups</a>
@@ -554,8 +661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Current number of auto scaling groups under the user account.</p>
-</dd><dt class="property-"
+    <dd>Current number of auto scaling groups under the user account.</dd><dt class="property-"
             title="">
         <span id="number_of_launch_configurations_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_of_launch_configurations_python" style="color: inherit; text-decoration: inherit;">number_<wbr>of_<wbr>launch_<wbr>configurations</a>
@@ -563,8 +669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Current number of launch configurations under the user account.</p>
-</dd><dt class="property-"
+    <dd>Current number of launch configurations under the user account.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -586,8 +691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="maxnumberofautoscalinggroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnumberofautoscalinggroups_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Number<wbr>Of<wbr>Auto<wbr>Scaling<wbr>Groups</a>
@@ -595,8 +699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of auto scaling groups allowed for creation by the user account.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of auto scaling groups allowed for creation by the user account.</dd><dt class="property-"
             title="">
         <span id="maxnumberoflaunchconfigurations_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxnumberoflaunchconfigurations_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Number<wbr>Of<wbr>Launch<wbr>Configurations</a>
@@ -604,8 +707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of launch configurations allowed for creation by the user account.</p>
-</dd><dt class="property-"
+    <dd>Maximum number of launch configurations allowed for creation by the user account.</dd><dt class="property-"
             title="">
         <span id="numberofautoscalinggroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberofautoscalinggroups_yaml" style="color: inherit; text-decoration: inherit;">number<wbr>Of<wbr>Auto<wbr>Scaling<wbr>Groups</a>
@@ -613,8 +715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Current number of auto scaling groups under the user account.</p>
-</dd><dt class="property-"
+    <dd>Current number of auto scaling groups under the user account.</dd><dt class="property-"
             title="">
         <span id="numberoflaunchconfigurations_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberoflaunchconfigurations_yaml" style="color: inherit; text-decoration: inherit;">number<wbr>Of<wbr>Launch<wbr>Configurations</a>
@@ -622,8 +723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Current number of launch configurations under the user account.</p>
-</dd><dt class="property-"
+    <dd>Current number of launch configurations under the user account.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -646,7 +746,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

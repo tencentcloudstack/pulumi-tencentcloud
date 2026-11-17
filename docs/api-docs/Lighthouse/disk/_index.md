@@ -2,9 +2,11 @@
 ---
 title: "Disk"
 title_tag: "tencentcloud.Lighthouse.Disk"
-meta_desc: "Documentation for the tencentcloud.Lighthouse.Disk resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a lighthouse disk"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,38 +18,86 @@ Provides a resource to create a lighthouse disk
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const disk = new tencentcloud.lighthouse.Disk("disk", {
+    zone: "ap-hongkong-2",
+    diskSize: 20,
+    diskType: "CLOUD_SSD",
     diskChargePrepaid: {
         period: 1,
         renewFlag: "NOTIFY_AND_AUTO_RENEW",
         timeUnit: "m",
     },
     diskName: "test",
-    diskSize: 20,
-    diskType: "CLOUD_SSD",
-    zone: "ap-hongkong-2",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 disk = tencentcloud.lighthouse.Disk("disk",
-    disk_charge_prepaid=tencentcloud.lighthouse.DiskDiskChargePrepaidArgs(
-        period=1,
-        renew_flag="NOTIFY_AND_AUTO_RENEW",
-        time_unit="m",
-    ),
-    disk_name="test",
+    zone="ap-hongkong-2",
     disk_size=20,
     disk_type="CLOUD_SSD",
-    zone="ap-hongkong-2")
+    disk_charge_prepaid={
+        "period": 1,
+        "renew_flag": "NOTIFY_AND_AUTO_RENEW",
+        "time_unit": "m",
+    },
+    disk_name="test")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/lighthouse"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := lighthouse.NewDisk(ctx, "disk", &lighthouse.DiskArgs{
+			Zone:     pulumi.String("ap-hongkong-2"),
+			DiskSize: pulumi.Int(20),
+			DiskType: pulumi.String("CLOUD_SSD"),
+			DiskChargePrepaid: &lighthouse.DiskDiskChargePrepaidArgs{
+				Period:    pulumi.Int(1),
+				RenewFlag: pulumi.String("NOTIFY_AND_AUTO_RENEW"),
+				TimeUnit:  pulumi.String("m"),
+			},
+			DiskName: pulumi.String("test"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +108,9 @@ return await Deployment.RunAsync(() =>
 {
     var disk = new Tencentcloud.Lighthouse.Disk("disk", new()
     {
+        Zone = "ap-hongkong-2",
+        DiskSize = 20,
+        DiskType = "CLOUD_SSD",
         DiskChargePrepaid = new Tencentcloud.Lighthouse.Inputs.DiskDiskChargePrepaidArgs
         {
             Period = 1,
@@ -65,41 +118,15 @@ return await Deployment.RunAsync(() =>
             TimeUnit = "m",
         },
         DiskName = "test",
-        DiskSize = 20,
-        DiskType = "CLOUD_SSD",
-        Zone = "ap-hongkong-2",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Lighthouse.NewDisk(ctx, "disk", &Lighthouse.DiskArgs{
-			DiskChargePrepaid: &lighthouse.DiskDiskChargePrepaidArgs{
-				Period:    pulumi.Int(1),
-				RenewFlag: pulumi.String("NOTIFY_AND_AUTO_RENEW"),
-				TimeUnit:  pulumi.String("m"),
-			},
-			DiskName: pulumi.String("test"),
-			DiskSize: pulumi.Int(20),
-			DiskType: pulumi.String("CLOUD_SSD"),
-			Zone:     pulumi.String("ap-hongkong-2"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -109,8 +136,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Lighthouse.Disk;
 import com.pulumi.tencentcloud.Lighthouse.DiskArgs;
 import com.pulumi.tencentcloud.Lighthouse.inputs.DiskDiskChargePrepaidArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -122,103 +149,166 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var disk = new Disk("disk", DiskArgs.builder()        
+        var disk = new Disk("disk", DiskArgs.builder()
+            .zone("ap-hongkong-2")
+            .diskSize(20)
+            .diskType("CLOUD_SSD")
             .diskChargePrepaid(DiskDiskChargePrepaidArgs.builder()
                 .period(1)
                 .renewFlag("NOTIFY_AND_AUTO_RENEW")
                 .timeUnit("m")
                 .build())
             .diskName("test")
-            .diskSize(20)
-            .diskType("CLOUD_SSD")
-            .zone("ap-hongkong-2")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   disk:
     type: tencentcloud:Lighthouse:Disk
     properties:
+      zone: ap-hongkong-2
+      diskSize: 20
+      diskType: CLOUD_SSD
       diskChargePrepaid:
         period: 1
         renewFlag: NOTIFY_AND_AUTO_RENEW
         timeUnit: m
       diskName: test
-      diskSize: 20
-      diskType: CLOUD_SSD
-      zone: ap-hongkong-2
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_lighthouse_disk" "disk" {
+  zone      = "ap-hongkong-2"
+  disk_size = 20
+  disk_type = "CLOUD_SSD"
+  disk_charge_prepaid = {
+    period     = 1
+    renew_flag = "NOTIFY_AND_AUTO_RENEW"
+    time_unit  = "m"
+  }
+  disk_name = "test"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateDisks](https://www.tencentcloud.com/document/api/1103/57994)
+  - [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+* Read: [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+* Update:
+  - [ModifyDisksAttribute](https://www.tencentcloud.com/document/api/1103/44567)
+  - [ModifyDisksRenewFlag](https://www.tencentcloud.com/document/api/1103/44566)
+* Delete:
+  - [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+  - [IsolateDisks](https://www.tencentcloud.com/document/api/1103/57993)
+  - [TerminateDisks](https://www.tencentcloud.com/document/api/1103/44565)
 
 
 
 ## Create Disk Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Disk</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DiskArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Disk</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DiskArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Disk</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-         <span class="nx">auto_mount_configuration</span><span class="p">:</span> <span class="nx">Optional[_lighthouse.DiskAutoMountConfigurationArgs]</span> = None<span class="p">,</span>
-         <span class="nx">auto_voucher</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-         <span class="nx">disk_backup_quota</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-         <span class="nx">disk_charge_prepaid</span><span class="p">:</span> <span class="nx">Optional[_lighthouse.DiskDiskChargePrepaidArgs]</span> = None<span class="p">,</span>
-         <span class="nx">disk_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-         <span class="nx">disk_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">disk_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-         <span class="nx">disk_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Disk</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DiskArgs</a></span><span class="p">,</span>
-         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Disk</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+         <span class="nx">disk_charge_prepaid</span><span class="p">:</span> <span class="nx">Optional[DiskDiskChargePrepaidArgs]</span> = None<span class="p">,</span>
+         <span class="nx">disk_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+         <span class="nx">disk_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">auto_mount_configuration</span><span class="p">:</span> <span class="nx">Optional[DiskAutoMountConfigurationArgs]</span> = None<span class="p">,</span>
+         <span class="nx">auto_voucher</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+         <span class="nx">disk_backup_quota</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+         <span class="nx">disk_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+         <span class="nx">disk_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDisk</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DiskArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Disk</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDisk</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DiskArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Disk</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Disk</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DiskArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Disk</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DiskArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Disk</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DiskArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Disk</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DiskArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Lighthouse:Disk</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Lighthouse:Disk</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_lighthouse_disk&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -239,7 +329,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -356,11 +446,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Disk Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -374,10 +472,9 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargeprepaid_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Charge<wbr>Prepaid</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#diskdiskchargeprepaid">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Disk<wbr>Disk<wbr>Charge<wbr>Prepaid<wbr>Args</a></span>
+        <span class="property-type"><a href="#diskdiskchargeprepaid">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Disk<wbr>Disk<wbr>Charge<wbr>Prepaid</a></span>
     </dt>
-    <dd><p>Disk subscription related parameter settings.</p>
-</dd><dt class="property-required"
+    <dd>Disk subscription related parameter settings.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -385,8 +482,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Disk size, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -394,8 +490,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</p>
-</dd><dt class="property-required"
+    <dd>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -403,17 +498,15 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="automountconfiguration_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#automountconfiguration_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Mount<wbr>Configuration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#diskautomountconfiguration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Disk<wbr>Auto<wbr>Mount<wbr>Configuration<wbr>Args</a></span>
+        <span class="property-type"><a href="#diskautomountconfiguration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Disk<wbr>Auto<wbr>Mount<wbr>Configuration</a></span>
     </dt>
-    <dd><p>Automatically mount and initialize data disks.</p>
-</dd><dt class="property-optional"
+    <dd>Automatically mount and initialize data disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Voucher</a>
@@ -421,8 +514,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to automatically use the voucher. Not used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically use the voucher. Not used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskbackupquota_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskbackupquota_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Backup<wbr>Quota</a>
@@ -430,8 +522,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskcount_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Count</a>
@@ -439,8 +530,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk count. Values: [1, 30]. Default: 1.</p>
-</dd><dt class="property-optional"
+    <dd>Disk count. Values: [1, 30]. Default: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskname_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Name</a>
@@ -448,8 +538,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk name. Maximum length 60.</p>
-</dd></dl>
+    <dd>Disk name. Maximum length 60.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -463,8 +552,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#diskdiskchargeprepaid">Disk<wbr>Disk<wbr>Charge<wbr>Prepaid<wbr>Args</a></span>
     </dt>
-    <dd><p>Disk subscription related parameter settings.</p>
-</dd><dt class="property-required"
+    <dd>Disk subscription related parameter settings.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -472,8 +560,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Disk size, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -481,8 +568,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</p>
-</dd><dt class="property-required"
+    <dd>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -490,8 +576,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="automountconfiguration_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#automountconfiguration_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Mount<wbr>Configuration</a>
@@ -499,8 +584,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#diskautomountconfiguration">Disk<wbr>Auto<wbr>Mount<wbr>Configuration<wbr>Args</a></span>
     </dt>
-    <dd><p>Automatically mount and initialize data disks.</p>
-</dd><dt class="property-optional"
+    <dd>Automatically mount and initialize data disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Voucher</a>
@@ -508,8 +592,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to automatically use the voucher. Not used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically use the voucher. Not used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskbackupquota_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskbackupquota_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Backup<wbr>Quota</a>
@@ -517,8 +600,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskcount_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Count</a>
@@ -526,8 +608,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk count. Values: [1, 30]. Default: 1.</p>
-</dd><dt class="property-optional"
+    <dd>Disk count. Values: [1, 30]. Default: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskname_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Name</a>
@@ -535,8 +616,85 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk name. Maximum length 60.</p>
-</dd></dl>
+    <dd>Disk name. Maximum length 60.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="disk_charge_prepaid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_charge_prepaid_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>charge_<wbr>prepaid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#diskdiskchargeprepaid">object</a></span>
+    </dt>
+    <dd>Disk subscription related parameter settings.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Disk size, unit: GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_mount_configuration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_mount_configuration_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>mount_<wbr>configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#diskautomountconfiguration">object</a></span>
+    </dt>
+    <dd>Automatically mount and initialize data disks.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_voucher_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_voucher_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>voucher</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to automatically use the voucher. Not used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_backup_quota_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_backup_quota_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>backup_<wbr>quota</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_count_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Disk count. Values: [1, 30]. Default: 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_name_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk name. Maximum length 60.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -548,10 +706,9 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargeprepaid_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Charge<wbr>Prepaid</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#diskdiskchargeprepaid">Disk<wbr>Disk<wbr>Charge<wbr>Prepaid<wbr>Args</a></span>
+        <span class="property-type"><a href="#diskdiskchargeprepaid">Disk<wbr>Disk<wbr>Charge<wbr>Prepaid</a></span>
     </dt>
-    <dd><p>Disk subscription related parameter settings.</p>
-</dd><dt class="property-required"
+    <dd>Disk subscription related parameter settings.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -559,8 +716,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Disk size, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Disk size, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -568,8 +724,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</p>
-</dd><dt class="property-required"
+    <dd>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -577,17 +732,15 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="automountconfiguration_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#automountconfiguration_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Mount<wbr>Configuration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#diskautomountconfiguration">Disk<wbr>Auto<wbr>Mount<wbr>Configuration<wbr>Args</a></span>
+        <span class="property-type"><a href="#diskautomountconfiguration">Disk<wbr>Auto<wbr>Mount<wbr>Configuration</a></span>
     </dt>
-    <dd><p>Automatically mount and initialize data disks.</p>
-</dd><dt class="property-optional"
+    <dd>Automatically mount and initialize data disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -595,8 +748,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to automatically use the voucher. Not used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically use the voucher. Not used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskbackupquota_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskbackupquota_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Backup<wbr>Quota</a>
@@ -604,8 +756,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskcount_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Count</a>
@@ -613,8 +764,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Disk count. Values: [1, 30]. Default: 1.</p>
-</dd><dt class="property-optional"
+    <dd>Disk count. Values: [1, 30]. Default: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskname_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Name</a>
@@ -622,8 +772,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk name. Maximum length 60.</p>
-</dd></dl>
+    <dd>Disk name. Maximum length 60.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -635,10 +784,9 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskchargeprepaid_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Charge<wbr>Prepaid</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#diskdiskchargeprepaid">Disk<wbr>Disk<wbr>Charge<wbr>Prepaid<wbr>Args</a></span>
+        <span class="property-type"><a href="#diskdiskchargeprepaid">Disk<wbr>Disk<wbr>Charge<wbr>Prepaid</a></span>
     </dt>
-    <dd><p>Disk subscription related parameter settings.</p>
-</dd><dt class="property-required"
+    <dd>Disk subscription related parameter settings.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -646,8 +794,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Disk size, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Disk size, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -655,8 +802,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</p>
-</dd><dt class="property-required"
+    <dd>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -664,17 +810,15 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="automountconfiguration_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#automountconfiguration_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Mount<wbr>Configuration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#diskautomountconfiguration">Disk<wbr>Auto<wbr>Mount<wbr>Configuration<wbr>Args</a></span>
+        <span class="property-type"><a href="#diskautomountconfiguration">Disk<wbr>Auto<wbr>Mount<wbr>Configuration</a></span>
     </dt>
-    <dd><p>Automatically mount and initialize data disks.</p>
-</dd><dt class="property-optional"
+    <dd>Automatically mount and initialize data disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -682,8 +826,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to automatically use the voucher. Not used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically use the voucher. Not used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskbackupquota_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskbackupquota_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Backup<wbr>Quota</a>
@@ -691,8 +834,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskcount_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Count</a>
@@ -700,8 +842,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Disk count. Values: [1, 30]. Default: 1.</p>
-</dd><dt class="property-optional"
+    <dd>Disk count. Values: [1, 30]. Default: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskname_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Name</a>
@@ -709,8 +850,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk name. Maximum length 60.</p>
-</dd></dl>
+    <dd>Disk name. Maximum length 60.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -724,8 +864,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#diskdiskchargeprepaid">Disk<wbr>Disk<wbr>Charge<wbr>Prepaid<wbr>Args</a></span>
     </dt>
-    <dd><p>Disk subscription related parameter settings.</p>
-</dd><dt class="property-required"
+    <dd>Disk subscription related parameter settings.</dd><dt class="property-required"
             title="Required">
         <span id="disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
@@ -733,8 +872,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Disk size, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
@@ -742,8 +880,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</p>
-</dd><dt class="property-required"
+    <dd>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -751,8 +888,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_mount_configuration_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_mount_configuration_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>mount_<wbr>configuration</a>
@@ -760,8 +896,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#diskautomountconfiguration">Disk<wbr>Auto<wbr>Mount<wbr>Configuration<wbr>Args</a></span>
     </dt>
-    <dd><p>Automatically mount and initialize data disks.</p>
-</dd><dt class="property-optional"
+    <dd>Automatically mount and initialize data disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_voucher_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_voucher_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>voucher</a>
@@ -769,8 +904,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to automatically use the voucher. Not used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically use the voucher. Not used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_backup_quota_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_backup_quota_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>backup_<wbr>quota</a>
@@ -778,8 +912,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_count_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>count</a>
@@ -787,8 +920,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk count. Values: [1, 30]. Default: 1.</p>
-</dd><dt class="property-optional"
+    <dd>Disk count. Values: [1, 30]. Default: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_name_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>name</a>
@@ -796,8 +928,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Disk name. Maximum length 60.</p>
-</dd></dl>
+    <dd>Disk name. Maximum length 60.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -811,8 +942,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#diskdiskchargeprepaid">Property Map</a></span>
     </dt>
-    <dd><p>Disk subscription related parameter settings.</p>
-</dd><dt class="property-required"
+    <dd>Disk subscription related parameter settings.</dd><dt class="property-required"
             title="Required">
         <span id="disksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -820,8 +950,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Disk size, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Disk size, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="disktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -829,8 +958,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</p>
-</dd><dt class="property-required"
+    <dd>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -838,8 +966,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd><dt class="property-optional"
+    <dd>Availability zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="automountconfiguration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#automountconfiguration_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Mount<wbr>Configuration</a>
@@ -847,8 +974,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#diskautomountconfiguration">Property Map</a></span>
     </dt>
-    <dd><p>Automatically mount and initialize data disks.</p>
-</dd><dt class="property-optional"
+    <dd>Automatically mount and initialize data disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="autovoucher_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autovoucher_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -856,8 +982,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to automatically use the voucher. Not used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically use the voucher. Not used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskbackupquota_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskbackupquota_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Backup<wbr>Quota</a>
@@ -865,8 +990,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskcount_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Count</a>
@@ -874,8 +998,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Disk count. Values: [1, 30]. Default: 1.</p>
-</dd><dt class="property-optional"
+    <dd>Disk count. Values: [1, 30]. Default: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskname_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Name</a>
@@ -883,8 +1006,7 @@ The Disk resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk name. Maximum length 60.</p>
-</dd></dl>
+    <dd>Disk name. Maximum length 60.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -905,8 +1027,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -920,8 +1041,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -935,8 +1069,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -950,8 +1083,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -965,8 +1097,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -980,8 +1111,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -991,128 +1121,167 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Disk resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DiskState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Disk</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DiskState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Disk</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">auto_mount_configuration</span><span class="p">:</span> <span class="nx">Optional[_lighthouse.DiskAutoMountConfigurationArgs]</span> = None<span class="p">,</span>
+        <span class="nx">auto_mount_configuration</span><span class="p">:</span> <span class="nx">Optional[DiskAutoMountConfigurationArgs]</span> = None<span class="p">,</span>
         <span class="nx">auto_voucher</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">disk_backup_quota</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">disk_charge_prepaid</span><span class="p">:</span> <span class="nx">Optional[_lighthouse.DiskDiskChargePrepaidArgs]</span> = None<span class="p">,</span>
+        <span class="nx">disk_charge_prepaid</span><span class="p">:</span> <span class="nx">Optional[DiskDiskChargePrepaidArgs]</span> = None<span class="p">,</span>
         <span class="nx">disk_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">disk_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">disk_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">disk_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Disk</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDisk<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DiskState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Disk</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDisk<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DiskState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Disk</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Disk</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DiskState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Disk</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DiskState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Disk</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DiskState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Disk</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DiskState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingDisk</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Lighthouse:Disk</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_lighthouse_disk</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DiskState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DiskState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1120,28 +1289,31 @@ Get an existing Disk resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DiskState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1149,28 +1321,31 @@ Get an existing Disk resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DiskState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1188,10 +1363,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_automountconfiguration_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Mount<wbr>Configuration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#diskautomountconfiguration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Disk<wbr>Auto<wbr>Mount<wbr>Configuration<wbr>Args</a></span>
+        <span class="property-type"><a href="#diskautomountconfiguration">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Disk<wbr>Auto<wbr>Mount<wbr>Configuration</a></span>
     </dt>
-    <dd><p>Automatically mount and initialize data disks.</p>
-</dd><dt class="property-optional"
+    <dd>Automatically mount and initialize data disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autovoucher_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autovoucher_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Voucher</a>
@@ -1199,8 +1373,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to automatically use the voucher. Not used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically use the voucher. Not used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskbackupquota_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskbackupquota_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Backup<wbr>Quota</a>
@@ -1208,17 +1381,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskchargeprepaid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskchargeprepaid_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Charge<wbr>Prepaid</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#diskdiskchargeprepaid">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Disk<wbr>Disk<wbr>Charge<wbr>Prepaid<wbr>Args</a></span>
+        <span class="property-type"><a href="#diskdiskchargeprepaid">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Disk<wbr>Disk<wbr>Charge<wbr>Prepaid</a></span>
     </dt>
-    <dd><p>Disk subscription related parameter settings.</p>
-</dd><dt class="property-optional"
+    <dd>Disk subscription related parameter settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskcount_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Count</a>
@@ -1226,8 +1397,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk count. Values: [1, 30]. Default: 1.</p>
-</dd><dt class="property-optional"
+    <dd>Disk count. Values: [1, 30]. Default: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskname_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Name</a>
@@ -1235,8 +1405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk name. Maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Disk name. Maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disksize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -1244,8 +1413,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size, unit: GB.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size, unit: GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -1253,8 +1421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1262,8 +1429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1277,8 +1443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#diskautomountconfiguration">Disk<wbr>Auto<wbr>Mount<wbr>Configuration<wbr>Args</a></span>
     </dt>
-    <dd><p>Automatically mount and initialize data disks.</p>
-</dd><dt class="property-optional"
+    <dd>Automatically mount and initialize data disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autovoucher_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autovoucher_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Voucher</a>
@@ -1286,8 +1451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to automatically use the voucher. Not used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically use the voucher. Not used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskbackupquota_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskbackupquota_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Backup<wbr>Quota</a>
@@ -1295,8 +1459,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskchargeprepaid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskchargeprepaid_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Charge<wbr>Prepaid</a>
@@ -1304,8 +1467,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#diskdiskchargeprepaid">Disk<wbr>Disk<wbr>Charge<wbr>Prepaid<wbr>Args</a></span>
     </dt>
-    <dd><p>Disk subscription related parameter settings.</p>
-</dd><dt class="property-optional"
+    <dd>Disk subscription related parameter settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskcount_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Count</a>
@@ -1313,8 +1475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk count. Values: [1, 30]. Default: 1.</p>
-</dd><dt class="property-optional"
+    <dd>Disk count. Values: [1, 30]. Default: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskname_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Name</a>
@@ -1322,8 +1483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk name. Maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Disk name. Maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disksize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -1331,8 +1491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size, unit: GB.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size, unit: GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -1340,8 +1499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1349,8 +1507,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_mount_configuration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_mount_configuration_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>mount_<wbr>configuration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#diskautomountconfiguration">object</a></span>
+    </dt>
+    <dd>Automatically mount and initialize data disks.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_voucher_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_voucher_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>voucher</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to automatically use the voucher. Not used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disk_backup_quota_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_backup_quota_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>backup_<wbr>quota</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disk_charge_prepaid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_charge_prepaid_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>charge_<wbr>prepaid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#diskdiskchargeprepaid">object</a></span>
+    </dt>
+    <dd>Disk subscription related parameter settings.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disk_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_count_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Disk count. Values: [1, 30]. Default: 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disk_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_name_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk name. Maximum length 60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Disk size, unit: GB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1362,10 +1597,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_automountconfiguration_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Mount<wbr>Configuration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#diskautomountconfiguration">Disk<wbr>Auto<wbr>Mount<wbr>Configuration<wbr>Args</a></span>
+        <span class="property-type"><a href="#diskautomountconfiguration">Disk<wbr>Auto<wbr>Mount<wbr>Configuration</a></span>
     </dt>
-    <dd><p>Automatically mount and initialize data disks.</p>
-</dd><dt class="property-optional"
+    <dd>Automatically mount and initialize data disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autovoucher_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autovoucher_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -1373,8 +1607,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to automatically use the voucher. Not used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically use the voucher. Not used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskbackupquota_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskbackupquota_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Backup<wbr>Quota</a>
@@ -1382,17 +1615,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskchargeprepaid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskchargeprepaid_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Charge<wbr>Prepaid</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#diskdiskchargeprepaid">Disk<wbr>Disk<wbr>Charge<wbr>Prepaid<wbr>Args</a></span>
+        <span class="property-type"><a href="#diskdiskchargeprepaid">Disk<wbr>Disk<wbr>Charge<wbr>Prepaid</a></span>
     </dt>
-    <dd><p>Disk subscription related parameter settings.</p>
-</dd><dt class="property-optional"
+    <dd>Disk subscription related parameter settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskcount_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Count</a>
@@ -1400,8 +1631,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Disk count. Values: [1, 30]. Default: 1.</p>
-</dd><dt class="property-optional"
+    <dd>Disk count. Values: [1, 30]. Default: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskname_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Name</a>
@@ -1409,8 +1639,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk name. Maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Disk name. Maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disksize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -1418,8 +1647,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Disk size, unit: GB.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size, unit: GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1427,8 +1655,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1436,8 +1663,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1449,10 +1675,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_automountconfiguration_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Mount<wbr>Configuration</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#diskautomountconfiguration">Disk<wbr>Auto<wbr>Mount<wbr>Configuration<wbr>Args</a></span>
+        <span class="property-type"><a href="#diskautomountconfiguration">Disk<wbr>Auto<wbr>Mount<wbr>Configuration</a></span>
     </dt>
-    <dd><p>Automatically mount and initialize data disks.</p>
-</dd><dt class="property-optional"
+    <dd>Automatically mount and initialize data disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autovoucher_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autovoucher_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -1460,8 +1685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to automatically use the voucher. Not used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically use the voucher. Not used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskbackupquota_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskbackupquota_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Backup<wbr>Quota</a>
@@ -1469,17 +1693,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskchargeprepaid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskchargeprepaid_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Charge<wbr>Prepaid</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#diskdiskchargeprepaid">Disk<wbr>Disk<wbr>Charge<wbr>Prepaid<wbr>Args</a></span>
+        <span class="property-type"><a href="#diskdiskchargeprepaid">Disk<wbr>Disk<wbr>Charge<wbr>Prepaid</a></span>
     </dt>
-    <dd><p>Disk subscription related parameter settings.</p>
-</dd><dt class="property-optional"
+    <dd>Disk subscription related parameter settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskcount_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Count</a>
@@ -1487,8 +1709,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Disk count. Values: [1, 30]. Default: 1.</p>
-</dd><dt class="property-optional"
+    <dd>Disk count. Values: [1, 30]. Default: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskname_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Name</a>
@@ -1496,8 +1717,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk name. Maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Disk name. Maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disksize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -1505,8 +1725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Disk size, unit: GB.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size, unit: GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1514,8 +1733,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1523,8 +1741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1538,8 +1755,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#diskautomountconfiguration">Disk<wbr>Auto<wbr>Mount<wbr>Configuration<wbr>Args</a></span>
     </dt>
-    <dd><p>Automatically mount and initialize data disks.</p>
-</dd><dt class="property-optional"
+    <dd>Automatically mount and initialize data disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_auto_voucher_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_voucher_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>voucher</a>
@@ -1547,8 +1763,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to automatically use the voucher. Not used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically use the voucher. Not used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disk_backup_quota_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_backup_quota_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>backup_<wbr>quota</a>
@@ -1556,8 +1771,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disk_charge_prepaid_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_charge_prepaid_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>charge_<wbr>prepaid</a>
@@ -1565,8 +1779,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#diskdiskchargeprepaid">Disk<wbr>Disk<wbr>Charge<wbr>Prepaid<wbr>Args</a></span>
     </dt>
-    <dd><p>Disk subscription related parameter settings.</p>
-</dd><dt class="property-optional"
+    <dd>Disk subscription related parameter settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disk_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_count_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>count</a>
@@ -1574,8 +1787,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk count. Values: [1, 30]. Default: 1.</p>
-</dd><dt class="property-optional"
+    <dd>Disk count. Values: [1, 30]. Default: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disk_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_name_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>name</a>
@@ -1583,8 +1795,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Disk name. Maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Disk name. Maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
@@ -1592,8 +1803,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size, unit: GB.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size, unit: GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
@@ -1601,8 +1811,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1610,8 +1819,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1625,8 +1833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#diskautomountconfiguration">Property Map</a></span>
     </dt>
-    <dd><p>Automatically mount and initialize data disks.</p>
-</dd><dt class="property-optional"
+    <dd>Automatically mount and initialize data disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autovoucher_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autovoucher_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Voucher</a>
@@ -1634,8 +1841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to automatically use the voucher. Not used by default.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to automatically use the voucher. Not used by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskbackupquota_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskbackupquota_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Backup<wbr>Quota</a>
@@ -1643,8 +1849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</p>
-</dd><dt class="property-optional"
+    <dd>Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskchargeprepaid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskchargeprepaid_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Charge<wbr>Prepaid</a>
@@ -1652,8 +1857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#diskdiskchargeprepaid">Property Map</a></span>
     </dt>
-    <dd><p>Disk subscription related parameter settings.</p>
-</dd><dt class="property-optional"
+    <dd>Disk subscription related parameter settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskcount_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Count</a>
@@ -1661,8 +1865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Disk count. Values: [1, 30]. Default: 1.</p>
-</dd><dt class="property-optional"
+    <dd>Disk count. Values: [1, 30]. Default: 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_diskname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_diskname_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Name</a>
@@ -1670,8 +1873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk name. Maximum length 60.</p>
-</dd><dt class="property-optional"
+    <dd>Disk name. Maximum length 60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disksize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -1679,8 +1881,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Disk size, unit: GB.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size, unit: GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1688,8 +1889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</p>
-</dd><dt class="property-optional"
+    <dd>Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1697,8 +1897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1713,7 +1912,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="diskautomountconfiguration">Disk<wbr>Auto<wbr>Mount<wbr>Configuration</h4>
+<h4 id="diskautomountconfiguration">
+Disk<wbr>Auto<wbr>Mount<wbr>Configuration<pulumi-choosable type="language" values="python,go" class="inline">, Disk<wbr>Auto<wbr>Mount<wbr>Configuration<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1725,8 +1926,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID to be mounted. The specified instance must be in the Running state.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID to be mounted. The specified instance must be in the Running state.</dd><dt class="property-optional"
             title="Optional">
         <span id="filesystemtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemtype_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>System<wbr>Type</a>
@@ -1734,8 +1934,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.</p>
-</dd><dt class="property-optional"
+    <dd>The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.</dd><dt class="property-optional"
             title="Optional">
         <span id="mountpoint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountpoint_csharp" style="color: inherit; text-decoration: inherit;">Mount<wbr>Point</a>
@@ -1743,8 +1942,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.</p>
-</dd></dl>
+    <dd>The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1758,8 +1956,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID to be mounted. The specified instance must be in the Running state.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID to be mounted. The specified instance must be in the Running state.</dd><dt class="property-optional"
             title="Optional">
         <span id="filesystemtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemtype_go" style="color: inherit; text-decoration: inherit;">File<wbr>System<wbr>Type</a>
@@ -1767,8 +1964,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.</p>
-</dd><dt class="property-optional"
+    <dd>The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.</dd><dt class="property-optional"
             title="Optional">
         <span id="mountpoint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountpoint_go" style="color: inherit; text-decoration: inherit;">Mount<wbr>Point</a>
@@ -1776,8 +1972,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.</p>
-</dd></dl>
+    <dd>The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID to be mounted. The specified instance must be in the Running state.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="file_system_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_system_type_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>system_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mount_point_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mount_point_hcl" style="color: inherit; text-decoration: inherit;">mount_<wbr>point</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1791,8 +2016,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID to be mounted. The specified instance must be in the Running state.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID to be mounted. The specified instance must be in the Running state.</dd><dt class="property-optional"
             title="Optional">
         <span id="filesystemtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemtype_java" style="color: inherit; text-decoration: inherit;">file<wbr>System<wbr>Type</a>
@@ -1800,8 +2024,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.</p>
-</dd><dt class="property-optional"
+    <dd>The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.</dd><dt class="property-optional"
             title="Optional">
         <span id="mountpoint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountpoint_java" style="color: inherit; text-decoration: inherit;">mount<wbr>Point</a>
@@ -1809,8 +2032,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.</p>
-</dd></dl>
+    <dd>The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1824,8 +2046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID to be mounted. The specified instance must be in the Running state.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID to be mounted. The specified instance must be in the Running state.</dd><dt class="property-optional"
             title="Optional">
         <span id="filesystemtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemtype_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>System<wbr>Type</a>
@@ -1833,8 +2054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.</p>
-</dd><dt class="property-optional"
+    <dd>The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.</dd><dt class="property-optional"
             title="Optional">
         <span id="mountpoint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountpoint_nodejs" style="color: inherit; text-decoration: inherit;">mount<wbr>Point</a>
@@ -1842,8 +2062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.</p>
-</dd></dl>
+    <dd>The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1857,8 +2076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID to be mounted. The specified instance must be in the Running state.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID to be mounted. The specified instance must be in the Running state.</dd><dt class="property-optional"
             title="Optional">
         <span id="file_system_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_system_type_python" style="color: inherit; text-decoration: inherit;">file_<wbr>system_<wbr>type</a>
@@ -1866,8 +2084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.</p>
-</dd><dt class="property-optional"
+    <dd>The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.</dd><dt class="property-optional"
             title="Optional">
         <span id="mount_point_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mount_point_python" style="color: inherit; text-decoration: inherit;">mount_<wbr>point</a>
@@ -1875,8 +2092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.</p>
-</dd></dl>
+    <dd>The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1890,8 +2106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID to be mounted. The specified instance must be in the Running state.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID to be mounted. The specified instance must be in the Running state.</dd><dt class="property-optional"
             title="Optional">
         <span id="filesystemtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filesystemtype_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>System<wbr>Type</a>
@@ -1899,8 +2114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.</p>
-</dd><dt class="property-optional"
+    <dd>The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.</dd><dt class="property-optional"
             title="Optional">
         <span id="mountpoint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mountpoint_yaml" style="color: inherit; text-decoration: inherit;">mount<wbr>Point</a>
@@ -1908,12 +2122,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.</p>
-</dd></dl>
+    <dd>The mount point within the instance. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it will be mounted under the /data/disk path by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="diskdiskchargeprepaid">Disk<wbr>Disk<wbr>Charge<wbr>Prepaid</h4>
+<h4 id="diskdiskchargeprepaid">
+Disk<wbr>Disk<wbr>Charge<wbr>Prepaid<pulumi-choosable type="language" values="python,go" class="inline">, Disk<wbr>Disk<wbr>Charge<wbr>Prepaid<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1925,8 +2140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>new purchase cycle.</p>
-</dd><dt class="property-optional"
+    <dd>new purchase cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="renewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_csharp" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -1934,8 +2148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Automatic renewal flag. Value: <code>NOTIFY_AND_AUTO_RENEW</code>: Notice expires and auto-renews. <code>NOTIFY_AND_MANUAL_RENEW</code>: Notification expires without automatic renewal, users need to manually renew. <code>DISABLE_NOTIFY_AND_AUTO_RENEW</code>: No automatic renewal and no notification. Default: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the disk will be automatically renewed monthly when the account balance is sufficient.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. Value: <code>NOTIFY_AND_AUTO_RENEW</code>: Notice expires and auto-renews. <code>NOTIFY_AND_MANUAL_RENEW</code>: Notification expires without automatic renewal, users need to manually renew. <code>DISABLE_NOTIFY_AND_AUTO_RENEW</code>: No automatic renewal and no notification. Default: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the disk will be automatically renewed monthly when the account balance is sufficient.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Unit</a>
@@ -1943,8 +2156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>newly purchased unit. Default: m.</p>
-</dd></dl>
+    <dd>newly purchased unit. Default: m.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1958,8 +2170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>new purchase cycle.</p>
-</dd><dt class="property-optional"
+    <dd>new purchase cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="renewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_go" style="color: inherit; text-decoration: inherit;">Renew<wbr>Flag</a>
@@ -1967,8 +2178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Automatic renewal flag. Value: <code>NOTIFY_AND_AUTO_RENEW</code>: Notice expires and auto-renews. <code>NOTIFY_AND_MANUAL_RENEW</code>: Notification expires without automatic renewal, users need to manually renew. <code>DISABLE_NOTIFY_AND_AUTO_RENEW</code>: No automatic renewal and no notification. Default: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the disk will be automatically renewed monthly when the account balance is sufficient.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. Value: <code>NOTIFY_AND_AUTO_RENEW</code>: Notice expires and auto-renews. <code>NOTIFY_AND_MANUAL_RENEW</code>: Notification expires without automatic renewal, users need to manually renew. <code>DISABLE_NOTIFY_AND_AUTO_RENEW</code>: No automatic renewal and no notification. Default: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the disk will be automatically renewed monthly when the account balance is sufficient.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Unit</a>
@@ -1976,8 +2186,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>newly purchased unit. Default: m.</p>
-</dd></dl>
+    <dd>newly purchased unit. Default: m.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>new purchase cycle.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renew_flag_hcl" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Automatic renewal flag. Value: <code>NOTIFY_AND_AUTO_RENEW</code>: Notice expires and auto-renews. <code>NOTIFY_AND_MANUAL_RENEW</code>: Notification expires without automatic renewal, users need to manually renew. <code>DISABLE_NOTIFY_AND_AUTO_RENEW</code>: No automatic renewal and no notification. Default: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the disk will be automatically renewed monthly when the account balance is sufficient.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="time_unit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_unit_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>newly purchased unit. Default: m.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1991,8 +2230,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>new purchase cycle.</p>
-</dd><dt class="property-optional"
+    <dd>new purchase cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="renewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_java" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -2000,8 +2238,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Automatic renewal flag. Value: <code>NOTIFY_AND_AUTO_RENEW</code>: Notice expires and auto-renews. <code>NOTIFY_AND_MANUAL_RENEW</code>: Notification expires without automatic renewal, users need to manually renew. <code>DISABLE_NOTIFY_AND_AUTO_RENEW</code>: No automatic renewal and no notification. Default: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the disk will be automatically renewed monthly when the account balance is sufficient.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. Value: <code>NOTIFY_AND_AUTO_RENEW</code>: Notice expires and auto-renews. <code>NOTIFY_AND_MANUAL_RENEW</code>: Notification expires without automatic renewal, users need to manually renew. <code>DISABLE_NOTIFY_AND_AUTO_RENEW</code>: No automatic renewal and no notification. Default: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the disk will be automatically renewed monthly when the account balance is sufficient.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_java" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -2009,8 +2246,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>newly purchased unit. Default: m.</p>
-</dd></dl>
+    <dd>newly purchased unit. Default: m.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2024,8 +2260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>new purchase cycle.</p>
-</dd><dt class="property-optional"
+    <dd>new purchase cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="renewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_nodejs" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -2033,8 +2268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Automatic renewal flag. Value: <code>NOTIFY_AND_AUTO_RENEW</code>: Notice expires and auto-renews. <code>NOTIFY_AND_MANUAL_RENEW</code>: Notification expires without automatic renewal, users need to manually renew. <code>DISABLE_NOTIFY_AND_AUTO_RENEW</code>: No automatic renewal and no notification. Default: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the disk will be automatically renewed monthly when the account balance is sufficient.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. Value: <code>NOTIFY_AND_AUTO_RENEW</code>: Notice expires and auto-renews. <code>NOTIFY_AND_MANUAL_RENEW</code>: Notification expires without automatic renewal, users need to manually renew. <code>DISABLE_NOTIFY_AND_AUTO_RENEW</code>: No automatic renewal and no notification. Default: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the disk will be automatically renewed monthly when the account balance is sufficient.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -2042,8 +2276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>newly purchased unit. Default: m.</p>
-</dd></dl>
+    <dd>newly purchased unit. Default: m.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2057,8 +2290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>new purchase cycle.</p>
-</dd><dt class="property-optional"
+    <dd>new purchase cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renew_flag_python" style="color: inherit; text-decoration: inherit;">renew_<wbr>flag</a>
@@ -2066,8 +2298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Automatic renewal flag. Value: <code>NOTIFY_AND_AUTO_RENEW</code>: Notice expires and auto-renews. <code>NOTIFY_AND_MANUAL_RENEW</code>: Notification expires without automatic renewal, users need to manually renew. <code>DISABLE_NOTIFY_AND_AUTO_RENEW</code>: No automatic renewal and no notification. Default: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the disk will be automatically renewed monthly when the account balance is sufficient.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. Value: <code>NOTIFY_AND_AUTO_RENEW</code>: Notice expires and auto-renews. <code>NOTIFY_AND_MANUAL_RENEW</code>: Notification expires without automatic renewal, users need to manually renew. <code>DISABLE_NOTIFY_AND_AUTO_RENEW</code>: No automatic renewal and no notification. Default: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the disk will be automatically renewed monthly when the account balance is sufficient.</dd><dt class="property-optional"
             title="Optional">
         <span id="time_unit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_unit_python" style="color: inherit; text-decoration: inherit;">time_<wbr>unit</a>
@@ -2075,8 +2306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>newly purchased unit. Default: m.</p>
-</dd></dl>
+    <dd>newly purchased unit. Default: m.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2090,8 +2320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>new purchase cycle.</p>
-</dd><dt class="property-optional"
+    <dd>new purchase cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="renewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#renewflag_yaml" style="color: inherit; text-decoration: inherit;">renew<wbr>Flag</a>
@@ -2099,8 +2328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Automatic renewal flag. Value: <code>NOTIFY_AND_AUTO_RENEW</code>: Notice expires and auto-renews. <code>NOTIFY_AND_MANUAL_RENEW</code>: Notification expires without automatic renewal, users need to manually renew. <code>DISABLE_NOTIFY_AND_AUTO_RENEW</code>: No automatic renewal and no notification. Default: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the disk will be automatically renewed monthly when the account balance is sufficient.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal flag. Value: <code>NOTIFY_AND_AUTO_RENEW</code>: Notice expires and auto-renews. <code>NOTIFY_AND_MANUAL_RENEW</code>: Notification expires without automatic renewal, users need to manually renew. <code>DISABLE_NOTIFY_AND_AUTO_RENEW</code>: No automatic renewal and no notification. Default: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the disk will be automatically renewed monthly when the account balance is sufficient.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -2108,8 +2336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>newly purchased unit. Default: m.</p>
-</dd></dl>
+    <dd>newly purchased unit. Default: m.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2121,7 +2348,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

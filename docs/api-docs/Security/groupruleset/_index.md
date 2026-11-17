@@ -2,9 +2,11 @@
 ---
 title: "GroupRuleSet"
 title_tag: "tencentcloud.Security.GroupRuleSet"
-meta_desc: "Documentation for the tencentcloud.Security.GroupRuleSet resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create security group rule. This resource is similar with tencentcloud_security_group_lite_rule, rules can be ordered and configure."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,21 +20,38 @@ Provides a resource to create security group rule. This resource is similar with
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const baseGroup = new tencentcloud.security.Group("baseGroup", {description: "Testing Rule Set Security"});
-const relative = new tencentcloud.security.Group("relative", {description: "Used for attach security policy"});
-const fooTemplate = new tencentcloud.address.Template("fooTemplate", {addresses: [
-    "10.0.0.1",
-    "10.0.1.0/24",
-    "10.0.0.1-10.0.0.100",
-]});
-const fooTemplateGroup = new tencentcloud.address.TemplateGroup("fooTemplateGroup", {templateIds: [fooTemplate.id]});
-const baseGroupRuleSet = new tencentcloud.security.GroupRuleSet("baseGroupRuleSet", {
-    securityGroupId: baseGroup.id,
+const base = new tencentcloud.security.Group("base", {
+    name: "test-set-sg",
+    description: "Testing Rule Set Security",
+});
+const relative = new tencentcloud.security.Group("relative", {
+    name: "for-relative",
+    description: "Used for attach security policy",
+});
+const foo = new tencentcloud.address.Template("foo", {
+    name: "test-set-aTemp",
+    addresses: [
+        "10.0.0.1",
+        "10.0.1.0/24",
+        "10.0.0.1-10.0.0.100",
+    ],
+});
+const fooTemplateGroup = new tencentcloud.address.TemplateGroup("foo", {
+    name: "test-set-atg",
+    templateIds: [foo.id],
+});
+const baseGroupRuleSet = new tencentcloud.security.GroupRuleSet("base", {
+    securityGroupId: base.id,
     ingresses: [
         {
             action: "ACCEPT",
@@ -79,7 +98,7 @@ const baseGroupRuleSet = new tencentcloud.security.GroupRuleSet("baseGroupRuleSe
         },
         {
             action: "DROP",
-            addressTemplateId: fooTemplate.id,
+            addressTemplateId: foo.id,
             description: "B:Allow template",
         },
         {
@@ -90,76 +109,209 @@ const baseGroupRuleSet = new tencentcloud.security.GroupRuleSet("baseGroupRuleSe
     ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-base_group = tencentcloud.security.Group("baseGroup", description="Testing Rule Set Security")
-relative = tencentcloud.security.Group("relative", description="Used for attach security policy")
-foo_template = tencentcloud.address.Template("fooTemplate", addresses=[
-    "10.0.0.1",
-    "10.0.1.0/24",
-    "10.0.0.1-10.0.0.100",
-])
-foo_template_group = tencentcloud.address.TemplateGroup("fooTemplateGroup", template_ids=[foo_template.id])
-base_group_rule_set = tencentcloud.security.GroupRuleSet("baseGroupRuleSet",
-    security_group_id=base_group.id,
+base = tencentcloud.security.Group("base",
+    name="test-set-sg",
+    description="Testing Rule Set Security")
+relative = tencentcloud.security.Group("relative",
+    name="for-relative",
+    description="Used for attach security policy")
+foo = tencentcloud.address.Template("foo",
+    name="test-set-aTemp",
+    addresses=[
+        "10.0.0.1",
+        "10.0.1.0/24",
+        "10.0.0.1-10.0.0.100",
+    ])
+foo_template_group = tencentcloud.address.TemplateGroup("foo",
+    name="test-set-atg",
+    template_ids=[foo.id])
+base_group_rule_set = tencentcloud.security.GroupRuleSet("base",
+    security_group_id=base.id,
     ingresses=[
-        tencentcloud.security.GroupRuleSetIngressArgs(
-            action="ACCEPT",
-            cidr_block="10.0.0.0/22",
-            protocol="TCP",
-            port="80-90",
-            description="A:Allow Ips and 80-90",
-        ),
-        tencentcloud.security.GroupRuleSetIngressArgs(
-            action="ACCEPT",
-            cidr_block="10.0.2.1",
-            protocol="UDP",
-            port="8080",
-            description="B:Allow UDP 8080",
-        ),
-        tencentcloud.security.GroupRuleSetIngressArgs(
-            action="ACCEPT",
-            cidr_block="10.0.2.1",
-            protocol="UDP",
-            port="8080",
-            description="C:Allow UDP 8080",
-        ),
-        tencentcloud.security.GroupRuleSetIngressArgs(
-            action="ACCEPT",
-            cidr_block="172.18.1.2",
-            protocol="ALL",
-            port="ALL",
-            description="D:Allow ALL",
-        ),
-        tencentcloud.security.GroupRuleSetIngressArgs(
-            action="DROP",
-            protocol="TCP",
-            port="80",
-            source_security_id=relative.id,
-            description="E:Block relative",
-        ),
+        {
+            "action": "ACCEPT",
+            "cidr_block": "10.0.0.0/22",
+            "protocol": "TCP",
+            "port": "80-90",
+            "description": "A:Allow Ips and 80-90",
+        },
+        {
+            "action": "ACCEPT",
+            "cidr_block": "10.0.2.1",
+            "protocol": "UDP",
+            "port": "8080",
+            "description": "B:Allow UDP 8080",
+        },
+        {
+            "action": "ACCEPT",
+            "cidr_block": "10.0.2.1",
+            "protocol": "UDP",
+            "port": "8080",
+            "description": "C:Allow UDP 8080",
+        },
+        {
+            "action": "ACCEPT",
+            "cidr_block": "172.18.1.2",
+            "protocol": "ALL",
+            "port": "ALL",
+            "description": "D:Allow ALL",
+        },
+        {
+            "action": "DROP",
+            "protocol": "TCP",
+            "port": "80",
+            "source_security_id": relative.id,
+            "description": "E:Block relative",
+        },
     ],
     egresses=[
-        tencentcloud.security.GroupRuleSetEgressArgs(
-            action="DROP",
-            cidr_block="10.0.0.0/16",
-            protocol="ICMP",
-            description="A:Block ping3",
-        ),
-        tencentcloud.security.GroupRuleSetEgressArgs(
-            action="DROP",
-            address_template_id=foo_template.id,
-            description="B:Allow template",
-        ),
-        tencentcloud.security.GroupRuleSetEgressArgs(
-            action="DROP",
-            address_template_group=foo_template_group.id,
-            description="C:DROP template group",
-        ),
+        {
+            "action": "DROP",
+            "cidr_block": "10.0.0.0/16",
+            "protocol": "ICMP",
+            "description": "A:Block ping3",
+        },
+        {
+            "action": "DROP",
+            "address_template_id": foo.id,
+            "description": "B:Allow template",
+        },
+        {
+            "action": "DROP",
+            "address_template_group": foo_template_group.id,
+            "description": "C:DROP template group",
+        },
     ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/address"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		base, err := security.NewGroup(ctx, "base", &security.GroupArgs{
+			Name:        pulumi.String("test-set-sg"),
+			Description: pulumi.String("Testing Rule Set Security"),
+		})
+		if err != nil {
+			return err
+		}
+		relative, err := security.NewGroup(ctx, "relative", &security.GroupArgs{
+			Name:        pulumi.String("for-relative"),
+			Description: pulumi.String("Used for attach security policy"),
+		})
+		if err != nil {
+			return err
+		}
+		foo, err := address.NewTemplate(ctx, "foo", &address.TemplateArgs{
+			Name: pulumi.String("test-set-aTemp"),
+			Addresses: pulumi.StringArray{
+				pulumi.String("10.0.0.1"),
+				pulumi.String("10.0.1.0/24"),
+				pulumi.String("10.0.0.1-10.0.0.100"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		fooTemplateGroup, err := address.NewTemplateGroup(ctx, "foo", &address.TemplateGroupArgs{
+			Name: pulumi.String("test-set-atg"),
+			TemplateIds: pulumi.StringArray{
+				foo.ID().ToIDOutput().ToStringOutput(),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = security.NewGroupRuleSet(ctx, "base", &security.GroupRuleSetArgs{
+			SecurityGroupId: base.ID().ToIDOutput().ToStringOutput(),
+			Ingresses: security.GroupRuleSetIngressArray{
+				&security.GroupRuleSetIngressArgs{
+					Action:      pulumi.String("ACCEPT"),
+					CidrBlock:   pulumi.String("10.0.0.0/22"),
+					Protocol:    pulumi.String("TCP"),
+					Port:        pulumi.String("80-90"),
+					Description: pulumi.String("A:Allow Ips and 80-90"),
+				},
+				&security.GroupRuleSetIngressArgs{
+					Action:      pulumi.String("ACCEPT"),
+					CidrBlock:   pulumi.String("10.0.2.1"),
+					Protocol:    pulumi.String("UDP"),
+					Port:        pulumi.String("8080"),
+					Description: pulumi.String("B:Allow UDP 8080"),
+				},
+				&security.GroupRuleSetIngressArgs{
+					Action:      pulumi.String("ACCEPT"),
+					CidrBlock:   pulumi.String("10.0.2.1"),
+					Protocol:    pulumi.String("UDP"),
+					Port:        pulumi.String("8080"),
+					Description: pulumi.String("C:Allow UDP 8080"),
+				},
+				&security.GroupRuleSetIngressArgs{
+					Action:      pulumi.String("ACCEPT"),
+					CidrBlock:   pulumi.String("172.18.1.2"),
+					Protocol:    pulumi.String("ALL"),
+					Port:        pulumi.String("ALL"),
+					Description: pulumi.String("D:Allow ALL"),
+				},
+				&security.GroupRuleSetIngressArgs{
+					Action:           pulumi.String("DROP"),
+					Protocol:         pulumi.String("TCP"),
+					Port:             pulumi.String("80"),
+					SourceSecurityId: relative.ID().ToIDOutput().ToStringOutput(),
+					Description:      pulumi.String("E:Block relative"),
+				},
+			},
+			Egresses: security.GroupRuleSetEgressArray{
+				&security.GroupRuleSetEgressArgs{
+					Action:      pulumi.String("DROP"),
+					CidrBlock:   pulumi.String("10.0.0.0/16"),
+					Protocol:    pulumi.String("ICMP"),
+					Description: pulumi.String("A:Block ping3"),
+				},
+				&security.GroupRuleSetEgressArgs{
+					Action:            pulumi.String("DROP"),
+					AddressTemplateId: foo.ID().ToIDOutput().ToStringOutput(),
+					Description:       pulumi.String("B:Allow template"),
+				},
+				&security.GroupRuleSetEgressArgs{
+					Action:               pulumi.String("DROP"),
+					AddressTemplateGroup: fooTemplateGroup.ID().ToIDOutput().ToStringOutput(),
+					Description:          pulumi.String("C:DROP template group"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -168,18 +320,21 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var baseGroup = new Tencentcloud.Security.Group("baseGroup", new()
+    var @base = new Tencentcloud.Security.Group("base", new()
     {
+        Name = "test-set-sg",
         Description = "Testing Rule Set Security",
     });
 
     var relative = new Tencentcloud.Security.Group("relative", new()
     {
+        Name = "for-relative",
         Description = "Used for attach security policy",
     });
 
-    var fooTemplate = new Tencentcloud.Address.Template("fooTemplate", new()
+    var foo = new Tencentcloud.Address.Template("foo", new()
     {
+        Name = "test-set-aTemp",
         Addresses = new[]
         {
             "10.0.0.1",
@@ -188,17 +343,18 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var fooTemplateGroup = new Tencentcloud.Address.TemplateGroup("fooTemplateGroup", new()
+    var fooTemplateGroup = new Tencentcloud.Address.TemplateGroup("foo", new()
     {
+        Name = "test-set-atg",
         TemplateIds = new[]
         {
-            fooTemplate.Id,
+            foo.Id,
         },
     });
 
-    var baseGroupRuleSet = new Tencentcloud.Security.GroupRuleSet("baseGroupRuleSet", new()
+    var baseGroupRuleSet = new Tencentcloud.Security.GroupRuleSet("base", new()
     {
-        SecurityGroupId = baseGroup.Id,
+        SecurityGroupId = @base.Id,
         Ingresses = new[]
         {
             new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
@@ -254,7 +410,7 @@ return await Deployment.RunAsync(() =>
             new Tencentcloud.Security.Inputs.GroupRuleSetEgressArgs
             {
                 Action = "DROP",
-                AddressTemplateId = fooTemplate.Id,
+                AddressTemplateId = foo.Id,
                 Description = "B:Allow template",
             },
             new Tencentcloud.Security.Inputs.GroupRuleSetEgressArgs
@@ -268,112 +424,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Address"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		baseGroup, err := Security.NewGroup(ctx, "baseGroup", &Security.GroupArgs{
-			Description: pulumi.String("Testing Rule Set Security"),
-		})
-		if err != nil {
-			return err
-		}
-		relative, err := Security.NewGroup(ctx, "relative", &Security.GroupArgs{
-			Description: pulumi.String("Used for attach security policy"),
-		})
-		if err != nil {
-			return err
-		}
-		fooTemplate, err := Address.NewTemplate(ctx, "fooTemplate", &Address.TemplateArgs{
-			Addresses: pulumi.StringArray{
-				pulumi.String("10.0.0.1"),
-				pulumi.String("10.0.1.0/24"),
-				pulumi.String("10.0.0.1-10.0.0.100"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		fooTemplateGroup, err := Address.NewTemplateGroup(ctx, "fooTemplateGroup", &Address.TemplateGroupArgs{
-			TemplateIds: pulumi.StringArray{
-				fooTemplate.ID(),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Security.NewGroupRuleSet(ctx, "baseGroupRuleSet", &Security.GroupRuleSetArgs{
-			SecurityGroupId: baseGroup.ID(),
-			Ingresses: security.GroupRuleSetIngressArray{
-				&security.GroupRuleSetIngressArgs{
-					Action:      pulumi.String("ACCEPT"),
-					CidrBlock:   pulumi.String("10.0.0.0/22"),
-					Protocol:    pulumi.String("TCP"),
-					Port:        pulumi.String("80-90"),
-					Description: pulumi.String("A:Allow Ips and 80-90"),
-				},
-				&security.GroupRuleSetIngressArgs{
-					Action:      pulumi.String("ACCEPT"),
-					CidrBlock:   pulumi.String("10.0.2.1"),
-					Protocol:    pulumi.String("UDP"),
-					Port:        pulumi.String("8080"),
-					Description: pulumi.String("B:Allow UDP 8080"),
-				},
-				&security.GroupRuleSetIngressArgs{
-					Action:      pulumi.String("ACCEPT"),
-					CidrBlock:   pulumi.String("10.0.2.1"),
-					Protocol:    pulumi.String("UDP"),
-					Port:        pulumi.String("8080"),
-					Description: pulumi.String("C:Allow UDP 8080"),
-				},
-				&security.GroupRuleSetIngressArgs{
-					Action:      pulumi.String("ACCEPT"),
-					CidrBlock:   pulumi.String("172.18.1.2"),
-					Protocol:    pulumi.String("ALL"),
-					Port:        pulumi.String("ALL"),
-					Description: pulumi.String("D:Allow ALL"),
-				},
-				&security.GroupRuleSetIngressArgs{
-					Action:           pulumi.String("DROP"),
-					Protocol:         pulumi.String("TCP"),
-					Port:             pulumi.String("80"),
-					SourceSecurityId: relative.ID(),
-					Description:      pulumi.String("E:Block relative"),
-				},
-			},
-			Egresses: security.GroupRuleSetEgressArray{
-				&security.GroupRuleSetEgressArgs{
-					Action:      pulumi.String("DROP"),
-					CidrBlock:   pulumi.String("10.0.0.0/16"),
-					Protocol:    pulumi.String("ICMP"),
-					Description: pulumi.String("A:Block ping3"),
-				},
-				&security.GroupRuleSetEgressArgs{
-					Action:            pulumi.String("DROP"),
-					AddressTemplateId: fooTemplate.ID(),
-					Description:       pulumi.String("B:Allow template"),
-				},
-				&security.GroupRuleSetEgressArgs{
-					Action:               pulumi.String("DROP"),
-					AddressTemplateGroup: fooTemplateGroup.ID(),
-					Description:          pulumi.String("C:DROP template group"),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -390,8 +445,8 @@ import com.pulumi.tencentcloud.Security.GroupRuleSet;
 import com.pulumi.tencentcloud.Security.GroupRuleSetArgs;
 import com.pulumi.tencentcloud.Security.inputs.GroupRuleSetIngressArgs;
 import com.pulumi.tencentcloud.Security.inputs.GroupRuleSetEgressArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -403,27 +458,31 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var baseGroup = new Group("baseGroup", GroupArgs.builder()        
+        var base = new Group("base", GroupArgs.builder()
+            .name("test-set-sg")
             .description("Testing Rule Set Security")
             .build());
 
-        var relative = new Group("relative", GroupArgs.builder()        
+        var relative = new Group("relative", GroupArgs.builder()
+            .name("for-relative")
             .description("Used for attach security policy")
             .build());
 
-        var fooTemplate = new Template("fooTemplate", TemplateArgs.builder()        
+        var foo = new Template("foo", TemplateArgs.builder()
+            .name("test-set-aTemp")
             .addresses(            
                 "10.0.0.1",
                 "10.0.1.0/24",
                 "10.0.0.1-10.0.0.100")
             .build());
 
-        var fooTemplateGroup = new TemplateGroup("fooTemplateGroup", TemplateGroupArgs.builder()        
-            .templateIds(fooTemplate.id())
+        var fooTemplateGroup = new TemplateGroup("fooTemplateGroup", TemplateGroupArgs.builder()
+            .name("test-set-atg")
+            .templateIds(foo.id())
             .build());
 
-        var baseGroupRuleSet = new GroupRuleSet("baseGroupRuleSet", GroupRuleSetArgs.builder()        
-            .securityGroupId(baseGroup.id())
+        var baseGroupRuleSet = new GroupRuleSet("baseGroupRuleSet", GroupRuleSetArgs.builder()
+            .securityGroupId(base.id())
             .ingresses(            
                 GroupRuleSetIngressArgs.builder()
                     .action("ACCEPT")
@@ -469,7 +528,7 @@ public class App {
                     .build(),
                 GroupRuleSetEgressArgs.builder()
                     .action("DROP")
-                    .addressTemplateId(fooTemplate.id())
+                    .addressTemplateId(foo.id())
                     .description("B:Allow template")
                     .build(),
                 GroupRuleSetEgressArgs.builder()
@@ -482,32 +541,43 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  baseGroup:
+  base:
     type: tencentcloud:Security:Group
     properties:
+      name: test-set-sg
       description: Testing Rule Set Security
   relative:
     type: tencentcloud:Security:Group
     properties:
+      name: for-relative
       description: Used for attach security policy
-  fooTemplate:
+  foo:
     type: tencentcloud:Address:Template
     properties:
+      name: test-set-aTemp
       addresses:
         - 10.0.0.1
         - 10.0.1.0/24
         - 10.0.0.1-10.0.0.100
   fooTemplateGroup:
     type: tencentcloud:Address:TemplateGroup
+    name: foo
     properties:
+      name: test-set-atg
       templateIds:
-        - ${fooTemplate.id}
+        - ${foo.id}
   baseGroupRuleSet:
     type: tencentcloud:Security:GroupRuleSet
+    name: base
     properties:
-      securityGroupId: ${baseGroup.id}
+      securityGroupId: ${base.id}
       ingresses:
         - action: ACCEPT
           cidrBlock: 10.0.0.0/22
@@ -540,73 +610,185 @@ resources:
           protocol: ICMP
           description: A:Block ping3
         - action: DROP
-          addressTemplateId: ${fooTemplate.id}
+          addressTemplateId: ${foo.id}
           description: B:Allow template
         - action: DROP
           addressTemplateGroup: ${fooTemplateGroup.id}
           description: C:DROP template group
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_security_group" "base" {
+  name        = "test-set-sg"
+  description = "Testing Rule Set Security"
+}
+resource "tencentcloud_security_group" "relative" {
+  name        = "for-relative"
+  description = "Used for attach security policy"
+}
+resource "tencentcloud_address_template" "foo" {
+  name      = "test-set-aTemp"
+  addresses = ["10.0.0.1", "10.0.1.0/24", "10.0.0.1-10.0.0.100"]
+}
+resource "tencentcloud_address_templategroup" "foo" {
+  name         = "test-set-atg"
+  template_ids = [tencentcloud_address_template.foo.id]
+}
+resource "tencentcloud_security_groupruleset" "base" {
+  security_group_id = tencentcloud_security_group.base.id
+  ingresses {
+    action      = "ACCEPT"
+    cidr_block  = "10.0.0.0/22"
+    protocol    = "TCP"
+    port        = "80-90"
+    description = "A:Allow Ips and 80-90"
+  }
+  ingresses {
+    action      = "ACCEPT"
+    cidr_block  = "10.0.2.1"
+    protocol    = "UDP"
+    port        = "8080"
+    description = "B:Allow UDP 8080"
+  }
+  ingresses {
+    action      = "ACCEPT"
+    cidr_block  = "10.0.2.1"
+    protocol    = "UDP"
+    port        = "8080"
+    description = "C:Allow UDP 8080"
+  }
+  ingresses {
+    action      = "ACCEPT"
+    cidr_block  = "172.18.1.2"
+    protocol    = "ALL"
+    port        = "ALL"
+    description = "D:Allow ALL"
+  }
+  ingresses {
+    action             = "DROP"
+    protocol           = "TCP"
+    port               = "80"
+    source_security_id = tencentcloud_security_group.relative.id
+    description        = "E:Block relative"
+  }
+  egresses {
+    action      = "DROP"
+    cidr_block  = "10.0.0.0/16"
+    protocol    = "ICMP"
+    description = "A:Block ping3"
+  }
+  egresses {
+    action              = "DROP"
+    address_template_id = tencentcloud_address_template.foo.id
+    description         = "B:Allow template"
+  }
+  egresses {
+    action                 = "DROP"
+    address_template_group = tencentcloud_address_templategroup.foo.id
+    description            = "C:DROP template group"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [ModifySecurityGroupPolicies](https://www.tencentcloud.com/document/api/215/15810)
+* Read: [DescribeSecurityGroupPolicies](https://www.tencentcloud.com/document/api/215/15804)
+* Update:
+  - [DeleteSecurityGroupPolicies](https://www.tencentcloud.com/document/api/215/15809)
+  - [ModifySecurityGroupPolicies](https://www.tencentcloud.com/document/api/215/15810)
+* Delete: [ModifySecurityGroupPolicies](https://www.tencentcloud.com/document/api/215/15810)
 
 
 ## Create GroupRuleSet Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">GroupRuleSet</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GroupRuleSetArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">GroupRuleSet</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GroupRuleSetArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">GroupRuleSet</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                 <span class="nx">egresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[_security.GroupRuleSetEgressArgs]]</span> = None<span class="p">,</span>
-                 <span class="nx">ingresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[_security.GroupRuleSetIngressArgs]]</span> = None<span class="p">,</span>
-                 <span class="nx">security_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">GroupRuleSet</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GroupRuleSetArgs</a></span><span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">GroupRuleSet</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                 <span class="nx">security_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">egresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[GroupRuleSetEgressArgs]]</span> = None<span class="p">,</span>
+                 <span class="nx">ingresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[GroupRuleSetIngressArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewGroupRuleSet</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">GroupRuleSetArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">GroupRuleSet</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewGroupRuleSet</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">GroupRuleSetArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">GroupRuleSet</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">GroupRuleSet</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GroupRuleSetArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">GroupRuleSet</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GroupRuleSetArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">GroupRuleSet</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GroupRuleSetArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">GroupRuleSet</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GroupRuleSetArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Security:GroupRuleSet</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Security:GroupRuleSet</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_security_group_rule_set&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -627,7 +809,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -744,11 +926,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## GroupRuleSet Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The GroupRuleSet resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -764,26 +954,23 @@ The GroupRuleSet resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="egresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_csharp" style="color: inherit; text-decoration: inherit;">Egresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grouprulesetegress">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Security.<wbr>Inputs.<wbr>Group<wbr>Rule<wbr>Set<wbr>Egress<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#grouprulesetegress">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Security.<wbr>Inputs.<wbr>Group<wbr>Rule<wbr>Set<wbr>Egress&gt;</a></span>
     </dt>
-    <dd><p>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_csharp" style="color: inherit; text-decoration: inherit;">Ingresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grouprulesetingress">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Security.<wbr>Inputs.<wbr>Group<wbr>Rule<wbr>Set<wbr>Ingress<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#grouprulesetingress">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Security.<wbr>Inputs.<wbr>Group<wbr>Rule<wbr>Set<wbr>Ingress&gt;</a></span>
     </dt>
-    <dd><p>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd></dl>
+    <dd>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -797,8 +984,7 @@ The GroupRuleSet resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="egresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_go" style="color: inherit; text-decoration: inherit;">Egresses</a>
@@ -806,8 +992,7 @@ The GroupRuleSet resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#grouprulesetegress">[]Group<wbr>Rule<wbr>Set<wbr>Egress<wbr>Args</a></span>
     </dt>
-    <dd><p>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_go" style="color: inherit; text-decoration: inherit;">Ingresses</a>
@@ -815,8 +1000,37 @@ The GroupRuleSet resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#grouprulesetingress">[]Group<wbr>Rule<wbr>Set<wbr>Ingress<wbr>Args</a></span>
     </dt>
-    <dd><p>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd></dl>
+    <dd>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="security_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_id_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the security group to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="egresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_hcl" style="color: inherit; text-decoration: inherit;">egresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#grouprulesetegress">list(object)</a></span>
+    </dt>
+    <dd>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ingresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_hcl" style="color: inherit; text-decoration: inherit;">ingresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#grouprulesetingress">list(object)</a></span>
+    </dt>
+    <dd>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -830,26 +1044,23 @@ The GroupRuleSet resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the security group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="egresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_java" style="color: inherit; text-decoration: inherit;">egresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grouprulesetegress">List&lt;Group<wbr>Rule<wbr>Set<wbr>Egress<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#grouprulesetegress">List&lt;Group<wbr>Rule<wbr>Set<wbr>Egress&gt;</a></span>
     </dt>
-    <dd><p>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_java" style="color: inherit; text-decoration: inherit;">ingresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grouprulesetingress">List&lt;Group<wbr>Rule<wbr>Set<wbr>Ingress<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#grouprulesetingress">List&lt;Group<wbr>Rule<wbr>Set<wbr>Ingress&gt;</a></span>
     </dt>
-    <dd><p>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd></dl>
+    <dd>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -863,26 +1074,23 @@ The GroupRuleSet resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="egresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_nodejs" style="color: inherit; text-decoration: inherit;">egresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grouprulesetegress">Group<wbr>Rule<wbr>Set<wbr>Egress<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#grouprulesetegress">Group<wbr>Rule<wbr>Set<wbr>Egress[]</a></span>
     </dt>
-    <dd><p>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_nodejs" style="color: inherit; text-decoration: inherit;">ingresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grouprulesetingress">Group<wbr>Rule<wbr>Set<wbr>Ingress<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#grouprulesetingress">Group<wbr>Rule<wbr>Set<wbr>Ingress[]</a></span>
     </dt>
-    <dd><p>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd></dl>
+    <dd>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -896,26 +1104,23 @@ The GroupRuleSet resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the security group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="egresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_python" style="color: inherit; text-decoration: inherit;">egresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grouprulesetegress">Group<wbr>Rule<wbr>Set<wbr>Egress<wbr>Args]</a></span>
+        <span class="property-type"><a href="#grouprulesetegress">Sequence[Group<wbr>Rule<wbr>Set<wbr>Egress<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_python" style="color: inherit; text-decoration: inherit;">ingresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grouprulesetingress">Group<wbr>Rule<wbr>Set<wbr>Ingress<wbr>Args]</a></span>
+        <span class="property-type"><a href="#grouprulesetingress">Sequence[Group<wbr>Rule<wbr>Set<wbr>Ingress<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd></dl>
+    <dd>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -929,8 +1134,7 @@ The GroupRuleSet resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the security group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="egresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_yaml" style="color: inherit; text-decoration: inherit;">egresses</a>
@@ -938,8 +1142,7 @@ The GroupRuleSet resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#grouprulesetegress">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_yaml" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -947,8 +1150,7 @@ The GroupRuleSet resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#grouprulesetingress">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd></dl>
+    <dd>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -969,8 +1171,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="version_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_csharp" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -978,8 +1179,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Security policies version, auto increment for every update.</p>
-</dd></dl>
+    <dd>Security policies version, auto increment for every update.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -993,8 +1193,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="version_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_go" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -1002,8 +1201,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Security policies version, auto increment for every update.</p>
-</dd></dl>
+    <dd>Security policies version, auto increment for every update.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_hcl" style="color: inherit; text-decoration: inherit;">version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Security policies version, auto increment for every update.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1017,8 +1237,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="version_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_java" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1026,8 +1245,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Security policies version, auto increment for every update.</p>
-</dd></dl>
+    <dd>Security policies version, auto increment for every update.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1041,8 +1259,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="version_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_nodejs" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1050,8 +1267,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Security policies version, auto increment for every update.</p>
-</dd></dl>
+    <dd>Security policies version, auto increment for every update.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1065,8 +1281,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_python" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1074,8 +1289,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Security policies version, auto increment for every update.</p>
-</dd></dl>
+    <dd>Security policies version, auto increment for every update.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1089,8 +1303,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="version_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_yaml" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1098,8 +1311,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Security policies version, auto increment for every update.</p>
-</dd></dl>
+    <dd>Security policies version, auto increment for every update.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1109,123 +1321,162 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing GroupRuleSet resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">GroupRuleSetState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">GroupRuleSet</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">GroupRuleSetState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">GroupRuleSet</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">egresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[_security.GroupRuleSetEgressArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">ingresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[_security.GroupRuleSetIngressArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">egresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[GroupRuleSetEgressArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">ingresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[GroupRuleSetIngressArgs]]</span> = None<span class="p">,</span>
         <span class="nx">security_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> GroupRuleSet</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetGroupRuleSet<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">GroupRuleSetState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">GroupRuleSet</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetGroupRuleSet<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">GroupRuleSetState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">GroupRuleSet</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">GroupRuleSet</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GroupRuleSetState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">GroupRuleSet</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GroupRuleSetState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">GroupRuleSet</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GroupRuleSetState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">GroupRuleSet</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GroupRuleSetState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingGroupRuleSet</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Security:GroupRuleSet</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_security_group_rule_set</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GroupRuleSetState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GroupRuleSetState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1233,28 +1484,31 @@ Get an existing GroupRuleSet resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GroupRuleSetState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1262,28 +1516,31 @@ Get an existing GroupRuleSet resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GroupRuleSetState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1301,19 +1558,17 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egresses_csharp" style="color: inherit; text-decoration: inherit;">Egresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grouprulesetegress">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Security.<wbr>Inputs.<wbr>Group<wbr>Rule<wbr>Set<wbr>Egress<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#grouprulesetegress">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Security.<wbr>Inputs.<wbr>Group<wbr>Rule<wbr>Set<wbr>Egress&gt;</a></span>
     </dt>
-    <dd><p>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ingresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingresses_csharp" style="color: inherit; text-decoration: inherit;">Ingresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grouprulesetingress">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Security.<wbr>Inputs.<wbr>Group<wbr>Rule<wbr>Set<wbr>Ingress<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#grouprulesetingress">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Security.<wbr>Inputs.<wbr>Group<wbr>Rule<wbr>Set<wbr>Ingress&gt;</a></span>
     </dt>
-    <dd><p>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_securitygroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupid_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Id</a>
@@ -1321,8 +1576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_csharp" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -1330,8 +1584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Security policies version, auto increment for every update.</p>
-</dd></dl>
+    <dd>Security policies version, auto increment for every update.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1345,8 +1598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#grouprulesetegress">[]Group<wbr>Rule<wbr>Set<wbr>Egress<wbr>Args</a></span>
     </dt>
-    <dd><p>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ingresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingresses_go" style="color: inherit; text-decoration: inherit;">Ingresses</a>
@@ -1354,8 +1606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#grouprulesetingress">[]Group<wbr>Rule<wbr>Set<wbr>Ingress<wbr>Args</a></span>
     </dt>
-    <dd><p>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_securitygroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupid_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Id</a>
@@ -1363,8 +1614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_go" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -1372,8 +1622,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Security policies version, auto increment for every update.</p>
-</dd></dl>
+    <dd>Security policies version, auto increment for every update.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_egresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egresses_hcl" style="color: inherit; text-decoration: inherit;">egresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#grouprulesetegress">list(object)</a></span>
+    </dt>
+    <dd>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ingresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingresses_hcl" style="color: inherit; text-decoration: inherit;">ingresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#grouprulesetingress">list(object)</a></span>
+    </dt>
+    <dd>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_security_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_group_id_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the security group to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_hcl" style="color: inherit; text-decoration: inherit;">version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Security policies version, auto increment for every update.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1385,19 +1672,17 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egresses_java" style="color: inherit; text-decoration: inherit;">egresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grouprulesetegress">List&lt;Group<wbr>Rule<wbr>Set<wbr>Egress<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#grouprulesetegress">List&lt;Group<wbr>Rule<wbr>Set<wbr>Egress&gt;</a></span>
     </dt>
-    <dd><p>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ingresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingresses_java" style="color: inherit; text-decoration: inherit;">ingresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grouprulesetingress">List&lt;Group<wbr>Rule<wbr>Set<wbr>Ingress<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#grouprulesetingress">List&lt;Group<wbr>Rule<wbr>Set<wbr>Ingress&gt;</a></span>
     </dt>
-    <dd><p>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_securitygroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupid_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Id</a>
@@ -1405,8 +1690,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the security group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_java" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1414,8 +1698,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Security policies version, auto increment for every update.</p>
-</dd></dl>
+    <dd>Security policies version, auto increment for every update.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1427,19 +1710,17 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egresses_nodejs" style="color: inherit; text-decoration: inherit;">egresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grouprulesetegress">Group<wbr>Rule<wbr>Set<wbr>Egress<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#grouprulesetegress">Group<wbr>Rule<wbr>Set<wbr>Egress[]</a></span>
     </dt>
-    <dd><p>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ingresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingresses_nodejs" style="color: inherit; text-decoration: inherit;">ingresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grouprulesetingress">Group<wbr>Rule<wbr>Set<wbr>Ingress<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#grouprulesetingress">Group<wbr>Rule<wbr>Set<wbr>Ingress[]</a></span>
     </dt>
-    <dd><p>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_securitygroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupid_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Id</a>
@@ -1447,8 +1728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_nodejs" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1456,8 +1736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Security policies version, auto increment for every update.</p>
-</dd></dl>
+    <dd>Security policies version, auto increment for every update.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1469,19 +1748,17 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egresses_python" style="color: inherit; text-decoration: inherit;">egresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grouprulesetegress">Group<wbr>Rule<wbr>Set<wbr>Egress<wbr>Args]</a></span>
+        <span class="property-type"><a href="#grouprulesetegress">Sequence[Group<wbr>Rule<wbr>Set<wbr>Egress<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ingresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingresses_python" style="color: inherit; text-decoration: inherit;">ingresses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grouprulesetingress">Group<wbr>Rule<wbr>Set<wbr>Ingress<wbr>Args]</a></span>
+        <span class="property-type"><a href="#grouprulesetingress">Sequence[Group<wbr>Rule<wbr>Set<wbr>Ingress<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_security_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_group_id_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>id</a>
@@ -1489,8 +1766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the security group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_python" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1498,8 +1774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Security policies version, auto increment for every update.</p>
-</dd></dl>
+    <dd>Security policies version, auto increment for every update.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1513,8 +1788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#grouprulesetegress">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional"
+    <dd>List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ingresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingresses_yaml" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -1522,8 +1796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#grouprulesetingress">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_securitygroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupid_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Id</a>
@@ -1531,8 +1804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the security group to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_yaml" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1540,8 +1812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Security policies version, auto increment for every update.</p>
-</dd></dl>
+    <dd>Security policies version, auto increment for every update.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1556,7 +1827,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="grouprulesetegress">Group<wbr>Rule<wbr>Set<wbr>Egress</h4>
+<h4 id="grouprulesetegress">
+Group<wbr>Rule<wbr>Set<wbr>Egress<pulumi-choosable type="language" values="python,go" class="inline">, Group<wbr>Rule<wbr>Set<wbr>Egress<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1568,8 +1841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplategroup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplategroup_csharp" style="color: inherit; text-decoration: inherit;">Address<wbr>Template<wbr>Group</a>
@@ -1577,8 +1849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplateid_csharp" style="color: inherit; text-decoration: inherit;">Address<wbr>Template<wbr>Id</a>
@@ -1586,8 +1857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_csharp" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -1595,8 +1865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An IP address network or CIDR segment. NOTE: <code>cidr_block</code>, <code>ipv6_cidr_block</code>, <code>source_security_id</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time.</p>
-</dd><dt class="property-optional"
+    <dd>An IP address network or CIDR segment. NOTE: <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time; One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1604,8 +1873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the security group rule.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the security group rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6cidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6cidrblock_csharp" style="color: inherit; text-decoration: inherit;">Ipv6Cidr<wbr>Block</a>
@@ -1613,8 +1881,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An IPV6 address network or CIDR segment, and conflict with <code>source_security_id</code> and <code>address_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>An IPV6 address network or CIDR segment, and conflict with <code>sourceSecurityId</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyindex_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyindex_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Index</a>
@@ -1622,8 +1889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The security group rule index number, whose value dynamically changes with changes in security group rules.</p>
-</dd><dt class="property-optional"
+    <dd>The security group rule index number, whose value dynamically changes with changes in security group rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1631,8 +1897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Range of the port. The available value can be one, multiple or one segment. E.g. <code>80</code>, <code>80,90</code> and <code>80-90</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Range of the port. The available value can be <code>all</code>, a single port, or a port range. E.g. <code>80</code>, <code>80,90</code>, <code>80-90</code> or <code>all</code>. Note: If the <code>Protocol</code> value is set to <code>ALL</code>, the <code>Port</code> value also needs to be set to <code>all</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1640,8 +1905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code> and <code>ICMP</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code>, <code>ICMP</code>, <code>ICMPv6</code> and <code>ALL</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplategroup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplategroup_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Template<wbr>Group</a>
@@ -1649,8 +1913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplateid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Template<wbr>Id</a>
@@ -1658,8 +1921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcesecurityid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcesecurityid_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Security<wbr>Id</a>
@@ -1667,8 +1929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the nested security group, and conflicts with <code>cidr_block</code> and <code>address_template_*</code>.</p>
-</dd></dl>
+    <dd>ID of the nested security group, and conflicts with <code>cidrBlock</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1682,8 +1943,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplategroup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplategroup_go" style="color: inherit; text-decoration: inherit;">Address<wbr>Template<wbr>Group</a>
@@ -1691,8 +1951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplateid_go" style="color: inherit; text-decoration: inherit;">Address<wbr>Template<wbr>Id</a>
@@ -1700,8 +1959,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_go" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -1709,8 +1967,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An IP address network or CIDR segment. NOTE: <code>cidr_block</code>, <code>ipv6_cidr_block</code>, <code>source_security_id</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time.</p>
-</dd><dt class="property-optional"
+    <dd>An IP address network or CIDR segment. NOTE: <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time; One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1718,8 +1975,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the security group rule.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the security group rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6cidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6cidrblock_go" style="color: inherit; text-decoration: inherit;">Ipv6Cidr<wbr>Block</a>
@@ -1727,8 +1983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An IPV6 address network or CIDR segment, and conflict with <code>source_security_id</code> and <code>address_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>An IPV6 address network or CIDR segment, and conflict with <code>sourceSecurityId</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyindex_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyindex_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Index</a>
@@ -1736,8 +1991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The security group rule index number, whose value dynamically changes with changes in security group rules.</p>
-</dd><dt class="property-optional"
+    <dd>The security group rule index number, whose value dynamically changes with changes in security group rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1745,8 +1999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Range of the port. The available value can be one, multiple or one segment. E.g. <code>80</code>, <code>80,90</code> and <code>80-90</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Range of the port. The available value can be <code>all</code>, a single port, or a port range. E.g. <code>80</code>, <code>80,90</code>, <code>80-90</code> or <code>all</code>. Note: If the <code>Protocol</code> value is set to <code>ALL</code>, the <code>Port</code> value also needs to be set to <code>all</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1754,8 +2007,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code> and <code>ICMP</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code>, <code>ICMP</code>, <code>ICMPv6</code> and <code>ALL</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplategroup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplategroup_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Template<wbr>Group</a>
@@ -1763,8 +2015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplateid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Template<wbr>Id</a>
@@ -1772,8 +2023,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcesecurityid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcesecurityid_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Security<wbr>Id</a>
@@ -1781,8 +2031,109 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the nested security group, and conflicts with <code>cidr_block</code> and <code>address_template_*</code>.</p>
-</dd></dl>
+    <dd>ID of the nested security group, and conflicts with <code>cidrBlock</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="address_template_group_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_template_group_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>template_<wbr>group</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="address_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_template_id_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An IP address network or CIDR segment. NOTE: <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time; One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the security group rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv6_cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_cidr_block_hcl" style="color: inherit; text-decoration: inherit;">ipv6_<wbr>cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An IPV6 address network or CIDR segment, and conflict with <code>sourceSecurityId</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="policy_index_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_index_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>index</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The security group rule index number, whose value dynamically changes with changes in security group rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Range of the port. The available value can be <code>all</code>, a single port, or a port range. E.g. <code>80</code>, <code>80,90</code>, <code>80-90</code> or <code>all</code>. Note: If the <code>Protocol</code> value is set to <code>ALL</code>, the <code>Port</code> value also needs to be set to <code>all</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code>, <code>ICMP</code>, <code>ICMPv6</code> and <code>ALL</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="service_template_group_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_template_group_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>template_<wbr>group</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="service_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_template_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_security_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_security_id_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>security_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the nested security group, and conflicts with <code>cidrBlock</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1796,8 +2147,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplategroup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplategroup_java" style="color: inherit; text-decoration: inherit;">address<wbr>Template<wbr>Group</a>
@@ -1805,8 +2155,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplateid_java" style="color: inherit; text-decoration: inherit;">address<wbr>Template<wbr>Id</a>
@@ -1814,8 +2163,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_java" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1823,8 +2171,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An IP address network or CIDR segment. NOTE: <code>cidr_block</code>, <code>ipv6_cidr_block</code>, <code>source_security_id</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time.</p>
-</dd><dt class="property-optional"
+    <dd>An IP address network or CIDR segment. NOTE: <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time; One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1832,8 +2179,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the security group rule.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the security group rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6cidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6cidrblock_java" style="color: inherit; text-decoration: inherit;">ipv6Cidr<wbr>Block</a>
@@ -1841,8 +2187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An IPV6 address network or CIDR segment, and conflict with <code>source_security_id</code> and <code>address_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>An IPV6 address network or CIDR segment, and conflict with <code>sourceSecurityId</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyindex_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyindex_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Index</a>
@@ -1850,8 +2195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The security group rule index number, whose value dynamically changes with changes in security group rules.</p>
-</dd><dt class="property-optional"
+    <dd>The security group rule index number, whose value dynamically changes with changes in security group rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1859,8 +2203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Range of the port. The available value can be one, multiple or one segment. E.g. <code>80</code>, <code>80,90</code> and <code>80-90</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Range of the port. The available value can be <code>all</code>, a single port, or a port range. E.g. <code>80</code>, <code>80,90</code>, <code>80-90</code> or <code>all</code>. Note: If the <code>Protocol</code> value is set to <code>ALL</code>, the <code>Port</code> value also needs to be set to <code>all</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1868,8 +2211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code> and <code>ICMP</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code>, <code>ICMP</code>, <code>ICMPv6</code> and <code>ALL</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplategroup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplategroup_java" style="color: inherit; text-decoration: inherit;">service<wbr>Template<wbr>Group</a>
@@ -1877,8 +2219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplateid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Template<wbr>Id</a>
@@ -1886,8 +2227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcesecurityid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcesecurityid_java" style="color: inherit; text-decoration: inherit;">source<wbr>Security<wbr>Id</a>
@@ -1895,8 +2235,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the nested security group, and conflicts with <code>cidr_block</code> and <code>address_template_*</code>.</p>
-</dd></dl>
+    <dd>ID of the nested security group, and conflicts with <code>cidrBlock</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1910,8 +2249,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplategroup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplategroup_nodejs" style="color: inherit; text-decoration: inherit;">address<wbr>Template<wbr>Group</a>
@@ -1919,8 +2257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplateid_nodejs" style="color: inherit; text-decoration: inherit;">address<wbr>Template<wbr>Id</a>
@@ -1928,8 +2265,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_nodejs" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1937,8 +2273,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An IP address network or CIDR segment. NOTE: <code>cidr_block</code>, <code>ipv6_cidr_block</code>, <code>source_security_id</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time.</p>
-</dd><dt class="property-optional"
+    <dd>An IP address network or CIDR segment. NOTE: <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time; One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1946,8 +2281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the security group rule.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the security group rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6cidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6cidrblock_nodejs" style="color: inherit; text-decoration: inherit;">ipv6Cidr<wbr>Block</a>
@@ -1955,8 +2289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An IPV6 address network or CIDR segment, and conflict with <code>source_security_id</code> and <code>address_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>An IPV6 address network or CIDR segment, and conflict with <code>sourceSecurityId</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyindex_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyindex_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Index</a>
@@ -1964,8 +2297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The security group rule index number, whose value dynamically changes with changes in security group rules.</p>
-</dd><dt class="property-optional"
+    <dd>The security group rule index number, whose value dynamically changes with changes in security group rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1973,8 +2305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Range of the port. The available value can be one, multiple or one segment. E.g. <code>80</code>, <code>80,90</code> and <code>80-90</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Range of the port. The available value can be <code>all</code>, a single port, or a port range. E.g. <code>80</code>, <code>80,90</code>, <code>80-90</code> or <code>all</code>. Note: If the <code>Protocol</code> value is set to <code>ALL</code>, the <code>Port</code> value also needs to be set to <code>all</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1982,8 +2313,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code> and <code>ICMP</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code>, <code>ICMP</code>, <code>ICMPv6</code> and <code>ALL</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplategroup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplategroup_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Template<wbr>Group</a>
@@ -1991,8 +2321,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplateid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Template<wbr>Id</a>
@@ -2000,8 +2329,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcesecurityid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcesecurityid_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Security<wbr>Id</a>
@@ -2009,8 +2337,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the nested security group, and conflicts with <code>cidr_block</code> and <code>address_template_*</code>.</p>
-</dd></dl>
+    <dd>ID of the nested security group, and conflicts with <code>cidrBlock</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2024,8 +2351,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="address_template_group_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_template_group_python" style="color: inherit; text-decoration: inherit;">address_<wbr>template_<wbr>group</a>
@@ -2033,8 +2359,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="address_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_template_id_python" style="color: inherit; text-decoration: inherit;">address_<wbr>template_<wbr>id</a>
@@ -2042,8 +2367,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_python" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
@@ -2051,8 +2375,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>An IP address network or CIDR segment. NOTE: <code>cidr_block</code>, <code>ipv6_cidr_block</code>, <code>source_security_id</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time.</p>
-</dd><dt class="property-optional"
+    <dd>An IP address network or CIDR segment. NOTE: <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time; One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2060,8 +2383,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the security group rule.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the security group rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6_cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_cidr_block_python" style="color: inherit; text-decoration: inherit;">ipv6_<wbr>cidr_<wbr>block</a>
@@ -2069,8 +2391,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>An IPV6 address network or CIDR segment, and conflict with <code>source_security_id</code> and <code>address_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>An IPV6 address network or CIDR segment, and conflict with <code>sourceSecurityId</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_index_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_index_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>index</a>
@@ -2078,8 +2399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The security group rule index number, whose value dynamically changes with changes in security group rules.</p>
-</dd><dt class="property-optional"
+    <dd>The security group rule index number, whose value dynamically changes with changes in security group rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2087,8 +2407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Range of the port. The available value can be one, multiple or one segment. E.g. <code>80</code>, <code>80,90</code> and <code>80-90</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Range of the port. The available value can be <code>all</code>, a single port, or a port range. E.g. <code>80</code>, <code>80,90</code>, <code>80-90</code> or <code>all</code>. Note: If the <code>Protocol</code> value is set to <code>ALL</code>, the <code>Port</code> value also needs to be set to <code>all</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2096,8 +2415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code> and <code>ICMP</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code>, <code>ICMP</code>, <code>ICMPv6</code> and <code>ALL</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="service_template_group_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_template_group_python" style="color: inherit; text-decoration: inherit;">service_<wbr>template_<wbr>group</a>
@@ -2105,8 +2423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="service_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_template_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>template_<wbr>id</a>
@@ -2114,8 +2431,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="source_security_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_security_id_python" style="color: inherit; text-decoration: inherit;">source_<wbr>security_<wbr>id</a>
@@ -2123,8 +2439,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the nested security group, and conflicts with <code>cidr_block</code> and <code>address_template_*</code>.</p>
-</dd></dl>
+    <dd>ID of the nested security group, and conflicts with <code>cidrBlock</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2138,8 +2453,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplategroup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplategroup_yaml" style="color: inherit; text-decoration: inherit;">address<wbr>Template<wbr>Group</a>
@@ -2147,8 +2461,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplateid_yaml" style="color: inherit; text-decoration: inherit;">address<wbr>Template<wbr>Id</a>
@@ -2156,8 +2469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_yaml" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -2165,8 +2477,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An IP address network or CIDR segment. NOTE: <code>cidr_block</code>, <code>ipv6_cidr_block</code>, <code>source_security_id</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time.</p>
-</dd><dt class="property-optional"
+    <dd>An IP address network or CIDR segment. NOTE: <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time; One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2174,8 +2485,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the security group rule.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the security group rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6cidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6cidrblock_yaml" style="color: inherit; text-decoration: inherit;">ipv6Cidr<wbr>Block</a>
@@ -2183,8 +2493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An IPV6 address network or CIDR segment, and conflict with <code>source_security_id</code> and <code>address_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>An IPV6 address network or CIDR segment, and conflict with <code>sourceSecurityId</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyindex_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyindex_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Index</a>
@@ -2192,8 +2501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The security group rule index number, whose value dynamically changes with changes in security group rules.</p>
-</dd><dt class="property-optional"
+    <dd>The security group rule index number, whose value dynamically changes with changes in security group rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2201,8 +2509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Range of the port. The available value can be one, multiple or one segment. E.g. <code>80</code>, <code>80,90</code> and <code>80-90</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Range of the port. The available value can be <code>all</code>, a single port, or a port range. E.g. <code>80</code>, <code>80,90</code>, <code>80-90</code> or <code>all</code>. Note: If the <code>Protocol</code> value is set to <code>ALL</code>, the <code>Port</code> value also needs to be set to <code>all</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2210,8 +2517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code> and <code>ICMP</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code>, <code>ICMP</code>, <code>ICMPv6</code> and <code>ALL</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplategroup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplategroup_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Template<wbr>Group</a>
@@ -2219,8 +2525,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplateid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Template<wbr>Id</a>
@@ -2228,8 +2533,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcesecurityid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcesecurityid_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Security<wbr>Id</a>
@@ -2237,12 +2541,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the nested security group, and conflicts with <code>cidr_block</code> and <code>address_template_*</code>.</p>
-</dd></dl>
+    <dd>ID of the nested security group, and conflicts with <code>cidrBlock</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="grouprulesetingress">Group<wbr>Rule<wbr>Set<wbr>Ingress</h4>
+<h4 id="grouprulesetingress">
+Group<wbr>Rule<wbr>Set<wbr>Ingress<pulumi-choosable type="language" values="python,go" class="inline">, Group<wbr>Rule<wbr>Set<wbr>Ingress<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2254,8 +2559,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplategroup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplategroup_csharp" style="color: inherit; text-decoration: inherit;">Address<wbr>Template<wbr>Group</a>
@@ -2263,8 +2567,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplateid_csharp" style="color: inherit; text-decoration: inherit;">Address<wbr>Template<wbr>Id</a>
@@ -2272,8 +2575,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_csharp" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -2281,8 +2583,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An IP address network or CIDR segment. NOTE: <code>cidr_block</code>, <code>ipv6_cidr_block</code>, <code>source_security_id</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time.</p>
-</dd><dt class="property-optional"
+    <dd>An IP address network or CIDR segment. NOTE: <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time; One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -2290,8 +2591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the security group rule.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the security group rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6cidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6cidrblock_csharp" style="color: inherit; text-decoration: inherit;">Ipv6Cidr<wbr>Block</a>
@@ -2299,8 +2599,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An IPV6 address network or CIDR segment, and conflict with <code>source_security_id</code> and <code>address_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>An IPV6 address network or CIDR segment, and conflict with <code>sourceSecurityId</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyindex_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyindex_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Index</a>
@@ -2308,8 +2607,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The security group rule index number, whose value dynamically changes with changes in security group rules.</p>
-</dd><dt class="property-optional"
+    <dd>The security group rule index number, whose value dynamically changes with changes in security group rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2317,8 +2615,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Range of the port. The available value can be one, multiple or one segment. E.g. <code>80</code>, <code>80,90</code> and <code>80-90</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Range of the port. The available value can be <code>all</code>, a single port, or a port range. E.g. <code>80</code>, <code>80,90</code>, <code>80-90</code> or <code>all</code>. Note: If the <code>Protocol</code> value is set to <code>ALL</code>, the <code>Port</code> value also needs to be set to <code>all</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -2326,8 +2623,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code> and <code>ICMP</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code>, <code>ICMP</code>, <code>ICMPv6</code> and <code>ALL</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplategroup_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplategroup_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Template<wbr>Group</a>
@@ -2335,8 +2631,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplateid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Template<wbr>Id</a>
@@ -2344,8 +2639,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcesecurityid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcesecurityid_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Security<wbr>Id</a>
@@ -2353,8 +2647,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the nested security group, and conflicts with <code>cidr_block</code> and <code>address_template_*</code>.</p>
-</dd></dl>
+    <dd>ID of the nested security group, and conflicts with <code>cidrBlock</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2368,8 +2661,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplategroup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplategroup_go" style="color: inherit; text-decoration: inherit;">Address<wbr>Template<wbr>Group</a>
@@ -2377,8 +2669,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplateid_go" style="color: inherit; text-decoration: inherit;">Address<wbr>Template<wbr>Id</a>
@@ -2386,8 +2677,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_go" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -2395,8 +2685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An IP address network or CIDR segment. NOTE: <code>cidr_block</code>, <code>ipv6_cidr_block</code>, <code>source_security_id</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time.</p>
-</dd><dt class="property-optional"
+    <dd>An IP address network or CIDR segment. NOTE: <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time; One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -2404,8 +2693,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the security group rule.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the security group rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6cidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6cidrblock_go" style="color: inherit; text-decoration: inherit;">Ipv6Cidr<wbr>Block</a>
@@ -2413,8 +2701,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An IPV6 address network or CIDR segment, and conflict with <code>source_security_id</code> and <code>address_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>An IPV6 address network or CIDR segment, and conflict with <code>sourceSecurityId</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyindex_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyindex_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Index</a>
@@ -2422,8 +2709,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The security group rule index number, whose value dynamically changes with changes in security group rules.</p>
-</dd><dt class="property-optional"
+    <dd>The security group rule index number, whose value dynamically changes with changes in security group rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2431,8 +2717,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Range of the port. The available value can be one, multiple or one segment. E.g. <code>80</code>, <code>80,90</code> and <code>80-90</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Range of the port. The available value can be <code>all</code>, a single port, or a port range. E.g. <code>80</code>, <code>80,90</code>, <code>80-90</code> or <code>all</code>. Note: If the <code>Protocol</code> value is set to <code>ALL</code>, the <code>Port</code> value also needs to be set to <code>all</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -2440,8 +2725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code> and <code>ICMP</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code>, <code>ICMP</code>, <code>ICMPv6</code> and <code>ALL</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplategroup_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplategroup_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Template<wbr>Group</a>
@@ -2449,8 +2733,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplateid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Template<wbr>Id</a>
@@ -2458,8 +2741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcesecurityid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcesecurityid_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Security<wbr>Id</a>
@@ -2467,8 +2749,109 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the nested security group, and conflicts with <code>cidr_block</code> and <code>address_template_*</code>.</p>
-</dd></dl>
+    <dd>ID of the nested security group, and conflicts with <code>cidrBlock</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="address_template_group_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_template_group_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>template_<wbr>group</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="address_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_template_id_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An IP address network or CIDR segment. NOTE: <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time; One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the security group rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv6_cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_cidr_block_hcl" style="color: inherit; text-decoration: inherit;">ipv6_<wbr>cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An IPV6 address network or CIDR segment, and conflict with <code>sourceSecurityId</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="policy_index_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_index_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>index</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The security group rule index number, whose value dynamically changes with changes in security group rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Range of the port. The available value can be <code>all</code>, a single port, or a port range. E.g. <code>80</code>, <code>80,90</code>, <code>80-90</code> or <code>all</code>. Note: If the <code>Protocol</code> value is set to <code>ALL</code>, the <code>Port</code> value also needs to be set to <code>all</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code>, <code>ICMP</code>, <code>ICMPv6</code> and <code>ALL</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="service_template_group_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_template_group_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>template_<wbr>group</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="service_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_template_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_security_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_security_id_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>security_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the nested security group, and conflicts with <code>cidrBlock</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2482,8 +2865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplategroup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplategroup_java" style="color: inherit; text-decoration: inherit;">address<wbr>Template<wbr>Group</a>
@@ -2491,8 +2873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplateid_java" style="color: inherit; text-decoration: inherit;">address<wbr>Template<wbr>Id</a>
@@ -2500,8 +2881,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_java" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -2509,8 +2889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An IP address network or CIDR segment. NOTE: <code>cidr_block</code>, <code>ipv6_cidr_block</code>, <code>source_security_id</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time.</p>
-</dd><dt class="property-optional"
+    <dd>An IP address network or CIDR segment. NOTE: <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time; One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2518,8 +2897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the security group rule.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the security group rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6cidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6cidrblock_java" style="color: inherit; text-decoration: inherit;">ipv6Cidr<wbr>Block</a>
@@ -2527,8 +2905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An IPV6 address network or CIDR segment, and conflict with <code>source_security_id</code> and <code>address_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>An IPV6 address network or CIDR segment, and conflict with <code>sourceSecurityId</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyindex_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyindex_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Index</a>
@@ -2536,8 +2913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The security group rule index number, whose value dynamically changes with changes in security group rules.</p>
-</dd><dt class="property-optional"
+    <dd>The security group rule index number, whose value dynamically changes with changes in security group rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2545,8 +2921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Range of the port. The available value can be one, multiple or one segment. E.g. <code>80</code>, <code>80,90</code> and <code>80-90</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Range of the port. The available value can be <code>all</code>, a single port, or a port range. E.g. <code>80</code>, <code>80,90</code>, <code>80-90</code> or <code>all</code>. Note: If the <code>Protocol</code> value is set to <code>ALL</code>, the <code>Port</code> value also needs to be set to <code>all</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2554,8 +2929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code> and <code>ICMP</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code>, <code>ICMP</code>, <code>ICMPv6</code> and <code>ALL</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplategroup_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplategroup_java" style="color: inherit; text-decoration: inherit;">service<wbr>Template<wbr>Group</a>
@@ -2563,8 +2937,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplateid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Template<wbr>Id</a>
@@ -2572,8 +2945,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcesecurityid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcesecurityid_java" style="color: inherit; text-decoration: inherit;">source<wbr>Security<wbr>Id</a>
@@ -2581,8 +2953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the nested security group, and conflicts with <code>cidr_block</code> and <code>address_template_*</code>.</p>
-</dd></dl>
+    <dd>ID of the nested security group, and conflicts with <code>cidrBlock</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2596,8 +2967,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplategroup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplategroup_nodejs" style="color: inherit; text-decoration: inherit;">address<wbr>Template<wbr>Group</a>
@@ -2605,8 +2975,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplateid_nodejs" style="color: inherit; text-decoration: inherit;">address<wbr>Template<wbr>Id</a>
@@ -2614,8 +2983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_nodejs" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -2623,8 +2991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An IP address network or CIDR segment. NOTE: <code>cidr_block</code>, <code>ipv6_cidr_block</code>, <code>source_security_id</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time.</p>
-</dd><dt class="property-optional"
+    <dd>An IP address network or CIDR segment. NOTE: <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time; One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2632,8 +2999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the security group rule.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the security group rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6cidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6cidrblock_nodejs" style="color: inherit; text-decoration: inherit;">ipv6Cidr<wbr>Block</a>
@@ -2641,8 +3007,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An IPV6 address network or CIDR segment, and conflict with <code>source_security_id</code> and <code>address_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>An IPV6 address network or CIDR segment, and conflict with <code>sourceSecurityId</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyindex_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyindex_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Index</a>
@@ -2650,8 +3015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The security group rule index number, whose value dynamically changes with changes in security group rules.</p>
-</dd><dt class="property-optional"
+    <dd>The security group rule index number, whose value dynamically changes with changes in security group rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2659,8 +3023,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Range of the port. The available value can be one, multiple or one segment. E.g. <code>80</code>, <code>80,90</code> and <code>80-90</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Range of the port. The available value can be <code>all</code>, a single port, or a port range. E.g. <code>80</code>, <code>80,90</code>, <code>80-90</code> or <code>all</code>. Note: If the <code>Protocol</code> value is set to <code>ALL</code>, the <code>Port</code> value also needs to be set to <code>all</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2668,8 +3031,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code> and <code>ICMP</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code>, <code>ICMP</code>, <code>ICMPv6</code> and <code>ALL</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplategroup_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplategroup_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Template<wbr>Group</a>
@@ -2677,8 +3039,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplateid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Template<wbr>Id</a>
@@ -2686,8 +3047,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcesecurityid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcesecurityid_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Security<wbr>Id</a>
@@ -2695,8 +3055,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the nested security group, and conflicts with <code>cidr_block</code> and <code>address_template_*</code>.</p>
-</dd></dl>
+    <dd>ID of the nested security group, and conflicts with <code>cidrBlock</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2710,8 +3069,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="address_template_group_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_template_group_python" style="color: inherit; text-decoration: inherit;">address_<wbr>template_<wbr>group</a>
@@ -2719,8 +3077,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="address_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_template_id_python" style="color: inherit; text-decoration: inherit;">address_<wbr>template_<wbr>id</a>
@@ -2728,8 +3085,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_python" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
@@ -2737,8 +3093,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>An IP address network or CIDR segment. NOTE: <code>cidr_block</code>, <code>ipv6_cidr_block</code>, <code>source_security_id</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time.</p>
-</dd><dt class="property-optional"
+    <dd>An IP address network or CIDR segment. NOTE: <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time; One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2746,8 +3101,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the security group rule.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the security group rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6_cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_cidr_block_python" style="color: inherit; text-decoration: inherit;">ipv6_<wbr>cidr_<wbr>block</a>
@@ -2755,8 +3109,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>An IPV6 address network or CIDR segment, and conflict with <code>source_security_id</code> and <code>address_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>An IPV6 address network or CIDR segment, and conflict with <code>sourceSecurityId</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_index_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_index_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>index</a>
@@ -2764,8 +3117,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The security group rule index number, whose value dynamically changes with changes in security group rules.</p>
-</dd><dt class="property-optional"
+    <dd>The security group rule index number, whose value dynamically changes with changes in security group rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2773,8 +3125,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Range of the port. The available value can be one, multiple or one segment. E.g. <code>80</code>, <code>80,90</code> and <code>80-90</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Range of the port. The available value can be <code>all</code>, a single port, or a port range. E.g. <code>80</code>, <code>80,90</code>, <code>80-90</code> or <code>all</code>. Note: If the <code>Protocol</code> value is set to <code>ALL</code>, the <code>Port</code> value also needs to be set to <code>all</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2782,8 +3133,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code> and <code>ICMP</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code>, <code>ICMP</code>, <code>ICMPv6</code> and <code>ALL</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="service_template_group_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_template_group_python" style="color: inherit; text-decoration: inherit;">service_<wbr>template_<wbr>group</a>
@@ -2791,8 +3141,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="service_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_template_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>template_<wbr>id</a>
@@ -2800,8 +3149,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="source_security_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_security_id_python" style="color: inherit; text-decoration: inherit;">source_<wbr>security_<wbr>id</a>
@@ -2809,8 +3157,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the nested security group, and conflicts with <code>cidr_block</code> and <code>address_template_*</code>.</p>
-</dd></dl>
+    <dd>ID of the nested security group, and conflicts with <code>cidrBlock</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2824,8 +3171,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Rule policy of security group. Valid values: <code>ACCEPT</code> and <code>DROP</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplategroup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplategroup_yaml" style="color: inherit; text-decoration: inherit;">address<wbr>Template<wbr>Group</a>
@@ -2833,8 +3179,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Address template like <code>ipmg-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="addresstemplateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addresstemplateid_yaml" style="color: inherit; text-decoration: inherit;">address<wbr>Template<wbr>Id</a>
@@ -2842,8 +3187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>source_security_id</code> and <code>cidr_block</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Address template ID like <code>ipm-xxxxxxxx</code>, conflict with <code>sourceSecurityId</code> and <code>cidrBlock</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="cidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_yaml" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -2851,8 +3195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An IP address network or CIDR segment. NOTE: <code>cidr_block</code>, <code>ipv6_cidr_block</code>, <code>source_security_id</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time.</p>
-</dd><dt class="property-optional"
+    <dd>An IP address network or CIDR segment. NOTE: <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> are exclusive and cannot be set in the same time; One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -2860,8 +3203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the security group rule.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the security group rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6cidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6cidrblock_yaml" style="color: inherit; text-decoration: inherit;">ipv6Cidr<wbr>Block</a>
@@ -2869,8 +3211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An IPV6 address network or CIDR segment, and conflict with <code>source_security_id</code> and <code>address_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>An IPV6 address network or CIDR segment, and conflict with <code>sourceSecurityId</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyindex_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyindex_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Index</a>
@@ -2878,8 +3219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The security group rule index number, whose value dynamically changes with changes in security group rules.</p>
-</dd><dt class="property-optional"
+    <dd>The security group rule index number, whose value dynamically changes with changes in security group rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2887,8 +3227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Range of the port. The available value can be one, multiple or one segment. E.g. <code>80</code>, <code>80,90</code> and <code>80-90</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Range of the port. The available value can be <code>all</code>, a single port, or a port range. E.g. <code>80</code>, <code>80,90</code>, <code>80-90</code> or <code>all</code>. Note: If the <code>Protocol</code> value is set to <code>ALL</code>, the <code>Port</code> value also needs to be set to <code>all</code>. Default to all ports, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2896,8 +3235,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code> and <code>ICMP</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of IP protocol. Valid values: <code>TCP</code>, <code>UDP</code>, <code>ICMP</code>, <code>ICMPv6</code> and <code>ALL</code>. Default to all types protocol, and conflicts with <code>service_template_*</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplategroup_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplategroup_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Template<wbr>Group</a>
@@ -2905,8 +3243,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Group ID of Protocol template ID like <code>ppmg-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetemplateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetemplateid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Template<wbr>Id</a>
@@ -2914,8 +3251,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>cidr_block</code> and <code>port</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify Protocol template ID like <code>ppm-xxxxxxxx</code>, conflict with <code>protocol</code> and <code>port</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="sourcesecurityid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcesecurityid_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Security<wbr>Id</a>
@@ -2923,8 +3259,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the nested security group, and conflicts with <code>cidr_block</code> and <code>address_template_*</code>.</p>
-</dd></dl>
+    <dd>ID of the nested security group, and conflicts with <code>cidrBlock</code> and <code>address_template_*</code>. NOTE: One of <code>cidrBlock</code>, <code>ipv6CidrBlock</code>, <code>sourceSecurityId</code> and <code>address_template_*</code> must be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2932,12 +3267,15 @@ The following state arguments are supported:
 
 
 
-Resource tencentcloud_security_group_rule_set can be imported by passing security grou id:
+Resource tencentcloud.Security.GroupRuleSet can be imported by passing security grou id:
 
 ```sh
 $ pulumi import tencentcloud:Security/groupRuleSet:GroupRuleSet sglab_1 sg-xxxxxxxx
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2949,7 +3287,6 @@ $ pulumi import tencentcloud:Security/groupRuleSet:GroupRuleSet sglab_1 sg-xxxxx
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

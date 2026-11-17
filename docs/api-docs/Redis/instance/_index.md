@@ -2,9 +2,11 @@
 ---
 title: "Instance"
 title_tag: "tencentcloud.Redis.Instance"
-meta_desc: "Documentation for the tencentcloud.Redis.Instance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a Redis instance and set its attributes. NOTE: The argument vpcId and subnetId is now required because Basic Network."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,7 +16,7 @@ no_edit_this_page: true
 
 Provides a resource to create a Redis instance and set its attributes.
 
-> **NOTE:** The argument vpc_id and subnet_id is now required because Basic Network Instance is no longer supported.
+> **NOTE:** The argument vpcId and subnetId is now required because Basic Network Instance is no longer supported.
 
 > **NOTE:** Both adding and removing replications in one change is supported but not recommend.
 
@@ -22,60 +24,140 @@ Provides a resource to create a Redis instance and set its attributes.
 
 ### Create a base version of redis
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zone = tencentcloud.Redis.getZoneConfig({
+const zone = tencentcloud.redis.getZoneConfig({
     typeId: 7,
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_redis_vpc",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     vpcId: vpc.id,
     availabilityZone: zone.then(zone => zone.lists?.[0]?.zone),
+    name: "tf_redis_subnet",
     cidrBlock: "10.0.1.0/24",
 });
-const foo = new tencentcloud.redis.Instance("foo", {
+const example = new tencentcloud.redis.Instance("example", {
     availabilityZone: zone.then(zone => zone.lists?.[0]?.zone),
     typeId: zone.then(zone => zone.lists?.[0]?.typeId),
-    password: "test12345789",
+    password: "Password@123",
     memSize: 8192,
     redisShardNum: zone.then(zone => zone.lists?.[0]?.redisShardNums?.[0]),
     redisReplicasNum: zone.then(zone => zone.lists?.[0]?.redisReplicasNums?.[0]),
+    name: "tf-example",
     port: 6379,
     vpcId: vpc.id,
     subnetId: subnet.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zone = tencentcloud.Redis.get_zone_config(type_id=7)
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+zone = tencentcloud.redis.get_zone_config(type_id=7)
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_redis_vpc")
 subnet = tencentcloud.subnet.Instance("subnet",
     vpc_id=vpc.id,
     availability_zone=zone.lists[0].zone,
+    name="tf_redis_subnet",
     cidr_block="10.0.1.0/24")
-foo = tencentcloud.redis.Instance("foo",
+example = tencentcloud.redis.Instance("example",
     availability_zone=zone.lists[0].zone,
     type_id=zone.lists[0].type_id,
-    password="test12345789",
+    password="Password@123",
     mem_size=8192,
     redis_shard_num=zone.lists[0].redis_shard_nums[0],
     redis_replicas_num=zone.lists[0].redis_replicas_nums[0],
+    name="tf-example",
     port=6379,
     vpc_id=vpc.id,
     subnet_id=subnet.id)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/redis"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zone, err := redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+			TypeId: pulumi.IntRef(7),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("tf_redis_vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
+			Name:             pulumi.String("tf_redis_subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = redis.NewInstance(ctx, "example", &redis.InstanceArgs{
+			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
+			TypeId:           pulumi.Int(zone.Lists[0].TypeId),
+			Password:         pulumi.String("Password@123"),
+			MemSize:          pulumi.Int(8192),
+			RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
+			RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
+			Name:             pulumi.String("tf-example"),
+			Port:             pulumi.Int(6379),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -88,23 +170,26 @@ return await Deployment.RunAsync(() =>
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
         CidrBlock = "10.0.0.0/16",
+        Name = "tf_redis_vpc",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         VpcId = vpc.Id,
         AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[0]?.Zone),
+        Name = "tf_redis_subnet",
         CidrBlock = "10.0.1.0/24",
     });
 
-    var foo = new Tencentcloud.Redis.Instance("foo", new()
+    var example = new Tencentcloud.Redis.Instance("example", new()
     {
         AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[0]?.Zone),
         TypeId = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[0]?.TypeId),
-        Password = "test12345789",
+        Password = "Password@123",
         MemSize = 8192,
         RedisShardNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[0]?.RedisShardNums[0]),
         RedisReplicasNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[0]?.RedisReplicasNums[0]),
+        Name = "tf-example",
         Port = 6379,
         VpcId = vpc.Id,
         SubnetId = subnet.Id,
@@ -112,56 +197,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
-			TypeId: pulumi.IntRef(7),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			VpcId:            vpc.ID(),
-			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
-			CidrBlock:        pulumi.String("10.0.1.0/24"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Redis.NewInstance(ctx, "foo", &Redis.InstanceArgs{
-			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
-			TypeId:           pulumi.Int(zone.Lists[0].TypeId),
-			Password:         pulumi.String("test12345789"),
-			MemSize:          pulumi.Int(8192),
-			RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
-			RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
-			Port:             pulumi.Int(6379),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -170,14 +210,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Redis.RedisFunctions;
 import com.pulumi.tencentcloud.Redis.inputs.GetZoneConfigArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
-import com.pulumi.tencentcloud.Redis.Instance;
-import com.pulumi.tencentcloud.Redis.InstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -193,23 +227,26 @@ public class App {
             .typeId(7)
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
             .cidrBlock("10.0.0.0/16")
+            .name("tf_redis_vpc")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .vpcId(vpc.id())
-            .availabilityZone(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[0].zone()))
+            .availabilityZone(zone.lists()[0].zone())
+            .name("tf_redis_subnet")
             .cidrBlock("10.0.1.0/24")
             .build());
 
-        var foo = new Instance("foo", InstanceArgs.builder()        
-            .availabilityZone(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[0].zone()))
-            .typeId(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[0].typeId()))
-            .password("test12345789")
+        var example = new com.pulumi.tencentcloud.Redis.Instance("example", com.pulumi.tencentcloud.Redis.InstanceArgs.builder()
+            .availabilityZone(zone.lists()[0].zone())
+            .typeId(zone.lists()[0].typeId())
+            .password("Password@123")
             .memSize(8192)
-            .redisShardNum(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[0].redisShardNums()[0]))
-            .redisReplicasNum(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[0].redisReplicasNums()[0]))
+            .redisShardNum(zone.lists()[0].redisShardNums()[0])
+            .redisReplicasNum(zone.lists()[0].redisReplicasNums()[0])
+            .name("tf-example")
             .port(6379)
             .vpcId(vpc.id())
             .subnetId(subnet.id())
@@ -218,64 +255,2491 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
       cidrBlock: 10.0.0.0/16
+      name: tf_redis_vpc
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       vpcId: ${vpc.id}
       availabilityZone: ${zone.lists[0].zone}
+      name: tf_redis_subnet
       cidrBlock: 10.0.1.0/24
-  foo:
+  example:
     type: tencentcloud:Redis:Instance
     properties:
       availabilityZone: ${zone.lists[0].zone}
       typeId: ${zone.lists[0].typeId}
-      password: test12345789
+      password: Password@123
       memSize: 8192
       redisShardNum: ${zone.lists[0].redisShardNums[0]}
       redisReplicasNum: ${zone.lists[0].redisReplicasNums[0]}
+      name: tf-example
       port: 6379
       vpcId: ${vpc.id}
       subnetId: ${subnet.id}
 variables:
   zone:
     fn::invoke:
-      Function: tencentcloud:Redis:getZoneConfig
-      Arguments:
+      function: tencentcloud:Redis:getZoneConfig
+      arguments:
         typeId: 7
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_redis_getzoneconfig" "zone" {
+  type_id = 7
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_redis_vpc"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = data.tencentcloud_redis_getzoneconfig.zone.lists[0].zone
+  name              = "tf_redis_subnet"
+  cidr_block        = "10.0.1.0/24"
+}
+resource "tencentcloud_redis_instance" "example" {
+  availability_zone  = data.tencentcloud_redis_getzoneconfig.zone.lists[0].zone
+  type_id            = data.tencentcloud_redis_getzoneconfig.zone.lists[0].type_id
+  password           = "Password@123"
+  mem_size           = 8192
+  redis_shard_num    = data.tencentcloud_redis_getzoneconfig.zone.lists[0].redis_shard_nums[0]
+  redis_replicas_num = data.tencentcloud_redis_getzoneconfig.zone.lists[0].redis_replicas_nums[0]
+  name               = "tf-example"
+  port               = 6379
+  vpc_id             = tencentcloud_vpc_instance.vpc.id
+  subnet_id          = tencentcloud_subnet_instance.subnet.id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Using multi replica zone set
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as std from "@pulumi/std";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const config = new pulumi.Config();
+const redisReplicasNum = config.getNumber("redisReplicasNum") || 3;
+const redisTypeId = config.getNumber("redisTypeId") || 7;
+const az = tencentcloud.availability.getZonesByProduct({
+    product: "redis",
+});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_redis_vpc",
+});
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    vpcId: vpc.id,
+    availabilityZone: az.then(az => az.zones?.[0]?.name),
+    name: "tf_redis_subnet",
+    cidrBlock: "10.0.1.0/24",
+});
+const securityGroup = new tencentcloud.security.Group("security_group", {name: "tf-redis-sg"});
+const sgRule = new tencentcloud.index.SecurityGroupLiteRule("sg_rule", {
+    securityGroupId: securityGroup.id,
+    ingresses: [
+        "ACCEPT#192.168.1.0/24#80#TCP",
+        "DROP#8.8.8.8#80,90#UDP",
+        "DROP#0.0.0.0/0#80-90#TCP",
+    ],
+    egresses: [
+        "ACCEPT#192.168.0.0/16#ALL#TCP",
+        "ACCEPT#10.0.0.0/8#ALL#ICMP",
+        "DROP#0.0.0.0/0#ALL#ALL",
+    ],
+});
+const example = new tencentcloud.redis.Instance("example", {
+    availabilityZone: az.then(az => az.zones?.[0]?.name),
+    typeId: redisTypeId,
+    chargeType: "POSTPAID",
+    memSize: 1024,
+    name: "tf-example",
+    port: 6379,
+    projectId: 0,
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    password: "Password@123",
+    securityGroups: [securityGroup.id],
+    redisReplicasNum: redisReplicasNum,
+    redisShardNum: 1,
+    replicaZoneIds: pulumi.all([std.range({
+        limit: redisReplicasNum,
+    }), az, az.then(az => az.zones).length]).apply(([invoke, az, length]) => .map(i => (az.zones[i % length].id))),
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_std as std
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+config = pulumi.Config()
+redis_replicas_num = config.get_float("redisReplicasNum")
+if redis_replicas_num is None:
+    redis_replicas_num = 3
+redis_type_id = config.get_float("redisTypeId")
+if redis_type_id is None:
+    redis_type_id = 7
+az = tencentcloud.availability.get_zones_by_product(product="redis")
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_redis_vpc")
+subnet = tencentcloud.subnet.Instance("subnet",
+    vpc_id=vpc.id,
+    availability_zone=az.zones[0].name,
+    name="tf_redis_subnet",
+    cidr_block="10.0.1.0/24")
+security_group = tencentcloud.security.Group("security_group", name="tf-redis-sg")
+sg_rule = tencentcloud.SecurityGroupLiteRule("sg_rule",
+    security_group_id=security_group.id,
+    ingresses=[
+        ACCEPT#192.168.1.0/24#80#TCP,
+        DROP#8.8.8.8#80,90#UDP,
+        DROP#0.0.0.0/0#80-90#TCP,
+    ],
+    egresses=[
+        ACCEPT#192.168.0.0/16#ALL#TCP,
+        ACCEPT#10.0.0.0/8#ALL#ICMP,
+        DROP#0.0.0.0/0#ALL#ALL,
+    ])
+example = tencentcloud.redis.Instance("example",
+    availability_zone=az.zones[0].name,
+    type_id=int(redis_type_id),
+    charge_type="POSTPAID",
+    mem_size=1024,
+    name="tf-example",
+    port=6379,
+    project_id=0,
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
+    password="Password@123",
+    security_groups=[security_group.id],
+    redis_replicas_num=int(redis_replicas_num),
+    redis_shard_num=1,
+    replica_zone_ids=[int(_arg0_.id) for i in std.range(limit=redis_replicas_num).result])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Std = Pulumi.Std;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var redisReplicasNum = config.GetDouble("redisReplicasNum") ?? 3;
+    var redisTypeId = config.GetDouble("redisTypeId") ?? 7;
+    var az = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
+    {
+        Product = "redis",
+    });
+
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "tf_redis_vpc",
+    });
+
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        AvailabilityZone = az.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
+        Name = "tf_redis_subnet",
+        CidrBlock = "10.0.1.0/24",
+    });
+
+    var securityGroup = new Tencentcloud.Security.Group("security_group", new()
+    {
+        Name = "tf-redis-sg",
+    });
+
+    var sgRule = new Tencentcloud.SecurityGroupLiteRule("sg_rule", new()
+    {
+        SecurityGroupId = securityGroup.Id,
+        Ingresses = new[]
+        {
+            "ACCEPT#192.168.1.0/24#80#TCP",
+            "DROP#8.8.8.8#80,90#UDP",
+            "DROP#0.0.0.0/0#80-90#TCP",
+        },
+        Egresses = new[]
+        {
+            "ACCEPT#192.168.0.0/16#ALL#TCP",
+            "ACCEPT#10.0.0.0/8#ALL#ICMP",
+            "DROP#0.0.0.0/0#ALL#ALL",
+        },
+    });
+
+    var example = new Tencentcloud.Redis.Instance("example", new()
+    {
+        AvailabilityZone = az.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
+        TypeId = redisTypeId,
+        ChargeType = "POSTPAID",
+        MemSize = 1024,
+        Name = "tf-example",
+        Port = 6379,
+        ProjectId = 0,
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        Password = "Password@123",
+        SecurityGroups = new[]
+        {
+            securityGroup.Id,
+        },
+        RedisReplicasNum = redisReplicasNum,
+        RedisShardNum = 1,
+        ReplicaZoneIds = Output.Tuple(Std.Range.Invoke(new()
+        {
+            Limit = redisReplicasNum,
+        }), az, az.Apply(getZonesByProductResult => getZonesByProductResult.Zones).Length()).Apply(values =>
+        {
+            var invoke = values.Item1;
+            var az = values.Item2;
+            var length = values.Item3;
+            return .Select(i => 
+            {
+                return az.Apply(getZonesByProductResult => getZonesByProductResult.Zones)[i % length].Id;
+            }).ToList();
+        }),
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```
+Example coming soon!
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    std = {
+      source = "pulumi/std"
+    }
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "az" {
+  product = "redis"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_redis_vpc"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.az.zones[0].name
+  name              = "tf_redis_subnet"
+  cidr_block        = "10.0.1.0/24"
+}
+resource "tencentcloud_security_group" "security_group" {
+  name = "tf-redis-sg"
+}
+resource "tencentcloud_securitygroupliterule" "sg_rule" {
+  security_group_id = tencentcloud_security_group.security_group.id
+  ingresses         = ["ACCEPT#192.168.1.0/24#80#TCP", "DROP#8.8.8.8#80,90#UDP", "DROP#0.0.0.0/0#80-90#TCP"]
+  egresses          = ["ACCEPT#192.168.0.0/16#ALL#TCP", "ACCEPT#10.0.0.0/8#ALL#ICMP", "DROP#0.0.0.0/0#ALL#ALL"]
+}
+resource "tencentcloud_redis_instance" "example" {
+  availability_zone  = data.tencentcloud_availability_getzonesbyproduct.az.zones[0].name
+  type_id            = var.redisTypeId
+  charge_type        = "POSTPAID"
+  mem_size           = 1024
+  name               = "tf-example"
+  port               = 6379
+  project_id         = 0
+  vpc_id             = tencentcloud_vpc_instance.vpc.id
+  subnet_id          = tencentcloud_subnet_instance.subnet.id
+  password           = "Password@123"
+  security_groups    = [tencentcloud_security_group.security_group.id]
+  redis_replicas_num = var.redisReplicasNum
+  redis_shard_num    = 1
+  replica_zone_ids   = [for i in range(var.redisReplicasNum) : data.tencentcloud_availability_getzonesbyproduct.az.zones[i % length(data.tencentcloud_availability_getzonesbyproduct.az.zones)].id]
+}
+variable "redisReplicasNum" {
+  type    = number
+  default = 3
+}
+variable "redisTypeId" {
+  type    = number
+  default = 7
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Buy a month of prepaid instances
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const zone = tencentcloud.redis.getZoneConfig({
+    typeId: 7,
+});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_redis_vpc",
+});
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    vpcId: vpc.id,
+    availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
+    name: "tf_redis_subnet",
+    cidrBlock: "10.0.1.0/24",
+});
+const securityGroup = new tencentcloud.security.Group("security_group", {name: "tf-redis-sg"});
+const sgRule = new tencentcloud.index.SecurityGroupLiteRule("sg_rule", {
+    securityGroupId: securityGroup.id,
+    ingresses: [
+        "ACCEPT#192.168.1.0/24#80#TCP",
+        "DROP#8.8.8.8#80,90#UDP",
+        "DROP#0.0.0.0/0#80-90#TCP",
+    ],
+    egresses: [
+        "ACCEPT#192.168.0.0/16#ALL#TCP",
+        "ACCEPT#10.0.0.0/8#ALL#ICMP",
+        "DROP#0.0.0.0/0#ALL#ALL",
+    ],
+});
+const example = new tencentcloud.redis.Instance("example", {
+    availabilityZone: zone.then(zone => zone.lists?.[0]?.zone),
+    typeId: zone.then(zone => zone.lists?.[0]?.typeId),
+    password: "Password@123",
+    memSize: 8192,
+    redisShardNum: zone.then(zone => zone.lists?.[0]?.redisShardNums?.[0]),
+    redisReplicasNum: zone.then(zone => zone.lists?.[0]?.redisReplicasNums?.[0]),
+    name: "tf-example",
+    port: 6379,
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    securityGroups: [securityGroup.id],
+    chargeType: "PREPAID",
+    prepaidPeriod: 1,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+zone = tencentcloud.redis.get_zone_config(type_id=7)
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_redis_vpc")
+subnet = tencentcloud.subnet.Instance("subnet",
+    vpc_id=vpc.id,
+    availability_zone=zone.lists[1].zone,
+    name="tf_redis_subnet",
+    cidr_block="10.0.1.0/24")
+security_group = tencentcloud.security.Group("security_group", name="tf-redis-sg")
+sg_rule = tencentcloud.SecurityGroupLiteRule("sg_rule",
+    security_group_id=security_group.id,
+    ingresses=[
+        ACCEPT#192.168.1.0/24#80#TCP,
+        DROP#8.8.8.8#80,90#UDP,
+        DROP#0.0.0.0/0#80-90#TCP,
+    ],
+    egresses=[
+        ACCEPT#192.168.0.0/16#ALL#TCP,
+        ACCEPT#10.0.0.0/8#ALL#ICMP,
+        DROP#0.0.0.0/0#ALL#ALL,
+    ])
+example = tencentcloud.redis.Instance("example",
+    availability_zone=zone.lists[0].zone,
+    type_id=zone.lists[0].type_id,
+    password="Password@123",
+    mem_size=8192,
+    redis_shard_num=zone.lists[0].redis_shard_nums[0],
+    redis_replicas_num=zone.lists[0].redis_replicas_nums[0],
+    name="tf-example",
+    port=6379,
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
+    security_groups=[security_group.id],
+    charge_type="PREPAID",
+    prepaid_period=1)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/redis"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zone, err := redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+			TypeId: pulumi.IntRef(7),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("tf_redis_vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
+			Name:             pulumi.String("tf_redis_subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+		})
+		if err != nil {
+			return err
+		}
+		securityGroup, err := security.NewGroup(ctx, "security_group", &security.GroupArgs{
+			Name: pulumi.String("tf-redis-sg"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = tencentcloud.NewSecurityGroupLiteRule(ctx, "sg_rule", &tencentcloud.SecurityGroupLiteRuleArgs{
+			SecurityGroupId: securityGroup.ID(),
+			Ingresses: []string{
+				"ACCEPT#192.168.1.0/24#80#TCP",
+				"DROP#8.8.8.8#80,90#UDP",
+				"DROP#0.0.0.0/0#80-90#TCP",
+			},
+			Egresses: []string{
+				"ACCEPT#192.168.0.0/16#ALL#TCP",
+				"ACCEPT#10.0.0.0/8#ALL#ICMP",
+				"DROP#0.0.0.0/0#ALL#ALL",
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = redis.NewInstance(ctx, "example", &redis.InstanceArgs{
+			AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
+			TypeId:           pulumi.Int(zone.Lists[0].TypeId),
+			Password:         pulumi.String("Password@123"),
+			MemSize:          pulumi.Int(8192),
+			RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
+			RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
+			Name:             pulumi.String("tf-example"),
+			Port:             pulumi.Int(6379),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			SecurityGroups: pulumi.StringArray{
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
+			},
+			ChargeType:    pulumi.String("PREPAID"),
+			PrepaidPeriod: pulumi.Int(1),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
+    {
+        TypeId = 7,
+    });
+
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "tf_redis_vpc",
+    });
+
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.Zone),
+        Name = "tf_redis_subnet",
+        CidrBlock = "10.0.1.0/24",
+    });
+
+    var securityGroup = new Tencentcloud.Security.Group("security_group", new()
+    {
+        Name = "tf-redis-sg",
+    });
+
+    var sgRule = new Tencentcloud.SecurityGroupLiteRule("sg_rule", new()
+    {
+        SecurityGroupId = securityGroup.Id,
+        Ingresses = new[]
+        {
+            "ACCEPT#192.168.1.0/24#80#TCP",
+            "DROP#8.8.8.8#80,90#UDP",
+            "DROP#0.0.0.0/0#80-90#TCP",
+        },
+        Egresses = new[]
+        {
+            "ACCEPT#192.168.0.0/16#ALL#TCP",
+            "ACCEPT#10.0.0.0/8#ALL#ICMP",
+            "DROP#0.0.0.0/0#ALL#ALL",
+        },
+    });
+
+    var example = new Tencentcloud.Redis.Instance("example", new()
+    {
+        AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[0]?.Zone),
+        TypeId = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[0]?.TypeId),
+        Password = "Password@123",
+        MemSize = 8192,
+        RedisShardNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[0]?.RedisShardNums[0]),
+        RedisReplicasNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[0]?.RedisReplicasNums[0]),
+        Name = "tf-example",
+        Port = 6379,
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        SecurityGroups = new[]
+        {
+            securityGroup.Id,
+        },
+        ChargeType = "PREPAID",
+        PrepaidPeriod = 1,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Redis.RedisFunctions;
+import com.pulumi.tencentcloud.Redis.inputs.GetZoneConfigArgs;
+import com.pulumi.tencentcloud.Security.Group;
+import com.pulumi.tencentcloud.Security.GroupArgs;
+import com.pulumi.tencentcloud.SecurityGroupLiteRule;
+import com.pulumi.tencentcloud.SecurityGroupLiteRuleArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var zone = RedisFunctions.getZoneConfig(GetZoneConfigArgs.builder()
+            .typeId(7)
+            .build());
+
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("tf_redis_vpc")
+            .build());
+
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .availabilityZone(zone.lists()[1].zone())
+            .name("tf_redis_subnet")
+            .cidrBlock("10.0.1.0/24")
+            .build());
+
+        var securityGroup = new Group("securityGroup", GroupArgs.builder()
+            .name("tf-redis-sg")
+            .build());
+
+        var sgRule = new SecurityGroupLiteRule("sgRule", SecurityGroupLiteRuleArgs.builder()
+            .securityGroupId(securityGroup.id())
+            .ingresses(Arrays.asList(            
+                "ACCEPT#192.168.1.0/24#80#TCP",
+                "DROP#8.8.8.8#80,90#UDP",
+                "DROP#0.0.0.0/0#80-90#TCP"))
+            .egresses(Arrays.asList(            
+                "ACCEPT#192.168.0.0/16#ALL#TCP",
+                "ACCEPT#10.0.0.0/8#ALL#ICMP",
+                "DROP#0.0.0.0/0#ALL#ALL"))
+            .build());
+
+        var example = new com.pulumi.tencentcloud.Redis.Instance("example", com.pulumi.tencentcloud.Redis.InstanceArgs.builder()
+            .availabilityZone(zone.lists()[0].zone())
+            .typeId(zone.lists()[0].typeId())
+            .password("Password@123")
+            .memSize(8192)
+            .redisShardNum(zone.lists()[0].redisShardNums()[0])
+            .redisReplicasNum(zone.lists()[0].redisReplicasNums()[0])
+            .name("tf-example")
+            .port(6379)
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .securityGroups(securityGroup.id())
+            .chargeType("PREPAID")
+            .prepaidPeriod(1)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      cidrBlock: 10.0.0.0/16
+      name: tf_redis_vpc
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      vpcId: ${vpc.id}
+      availabilityZone: ${zone.lists[1].zone}
+      name: tf_redis_subnet
+      cidrBlock: 10.0.1.0/24
+  securityGroup:
+    type: tencentcloud:Security:Group
+    name: security_group
+    properties:
+      name: tf-redis-sg
+  sgRule:
+    type: tencentcloud:SecurityGroupLiteRule
+    name: sg_rule
+    properties:
+      securityGroupId: ${securityGroup.id}
+      ingresses:
+        - ACCEPT#192.168.1.0/24#80#TCP
+        - DROP#8.8.8.8#80,90#UDP
+        - DROP#0.0.0.0/0#80-90#TCP
+      egresses:
+        - ACCEPT#192.168.0.0/16#ALL#TCP
+        - ACCEPT#10.0.0.0/8#ALL#ICMP
+        - DROP#0.0.0.0/0#ALL#ALL
+  example:
+    type: tencentcloud:Redis:Instance
+    properties:
+      availabilityZone: ${zone.lists[0].zone}
+      typeId: ${zone.lists[0].typeId}
+      password: Password@123
+      memSize: 8192
+      redisShardNum: ${zone.lists[0].redisShardNums[0]}
+      redisReplicasNum: ${zone.lists[0].redisReplicasNums[0]}
+      name: tf-example
+      port: 6379
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      securityGroups:
+        - ${securityGroup.id}
+      chargeType: PREPAID
+      prepaidPeriod: 1
+variables:
+  zone:
+    fn::invoke:
+      function: tencentcloud:Redis:getZoneConfig
+      arguments:
+        typeId: 7
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_redis_getzoneconfig" "zone" {
+  type_id = 7
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_redis_vpc"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = data.tencentcloud_redis_getzoneconfig.zone.lists[1].zone
+  name              = "tf_redis_subnet"
+  cidr_block        = "10.0.1.0/24"
+}
+resource "tencentcloud_security_group" "security_group" {
+  name = "tf-redis-sg"
+}
+resource "tencentcloud_securitygroupliterule" "sg_rule" {
+  security_group_id = tencentcloud_security_group.security_group.id
+  ingresses         = ["ACCEPT#192.168.1.0/24#80#TCP", "DROP#8.8.8.8#80,90#UDP", "DROP#0.0.0.0/0#80-90#TCP"]
+  egresses          = ["ACCEPT#192.168.0.0/16#ALL#TCP", "ACCEPT#10.0.0.0/8#ALL#ICMP", "DROP#0.0.0.0/0#ALL#ALL"]
+}
+resource "tencentcloud_redis_instance" "example" {
+  availability_zone  = data.tencentcloud_redis_getzoneconfig.zone.lists[0].zone
+  type_id            = data.tencentcloud_redis_getzoneconfig.zone.lists[0].type_id
+  password           = "Password@123"
+  mem_size           = 8192
+  redis_shard_num    = data.tencentcloud_redis_getzoneconfig.zone.lists[0].redis_shard_nums[0]
+  redis_replicas_num = data.tencentcloud_redis_getzoneconfig.zone.lists[0].redis_replicas_nums[0]
+  name               = "tf-example"
+  port               = 6379
+  vpc_id             = tencentcloud_vpc_instance.vpc.id
+  subnet_id          = tencentcloud_subnet_instance.subnet.id
+  security_groups    = [tencentcloud_security_group.security_group.id]
+  charge_type        = "PREPAID"
+  prepaid_period     = 1
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a multi-AZ instance
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const zone = tencentcloud.redis.getZoneConfig({
+    typeId: 7,
+    region: "ap-guangzhou",
+});
+const config = new pulumi.Config();
+const replicaZoneIds = config.getObject<any>("replicaZoneIds") || [
+    100004,
+    100006,
+];
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_redis_vpc",
+});
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    vpcId: vpc.id,
+    availabilityZone: zone.then(zone => zone.lists?.[2]?.zone),
+    name: "tf_redis_subnet",
+    cidrBlock: "10.0.1.0/24",
+});
+const securityGroup = new tencentcloud.security.Group("security_group", {name: "tf-redis-sg"});
+const sgRule = new tencentcloud.index.SecurityGroupLiteRule("sg_rule", {
+    securityGroupId: securityGroup.id,
+    ingresses: [
+        "ACCEPT#192.168.1.0/24#80#TCP",
+        "DROP#8.8.8.8#80,90#UDP",
+        "DROP#0.0.0.0/0#80-90#TCP",
+    ],
+    egresses: [
+        "ACCEPT#192.168.0.0/16#ALL#TCP",
+        "ACCEPT#10.0.0.0/8#ALL#ICMP",
+        "DROP#0.0.0.0/0#ALL#ALL",
+    ],
+});
+const example = new tencentcloud.redis.Instance("example", {
+    availabilityZone: zone.then(zone => zone.lists?.[2]?.zone),
+    typeId: zone.then(zone => zone.lists?.[2]?.typeId),
+    password: "Password@123",
+    memSize: 8192,
+    redisShardNum: zone.then(zone => zone.lists?.[2]?.redisShardNums?.[0]),
+    redisReplicasNum: 2,
+    replicaZoneIds: replicaZoneIds,
+    name: "tf-example",
+    port: 6379,
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    securityGroups: [securityGroup.id],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+zone = tencentcloud.redis.get_zone_config(type_id=7,
+    region="ap-guangzhou")
+config = pulumi.Config()
+replica_zone_ids = config.get_object("replicaZoneIds")
+if replica_zone_ids is None:
+    replica_zone_ids = [
+        100004,
+        100006,
+    ]
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_redis_vpc")
+subnet = tencentcloud.subnet.Instance("subnet",
+    vpc_id=vpc.id,
+    availability_zone=zone.lists[2].zone,
+    name="tf_redis_subnet",
+    cidr_block="10.0.1.0/24")
+security_group = tencentcloud.security.Group("security_group", name="tf-redis-sg")
+sg_rule = tencentcloud.SecurityGroupLiteRule("sg_rule",
+    security_group_id=security_group.id,
+    ingresses=[
+        ACCEPT#192.168.1.0/24#80#TCP,
+        DROP#8.8.8.8#80,90#UDP,
+        DROP#0.0.0.0/0#80-90#TCP,
+    ],
+    egresses=[
+        ACCEPT#192.168.0.0/16#ALL#TCP,
+        ACCEPT#10.0.0.0/8#ALL#ICMP,
+        DROP#0.0.0.0/0#ALL#ALL,
+    ])
+example = tencentcloud.redis.Instance("example",
+    availability_zone=zone.lists[2].zone,
+    type_id=zone.lists[2].type_id,
+    password="Password@123",
+    mem_size=8192,
+    redis_shard_num=zone.lists[2].redis_shard_nums[0],
+    redis_replicas_num=2,
+    replica_zone_ids=replica_zone_ids,
+    name="tf-example",
+    port=6379,
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
+    security_groups=[security_group.id])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/redis"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zone, err := redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+			TypeId: pulumi.IntRef(7),
+			Region: pulumi.StringRef("ap-guangzhou"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		cfg := config.New(ctx, "")
+		replicaZoneIds := []int{
+			100004,
+			100006,
+		}
+		if param := cfg.GetObject("replicaZoneIds"); param != nil {
+			replicaZoneIds = param
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("tf_redis_vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
+			Name:             pulumi.String("tf_redis_subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+		})
+		if err != nil {
+			return err
+		}
+		securityGroup, err := security.NewGroup(ctx, "security_group", &security.GroupArgs{
+			Name: pulumi.String("tf-redis-sg"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = tencentcloud.NewSecurityGroupLiteRule(ctx, "sg_rule", &tencentcloud.SecurityGroupLiteRuleArgs{
+			SecurityGroupId: securityGroup.ID(),
+			Ingresses: []string{
+				"ACCEPT#192.168.1.0/24#80#TCP",
+				"DROP#8.8.8.8#80,90#UDP",
+				"DROP#0.0.0.0/0#80-90#TCP",
+			},
+			Egresses: []string{
+				"ACCEPT#192.168.0.0/16#ALL#TCP",
+				"ACCEPT#10.0.0.0/8#ALL#ICMP",
+				"DROP#0.0.0.0/0#ALL#ALL",
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = redis.NewInstance(ctx, "example", &redis.InstanceArgs{
+			AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
+			TypeId:           pulumi.Int(zone.Lists[2].TypeId),
+			Password:         pulumi.String("Password@123"),
+			MemSize:          pulumi.Int(8192),
+			RedisShardNum:    pulumi.Int(zone.Lists[2].RedisShardNums[0]),
+			RedisReplicasNum: pulumi.Int(2),
+			ReplicaZoneIds:   pulumi.Any(replicaZoneIds),
+			Name:             pulumi.String("tf-example"),
+			Port:             pulumi.Int(6379),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			SecurityGroups: pulumi.StringArray{
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
+    {
+        TypeId = 7,
+        Region = "ap-guangzhou",
+    });
+
+    var config = new Config();
+    var replicaZoneIds = config.GetObject<dynamic>("replicaZoneIds") ?? new[]
+    {
+        100004,
+        100006,
+    };
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "tf_redis_vpc",
+    });
+
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[2]?.Zone),
+        Name = "tf_redis_subnet",
+        CidrBlock = "10.0.1.0/24",
+    });
+
+    var securityGroup = new Tencentcloud.Security.Group("security_group", new()
+    {
+        Name = "tf-redis-sg",
+    });
+
+    var sgRule = new Tencentcloud.SecurityGroupLiteRule("sg_rule", new()
+    {
+        SecurityGroupId = securityGroup.Id,
+        Ingresses = new[]
+        {
+            "ACCEPT#192.168.1.0/24#80#TCP",
+            "DROP#8.8.8.8#80,90#UDP",
+            "DROP#0.0.0.0/0#80-90#TCP",
+        },
+        Egresses = new[]
+        {
+            "ACCEPT#192.168.0.0/16#ALL#TCP",
+            "ACCEPT#10.0.0.0/8#ALL#ICMP",
+            "DROP#0.0.0.0/0#ALL#ALL",
+        },
+    });
+
+    var example = new Tencentcloud.Redis.Instance("example", new()
+    {
+        AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[2]?.Zone),
+        TypeId = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[2]?.TypeId),
+        Password = "Password@123",
+        MemSize = 8192,
+        RedisShardNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[2]?.RedisShardNums[0]),
+        RedisReplicasNum = 2,
+        ReplicaZoneIds = replicaZoneIds,
+        Name = "tf-example",
+        Port = 6379,
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        SecurityGroups = new[]
+        {
+            securityGroup.Id,
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Redis.RedisFunctions;
+import com.pulumi.tencentcloud.Redis.inputs.GetZoneConfigArgs;
+import com.pulumi.tencentcloud.Security.Group;
+import com.pulumi.tencentcloud.Security.GroupArgs;
+import com.pulumi.tencentcloud.SecurityGroupLiteRule;
+import com.pulumi.tencentcloud.SecurityGroupLiteRuleArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var config = ctx.config();
+        final var zone = RedisFunctions.getZoneConfig(GetZoneConfigArgs.builder()
+            .typeId(7)
+            .region("ap-guangzhou")
+            .build());
+
+        final var replicaZoneIds = config.get("replicaZoneIds").orElse(Arrays.asList(        
+            100004,
+            100006));
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("tf_redis_vpc")
+            .build());
+
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .availabilityZone(zone.lists()[2].zone())
+            .name("tf_redis_subnet")
+            .cidrBlock("10.0.1.0/24")
+            .build());
+
+        var securityGroup = new Group("securityGroup", GroupArgs.builder()
+            .name("tf-redis-sg")
+            .build());
+
+        var sgRule = new SecurityGroupLiteRule("sgRule", SecurityGroupLiteRuleArgs.builder()
+            .securityGroupId(securityGroup.id())
+            .ingresses(Arrays.asList(            
+                "ACCEPT#192.168.1.0/24#80#TCP",
+                "DROP#8.8.8.8#80,90#UDP",
+                "DROP#0.0.0.0/0#80-90#TCP"))
+            .egresses(Arrays.asList(            
+                "ACCEPT#192.168.0.0/16#ALL#TCP",
+                "ACCEPT#10.0.0.0/8#ALL#ICMP",
+                "DROP#0.0.0.0/0#ALL#ALL"))
+            .build());
+
+        var example = new com.pulumi.tencentcloud.Redis.Instance("example", com.pulumi.tencentcloud.Redis.InstanceArgs.builder()
+            .availabilityZone(zone.lists()[2].zone())
+            .typeId(zone.lists()[2].typeId())
+            .password("Password@123")
+            .memSize(8192)
+            .redisShardNum(zone.lists()[2].redisShardNums()[0])
+            .redisReplicasNum(2)
+            .replicaZoneIds(replicaZoneIds)
+            .name("tf-example")
+            .port(6379)
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .securityGroups(securityGroup.id())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+configuration:
+  replicaZoneIds:
+    type: object
+    default:
+      - 100004
+      - 100006
+resources:
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      cidrBlock: 10.0.0.0/16
+      name: tf_redis_vpc
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      vpcId: ${vpc.id}
+      availabilityZone: ${zone.lists[2].zone}
+      name: tf_redis_subnet
+      cidrBlock: 10.0.1.0/24
+  securityGroup:
+    type: tencentcloud:Security:Group
+    name: security_group
+    properties:
+      name: tf-redis-sg
+  sgRule:
+    type: tencentcloud:SecurityGroupLiteRule
+    name: sg_rule
+    properties:
+      securityGroupId: ${securityGroup.id}
+      ingresses:
+        - ACCEPT#192.168.1.0/24#80#TCP
+        - DROP#8.8.8.8#80,90#UDP
+        - DROP#0.0.0.0/0#80-90#TCP
+      egresses:
+        - ACCEPT#192.168.0.0/16#ALL#TCP
+        - ACCEPT#10.0.0.0/8#ALL#ICMP
+        - DROP#0.0.0.0/0#ALL#ALL
+  example:
+    type: tencentcloud:Redis:Instance
+    properties:
+      availabilityZone: ${zone.lists[2].zone}
+      typeId: ${zone.lists[2].typeId}
+      password: Password@123
+      memSize: 8192
+      redisShardNum: ${zone.lists[2].redisShardNums[0]}
+      redisReplicasNum: 2
+      replicaZoneIds: ${replicaZoneIds}
+      name: tf-example
+      port: 6379
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      securityGroups:
+        - ${securityGroup.id}
+variables:
+  zone:
+    fn::invoke:
+      function: tencentcloud:Redis:getZoneConfig
+      arguments:
+        typeId: 7
+        region: ap-guangzhou
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_redis_getzoneconfig" "zone" {
+  type_id = 7
+  region  = "ap-guangzhou"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_redis_vpc"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = data.tencentcloud_redis_getzoneconfig.zone.lists[2].zone
+  name              = "tf_redis_subnet"
+  cidr_block        = "10.0.1.0/24"
+}
+resource "tencentcloud_security_group" "security_group" {
+  name = "tf-redis-sg"
+}
+resource "tencentcloud_securitygroupliterule" "sg_rule" {
+  security_group_id = tencentcloud_security_group.security_group.id
+  ingresses         = ["ACCEPT#192.168.1.0/24#80#TCP", "DROP#8.8.8.8#80,90#UDP", "DROP#0.0.0.0/0#80-90#TCP"]
+  egresses          = ["ACCEPT#192.168.0.0/16#ALL#TCP", "ACCEPT#10.0.0.0/8#ALL#ICMP", "DROP#0.0.0.0/0#ALL#ALL"]
+}
+resource "tencentcloud_redis_instance" "example" {
+  availability_zone  = data.tencentcloud_redis_getzoneconfig.zone.lists[2].zone
+  type_id            = data.tencentcloud_redis_getzoneconfig.zone.lists[2].type_id
+  password           = "Password@123"
+  mem_size           = 8192
+  redis_shard_num    = data.tencentcloud_redis_getzoneconfig.zone.lists[2].redis_shard_nums[0]
+  redis_replicas_num = 2
+  replica_zone_ids   = var.replicaZoneIds
+  name               = "tf-example"
+  port               = 6379
+  vpc_id             = tencentcloud_vpc_instance.vpc.id
+  subnet_id          = tencentcloud_subnet_instance.subnet.id
+  security_groups    = [tencentcloud_security_group.security_group.id]
+}
+variable "replicaZoneIds" {
+  default = [100004, 100006]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a memcached instance
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const zone = tencentcloud.redis.getZoneConfig({
+    typeId: 200,
+    region: "ap-guangzhou",
+});
+const config = new pulumi.Config();
+const replicaZoneIds = config.getObject<any>("replicaZoneIds") || [
+    100004,
+    100006,
+];
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_redis_vpc",
+});
+const subnet = new tencentcloud.subnet.Instance("subnet", {
+    vpcId: vpc.id,
+    availabilityZone: zone.then(zone => zone.lists?.[2]?.zone),
+    name: "tf_redis_subnet",
+    cidrBlock: "10.0.1.0/24",
+});
+const securityGroup = new tencentcloud.security.Group("security_group", {name: "tf-redis-sg"});
+const sgRule = new tencentcloud.security.GroupRuleSet("sg_rule", {
+    securityGroupId: securityGroup.id,
+    ingresses: [
+        {
+            action: "ACCEPT",
+            cidrBlock: "10.0.0.0/22",
+            protocol: "TCP",
+            port: "80-90",
+            description: "A:Allow Ips and 80-90",
+        },
+        {
+            action: "ACCEPT",
+            cidrBlock: "10.0.2.1",
+            protocol: "UDP",
+            port: "8080",
+            description: "B:Allow UDP 8080",
+        },
+    ],
+    egresses: [
+        {
+            action: "DROP",
+            cidrBlock: "10.0.0.0/16",
+            protocol: "ICMP",
+            description: "A:Block ping3",
+        },
+        {
+            action: "DROP",
+            cidrBlock: "0.0.0.0/0",
+            protocol: "ALL",
+            description: "A:Block ping3",
+        },
+    ],
+});
+const example = new tencentcloud.redis.Instance("example", {
+    availabilityZone: zone.then(zone => zone.lists?.[2]?.zone),
+    typeId: zone.then(zone => zone.lists?.[2]?.typeId),
+    memSize: 8192,
+    redisShardNum: zone.then(zone => zone.lists?.[2]?.redisShardNums?.[0]),
+    redisReplicasNum: 2,
+    noAuth: true,
+    replicaZoneIds: replicaZoneIds,
+    name: "tf-example",
+    port: 6379,
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    securityGroups: [securityGroup.id],
+    forceDelete: true,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+zone = tencentcloud.redis.get_zone_config(type_id=200,
+    region="ap-guangzhou")
+config = pulumi.Config()
+replica_zone_ids = config.get_object("replicaZoneIds")
+if replica_zone_ids is None:
+    replica_zone_ids = [
+        100004,
+        100006,
+    ]
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_redis_vpc")
+subnet = tencentcloud.subnet.Instance("subnet",
+    vpc_id=vpc.id,
+    availability_zone=zone.lists[2].zone,
+    name="tf_redis_subnet",
+    cidr_block="10.0.1.0/24")
+security_group = tencentcloud.security.Group("security_group", name="tf-redis-sg")
+sg_rule = tencentcloud.security.GroupRuleSet("sg_rule",
+    security_group_id=security_group.id,
+    ingresses=[
+        {
+            "action": "ACCEPT",
+            "cidr_block": "10.0.0.0/22",
+            "protocol": "TCP",
+            "port": "80-90",
+            "description": "A:Allow Ips and 80-90",
+        },
+        {
+            "action": "ACCEPT",
+            "cidr_block": "10.0.2.1",
+            "protocol": "UDP",
+            "port": "8080",
+            "description": "B:Allow UDP 8080",
+        },
+    ],
+    egresses=[
+        {
+            "action": "DROP",
+            "cidr_block": "10.0.0.0/16",
+            "protocol": "ICMP",
+            "description": "A:Block ping3",
+        },
+        {
+            "action": "DROP",
+            "cidr_block": "0.0.0.0/0",
+            "protocol": "ALL",
+            "description": "A:Block ping3",
+        },
+    ])
+example = tencentcloud.redis.Instance("example",
+    availability_zone=zone.lists[2].zone,
+    type_id=zone.lists[2].type_id,
+    mem_size=8192,
+    redis_shard_num=zone.lists[2].redis_shard_nums[0],
+    redis_replicas_num=2,
+    no_auth=True,
+    replica_zone_ids=replica_zone_ids,
+    name="tf-example",
+    port=6379,
+    vpc_id=vpc.id,
+    subnet_id=subnet.id,
+    security_groups=[security_group.id],
+    force_delete=True)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/redis"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zone, err := redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+			TypeId: pulumi.IntRef(200),
+			Region: pulumi.StringRef("ap-guangzhou"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		cfg := config.New(ctx, "")
+		replicaZoneIds := []int{
+			100004,
+			100006,
+		}
+		if param := cfg.GetObject("replicaZoneIds"); param != nil {
+			replicaZoneIds = param
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("tf_redis_vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
+			Name:             pulumi.String("tf_redis_subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+		})
+		if err != nil {
+			return err
+		}
+		securityGroup, err := security.NewGroup(ctx, "security_group", &security.GroupArgs{
+			Name: pulumi.String("tf-redis-sg"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = security.NewGroupRuleSet(ctx, "sg_rule", &security.GroupRuleSetArgs{
+			SecurityGroupId: securityGroup.ID().ToIDOutput().ToStringOutput(),
+			Ingresses: security.GroupRuleSetIngressArray{
+				&security.GroupRuleSetIngressArgs{
+					Action:      pulumi.String("ACCEPT"),
+					CidrBlock:   pulumi.String("10.0.0.0/22"),
+					Protocol:    pulumi.String("TCP"),
+					Port:        pulumi.String("80-90"),
+					Description: pulumi.String("A:Allow Ips and 80-90"),
+				},
+				&security.GroupRuleSetIngressArgs{
+					Action:      pulumi.String("ACCEPT"),
+					CidrBlock:   pulumi.String("10.0.2.1"),
+					Protocol:    pulumi.String("UDP"),
+					Port:        pulumi.String("8080"),
+					Description: pulumi.String("B:Allow UDP 8080"),
+				},
+			},
+			Egresses: security.GroupRuleSetEgressArray{
+				&security.GroupRuleSetEgressArgs{
+					Action:      pulumi.String("DROP"),
+					CidrBlock:   pulumi.String("10.0.0.0/16"),
+					Protocol:    pulumi.String("ICMP"),
+					Description: pulumi.String("A:Block ping3"),
+				},
+				&security.GroupRuleSetEgressArgs{
+					Action:      pulumi.String("DROP"),
+					CidrBlock:   pulumi.String("0.0.0.0/0"),
+					Protocol:    pulumi.String("ALL"),
+					Description: pulumi.String("A:Block ping3"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = redis.NewInstance(ctx, "example", &redis.InstanceArgs{
+			AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
+			TypeId:           pulumi.Int(zone.Lists[2].TypeId),
+			MemSize:          pulumi.Int(8192),
+			RedisShardNum:    pulumi.Int(zone.Lists[2].RedisShardNums[0]),
+			RedisReplicasNum: pulumi.Int(2),
+			NoAuth:           pulumi.Bool(true),
+			ReplicaZoneIds:   pulumi.Any(replicaZoneIds),
+			Name:             pulumi.String("tf-example"),
+			Port:             pulumi.Int(6379),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			SecurityGroups: pulumi.StringArray{
+				securityGroup.ID().ToIDOutput().ToStringOutput(),
+			},
+			ForceDelete: pulumi.Bool(true),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
+    {
+        TypeId = 200,
+        Region = "ap-guangzhou",
+    });
+
+    var config = new Config();
+    var replicaZoneIds = config.GetObject<dynamic>("replicaZoneIds") ?? new[]
+    {
+        100004,
+        100006,
+    };
+    var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    {
+        CidrBlock = "10.0.0.0/16",
+        Name = "tf_redis_vpc",
+    });
+
+    var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    {
+        VpcId = vpc.Id,
+        AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[2]?.Zone),
+        Name = "tf_redis_subnet",
+        CidrBlock = "10.0.1.0/24",
+    });
+
+    var securityGroup = new Tencentcloud.Security.Group("security_group", new()
+    {
+        Name = "tf-redis-sg",
+    });
+
+    var sgRule = new Tencentcloud.Security.GroupRuleSet("sg_rule", new()
+    {
+        SecurityGroupId = securityGroup.Id,
+        Ingresses = new[]
+        {
+            new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
+            {
+                Action = "ACCEPT",
+                CidrBlock = "10.0.0.0/22",
+                Protocol = "TCP",
+                Port = "80-90",
+                Description = "A:Allow Ips and 80-90",
+            },
+            new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
+            {
+                Action = "ACCEPT",
+                CidrBlock = "10.0.2.1",
+                Protocol = "UDP",
+                Port = "8080",
+                Description = "B:Allow UDP 8080",
+            },
+        },
+        Egresses = new[]
+        {
+            new Tencentcloud.Security.Inputs.GroupRuleSetEgressArgs
+            {
+                Action = "DROP",
+                CidrBlock = "10.0.0.0/16",
+                Protocol = "ICMP",
+                Description = "A:Block ping3",
+            },
+            new Tencentcloud.Security.Inputs.GroupRuleSetEgressArgs
+            {
+                Action = "DROP",
+                CidrBlock = "0.0.0.0/0",
+                Protocol = "ALL",
+                Description = "A:Block ping3",
+            },
+        },
+    });
+
+    var example = new Tencentcloud.Redis.Instance("example", new()
+    {
+        AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[2]?.Zone),
+        TypeId = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[2]?.TypeId),
+        MemSize = 8192,
+        RedisShardNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[2]?.RedisShardNums[0]),
+        RedisReplicasNum = 2,
+        NoAuth = true,
+        ReplicaZoneIds = replicaZoneIds,
+        Name = "tf-example",
+        Port = 6379,
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        SecurityGroups = new[]
+        {
+            securityGroup.Id,
+        },
+        ForceDelete = true,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Redis.RedisFunctions;
+import com.pulumi.tencentcloud.Redis.inputs.GetZoneConfigArgs;
+import com.pulumi.tencentcloud.Security.Group;
+import com.pulumi.tencentcloud.Security.GroupArgs;
+import com.pulumi.tencentcloud.Security.GroupRuleSet;
+import com.pulumi.tencentcloud.Security.GroupRuleSetArgs;
+import com.pulumi.tencentcloud.Security.inputs.GroupRuleSetIngressArgs;
+import com.pulumi.tencentcloud.Security.inputs.GroupRuleSetEgressArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var config = ctx.config();
+        final var zone = RedisFunctions.getZoneConfig(GetZoneConfigArgs.builder()
+            .typeId(200)
+            .region("ap-guangzhou")
+            .build());
+
+        final var replicaZoneIds = config.get("replicaZoneIds").orElse(Arrays.asList(        
+            100004,
+            100006));
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .cidrBlock("10.0.0.0/16")
+            .name("tf_redis_vpc")
+            .build());
+
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .vpcId(vpc.id())
+            .availabilityZone(zone.lists()[2].zone())
+            .name("tf_redis_subnet")
+            .cidrBlock("10.0.1.0/24")
+            .build());
+
+        var securityGroup = new Group("securityGroup", GroupArgs.builder()
+            .name("tf-redis-sg")
+            .build());
+
+        var sgRule = new GroupRuleSet("sgRule", GroupRuleSetArgs.builder()
+            .securityGroupId(securityGroup.id())
+            .ingresses(            
+                GroupRuleSetIngressArgs.builder()
+                    .action("ACCEPT")
+                    .cidrBlock("10.0.0.0/22")
+                    .protocol("TCP")
+                    .port("80-90")
+                    .description("A:Allow Ips and 80-90")
+                    .build(),
+                GroupRuleSetIngressArgs.builder()
+                    .action("ACCEPT")
+                    .cidrBlock("10.0.2.1")
+                    .protocol("UDP")
+                    .port("8080")
+                    .description("B:Allow UDP 8080")
+                    .build())
+            .egresses(            
+                GroupRuleSetEgressArgs.builder()
+                    .action("DROP")
+                    .cidrBlock("10.0.0.0/16")
+                    .protocol("ICMP")
+                    .description("A:Block ping3")
+                    .build(),
+                GroupRuleSetEgressArgs.builder()
+                    .action("DROP")
+                    .cidrBlock("0.0.0.0/0")
+                    .protocol("ALL")
+                    .description("A:Block ping3")
+                    .build())
+            .build());
+
+        var example = new com.pulumi.tencentcloud.Redis.Instance("example", com.pulumi.tencentcloud.Redis.InstanceArgs.builder()
+            .availabilityZone(zone.lists()[2].zone())
+            .typeId(zone.lists()[2].typeId())
+            .memSize(8192)
+            .redisShardNum(zone.lists()[2].redisShardNums()[0])
+            .redisReplicasNum(2)
+            .noAuth(true)
+            .replicaZoneIds(replicaZoneIds)
+            .name("tf-example")
+            .port(6379)
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
+            .securityGroups(securityGroup.id())
+            .forceDelete(true)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+configuration:
+  replicaZoneIds:
+    type: object
+    default:
+      - 100004
+      - 100006
+resources:
+  vpc:
+    type: tencentcloud:Vpc:Instance
+    properties:
+      cidrBlock: 10.0.0.0/16
+      name: tf_redis_vpc
+  subnet:
+    type: tencentcloud:Subnet:Instance
+    properties:
+      vpcId: ${vpc.id}
+      availabilityZone: ${zone.lists[2].zone}
+      name: tf_redis_subnet
+      cidrBlock: 10.0.1.0/24
+  securityGroup:
+    type: tencentcloud:Security:Group
+    name: security_group
+    properties:
+      name: tf-redis-sg
+  sgRule:
+    type: tencentcloud:Security:GroupRuleSet
+    name: sg_rule
+    properties:
+      securityGroupId: ${securityGroup.id}
+      ingresses:
+        - action: ACCEPT
+          cidrBlock: 10.0.0.0/22
+          protocol: TCP
+          port: 80-90
+          description: A:Allow Ips and 80-90
+        - action: ACCEPT
+          cidrBlock: 10.0.2.1
+          protocol: UDP
+          port: '8080'
+          description: B:Allow UDP 8080
+      egresses:
+        - action: DROP
+          cidrBlock: 10.0.0.0/16
+          protocol: ICMP
+          description: A:Block ping3
+        - action: DROP
+          cidrBlock: 0.0.0.0/0
+          protocol: ALL
+          description: A:Block ping3
+  example:
+    type: tencentcloud:Redis:Instance
+    properties:
+      availabilityZone: ${zone.lists[2].zone}
+      typeId: ${zone.lists[2].typeId}
+      memSize: 8192
+      redisShardNum: ${zone.lists[2].redisShardNums[0]}
+      redisReplicasNum: 2
+      noAuth: true
+      replicaZoneIds: ${replicaZoneIds}
+      name: tf-example
+      port: 6379
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
+      securityGroups:
+        - ${securityGroup.id}
+      forceDelete: true
+variables:
+  zone:
+    fn::invoke:
+      function: tencentcloud:Redis:getZoneConfig
+      arguments:
+        typeId: 200
+        region: ap-guangzhou
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_redis_getzoneconfig" "zone" {
+  type_id = 200
+  region  = "ap-guangzhou"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_redis_vpc"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = data.tencentcloud_redis_getzoneconfig.zone.lists[2].zone
+  name              = "tf_redis_subnet"
+  cidr_block        = "10.0.1.0/24"
+}
+resource "tencentcloud_security_group" "security_group" {
+  name = "tf-redis-sg"
+}
+resource "tencentcloud_security_groupruleset" "sg_rule" {
+  security_group_id = tencentcloud_security_group.security_group.id
+  ingresses {
+    action      = "ACCEPT"
+    cidr_block  = "10.0.0.0/22"
+    protocol    = "TCP"
+    port        = "80-90"
+    description = "A:Allow Ips and 80-90"
+  }
+  ingresses {
+    action      = "ACCEPT"
+    cidr_block  = "10.0.2.1"
+    protocol    = "UDP"
+    port        = "8080"
+    description = "B:Allow UDP 8080"
+  }
+  egresses {
+    action      = "DROP"
+    cidr_block  = "10.0.0.0/16"
+    protocol    = "ICMP"
+    description = "A:Block ping3"
+  }
+  egresses {
+    action      = "DROP"
+    cidr_block  = "0.0.0.0/0"
+    protocol    = "ALL"
+    description = "A:Block ping3"
+  }
+}
+resource "tencentcloud_redis_instance" "example" {
+  availability_zone  = data.tencentcloud_redis_getzoneconfig.zone.lists[2].zone
+  type_id            = data.tencentcloud_redis_getzoneconfig.zone.lists[2].type_id
+  mem_size           = 8192
+  redis_shard_num    = data.tencentcloud_redis_getzoneconfig.zone.lists[2].redis_shard_nums[0]
+  redis_replicas_num = 2
+  no_auth            = true
+  replica_zone_ids   = var.replicaZoneIds
+  name               = "tf-example"
+  port               = 6379
+  vpc_id             = tencentcloud_vpc_instance.vpc.id
+  subnet_id          = tencentcloud_subnet_instance.subnet.id
+  security_groups    = [tencentcloud_security_group.security_group.id]
+  force_delete       = true
+}
+variable "replicaZoneIds" {
+  default = [100004, 100006]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a CDC scenario instance
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const config = new pulumi.Config();
+const cdcId = config.get("cdcId") || "cluster-262n63e8";
+const cdcRegion = config.get("cdcRegion") || "ap-guangzhou";
+const clusters = tencentcloud.redis.getClusters({
+    dedicatedClusterId: cdcId,
+});
+export const name = clusters.then(clusters => clusters.resources?.[0]?.redisClusterId);
+const zone = tencentcloud.redis.getZoneConfig({
+    typeId: 7,
+    region: cdcRegion,
+});
+const example = tencentcloud.cdc.getDedicatedClusters({
+    dedicatedClusterIds: [cdcId],
+});
+const subnets = tencentcloud.vpc.getSubnets({
+    cdcId: cdcId,
+});
+const exampleInstance = new tencentcloud.redis.Instance("example", {
+    availabilityZone: example.then(example => example.dedicatedClusterSets?.[0]?.zone),
+    typeId: zone.then(zone => zone.lists?.[0]?.typeId),
+    password: "Password@123",
+    memSize: 8192,
+    redisShardNum: zone.then(zone => zone.lists?.[0]?.redisShardNums?.[0]),
+    redisReplicasNum: zone.then(zone => zone.lists?.[0]?.redisReplicasNums?.[0]),
+    name: "tf-cdc-example",
+    port: 6379,
+    vpcId: subnets.then(subnets => subnets.instanceLists?.[0]?.vpcId),
+    subnetId: subnets.then(subnets => subnets.instanceLists?.[0]?.subnetId),
+    productVersion: "cdc",
+    redisClusterId: clusters.then(clusters => clusters.resources?.[0]?.redisClusterId),
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+config = pulumi.Config()
+cdc_id = config.get("cdcId")
+if cdc_id is None:
+    cdc_id = "cluster-262n63e8"
+cdc_region = config.get("cdcRegion")
+if cdc_region is None:
+    cdc_region = "ap-guangzhou"
+clusters = tencentcloud.redis.get_clusters(dedicated_cluster_id=cdc_id)
+pulumi.export("name", clusters.resources[0].redis_cluster_id)
+zone = tencentcloud.redis.get_zone_config(type_id=7,
+    region=cdc_region)
+example = tencentcloud.cdc.get_dedicated_clusters(dedicated_cluster_ids=[cdc_id])
+subnets = tencentcloud.vpc.get_subnets(cdc_id=cdc_id)
+example_instance = tencentcloud.redis.Instance("example",
+    availability_zone=example.dedicated_cluster_sets[0].zone,
+    type_id=zone.lists[0].type_id,
+    password="Password@123",
+    mem_size=8192,
+    redis_shard_num=zone.lists[0].redis_shard_nums[0],
+    redis_replicas_num=zone.lists[0].redis_replicas_nums[0],
+    name="tf-cdc-example",
+    port=6379,
+    vpc_id=subnets.instance_lists[0].vpc_id,
+    subnet_id=subnets.instance_lists[0].subnet_id,
+    product_version="cdc",
+    redis_cluster_id=clusters.resources[0].redis_cluster_id)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cdc"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/redis"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		cdcId := "cluster-262n63e8"
+		if param := cfg.Get("cdcId"); param != "" {
+			cdcId = param
+		}
+		cdcRegion := "ap-guangzhou"
+		if param := cfg.Get("cdcRegion"); param != "" {
+			cdcRegion = param
+		}
+		clusters, err := redis.GetClusters(ctx, &redis.GetClustersArgs{
+			DedicatedClusterId: pulumi.StringRef(cdcId),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		ctx.Export("name", clusters.Resources[0].RedisClusterId)
+		zone, err := redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+			TypeId: pulumi.IntRef(7),
+			Region: pulumi.StringRef(cdcRegion),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		example, err := cdc.GetDedicatedClusters(ctx, &cdc.GetDedicatedClustersArgs{
+			DedicatedClusterIds: []string{
+				cdcId,
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		subnets, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+			CdcId: pulumi.StringRef(cdcId),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		_, err = redis.NewInstance(ctx, "example", &redis.InstanceArgs{
+			AvailabilityZone: pulumi.String(example.DedicatedClusterSets[0].Zone),
+			TypeId:           pulumi.Int(zone.Lists[0].TypeId),
+			Password:         pulumi.String("Password@123"),
+			MemSize:          pulumi.Int(8192),
+			RedisShardNum:    pulumi.Int(zone.Lists[0].RedisShardNums[0]),
+			RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
+			Name:             pulumi.String("tf-cdc-example"),
+			Port:             pulumi.Int(6379),
+			VpcId:            pulumi.String(subnets.InstanceLists[0].VpcId),
+			SubnetId:         pulumi.String(subnets.InstanceLists[0].SubnetId),
+			ProductVersion:   pulumi.String("cdc"),
+			RedisClusterId:   pulumi.String(clusters.Resources[0].RedisClusterId),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var cdcId = config.Get("cdcId") ?? "cluster-262n63e8";
+    var cdcRegion = config.Get("cdcRegion") ?? "ap-guangzhou";
+    var clusters = Tencentcloud.Redis.GetClusters.Invoke(new()
+    {
+        DedicatedClusterId = cdcId,
+    });
+
+    var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
+    {
+        TypeId = 7,
+        Region = cdcRegion,
+    });
+
+    var example = Tencentcloud.Cdc.GetDedicatedClusters.Invoke(new()
+    {
+        DedicatedClusterIds = new[]
+        {
+            cdcId,
+        },
+    });
+
+    var subnets = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+    {
+        CdcId = cdcId,
+    });
+
+    var exampleInstance = new Tencentcloud.Redis.Instance("example", new()
+    {
+        AvailabilityZone = example.Apply(getDedicatedClustersResult => getDedicatedClustersResult.DedicatedClusterSets[0]?.Zone),
+        TypeId = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[0]?.TypeId),
+        Password = "Password@123",
+        MemSize = 8192,
+        RedisShardNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[0]?.RedisShardNums[0]),
+        RedisReplicasNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[0]?.RedisReplicasNums[0]),
+        Name = "tf-cdc-example",
+        Port = 6379,
+        VpcId = subnets.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId),
+        SubnetId = subnets.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.SubnetId),
+        ProductVersion = "cdc",
+        RedisClusterId = clusters.Apply(getClustersResult => getClustersResult.Resources[0]?.RedisClusterId),
+    });
+
+    return new Dictionary<string, object?>
+    {
+        ["name"] = clusters.Apply(getClustersResult => getClustersResult.Resources[0]?.RedisClusterId),
+    };
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Redis.RedisFunctions;
+import com.pulumi.tencentcloud.Redis.inputs.GetClustersArgs;
+import com.pulumi.tencentcloud.Redis.inputs.GetZoneConfigArgs;
+import com.pulumi.tencentcloud.Cdc.CdcFunctions;
+import com.pulumi.tencentcloud.Cdc.inputs.GetDedicatedClustersArgs;
+import com.pulumi.tencentcloud.Vpc.VpcFunctions;
+import com.pulumi.tencentcloud.Vpc.inputs.GetSubnetsArgs;
+import com.pulumi.tencentcloud.Redis.Instance;
+import com.pulumi.tencentcloud.Redis.InstanceArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var config = ctx.config();
+        final var cdcId = config.get("cdcId").orElse("cluster-262n63e8");
+        final var cdcRegion = config.get("cdcRegion").orElse("ap-guangzhou");
+        final var clusters = RedisFunctions.getClusters(GetClustersArgs.builder()
+            .dedicatedClusterId(cdcId)
+            .build());
+
+        ctx.export("name", clusters.resources()[0].redisClusterId());
+        final var zone = RedisFunctions.getZoneConfig(GetZoneConfigArgs.builder()
+            .typeId(7)
+            .region(cdcRegion)
+            .build());
+
+        final var example = CdcFunctions.getDedicatedClusters(GetDedicatedClustersArgs.builder()
+            .dedicatedClusterIds(cdcId)
+            .build());
+
+        final var subnets = VpcFunctions.getSubnets(GetSubnetsArgs.builder()
+            .cdcId(cdcId)
+            .build());
+
+        var exampleInstance = new Instance("exampleInstance", InstanceArgs.builder()
+            .availabilityZone(example.dedicatedClusterSets()[0].zone())
+            .typeId(zone.lists()[0].typeId())
+            .password("Password@123")
+            .memSize(8192)
+            .redisShardNum(zone.lists()[0].redisShardNums()[0])
+            .redisReplicasNum(zone.lists()[0].redisReplicasNums()[0])
+            .name("tf-cdc-example")
+            .port(6379)
+            .vpcId(subnets.instanceLists()[0].vpcId())
+            .subnetId(subnets.instanceLists()[0].subnetId())
+            .productVersion("cdc")
+            .redisClusterId(clusters.resources()[0].redisClusterId())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+configuration:
+  cdcId:
+    type: string
+    default: cluster-262n63e8
+  cdcRegion:
+    type: string
+    default: ap-guangzhou
+resources:
+  exampleInstance:
+    type: tencentcloud:Redis:Instance
+    name: example
+    properties:
+      availabilityZone: ${example.dedicatedClusterSets[0].zone}
+      typeId: ${zone.lists[0].typeId}
+      password: Password@123
+      memSize: 8192
+      redisShardNum: ${zone.lists[0].redisShardNums[0]}
+      redisReplicasNum: ${zone.lists[0].redisReplicasNums[0]}
+      name: tf-cdc-example
+      port: 6379
+      vpcId: ${subnets.instanceLists[0].vpcId}
+      subnetId: ${subnets.instanceLists[0].subnetId}
+      productVersion: cdc
+      redisClusterId: ${clusters.resources[0].redisClusterId}
+variables:
+  clusters:
+    fn::invoke:
+      function: tencentcloud:Redis:getClusters
+      arguments:
+        dedicatedClusterId: ${cdcId}
+  zone:
+    fn::invoke:
+      function: tencentcloud:Redis:getZoneConfig
+      arguments:
+        typeId: 7
+        region: ${cdcRegion}
+  example:
+    fn::invoke:
+      function: tencentcloud:Cdc:getDedicatedClusters
+      arguments:
+        dedicatedClusterIds:
+          - ${cdcId}
+  subnets:
+    fn::invoke:
+      function: tencentcloud:Vpc:getSubnets
+      arguments:
+        cdcId: ${cdcId}
+outputs:
+  name: ${clusters.resources[0].redisClusterId}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_redis_getclusters" "clusters" {
+  dedicated_cluster_id = var.cdcId
+}
+data "tencentcloud_redis_getzoneconfig" "zone" {
+  type_id = 7
+  region  = var.cdcRegion
+}
+data "tencentcloud_cdc_getdedicatedclusters" "example" {
+  dedicated_cluster_ids = [var.cdcId]
+}
+data "tencentcloud_vpc_getsubnets" "subnets" {
+  cdc_id = var.cdcId
+}
+
+resource "tencentcloud_redis_instance" "example" {
+  availability_zone  = data.tencentcloud_cdc_getdedicatedclusters.example.dedicated_cluster_sets[0].zone
+  type_id            = data.tencentcloud_redis_getzoneconfig.zone.lists[0].type_id
+  password           = "Password@123"
+  mem_size           = 8192
+  redis_shard_num    = data.tencentcloud_redis_getzoneconfig.zone.lists[0].redis_shard_nums[0]
+  redis_replicas_num = data.tencentcloud_redis_getzoneconfig.zone.lists[0].redis_replicas_nums[0]
+  name               = "tf-cdc-example"
+  port               = 6379
+  vpc_id             = data.tencentcloud_vpc_getsubnets.subnets.instance_lists[0].vpc_id
+  subnet_id          = data.tencentcloud_vpc_getsubnets.subnets.instance_lists[0].subnet_id
+  product_version    = "cdc"
+  redis_cluster_id   = data.tencentcloud_redis_getclusters.clusters.resources[0].redis_cluster_id
+}
+variable "cdcId" {
+  type    = string
+  default = "cluster-262n63e8"
+}
+variable "cdcRegion" {
+  type    = string
+  default = "ap-guangzhou"
+}
+output "name" {
+  value = data.tencentcloud_redis_getclusters.clusters.resources[0].redis_cluster_id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [AllocateWanAddress](https://www.tencentcloud.com/document/api/239/46976)
+  - [CreateInstances](https://www.tencentcloud.com/document/api/239/32069)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+  - [DescribeProductInfo](https://www.tencentcloud.com/document/api/239/32077)
+  - [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [ReleaseWanAddress](https://www.tencentcloud.com/document/api/239/46975)
+* Read:
+  - [DescribeInstanceSecurityGroup](https://www.tencentcloud.com/document/api/239/32081)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
+* Update:
+  - [AllocateWanAddress](https://www.tencentcloud.com/document/api/239/46976)
+  - [ApplyParamsTemplate](https://www.tencentcloud.com/document/api/239/41922)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+  - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+  - [DescribeTaskList](https://www.tencentcloud.com/document/api/239/33293)
+  - [DisableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32061)
+  - [EnableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32060)
+  - [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/239/37320)
+  - [ModifyInstance](https://www.tencentcloud.com/document/api/239/32057)
+  - [ModifyInstanceAvailabilityZones](https://www.tencentcloud.com/document/api/239/59383)
+  - [ModifyInstanceChargeType](https://www.tencentcloud.com/document/api/239/78762)
+  - [ModifyNetworkConfig](https://www.tencentcloud.com/document/api/239/32056)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [ReleaseWanAddress](https://www.tencentcloud.com/document/api/239/46975)
+  - [ResetPassword](https://www.tencentcloud.com/document/api/239/32054)
+  - [UpgradeInstance](https://www.tencentcloud.com/document/api/239/32052)
+  - [UpgradeInstanceVersion](https://www.tencentcloud.com/document/api/239/37831)
+* Delete:
+  - [CleanUpInstance](https://www.tencentcloud.com/document/api/239/32071)
+  - [DescribeInstanceDealDetail](https://www.tencentcloud.com/document/api/239/32067)
+  - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+  - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+  - [DestroyPostpaidInstance](https://www.tencentcloud.com/document/api/239/32063)
+  - [DestroyPrepaidInstance](https://www.tencentcloud.com/document/api/239/32062)
 
 
 ## Create Instance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-             <span class="nx">auto_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">force_delete</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-             <span class="nx">ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">mem_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">no_auth</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">operation_network</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -283,56 +2747,65 @@ variables:
              <span class="nx">password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">recycle</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">redis_cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">force_delete</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">auto_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">product_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">redis_replicas_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">redis_shard_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">replica_zone_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[int]]</span> = None<span class="p">,</span>
              <span class="nx">replicas_read_only</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
              <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
              <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">type_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">wait_switch</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">recycle</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">wait_switch</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">wan_address_switch</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Instance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">InstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Redis:Instance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Redis:Instance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_redis_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -353,7 +2826,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -470,11 +2943,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Instance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Instance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -490,8 +2971,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone ID of an instance to be created, please refer to <code>tencentcloud_redis_zone_config.list</code>.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of an instance to be created, like <code>ap-beijing-7</code>, please refer to <code>tencentcloud_redis_zone_config.list</code>.</dd><dt class="property-required"
             title="Required">
         <span id="memsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_csharp" style="color: inherit; text-decoration: inherit;">Mem<wbr>Size</a>
@@ -499,8 +2979,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="autorenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -508,8 +2987,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -517,8 +2995,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>. Note: TencentCloud International only supports <code>POSTPAID</code>. Caution that update operation on this field will delete old instances and create new with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_csharp" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -526,8 +3003,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -535,8 +3011,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address of an instance. When the <code>operation_network</code> is <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of an instance. When the <code>operationNetwork</code> is <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -544,8 +3019,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="noauth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noauth_csharp" style="color: inherit; text-decoration: inherit;">No<wbr>Auth</a>
@@ -553,8 +3027,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="operationnetwork_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationnetwork_csharp" style="color: inherit; text-decoration: inherit;">Operation<wbr>Network</a>
@@ -562,8 +3035,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</p>
-</dd><dt class="property-optional"
+    <dd>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramstemplateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramstemplateid_csharp" style="color: inherit; text-decoration: inherit;">Params<wbr>Template<wbr>Id</a>
@@ -571,8 +3043,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify params template id. If not set, will use default template.</p>
-</dd><dt class="property-optional"
+    <dd>Specify params template id. If not set, will use default template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -580,8 +3051,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</p>
-</dd><dt class="property-optional"
+    <dd>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -589,8 +3059,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port used to access a redis instance. The default value is 6379. When the <code>operation_network</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>The port used to access a redis instance. The default value is 6379. When the <code>operationNetwork</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -598,8 +3067,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="productversion_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productversion_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify the product version of the instance. <code>local</code>: common type I;<code>localv2 </code>: common type II; <code>cloud</code>: cloud native,Currently not available for sale; <code>cdc</code>: dedicated cluster type. Default is <code>local</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -607,8 +3083,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies which project the instance should belong to.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which project the instance should belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="recycle_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recycle_csharp" style="color: inherit; text-decoration: inherit;">Recycle</a>
@@ -616,8 +3091,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redisclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisclusterid_csharp" style="color: inherit; text-decoration: inherit;">Redis<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster ID. When the <code>productVersion</code> is set to <code>cdc</code>, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="redisreplicasnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisreplicasnum_csharp" style="color: inherit; text-decoration: inherit;">Redis<wbr>Replicas<wbr>Num</a>
@@ -625,8 +3107,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replica_zone_ids</code>, Non-multi-AZ does not require <code>replica_zone_ids</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replicaZoneIds</code>, Non-multi-AZ does not require <code>replicaZoneIds</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</dd><dt class="property-optional"
             title="Optional">
         <span id="redisshardnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisshardnum_csharp" style="color: inherit; text-decoration: inherit;">Redis<wbr>Shard<wbr>Num</a>
@@ -634,8 +3115,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="replicazoneids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicazoneids_csharp" style="color: inherit; text-decoration: inherit;">Replica<wbr>Zone<wbr>Ids</a>
@@ -643,8 +3123,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</p>
-</dd><dt class="property-optional"
+    <dd>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</dd><dt class="property-optional"
             title="Optional">
         <span id="replicasreadonly_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicasreadonly_csharp" style="color: inherit; text-decoration: inherit;">Replicas<wbr>Read<wbr>Only</a>
@@ -652,8 +3131,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</p>
-</dd><dt class="property-optional"
+    <dd>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -661,8 +3139,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -670,17 +3147,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies which subnet the instance should belong to. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which subnet the instance should belong to. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Instance tags.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -688,9 +3163,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>cluster_ckv</code>,<code>cluster_redis5.0</code>,<code>cluster_redis</code>,<code>master_slave_ckv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>master_slave_redis</code>,<code>standalone_redis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>clusterCkv</code>,<code>cluster_redis5.0</code>,<code>clusterRedis</code>,<code>masterSlaveCkv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>masterSlaveRedis</code>,<code>standaloneRedis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="typeid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_csharp" style="color: inherit; text-decoration: inherit;">Type<wbr>Id</a>
@@ -698,8 +3171,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.<!-- raw HTML omitted --><!-- raw HTML omitted -->2: Redis 2.8 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->3: CKV 3.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->4: CKV 3.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->6: Redis 4.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->7: Redis 4.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->8: Redis 5.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->9: Redis 5.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->15: Redis 6.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->16: Redis 6.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->17: Redis 7.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->18: Redis 7.0 Memory Edition (cluster architecture). <!-- raw HTML omitted --> <!-- raw HTML omitted -->200: Memcached 1.6 Memory Edition (cluster architecture). <!-- raw HTML omitted -->Note: The CKV version is currently used by existing users and is temporarily retained.<!-- raw HTML omitted -->.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -707,8 +3179,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is to be associated. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc with which the instance is to be associated. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="waitswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitswitch_csharp" style="color: inherit; text-decoration: inherit;">Wait<wbr>Switch</a>
@@ -716,8 +3187,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</p>
-</dd></dl>
+    <dd>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="wanaddressswitch_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanaddressswitch_csharp" style="color: inherit; text-decoration: inherit;">Wan<wbr>Address<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Wan address switch, default <code>close</code>, values: <code>open</code>, <code>close</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -731,8 +3209,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone ID of an instance to be created, please refer to <code>tencentcloud_redis_zone_config.list</code>.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of an instance to be created, like <code>ap-beijing-7</code>, please refer to <code>tencentcloud_redis_zone_config.list</code>.</dd><dt class="property-required"
             title="Required">
         <span id="memsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_go" style="color: inherit; text-decoration: inherit;">Mem<wbr>Size</a>
@@ -740,8 +3217,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="autorenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -749,8 +3225,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -758,8 +3233,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>. Note: TencentCloud International only supports <code>POSTPAID</code>. Caution that update operation on this field will delete old instances and create new with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_go" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -767,8 +3241,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -776,8 +3249,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address of an instance. When the <code>operation_network</code> is <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of an instance. When the <code>operationNetwork</code> is <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -785,8 +3257,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="noauth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noauth_go" style="color: inherit; text-decoration: inherit;">No<wbr>Auth</a>
@@ -794,8 +3265,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="operationnetwork_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationnetwork_go" style="color: inherit; text-decoration: inherit;">Operation<wbr>Network</a>
@@ -803,8 +3273,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</p>
-</dd><dt class="property-optional"
+    <dd>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramstemplateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramstemplateid_go" style="color: inherit; text-decoration: inherit;">Params<wbr>Template<wbr>Id</a>
@@ -812,8 +3281,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify params template id. If not set, will use default template.</p>
-</dd><dt class="property-optional"
+    <dd>Specify params template id. If not set, will use default template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -821,8 +3289,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</p>
-</dd><dt class="property-optional"
+    <dd>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -830,8 +3297,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port used to access a redis instance. The default value is 6379. When the <code>operation_network</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>The port used to access a redis instance. The default value is 6379. When the <code>operationNetwork</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -839,8 +3305,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="productversion_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productversion_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify the product version of the instance. <code>local</code>: common type I;<code>localv2 </code>: common type II; <code>cloud</code>: cloud native,Currently not available for sale; <code>cdc</code>: dedicated cluster type. Default is <code>local</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -848,8 +3321,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies which project the instance should belong to.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which project the instance should belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="recycle_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recycle_go" style="color: inherit; text-decoration: inherit;">Recycle</a>
@@ -857,8 +3329,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redisclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisclusterid_go" style="color: inherit; text-decoration: inherit;">Redis<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster ID. When the <code>productVersion</code> is set to <code>cdc</code>, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="redisreplicasnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisreplicasnum_go" style="color: inherit; text-decoration: inherit;">Redis<wbr>Replicas<wbr>Num</a>
@@ -866,8 +3345,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replica_zone_ids</code>, Non-multi-AZ does not require <code>replica_zone_ids</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replicaZoneIds</code>, Non-multi-AZ does not require <code>replicaZoneIds</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</dd><dt class="property-optional"
             title="Optional">
         <span id="redisshardnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisshardnum_go" style="color: inherit; text-decoration: inherit;">Redis<wbr>Shard<wbr>Num</a>
@@ -875,8 +3353,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="replicazoneids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicazoneids_go" style="color: inherit; text-decoration: inherit;">Replica<wbr>Zone<wbr>Ids</a>
@@ -884,8 +3361,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</p>
-</dd><dt class="property-optional"
+    <dd>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</dd><dt class="property-optional"
             title="Optional">
         <span id="replicasreadonly_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicasreadonly_go" style="color: inherit; text-decoration: inherit;">Replicas<wbr>Read<wbr>Only</a>
@@ -893,8 +3369,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</p>
-</dd><dt class="property-optional"
+    <dd>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -902,8 +3377,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -911,17 +3385,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies which subnet the instance should belong to. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which subnet the instance should belong to. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Instance tags.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -929,9 +3401,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>cluster_ckv</code>,<code>cluster_redis5.0</code>,<code>cluster_redis</code>,<code>master_slave_ckv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>master_slave_redis</code>,<code>standalone_redis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>clusterCkv</code>,<code>cluster_redis5.0</code>,<code>clusterRedis</code>,<code>masterSlaveCkv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>masterSlaveRedis</code>,<code>standaloneRedis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="typeid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_go" style="color: inherit; text-decoration: inherit;">Type<wbr>Id</a>
@@ -939,8 +3409,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.<!-- raw HTML omitted --><!-- raw HTML omitted -->2: Redis 2.8 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->3: CKV 3.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->4: CKV 3.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->6: Redis 4.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->7: Redis 4.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->8: Redis 5.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->9: Redis 5.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->15: Redis 6.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->16: Redis 6.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->17: Redis 7.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->18: Redis 7.0 Memory Edition (cluster architecture). <!-- raw HTML omitted --> <!-- raw HTML omitted -->200: Memcached 1.6 Memory Edition (cluster architecture). <!-- raw HTML omitted -->Note: The CKV version is currently used by existing users and is temporarily retained.<!-- raw HTML omitted -->.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -948,8 +3417,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is to be associated. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc with which the instance is to be associated. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="waitswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitswitch_go" style="color: inherit; text-decoration: inherit;">Wait<wbr>Switch</a>
@@ -957,8 +3425,253 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</p>
-</dd></dl>
+    <dd>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="wanaddressswitch_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanaddressswitch_go" style="color: inherit; text-decoration: inherit;">Wan<wbr>Address<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Wan address switch, default <code>close</code>, values: <code>open</code>, <code>close</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone of an instance to be created, like <code>ap-beijing-7</code>, please refer to <code>tencentcloud_redis_zone_config.list</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="mem_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_size_hcl" style="color: inherit; text-decoration: inherit;">mem_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="force_delete_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_delete_hcl" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP address of an instance. When the <code>operationNetwork</code> is <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="no_auth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#no_auth_hcl" style="color: inherit; text-decoration: inherit;">no_<wbr>auth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="operation_network_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_network_hcl" style="color: inherit; text-decoration: inherit;">operation_<wbr>network</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="params_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#params_template_id_hcl" style="color: inherit; text-decoration: inherit;">params_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify params template id. If not set, will use default template.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The port used to access a redis instance. The default value is 6379. When the <code>operationNetwork</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="product_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_version_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify the product version of the instance. <code>local</code>: common type I;<code>localv2 </code>: common type II; <code>cloud</code>: cloud native,Currently not available for sale; <code>cdc</code>: dedicated cluster type. Default is <code>local</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies which project the instance should belong to.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="recycle_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recycle_hcl" style="color: inherit; text-decoration: inherit;">recycle</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redis_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">redis_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster ID. When the <code>productVersion</code> is set to <code>cdc</code>, this parameter must be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redis_replicas_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_replicas_num_hcl" style="color: inherit; text-decoration: inherit;">redis_<wbr>replicas_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replicaZoneIds</code>, Non-multi-AZ does not require <code>replicaZoneIds</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redis_shard_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_shard_num_hcl" style="color: inherit; text-decoration: inherit;">redis_<wbr>shard_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="replica_zone_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replica_zone_ids_hcl" style="color: inherit; text-decoration: inherit;">replica_<wbr>zone_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="replicas_read_only_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicas_read_only_hcl" style="color: inherit; text-decoration: inherit;">replicas_<wbr>read_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies which subnet the instance should belong to. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Instance tags.</dd><dt class="property-optional property-deprecated property-replacement"
+            title="Optional, Deprecated">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>clusterCkv</code>,<code>cluster_redis5.0</code>,<code>clusterRedis</code>,<code>masterSlaveCkv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>masterSlaveRedis</code>,<code>standaloneRedis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_id_hcl" style="color: inherit; text-decoration: inherit;">type_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.<!-- raw HTML omitted --><!-- raw HTML omitted -->2: Redis 2.8 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->3: CKV 3.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->4: CKV 3.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->6: Redis 4.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->7: Redis 4.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->8: Redis 5.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->9: Redis 5.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->15: Redis 6.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->16: Redis 6.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->17: Redis 7.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->18: Redis 7.0 Memory Edition (cluster architecture). <!-- raw HTML omitted --> <!-- raw HTML omitted -->200: Memcached 1.6 Memory Edition (cluster architecture). <!-- raw HTML omitted -->Note: The CKV version is currently used by existing users and is temporarily retained.<!-- raw HTML omitted -->.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the vpc with which the instance is to be associated. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="wait_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wait_switch_hcl" style="color: inherit; text-decoration: inherit;">wait_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="wan_address_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wan_address_switch_hcl" style="color: inherit; text-decoration: inherit;">wan_<wbr>address_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Wan address switch, default <code>close</code>, values: <code>open</code>, <code>close</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -972,8 +3685,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone ID of an instance to be created, please refer to <code>tencentcloud_redis_zone_config.list</code>.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of an instance to be created, like <code>ap-beijing-7</code>, please refer to <code>tencentcloud_redis_zone_config.list</code>.</dd><dt class="property-required"
             title="Required">
         <span id="memsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_java" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -981,8 +3693,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="autorenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -990,8 +3701,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -999,8 +3709,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>. Note: TencentCloud International only supports <code>POSTPAID</code>. Caution that update operation on this field will delete old instances and create new with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_java" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -1008,8 +3717,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1017,8 +3725,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address of an instance. When the <code>operation_network</code> is <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of an instance. When the <code>operationNetwork</code> is <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1026,8 +3733,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="noauth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noauth_java" style="color: inherit; text-decoration: inherit;">no<wbr>Auth</a>
@@ -1035,8 +3741,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="operationnetwork_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationnetwork_java" style="color: inherit; text-decoration: inherit;">operation<wbr>Network</a>
@@ -1044,8 +3749,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</p>
-</dd><dt class="property-optional"
+    <dd>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramstemplateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramstemplateid_java" style="color: inherit; text-decoration: inherit;">params<wbr>Template<wbr>Id</a>
@@ -1053,8 +3757,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify params template id. If not set, will use default template.</p>
-</dd><dt class="property-optional"
+    <dd>Specify params template id. If not set, will use default template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1062,8 +3765,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</p>
-</dd><dt class="property-optional"
+    <dd>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1071,8 +3773,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The port used to access a redis instance. The default value is 6379. When the <code>operation_network</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>The port used to access a redis instance. The default value is 6379. When the <code>operationNetwork</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -1080,8 +3781,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="productversion_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productversion_java" style="color: inherit; text-decoration: inherit;">product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specify the product version of the instance. <code>local</code>: common type I;<code>localv2 </code>: common type II; <code>cloud</code>: cloud native,Currently not available for sale; <code>cdc</code>: dedicated cluster type. Default is <code>local</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1089,8 +3797,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies which project the instance should belong to.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which project the instance should belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="recycle_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recycle_java" style="color: inherit; text-decoration: inherit;">recycle</a>
@@ -1098,8 +3805,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redisclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisclusterid_java" style="color: inherit; text-decoration: inherit;">redis<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Exclusive cluster ID. When the <code>productVersion</code> is set to <code>cdc</code>, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="redisreplicasnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisreplicasnum_java" style="color: inherit; text-decoration: inherit;">redis<wbr>Replicas<wbr>Num</a>
@@ -1107,8 +3821,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replica_zone_ids</code>, Non-multi-AZ does not require <code>replica_zone_ids</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replicaZoneIds</code>, Non-multi-AZ does not require <code>replicaZoneIds</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</dd><dt class="property-optional"
             title="Optional">
         <span id="redisshardnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisshardnum_java" style="color: inherit; text-decoration: inherit;">redis<wbr>Shard<wbr>Num</a>
@@ -1116,8 +3829,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="replicazoneids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicazoneids_java" style="color: inherit; text-decoration: inherit;">replica<wbr>Zone<wbr>Ids</a>
@@ -1125,8 +3837,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</p>
-</dd><dt class="property-optional"
+    <dd>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</dd><dt class="property-optional"
             title="Optional">
         <span id="replicasreadonly_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicasreadonly_java" style="color: inherit; text-decoration: inherit;">replicas<wbr>Read<wbr>Only</a>
@@ -1134,8 +3845,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</p>
-</dd><dt class="property-optional"
+    <dd>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1143,8 +3853,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1152,17 +3861,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies which subnet the instance should belong to. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which subnet the instance should belong to. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Instance tags.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1170,9 +3877,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>cluster_ckv</code>,<code>cluster_redis5.0</code>,<code>cluster_redis</code>,<code>master_slave_ckv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>master_slave_redis</code>,<code>standalone_redis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>clusterCkv</code>,<code>cluster_redis5.0</code>,<code>clusterRedis</code>,<code>masterSlaveCkv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>masterSlaveRedis</code>,<code>standaloneRedis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="typeid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_java" style="color: inherit; text-decoration: inherit;">type<wbr>Id</a>
@@ -1180,8 +3885,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.<!-- raw HTML omitted --><!-- raw HTML omitted -->2: Redis 2.8 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->3: CKV 3.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->4: CKV 3.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->6: Redis 4.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->7: Redis 4.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->8: Redis 5.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->9: Redis 5.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->15: Redis 6.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->16: Redis 6.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->17: Redis 7.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->18: Redis 7.0 Memory Edition (cluster architecture). <!-- raw HTML omitted --> <!-- raw HTML omitted -->200: Memcached 1.6 Memory Edition (cluster architecture). <!-- raw HTML omitted -->Note: The CKV version is currently used by existing users and is temporarily retained.<!-- raw HTML omitted -->.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1189,8 +3893,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is to be associated. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc with which the instance is to be associated. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="waitswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitswitch_java" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
@@ -1198,8 +3901,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</p>
-</dd></dl>
+    <dd>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="wanaddressswitch_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanaddressswitch_java" style="color: inherit; text-decoration: inherit;">wan<wbr>Address<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Wan address switch, default <code>close</code>, values: <code>open</code>, <code>close</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1213,8 +3923,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone ID of an instance to be created, please refer to <code>tencentcloud_redis_zone_config.list</code>.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of an instance to be created, like <code>ap-beijing-7</code>, please refer to <code>tencentcloud_redis_zone_config.list</code>.</dd><dt class="property-required"
             title="Required">
         <span id="memsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_nodejs" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -1222,8 +3931,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="autorenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -1231,8 +3939,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1240,8 +3947,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>. Note: TencentCloud International only supports <code>POSTPAID</code>. Caution that update operation on this field will delete old instances and create new with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_nodejs" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -1249,8 +3955,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1258,8 +3963,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address of an instance. When the <code>operation_network</code> is <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of an instance. When the <code>operationNetwork</code> is <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1267,8 +3971,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="noauth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noauth_nodejs" style="color: inherit; text-decoration: inherit;">no<wbr>Auth</a>
@@ -1276,8 +3979,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="operationnetwork_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationnetwork_nodejs" style="color: inherit; text-decoration: inherit;">operation<wbr>Network</a>
@@ -1285,8 +3987,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</p>
-</dd><dt class="property-optional"
+    <dd>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramstemplateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramstemplateid_nodejs" style="color: inherit; text-decoration: inherit;">params<wbr>Template<wbr>Id</a>
@@ -1294,8 +3995,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify params template id. If not set, will use default template.</p>
-</dd><dt class="property-optional"
+    <dd>Specify params template id. If not set, will use default template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1303,8 +4003,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</p>
-</dd><dt class="property-optional"
+    <dd>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1312,8 +4011,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The port used to access a redis instance. The default value is 6379. When the <code>operation_network</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>The port used to access a redis instance. The default value is 6379. When the <code>operationNetwork</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -1321,8 +4019,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="productversion_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productversion_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify the product version of the instance. <code>local</code>: common type I;<code>localv2 </code>: common type II; <code>cloud</code>: cloud native,Currently not available for sale; <code>cdc</code>: dedicated cluster type. Default is <code>local</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1330,8 +4035,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies which project the instance should belong to.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which project the instance should belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="recycle_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recycle_nodejs" style="color: inherit; text-decoration: inherit;">recycle</a>
@@ -1339,8 +4043,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redisclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisclusterid_nodejs" style="color: inherit; text-decoration: inherit;">redis<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster ID. When the <code>productVersion</code> is set to <code>cdc</code>, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="redisreplicasnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisreplicasnum_nodejs" style="color: inherit; text-decoration: inherit;">redis<wbr>Replicas<wbr>Num</a>
@@ -1348,8 +4059,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replica_zone_ids</code>, Non-multi-AZ does not require <code>replica_zone_ids</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replicaZoneIds</code>, Non-multi-AZ does not require <code>replicaZoneIds</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</dd><dt class="property-optional"
             title="Optional">
         <span id="redisshardnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisshardnum_nodejs" style="color: inherit; text-decoration: inherit;">redis<wbr>Shard<wbr>Num</a>
@@ -1357,8 +4067,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="replicazoneids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicazoneids_nodejs" style="color: inherit; text-decoration: inherit;">replica<wbr>Zone<wbr>Ids</a>
@@ -1366,8 +4075,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</p>
-</dd><dt class="property-optional"
+    <dd>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</dd><dt class="property-optional"
             title="Optional">
         <span id="replicasreadonly_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicasreadonly_nodejs" style="color: inherit; text-decoration: inherit;">replicas<wbr>Read<wbr>Only</a>
@@ -1375,8 +4083,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</p>
-</dd><dt class="property-optional"
+    <dd>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1384,8 +4091,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1393,17 +4099,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies which subnet the instance should belong to. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which subnet the instance should belong to. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Instance tags.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1411,9 +4115,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>cluster_ckv</code>,<code>cluster_redis5.0</code>,<code>cluster_redis</code>,<code>master_slave_ckv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>master_slave_redis</code>,<code>standalone_redis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>clusterCkv</code>,<code>cluster_redis5.0</code>,<code>clusterRedis</code>,<code>masterSlaveCkv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>masterSlaveRedis</code>,<code>standaloneRedis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="typeid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_nodejs" style="color: inherit; text-decoration: inherit;">type<wbr>Id</a>
@@ -1421,8 +4123,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.<!-- raw HTML omitted --><!-- raw HTML omitted -->2: Redis 2.8 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->3: CKV 3.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->4: CKV 3.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->6: Redis 4.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->7: Redis 4.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->8: Redis 5.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->9: Redis 5.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->15: Redis 6.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->16: Redis 6.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->17: Redis 7.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->18: Redis 7.0 Memory Edition (cluster architecture). <!-- raw HTML omitted --> <!-- raw HTML omitted -->200: Memcached 1.6 Memory Edition (cluster architecture). <!-- raw HTML omitted -->Note: The CKV version is currently used by existing users and is temporarily retained.<!-- raw HTML omitted -->.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1430,8 +4131,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is to be associated. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc with which the instance is to be associated. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="waitswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitswitch_nodejs" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
@@ -1439,8 +4139,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</p>
-</dd></dl>
+    <dd>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="wanaddressswitch_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanaddressswitch_nodejs" style="color: inherit; text-decoration: inherit;">wan<wbr>Address<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Wan address switch, default <code>close</code>, values: <code>open</code>, <code>close</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1454,8 +4161,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone ID of an instance to be created, please refer to <code>tencentcloud_redis_zone_config.list</code>.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of an instance to be created, like <code>ap-beijing-7</code>, please refer to <code>tencentcloud_redis_zone_config.list</code>.</dd><dt class="property-required"
             title="Required">
         <span id="mem_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mem_size_python" style="color: inherit; text-decoration: inherit;">mem_<wbr>size</a>
@@ -1463,8 +4169,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="auto_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
@@ -1472,8 +4177,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -1481,8 +4185,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>. Note: TencentCloud International only supports <code>POSTPAID</code>. Caution that update operation on this field will delete old instances and create new with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="force_delete_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#force_delete_python" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
@@ -1490,8 +4193,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1499,8 +4201,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP address of an instance. When the <code>operation_network</code> is <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of an instance. When the <code>operationNetwork</code> is <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1508,8 +4209,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="no_auth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#no_auth_python" style="color: inherit; text-decoration: inherit;">no_<wbr>auth</a>
@@ -1517,8 +4217,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="operation_network_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_network_python" style="color: inherit; text-decoration: inherit;">operation_<wbr>network</a>
@@ -1526,8 +4225,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</p>
-</dd><dt class="property-optional"
+    <dd>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</dd><dt class="property-optional"
             title="Optional">
         <span id="params_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#params_template_id_python" style="color: inherit; text-decoration: inherit;">params_<wbr>template_<wbr>id</a>
@@ -1535,8 +4233,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify params template id. If not set, will use default template.</p>
-</dd><dt class="property-optional"
+    <dd>Specify params template id. If not set, will use default template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1544,8 +4241,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</p>
-</dd><dt class="property-optional"
+    <dd>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1553,8 +4249,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port used to access a redis instance. The default value is 6379. When the <code>operation_network</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>The port used to access a redis instance. The default value is 6379. When the <code>operationNetwork</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_period_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
@@ -1562,8 +4257,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="product_version_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#product_version_python" style="color: inherit; text-decoration: inherit;">product_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Specify the product version of the instance. <code>local</code>: common type I;<code>localv2 </code>: common type II; <code>cloud</code>: cloud native,Currently not available for sale; <code>cdc</code>: dedicated cluster type. Default is <code>local</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1571,8 +4273,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies which project the instance should belong to.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which project the instance should belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="recycle_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recycle_python" style="color: inherit; text-decoration: inherit;">recycle</a>
@@ -1580,8 +4281,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redis_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_cluster_id_python" style="color: inherit; text-decoration: inherit;">redis_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Exclusive cluster ID. When the <code>productVersion</code> is set to <code>cdc</code>, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="redis_replicas_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_replicas_num_python" style="color: inherit; text-decoration: inherit;">redis_<wbr>replicas_<wbr>num</a>
@@ -1589,8 +4297,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replica_zone_ids</code>, Non-multi-AZ does not require <code>replica_zone_ids</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replicaZoneIds</code>, Non-multi-AZ does not require <code>replicaZoneIds</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</dd><dt class="property-optional"
             title="Optional">
         <span id="redis_shard_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_shard_num_python" style="color: inherit; text-decoration: inherit;">redis_<wbr>shard_<wbr>num</a>
@@ -1598,8 +4305,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="replica_zone_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replica_zone_ids_python" style="color: inherit; text-decoration: inherit;">replica_<wbr>zone_<wbr>ids</a>
@@ -1607,8 +4313,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</p>
-</dd><dt class="property-optional"
+    <dd>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</dd><dt class="property-optional"
             title="Optional">
         <span id="replicas_read_only_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicas_read_only_python" style="color: inherit; text-decoration: inherit;">replicas_<wbr>read_<wbr>only</a>
@@ -1616,8 +4321,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</p>
-</dd><dt class="property-optional"
+    <dd>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -1625,8 +4329,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1634,17 +4337,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies which subnet the instance should belong to. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which subnet the instance should belong to. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Instance tags.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1652,9 +4353,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>cluster_ckv</code>,<code>cluster_redis5.0</code>,<code>cluster_redis</code>,<code>master_slave_ckv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>master_slave_redis</code>,<code>standalone_redis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>clusterCkv</code>,<code>cluster_redis5.0</code>,<code>clusterRedis</code>,<code>masterSlaveCkv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>masterSlaveRedis</code>,<code>standaloneRedis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="type_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_id_python" style="color: inherit; text-decoration: inherit;">type_<wbr>id</a>
@@ -1662,8 +4361,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.<!-- raw HTML omitted --><!-- raw HTML omitted -->2: Redis 2.8 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->3: CKV 3.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->4: CKV 3.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->6: Redis 4.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->7: Redis 4.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->8: Redis 5.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->9: Redis 5.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->15: Redis 6.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->16: Redis 6.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->17: Redis 7.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->18: Redis 7.0 Memory Edition (cluster architecture). <!-- raw HTML omitted --> <!-- raw HTML omitted -->200: Memcached 1.6 Memory Edition (cluster architecture). <!-- raw HTML omitted -->Note: The CKV version is currently used by existing users and is temporarily retained.<!-- raw HTML omitted -->.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1671,8 +4369,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is to be associated. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc with which the instance is to be associated. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="wait_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wait_switch_python" style="color: inherit; text-decoration: inherit;">wait_<wbr>switch</a>
@@ -1680,8 +4377,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</p>
-</dd></dl>
+    <dd>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="wan_address_switch_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wan_address_switch_python" style="color: inherit; text-decoration: inherit;">wan_<wbr>address_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Wan address switch, default <code>close</code>, values: <code>open</code>, <code>close</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1695,8 +4399,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone ID of an instance to be created, please refer to <code>tencentcloud_redis_zone_config.list</code>.</p>
-</dd><dt class="property-required"
+    <dd>The available zone of an instance to be created, like <code>ap-beijing-7</code>, please refer to <code>tencentcloud_redis_zone_config.list</code>.</dd><dt class="property-required"
             title="Required">
         <span id="memsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memsize_yaml" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -1704,8 +4407,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="autorenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -1713,8 +4415,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</dd><dt class="property-optional"
             title="Optional">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1722,8 +4423,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>. Note: TencentCloud International only supports <code>POSTPAID</code>. Caution that update operation on this field will delete old instances and create new with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="forcedelete_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forcedelete_yaml" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -1731,8 +4431,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1740,8 +4439,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address of an instance. When the <code>operation_network</code> is <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of an instance. When the <code>operationNetwork</code> is <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1749,8 +4447,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="noauth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noauth_yaml" style="color: inherit; text-decoration: inherit;">no<wbr>Auth</a>
@@ -1758,8 +4455,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="operationnetwork_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationnetwork_yaml" style="color: inherit; text-decoration: inherit;">operation<wbr>Network</a>
@@ -1767,8 +4463,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</p>
-</dd><dt class="property-optional"
+    <dd>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</dd><dt class="property-optional"
             title="Optional">
         <span id="paramstemplateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paramstemplateid_yaml" style="color: inherit; text-decoration: inherit;">params<wbr>Template<wbr>Id</a>
@@ -1776,8 +4471,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify params template id. If not set, will use default template.</p>
-</dd><dt class="property-optional"
+    <dd>Specify params template id. If not set, will use default template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1785,8 +4479,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</p>
-</dd><dt class="property-optional"
+    <dd>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1794,8 +4487,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The port used to access a redis instance. The default value is 6379. When the <code>operation_network</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>The port used to access a redis instance. The default value is 6379. When the <code>operationNetwork</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -1803,8 +4495,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="productversion_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#productversion_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specify the product version of the instance. <code>local</code>: common type I;<code>localv2 </code>: common type II; <code>cloud</code>: cloud native,Currently not available for sale; <code>cdc</code>: dedicated cluster type. Default is <code>local</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1812,8 +4511,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies which project the instance should belong to.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which project the instance should belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="recycle_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#recycle_yaml" style="color: inherit; text-decoration: inherit;">recycle</a>
@@ -1821,8 +4519,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="redisclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisclusterid_yaml" style="color: inherit; text-decoration: inherit;">redis<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Exclusive cluster ID. When the <code>productVersion</code> is set to <code>cdc</code>, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="redisreplicasnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisreplicasnum_yaml" style="color: inherit; text-decoration: inherit;">redis<wbr>Replicas<wbr>Num</a>
@@ -1830,8 +4535,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replica_zone_ids</code>, Non-multi-AZ does not require <code>replica_zone_ids</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replicaZoneIds</code>, Non-multi-AZ does not require <code>replicaZoneIds</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</dd><dt class="property-optional"
             title="Optional">
         <span id="redisshardnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisshardnum_yaml" style="color: inherit; text-decoration: inherit;">redis<wbr>Shard<wbr>Num</a>
@@ -1839,8 +4543,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="replicazoneids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicazoneids_yaml" style="color: inherit; text-decoration: inherit;">replica<wbr>Zone<wbr>Ids</a>
@@ -1848,8 +4551,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</p>
-</dd><dt class="property-optional"
+    <dd>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</dd><dt class="property-optional"
             title="Optional">
         <span id="replicasreadonly_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replicasreadonly_yaml" style="color: inherit; text-decoration: inherit;">replicas<wbr>Read<wbr>Only</a>
@@ -1857,8 +4559,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</p>
-</dd><dt class="property-optional"
+    <dd>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1866,8 +4567,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1875,17 +4575,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies which subnet the instance should belong to. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which subnet the instance should belong to. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Instance tags.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1893,9 +4591,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>cluster_ckv</code>,<code>cluster_redis5.0</code>,<code>cluster_redis</code>,<code>master_slave_ckv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>master_slave_redis</code>,<code>standalone_redis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>clusterCkv</code>,<code>cluster_redis5.0</code>,<code>clusterRedis</code>,<code>masterSlaveCkv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>masterSlaveRedis</code>,<code>standaloneRedis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="typeid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#typeid_yaml" style="color: inherit; text-decoration: inherit;">type<wbr>Id</a>
@@ -1903,8 +4599,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.<!-- raw HTML omitted --><!-- raw HTML omitted -->2: Redis 2.8 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->3: CKV 3.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->4: CKV 3.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->6: Redis 4.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->7: Redis 4.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->8: Redis 5.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->9: Redis 5.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->15: Redis 6.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->16: Redis 6.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->17: Redis 7.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->18: Redis 7.0 Memory Edition (cluster architecture). <!-- raw HTML omitted --> <!-- raw HTML omitted -->200: Memcached 1.6 Memory Edition (cluster architecture). <!-- raw HTML omitted -->Note: The CKV version is currently used by existing users and is temporarily retained.<!-- raw HTML omitted -->.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1912,8 +4607,7 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is to be associated. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc with which the instance is to be associated. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="waitswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#waitswitch_yaml" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
@@ -1921,8 +4615,15 @@ The Instance resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</p>
-</dd></dl>
+    <dd>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="wanaddressswitch_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanaddressswitch_yaml" style="color: inherit; text-decoration: inherit;">wan<wbr>Address<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Wan address switch, default <code>close</code>, values: <code>open</code>, <code>close</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1943,8 +4644,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the instance was created.</dd><dt class="property-"
+            title="">
+        <span id="dedicatedclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_csharp" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1952,8 +4660,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="nodeinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfos_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Infos</a>
@@ -1961,8 +4668,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancenodeinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Redis.<wbr>Outputs.<wbr>Instance<wbr>Node<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Readonly Primary/Replica nodes.</p>
-</dd><dt class="property-"
+    <dd>Readonly Primary/Replica nodes.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1970,8 +4676,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: init, processing, online, isolate and todelete.</p>
-</dd></dl>
+    <dd>Current status of an instance, maybe: init, processing, online, isolate and todelete.</dd><dt class="property-"
+            title="">
+        <span id="wanaddress_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanaddress_csharp" style="color: inherit; text-decoration: inherit;">Wan<wbr>Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Allocate Wan Address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1985,8 +4698,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the instance was created.</dd><dt class="property-"
+            title="">
+        <span id="dedicatedclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_go" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1994,8 +4714,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="nodeinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfos_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Infos</a>
@@ -2003,8 +4722,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancenodeinfo">[]Instance<wbr>Node<wbr>Info</a></span>
     </dt>
-    <dd><p>Readonly Primary/Replica nodes.</p>
-</dd><dt class="property-"
+    <dd>Readonly Primary/Replica nodes.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2012,8 +4730,69 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: init, processing, online, isolate and todelete.</p>
-</dd></dl>
+    <dd>Current status of an instance, maybe: init, processing, online, isolate and todelete.</dd><dt class="property-"
+            title="">
+        <span id="wanaddress_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanaddress_go" style="color: inherit; text-decoration: inherit;">Wan<wbr>Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Allocate Wan Address.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time when the instance was created.</dd><dt class="property-"
+            title="">
+        <span id="dedicated_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicated_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="node_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_infos_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancenodeinfo">list(object)</a></span>
+    </dt>
+    <dd>Readonly Primary/Replica nodes.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Current status of an instance, maybe: init, processing, online, isolate and todelete.</dd><dt class="property-"
+            title="">
+        <span id="wan_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wan_address_hcl" style="color: inherit; text-decoration: inherit;">wan_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Allocate Wan Address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2027,8 +4806,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the instance was created.</dd><dt class="property-"
+            title="">
+        <span id="dedicatedclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_java" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2036,8 +4822,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="nodeinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfos_java" style="color: inherit; text-decoration: inherit;">node<wbr>Infos</a>
@@ -2045,8 +4830,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancenodeinfo">List&lt;Instance<wbr>Node<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Readonly Primary/Replica nodes.</p>
-</dd><dt class="property-"
+    <dd>Readonly Primary/Replica nodes.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2054,8 +4838,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: init, processing, online, isolate and todelete.</p>
-</dd></dl>
+    <dd>Current status of an instance, maybe: init, processing, online, isolate and todelete.</dd><dt class="property-"
+            title="">
+        <span id="wanaddress_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanaddress_java" style="color: inherit; text-decoration: inherit;">wan<wbr>Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Allocate Wan Address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2069,8 +4860,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the instance was created.</dd><dt class="property-"
+            title="">
+        <span id="dedicatedclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_nodejs" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2078,8 +4876,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="nodeinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfos_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Infos</a>
@@ -2087,8 +4884,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancenodeinfo">Instance<wbr>Node<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Readonly Primary/Replica nodes.</p>
-</dd><dt class="property-"
+    <dd>Readonly Primary/Replica nodes.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2096,8 +4892,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: init, processing, online, isolate and todelete.</p>
-</dd></dl>
+    <dd>Current status of an instance, maybe: init, processing, online, isolate and todelete.</dd><dt class="property-"
+            title="">
+        <span id="wanaddress_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanaddress_nodejs" style="color: inherit; text-decoration: inherit;">wan<wbr>Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Allocate Wan Address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2111,8 +4914,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the instance was created.</dd><dt class="property-"
+            title="">
+        <span id="dedicated_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicated_cluster_id_python" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2120,17 +4930,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="node_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#node_infos_python" style="color: inherit; text-decoration: inherit;">node_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancenodeinfo">Instance<wbr>Node<wbr>Info]</a></span>
+        <span class="property-type"><a href="#instancenodeinfo">Sequence[Instance<wbr>Node<wbr>Info]</a></span>
     </dt>
-    <dd><p>Readonly Primary/Replica nodes.</p>
-</dd><dt class="property-"
+    <dd>Readonly Primary/Replica nodes.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2138,8 +4946,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: init, processing, online, isolate and todelete.</p>
-</dd></dl>
+    <dd>Current status of an instance, maybe: init, processing, online, isolate and todelete.</dd><dt class="property-"
+            title="">
+        <span id="wan_address_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wan_address_python" style="color: inherit; text-decoration: inherit;">wan_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Allocate Wan Address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2153,8 +4968,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the instance was created.</dd><dt class="property-"
+            title="">
+        <span id="dedicatedclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_yaml" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2162,8 +4984,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="nodeinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodeinfos_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Infos</a>
@@ -2171,8 +4992,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancenodeinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Readonly Primary/Replica nodes.</p>
-</dd><dt class="property-"
+    <dd>Readonly Primary/Replica nodes.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2180,8 +5000,15 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: init, processing, online, isolate and todelete.</p>
-</dd></dl>
+    <dd>Current status of an instance, maybe: init, processing, online, isolate and todelete.</dd><dt class="property-"
+            title="">
+        <span id="wanaddress_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wanaddress_yaml" style="color: inherit; text-decoration: inherit;">wan<wbr>Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Allocate Wan Address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2191,18 +5018,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Instance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Instance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -2210,19 +5037,22 @@ Get an existing Instance resource's state with the given name, ID, and optional 
         <span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">dedicated_cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">force_delete</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">mem_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">no_auth</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">node_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[_redis.InstanceNodeInfoArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">node_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[InstanceNodeInfoArgs]]</span> = None<span class="p">,</span>
         <span class="nx">operation_network</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">params_template_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">product_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">recycle</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">redis_cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">redis_replicas_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">redis_shard_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">replica_zone_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[int]]</span> = None<span class="p">,</span>
@@ -2230,109 +5060,150 @@ Get an existing Instance resource's state with the given name, ID, and optional 
         <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">type_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">wait_switch</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">wait_switch</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">wan_address</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">wan_address_switch</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Instance</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">InstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Instance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Instance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">InstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Redis:Instance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_redis_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2340,28 +5211,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2369,28 +5243,31 @@ Get an existing Instance resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">InstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2410,8 +5287,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -2419,8 +5295,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone ID of an instance to be created, please refer to <code>tencentcloud_redis_zone_config.list</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of an instance to be created, like <code>ap-beijing-7</code>, please refer to <code>tencentcloud_redis_zone_config.list</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -2428,8 +5303,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>. Note: TencentCloud International only supports <code>POSTPAID</code>. Caution that update operation on this field will delete old instances and create new with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2437,8 +5311,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the instance was created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dedicatedclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicatedclusterid_csharp" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_csharp" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -2446,8 +5327,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -2455,8 +5335,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address of an instance. When the <code>operation_network</code> is <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of an instance. When the <code>operationNetwork</code> is <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memsize_csharp" style="color: inherit; text-decoration: inherit;">Mem<wbr>Size</a>
@@ -2464,8 +5343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</p>
-</dd><dt class="property-optional"
+    <dd>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2473,8 +5351,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_noauth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_noauth_csharp" style="color: inherit; text-decoration: inherit;">No<wbr>Auth</a>
@@ -2482,17 +5359,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeinfos_csharp" style="color: inherit; text-decoration: inherit;">Node<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancenodeinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Redis.<wbr>Inputs.<wbr>Instance<wbr>Node<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancenodeinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Redis.<wbr>Inputs.<wbr>Instance<wbr>Node<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Readonly Primary/Replica nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Readonly Primary/Replica nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_operationnetwork_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationnetwork_csharp" style="color: inherit; text-decoration: inherit;">Operation<wbr>Network</a>
@@ -2500,8 +5375,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</p>
-</dd><dt class="property-optional"
+    <dd>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramstemplateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramstemplateid_csharp" style="color: inherit; text-decoration: inherit;">Params<wbr>Template<wbr>Id</a>
@@ -2509,8 +5383,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify params template id. If not set, will use default template.</p>
-</dd><dt class="property-optional"
+    <dd>Specify params template id. If not set, will use default template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -2518,8 +5391,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</p>
-</dd><dt class="property-optional"
+    <dd>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2527,8 +5399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port used to access a redis instance. The default value is 6379. When the <code>operation_network</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>The port used to access a redis instance. The default value is 6379. When the <code>operationNetwork</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -2536,8 +5407,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_productversion_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productversion_csharp" style="color: inherit; text-decoration: inherit;">Product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify the product version of the instance. <code>local</code>: common type I;<code>localv2 </code>: common type II; <code>cloud</code>: cloud native,Currently not available for sale; <code>cdc</code>: dedicated cluster type. Default is <code>local</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2545,8 +5423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies which project the instance should belong to.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which project the instance should belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recycle_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recycle_csharp" style="color: inherit; text-decoration: inherit;">Recycle</a>
@@ -2554,8 +5431,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_redisclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisclusterid_csharp" style="color: inherit; text-decoration: inherit;">Redis<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster ID. When the <code>productVersion</code> is set to <code>cdc</code>, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redisreplicasnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisreplicasnum_csharp" style="color: inherit; text-decoration: inherit;">Redis<wbr>Replicas<wbr>Num</a>
@@ -2563,8 +5447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replica_zone_ids</code>, Non-multi-AZ does not require <code>replica_zone_ids</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replicaZoneIds</code>, Non-multi-AZ does not require <code>replicaZoneIds</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redisshardnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisshardnum_csharp" style="color: inherit; text-decoration: inherit;">Redis<wbr>Shard<wbr>Num</a>
@@ -2572,8 +5455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicazoneids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicazoneids_csharp" style="color: inherit; text-decoration: inherit;">Replica<wbr>Zone<wbr>Ids</a>
@@ -2581,8 +5463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</p>
-</dd><dt class="property-optional"
+    <dd>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicasreadonly_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicasreadonly_csharp" style="color: inherit; text-decoration: inherit;">Replicas<wbr>Read<wbr>Only</a>
@@ -2590,8 +5471,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</p>
-</dd><dt class="property-optional"
+    <dd>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -2599,8 +5479,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2608,8 +5487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: init, processing, online, isolate and todelete.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of an instance, maybe: init, processing, online, isolate and todelete.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2617,17 +5495,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies which subnet the instance should belong to. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which subnet the instance should belong to. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Instance tags.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="state_type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2635,9 +5511,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>cluster_ckv</code>,<code>cluster_redis5.0</code>,<code>cluster_redis</code>,<code>master_slave_ckv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>master_slave_redis</code>,<code>standalone_redis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>clusterCkv</code>,<code>cluster_redis5.0</code>,<code>clusterRedis</code>,<code>masterSlaveCkv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>masterSlaveRedis</code>,<code>standaloneRedis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_typeid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_typeid_csharp" style="color: inherit; text-decoration: inherit;">Type<wbr>Id</a>
@@ -2645,8 +5519,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.<!-- raw HTML omitted --><!-- raw HTML omitted -->2: Redis 2.8 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->3: CKV 3.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->4: CKV 3.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->6: Redis 4.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->7: Redis 4.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->8: Redis 5.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->9: Redis 5.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->15: Redis 6.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->16: Redis 6.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->17: Redis 7.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->18: Redis 7.0 Memory Edition (cluster architecture). <!-- raw HTML omitted --> <!-- raw HTML omitted -->200: Memcached 1.6 Memory Edition (cluster architecture). <!-- raw HTML omitted -->Note: The CKV version is currently used by existing users and is temporarily retained.<!-- raw HTML omitted -->.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2654,8 +5527,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is to be associated. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc with which the instance is to be associated. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_waitswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitswitch_csharp" style="color: inherit; text-decoration: inherit;">Wait<wbr>Switch</a>
@@ -2663,8 +5535,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</p>
-</dd></dl>
+    <dd>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wanaddress_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanaddress_csharp" style="color: inherit; text-decoration: inherit;">Wan<wbr>Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Allocate Wan Address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wanaddressswitch_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanaddressswitch_csharp" style="color: inherit; text-decoration: inherit;">Wan<wbr>Address<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Wan address switch, default <code>close</code>, values: <code>open</code>, <code>close</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2678,8 +5565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -2687,8 +5573,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone ID of an instance to be created, please refer to <code>tencentcloud_redis_zone_config.list</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of an instance to be created, like <code>ap-beijing-7</code>, please refer to <code>tencentcloud_redis_zone_config.list</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -2696,8 +5581,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>. Note: TencentCloud International only supports <code>POSTPAID</code>. Caution that update operation on this field will delete old instances and create new with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2705,8 +5589,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the instance was created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dedicatedclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicatedclusterid_go" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_go" style="color: inherit; text-decoration: inherit;">Force<wbr>Delete</a>
@@ -2714,8 +5605,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -2723,8 +5613,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address of an instance. When the <code>operation_network</code> is <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of an instance. When the <code>operationNetwork</code> is <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memsize_go" style="color: inherit; text-decoration: inherit;">Mem<wbr>Size</a>
@@ -2732,8 +5621,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</p>
-</dd><dt class="property-optional"
+    <dd>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2741,8 +5629,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_noauth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_noauth_go" style="color: inherit; text-decoration: inherit;">No<wbr>Auth</a>
@@ -2750,8 +5637,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeinfos_go" style="color: inherit; text-decoration: inherit;">Node<wbr>Infos</a>
@@ -2759,8 +5645,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancenodeinfo">[]Instance<wbr>Node<wbr>Info<wbr>Args</a></span>
     </dt>
-    <dd><p>Readonly Primary/Replica nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Readonly Primary/Replica nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_operationnetwork_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationnetwork_go" style="color: inherit; text-decoration: inherit;">Operation<wbr>Network</a>
@@ -2768,8 +5653,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</p>
-</dd><dt class="property-optional"
+    <dd>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramstemplateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramstemplateid_go" style="color: inherit; text-decoration: inherit;">Params<wbr>Template<wbr>Id</a>
@@ -2777,8 +5661,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify params template id. If not set, will use default template.</p>
-</dd><dt class="property-optional"
+    <dd>Specify params template id. If not set, will use default template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -2786,8 +5669,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</p>
-</dd><dt class="property-optional"
+    <dd>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2795,8 +5677,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port used to access a redis instance. The default value is 6379. When the <code>operation_network</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>The port used to access a redis instance. The default value is 6379. When the <code>operationNetwork</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -2804,8 +5685,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_productversion_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productversion_go" style="color: inherit; text-decoration: inherit;">Product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify the product version of the instance. <code>local</code>: common type I;<code>localv2 </code>: common type II; <code>cloud</code>: cloud native,Currently not available for sale; <code>cdc</code>: dedicated cluster type. Default is <code>local</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2813,8 +5701,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies which project the instance should belong to.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which project the instance should belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recycle_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recycle_go" style="color: inherit; text-decoration: inherit;">Recycle</a>
@@ -2822,8 +5709,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_redisclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisclusterid_go" style="color: inherit; text-decoration: inherit;">Redis<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster ID. When the <code>productVersion</code> is set to <code>cdc</code>, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redisreplicasnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisreplicasnum_go" style="color: inherit; text-decoration: inherit;">Redis<wbr>Replicas<wbr>Num</a>
@@ -2831,8 +5725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replica_zone_ids</code>, Non-multi-AZ does not require <code>replica_zone_ids</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replicaZoneIds</code>, Non-multi-AZ does not require <code>replicaZoneIds</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redisshardnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisshardnum_go" style="color: inherit; text-decoration: inherit;">Redis<wbr>Shard<wbr>Num</a>
@@ -2840,8 +5733,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicazoneids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicazoneids_go" style="color: inherit; text-decoration: inherit;">Replica<wbr>Zone<wbr>Ids</a>
@@ -2849,8 +5741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</p>
-</dd><dt class="property-optional"
+    <dd>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicasreadonly_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicasreadonly_go" style="color: inherit; text-decoration: inherit;">Replicas<wbr>Read<wbr>Only</a>
@@ -2858,8 +5749,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</p>
-</dd><dt class="property-optional"
+    <dd>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -2867,8 +5757,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2876,8 +5765,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: init, processing, online, isolate and todelete.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of an instance, maybe: init, processing, online, isolate and todelete.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2885,17 +5773,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies which subnet the instance should belong to. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which subnet the instance should belong to. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Instance tags.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="state_type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2903,9 +5789,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>cluster_ckv</code>,<code>cluster_redis5.0</code>,<code>cluster_redis</code>,<code>master_slave_ckv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>master_slave_redis</code>,<code>standalone_redis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>clusterCkv</code>,<code>cluster_redis5.0</code>,<code>clusterRedis</code>,<code>masterSlaveCkv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>masterSlaveRedis</code>,<code>standaloneRedis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_typeid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_typeid_go" style="color: inherit; text-decoration: inherit;">Type<wbr>Id</a>
@@ -2913,8 +5797,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.<!-- raw HTML omitted --><!-- raw HTML omitted -->2: Redis 2.8 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->3: CKV 3.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->4: CKV 3.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->6: Redis 4.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->7: Redis 4.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->8: Redis 5.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->9: Redis 5.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->15: Redis 6.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->16: Redis 6.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->17: Redis 7.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->18: Redis 7.0 Memory Edition (cluster architecture). <!-- raw HTML omitted --> <!-- raw HTML omitted -->200: Memcached 1.6 Memory Edition (cluster architecture). <!-- raw HTML omitted -->Note: The CKV version is currently used by existing users and is temporarily retained.<!-- raw HTML omitted -->.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2922,8 +5805,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is to be associated. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc with which the instance is to be associated. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_waitswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitswitch_go" style="color: inherit; text-decoration: inherit;">Wait<wbr>Switch</a>
@@ -2931,8 +5813,301 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</p>
-</dd></dl>
+    <dd>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wanaddress_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanaddress_go" style="color: inherit; text-decoration: inherit;">Wan<wbr>Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Allocate Wan Address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wanaddressswitch_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanaddressswitch_go" style="color: inherit; text-decoration: inherit;">Wan<wbr>Address<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Wan address switch, default <code>close</code>, values: <code>open</code>, <code>close</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone of an instance to be created, like <code>ap-beijing-7</code>, please refer to <code>tencentcloud_redis_zone_config.list</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time when the instance was created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dedicated_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicated_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_force_delete_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_delete_hcl" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP address of an instance. When the <code>operationNetwork</code> is <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_mem_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mem_size_hcl" style="color: inherit; text-decoration: inherit;">mem_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_no_auth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_no_auth_hcl" style="color: inherit; text-decoration: inherit;">no_<wbr>auth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_node_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_node_infos_hcl" style="color: inherit; text-decoration: inherit;">node_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#instancenodeinfo">list(object)</a></span>
+    </dt>
+    <dd>Readonly Primary/Replica nodes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_operation_network_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operation_network_hcl" style="color: inherit; text-decoration: inherit;">operation_<wbr>network</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_params_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_params_template_id_hcl" style="color: inherit; text-decoration: inherit;">params_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify params template id. If not set, will use default template.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="state_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The port used to access a redis instance. The default value is 6379. When the <code>operationNetwork</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_product_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_version_hcl" style="color: inherit; text-decoration: inherit;">product_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify the product version of the instance. <code>local</code>: common type I;<code>localv2 </code>: common type II; <code>cloud</code>: cloud native,Currently not available for sale; <code>cdc</code>: dedicated cluster type. Default is <code>local</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies which project the instance should belong to.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_recycle_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recycle_hcl" style="color: inherit; text-decoration: inherit;">recycle</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_redis_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redis_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">redis_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster ID. When the <code>productVersion</code> is set to <code>cdc</code>, this parameter must be set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_redis_replicas_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redis_replicas_num_hcl" style="color: inherit; text-decoration: inherit;">redis_<wbr>replicas_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replicaZoneIds</code>, Non-multi-AZ does not require <code>replicaZoneIds</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_redis_shard_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redis_shard_num_hcl" style="color: inherit; text-decoration: inherit;">redis_<wbr>shard_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replica_zone_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replica_zone_ids_hcl" style="color: inherit; text-decoration: inherit;">replica_<wbr>zone_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replicas_read_only_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicas_read_only_hcl" style="color: inherit; text-decoration: inherit;">replicas_<wbr>read_<wbr>only</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Current status of an instance, maybe: init, processing, online, isolate and todelete.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifies which subnet the instance should belong to. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Instance tags.</dd><dt class="property-optional property-deprecated property-replacement"
+            title="Optional, Deprecated">
+        <span id="state_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>clusterCkv</code>,<code>cluster_redis5.0</code>,<code>clusterRedis</code>,<code>masterSlaveCkv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>masterSlaveRedis</code>,<code>standaloneRedis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_type_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_id_hcl" style="color: inherit; text-decoration: inherit;">type_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.<!-- raw HTML omitted --><!-- raw HTML omitted -->2: Redis 2.8 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->3: CKV 3.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->4: CKV 3.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->6: Redis 4.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->7: Redis 4.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->8: Redis 5.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->9: Redis 5.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->15: Redis 6.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->16: Redis 6.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->17: Redis 7.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->18: Redis 7.0 Memory Edition (cluster architecture). <!-- raw HTML omitted --> <!-- raw HTML omitted -->200: Memcached 1.6 Memory Edition (cluster architecture). <!-- raw HTML omitted -->Note: The CKV version is currently used by existing users and is temporarily retained.<!-- raw HTML omitted -->.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the vpc with which the instance is to be associated. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wait_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wait_switch_hcl" style="color: inherit; text-decoration: inherit;">wait_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wan_address_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wan_address_hcl" style="color: inherit; text-decoration: inherit;">wan_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Allocate Wan Address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wan_address_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wan_address_switch_hcl" style="color: inherit; text-decoration: inherit;">wan_<wbr>address_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Wan address switch, default <code>close</code>, values: <code>open</code>, <code>close</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2946,8 +6121,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -2955,8 +6129,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone ID of an instance to be created, please refer to <code>tencentcloud_redis_zone_config.list</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of an instance to be created, like <code>ap-beijing-7</code>, please refer to <code>tencentcloud_redis_zone_config.list</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2964,8 +6137,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>. Note: TencentCloud International only supports <code>POSTPAID</code>. Caution that update operation on this field will delete old instances and create new with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2973,8 +6145,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the instance was created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dedicatedclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicatedclusterid_java" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_java" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -2982,8 +6161,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2991,8 +6169,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address of an instance. When the <code>operation_network</code> is <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of an instance. When the <code>operationNetwork</code> is <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memsize_java" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -3000,8 +6177,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</p>
-</dd><dt class="property-optional"
+    <dd>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3009,8 +6185,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_noauth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_noauth_java" style="color: inherit; text-decoration: inherit;">no<wbr>Auth</a>
@@ -3018,17 +6193,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeinfos_java" style="color: inherit; text-decoration: inherit;">node<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancenodeinfo">List&lt;Instance<wbr>Node<wbr>Info<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#instancenodeinfo">List&lt;Instance<wbr>Node<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Readonly Primary/Replica nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Readonly Primary/Replica nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_operationnetwork_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationnetwork_java" style="color: inherit; text-decoration: inherit;">operation<wbr>Network</a>
@@ -3036,8 +6209,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</p>
-</dd><dt class="property-optional"
+    <dd>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramstemplateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramstemplateid_java" style="color: inherit; text-decoration: inherit;">params<wbr>Template<wbr>Id</a>
@@ -3045,8 +6217,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify params template id. If not set, will use default template.</p>
-</dd><dt class="property-optional"
+    <dd>Specify params template id. If not set, will use default template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3054,8 +6225,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</p>
-</dd><dt class="property-optional"
+    <dd>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -3063,8 +6233,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The port used to access a redis instance. The default value is 6379. When the <code>operation_network</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>The port used to access a redis instance. The default value is 6379. When the <code>operationNetwork</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -3072,8 +6241,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_productversion_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productversion_java" style="color: inherit; text-decoration: inherit;">product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specify the product version of the instance. <code>local</code>: common type I;<code>localv2 </code>: common type II; <code>cloud</code>: cloud native,Currently not available for sale; <code>cdc</code>: dedicated cluster type. Default is <code>local</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3081,8 +6257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies which project the instance should belong to.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which project the instance should belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recycle_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recycle_java" style="color: inherit; text-decoration: inherit;">recycle</a>
@@ -3090,8 +6265,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_redisclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisclusterid_java" style="color: inherit; text-decoration: inherit;">redis<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Exclusive cluster ID. When the <code>productVersion</code> is set to <code>cdc</code>, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redisreplicasnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisreplicasnum_java" style="color: inherit; text-decoration: inherit;">redis<wbr>Replicas<wbr>Num</a>
@@ -3099,8 +6281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replica_zone_ids</code>, Non-multi-AZ does not require <code>replica_zone_ids</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replicaZoneIds</code>, Non-multi-AZ does not require <code>replicaZoneIds</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redisshardnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisshardnum_java" style="color: inherit; text-decoration: inherit;">redis<wbr>Shard<wbr>Num</a>
@@ -3108,8 +6289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicazoneids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicazoneids_java" style="color: inherit; text-decoration: inherit;">replica<wbr>Zone<wbr>Ids</a>
@@ -3117,8 +6297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</p>
-</dd><dt class="property-optional"
+    <dd>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicasreadonly_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicasreadonly_java" style="color: inherit; text-decoration: inherit;">replicas<wbr>Read<wbr>Only</a>
@@ -3126,8 +6305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</p>
-</dd><dt class="property-optional"
+    <dd>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -3135,8 +6313,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3144,8 +6321,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: init, processing, online, isolate and todelete.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of an instance, maybe: init, processing, online, isolate and todelete.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3153,17 +6329,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies which subnet the instance should belong to. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which subnet the instance should belong to. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Instance tags.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="state_type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3171,9 +6345,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>cluster_ckv</code>,<code>cluster_redis5.0</code>,<code>cluster_redis</code>,<code>master_slave_ckv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>master_slave_redis</code>,<code>standalone_redis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>clusterCkv</code>,<code>cluster_redis5.0</code>,<code>clusterRedis</code>,<code>masterSlaveCkv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>masterSlaveRedis</code>,<code>standaloneRedis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_typeid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_typeid_java" style="color: inherit; text-decoration: inherit;">type<wbr>Id</a>
@@ -3181,8 +6353,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.<!-- raw HTML omitted --><!-- raw HTML omitted -->2: Redis 2.8 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->3: CKV 3.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->4: CKV 3.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->6: Redis 4.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->7: Redis 4.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->8: Redis 5.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->9: Redis 5.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->15: Redis 6.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->16: Redis 6.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->17: Redis 7.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->18: Redis 7.0 Memory Edition (cluster architecture). <!-- raw HTML omitted --> <!-- raw HTML omitted -->200: Memcached 1.6 Memory Edition (cluster architecture). <!-- raw HTML omitted -->Note: The CKV version is currently used by existing users and is temporarily retained.<!-- raw HTML omitted -->.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3190,8 +6361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is to be associated. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc with which the instance is to be associated. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_waitswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitswitch_java" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
@@ -3199,8 +6369,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</p>
-</dd></dl>
+    <dd>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wanaddress_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanaddress_java" style="color: inherit; text-decoration: inherit;">wan<wbr>Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Allocate Wan Address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wanaddressswitch_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanaddressswitch_java" style="color: inherit; text-decoration: inherit;">wan<wbr>Address<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Wan address switch, default <code>close</code>, values: <code>open</code>, <code>close</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3214,8 +6399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -3223,8 +6407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone ID of an instance to be created, please refer to <code>tencentcloud_redis_zone_config.list</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of an instance to be created, like <code>ap-beijing-7</code>, please refer to <code>tencentcloud_redis_zone_config.list</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -3232,8 +6415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>. Note: TencentCloud International only supports <code>POSTPAID</code>. Caution that update operation on this field will delete old instances and create new with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3241,8 +6423,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the instance was created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dedicatedclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicatedclusterid_nodejs" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_nodejs" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -3250,8 +6439,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -3259,8 +6447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address of an instance. When the <code>operation_network</code> is <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of an instance. When the <code>operationNetwork</code> is <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memsize_nodejs" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -3268,8 +6455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</p>
-</dd><dt class="property-optional"
+    <dd>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3277,8 +6463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_noauth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_noauth_nodejs" style="color: inherit; text-decoration: inherit;">no<wbr>Auth</a>
@@ -3286,17 +6471,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeinfos_nodejs" style="color: inherit; text-decoration: inherit;">node<wbr>Infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancenodeinfo">Instance<wbr>Node<wbr>Info<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#instancenodeinfo">Instance<wbr>Node<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Readonly Primary/Replica nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Readonly Primary/Replica nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_operationnetwork_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationnetwork_nodejs" style="color: inherit; text-decoration: inherit;">operation<wbr>Network</a>
@@ -3304,8 +6487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</p>
-</dd><dt class="property-optional"
+    <dd>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramstemplateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramstemplateid_nodejs" style="color: inherit; text-decoration: inherit;">params<wbr>Template<wbr>Id</a>
@@ -3313,8 +6495,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify params template id. If not set, will use default template.</p>
-</dd><dt class="property-optional"
+    <dd>Specify params template id. If not set, will use default template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3322,8 +6503,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</p>
-</dd><dt class="property-optional"
+    <dd>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -3331,8 +6511,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The port used to access a redis instance. The default value is 6379. When the <code>operation_network</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>The port used to access a redis instance. The default value is 6379. When the <code>operationNetwork</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -3340,8 +6519,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_productversion_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productversion_nodejs" style="color: inherit; text-decoration: inherit;">product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify the product version of the instance. <code>local</code>: common type I;<code>localv2 </code>: common type II; <code>cloud</code>: cloud native,Currently not available for sale; <code>cdc</code>: dedicated cluster type. Default is <code>local</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3349,8 +6535,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies which project the instance should belong to.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which project the instance should belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recycle_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recycle_nodejs" style="color: inherit; text-decoration: inherit;">recycle</a>
@@ -3358,8 +6543,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_redisclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisclusterid_nodejs" style="color: inherit; text-decoration: inherit;">redis<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exclusive cluster ID. When the <code>productVersion</code> is set to <code>cdc</code>, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redisreplicasnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisreplicasnum_nodejs" style="color: inherit; text-decoration: inherit;">redis<wbr>Replicas<wbr>Num</a>
@@ -3367,8 +6559,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replica_zone_ids</code>, Non-multi-AZ does not require <code>replica_zone_ids</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replicaZoneIds</code>, Non-multi-AZ does not require <code>replicaZoneIds</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redisshardnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisshardnum_nodejs" style="color: inherit; text-decoration: inherit;">redis<wbr>Shard<wbr>Num</a>
@@ -3376,8 +6567,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicazoneids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicazoneids_nodejs" style="color: inherit; text-decoration: inherit;">replica<wbr>Zone<wbr>Ids</a>
@@ -3385,8 +6575,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</p>
-</dd><dt class="property-optional"
+    <dd>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicasreadonly_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicasreadonly_nodejs" style="color: inherit; text-decoration: inherit;">replicas<wbr>Read<wbr>Only</a>
@@ -3394,8 +6583,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</p>
-</dd><dt class="property-optional"
+    <dd>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -3403,8 +6591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3412,8 +6599,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: init, processing, online, isolate and todelete.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of an instance, maybe: init, processing, online, isolate and todelete.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3421,17 +6607,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifies which subnet the instance should belong to. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which subnet the instance should belong to. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Instance tags.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="state_type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3439,9 +6623,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>cluster_ckv</code>,<code>cluster_redis5.0</code>,<code>cluster_redis</code>,<code>master_slave_ckv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>master_slave_redis</code>,<code>standalone_redis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>clusterCkv</code>,<code>cluster_redis5.0</code>,<code>clusterRedis</code>,<code>masterSlaveCkv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>masterSlaveRedis</code>,<code>standaloneRedis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_typeid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_typeid_nodejs" style="color: inherit; text-decoration: inherit;">type<wbr>Id</a>
@@ -3449,8 +6631,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.<!-- raw HTML omitted --><!-- raw HTML omitted -->2: Redis 2.8 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->3: CKV 3.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->4: CKV 3.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->6: Redis 4.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->7: Redis 4.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->8: Redis 5.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->9: Redis 5.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->15: Redis 6.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->16: Redis 6.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->17: Redis 7.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->18: Redis 7.0 Memory Edition (cluster architecture). <!-- raw HTML omitted --> <!-- raw HTML omitted -->200: Memcached 1.6 Memory Edition (cluster architecture). <!-- raw HTML omitted -->Note: The CKV version is currently used by existing users and is temporarily retained.<!-- raw HTML omitted -->.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3458,8 +6639,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is to be associated. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc with which the instance is to be associated. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_waitswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitswitch_nodejs" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
@@ -3467,8 +6647,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</p>
-</dd></dl>
+    <dd>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wanaddress_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanaddress_nodejs" style="color: inherit; text-decoration: inherit;">wan<wbr>Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Allocate Wan Address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wanaddressswitch_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanaddressswitch_nodejs" style="color: inherit; text-decoration: inherit;">wan<wbr>Address<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Wan address switch, default <code>close</code>, values: <code>open</code>, <code>close</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3482,8 +6677,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -3491,8 +6685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone ID of an instance to be created, please refer to <code>tencentcloud_redis_zone_config.list</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of an instance to be created, like <code>ap-beijing-7</code>, please refer to <code>tencentcloud_redis_zone_config.list</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -3500,8 +6693,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>. Note: TencentCloud International only supports <code>POSTPAID</code>. Caution that update operation on this field will delete old instances and create new with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -3509,8 +6701,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the instance was created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dedicated_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicated_cluster_id_python" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_force_delete_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_force_delete_python" style="color: inherit; text-decoration: inherit;">force_<wbr>delete</a>
@@ -3518,8 +6717,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -3527,8 +6725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP address of an instance. When the <code>operation_network</code> is <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of an instance. When the <code>operationNetwork</code> is <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mem_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mem_size_python" style="color: inherit; text-decoration: inherit;">mem_<wbr>size</a>
@@ -3536,8 +6733,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</p>
-</dd><dt class="property-optional"
+    <dd>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3545,8 +6741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_no_auth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_no_auth_python" style="color: inherit; text-decoration: inherit;">no_<wbr>auth</a>
@@ -3554,17 +6749,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_node_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_node_infos_python" style="color: inherit; text-decoration: inherit;">node_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#instancenodeinfo">Instance<wbr>Node<wbr>Info<wbr>Args]</a></span>
+        <span class="property-type"><a href="#instancenodeinfo">Sequence[Instance<wbr>Node<wbr>Info<wbr>Args]</a></span>
     </dt>
-    <dd><p>Readonly Primary/Replica nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Readonly Primary/Replica nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_operation_network_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operation_network_python" style="color: inherit; text-decoration: inherit;">operation_<wbr>network</a>
@@ -3572,8 +6765,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</p>
-</dd><dt class="property-optional"
+    <dd>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_params_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_params_template_id_python" style="color: inherit; text-decoration: inherit;">params_<wbr>template_<wbr>id</a>
@@ -3581,8 +6773,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify params template id. If not set, will use default template.</p>
-</dd><dt class="property-optional"
+    <dd>Specify params template id. If not set, will use default template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3590,8 +6781,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</p>
-</dd><dt class="property-optional"
+    <dd>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -3599,8 +6789,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port used to access a redis instance. The default value is 6379. When the <code>operation_network</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>The port used to access a redis instance. The default value is 6379. When the <code>operationNetwork</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_period_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
@@ -3608,8 +6797,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_product_version_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_product_version_python" style="color: inherit; text-decoration: inherit;">product_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Specify the product version of the instance. <code>local</code>: common type I;<code>localv2 </code>: common type II; <code>cloud</code>: cloud native,Currently not available for sale; <code>cdc</code>: dedicated cluster type. Default is <code>local</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -3617,8 +6813,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies which project the instance should belong to.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which project the instance should belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recycle_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recycle_python" style="color: inherit; text-decoration: inherit;">recycle</a>
@@ -3626,8 +6821,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_redis_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redis_cluster_id_python" style="color: inherit; text-decoration: inherit;">redis_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Exclusive cluster ID. When the <code>productVersion</code> is set to <code>cdc</code>, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redis_replicas_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redis_replicas_num_python" style="color: inherit; text-decoration: inherit;">redis_<wbr>replicas_<wbr>num</a>
@@ -3635,8 +6837,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replica_zone_ids</code>, Non-multi-AZ does not require <code>replica_zone_ids</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replicaZoneIds</code>, Non-multi-AZ does not require <code>replicaZoneIds</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redis_shard_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redis_shard_num_python" style="color: inherit; text-decoration: inherit;">redis_<wbr>shard_<wbr>num</a>
@@ -3644,8 +6845,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replica_zone_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replica_zone_ids_python" style="color: inherit; text-decoration: inherit;">replica_<wbr>zone_<wbr>ids</a>
@@ -3653,8 +6853,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</p>
-</dd><dt class="property-optional"
+    <dd>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicas_read_only_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicas_read_only_python" style="color: inherit; text-decoration: inherit;">replicas_<wbr>read_<wbr>only</a>
@@ -3662,8 +6861,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</p>
-</dd><dt class="property-optional"
+    <dd>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -3671,8 +6869,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3680,8 +6877,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: init, processing, online, isolate and todelete.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of an instance, maybe: init, processing, online, isolate and todelete.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -3689,17 +6885,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifies which subnet the instance should belong to. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which subnet the instance should belong to. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Instance tags.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="state_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3707,9 +6901,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>cluster_ckv</code>,<code>cluster_redis5.0</code>,<code>cluster_redis</code>,<code>master_slave_ckv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>master_slave_redis</code>,<code>standalone_redis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>clusterCkv</code>,<code>cluster_redis5.0</code>,<code>clusterRedis</code>,<code>masterSlaveCkv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>masterSlaveRedis</code>,<code>standaloneRedis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_id_python" style="color: inherit; text-decoration: inherit;">type_<wbr>id</a>
@@ -3717,8 +6909,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.<!-- raw HTML omitted --><!-- raw HTML omitted -->2: Redis 2.8 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->3: CKV 3.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->4: CKV 3.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->6: Redis 4.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->7: Redis 4.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->8: Redis 5.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->9: Redis 5.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->15: Redis 6.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->16: Redis 6.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->17: Redis 7.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->18: Redis 7.0 Memory Edition (cluster architecture). <!-- raw HTML omitted --> <!-- raw HTML omitted -->200: Memcached 1.6 Memory Edition (cluster architecture). <!-- raw HTML omitted -->Note: The CKV version is currently used by existing users and is temporarily retained.<!-- raw HTML omitted -->.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -3726,8 +6917,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is to be associated. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc with which the instance is to be associated. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_wait_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wait_switch_python" style="color: inherit; text-decoration: inherit;">wait_<wbr>switch</a>
@@ -3735,8 +6925,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</p>
-</dd></dl>
+    <dd>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wan_address_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wan_address_python" style="color: inherit; text-decoration: inherit;">wan_<wbr>address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Allocate Wan Address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wan_address_switch_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wan_address_switch_python" style="color: inherit; text-decoration: inherit;">wan_<wbr>address_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Wan address switch, default <code>close</code>, values: <code>open</code>, <code>close</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3750,8 +6955,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -3759,8 +6963,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone ID of an instance to be created, please refer to <code>tencentcloud_redis_zone_config.list</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of an instance to be created, like <code>ap-beijing-7</code>, please refer to <code>tencentcloud_redis_zone_config.list</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -3768,8 +6971,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>. Note: TencentCloud International only supports <code>POSTPAID</code>. Caution that update operation on this field will delete old instances and create new with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values: <code>PREPAID</code> and <code>POSTPAID</code>. Default value is <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3777,8 +6979,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the instance was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the instance was created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dedicatedclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicatedclusterid_yaml" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forcedelete_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forcedelete_yaml" style="color: inherit; text-decoration: inherit;">force<wbr>Delete</a>
@@ -3786,8 +6995,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for <code>PREPAID</code> instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -3795,8 +7003,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address of an instance. When the <code>operation_network</code> is <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>IP address of an instance. When the <code>operationNetwork</code> is <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memsize_yaml" style="color: inherit; text-decoration: inherit;">mem<wbr>Size</a>
@@ -3804,8 +7011,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</p>
-</dd><dt class="property-optional"
+    <dd>The memory volume of an available instance(in MB), please refer to <code>tencentcloud_redis_zone_config.list[zone].shard_memories</code>. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. <code>512MB</code> is supported only in master-slave instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3813,8 +7019,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance name.</p>
-</dd><dt class="property-optional"
+    <dd>Instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_noauth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_noauth_yaml" style="color: inherit; text-decoration: inherit;">no<wbr>Auth</a>
@@ -3822,8 +7027,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodeinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodeinfos_yaml" style="color: inherit; text-decoration: inherit;">node<wbr>Infos</a>
@@ -3831,8 +7035,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#instancenodeinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Readonly Primary/Replica nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Readonly Primary/Replica nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_operationnetwork_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_operationnetwork_yaml" style="color: inherit; text-decoration: inherit;">operation<wbr>Network</a>
@@ -3840,8 +7043,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</p>
-</dd><dt class="property-optional"
+    <dd>Refers to the category of the pre-modified network, including: <code>changeVip</code>: refers to switching the private network, including its intranet IPv4 address and port; <code>changeVpc</code>: refers to switching the subnet to which the private network belongs; <code>changeBaseToVpc</code>: refers to switching the basic network to a private network; <code>changeVPort</code>: refers to only modifying the instance network port.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_paramstemplateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_paramstemplateid_yaml" style="color: inherit; text-decoration: inherit;">params<wbr>Template<wbr>Id</a>
@@ -3849,8 +7051,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify params template id. If not set, will use default template.</p>
-</dd><dt class="property-optional"
+    <dd>Specify params template id. If not set, will use default template.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3858,8 +7059,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</p>
-</dd><dt class="property-optional"
+    <dd>Password for a Redis user, which should be 8 to 16 characters. NOTE: Only <code>no_auth=true</code> specified can make password empty.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -3867,8 +7067,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The port used to access a redis instance. The default value is 6379. When the <code>operation_network</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>The port used to access a redis instance. The default value is 6379. When the <code>operationNetwork</code> is <code>changeVPort</code> or <code>changeVip</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -3876,8 +7075,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_productversion_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_productversion_yaml" style="color: inherit; text-decoration: inherit;">product<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Specify the product version of the instance. <code>local</code>: common type I;<code>localv2 </code>: common type II; <code>cloud</code>: cloud native,Currently not available for sale; <code>cdc</code>: dedicated cluster type. Default is <code>local</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3885,8 +7091,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies which project the instance should belong to.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which project the instance should belong to.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_recycle_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_recycle_yaml" style="color: inherit; text-decoration: inherit;">recycle</a>
@@ -3894,8 +7099,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Original intranet IPv4 address retention time: unit: day, value range: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>7</code>, <code>15</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_redisclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisclusterid_yaml" style="color: inherit; text-decoration: inherit;">redis<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Exclusive cluster ID. When the <code>productVersion</code> is set to <code>cdc</code>, this parameter must be set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redisreplicasnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisreplicasnum_yaml" style="color: inherit; text-decoration: inherit;">redis<wbr>Replicas<wbr>Num</a>
@@ -3903,8 +7115,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replica_zone_ids</code>, Non-multi-AZ does not require <code>replica_zone_ids</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance copies. This is not required for standalone and master slave versions and must equal to count of <code>replicaZoneIds</code>, Non-multi-AZ does not require <code>replicaZoneIds</code>; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_redisshardnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisshardnum_yaml" style="color: inherit; text-decoration: inherit;">redis<wbr>Shard<wbr>Num</a>
@@ -3912,8 +7123,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</p>
-</dd><dt class="property-optional"
+    <dd>The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [<code>1</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>24 </code>, <code>32</code>, <code>40</code>, <code>48</code>, <code>64</code>, <code>80</code>, <code>96</code>, <code>128</code>].</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicazoneids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicazoneids_yaml" style="color: inherit; text-decoration: inherit;">replica<wbr>Zone<wbr>Ids</a>
@@ -3921,8 +7131,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</p>
-</dd><dt class="property-optional"
+    <dd>ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replicasreadonly_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replicasreadonly_yaml" style="color: inherit; text-decoration: inherit;">replicas<wbr>Read<wbr>Only</a>
@@ -3930,8 +7139,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</p>
-</dd><dt class="property-optional"
+    <dd>Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas &gt;=2.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -3939,8 +7147,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of security group. If both vpc_id and subnet_id are not set, this argument should not be set either.</p>
-</dd><dt class="property-optional"
+    <dd>ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3948,8 +7155,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of an instance, maybe: init, processing, online, isolate and todelete.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of an instance, maybe: init, processing, online, isolate and todelete.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3957,17 +7163,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifies which subnet the instance should belong to. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies which subnet the instance should belong to. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Instance tags.</p>
-</dd><dt class="property-optional property-deprecated property-replacement"
+    <dd>Instance tags.</dd><dt class="property-optional property-deprecated property-replacement"
             title="Optional, Deprecated">
         <span id="state_type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3975,9 +7179,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>cluster_ckv</code>,<code>cluster_redis5.0</code>,<code>cluster_redis</code>,<code>master_slave_ckv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>master_slave_redis</code>,<code>standalone_redis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: <code>clusterCkv</code>,<code>cluster_redis5.0</code>,<code>clusterRedis</code>,<code>masterSlaveCkv</code>,<code>master_slave_redis4.0</code>,<code>master_slave_redis5.0</code>,<code>masterSlaveRedis</code>,<code>standaloneRedis</code>, specific region support specific types, need to refer data <code>tencentcloud.Redis.getZoneConfig</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.33.1. Please use 'type_id' instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_typeid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_typeid_yaml" style="color: inherit; text-decoration: inherit;">type<wbr>Id</a>
@@ -3985,8 +7187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Available values reference data source <code>tencentcloud.Redis.getZoneConfig</code> or <a href="https://intl.cloud.tencent.com/document/product/239/32069">document</a>, toggle immediately when modified.<!-- raw HTML omitted --><!-- raw HTML omitted -->2: Redis 2.8 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->3: CKV 3.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->4: CKV 3.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->6: Redis 4.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->7: Redis 4.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->8: Redis 5.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->9: Redis 5.0 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->15: Redis 6.2 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->16: Redis 6.2 Memory Edition (cluster architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->17: Redis 7.0 Memory Edition (standard architecture);<!-- raw HTML omitted --> <!-- raw HTML omitted -->18: Redis 7.0 Memory Edition (cluster architecture). <!-- raw HTML omitted --> <!-- raw HTML omitted -->200: Memcached 1.6 Memory Edition (cluster architecture). <!-- raw HTML omitted -->Note: The CKV version is currently used by existing users and is temporarily retained.<!-- raw HTML omitted -->.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3994,8 +7195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is to be associated. When the <code>operation_network</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the vpc with which the instance is to be associated. When the <code>operationNetwork</code> is <code>changeVpc</code> or <code>changeBaseToVpc</code>, this parameter needs to be configured.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_waitswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_waitswitch_yaml" style="color: inherit; text-decoration: inherit;">wait<wbr>Switch</a>
@@ -4003,8 +7203,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</p>
-</dd></dl>
+    <dd>Switching mode: <code>1</code>-maintenance time window switching, <code>2</code>-immediate switching, default value <code>2</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wanaddress_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanaddress_yaml" style="color: inherit; text-decoration: inherit;">wan<wbr>Address</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Allocate Wan Address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_wanaddressswitch_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_wanaddressswitch_yaml" style="color: inherit; text-decoration: inherit;">wan<wbr>Address<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Wan address switch, default <code>close</code>, values: <code>open</code>, <code>close</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -4019,7 +7234,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="instancenodeinfo">Instance<wbr>Node<wbr>Info</h4>
+<h4 id="instancenodeinfo">
+Instance<wbr>Node<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Instance<wbr>Node<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4031,8 +7248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the master or replica node.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the master or replica node.</dd><dt class="property-optional"
             title="Optional">
         <span id="master_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_csharp" style="color: inherit; text-decoration: inherit;">Master</a>
@@ -4040,8 +7256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the node is master.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node is master.</dd><dt class="property-optional"
             title="Optional">
         <span id="zoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -4049,8 +7264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the availability zone of the master or replica node.</p>
-</dd></dl>
+    <dd>ID of the availability zone of the master or replica node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4064,8 +7278,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the master or replica node.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the master or replica node.</dd><dt class="property-optional"
             title="Optional">
         <span id="master_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_go" style="color: inherit; text-decoration: inherit;">Master</a>
@@ -4073,8 +7286,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the node is master.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node is master.</dd><dt class="property-optional"
             title="Optional">
         <span id="zoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -4082,8 +7294,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the availability zone of the master or replica node.</p>
-</dd></dl>
+    <dd>ID of the availability zone of the master or replica node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the master or replica node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="master_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_hcl" style="color: inherit; text-decoration: inherit;">master</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the node is master.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the availability zone of the master or replica node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4097,8 +7338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the master or replica node.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the master or replica node.</dd><dt class="property-optional"
             title="Optional">
         <span id="master_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_java" style="color: inherit; text-decoration: inherit;">master</a>
@@ -4106,8 +7346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the node is master.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node is master.</dd><dt class="property-optional"
             title="Optional">
         <span id="zoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -4115,8 +7354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the availability zone of the master or replica node.</p>
-</dd></dl>
+    <dd>ID of the availability zone of the master or replica node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4130,8 +7368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the master or replica node.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the master or replica node.</dd><dt class="property-optional"
             title="Optional">
         <span id="master_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_nodejs" style="color: inherit; text-decoration: inherit;">master</a>
@@ -4139,8 +7376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the node is master.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node is master.</dd><dt class="property-optional"
             title="Optional">
         <span id="zoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -4148,8 +7384,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the availability zone of the master or replica node.</p>
-</dd></dl>
+    <dd>ID of the availability zone of the master or replica node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4163,8 +7398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the master or replica node.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the master or replica node.</dd><dt class="property-optional"
             title="Optional">
         <span id="master_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_python" style="color: inherit; text-decoration: inherit;">master</a>
@@ -4172,8 +7406,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the node is master.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node is master.</dd><dt class="property-optional"
             title="Optional">
         <span id="zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
@@ -4181,8 +7414,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the availability zone of the master or replica node.</p>
-</dd></dl>
+    <dd>ID of the availability zone of the master or replica node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4196,8 +7428,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the master or replica node.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the master or replica node.</dd><dt class="property-optional"
             title="Optional">
         <span id="master_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_yaml" style="color: inherit; text-decoration: inherit;">master</a>
@@ -4205,8 +7436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the node is master.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the node is master.</dd><dt class="property-optional"
             title="Optional">
         <span id="zoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -4214,8 +7444,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the availability zone of the master or replica node.</p>
-</dd></dl>
+    <dd>ID of the availability zone of the master or replica node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4226,9 +7455,12 @@ The following state arguments are supported:
 Redis instance can be imported, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
+$ pulumi import tencentcloud:Redis/instance:Instance example crs-iu22tdrf
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -4240,7 +7472,6 @@ $ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

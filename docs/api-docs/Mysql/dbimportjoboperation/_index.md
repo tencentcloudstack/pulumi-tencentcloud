@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Mysql.DbImportJobOperation"
 meta_desc: "Documentation for the tencentcloud.Mysql.DbImportJobOperation resource with examples, input properties, output properties, lookup functions, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,65 +18,80 @@ no_edit_this_page: true
 
 
 ## Create DbImportJobOperation Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">DbImportJobOperation</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DbImportJobOperationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">DbImportJobOperation</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DbImportJobOperationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">DbImportJobOperation</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DbImportJobOperationArgs</a></span><span class="p">,</span>
+                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">DbImportJobOperation</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                         <span class="nx">user</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                          <span class="nx">cos_url</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                          <span class="nx">db_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                          <span class="nx">file_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                         <span class="nx">password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                         <span class="nx">user</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">DbImportJobOperation</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DbImportJobOperationArgs</a></span><span class="p">,</span>
-                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                         <span class="nx">password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDbImportJobOperation</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DbImportJobOperationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DbImportJobOperation</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDbImportJobOperation</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DbImportJobOperationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DbImportJobOperation</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">DbImportJobOperation</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DbImportJobOperationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">DbImportJobOperation</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DbImportJobOperationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">DbImportJobOperation</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DbImportJobOperationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">DbImportJobOperation</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DbImportJobOperationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mysql:DbImportJobOperation</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mysql:DbImportJobOperation</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_mysql_db_import_job_operation&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -95,7 +112,7 @@ no_edit_this_page: true
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -212,11 +229,19 @@ no_edit_this_page: true
 </pulumi-choosable>
 </div>
 
+
+
 ## DbImportJobOperation Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The DbImportJobOperation resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -232,9 +257,7 @@ The DbImportJobOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console
-page.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="user_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_csharp" style="color: inherit; text-decoration: inherit;">User</a>
@@ -242,8 +265,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The username of the cloud database.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The username of the cloud database.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="cosurl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosurl_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Url</a>
@@ -251,8 +273,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="dbname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -260,8 +281,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="filename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filename_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Name</a>
@@ -269,8 +289,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -278,8 +297,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The password of the user account of the cloud database instance.</p>
-</dd></dl>
+    <dd>The password of the user account of the cloud database instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -293,9 +311,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console
-page.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="user_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_go" style="color: inherit; text-decoration: inherit;">User</a>
@@ -303,8 +319,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The username of the cloud database.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The username of the cloud database.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="cosurl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosurl_go" style="color: inherit; text-decoration: inherit;">Cos<wbr>Url</a>
@@ -312,8 +327,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="dbname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -321,8 +335,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="filename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filename_go" style="color: inherit; text-decoration: inherit;">File<wbr>Name</a>
@@ -330,8 +343,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -339,8 +351,61 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The password of the user account of the cloud database instance.</p>
-</dd></dl>
+    <dd>The password of the user account of the cloud database instance.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="user_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_hcl" style="color: inherit; text-decoration: inherit;">user</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The username of the cloud database.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="cos_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_url_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="db_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_name_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="file_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_name_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The password of the user account of the cloud database instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -354,9 +419,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console
-page.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="user_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_java" style="color: inherit; text-decoration: inherit;">user</a>
@@ -364,8 +427,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The username of the cloud database.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The username of the cloud database.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="cosurl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosurl_java" style="color: inherit; text-decoration: inherit;">cos<wbr>Url</a>
@@ -373,8 +435,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="dbname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_java" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -382,8 +443,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="filename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filename_java" style="color: inherit; text-decoration: inherit;">file<wbr>Name</a>
@@ -391,8 +451,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -400,8 +459,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The password of the user account of the cloud database instance.</p>
-</dd></dl>
+    <dd>The password of the user account of the cloud database instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -415,9 +473,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console
-page.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="user_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_nodejs" style="color: inherit; text-decoration: inherit;">user</a>
@@ -425,8 +481,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The username of the cloud database.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The username of the cloud database.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="cosurl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosurl_nodejs" style="color: inherit; text-decoration: inherit;">cos<wbr>Url</a>
@@ -434,8 +489,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="dbname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -443,8 +497,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="filename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filename_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Name</a>
@@ -452,8 +505,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -461,8 +513,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The password of the user account of the cloud database instance.</p>
-</dd></dl>
+    <dd>The password of the user account of the cloud database instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -476,9 +527,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console
-page.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="user_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_python" style="color: inherit; text-decoration: inherit;">user</a>
@@ -486,8 +535,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The username of the cloud database.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The username of the cloud database.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="cos_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cos_url_python" style="color: inherit; text-decoration: inherit;">cos_<wbr>url</a>
@@ -495,8 +543,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="db_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_name_python" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
@@ -504,8 +551,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="file_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#file_name_python" style="color: inherit; text-decoration: inherit;">file_<wbr>name</a>
@@ -513,8 +559,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -522,8 +567,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The password of the user account of the cloud database instance.</p>
-</dd></dl>
+    <dd>The password of the user account of the cloud database instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -537,9 +581,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console
-page.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="user_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_yaml" style="color: inherit; text-decoration: inherit;">user</a>
@@ -547,8 +589,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The username of the cloud database.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The username of the cloud database.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="cosurl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cosurl_yaml" style="color: inherit; text-decoration: inherit;">cos<wbr>Url</a>
@@ -556,8 +597,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="dbname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -565,8 +605,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="filename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filename_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Name</a>
@@ -574,8 +613,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -583,8 +621,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The password of the user account of the cloud database instance.</p>
-</dd></dl>
+    <dd>The password of the user account of the cloud database instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -605,8 +642,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The request ID of the asynchronous task.</p>
-</dd><dt class="property-"
+    <dd>The request ID of the asynchronous task.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -614,8 +650,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -629,8 +664,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The request ID of the asynchronous task.</p>
-</dd><dt class="property-"
+    <dd>The request ID of the asynchronous task.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -638,8 +672,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="async_request_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#async_request_id_hcl" style="color: inherit; text-decoration: inherit;">async_<wbr>request_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The request ID of the asynchronous task.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -653,8 +708,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The request ID of the asynchronous task.</p>
-</dd><dt class="property-"
+    <dd>The request ID of the asynchronous task.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -662,8 +716,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -677,8 +730,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The request ID of the asynchronous task.</p>
-</dd><dt class="property-"
+    <dd>The request ID of the asynchronous task.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -686,8 +738,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -701,8 +752,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The request ID of the asynchronous task.</p>
-</dd><dt class="property-"
+    <dd>The request ID of the asynchronous task.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -710,8 +760,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -725,8 +774,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The request ID of the asynchronous task.</p>
-</dd><dt class="property-"
+    <dd>The request ID of the asynchronous task.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -734,8 +782,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -745,18 +792,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing DbImportJobOperation resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DbImportJobOperationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">DbImportJobOperation</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DbImportJobOperationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">DbImportJobOperation</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -767,104 +814,143 @@ Get an existing DbImportJobOperation resource's state with the given name, ID, a
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">user</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> DbImportJobOperation</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDbImportJobOperation<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DbImportJobOperationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DbImportJobOperation</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDbImportJobOperation<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DbImportJobOperationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DbImportJobOperation</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">DbImportJobOperation</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DbImportJobOperationState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">DbImportJobOperation</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DbImportJobOperationState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">DbImportJobOperation</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DbImportJobOperationState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">DbImportJobOperation</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DbImportJobOperationState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingDbImportJobOperation</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Mysql:DbImportJobOperation</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_mysql_db_import_job_operation</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DbImportJobOperationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DbImportJobOperationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -872,28 +958,31 @@ Get an existing DbImportJobOperation resource's state with the given name, ID, a
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DbImportJobOperationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -901,28 +990,31 @@ Get an existing DbImportJobOperation resource's state with the given name, ID, a
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DbImportJobOperationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -942,8 +1034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The request ID of the asynchronous task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The request ID of the asynchronous task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cosurl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosurl_csharp" style="color: inherit; text-decoration: inherit;">Cos<wbr>Url</a>
@@ -951,8 +1042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dbname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbname_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -960,8 +1050,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filename_csharp" style="color: inherit; text-decoration: inherit;">File<wbr>Name</a>
@@ -969,8 +1058,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -978,9 +1066,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console
-page.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -988,8 +1074,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The password of the user account of the cloud database instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The password of the user account of the cloud database instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_user_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_csharp" style="color: inherit; text-decoration: inherit;">User</a>
@@ -997,8 +1082,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The username of the cloud database.</p>
-</dd></dl>
+    <dd>The username of the cloud database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1012,8 +1096,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The request ID of the asynchronous task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The request ID of the asynchronous task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cosurl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosurl_go" style="color: inherit; text-decoration: inherit;">Cos<wbr>Url</a>
@@ -1021,8 +1104,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dbname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbname_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -1030,8 +1112,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filename_go" style="color: inherit; text-decoration: inherit;">File<wbr>Name</a>
@@ -1039,8 +1120,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1048,9 +1128,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console
-page.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -1058,8 +1136,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The password of the user account of the cloud database instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The password of the user account of the cloud database instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_user_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_go" style="color: inherit; text-decoration: inherit;">User</a>
@@ -1067,8 +1144,69 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The username of the cloud database.</p>
-</dd></dl>
+    <dd>The username of the cloud database.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_async_request_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_async_request_id_hcl" style="color: inherit; text-decoration: inherit;">async_<wbr>request_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The request ID of the asynchronous task.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cos_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cos_url_hcl" style="color: inherit; text-decoration: inherit;">cos_<wbr>url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_db_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_name_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_file_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_file_name_hcl" style="color: inherit; text-decoration: inherit;">file_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The password of the user account of the cloud database instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_user_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_hcl" style="color: inherit; text-decoration: inherit;">user</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The username of the cloud database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1082,8 +1220,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The request ID of the asynchronous task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The request ID of the asynchronous task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cosurl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosurl_java" style="color: inherit; text-decoration: inherit;">cos<wbr>Url</a>
@@ -1091,8 +1228,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dbname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbname_java" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -1100,8 +1236,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filename_java" style="color: inherit; text-decoration: inherit;">file<wbr>Name</a>
@@ -1109,8 +1244,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1118,9 +1252,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console
-page.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1128,8 +1260,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The password of the user account of the cloud database instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The password of the user account of the cloud database instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_user_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_java" style="color: inherit; text-decoration: inherit;">user</a>
@@ -1137,8 +1268,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The username of the cloud database.</p>
-</dd></dl>
+    <dd>The username of the cloud database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1152,8 +1282,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The request ID of the asynchronous task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The request ID of the asynchronous task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cosurl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosurl_nodejs" style="color: inherit; text-decoration: inherit;">cos<wbr>Url</a>
@@ -1161,8 +1290,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dbname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbname_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -1170,8 +1298,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filename_nodejs" style="color: inherit; text-decoration: inherit;">file<wbr>Name</a>
@@ -1179,8 +1306,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1188,9 +1314,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console
-page.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1198,8 +1322,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The password of the user account of the cloud database instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The password of the user account of the cloud database instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_user_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_nodejs" style="color: inherit; text-decoration: inherit;">user</a>
@@ -1207,8 +1330,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The username of the cloud database.</p>
-</dd></dl>
+    <dd>The username of the cloud database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1222,8 +1344,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The request ID of the asynchronous task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The request ID of the asynchronous task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cos_url_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cos_url_python" style="color: inherit; text-decoration: inherit;">cos_<wbr>url</a>
@@ -1231,8 +1352,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_db_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_name_python" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
@@ -1240,8 +1360,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_file_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_file_name_python" style="color: inherit; text-decoration: inherit;">file_<wbr>name</a>
@@ -1249,8 +1368,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1258,9 +1376,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console
-page.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1268,8 +1384,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The password of the user account of the cloud database instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The password of the user account of the cloud database instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_user_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_python" style="color: inherit; text-decoration: inherit;">user</a>
@@ -1277,8 +1392,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The username of the cloud database.</p>
-</dd></dl>
+    <dd>The username of the cloud database.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1292,8 +1406,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The request ID of the asynchronous task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The request ID of the asynchronous task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cosurl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cosurl_yaml" style="color: inherit; text-decoration: inherit;">cos<wbr>Url</a>
@@ -1301,8 +1414,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_dbname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbname_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -1310,8 +1422,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the imported target database, if it is not passed, it means that no database is specified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of the imported target database, if it is not passed, it means that no database is specified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_filename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filename_yaml" style="color: inherit; text-decoration: inherit;">file<wbr>Name</a>
@@ -1319,8 +1430,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1328,9 +1438,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console
-page.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1338,8 +1446,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The password of the user account of the cloud database instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The password of the user account of the cloud database instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_user_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_yaml" style="color: inherit; text-decoration: inherit;">user</a>
@@ -1347,8 +1454,7 @@ page.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The username of the cloud database.</p>
-</dd></dl>
+    <dd>The username of the cloud database.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1367,7 +1473,6 @@ page.</p>
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

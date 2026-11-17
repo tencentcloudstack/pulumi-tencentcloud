@@ -2,9 +2,11 @@
 ---
 title: "getReadonlyGroups"
 title_tag: "tencentcloud.Sqlserver.getReadonlyGroups"
-meta_desc: "Documentation for the tencentcloud.Sqlserver.getReadonlyGroups function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query the list of SQL Server readonly groups."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query the list of SQL Server readonly groups.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example = tencentcloud.Sqlserver.getDbs({
+const example = tencentcloud.sqlserver.getDbs({
     instanceId: "mssql-ds1xhnt9",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-example = tencentcloud.Sqlserver.get_dbs(instance_id="mssql-ds1xhnt9")
+example = tencentcloud.sqlserver.get_dbs(instance_id="mssql-ds1xhnt9")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/sqlserver"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := sqlserver.GetDbs(ctx, &sqlserver.GetDbsArgs{
+			InstanceId: "mssql-ds1xhnt9",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Sqlserver.GetDbs(ctx, &sqlserver.GetDbsArgs{
-			InstanceId: "mssql-ds1xhnt9",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Sqlserver.SqlserverFunctions;
 import com.pulumi.tencentcloud.Sqlserver.inputs.GetDbsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   example:
     fn::invoke:
-      Function: tencentcloud:Sqlserver:getDbs
-      Arguments:
+      function: tencentcloud:Sqlserver:getDbs
+      arguments:
         instanceId: mssql-ds1xhnt9
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_sqlserver_getdbs" "example" {
+  instance_id = "mssql-ds1xhnt9"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeReadOnlyGroupList](https://www.tencentcloud.com/document/api/238/72738)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getReadonlyGroups<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetReadonlyGroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetReadonlyGroupsResult</a></span>></span
+><span class="k">function </span>getReadonlyGroups<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetReadonlyGroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetReadonlyGroupsResult</a></span>></span
 ><span class="k">
-function </span>getReadonlyGroupsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetReadonlyGroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetReadonlyGroupsResult</a></span>></span
+function </span>getReadonlyGroupsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetReadonlyGroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetReadonlyGroupsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -138,9 +195,9 @@ function </span>getReadonlyGroupsOutput<span class="p">(</span><span class="nx">
                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetReadonlyGroupsResult</span
 ><span class="k">
-def </span>get_readonly_groups_output<span class="p">(</span><span class="nx">master_instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetReadonlyGroupsResult]</span
+def </span>get_readonly_groups_output<span class="p">(</span><span class="nx">master_instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetReadonlyGroupsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,7 +222,8 @@ func </span>GetReadonlyGroupsOutput<span class="p">(</span><span class="nx">ctx<
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetReadonlyGroups </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetReadonlyGroupsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetReadonlyGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetReadonlyGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetReadonlyGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetReadonlyGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetReadonlyGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetReadonlyGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetReadonlyGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,7 +232,8 @@ func </span>GetReadonlyGroupsOutput<span class="p">(</span><span class="nx">ctx<
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetReadonlyGroupsResult</a></span>> </span>getReadonlyGroups<span class="p">(</span><span class="nx">GetReadonlyGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetReadonlyGroupsResult</a></span>> </span>getReadonlyGroups<span class="p">(</span><span class="nx">GetReadonlyGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetReadonlyGroupsResult</a></span>> </span>getReadonlyGroups<span class="p">(</span><span class="nx">GetReadonlyGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,6 +245,15 @@ func </span>GetReadonlyGroupsOutput<span class="p">(</span><span class="nx">ctx<
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Sqlserver/getReadonlyGroups:getReadonlyGroups
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_sqlserver_get_readonly_groups&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -204,8 +272,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master SQL Server instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Master SQL Server instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -213,8 +280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +294,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master SQL Server instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Master SQL Server instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -237,8 +302,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="master_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_instance_id_hcl" style="color: inherit; text-decoration: inherit;">master_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Master SQL Server instance ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Master SQL Server instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Master SQL Server instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -261,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -276,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master SQL Server instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Master SQL Server instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -285,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Master SQL Server instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Master SQL Server instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -309,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Master SQL Server instance ID.</p>
-</dd><dt class="property-optional"
+    <dd>Master SQL Server instance ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -333,8 +412,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd></dl>
+    <dd>Used to store results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -366,8 +443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getreadonlygroupslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Sqlserver.<wbr>Outputs.<wbr>Get<wbr>Readonly<wbr>Groups<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of SQL Server readonly group. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of SQL Server readonly group. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="masterinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Master<wbr>Instance<wbr>Id</a>
@@ -375,8 +451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master instance id.</p>
-</dd><dt class="property-"
+    <dd>Master instance id.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -398,8 +473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -407,8 +481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getreadonlygroupslist">[]Get<wbr>Readonly<wbr>Groups<wbr>List</a></span>
     </dt>
-    <dd><p>A list of SQL Server readonly group. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of SQL Server readonly group. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="masterinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_go" style="color: inherit; text-decoration: inherit;">Master<wbr>Instance<wbr>Id</a>
@@ -416,11 +489,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master instance id.</p>
-</dd><dt class="property-"
+    <dd>Master instance id.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getreadonlygroupslist">list(object)</a></span>
+    </dt>
+    <dd>A list of SQL Server readonly group. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="master_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_instance_id_hcl" style="color: inherit; text-decoration: inherit;">master_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Master instance id.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -439,8 +549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -448,8 +557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getreadonlygroupslist">List&lt;Get<wbr>Readonly<wbr>Groups<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of SQL Server readonly group. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of SQL Server readonly group. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="masterinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_java" style="color: inherit; text-decoration: inherit;">master<wbr>Instance<wbr>Id</a>
@@ -457,8 +565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Master instance id.</p>
-</dd><dt class="property-"
+    <dd>Master instance id.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -480,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -489,8 +595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getreadonlygroupslist">Get<wbr>Readonly<wbr>Groups<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of SQL Server readonly group. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of SQL Server readonly group. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="masterinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">master<wbr>Instance<wbr>Id</a>
@@ -498,8 +603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master instance id.</p>
-</dd><dt class="property-"
+    <dd>Master instance id.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -521,17 +625,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getreadonlygroupslist">Get<wbr>Readonly<wbr>Groups<wbr>List]</a></span>
+        <span class="property-type"><a href="#getreadonlygroupslist">Sequence[Get<wbr>Readonly<wbr>Groups<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of SQL Server readonly group. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of SQL Server readonly group. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="master_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_instance_id_python" style="color: inherit; text-decoration: inherit;">master_<wbr>instance_<wbr>id</a>
@@ -539,8 +641,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Master instance id.</p>
-</dd><dt class="property-"
+    <dd>Master instance id.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -562,8 +663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -571,8 +671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getreadonlygroupslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of SQL Server readonly group. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of SQL Server readonly group. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="masterinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_yaml" style="color: inherit; text-decoration: inherit;">master<wbr>Instance<wbr>Id</a>
@@ -580,8 +679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Master instance id.</p>
-</dd><dt class="property-"
+    <dd>Master instance id.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -613,8 +711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>ID of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="isofflinedelay_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isofflinedelay_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Offline<wbr>Delay</a>
@@ -622,8 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicate whether to offline delayed readonly instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to offline delayed readonly instances.</dd><dt class="property-required"
             title="Required">
         <span id="masterinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Master<wbr>Instance<wbr>Id</a>
@@ -631,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master SQL Server instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Master SQL Server instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="maxdelaytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdelaytime_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Delay<wbr>Time</a>
@@ -640,8 +735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum delay time of the readonly instances.</p>
-</dd><dt class="property-required"
+    <dd>Maximum delay time of the readonly instances.</dd><dt class="property-required"
             title="Required">
         <span id="mininstances_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mininstances_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Instances</a>
@@ -649,8 +743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum readonly instances that stays in the group.</p>
-</dd><dt class="property-required"
+    <dd>Minimum readonly instances that stays in the group.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -658,8 +751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Name of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="readonlyinstancesets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonlyinstancesets_csharp" style="color: inherit; text-decoration: inherit;">Readonly<wbr>Instance<wbr>Sets</a>
@@ -667,8 +759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Readonly instance ID set of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Readonly instance ID set of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -676,8 +767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the readonly group. <code>1</code> for running, <code>5</code> for applying.</p>
-</dd><dt class="property-required"
+    <dd>Status of the readonly group. <code>1</code> for running, <code>5</code> for applying.</dd><dt class="property-required"
             title="Required">
         <span id="vip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_csharp" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -685,8 +775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP address of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP address of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="vport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_csharp" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -694,8 +783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Virtual port of the readonly group.</p>
-</dd></dl>
+    <dd>Virtual port of the readonly group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -709,8 +797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>ID of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="isofflinedelay_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isofflinedelay_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Offline<wbr>Delay</a>
@@ -718,8 +805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicate whether to offline delayed readonly instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to offline delayed readonly instances.</dd><dt class="property-required"
             title="Required">
         <span id="masterinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_go" style="color: inherit; text-decoration: inherit;">Master<wbr>Instance<wbr>Id</a>
@@ -727,8 +813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master SQL Server instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Master SQL Server instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="maxdelaytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdelaytime_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Delay<wbr>Time</a>
@@ -736,8 +821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum delay time of the readonly instances.</p>
-</dd><dt class="property-required"
+    <dd>Maximum delay time of the readonly instances.</dd><dt class="property-required"
             title="Required">
         <span id="mininstances_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mininstances_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Instances</a>
@@ -745,8 +829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum readonly instances that stays in the group.</p>
-</dd><dt class="property-required"
+    <dd>Minimum readonly instances that stays in the group.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -754,8 +837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Name of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="readonlyinstancesets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonlyinstancesets_go" style="color: inherit; text-decoration: inherit;">Readonly<wbr>Instance<wbr>Sets</a>
@@ -763,8 +845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Readonly instance ID set of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Readonly instance ID set of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -772,8 +853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the readonly group. <code>1</code> for running, <code>5</code> for applying.</p>
-</dd><dt class="property-required"
+    <dd>Status of the readonly group. <code>1</code> for running, <code>5</code> for applying.</dd><dt class="property-required"
             title="Required">
         <span id="vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -781,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP address of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP address of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="vport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_go" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -790,8 +869,93 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Virtual port of the readonly group.</p>
-</dd></dl>
+    <dd>Virtual port of the readonly group.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the readonly group.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_offline_delay_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_offline_delay_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>offline_<wbr>delay</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Indicate whether to offline delayed readonly instances.</dd><dt class="property-required"
+            title="Required">
+        <span id="master_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_instance_id_hcl" style="color: inherit; text-decoration: inherit;">master_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Master SQL Server instance ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_delay_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_delay_time_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>delay_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum delay time of the readonly instances.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_instances_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_instances_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>instances</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum readonly instances that stays in the group.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the readonly group.</dd><dt class="property-required"
+            title="Required">
+        <span id="readonly_instance_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonly_instance_sets_hcl" style="color: inherit; text-decoration: inherit;">readonly_<wbr>instance_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Readonly instance ID set of the readonly group.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Status of the readonly group. <code>1</code> for running, <code>5</code> for applying.</dd><dt class="property-required"
+            title="Required">
+        <span id="vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Virtual IP address of the readonly group.</dd><dt class="property-required"
+            title="Required">
+        <span id="vport_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_hcl" style="color: inherit; text-decoration: inherit;">vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Virtual port of the readonly group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -805,8 +969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>ID of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="isofflinedelay_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isofflinedelay_java" style="color: inherit; text-decoration: inherit;">is<wbr>Offline<wbr>Delay</a>
@@ -814,8 +977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Indicate whether to offline delayed readonly instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to offline delayed readonly instances.</dd><dt class="property-required"
             title="Required">
         <span id="masterinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_java" style="color: inherit; text-decoration: inherit;">master<wbr>Instance<wbr>Id</a>
@@ -823,8 +985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Master SQL Server instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Master SQL Server instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="maxdelaytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdelaytime_java" style="color: inherit; text-decoration: inherit;">max<wbr>Delay<wbr>Time</a>
@@ -832,8 +993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum delay time of the readonly instances.</p>
-</dd><dt class="property-required"
+    <dd>Maximum delay time of the readonly instances.</dd><dt class="property-required"
             title="Required">
         <span id="mininstances_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mininstances_java" style="color: inherit; text-decoration: inherit;">min<wbr>Instances</a>
@@ -841,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Minimum readonly instances that stays in the group.</p>
-</dd><dt class="property-required"
+    <dd>Minimum readonly instances that stays in the group.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -850,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Name of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="readonlyinstancesets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonlyinstancesets_java" style="color: inherit; text-decoration: inherit;">readonly<wbr>Instance<wbr>Sets</a>
@@ -859,8 +1017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Readonly instance ID set of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Readonly instance ID set of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -868,8 +1025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Status of the readonly group. <code>1</code> for running, <code>5</code> for applying.</p>
-</dd><dt class="property-required"
+    <dd>Status of the readonly group. <code>1</code> for running, <code>5</code> for applying.</dd><dt class="property-required"
             title="Required">
         <span id="vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -877,8 +1033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual IP address of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP address of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="vport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_java" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -886,8 +1041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Virtual port of the readonly group.</p>
-</dd></dl>
+    <dd>Virtual port of the readonly group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -901,8 +1055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>ID of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="isofflinedelay_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isofflinedelay_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Offline<wbr>Delay</a>
@@ -910,8 +1063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Indicate whether to offline delayed readonly instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to offline delayed readonly instances.</dd><dt class="property-required"
             title="Required">
         <span id="masterinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">master<wbr>Instance<wbr>Id</a>
@@ -919,8 +1071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master SQL Server instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Master SQL Server instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="maxdelaytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdelaytime_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Delay<wbr>Time</a>
@@ -928,8 +1079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum delay time of the readonly instances.</p>
-</dd><dt class="property-required"
+    <dd>Maximum delay time of the readonly instances.</dd><dt class="property-required"
             title="Required">
         <span id="mininstances_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mininstances_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Instances</a>
@@ -937,8 +1087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Minimum readonly instances that stays in the group.</p>
-</dd><dt class="property-required"
+    <dd>Minimum readonly instances that stays in the group.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -946,8 +1095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Name of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="readonlyinstancesets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonlyinstancesets_nodejs" style="color: inherit; text-decoration: inherit;">readonly<wbr>Instance<wbr>Sets</a>
@@ -955,8 +1103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Readonly instance ID set of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Readonly instance ID set of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -964,8 +1111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Status of the readonly group. <code>1</code> for running, <code>5</code> for applying.</p>
-</dd><dt class="property-required"
+    <dd>Status of the readonly group. <code>1</code> for running, <code>5</code> for applying.</dd><dt class="property-required"
             title="Required">
         <span id="vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -973,8 +1119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP address of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP address of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="vport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_nodejs" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -982,8 +1127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Virtual port of the readonly group.</p>
-</dd></dl>
+    <dd>Virtual port of the readonly group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -997,8 +1141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>ID of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="is_offline_delay_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_offline_delay_python" style="color: inherit; text-decoration: inherit;">is_<wbr>offline_<wbr>delay</a>
@@ -1006,8 +1149,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicate whether to offline delayed readonly instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to offline delayed readonly instances.</dd><dt class="property-required"
             title="Required">
         <span id="master_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_instance_id_python" style="color: inherit; text-decoration: inherit;">master_<wbr>instance_<wbr>id</a>
@@ -1015,8 +1157,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Master SQL Server instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Master SQL Server instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="max_delay_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_delay_time_python" style="color: inherit; text-decoration: inherit;">max_<wbr>delay_<wbr>time</a>
@@ -1024,8 +1165,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum delay time of the readonly instances.</p>
-</dd><dt class="property-required"
+    <dd>Maximum delay time of the readonly instances.</dd><dt class="property-required"
             title="Required">
         <span id="min_instances_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_instances_python" style="color: inherit; text-decoration: inherit;">min_<wbr>instances</a>
@@ -1033,8 +1173,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum readonly instances that stays in the group.</p>
-</dd><dt class="property-required"
+    <dd>Minimum readonly instances that stays in the group.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1042,8 +1181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Name of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="readonly_instance_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonly_instance_sets_python" style="color: inherit; text-decoration: inherit;">readonly_<wbr>instance_<wbr>sets</a>
@@ -1051,8 +1189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Readonly instance ID set of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Readonly instance ID set of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1060,8 +1197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the readonly group. <code>1</code> for running, <code>5</code> for applying.</p>
-</dd><dt class="property-required"
+    <dd>Status of the readonly group. <code>1</code> for running, <code>5</code> for applying.</dd><dt class="property-required"
             title="Required">
         <span id="vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1069,8 +1205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Virtual IP address of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP address of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="vport_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_python" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -1078,8 +1213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Virtual port of the readonly group.</p>
-</dd></dl>
+    <dd>Virtual port of the readonly group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1093,8 +1227,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>ID of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="isofflinedelay_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isofflinedelay_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Offline<wbr>Delay</a>
@@ -1102,8 +1235,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Indicate whether to offline delayed readonly instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to offline delayed readonly instances.</dd><dt class="property-required"
             title="Required">
         <span id="masterinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_yaml" style="color: inherit; text-decoration: inherit;">master<wbr>Instance<wbr>Id</a>
@@ -1111,8 +1243,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Master SQL Server instance ID.</p>
-</dd><dt class="property-required"
+    <dd>Master SQL Server instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="maxdelaytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxdelaytime_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Delay<wbr>Time</a>
@@ -1120,8 +1251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum delay time of the readonly instances.</p>
-</dd><dt class="property-required"
+    <dd>Maximum delay time of the readonly instances.</dd><dt class="property-required"
             title="Required">
         <span id="mininstances_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mininstances_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Instances</a>
@@ -1129,8 +1259,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Minimum readonly instances that stays in the group.</p>
-</dd><dt class="property-required"
+    <dd>Minimum readonly instances that stays in the group.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1138,8 +1267,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Name of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="readonlyinstancesets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#readonlyinstancesets_yaml" style="color: inherit; text-decoration: inherit;">readonly<wbr>Instance<wbr>Sets</a>
@@ -1147,8 +1275,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Readonly instance ID set of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Readonly instance ID set of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1156,8 +1283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Status of the readonly group. <code>1</code> for running, <code>5</code> for applying.</p>
-</dd><dt class="property-required"
+    <dd>Status of the readonly group. <code>1</code> for running, <code>5</code> for applying.</dd><dt class="property-required"
             title="Required">
         <span id="vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1165,8 +1291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual IP address of the readonly group.</p>
-</dd><dt class="property-required"
+    <dd>Virtual IP address of the readonly group.</dd><dt class="property-required"
             title="Required">
         <span id="vport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_yaml" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -1174,8 +1299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Virtual port of the readonly group.</p>
-</dd></dl>
+    <dd>Virtual port of the readonly group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1190,7 +1314,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

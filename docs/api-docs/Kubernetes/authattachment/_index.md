@@ -2,9 +2,11 @@
 ---
 title: "AuthAttachment"
 title_tag: "tencentcloud.Kubernetes.AuthAttachment"
-meta_desc: "Documentation for the tencentcloud.Kubernetes.AuthAttachment resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to configure kubernetes cluster authentication info. NOTE: Only available for cluster version >= 1.20"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,278 +20,56 @@ Provide a resource to configure kubernetes cluster authentication info.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Use TKE default issuer and jwksUri
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const config = new pulumi.Config();
-const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
-const clusterCidr = config.get("clusterCidr") || "172.16.0.0/16";
-const defaultInstanceType = config.get("defaultInstanceType") || "S1.SMALL1";
-const default = tencentcloud.Images.getInstance({
-    imageTypes: ["PUBLIC_IMAGE"],
-    osName: "centos",
-});
-const vpc = tencentcloud.Vpc.getSubnets({
-    isDefault: true,
-    availabilityZone: availabilityZone,
-});
-const managedCluster = new tencentcloud.kubernetes.Cluster("managedCluster", {
-    vpcId: vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId),
-    clusterCidr: "10.31.0.0/16",
-    clusterMaxPodNum: 32,
-    clusterName: "keep",
-    clusterDesc: "test cluster desc",
-    clusterVersion: "1.20.6",
-    clusterMaxServiceNum: 32,
-    workerConfigs: [{
-        count: 1,
-        availabilityZone: availabilityZone,
-        instanceType: defaultInstanceType,
-        systemDiskType: "CLOUD_SSD",
-        systemDiskSize: 60,
-        internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
-        internetMaxBandwidthOut: 100,
-        publicIpAssigned: true,
-        subnetId: vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId),
-        dataDisks: [{
-            diskType: "CLOUD_PREMIUM",
-            diskSize: 50,
-        }],
-        enhancedSecurityService: false,
-        enhancedMonitorService: false,
-        userData: "dGVzdA==",
-        password: "ZZXXccvv1212",
-    }],
-    clusterDeployType: "MANAGED_CLUSTER",
-});
-const testAuthAttach = new tencentcloud.kubernetes.AuthAttachment("testAuthAttach", {
-    clusterId: managedCluster.id,
-    jwksUri: pulumi.interpolate`https://${managedCluster.id}.ccs.tencent-cloud.com/openid/v1/jwks`,
-    issuer: pulumi.interpolate`https://${managedCluster.id}.ccs.tencent-cloud.com`,
+const example = new tencentcloud.kubernetes.AuthAttachment("example", {
+    clusterId: "cls-53c7589g",
+    useTkeDefault: true,
     autoCreateDiscoveryAnonymousAuth: true,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
-import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-config = pulumi.Config()
-availability_zone = config.get("availabilityZone")
-if availability_zone is None:
-    availability_zone = "ap-guangzhou-3"
-cluster_cidr = config.get("clusterCidr")
-if cluster_cidr is None:
-    cluster_cidr = "172.16.0.0/16"
-default_instance_type = config.get("defaultInstanceType")
-if default_instance_type is None:
-    default_instance_type = "S1.SMALL1"
-default = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
-    os_name="centos")
-vpc = tencentcloud.Vpc.get_subnets(is_default=True,
-    availability_zone=availability_zone)
-managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
-    vpc_id=vpc.instance_lists[0].vpc_id,
-    cluster_cidr="10.31.0.0/16",
-    cluster_max_pod_num=32,
-    cluster_name="keep",
-    cluster_desc="test cluster desc",
-    cluster_version="1.20.6",
-    cluster_max_service_num=32,
-    worker_configs=[tencentcloud.kubernetes.ClusterWorkerConfigArgs(
-        count=1,
-        availability_zone=availability_zone,
-        instance_type=default_instance_type,
-        system_disk_type="CLOUD_SSD",
-        system_disk_size=60,
-        internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-        internet_max_bandwidth_out=100,
-        public_ip_assigned=True,
-        subnet_id=vpc.instance_lists[0].subnet_id,
-        data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
-            disk_type="CLOUD_PREMIUM",
-            disk_size=50,
-        )],
-        enhanced_security_service=False,
-        enhanced_monitor_service=False,
-        user_data="dGVzdA==",
-        password="ZZXXccvv1212",
-    )],
-    cluster_deploy_type="MANAGED_CLUSTER")
-test_auth_attach = tencentcloud.kubernetes.AuthAttachment("testAuthAttach",
-    cluster_id=managed_cluster.id,
-    jwks_uri=managed_cluster.id.apply(lambda id: f"https://{id}.ccs.tencent-cloud.com/openid/v1/jwks"),
-    issuer=managed_cluster.id.apply(lambda id: f"https://{id}.ccs.tencent-cloud.com"),
+example = tencentcloud.kubernetes.AuthAttachment("example",
+    cluster_id="cls-53c7589g",
+    use_tke_default=True,
     auto_create_discovery_anonymous_auth=True)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var config = new Config();
-    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    var clusterCidr = config.Get("clusterCidr") ?? "172.16.0.0/16";
-    var defaultInstanceType = config.Get("defaultInstanceType") ?? "S1.SMALL1";
-    var @default = Tencentcloud.Images.GetInstance.Invoke(new()
-    {
-        ImageTypes = new[]
-        {
-            "PUBLIC_IMAGE",
-        },
-        OsName = "centos",
-    });
-
-    var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
-    {
-        IsDefault = true,
-        AvailabilityZone = availabilityZone,
-    });
-
-    var managedCluster = new Tencentcloud.Kubernetes.Cluster("managedCluster", new()
-    {
-        VpcId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId),
-        ClusterCidr = "10.31.0.0/16",
-        ClusterMaxPodNum = 32,
-        ClusterName = "keep",
-        ClusterDesc = "test cluster desc",
-        ClusterVersion = "1.20.6",
-        ClusterMaxServiceNum = 32,
-        WorkerConfigs = new[]
-        {
-            new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigArgs
-            {
-                Count = 1,
-                AvailabilityZone = availabilityZone,
-                InstanceType = defaultInstanceType,
-                SystemDiskType = "CLOUD_SSD",
-                SystemDiskSize = 60,
-                InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
-                InternetMaxBandwidthOut = 100,
-                PublicIpAssigned = true,
-                SubnetId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.SubnetId),
-                DataDisks = new[]
-                {
-                    new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigDataDiskArgs
-                    {
-                        DiskType = "CLOUD_PREMIUM",
-                        DiskSize = 50,
-                    },
-                },
-                EnhancedSecurityService = false,
-                EnhancedMonitorService = false,
-                UserData = "dGVzdA==",
-                Password = "ZZXXccvv1212",
-            },
-        },
-        ClusterDeployType = "MANAGED_CLUSTER",
-    });
-
-    var testAuthAttach = new Tencentcloud.Kubernetes.AuthAttachment("testAuthAttach", new()
-    {
-        ClusterId = managedCluster.Id,
-        JwksUri = managedCluster.Id.Apply(id => $"https://{id}.ccs.tencent-cloud.com/openid/v1/jwks"),
-        Issuer = managedCluster.Id.Apply(id => $"https://{id}.ccs.tencent-cloud.com"),
-        AutoCreateDiscoveryAnonymousAuth = true,
-    });
-
-});
-```
 ```go
 package main
 
 import (
-	"fmt"
-
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		cfg := config.New(ctx, "")
-		availabilityZone := "ap-guangzhou-3"
-		if param := cfg.Get("availabilityZone"); param != "" {
-			availabilityZone = param
-		}
-		clusterCidr := "172.16.0.0/16"
-		if param := cfg.Get("clusterCidr"); param != "" {
-			clusterCidr = param
-		}
-		defaultInstanceType := "S1.SMALL1"
-		if param := cfg.Get("defaultInstanceType"); param != "" {
-			defaultInstanceType = param
-		}
-		_, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-			ImageTypes: []string{
-				"PUBLIC_IMAGE",
-			},
-			OsName: pulumi.StringRef("centos"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-			IsDefault:        pulumi.BoolRef(true),
-			AvailabilityZone: pulumi.StringRef(availabilityZone),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		managedCluster, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
-			VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
-			ClusterCidr:          pulumi.String("10.31.0.0/16"),
-			ClusterMaxPodNum:     pulumi.Int(32),
-			ClusterName:          pulumi.String("keep"),
-			ClusterDesc:          pulumi.String("test cluster desc"),
-			ClusterVersion:       pulumi.String("1.20.6"),
-			ClusterMaxServiceNum: pulumi.Int(32),
-			WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
-				&kubernetes.ClusterWorkerConfigArgs{
-					Count:                   pulumi.Int(1),
-					AvailabilityZone:        pulumi.String(availabilityZone),
-					InstanceType:            pulumi.String(defaultInstanceType),
-					SystemDiskType:          pulumi.String("CLOUD_SSD"),
-					SystemDiskSize:          pulumi.Int(60),
-					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-					InternetMaxBandwidthOut: pulumi.Int(100),
-					PublicIpAssigned:        pulumi.Bool(true),
-					SubnetId:                pulumi.String(vpc.InstanceLists[0].SubnetId),
-					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
-						&kubernetes.ClusterWorkerConfigDataDiskArgs{
-							DiskType: pulumi.String("CLOUD_PREMIUM"),
-							DiskSize: pulumi.Int(50),
-						},
-					},
-					EnhancedSecurityService: pulumi.Bool(false),
-					EnhancedMonitorService:  pulumi.Bool(false),
-					UserData:                pulumi.String("dGVzdA=="),
-					Password:                pulumi.String("ZZXXccvv1212"),
-				},
-			},
-			ClusterDeployType: pulumi.String("MANAGED_CLUSTER"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Kubernetes.NewAuthAttachment(ctx, "testAuthAttach", &Kubernetes.AuthAttachmentArgs{
-			ClusterId: managedCluster.ID(),
-			JwksUri: managedCluster.ID().ApplyT(func(id string) (string, error) {
-				return fmt.Sprintf("https://%v.ccs.tencent-cloud.com/openid/v1/jwks", id), nil
-			}).(pulumi.StringOutput),
-			Issuer: managedCluster.ID().ApplyT(func(id string) (string, error) {
-				return fmt.Sprintf("https://%v.ccs.tencent-cloud.com", id), nil
-			}).(pulumi.StringOutput),
+		_, err := kubernetes.NewAuthAttachment(ctx, "example", &kubernetes.AuthAttachmentArgs{
+			ClusterId:                        pulumi.String("cls-53c7589g"),
+			UseTkeDefault:                    pulumi.Bool(true),
 			AutoCreateDiscoveryAnonymousAuth: pulumi.Bool(true),
 		})
 		if err != nil {
@@ -299,23 +79,43 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Kubernetes.AuthAttachment("example", new()
+    {
+        ClusterId = "cls-53c7589g",
+        UseTkeDefault = true,
+        AutoCreateDiscoveryAnonymousAuth = true,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Images.ImagesFunctions;
-import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
-import com.pulumi.tencentcloud.Vpc.VpcFunctions;
-import com.pulumi.tencentcloud.Vpc.inputs.GetSubnetsArgs;
-import com.pulumi.tencentcloud.Kubernetes.Cluster;
-import com.pulumi.tencentcloud.Kubernetes.ClusterArgs;
-import com.pulumi.tencentcloud.Kubernetes.inputs.ClusterWorkerConfigArgs;
 import com.pulumi.tencentcloud.Kubernetes.AuthAttachment;
 import com.pulumi.tencentcloud.Kubernetes.AuthAttachmentArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -327,393 +127,110 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var config = ctx.config();
-        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-3");
-        final var clusterCidr = config.get("clusterCidr").orElse("172.16.0.0/16");
-        final var defaultInstanceType = config.get("defaultInstanceType").orElse("S1.SMALL1");
-        final var default = ImagesFunctions.getInstance(GetInstanceArgs.builder()
-            .imageTypes("PUBLIC_IMAGE")
-            .osName("centos")
-            .build());
-
-        final var vpc = VpcFunctions.getSubnets(GetSubnetsArgs.builder()
-            .isDefault(true)
-            .availabilityZone(availabilityZone)
-            .build());
-
-        var managedCluster = new Cluster("managedCluster", ClusterArgs.builder()        
-            .vpcId(vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].vpcId()))
-            .clusterCidr("10.31.0.0/16")
-            .clusterMaxPodNum(32)
-            .clusterName("keep")
-            .clusterDesc("test cluster desc")
-            .clusterVersion("1.20.6")
-            .clusterMaxServiceNum(32)
-            .workerConfigs(ClusterWorkerConfigArgs.builder()
-                .count(1)
-                .availabilityZone(availabilityZone)
-                .instanceType(defaultInstanceType)
-                .systemDiskType("CLOUD_SSD")
-                .systemDiskSize(60)
-                .internetChargeType("TRAFFIC_POSTPAID_BY_HOUR")
-                .internetMaxBandwidthOut(100)
-                .publicIpAssigned(true)
-                .subnetId(vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].subnetId()))
-                .dataDisks(ClusterWorkerConfigDataDiskArgs.builder()
-                    .diskType("CLOUD_PREMIUM")
-                    .diskSize(50)
-                    .build())
-                .enhancedSecurityService(false)
-                .enhancedMonitorService(false)
-                .userData("dGVzdA==")
-                .password("ZZXXccvv1212")
-                .build())
-            .clusterDeployType("MANAGED_CLUSTER")
-            .build());
-
-        var testAuthAttach = new AuthAttachment("testAuthAttach", AuthAttachmentArgs.builder()        
-            .clusterId(managedCluster.id())
-            .jwksUri(managedCluster.id().applyValue(id -> String.format("https://%s.ccs.tencent-cloud.com/openid/v1/jwks", id)))
-            .issuer(managedCluster.id().applyValue(id -> String.format("https://%s.ccs.tencent-cloud.com", id)))
+        var example = new AuthAttachment("example", AuthAttachmentArgs.builder()
+            .clusterId("cls-53c7589g")
+            .useTkeDefault(true)
             .autoCreateDiscoveryAnonymousAuth(true)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
-configuration:
-  availabilityZone:
-    type: string
-    default: ap-guangzhou-3
-  clusterCidr:
-    type: string
-    default: 172.16.0.0/16
-  defaultInstanceType:
-    type: string
-    default: S1.SMALL1
 resources:
-  managedCluster:
-    type: tencentcloud:Kubernetes:Cluster
-    properties:
-      vpcId: ${vpc.instanceLists[0].vpcId}
-      clusterCidr: 10.31.0.0/16
-      clusterMaxPodNum: 32
-      clusterName: keep
-      clusterDesc: test cluster desc
-      clusterVersion: 1.20.6
-      clusterMaxServiceNum: 32
-      workerConfigs:
-        - count: 1
-          availabilityZone: ${availabilityZone}
-          instanceType: ${defaultInstanceType}
-          systemDiskType: CLOUD_SSD
-          systemDiskSize: 60
-          internetChargeType: TRAFFIC_POSTPAID_BY_HOUR
-          internetMaxBandwidthOut: 100
-          publicIpAssigned: true
-          subnetId: ${vpc.instanceLists[0].subnetId}
-          dataDisks:
-            - diskType: CLOUD_PREMIUM
-              diskSize: 50
-          enhancedSecurityService: false
-          enhancedMonitorService: false
-          userData: dGVzdA==
-          password: ZZXXccvv1212
-      clusterDeployType: MANAGED_CLUSTER
-  testAuthAttach:
+  example:
     type: tencentcloud:Kubernetes:AuthAttachment
     properties:
-      clusterId: ${managedCluster.id}
-      jwksUri: https://${managedCluster.id}.ccs.tencent-cloud.com/openid/v1/jwks
-      issuer: https://${managedCluster.id}.ccs.tencent-cloud.com
+      clusterId: cls-53c7589g
+      useTkeDefault: true
       autoCreateDiscoveryAnonymousAuth: true
-variables:
-  default:
-    fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments:
-        imageTypes:
-          - PUBLIC_IMAGE
-        osName: centos
-  vpc:
-    fn::invoke:
-      Function: tencentcloud:Vpc:getSubnets
-      Arguments:
-        isDefault: true
-        availabilityZone: ${availabilityZone}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### Use the TKE default issuer and jwks_uri
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+resource "tencentcloud_kubernetes_authattachment" "example" {
+  cluster_id                           = "cls-53c7589g"
+  use_tke_default                      = true
+  auto_create_discovery_anonymous_auth = true
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Use custom issuer and jwksUri
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const config = new pulumi.Config();
-const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
-const clusterCidr = config.get("clusterCidr") || "172.16.0.0/16";
-const defaultInstanceType = config.get("defaultInstanceType") || "S1.SMALL1";
-const default = tencentcloud.Images.getInstance({
-    imageTypes: ["PUBLIC_IMAGE"],
-    osName: "centos",
-});
-const vpc = tencentcloud.Vpc.getSubnets({
-    isDefault: true,
-    availabilityZone: availabilityZone,
-});
-const managedCluster = new tencentcloud.kubernetes.Cluster("managedCluster", {
-    vpcId: vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId),
-    clusterCidr: "10.31.0.0/16",
-    clusterMaxPodNum: 32,
-    clusterName: "keep",
-    clusterDesc: "test cluster desc",
-    clusterVersion: "1.20.6",
-    clusterMaxServiceNum: 32,
-    workerConfigs: [{
-        count: 1,
-        availabilityZone: availabilityZone,
-        instanceType: defaultInstanceType,
-        systemDiskType: "CLOUD_SSD",
-        systemDiskSize: 60,
-        internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
-        internetMaxBandwidthOut: 100,
-        publicIpAssigned: true,
-        subnetId: vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId),
-        dataDisks: [{
-            diskType: "CLOUD_PREMIUM",
-            diskSize: 50,
-        }],
-        enhancedSecurityService: false,
-        enhancedMonitorService: false,
-        userData: "dGVzdA==",
-        password: "ZZXXccvv1212",
-    }],
-    clusterDeployType: "MANAGED_CLUSTER",
-});
-// if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
-const testUseTkeDefaultAuthAttach = new tencentcloud.kubernetes.AuthAttachment("testUseTkeDefaultAuthAttach", {
-    clusterId: managedCluster.id,
-    autoCreateDiscoveryAnonymousAuth: true,
-    useTkeDefault: true,
+const example = new tencentcloud.kubernetes.AuthAttachment("example", {
+    clusterId: "cls-53c7589g",
+    useTkeDefault: false,
+    jwksUri: "https://cls-53c7589g.ccs.tencent-cloud.com/openid/v1/jwks",
+    issuer: "https://cls-53c7589g.ccs.tencent-cloud.com",
+    autoCreateDiscoveryAnonymousAuth: false,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
-import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-config = pulumi.Config()
-availability_zone = config.get("availabilityZone")
-if availability_zone is None:
-    availability_zone = "ap-guangzhou-3"
-cluster_cidr = config.get("clusterCidr")
-if cluster_cidr is None:
-    cluster_cidr = "172.16.0.0/16"
-default_instance_type = config.get("defaultInstanceType")
-if default_instance_type is None:
-    default_instance_type = "S1.SMALL1"
-default = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
-    os_name="centos")
-vpc = tencentcloud.Vpc.get_subnets(is_default=True,
-    availability_zone=availability_zone)
-managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
-    vpc_id=vpc.instance_lists[0].vpc_id,
-    cluster_cidr="10.31.0.0/16",
-    cluster_max_pod_num=32,
-    cluster_name="keep",
-    cluster_desc="test cluster desc",
-    cluster_version="1.20.6",
-    cluster_max_service_num=32,
-    worker_configs=[tencentcloud.kubernetes.ClusterWorkerConfigArgs(
-        count=1,
-        availability_zone=availability_zone,
-        instance_type=default_instance_type,
-        system_disk_type="CLOUD_SSD",
-        system_disk_size=60,
-        internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
-        internet_max_bandwidth_out=100,
-        public_ip_assigned=True,
-        subnet_id=vpc.instance_lists[0].subnet_id,
-        data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
-            disk_type="CLOUD_PREMIUM",
-            disk_size=50,
-        )],
-        enhanced_security_service=False,
-        enhanced_monitor_service=False,
-        user_data="dGVzdA==",
-        password="ZZXXccvv1212",
-    )],
-    cluster_deploy_type="MANAGED_CLUSTER")
-# if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
-test_use_tke_default_auth_attach = tencentcloud.kubernetes.AuthAttachment("testUseTkeDefaultAuthAttach",
-    cluster_id=managed_cluster.id,
-    auto_create_discovery_anonymous_auth=True,
-    use_tke_default=True)
+example = tencentcloud.kubernetes.AuthAttachment("example",
+    cluster_id="cls-53c7589g",
+    use_tke_default=False,
+    jwks_uri="https://cls-53c7589g.ccs.tencent-cloud.com/openid/v1/jwks",
+    issuer="https://cls-53c7589g.ccs.tencent-cloud.com",
+    auto_create_discovery_anonymous_auth=False)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var config = new Config();
-    var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    var clusterCidr = config.Get("clusterCidr") ?? "172.16.0.0/16";
-    var defaultInstanceType = config.Get("defaultInstanceType") ?? "S1.SMALL1";
-    var @default = Tencentcloud.Images.GetInstance.Invoke(new()
-    {
-        ImageTypes = new[]
-        {
-            "PUBLIC_IMAGE",
-        },
-        OsName = "centos",
-    });
-
-    var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
-    {
-        IsDefault = true,
-        AvailabilityZone = availabilityZone,
-    });
-
-    var managedCluster = new Tencentcloud.Kubernetes.Cluster("managedCluster", new()
-    {
-        VpcId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId),
-        ClusterCidr = "10.31.0.0/16",
-        ClusterMaxPodNum = 32,
-        ClusterName = "keep",
-        ClusterDesc = "test cluster desc",
-        ClusterVersion = "1.20.6",
-        ClusterMaxServiceNum = 32,
-        WorkerConfigs = new[]
-        {
-            new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigArgs
-            {
-                Count = 1,
-                AvailabilityZone = availabilityZone,
-                InstanceType = defaultInstanceType,
-                SystemDiskType = "CLOUD_SSD",
-                SystemDiskSize = 60,
-                InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
-                InternetMaxBandwidthOut = 100,
-                PublicIpAssigned = true,
-                SubnetId = vpc.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.SubnetId),
-                DataDisks = new[]
-                {
-                    new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigDataDiskArgs
-                    {
-                        DiskType = "CLOUD_PREMIUM",
-                        DiskSize = 50,
-                    },
-                },
-                EnhancedSecurityService = false,
-                EnhancedMonitorService = false,
-                UserData = "dGVzdA==",
-                Password = "ZZXXccvv1212",
-            },
-        },
-        ClusterDeployType = "MANAGED_CLUSTER",
-    });
-
-    // if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
-    var testUseTkeDefaultAuthAttach = new Tencentcloud.Kubernetes.AuthAttachment("testUseTkeDefaultAuthAttach", new()
-    {
-        ClusterId = managedCluster.Id,
-        AutoCreateDiscoveryAnonymousAuth = true,
-        UseTkeDefault = true,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		cfg := config.New(ctx, "")
-		availabilityZone := "ap-guangzhou-3"
-		if param := cfg.Get("availabilityZone"); param != "" {
-			availabilityZone = param
-		}
-		clusterCidr := "172.16.0.0/16"
-		if param := cfg.Get("clusterCidr"); param != "" {
-			clusterCidr = param
-		}
-		defaultInstanceType := "S1.SMALL1"
-		if param := cfg.Get("defaultInstanceType"); param != "" {
-			defaultInstanceType = param
-		}
-		_, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-			ImageTypes: []string{
-				"PUBLIC_IMAGE",
-			},
-			OsName: pulumi.StringRef("centos"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-			IsDefault:        pulumi.BoolRef(true),
-			AvailabilityZone: pulumi.StringRef(availabilityZone),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		managedCluster, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
-			VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
-			ClusterCidr:          pulumi.String("10.31.0.0/16"),
-			ClusterMaxPodNum:     pulumi.Int(32),
-			ClusterName:          pulumi.String("keep"),
-			ClusterDesc:          pulumi.String("test cluster desc"),
-			ClusterVersion:       pulumi.String("1.20.6"),
-			ClusterMaxServiceNum: pulumi.Int(32),
-			WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
-				&kubernetes.ClusterWorkerConfigArgs{
-					Count:                   pulumi.Int(1),
-					AvailabilityZone:        pulumi.String(availabilityZone),
-					InstanceType:            pulumi.String(defaultInstanceType),
-					SystemDiskType:          pulumi.String("CLOUD_SSD"),
-					SystemDiskSize:          pulumi.Int(60),
-					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-					InternetMaxBandwidthOut: pulumi.Int(100),
-					PublicIpAssigned:        pulumi.Bool(true),
-					SubnetId:                pulumi.String(vpc.InstanceLists[0].SubnetId),
-					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
-						&kubernetes.ClusterWorkerConfigDataDiskArgs{
-							DiskType: pulumi.String("CLOUD_PREMIUM"),
-							DiskSize: pulumi.Int(50),
-						},
-					},
-					EnhancedSecurityService: pulumi.Bool(false),
-					EnhancedMonitorService:  pulumi.Bool(false),
-					UserData:                pulumi.String("dGVzdA=="),
-					Password:                pulumi.String("ZZXXccvv1212"),
-				},
-			},
-			ClusterDeployType: pulumi.String("MANAGED_CLUSTER"),
-		})
-		if err != nil {
-			return err
-		}
-		// if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
-		_, err = Kubernetes.NewAuthAttachment(ctx, "testUseTkeDefaultAuthAttach", &Kubernetes.AuthAttachmentArgs{
-			ClusterId:                        managedCluster.ID(),
-			AutoCreateDiscoveryAnonymousAuth: pulumi.Bool(true),
-			UseTkeDefault:                    pulumi.Bool(true),
+		_, err := kubernetes.NewAuthAttachment(ctx, "example", &kubernetes.AuthAttachmentArgs{
+			ClusterId:                        pulumi.String("cls-53c7589g"),
+			UseTkeDefault:                    pulumi.Bool(false),
+			JwksUri:                          pulumi.String("https://cls-53c7589g.ccs.tencent-cloud.com/openid/v1/jwks"),
+			Issuer:                           pulumi.String("https://cls-53c7589g.ccs.tencent-cloud.com"),
+			AutoCreateDiscoveryAnonymousAuth: pulumi.Bool(false),
 		})
 		if err != nil {
 			return err
@@ -722,23 +239,45 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Kubernetes.AuthAttachment("example", new()
+    {
+        ClusterId = "cls-53c7589g",
+        UseTkeDefault = false,
+        JwksUri = "https://cls-53c7589g.ccs.tencent-cloud.com/openid/v1/jwks",
+        Issuer = "https://cls-53c7589g.ccs.tencent-cloud.com",
+        AutoCreateDiscoveryAnonymousAuth = false,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Images.ImagesFunctions;
-import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
-import com.pulumi.tencentcloud.Vpc.VpcFunctions;
-import com.pulumi.tencentcloud.Vpc.inputs.GetSubnetsArgs;
-import com.pulumi.tencentcloud.Kubernetes.Cluster;
-import com.pulumi.tencentcloud.Kubernetes.ClusterArgs;
-import com.pulumi.tencentcloud.Kubernetes.inputs.ClusterWorkerConfigArgs;
 import com.pulumi.tencentcloud.Kubernetes.AuthAttachment;
 import com.pulumi.tencentcloud.Kubernetes.AuthAttachmentArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -750,203 +289,120 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var config = ctx.config();
-        final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-3");
-        final var clusterCidr = config.get("clusterCidr").orElse("172.16.0.0/16");
-        final var defaultInstanceType = config.get("defaultInstanceType").orElse("S1.SMALL1");
-        final var default = ImagesFunctions.getInstance(GetInstanceArgs.builder()
-            .imageTypes("PUBLIC_IMAGE")
-            .osName("centos")
-            .build());
-
-        final var vpc = VpcFunctions.getSubnets(GetSubnetsArgs.builder()
-            .isDefault(true)
-            .availabilityZone(availabilityZone)
-            .build());
-
-        var managedCluster = new Cluster("managedCluster", ClusterArgs.builder()        
-            .vpcId(vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].vpcId()))
-            .clusterCidr("10.31.0.0/16")
-            .clusterMaxPodNum(32)
-            .clusterName("keep")
-            .clusterDesc("test cluster desc")
-            .clusterVersion("1.20.6")
-            .clusterMaxServiceNum(32)
-            .workerConfigs(ClusterWorkerConfigArgs.builder()
-                .count(1)
-                .availabilityZone(availabilityZone)
-                .instanceType(defaultInstanceType)
-                .systemDiskType("CLOUD_SSD")
-                .systemDiskSize(60)
-                .internetChargeType("TRAFFIC_POSTPAID_BY_HOUR")
-                .internetMaxBandwidthOut(100)
-                .publicIpAssigned(true)
-                .subnetId(vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].subnetId()))
-                .dataDisks(ClusterWorkerConfigDataDiskArgs.builder()
-                    .diskType("CLOUD_PREMIUM")
-                    .diskSize(50)
-                    .build())
-                .enhancedSecurityService(false)
-                .enhancedMonitorService(false)
-                .userData("dGVzdA==")
-                .password("ZZXXccvv1212")
-                .build())
-            .clusterDeployType("MANAGED_CLUSTER")
-            .build());
-
-        // if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
-        var testUseTkeDefaultAuthAttach = new AuthAttachment("testUseTkeDefaultAuthAttach", AuthAttachmentArgs.builder()        
-            .clusterId(managedCluster.id())
-            .autoCreateDiscoveryAnonymousAuth(true)
-            .useTkeDefault(true)
+        var example = new AuthAttachment("example", AuthAttachmentArgs.builder()
+            .clusterId("cls-53c7589g")
+            .useTkeDefault(false)
+            .jwksUri("https://cls-53c7589g.ccs.tencent-cloud.com/openid/v1/jwks")
+            .issuer("https://cls-53c7589g.ccs.tencent-cloud.com")
+            .autoCreateDiscoveryAnonymousAuth(false)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
-configuration:
-  availabilityZone:
-    type: string
-    default: ap-guangzhou-3
-  clusterCidr:
-    type: string
-    default: 172.16.0.0/16
-  defaultInstanceType:
-    type: string
-    default: S1.SMALL1
 resources:
-  managedCluster:
-    type: tencentcloud:Kubernetes:Cluster
-    properties:
-      vpcId: ${vpc.instanceLists[0].vpcId}
-      clusterCidr: 10.31.0.0/16
-      clusterMaxPodNum: 32
-      clusterName: keep
-      clusterDesc: test cluster desc
-      clusterVersion: 1.20.6
-      clusterMaxServiceNum: 32
-      workerConfigs:
-        - count: 1
-          availabilityZone: ${availabilityZone}
-          instanceType: ${defaultInstanceType}
-          systemDiskType: CLOUD_SSD
-          systemDiskSize: 60
-          internetChargeType: TRAFFIC_POSTPAID_BY_HOUR
-          internetMaxBandwidthOut: 100
-          publicIpAssigned: true
-          subnetId: ${vpc.instanceLists[0].subnetId}
-          dataDisks:
-            - diskType: CLOUD_PREMIUM
-              diskSize: 50
-          enhancedSecurityService: false
-          enhancedMonitorService: false
-          userData: dGVzdA==
-          password: ZZXXccvv1212
-      clusterDeployType: MANAGED_CLUSTER
-  # if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
-  testUseTkeDefaultAuthAttach:
+  example:
     type: tencentcloud:Kubernetes:AuthAttachment
     properties:
-      clusterId: ${managedCluster.id}
-      autoCreateDiscoveryAnonymousAuth: true
-      useTkeDefault: true
-variables:
-  default:
-    fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments:
-        imageTypes:
-          - PUBLIC_IMAGE
-        osName: centos
-  vpc:
-    fn::invoke:
-      Function: tencentcloud:Vpc:getSubnets
-      Arguments:
-        isDefault: true
-        availabilityZone: ${availabilityZone}
+      clusterId: cls-53c7589g
+      useTkeDefault: false
+      jwksUri: https://cls-53c7589g.ccs.tencent-cloud.com/openid/v1/jwks
+      issuer: https://cls-53c7589g.ccs.tencent-cloud.com
+      autoCreateDiscoveryAnonymousAuth: false
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_kubernetes_authattachment" "example" {
+  cluster_id                           = "cls-53c7589g"
+  use_tke_default                      = false
+  jwks_uri                             = "https://cls-53c7589g.ccs.tencent-cloud.com/openid/v1/jwks"
+  issuer                               = "https://cls-53c7589g.ccs.tencent-cloud.com"
+  auto_create_discovery_anonymous_auth = false
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Use OIDC Config
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const testAuthAttach = new tencentcloud.kubernetes.AuthAttachment("testAuthAttach", {
-    clusterId: tencentcloud_kubernetes_cluster.managed_cluster.id,
+const example = new tencentcloud.kubernetes.AuthAttachment("example", {
+    clusterId: "cls-oof3l9ks",
     useTkeDefault: true,
     autoCreateDiscoveryAnonymousAuth: true,
     autoCreateOidcConfig: true,
     autoInstallPodIdentityWebhookAddon: true,
 });
-const oidcConfig = tencentcloud.Cam.getOidcConfig({
-    name: tencentcloud_kubernetes_cluster.managed_cluster.id,
+const oidcConfig = tencentcloud.cam.getOidcConfigOutput({
+    name: example.clusterId,
 });
-export const identityKey = oidcConfig.then(oidcConfig => oidcConfig.identityKey);
-export const identityUrl = oidcConfig.then(oidcConfig => oidcConfig.identityUrl);
+export const identityKey = oidcConfig.identityKey;
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-test_auth_attach = tencentcloud.kubernetes.AuthAttachment("testAuthAttach",
-    cluster_id=tencentcloud_kubernetes_cluster["managed_cluster"]["id"],
+example = tencentcloud.kubernetes.AuthAttachment("example",
+    cluster_id="cls-oof3l9ks",
     use_tke_default=True,
     auto_create_discovery_anonymous_auth=True,
     auto_create_oidc_config=True,
     auto_install_pod_identity_webhook_addon=True)
-oidc_config = tencentcloud.Cam.get_oidc_config(name=tencentcloud_kubernetes_cluster["managed_cluster"]["id"])
+oidc_config = tencentcloud.cam.get_oidc_config_output(name=example.cluster_id)
 pulumi.export("identityKey", oidc_config.identity_key)
-pulumi.export("identityUrl", oidc_config.identity_url)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var testAuthAttach = new Tencentcloud.Kubernetes.AuthAttachment("testAuthAttach", new()
-    {
-        ClusterId = tencentcloud_kubernetes_cluster.Managed_cluster.Id,
-        UseTkeDefault = true,
-        AutoCreateDiscoveryAnonymousAuth = true,
-        AutoCreateOidcConfig = true,
-        AutoInstallPodIdentityWebhookAddon = true,
-    });
-
-    var oidcConfig = Tencentcloud.Cam.GetOidcConfig.Invoke(new()
-    {
-        Name = tencentcloud_kubernetes_cluster.Managed_cluster.Id,
-    });
-
-    return new Dictionary<string, object?>
-    {
-        ["identityKey"] = oidcConfig.Apply(getOidcConfigResult => getOidcConfigResult.IdentityKey),
-        ["identityUrl"] = oidcConfig.Apply(getOidcConfigResult => getOidcConfigResult.IdentityUrl),
-    };
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cam"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Kubernetes.NewAuthAttachment(ctx, "testAuthAttach", &Kubernetes.AuthAttachmentArgs{
-			ClusterId:                          pulumi.Any(tencentcloud_kubernetes_cluster.Managed_cluster.Id),
+		example, err := kubernetes.NewAuthAttachment(ctx, "example", &kubernetes.AuthAttachmentArgs{
+			ClusterId:                          pulumi.String("cls-oof3l9ks"),
 			UseTkeDefault:                      pulumi.Bool(true),
 			AutoCreateDiscoveryAnonymousAuth:   pulumi.Bool(true),
 			AutoCreateOidcConfig:               pulumi.Bool(true),
@@ -955,18 +411,52 @@ func main() {
 		if err != nil {
 			return err
 		}
-		oidcConfig, err := Cam.GetOidcConfig(ctx, &cam.GetOidcConfigArgs{
-			Name: tencentcloud_kubernetes_cluster.Managed_cluster.Id,
+		oidcConfig := cam.GetOidcConfigOutput(ctx, cam.GetOidcConfigOutputArgs{
+			Name: example.ClusterId,
 		}, nil)
-		if err != nil {
-			return err
-		}
-		ctx.Export("identityKey", oidcConfig.IdentityKey)
-		ctx.Export("identityUrl", oidcConfig.IdentityUrl)
+		ctx.Export("identityKey", oidcConfig.IdentityKey())
 		return nil
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Kubernetes.AuthAttachment("example", new()
+    {
+        ClusterId = "cls-oof3l9ks",
+        UseTkeDefault = true,
+        AutoCreateDiscoveryAnonymousAuth = true,
+        AutoCreateOidcConfig = true,
+        AutoInstallPodIdentityWebhookAddon = true,
+    });
+
+    var oidcConfig = Tencentcloud.Cam.GetOidcConfig.Invoke(new()
+    {
+        Name = example.ClusterId,
+    });
+
+    return new Dictionary<string, object?>
+    {
+        ["identityKey"] = oidcConfig.Apply(getOidcConfigResult => getOidcConfigResult.IdentityKey),
+    };
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -977,8 +467,8 @@ import com.pulumi.tencentcloud.Kubernetes.AuthAttachment;
 import com.pulumi.tencentcloud.Kubernetes.AuthAttachmentArgs;
 import com.pulumi.tencentcloud.Cam.CamFunctions;
 import com.pulumi.tencentcloud.Cam.inputs.GetOidcConfigArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -990,8 +480,8 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var testAuthAttach = new AuthAttachment("testAuthAttach", AuthAttachmentArgs.builder()        
-            .clusterId(tencentcloud_kubernetes_cluster.managed_cluster().id())
+        var example = new AuthAttachment("example", AuthAttachmentArgs.builder()
+            .clusterId("cls-oof3l9ks")
             .useTkeDefault(true)
             .autoCreateDiscoveryAnonymousAuth(true)
             .autoCreateOidcConfig(true)
@@ -999,20 +489,24 @@ public class App {
             .build());
 
         final var oidcConfig = CamFunctions.getOidcConfig(GetOidcConfigArgs.builder()
-            .name(tencentcloud_kubernetes_cluster.managed_cluster().id())
+            .name(example.clusterId())
             .build());
 
-        ctx.export("identityKey", oidcConfig.applyValue(getOidcConfigResult -> getOidcConfigResult.identityKey()));
-        ctx.export("identityUrl", oidcConfig.applyValue(getOidcConfigResult -> getOidcConfigResult.identityUrl()));
+        ctx.export("identityKey", oidcConfig.applyValue(_oidcConfig -> _oidcConfig.identityKey()));
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  testAuthAttach:
+  example:
     type: tencentcloud:Kubernetes:AuthAttachment
     properties:
-      clusterId: ${tencentcloud_kubernetes_cluster.managed_cluster.id}
+      clusterId: cls-oof3l9ks
       useTkeDefault: true
       autoCreateDiscoveryAnonymousAuth: true
       autoCreateOidcConfig: true
@@ -1020,79 +514,138 @@ resources:
 variables:
   oidcConfig:
     fn::invoke:
-      Function: tencentcloud:Cam:getOidcConfig
-      Arguments:
-        name: ${tencentcloud_kubernetes_cluster.managed_cluster.id}
+      function: tencentcloud:Cam:getOidcConfig
+      arguments:
+        name: ${example.clusterId}
 outputs:
   identityKey: ${oidcConfig.identityKey}
-  identityUrl: ${oidcConfig.identityUrl}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cam_getoidcconfig" "oidcConfig" {
+  name = tencentcloud_kubernetes_authattachment.example.cluster_id
+}
+
+resource "tencentcloud_kubernetes_authattachment" "example" {
+  cluster_id                              = "cls-oof3l9ks"
+  use_tke_default                         = true
+  auto_create_discovery_anonymous_auth    = true
+  auto_create_oidc_config                 = true
+  auto_install_pod_identity_webhook_addon = true
+}
+output "identityKey" {
+  value = data.tencentcloud_cam_getoidcconfig.oidcConfig.identity_key
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [DescribeClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42699)
+  - [ModifyClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42698)
+* Read: [DescribeClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42699)
+* Update:
+  - [DescribeClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42699)
+  - [ModifyClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42698)
+* Delete:
+  - [DescribeClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42699)
+  - [ModifyClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42698)
 
 
 ## Create AuthAttachment Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">AuthAttachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AuthAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">AuthAttachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AuthAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">AuthAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                   <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AuthAttachmentArgs</a></span><span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">AuthAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                   <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">auto_create_client_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                    <span class="nx">auto_create_discovery_anonymous_auth</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
                    <span class="nx">auto_create_oidc_config</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
                    <span class="nx">auto_install_pod_identity_webhook_addon</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-                   <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">issuer</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">jwks_uri</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                   <span class="nx">use_tke_default</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">AuthAttachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                   <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AuthAttachmentArgs</a></span><span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                   <span class="nx">use_tke_default</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAuthAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AuthAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">AuthAttachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAuthAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AuthAttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">AuthAttachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">AuthAttachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AuthAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">AuthAttachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AuthAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">AuthAttachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AuthAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">AuthAttachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AuthAttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Kubernetes:AuthAttachment</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Kubernetes:AuthAttachment</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_kubernetes_auth_attachment&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -1113,7 +666,7 @@ outputs:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -1230,11 +783,19 @@ outputs:
 </pulumi-choosable>
 </div>
 
+
+
 ## AuthAttachment Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The AuthAttachment resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -1242,7 +803,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1250,8 +811,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of clusters.</p>
-</dd><dt class="property-optional"
+    <dd>ID of clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="autocreateclientids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autocreateclientids_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Create<wbr>Client<wbr>Ids</a>
@@ -1259,8 +819,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Creating ClientId of the identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating ClientId of the identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="autocreatediscoveryanonymousauth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autocreatediscoveryanonymousauth_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Create<wbr>Discovery<wbr>Anonymous<wbr>Auth</a>
@@ -1268,8 +827,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.</p>
-</dd><dt class="property-optional"
+    <dd>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access <code>/.well-known/openid-configuration</code> and <code>/openid/v1/jwks</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autocreateoidcconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autocreateoidcconfig_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Create<wbr>Oidc<wbr>Config</a>
@@ -1277,8 +835,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Creating an identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating an identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="autoinstallpodidentitywebhookaddon_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoinstallpodidentitywebhookaddon_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Install<wbr>Pod<wbr>Identity<wbr>Webhook<wbr>Addon</a>
@@ -1286,8 +843,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Creating the PodIdentityWebhook component. if <code>auto_create_oidc_config</code> is true, this field must set true.</p>
-</dd><dt class="property-optional"
+    <dd>Creating the PodIdentityWebhook component. if <code>autoCreateOidcConfig</code> is true, this field must set true.</dd><dt class="property-optional"
             title="Optional">
         <span id="issuer_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuer_csharp" style="color: inherit; text-decoration: inherit;">Issuer</a>
@@ -1295,8 +851,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify service-account-issuer. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-issuer. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="jwksuri_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jwksuri_csharp" style="color: inherit; text-decoration: inherit;">Jwks<wbr>Uri</a>
@@ -1304,8 +859,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify service-account-jwks-uri. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-jwks-uri. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="usetkedefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usetkedefault_csharp" style="color: inherit; text-decoration: inherit;">Use<wbr>Tke<wbr>Default</a>
@@ -1313,14 +867,13 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.</p>
-</dd></dl>
+    <dd>If set to <code>true</code>, the <code>issuer</code> and <code>jwksUri</code> will be generated automatically by tke, please do not set <code>issuer</code> and <code>jwksUri</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1328,8 +881,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of clusters.</p>
-</dd><dt class="property-optional"
+    <dd>ID of clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="autocreateclientids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autocreateclientids_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Create<wbr>Client<wbr>Ids</a>
@@ -1337,8 +889,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Creating ClientId of the identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating ClientId of the identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="autocreatediscoveryanonymousauth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autocreatediscoveryanonymousauth_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Create<wbr>Discovery<wbr>Anonymous<wbr>Auth</a>
@@ -1346,8 +897,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.</p>
-</dd><dt class="property-optional"
+    <dd>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access <code>/.well-known/openid-configuration</code> and <code>/openid/v1/jwks</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autocreateoidcconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autocreateoidcconfig_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Create<wbr>Oidc<wbr>Config</a>
@@ -1355,8 +905,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Creating an identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating an identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="autoinstallpodidentitywebhookaddon_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoinstallpodidentitywebhookaddon_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Install<wbr>Pod<wbr>Identity<wbr>Webhook<wbr>Addon</a>
@@ -1364,8 +913,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Creating the PodIdentityWebhook component. if <code>auto_create_oidc_config</code> is true, this field must set true.</p>
-</dd><dt class="property-optional"
+    <dd>Creating the PodIdentityWebhook component. if <code>autoCreateOidcConfig</code> is true, this field must set true.</dd><dt class="property-optional"
             title="Optional">
         <span id="issuer_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuer_go" style="color: inherit; text-decoration: inherit;">Issuer</a>
@@ -1373,8 +921,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify service-account-issuer. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-issuer. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="jwksuri_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jwksuri_go" style="color: inherit; text-decoration: inherit;">Jwks<wbr>Uri</a>
@@ -1382,8 +929,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify service-account-jwks-uri. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-jwks-uri. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="usetkedefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usetkedefault_go" style="color: inherit; text-decoration: inherit;">Use<wbr>Tke<wbr>Default</a>
@@ -1391,14 +937,83 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.</p>
-</dd></dl>
+    <dd>If set to <code>true</code>, the <code>issuer</code> and <code>jwksUri</code> will be generated automatically by tke, please do not set <code>issuer</code> and <code>jwksUri</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of clusters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_create_client_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_create_client_ids_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>create_<wbr>client_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Creating ClientId of the identity provider.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_create_discovery_anonymous_auth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_create_discovery_anonymous_auth_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>create_<wbr>discovery_<wbr>anonymous_<wbr>auth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access <code>/.well-known/openid-configuration</code> and <code>/openid/v1/jwks</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_create_oidc_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_create_oidc_config_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>create_<wbr>oidc_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Creating an identity provider.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_install_pod_identity_webhook_addon_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_install_pod_identity_webhook_addon_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>install_<wbr>pod_<wbr>identity_<wbr>webhook_<wbr>addon</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Creating the PodIdentityWebhook component. if <code>autoCreateOidcConfig</code> is true, this field must set true.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="issuer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuer_hcl" style="color: inherit; text-decoration: inherit;">issuer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify service-account-issuer. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="jwks_uri_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jwks_uri_hcl" style="color: inherit; text-decoration: inherit;">jwks_<wbr>uri</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify service-account-jwks-uri. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="use_tke_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#use_tke_default_hcl" style="color: inherit; text-decoration: inherit;">use_<wbr>tke_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>If set to <code>true</code>, the <code>issuer</code> and <code>jwksUri</code> will be generated automatically by tke, please do not set <code>issuer</code> and <code>jwksUri</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1406,8 +1021,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of clusters.</p>
-</dd><dt class="property-optional"
+    <dd>ID of clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="autocreateclientids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autocreateclientids_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Create<wbr>Client<wbr>Ids</a>
@@ -1415,8 +1029,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Creating ClientId of the identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating ClientId of the identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="autocreatediscoveryanonymousauth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autocreatediscoveryanonymousauth_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Create<wbr>Discovery<wbr>Anonymous<wbr>Auth</a>
@@ -1424,8 +1037,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.</p>
-</dd><dt class="property-optional"
+    <dd>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access <code>/.well-known/openid-configuration</code> and <code>/openid/v1/jwks</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autocreateoidcconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autocreateoidcconfig_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Create<wbr>Oidc<wbr>Config</a>
@@ -1433,8 +1045,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Creating an identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating an identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="autoinstallpodidentitywebhookaddon_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoinstallpodidentitywebhookaddon_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Install<wbr>Pod<wbr>Identity<wbr>Webhook<wbr>Addon</a>
@@ -1442,8 +1053,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Creating the PodIdentityWebhook component. if <code>auto_create_oidc_config</code> is true, this field must set true.</p>
-</dd><dt class="property-optional"
+    <dd>Creating the PodIdentityWebhook component. if <code>autoCreateOidcConfig</code> is true, this field must set true.</dd><dt class="property-optional"
             title="Optional">
         <span id="issuer_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuer_java" style="color: inherit; text-decoration: inherit;">issuer</a>
@@ -1451,8 +1061,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify service-account-issuer. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-issuer. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="jwksuri_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jwksuri_java" style="color: inherit; text-decoration: inherit;">jwks<wbr>Uri</a>
@@ -1460,8 +1069,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify service-account-jwks-uri. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-jwks-uri. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="usetkedefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usetkedefault_java" style="color: inherit; text-decoration: inherit;">use<wbr>Tke<wbr>Default</a>
@@ -1469,14 +1077,13 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.</p>
-</dd></dl>
+    <dd>If set to <code>true</code>, the <code>issuer</code> and <code>jwksUri</code> will be generated automatically by tke, please do not set <code>issuer</code> and <code>jwksUri</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1484,8 +1091,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of clusters.</p>
-</dd><dt class="property-optional"
+    <dd>ID of clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="autocreateclientids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autocreateclientids_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Create<wbr>Client<wbr>Ids</a>
@@ -1493,8 +1099,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Creating ClientId of the identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating ClientId of the identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="autocreatediscoveryanonymousauth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autocreatediscoveryanonymousauth_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Create<wbr>Discovery<wbr>Anonymous<wbr>Auth</a>
@@ -1502,8 +1107,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.</p>
-</dd><dt class="property-optional"
+    <dd>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access <code>/.well-known/openid-configuration</code> and <code>/openid/v1/jwks</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autocreateoidcconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autocreateoidcconfig_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Create<wbr>Oidc<wbr>Config</a>
@@ -1511,8 +1115,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Creating an identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating an identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="autoinstallpodidentitywebhookaddon_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoinstallpodidentitywebhookaddon_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Install<wbr>Pod<wbr>Identity<wbr>Webhook<wbr>Addon</a>
@@ -1520,8 +1123,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Creating the PodIdentityWebhook component. if <code>auto_create_oidc_config</code> is true, this field must set true.</p>
-</dd><dt class="property-optional"
+    <dd>Creating the PodIdentityWebhook component. if <code>autoCreateOidcConfig</code> is true, this field must set true.</dd><dt class="property-optional"
             title="Optional">
         <span id="issuer_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuer_nodejs" style="color: inherit; text-decoration: inherit;">issuer</a>
@@ -1529,8 +1131,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify service-account-issuer. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-issuer. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="jwksuri_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jwksuri_nodejs" style="color: inherit; text-decoration: inherit;">jwks<wbr>Uri</a>
@@ -1538,8 +1139,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify service-account-jwks-uri. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-jwks-uri. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="usetkedefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usetkedefault_nodejs" style="color: inherit; text-decoration: inherit;">use<wbr>Tke<wbr>Default</a>
@@ -1547,14 +1147,13 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.</p>
-</dd></dl>
+    <dd>If set to <code>true</code>, the <code>issuer</code> and <code>jwksUri</code> will be generated automatically by tke, please do not set <code>issuer</code> and <code>jwksUri</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -1562,8 +1161,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of clusters.</p>
-</dd><dt class="property-optional"
+    <dd>ID of clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_create_client_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_create_client_ids_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>create_<wbr>client_<wbr>ids</a>
@@ -1571,8 +1169,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Creating ClientId of the identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating ClientId of the identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_create_discovery_anonymous_auth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_create_discovery_anonymous_auth_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>create_<wbr>discovery_<wbr>anonymous_<wbr>auth</a>
@@ -1580,8 +1177,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.</p>
-</dd><dt class="property-optional"
+    <dd>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access <code>/.well-known/openid-configuration</code> and <code>/openid/v1/jwks</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_create_oidc_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_create_oidc_config_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>create_<wbr>oidc_<wbr>config</a>
@@ -1589,8 +1185,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Creating an identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating an identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_install_pod_identity_webhook_addon_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_install_pod_identity_webhook_addon_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>install_<wbr>pod_<wbr>identity_<wbr>webhook_<wbr>addon</a>
@@ -1598,8 +1193,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Creating the PodIdentityWebhook component. if <code>auto_create_oidc_config</code> is true, this field must set true.</p>
-</dd><dt class="property-optional"
+    <dd>Creating the PodIdentityWebhook component. if <code>autoCreateOidcConfig</code> is true, this field must set true.</dd><dt class="property-optional"
             title="Optional">
         <span id="issuer_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuer_python" style="color: inherit; text-decoration: inherit;">issuer</a>
@@ -1607,8 +1201,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify service-account-issuer. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-issuer. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="jwks_uri_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jwks_uri_python" style="color: inherit; text-decoration: inherit;">jwks_<wbr>uri</a>
@@ -1616,8 +1209,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify service-account-jwks-uri. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-jwks-uri. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="use_tke_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#use_tke_default_python" style="color: inherit; text-decoration: inherit;">use_<wbr>tke_<wbr>default</a>
@@ -1625,14 +1217,13 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.</p>
-</dd></dl>
+    <dd>If set to <code>true</code>, the <code>issuer</code> and <code>jwksUri</code> will be generated automatically by tke, please do not set <code>issuer</code> and <code>jwksUri</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<dl class="resources-properties"><dt class="property-required"
+<dl class="resources-properties"><dt class="property-required property-replacement"
             title="Required">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1640,8 +1231,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of clusters.</p>
-</dd><dt class="property-optional"
+    <dd>ID of clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="autocreateclientids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autocreateclientids_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Create<wbr>Client<wbr>Ids</a>
@@ -1649,8 +1239,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Creating ClientId of the identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating ClientId of the identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="autocreatediscoveryanonymousauth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autocreatediscoveryanonymousauth_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Create<wbr>Discovery<wbr>Anonymous<wbr>Auth</a>
@@ -1658,8 +1247,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.</p>
-</dd><dt class="property-optional"
+    <dd>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access <code>/.well-known/openid-configuration</code> and <code>/openid/v1/jwks</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autocreateoidcconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autocreateoidcconfig_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Create<wbr>Oidc<wbr>Config</a>
@@ -1667,8 +1255,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Creating an identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating an identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="autoinstallpodidentitywebhookaddon_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoinstallpodidentitywebhookaddon_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Install<wbr>Pod<wbr>Identity<wbr>Webhook<wbr>Addon</a>
@@ -1676,8 +1263,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Creating the PodIdentityWebhook component. if <code>auto_create_oidc_config</code> is true, this field must set true.</p>
-</dd><dt class="property-optional"
+    <dd>Creating the PodIdentityWebhook component. if <code>autoCreateOidcConfig</code> is true, this field must set true.</dd><dt class="property-optional"
             title="Optional">
         <span id="issuer_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuer_yaml" style="color: inherit; text-decoration: inherit;">issuer</a>
@@ -1685,8 +1271,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify service-account-issuer. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-issuer. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="jwksuri_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jwksuri_yaml" style="color: inherit; text-decoration: inherit;">jwks<wbr>Uri</a>
@@ -1694,8 +1279,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify service-account-jwks-uri. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-jwks-uri. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="usetkedefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usetkedefault_yaml" style="color: inherit; text-decoration: inherit;">use<wbr>Tke<wbr>Default</a>
@@ -1703,8 +1287,7 @@ The AuthAttachment resource accepts the following [input](/docs/intro/concepts/i
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.</p>
-</dd></dl>
+    <dd>If set to <code>true</code>, the <code>issuer</code> and <code>jwksUri</code> will be generated automatically by tke, please do not set <code>issuer</code> and <code>jwksUri</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1725,8 +1308,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tkedefaultissuer_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tkedefaultissuer_csharp" style="color: inherit; text-decoration: inherit;">Tke<wbr>Default<wbr>Issuer</a>
@@ -1734,8 +1316,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default issuer of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-"
+    <dd>The default issuer of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-"
             title="">
         <span id="tkedefaultjwksuri_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tkedefaultjwksuri_csharp" style="color: inherit; text-decoration: inherit;">Tke<wbr>Default<wbr>Jwks<wbr>Uri</a>
@@ -1743,8 +1324,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default jwks_uri of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd></dl>
+    <dd>The default jwksUri of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1758,8 +1338,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tkedefaultissuer_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tkedefaultissuer_go" style="color: inherit; text-decoration: inherit;">Tke<wbr>Default<wbr>Issuer</a>
@@ -1767,8 +1346,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default issuer of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-"
+    <dd>The default issuer of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-"
             title="">
         <span id="tkedefaultjwksuri_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tkedefaultjwksuri_go" style="color: inherit; text-decoration: inherit;">Tke<wbr>Default<wbr>Jwks<wbr>Uri</a>
@@ -1776,8 +1354,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default jwks_uri of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd></dl>
+    <dd>The default jwksUri of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="tke_default_issuer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tke_default_issuer_hcl" style="color: inherit; text-decoration: inherit;">tke_<wbr>default_<wbr>issuer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default issuer of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-"
+            title="">
+        <span id="tke_default_jwks_uri_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tke_default_jwks_uri_hcl" style="color: inherit; text-decoration: inherit;">tke_<wbr>default_<wbr>jwks_<wbr>uri</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default jwksUri of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1791,8 +1398,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tkedefaultissuer_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tkedefaultissuer_java" style="color: inherit; text-decoration: inherit;">tke<wbr>Default<wbr>Issuer</a>
@@ -1800,8 +1406,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default issuer of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-"
+    <dd>The default issuer of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-"
             title="">
         <span id="tkedefaultjwksuri_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tkedefaultjwksuri_java" style="color: inherit; text-decoration: inherit;">tke<wbr>Default<wbr>Jwks<wbr>Uri</a>
@@ -1809,8 +1414,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default jwks_uri of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd></dl>
+    <dd>The default jwksUri of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1824,8 +1428,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tkedefaultissuer_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tkedefaultissuer_nodejs" style="color: inherit; text-decoration: inherit;">tke<wbr>Default<wbr>Issuer</a>
@@ -1833,8 +1436,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default issuer of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-"
+    <dd>The default issuer of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-"
             title="">
         <span id="tkedefaultjwksuri_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tkedefaultjwksuri_nodejs" style="color: inherit; text-decoration: inherit;">tke<wbr>Default<wbr>Jwks<wbr>Uri</a>
@@ -1842,8 +1444,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default jwks_uri of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd></dl>
+    <dd>The default jwksUri of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1857,8 +1458,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tke_default_issuer_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tke_default_issuer_python" style="color: inherit; text-decoration: inherit;">tke_<wbr>default_<wbr>issuer</a>
@@ -1866,8 +1466,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The default issuer of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-"
+    <dd>The default issuer of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-"
             title="">
         <span id="tke_default_jwks_uri_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tke_default_jwks_uri_python" style="color: inherit; text-decoration: inherit;">tke_<wbr>default_<wbr>jwks_<wbr>uri</a>
@@ -1875,8 +1474,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The default jwks_uri of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd></dl>
+    <dd>The default jwksUri of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1890,8 +1488,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tkedefaultissuer_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tkedefaultissuer_yaml" style="color: inherit; text-decoration: inherit;">tke<wbr>Default<wbr>Issuer</a>
@@ -1899,8 +1496,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default issuer of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-"
+    <dd>The default issuer of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-"
             title="">
         <span id="tkedefaultjwksuri_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tkedefaultjwksuri_yaml" style="color: inherit; text-decoration: inherit;">tke<wbr>Default<wbr>Jwks<wbr>Uri</a>
@@ -1908,8 +1504,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default jwks_uri of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd></dl>
+    <dd>The default jwksUri of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1919,18 +1514,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing AuthAttachment resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AuthAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">AuthAttachment</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AuthAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">AuthAttachment</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1944,104 +1539,143 @@ Get an existing AuthAttachment resource's state with the given name, ID, and opt
         <span class="nx">tke_default_issuer</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">tke_default_jwks_uri</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">use_tke_default</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">) -&gt;</span> AuthAttachment</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAuthAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AuthAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">AuthAttachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAuthAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AuthAttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">AuthAttachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">AuthAttachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AuthAttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">AuthAttachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AuthAttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">AuthAttachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AuthAttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">AuthAttachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AuthAttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingAuthAttachment</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Kubernetes:AuthAttachment</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_kubernetes_auth_attachment</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AuthAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AuthAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2049,28 +1683,31 @@ Get an existing AuthAttachment resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AuthAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2078,28 +1715,31 @@ Get an existing AuthAttachment resource's state with the given name, ID, and opt
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AuthAttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2119,8 +1759,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Creating ClientId of the identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating ClientId of the identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autocreatediscoveryanonymousauth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autocreatediscoveryanonymousauth_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Create<wbr>Discovery<wbr>Anonymous<wbr>Auth</a>
@@ -2128,8 +1767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.</p>
-</dd><dt class="property-optional"
+    <dd>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access <code>/.well-known/openid-configuration</code> and <code>/openid/v1/jwks</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autocreateoidcconfig_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autocreateoidcconfig_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Create<wbr>Oidc<wbr>Config</a>
@@ -2137,8 +1775,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Creating an identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating an identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoinstallpodidentitywebhookaddon_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoinstallpodidentitywebhookaddon_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Install<wbr>Pod<wbr>Identity<wbr>Webhook<wbr>Addon</a>
@@ -2146,8 +1783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Creating the PodIdentityWebhook component. if <code>auto_create_oidc_config</code> is true, this field must set true.</p>
-</dd><dt class="property-optional"
+    <dd>Creating the PodIdentityWebhook component. if <code>autoCreateOidcConfig</code> is true, this field must set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -2155,8 +1791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of clusters.</p>
-</dd><dt class="property-optional"
+    <dd>ID of clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_issuer_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_issuer_csharp" style="color: inherit; text-decoration: inherit;">Issuer</a>
@@ -2164,8 +1799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify service-account-issuer. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-issuer. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jwksuri_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jwksuri_csharp" style="color: inherit; text-decoration: inherit;">Jwks<wbr>Uri</a>
@@ -2173,8 +1807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify service-account-jwks-uri. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-jwks-uri. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tkedefaultissuer_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tkedefaultissuer_csharp" style="color: inherit; text-decoration: inherit;">Tke<wbr>Default<wbr>Issuer</a>
@@ -2182,8 +1815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default issuer of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-optional"
+    <dd>The default issuer of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tkedefaultjwksuri_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tkedefaultjwksuri_csharp" style="color: inherit; text-decoration: inherit;">Tke<wbr>Default<wbr>Jwks<wbr>Uri</a>
@@ -2191,8 +1823,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default jwks_uri of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-optional"
+    <dd>The default jwksUri of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usetkedefault_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usetkedefault_csharp" style="color: inherit; text-decoration: inherit;">Use<wbr>Tke<wbr>Default</a>
@@ -2200,8 +1831,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.</p>
-</dd></dl>
+    <dd>If set to <code>true</code>, the <code>issuer</code> and <code>jwksUri</code> will be generated automatically by tke, please do not set <code>issuer</code> and <code>jwksUri</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2215,8 +1845,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Creating ClientId of the identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating ClientId of the identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autocreatediscoveryanonymousauth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autocreatediscoveryanonymousauth_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Create<wbr>Discovery<wbr>Anonymous<wbr>Auth</a>
@@ -2224,8 +1853,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.</p>
-</dd><dt class="property-optional"
+    <dd>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access <code>/.well-known/openid-configuration</code> and <code>/openid/v1/jwks</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autocreateoidcconfig_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autocreateoidcconfig_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Create<wbr>Oidc<wbr>Config</a>
@@ -2233,8 +1861,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Creating an identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating an identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoinstallpodidentitywebhookaddon_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoinstallpodidentitywebhookaddon_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Install<wbr>Pod<wbr>Identity<wbr>Webhook<wbr>Addon</a>
@@ -2242,8 +1869,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Creating the PodIdentityWebhook component. if <code>auto_create_oidc_config</code> is true, this field must set true.</p>
-</dd><dt class="property-optional"
+    <dd>Creating the PodIdentityWebhook component. if <code>autoCreateOidcConfig</code> is true, this field must set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -2251,8 +1877,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of clusters.</p>
-</dd><dt class="property-optional"
+    <dd>ID of clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_issuer_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_issuer_go" style="color: inherit; text-decoration: inherit;">Issuer</a>
@@ -2260,8 +1885,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify service-account-issuer. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-issuer. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jwksuri_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jwksuri_go" style="color: inherit; text-decoration: inherit;">Jwks<wbr>Uri</a>
@@ -2269,8 +1893,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify service-account-jwks-uri. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-jwks-uri. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tkedefaultissuer_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tkedefaultissuer_go" style="color: inherit; text-decoration: inherit;">Tke<wbr>Default<wbr>Issuer</a>
@@ -2278,8 +1901,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default issuer of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-optional"
+    <dd>The default issuer of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tkedefaultjwksuri_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tkedefaultjwksuri_go" style="color: inherit; text-decoration: inherit;">Tke<wbr>Default<wbr>Jwks<wbr>Uri</a>
@@ -2287,8 +1909,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default jwks_uri of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-optional"
+    <dd>The default jwksUri of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usetkedefault_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usetkedefault_go" style="color: inherit; text-decoration: inherit;">Use<wbr>Tke<wbr>Default</a>
@@ -2296,8 +1917,93 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.</p>
-</dd></dl>
+    <dd>If set to <code>true</code>, the <code>issuer</code> and <code>jwksUri</code> will be generated automatically by tke, please do not set <code>issuer</code> and <code>jwksUri</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_create_client_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_create_client_ids_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>create_<wbr>client_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Creating ClientId of the identity provider.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_create_discovery_anonymous_auth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_create_discovery_anonymous_auth_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>create_<wbr>discovery_<wbr>anonymous_<wbr>auth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access <code>/.well-known/openid-configuration</code> and <code>/openid/v1/jwks</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_create_oidc_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_create_oidc_config_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>create_<wbr>oidc_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Creating an identity provider.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_install_pod_identity_webhook_addon_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_install_pod_identity_webhook_addon_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>install_<wbr>pod_<wbr>identity_<wbr>webhook_<wbr>addon</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Creating the PodIdentityWebhook component. if <code>autoCreateOidcConfig</code> is true, this field must set true.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of clusters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_issuer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_issuer_hcl" style="color: inherit; text-decoration: inherit;">issuer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify service-account-issuer. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_jwks_uri_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jwks_uri_hcl" style="color: inherit; text-decoration: inherit;">jwks_<wbr>uri</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specify service-account-jwks-uri. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tke_default_issuer_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tke_default_issuer_hcl" style="color: inherit; text-decoration: inherit;">tke_<wbr>default_<wbr>issuer</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default issuer of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tke_default_jwks_uri_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tke_default_jwks_uri_hcl" style="color: inherit; text-decoration: inherit;">tke_<wbr>default_<wbr>jwks_<wbr>uri</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The default jwksUri of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_use_tke_default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_use_tke_default_hcl" style="color: inherit; text-decoration: inherit;">use_<wbr>tke_<wbr>default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>If set to <code>true</code>, the <code>issuer</code> and <code>jwksUri</code> will be generated automatically by tke, please do not set <code>issuer</code> and <code>jwksUri</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2311,8 +2017,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Creating ClientId of the identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating ClientId of the identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autocreatediscoveryanonymousauth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autocreatediscoveryanonymousauth_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Create<wbr>Discovery<wbr>Anonymous<wbr>Auth</a>
@@ -2320,8 +2025,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.</p>
-</dd><dt class="property-optional"
+    <dd>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access <code>/.well-known/openid-configuration</code> and <code>/openid/v1/jwks</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autocreateoidcconfig_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autocreateoidcconfig_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Create<wbr>Oidc<wbr>Config</a>
@@ -2329,8 +2033,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Creating an identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating an identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoinstallpodidentitywebhookaddon_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoinstallpodidentitywebhookaddon_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Install<wbr>Pod<wbr>Identity<wbr>Webhook<wbr>Addon</a>
@@ -2338,8 +2041,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Creating the PodIdentityWebhook component. if <code>auto_create_oidc_config</code> is true, this field must set true.</p>
-</dd><dt class="property-optional"
+    <dd>Creating the PodIdentityWebhook component. if <code>autoCreateOidcConfig</code> is true, this field must set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -2347,8 +2049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of clusters.</p>
-</dd><dt class="property-optional"
+    <dd>ID of clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_issuer_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_issuer_java" style="color: inherit; text-decoration: inherit;">issuer</a>
@@ -2356,8 +2057,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify service-account-issuer. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-issuer. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jwksuri_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jwksuri_java" style="color: inherit; text-decoration: inherit;">jwks<wbr>Uri</a>
@@ -2365,8 +2065,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify service-account-jwks-uri. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-jwks-uri. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tkedefaultissuer_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tkedefaultissuer_java" style="color: inherit; text-decoration: inherit;">tke<wbr>Default<wbr>Issuer</a>
@@ -2374,8 +2073,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default issuer of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-optional"
+    <dd>The default issuer of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tkedefaultjwksuri_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tkedefaultjwksuri_java" style="color: inherit; text-decoration: inherit;">tke<wbr>Default<wbr>Jwks<wbr>Uri</a>
@@ -2383,8 +2081,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default jwks_uri of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-optional"
+    <dd>The default jwksUri of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usetkedefault_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usetkedefault_java" style="color: inherit; text-decoration: inherit;">use<wbr>Tke<wbr>Default</a>
@@ -2392,8 +2089,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.</p>
-</dd></dl>
+    <dd>If set to <code>true</code>, the <code>issuer</code> and <code>jwksUri</code> will be generated automatically by tke, please do not set <code>issuer</code> and <code>jwksUri</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2407,8 +2103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Creating ClientId of the identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating ClientId of the identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autocreatediscoveryanonymousauth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autocreatediscoveryanonymousauth_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Create<wbr>Discovery<wbr>Anonymous<wbr>Auth</a>
@@ -2416,8 +2111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.</p>
-</dd><dt class="property-optional"
+    <dd>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access <code>/.well-known/openid-configuration</code> and <code>/openid/v1/jwks</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autocreateoidcconfig_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autocreateoidcconfig_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Create<wbr>Oidc<wbr>Config</a>
@@ -2425,8 +2119,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Creating an identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating an identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoinstallpodidentitywebhookaddon_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoinstallpodidentitywebhookaddon_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Install<wbr>Pod<wbr>Identity<wbr>Webhook<wbr>Addon</a>
@@ -2434,8 +2127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Creating the PodIdentityWebhook component. if <code>auto_create_oidc_config</code> is true, this field must set true.</p>
-</dd><dt class="property-optional"
+    <dd>Creating the PodIdentityWebhook component. if <code>autoCreateOidcConfig</code> is true, this field must set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -2443,8 +2135,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of clusters.</p>
-</dd><dt class="property-optional"
+    <dd>ID of clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_issuer_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_issuer_nodejs" style="color: inherit; text-decoration: inherit;">issuer</a>
@@ -2452,8 +2143,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify service-account-issuer. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-issuer. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jwksuri_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jwksuri_nodejs" style="color: inherit; text-decoration: inherit;">jwks<wbr>Uri</a>
@@ -2461,8 +2151,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specify service-account-jwks-uri. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-jwks-uri. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tkedefaultissuer_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tkedefaultissuer_nodejs" style="color: inherit; text-decoration: inherit;">tke<wbr>Default<wbr>Issuer</a>
@@ -2470,8 +2159,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default issuer of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-optional"
+    <dd>The default issuer of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tkedefaultjwksuri_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tkedefaultjwksuri_nodejs" style="color: inherit; text-decoration: inherit;">tke<wbr>Default<wbr>Jwks<wbr>Uri</a>
@@ -2479,8 +2167,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The default jwks_uri of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-optional"
+    <dd>The default jwksUri of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usetkedefault_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usetkedefault_nodejs" style="color: inherit; text-decoration: inherit;">use<wbr>Tke<wbr>Default</a>
@@ -2488,8 +2175,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.</p>
-</dd></dl>
+    <dd>If set to <code>true</code>, the <code>issuer</code> and <code>jwksUri</code> will be generated automatically by tke, please do not set <code>issuer</code> and <code>jwksUri</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2503,8 +2189,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Creating ClientId of the identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating ClientId of the identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_auto_create_discovery_anonymous_auth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_create_discovery_anonymous_auth_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>create_<wbr>discovery_<wbr>anonymous_<wbr>auth</a>
@@ -2512,8 +2197,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.</p>
-</dd><dt class="property-optional"
+    <dd>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access <code>/.well-known/openid-configuration</code> and <code>/openid/v1/jwks</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_auto_create_oidc_config_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_create_oidc_config_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>create_<wbr>oidc_<wbr>config</a>
@@ -2521,8 +2205,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Creating an identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating an identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_auto_install_pod_identity_webhook_addon_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_install_pod_identity_webhook_addon_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>install_<wbr>pod_<wbr>identity_<wbr>webhook_<wbr>addon</a>
@@ -2530,8 +2213,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Creating the PodIdentityWebhook component. if <code>auto_create_oidc_config</code> is true, this field must set true.</p>
-</dd><dt class="property-optional"
+    <dd>Creating the PodIdentityWebhook component. if <code>autoCreateOidcConfig</code> is true, this field must set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -2539,8 +2221,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of clusters.</p>
-</dd><dt class="property-optional"
+    <dd>ID of clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_issuer_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_issuer_python" style="color: inherit; text-decoration: inherit;">issuer</a>
@@ -2548,8 +2229,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify service-account-issuer. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-issuer. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jwks_uri_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jwks_uri_python" style="color: inherit; text-decoration: inherit;">jwks_<wbr>uri</a>
@@ -2557,8 +2237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specify service-account-jwks-uri. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-jwks-uri. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tke_default_issuer_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tke_default_issuer_python" style="color: inherit; text-decoration: inherit;">tke_<wbr>default_<wbr>issuer</a>
@@ -2566,8 +2245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The default issuer of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-optional"
+    <dd>The default issuer of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tke_default_jwks_uri_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tke_default_jwks_uri_python" style="color: inherit; text-decoration: inherit;">tke_<wbr>default_<wbr>jwks_<wbr>uri</a>
@@ -2575,8 +2253,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The default jwks_uri of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-optional"
+    <dd>The default jwksUri of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_use_tke_default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_use_tke_default_python" style="color: inherit; text-decoration: inherit;">use_<wbr>tke_<wbr>default</a>
@@ -2584,8 +2261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.</p>
-</dd></dl>
+    <dd>If set to <code>true</code>, the <code>issuer</code> and <code>jwksUri</code> will be generated automatically by tke, please do not set <code>issuer</code> and <code>jwksUri</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2599,8 +2275,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Creating ClientId of the identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating ClientId of the identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autocreatediscoveryanonymousauth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autocreatediscoveryanonymousauth_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Create<wbr>Discovery<wbr>Anonymous<wbr>Auth</a>
@@ -2608,8 +2283,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.</p>
-</dd><dt class="property-optional"
+    <dd>If set to <code>true</code>, the rbac rule will be created automatically which allow anonymous user to access <code>/.well-known/openid-configuration</code> and <code>/openid/v1/jwks</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autocreateoidcconfig_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autocreateoidcconfig_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Create<wbr>Oidc<wbr>Config</a>
@@ -2617,8 +2291,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Creating an identity provider.</p>
-</dd><dt class="property-optional"
+    <dd>Creating an identity provider.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_autoinstallpodidentitywebhookaddon_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoinstallpodidentitywebhookaddon_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Install<wbr>Pod<wbr>Identity<wbr>Webhook<wbr>Addon</a>
@@ -2626,8 +2299,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Creating the PodIdentityWebhook component. if <code>auto_create_oidc_config</code> is true, this field must set true.</p>
-</dd><dt class="property-optional"
+    <dd>Creating the PodIdentityWebhook component. if <code>autoCreateOidcConfig</code> is true, this field must set true.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -2635,8 +2307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of clusters.</p>
-</dd><dt class="property-optional"
+    <dd>ID of clusters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_issuer_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_issuer_yaml" style="color: inherit; text-decoration: inherit;">issuer</a>
@@ -2644,8 +2315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify service-account-issuer. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-issuer. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jwksuri_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jwksuri_yaml" style="color: inherit; text-decoration: inherit;">jwks<wbr>Uri</a>
@@ -2653,8 +2323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specify service-account-jwks-uri. If use_tke_default is set to <code>true</code>, please do not set this field.</p>
-</dd><dt class="property-optional"
+    <dd>Specify service-account-jwks-uri. If <code>useTkeDefault</code> is set to <code>true</code>, please do not set this field.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tkedefaultissuer_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tkedefaultissuer_yaml" style="color: inherit; text-decoration: inherit;">tke<wbr>Default<wbr>Issuer</a>
@@ -2662,8 +2331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default issuer of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-optional"
+    <dd>The default issuer of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tkedefaultjwksuri_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tkedefaultjwksuri_yaml" style="color: inherit; text-decoration: inherit;">tke<wbr>Default<wbr>Jwks<wbr>Uri</a>
@@ -2671,8 +2339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The default jwks_uri of tke. If use_tke_default is set to <code>true</code>, this parameter will be set to the default value.</p>
-</dd><dt class="property-optional"
+    <dd>The default jwksUri of tke. If <code>useTkeDefault</code> is set to <code>true</code>, this parameter will be set to the default value.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_usetkedefault_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_usetkedefault_yaml" style="color: inherit; text-decoration: inherit;">use<wbr>Tke<wbr>Default</a>
@@ -2680,8 +2347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>If set to <code>true</code>, the issuer and jwks_uri will be generated automatically by tke, please do not set issuer and jwks_uri.</p>
-</dd></dl>
+    <dd>If set to <code>true</code>, the <code>issuer</code> and <code>jwksUri</code> will be generated automatically by tke, please do not set <code>issuer</code> and <code>jwksUri</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2696,12 +2362,15 @@ The following state arguments are supported:
 
 
 
-tke cluster authentication can be imported, e.g.
+TKE cluster authentication can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment test cls-xxx
+$ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment example cls-fp5o961e
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2713,7 +2382,6 @@ $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment test cls-x
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "CcPolicyV2"
 title_tag: "tencentcloud.Dayu.CcPolicyV2"
-meta_desc: "Documentation for the tencentcloud.Dayu.CcPolicyV2 resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create a dayu CC policy"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,39 +18,50 @@ Use this resource to create a dayu CC policy
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const demo = new tencentcloud.dayu.CcPolicyV2("demo", {
+    resourceId: "bgpip-000004xf",
     business: "bgpip",
-    ccBlackWhiteIps: [{
-        blackWhiteIp: "1.2.3.4",
+    thresholds: [{
         domain: "12.com",
-        protocol: "http",
-        type: "black",
+        threshold: 0,
     }],
     ccGeoIpPolicys: [{
         action: "drop",
+        regionType: "china",
         domain: "12.com",
         protocol: "http",
-        regionType: "china",
+    }],
+    ccBlackWhiteIps: [{
+        protocol: "http",
+        domain: "12.com",
+        blackWhiteIp: "1.2.3.4",
+        type: "black",
     }],
     ccPrecisionPolicys: [{
-        domain: "1.com",
-        ip: "162.62.163.34",
         policyAction: "drop",
+        domain: "1.com",
+        protocol: "http",
+        ip: "162.62.163.34",
         policys: [{
             fieldName: "cgi",
             fieldType: "value",
             value: "12123.com",
             valueOperator: "equal",
         }],
-        protocol: "http",
     }],
     ccPrecisionReqLimits: [{
         domain: "11.com",
+        protocol: "http",
         level: "loose",
         policys: [{
             action: "alg",
@@ -58,64 +71,149 @@ const demo = new tencentcloud.dayu.CcPolicyV2("demo", {
             requestNum: 12,
             uri: "15.com",
         }],
-        protocol: "http",
-    }],
-    resourceId: "bgpip-000004xf",
-    thresholds: [{
-        domain: "12.com",
-        threshold: 0,
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 demo = tencentcloud.dayu.CcPolicyV2("demo",
-    business="bgpip",
-    cc_black_white_ips=[tencentcloud.dayu.CcPolicyV2CcBlackWhiteIpArgs(
-        black_white_ip="1.2.3.4",
-        domain="12.com",
-        protocol="http",
-        type="black",
-    )],
-    cc_geo_ip_policys=[tencentcloud.dayu.CcPolicyV2CcGeoIpPolicyArgs(
-        action="drop",
-        domain="12.com",
-        protocol="http",
-        region_type="china",
-    )],
-    cc_precision_policys=[tencentcloud.dayu.CcPolicyV2CcPrecisionPolicyArgs(
-        domain="1.com",
-        ip="162.62.163.34",
-        policy_action="drop",
-        policys=[tencentcloud.dayu.CcPolicyV2CcPrecisionPolicyPolicyArgs(
-            field_name="cgi",
-            field_type="value",
-            value="12123.com",
-            value_operator="equal",
-        )],
-        protocol="http",
-    )],
-    cc_precision_req_limits=[tencentcloud.dayu.CcPolicyV2CcPrecisionReqLimitArgs(
-        domain="11.com",
-        level="loose",
-        policys=[tencentcloud.dayu.CcPolicyV2CcPrecisionReqLimitPolicyArgs(
-            action="alg",
-            execute_duration=2,
-            mode="equal",
-            period=5,
-            request_num=12,
-            uri="15.com",
-        )],
-        protocol="http",
-    )],
     resource_id="bgpip-000004xf",
-    thresholds=[tencentcloud.dayu.CcPolicyV2ThresholdArgs(
-        domain="12.com",
-        threshold=0,
-    )])
+    business="bgpip",
+    thresholds=[{
+        "domain": "12.com",
+        "threshold": 0,
+    }],
+    cc_geo_ip_policys=[{
+        "action": "drop",
+        "region_type": "china",
+        "domain": "12.com",
+        "protocol": "http",
+    }],
+    cc_black_white_ips=[{
+        "protocol": "http",
+        "domain": "12.com",
+        "black_white_ip": "1.2.3.4",
+        "type": "black",
+    }],
+    cc_precision_policys=[{
+        "policy_action": "drop",
+        "domain": "1.com",
+        "protocol": "http",
+        "ip": "162.62.163.34",
+        "policys": [{
+            "field_name": "cgi",
+            "field_type": "value",
+            "value": "12123.com",
+            "value_operator": "equal",
+        }],
+    }],
+    cc_precision_req_limits=[{
+        "domain": "11.com",
+        "protocol": "http",
+        "level": "loose",
+        "policys": [{
+            "action": "alg",
+            "execute_duration": 2,
+            "mode": "equal",
+            "period": 5,
+            "request_num": 12,
+            "uri": "15.com",
+        }],
+    }])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dayu"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dayu.NewCcPolicyV2(ctx, "demo", &dayu.CcPolicyV2Args{
+			ResourceId: pulumi.String("bgpip-000004xf"),
+			Business:   pulumi.String("bgpip"),
+			Thresholds: dayu.CcPolicyV2ThresholdArray{
+				&dayu.CcPolicyV2ThresholdArgs{
+					Domain:    pulumi.String("12.com"),
+					Threshold: pulumi.Int(0),
+				},
+			},
+			CcGeoIpPolicys: dayu.CcPolicyV2CcGeoIpPolicyArray{
+				&dayu.CcPolicyV2CcGeoIpPolicyArgs{
+					Action:     pulumi.String("drop"),
+					RegionType: pulumi.String("china"),
+					Domain:     pulumi.String("12.com"),
+					Protocol:   pulumi.String("http"),
+				},
+			},
+			CcBlackWhiteIps: dayu.CcPolicyV2CcBlackWhiteIpArray{
+				&dayu.CcPolicyV2CcBlackWhiteIpArgs{
+					Protocol:     pulumi.String("http"),
+					Domain:       pulumi.String("12.com"),
+					BlackWhiteIp: pulumi.String("1.2.3.4"),
+					Type:         pulumi.String("black"),
+				},
+			},
+			CcPrecisionPolicys: dayu.CcPolicyV2CcPrecisionPolicyArray{
+				&dayu.CcPolicyV2CcPrecisionPolicyArgs{
+					PolicyAction: pulumi.String("drop"),
+					Domain:       pulumi.String("1.com"),
+					Protocol:     pulumi.String("http"),
+					Ip:           pulumi.String("162.62.163.34"),
+					Policys: dayu.CcPolicyV2CcPrecisionPolicyPolicyArray{
+						&dayu.CcPolicyV2CcPrecisionPolicyPolicyArgs{
+							FieldName:     pulumi.String("cgi"),
+							FieldType:     pulumi.String("value"),
+							Value:         pulumi.String("12123.com"),
+							ValueOperator: pulumi.String("equal"),
+						},
+					},
+				},
+			},
+			CcPrecisionReqLimits: dayu.CcPolicyV2CcPrecisionReqLimitArray{
+				&dayu.CcPolicyV2CcPrecisionReqLimitArgs{
+					Domain:   pulumi.String("11.com"),
+					Protocol: pulumi.String("http"),
+					Level:    pulumi.String("loose"),
+					Policys: dayu.CcPolicyV2CcPrecisionReqLimitPolicyArray{
+						&dayu.CcPolicyV2CcPrecisionReqLimitPolicyArgs{
+							Action:          pulumi.String("alg"),
+							ExecuteDuration: pulumi.Int(2),
+							Mode:            pulumi.String("equal"),
+							Period:          pulumi.Int(5),
+							RequestNum:      pulumi.Int(12),
+							Uri:             pulumi.String("15.com"),
+						},
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -126,15 +224,14 @@ return await Deployment.RunAsync(() =>
 {
     var demo = new Tencentcloud.Dayu.CcPolicyV2("demo", new()
     {
+        ResourceId = "bgpip-000004xf",
         Business = "bgpip",
-        CcBlackWhiteIps = new[]
+        Thresholds = new[]
         {
-            new Tencentcloud.Dayu.Inputs.CcPolicyV2CcBlackWhiteIpArgs
+            new Tencentcloud.Dayu.Inputs.CcPolicyV2ThresholdArgs
             {
-                BlackWhiteIp = "1.2.3.4",
                 Domain = "12.com",
-                Protocol = "http",
-                Type = "black",
+                Threshold = 0,
             },
         },
         CcGeoIpPolicys = new[]
@@ -142,18 +239,29 @@ return await Deployment.RunAsync(() =>
             new Tencentcloud.Dayu.Inputs.CcPolicyV2CcGeoIpPolicyArgs
             {
                 Action = "drop",
+                RegionType = "china",
                 Domain = "12.com",
                 Protocol = "http",
-                RegionType = "china",
+            },
+        },
+        CcBlackWhiteIps = new[]
+        {
+            new Tencentcloud.Dayu.Inputs.CcPolicyV2CcBlackWhiteIpArgs
+            {
+                Protocol = "http",
+                Domain = "12.com",
+                BlackWhiteIp = "1.2.3.4",
+                Type = "black",
             },
         },
         CcPrecisionPolicys = new[]
         {
             new Tencentcloud.Dayu.Inputs.CcPolicyV2CcPrecisionPolicyArgs
             {
-                Domain = "1.com",
-                Ip = "162.62.163.34",
                 PolicyAction = "drop",
+                Domain = "1.com",
+                Protocol = "http",
+                Ip = "162.62.163.34",
                 Policys = new[]
                 {
                     new Tencentcloud.Dayu.Inputs.CcPolicyV2CcPrecisionPolicyPolicyArgs
@@ -164,7 +272,6 @@ return await Deployment.RunAsync(() =>
                         ValueOperator = "equal",
                     },
                 },
-                Protocol = "http",
             },
         },
         CcPrecisionReqLimits = new[]
@@ -172,6 +279,7 @@ return await Deployment.RunAsync(() =>
             new Tencentcloud.Dayu.Inputs.CcPolicyV2CcPrecisionReqLimitArgs
             {
                 Domain = "11.com",
+                Protocol = "http",
                 Level = "loose",
                 Policys = new[]
                 {
@@ -185,98 +293,17 @@ return await Deployment.RunAsync(() =>
                         Uri = "15.com",
                     },
                 },
-                Protocol = "http",
-            },
-        },
-        ResourceId = "bgpip-000004xf",
-        Thresholds = new[]
-        {
-            new Tencentcloud.Dayu.Inputs.CcPolicyV2ThresholdArgs
-            {
-                Domain = "12.com",
-                Threshold = 0,
             },
         },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dayu.NewCcPolicyV2(ctx, "demo", &Dayu.CcPolicyV2Args{
-			Business: pulumi.String("bgpip"),
-			CcBlackWhiteIps: dayu.CcPolicyV2CcBlackWhiteIpArray{
-				&dayu.CcPolicyV2CcBlackWhiteIpArgs{
-					BlackWhiteIp: pulumi.String("1.2.3.4"),
-					Domain:       pulumi.String("12.com"),
-					Protocol:     pulumi.String("http"),
-					Type:         pulumi.String("black"),
-				},
-			},
-			CcGeoIpPolicys: dayu.CcPolicyV2CcGeoIpPolicyArray{
-				&dayu.CcPolicyV2CcGeoIpPolicyArgs{
-					Action:     pulumi.String("drop"),
-					Domain:     pulumi.String("12.com"),
-					Protocol:   pulumi.String("http"),
-					RegionType: pulumi.String("china"),
-				},
-			},
-			CcPrecisionPolicys: dayu.CcPolicyV2CcPrecisionPolicyArray{
-				&dayu.CcPolicyV2CcPrecisionPolicyArgs{
-					Domain:       pulumi.String("1.com"),
-					Ip:           pulumi.String("162.62.163.34"),
-					PolicyAction: pulumi.String("drop"),
-					Policys: dayu.CcPolicyV2CcPrecisionPolicyPolicyArray{
-						&dayu.CcPolicyV2CcPrecisionPolicyPolicyArgs{
-							FieldName:     pulumi.String("cgi"),
-							FieldType:     pulumi.String("value"),
-							Value:         pulumi.String("12123.com"),
-							ValueOperator: pulumi.String("equal"),
-						},
-					},
-					Protocol: pulumi.String("http"),
-				},
-			},
-			CcPrecisionReqLimits: dayu.CcPolicyV2CcPrecisionReqLimitArray{
-				&dayu.CcPolicyV2CcPrecisionReqLimitArgs{
-					Domain: pulumi.String("11.com"),
-					Level:  pulumi.String("loose"),
-					Policys: dayu.CcPolicyV2CcPrecisionReqLimitPolicyArray{
-						&dayu.CcPolicyV2CcPrecisionReqLimitPolicyArgs{
-							Action:          pulumi.String("alg"),
-							ExecuteDuration: pulumi.Int(2),
-							Mode:            pulumi.String("equal"),
-							Period:          pulumi.Int(5),
-							RequestNum:      pulumi.Int(12),
-							Uri:             pulumi.String("15.com"),
-						},
-					},
-					Protocol: pulumi.String("http"),
-				},
-			},
-			ResourceId: pulumi.String("bgpip-000004xf"),
-			Thresholds: dayu.CcPolicyV2ThresholdArray{
-				&dayu.CcPolicyV2ThresholdArgs{
-					Domain:    pulumi.String("12.com"),
-					Threshold: pulumi.Int(0),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -285,13 +312,15 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dayu.CcPolicyV2;
 import com.pulumi.tencentcloud.Dayu.CcPolicyV2Args;
-import com.pulumi.tencentcloud.Dayu.inputs.CcPolicyV2CcBlackWhiteIpArgs;
-import com.pulumi.tencentcloud.Dayu.inputs.CcPolicyV2CcGeoIpPolicyArgs;
-import com.pulumi.tencentcloud.Dayu.inputs.CcPolicyV2CcPrecisionPolicyArgs;
-import com.pulumi.tencentcloud.Dayu.inputs.CcPolicyV2CcPrecisionReqLimitArgs;
 import com.pulumi.tencentcloud.Dayu.inputs.CcPolicyV2ThresholdArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Dayu.inputs.CcPolicyV2CcGeoIpPolicyArgs;
+import com.pulumi.tencentcloud.Dayu.inputs.CcPolicyV2CcBlackWhiteIpArgs;
+import com.pulumi.tencentcloud.Dayu.inputs.CcPolicyV2CcPrecisionPolicyArgs;
+import com.pulumi.tencentcloud.Dayu.inputs.CcPolicyV2CcPrecisionPolicyPolicyArgs;
+import com.pulumi.tencentcloud.Dayu.inputs.CcPolicyV2CcPrecisionReqLimitArgs;
+import com.pulumi.tencentcloud.Dayu.inputs.CcPolicyV2CcPrecisionReqLimitPolicyArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -303,34 +332,40 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var demo = new CcPolicyV2("demo", CcPolicyV2Args.builder()        
+        var demo = new CcPolicyV2("demo", CcPolicyV2Args.builder()
+            .resourceId("bgpip-000004xf")
             .business("bgpip")
-            .ccBlackWhiteIps(CcPolicyV2CcBlackWhiteIpArgs.builder()
-                .blackWhiteIp("1.2.3.4")
+            .thresholds(CcPolicyV2ThresholdArgs.builder()
                 .domain("12.com")
-                .protocol("http")
-                .type("black")
+                .threshold(0)
                 .build())
             .ccGeoIpPolicys(CcPolicyV2CcGeoIpPolicyArgs.builder()
                 .action("drop")
+                .regionType("china")
                 .domain("12.com")
                 .protocol("http")
-                .regionType("china")
+                .build())
+            .ccBlackWhiteIps(CcPolicyV2CcBlackWhiteIpArgs.builder()
+                .protocol("http")
+                .domain("12.com")
+                .blackWhiteIp("1.2.3.4")
+                .type("black")
                 .build())
             .ccPrecisionPolicys(CcPolicyV2CcPrecisionPolicyArgs.builder()
-                .domain("1.com")
-                .ip("162.62.163.34")
                 .policyAction("drop")
+                .domain("1.com")
+                .protocol("http")
+                .ip("162.62.163.34")
                 .policys(CcPolicyV2CcPrecisionPolicyPolicyArgs.builder()
                     .fieldName("cgi")
                     .fieldType("value")
                     .value("12123.com")
                     .valueOperator("equal")
                     .build())
-                .protocol("http")
                 .build())
             .ccPrecisionReqLimits(CcPolicyV2CcPrecisionReqLimitArgs.builder()
                 .domain("11.com")
+                .protocol("http")
                 .level("loose")
                 .policys(CcPolicyV2CcPrecisionReqLimitPolicyArgs.builder()
                     .action("alg")
@@ -340,46 +375,50 @@ public class App {
                     .requestNum(12)
                     .uri("15.com")
                     .build())
-                .protocol("http")
-                .build())
-            .resourceId("bgpip-000004xf")
-            .thresholds(CcPolicyV2ThresholdArgs.builder()
-                .domain("12.com")
-                .threshold(0)
                 .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   demo:
     type: tencentcloud:Dayu:CcPolicyV2
     properties:
+      resourceId: bgpip-000004xf
       business: bgpip
-      ccBlackWhiteIps:
-        - blackWhiteIp: 1.2.3.4
-          domain: 12.com
-          protocol: http
-          type: black
+      thresholds:
+        - domain: 12.com
+          threshold: 0
       ccGeoIpPolicys:
         - action: drop
+          regionType: china
           domain: 12.com
           protocol: http
-          regionType: china
+      ccBlackWhiteIps:
+        - protocol: http
+          domain: 12.com
+          blackWhiteIp: 1.2.3.4
+          type: black
       ccPrecisionPolicys:
-        - domain: 1.com
+        - policyAction: drop
+          domain: 1.com
+          protocol: http
           ip: 162.62.163.34
-          policyAction: drop
           policys:
             - fieldName: cgi
               fieldType: value
               value: 12123.com
               valueOperator: equal
-          protocol: http
       ccPrecisionReqLimits:
         - domain: 11.com
+          protocol: http
           level: loose
           policys:
             - action: alg
@@ -388,78 +427,200 @@ resources:
               period: 5
               requestNum: 12
               uri: 15.com
-          protocol: http
-      resourceId: bgpip-000004xf
-      thresholds:
-        - domain: 12.com
-          threshold: 0
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_dayu_ccpolicyv2" "demo" {
+  resource_id = "bgpip-000004xf"
+  business    = "bgpip"
+  thresholds {
+    domain    = "12.com"
+    threshold = 0
+  }
+  cc_geo_ip_policys {
+    action      = "drop"
+    region_type = "china"
+    domain      = "12.com"
+    protocol    = "http"
+  }
+  cc_black_white_ips {
+    protocol       = "http"
+    domain         = "12.com"
+    black_white_ip = "1.2.3.4"
+    type           = "black"
+  }
+  cc_precision_policys {
+    policy_action = "drop"
+    domain        = "1.com"
+    protocol      = "http"
+    ip            = "162.62.163.34"
+    policys {
+      field_name     = "cgi"
+      field_type     = "value"
+      value          = "12123.com"
+      value_operator = "equal"
+    }
+  }
+  cc_precision_req_limits {
+    domain   = "11.com"
+    protocol = "http"
+    level    = "loose"
+    policys {
+      action           = "alg"
+      execute_duration = 2
+      mode             = "equal"
+      period           = 5
+      request_num      = 12
+      uri              = "15.com"
+    }
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateCCPrecisionPolicy](https://www.tencentcloud.com/document/api/1213/61396)
+  - [CreateCCReqLimitPolicy](https://www.tencentcloud.com/document/api/1213/61395)
+  - [CreateCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61383)
+  - [CreateCcGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61382)
+  - [DescribeListProtectThresholdConfigNew](https://www.tencentcloud.com/search/?wd=DescribeListProtectThresholdConfigNew&type=document&lang=en)
+  - [ModifyCCLevelPolicy](https://www.tencentcloud.com/search/?wd=ModifyCCLevelPolicy&type=document&lang=en)
+  - [ModifyCCThresholdPolicy](https://www.tencentcloud.com/search/?wd=ModifyCCThresholdPolicy&type=document&lang=en)
+* Read:
+  - [DescribeCCLevelList](https://www.tencentcloud.com/document/api/1213/61390)
+  - [DescribeCCPrecisionPlyList](https://www.tencentcloud.com/document/api/1213/61388)
+  - [DescribeCCReqLimitPolicyList](https://www.tencentcloud.com/search/?wd=DescribeCCReqLimitPolicyList&type=document&lang=en)
+  - [DescribeCCThresholdList](https://www.tencentcloud.com/document/api/1213/61387)
+  - [DescribeCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61366)
+  - [DescribeCcGeoIPBlockConfigList](https://www.tencentcloud.com/document/api/1213/61365)
+* Update:
+  - [CreateCCPrecisionPolicy](https://www.tencentcloud.com/document/api/1213/61396)
+  - [CreateCCReqLimitPolicy](https://www.tencentcloud.com/document/api/1213/61395)
+  - [CreateCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61383)
+  - [CreateCcGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61382)
+  - [DeleteCCLevelPolicy](https://www.tencentcloud.com/document/api/1213/61394)
+  - [DeleteCCPrecisionPolicy](https://www.tencentcloud.com/document/api/1213/61393)
+  - [DeleteCCRequestLimitPolicy](https://www.tencentcloud.com/search/?wd=DeleteCCRequestLimitPolicy&type=document&lang=en)
+  - [DeleteCCThresholdPolicy](https://www.tencentcloud.com/document/api/1213/61392)
+  - [DeleteCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61374)
+  - [DeleteCcGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61373)
+  - [DescribeCCPrecisionPlyList](https://www.tencentcloud.com/document/api/1213/61388)
+  - [DescribeCCReqLimitPolicyList](https://www.tencentcloud.com/search/?wd=DescribeCCReqLimitPolicyList&type=document&lang=en)
+  - [DescribeCCThresholdList](https://www.tencentcloud.com/document/api/1213/61387)
+  - [DescribeCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61366)
+  - [DescribeCcGeoIPBlockConfigList](https://www.tencentcloud.com/document/api/1213/61365)
+  - [DescribeListProtectThresholdConfigNew](https://www.tencentcloud.com/search/?wd=DescribeListProtectThresholdConfigNew&type=document&lang=en)
+  - [ModifyCCLevelPolicy](https://www.tencentcloud.com/search/?wd=ModifyCCLevelPolicy&type=document&lang=en)
+  - [ModifyCCThresholdPolicy](https://www.tencentcloud.com/search/?wd=ModifyCCThresholdPolicy&type=document&lang=en)
+* Delete:
+  - [DeleteCCLevelPolicy](https://www.tencentcloud.com/document/api/1213/61394)
+  - [DeleteCCPrecisionPolicy](https://www.tencentcloud.com/document/api/1213/61393)
+  - [DeleteCCThresholdPolicy](https://www.tencentcloud.com/document/api/1213/61392)
+  - [DeleteCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61374)
+  - [DeleteCcGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61373)
+  - [DescribeCCLevelList](https://www.tencentcloud.com/document/api/1213/61390)
+  - [DescribeCCPrecisionPlyList](https://www.tencentcloud.com/document/api/1213/61388)
+  - [DescribeCCReqLimitPolicyList](https://www.tencentcloud.com/search/?wd=DescribeCCReqLimitPolicyList&type=document&lang=en)
+  - [DescribeCCThresholdList](https://www.tencentcloud.com/document/api/1213/61387)
+  - [DescribeCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61366)
+  - [DescribeCcGeoIPBlockConfigList](https://www.tencentcloud.com/document/api/1213/61365)
 
 
 
 ## Create CcPolicyV2 Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">CcPolicyV2</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CcPolicyV2Args</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">CcPolicyV2</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CcPolicyV2Args</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">CcPolicyV2</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CcPolicyV2Args</a></span><span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">CcPolicyV2</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                <span class="nx">business</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">cc_black_white_ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.CcPolicyV2CcBlackWhiteIpArgs]]</span> = None<span class="p">,</span>
-               <span class="nx">cc_geo_ip_policys</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.CcPolicyV2CcGeoIpPolicyArgs]]</span> = None<span class="p">,</span>
-               <span class="nx">cc_precision_policys</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.CcPolicyV2CcPrecisionPolicyArgs]]</span> = None<span class="p">,</span>
-               <span class="nx">cc_precision_req_limits</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.CcPolicyV2CcPrecisionReqLimitArgs]]</span> = None<span class="p">,</span>
                <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">thresholds</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.CcPolicyV2ThresholdArgs]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">CcPolicyV2</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">CcPolicyV2Args</a></span><span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+               <span class="nx">cc_black_white_ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[CcPolicyV2CcBlackWhiteIpArgs]]</span> = None<span class="p">,</span>
+               <span class="nx">cc_geo_ip_policys</span><span class="p">:</span> <span class="nx">Optional[Sequence[CcPolicyV2CcGeoIpPolicyArgs]]</span> = None<span class="p">,</span>
+               <span class="nx">cc_precision_policys</span><span class="p">:</span> <span class="nx">Optional[Sequence[CcPolicyV2CcPrecisionPolicyArgs]]</span> = None<span class="p">,</span>
+               <span class="nx">cc_precision_req_limits</span><span class="p">:</span> <span class="nx">Optional[Sequence[CcPolicyV2CcPrecisionReqLimitArgs]]</span> = None<span class="p">,</span>
+               <span class="nx">thresholds</span><span class="p">:</span> <span class="nx">Optional[Sequence[CcPolicyV2ThresholdArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCcPolicyV2</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">CcPolicyV2Args</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CcPolicyV2</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewCcPolicyV2</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">CcPolicyV2Args</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CcPolicyV2</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">CcPolicyV2</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CcPolicyV2Args</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">CcPolicyV2</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CcPolicyV2Args</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">CcPolicyV2</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CcPolicyV2Args</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">CcPolicyV2</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">CcPolicyV2Args</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dayu:CcPolicyV2</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dayu:CcPolicyV2</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_dayu_cc_policy_v2&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -480,7 +641,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -597,11 +758,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## CcPolicyV2 Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -617,8 +786,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-required"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -626,53 +794,47 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccblackwhiteips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccblackwhiteips_csharp" style="color: inherit; text-decoration: inherit;">Cc<wbr>Black<wbr>White<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip&gt;</a></span>
     </dt>
-    <dd><p>Blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccgeoippolicys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccgeoippolicys_csharp" style="color: inherit; text-decoration: inherit;">Cc<wbr>Geo<wbr>Ip<wbr>Policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>Details of the CC region blocking policy list.</p>
-</dd><dt class="property-optional"
+    <dd>Details of the CC region blocking policy list.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccprecisionpolicys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccprecisionpolicys_csharp" style="color: inherit; text-decoration: inherit;">Cc<wbr>Precision<wbr>Policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>CC Precision Protection List.</p>
-</dd><dt class="property-optional"
+    <dd>CC Precision Protection List.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccprecisionreqlimits_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccprecisionreqlimits_csharp" style="color: inherit; text-decoration: inherit;">Cc<wbr>Precision<wbr>Req<wbr>Limits</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit&gt;</a></span>
     </dt>
-    <dd><p>CC frequency throttling policy.</p>
-</dd><dt class="property-optional"
+    <dd>CC frequency throttling policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="thresholds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#thresholds_csharp" style="color: inherit; text-decoration: inherit;">Thresholds</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2threshold">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Threshold<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2threshold">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Threshold&gt;</a></span>
     </dt>
-    <dd><p>List of protection threshold configurations.</p>
-</dd></dl>
+    <dd>List of protection threshold configurations.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -686,8 +848,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-required"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -695,8 +856,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccblackwhiteips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccblackwhiteips_go" style="color: inherit; text-decoration: inherit;">Cc<wbr>Black<wbr>White<wbr>Ips</a>
@@ -704,8 +864,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">[]Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Args</a></span>
     </dt>
-    <dd><p>Blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccgeoippolicys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccgeoippolicys_go" style="color: inherit; text-decoration: inherit;">Cc<wbr>Geo<wbr>Ip<wbr>Policys</a>
@@ -713,8 +872,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">[]Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy<wbr>Args</a></span>
     </dt>
-    <dd><p>Details of the CC region blocking policy list.</p>
-</dd><dt class="property-optional"
+    <dd>Details of the CC region blocking policy list.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccprecisionpolicys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccprecisionpolicys_go" style="color: inherit; text-decoration: inherit;">Cc<wbr>Precision<wbr>Policys</a>
@@ -722,8 +880,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">[]Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Args</a></span>
     </dt>
-    <dd><p>CC Precision Protection List.</p>
-</dd><dt class="property-optional"
+    <dd>CC Precision Protection List.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccprecisionreqlimits_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccprecisionreqlimits_go" style="color: inherit; text-decoration: inherit;">Cc<wbr>Precision<wbr>Req<wbr>Limits</a>
@@ -731,8 +888,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">[]Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Args</a></span>
     </dt>
-    <dd><p>CC frequency throttling policy.</p>
-</dd><dt class="property-optional"
+    <dd>CC frequency throttling policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="thresholds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#thresholds_go" style="color: inherit; text-decoration: inherit;">Thresholds</a>
@@ -740,8 +896,69 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2threshold">[]Cc<wbr>Policy<wbr>V2Threshold<wbr>Args</a></span>
     </dt>
-    <dd><p>List of protection threshold configurations.</p>
-</dd></dl>
+    <dd>List of protection threshold configurations.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="business_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#business_hcl" style="color: inherit; text-decoration: inherit;">business</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cc_black_white_ips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cc_black_white_ips_hcl" style="color: inherit; text-decoration: inherit;">cc_<wbr>black_<wbr>white_<wbr>ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">list(object)</a></span>
+    </dt>
+    <dd>Blacklist and whitelist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cc_geo_ip_policys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cc_geo_ip_policys_hcl" style="color: inherit; text-decoration: inherit;">cc_<wbr>geo_<wbr>ip_<wbr>policys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">list(object)</a></span>
+    </dt>
+    <dd>Details of the CC region blocking policy list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cc_precision_policys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cc_precision_policys_hcl" style="color: inherit; text-decoration: inherit;">cc_<wbr>precision_<wbr>policys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">list(object)</a></span>
+    </dt>
+    <dd>CC Precision Protection List.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cc_precision_req_limits_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cc_precision_req_limits_hcl" style="color: inherit; text-decoration: inherit;">cc_<wbr>precision_<wbr>req_<wbr>limits</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">list(object)</a></span>
+    </dt>
+    <dd>CC frequency throttling policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="thresholds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#thresholds_hcl" style="color: inherit; text-decoration: inherit;">thresholds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ccpolicyv2threshold">list(object)</a></span>
+    </dt>
+    <dd>List of protection threshold configurations.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -755,8 +972,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-required"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -764,53 +980,47 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccblackwhiteips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccblackwhiteips_java" style="color: inherit; text-decoration: inherit;">cc<wbr>Black<wbr>White<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip&gt;</a></span>
     </dt>
-    <dd><p>Blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccgeoippolicys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccgeoippolicys_java" style="color: inherit; text-decoration: inherit;">cc<wbr>Geo<wbr>Ip<wbr>Policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>Details of the CC region blocking policy list.</p>
-</dd><dt class="property-optional"
+    <dd>Details of the CC region blocking policy list.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccprecisionpolicys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccprecisionpolicys_java" style="color: inherit; text-decoration: inherit;">cc<wbr>Precision<wbr>Policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>CC Precision Protection List.</p>
-</dd><dt class="property-optional"
+    <dd>CC Precision Protection List.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccprecisionreqlimits_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccprecisionreqlimits_java" style="color: inherit; text-decoration: inherit;">cc<wbr>Precision<wbr>Req<wbr>Limits</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit&gt;</a></span>
     </dt>
-    <dd><p>CC frequency throttling policy.</p>
-</dd><dt class="property-optional"
+    <dd>CC frequency throttling policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="thresholds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#thresholds_java" style="color: inherit; text-decoration: inherit;">thresholds</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2threshold">List&lt;Cc<wbr>Policy<wbr>V2Threshold<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2threshold">List&lt;Cc<wbr>Policy<wbr>V2Threshold&gt;</a></span>
     </dt>
-    <dd><p>List of protection threshold configurations.</p>
-</dd></dl>
+    <dd>List of protection threshold configurations.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -824,8 +1034,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-required"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -833,53 +1042,47 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccblackwhiteips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccblackwhiteips_nodejs" style="color: inherit; text-decoration: inherit;">cc<wbr>Black<wbr>White<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip[]</a></span>
     </dt>
-    <dd><p>Blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccgeoippolicys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccgeoippolicys_nodejs" style="color: inherit; text-decoration: inherit;">cc<wbr>Geo<wbr>Ip<wbr>Policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy[]</a></span>
     </dt>
-    <dd><p>Details of the CC region blocking policy list.</p>
-</dd><dt class="property-optional"
+    <dd>Details of the CC region blocking policy list.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccprecisionpolicys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccprecisionpolicys_nodejs" style="color: inherit; text-decoration: inherit;">cc<wbr>Precision<wbr>Policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy[]</a></span>
     </dt>
-    <dd><p>CC Precision Protection List.</p>
-</dd><dt class="property-optional"
+    <dd>CC Precision Protection List.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccprecisionreqlimits_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccprecisionreqlimits_nodejs" style="color: inherit; text-decoration: inherit;">cc<wbr>Precision<wbr>Req<wbr>Limits</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit[]</a></span>
     </dt>
-    <dd><p>CC frequency throttling policy.</p>
-</dd><dt class="property-optional"
+    <dd>CC frequency throttling policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="thresholds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#thresholds_nodejs" style="color: inherit; text-decoration: inherit;">thresholds</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2threshold">Cc<wbr>Policy<wbr>V2Threshold<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2threshold">Cc<wbr>Policy<wbr>V2Threshold[]</a></span>
     </dt>
-    <dd><p>List of protection threshold configurations.</p>
-</dd></dl>
+    <dd>List of protection threshold configurations.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -893,8 +1096,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-required"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-required"
             title="Required">
         <span id="resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -902,53 +1104,47 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cc_black_white_ips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cc_black_white_ips_python" style="color: inherit; text-decoration: inherit;">cc_<wbr>black_<wbr>white_<wbr>ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">Sequence[Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Args]</a></span>
     </dt>
-    <dd><p>Blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="cc_geo_ip_policys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cc_geo_ip_policys_python" style="color: inherit; text-decoration: inherit;">cc_<wbr>geo_<wbr>ip_<wbr>policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">Sequence[Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy<wbr>Args]</a></span>
     </dt>
-    <dd><p>Details of the CC region blocking policy list.</p>
-</dd><dt class="property-optional"
+    <dd>Details of the CC region blocking policy list.</dd><dt class="property-optional"
             title="Optional">
         <span id="cc_precision_policys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cc_precision_policys_python" style="color: inherit; text-decoration: inherit;">cc_<wbr>precision_<wbr>policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">Sequence[Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Args]</a></span>
     </dt>
-    <dd><p>CC Precision Protection List.</p>
-</dd><dt class="property-optional"
+    <dd>CC Precision Protection List.</dd><dt class="property-optional"
             title="Optional">
         <span id="cc_precision_req_limits_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cc_precision_req_limits_python" style="color: inherit; text-decoration: inherit;">cc_<wbr>precision_<wbr>req_<wbr>limits</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">Sequence[Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Args]</a></span>
     </dt>
-    <dd><p>CC frequency throttling policy.</p>
-</dd><dt class="property-optional"
+    <dd>CC frequency throttling policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="thresholds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#thresholds_python" style="color: inherit; text-decoration: inherit;">thresholds</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2threshold">Cc<wbr>Policy<wbr>V2Threshold<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2threshold">Sequence[Cc<wbr>Policy<wbr>V2Threshold<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of protection threshold configurations.</p>
-</dd></dl>
+    <dd>List of protection threshold configurations.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -962,8 +1158,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-required"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-required"
             title="Required">
         <span id="resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -971,8 +1166,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccblackwhiteips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccblackwhiteips_yaml" style="color: inherit; text-decoration: inherit;">cc<wbr>Black<wbr>White<wbr>Ips</a>
@@ -980,8 +1174,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccgeoippolicys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccgeoippolicys_yaml" style="color: inherit; text-decoration: inherit;">cc<wbr>Geo<wbr>Ip<wbr>Policys</a>
@@ -989,8 +1182,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Details of the CC region blocking policy list.</p>
-</dd><dt class="property-optional"
+    <dd>Details of the CC region blocking policy list.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccprecisionpolicys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccprecisionpolicys_yaml" style="color: inherit; text-decoration: inherit;">cc<wbr>Precision<wbr>Policys</a>
@@ -998,8 +1190,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>CC Precision Protection List.</p>
-</dd><dt class="property-optional"
+    <dd>CC Precision Protection List.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccprecisionreqlimits_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccprecisionreqlimits_yaml" style="color: inherit; text-decoration: inherit;">cc<wbr>Precision<wbr>Req<wbr>Limits</a>
@@ -1007,8 +1198,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>CC frequency throttling policy.</p>
-</dd><dt class="property-optional"
+    <dd>CC frequency throttling policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="thresholds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#thresholds_yaml" style="color: inherit; text-decoration: inherit;">thresholds</a>
@@ -1016,8 +1206,7 @@ The CcPolicyV2 resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2threshold">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of protection threshold configurations.</p>
-</dd></dl>
+    <dd>List of protection threshold configurations.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1038,8 +1227,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1053,8 +1241,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1068,8 +1269,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1083,8 +1283,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1098,8 +1297,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1113,8 +1311,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1124,126 +1321,165 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing CcPolicyV2 resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">CcPolicyV2State</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">CcPolicyV2</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">CcPolicyV2State</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">CcPolicyV2</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">business</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">cc_black_white_ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.CcPolicyV2CcBlackWhiteIpArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">cc_geo_ip_policys</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.CcPolicyV2CcGeoIpPolicyArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">cc_precision_policys</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.CcPolicyV2CcPrecisionPolicyArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">cc_precision_req_limits</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.CcPolicyV2CcPrecisionReqLimitArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">cc_black_white_ips</span><span class="p">:</span> <span class="nx">Optional[Sequence[CcPolicyV2CcBlackWhiteIpArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">cc_geo_ip_policys</span><span class="p">:</span> <span class="nx">Optional[Sequence[CcPolicyV2CcGeoIpPolicyArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">cc_precision_policys</span><span class="p">:</span> <span class="nx">Optional[Sequence[CcPolicyV2CcPrecisionPolicyArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">cc_precision_req_limits</span><span class="p">:</span> <span class="nx">Optional[Sequence[CcPolicyV2CcPrecisionReqLimitArgs]]</span> = None<span class="p">,</span>
         <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">thresholds</span><span class="p">:</span> <span class="nx">Optional[Sequence[_dayu.CcPolicyV2ThresholdArgs]]</span> = None<span class="p">) -&gt;</span> CcPolicyV2</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">thresholds</span><span class="p">:</span> <span class="nx">Optional[Sequence[CcPolicyV2ThresholdArgs]]</span> = None<span class="p">) -&gt;</span> CcPolicyV2</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCcPolicyV2<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">CcPolicyV2State</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CcPolicyV2</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetCcPolicyV2<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">CcPolicyV2State</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">CcPolicyV2</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">CcPolicyV2</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CcPolicyV2State</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">CcPolicyV2</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CcPolicyV2State</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">CcPolicyV2</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CcPolicyV2State</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">CcPolicyV2</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">CcPolicyV2State</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingCcPolicyV2</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Dayu:CcPolicyV2</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_dayu_cc_policy_v2</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CcPolicyV2State</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CcPolicyV2State</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1251,28 +1487,31 @@ Get an existing CcPolicyV2 resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CcPolicyV2State</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1280,28 +1519,31 @@ Get an existing CcPolicyV2 resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CcPolicyV2State</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1321,44 +1563,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccblackwhiteips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccblackwhiteips_csharp" style="color: inherit; text-decoration: inherit;">Cc<wbr>Black<wbr>White<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip&gt;</a></span>
     </dt>
-    <dd><p>Blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccgeoippolicys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccgeoippolicys_csharp" style="color: inherit; text-decoration: inherit;">Cc<wbr>Geo<wbr>Ip<wbr>Policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>Details of the CC region blocking policy list.</p>
-</dd><dt class="property-optional"
+    <dd>Details of the CC region blocking policy list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccprecisionpolicys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccprecisionpolicys_csharp" style="color: inherit; text-decoration: inherit;">Cc<wbr>Precision<wbr>Policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>CC Precision Protection List.</p>
-</dd><dt class="property-optional"
+    <dd>CC Precision Protection List.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccprecisionreqlimits_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccprecisionreqlimits_csharp" style="color: inherit; text-decoration: inherit;">Cc<wbr>Precision<wbr>Req<wbr>Limits</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit&gt;</a></span>
     </dt>
-    <dd><p>CC frequency throttling policy.</p>
-</dd><dt class="property-optional"
+    <dd>CC frequency throttling policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1366,17 +1603,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_thresholds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_thresholds_csharp" style="color: inherit; text-decoration: inherit;">Thresholds</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2threshold">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Threshold<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2threshold">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Threshold&gt;</a></span>
     </dt>
-    <dd><p>List of protection threshold configurations.</p>
-</dd></dl>
+    <dd>List of protection threshold configurations.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1390,8 +1625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccblackwhiteips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccblackwhiteips_go" style="color: inherit; text-decoration: inherit;">Cc<wbr>Black<wbr>White<wbr>Ips</a>
@@ -1399,8 +1633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">[]Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Args</a></span>
     </dt>
-    <dd><p>Blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccgeoippolicys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccgeoippolicys_go" style="color: inherit; text-decoration: inherit;">Cc<wbr>Geo<wbr>Ip<wbr>Policys</a>
@@ -1408,8 +1641,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">[]Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy<wbr>Args</a></span>
     </dt>
-    <dd><p>Details of the CC region blocking policy list.</p>
-</dd><dt class="property-optional"
+    <dd>Details of the CC region blocking policy list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccprecisionpolicys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccprecisionpolicys_go" style="color: inherit; text-decoration: inherit;">Cc<wbr>Precision<wbr>Policys</a>
@@ -1417,8 +1649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">[]Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Args</a></span>
     </dt>
-    <dd><p>CC Precision Protection List.</p>
-</dd><dt class="property-optional"
+    <dd>CC Precision Protection List.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccprecisionreqlimits_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccprecisionreqlimits_go" style="color: inherit; text-decoration: inherit;">Cc<wbr>Precision<wbr>Req<wbr>Limits</a>
@@ -1426,8 +1657,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">[]Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Args</a></span>
     </dt>
-    <dd><p>CC frequency throttling policy.</p>
-</dd><dt class="property-optional"
+    <dd>CC frequency throttling policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1435,8 +1665,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_thresholds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_thresholds_go" style="color: inherit; text-decoration: inherit;">Thresholds</a>
@@ -1444,8 +1673,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2threshold">[]Cc<wbr>Policy<wbr>V2Threshold<wbr>Args</a></span>
     </dt>
-    <dd><p>List of protection threshold configurations.</p>
-</dd></dl>
+    <dd>List of protection threshold configurations.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_business_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_business_hcl" style="color: inherit; text-decoration: inherit;">business</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cc_black_white_ips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cc_black_white_ips_hcl" style="color: inherit; text-decoration: inherit;">cc_<wbr>black_<wbr>white_<wbr>ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">list(object)</a></span>
+    </dt>
+    <dd>Blacklist and whitelist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cc_geo_ip_policys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cc_geo_ip_policys_hcl" style="color: inherit; text-decoration: inherit;">cc_<wbr>geo_<wbr>ip_<wbr>policys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">list(object)</a></span>
+    </dt>
+    <dd>Details of the CC region blocking policy list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cc_precision_policys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cc_precision_policys_hcl" style="color: inherit; text-decoration: inherit;">cc_<wbr>precision_<wbr>policys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">list(object)</a></span>
+    </dt>
+    <dd>CC Precision Protection List.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cc_precision_req_limits_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cc_precision_req_limits_hcl" style="color: inherit; text-decoration: inherit;">cc_<wbr>precision_<wbr>req_<wbr>limits</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">list(object)</a></span>
+    </dt>
+    <dd>CC frequency throttling policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_thresholds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_thresholds_hcl" style="color: inherit; text-decoration: inherit;">thresholds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ccpolicyv2threshold">list(object)</a></span>
+    </dt>
+    <dd>List of protection threshold configurations.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1459,44 +1749,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccblackwhiteips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccblackwhiteips_java" style="color: inherit; text-decoration: inherit;">cc<wbr>Black<wbr>White<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip&gt;</a></span>
     </dt>
-    <dd><p>Blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccgeoippolicys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccgeoippolicys_java" style="color: inherit; text-decoration: inherit;">cc<wbr>Geo<wbr>Ip<wbr>Policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>Details of the CC region blocking policy list.</p>
-</dd><dt class="property-optional"
+    <dd>Details of the CC region blocking policy list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccprecisionpolicys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccprecisionpolicys_java" style="color: inherit; text-decoration: inherit;">cc<wbr>Precision<wbr>Policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>CC Precision Protection List.</p>
-</dd><dt class="property-optional"
+    <dd>CC Precision Protection List.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccprecisionreqlimits_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccprecisionreqlimits_java" style="color: inherit; text-decoration: inherit;">cc<wbr>Precision<wbr>Req<wbr>Limits</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit&gt;</a></span>
     </dt>
-    <dd><p>CC frequency throttling policy.</p>
-</dd><dt class="property-optional"
+    <dd>CC frequency throttling policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1504,17 +1789,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_thresholds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_thresholds_java" style="color: inherit; text-decoration: inherit;">thresholds</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2threshold">List&lt;Cc<wbr>Policy<wbr>V2Threshold<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#ccpolicyv2threshold">List&lt;Cc<wbr>Policy<wbr>V2Threshold&gt;</a></span>
     </dt>
-    <dd><p>List of protection threshold configurations.</p>
-</dd></dl>
+    <dd>List of protection threshold configurations.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1528,44 +1811,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccblackwhiteips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccblackwhiteips_nodejs" style="color: inherit; text-decoration: inherit;">cc<wbr>Black<wbr>White<wbr>Ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip[]</a></span>
     </dt>
-    <dd><p>Blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccgeoippolicys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccgeoippolicys_nodejs" style="color: inherit; text-decoration: inherit;">cc<wbr>Geo<wbr>Ip<wbr>Policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy[]</a></span>
     </dt>
-    <dd><p>Details of the CC region blocking policy list.</p>
-</dd><dt class="property-optional"
+    <dd>Details of the CC region blocking policy list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccprecisionpolicys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccprecisionpolicys_nodejs" style="color: inherit; text-decoration: inherit;">cc<wbr>Precision<wbr>Policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy[]</a></span>
     </dt>
-    <dd><p>CC Precision Protection List.</p>
-</dd><dt class="property-optional"
+    <dd>CC Precision Protection List.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccprecisionreqlimits_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccprecisionreqlimits_nodejs" style="color: inherit; text-decoration: inherit;">cc<wbr>Precision<wbr>Req<wbr>Limits</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit[]</a></span>
     </dt>
-    <dd><p>CC frequency throttling policy.</p>
-</dd><dt class="property-optional"
+    <dd>CC frequency throttling policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1573,17 +1851,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_thresholds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_thresholds_nodejs" style="color: inherit; text-decoration: inherit;">thresholds</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2threshold">Cc<wbr>Policy<wbr>V2Threshold<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2threshold">Cc<wbr>Policy<wbr>V2Threshold[]</a></span>
     </dt>
-    <dd><p>List of protection threshold configurations.</p>
-</dd></dl>
+    <dd>List of protection threshold configurations.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1597,44 +1873,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cc_black_white_ips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cc_black_white_ips_python" style="color: inherit; text-decoration: inherit;">cc_<wbr>black_<wbr>white_<wbr>ips</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">Sequence[Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Args]</a></span>
     </dt>
-    <dd><p>Blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cc_geo_ip_policys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cc_geo_ip_policys_python" style="color: inherit; text-decoration: inherit;">cc_<wbr>geo_<wbr>ip_<wbr>policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">Sequence[Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy<wbr>Args]</a></span>
     </dt>
-    <dd><p>Details of the CC region blocking policy list.</p>
-</dd><dt class="property-optional"
+    <dd>Details of the CC region blocking policy list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cc_precision_policys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cc_precision_policys_python" style="color: inherit; text-decoration: inherit;">cc_<wbr>precision_<wbr>policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">Sequence[Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Args]</a></span>
     </dt>
-    <dd><p>CC Precision Protection List.</p>
-</dd><dt class="property-optional"
+    <dd>CC Precision Protection List.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cc_precision_req_limits_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cc_precision_req_limits_python" style="color: inherit; text-decoration: inherit;">cc_<wbr>precision_<wbr>req_<wbr>limits</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">Sequence[Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Args]</a></span>
     </dt>
-    <dd><p>CC frequency throttling policy.</p>
-</dd><dt class="property-optional"
+    <dd>CC frequency throttling policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -1642,17 +1913,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_thresholds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_thresholds_python" style="color: inherit; text-decoration: inherit;">thresholds</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2threshold">Cc<wbr>Policy<wbr>V2Threshold<wbr>Args]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2threshold">Sequence[Cc<wbr>Policy<wbr>V2Threshold<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of protection threshold configurations.</p>
-</dd></dl>
+    <dd>List of protection threshold configurations.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1666,8 +1935,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</p>
-</dd><dt class="property-optional"
+    <dd>Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccblackwhiteips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccblackwhiteips_yaml" style="color: inherit; text-decoration: inherit;">cc<wbr>Black<wbr>White<wbr>Ips</a>
@@ -1675,8 +1943,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccblackwhiteip">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Blacklist and whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Blacklist and whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccgeoippolicys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccgeoippolicys_yaml" style="color: inherit; text-decoration: inherit;">cc<wbr>Geo<wbr>Ip<wbr>Policys</a>
@@ -1684,8 +1951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccgeoippolicy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Details of the CC region blocking policy list.</p>
-</dd><dt class="property-optional"
+    <dd>Details of the CC region blocking policy list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccprecisionpolicys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccprecisionpolicys_yaml" style="color: inherit; text-decoration: inherit;">cc<wbr>Precision<wbr>Policys</a>
@@ -1693,8 +1959,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>CC Precision Protection List.</p>
-</dd><dt class="property-optional"
+    <dd>CC Precision Protection List.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ccprecisionreqlimits_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ccprecisionreqlimits_yaml" style="color: inherit; text-decoration: inherit;">cc<wbr>Precision<wbr>Req<wbr>Limits</a>
@@ -1702,8 +1967,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimit">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>CC frequency throttling policy.</p>
-</dd><dt class="property-optional"
+    <dd>CC frequency throttling policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1711,8 +1975,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the resource instance.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the resource instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_thresholds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_thresholds_yaml" style="color: inherit; text-decoration: inherit;">thresholds</a>
@@ -1720,8 +1983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2threshold">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of protection threshold configurations.</p>
-</dd></dl>
+    <dd>List of protection threshold configurations.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1736,7 +1998,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="ccpolicyv2ccblackwhiteip">Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip</h4>
+<h4 id="ccpolicyv2ccblackwhiteip">
+Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip<pulumi-choosable type="language" values="python,go" class="inline">, Cc<wbr>Policy<wbr>V2Cc<wbr>Black<wbr>White<wbr>Ip<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1748,8 +2012,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Blacklist and whitelist IP addresses.</p>
-</dd><dt class="property-required"
+    <dd>Blacklist and whitelist IP addresses.</dd><dt class="property-required"
             title="Required">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1757,8 +2020,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1766,8 +2028,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1775,8 +2036,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white (whitelist IP)].</p>
-</dd><dt class="property-optional"
+    <dd>IP type, value [black(blacklist IP), white (whitelist IP)].</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1784,8 +2044,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_csharp" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -1793,8 +2052,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time.</p>
-</dd></dl>
+    <dd>Modify time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1808,8 +2066,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Blacklist and whitelist IP addresses.</p>
-</dd><dt class="property-required"
+    <dd>Blacklist and whitelist IP addresses.</dd><dt class="property-required"
             title="Required">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1817,8 +2074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1826,8 +2082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1835,8 +2090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white (whitelist IP)].</p>
-</dd><dt class="property-optional"
+    <dd>IP type, value [black(blacklist IP), white (whitelist IP)].</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1844,8 +2098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_go" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -1853,8 +2106,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time.</p>
-</dd></dl>
+    <dd>Modify time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="black_white_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#black_white_ip_hcl" style="color: inherit; text-decoration: inherit;">black_<wbr>white_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Blacklist and whitelist IP addresses.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP type, value [black(blacklist IP), white (whitelist IP)].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_hcl" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Modify time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1868,8 +2174,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Blacklist and whitelist IP addresses.</p>
-</dd><dt class="property-required"
+    <dd>Blacklist and whitelist IP addresses.</dd><dt class="property-required"
             title="Required">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1877,8 +2182,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1886,8 +2190,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1895,8 +2198,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white (whitelist IP)].</p>
-</dd><dt class="property-optional"
+    <dd>IP type, value [black(blacklist IP), white (whitelist IP)].</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1904,8 +2206,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_java" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1913,8 +2214,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Modify time.</p>
-</dd></dl>
+    <dd>Modify time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1928,8 +2228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Blacklist and whitelist IP addresses.</p>
-</dd><dt class="property-required"
+    <dd>Blacklist and whitelist IP addresses.</dd><dt class="property-required"
             title="Required">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1937,8 +2236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1946,8 +2244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1955,8 +2252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white (whitelist IP)].</p>
-</dd><dt class="property-optional"
+    <dd>IP type, value [black(blacklist IP), white (whitelist IP)].</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1964,8 +2260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_nodejs" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1973,8 +2268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time.</p>
-</dd></dl>
+    <dd>Modify time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1988,8 +2282,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Blacklist and whitelist IP addresses.</p>
-</dd><dt class="property-required"
+    <dd>Blacklist and whitelist IP addresses.</dd><dt class="property-required"
             title="Required">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1997,8 +2290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2006,8 +2298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2015,8 +2306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white (whitelist IP)].</p>
-</dd><dt class="property-optional"
+    <dd>IP type, value [black(blacklist IP), white (whitelist IP)].</dd><dt class="property-optional"
             title="Optional">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2024,8 +2314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_python" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
@@ -2033,8 +2322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Modify time.</p>
-</dd></dl>
+    <dd>Modify time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2048,8 +2336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Blacklist and whitelist IP addresses.</p>
-</dd><dt class="property-required"
+    <dd>Blacklist and whitelist IP addresses.</dd><dt class="property-required"
             title="Required">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2057,8 +2344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2066,8 +2352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2075,8 +2360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP type, value [black(blacklist IP), white (whitelist IP)].</p>
-</dd><dt class="property-optional"
+    <dd>IP type, value [black(blacklist IP), white (whitelist IP)].</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2084,8 +2368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_yaml" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -2093,12 +2376,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Modify time.</p>
-</dd></dl>
+    <dd>Modify time.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="ccpolicyv2ccgeoippolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy</h4>
+<h4 id="ccpolicyv2ccgeoippolicy">
+Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy<pulumi-choosable type="language" values="python,go" class="inline">, Cc<wbr>Policy<wbr>V2Cc<wbr>Geo<wbr>Ip<wbr>Policy<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2110,8 +2394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User action, drop or arg.</p>
-</dd><dt class="property-required"
+    <dd>User action, drop or arg.</dd><dt class="property-required"
             title="Required">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -2119,8 +2402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required"
+    <dd>domain.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -2128,8 +2410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, preferably HTTP, HTTPS.</p>
-</dd><dt class="property-required"
+    <dd>Protocol, preferably HTTP, HTTPS.</dd><dt class="property-required"
             title="Required">
         <span id="regiontype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regiontype_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Type</a>
@@ -2137,8 +2418,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Regional types, divided into china, oversea and customized.</p>
-</dd><dt class="property-optional"
+    <dd>Regional types, divided into china, oversea and customized.</dd><dt class="property-optional"
             title="Optional">
         <span id="arealists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arealists_csharp" style="color: inherit; text-decoration: inherit;">Area<wbr>Lists</a>
@@ -2146,8 +2426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>The list of region IDs that the user selects to block.</p>
-</dd><dt class="property-optional"
+    <dd>The list of region IDs that the user selects to block.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2155,8 +2434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_csharp" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -2164,8 +2442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time.</p>
-</dd></dl>
+    <dd>Modify time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2179,8 +2456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User action, drop or arg.</p>
-</dd><dt class="property-required"
+    <dd>User action, drop or arg.</dd><dt class="property-required"
             title="Required">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -2188,8 +2464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required"
+    <dd>domain.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -2197,8 +2472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, preferably HTTP, HTTPS.</p>
-</dd><dt class="property-required"
+    <dd>Protocol, preferably HTTP, HTTPS.</dd><dt class="property-required"
             title="Required">
         <span id="regiontype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regiontype_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Type</a>
@@ -2206,8 +2480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Regional types, divided into china, oversea and customized.</p>
-</dd><dt class="property-optional"
+    <dd>Regional types, divided into china, oversea and customized.</dd><dt class="property-optional"
             title="Optional">
         <span id="arealists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arealists_go" style="color: inherit; text-decoration: inherit;">Area<wbr>Lists</a>
@@ -2215,8 +2488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>The list of region IDs that the user selects to block.</p>
-</dd><dt class="property-optional"
+    <dd>The list of region IDs that the user selects to block.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2224,8 +2496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_go" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -2233,8 +2504,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time.</p>
-</dd></dl>
+    <dd>Modify time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User action, drop or arg.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>domain.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol, preferably HTTP, HTTPS.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_type_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Regional types, divided into china, oversea and customized.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="area_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_lists_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>The list of region IDs that the user selects to block.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_hcl" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Modify time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2248,8 +2580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User action, drop or arg.</p>
-</dd><dt class="property-required"
+    <dd>User action, drop or arg.</dd><dt class="property-required"
             title="Required">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2257,8 +2588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required"
+    <dd>domain.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2266,8 +2596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol, preferably HTTP, HTTPS.</p>
-</dd><dt class="property-required"
+    <dd>Protocol, preferably HTTP, HTTPS.</dd><dt class="property-required"
             title="Required">
         <span id="regiontype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regiontype_java" style="color: inherit; text-decoration: inherit;">region<wbr>Type</a>
@@ -2275,8 +2604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Regional types, divided into china, oversea and customized.</p>
-</dd><dt class="property-optional"
+    <dd>Regional types, divided into china, oversea and customized.</dd><dt class="property-optional"
             title="Optional">
         <span id="arealists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arealists_java" style="color: inherit; text-decoration: inherit;">area<wbr>Lists</a>
@@ -2284,8 +2612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>The list of region IDs that the user selects to block.</p>
-</dd><dt class="property-optional"
+    <dd>The list of region IDs that the user selects to block.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2293,8 +2620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_java" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -2302,8 +2628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Modify time.</p>
-</dd></dl>
+    <dd>Modify time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2317,8 +2642,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User action, drop or arg.</p>
-</dd><dt class="property-required"
+    <dd>User action, drop or arg.</dd><dt class="property-required"
             title="Required">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2326,8 +2650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required"
+    <dd>domain.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2335,8 +2658,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, preferably HTTP, HTTPS.</p>
-</dd><dt class="property-required"
+    <dd>Protocol, preferably HTTP, HTTPS.</dd><dt class="property-required"
             title="Required">
         <span id="regiontype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regiontype_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Type</a>
@@ -2344,8 +2666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Regional types, divided into china, oversea and customized.</p>
-</dd><dt class="property-optional"
+    <dd>Regional types, divided into china, oversea and customized.</dd><dt class="property-optional"
             title="Optional">
         <span id="arealists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arealists_nodejs" style="color: inherit; text-decoration: inherit;">area<wbr>Lists</a>
@@ -2353,8 +2674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>The list of region IDs that the user selects to block.</p>
-</dd><dt class="property-optional"
+    <dd>The list of region IDs that the user selects to block.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2362,8 +2682,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_nodejs" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -2371,8 +2690,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Modify time.</p>
-</dd></dl>
+    <dd>Modify time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2386,8 +2704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User action, drop or arg.</p>
-</dd><dt class="property-required"
+    <dd>User action, drop or arg.</dd><dt class="property-required"
             title="Required">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2395,8 +2712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required"
+    <dd>domain.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2404,8 +2720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol, preferably HTTP, HTTPS.</p>
-</dd><dt class="property-required"
+    <dd>Protocol, preferably HTTP, HTTPS.</dd><dt class="property-required"
             title="Required">
         <span id="region_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_type_python" style="color: inherit; text-decoration: inherit;">region_<wbr>type</a>
@@ -2413,8 +2728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Regional types, divided into china, oversea and customized.</p>
-</dd><dt class="property-optional"
+    <dd>Regional types, divided into china, oversea and customized.</dd><dt class="property-optional"
             title="Optional">
         <span id="area_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_lists_python" style="color: inherit; text-decoration: inherit;">area_<wbr>lists</a>
@@ -2422,8 +2736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>The list of region IDs that the user selects to block.</p>
-</dd><dt class="property-optional"
+    <dd>The list of region IDs that the user selects to block.</dd><dt class="property-optional"
             title="Optional">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2431,8 +2744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_python" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
@@ -2440,8 +2752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Modify time.</p>
-</dd></dl>
+    <dd>Modify time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2455,8 +2766,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User action, drop or arg.</p>
-</dd><dt class="property-required"
+    <dd>User action, drop or arg.</dd><dt class="property-required"
             title="Required">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -2464,8 +2774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required"
+    <dd>domain.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2473,8 +2782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol, preferably HTTP, HTTPS.</p>
-</dd><dt class="property-required"
+    <dd>Protocol, preferably HTTP, HTTPS.</dd><dt class="property-required"
             title="Required">
         <span id="regiontype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regiontype_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Type</a>
@@ -2482,8 +2790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Regional types, divided into china, oversea and customized.</p>
-</dd><dt class="property-optional"
+    <dd>Regional types, divided into china, oversea and customized.</dd><dt class="property-optional"
             title="Optional">
         <span id="arealists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arealists_yaml" style="color: inherit; text-decoration: inherit;">area<wbr>Lists</a>
@@ -2491,8 +2798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>The list of region IDs that the user selects to block.</p>
-</dd><dt class="property-optional"
+    <dd>The list of region IDs that the user selects to block.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2500,8 +2806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-optional"
+    <dd>Create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="modifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_yaml" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -2509,12 +2814,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Modify time.</p>
-</dd></dl>
+    <dd>Modify time.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="ccpolicyv2ccprecisionpolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy</h4>
+<h4 id="ccpolicyv2ccprecisionpolicy">
+Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<pulumi-choosable type="language" values="python,go" class="inline">, Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2526,8 +2832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -2535,8 +2840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip address.</p>
-</dd><dt class="property-required"
+    <dd>Ip address.</dd><dt class="property-required"
             title="Required">
         <span id="policyaction_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyaction_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Action</a>
@@ -2544,8 +2848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy mode (discard or captcha).</p>
-</dd><dt class="property-required"
+    <dd>Policy mode (discard or captcha).</dd><dt class="property-required"
             title="Required">
         <span id="policys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policys_csharp" style="color: inherit; text-decoration: inherit;">Policys</a>
@@ -2553,8 +2856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicypolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>A list of policies.</p>
-</dd><dt class="property-required"
+    <dd>A list of policies.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -2562,8 +2864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -2571,8 +2872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy Id.</p>
-</dd></dl>
+    <dd>Policy Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2586,8 +2886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -2595,8 +2894,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip address.</p>
-</dd><dt class="property-required"
+    <dd>Ip address.</dd><dt class="property-required"
             title="Required">
         <span id="policyaction_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyaction_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Action</a>
@@ -2604,8 +2902,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy mode (discard or captcha).</p>
-</dd><dt class="property-required"
+    <dd>Policy mode (discard or captcha).</dd><dt class="property-required"
             title="Required">
         <span id="policys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policys_go" style="color: inherit; text-decoration: inherit;">Policys</a>
@@ -2613,8 +2910,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicypolicy">[]Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Policy</a></span>
     </dt>
-    <dd><p>A list of policies.</p>
-</dd><dt class="property-required"
+    <dd>A list of policies.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -2622,8 +2918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -2631,8 +2926,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy Id.</p>
-</dd></dl>
+    <dd>Policy Id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain.</dd><dt class="property-required"
+            title="Required">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ip address.</dd><dt class="property-required"
+            title="Required">
+        <span id="policy_action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_action_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy mode (discard or captcha).</dd><dt class="property-required"
+            title="Required">
+        <span id="policys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policys_hcl" style="color: inherit; text-decoration: inherit;">policys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicypolicy">list(object)</a></span>
+    </dt>
+    <dd>A list of policies.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2646,8 +2994,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2655,8 +3002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip address.</p>
-</dd><dt class="property-required"
+    <dd>Ip address.</dd><dt class="property-required"
             title="Required">
         <span id="policyaction_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyaction_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Action</a>
@@ -2664,8 +3010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy mode (discard or captcha).</p>
-</dd><dt class="property-required"
+    <dd>Policy mode (discard or captcha).</dd><dt class="property-required"
             title="Required">
         <span id="policys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policys_java" style="color: inherit; text-decoration: inherit;">policys</a>
@@ -2673,8 +3018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicypolicy">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>A list of policies.</p>
-</dd><dt class="property-required"
+    <dd>A list of policies.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2682,8 +3026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -2691,8 +3034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy Id.</p>
-</dd></dl>
+    <dd>Policy Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2706,8 +3048,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2715,8 +3056,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip address.</p>
-</dd><dt class="property-required"
+    <dd>Ip address.</dd><dt class="property-required"
             title="Required">
         <span id="policyaction_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyaction_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Action</a>
@@ -2724,8 +3064,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy mode (discard or captcha).</p>
-</dd><dt class="property-required"
+    <dd>Policy mode (discard or captcha).</dd><dt class="property-required"
             title="Required">
         <span id="policys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policys_nodejs" style="color: inherit; text-decoration: inherit;">policys</a>
@@ -2733,8 +3072,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicypolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Policy[]</a></span>
     </dt>
-    <dd><p>A list of policies.</p>
-</dd><dt class="property-required"
+    <dd>A list of policies.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2742,8 +3080,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -2751,8 +3088,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy Id.</p>
-</dd></dl>
+    <dd>Policy Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2766,8 +3102,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2775,8 +3110,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ip address.</p>
-</dd><dt class="property-required"
+    <dd>Ip address.</dd><dt class="property-required"
             title="Required">
         <span id="policy_action_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_action_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>action</a>
@@ -2784,17 +3118,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy mode (discard or captcha).</p>
-</dd><dt class="property-required"
+    <dd>Policy mode (discard or captcha).</dd><dt class="property-required"
             title="Required">
         <span id="policys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policys_python" style="color: inherit; text-decoration: inherit;">policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicypolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Policy]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicypolicy">Sequence[Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Policy]</a></span>
     </dt>
-    <dd><p>A list of policies.</p>
-</dd><dt class="property-required"
+    <dd>A list of policies.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2802,8 +3134,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -2811,8 +3142,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy Id.</p>
-</dd></dl>
+    <dd>Policy Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2826,8 +3156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2835,8 +3164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip address.</p>
-</dd><dt class="property-required"
+    <dd>Ip address.</dd><dt class="property-required"
             title="Required">
         <span id="policyaction_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyaction_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Action</a>
@@ -2844,8 +3172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy mode (discard or captcha).</p>
-</dd><dt class="property-required"
+    <dd>Policy mode (discard or captcha).</dd><dt class="property-required"
             title="Required">
         <span id="policys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policys_yaml" style="color: inherit; text-decoration: inherit;">policys</a>
@@ -2853,8 +3180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionpolicypolicy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of policies.</p>
-</dd><dt class="property-required"
+    <dd>A list of policies.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2862,8 +3188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -2871,12 +3196,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy Id.</p>
-</dd></dl>
+    <dd>Policy Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="ccpolicyv2ccprecisionpolicypolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Policy</h4>
+<h4 id="ccpolicyv2ccprecisionpolicypolicy">
+Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Policy<pulumi-choosable type="language" values="python,go" class="inline">, Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Policy<wbr>Policy<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2888,8 +3214,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration item types, currently only support value.</p>
-</dd><dt class="property-required"
+    <dd>Configuration item types, currently only support value.</dd><dt class="property-required"
             title="Required">
         <span id="fieldtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fieldtype_csharp" style="color: inherit; text-decoration: inherit;">Field<wbr>Type</a>
@@ -2897,8 +3222,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.</p>
-</dd><dt class="property-required"
+    <dd>Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2906,8 +3230,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configure the value.</p>
-</dd><dt class="property-required"
+    <dd>Configure the value.</dd><dt class="property-required"
             title="Required">
         <span id="valueoperator_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#valueoperator_csharp" style="color: inherit; text-decoration: inherit;">Value<wbr>Operator</a>
@@ -2915,8 +3238,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.</p>
-</dd></dl>
+    <dd>Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2930,8 +3252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration item types, currently only support value.</p>
-</dd><dt class="property-required"
+    <dd>Configuration item types, currently only support value.</dd><dt class="property-required"
             title="Required">
         <span id="fieldtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fieldtype_go" style="color: inherit; text-decoration: inherit;">Field<wbr>Type</a>
@@ -2939,8 +3260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.</p>
-</dd><dt class="property-required"
+    <dd>Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2948,8 +3268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configure the value.</p>
-</dd><dt class="property-required"
+    <dd>Configure the value.</dd><dt class="property-required"
             title="Required">
         <span id="valueoperator_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#valueoperator_go" style="color: inherit; text-decoration: inherit;">Value<wbr>Operator</a>
@@ -2957,8 +3276,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.</p>
-</dd></dl>
+    <dd>Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="field_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#field_name_hcl" style="color: inherit; text-decoration: inherit;">field_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Configuration item types, currently only support value.</dd><dt class="property-required"
+            title="Required">
+        <span id="field_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#field_type_hcl" style="color: inherit; text-decoration: inherit;">field_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Configure the value.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_operator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_operator_hcl" style="color: inherit; text-decoration: inherit;">value_<wbr>operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2972,8 +3328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configuration item types, currently only support value.</p>
-</dd><dt class="property-required"
+    <dd>Configuration item types, currently only support value.</dd><dt class="property-required"
             title="Required">
         <span id="fieldtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fieldtype_java" style="color: inherit; text-decoration: inherit;">field<wbr>Type</a>
@@ -2981,8 +3336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.</p>
-</dd><dt class="property-required"
+    <dd>Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2990,8 +3344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configure the value.</p>
-</dd><dt class="property-required"
+    <dd>Configure the value.</dd><dt class="property-required"
             title="Required">
         <span id="valueoperator_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#valueoperator_java" style="color: inherit; text-decoration: inherit;">value<wbr>Operator</a>
@@ -2999,8 +3352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.</p>
-</dd></dl>
+    <dd>Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3014,8 +3366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration item types, currently only support value.</p>
-</dd><dt class="property-required"
+    <dd>Configuration item types, currently only support value.</dd><dt class="property-required"
             title="Required">
         <span id="fieldtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fieldtype_nodejs" style="color: inherit; text-decoration: inherit;">field<wbr>Type</a>
@@ -3023,8 +3374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.</p>
-</dd><dt class="property-required"
+    <dd>Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3032,8 +3382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configure the value.</p>
-</dd><dt class="property-required"
+    <dd>Configure the value.</dd><dt class="property-required"
             title="Required">
         <span id="valueoperator_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#valueoperator_nodejs" style="color: inherit; text-decoration: inherit;">value<wbr>Operator</a>
@@ -3041,8 +3390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.</p>
-</dd></dl>
+    <dd>Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3056,8 +3404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Configuration item types, currently only support value.</p>
-</dd><dt class="property-required"
+    <dd>Configuration item types, currently only support value.</dd><dt class="property-required"
             title="Required">
         <span id="field_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#field_type_python" style="color: inherit; text-decoration: inherit;">field_<wbr>type</a>
@@ -3065,8 +3412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.</p>
-</dd><dt class="property-required"
+    <dd>Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3074,8 +3420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Configure the value.</p>
-</dd><dt class="property-required"
+    <dd>Configure the value.</dd><dt class="property-required"
             title="Required">
         <span id="value_operator_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_operator_python" style="color: inherit; text-decoration: inherit;">value_<wbr>operator</a>
@@ -3083,8 +3428,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.</p>
-</dd></dl>
+    <dd>Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3098,8 +3442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configuration item types, currently only support value.</p>
-</dd><dt class="property-required"
+    <dd>Configuration item types, currently only support value.</dd><dt class="property-required"
             title="Required">
         <span id="fieldtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fieldtype_yaml" style="color: inherit; text-decoration: inherit;">field<wbr>Type</a>
@@ -3107,8 +3450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.</p>
-</dd><dt class="property-required"
+    <dd>Configuration fields with the desirable values cgi, ua, cookie, referer, accept, srcip.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3116,8 +3458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configure the value.</p>
-</dd><dt class="property-required"
+    <dd>Configure the value.</dd><dt class="property-required"
             title="Required">
         <span id="valueoperator_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#valueoperator_yaml" style="color: inherit; text-decoration: inherit;">value<wbr>Operator</a>
@@ -3125,12 +3466,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.</p>
-</dd></dl>
+    <dd>Configure the item-value comparison mode, which can be taken as the value of evaluate, not_equal, include.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="ccpolicyv2ccprecisionreqlimit">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit</h4>
+<h4 id="ccpolicyv2ccprecisionreqlimit">
+Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<pulumi-choosable type="language" values="python,go" class="inline">, Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3142,8 +3484,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="level_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_csharp" style="color: inherit; text-decoration: inherit;">Level</a>
@@ -3151,8 +3492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.</p>
-</dd><dt class="property-required"
+    <dd>Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.</dd><dt class="property-required"
             title="Required">
         <span id="policys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policys_csharp" style="color: inherit; text-decoration: inherit;">Policys</a>
@@ -3160,8 +3500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimitpolicy">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>The CC Frequency Limit Policy Item field.</p>
-</dd><dt class="property-required"
+    <dd>The CC Frequency Limit Policy Item field.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -3169,8 +3508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, preferably HTTP, HTTPS.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, preferably HTTP, HTTPS.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -3178,8 +3516,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -3187,8 +3524,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip address.</p>
-</dd></dl>
+    <dd>IP address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3202,8 +3538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="level_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_go" style="color: inherit; text-decoration: inherit;">Level</a>
@@ -3211,8 +3546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.</p>
-</dd><dt class="property-required"
+    <dd>Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.</dd><dt class="property-required"
             title="Required">
         <span id="policys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policys_go" style="color: inherit; text-decoration: inherit;">Policys</a>
@@ -3220,8 +3554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimitpolicy">[]Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Policy</a></span>
     </dt>
-    <dd><p>The CC Frequency Limit Policy Item field.</p>
-</dd><dt class="property-required"
+    <dd>The CC Frequency Limit Policy Item field.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -3229,8 +3562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, preferably HTTP, HTTPS.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, preferably HTTP, HTTPS.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -3238,8 +3570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -3247,8 +3578,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip address.</p>
-</dd></dl>
+    <dd>IP address.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain.</dd><dt class="property-required"
+            title="Required">
+        <span id="level_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_hcl" style="color: inherit; text-decoration: inherit;">level</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.</dd><dt class="property-required"
+            title="Required">
+        <span id="policys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policys_hcl" style="color: inherit; text-decoration: inherit;">policys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimitpolicy">list(object)</a></span>
+    </dt>
+    <dd>The CC Frequency Limit Policy Item field.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol, preferably HTTP, HTTPS.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3262,8 +3646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="level_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_java" style="color: inherit; text-decoration: inherit;">level</a>
@@ -3271,8 +3654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.</p>
-</dd><dt class="property-required"
+    <dd>Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.</dd><dt class="property-required"
             title="Required">
         <span id="policys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policys_java" style="color: inherit; text-decoration: inherit;">policys</a>
@@ -3280,8 +3662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimitpolicy">List&lt;Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Policy&gt;</a></span>
     </dt>
-    <dd><p>The CC Frequency Limit Policy Item field.</p>
-</dd><dt class="property-required"
+    <dd>The CC Frequency Limit Policy Item field.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3289,8 +3670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol, preferably HTTP, HTTPS.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, preferably HTTP, HTTPS.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -3298,8 +3678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -3307,8 +3686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip address.</p>
-</dd></dl>
+    <dd>IP address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3322,8 +3700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="level_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_nodejs" style="color: inherit; text-decoration: inherit;">level</a>
@@ -3331,8 +3708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.</p>
-</dd><dt class="property-required"
+    <dd>Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.</dd><dt class="property-required"
             title="Required">
         <span id="policys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policys_nodejs" style="color: inherit; text-decoration: inherit;">policys</a>
@@ -3340,8 +3716,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimitpolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Policy[]</a></span>
     </dt>
-    <dd><p>The CC Frequency Limit Policy Item field.</p>
-</dd><dt class="property-required"
+    <dd>The CC Frequency Limit Policy Item field.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3349,8 +3724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol, preferably HTTP, HTTPS.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, preferably HTTP, HTTPS.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -3358,8 +3732,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -3367,8 +3740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip address.</p>
-</dd></dl>
+    <dd>IP address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3382,8 +3754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="level_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_python" style="color: inherit; text-decoration: inherit;">level</a>
@@ -3391,17 +3762,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.</p>
-</dd><dt class="property-required"
+    <dd>Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.</dd><dt class="property-required"
             title="Required">
         <span id="policys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policys_python" style="color: inherit; text-decoration: inherit;">policys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimitpolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Policy]</a></span>
+        <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimitpolicy">Sequence[Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Policy]</a></span>
     </dt>
-    <dd><p>The CC Frequency Limit Policy Item field.</p>
-</dd><dt class="property-required"
+    <dd>The CC Frequency Limit Policy Item field.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3409,8 +3778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol, preferably HTTP, HTTPS.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, preferably HTTP, HTTPS.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -3418,8 +3786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -3427,8 +3794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ip address.</p>
-</dd></dl>
+    <dd>IP address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3442,8 +3808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain.</p>
-</dd><dt class="property-required"
+    <dd>Domain.</dd><dt class="property-required"
             title="Required">
         <span id="level_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_yaml" style="color: inherit; text-decoration: inherit;">level</a>
@@ -3451,8 +3816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.</p>
-</dd><dt class="property-required"
+    <dd>Protection rating, the optional value of default means default policy, loose means loose, and strict means strict.</dd><dt class="property-required"
             title="Required">
         <span id="policys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policys_yaml" style="color: inherit; text-decoration: inherit;">policys</a>
@@ -3460,8 +3824,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#ccpolicyv2ccprecisionreqlimitpolicy">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The CC Frequency Limit Policy Item field.</p>
-</dd><dt class="property-required"
+    <dd>The CC Frequency Limit Policy Item field.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3469,8 +3832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol, preferably HTTP, HTTPS.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol, preferably HTTP, HTTPS.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -3478,8 +3840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -3487,12 +3848,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip address.</p>
-</dd></dl>
+    <dd>IP address.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="ccpolicyv2ccprecisionreqlimitpolicy">Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Policy</h4>
+<h4 id="ccpolicyv2ccprecisionreqlimitpolicy">
+Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Policy<pulumi-choosable type="language" values="python,go" class="inline">, Cc<wbr>Policy<wbr>V2Cc<wbr>Precision<wbr>Req<wbr>Limit<wbr>Policy<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3504,8 +3866,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.</p>
-</dd><dt class="property-required"
+    <dd>The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.</dd><dt class="property-required"
             title="Required">
         <span id="executeduration_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#executeduration_csharp" style="color: inherit; text-decoration: inherit;">Execute<wbr>Duration</a>
@@ -3513,8 +3874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The duration of the frequency limit policy can be taken from 1 to 86400 per second.</p>
-</dd><dt class="property-required"
+    <dd>The duration of the frequency limit policy can be taken from 1 to 86400 per second.</dd><dt class="property-required"
             title="Required">
         <span id="mode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_csharp" style="color: inherit; text-decoration: inherit;">Mode</a>
@@ -3522,8 +3882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The policy item is compared, and the optional value include indicates inclusion, and equal means equal.</p>
-</dd><dt class="property-required"
+    <dd>The policy item is compared, and the optional value include indicates inclusion, and equal means equal.</dd><dt class="property-required"
             title="Required">
         <span id="period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -3531,8 +3890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Statistical period, take values 1, 10, 30, 60, in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Statistical period, take values 1, 10, 30, 60, in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="requestnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestnum_csharp" style="color: inherit; text-decoration: inherit;">Request<wbr>Num</a>
@@ -3540,8 +3898,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of requests, the value is 1 to 20000.</p>
-</dd><dt class="property-optional"
+    <dd>The number of requests, the value is 1 to 20000.</dd><dt class="property-optional"
             title="Optional">
         <span id="cookie_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cookie_csharp" style="color: inherit; text-decoration: inherit;">Cookie</a>
@@ -3549,8 +3906,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cookies, one of the three policy entries can only be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>Cookies, one of the three policy entries can only be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="uri_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uri_csharp" style="color: inherit; text-decoration: inherit;">Uri</a>
@@ -3558,8 +3914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Uri, one of the three policy entries can only be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>Uri, one of the three policy entries can only be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="useragent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useragent_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Agent</a>
@@ -3567,8 +3922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User-Agent, only one of the three policy entries can be filled in.</p>
-</dd></dl>
+    <dd>User-Agent, only one of the three policy entries can be filled in.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3582,8 +3936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.</p>
-</dd><dt class="property-required"
+    <dd>The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.</dd><dt class="property-required"
             title="Required">
         <span id="executeduration_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#executeduration_go" style="color: inherit; text-decoration: inherit;">Execute<wbr>Duration</a>
@@ -3591,8 +3944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The duration of the frequency limit policy can be taken from 1 to 86400 per second.</p>
-</dd><dt class="property-required"
+    <dd>The duration of the frequency limit policy can be taken from 1 to 86400 per second.</dd><dt class="property-required"
             title="Required">
         <span id="mode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_go" style="color: inherit; text-decoration: inherit;">Mode</a>
@@ -3600,8 +3952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The policy item is compared, and the optional value include indicates inclusion, and equal means equal.</p>
-</dd><dt class="property-required"
+    <dd>The policy item is compared, and the optional value include indicates inclusion, and equal means equal.</dd><dt class="property-required"
             title="Required">
         <span id="period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -3609,8 +3960,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Statistical period, take values 1, 10, 30, 60, in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Statistical period, take values 1, 10, 30, 60, in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="requestnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestnum_go" style="color: inherit; text-decoration: inherit;">Request<wbr>Num</a>
@@ -3618,8 +3968,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of requests, the value is 1 to 20000.</p>
-</dd><dt class="property-optional"
+    <dd>The number of requests, the value is 1 to 20000.</dd><dt class="property-optional"
             title="Optional">
         <span id="cookie_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cookie_go" style="color: inherit; text-decoration: inherit;">Cookie</a>
@@ -3627,8 +3976,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cookies, one of the three policy entries can only be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>Cookies, one of the three policy entries can only be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="uri_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uri_go" style="color: inherit; text-decoration: inherit;">Uri</a>
@@ -3636,8 +3984,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Uri, one of the three policy entries can only be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>Uri, one of the three policy entries can only be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="useragent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useragent_go" style="color: inherit; text-decoration: inherit;">User<wbr>Agent</a>
@@ -3645,8 +3992,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User-Agent, only one of the three policy entries can be filled in.</p>
-</dd></dl>
+    <dd>User-Agent, only one of the three policy entries can be filled in.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.</dd><dt class="property-required"
+            title="Required">
+        <span id="execute_duration_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#execute_duration_hcl" style="color: inherit; text-decoration: inherit;">execute_<wbr>duration</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The duration of the frequency limit policy can be taken from 1 to 86400 per second.</dd><dt class="property-required"
+            title="Required">
+        <span id="mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_hcl" style="color: inherit; text-decoration: inherit;">mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The policy item is compared, and the optional value include indicates inclusion, and equal means equal.</dd><dt class="property-required"
+            title="Required">
+        <span id="period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Statistical period, take values 1, 10, 30, 60, in seconds.</dd><dt class="property-required"
+            title="Required">
+        <span id="request_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_num_hcl" style="color: inherit; text-decoration: inherit;">request_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of requests, the value is 1 to 20000.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cookie_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cookie_hcl" style="color: inherit; text-decoration: inherit;">cookie</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cookies, one of the three policy entries can only be filled in.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="uri_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uri_hcl" style="color: inherit; text-decoration: inherit;">uri</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Uri, one of the three policy entries can only be filled in.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="user_agent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_agent_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>agent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User-Agent, only one of the three policy entries can be filled in.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3660,8 +4076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.</p>
-</dd><dt class="property-required"
+    <dd>The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.</dd><dt class="property-required"
             title="Required">
         <span id="executeduration_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#executeduration_java" style="color: inherit; text-decoration: inherit;">execute<wbr>Duration</a>
@@ -3669,8 +4084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The duration of the frequency limit policy can be taken from 1 to 86400 per second.</p>
-</dd><dt class="property-required"
+    <dd>The duration of the frequency limit policy can be taken from 1 to 86400 per second.</dd><dt class="property-required"
             title="Required">
         <span id="mode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_java" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -3678,8 +4092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The policy item is compared, and the optional value include indicates inclusion, and equal means equal.</p>
-</dd><dt class="property-required"
+    <dd>The policy item is compared, and the optional value include indicates inclusion, and equal means equal.</dd><dt class="property-required"
             title="Required">
         <span id="period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -3687,8 +4100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Statistical period, take values 1, 10, 30, 60, in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Statistical period, take values 1, 10, 30, 60, in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="requestnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestnum_java" style="color: inherit; text-decoration: inherit;">request<wbr>Num</a>
@@ -3696,8 +4108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of requests, the value is 1 to 20000.</p>
-</dd><dt class="property-optional"
+    <dd>The number of requests, the value is 1 to 20000.</dd><dt class="property-optional"
             title="Optional">
         <span id="cookie_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cookie_java" style="color: inherit; text-decoration: inherit;">cookie</a>
@@ -3705,8 +4116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cookies, one of the three policy entries can only be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>Cookies, one of the three policy entries can only be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="uri_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uri_java" style="color: inherit; text-decoration: inherit;">uri</a>
@@ -3714,8 +4124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Uri, one of the three policy entries can only be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>Uri, one of the three policy entries can only be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="useragent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useragent_java" style="color: inherit; text-decoration: inherit;">user<wbr>Agent</a>
@@ -3723,8 +4132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User-Agent, only one of the three policy entries can be filled in.</p>
-</dd></dl>
+    <dd>User-Agent, only one of the three policy entries can be filled in.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3738,8 +4146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.</p>
-</dd><dt class="property-required"
+    <dd>The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.</dd><dt class="property-required"
             title="Required">
         <span id="executeduration_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#executeduration_nodejs" style="color: inherit; text-decoration: inherit;">execute<wbr>Duration</a>
@@ -3747,8 +4154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The duration of the frequency limit policy can be taken from 1 to 86400 per second.</p>
-</dd><dt class="property-required"
+    <dd>The duration of the frequency limit policy can be taken from 1 to 86400 per second.</dd><dt class="property-required"
             title="Required">
         <span id="mode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_nodejs" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -3756,8 +4162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The policy item is compared, and the optional value include indicates inclusion, and equal means equal.</p>
-</dd><dt class="property-required"
+    <dd>The policy item is compared, and the optional value include indicates inclusion, and equal means equal.</dd><dt class="property-required"
             title="Required">
         <span id="period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -3765,8 +4170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Statistical period, take values 1, 10, 30, 60, in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Statistical period, take values 1, 10, 30, 60, in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="requestnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestnum_nodejs" style="color: inherit; text-decoration: inherit;">request<wbr>Num</a>
@@ -3774,8 +4178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of requests, the value is 1 to 20000.</p>
-</dd><dt class="property-optional"
+    <dd>The number of requests, the value is 1 to 20000.</dd><dt class="property-optional"
             title="Optional">
         <span id="cookie_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cookie_nodejs" style="color: inherit; text-decoration: inherit;">cookie</a>
@@ -3783,8 +4186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cookies, one of the three policy entries can only be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>Cookies, one of the three policy entries can only be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="uri_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uri_nodejs" style="color: inherit; text-decoration: inherit;">uri</a>
@@ -3792,8 +4194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Uri, one of the three policy entries can only be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>Uri, one of the three policy entries can only be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="useragent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useragent_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Agent</a>
@@ -3801,8 +4202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User-Agent, only one of the three policy entries can be filled in.</p>
-</dd></dl>
+    <dd>User-Agent, only one of the three policy entries can be filled in.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3816,8 +4216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.</p>
-</dd><dt class="property-required"
+    <dd>The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.</dd><dt class="property-required"
             title="Required">
         <span id="execute_duration_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#execute_duration_python" style="color: inherit; text-decoration: inherit;">execute_<wbr>duration</a>
@@ -3825,8 +4224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The duration of the frequency limit policy can be taken from 1 to 86400 per second.</p>
-</dd><dt class="property-required"
+    <dd>The duration of the frequency limit policy can be taken from 1 to 86400 per second.</dd><dt class="property-required"
             title="Required">
         <span id="mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_python" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -3834,8 +4232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The policy item is compared, and the optional value include indicates inclusion, and equal means equal.</p>
-</dd><dt class="property-required"
+    <dd>The policy item is compared, and the optional value include indicates inclusion, and equal means equal.</dd><dt class="property-required"
             title="Required">
         <span id="period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -3843,8 +4240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Statistical period, take values 1, 10, 30, 60, in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Statistical period, take values 1, 10, 30, 60, in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="request_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#request_num_python" style="color: inherit; text-decoration: inherit;">request_<wbr>num</a>
@@ -3852,8 +4248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of requests, the value is 1 to 20000.</p>
-</dd><dt class="property-optional"
+    <dd>The number of requests, the value is 1 to 20000.</dd><dt class="property-optional"
             title="Optional">
         <span id="cookie_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cookie_python" style="color: inherit; text-decoration: inherit;">cookie</a>
@@ -3861,8 +4256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cookies, one of the three policy entries can only be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>Cookies, one of the three policy entries can only be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="uri_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uri_python" style="color: inherit; text-decoration: inherit;">uri</a>
@@ -3870,8 +4264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Uri, one of the three policy entries can only be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>Uri, one of the three policy entries can only be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="user_agent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_agent_python" style="color: inherit; text-decoration: inherit;">user_<wbr>agent</a>
@@ -3879,8 +4272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User-Agent, only one of the three policy entries can be filled in.</p>
-</dd></dl>
+    <dd>User-Agent, only one of the three policy entries can be filled in.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3894,8 +4286,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.</p>
-</dd><dt class="property-required"
+    <dd>The frequency limit policy mode, the optional value of arg indicates the verification code, and drop indicates the discard.</dd><dt class="property-required"
             title="Required">
         <span id="executeduration_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#executeduration_yaml" style="color: inherit; text-decoration: inherit;">execute<wbr>Duration</a>
@@ -3903,8 +4294,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The duration of the frequency limit policy can be taken from 1 to 86400 per second.</p>
-</dd><dt class="property-required"
+    <dd>The duration of the frequency limit policy can be taken from 1 to 86400 per second.</dd><dt class="property-required"
             title="Required">
         <span id="mode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mode_yaml" style="color: inherit; text-decoration: inherit;">mode</a>
@@ -3912,8 +4302,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The policy item is compared, and the optional value include indicates inclusion, and equal means equal.</p>
-</dd><dt class="property-required"
+    <dd>The policy item is compared, and the optional value include indicates inclusion, and equal means equal.</dd><dt class="property-required"
             title="Required">
         <span id="period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -3921,8 +4310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Statistical period, take values 1, 10, 30, 60, in seconds.</p>
-</dd><dt class="property-required"
+    <dd>Statistical period, take values 1, 10, 30, 60, in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="requestnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#requestnum_yaml" style="color: inherit; text-decoration: inherit;">request<wbr>Num</a>
@@ -3930,8 +4318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of requests, the value is 1 to 20000.</p>
-</dd><dt class="property-optional"
+    <dd>The number of requests, the value is 1 to 20000.</dd><dt class="property-optional"
             title="Optional">
         <span id="cookie_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cookie_yaml" style="color: inherit; text-decoration: inherit;">cookie</a>
@@ -3939,8 +4326,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cookies, one of the three policy entries can only be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>Cookies, one of the three policy entries can only be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="uri_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uri_yaml" style="color: inherit; text-decoration: inherit;">uri</a>
@@ -3948,8 +4334,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Uri, one of the three policy entries can only be filled in.</p>
-</dd><dt class="property-optional"
+    <dd>Uri, one of the three policy entries can only be filled in.</dd><dt class="property-optional"
             title="Optional">
         <span id="useragent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#useragent_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Agent</a>
@@ -3957,12 +4342,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User-Agent, only one of the three policy entries can be filled in.</p>
-</dd></dl>
+    <dd>User-Agent, only one of the three policy entries can be filled in.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="ccpolicyv2threshold">Cc<wbr>Policy<wbr>V2Threshold</h4>
+<h4 id="ccpolicyv2threshold">
+Cc<wbr>Policy<wbr>V2Threshold<pulumi-choosable type="language" values="python,go" class="inline">, Cc<wbr>Policy<wbr>V2Threshold<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3974,8 +4360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required"
+    <dd>domain.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_csharp" style="color: inherit; text-decoration: inherit;">Threshold</a>
@@ -3983,8 +4368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cleaning threshold, -1 indicates that the <code>default</code> mode is turned on.</p>
-</dd></dl>
+    <dd>Cleaning threshold, -1 indicates that the <code>default</code> mode is turned on.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3998,8 +4382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required"
+    <dd>domain.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_go" style="color: inherit; text-decoration: inherit;">Threshold</a>
@@ -4007,8 +4390,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cleaning threshold, -1 indicates that the <code>default</code> mode is turned on.</p>
-</dd></dl>
+    <dd>Cleaning threshold, -1 indicates that the <code>default</code> mode is turned on.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>domain.</dd><dt class="property-required"
+            title="Required">
+        <span id="threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_hcl" style="color: inherit; text-decoration: inherit;">threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cleaning threshold, -1 indicates that the <code>default</code> mode is turned on.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4022,8 +4426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required"
+    <dd>domain.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_java" style="color: inherit; text-decoration: inherit;">threshold</a>
@@ -4031,8 +4434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cleaning threshold, -1 indicates that the <code>default</code> mode is turned on.</p>
-</dd></dl>
+    <dd>Cleaning threshold, -1 indicates that the <code>default</code> mode is turned on.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4046,8 +4448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required"
+    <dd>domain.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_nodejs" style="color: inherit; text-decoration: inherit;">threshold</a>
@@ -4055,8 +4456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cleaning threshold, -1 indicates that the <code>default</code> mode is turned on.</p>
-</dd></dl>
+    <dd>Cleaning threshold, -1 indicates that the <code>default</code> mode is turned on.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4070,8 +4470,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required"
+    <dd>domain.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_python" style="color: inherit; text-decoration: inherit;">threshold</a>
@@ -4079,8 +4478,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cleaning threshold, -1 indicates that the <code>default</code> mode is turned on.</p>
-</dd></dl>
+    <dd>Cleaning threshold, -1 indicates that the <code>default</code> mode is turned on.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4094,8 +4492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>domain.</p>
-</dd><dt class="property-required"
+    <dd>domain.</dd><dt class="property-required"
             title="Required">
         <span id="threshold_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#threshold_yaml" style="color: inherit; text-decoration: inherit;">threshold</a>
@@ -4103,8 +4500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cleaning threshold, -1 indicates that the <code>default</code> mode is turned on.</p>
-</dd></dl>
+    <dd>Cleaning threshold, -1 indicates that the <code>default</code> mode is turned on.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4116,7 +4512,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

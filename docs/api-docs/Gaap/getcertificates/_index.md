@@ -2,9 +2,11 @@
 ---
 title: "getCertificates"
 title_tag: "tencentcloud.Gaap.getCertificates"
-meta_desc: "Documentation for the tencentcloud.Gaap.getCertificates function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query GAAP certificate."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,76 +18,103 @@ Use this data source to query GAAP certificate.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooCertificate = new tencentcloud.gaap.Certificate("fooCertificate", {
+const fooCertificate = new tencentcloud.gaap.Certificate("foo", {
     type: "BASIC",
     content: "test:tx2KGdo3zJg/.",
+    name: "test_certificate",
 });
-const fooCertificates = tencentcloud.Gaap.getCertificatesOutput({
+const foo = tencentcloud.gaap.getCertificatesOutput({
     id: fooCertificate.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo_certificate = tencentcloud.gaap.Certificate("fooCertificate",
+foo_certificate = tencentcloud.gaap.Certificate("foo",
     type="BASIC",
-    content="test:tx2KGdo3zJg/.")
-foo_certificates = tencentcloud.Gaap.get_certificates_output(id=foo_certificate.id)
+    content="test:tx2KGdo3zJg/.",
+    name="test_certificate")
+foo = tencentcloud.gaap.get_certificates_output(id=foo_certificate.id)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		fooCertificate, err := gaap.NewCertificate(ctx, "foo", &gaap.CertificateArgs{
+			Type:    pulumi.String("BASIC"),
+			Content: pulumi.String("test:tx2KGdo3zJg/."),
+			Name:    pulumi.String("test_certificate"),
+		})
+		if err != nil {
+			return err
+		}
+		_ = gaap.GetCertificatesOutput(ctx, gaap.GetCertificatesOutputArgs{
+			Id: fooCertificate.ID().ToIDOutput().ToStringOutput(),
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var fooCertificate = new Tencentcloud.Gaap.Certificate("fooCertificate", new()
+    var fooCertificate = new Tencentcloud.Gaap.Certificate("foo", new()
     {
         Type = "BASIC",
         Content = "test:tx2KGdo3zJg/.",
+        Name = "test_certificate",
     });
 
-    var fooCertificates = Tencentcloud.Gaap.GetCertificates.Invoke(new()
+    var foo = Tencentcloud.Gaap.GetCertificates.Invoke(new()
     {
         Id = fooCertificate.Id,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooCertificate, err := Gaap.NewCertificate(ctx, "fooCertificate", &Gaap.CertificateArgs{
-			Type:    pulumi.String("BASIC"),
-			Content: pulumi.String("test:tx2KGdo3zJg/."),
-		})
-		if err != nil {
-			return err
-		}
-		_ = Gaap.GetCertificatesOutput(ctx, gaap.GetCertificatesOutputArgs{
-			Id: fooCertificate.ID(),
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -96,8 +125,8 @@ import com.pulumi.tencentcloud.Gaap.Certificate;
 import com.pulumi.tencentcloud.Gaap.CertificateArgs;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetCertificatesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -109,34 +138,73 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fooCertificate = new Certificate("fooCertificate", CertificateArgs.builder()        
+        var fooCertificate = new Certificate("fooCertificate", CertificateArgs.builder()
             .type("BASIC")
             .content("test:tx2KGdo3zJg/.")
+            .name("test_certificate")
             .build());
 
-        final var fooCertificates = GaapFunctions.getCertificates(GetCertificatesArgs.builder()
+        final var foo = GaapFunctions.getCertificates(GetCertificatesArgs.builder()
             .id(fooCertificate.id())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   fooCertificate:
     type: tencentcloud:Gaap:Certificate
+    name: foo
     properties:
       type: BASIC
       content: test:tx2KGdo3zJg/.
+      name: test_certificate
 variables:
-  fooCertificates:
+  foo:
     fn::invoke:
-      Function: tencentcloud:Gaap:getCertificates
-      Arguments:
+      function: tencentcloud:Gaap:getCertificates
+      arguments:
         id: ${fooCertificate.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getcertificates" "foo" {
+  id = tencentcloud_gaap_certificate.foo.id
+}
+
+resource "tencentcloud_gaap_certificate" "foo" {
+  type    = "BASIC"
+  content = "test:tx2KGdo3zJg/."
+  name    = "test_certificate"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeCertificates](https://www.tencentcloud.com/document/api/608/33115)
 
 
 
@@ -148,7 +216,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -156,9 +224,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getCertificates<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCertificatesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetCertificatesResult</a></span>></span
+><span class="k">function </span>getCertificates<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCertificatesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetCertificatesResult</a></span>></span
 ><span class="k">
-function </span>getCertificatesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCertificatesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetCertificatesResult</a></span>></span
+function </span>getCertificatesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetCertificatesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetCertificatesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,11 +241,11 @@ function </span>getCertificatesOutput<span class="p">(</span><span class="nx">ar
                      <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetCertificatesResult</span
 ><span class="k">
-def </span>get_certificates_output<span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetCertificatesResult]</span
+def </span>get_certificates_output<span class="p">(</span><span class="nx">id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetCertificatesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -202,7 +270,8 @@ func </span>GetCertificatesOutput<span class="p">(</span><span class="nx">ctx</s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetCertificates </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetCertificatesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetCertificatesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetCertificatesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCertificatesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetCertificatesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCertificatesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetCertificatesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetCertificatesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -211,7 +280,8 @@ func </span>GetCertificatesOutput<span class="p">(</span><span class="nx">ctx</s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetCertificatesResult</a></span>> </span>getCertificates<span class="p">(</span><span class="nx">GetCertificatesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetCertificatesResult</a></span>> </span>getCertificates<span class="p">(</span><span class="nx">GetCertificatesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetCertificatesResult</a></span>> </span>getCertificates<span class="p">(</span><span class="nx">GetCertificatesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -223,6 +293,15 @@ func </span>GetCertificatesOutput<span class="p">(</span><span class="nx">ctx</s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getCertificates:getCertificates
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_certificates&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -241,8 +320,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the certificate to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the certificate to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -250,8 +328,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the certificate to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the certificate to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -259,8 +336,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -268,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -283,8 +358,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the certificate to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the certificate to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -292,8 +366,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the certificate to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the certificate to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -301,8 +374,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -310,8 +382,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the certificate to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the certificate to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -325,8 +434,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the certificate to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the certificate to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -334,8 +442,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the certificate to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the certificate to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -343,8 +450,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -352,8 +458,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -367,8 +472,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the certificate to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the certificate to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -376,8 +480,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the certificate to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the certificate to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -385,8 +488,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -394,8 +496,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -409,8 +510,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the certificate to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the certificate to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -418,8 +518,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the certificate to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the certificate to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -427,8 +526,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -436,8 +534,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -451,8 +548,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the certificate to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the certificate to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -460,8 +556,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the certificate to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the certificate to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -469,8 +564,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -478,8 +572,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -502,8 +595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcertificatescertificate">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Certificates<wbr>Certificate&gt;</a></span>
     </dt>
-    <dd><p>An information list of certificate. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of certificate. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -511,8 +603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the certificate.</p>
-</dd><dt class="property-"
+    <dd>ID of the certificate.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -520,8 +611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Name of the certificate.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -537,8 +627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -552,8 +641,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcertificatescertificate">[]Get<wbr>Certificates<wbr>Certificate</a></span>
     </dt>
-    <dd><p>An information list of certificate. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of certificate. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -561,8 +649,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the certificate.</p>
-</dd><dt class="property-"
+    <dd>ID of the certificate.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -570,8 +657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Name of the certificate.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -587,8 +673,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="certificates_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificates_hcl" style="color: inherit; text-decoration: inherit;">certificates</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getcertificatescertificate">list(object)</a></span>
+    </dt>
+    <dd>An information list of certificate. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the certificate.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the certificate.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -602,8 +733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcertificatescertificate">List&lt;Get<wbr>Certificates<wbr>Certificate&gt;</a></span>
     </dt>
-    <dd><p>An information list of certificate. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of certificate. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -611,8 +741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the certificate.</p>
-</dd><dt class="property-"
+    <dd>ID of the certificate.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -620,8 +749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Name of the certificate.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -637,8 +765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -652,8 +779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcertificatescertificate">Get<wbr>Certificates<wbr>Certificate[]</a></span>
     </dt>
-    <dd><p>An information list of certificate. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of certificate. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -661,8 +787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the certificate.</p>
-</dd><dt class="property-"
+    <dd>ID of the certificate.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -670,8 +795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Name of the certificate.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -687,8 +811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -700,10 +823,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificates_python" style="color: inherit; text-decoration: inherit;">certificates</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getcertificatescertificate">Get<wbr>Certificates<wbr>Certificate]</a></span>
+        <span class="property-type"><a href="#getcertificatescertificate">Sequence[Get<wbr>Certificates<wbr>Certificate]</a></span>
     </dt>
-    <dd><p>An information list of certificate. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of certificate. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -711,8 +833,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the certificate.</p>
-</dd><dt class="property-"
+    <dd>ID of the certificate.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -720,8 +841,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Name of the certificate.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -737,8 +857,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -752,8 +871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getcertificatescertificate">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of certificate. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of certificate. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -761,8 +879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the certificate.</p>
-</dd><dt class="property-"
+    <dd>ID of the certificate.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -770,8 +887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the certificate.</p>
-</dd><dt class="property-"
+    <dd>Name of the certificate.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -787,8 +903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -812,8 +927,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Beginning time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -821,8 +935,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -830,8 +943,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Ending time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -839,8 +951,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the certificate to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the certificate to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="issuercn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuercn_csharp" style="color: inherit; text-decoration: inherit;">Issuer<wbr>Cn</a>
@@ -848,8 +959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Issuer name of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -857,8 +967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the certificate to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the certificate to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subjectcn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subjectcn_csharp" style="color: inherit; text-decoration: inherit;">Subject<wbr>Cn</a>
@@ -866,8 +975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Subject name of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -875,8 +983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -890,8 +997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Beginning time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -899,8 +1005,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -908,8 +1013,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Ending time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -917,8 +1021,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the certificate to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the certificate to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="issuercn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuercn_go" style="color: inherit; text-decoration: inherit;">Issuer<wbr>Cn</a>
@@ -926,8 +1029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Issuer name of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -935,8 +1037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the certificate to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the certificate to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subjectcn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subjectcn_go" style="color: inherit; text-decoration: inherit;">Subject<wbr>Cn</a>
@@ -944,8 +1045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Subject name of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -953,8 +1053,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="begin_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begin_time_hcl" style="color: inherit; text-decoration: inherit;">begin_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Beginning time of the certificate.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the certificate.</dd><dt class="property-required"
+            title="Required">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ending time of the certificate.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the certificate to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="issuer_cn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuer_cn_hcl" style="color: inherit; text-decoration: inherit;">issuer_<wbr>cn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Issuer name of the certificate.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the certificate to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="subject_cn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subject_cn_hcl" style="color: inherit; text-decoration: inherit;">subject_<wbr>cn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subject name of the certificate.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -968,8 +1137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Beginning time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -977,8 +1145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -986,8 +1153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Ending time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -995,8 +1161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the certificate to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the certificate to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="issuercn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuercn_java" style="color: inherit; text-decoration: inherit;">issuer<wbr>Cn</a>
@@ -1004,8 +1169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Issuer name of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1013,8 +1177,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the certificate to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the certificate to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subjectcn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subjectcn_java" style="color: inherit; text-decoration: inherit;">subject<wbr>Cn</a>
@@ -1022,8 +1185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Subject name of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1031,8 +1193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1046,8 +1207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Beginning time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1055,8 +1215,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1064,8 +1223,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Ending time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1073,8 +1231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the certificate to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the certificate to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="issuercn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuercn_nodejs" style="color: inherit; text-decoration: inherit;">issuer<wbr>Cn</a>
@@ -1082,8 +1239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Issuer name of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1091,8 +1247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the certificate to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the certificate to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subjectcn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subjectcn_nodejs" style="color: inherit; text-decoration: inherit;">subject<wbr>Cn</a>
@@ -1100,8 +1255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Subject name of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1109,8 +1263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1124,8 +1277,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Beginning time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1133,8 +1285,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -1142,8 +1293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Ending time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1151,8 +1301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the certificate to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the certificate to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="issuer_cn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuer_cn_python" style="color: inherit; text-decoration: inherit;">issuer_<wbr>cn</a>
@@ -1160,8 +1309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Issuer name of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1169,8 +1317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the certificate to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the certificate to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subject_cn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subject_cn_python" style="color: inherit; text-decoration: inherit;">subject_<wbr>cn</a>
@@ -1178,8 +1325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Subject name of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1187,8 +1333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1202,8 +1347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Beginning time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Beginning time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1211,8 +1355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1220,8 +1363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ending time of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Ending time of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1229,8 +1371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the certificate to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the certificate to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="issuercn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#issuercn_yaml" style="color: inherit; text-decoration: inherit;">issuer<wbr>Cn</a>
@@ -1238,8 +1379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Issuer name of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Issuer name of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1247,8 +1387,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the certificate to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the certificate to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="subjectcn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subjectcn_yaml" style="color: inherit; text-decoration: inherit;">subject<wbr>Cn</a>
@@ -1256,8 +1395,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subject name of the certificate.</p>
-</dd><dt class="property-required"
+    <dd>Subject name of the certificate.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1265,8 +1403,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</p>
-</dd></dl>
+    <dd>Type of the certificate to be queried. Valid values: <code>BASIC</code>, <code>CLIENT</code>, <code>SERVER</code>, <code>REALSERVER</code> and <code>PROXY</code>. <code>BASIC</code> means basic certificate; <code>CLIENT</code> means client CA certificate; <code>SERVER</code> means server SSL certificate; <code>REALSERVER</code> means realserver CA certificate; <code>PROXY</code> means proxy SSL certificate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1281,7 +1418,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

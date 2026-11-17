@@ -2,9 +2,11 @@
 ---
 title: "getDdosPolicyCases"
 title_tag: "tencentcloud.Dayu.getDdosPolicyCases"
-meta_desc: "Documentation for the tencentcloud.Dayu.getDdosPolicyCases function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query dayu DDoS policy cases"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,52 +18,51 @@ Use this data source to query dayu DDoS policy cases
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const idTest = tencentcloud.Dayu.getDdosPolicyCases({
-    resourceType: tencentcloud_dayu_ddos_policy_case.test_policy_case.resource_type,
-    sceneId: tencentcloud_dayu_ddos_policy_case.test_policy_case.scene_id,
+const idTest = tencentcloud.dayu.getDdosPolicyCases({
+    resourceType: testPolicyCase.resourceType,
+    sceneId: testPolicyCase.sceneId,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-id_test = tencentcloud.Dayu.get_ddos_policy_cases(resource_type=tencentcloud_dayu_ddos_policy_case["test_policy_case"]["resource_type"],
-    scene_id=tencentcloud_dayu_ddos_policy_case["test_policy_case"]["scene_id"])
+id_test = tencentcloud.dayu.get_ddos_policy_cases(resource_type=test_policy_case["resourceType"],
+    scene_id=test_policy_case["sceneId"])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var idTest = Tencentcloud.Dayu.GetDdosPolicyCases.Invoke(new()
-    {
-        ResourceType = tencentcloud_dayu_ddos_policy_case.Test_policy_case.Resource_type,
-        SceneId = tencentcloud_dayu_ddos_policy_case.Test_policy_case.Scene_id,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dayu"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dayu.GetDdosPolicyCases(ctx, &dayu.GetDdosPolicyCasesArgs{
-			ResourceType: tencentcloud_dayu_ddos_policy_case.Test_policy_case.Resource_type,
-			SceneId:      tencentcloud_dayu_ddos_policy_case.Test_policy_case.Scene_id,
+		_, err := dayu.GetDdosPolicyCases(ctx, &dayu.GetDdosPolicyCasesArgs{
+			ResourceType: testPolicyCase.ResourceType,
+			SceneId:      testPolicyCase.SceneId,
 		}, nil)
 		if err != nil {
 			return err
@@ -70,6 +71,32 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var idTest = Tencentcloud.Dayu.GetDdosPolicyCases.Invoke(new()
+    {
+        ResourceType = testPolicyCase.ResourceType,
+        SceneId = testPolicyCase.SceneId,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dayu.DayuFunctions;
 import com.pulumi.tencentcloud.Dayu.inputs.GetDdosPolicyCasesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,24 +119,55 @@ public class App {
 
     public static void stack(Context ctx) {
         final var idTest = DayuFunctions.getDdosPolicyCases(GetDdosPolicyCasesArgs.builder()
-            .resourceType(tencentcloud_dayu_ddos_policy_case.test_policy_case().resource_type())
-            .sceneId(tencentcloud_dayu_ddos_policy_case.test_policy_case().scene_id())
+            .resourceType(testPolicyCase.resourceType())
+            .sceneId(testPolicyCase.sceneId())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   idTest:
     fn::invoke:
-      Function: tencentcloud:Dayu:getDdosPolicyCases
-      Arguments:
-        resourceType: ${tencentcloud_dayu_ddos_policy_case.test_policy_case.resource_type}
-        sceneId: ${tencentcloud_dayu_ddos_policy_case.test_policy_case.scene_id}
+      function: tencentcloud:Dayu:getDdosPolicyCases
+      arguments:
+        resourceType: ${testPolicyCase.resourceType}
+        sceneId: ${testPolicyCase.sceneId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dayu_getddospolicycases" "idTest" {
+  resource_type = testPolicyCase.resourceType
+  scene_id      = testPolicyCase.sceneId
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribePolicyCase](https://www.tencentcloud.com/search/?wd=DescribePolicyCase&type=document&lang=en)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getDdosPolicyCases<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDdosPolicyCasesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDdosPolicyCasesResult</a></span>></span
+><span class="k">function </span>getDdosPolicyCases<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDdosPolicyCasesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDdosPolicyCasesResult</a></span>></span
 ><span class="k">
-function </span>getDdosPolicyCasesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDdosPolicyCasesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDdosPolicyCasesResult</a></span>></span
+function </span>getDdosPolicyCasesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDdosPolicyCasesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDdosPolicyCasesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -145,10 +203,10 @@ function </span>getDdosPolicyCasesOutput<span class="p">(</span><span class="nx"
                           <span class="nx">scene_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetDdosPolicyCasesResult</span
 ><span class="k">
-def </span>get_ddos_policy_cases_output<span class="p">(</span><span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">scene_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDdosPolicyCasesResult]</span
+def </span>get_ddos_policy_cases_output<span class="p">(</span><span class="nx">resource_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">scene_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDdosPolicyCasesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,7 +231,8 @@ func </span>GetDdosPolicyCasesOutput<span class="p">(</span><span class="nx">ctx
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetDdosPolicyCases </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetDdosPolicyCasesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetDdosPolicyCasesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetDdosPolicyCasesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDdosPolicyCasesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDdosPolicyCasesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDdosPolicyCasesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDdosPolicyCasesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDdosPolicyCasesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,7 +241,8 @@ func </span>GetDdosPolicyCasesOutput<span class="p">(</span><span class="nx">ctx
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetDdosPolicyCasesResult</a></span>> </span>getDdosPolicyCases<span class="p">(</span><span class="nx">GetDdosPolicyCasesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDdosPolicyCasesResult</a></span>> </span>getDdosPolicyCases<span class="p">(</span><span class="nx">GetDdosPolicyCasesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDdosPolicyCasesResult</a></span>> </span>getDdosPolicyCases<span class="p">(</span><span class="nx">GetDdosPolicyCasesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,6 +254,15 @@ func </span>GetDdosPolicyCasesOutput<span class="p">(</span><span class="nx">ctx
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dayu/getDdosPolicyCases:getDdosPolicyCases
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dayu_get_ddos_policy_cases&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -212,8 +281,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_csharp" style="color: inherit; text-decoration: inherit;">Scene<wbr>Id</a>
@@ -221,8 +289,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy case to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy case to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -230,8 +297,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -245,8 +311,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_go" style="color: inherit; text-decoration: inherit;">Scene<wbr>Id</a>
@@ -254,8 +319,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy case to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy case to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -263,8 +327,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="scene_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_id_hcl" style="color: inherit; text-decoration: inherit;">scene_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DDoS policy case to be query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_java" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -287,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DDoS policy case to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy case to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -296,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -311,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_nodejs" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -320,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy case to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy case to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -329,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +431,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="scene_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_id_python" style="color: inherit; text-decoration: inherit;">scene_<wbr>id</a>
@@ -353,8 +439,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DDoS policy case to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy case to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -362,8 +447,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -377,8 +461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_yaml" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -386,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DDoS policy case to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy case to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -395,8 +477,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -419,8 +500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -428,8 +508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicycaseslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Outputs.<wbr>Get<wbr>Ddos<wbr>Policy<wbr>Cases<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of DDoS policy cases. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of DDoS policy cases. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -437,8 +516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the DDoS policy case works for.</dd><dt class="property-"
             title="">
         <span id="sceneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_csharp" style="color: inherit; text-decoration: inherit;">Scene<wbr>Id</a>
@@ -446,8 +524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd><dt class="property-"
+    <dd>ID of the DDoS policy case.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -469,8 +546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -478,8 +554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicycaseslist">[]Get<wbr>Ddos<wbr>Policy<wbr>Cases<wbr>List</a></span>
     </dt>
-    <dd><p>A list of DDoS policy cases. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of DDoS policy cases. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -487,8 +562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the DDoS policy case works for.</dd><dt class="property-"
             title="">
         <span id="sceneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_go" style="color: inherit; text-decoration: inherit;">Scene<wbr>Id</a>
@@ -496,11 +570,56 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd><dt class="property-"
+    <dd>ID of the DDoS policy case.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getddospolicycaseslist">list(object)</a></span>
+    </dt>
+    <dd>A list of DDoS policy cases. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the DDoS policy case works for.</dd><dt class="property-"
+            title="">
+        <span id="scene_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_id_hcl" style="color: inherit; text-decoration: inherit;">scene_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DDoS policy case.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -519,8 +638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -528,8 +646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicycaseslist">List&lt;Get<wbr>Ddos<wbr>Policy<wbr>Cases<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of DDoS policy cases. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of DDoS policy cases. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -537,8 +654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the DDoS policy case works for.</dd><dt class="property-"
             title="">
         <span id="sceneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_java" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -546,8 +662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd><dt class="property-"
+    <dd>ID of the DDoS policy case.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -569,8 +684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -578,8 +692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicycaseslist">Get<wbr>Ddos<wbr>Policy<wbr>Cases<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of DDoS policy cases. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of DDoS policy cases. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -587,8 +700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the DDoS policy case works for.</dd><dt class="property-"
             title="">
         <span id="sceneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_nodejs" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -596,8 +708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd><dt class="property-"
+    <dd>ID of the DDoS policy case.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -619,17 +730,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getddospolicycaseslist">Get<wbr>Ddos<wbr>Policy<wbr>Cases<wbr>List]</a></span>
+        <span class="property-type"><a href="#getddospolicycaseslist">Sequence[Get<wbr>Ddos<wbr>Policy<wbr>Cases<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of DDoS policy cases. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of DDoS policy cases. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -637,8 +746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the DDoS policy case works for.</dd><dt class="property-"
             title="">
         <span id="scene_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_id_python" style="color: inherit; text-decoration: inherit;">scene_<wbr>id</a>
@@ -646,8 +754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd><dt class="property-"
+    <dd>ID of the DDoS policy case.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -669,8 +776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -678,8 +784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicycaseslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of DDoS policy cases. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of DDoS policy cases. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -687,8 +792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for.</p>
-</dd><dt class="property-"
+    <dd>Type of the resource that the DDoS policy case works for.</dd><dt class="property-"
             title="">
         <span id="sceneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_yaml" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -696,8 +800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DDoS policy case.</p>
-</dd><dt class="property-"
+    <dd>ID of the DDoS policy case.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -729,8 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="apptype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apptype_csharp" style="color: inherit; text-decoration: inherit;">App<wbr>Type</a>
@@ -738,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>App type of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App type of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -747,8 +848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="hasabroad_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasabroad_csharp" style="color: inherit; text-decoration: inherit;">Has<wbr>Abroad</a>
@@ -756,8 +856,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves overseas or not.</dd><dt class="property-required"
             title="Required">
         <span id="hasinitiatetcp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiatetcp_csharp" style="color: inherit; text-decoration: inherit;">Has<wbr>Initiate<wbr>Tcp</a>
@@ -765,8 +864,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service actively initiates TCP requests or not.</dd><dt class="property-required"
             title="Required">
         <span id="hasinitiateudp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiateudp_csharp" style="color: inherit; text-decoration: inherit;">Has<wbr>Initiate<wbr>Udp</a>
@@ -774,8 +872,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the actively initiate UDP requests or not.</dd><dt class="property-required"
             title="Required">
         <span id="hasvpn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasvpn_csharp" style="color: inherit; text-decoration: inherit;">Has<wbr>Vpn</a>
@@ -783,8 +880,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves VPN service or not.</dd><dt class="property-required"
             title="Required">
         <span id="maxtcppackagelen_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtcppackagelen_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -792,8 +888,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of TCP message package.</p>
-</dd><dt class="property-required"
+    <dd>The max length of TCP message package.</dd><dt class="property-required"
             title="Required">
         <span id="maxudppackagelen_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxudppackagelen_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -801,8 +896,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of UDP message package.</p>
-</dd><dt class="property-required"
+    <dd>The max length of UDP message package.</dd><dt class="property-required"
             title="Required">
         <span id="mintcppackagelen_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mintcppackagelen_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -810,8 +904,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of TCP message package.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of TCP message package.</dd><dt class="property-required"
             title="Required">
         <span id="minudppackagelen_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minudppackagelen_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -819,8 +912,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of UDP message package.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of UDP message package.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -828,8 +920,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="peertcpport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peertcpport_csharp" style="color: inherit; text-decoration: inherit;">Peer<wbr>Tcp<wbr>Port</a>
@@ -837,8 +928,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests.</p>
-</dd><dt class="property-required"
+    <dd>The port that actively initiates TCP requests.</dd><dt class="property-required"
             title="Required">
         <span id="peerudpport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peerudpport_csharp" style="color: inherit; text-decoration: inherit;">Peer<wbr>Udp<wbr>Port</a>
@@ -846,8 +936,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests.</p>
-</dd><dt class="property-required"
+    <dd>The port that actively initiates UDP requests.</dd><dt class="property-required"
             title="Required">
         <span id="platformtypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platformtypes_csharp" style="color: inherit; text-decoration: inherit;">Platform<wbr>Types</a>
@@ -855,8 +944,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -864,8 +952,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_csharp" style="color: inherit; text-decoration: inherit;">Scene<wbr>Id</a>
@@ -873,8 +960,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy case to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DDoS policy case to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tcpendport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpendport_csharp" style="color: inherit; text-decoration: inherit;">Tcp<wbr>End<wbr>Port</a>
@@ -882,8 +968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the TCP service.</p>
-</dd><dt class="property-required"
+    <dd>End port of the TCP service.</dd><dt class="property-required"
             title="Required">
         <span id="tcpfootprint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpfootprint_csharp" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Footprint</a>
@@ -891,8 +976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load.</p>
-</dd><dt class="property-required"
+    <dd>The fixed signature of TCP protocol load.</dd><dt class="property-required"
             title="Required">
         <span id="tcpstartport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpstartport_csharp" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Start<wbr>Port</a>
@@ -900,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the TCP service.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the TCP service.</dd><dt class="property-required"
             title="Required">
         <span id="udpendport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpendport_csharp" style="color: inherit; text-decoration: inherit;">Udp<wbr>End<wbr>Port</a>
@@ -909,8 +992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the UDP service.</p>
-</dd><dt class="property-required"
+    <dd>End port of the UDP service.</dd><dt class="property-required"
             title="Required">
         <span id="udpfootprint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpfootprint_csharp" style="color: inherit; text-decoration: inherit;">Udp<wbr>Footprint</a>
@@ -918,8 +1000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load.</p>
-</dd><dt class="property-required"
+    <dd>The fixed signature of TCP protocol load.</dd><dt class="property-required"
             title="Required">
         <span id="udpstartport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpstartport_csharp" style="color: inherit; text-decoration: inherit;">Udp<wbr>Start<wbr>Port</a>
@@ -927,8 +1008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the UDP service.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the UDP service.</dd><dt class="property-required"
             title="Required">
         <span id="webapiurls_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webapiurls_csharp" style="color: inherit; text-decoration: inherit;">Web<wbr>Api<wbr>Urls</a>
@@ -936,8 +1016,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd></dl>
+    <dd>Web API url set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -951,8 +1030,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="apptype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apptype_go" style="color: inherit; text-decoration: inherit;">App<wbr>Type</a>
@@ -960,8 +1038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>App type of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App type of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -969,8 +1046,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="hasabroad_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasabroad_go" style="color: inherit; text-decoration: inherit;">Has<wbr>Abroad</a>
@@ -978,8 +1054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves overseas or not.</dd><dt class="property-required"
             title="Required">
         <span id="hasinitiatetcp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiatetcp_go" style="color: inherit; text-decoration: inherit;">Has<wbr>Initiate<wbr>Tcp</a>
@@ -987,8 +1062,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service actively initiates TCP requests or not.</dd><dt class="property-required"
             title="Required">
         <span id="hasinitiateudp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiateudp_go" style="color: inherit; text-decoration: inherit;">Has<wbr>Initiate<wbr>Udp</a>
@@ -996,8 +1070,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the actively initiate UDP requests or not.</dd><dt class="property-required"
             title="Required">
         <span id="hasvpn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasvpn_go" style="color: inherit; text-decoration: inherit;">Has<wbr>Vpn</a>
@@ -1005,8 +1078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves VPN service or not.</dd><dt class="property-required"
             title="Required">
         <span id="maxtcppackagelen_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtcppackagelen_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -1014,8 +1086,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of TCP message package.</p>
-</dd><dt class="property-required"
+    <dd>The max length of TCP message package.</dd><dt class="property-required"
             title="Required">
         <span id="maxudppackagelen_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxudppackagelen_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -1023,8 +1094,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of UDP message package.</p>
-</dd><dt class="property-required"
+    <dd>The max length of UDP message package.</dd><dt class="property-required"
             title="Required">
         <span id="mintcppackagelen_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mintcppackagelen_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -1032,8 +1102,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of TCP message package.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of TCP message package.</dd><dt class="property-required"
             title="Required">
         <span id="minudppackagelen_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minudppackagelen_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -1041,8 +1110,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of UDP message package.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of UDP message package.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1050,8 +1118,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="peertcpport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peertcpport_go" style="color: inherit; text-decoration: inherit;">Peer<wbr>Tcp<wbr>Port</a>
@@ -1059,8 +1126,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests.</p>
-</dd><dt class="property-required"
+    <dd>The port that actively initiates TCP requests.</dd><dt class="property-required"
             title="Required">
         <span id="peerudpport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peerudpport_go" style="color: inherit; text-decoration: inherit;">Peer<wbr>Udp<wbr>Port</a>
@@ -1068,8 +1134,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests.</p>
-</dd><dt class="property-required"
+    <dd>The port that actively initiates UDP requests.</dd><dt class="property-required"
             title="Required">
         <span id="platformtypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platformtypes_go" style="color: inherit; text-decoration: inherit;">Platform<wbr>Types</a>
@@ -1077,8 +1142,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1086,8 +1150,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_go" style="color: inherit; text-decoration: inherit;">Scene<wbr>Id</a>
@@ -1095,8 +1158,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy case to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DDoS policy case to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tcpendport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpendport_go" style="color: inherit; text-decoration: inherit;">Tcp<wbr>End<wbr>Port</a>
@@ -1104,8 +1166,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the TCP service.</p>
-</dd><dt class="property-required"
+    <dd>End port of the TCP service.</dd><dt class="property-required"
             title="Required">
         <span id="tcpfootprint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpfootprint_go" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Footprint</a>
@@ -1113,8 +1174,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load.</p>
-</dd><dt class="property-required"
+    <dd>The fixed signature of TCP protocol load.</dd><dt class="property-required"
             title="Required">
         <span id="tcpstartport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpstartport_go" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Start<wbr>Port</a>
@@ -1122,8 +1182,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the TCP service.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the TCP service.</dd><dt class="property-required"
             title="Required">
         <span id="udpendport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpendport_go" style="color: inherit; text-decoration: inherit;">Udp<wbr>End<wbr>Port</a>
@@ -1131,8 +1190,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the UDP service.</p>
-</dd><dt class="property-required"
+    <dd>End port of the UDP service.</dd><dt class="property-required"
             title="Required">
         <span id="udpfootprint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpfootprint_go" style="color: inherit; text-decoration: inherit;">Udp<wbr>Footprint</a>
@@ -1140,8 +1198,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load.</p>
-</dd><dt class="property-required"
+    <dd>The fixed signature of TCP protocol load.</dd><dt class="property-required"
             title="Required">
         <span id="udpstartport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpstartport_go" style="color: inherit; text-decoration: inherit;">Udp<wbr>Start<wbr>Port</a>
@@ -1149,8 +1206,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the UDP service.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the UDP service.</dd><dt class="property-required"
             title="Required">
         <span id="webapiurls_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webapiurls_go" style="color: inherit; text-decoration: inherit;">Web<wbr>Api<wbr>Urls</a>
@@ -1158,8 +1214,205 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd></dl>
+    <dd>Web API url set.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="app_protocols_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#app_protocols_hcl" style="color: inherit; text-decoration: inherit;">app_<wbr>protocols</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-required"
+            title="Required">
+        <span id="app_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#app_type_hcl" style="color: inherit; text-decoration: inherit;">app_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>App type of the DDoS policy case.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-required"
+            title="Required">
+        <span id="has_abroad_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_abroad_hcl" style="color: inherit; text-decoration: inherit;">has_<wbr>abroad</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicate whether the service involves overseas or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="has_initiate_tcp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_initiate_tcp_hcl" style="color: inherit; text-decoration: inherit;">has_<wbr>initiate_<wbr>tcp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicate whether the service actively initiates TCP requests or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="has_initiate_udp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_initiate_udp_hcl" style="color: inherit; text-decoration: inherit;">has_<wbr>initiate_<wbr>udp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicate whether the actively initiate UDP requests or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="has_vpn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_vpn_hcl" style="color: inherit; text-decoration: inherit;">has_<wbr>vpn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicate whether the service involves VPN service or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_tcp_package_len_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_tcp_package_len_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>tcp_<wbr>package_<wbr>len</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The max length of TCP message package.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_udp_package_len_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_udp_package_len_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>udp_<wbr>package_<wbr>len</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The max length of UDP message package.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_tcp_package_len_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_tcp_package_len_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>tcp_<wbr>package_<wbr>len</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The minimum length of TCP message package.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_udp_package_len_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_udp_package_len_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>udp_<wbr>package_<wbr>len</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The minimum length of UDP message package.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the DDoS policy case.</dd><dt class="property-required"
+            title="Required">
+        <span id="peer_tcp_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peer_tcp_port_hcl" style="color: inherit; text-decoration: inherit;">peer_<wbr>tcp_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The port that actively initiates TCP requests.</dd><dt class="property-required"
+            title="Required">
+        <span id="peer_udp_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peer_udp_port_hcl" style="color: inherit; text-decoration: inherit;">peer_<wbr>udp_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The port that actively initiates UDP requests.</dd><dt class="property-required"
+            title="Required">
+        <span id="platform_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_types_hcl" style="color: inherit; text-decoration: inherit;">platform_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="scene_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_id_hcl" style="color: inherit; text-decoration: inherit;">scene_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DDoS policy case to be query.</dd><dt class="property-required"
+            title="Required">
+        <span id="tcp_end_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_end_port_hcl" style="color: inherit; text-decoration: inherit;">tcp_<wbr>end_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>End port of the TCP service.</dd><dt class="property-required"
+            title="Required">
+        <span id="tcp_footprint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_footprint_hcl" style="color: inherit; text-decoration: inherit;">tcp_<wbr>footprint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The fixed signature of TCP protocol load.</dd><dt class="property-required"
+            title="Required">
+        <span id="tcp_start_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_start_port_hcl" style="color: inherit; text-decoration: inherit;">tcp_<wbr>start_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Start port of the TCP service.</dd><dt class="property-required"
+            title="Required">
+        <span id="udp_end_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udp_end_port_hcl" style="color: inherit; text-decoration: inherit;">udp_<wbr>end_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>End port of the UDP service.</dd><dt class="property-required"
+            title="Required">
+        <span id="udp_footprint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udp_footprint_hcl" style="color: inherit; text-decoration: inherit;">udp_<wbr>footprint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The fixed signature of TCP protocol load.</dd><dt class="property-required"
+            title="Required">
+        <span id="udp_start_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udp_start_port_hcl" style="color: inherit; text-decoration: inherit;">udp_<wbr>start_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Start port of the UDP service.</dd><dt class="property-required"
+            title="Required">
+        <span id="web_api_urls_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#web_api_urls_hcl" style="color: inherit; text-decoration: inherit;">web_<wbr>api_<wbr>urls</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Web API url set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1173,8 +1426,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="apptype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apptype_java" style="color: inherit; text-decoration: inherit;">app<wbr>Type</a>
@@ -1182,8 +1434,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>App type of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App type of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1191,8 +1442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="hasabroad_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasabroad_java" style="color: inherit; text-decoration: inherit;">has<wbr>Abroad</a>
@@ -1200,8 +1450,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves overseas or not.</dd><dt class="property-required"
             title="Required">
         <span id="hasinitiatetcp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiatetcp_java" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Tcp</a>
@@ -1209,8 +1458,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service actively initiates TCP requests or not.</dd><dt class="property-required"
             title="Required">
         <span id="hasinitiateudp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiateudp_java" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Udp</a>
@@ -1218,8 +1466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the actively initiate UDP requests or not.</dd><dt class="property-required"
             title="Required">
         <span id="hasvpn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasvpn_java" style="color: inherit; text-decoration: inherit;">has<wbr>Vpn</a>
@@ -1227,8 +1474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves VPN service or not.</dd><dt class="property-required"
             title="Required">
         <span id="maxtcppackagelen_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtcppackagelen_java" style="color: inherit; text-decoration: inherit;">max<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -1236,8 +1482,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The max length of TCP message package.</p>
-</dd><dt class="property-required"
+    <dd>The max length of TCP message package.</dd><dt class="property-required"
             title="Required">
         <span id="maxudppackagelen_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxudppackagelen_java" style="color: inherit; text-decoration: inherit;">max<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -1245,8 +1490,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The max length of UDP message package.</p>
-</dd><dt class="property-required"
+    <dd>The max length of UDP message package.</dd><dt class="property-required"
             title="Required">
         <span id="mintcppackagelen_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mintcppackagelen_java" style="color: inherit; text-decoration: inherit;">min<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -1254,8 +1498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The minimum length of TCP message package.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of TCP message package.</dd><dt class="property-required"
             title="Required">
         <span id="minudppackagelen_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minudppackagelen_java" style="color: inherit; text-decoration: inherit;">min<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -1263,8 +1506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The minimum length of UDP message package.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of UDP message package.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1272,8 +1514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="peertcpport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peertcpport_java" style="color: inherit; text-decoration: inherit;">peer<wbr>Tcp<wbr>Port</a>
@@ -1281,8 +1522,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests.</p>
-</dd><dt class="property-required"
+    <dd>The port that actively initiates TCP requests.</dd><dt class="property-required"
             title="Required">
         <span id="peerudpport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peerudpport_java" style="color: inherit; text-decoration: inherit;">peer<wbr>Udp<wbr>Port</a>
@@ -1290,8 +1530,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests.</p>
-</dd><dt class="property-required"
+    <dd>The port that actively initiates UDP requests.</dd><dt class="property-required"
             title="Required">
         <span id="platformtypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platformtypes_java" style="color: inherit; text-decoration: inherit;">platform<wbr>Types</a>
@@ -1299,8 +1538,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1308,8 +1546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_java" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -1317,8 +1554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DDoS policy case to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DDoS policy case to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tcpendport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpendport_java" style="color: inherit; text-decoration: inherit;">tcp<wbr>End<wbr>Port</a>
@@ -1326,8 +1562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End port of the TCP service.</p>
-</dd><dt class="property-required"
+    <dd>End port of the TCP service.</dd><dt class="property-required"
             title="Required">
         <span id="tcpfootprint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpfootprint_java" style="color: inherit; text-decoration: inherit;">tcp<wbr>Footprint</a>
@@ -1335,8 +1570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load.</p>
-</dd><dt class="property-required"
+    <dd>The fixed signature of TCP protocol load.</dd><dt class="property-required"
             title="Required">
         <span id="tcpstartport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpstartport_java" style="color: inherit; text-decoration: inherit;">tcp<wbr>Start<wbr>Port</a>
@@ -1344,8 +1578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start port of the TCP service.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the TCP service.</dd><dt class="property-required"
             title="Required">
         <span id="udpendport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpendport_java" style="color: inherit; text-decoration: inherit;">udp<wbr>End<wbr>Port</a>
@@ -1353,8 +1586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End port of the UDP service.</p>
-</dd><dt class="property-required"
+    <dd>End port of the UDP service.</dd><dt class="property-required"
             title="Required">
         <span id="udpfootprint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpfootprint_java" style="color: inherit; text-decoration: inherit;">udp<wbr>Footprint</a>
@@ -1362,8 +1594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load.</p>
-</dd><dt class="property-required"
+    <dd>The fixed signature of TCP protocol load.</dd><dt class="property-required"
             title="Required">
         <span id="udpstartport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpstartport_java" style="color: inherit; text-decoration: inherit;">udp<wbr>Start<wbr>Port</a>
@@ -1371,8 +1602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start port of the UDP service.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the UDP service.</dd><dt class="property-required"
             title="Required">
         <span id="webapiurls_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webapiurls_java" style="color: inherit; text-decoration: inherit;">web<wbr>Api<wbr>Urls</a>
@@ -1380,8 +1610,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd></dl>
+    <dd>Web API url set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1395,8 +1624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="apptype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apptype_nodejs" style="color: inherit; text-decoration: inherit;">app<wbr>Type</a>
@@ -1404,8 +1632,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>App type of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App type of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1413,8 +1640,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="hasabroad_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasabroad_nodejs" style="color: inherit; text-decoration: inherit;">has<wbr>Abroad</a>
@@ -1422,8 +1648,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves overseas or not.</dd><dt class="property-required"
             title="Required">
         <span id="hasinitiatetcp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiatetcp_nodejs" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Tcp</a>
@@ -1431,8 +1656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service actively initiates TCP requests or not.</dd><dt class="property-required"
             title="Required">
         <span id="hasinitiateudp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiateudp_nodejs" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Udp</a>
@@ -1440,8 +1664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the actively initiate UDP requests or not.</dd><dt class="property-required"
             title="Required">
         <span id="hasvpn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasvpn_nodejs" style="color: inherit; text-decoration: inherit;">has<wbr>Vpn</a>
@@ -1449,8 +1672,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves VPN service or not.</dd><dt class="property-required"
             title="Required">
         <span id="maxtcppackagelen_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtcppackagelen_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -1458,8 +1680,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of TCP message package.</p>
-</dd><dt class="property-required"
+    <dd>The max length of TCP message package.</dd><dt class="property-required"
             title="Required">
         <span id="maxudppackagelen_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxudppackagelen_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -1467,8 +1688,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The max length of UDP message package.</p>
-</dd><dt class="property-required"
+    <dd>The max length of UDP message package.</dd><dt class="property-required"
             title="Required">
         <span id="mintcppackagelen_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mintcppackagelen_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -1476,8 +1696,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of TCP message package.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of TCP message package.</dd><dt class="property-required"
             title="Required">
         <span id="minudppackagelen_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minudppackagelen_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -1485,8 +1704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The minimum length of UDP message package.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of UDP message package.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1494,8 +1712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="peertcpport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peertcpport_nodejs" style="color: inherit; text-decoration: inherit;">peer<wbr>Tcp<wbr>Port</a>
@@ -1503,8 +1720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests.</p>
-</dd><dt class="property-required"
+    <dd>The port that actively initiates TCP requests.</dd><dt class="property-required"
             title="Required">
         <span id="peerudpport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peerudpport_nodejs" style="color: inherit; text-decoration: inherit;">peer<wbr>Udp<wbr>Port</a>
@@ -1512,8 +1728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests.</p>
-</dd><dt class="property-required"
+    <dd>The port that actively initiates UDP requests.</dd><dt class="property-required"
             title="Required">
         <span id="platformtypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platformtypes_nodejs" style="color: inherit; text-decoration: inherit;">platform<wbr>Types</a>
@@ -1521,8 +1736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1530,8 +1744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_nodejs" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -1539,8 +1752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy case to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DDoS policy case to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tcpendport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpendport_nodejs" style="color: inherit; text-decoration: inherit;">tcp<wbr>End<wbr>Port</a>
@@ -1548,8 +1760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the TCP service.</p>
-</dd><dt class="property-required"
+    <dd>End port of the TCP service.</dd><dt class="property-required"
             title="Required">
         <span id="tcpfootprint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpfootprint_nodejs" style="color: inherit; text-decoration: inherit;">tcp<wbr>Footprint</a>
@@ -1557,8 +1768,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load.</p>
-</dd><dt class="property-required"
+    <dd>The fixed signature of TCP protocol load.</dd><dt class="property-required"
             title="Required">
         <span id="tcpstartport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpstartport_nodejs" style="color: inherit; text-decoration: inherit;">tcp<wbr>Start<wbr>Port</a>
@@ -1566,8 +1776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the TCP service.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the TCP service.</dd><dt class="property-required"
             title="Required">
         <span id="udpendport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpendport_nodejs" style="color: inherit; text-decoration: inherit;">udp<wbr>End<wbr>Port</a>
@@ -1575,8 +1784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End port of the UDP service.</p>
-</dd><dt class="property-required"
+    <dd>End port of the UDP service.</dd><dt class="property-required"
             title="Required">
         <span id="udpfootprint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpfootprint_nodejs" style="color: inherit; text-decoration: inherit;">udp<wbr>Footprint</a>
@@ -1584,8 +1792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load.</p>
-</dd><dt class="property-required"
+    <dd>The fixed signature of TCP protocol load.</dd><dt class="property-required"
             title="Required">
         <span id="udpstartport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpstartport_nodejs" style="color: inherit; text-decoration: inherit;">udp<wbr>Start<wbr>Port</a>
@@ -1593,8 +1800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Start port of the UDP service.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the UDP service.</dd><dt class="property-required"
             title="Required">
         <span id="webapiurls_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webapiurls_nodejs" style="color: inherit; text-decoration: inherit;">web<wbr>Api<wbr>Urls</a>
@@ -1602,8 +1808,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd></dl>
+    <dd>Web API url set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1617,8 +1822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="app_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#app_type_python" style="color: inherit; text-decoration: inherit;">app_<wbr>type</a>
@@ -1626,8 +1830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>App type of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App type of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1635,8 +1838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="has_abroad_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_abroad_python" style="color: inherit; text-decoration: inherit;">has_<wbr>abroad</a>
@@ -1644,8 +1846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves overseas or not.</dd><dt class="property-required"
             title="Required">
         <span id="has_initiate_tcp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_initiate_tcp_python" style="color: inherit; text-decoration: inherit;">has_<wbr>initiate_<wbr>tcp</a>
@@ -1653,8 +1854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service actively initiates TCP requests or not.</dd><dt class="property-required"
             title="Required">
         <span id="has_initiate_udp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_initiate_udp_python" style="color: inherit; text-decoration: inherit;">has_<wbr>initiate_<wbr>udp</a>
@@ -1662,8 +1862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the actively initiate UDP requests or not.</dd><dt class="property-required"
             title="Required">
         <span id="has_vpn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_vpn_python" style="color: inherit; text-decoration: inherit;">has_<wbr>vpn</a>
@@ -1671,8 +1870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves VPN service or not.</dd><dt class="property-required"
             title="Required">
         <span id="max_tcp_package_len_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_tcp_package_len_python" style="color: inherit; text-decoration: inherit;">max_<wbr>tcp_<wbr>package_<wbr>len</a>
@@ -1680,8 +1878,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The max length of TCP message package.</p>
-</dd><dt class="property-required"
+    <dd>The max length of TCP message package.</dd><dt class="property-required"
             title="Required">
         <span id="max_udp_package_len_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_udp_package_len_python" style="color: inherit; text-decoration: inherit;">max_<wbr>udp_<wbr>package_<wbr>len</a>
@@ -1689,8 +1886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The max length of UDP message package.</p>
-</dd><dt class="property-required"
+    <dd>The max length of UDP message package.</dd><dt class="property-required"
             title="Required">
         <span id="min_tcp_package_len_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_tcp_package_len_python" style="color: inherit; text-decoration: inherit;">min_<wbr>tcp_<wbr>package_<wbr>len</a>
@@ -1698,8 +1894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The minimum length of TCP message package.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of TCP message package.</dd><dt class="property-required"
             title="Required">
         <span id="min_udp_package_len_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_udp_package_len_python" style="color: inherit; text-decoration: inherit;">min_<wbr>udp_<wbr>package_<wbr>len</a>
@@ -1707,8 +1902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The minimum length of UDP message package.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of UDP message package.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1716,8 +1910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="peer_tcp_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peer_tcp_port_python" style="color: inherit; text-decoration: inherit;">peer_<wbr>tcp_<wbr>port</a>
@@ -1725,8 +1918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests.</p>
-</dd><dt class="property-required"
+    <dd>The port that actively initiates TCP requests.</dd><dt class="property-required"
             title="Required">
         <span id="peer_udp_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peer_udp_port_python" style="color: inherit; text-decoration: inherit;">peer_<wbr>udp_<wbr>port</a>
@@ -1734,8 +1926,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests.</p>
-</dd><dt class="property-required"
+    <dd>The port that actively initiates UDP requests.</dd><dt class="property-required"
             title="Required">
         <span id="platform_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platform_types_python" style="color: inherit; text-decoration: inherit;">platform_<wbr>types</a>
@@ -1743,8 +1934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -1752,8 +1942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="scene_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_id_python" style="color: inherit; text-decoration: inherit;">scene_<wbr>id</a>
@@ -1761,8 +1950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DDoS policy case to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DDoS policy case to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tcp_end_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_end_port_python" style="color: inherit; text-decoration: inherit;">tcp_<wbr>end_<wbr>port</a>
@@ -1770,8 +1958,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>End port of the TCP service.</p>
-</dd><dt class="property-required"
+    <dd>End port of the TCP service.</dd><dt class="property-required"
             title="Required">
         <span id="tcp_footprint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_footprint_python" style="color: inherit; text-decoration: inherit;">tcp_<wbr>footprint</a>
@@ -1779,8 +1966,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load.</p>
-</dd><dt class="property-required"
+    <dd>The fixed signature of TCP protocol load.</dd><dt class="property-required"
             title="Required">
         <span id="tcp_start_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_start_port_python" style="color: inherit; text-decoration: inherit;">tcp_<wbr>start_<wbr>port</a>
@@ -1788,8 +1974,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Start port of the TCP service.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the TCP service.</dd><dt class="property-required"
             title="Required">
         <span id="udp_end_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udp_end_port_python" style="color: inherit; text-decoration: inherit;">udp_<wbr>end_<wbr>port</a>
@@ -1797,8 +1982,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>End port of the UDP service.</p>
-</dd><dt class="property-required"
+    <dd>End port of the UDP service.</dd><dt class="property-required"
             title="Required">
         <span id="udp_footprint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udp_footprint_python" style="color: inherit; text-decoration: inherit;">udp_<wbr>footprint</a>
@@ -1806,8 +1990,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load.</p>
-</dd><dt class="property-required"
+    <dd>The fixed signature of TCP protocol load.</dd><dt class="property-required"
             title="Required">
         <span id="udp_start_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udp_start_port_python" style="color: inherit; text-decoration: inherit;">udp_<wbr>start_<wbr>port</a>
@@ -1815,8 +1998,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Start port of the UDP service.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the UDP service.</dd><dt class="property-required"
             title="Required">
         <span id="web_api_urls_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#web_api_urls_python" style="color: inherit; text-decoration: inherit;">web_<wbr>api_<wbr>urls</a>
@@ -1824,8 +2006,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd></dl>
+    <dd>Web API url set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1839,8 +2020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>App protocol set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App protocol set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="apptype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#apptype_yaml" style="color: inherit; text-decoration: inherit;">app<wbr>Type</a>
@@ -1848,8 +2028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>App type of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>App type of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1857,8 +2036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="hasabroad_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasabroad_yaml" style="color: inherit; text-decoration: inherit;">has<wbr>Abroad</a>
@@ -1866,8 +2044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service involves overseas or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves overseas or not.</dd><dt class="property-required"
             title="Required">
         <span id="hasinitiatetcp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiatetcp_yaml" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Tcp</a>
@@ -1875,8 +2052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service actively initiates TCP requests or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service actively initiates TCP requests or not.</dd><dt class="property-required"
             title="Required">
         <span id="hasinitiateudp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasinitiateudp_yaml" style="color: inherit; text-decoration: inherit;">has<wbr>Initiate<wbr>Udp</a>
@@ -1884,8 +2060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the actively initiate UDP requests or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the actively initiate UDP requests or not.</dd><dt class="property-required"
             title="Required">
         <span id="hasvpn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hasvpn_yaml" style="color: inherit; text-decoration: inherit;">has<wbr>Vpn</a>
@@ -1893,8 +2068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether the service involves VPN service or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether the service involves VPN service or not.</dd><dt class="property-required"
             title="Required">
         <span id="maxtcppackagelen_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxtcppackagelen_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -1902,8 +2076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The max length of TCP message package.</p>
-</dd><dt class="property-required"
+    <dd>The max length of TCP message package.</dd><dt class="property-required"
             title="Required">
         <span id="maxudppackagelen_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxudppackagelen_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -1911,8 +2084,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The max length of UDP message package.</p>
-</dd><dt class="property-required"
+    <dd>The max length of UDP message package.</dd><dt class="property-required"
             title="Required">
         <span id="mintcppackagelen_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mintcppackagelen_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Tcp<wbr>Package<wbr>Len</a>
@@ -1920,8 +2092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The minimum length of TCP message package.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of TCP message package.</dd><dt class="property-required"
             title="Required">
         <span id="minudppackagelen_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minudppackagelen_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Udp<wbr>Package<wbr>Len</a>
@@ -1929,8 +2100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The minimum length of UDP message package.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of UDP message package.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1938,8 +2108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="peertcpport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peertcpport_yaml" style="color: inherit; text-decoration: inherit;">peer<wbr>Tcp<wbr>Port</a>
@@ -1947,8 +2116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The port that actively initiates TCP requests.</p>
-</dd><dt class="property-required"
+    <dd>The port that actively initiates TCP requests.</dd><dt class="property-required"
             title="Required">
         <span id="peerudpport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#peerudpport_yaml" style="color: inherit; text-decoration: inherit;">peer<wbr>Udp<wbr>Port</a>
@@ -1956,8 +2124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The port that actively initiates UDP requests.</p>
-</dd><dt class="property-required"
+    <dd>The port that actively initiates UDP requests.</dd><dt class="property-required"
             title="Required">
         <span id="platformtypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#platformtypes_yaml" style="color: inherit; text-decoration: inherit;">platform<wbr>Types</a>
@@ -1965,8 +2132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Platform set of the DDoS policy case.</p>
-</dd><dt class="property-required"
+    <dd>Platform set of the DDoS policy case.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1974,8 +2140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the DDoS policy case works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_yaml" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -1983,8 +2148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DDoS policy case to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DDoS policy case to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tcpendport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpendport_yaml" style="color: inherit; text-decoration: inherit;">tcp<wbr>End<wbr>Port</a>
@@ -1992,8 +2156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End port of the TCP service.</p>
-</dd><dt class="property-required"
+    <dd>End port of the TCP service.</dd><dt class="property-required"
             title="Required">
         <span id="tcpfootprint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpfootprint_yaml" style="color: inherit; text-decoration: inherit;">tcp<wbr>Footprint</a>
@@ -2001,8 +2164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load.</p>
-</dd><dt class="property-required"
+    <dd>The fixed signature of TCP protocol load.</dd><dt class="property-required"
             title="Required">
         <span id="tcpstartport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpstartport_yaml" style="color: inherit; text-decoration: inherit;">tcp<wbr>Start<wbr>Port</a>
@@ -2010,8 +2172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start port of the TCP service.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the TCP service.</dd><dt class="property-required"
             title="Required">
         <span id="udpendport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpendport_yaml" style="color: inherit; text-decoration: inherit;">udp<wbr>End<wbr>Port</a>
@@ -2019,8 +2180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End port of the UDP service.</p>
-</dd><dt class="property-required"
+    <dd>End port of the UDP service.</dd><dt class="property-required"
             title="Required">
         <span id="udpfootprint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpfootprint_yaml" style="color: inherit; text-decoration: inherit;">udp<wbr>Footprint</a>
@@ -2028,8 +2188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The fixed signature of TCP protocol load.</p>
-</dd><dt class="property-required"
+    <dd>The fixed signature of TCP protocol load.</dd><dt class="property-required"
             title="Required">
         <span id="udpstartport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpstartport_yaml" style="color: inherit; text-decoration: inherit;">udp<wbr>Start<wbr>Port</a>
@@ -2037,8 +2196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Start port of the UDP service.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the UDP service.</dd><dt class="property-required"
             title="Required">
         <span id="webapiurls_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webapiurls_yaml" style="color: inherit; text-decoration: inherit;">web<wbr>Api<wbr>Urls</a>
@@ -2046,8 +2204,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Web API url set.</p>
-</dd></dl>
+    <dd>Web API url set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2062,7 +2219,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

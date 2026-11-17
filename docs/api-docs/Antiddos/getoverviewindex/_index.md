@@ -2,9 +2,11 @@
 ---
 title: "getOverviewIndex"
 title_tag: "tencentcloud.Antiddos.getOverviewIndex"
-meta_desc: "Documentation for the tencentcloud.Antiddos.getOverviewIndex function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of antiddos overview index"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,52 +18,51 @@ Use this data source to query detailed information of antiddos overview index
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const overviewIndex = tencentcloud.Antiddos.getOverviewIndex({
-    endTime: "2023-11-21 12:32:12",
+const overviewIndex = tencentcloud.antiddos.getOverviewIndex({
     startTime: "2023-11-20 12:32:12",
+    endTime: "2023-11-21 12:32:12",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-overview_index = tencentcloud.Antiddos.get_overview_index(end_time="2023-11-21 12:32:12",
-    start_time="2023-11-20 12:32:12")
+overview_index = tencentcloud.antiddos.get_overview_index(start_time="2023-11-20 12:32:12",
+    end_time="2023-11-21 12:32:12")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var overviewIndex = Tencentcloud.Antiddos.GetOverviewIndex.Invoke(new()
-    {
-        EndTime = "2023-11-21 12:32:12",
-        StartTime = "2023-11-20 12:32:12",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/antiddos"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Antiddos.GetOverviewIndex(ctx, &antiddos.GetOverviewIndexArgs{
-			EndTime:   "2023-11-21 12:32:12",
+		_, err := antiddos.GetOverviewIndex(ctx, &antiddos.GetOverviewIndexArgs{
 			StartTime: "2023-11-20 12:32:12",
+			EndTime:   "2023-11-21 12:32:12",
 		}, nil)
 		if err != nil {
 			return err
@@ -70,6 +71,32 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var overviewIndex = Tencentcloud.Antiddos.GetOverviewIndex.Invoke(new()
+    {
+        StartTime = "2023-11-20 12:32:12",
+        EndTime = "2023-11-21 12:32:12",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Antiddos.AntiddosFunctions;
 import com.pulumi.tencentcloud.Antiddos.inputs.GetOverviewIndexArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,24 +119,55 @@ public class App {
 
     public static void stack(Context ctx) {
         final var overviewIndex = AntiddosFunctions.getOverviewIndex(GetOverviewIndexArgs.builder()
-            .endTime("2023-11-21 12:32:12")
             .startTime("2023-11-20 12:32:12")
+            .endTime("2023-11-21 12:32:12")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   overviewIndex:
     fn::invoke:
-      Function: tencentcloud:Antiddos:getOverviewIndex
-      Arguments:
-        endTime: 2023-11-21 12:32:12
+      function: tencentcloud:Antiddos:getOverviewIndex
+      arguments:
         startTime: 2023-11-20 12:32:12
+        endTime: 2023-11-21 12:32:12
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_antiddos_getoverviewindex" "overviewIndex" {
+  start_time = "2023-11-20 12:32:12"
+  end_time   = "2023-11-21 12:32:12"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeOverviewIndex](https://www.tencentcloud.com/search/?wd=DescribeOverviewIndex&type=document&lang=en)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getOverviewIndex<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetOverviewIndexArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetOverviewIndexResult</a></span>></span
+><span class="k">function </span>getOverviewIndex<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetOverviewIndexArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetOverviewIndexResult</a></span>></span
 ><span class="k">
-function </span>getOverviewIndexOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetOverviewIndexOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetOverviewIndexResult</a></span>></span
+function </span>getOverviewIndexOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetOverviewIndexOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetOverviewIndexResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -145,10 +203,10 @@ function </span>getOverviewIndexOutput<span class="p">(</span><span class="nx">a
                        <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetOverviewIndexResult</span
 ><span class="k">
-def </span>get_overview_index_output<span class="p">(</span><span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">start_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetOverviewIndexResult]</span
+def </span>get_overview_index_output<span class="p">(</span><span class="nx">end_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">start_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetOverviewIndexResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,7 +231,8 @@ func </span>GetOverviewIndexOutput<span class="p">(</span><span class="nx">ctx</
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetOverviewIndex </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetOverviewIndexResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetOverviewIndexArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetOverviewIndexResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetOverviewIndexInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetOverviewIndexResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetOverviewIndexInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetOverviewIndexResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetOverviewIndexInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,7 +241,8 @@ func </span>GetOverviewIndexOutput<span class="p">(</span><span class="nx">ctx</
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetOverviewIndexResult</a></span>> </span>getOverviewIndex<span class="p">(</span><span class="nx">GetOverviewIndexArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetOverviewIndexResult</a></span>> </span>getOverviewIndex<span class="p">(</span><span class="nx">GetOverviewIndexArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetOverviewIndexResult</a></span>> </span>getOverviewIndex<span class="p">(</span><span class="nx">GetOverviewIndexArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,6 +254,15 @@ func </span>GetOverviewIndexOutput<span class="p">(</span><span class="nx">ctx</
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Antiddos/getOverviewIndex:getOverviewIndex
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_antiddos_get_overview_index&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -212,8 +281,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EndTime.</p>
-</dd><dt class="property-required"
+    <dd>EndTime.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -221,8 +289,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>StartTime.</p>
-</dd><dt class="property-optional"
+    <dd>StartTime.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -230,8 +297,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -245,8 +311,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EndTime.</p>
-</dd><dt class="property-required"
+    <dd>EndTime.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -254,8 +319,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>StartTime.</p>
-</dd><dt class="property-optional"
+    <dd>StartTime.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -263,8 +327,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>EndTime.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>StartTime.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>EndTime.</p>
-</dd><dt class="property-required"
+    <dd>EndTime.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -287,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>StartTime.</p>
-</dd><dt class="property-optional"
+    <dd>StartTime.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -296,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -311,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EndTime.</p>
-</dd><dt class="property-required"
+    <dd>EndTime.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -320,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>StartTime.</p>
-</dd><dt class="property-optional"
+    <dd>StartTime.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -329,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +431,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>EndTime.</p>
-</dd><dt class="property-required"
+    <dd>EndTime.</dd><dt class="property-required"
             title="Required">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -353,8 +439,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>StartTime.</p>
-</dd><dt class="property-optional"
+    <dd>StartTime.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -362,8 +447,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -377,8 +461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>EndTime.</p>
-</dd><dt class="property-required"
+    <dd>EndTime.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -386,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>StartTime.</p>
-</dd><dt class="property-optional"
+    <dd>StartTime.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -395,8 +477,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -419,8 +500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ip count.</p>
-</dd><dt class="property-"
+    <dd>ip count.</dd><dt class="property-"
             title="">
         <span id="antiddosdomaincount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddosdomaincount_csharp" style="color: inherit; text-decoration: inherit;">Antiddos<wbr>Domain<wbr>Count</a>
@@ -428,8 +508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>AntiddosDomainCount.</p>
-</dd><dt class="property-"
+    <dd>AntiddosDomainCount.</dd><dt class="property-"
             title="">
         <span id="antiddosipcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddosipcount_csharp" style="color: inherit; text-decoration: inherit;">Antiddos<wbr>Ip<wbr>Count</a>
@@ -437,8 +516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of advanced defense IPs (including advanced defense packets and advanced defense IPs).</p>
-</dd><dt class="property-"
+    <dd>Total number of advanced defense IPs (including advanced defense packets and advanced defense IPs).</dd><dt class="property-"
             title="">
         <span id="attackdomaincount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attackdomaincount_csharp" style="color: inherit; text-decoration: inherit;">Attack<wbr>Domain<wbr>Count</a>
@@ -446,8 +524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>AttackDomainCount.</p>
-</dd><dt class="property-"
+    <dd>AttackDomainCount.</dd><dt class="property-"
             title="">
         <span id="attackipcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attackipcount_csharp" style="color: inherit; text-decoration: inherit;">Attack<wbr>Ip<wbr>Count</a>
@@ -455,8 +532,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>AttackIpCount.</p>
-</dd><dt class="property-"
+    <dd>AttackIpCount.</dd><dt class="property-"
             title="">
         <span id="blockipcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blockipcount_csharp" style="color: inherit; text-decoration: inherit;">Block<wbr>Ip<wbr>Count</a>
@@ -464,8 +540,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>BlockIpCount.</p>
-</dd><dt class="property-"
+    <dd>BlockIpCount.</dd><dt class="property-"
             title="">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -481,8 +556,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="maxattackflow_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxattackflow_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Attack<wbr>Flow</a>
@@ -490,8 +564,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>MaxAttackFlow.</p>
-</dd><dt class="property-"
+    <dd>MaxAttackFlow.</dd><dt class="property-"
             title="">
         <span id="newattackip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newattackip_csharp" style="color: inherit; text-decoration: inherit;">New<wbr>Attack<wbr>Ip</a>
@@ -499,8 +572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IP address in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The IP address in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="newattacktime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newattacktime_csharp" style="color: inherit; text-decoration: inherit;">New<wbr>Attack<wbr>Time</a>
@@ -508,8 +580,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The time in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="newattacktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newattacktype_csharp" style="color: inherit; text-decoration: inherit;">New<wbr>Attack<wbr>Type</a>
@@ -517,8 +588,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The type in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -548,8 +618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ip count.</p>
-</dd><dt class="property-"
+    <dd>ip count.</dd><dt class="property-"
             title="">
         <span id="antiddosdomaincount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddosdomaincount_go" style="color: inherit; text-decoration: inherit;">Antiddos<wbr>Domain<wbr>Count</a>
@@ -557,8 +626,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>AntiddosDomainCount.</p>
-</dd><dt class="property-"
+    <dd>AntiddosDomainCount.</dd><dt class="property-"
             title="">
         <span id="antiddosipcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddosipcount_go" style="color: inherit; text-decoration: inherit;">Antiddos<wbr>Ip<wbr>Count</a>
@@ -566,8 +634,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of advanced defense IPs (including advanced defense packets and advanced defense IPs).</p>
-</dd><dt class="property-"
+    <dd>Total number of advanced defense IPs (including advanced defense packets and advanced defense IPs).</dd><dt class="property-"
             title="">
         <span id="attackdomaincount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attackdomaincount_go" style="color: inherit; text-decoration: inherit;">Attack<wbr>Domain<wbr>Count</a>
@@ -575,8 +642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>AttackDomainCount.</p>
-</dd><dt class="property-"
+    <dd>AttackDomainCount.</dd><dt class="property-"
             title="">
         <span id="attackipcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attackipcount_go" style="color: inherit; text-decoration: inherit;">Attack<wbr>Ip<wbr>Count</a>
@@ -584,8 +650,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>AttackIpCount.</p>
-</dd><dt class="property-"
+    <dd>AttackIpCount.</dd><dt class="property-"
             title="">
         <span id="blockipcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blockipcount_go" style="color: inherit; text-decoration: inherit;">Block<wbr>Ip<wbr>Count</a>
@@ -593,8 +658,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>BlockIpCount.</p>
-</dd><dt class="property-"
+    <dd>BlockIpCount.</dd><dt class="property-"
             title="">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -610,8 +674,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="maxattackflow_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxattackflow_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Attack<wbr>Flow</a>
@@ -619,8 +682,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>MaxAttackFlow.</p>
-</dd><dt class="property-"
+    <dd>MaxAttackFlow.</dd><dt class="property-"
             title="">
         <span id="newattackip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newattackip_go" style="color: inherit; text-decoration: inherit;">New<wbr>Attack<wbr>Ip</a>
@@ -628,8 +690,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IP address in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The IP address in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="newattacktime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newattacktime_go" style="color: inherit; text-decoration: inherit;">New<wbr>Attack<wbr>Time</a>
@@ -637,8 +698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The time in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="newattacktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newattacktype_go" style="color: inherit; text-decoration: inherit;">New<wbr>Attack<wbr>Type</a>
@@ -646,8 +706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The type in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -668,6 +727,124 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="all_ip_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#all_ip_count_hcl" style="color: inherit; text-decoration: inherit;">all_<wbr>ip_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ip count.</dd><dt class="property-"
+            title="">
+        <span id="antiddos_domain_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddos_domain_count_hcl" style="color: inherit; text-decoration: inherit;">antiddos_<wbr>domain_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>AntiddosDomainCount.</dd><dt class="property-"
+            title="">
+        <span id="antiddos_ip_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddos_ip_count_hcl" style="color: inherit; text-decoration: inherit;">antiddos_<wbr>ip_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total number of advanced defense IPs (including advanced defense packets and advanced defense IPs).</dd><dt class="property-"
+            title="">
+        <span id="attack_domain_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attack_domain_count_hcl" style="color: inherit; text-decoration: inherit;">attack_<wbr>domain_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>AttackDomainCount.</dd><dt class="property-"
+            title="">
+        <span id="attack_ip_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attack_ip_count_hcl" style="color: inherit; text-decoration: inherit;">attack_<wbr>ip_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>AttackIpCount.</dd><dt class="property-"
+            title="">
+        <span id="block_ip_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#block_ip_count_hcl" style="color: inherit; text-decoration: inherit;">block_<wbr>ip_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>BlockIpCount.</dd><dt class="property-"
+            title="">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="max_attack_flow_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_attack_flow_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>attack_<wbr>flow</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>MaxAttackFlow.</dd><dt class="property-"
+            title="">
+        <span id="new_attack_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_attack_ip_hcl" style="color: inherit; text-decoration: inherit;">new_<wbr>attack_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The IP address in the most recent attack.</dd><dt class="property-"
+            title="">
+        <span id="new_attack_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_attack_time_hcl" style="color: inherit; text-decoration: inherit;">new_<wbr>attack_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time in the most recent attack.</dd><dt class="property-"
+            title="">
+        <span id="new_attack_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_attack_type_hcl" style="color: inherit; text-decoration: inherit;">new_<wbr>attack_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type in the most recent attack.</dd><dt class="property-"
+            title="">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -677,8 +854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ip count.</p>
-</dd><dt class="property-"
+    <dd>ip count.</dd><dt class="property-"
             title="">
         <span id="antiddosdomaincount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddosdomaincount_java" style="color: inherit; text-decoration: inherit;">antiddos<wbr>Domain<wbr>Count</a>
@@ -686,8 +862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>AntiddosDomainCount.</p>
-</dd><dt class="property-"
+    <dd>AntiddosDomainCount.</dd><dt class="property-"
             title="">
         <span id="antiddosipcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddosipcount_java" style="color: inherit; text-decoration: inherit;">antiddos<wbr>Ip<wbr>Count</a>
@@ -695,8 +870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total number of advanced defense IPs (including advanced defense packets and advanced defense IPs).</p>
-</dd><dt class="property-"
+    <dd>Total number of advanced defense IPs (including advanced defense packets and advanced defense IPs).</dd><dt class="property-"
             title="">
         <span id="attackdomaincount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attackdomaincount_java" style="color: inherit; text-decoration: inherit;">attack<wbr>Domain<wbr>Count</a>
@@ -704,8 +878,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>AttackDomainCount.</p>
-</dd><dt class="property-"
+    <dd>AttackDomainCount.</dd><dt class="property-"
             title="">
         <span id="attackipcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attackipcount_java" style="color: inherit; text-decoration: inherit;">attack<wbr>Ip<wbr>Count</a>
@@ -713,8 +886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>AttackIpCount.</p>
-</dd><dt class="property-"
+    <dd>AttackIpCount.</dd><dt class="property-"
             title="">
         <span id="blockipcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blockipcount_java" style="color: inherit; text-decoration: inherit;">block<wbr>Ip<wbr>Count</a>
@@ -722,8 +894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>BlockIpCount.</p>
-</dd><dt class="property-"
+    <dd>BlockIpCount.</dd><dt class="property-"
             title="">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -739,8 +910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="maxattackflow_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxattackflow_java" style="color: inherit; text-decoration: inherit;">max<wbr>Attack<wbr>Flow</a>
@@ -748,8 +918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>MaxAttackFlow.</p>
-</dd><dt class="property-"
+    <dd>MaxAttackFlow.</dd><dt class="property-"
             title="">
         <span id="newattackip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newattackip_java" style="color: inherit; text-decoration: inherit;">new<wbr>Attack<wbr>Ip</a>
@@ -757,8 +926,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The IP address in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The IP address in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="newattacktime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newattacktime_java" style="color: inherit; text-decoration: inherit;">new<wbr>Attack<wbr>Time</a>
@@ -766,8 +934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The time in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="newattacktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newattacktype_java" style="color: inherit; text-decoration: inherit;">new<wbr>Attack<wbr>Type</a>
@@ -775,8 +942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The type in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -806,8 +972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ip count.</p>
-</dd><dt class="property-"
+    <dd>ip count.</dd><dt class="property-"
             title="">
         <span id="antiddosdomaincount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddosdomaincount_nodejs" style="color: inherit; text-decoration: inherit;">antiddos<wbr>Domain<wbr>Count</a>
@@ -815,8 +980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>AntiddosDomainCount.</p>
-</dd><dt class="property-"
+    <dd>AntiddosDomainCount.</dd><dt class="property-"
             title="">
         <span id="antiddosipcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddosipcount_nodejs" style="color: inherit; text-decoration: inherit;">antiddos<wbr>Ip<wbr>Count</a>
@@ -824,8 +988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total number of advanced defense IPs (including advanced defense packets and advanced defense IPs).</p>
-</dd><dt class="property-"
+    <dd>Total number of advanced defense IPs (including advanced defense packets and advanced defense IPs).</dd><dt class="property-"
             title="">
         <span id="attackdomaincount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attackdomaincount_nodejs" style="color: inherit; text-decoration: inherit;">attack<wbr>Domain<wbr>Count</a>
@@ -833,8 +996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>AttackDomainCount.</p>
-</dd><dt class="property-"
+    <dd>AttackDomainCount.</dd><dt class="property-"
             title="">
         <span id="attackipcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attackipcount_nodejs" style="color: inherit; text-decoration: inherit;">attack<wbr>Ip<wbr>Count</a>
@@ -842,8 +1004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>AttackIpCount.</p>
-</dd><dt class="property-"
+    <dd>AttackIpCount.</dd><dt class="property-"
             title="">
         <span id="blockipcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blockipcount_nodejs" style="color: inherit; text-decoration: inherit;">block<wbr>Ip<wbr>Count</a>
@@ -851,8 +1012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>BlockIpCount.</p>
-</dd><dt class="property-"
+    <dd>BlockIpCount.</dd><dt class="property-"
             title="">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -868,8 +1028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="maxattackflow_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxattackflow_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Attack<wbr>Flow</a>
@@ -877,8 +1036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>MaxAttackFlow.</p>
-</dd><dt class="property-"
+    <dd>MaxAttackFlow.</dd><dt class="property-"
             title="">
         <span id="newattackip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newattackip_nodejs" style="color: inherit; text-decoration: inherit;">new<wbr>Attack<wbr>Ip</a>
@@ -886,8 +1044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The IP address in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The IP address in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="newattacktime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newattacktime_nodejs" style="color: inherit; text-decoration: inherit;">new<wbr>Attack<wbr>Time</a>
@@ -895,8 +1052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The time in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="newattacktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newattacktype_nodejs" style="color: inherit; text-decoration: inherit;">new<wbr>Attack<wbr>Type</a>
@@ -904,8 +1060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The type in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -935,8 +1090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ip count.</p>
-</dd><dt class="property-"
+    <dd>ip count.</dd><dt class="property-"
             title="">
         <span id="antiddos_domain_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddos_domain_count_python" style="color: inherit; text-decoration: inherit;">antiddos_<wbr>domain_<wbr>count</a>
@@ -944,8 +1098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>AntiddosDomainCount.</p>
-</dd><dt class="property-"
+    <dd>AntiddosDomainCount.</dd><dt class="property-"
             title="">
         <span id="antiddos_ip_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddos_ip_count_python" style="color: inherit; text-decoration: inherit;">antiddos_<wbr>ip_<wbr>count</a>
@@ -953,8 +1106,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of advanced defense IPs (including advanced defense packets and advanced defense IPs).</p>
-</dd><dt class="property-"
+    <dd>Total number of advanced defense IPs (including advanced defense packets and advanced defense IPs).</dd><dt class="property-"
             title="">
         <span id="attack_domain_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attack_domain_count_python" style="color: inherit; text-decoration: inherit;">attack_<wbr>domain_<wbr>count</a>
@@ -962,8 +1114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>AttackDomainCount.</p>
-</dd><dt class="property-"
+    <dd>AttackDomainCount.</dd><dt class="property-"
             title="">
         <span id="attack_ip_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attack_ip_count_python" style="color: inherit; text-decoration: inherit;">attack_<wbr>ip_<wbr>count</a>
@@ -971,8 +1122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>AttackIpCount.</p>
-</dd><dt class="property-"
+    <dd>AttackIpCount.</dd><dt class="property-"
             title="">
         <span id="block_ip_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#block_ip_count_python" style="color: inherit; text-decoration: inherit;">block_<wbr>ip_<wbr>count</a>
@@ -980,8 +1130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>BlockIpCount.</p>
-</dd><dt class="property-"
+    <dd>BlockIpCount.</dd><dt class="property-"
             title="">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -997,8 +1146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="max_attack_flow_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_attack_flow_python" style="color: inherit; text-decoration: inherit;">max_<wbr>attack_<wbr>flow</a>
@@ -1006,8 +1154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>MaxAttackFlow.</p>
-</dd><dt class="property-"
+    <dd>MaxAttackFlow.</dd><dt class="property-"
             title="">
         <span id="new_attack_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_attack_ip_python" style="color: inherit; text-decoration: inherit;">new_<wbr>attack_<wbr>ip</a>
@@ -1015,8 +1162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The IP address in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The IP address in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="new_attack_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_attack_time_python" style="color: inherit; text-decoration: inherit;">new_<wbr>attack_<wbr>time</a>
@@ -1024,8 +1170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The time in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="new_attack_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_attack_type_python" style="color: inherit; text-decoration: inherit;">new_<wbr>attack_<wbr>type</a>
@@ -1033,8 +1178,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The type in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -1064,8 +1208,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ip count.</p>
-</dd><dt class="property-"
+    <dd>ip count.</dd><dt class="property-"
             title="">
         <span id="antiddosdomaincount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddosdomaincount_yaml" style="color: inherit; text-decoration: inherit;">antiddos<wbr>Domain<wbr>Count</a>
@@ -1073,8 +1216,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>AntiddosDomainCount.</p>
-</dd><dt class="property-"
+    <dd>AntiddosDomainCount.</dd><dt class="property-"
             title="">
         <span id="antiddosipcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddosipcount_yaml" style="color: inherit; text-decoration: inherit;">antiddos<wbr>Ip<wbr>Count</a>
@@ -1082,8 +1224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total number of advanced defense IPs (including advanced defense packets and advanced defense IPs).</p>
-</dd><dt class="property-"
+    <dd>Total number of advanced defense IPs (including advanced defense packets and advanced defense IPs).</dd><dt class="property-"
             title="">
         <span id="attackdomaincount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attackdomaincount_yaml" style="color: inherit; text-decoration: inherit;">attack<wbr>Domain<wbr>Count</a>
@@ -1091,8 +1232,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>AttackDomainCount.</p>
-</dd><dt class="property-"
+    <dd>AttackDomainCount.</dd><dt class="property-"
             title="">
         <span id="attackipcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attackipcount_yaml" style="color: inherit; text-decoration: inherit;">attack<wbr>Ip<wbr>Count</a>
@@ -1100,8 +1240,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>AttackIpCount.</p>
-</dd><dt class="property-"
+    <dd>AttackIpCount.</dd><dt class="property-"
             title="">
         <span id="blockipcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blockipcount_yaml" style="color: inherit; text-decoration: inherit;">block<wbr>Ip<wbr>Count</a>
@@ -1109,8 +1248,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>BlockIpCount.</p>
-</dd><dt class="property-"
+    <dd>BlockIpCount.</dd><dt class="property-"
             title="">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1126,8 +1264,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="maxattackflow_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxattackflow_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Attack<wbr>Flow</a>
@@ -1135,8 +1272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>MaxAttackFlow.</p>
-</dd><dt class="property-"
+    <dd>MaxAttackFlow.</dd><dt class="property-"
             title="">
         <span id="newattackip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newattackip_yaml" style="color: inherit; text-decoration: inherit;">new<wbr>Attack<wbr>Ip</a>
@@ -1144,8 +1280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The IP address in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The IP address in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="newattacktime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newattacktime_yaml" style="color: inherit; text-decoration: inherit;">new<wbr>Attack<wbr>Time</a>
@@ -1153,8 +1288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The time in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="newattacktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newattacktype_yaml" style="color: inherit; text-decoration: inherit;">new<wbr>Attack<wbr>Type</a>
@@ -1162,8 +1296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type in the most recent attack.</p>
-</dd><dt class="property-"
+    <dd>The type in the most recent attack.</dd><dt class="property-"
             title="">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1194,7 +1327,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

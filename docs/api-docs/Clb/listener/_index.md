@@ -2,9 +2,11 @@
 ---
 title: "Listener"
 title_tag: "tencentcloud.Clb.Listener"
-meta_desc: "Documentation for the tencentcloud.Clb.Listener resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a CLB listener."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,59 +20,56 @@ Provides a resource to create a CLB listener.
 
 ### HTTP Listener
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const hTTPListener = new tencentcloud.clb.Listener("hTTPListener", {
-    clbId: "lb-0lh5au7v",
-    listenerName: "test_listener",
+const example = new tencentcloud.clb.Listener("example", {
+    clbId: "lb-qck8thny",
+    listenerName: "tf-example",
     port: 80,
     protocol: "HTTP",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-h_ttp_listener = tencentcloud.clb.Listener("hTTPListener",
-    clb_id="lb-0lh5au7v",
-    listener_name="test_listener",
+example = tencentcloud.clb.Listener("example",
+    clb_id="lb-qck8thny",
+    listener_name="tf-example",
     port=80,
     protocol="HTTP")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var hTTPListener = new Tencentcloud.Clb.Listener("hTTPListener", new()
-    {
-        ClbId = "lb-0lh5au7v",
-        ListenerName = "test_listener",
-        Port = 80,
-        Protocol = "HTTP",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewListener(ctx, "hTTPListener", &Clb.ListenerArgs{
-			ClbId:        pulumi.String("lb-0lh5au7v"),
-			ListenerName: pulumi.String("test_listener"),
+		_, err := clb.NewListener(ctx, "example", &clb.ListenerArgs{
+			ClbId:        pulumi.String("lb-qck8thny"),
+			ListenerName: pulumi.String("tf-example"),
 			Port:         pulumi.Int(80),
 			Protocol:     pulumi.String("HTTP"),
 		})
@@ -81,97 +80,11 @@ func main() {
 	})
 }
 ```
-```java
-package generated_program;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
 
-import com.pulumi.Context;
-import com.pulumi.Pulumi;
-import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Clb.Listener;
-import com.pulumi.tencentcloud.Clb.ListenerArgs;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-public class App {
-    public static void main(String[] args) {
-        Pulumi.run(App::stack);
-    }
-
-    public static void stack(Context ctx) {
-        var hTTPListener = new Listener("hTTPListener", ListenerArgs.builder()        
-            .clbId("lb-0lh5au7v")
-            .listenerName("test_listener")
-            .port(80)
-            .protocol("HTTP")
-            .build());
-
-    }
-}
-```
-```yaml
-resources:
-  hTTPListener:
-    type: tencentcloud:Clb:Listener
-    properties:
-      clbId: lb-0lh5au7v
-      listenerName: test_listener
-      port: 80
-      protocol: HTTP
-```
-<!--End PulumiCodeChooser -->
-
-### TCP/UDP Listener
-
-<!--Start PulumiCodeChooser -->
-```typescript
-import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
-
-const tCPListener = new tencentcloud.clb.Listener("tCPListener", {
-    clbId: "lb-0lh5au7v",
-    healthCheckHealthNum: 3,
-    healthCheckHttpCode: 2,
-    healthCheckHttpMethod: "GET",
-    healthCheckHttpVersion: "HTTP/1.0",
-    healthCheckIntervalTime: 5,
-    healthCheckPort: 200,
-    healthCheckSwitch: true,
-    healthCheckTimeOut: 2,
-    healthCheckType: "HTTP",
-    healthCheckUnhealthNum: 3,
-    listenerName: "test_listener",
-    port: 80,
-    protocol: "TCP",
-    scheduler: "WRR",
-    sessionExpireTime: 30,
-});
-```
-```python
-import pulumi
-import tencentcloud_iac_pulumi as tencentcloud
-
-t_cp_listener = tencentcloud.clb.Listener("tCPListener",
-    clb_id="lb-0lh5au7v",
-    health_check_health_num=3,
-    health_check_http_code=2,
-    health_check_http_method="GET",
-    health_check_http_version="HTTP/1.0",
-    health_check_interval_time=5,
-    health_check_port=200,
-    health_check_switch=True,
-    health_check_time_out=2,
-    health_check_type="HTTP",
-    health_check_unhealth_num=3,
-    listener_name="test_listener",
-    port=80,
-    protocol="TCP",
-    scheduler="WRR",
-    session_expire_time=30)
-```
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -180,63 +93,21 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var tCPListener = new Tencentcloud.Clb.Listener("tCPListener", new()
+    var example = new Tencentcloud.Clb.Listener("example", new()
     {
-        ClbId = "lb-0lh5au7v",
-        HealthCheckHealthNum = 3,
-        HealthCheckHttpCode = 2,
-        HealthCheckHttpMethod = "GET",
-        HealthCheckHttpVersion = "HTTP/1.0",
-        HealthCheckIntervalTime = 5,
-        HealthCheckPort = 200,
-        HealthCheckSwitch = true,
-        HealthCheckTimeOut = 2,
-        HealthCheckType = "HTTP",
-        HealthCheckUnhealthNum = 3,
-        ListenerName = "test_listener",
+        ClbId = "lb-qck8thny",
+        ListenerName = "tf-example",
         Port = 80,
-        Protocol = "TCP",
-        Scheduler = "WRR",
-        SessionExpireTime = 30,
+        Protocol = "HTTP",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewListener(ctx, "tCPListener", &Clb.ListenerArgs{
-			ClbId:                   pulumi.String("lb-0lh5au7v"),
-			HealthCheckHealthNum:    pulumi.Int(3),
-			HealthCheckHttpCode:     pulumi.Int(2),
-			HealthCheckHttpMethod:   pulumi.String("GET"),
-			HealthCheckHttpVersion:  pulumi.String("HTTP/1.0"),
-			HealthCheckIntervalTime: pulumi.Int(5),
-			HealthCheckPort:         pulumi.Int(200),
-			HealthCheckSwitch:       pulumi.Bool(true),
-			HealthCheckTimeOut:      pulumi.Int(2),
-			HealthCheckType:         pulumi.String("HTTP"),
-			HealthCheckUnhealthNum:  pulumi.Int(3),
-			ListenerName:            pulumi.String("test_listener"),
-			Port:                    pulumi.Int(80),
-			Protocol:                pulumi.String("TCP"),
-			Scheduler:               pulumi.String("WRR"),
-			SessionExpireTime:       pulumi.Int(30),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -245,8 +116,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clb.Listener;
 import com.pulumi.tencentcloud.Clb.ListenerArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -258,62 +129,505 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var tCPListener = new Listener("tCPListener", ListenerArgs.builder()        
-            .clbId("lb-0lh5au7v")
-            .healthCheckHealthNum(3)
-            .healthCheckHttpCode(2)
-            .healthCheckHttpMethod("GET")
-            .healthCheckHttpVersion("HTTP/1.0")
-            .healthCheckIntervalTime(5)
-            .healthCheckPort(200)
-            .healthCheckSwitch(true)
-            .healthCheckTimeOut(2)
-            .healthCheckType("HTTP")
-            .healthCheckUnhealthNum(3)
-            .listenerName("test_listener")
+        var example = new Listener("example", ListenerArgs.builder()
+            .clbId("lb-qck8thny")
+            .listenerName("tf-example")
             .port(80)
-            .protocol("TCP")
-            .scheduler("WRR")
-            .sessionExpireTime(30)
+            .protocol("HTTP")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  tCPListener:
+  example:
     type: tencentcloud:Clb:Listener
     properties:
-      clbId: lb-0lh5au7v
-      healthCheckHealthNum: 3
-      healthCheckHttpCode: 2
-      healthCheckHttpMethod: GET
-      healthCheckHttpVersion: HTTP/1.0
-      healthCheckIntervalTime: 5
-      healthCheckPort: 200
-      healthCheckSwitch: true
-      healthCheckTimeOut: 2
-      healthCheckType: HTTP
-      healthCheckUnhealthNum: 3
-      listenerName: test_listener
+      clbId: lb-qck8thny
+      listenerName: tf-example
       port: 80
-      protocol: TCP
-      scheduler: WRR
-      sessionExpireTime: 30
+      protocol: HTTP
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### TCP/UDP Listener with tcp health check
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+resource "tencentcloud_clb_listener" "example" {
+  clb_id        = "lb-qck8thny"
+  listener_name = "tf-example"
+  port          = 80
+  protocol      = "HTTP"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### HTTP Listener with specific data compress mode
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const listenerTcp = new tencentcloud.clb.Listener("listenerTcp", {
-    clbId: tencentcloud_clb_instance.clb_basic.id,
-    listenerName: "listener_tcp",
+const example = new tencentcloud.clb.Listener("example", {
+    clbId: "lb-qck8thny",
+    listenerName: "tf-example",
+    port: 80,
+    protocol: "HTTP",
+    dataCompressMode: "transparent",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.clb.Listener("example",
+    clb_id="lb-qck8thny",
+    listener_name="tf-example",
+    port=80,
+    protocol="HTTP",
+    data_compress_mode="transparent")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clb.NewListener(ctx, "example", &clb.ListenerArgs{
+			ClbId:            pulumi.String("lb-qck8thny"),
+			ListenerName:     pulumi.String("tf-example"),
+			Port:             pulumi.Int(80),
+			Protocol:         pulumi.String("HTTP"),
+			DataCompressMode: pulumi.String("transparent"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Listener("example", new()
+    {
+        ClbId = "lb-qck8thny",
+        ListenerName = "tf-example",
+        Port = 80,
+        Protocol = "HTTP",
+        DataCompressMode = "transparent",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Clb.Listener;
+import com.pulumi.tencentcloud.Clb.ListenerArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Listener("example", ListenerArgs.builder()
+            .clbId("lb-qck8thny")
+            .listenerName("tf-example")
+            .port(80)
+            .protocol("HTTP")
+            .dataCompressMode("transparent")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Clb:Listener
+    properties:
+      clbId: lb-qck8thny
+      listenerName: tf-example
+      port: 80
+      protocol: HTTP
+      dataCompressMode: transparent
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_listener" "example" {
+  clb_id             = "lb-qck8thny"
+  listener_name      = "tf-example"
+  port               = 80
+  protocol           = "HTTP"
+  data_compress_mode = "transparent"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### TCP/UDP Listener
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.clb.Listener("example", {
+    clbId: "lb-qck8thny",
+    listenerName: "tf-example",
+    port: 80,
+    protocol: "TCP",
+    healthCheckSwitch: true,
+    healthCheckTimeOut: 2,
+    healthCheckIntervalTime: 5,
+    healthCheckHealthNum: 3,
+    healthCheckUnhealthNum: 3,
+    sessionExpireTime: 30,
+    scheduler: "WRR",
+    healthCheckPort: 200,
+    healthCheckType: "HTTP",
+    healthCheckHttpPath: "/",
+    healthCheckHttpCode: 2,
+    healthCheckHttpVersion: "HTTP/1.0",
+    healthCheckHttpMethod: "GET",
+    deregisterTargetRst: false,
+    idleConnectTimeout: 900,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.clb.Listener("example",
+    clb_id="lb-qck8thny",
+    listener_name="tf-example",
+    port=80,
+    protocol="TCP",
+    health_check_switch=True,
+    health_check_time_out=2,
+    health_check_interval_time=5,
+    health_check_health_num=3,
+    health_check_unhealth_num=3,
+    session_expire_time=30,
+    scheduler="WRR",
+    health_check_port=200,
+    health_check_type="HTTP",
+    health_check_http_path="/",
+    health_check_http_code=2,
+    health_check_http_version="HTTP/1.0",
+    health_check_http_method="GET",
+    deregister_target_rst=False,
+    idle_connect_timeout=900)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clb.NewListener(ctx, "example", &clb.ListenerArgs{
+			ClbId:                   pulumi.String("lb-qck8thny"),
+			ListenerName:            pulumi.String("tf-example"),
+			Port:                    pulumi.Int(80),
+			Protocol:                pulumi.String("TCP"),
+			HealthCheckSwitch:       pulumi.Bool(true),
+			HealthCheckTimeOut:      pulumi.Int(2),
+			HealthCheckIntervalTime: pulumi.Int(5),
+			HealthCheckHealthNum:    pulumi.Int(3),
+			HealthCheckUnhealthNum:  pulumi.Int(3),
+			SessionExpireTime:       pulumi.Int(30),
+			Scheduler:               pulumi.String("WRR"),
+			HealthCheckPort:         pulumi.Int(200),
+			HealthCheckType:         pulumi.String("HTTP"),
+			HealthCheckHttpPath:     pulumi.String("/"),
+			HealthCheckHttpCode:     pulumi.Int(2),
+			HealthCheckHttpVersion:  pulumi.String("HTTP/1.0"),
+			HealthCheckHttpMethod:   pulumi.String("GET"),
+			DeregisterTargetRst:     pulumi.Bool(false),
+			IdleConnectTimeout:      pulumi.Int(900),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Listener("example", new()
+    {
+        ClbId = "lb-qck8thny",
+        ListenerName = "tf-example",
+        Port = 80,
+        Protocol = "TCP",
+        HealthCheckSwitch = true,
+        HealthCheckTimeOut = 2,
+        HealthCheckIntervalTime = 5,
+        HealthCheckHealthNum = 3,
+        HealthCheckUnhealthNum = 3,
+        SessionExpireTime = 30,
+        Scheduler = "WRR",
+        HealthCheckPort = 200,
+        HealthCheckType = "HTTP",
+        HealthCheckHttpPath = "/",
+        HealthCheckHttpCode = 2,
+        HealthCheckHttpVersion = "HTTP/1.0",
+        HealthCheckHttpMethod = "GET",
+        DeregisterTargetRst = false,
+        IdleConnectTimeout = 900,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Clb.Listener;
+import com.pulumi.tencentcloud.Clb.ListenerArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Listener("example", ListenerArgs.builder()
+            .clbId("lb-qck8thny")
+            .listenerName("tf-example")
+            .port(80)
+            .protocol("TCP")
+            .healthCheckSwitch(true)
+            .healthCheckTimeOut(2)
+            .healthCheckIntervalTime(5)
+            .healthCheckHealthNum(3)
+            .healthCheckUnhealthNum(3)
+            .sessionExpireTime(30)
+            .scheduler("WRR")
+            .healthCheckPort(200)
+            .healthCheckType("HTTP")
+            .healthCheckHttpPath("/")
+            .healthCheckHttpCode(2)
+            .healthCheckHttpVersion("HTTP/1.0")
+            .healthCheckHttpMethod("GET")
+            .deregisterTargetRst(false)
+            .idleConnectTimeout(900)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Clb:Listener
+    properties:
+      clbId: lb-qck8thny
+      listenerName: tf-example
+      port: 80
+      protocol: TCP
+      healthCheckSwitch: true
+      healthCheckTimeOut: 2
+      healthCheckIntervalTime: 5
+      healthCheckHealthNum: 3
+      healthCheckUnhealthNum: 3
+      sessionExpireTime: 30
+      scheduler: WRR
+      healthCheckPort: 200
+      healthCheckType: HTTP
+      healthCheckHttpPath: /
+      healthCheckHttpCode: 2
+      healthCheckHttpVersion: HTTP/1.0
+      healthCheckHttpMethod: GET
+      deregisterTargetRst: false
+      idleConnectTimeout: 900
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_listener" "example" {
+  clb_id                     = "lb-qck8thny"
+  listener_name              = "tf-example"
+  port                       = 80
+  protocol                   = "TCP"
+  health_check_switch        = true
+  health_check_time_out      = 2
+  health_check_interval_time = 5
+  health_check_health_num    = 3
+  health_check_unhealth_num  = 3
+  session_expire_time        = 30
+  scheduler                  = "WRR"
+  health_check_port          = 200
+  health_check_type          = "HTTP"
+  health_check_http_path     = "/"
+  health_check_http_code     = 2
+  health_check_http_version  = "HTTP/1.0"
+  health_check_http_method   = "GET"
+  deregister_target_rst      = false
+  idle_connect_timeout       = 900
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### TCP/UDP Listener with tcp health check
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.clb.Listener("example", {
+    clbId: "lb-qck8thny",
+    listenerName: "tf-example",
     port: 44,
     protocol: "TCP",
     healthCheckSwitch: true,
@@ -325,15 +639,22 @@ const listenerTcp = new tencentcloud.clb.Listener("listenerTcp", {
     scheduler: "WRR",
     healthCheckType: "TCP",
     healthCheckPort: 200,
+    deregisterTargetRst: false,
+    idleConnectTimeout: 900,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-listener_tcp = tencentcloud.clb.Listener("listenerTcp",
-    clb_id=tencentcloud_clb_instance["clb_basic"]["id"],
-    listener_name="listener_tcp",
+example = tencentcloud.clb.Listener("example",
+    clb_id="lb-qck8thny",
+    listener_name="tf-example",
     port=44,
     protocol="TCP",
     health_check_switch=True,
@@ -344,48 +665,28 @@ listener_tcp = tencentcloud.clb.Listener("listenerTcp",
     session_expire_time=30,
     scheduler="WRR",
     health_check_type="TCP",
-    health_check_port=200)
+    health_check_port=200,
+    deregister_target_rst=False,
+    idle_connect_timeout=900)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var listenerTcp = new Tencentcloud.Clb.Listener("listenerTcp", new()
-    {
-        ClbId = tencentcloud_clb_instance.Clb_basic.Id,
-        ListenerName = "listener_tcp",
-        Port = 44,
-        Protocol = "TCP",
-        HealthCheckSwitch = true,
-        HealthCheckTimeOut = 30,
-        HealthCheckIntervalTime = 100,
-        HealthCheckHealthNum = 2,
-        HealthCheckUnhealthNum = 2,
-        SessionExpireTime = 30,
-        Scheduler = "WRR",
-        HealthCheckType = "TCP",
-        HealthCheckPort = 200,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewListener(ctx, "listenerTcp", &Clb.ListenerArgs{
-			ClbId:                   pulumi.Any(tencentcloud_clb_instance.Clb_basic.Id),
-			ListenerName:            pulumi.String("listener_tcp"),
+		_, err := clb.NewListener(ctx, "example", &clb.ListenerArgs{
+			ClbId:                   pulumi.String("lb-qck8thny"),
+			ListenerName:            pulumi.String("tf-example"),
 			Port:                    pulumi.Int(44),
 			Protocol:                pulumi.String("TCP"),
 			HealthCheckSwitch:       pulumi.Bool(true),
@@ -397,6 +698,8 @@ func main() {
 			Scheduler:               pulumi.String("WRR"),
 			HealthCheckType:         pulumi.String("TCP"),
 			HealthCheckPort:         pulumi.Int(200),
+			DeregisterTargetRst:     pulumi.Bool(false),
+			IdleConnectTimeout:      pulumi.Int(900),
 		})
 		if err != nil {
 			return err
@@ -405,6 +708,45 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Listener("example", new()
+    {
+        ClbId = "lb-qck8thny",
+        ListenerName = "tf-example",
+        Port = 44,
+        Protocol = "TCP",
+        HealthCheckSwitch = true,
+        HealthCheckTimeOut = 30,
+        HealthCheckIntervalTime = 100,
+        HealthCheckHealthNum = 2,
+        HealthCheckUnhealthNum = 2,
+        SessionExpireTime = 30,
+        Scheduler = "WRR",
+        HealthCheckType = "TCP",
+        HealthCheckPort = 200,
+        DeregisterTargetRst = false,
+        IdleConnectTimeout = 900,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -413,8 +755,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clb.Listener;
 import com.pulumi.tencentcloud.Clb.ListenerArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -426,9 +768,9 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var listenerTcp = new Listener("listenerTcp", ListenerArgs.builder()        
-            .clbId(tencentcloud_clb_instance.clb_basic().id())
-            .listenerName("listener_tcp")
+        var example = new Listener("example", ListenerArgs.builder()
+            .clbId("lb-qck8thny")
+            .listenerName("tf-example")
             .port(44)
             .protocol("TCP")
             .healthCheckSwitch(true)
@@ -440,18 +782,25 @@ public class App {
             .scheduler("WRR")
             .healthCheckType("TCP")
             .healthCheckPort(200)
+            .deregisterTargetRst(false)
+            .idleConnectTimeout(900)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  listenerTcp:
+  example:
     type: tencentcloud:Clb:Listener
     properties:
-      clbId: ${tencentcloud_clb_instance.clb_basic.id}
-      listenerName: listener_tcp
+      clbId: lb-qck8thny
+      listenerName: tf-example
       port: 44
       protocol: TCP
       healthCheckSwitch: true
@@ -463,19 +812,60 @@ resources:
       scheduler: WRR
       healthCheckType: TCP
       healthCheckPort: 200
+      deregisterTargetRst: false
+      idleConnectTimeout: 900
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_listener" "example" {
+  clb_id                     = "lb-qck8thny"
+  listener_name              = "tf-example"
+  port                       = 44
+  protocol                   = "TCP"
+  health_check_switch        = true
+  health_check_time_out      = 30
+  health_check_interval_time = 100
+  health_check_health_num    = 2
+  health_check_unhealth_num  = 2
+  session_expire_time        = 30
+  scheduler                  = "WRR"
+  health_check_type          = "TCP"
+  health_check_port          = 200
+  deregister_target_rst      = false
+  idle_connect_timeout       = 900
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### TCP/UDP Listener with http health check
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const listenerTcp = new tencentcloud.clb.Listener("listenerTcp", {
-    clbId: tencentcloud_clb_instance.clb_basic.id,
-    listenerName: "listener_tcp",
+const example = new tencentcloud.clb.Listener("example", {
+    clbId: "lb-qck8thny",
+    listenerName: "tf-example",
     port: 44,
     protocol: "TCP",
     healthCheckSwitch: true,
@@ -491,15 +881,22 @@ const listenerTcp = new tencentcloud.clb.Listener("listenerTcp", {
     healthCheckHttpVersion: "HTTP/1.1",
     healthCheckHttpMethod: "HEAD",
     healthCheckHttpPath: "/",
+    deregisterTargetRst: false,
+    idleConnectTimeout: 900,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-listener_tcp = tencentcloud.clb.Listener("listenerTcp",
-    clb_id=tencentcloud_clb_instance["clb_basic"]["id"],
-    listener_name="listener_tcp",
+example = tencentcloud.clb.Listener("example",
+    clb_id="lb-qck8thny",
+    listener_name="tf-example",
     port=44,
     protocol="TCP",
     health_check_switch=True,
@@ -514,52 +911,28 @@ listener_tcp = tencentcloud.clb.Listener("listenerTcp",
     health_check_http_code=16,
     health_check_http_version="HTTP/1.1",
     health_check_http_method="HEAD",
-    health_check_http_path="/")
+    health_check_http_path="/",
+    deregister_target_rst=False,
+    idle_connect_timeout=900)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var listenerTcp = new Tencentcloud.Clb.Listener("listenerTcp", new()
-    {
-        ClbId = tencentcloud_clb_instance.Clb_basic.Id,
-        ListenerName = "listener_tcp",
-        Port = 44,
-        Protocol = "TCP",
-        HealthCheckSwitch = true,
-        HealthCheckTimeOut = 30,
-        HealthCheckIntervalTime = 100,
-        HealthCheckHealthNum = 2,
-        HealthCheckUnhealthNum = 2,
-        SessionExpireTime = 30,
-        Scheduler = "WRR",
-        HealthCheckType = "HTTP",
-        HealthCheckHttpDomain = "www.tencent.com",
-        HealthCheckHttpCode = 16,
-        HealthCheckHttpVersion = "HTTP/1.1",
-        HealthCheckHttpMethod = "HEAD",
-        HealthCheckHttpPath = "/",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewListener(ctx, "listenerTcp", &Clb.ListenerArgs{
-			ClbId:                   pulumi.Any(tencentcloud_clb_instance.Clb_basic.Id),
-			ListenerName:            pulumi.String("listener_tcp"),
+		_, err := clb.NewListener(ctx, "example", &clb.ListenerArgs{
+			ClbId:                   pulumi.String("lb-qck8thny"),
+			ListenerName:            pulumi.String("tf-example"),
 			Port:                    pulumi.Int(44),
 			Protocol:                pulumi.String("TCP"),
 			HealthCheckSwitch:       pulumi.Bool(true),
@@ -575,6 +948,8 @@ func main() {
 			HealthCheckHttpVersion:  pulumi.String("HTTP/1.1"),
 			HealthCheckHttpMethod:   pulumi.String("HEAD"),
 			HealthCheckHttpPath:     pulumi.String("/"),
+			DeregisterTargetRst:     pulumi.Bool(false),
+			IdleConnectTimeout:      pulumi.Int(900),
 		})
 		if err != nil {
 			return err
@@ -583,6 +958,49 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Listener("example", new()
+    {
+        ClbId = "lb-qck8thny",
+        ListenerName = "tf-example",
+        Port = 44,
+        Protocol = "TCP",
+        HealthCheckSwitch = true,
+        HealthCheckTimeOut = 30,
+        HealthCheckIntervalTime = 100,
+        HealthCheckHealthNum = 2,
+        HealthCheckUnhealthNum = 2,
+        SessionExpireTime = 30,
+        Scheduler = "WRR",
+        HealthCheckType = "HTTP",
+        HealthCheckHttpDomain = "www.tencent.com",
+        HealthCheckHttpCode = 16,
+        HealthCheckHttpVersion = "HTTP/1.1",
+        HealthCheckHttpMethod = "HEAD",
+        HealthCheckHttpPath = "/",
+        DeregisterTargetRst = false,
+        IdleConnectTimeout = 900,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -591,8 +1009,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clb.Listener;
 import com.pulumi.tencentcloud.Clb.ListenerArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -604,9 +1022,9 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var listenerTcp = new Listener("listenerTcp", ListenerArgs.builder()        
-            .clbId(tencentcloud_clb_instance.clb_basic().id())
-            .listenerName("listener_tcp")
+        var example = new Listener("example", ListenerArgs.builder()
+            .clbId("lb-qck8thny")
+            .listenerName("tf-example")
             .port(44)
             .protocol("TCP")
             .healthCheckSwitch(true)
@@ -622,18 +1040,25 @@ public class App {
             .healthCheckHttpVersion("HTTP/1.1")
             .healthCheckHttpMethod("HEAD")
             .healthCheckHttpPath("/")
+            .deregisterTargetRst(false)
+            .idleConnectTimeout(900)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  listenerTcp:
+  example:
     type: tencentcloud:Clb:Listener
     properties:
-      clbId: ${tencentcloud_clb_instance.clb_basic.id}
-      listenerName: listener_tcp
+      clbId: lb-qck8thny
+      listenerName: tf-example
       port: 44
       protocol: TCP
       healthCheckSwitch: true
@@ -649,19 +1074,64 @@ resources:
       healthCheckHttpVersion: HTTP/1.1
       healthCheckHttpMethod: HEAD
       healthCheckHttpPath: /
+      deregisterTargetRst: false
+      idleConnectTimeout: 900
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_listener" "example" {
+  clb_id                     = "lb-qck8thny"
+  listener_name              = "tf-example"
+  port                       = 44
+  protocol                   = "TCP"
+  health_check_switch        = true
+  health_check_time_out      = 30
+  health_check_interval_time = 100
+  health_check_health_num    = 2
+  health_check_unhealth_num  = 2
+  session_expire_time        = 30
+  scheduler                  = "WRR"
+  health_check_type          = "HTTP"
+  health_check_http_domain   = "www.tencent.com"
+  health_check_http_code     = 16
+  health_check_http_version  = "HTTP/1.1"
+  health_check_http_method   = "HEAD"
+  health_check_http_path     = "/"
+  deregister_target_rst      = false
+  idle_connect_timeout       = 900
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### TCP/UDP Listener with customer health check
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const listenerTcp = new tencentcloud.clb.Listener("listenerTcp", {
-    clbId: tencentcloud_clb_instance.clb_basic.id,
-    listenerName: "listener_tcp",
+const example = new tencentcloud.clb.Listener("example", {
+    clbId: "lb-qck8thny",
+    listenerName: "tf-example",
     port: 44,
     protocol: "TCP",
     healthCheckSwitch: true,
@@ -678,13 +1148,18 @@ const listenerTcp = new tencentcloud.clb.Listener("listenerTcp", {
     targetType: "TARGETGROUP",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-listener_tcp = tencentcloud.clb.Listener("listenerTcp",
-    clb_id=tencentcloud_clb_instance["clb_basic"]["id"],
-    listener_name="listener_tcp",
+example = tencentcloud.clb.Listener("example",
+    clb_id="lb-qck8thny",
+    listener_name="tf-example",
     port=44,
     protocol="TCP",
     health_check_switch=True,
@@ -700,49 +1175,24 @@ listener_tcp = tencentcloud.clb.Listener("listenerTcp",
     health_check_recv_context="ABCD",
     target_type="TARGETGROUP")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var listenerTcp = new Tencentcloud.Clb.Listener("listenerTcp", new()
-    {
-        ClbId = tencentcloud_clb_instance.Clb_basic.Id,
-        ListenerName = "listener_tcp",
-        Port = 44,
-        Protocol = "TCP",
-        HealthCheckSwitch = true,
-        HealthCheckTimeOut = 30,
-        HealthCheckIntervalTime = 100,
-        HealthCheckHealthNum = 2,
-        HealthCheckUnhealthNum = 2,
-        SessionExpireTime = 30,
-        Scheduler = "WRR",
-        HealthCheckType = "CUSTOM",
-        HealthCheckContextType = "HEX",
-        HealthCheckSendContext = "0123456789ABCDEF",
-        HealthCheckRecvContext = "ABCD",
-        TargetType = "TARGETGROUP",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewListener(ctx, "listenerTcp", &Clb.ListenerArgs{
-			ClbId:                   pulumi.Any(tencentcloud_clb_instance.Clb_basic.Id),
-			ListenerName:            pulumi.String("listener_tcp"),
+		_, err := clb.NewListener(ctx, "example", &clb.ListenerArgs{
+			ClbId:                   pulumi.String("lb-qck8thny"),
+			ListenerName:            pulumi.String("tf-example"),
 			Port:                    pulumi.Int(44),
 			Protocol:                pulumi.String("TCP"),
 			HealthCheckSwitch:       pulumi.Bool(true),
@@ -765,6 +1215,46 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Listener("example", new()
+    {
+        ClbId = "lb-qck8thny",
+        ListenerName = "tf-example",
+        Port = 44,
+        Protocol = "TCP",
+        HealthCheckSwitch = true,
+        HealthCheckTimeOut = 30,
+        HealthCheckIntervalTime = 100,
+        HealthCheckHealthNum = 2,
+        HealthCheckUnhealthNum = 2,
+        SessionExpireTime = 30,
+        Scheduler = "WRR",
+        HealthCheckType = "CUSTOM",
+        HealthCheckContextType = "HEX",
+        HealthCheckSendContext = "0123456789ABCDEF",
+        HealthCheckRecvContext = "ABCD",
+        TargetType = "TARGETGROUP",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -773,8 +1263,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clb.Listener;
 import com.pulumi.tencentcloud.Clb.ListenerArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -786,9 +1276,9 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var listenerTcp = new Listener("listenerTcp", ListenerArgs.builder()        
-            .clbId(tencentcloud_clb_instance.clb_basic().id())
-            .listenerName("listener_tcp")
+        var example = new Listener("example", ListenerArgs.builder()
+            .clbId("lb-qck8thny")
+            .listenerName("tf-example")
             .port(44)
             .protocol("TCP")
             .healthCheckSwitch(true)
@@ -808,13 +1298,18 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  listenerTcp:
+  example:
     type: tencentcloud:Clb:Listener
     properties:
-      clbId: ${tencentcloud_clb_instance.clb_basic.id}
-      listenerName: listener_tcp
+      clbId: lb-qck8thny
+      listenerName: tf-example
       port: 44
       protocol: TCP
       healthCheckSwitch: true
@@ -830,80 +1325,108 @@ resources:
       healthCheckRecvContext: ABCD
       targetType: TARGETGROUP
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### HTTPS Listener
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+resource "tencentcloud_clb_listener" "example" {
+  clb_id                     = "lb-qck8thny"
+  listener_name              = "tf-example"
+  port                       = 44
+  protocol                   = "TCP"
+  health_check_switch        = true
+  health_check_time_out      = 30
+  health_check_interval_time = 100
+  health_check_health_num    = 2
+  health_check_unhealth_num  = 2
+  session_expire_time        = 30
+  scheduler                  = "WRR"
+  health_check_type          = "CUSTOM"
+  health_check_context_type  = "HEX"
+  health_check_send_context  = "0123456789ABCDEF"
+  health_check_recv_context  = "ABCD"
+  target_type                = "TARGETGROUP"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### HTTPS Listener with sigle certificate
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const hTTPSListener = new tencentcloud.clb.Listener("hTTPSListener", {
-    certificateCaId: "VfqO4zkB",
-    certificateId: "VjANRdz8",
-    certificateSslMode: "MUTUAL",
+const example = new tencentcloud.clb.Listener("example", {
     clbId: "lb-0lh5au7v",
-    listenerName: "test_listener",
+    listenerName: "tf-example",
     port: 80,
     protocol: "HTTPS",
+    certificateSslMode: "MUTUAL",
+    certificateId: "VjANRdz8",
+    certificateCaId: "VfqO4zkB",
     sniSwitch: true,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-h_ttps_listener = tencentcloud.clb.Listener("hTTPSListener",
-    certificate_ca_id="VfqO4zkB",
-    certificate_id="VjANRdz8",
-    certificate_ssl_mode="MUTUAL",
+example = tencentcloud.clb.Listener("example",
     clb_id="lb-0lh5au7v",
-    listener_name="test_listener",
+    listener_name="tf-example",
     port=80,
     protocol="HTTPS",
+    certificate_ssl_mode="MUTUAL",
+    certificate_id="VjANRdz8",
+    certificate_ca_id="VfqO4zkB",
     sni_switch=True)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var hTTPSListener = new Tencentcloud.Clb.Listener("hTTPSListener", new()
-    {
-        CertificateCaId = "VfqO4zkB",
-        CertificateId = "VjANRdz8",
-        CertificateSslMode = "MUTUAL",
-        ClbId = "lb-0lh5au7v",
-        ListenerName = "test_listener",
-        Port = 80,
-        Protocol = "HTTPS",
-        SniSwitch = true,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewListener(ctx, "hTTPSListener", &Clb.ListenerArgs{
-			CertificateCaId:    pulumi.String("VfqO4zkB"),
-			CertificateId:      pulumi.String("VjANRdz8"),
-			CertificateSslMode: pulumi.String("MUTUAL"),
+		_, err := clb.NewListener(ctx, "example", &clb.ListenerArgs{
 			ClbId:              pulumi.String("lb-0lh5au7v"),
-			ListenerName:       pulumi.String("test_listener"),
+			ListenerName:       pulumi.String("tf-example"),
 			Port:               pulumi.Int(80),
 			Protocol:           pulumi.String("HTTPS"),
+			CertificateSslMode: pulumi.String("MUTUAL"),
+			CertificateId:      pulumi.String("VjANRdz8"),
+			CertificateCaId:    pulumi.String("VfqO4zkB"),
 			SniSwitch:          pulumi.Bool(true),
 		})
 		if err != nil {
@@ -913,6 +1436,38 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Listener("example", new()
+    {
+        ClbId = "lb-0lh5au7v",
+        ListenerName = "tf-example",
+        Port = 80,
+        Protocol = "HTTPS",
+        CertificateSslMode = "MUTUAL",
+        CertificateId = "VjANRdz8",
+        CertificateCaId = "VfqO4zkB",
+        SniSwitch = true,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -921,8 +1476,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clb.Listener;
 import com.pulumi.tencentcloud.Clb.ListenerArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -934,80 +1489,159 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var hTTPSListener = new Listener("hTTPSListener", ListenerArgs.builder()        
-            .certificateCaId("VfqO4zkB")
-            .certificateId("VjANRdz8")
-            .certificateSslMode("MUTUAL")
+        var example = new Listener("example", ListenerArgs.builder()
             .clbId("lb-0lh5au7v")
-            .listenerName("test_listener")
-            .port("80")
+            .listenerName("tf-example")
+            .port(80)
             .protocol("HTTPS")
+            .certificateSslMode("MUTUAL")
+            .certificateId("VjANRdz8")
+            .certificateCaId("VfqO4zkB")
             .sniSwitch(true)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  hTTPSListener:
+  example:
     type: tencentcloud:Clb:Listener
     properties:
-      certificateCaId: VfqO4zkB
-      certificateId: VjANRdz8
-      certificateSslMode: MUTUAL
       clbId: lb-0lh5au7v
-      listenerName: test_listener
+      listenerName: tf-example
       port: '80'
       protocol: HTTPS
+      certificateSslMode: MUTUAL
+      certificateId: VjANRdz8
+      certificateCaId: VfqO4zkB
       sniSwitch: true
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### TCP SSL Listener
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+resource "tencentcloud_clb_listener" "example" {
+  clb_id               = "lb-0lh5au7v"
+  listener_name        = "tf-example"
+  port                 = "80"
+  protocol             = "HTTPS"
+  certificate_ssl_mode = "MUTUAL"
+  certificate_id       = "VjANRdz8"
+  certificate_ca_id    = "VfqO4zkB"
+  sni_switch           = true
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### HTTPS Listener with multi certificates
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const tCPSSLListener = new tencentcloud.clb.Listener("tCPSSLListener", {
-    certificateCaId: "VfqO4zkB",
-    certificateId: "VjANRdz8",
-    certificateSslMode: "MUTUAL",
-    clbId: "lb-0lh5au7v",
-    healthCheckHealthNum: 3,
-    healthCheckIntervalTime: 5,
-    healthCheckSwitch: true,
-    healthCheckTimeOut: 2,
-    healthCheckUnhealthNum: 3,
-    listenerName: "test_listener",
+const example = new tencentcloud.clb.Listener("example", {
+    clbId: "lb-l6cp6jt4",
+    listenerName: "tf-example",
     port: 80,
-    protocol: "TCP_SSL",
-    scheduler: "WRR",
-    targetType: "TARGETGROUP",
+    protocol: "HTTPS",
+    sniSwitch: true,
+    multiCertInfo: {
+        sslMode: "UNIDIRECTIONAL",
+        certIdLists: [
+            "LCYouprI",
+            "JVO1alRN",
+        ],
+    },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-t_cpssl_listener = tencentcloud.clb.Listener("tCPSSLListener",
-    certificate_ca_id="VfqO4zkB",
-    certificate_id="VjANRdz8",
-    certificate_ssl_mode="MUTUAL",
-    clb_id="lb-0lh5au7v",
-    health_check_health_num=3,
-    health_check_interval_time=5,
-    health_check_switch=True,
-    health_check_time_out=2,
-    health_check_unhealth_num=3,
-    listener_name="test_listener",
+example = tencentcloud.clb.Listener("example",
+    clb_id="lb-l6cp6jt4",
+    listener_name="tf-example",
     port=80,
-    protocol="TCP_SSL",
-    scheduler="WRR",
-    target_type="TARGETGROUP")
+    protocol="HTTPS",
+    sni_switch=True,
+    multi_cert_info={
+        "ssl_mode": "UNIDIRECTIONAL",
+        "cert_id_lists": [
+            "LCYouprI",
+            "JVO1alRN",
+        ],
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clb.NewListener(ctx, "example", &clb.ListenerArgs{
+			ClbId:        pulumi.String("lb-l6cp6jt4"),
+			ListenerName: pulumi.String("tf-example"),
+			Port:         pulumi.Int(80),
+			Protocol:     pulumi.String("HTTPS"),
+			SniSwitch:    pulumi.Bool(true),
+			MultiCertInfo: &clb.ListenerMultiCertInfoArgs{
+				SslMode: pulumi.String("UNIDIRECTIONAL"),
+				CertIdLists: pulumi.StringArray{
+					pulumi.String("LCYouprI"),
+					pulumi.String("JVO1alRN"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -1016,49 +1650,203 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var tCPSSLListener = new Tencentcloud.Clb.Listener("tCPSSLListener", new()
+    var example = new Tencentcloud.Clb.Listener("example", new()
     {
-        CertificateCaId = "VfqO4zkB",
-        CertificateId = "VjANRdz8",
-        CertificateSslMode = "MUTUAL",
-        ClbId = "lb-0lh5au7v",
-        HealthCheckHealthNum = 3,
-        HealthCheckIntervalTime = 5,
-        HealthCheckSwitch = true,
-        HealthCheckTimeOut = 2,
-        HealthCheckUnhealthNum = 3,
-        ListenerName = "test_listener",
+        ClbId = "lb-l6cp6jt4",
+        ListenerName = "tf-example",
         Port = 80,
-        Protocol = "TCP_SSL",
-        Scheduler = "WRR",
-        TargetType = "TARGETGROUP",
+        Protocol = "HTTPS",
+        SniSwitch = true,
+        MultiCertInfo = new Tencentcloud.Clb.Inputs.ListenerMultiCertInfoArgs
+        {
+            SslMode = "UNIDIRECTIONAL",
+            CertIdLists = new[]
+            {
+                "LCYouprI",
+                "JVO1alRN",
+            },
+        },
     });
 
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Clb.Listener;
+import com.pulumi.tencentcloud.Clb.ListenerArgs;
+import com.pulumi.tencentcloud.Clb.inputs.ListenerMultiCertInfoArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Listener("example", ListenerArgs.builder()
+            .clbId("lb-l6cp6jt4")
+            .listenerName("tf-example")
+            .port(80)
+            .protocol("HTTPS")
+            .sniSwitch(true)
+            .multiCertInfo(ListenerMultiCertInfoArgs.builder()
+                .sslMode("UNIDIRECTIONAL")
+                .certIdLists(                
+                    "LCYouprI",
+                    "JVO1alRN")
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Clb:Listener
+    properties:
+      clbId: lb-l6cp6jt4
+      listenerName: tf-example
+      port: '80'
+      protocol: HTTPS
+      sniSwitch: true
+      multiCertInfo:
+        sslMode: UNIDIRECTIONAL
+        certIdLists:
+          - LCYouprI
+          - JVO1alRN
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_listener" "example" {
+  clb_id        = "lb-l6cp6jt4"
+  listener_name = "tf-example"
+  port          = "80"
+  protocol      = "HTTPS"
+  sni_switch    = true
+  multi_cert_info = {
+    ssl_mode      = "UNIDIRECTIONAL"
+    cert_id_lists = ["LCYouprI", "JVO1alRN"]
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### TCP SSL Listener
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.clb.Listener("example", {
+    clbId: "lb-0lh5au7v",
+    listenerName: "tf-example",
+    port: 80,
+    protocol: "TCP_SSL",
+    certificateSslMode: "MUTUAL",
+    certificateId: "VjANRdz8",
+    certificateCaId: "VfqO4zkB",
+    healthCheckSwitch: true,
+    healthCheckTimeOut: 2,
+    healthCheckIntervalTime: 5,
+    healthCheckHealthNum: 3,
+    healthCheckUnhealthNum: 3,
+    scheduler: "WRR",
+    targetType: "TARGETGROUP",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.clb.Listener("example",
+    clb_id="lb-0lh5au7v",
+    listener_name="tf-example",
+    port=80,
+    protocol="TCP_SSL",
+    certificate_ssl_mode="MUTUAL",
+    certificate_id="VjANRdz8",
+    certificate_ca_id="VfqO4zkB",
+    health_check_switch=True,
+    health_check_time_out=2,
+    health_check_interval_time=5,
+    health_check_health_num=3,
+    health_check_unhealth_num=3,
+    scheduler="WRR",
+    target_type="TARGETGROUP")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewListener(ctx, "tCPSSLListener", &Clb.ListenerArgs{
-			CertificateCaId:         pulumi.String("VfqO4zkB"),
-			CertificateId:           pulumi.String("VjANRdz8"),
-			CertificateSslMode:      pulumi.String("MUTUAL"),
+		_, err := clb.NewListener(ctx, "example", &clb.ListenerArgs{
 			ClbId:                   pulumi.String("lb-0lh5au7v"),
-			HealthCheckHealthNum:    pulumi.Int(3),
-			HealthCheckIntervalTime: pulumi.Int(5),
-			HealthCheckSwitch:       pulumi.Bool(true),
-			HealthCheckTimeOut:      pulumi.Int(2),
-			HealthCheckUnhealthNum:  pulumi.Int(3),
-			ListenerName:            pulumi.String("test_listener"),
+			ListenerName:            pulumi.String("tf-example"),
 			Port:                    pulumi.Int(80),
 			Protocol:                pulumi.String("TCP_SSL"),
+			CertificateSslMode:      pulumi.String("MUTUAL"),
+			CertificateId:           pulumi.String("VjANRdz8"),
+			CertificateCaId:         pulumi.String("VfqO4zkB"),
+			HealthCheckSwitch:       pulumi.Bool(true),
+			HealthCheckTimeOut:      pulumi.Int(2),
+			HealthCheckIntervalTime: pulumi.Int(5),
+			HealthCheckHealthNum:    pulumi.Int(3),
+			HealthCheckUnhealthNum:  pulumi.Int(3),
 			Scheduler:               pulumi.String("WRR"),
 			TargetType:              pulumi.String("TARGETGROUP"),
 		})
@@ -1069,6 +1857,44 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Listener("example", new()
+    {
+        ClbId = "lb-0lh5au7v",
+        ListenerName = "tf-example",
+        Port = 80,
+        Protocol = "TCP_SSL",
+        CertificateSslMode = "MUTUAL",
+        CertificateId = "VjANRdz8",
+        CertificateCaId = "VfqO4zkB",
+        HealthCheckSwitch = true,
+        HealthCheckTimeOut = 2,
+        HealthCheckIntervalTime = 5,
+        HealthCheckHealthNum = 3,
+        HealthCheckUnhealthNum = 3,
+        Scheduler = "WRR",
+        TargetType = "TARGETGROUP",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -1077,8 +1903,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clb.Listener;
 import com.pulumi.tencentcloud.Clb.ListenerArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -1090,19 +1916,19 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var tCPSSLListener = new Listener("tCPSSLListener", ListenerArgs.builder()        
-            .certificateCaId("VfqO4zkB")
-            .certificateId("VjANRdz8")
-            .certificateSslMode("MUTUAL")
+        var example = new Listener("example", ListenerArgs.builder()
             .clbId("lb-0lh5au7v")
-            .healthCheckHealthNum(3)
-            .healthCheckIntervalTime(5)
+            .listenerName("tf-example")
+            .port(80)
+            .protocol("TCP_SSL")
+            .certificateSslMode("MUTUAL")
+            .certificateId("VjANRdz8")
+            .certificateCaId("VfqO4zkB")
             .healthCheckSwitch(true)
             .healthCheckTimeOut(2)
+            .healthCheckIntervalTime(5)
+            .healthCheckHealthNum(3)
             .healthCheckUnhealthNum(3)
-            .listenerName("test_listener")
-            .port("80")
-            .protocol("TCP_SSL")
             .scheduler("WRR")
             .targetType("TARGETGROUP")
             .build());
@@ -1110,67 +1936,151 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  tCPSSLListener:
+  example:
     type: tencentcloud:Clb:Listener
     properties:
-      certificateCaId: VfqO4zkB
-      certificateId: VjANRdz8
-      certificateSslMode: MUTUAL
       clbId: lb-0lh5au7v
-      healthCheckHealthNum: 3
-      healthCheckIntervalTime: 5
-      healthCheckSwitch: true
-      healthCheckTimeOut: 2
-      healthCheckUnhealthNum: 3
-      listenerName: test_listener
+      listenerName: tf-example
       port: '80'
       protocol: TCP_SSL
+      certificateSslMode: MUTUAL
+      certificateId: VjANRdz8
+      certificateCaId: VfqO4zkB
+      healthCheckSwitch: true
+      healthCheckTimeOut: 2
+      healthCheckIntervalTime: 5
+      healthCheckHealthNum: 3
+      healthCheckUnhealthNum: 3
       scheduler: WRR
       targetType: TARGETGROUP
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### Port Range Listener
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+resource "tencentcloud_clb_listener" "example" {
+  clb_id                     = "lb-0lh5au7v"
+  listener_name              = "tf-example"
+  port                       = "80"
+  protocol                   = "TCP_SSL"
+  certificate_ssl_mode       = "MUTUAL"
+  certificate_id             = "VjANRdz8"
+  certificate_ca_id          = "VfqO4zkB"
+  health_check_switch        = true
+  health_check_time_out      = 2
+  health_check_interval_time = 5
+  health_check_health_num    = 3
+  health_check_unhealth_num  = 3
+  scheduler                  = "WRR"
+  target_type                = "TARGETGROUP"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### TCP_SSL Listener with MaxConn, MaxCps, ProxyProtocol
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const clbBasic = new tencentcloud.clb.Instance("clbBasic", {
-    networkType: "OPEN",
-    clbName: "tf-listener-test",
-});
-const listenerBasic = new tencentcloud.clb.Listener("listenerBasic", {
-    clbId: clbBasic.id,
-    port: 1,
-    endPort: 6,
-    protocol: "TCP",
-    listenerName: "listener_basic",
-    sessionExpireTime: 30,
+const example = new tencentcloud.clb.Listener("example", {
+    clbId: "lb-0lh5au7v",
+    listenerName: "tf-example",
+    port: 443,
+    protocol: "TCP_SSL",
+    certificateSslMode: "UNIDIRECTIONAL",
+    certificateId: "VjANRdz8",
     scheduler: "WRR",
-    targetType: "NODE",
+    maxConn: 1000,
+    maxCps: 100,
+    proxyProtocol: true,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-clb_basic = tencentcloud.clb.Instance("clbBasic",
-    network_type="OPEN",
-    clb_name="tf-listener-test")
-listener_basic = tencentcloud.clb.Listener("listenerBasic",
-    clb_id=clb_basic.id,
-    port=1,
-    end_port=6,
-    protocol="TCP",
-    listener_name="listener_basic",
-    session_expire_time=30,
+example = tencentcloud.clb.Listener("example",
+    clb_id="lb-0lh5au7v",
+    listener_name="tf-example",
+    port=443,
+    protocol="TCP_SSL",
+    certificate_ssl_mode="UNIDIRECTIONAL",
+    certificate_id="VjANRdz8",
     scheduler="WRR",
-    target_type="NODE")
+    max_conn=1000,
+    max_cps=100,
+    proxy_protocol=True)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clb.NewListener(ctx, "example", &clb.ListenerArgs{
+			ClbId:              pulumi.String("lb-0lh5au7v"),
+			ListenerName:       pulumi.String("tf-example"),
+			Port:               pulumi.Int(443),
+			Protocol:           pulumi.String("TCP_SSL"),
+			CertificateSslMode: pulumi.String("UNIDIRECTIONAL"),
+			CertificateId:      pulumi.String("VjANRdz8"),
+			Scheduler:          pulumi.String("WRR"),
+			MaxConn:            pulumi.Int(1000),
+			MaxCps:             pulumi.Int(100),
+			ProxyProtocol:      pulumi.Bool(true),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -1179,49 +2089,193 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var clbBasic = new Tencentcloud.Clb.Instance("clbBasic", new()
+    var example = new Tencentcloud.Clb.Listener("example", new()
     {
-        NetworkType = "OPEN",
-        ClbName = "tf-listener-test",
-    });
-
-    var listenerBasic = new Tencentcloud.Clb.Listener("listenerBasic", new()
-    {
-        ClbId = clbBasic.Id,
-        Port = 1,
-        EndPort = 6,
-        Protocol = "TCP",
-        ListenerName = "listener_basic",
-        SessionExpireTime = 30,
+        ClbId = "lb-0lh5au7v",
+        ListenerName = "tf-example",
+        Port = 443,
+        Protocol = "TCP_SSL",
+        CertificateSslMode = "UNIDIRECTIONAL",
+        CertificateId = "VjANRdz8",
         Scheduler = "WRR",
-        TargetType = "NODE",
+        MaxConn = 1000,
+        MaxCps = 100,
+        ProxyProtocol = true,
     });
 
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Clb.Listener;
+import com.pulumi.tencentcloud.Clb.ListenerArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Listener("example", ListenerArgs.builder()
+            .clbId("lb-0lh5au7v")
+            .listenerName("tf-example")
+            .port(443)
+            .protocol("TCP_SSL")
+            .certificateSslMode("UNIDIRECTIONAL")
+            .certificateId("VjANRdz8")
+            .scheduler("WRR")
+            .maxConn(1000)
+            .maxCps(100)
+            .proxyProtocol(true)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Clb:Listener
+    properties:
+      clbId: lb-0lh5au7v
+      listenerName: tf-example
+      port: '443'
+      protocol: TCP_SSL
+      certificateSslMode: UNIDIRECTIONAL
+      certificateId: VjANRdz8
+      scheduler: WRR
+      maxConn: 1000
+      maxCps: 100
+      proxyProtocol: true
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_listener" "example" {
+  clb_id               = "lb-0lh5au7v"
+  listener_name        = "tf-example"
+  port                 = "443"
+  protocol             = "TCP_SSL"
+  certificate_ssl_mode = "UNIDIRECTIONAL"
+  certificate_id       = "VjANRdz8"
+  scheduler            = "WRR"
+  max_conn             = 1000
+  max_cps              = 100
+  proxy_protocol       = true
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Port Range Listener
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.clb.Instance("example", {
+    clbName: "tf-listener-test",
+    networkType: "OPEN",
+});
+const exampleListener = new tencentcloud.clb.Listener("example", {
+    clbId: example.id,
+    listenerName: "tf-example",
+    port: 1,
+    endPort: 6,
+    protocol: "TCP",
+    sessionExpireTime: 30,
+    scheduler: "WRR",
+    targetType: "NODE",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.clb.Instance("example",
+    clb_name="tf-listener-test",
+    network_type="OPEN")
+example_listener = tencentcloud.clb.Listener("example",
+    clb_id=example.id,
+    listener_name="tf-example",
+    port=1,
+    end_port=6,
+    protocol="TCP",
+    session_expire_time=30,
+    scheduler="WRR",
+    target_type="NODE")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		clbBasic, err := Clb.NewInstance(ctx, "clbBasic", &Clb.InstanceArgs{
-			NetworkType: pulumi.String("OPEN"),
+		example, err := clb.NewInstance(ctx, "example", &clb.InstanceArgs{
 			ClbName:     pulumi.String("tf-listener-test"),
+			NetworkType: pulumi.String("OPEN"),
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Clb.NewListener(ctx, "listenerBasic", &Clb.ListenerArgs{
-			ClbId:             clbBasic.ID(),
+		_, err = clb.NewListener(ctx, "example", &clb.ListenerArgs{
+			ClbId:             example.ID().ToIDOutput().ToStringOutput(),
+			ListenerName:      pulumi.String("tf-example"),
 			Port:              pulumi.Int(1),
 			EndPort:           pulumi.Int(6),
 			Protocol:          pulumi.String("TCP"),
-			ListenerName:      pulumi.String("listener_basic"),
 			SessionExpireTime: pulumi.Int(30),
 			Scheduler:         pulumi.String("WRR"),
 			TargetType:        pulumi.String("NODE"),
@@ -1233,6 +2287,44 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Instance("example", new()
+    {
+        ClbName = "tf-listener-test",
+        NetworkType = "OPEN",
+    });
+
+    var exampleListener = new Tencentcloud.Clb.Listener("example", new()
+    {
+        ClbId = example.Id,
+        ListenerName = "tf-example",
+        Port = 1,
+        EndPort = 6,
+        Protocol = "TCP",
+        SessionExpireTime = 30,
+        Scheduler = "WRR",
+        TargetType = "NODE",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -1243,8 +2335,8 @@ import com.pulumi.tencentcloud.Clb.Instance;
 import com.pulumi.tencentcloud.Clb.InstanceArgs;
 import com.pulumi.tencentcloud.Clb.Listener;
 import com.pulumi.tencentcloud.Clb.ListenerArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -1256,17 +2348,17 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var clbBasic = new Instance("clbBasic", InstanceArgs.builder()        
-            .networkType("OPEN")
+        var example = new Instance("example", InstanceArgs.builder()
             .clbName("tf-listener-test")
+            .networkType("OPEN")
             .build());
 
-        var listenerBasic = new Listener("listenerBasic", ListenerArgs.builder()        
-            .clbId(clbBasic.id())
+        var exampleListener = new Listener("exampleListener", ListenerArgs.builder()
+            .clbId(example.id())
+            .listenerName("tf-example")
             .port(1)
             .endPort(6)
             .protocol("TCP")
-            .listenerName("listener_basic")
             .sessionExpireTime(30)
             .scheduler("WRR")
             .targetType("NODE")
@@ -1275,51 +2367,108 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  clbBasic:
+  example:
     type: tencentcloud:Clb:Instance
     properties:
-      networkType: OPEN
       clbName: tf-listener-test
-  listenerBasic:
+      networkType: OPEN
+  exampleListener:
     type: tencentcloud:Clb:Listener
+    name: example
     properties:
-      clbId: ${clbBasic.id}
+      clbId: ${example.id}
+      listenerName: tf-example
       port: 1
       endPort: 6
       protocol: TCP
-      listenerName: listener_basic
       sessionExpireTime: 30
       scheduler: WRR
       targetType: NODE
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_instance" "example" {
+  clb_name     = "tf-listener-test"
+  network_type = "OPEN"
+}
+resource "tencentcloud_clb_listener" "example" {
+  clb_id              = tencentcloud_clb_instance.example.id
+  listener_name       = "tf-example"
+  port                = 1
+  end_port            = 6
+  protocol            = "TCP"
+  session_expire_time = 30
+  scheduler           = "WRR"
+  target_type         = "NODE"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateListener](https://www.tencentcloud.com/document/api/214/33842)
+* Read: [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+* Update: [ModifyListener](https://www.tencentcloud.com/document/api/214/33818)
+* Delete: [DeleteListener](https://www.tencentcloud.com/document/api/214/33838)
 
 
 ## Create Listener Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Listener</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ListenerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Listener</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ListenerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Listener</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ListenerArgs</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Listener</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-             <span class="nx">certificate_ca_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">certificate_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">certificate_ssl_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">clb_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">listener_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">health_check_unhealth_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">idle_connect_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">deregister_target_rst</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">end_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">h2c_switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">health_check_context_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">health_check_health_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">health_check_http_code</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
@@ -1334,54 +2483,71 @@ resources:
              <span class="nx">health_check_switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">health_check_time_out</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">health_check_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">health_check_unhealth_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">health_source_ip_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">certificate_ca_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">data_compress_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">keepalive_enable</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">listener_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">health_source_ip_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">certificate_ssl_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">max_conn</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">max_cps</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">multi_cert_info</span><span class="p">:</span> <span class="nx">Optional[ListenerMultiCertInfoArgs]</span> = None<span class="p">,</span>
              <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">certificate_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">proxy_protocol</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">reschedule_expand_target</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">reschedule_interval</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">reschedule_start_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">reschedule_target_zero_weight</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+             <span class="nx">reschedule_unhealthy</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">scheduler</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">session_expire_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">session_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">snat_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
              <span class="nx">sni_switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-             <span class="nx">target_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Listener</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ListenerArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">target_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewListener</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ListenerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Listener</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewListener</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ListenerArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Listener</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Listener</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ListenerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Listener</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ListenerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Listener</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ListenerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Listener</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ListenerArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Clb:Listener</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Clb:Listener</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_clb_listener&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -1402,7 +2568,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -1519,11 +2685,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Listener Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Listener resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -1539,8 +2713,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB instance.</dd><dt class="property-required"
             title="Required">
         <span id="listenername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Name</a>
@@ -1548,8 +2721,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1557,8 +2729,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificatecaid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatecaid_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Ca<wbr>Id</a>
@@ -1566,8 +2737,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -1575,8 +2745,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificatesslmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatesslmode_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Ssl<wbr>Mode</a>
@@ -1584,8 +2753,23 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="datacompressmode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datacompressmode_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Compress<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data compression mode. Valid values: <code>transparent</code>, <code>compatibility</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deregistertargetrst_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deregistertargetrst_csharp" style="color: inherit; text-decoration: inherit;">Deregister<wbr>Target<wbr>Rst</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="endport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endport_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Port</a>
@@ -1593,8 +2777,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="h2cswitch_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#h2cswitch_csharp" style="color: inherit; text-decoration: inherit;">H2c<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable H2C for intranet <code>HTTP</code> listeners. <code>true</code>: enable, <code>false</code>: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type <code>GRPC</code> or <code>GRPCS</code>; <code>GRPC</code> or <code>GRPCS</code> must be explicitly specified in the forwarding type when creating rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckcontexttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckcontexttype_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Context<wbr>Type</a>
@@ -1602,8 +2793,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check protocol. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required, which represents the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>. When <code>HEX</code>, the characters of <code>sendContext</code>/<code>recvContext</code> can only be selected from <code>0123456789ABCDEF</code> and the length must be even. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhealthnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhealthnum_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -1611,8 +2801,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpcode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpcode_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Code</a>
@@ -1620,8 +2809,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>1</code>, <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>. <code>1</code> means http_1xx, <code>2</code> means http_2xx, <code>4</code> means http_3xx, <code>8</code> means http_4xx, <code>16</code> means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.</p>
-</dd><dt class="property-optional"
+    <dd>Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. <code>1</code>=1xx healthy, <code>2</code>=2xx, <code>4</code>=3xx, <code>8</code>=4xx, <code>16</code>=5xx. To treat multiple return codes as healthy, add the corresponding values together.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpdomain_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Domain</a>
@@ -1629,8 +2817,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check domain of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpmethod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpmethod_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Method</a>
@@ -1638,8 +2825,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check method of TCP listener. Valid values: <code>HEAD</code>, <code>GET</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default <code>HEAD</code>. Valid values: <code>HEAD</code>, <code>GET</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttppath_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttppath_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Path</a>
@@ -1647,8 +2833,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check path of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpversion_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Version</a>
@@ -1656,8 +2841,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The HTTP version of the backend service. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP version of the backend service. Required when <code>healthCheckType</code> is <code>HTTP</code>. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>. Only applicable to <code>TCP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckintervaltime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckintervaltime_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Interval<wbr>Time</a>
@@ -1665,8 +2849,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckport_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Port</a>
@@ -1674,8 +2857,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass <code>-1</code> to restore the default. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckrecvcontext_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckrecvcontext_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Recv<wbr>Context</a>
@@ -1683,8 +2865,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It represents the result returned by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecksendcontext_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecksendcontext_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Send<wbr>Context</a>
@@ -1692,8 +2873,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It represents the content of the request sent by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckswitch_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Switch</a>
@@ -1701,8 +2881,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecktimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktimeout_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Time<wbr>Out</a>
@@ -1710,8 +2889,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of <code>TCP</code>,<code>UDP</code>,<code>TCP_SSL</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktype_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Type</a>
@@ -1719,8 +2897,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol used for health check. Valid values: <code>CUSTOM</code>, <code>TCP</code>, <code>HTTP</code>,<code>HTTPS</code>, <code>PING</code>, <code>GRPC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check protocol. Valid values: <code>TCP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>GRPC</code>, <code>PING</code>, <code>CUSTOM</code>. UDP listeners support <code>PING</code>/<code>CUSTOM</code>; TCP listeners support <code>TCP</code>/<code>HTTP</code>/<code>CUSTOM</code>; TCP_SSL/QUIC listeners support <code>TCP</code>/<code>HTTP</code>; HTTP rules support <code>HTTP</code>/<code>GRPC</code>; HTTPS rules support <code>HTTP</code>/<code>HTTPS</code>/<code>GRPC</code>. Defaults: <code>HTTP</code> for HTTP listeners, <code>TCP</code> for TCP/TCP_SSL/QUIC listeners, <code>PING</code> for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckunhealthnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckunhealthnum_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -1728,8 +2905,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthsourceiptype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthsourceiptype_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Source<wbr>Ip<wbr>Type</a>
@@ -1737,8 +2913,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the type of health check source IP. <code>0</code> (default): CLB VIP. <code>1</code>: 100.64 IP range.</p>
-</dd><dt class="property-optional"
+    <dd>Health check source IP type. <code>0</code>: use the CLB VIP as the source IP, <code>1</code>: use a 100.64 IP range as the source IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="idleconnecttimeout_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idleconnecttimeout_csharp" style="color: inherit; text-decoration: inherit;">Idle<wbr>Connect<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.</dd><dt class="property-optional"
             title="Optional">
         <span id="keepaliveenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepaliveenable_csharp" style="color: inherit; text-decoration: inherit;">Keepalive<wbr>Enable</a>
@@ -1746,8 +2929,31 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable persistent connection (long connection). Only applicable to <code>HTTP</code>/<code>HTTPS</code> listeners. Valid values: <code>0</code> (disable, default), <code>1</code> (enable). This feature is currently in beta.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maxconn_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconn_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Conn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maxcps_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxcps_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Cps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multicertinfo_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multicertinfo_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Cert<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#listenermulticertinfo">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Listener<wbr>Multi<wbr>Cert<wbr>Info</a></span>
+    </dt>
+    <dd>Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to <code>TCP_SSL</code> listeners and <code>HTTPS</code> listeners with SNI disabled. When creating a <code>TCP_SSL</code> listener or an <code>HTTPS</code> listener with SNI disabled, at least one of <code>certificate</code>/<code>multiCertInfo</code> must be specified, but they cannot be specified at the same time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1755,8 +2961,55 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the CLB listener. Port range: [1 - 65535].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="proxyprotocol_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyprotocol_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduleexpandtarget_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduleexpandtarget_csharp" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Expand<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduleinterval_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduleinterval_csharp" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="reschedulestarttime_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reschedulestarttime_csharp" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduletargetzeroweight_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduletargetzeroweight_csharp" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Target<wbr>Zero<wbr>Weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduleunhealthy_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduleunhealthy_csharp" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_csharp" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -1764,8 +3017,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of <code>HTTP</code> and <code>HTTPS</code> protocol additionally supports the <code>IP Hash</code> method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method. Valid values: <code>WRR</code> (weighted round-robin), <code>LEAST_CONN</code> (least connections). Default is <code>WRR</code>. Only applicable to <code>TCP</code>/<code>UDP</code>/<code>TCP_SSL</code>/<code>QUIC</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessionexpiretime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionexpiretime_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Expire<wbr>Time</a>
@@ -1773,8 +3025,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as <code>WRR</code>, and not available when listener protocol is <code>TCP_SSL</code>. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessiontype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontype_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Type</a>
@@ -1782,8 +3033,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Session persistence type. Valid values: <code>NORMAL</code>: the default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. The <code>QUIC_CID</code> value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Session persistence type. <code>NORMAL</code> (default): default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule. If <code>QUIC_CID</code> is selected, <code>protocol</code> must be <code>UDP</code>, <code>scheduler</code> must be <code>WRR</code>, and only IPv4 is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snatenable_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatenable_csharp" style="color: inherit; text-decoration: inherit;">Snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable SNAT (source IP replacement). <code>true</code>: enable, <code>false</code>: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="sniswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sniswitch_csharp" style="color: inherit; text-decoration: inherit;">Sni<wbr>Switch</a>
@@ -1791,8 +3049,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether SNI is enabled, and only supported with protocol <code>HTTPS</code>. If enabled, you can set a certificate for each rule in <code>tencentcloud.Clb.ListenerRule</code>, otherwise all rules have a certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether SNI is enabled. Only applicable to <code>HTTPS</code> listeners. <code>0</code>: disabled, <code>1</code>: enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="targettype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targettype_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Type</a>
@@ -1800,8 +3057,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>. <code>NODE</code> means to bind ordinary nodes, <code>TARGETGROUP</code> means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd></dl>
+    <dd>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>, <code>TARGETGROUP-V2</code>. <code>NODE</code> means binding ordinary nodes, <code>TARGETGROUP</code> means binding a target group. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1815,8 +3071,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB instance.</dd><dt class="property-required"
             title="Required">
         <span id="listenername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Name</a>
@@ -1824,8 +3079,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1833,8 +3087,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificatecaid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatecaid_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Ca<wbr>Id</a>
@@ -1842,8 +3095,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -1851,8 +3103,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificatesslmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatesslmode_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Ssl<wbr>Mode</a>
@@ -1860,8 +3111,23 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="datacompressmode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datacompressmode_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Compress<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data compression mode. Valid values: <code>transparent</code>, <code>compatibility</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deregistertargetrst_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deregistertargetrst_go" style="color: inherit; text-decoration: inherit;">Deregister<wbr>Target<wbr>Rst</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="endport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endport_go" style="color: inherit; text-decoration: inherit;">End<wbr>Port</a>
@@ -1869,8 +3135,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="h2cswitch_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#h2cswitch_go" style="color: inherit; text-decoration: inherit;">H2c<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable H2C for intranet <code>HTTP</code> listeners. <code>true</code>: enable, <code>false</code>: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type <code>GRPC</code> or <code>GRPCS</code>; <code>GRPC</code> or <code>GRPCS</code> must be explicitly specified in the forwarding type when creating rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckcontexttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckcontexttype_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Context<wbr>Type</a>
@@ -1878,8 +3151,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check protocol. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required, which represents the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>. When <code>HEX</code>, the characters of <code>sendContext</code>/<code>recvContext</code> can only be selected from <code>0123456789ABCDEF</code> and the length must be even. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhealthnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhealthnum_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -1887,8 +3159,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpcode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpcode_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Code</a>
@@ -1896,8 +3167,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>1</code>, <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>. <code>1</code> means http_1xx, <code>2</code> means http_2xx, <code>4</code> means http_3xx, <code>8</code> means http_4xx, <code>16</code> means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.</p>
-</dd><dt class="property-optional"
+    <dd>Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. <code>1</code>=1xx healthy, <code>2</code>=2xx, <code>4</code>=3xx, <code>8</code>=4xx, <code>16</code>=5xx. To treat multiple return codes as healthy, add the corresponding values together.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpdomain_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Domain</a>
@@ -1905,8 +3175,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check domain of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpmethod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpmethod_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Method</a>
@@ -1914,8 +3183,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check method of TCP listener. Valid values: <code>HEAD</code>, <code>GET</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default <code>HEAD</code>. Valid values: <code>HEAD</code>, <code>GET</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttppath_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttppath_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Path</a>
@@ -1923,8 +3191,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check path of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpversion_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Version</a>
@@ -1932,8 +3199,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The HTTP version of the backend service. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP version of the backend service. Required when <code>healthCheckType</code> is <code>HTTP</code>. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>. Only applicable to <code>TCP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckintervaltime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckintervaltime_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Interval<wbr>Time</a>
@@ -1941,8 +3207,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckport_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Port</a>
@@ -1950,8 +3215,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass <code>-1</code> to restore the default. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckrecvcontext_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckrecvcontext_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Recv<wbr>Context</a>
@@ -1959,8 +3223,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It represents the result returned by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecksendcontext_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecksendcontext_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Send<wbr>Context</a>
@@ -1968,8 +3231,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It represents the content of the request sent by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckswitch_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Switch</a>
@@ -1977,8 +3239,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecktimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktimeout_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Time<wbr>Out</a>
@@ -1986,8 +3247,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of <code>TCP</code>,<code>UDP</code>,<code>TCP_SSL</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktype_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Type</a>
@@ -1995,8 +3255,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol used for health check. Valid values: <code>CUSTOM</code>, <code>TCP</code>, <code>HTTP</code>,<code>HTTPS</code>, <code>PING</code>, <code>GRPC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check protocol. Valid values: <code>TCP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>GRPC</code>, <code>PING</code>, <code>CUSTOM</code>. UDP listeners support <code>PING</code>/<code>CUSTOM</code>; TCP listeners support <code>TCP</code>/<code>HTTP</code>/<code>CUSTOM</code>; TCP_SSL/QUIC listeners support <code>TCP</code>/<code>HTTP</code>; HTTP rules support <code>HTTP</code>/<code>GRPC</code>; HTTPS rules support <code>HTTP</code>/<code>HTTPS</code>/<code>GRPC</code>. Defaults: <code>HTTP</code> for HTTP listeners, <code>TCP</code> for TCP/TCP_SSL/QUIC listeners, <code>PING</code> for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckunhealthnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckunhealthnum_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -2004,8 +3263,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthsourceiptype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthsourceiptype_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Source<wbr>Ip<wbr>Type</a>
@@ -2013,8 +3271,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the type of health check source IP. <code>0</code> (default): CLB VIP. <code>1</code>: 100.64 IP range.</p>
-</dd><dt class="property-optional"
+    <dd>Health check source IP type. <code>0</code>: use the CLB VIP as the source IP, <code>1</code>: use a 100.64 IP range as the source IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="idleconnecttimeout_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idleconnecttimeout_go" style="color: inherit; text-decoration: inherit;">Idle<wbr>Connect<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.</dd><dt class="property-optional"
             title="Optional">
         <span id="keepaliveenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepaliveenable_go" style="color: inherit; text-decoration: inherit;">Keepalive<wbr>Enable</a>
@@ -2022,8 +3287,31 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable persistent connection (long connection). Only applicable to <code>HTTP</code>/<code>HTTPS</code> listeners. Valid values: <code>0</code> (disable, default), <code>1</code> (enable). This feature is currently in beta.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maxconn_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconn_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Conn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maxcps_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxcps_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Cps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multicertinfo_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multicertinfo_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Cert<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#listenermulticertinfo">Listener<wbr>Multi<wbr>Cert<wbr>Info<wbr>Args</a></span>
+    </dt>
+    <dd>Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to <code>TCP_SSL</code> listeners and <code>HTTPS</code> listeners with SNI disabled. When creating a <code>TCP_SSL</code> listener or an <code>HTTPS</code> listener with SNI disabled, at least one of <code>certificate</code>/<code>multiCertInfo</code> must be specified, but they cannot be specified at the same time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2031,8 +3319,55 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the CLB listener. Port range: [1 - 65535].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="proxyprotocol_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyprotocol_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduleexpandtarget_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduleexpandtarget_go" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Expand<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduleinterval_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduleinterval_go" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="reschedulestarttime_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reschedulestarttime_go" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduletargetzeroweight_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduletargetzeroweight_go" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Target<wbr>Zero<wbr>Weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduleunhealthy_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduleunhealthy_go" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_go" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -2040,8 +3375,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of <code>HTTP</code> and <code>HTTPS</code> protocol additionally supports the <code>IP Hash</code> method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method. Valid values: <code>WRR</code> (weighted round-robin), <code>LEAST_CONN</code> (least connections). Default is <code>WRR</code>. Only applicable to <code>TCP</code>/<code>UDP</code>/<code>TCP_SSL</code>/<code>QUIC</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessionexpiretime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionexpiretime_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Expire<wbr>Time</a>
@@ -2049,8 +3383,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as <code>WRR</code>, and not available when listener protocol is <code>TCP_SSL</code>. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessiontype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontype_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Type</a>
@@ -2058,8 +3391,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Session persistence type. Valid values: <code>NORMAL</code>: the default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. The <code>QUIC_CID</code> value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Session persistence type. <code>NORMAL</code> (default): default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule. If <code>QUIC_CID</code> is selected, <code>protocol</code> must be <code>UDP</code>, <code>scheduler</code> must be <code>WRR</code>, and only IPv4 is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snatenable_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatenable_go" style="color: inherit; text-decoration: inherit;">Snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable SNAT (source IP replacement). <code>true</code>: enable, <code>false</code>: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="sniswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sniswitch_go" style="color: inherit; text-decoration: inherit;">Sni<wbr>Switch</a>
@@ -2067,8 +3407,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether SNI is enabled, and only supported with protocol <code>HTTPS</code>. If enabled, you can set a certificate for each rule in <code>tencentcloud.Clb.ListenerRule</code>, otherwise all rules have a certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether SNI is enabled. Only applicable to <code>HTTPS</code> listeners. <code>0</code>: disabled, <code>1</code>: enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="targettype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targettype_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Type</a>
@@ -2076,8 +3415,365 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>. <code>NODE</code> means to bind ordinary nodes, <code>TARGETGROUP</code> means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd></dl>
+    <dd>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>, <code>TARGETGROUP-V2</code>. <code>NODE</code> means binding ordinary nodes, <code>TARGETGROUP</code> means binding a target group. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="listener_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_name_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="certificate_ca_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_ca_id_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>ca_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_id_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="certificate_ssl_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_ssl_mode_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>ssl_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="data_compress_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_compress_mode_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>compress_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data compression mode. Valid values: <code>transparent</code>, <code>compatibility</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deregister_target_rst_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deregister_target_rst_hcl" style="color: inherit; text-decoration: inherit;">deregister_<wbr>target_<wbr>rst</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="end_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_port_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="h2c_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#h2c_switch_hcl" style="color: inherit; text-decoration: inherit;">h2c_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable H2C for intranet <code>HTTP</code> listeners. <code>true</code>: enable, <code>false</code>: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type <code>GRPC</code> or <code>GRPCS</code>; <code>GRPC</code> or <code>GRPCS</code> must be explicitly specified in the forwarding type when creating rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_context_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_context_type_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>context_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>. When <code>HEX</code>, the characters of <code>sendContext</code>/<code>recvContext</code> can only be selected from <code>0123456789ABCDEF</code> and the length must be even. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_health_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_health_num_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>health_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_http_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_code_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. <code>1</code>=1xx healthy, <code>2</code>=2xx, <code>4</code>=3xx, <code>8</code>=4xx, <code>16</code>=5xx. To treat multiple return codes as healthy, add the corresponding values together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_http_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_domain_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_http_method_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_method_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default <code>HEAD</code>. Valid values: <code>HEAD</code>, <code>GET</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_http_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_path_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_http_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_version_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTP version of the backend service. Required when <code>healthCheckType</code> is <code>HTTP</code>. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>. Only applicable to <code>TCP</code> listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_interval_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_interval_time_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>interval_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_port_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass <code>-1</code> to restore the default. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_recv_context_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_recv_context_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>recv_<wbr>context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_send_context_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_send_context_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>send_<wbr>context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_switch_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_time_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_time_out_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>time_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_type_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check protocol. Valid values: <code>TCP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>GRPC</code>, <code>PING</code>, <code>CUSTOM</code>. UDP listeners support <code>PING</code>/<code>CUSTOM</code>; TCP listeners support <code>TCP</code>/<code>HTTP</code>/<code>CUSTOM</code>; TCP_SSL/QUIC listeners support <code>TCP</code>/<code>HTTP</code>; HTTP rules support <code>HTTP</code>/<code>GRPC</code>; HTTPS rules support <code>HTTP</code>/<code>HTTPS</code>/<code>GRPC</code>. Defaults: <code>HTTP</code> for HTTP listeners, <code>TCP</code> for TCP/TCP_SSL/QUIC listeners, <code>PING</code> for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_unhealth_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_unhealth_num_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>unhealth_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_source_ip_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_source_ip_type_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>source_<wbr>ip_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health check source IP type. <code>0</code>: use the CLB VIP as the source IP, <code>1</code>: use a 100.64 IP range as the source IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="idle_connect_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idle_connect_timeout_hcl" style="color: inherit; text-decoration: inherit;">idle_<wbr>connect_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keepalive_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepalive_enable_hcl" style="color: inherit; text-decoration: inherit;">keepalive_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable persistent connection (long connection). Only applicable to <code>HTTP</code>/<code>HTTPS</code> listeners. Valid values: <code>0</code> (disable, default), <code>1</code> (enable). This feature is currently in beta.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_conn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_conn_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>conn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_cps_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_cps_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>cps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multi_cert_info_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_cert_info_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>cert_<wbr>info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#listenermulticertinfo">object</a></span>
+    </dt>
+    <dd>Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to <code>TCP_SSL</code> listeners and <code>HTTPS</code> listeners with SNI disabled. When creating a <code>TCP_SSL</code> listener or an <code>HTTPS</code> listener with SNI disabled, at least one of <code>certificate</code>/<code>multiCertInfo</code> must be specified, but they cannot be specified at the same time.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the CLB listener. Port range: [1 - 65535].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="proxy_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_protocol_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="reschedule_expand_target_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reschedule_expand_target_hcl" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>expand_<wbr>target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="reschedule_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reschedule_interval_hcl" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="reschedule_start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reschedule_start_time_hcl" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="reschedule_target_zero_weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reschedule_target_zero_weight_hcl" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>target_<wbr>zero_<wbr>weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="reschedule_unhealthy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reschedule_unhealthy_hcl" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scheduler_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_hcl" style="color: inherit; text-decoration: inherit;">scheduler</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling method. Valid values: <code>WRR</code> (weighted round-robin), <code>LEAST_CONN</code> (least connections). Default is <code>WRR</code>. Only applicable to <code>TCP</code>/<code>UDP</code>/<code>TCP_SSL</code>/<code>QUIC</code> listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="session_expire_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_expire_time_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>expire_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="session_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_type_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Session persistence type. <code>NORMAL</code> (default): default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule. If <code>QUIC_CID</code> is selected, <code>protocol</code> must be <code>UDP</code>, <code>scheduler</code> must be <code>WRR</code>, and only IPv4 is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snat_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_enable_hcl" style="color: inherit; text-decoration: inherit;">snat_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable SNAT (source IP replacement). <code>true</code>: enable, <code>false</code>: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="sni_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sni_switch_hcl" style="color: inherit; text-decoration: inherit;">sni_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether SNI is enabled. Only applicable to <code>HTTPS</code> listeners. <code>0</code>: disabled, <code>1</code>: enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="target_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_type_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>, <code>TARGETGROUP-V2</code>. <code>NODE</code> means binding ordinary nodes, <code>TARGETGROUP</code> means binding a target group. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2091,8 +3787,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB instance.</dd><dt class="property-required"
             title="Required">
         <span id="listenername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -2100,8 +3795,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2109,8 +3803,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificatecaid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatecaid_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Ca<wbr>Id</a>
@@ -2118,8 +3811,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -2127,8 +3819,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificatesslmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatesslmode_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Ssl<wbr>Mode</a>
@@ -2136,8 +3827,23 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="datacompressmode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datacompressmode_java" style="color: inherit; text-decoration: inherit;">data<wbr>Compress<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Data compression mode. Valid values: <code>transparent</code>, <code>compatibility</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deregistertargetrst_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deregistertargetrst_java" style="color: inherit; text-decoration: inherit;">deregister<wbr>Target<wbr>Rst</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="endport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endport_java" style="color: inherit; text-decoration: inherit;">end<wbr>Port</a>
@@ -2145,8 +3851,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="h2cswitch_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#h2cswitch_java" style="color: inherit; text-decoration: inherit;">h2c<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable H2C for intranet <code>HTTP</code> listeners. <code>true</code>: enable, <code>false</code>: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type <code>GRPC</code> or <code>GRPCS</code>; <code>GRPC</code> or <code>GRPCS</code> must be explicitly specified in the forwarding type when creating rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckcontexttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckcontexttype_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Context<wbr>Type</a>
@@ -2154,8 +3867,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Health check protocol. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required, which represents the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>. When <code>HEX</code>, the characters of <code>sendContext</code>/<code>recvContext</code> can only be selected from <code>0123456789ABCDEF</code> and the length must be even. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhealthnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhealthnum_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -2163,8 +3875,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpcode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpcode_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Code</a>
@@ -2172,8 +3883,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>1</code>, <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>. <code>1</code> means http_1xx, <code>2</code> means http_2xx, <code>4</code> means http_3xx, <code>8</code> means http_4xx, <code>16</code> means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.</p>
-</dd><dt class="property-optional"
+    <dd>Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. <code>1</code>=1xx healthy, <code>2</code>=2xx, <code>4</code>=3xx, <code>8</code>=4xx, <code>16</code>=5xx. To treat multiple return codes as healthy, add the corresponding values together.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpdomain_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Domain</a>
@@ -2181,8 +3891,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP health check domain of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpmethod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpmethod_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Method</a>
@@ -2190,8 +3899,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP health check method of TCP listener. Valid values: <code>HEAD</code>, <code>GET</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default <code>HEAD</code>. Valid values: <code>HEAD</code>, <code>GET</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttppath_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttppath_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Path</a>
@@ -2199,8 +3907,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP health check path of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpversion_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Version</a>
@@ -2208,8 +3915,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The HTTP version of the backend service. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP version of the backend service. Required when <code>healthCheckType</code> is <code>HTTP</code>. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>. Only applicable to <code>TCP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckintervaltime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckintervaltime_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Interval<wbr>Time</a>
@@ -2217,8 +3923,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckport_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Port</a>
@@ -2226,8 +3931,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass <code>-1</code> to restore the default. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckrecvcontext_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckrecvcontext_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Recv<wbr>Context</a>
@@ -2235,8 +3939,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It represents the result returned by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecksendcontext_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecksendcontext_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Send<wbr>Context</a>
@@ -2244,8 +3947,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It represents the content of the request sent by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckswitch_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Switch</a>
@@ -2253,8 +3955,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecktimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktimeout_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Time<wbr>Out</a>
@@ -2262,8 +3963,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of <code>TCP</code>,<code>UDP</code>,<code>TCP_SSL</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktype_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Type</a>
@@ -2271,8 +3971,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol used for health check. Valid values: <code>CUSTOM</code>, <code>TCP</code>, <code>HTTP</code>,<code>HTTPS</code>, <code>PING</code>, <code>GRPC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check protocol. Valid values: <code>TCP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>GRPC</code>, <code>PING</code>, <code>CUSTOM</code>. UDP listeners support <code>PING</code>/<code>CUSTOM</code>; TCP listeners support <code>TCP</code>/<code>HTTP</code>/<code>CUSTOM</code>; TCP_SSL/QUIC listeners support <code>TCP</code>/<code>HTTP</code>; HTTP rules support <code>HTTP</code>/<code>GRPC</code>; HTTPS rules support <code>HTTP</code>/<code>HTTPS</code>/<code>GRPC</code>. Defaults: <code>HTTP</code> for HTTP listeners, <code>TCP</code> for TCP/TCP_SSL/QUIC listeners, <code>PING</code> for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckunhealthnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckunhealthnum_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -2280,8 +3979,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthsourceiptype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthsourceiptype_java" style="color: inherit; text-decoration: inherit;">health<wbr>Source<wbr>Ip<wbr>Type</a>
@@ -2289,8 +3987,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies the type of health check source IP. <code>0</code> (default): CLB VIP. <code>1</code>: 100.64 IP range.</p>
-</dd><dt class="property-optional"
+    <dd>Health check source IP type. <code>0</code>: use the CLB VIP as the source IP, <code>1</code>: use a 100.64 IP range as the source IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="idleconnecttimeout_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idleconnecttimeout_java" style="color: inherit; text-decoration: inherit;">idle<wbr>Connect<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.</dd><dt class="property-optional"
             title="Optional">
         <span id="keepaliveenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepaliveenable_java" style="color: inherit; text-decoration: inherit;">keepalive<wbr>Enable</a>
@@ -2298,8 +4003,31 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable persistent connection (long connection). Only applicable to <code>HTTP</code>/<code>HTTPS</code> listeners. Valid values: <code>0</code> (disable, default), <code>1</code> (enable). This feature is currently in beta.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maxconn_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconn_java" style="color: inherit; text-decoration: inherit;">max<wbr>Conn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maxcps_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxcps_java" style="color: inherit; text-decoration: inherit;">max<wbr>Cps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multicertinfo_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multicertinfo_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Cert<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#listenermulticertinfo">Listener<wbr>Multi<wbr>Cert<wbr>Info</a></span>
+    </dt>
+    <dd>Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to <code>TCP_SSL</code> listeners and <code>HTTPS</code> listeners with SNI disabled. When creating a <code>TCP_SSL</code> listener or an <code>HTTPS</code> listener with SNI disabled, at least one of <code>certificate</code>/<code>multiCertInfo</code> must be specified, but they cannot be specified at the same time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2307,8 +4035,55 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the CLB listener. Port range: [1 - 65535].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="proxyprotocol_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyprotocol_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduleexpandtarget_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduleexpandtarget_java" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Expand<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduleinterval_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduleinterval_java" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="reschedulestarttime_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reschedulestarttime_java" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduletargetzeroweight_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduletargetzeroweight_java" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Target<wbr>Zero<wbr>Weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduleunhealthy_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduleunhealthy_java" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_java" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -2316,8 +4091,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of <code>HTTP</code> and <code>HTTPS</code> protocol additionally supports the <code>IP Hash</code> method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method. Valid values: <code>WRR</code> (weighted round-robin), <code>LEAST_CONN</code> (least connections). Default is <code>WRR</code>. Only applicable to <code>TCP</code>/<code>UDP</code>/<code>TCP_SSL</code>/<code>QUIC</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessionexpiretime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionexpiretime_java" style="color: inherit; text-decoration: inherit;">session<wbr>Expire<wbr>Time</a>
@@ -2325,8 +4099,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as <code>WRR</code>, and not available when listener protocol is <code>TCP_SSL</code>. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessiontype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontype_java" style="color: inherit; text-decoration: inherit;">session<wbr>Type</a>
@@ -2334,8 +4107,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Session persistence type. Valid values: <code>NORMAL</code>: the default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. The <code>QUIC_CID</code> value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Session persistence type. <code>NORMAL</code> (default): default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule. If <code>QUIC_CID</code> is selected, <code>protocol</code> must be <code>UDP</code>, <code>scheduler</code> must be <code>WRR</code>, and only IPv4 is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snatenable_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatenable_java" style="color: inherit; text-decoration: inherit;">snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable SNAT (source IP replacement). <code>true</code>: enable, <code>false</code>: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="sniswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sniswitch_java" style="color: inherit; text-decoration: inherit;">sni<wbr>Switch</a>
@@ -2343,8 +4123,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether SNI is enabled, and only supported with protocol <code>HTTPS</code>. If enabled, you can set a certificate for each rule in <code>tencentcloud.Clb.ListenerRule</code>, otherwise all rules have a certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether SNI is enabled. Only applicable to <code>HTTPS</code> listeners. <code>0</code>: disabled, <code>1</code>: enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="targettype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targettype_java" style="color: inherit; text-decoration: inherit;">target<wbr>Type</a>
@@ -2352,8 +4131,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>. <code>NODE</code> means to bind ordinary nodes, <code>TARGETGROUP</code> means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd></dl>
+    <dd>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>, <code>TARGETGROUP-V2</code>. <code>NODE</code> means binding ordinary nodes, <code>TARGETGROUP</code> means binding a target group. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2367,8 +4145,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB instance.</dd><dt class="property-required"
             title="Required">
         <span id="listenername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -2376,8 +4153,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2385,8 +4161,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificatecaid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatecaid_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Ca<wbr>Id</a>
@@ -2394,8 +4169,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -2403,8 +4177,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificatesslmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatesslmode_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Ssl<wbr>Mode</a>
@@ -2412,8 +4185,23 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="datacompressmode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datacompressmode_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Compress<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data compression mode. Valid values: <code>transparent</code>, <code>compatibility</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deregistertargetrst_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deregistertargetrst_nodejs" style="color: inherit; text-decoration: inherit;">deregister<wbr>Target<wbr>Rst</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="endport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endport_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Port</a>
@@ -2421,8 +4209,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="h2cswitch_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#h2cswitch_nodejs" style="color: inherit; text-decoration: inherit;">h2c<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable H2C for intranet <code>HTTP</code> listeners. <code>true</code>: enable, <code>false</code>: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type <code>GRPC</code> or <code>GRPCS</code>; <code>GRPC</code> or <code>GRPCS</code> must be explicitly specified in the forwarding type when creating rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckcontexttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckcontexttype_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Context<wbr>Type</a>
@@ -2430,8 +4225,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check protocol. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required, which represents the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>. When <code>HEX</code>, the characters of <code>sendContext</code>/<code>recvContext</code> can only be selected from <code>0123456789ABCDEF</code> and the length must be even. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhealthnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhealthnum_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -2439,8 +4233,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpcode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpcode_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Code</a>
@@ -2448,8 +4241,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>1</code>, <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>. <code>1</code> means http_1xx, <code>2</code> means http_2xx, <code>4</code> means http_3xx, <code>8</code> means http_4xx, <code>16</code> means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.</p>
-</dd><dt class="property-optional"
+    <dd>Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. <code>1</code>=1xx healthy, <code>2</code>=2xx, <code>4</code>=3xx, <code>8</code>=4xx, <code>16</code>=5xx. To treat multiple return codes as healthy, add the corresponding values together.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpdomain_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Domain</a>
@@ -2457,8 +4249,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check domain of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpmethod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpmethod_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Method</a>
@@ -2466,8 +4257,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check method of TCP listener. Valid values: <code>HEAD</code>, <code>GET</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default <code>HEAD</code>. Valid values: <code>HEAD</code>, <code>GET</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttppath_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttppath_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Path</a>
@@ -2475,8 +4265,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check path of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpversion_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Version</a>
@@ -2484,8 +4273,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The HTTP version of the backend service. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP version of the backend service. Required when <code>healthCheckType</code> is <code>HTTP</code>. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>. Only applicable to <code>TCP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckintervaltime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckintervaltime_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Interval<wbr>Time</a>
@@ -2493,8 +4281,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckport_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Port</a>
@@ -2502,8 +4289,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass <code>-1</code> to restore the default. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckrecvcontext_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckrecvcontext_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Recv<wbr>Context</a>
@@ -2511,8 +4297,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It represents the result returned by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecksendcontext_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecksendcontext_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Send<wbr>Context</a>
@@ -2520,8 +4305,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It represents the content of the request sent by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckswitch_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Switch</a>
@@ -2529,8 +4313,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecktimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktimeout_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Time<wbr>Out</a>
@@ -2538,8 +4321,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of <code>TCP</code>,<code>UDP</code>,<code>TCP_SSL</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktype_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Type</a>
@@ -2547,8 +4329,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol used for health check. Valid values: <code>CUSTOM</code>, <code>TCP</code>, <code>HTTP</code>,<code>HTTPS</code>, <code>PING</code>, <code>GRPC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check protocol. Valid values: <code>TCP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>GRPC</code>, <code>PING</code>, <code>CUSTOM</code>. UDP listeners support <code>PING</code>/<code>CUSTOM</code>; TCP listeners support <code>TCP</code>/<code>HTTP</code>/<code>CUSTOM</code>; TCP_SSL/QUIC listeners support <code>TCP</code>/<code>HTTP</code>; HTTP rules support <code>HTTP</code>/<code>GRPC</code>; HTTPS rules support <code>HTTP</code>/<code>HTTPS</code>/<code>GRPC</code>. Defaults: <code>HTTP</code> for HTTP listeners, <code>TCP</code> for TCP/TCP_SSL/QUIC listeners, <code>PING</code> for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckunhealthnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckunhealthnum_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -2556,8 +4337,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthsourceiptype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthsourceiptype_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Source<wbr>Ip<wbr>Type</a>
@@ -2565,8 +4345,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies the type of health check source IP. <code>0</code> (default): CLB VIP. <code>1</code>: 100.64 IP range.</p>
-</dd><dt class="property-optional"
+    <dd>Health check source IP type. <code>0</code>: use the CLB VIP as the source IP, <code>1</code>: use a 100.64 IP range as the source IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="idleconnecttimeout_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idleconnecttimeout_nodejs" style="color: inherit; text-decoration: inherit;">idle<wbr>Connect<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.</dd><dt class="property-optional"
             title="Optional">
         <span id="keepaliveenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepaliveenable_nodejs" style="color: inherit; text-decoration: inherit;">keepalive<wbr>Enable</a>
@@ -2574,8 +4361,31 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable persistent connection (long connection). Only applicable to <code>HTTP</code>/<code>HTTPS</code> listeners. Valid values: <code>0</code> (disable, default), <code>1</code> (enable). This feature is currently in beta.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maxconn_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconn_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Conn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maxcps_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxcps_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Cps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multicertinfo_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multicertinfo_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Cert<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#listenermulticertinfo">Listener<wbr>Multi<wbr>Cert<wbr>Info</a></span>
+    </dt>
+    <dd>Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to <code>TCP_SSL</code> listeners and <code>HTTPS</code> listeners with SNI disabled. When creating a <code>TCP_SSL</code> listener or an <code>HTTPS</code> listener with SNI disabled, at least one of <code>certificate</code>/<code>multiCertInfo</code> must be specified, but they cannot be specified at the same time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2583,8 +4393,55 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the CLB listener. Port range: [1 - 65535].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="proxyprotocol_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyprotocol_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduleexpandtarget_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduleexpandtarget_nodejs" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Expand<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduleinterval_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduleinterval_nodejs" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="reschedulestarttime_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reschedulestarttime_nodejs" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduletargetzeroweight_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduletargetzeroweight_nodejs" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Target<wbr>Zero<wbr>Weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduleunhealthy_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduleunhealthy_nodejs" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_nodejs" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -2592,8 +4449,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of <code>HTTP</code> and <code>HTTPS</code> protocol additionally supports the <code>IP Hash</code> method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method. Valid values: <code>WRR</code> (weighted round-robin), <code>LEAST_CONN</code> (least connections). Default is <code>WRR</code>. Only applicable to <code>TCP</code>/<code>UDP</code>/<code>TCP_SSL</code>/<code>QUIC</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessionexpiretime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionexpiretime_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Expire<wbr>Time</a>
@@ -2601,8 +4457,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as <code>WRR</code>, and not available when listener protocol is <code>TCP_SSL</code>. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessiontype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontype_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Type</a>
@@ -2610,8 +4465,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Session persistence type. Valid values: <code>NORMAL</code>: the default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. The <code>QUIC_CID</code> value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Session persistence type. <code>NORMAL</code> (default): default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule. If <code>QUIC_CID</code> is selected, <code>protocol</code> must be <code>UDP</code>, <code>scheduler</code> must be <code>WRR</code>, and only IPv4 is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snatenable_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatenable_nodejs" style="color: inherit; text-decoration: inherit;">snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable SNAT (source IP replacement). <code>true</code>: enable, <code>false</code>: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="sniswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sniswitch_nodejs" style="color: inherit; text-decoration: inherit;">sni<wbr>Switch</a>
@@ -2619,8 +4481,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether SNI is enabled, and only supported with protocol <code>HTTPS</code>. If enabled, you can set a certificate for each rule in <code>tencentcloud.Clb.ListenerRule</code>, otherwise all rules have a certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether SNI is enabled. Only applicable to <code>HTTPS</code> listeners. <code>0</code>: disabled, <code>1</code>: enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="targettype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targettype_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Type</a>
@@ -2628,8 +4489,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>. <code>NODE</code> means to bind ordinary nodes, <code>TARGETGROUP</code> means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd></dl>
+    <dd>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>, <code>TARGETGROUP-V2</code>. <code>NODE</code> means binding ordinary nodes, <code>TARGETGROUP</code> means binding a target group. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2643,8 +4503,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB instance.</dd><dt class="property-required"
             title="Required">
         <span id="listener_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_name_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>name</a>
@@ -2652,8 +4511,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2661,8 +4519,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificate_ca_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_ca_id_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>ca_<wbr>id</a>
@@ -2670,8 +4527,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificate_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_id_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
@@ -2679,8 +4535,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificate_ssl_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_ssl_mode_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>ssl_<wbr>mode</a>
@@ -2688,8 +4543,23 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="data_compress_mode_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_compress_mode_python" style="color: inherit; text-decoration: inherit;">data_<wbr>compress_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Data compression mode. Valid values: <code>transparent</code>, <code>compatibility</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deregister_target_rst_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deregister_target_rst_python" style="color: inherit; text-decoration: inherit;">deregister_<wbr>target_<wbr>rst</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="end_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_port_python" style="color: inherit; text-decoration: inherit;">end_<wbr>port</a>
@@ -2697,8 +4567,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="h2c_switch_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#h2c_switch_python" style="color: inherit; text-decoration: inherit;">h2c_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable H2C for intranet <code>HTTP</code> listeners. <code>true</code>: enable, <code>false</code>: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type <code>GRPC</code> or <code>GRPCS</code>; <code>GRPC</code> or <code>GRPCS</code> must be explicitly specified in the forwarding type when creating rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_context_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_context_type_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>context_<wbr>type</a>
@@ -2706,8 +4583,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Health check protocol. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required, which represents the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>. When <code>HEX</code>, the characters of <code>sendContext</code>/<code>recvContext</code> can only be selected from <code>0123456789ABCDEF</code> and the length must be even. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_health_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_health_num_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>health_<wbr>num</a>
@@ -2715,8 +4591,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_http_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_code_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>code</a>
@@ -2724,8 +4599,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>1</code>, <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>. <code>1</code> means http_1xx, <code>2</code> means http_2xx, <code>4</code> means http_3xx, <code>8</code> means http_4xx, <code>16</code> means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.</p>
-</dd><dt class="property-optional"
+    <dd>Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. <code>1</code>=1xx healthy, <code>2</code>=2xx, <code>4</code>=3xx, <code>8</code>=4xx, <code>16</code>=5xx. To treat multiple return codes as healthy, add the corresponding values together.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_http_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_domain_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>domain</a>
@@ -2733,8 +4607,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTP health check domain of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_http_method_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_method_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>method</a>
@@ -2742,8 +4615,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTP health check method of TCP listener. Valid values: <code>HEAD</code>, <code>GET</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default <code>HEAD</code>. Valid values: <code>HEAD</code>, <code>GET</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_http_path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_path_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>path</a>
@@ -2751,8 +4623,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTP health check path of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_http_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_http_version_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>version</a>
@@ -2760,8 +4631,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The HTTP version of the backend service. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP version of the backend service. Required when <code>healthCheckType</code> is <code>HTTP</code>. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>. Only applicable to <code>TCP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_interval_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_interval_time_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>interval_<wbr>time</a>
@@ -2769,8 +4639,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_port_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>port</a>
@@ -2778,8 +4647,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass <code>-1</code> to restore the default. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_recv_context_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_recv_context_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>recv_<wbr>context</a>
@@ -2787,8 +4655,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>It represents the result returned by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_send_context_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_send_context_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>send_<wbr>context</a>
@@ -2796,8 +4663,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>It represents the content of the request sent by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_switch_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>switch</a>
@@ -2805,8 +4671,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_time_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_time_out_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>time_<wbr>out</a>
@@ -2814,8 +4679,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of <code>TCP</code>,<code>UDP</code>,<code>TCP_SSL</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_type_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>type</a>
@@ -2823,8 +4687,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol used for health check. Valid values: <code>CUSTOM</code>, <code>TCP</code>, <code>HTTP</code>,<code>HTTPS</code>, <code>PING</code>, <code>GRPC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check protocol. Valid values: <code>TCP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>GRPC</code>, <code>PING</code>, <code>CUSTOM</code>. UDP listeners support <code>PING</code>/<code>CUSTOM</code>; TCP listeners support <code>TCP</code>/<code>HTTP</code>/<code>CUSTOM</code>; TCP_SSL/QUIC listeners support <code>TCP</code>/<code>HTTP</code>; HTTP rules support <code>HTTP</code>/<code>GRPC</code>; HTTPS rules support <code>HTTP</code>/<code>HTTPS</code>/<code>GRPC</code>. Defaults: <code>HTTP</code> for HTTP listeners, <code>TCP</code> for TCP/TCP_SSL/QUIC listeners, <code>PING</code> for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_check_unhealth_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_unhealth_num_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>unhealth_<wbr>num</a>
@@ -2832,8 +4695,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_source_ip_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_source_ip_type_python" style="color: inherit; text-decoration: inherit;">health_<wbr>source_<wbr>ip_<wbr>type</a>
@@ -2841,8 +4703,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the type of health check source IP. <code>0</code> (default): CLB VIP. <code>1</code>: 100.64 IP range.</p>
-</dd><dt class="property-optional"
+    <dd>Health check source IP type. <code>0</code>: use the CLB VIP as the source IP, <code>1</code>: use a 100.64 IP range as the source IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="idle_connect_timeout_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idle_connect_timeout_python" style="color: inherit; text-decoration: inherit;">idle_<wbr>connect_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.</dd><dt class="property-optional"
             title="Optional">
         <span id="keepalive_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepalive_enable_python" style="color: inherit; text-decoration: inherit;">keepalive_<wbr>enable</a>
@@ -2850,8 +4719,31 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable persistent connection (long connection). Only applicable to <code>HTTP</code>/<code>HTTPS</code> listeners. Valid values: <code>0</code> (disable, default), <code>1</code> (enable). This feature is currently in beta.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_conn_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_conn_python" style="color: inherit; text-decoration: inherit;">max_<wbr>conn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_cps_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_cps_python" style="color: inherit; text-decoration: inherit;">max_<wbr>cps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multi_cert_info_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_cert_info_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>cert_<wbr>info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#listenermulticertinfo">Listener<wbr>Multi<wbr>Cert<wbr>Info<wbr>Args</a></span>
+    </dt>
+    <dd>Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to <code>TCP_SSL</code> listeners and <code>HTTPS</code> listeners with SNI disabled. When creating a <code>TCP_SSL</code> listener or an <code>HTTPS</code> listener with SNI disabled, at least one of <code>certificate</code>/<code>multiCertInfo</code> must be specified, but they cannot be specified at the same time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2859,8 +4751,55 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the CLB listener. Port range: [1 - 65535].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="proxy_protocol_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_protocol_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="reschedule_expand_target_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reschedule_expand_target_python" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>expand_<wbr>target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="reschedule_interval_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reschedule_interval_python" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="reschedule_start_time_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reschedule_start_time_python" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="reschedule_target_zero_weight_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reschedule_target_zero_weight_python" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>target_<wbr>zero_<wbr>weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="reschedule_unhealthy_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reschedule_unhealthy_python" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_python" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -2868,8 +4807,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of <code>HTTP</code> and <code>HTTPS</code> protocol additionally supports the <code>IP Hash</code> method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method. Valid values: <code>WRR</code> (weighted round-robin), <code>LEAST_CONN</code> (least connections). Default is <code>WRR</code>. Only applicable to <code>TCP</code>/<code>UDP</code>/<code>TCP_SSL</code>/<code>QUIC</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="session_expire_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_expire_time_python" style="color: inherit; text-decoration: inherit;">session_<wbr>expire_<wbr>time</a>
@@ -2877,8 +4815,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as <code>WRR</code>, and not available when listener protocol is <code>TCP_SSL</code>. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="session_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_type_python" style="color: inherit; text-decoration: inherit;">session_<wbr>type</a>
@@ -2886,8 +4823,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Session persistence type. Valid values: <code>NORMAL</code>: the default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. The <code>QUIC_CID</code> value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Session persistence type. <code>NORMAL</code> (default): default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule. If <code>QUIC_CID</code> is selected, <code>protocol</code> must be <code>UDP</code>, <code>scheduler</code> must be <code>WRR</code>, and only IPv4 is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snat_enable_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_enable_python" style="color: inherit; text-decoration: inherit;">snat_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable SNAT (source IP replacement). <code>true</code>: enable, <code>false</code>: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="sni_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sni_switch_python" style="color: inherit; text-decoration: inherit;">sni_<wbr>switch</a>
@@ -2895,8 +4839,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether SNI is enabled, and only supported with protocol <code>HTTPS</code>. If enabled, you can set a certificate for each rule in <code>tencentcloud.Clb.ListenerRule</code>, otherwise all rules have a certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether SNI is enabled. Only applicable to <code>HTTPS</code> listeners. <code>0</code>: disabled, <code>1</code>: enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="target_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_type_python" style="color: inherit; text-decoration: inherit;">target_<wbr>type</a>
@@ -2904,8 +4847,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>. <code>NODE</code> means to bind ordinary nodes, <code>TARGETGROUP</code> means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd></dl>
+    <dd>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>, <code>TARGETGROUP-V2</code>. <code>NODE</code> means binding ordinary nodes, <code>TARGETGROUP</code> means binding a target group. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2919,8 +4861,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB instance.</dd><dt class="property-required"
             title="Required">
         <span id="listenername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -2928,8 +4869,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2937,8 +4877,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificatecaid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatecaid_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Ca<wbr>Id</a>
@@ -2946,8 +4885,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -2955,8 +4893,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
             title="Optional">
         <span id="certificatesslmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificatesslmode_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Ssl<wbr>Mode</a>
@@ -2964,8 +4901,23 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="datacompressmode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datacompressmode_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Compress<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Data compression mode. Valid values: <code>transparent</code>, <code>compatibility</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="deregistertargetrst_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deregistertargetrst_yaml" style="color: inherit; text-decoration: inherit;">deregister<wbr>Target<wbr>Rst</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="endport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endport_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Port</a>
@@ -2973,8 +4925,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="h2cswitch_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#h2cswitch_yaml" style="color: inherit; text-decoration: inherit;">h2c<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable H2C for intranet <code>HTTP</code> listeners. <code>true</code>: enable, <code>false</code>: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type <code>GRPC</code> or <code>GRPCS</code>; <code>GRPC</code> or <code>GRPCS</code> must be explicitly specified in the forwarding type when creating rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckcontexttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckcontexttype_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Context<wbr>Type</a>
@@ -2982,8 +4941,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Health check protocol. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required, which represents the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>. When <code>HEX</code>, the characters of <code>sendContext</code>/<code>recvContext</code> can only be selected from <code>0123456789ABCDEF</code> and the length must be even. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhealthnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhealthnum_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -2991,8 +4949,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpcode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpcode_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Code</a>
@@ -3000,8 +4957,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>1</code>, <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>. <code>1</code> means http_1xx, <code>2</code> means http_2xx, <code>4</code> means http_3xx, <code>8</code> means http_4xx, <code>16</code> means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.</p>
-</dd><dt class="property-optional"
+    <dd>Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. <code>1</code>=1xx healthy, <code>2</code>=2xx, <code>4</code>=3xx, <code>8</code>=4xx, <code>16</code>=5xx. To treat multiple return codes as healthy, add the corresponding values together.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpdomain_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Domain</a>
@@ -3009,8 +4965,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP health check domain of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpmethod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpmethod_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Method</a>
@@ -3018,8 +4973,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP health check method of TCP listener. Valid values: <code>HEAD</code>, <code>GET</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default <code>HEAD</code>. Valid values: <code>HEAD</code>, <code>GET</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttppath_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttppath_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Path</a>
@@ -3027,8 +4981,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP health check path of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckhttpversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckhttpversion_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Version</a>
@@ -3036,8 +4989,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The HTTP version of the backend service. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP version of the backend service. Required when <code>healthCheckType</code> is <code>HTTP</code>. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>. Only applicable to <code>TCP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckintervaltime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckintervaltime_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Interval<wbr>Time</a>
@@ -3045,8 +4997,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckport_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Port</a>
@@ -3054,8 +5005,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass <code>-1</code> to restore the default. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckrecvcontext_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckrecvcontext_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Recv<wbr>Context</a>
@@ -3063,8 +5013,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It represents the result returned by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecksendcontext_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecksendcontext_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Send<wbr>Context</a>
@@ -3072,8 +5021,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It represents the content of the request sent by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckswitch_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Switch</a>
@@ -3081,8 +5029,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecktimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktimeout_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Time<wbr>Out</a>
@@ -3090,8 +5037,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of <code>TCP</code>,<code>UDP</code>,<code>TCP_SSL</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktype_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Type</a>
@@ -3099,8 +5045,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol used for health check. Valid values: <code>CUSTOM</code>, <code>TCP</code>, <code>HTTP</code>,<code>HTTPS</code>, <code>PING</code>, <code>GRPC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check protocol. Valid values: <code>TCP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>GRPC</code>, <code>PING</code>, <code>CUSTOM</code>. UDP listeners support <code>PING</code>/<code>CUSTOM</code>; TCP listeners support <code>TCP</code>/<code>HTTP</code>/<code>CUSTOM</code>; TCP_SSL/QUIC listeners support <code>TCP</code>/<code>HTTP</code>; HTTP rules support <code>HTTP</code>/<code>GRPC</code>; HTTPS rules support <code>HTTP</code>/<code>HTTPS</code>/<code>GRPC</code>. Defaults: <code>HTTP</code> for HTTP listeners, <code>TCP</code> for TCP/TCP_SSL/QUIC listeners, <code>PING</code> for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthcheckunhealthnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckunhealthnum_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -3108,8 +5053,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthsourceiptype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthsourceiptype_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Source<wbr>Ip<wbr>Type</a>
@@ -3117,8 +5061,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies the type of health check source IP. <code>0</code> (default): CLB VIP. <code>1</code>: 100.64 IP range.</p>
-</dd><dt class="property-optional"
+    <dd>Health check source IP type. <code>0</code>: use the CLB VIP as the source IP, <code>1</code>: use a 100.64 IP range as the source IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="idleconnecttimeout_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idleconnecttimeout_yaml" style="color: inherit; text-decoration: inherit;">idle<wbr>Connect<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.</dd><dt class="property-optional"
             title="Optional">
         <span id="keepaliveenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepaliveenable_yaml" style="color: inherit; text-decoration: inherit;">keepalive<wbr>Enable</a>
@@ -3126,8 +5077,31 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Whether to enable persistent connection (long connection). Only applicable to <code>HTTP</code>/<code>HTTPS</code> listeners. Valid values: <code>0</code> (disable, default), <code>1</code> (enable). This feature is currently in beta.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maxconn_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxconn_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Conn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="maxcps_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxcps_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Cps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multicertinfo_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multicertinfo_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Cert<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#listenermulticertinfo">Property Map</a></span>
+    </dt>
+    <dd>Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to <code>TCP_SSL</code> listeners and <code>HTTPS</code> listeners with SNI disabled. When creating a <code>TCP_SSL</code> listener or an <code>HTTPS</code> listener with SNI disabled, at least one of <code>certificate</code>/<code>multiCertInfo</code> must be specified, but they cannot be specified at the same time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -3135,8 +5109,55 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the CLB listener. Port range: [1 - 65535].</dd><dt class="property-optional"
+            title="Optional">
+        <span id="proxyprotocol_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyprotocol_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduleexpandtarget_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduleexpandtarget_yaml" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Expand<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduleinterval_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduleinterval_yaml" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="reschedulestarttime_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reschedulestarttime_yaml" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduletargetzeroweight_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduletargetzeroweight_yaml" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Target<wbr>Zero<wbr>Weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rescheduleunhealthy_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rescheduleunhealthy_yaml" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="scheduler_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_yaml" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -3144,8 +5165,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of <code>HTTP</code> and <code>HTTPS</code> protocol additionally supports the <code>IP Hash</code> method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method. Valid values: <code>WRR</code> (weighted round-robin), <code>LEAST_CONN</code> (least connections). Default is <code>WRR</code>. Only applicable to <code>TCP</code>/<code>UDP</code>/<code>TCP_SSL</code>/<code>QUIC</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessionexpiretime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionexpiretime_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Expire<wbr>Time</a>
@@ -3153,8 +5173,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as <code>WRR</code>, and not available when listener protocol is <code>TCP_SSL</code>. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessiontype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessiontype_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Type</a>
@@ -3162,8 +5181,15 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Session persistence type. Valid values: <code>NORMAL</code>: the default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. The <code>QUIC_CID</code> value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Session persistence type. <code>NORMAL</code> (default): default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule. If <code>QUIC_CID</code> is selected, <code>protocol</code> must be <code>UDP</code>, <code>scheduler</code> must be <code>WRR</code>, and only IPv4 is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snatenable_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatenable_yaml" style="color: inherit; text-decoration: inherit;">snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable SNAT (source IP replacement). <code>true</code>: enable, <code>false</code>: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="sniswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sniswitch_yaml" style="color: inherit; text-decoration: inherit;">sni<wbr>Switch</a>
@@ -3171,8 +5197,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether SNI is enabled, and only supported with protocol <code>HTTPS</code>. If enabled, you can set a certificate for each rule in <code>tencentcloud.Clb.ListenerRule</code>, otherwise all rules have a certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether SNI is enabled. Only applicable to <code>HTTPS</code> listeners. <code>0</code>: disabled, <code>1</code>: enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="targettype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targettype_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Type</a>
@@ -3180,8 +5205,7 @@ The Listener resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>. <code>NODE</code> means to bind ordinary nodes, <code>TARGETGROUP</code> means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd></dl>
+    <dd>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>, <code>TARGETGROUP-V2</code>. <code>NODE</code> means binding ordinary nodes, <code>TARGETGROUP</code> means binding a target group. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3202,8 +5226,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -3211,8 +5234,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of this CLB listener.</p>
-</dd></dl>
+    <dd>ID of this CLB listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3226,8 +5248,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -3235,8 +5256,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of this CLB listener.</p>
-</dd></dl>
+    <dd>ID of this CLB listener.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of this CLB listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3250,8 +5292,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -3259,8 +5300,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of this CLB listener.</p>
-</dd></dl>
+    <dd>ID of this CLB listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3274,8 +5314,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -3283,8 +5322,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of this CLB listener.</p>
-</dd></dl>
+    <dd>ID of this CLB listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3298,8 +5336,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -3307,8 +5344,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of this CLB listener.</p>
-</dd></dl>
+    <dd>ID of this CLB listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3322,8 +5358,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -3331,8 +5366,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of this CLB listener.</p>
-</dd></dl>
+    <dd>ID of this CLB listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3342,18 +5376,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Listener resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ListenerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Listener</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ListenerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Listener</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -3361,7 +5395,10 @@ Get an existing Listener resource's state with the given name, ID, and optional 
         <span class="nx">certificate_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">certificate_ssl_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">clb_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">data_compress_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">deregister_target_rst</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">end_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">h2c_switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">health_check_context_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">health_check_health_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">health_check_http_code</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
@@ -3378,114 +5415,164 @@ Get an existing Listener resource's state with the given name, ID, and optional 
         <span class="nx">health_check_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">health_check_unhealth_num</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">health_source_ip_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">idle_connect_timeout</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">keepalive_enable</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">listener_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">max_conn</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">max_cps</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">multi_cert_info</span><span class="p">:</span> <span class="nx">Optional[ListenerMultiCertInfoArgs]</span> = None<span class="p">,</span>
         <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">proxy_protocol</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">reschedule_expand_target</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">reschedule_interval</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">reschedule_start_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">reschedule_target_zero_weight</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">reschedule_unhealthy</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">scheduler</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">session_expire_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">session_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">snat_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">sni_switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">target_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Listener</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetListener<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ListenerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Listener</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetListener<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ListenerState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Listener</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Listener</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ListenerState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Listener</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ListenerState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Listener</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ListenerState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Listener</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ListenerState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingListener</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Clb:Listener</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_clb_listener</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ListenerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ListenerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3493,28 +5580,31 @@ Get an existing Listener resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ListenerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3522,28 +5612,31 @@ Get an existing Listener resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ListenerState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3563,8 +5656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateid_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -3572,8 +5664,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificatesslmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificatesslmode_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Ssl<wbr>Mode</a>
@@ -3581,8 +5672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clbid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clbid_csharp" style="color: inherit; text-decoration: inherit;">Clb<wbr>Id</a>
@@ -3590,8 +5680,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_datacompressmode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datacompressmode_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Compress<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data compression mode. Valid values: <code>transparent</code>, <code>compatibility</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deregistertargetrst_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deregistertargetrst_csharp" style="color: inherit; text-decoration: inherit;">Deregister<wbr>Target<wbr>Rst</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_endport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endport_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Port</a>
@@ -3599,8 +5704,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_h2cswitch_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_h2cswitch_csharp" style="color: inherit; text-decoration: inherit;">H2c<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable H2C for intranet <code>HTTP</code> listeners. <code>true</code>: enable, <code>false</code>: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type <code>GRPC</code> or <code>GRPCS</code>; <code>GRPC</code> or <code>GRPCS</code> must be explicitly specified in the forwarding type when creating rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckcontexttype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckcontexttype_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Context<wbr>Type</a>
@@ -3608,8 +5720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check protocol. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required, which represents the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>. When <code>HEX</code>, the characters of <code>sendContext</code>/<code>recvContext</code> can only be selected from <code>0123456789ABCDEF</code> and the length must be even. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhealthnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhealthnum_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -3617,8 +5728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpcode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpcode_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Code</a>
@@ -3626,8 +5736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>1</code>, <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>. <code>1</code> means http_1xx, <code>2</code> means http_2xx, <code>4</code> means http_3xx, <code>8</code> means http_4xx, <code>16</code> means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.</p>
-</dd><dt class="property-optional"
+    <dd>Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. <code>1</code>=1xx healthy, <code>2</code>=2xx, <code>4</code>=3xx, <code>8</code>=4xx, <code>16</code>=5xx. To treat multiple return codes as healthy, add the corresponding values together.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpdomain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpdomain_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Domain</a>
@@ -3635,8 +5744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check domain of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpmethod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpmethod_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Method</a>
@@ -3644,8 +5752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check method of TCP listener. Valid values: <code>HEAD</code>, <code>GET</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default <code>HEAD</code>. Valid values: <code>HEAD</code>, <code>GET</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttppath_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttppath_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Path</a>
@@ -3653,8 +5760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check path of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpversion_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Version</a>
@@ -3662,8 +5768,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The HTTP version of the backend service. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP version of the backend service. Required when <code>healthCheckType</code> is <code>HTTP</code>. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>. Only applicable to <code>TCP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckintervaltime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckintervaltime_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Interval<wbr>Time</a>
@@ -3671,8 +5776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckport_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Port</a>
@@ -3680,8 +5784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass <code>-1</code> to restore the default. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckrecvcontext_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckrecvcontext_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Recv<wbr>Context</a>
@@ -3689,8 +5792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It represents the result returned by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecksendcontext_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecksendcontext_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Send<wbr>Context</a>
@@ -3698,8 +5800,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It represents the content of the request sent by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckswitch_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Switch</a>
@@ -3707,8 +5808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecktimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktimeout_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Time<wbr>Out</a>
@@ -3716,8 +5816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of <code>TCP</code>,<code>UDP</code>,<code>TCP_SSL</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktype_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Type</a>
@@ -3725,8 +5824,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol used for health check. Valid values: <code>CUSTOM</code>, <code>TCP</code>, <code>HTTP</code>,<code>HTTPS</code>, <code>PING</code>, <code>GRPC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check protocol. Valid values: <code>TCP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>GRPC</code>, <code>PING</code>, <code>CUSTOM</code>. UDP listeners support <code>PING</code>/<code>CUSTOM</code>; TCP listeners support <code>TCP</code>/<code>HTTP</code>/<code>CUSTOM</code>; TCP_SSL/QUIC listeners support <code>TCP</code>/<code>HTTP</code>; HTTP rules support <code>HTTP</code>/<code>GRPC</code>; HTTPS rules support <code>HTTP</code>/<code>HTTPS</code>/<code>GRPC</code>. Defaults: <code>HTTP</code> for HTTP listeners, <code>TCP</code> for TCP/TCP_SSL/QUIC listeners, <code>PING</code> for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckunhealthnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckunhealthnum_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -3734,8 +5832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthsourceiptype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthsourceiptype_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Source<wbr>Ip<wbr>Type</a>
@@ -3743,8 +5840,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the type of health check source IP. <code>0</code> (default): CLB VIP. <code>1</code>: 100.64 IP range.</p>
-</dd><dt class="property-optional"
+    <dd>Health check source IP type. <code>0</code>: use the CLB VIP as the source IP, <code>1</code>: use a 100.64 IP range as the source IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_idleconnecttimeout_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_idleconnecttimeout_csharp" style="color: inherit; text-decoration: inherit;">Idle<wbr>Connect<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keepaliveenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepaliveenable_csharp" style="color: inherit; text-decoration: inherit;">Keepalive<wbr>Enable</a>
@@ -3752,8 +5856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable persistent connection (long connection). Only applicable to <code>HTTP</code>/<code>HTTPS</code> listeners. Valid values: <code>0</code> (disable, default), <code>1</code> (enable). This feature is currently in beta.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -3761,8 +5864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of this CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>ID of this CLB listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_listenername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenername_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Name</a>
@@ -3770,8 +5872,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_maxconn_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxconn_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Conn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_maxcps_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxcps_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Cps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multicertinfo_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multicertinfo_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Cert<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#listenermulticertinfo">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Listener<wbr>Multi<wbr>Cert<wbr>Info</a></span>
+    </dt>
+    <dd>Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to <code>TCP_SSL</code> listeners and <code>HTTPS</code> listeners with SNI disabled. When creating a <code>TCP_SSL</code> listener or an <code>HTTPS</code> listener with SNI disabled, at least one of <code>certificate</code>/<code>multiCertInfo</code> must be specified, but they cannot be specified at the same time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -3779,8 +5904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the CLB listener. Port range: [1 - 65535].</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -3788,8 +5912,55 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_proxyprotocol_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyprotocol_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduleexpandtarget_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduleexpandtarget_csharp" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Expand<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduleinterval_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduleinterval_csharp" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_reschedulestarttime_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reschedulestarttime_csharp" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduletargetzeroweight_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduletargetzeroweight_csharp" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Target<wbr>Zero<wbr>Weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduleunhealthy_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduleunhealthy_csharp" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduler_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduler_csharp" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -3797,8 +5968,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of <code>HTTP</code> and <code>HTTPS</code> protocol additionally supports the <code>IP Hash</code> method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method. Valid values: <code>WRR</code> (weighted round-robin), <code>LEAST_CONN</code> (least connections). Default is <code>WRR</code>. Only applicable to <code>TCP</code>/<code>UDP</code>/<code>TCP_SSL</code>/<code>QUIC</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessionexpiretime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionexpiretime_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Expire<wbr>Time</a>
@@ -3806,8 +5976,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as <code>WRR</code>, and not available when listener protocol is <code>TCP_SSL</code>. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessiontype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessiontype_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Type</a>
@@ -3815,8 +5984,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Session persistence type. Valid values: <code>NORMAL</code>: the default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. The <code>QUIC_CID</code> value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Session persistence type. <code>NORMAL</code> (default): default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule. If <code>QUIC_CID</code> is selected, <code>protocol</code> must be <code>UDP</code>, <code>scheduler</code> must be <code>WRR</code>, and only IPv4 is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snatenable_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatenable_csharp" style="color: inherit; text-decoration: inherit;">Snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable SNAT (source IP replacement). <code>true</code>: enable, <code>false</code>: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sniswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sniswitch_csharp" style="color: inherit; text-decoration: inherit;">Sni<wbr>Switch</a>
@@ -3824,8 +6000,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether SNI is enabled, and only supported with protocol <code>HTTPS</code>. If enabled, you can set a certificate for each rule in <code>tencentcloud.Clb.ListenerRule</code>, otherwise all rules have a certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether SNI is enabled. Only applicable to <code>HTTPS</code> listeners. <code>0</code>: disabled, <code>1</code>: enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targettype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targettype_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Type</a>
@@ -3833,8 +6008,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>. <code>NODE</code> means to bind ordinary nodes, <code>TARGETGROUP</code> means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd></dl>
+    <dd>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>, <code>TARGETGROUP-V2</code>. <code>NODE</code> means binding ordinary nodes, <code>TARGETGROUP</code> means binding a target group. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3848,8 +6022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateid_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -3857,8 +6030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificatesslmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificatesslmode_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Ssl<wbr>Mode</a>
@@ -3866,8 +6038,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clbid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clbid_go" style="color: inherit; text-decoration: inherit;">Clb<wbr>Id</a>
@@ -3875,8 +6046,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_datacompressmode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datacompressmode_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Compress<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data compression mode. Valid values: <code>transparent</code>, <code>compatibility</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deregistertargetrst_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deregistertargetrst_go" style="color: inherit; text-decoration: inherit;">Deregister<wbr>Target<wbr>Rst</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_endport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endport_go" style="color: inherit; text-decoration: inherit;">End<wbr>Port</a>
@@ -3884,8 +6070,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_h2cswitch_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_h2cswitch_go" style="color: inherit; text-decoration: inherit;">H2c<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable H2C for intranet <code>HTTP</code> listeners. <code>true</code>: enable, <code>false</code>: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type <code>GRPC</code> or <code>GRPCS</code>; <code>GRPC</code> or <code>GRPCS</code> must be explicitly specified in the forwarding type when creating rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckcontexttype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckcontexttype_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Context<wbr>Type</a>
@@ -3893,8 +6086,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check protocol. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required, which represents the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>. When <code>HEX</code>, the characters of <code>sendContext</code>/<code>recvContext</code> can only be selected from <code>0123456789ABCDEF</code> and the length must be even. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhealthnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhealthnum_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -3902,8 +6094,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpcode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpcode_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Code</a>
@@ -3911,8 +6102,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>1</code>, <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>. <code>1</code> means http_1xx, <code>2</code> means http_2xx, <code>4</code> means http_3xx, <code>8</code> means http_4xx, <code>16</code> means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.</p>
-</dd><dt class="property-optional"
+    <dd>Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. <code>1</code>=1xx healthy, <code>2</code>=2xx, <code>4</code>=3xx, <code>8</code>=4xx, <code>16</code>=5xx. To treat multiple return codes as healthy, add the corresponding values together.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpdomain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpdomain_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Domain</a>
@@ -3920,8 +6110,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check domain of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpmethod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpmethod_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Method</a>
@@ -3929,8 +6118,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check method of TCP listener. Valid values: <code>HEAD</code>, <code>GET</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default <code>HEAD</code>. Valid values: <code>HEAD</code>, <code>GET</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttppath_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttppath_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Path</a>
@@ -3938,8 +6126,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check path of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpversion_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Http<wbr>Version</a>
@@ -3947,8 +6134,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The HTTP version of the backend service. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP version of the backend service. Required when <code>healthCheckType</code> is <code>HTTP</code>. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>. Only applicable to <code>TCP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckintervaltime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckintervaltime_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Interval<wbr>Time</a>
@@ -3956,8 +6142,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckport_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Port</a>
@@ -3965,8 +6150,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass <code>-1</code> to restore the default. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckrecvcontext_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckrecvcontext_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Recv<wbr>Context</a>
@@ -3974,8 +6158,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It represents the result returned by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecksendcontext_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecksendcontext_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Send<wbr>Context</a>
@@ -3983,8 +6166,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It represents the content of the request sent by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckswitch_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Switch</a>
@@ -3992,8 +6174,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecktimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktimeout_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Time<wbr>Out</a>
@@ -4001,8 +6182,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of <code>TCP</code>,<code>UDP</code>,<code>TCP_SSL</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktype_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Type</a>
@@ -4010,8 +6190,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol used for health check. Valid values: <code>CUSTOM</code>, <code>TCP</code>, <code>HTTP</code>,<code>HTTPS</code>, <code>PING</code>, <code>GRPC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check protocol. Valid values: <code>TCP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>GRPC</code>, <code>PING</code>, <code>CUSTOM</code>. UDP listeners support <code>PING</code>/<code>CUSTOM</code>; TCP listeners support <code>TCP</code>/<code>HTTP</code>/<code>CUSTOM</code>; TCP_SSL/QUIC listeners support <code>TCP</code>/<code>HTTP</code>; HTTP rules support <code>HTTP</code>/<code>GRPC</code>; HTTPS rules support <code>HTTP</code>/<code>HTTPS</code>/<code>GRPC</code>. Defaults: <code>HTTP</code> for HTTP listeners, <code>TCP</code> for TCP/TCP_SSL/QUIC listeners, <code>PING</code> for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckunhealthnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckunhealthnum_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -4019,8 +6198,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthsourceiptype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthsourceiptype_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Source<wbr>Ip<wbr>Type</a>
@@ -4028,8 +6206,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the type of health check source IP. <code>0</code> (default): CLB VIP. <code>1</code>: 100.64 IP range.</p>
-</dd><dt class="property-optional"
+    <dd>Health check source IP type. <code>0</code>: use the CLB VIP as the source IP, <code>1</code>: use a 100.64 IP range as the source IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_idleconnecttimeout_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_idleconnecttimeout_go" style="color: inherit; text-decoration: inherit;">Idle<wbr>Connect<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keepaliveenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepaliveenable_go" style="color: inherit; text-decoration: inherit;">Keepalive<wbr>Enable</a>
@@ -4037,8 +6222,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable persistent connection (long connection). Only applicable to <code>HTTP</code>/<code>HTTPS</code> listeners. Valid values: <code>0</code> (disable, default), <code>1</code> (enable). This feature is currently in beta.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -4046,8 +6230,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of this CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>ID of this CLB listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_listenername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenername_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Name</a>
@@ -4055,8 +6238,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_maxconn_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxconn_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Conn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_maxcps_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxcps_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Cps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multicertinfo_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multicertinfo_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Cert<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#listenermulticertinfo">Listener<wbr>Multi<wbr>Cert<wbr>Info<wbr>Args</a></span>
+    </dt>
+    <dd>Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to <code>TCP_SSL</code> listeners and <code>HTTPS</code> listeners with SNI disabled. When creating a <code>TCP_SSL</code> listener or an <code>HTTPS</code> listener with SNI disabled, at least one of <code>certificate</code>/<code>multiCertInfo</code> must be specified, but they cannot be specified at the same time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -4064,8 +6270,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the CLB listener. Port range: [1 - 65535].</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -4073,8 +6278,55 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_proxyprotocol_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyprotocol_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduleexpandtarget_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduleexpandtarget_go" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Expand<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduleinterval_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduleinterval_go" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_reschedulestarttime_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reschedulestarttime_go" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduletargetzeroweight_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduletargetzeroweight_go" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Target<wbr>Zero<wbr>Weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduleunhealthy_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduleunhealthy_go" style="color: inherit; text-decoration: inherit;">Reschedule<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduler_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduler_go" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -4082,8 +6334,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of <code>HTTP</code> and <code>HTTPS</code> protocol additionally supports the <code>IP Hash</code> method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method. Valid values: <code>WRR</code> (weighted round-robin), <code>LEAST_CONN</code> (least connections). Default is <code>WRR</code>. Only applicable to <code>TCP</code>/<code>UDP</code>/<code>TCP_SSL</code>/<code>QUIC</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessionexpiretime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionexpiretime_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Expire<wbr>Time</a>
@@ -4091,8 +6342,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as <code>WRR</code>, and not available when listener protocol is <code>TCP_SSL</code>. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessiontype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessiontype_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Type</a>
@@ -4100,8 +6350,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Session persistence type. Valid values: <code>NORMAL</code>: the default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. The <code>QUIC_CID</code> value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Session persistence type. <code>NORMAL</code> (default): default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule. If <code>QUIC_CID</code> is selected, <code>protocol</code> must be <code>UDP</code>, <code>scheduler</code> must be <code>WRR</code>, and only IPv4 is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snatenable_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatenable_go" style="color: inherit; text-decoration: inherit;">Snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable SNAT (source IP replacement). <code>true</code>: enable, <code>false</code>: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sniswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sniswitch_go" style="color: inherit; text-decoration: inherit;">Sni<wbr>Switch</a>
@@ -4109,8 +6366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether SNI is enabled, and only supported with protocol <code>HTTPS</code>. If enabled, you can set a certificate for each rule in <code>tencentcloud.Clb.ListenerRule</code>, otherwise all rules have a certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether SNI is enabled. Only applicable to <code>HTTPS</code> listeners. <code>0</code>: disabled, <code>1</code>: enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targettype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targettype_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Type</a>
@@ -4118,8 +6374,373 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>. <code>NODE</code> means to bind ordinary nodes, <code>TARGETGROUP</code> means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd></dl>
+    <dd>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>, <code>TARGETGROUP-V2</code>. <code>NODE</code> means binding ordinary nodes, <code>TARGETGROUP</code> means binding a target group. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_certificate_ca_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificate_ca_id_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>ca_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificate_id_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_certificate_ssl_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificate_ssl_mode_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>ssl_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_data_compress_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_data_compress_mode_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>compress_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data compression mode. Valid values: <code>transparent</code>, <code>compatibility</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deregister_target_rst_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deregister_target_rst_hcl" style="color: inherit; text-decoration: inherit;">deregister_<wbr>target_<wbr>rst</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_end_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_end_port_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_h2c_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_h2c_switch_hcl" style="color: inherit; text-decoration: inherit;">h2c_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable H2C for intranet <code>HTTP</code> listeners. <code>true</code>: enable, <code>false</code>: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type <code>GRPC</code> or <code>GRPCS</code>; <code>GRPC</code> or <code>GRPCS</code> must be explicitly specified in the forwarding type when creating rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_context_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_context_type_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>context_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>. When <code>HEX</code>, the characters of <code>sendContext</code>/<code>recvContext</code> can only be selected from <code>0123456789ABCDEF</code> and the length must be even. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_health_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_health_num_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>health_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_http_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_http_code_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. <code>1</code>=1xx healthy, <code>2</code>=2xx, <code>4</code>=3xx, <code>8</code>=4xx, <code>16</code>=5xx. To treat multiple return codes as healthy, add the corresponding values together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_http_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_http_domain_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_http_method_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_http_method_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default <code>HEAD</code>. Valid values: <code>HEAD</code>, <code>GET</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_http_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_http_path_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_http_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_http_version_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTP version of the backend service. Required when <code>healthCheckType</code> is <code>HTTP</code>. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>. Only applicable to <code>TCP</code> listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_interval_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_interval_time_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>interval_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_port_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass <code>-1</code> to restore the default. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_recv_context_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_recv_context_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>recv_<wbr>context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_send_context_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_send_context_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>send_<wbr>context</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_switch_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_time_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_time_out_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>time_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_type_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check protocol. Valid values: <code>TCP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>GRPC</code>, <code>PING</code>, <code>CUSTOM</code>. UDP listeners support <code>PING</code>/<code>CUSTOM</code>; TCP listeners support <code>TCP</code>/<code>HTTP</code>/<code>CUSTOM</code>; TCP_SSL/QUIC listeners support <code>TCP</code>/<code>HTTP</code>; HTTP rules support <code>HTTP</code>/<code>GRPC</code>; HTTPS rules support <code>HTTP</code>/<code>HTTPS</code>/<code>GRPC</code>. Defaults: <code>HTTP</code> for HTTP listeners, <code>TCP</code> for TCP/TCP_SSL/QUIC listeners, <code>PING</code> for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_unhealth_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_unhealth_num_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>unhealth_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_source_ip_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_source_ip_type_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>source_<wbr>ip_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health check source IP type. <code>0</code>: use the CLB VIP as the source IP, <code>1</code>: use a 100.64 IP range as the source IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_idle_connect_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_idle_connect_timeout_hcl" style="color: inherit; text-decoration: inherit;">idle_<wbr>connect_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_keepalive_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepalive_enable_hcl" style="color: inherit; text-decoration: inherit;">keepalive_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable persistent connection (long connection). Only applicable to <code>HTTP</code>/<code>HTTPS</code> listeners. Valid values: <code>0</code> (disable, default), <code>1</code> (enable). This feature is currently in beta.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of this CLB listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_listener_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listener_name_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_conn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_conn_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>conn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_cps_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_cps_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>cps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multi_cert_info_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multi_cert_info_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>cert_<wbr>info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#listenermulticertinfo">object</a></span>
+    </dt>
+    <dd>Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to <code>TCP_SSL</code> listeners and <code>HTTPS</code> listeners with SNI disabled. When creating a <code>TCP_SSL</code> listener or an <code>HTTPS</code> listener with SNI disabled, at least one of <code>certificate</code>/<code>multiCertInfo</code> must be specified, but they cannot be specified at the same time.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the CLB listener. Port range: [1 - 65535].</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_proxy_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_protocol_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_reschedule_expand_target_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reschedule_expand_target_hcl" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>expand_<wbr>target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_reschedule_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reschedule_interval_hcl" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_reschedule_start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reschedule_start_time_hcl" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_reschedule_target_zero_weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reschedule_target_zero_weight_hcl" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>target_<wbr>zero_<wbr>weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_reschedule_unhealthy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reschedule_unhealthy_hcl" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scheduler_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduler_hcl" style="color: inherit; text-decoration: inherit;">scheduler</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling method. Valid values: <code>WRR</code> (weighted round-robin), <code>LEAST_CONN</code> (least connections). Default is <code>WRR</code>. Only applicable to <code>TCP</code>/<code>UDP</code>/<code>TCP_SSL</code>/<code>QUIC</code> listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_session_expire_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_session_expire_time_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>expire_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_session_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_session_type_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Session persistence type. <code>NORMAL</code> (default): default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule. If <code>QUIC_CID</code> is selected, <code>protocol</code> must be <code>UDP</code>, <code>scheduler</code> must be <code>WRR</code>, and only IPv4 is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snat_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snat_enable_hcl" style="color: inherit; text-decoration: inherit;">snat_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable SNAT (source IP replacement). <code>true</code>: enable, <code>false</code>: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_sni_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sni_switch_hcl" style="color: inherit; text-decoration: inherit;">sni_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether SNI is enabled. Only applicable to <code>HTTPS</code> listeners. <code>0</code>: disabled, <code>1</code>: enabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_target_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_type_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>, <code>TARGETGROUP-V2</code>. <code>NODE</code> means binding ordinary nodes, <code>TARGETGROUP</code> means binding a target group. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4133,8 +6754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateid_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -4142,8 +6762,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificatesslmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificatesslmode_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Ssl<wbr>Mode</a>
@@ -4151,8 +6770,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clbid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clbid_java" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -4160,8 +6778,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_datacompressmode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datacompressmode_java" style="color: inherit; text-decoration: inherit;">data<wbr>Compress<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Data compression mode. Valid values: <code>transparent</code>, <code>compatibility</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deregistertargetrst_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deregistertargetrst_java" style="color: inherit; text-decoration: inherit;">deregister<wbr>Target<wbr>Rst</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_endport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endport_java" style="color: inherit; text-decoration: inherit;">end<wbr>Port</a>
@@ -4169,8 +6802,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_h2cswitch_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_h2cswitch_java" style="color: inherit; text-decoration: inherit;">h2c<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable H2C for intranet <code>HTTP</code> listeners. <code>true</code>: enable, <code>false</code>: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type <code>GRPC</code> or <code>GRPCS</code>; <code>GRPC</code> or <code>GRPCS</code> must be explicitly specified in the forwarding type when creating rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckcontexttype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckcontexttype_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Context<wbr>Type</a>
@@ -4178,8 +6818,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Health check protocol. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required, which represents the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>. When <code>HEX</code>, the characters of <code>sendContext</code>/<code>recvContext</code> can only be selected from <code>0123456789ABCDEF</code> and the length must be even. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhealthnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhealthnum_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -4187,8 +6826,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpcode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpcode_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Code</a>
@@ -4196,8 +6834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>1</code>, <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>. <code>1</code> means http_1xx, <code>2</code> means http_2xx, <code>4</code> means http_3xx, <code>8</code> means http_4xx, <code>16</code> means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.</p>
-</dd><dt class="property-optional"
+    <dd>Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. <code>1</code>=1xx healthy, <code>2</code>=2xx, <code>4</code>=3xx, <code>8</code>=4xx, <code>16</code>=5xx. To treat multiple return codes as healthy, add the corresponding values together.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpdomain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpdomain_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Domain</a>
@@ -4205,8 +6842,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP health check domain of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpmethod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpmethod_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Method</a>
@@ -4214,8 +6850,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP health check method of TCP listener. Valid values: <code>HEAD</code>, <code>GET</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default <code>HEAD</code>. Valid values: <code>HEAD</code>, <code>GET</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttppath_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttppath_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Path</a>
@@ -4223,8 +6858,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP health check path of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpversion_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Version</a>
@@ -4232,8 +6866,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The HTTP version of the backend service. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP version of the backend service. Required when <code>healthCheckType</code> is <code>HTTP</code>. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>. Only applicable to <code>TCP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckintervaltime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckintervaltime_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Interval<wbr>Time</a>
@@ -4241,8 +6874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckport_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Port</a>
@@ -4250,8 +6882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass <code>-1</code> to restore the default. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckrecvcontext_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckrecvcontext_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Recv<wbr>Context</a>
@@ -4259,8 +6890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It represents the result returned by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecksendcontext_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecksendcontext_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Send<wbr>Context</a>
@@ -4268,8 +6898,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It represents the content of the request sent by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckswitch_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Switch</a>
@@ -4277,8 +6906,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecktimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktimeout_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Time<wbr>Out</a>
@@ -4286,8 +6914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of <code>TCP</code>,<code>UDP</code>,<code>TCP_SSL</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktype_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Type</a>
@@ -4295,8 +6922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol used for health check. Valid values: <code>CUSTOM</code>, <code>TCP</code>, <code>HTTP</code>,<code>HTTPS</code>, <code>PING</code>, <code>GRPC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check protocol. Valid values: <code>TCP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>GRPC</code>, <code>PING</code>, <code>CUSTOM</code>. UDP listeners support <code>PING</code>/<code>CUSTOM</code>; TCP listeners support <code>TCP</code>/<code>HTTP</code>/<code>CUSTOM</code>; TCP_SSL/QUIC listeners support <code>TCP</code>/<code>HTTP</code>; HTTP rules support <code>HTTP</code>/<code>GRPC</code>; HTTPS rules support <code>HTTP</code>/<code>HTTPS</code>/<code>GRPC</code>. Defaults: <code>HTTP</code> for HTTP listeners, <code>TCP</code> for TCP/TCP_SSL/QUIC listeners, <code>PING</code> for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckunhealthnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckunhealthnum_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -4304,8 +6930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthsourceiptype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthsourceiptype_java" style="color: inherit; text-decoration: inherit;">health<wbr>Source<wbr>Ip<wbr>Type</a>
@@ -4313,8 +6938,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies the type of health check source IP. <code>0</code> (default): CLB VIP. <code>1</code>: 100.64 IP range.</p>
-</dd><dt class="property-optional"
+    <dd>Health check source IP type. <code>0</code>: use the CLB VIP as the source IP, <code>1</code>: use a 100.64 IP range as the source IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_idleconnecttimeout_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_idleconnecttimeout_java" style="color: inherit; text-decoration: inherit;">idle<wbr>Connect<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keepaliveenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepaliveenable_java" style="color: inherit; text-decoration: inherit;">keepalive<wbr>Enable</a>
@@ -4322,8 +6954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable persistent connection (long connection). Only applicable to <code>HTTP</code>/<code>HTTPS</code> listeners. Valid values: <code>0</code> (disable, default), <code>1</code> (enable). This feature is currently in beta.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -4331,8 +6962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of this CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>ID of this CLB listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_listenername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenername_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -4340,8 +6970,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_maxconn_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxconn_java" style="color: inherit; text-decoration: inherit;">max<wbr>Conn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_maxcps_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxcps_java" style="color: inherit; text-decoration: inherit;">max<wbr>Cps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multicertinfo_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multicertinfo_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Cert<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#listenermulticertinfo">Listener<wbr>Multi<wbr>Cert<wbr>Info</a></span>
+    </dt>
+    <dd>Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to <code>TCP_SSL</code> listeners and <code>HTTPS</code> listeners with SNI disabled. When creating a <code>TCP_SSL</code> listener or an <code>HTTPS</code> listener with SNI disabled, at least one of <code>certificate</code>/<code>multiCertInfo</code> must be specified, but they cannot be specified at the same time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4349,8 +7002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the CLB listener. Port range: [1 - 65535].</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -4358,8 +7010,55 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_proxyprotocol_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyprotocol_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduleexpandtarget_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduleexpandtarget_java" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Expand<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduleinterval_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduleinterval_java" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_reschedulestarttime_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reschedulestarttime_java" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduletargetzeroweight_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduletargetzeroweight_java" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Target<wbr>Zero<wbr>Weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduleunhealthy_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduleunhealthy_java" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduler_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduler_java" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -4367,8 +7066,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of <code>HTTP</code> and <code>HTTPS</code> protocol additionally supports the <code>IP Hash</code> method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method. Valid values: <code>WRR</code> (weighted round-robin), <code>LEAST_CONN</code> (least connections). Default is <code>WRR</code>. Only applicable to <code>TCP</code>/<code>UDP</code>/<code>TCP_SSL</code>/<code>QUIC</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessionexpiretime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionexpiretime_java" style="color: inherit; text-decoration: inherit;">session<wbr>Expire<wbr>Time</a>
@@ -4376,8 +7074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as <code>WRR</code>, and not available when listener protocol is <code>TCP_SSL</code>. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessiontype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessiontype_java" style="color: inherit; text-decoration: inherit;">session<wbr>Type</a>
@@ -4385,8 +7082,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Session persistence type. Valid values: <code>NORMAL</code>: the default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. The <code>QUIC_CID</code> value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Session persistence type. <code>NORMAL</code> (default): default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule. If <code>QUIC_CID</code> is selected, <code>protocol</code> must be <code>UDP</code>, <code>scheduler</code> must be <code>WRR</code>, and only IPv4 is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snatenable_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatenable_java" style="color: inherit; text-decoration: inherit;">snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable SNAT (source IP replacement). <code>true</code>: enable, <code>false</code>: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sniswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sniswitch_java" style="color: inherit; text-decoration: inherit;">sni<wbr>Switch</a>
@@ -4394,8 +7098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether SNI is enabled, and only supported with protocol <code>HTTPS</code>. If enabled, you can set a certificate for each rule in <code>tencentcloud.Clb.ListenerRule</code>, otherwise all rules have a certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether SNI is enabled. Only applicable to <code>HTTPS</code> listeners. <code>0</code>: disabled, <code>1</code>: enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targettype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targettype_java" style="color: inherit; text-decoration: inherit;">target<wbr>Type</a>
@@ -4403,8 +7106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>. <code>NODE</code> means to bind ordinary nodes, <code>TARGETGROUP</code> means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd></dl>
+    <dd>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>, <code>TARGETGROUP-V2</code>. <code>NODE</code> means binding ordinary nodes, <code>TARGETGROUP</code> means binding a target group. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4418,8 +7120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateid_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -4427,8 +7128,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificatesslmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificatesslmode_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Ssl<wbr>Mode</a>
@@ -4436,8 +7136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clbid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clbid_nodejs" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -4445,8 +7144,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_datacompressmode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datacompressmode_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Compress<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data compression mode. Valid values: <code>transparent</code>, <code>compatibility</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deregistertargetrst_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deregistertargetrst_nodejs" style="color: inherit; text-decoration: inherit;">deregister<wbr>Target<wbr>Rst</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_endport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endport_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Port</a>
@@ -4454,8 +7168,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_h2cswitch_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_h2cswitch_nodejs" style="color: inherit; text-decoration: inherit;">h2c<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable H2C for intranet <code>HTTP</code> listeners. <code>true</code>: enable, <code>false</code>: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type <code>GRPC</code> or <code>GRPCS</code>; <code>GRPC</code> or <code>GRPCS</code> must be explicitly specified in the forwarding type when creating rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckcontexttype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckcontexttype_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Context<wbr>Type</a>
@@ -4463,8 +7184,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Health check protocol. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required, which represents the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>. When <code>HEX</code>, the characters of <code>sendContext</code>/<code>recvContext</code> can only be selected from <code>0123456789ABCDEF</code> and the length must be even. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhealthnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhealthnum_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -4472,8 +7192,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpcode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpcode_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Code</a>
@@ -4481,8 +7200,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>1</code>, <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>. <code>1</code> means http_1xx, <code>2</code> means http_2xx, <code>4</code> means http_3xx, <code>8</code> means http_4xx, <code>16</code> means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.</p>
-</dd><dt class="property-optional"
+    <dd>Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. <code>1</code>=1xx healthy, <code>2</code>=2xx, <code>4</code>=3xx, <code>8</code>=4xx, <code>16</code>=5xx. To treat multiple return codes as healthy, add the corresponding values together.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpdomain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpdomain_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Domain</a>
@@ -4490,8 +7208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check domain of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpmethod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpmethod_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Method</a>
@@ -4499,8 +7216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check method of TCP listener. Valid values: <code>HEAD</code>, <code>GET</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default <code>HEAD</code>. Valid values: <code>HEAD</code>, <code>GET</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttppath_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttppath_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Path</a>
@@ -4508,8 +7224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP health check path of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpversion_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Version</a>
@@ -4517,8 +7232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The HTTP version of the backend service. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP version of the backend service. Required when <code>healthCheckType</code> is <code>HTTP</code>. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>. Only applicable to <code>TCP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckintervaltime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckintervaltime_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Interval<wbr>Time</a>
@@ -4526,8 +7240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckport_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Port</a>
@@ -4535,8 +7248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass <code>-1</code> to restore the default. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckrecvcontext_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckrecvcontext_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Recv<wbr>Context</a>
@@ -4544,8 +7256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It represents the result returned by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecksendcontext_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecksendcontext_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Send<wbr>Context</a>
@@ -4553,8 +7264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It represents the content of the request sent by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckswitch_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Switch</a>
@@ -4562,8 +7272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecktimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktimeout_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Time<wbr>Out</a>
@@ -4571,8 +7280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of <code>TCP</code>,<code>UDP</code>,<code>TCP_SSL</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktype_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Type</a>
@@ -4580,8 +7288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol used for health check. Valid values: <code>CUSTOM</code>, <code>TCP</code>, <code>HTTP</code>,<code>HTTPS</code>, <code>PING</code>, <code>GRPC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check protocol. Valid values: <code>TCP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>GRPC</code>, <code>PING</code>, <code>CUSTOM</code>. UDP listeners support <code>PING</code>/<code>CUSTOM</code>; TCP listeners support <code>TCP</code>/<code>HTTP</code>/<code>CUSTOM</code>; TCP_SSL/QUIC listeners support <code>TCP</code>/<code>HTTP</code>; HTTP rules support <code>HTTP</code>/<code>GRPC</code>; HTTPS rules support <code>HTTP</code>/<code>HTTPS</code>/<code>GRPC</code>. Defaults: <code>HTTP</code> for HTTP listeners, <code>TCP</code> for TCP/TCP_SSL/QUIC listeners, <code>PING</code> for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckunhealthnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckunhealthnum_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -4589,8 +7296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthsourceiptype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthsourceiptype_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Source<wbr>Ip<wbr>Type</a>
@@ -4598,8 +7304,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies the type of health check source IP. <code>0</code> (default): CLB VIP. <code>1</code>: 100.64 IP range.</p>
-</dd><dt class="property-optional"
+    <dd>Health check source IP type. <code>0</code>: use the CLB VIP as the source IP, <code>1</code>: use a 100.64 IP range as the source IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_idleconnecttimeout_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_idleconnecttimeout_nodejs" style="color: inherit; text-decoration: inherit;">idle<wbr>Connect<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keepaliveenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepaliveenable_nodejs" style="color: inherit; text-decoration: inherit;">keepalive<wbr>Enable</a>
@@ -4607,8 +7320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable persistent connection (long connection). Only applicable to <code>HTTP</code>/<code>HTTPS</code> listeners. Valid values: <code>0</code> (disable, default), <code>1</code> (enable). This feature is currently in beta.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -4616,8 +7328,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of this CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>ID of this CLB listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_listenername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenername_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -4625,8 +7336,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_maxconn_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxconn_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Conn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_maxcps_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxcps_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Cps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multicertinfo_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multicertinfo_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Cert<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#listenermulticertinfo">Listener<wbr>Multi<wbr>Cert<wbr>Info</a></span>
+    </dt>
+    <dd>Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to <code>TCP_SSL</code> listeners and <code>HTTPS</code> listeners with SNI disabled. When creating a <code>TCP_SSL</code> listener or an <code>HTTPS</code> listener with SNI disabled, at least one of <code>certificate</code>/<code>multiCertInfo</code> must be specified, but they cannot be specified at the same time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4634,8 +7368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the CLB listener. Port range: [1 - 65535].</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -4643,8 +7376,55 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_proxyprotocol_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyprotocol_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduleexpandtarget_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduleexpandtarget_nodejs" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Expand<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduleinterval_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduleinterval_nodejs" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_reschedulestarttime_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reschedulestarttime_nodejs" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduletargetzeroweight_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduletargetzeroweight_nodejs" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Target<wbr>Zero<wbr>Weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduleunhealthy_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduleunhealthy_nodejs" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduler_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduler_nodejs" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -4652,8 +7432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of <code>HTTP</code> and <code>HTTPS</code> protocol additionally supports the <code>IP Hash</code> method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method. Valid values: <code>WRR</code> (weighted round-robin), <code>LEAST_CONN</code> (least connections). Default is <code>WRR</code>. Only applicable to <code>TCP</code>/<code>UDP</code>/<code>TCP_SSL</code>/<code>QUIC</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessionexpiretime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionexpiretime_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Expire<wbr>Time</a>
@@ -4661,8 +7440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as <code>WRR</code>, and not available when listener protocol is <code>TCP_SSL</code>. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessiontype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessiontype_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Type</a>
@@ -4670,8 +7448,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Session persistence type. Valid values: <code>NORMAL</code>: the default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. The <code>QUIC_CID</code> value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Session persistence type. <code>NORMAL</code> (default): default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule. If <code>QUIC_CID</code> is selected, <code>protocol</code> must be <code>UDP</code>, <code>scheduler</code> must be <code>WRR</code>, and only IPv4 is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snatenable_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatenable_nodejs" style="color: inherit; text-decoration: inherit;">snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable SNAT (source IP replacement). <code>true</code>: enable, <code>false</code>: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sniswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sniswitch_nodejs" style="color: inherit; text-decoration: inherit;">sni<wbr>Switch</a>
@@ -4679,8 +7464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether SNI is enabled, and only supported with protocol <code>HTTPS</code>. If enabled, you can set a certificate for each rule in <code>tencentcloud.Clb.ListenerRule</code>, otherwise all rules have a certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether SNI is enabled. Only applicable to <code>HTTPS</code> listeners. <code>0</code>: disabled, <code>1</code>: enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targettype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targettype_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Type</a>
@@ -4688,8 +7472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>. <code>NODE</code> means to bind ordinary nodes, <code>TARGETGROUP</code> means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd></dl>
+    <dd>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>, <code>TARGETGROUP-V2</code>. <code>NODE</code> means binding ordinary nodes, <code>TARGETGROUP</code> means binding a target group. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4703,8 +7486,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificate_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificate_id_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
@@ -4712,8 +7494,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificate_ssl_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificate_ssl_mode_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>ssl_<wbr>mode</a>
@@ -4721,8 +7502,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clb_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clb_id_python" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
@@ -4730,8 +7510,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_data_compress_mode_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_data_compress_mode_python" style="color: inherit; text-decoration: inherit;">data_<wbr>compress_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Data compression mode. Valid values: <code>transparent</code>, <code>compatibility</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deregister_target_rst_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deregister_target_rst_python" style="color: inherit; text-decoration: inherit;">deregister_<wbr>target_<wbr>rst</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_end_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_end_port_python" style="color: inherit; text-decoration: inherit;">end_<wbr>port</a>
@@ -4739,8 +7534,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_h2c_switch_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_h2c_switch_python" style="color: inherit; text-decoration: inherit;">h2c_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable H2C for intranet <code>HTTP</code> listeners. <code>true</code>: enable, <code>false</code>: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type <code>GRPC</code> or <code>GRPCS</code>; <code>GRPC</code> or <code>GRPCS</code> must be explicitly specified in the forwarding type when creating rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_context_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_context_type_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>context_<wbr>type</a>
@@ -4748,8 +7550,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Health check protocol. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required, which represents the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>. When <code>HEX</code>, the characters of <code>sendContext</code>/<code>recvContext</code> can only be selected from <code>0123456789ABCDEF</code> and the length must be even. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_health_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_health_num_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>health_<wbr>num</a>
@@ -4757,8 +7558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_http_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_http_code_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>code</a>
@@ -4766,8 +7566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>1</code>, <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>. <code>1</code> means http_1xx, <code>2</code> means http_2xx, <code>4</code> means http_3xx, <code>8</code> means http_4xx, <code>16</code> means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.</p>
-</dd><dt class="property-optional"
+    <dd>Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. <code>1</code>=1xx healthy, <code>2</code>=2xx, <code>4</code>=3xx, <code>8</code>=4xx, <code>16</code>=5xx. To treat multiple return codes as healthy, add the corresponding values together.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_http_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_http_domain_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>domain</a>
@@ -4775,8 +7574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTP health check domain of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_http_method_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_http_method_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>method</a>
@@ -4784,8 +7582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTP health check method of TCP listener. Valid values: <code>HEAD</code>, <code>GET</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default <code>HEAD</code>. Valid values: <code>HEAD</code>, <code>GET</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_http_path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_http_path_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>path</a>
@@ -4793,8 +7590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTP health check path of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_http_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_http_version_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>http_<wbr>version</a>
@@ -4802,8 +7598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The HTTP version of the backend service. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP version of the backend service. Required when <code>healthCheckType</code> is <code>HTTP</code>. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>. Only applicable to <code>TCP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_interval_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_interval_time_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>interval_<wbr>time</a>
@@ -4811,8 +7606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_port_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>port</a>
@@ -4820,8 +7614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass <code>-1</code> to restore the default. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_recv_context_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_recv_context_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>recv_<wbr>context</a>
@@ -4829,8 +7622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>It represents the result returned by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_send_context_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_send_context_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>send_<wbr>context</a>
@@ -4838,8 +7630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>It represents the content of the request sent by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_switch_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>switch</a>
@@ -4847,8 +7638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_time_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_time_out_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>time_<wbr>out</a>
@@ -4856,8 +7646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of <code>TCP</code>,<code>UDP</code>,<code>TCP_SSL</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_type_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>type</a>
@@ -4865,8 +7654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol used for health check. Valid values: <code>CUSTOM</code>, <code>TCP</code>, <code>HTTP</code>,<code>HTTPS</code>, <code>PING</code>, <code>GRPC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check protocol. Valid values: <code>TCP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>GRPC</code>, <code>PING</code>, <code>CUSTOM</code>. UDP listeners support <code>PING</code>/<code>CUSTOM</code>; TCP listeners support <code>TCP</code>/<code>HTTP</code>/<code>CUSTOM</code>; TCP_SSL/QUIC listeners support <code>TCP</code>/<code>HTTP</code>; HTTP rules support <code>HTTP</code>/<code>GRPC</code>; HTTPS rules support <code>HTTP</code>/<code>HTTPS</code>/<code>GRPC</code>. Defaults: <code>HTTP</code> for HTTP listeners, <code>TCP</code> for TCP/TCP_SSL/QUIC listeners, <code>PING</code> for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_check_unhealth_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_unhealth_num_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>unhealth_<wbr>num</a>
@@ -4874,8 +7662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_source_ip_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_source_ip_type_python" style="color: inherit; text-decoration: inherit;">health_<wbr>source_<wbr>ip_<wbr>type</a>
@@ -4883,8 +7670,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies the type of health check source IP. <code>0</code> (default): CLB VIP. <code>1</code>: 100.64 IP range.</p>
-</dd><dt class="property-optional"
+    <dd>Health check source IP type. <code>0</code>: use the CLB VIP as the source IP, <code>1</code>: use a 100.64 IP range as the source IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_idle_connect_timeout_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_idle_connect_timeout_python" style="color: inherit; text-decoration: inherit;">idle_<wbr>connect_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keepalive_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepalive_enable_python" style="color: inherit; text-decoration: inherit;">keepalive_<wbr>enable</a>
@@ -4892,8 +7686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable persistent connection (long connection). Only applicable to <code>HTTP</code>/<code>HTTPS</code> listeners. Valid values: <code>0</code> (disable, default), <code>1</code> (enable). This feature is currently in beta.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -4901,8 +7694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of this CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>ID of this CLB listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_listener_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listener_name_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>name</a>
@@ -4910,8 +7702,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_conn_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_conn_python" style="color: inherit; text-decoration: inherit;">max_<wbr>conn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_cps_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_cps_python" style="color: inherit; text-decoration: inherit;">max_<wbr>cps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multi_cert_info_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multi_cert_info_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>cert_<wbr>info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#listenermulticertinfo">Listener<wbr>Multi<wbr>Cert<wbr>Info<wbr>Args</a></span>
+    </dt>
+    <dd>Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to <code>TCP_SSL</code> listeners and <code>HTTPS</code> listeners with SNI disabled. When creating a <code>TCP_SSL</code> listener or an <code>HTTPS</code> listener with SNI disabled, at least one of <code>certificate</code>/<code>multiCertInfo</code> must be specified, but they cannot be specified at the same time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4919,8 +7734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the CLB listener. Port range: [1 - 65535].</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -4928,8 +7742,55 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_proxy_protocol_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_protocol_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_reschedule_expand_target_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reschedule_expand_target_python" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>expand_<wbr>target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_reschedule_interval_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reschedule_interval_python" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_reschedule_start_time_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reschedule_start_time_python" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_reschedule_target_zero_weight_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reschedule_target_zero_weight_python" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>target_<wbr>zero_<wbr>weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_reschedule_unhealthy_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reschedule_unhealthy_python" style="color: inherit; text-decoration: inherit;">reschedule_<wbr>unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduler_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduler_python" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -4937,8 +7798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of <code>HTTP</code> and <code>HTTPS</code> protocol additionally supports the <code>IP Hash</code> method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method. Valid values: <code>WRR</code> (weighted round-robin), <code>LEAST_CONN</code> (least connections). Default is <code>WRR</code>. Only applicable to <code>TCP</code>/<code>UDP</code>/<code>TCP_SSL</code>/<code>QUIC</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_session_expire_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_session_expire_time_python" style="color: inherit; text-decoration: inherit;">session_<wbr>expire_<wbr>time</a>
@@ -4946,8 +7806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as <code>WRR</code>, and not available when listener protocol is <code>TCP_SSL</code>. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_session_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_session_type_python" style="color: inherit; text-decoration: inherit;">session_<wbr>type</a>
@@ -4955,8 +7814,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Session persistence type. Valid values: <code>NORMAL</code>: the default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. The <code>QUIC_CID</code> value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Session persistence type. <code>NORMAL</code> (default): default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule. If <code>QUIC_CID</code> is selected, <code>protocol</code> must be <code>UDP</code>, <code>scheduler</code> must be <code>WRR</code>, and only IPv4 is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snat_enable_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snat_enable_python" style="color: inherit; text-decoration: inherit;">snat_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable SNAT (source IP replacement). <code>true</code>: enable, <code>false</code>: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sni_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sni_switch_python" style="color: inherit; text-decoration: inherit;">sni_<wbr>switch</a>
@@ -4964,8 +7830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether SNI is enabled, and only supported with protocol <code>HTTPS</code>. If enabled, you can set a certificate for each rule in <code>tencentcloud.Clb.ListenerRule</code>, otherwise all rules have a certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether SNI is enabled. Only applicable to <code>HTTPS</code> listeners. <code>0</code>: disabled, <code>1</code>: enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_target_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_type_python" style="color: inherit; text-decoration: inherit;">target_<wbr>type</a>
@@ -4973,8 +7838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>. <code>NODE</code> means to bind ordinary nodes, <code>TARGETGROUP</code> means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd></dl>
+    <dd>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>, <code>TARGETGROUP-V2</code>. <code>NODE</code> means binding ordinary nodes, <code>TARGETGROUP</code> means binding a target group. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4988,8 +7852,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the client certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when the ssl mode is <code>MUTUAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificateid_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -4997,8 +7860,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the server certificate. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_certificatesslmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_certificatesslmode_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Ssl<wbr>Mode</a>
@@ -5006,8 +7868,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of certificate. Valid values: <code>UNIDIRECTIONAL</code>, <code>MUTUAL</code>. NOTES: Only supports listeners of <code>HTTPS</code> and <code>TCP_SSL</code> protocol and must be set when it is available.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clbid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clbid_yaml" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -5015,8 +7876,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_datacompressmode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datacompressmode_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Compress<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Data compression mode. Valid values: <code>transparent</code>, <code>compatibility</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deregistertargetrst_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deregistertargetrst_yaml" style="color: inherit; text-decoration: inherit;">deregister<wbr>Target<wbr>Rst</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_endport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endport_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Port</a>
@@ -5024,8 +7900,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</p>
-</dd><dt class="property-optional"
+    <dd>This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the <code>Ports</code> parameter, which is used to specify the start port. If you want to try the port range feature, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_h2cswitch_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_h2cswitch_yaml" style="color: inherit; text-decoration: inherit;">h2c<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable H2C for intranet <code>HTTP</code> listeners. <code>true</code>: enable, <code>false</code>: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type <code>GRPC</code> or <code>GRPCS</code>; <code>GRPC</code> or <code>GRPCS</code> must be explicitly specified in the forwarding type when creating rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckcontexttype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckcontexttype_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Context<wbr>Type</a>
@@ -5033,8 +7916,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Health check protocol. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required, which represents the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the input format of the health check. Valid values: <code>HEX</code>, <code>TEXT</code>. When <code>HEX</code>, the characters of <code>sendContext</code>/<code>recvContext</code> can only be selected from <code>0123456789ABCDEF</code> and the length must be even. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhealthnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhealthnum_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Health<wbr>Num</a>
@@ -5042,8 +7924,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Health threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd><dt class="property-optional"
+    <dd>Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpcode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpcode_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Code</a>
@@ -5051,8 +7932,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>1</code>, <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>. <code>1</code> means http_1xx, <code>2</code> means http_2xx, <code>4</code> means http_3xx, <code>8</code> means http_4xx, <code>16</code> means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.</p>
-</dd><dt class="property-optional"
+    <dd>Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. <code>1</code>=1xx healthy, <code>2</code>=2xx, <code>4</code>=3xx, <code>8</code>=4xx, <code>16</code>=5xx. To treat multiple return codes as healthy, add the corresponding values together.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpdomain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpdomain_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Domain</a>
@@ -5060,8 +7940,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP health check domain of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpmethod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpmethod_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Method</a>
@@ -5069,8 +7948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP health check method of TCP listener. Valid values: <code>HEAD</code>, <code>GET</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default <code>HEAD</code>. Valid values: <code>HEAD</code>, <code>GET</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttppath_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttppath_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Path</a>
@@ -5078,8 +7956,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP health check path of TCP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckhttpversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckhttpversion_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Http<wbr>Version</a>
@@ -5087,8 +7964,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The HTTP version of the backend service. When the value of <code>health_check_type</code> of the health check protocol is <code>HTTP</code>, this field is required. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>HTTP version of the backend service. Required when <code>healthCheckType</code> is <code>HTTP</code>. Valid values: <code>HTTP/1.0</code>, <code>HTTP/1.1</code>. Only applicable to <code>TCP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckintervaltime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckintervaltime_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Interval<wbr>Time</a>
@@ -5096,8 +7972,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckport_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Port</a>
@@ -5105,8 +7980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.</p>
-</dd><dt class="property-optional"
+    <dd>Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass <code>-1</code> to restore the default. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckrecvcontext_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckrecvcontext_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Recv<wbr>Context</a>
@@ -5114,8 +7988,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It represents the result returned by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecksendcontext_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecksendcontext_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Send<wbr>Context</a>
@@ -5123,8 +7996,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It represents the content of the request sent by the health check. When the value of <code>health_check_type</code> of the health check protocol is <code>CUSTOM</code>, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When <code>health_check_context_type</code> value is <code>HEX</code>, the characters of SendContext and RecvContext can only be selected in <code>0123456789ABCDEF</code> and the length must be even digits.</p>
-</dd><dt class="property-optional"
+    <dd>Custom probe parameter. Required when <code>healthCheckType</code> is <code>CUSTOM</code>, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckswitch_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Switch</a>
@@ -5132,8 +8004,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enabled.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether health check is enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecktimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktimeout_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Time<wbr>Out</a>
@@ -5141,8 +8012,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of <code>TCP</code>,<code>UDP</code>,<code>TCP_SSL</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktype_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Type</a>
@@ -5150,8 +8020,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol used for health check. Valid values: <code>CUSTOM</code>, <code>TCP</code>, <code>HTTP</code>,<code>HTTPS</code>, <code>PING</code>, <code>GRPC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Health check protocol. Valid values: <code>TCP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>GRPC</code>, <code>PING</code>, <code>CUSTOM</code>. UDP listeners support <code>PING</code>/<code>CUSTOM</code>; TCP listeners support <code>TCP</code>/<code>HTTP</code>/<code>CUSTOM</code>; TCP_SSL/QUIC listeners support <code>TCP</code>/<code>HTTP</code>; HTTP rules support <code>HTTP</code>/<code>GRPC</code>; HTTPS rules support <code>HTTP</code>/<code>HTTPS</code>/<code>GRPC</code>. Defaults: <code>HTTP</code> for HTTP listeners, <code>TCP</code> for TCP/TCP_SSL/QUIC listeners, <code>PING</code> for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthcheckunhealthnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheckunhealthnum_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Unhealth<wbr>Num</a>
@@ -5159,8 +8028,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Unhealthy threshold of health check, and the default is <code>3</code>. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthsourceiptype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthsourceiptype_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Source<wbr>Ip<wbr>Type</a>
@@ -5168,8 +8036,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies the type of health check source IP. <code>0</code> (default): CLB VIP. <code>1</code>: 100.64 IP range.</p>
-</dd><dt class="property-optional"
+    <dd>Health check source IP type. <code>0</code>: use the CLB VIP as the source IP, <code>1</code>: use a 100.64 IP range as the source IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_idleconnecttimeout_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_idleconnecttimeout_yaml" style="color: inherit; text-decoration: inherit;">idle<wbr>Connect<wbr>Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keepaliveenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepaliveenable_yaml" style="color: inherit; text-decoration: inherit;">keepalive<wbr>Enable</a>
@@ -5177,8 +8052,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable persistent connection (long connection). Only applicable to <code>HTTP</code>/<code>HTTPS</code> listeners. Valid values: <code>0</code> (disable, default), <code>1</code> (enable). This feature is currently in beta.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -5186,8 +8060,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of this CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>ID of this CLB listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_listenername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenername_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -5195,8 +8068,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_maxconn_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxconn_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Conn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_maxcps_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxcps_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Cps</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multicertinfo_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multicertinfo_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Cert<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#listenermulticertinfo">Property Map</a></span>
+    </dt>
+    <dd>Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to <code>TCP_SSL</code> listeners and <code>HTTPS</code> listeners with SNI disabled. When creating a <code>TCP_SSL</code> listener or an <code>HTTPS</code> listener with SNI disabled, at least one of <code>certificate</code>/<code>multiCertInfo</code> must be specified, but they cannot be specified at the same time.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -5204,8 +8100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the CLB listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Port of the CLB listener. Port range: [1 - 65535].</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -5213,8 +8108,55 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of protocol within the listener. Valid values: <code>TCP</code>, <code>UDP</code>, <code>HTTP</code>, <code>HTTPS</code>, <code>TCP_SSL</code> and <code>QUIC</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_proxyprotocol_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyprotocol_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduleexpandtarget_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduleexpandtarget_yaml" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Expand<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduleinterval_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduleinterval_yaml" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_reschedulestarttime_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reschedulestarttime_yaml" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Start<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduletargetzeroweight_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduletargetzeroweight_yaml" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Target<wbr>Zero<wbr>Weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rescheduleunhealthy_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rescheduleunhealthy_yaml" style="color: inherit; text-decoration: inherit;">reschedule<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheduler_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheduler_yaml" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -5222,8 +8164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of <code>HTTP</code> and <code>HTTPS</code> protocol additionally supports the <code>IP Hash</code> method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling method. Valid values: <code>WRR</code> (weighted round-robin), <code>LEAST_CONN</code> (least connections). Default is <code>WRR</code>. Only applicable to <code>TCP</code>/<code>UDP</code>/<code>TCP_SSL</code>/<code>QUIC</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessionexpiretime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionexpiretime_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Expire<wbr>Time</a>
@@ -5231,8 +8172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as <code>WRR</code>, and not available when listener protocol is <code>TCP_SSL</code>. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in <code>tencentcloud.Clb.ListenerRule</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to <code>TCP</code>/<code>UDP</code> listeners.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessiontype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessiontype_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Type</a>
@@ -5240,8 +8180,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Session persistence type. Valid values: <code>NORMAL</code>: the default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. The <code>QUIC_CID</code> value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Session persistence type. <code>NORMAL</code> (default): default session persistence type; <code>QUIC_CID</code>: session persistence by QUIC connection ID. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule. If <code>QUIC_CID</code> is selected, <code>protocol</code> must be <code>UDP</code>, <code>scheduler</code> must be <code>WRR</code>, and only IPv4 is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snatenable_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatenable_yaml" style="color: inherit; text-decoration: inherit;">snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable SNAT (source IP replacement). <code>true</code>: enable, <code>false</code>: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_sniswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sniswitch_yaml" style="color: inherit; text-decoration: inherit;">sni<wbr>Switch</a>
@@ -5249,8 +8196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether SNI is enabled, and only supported with protocol <code>HTTPS</code>. If enabled, you can set a certificate for each rule in <code>tencentcloud.Clb.ListenerRule</code>, otherwise all rules have a certificate.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether SNI is enabled. Only applicable to <code>HTTPS</code> listeners. <code>0</code>: disabled, <code>1</code>: enabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targettype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targettype_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Type</a>
@@ -5258,8 +8204,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>. <code>NODE</code> means to bind ordinary nodes, <code>TARGETGROUP</code> means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.</p>
-</dd></dl>
+    <dd>Backend target type. Valid values: <code>NODE</code>, <code>TARGETGROUP</code>, <code>TARGETGROUP-V2</code>. <code>NODE</code> means binding ordinary nodes, <code>TARGETGROUP</code> means binding a target group. Only applicable to <code>TCP</code>/<code>UDP</code> listeners; L7 listeners should be configured in the forwarding rule.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -5269,17 +8214,182 @@ The following state arguments are supported:
 
 
 
+
+## Supporting Types
+
+
+
+<h4 id="listenermulticertinfo">
+Listener<wbr>Multi<wbr>Cert<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Listener<wbr>Multi<wbr>Cert<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="certidlists_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certidlists_csharp" style="color: inherit; text-decoration: inherit;">Cert<wbr>Id<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>List of server certificate ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="sslmode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslmode_csharp" style="color: inherit; text-decoration: inherit;">Ssl<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Authentication type. Values: UNIDIRECTIONAL (one-way authentication), MUTUAL (two-way authentication).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="certidlists_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certidlists_go" style="color: inherit; text-decoration: inherit;">Cert<wbr>Id<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>List of server certificate ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="sslmode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslmode_go" style="color: inherit; text-decoration: inherit;">Ssl<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Authentication type. Values: UNIDIRECTIONAL (one-way authentication), MUTUAL (two-way authentication).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cert_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_id_lists_hcl" style="color: inherit; text-decoration: inherit;">cert_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of server certificate ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="ssl_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssl_mode_hcl" style="color: inherit; text-decoration: inherit;">ssl_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Authentication type. Values: UNIDIRECTIONAL (one-way authentication), MUTUAL (two-way authentication).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="certidlists_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certidlists_java" style="color: inherit; text-decoration: inherit;">cert<wbr>Id<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>List of server certificate ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="sslmode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslmode_java" style="color: inherit; text-decoration: inherit;">ssl<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Authentication type. Values: UNIDIRECTIONAL (one-way authentication), MUTUAL (two-way authentication).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="certidlists_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certidlists_nodejs" style="color: inherit; text-decoration: inherit;">cert<wbr>Id<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>List of server certificate ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="sslmode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslmode_nodejs" style="color: inherit; text-decoration: inherit;">ssl<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Authentication type. Values: UNIDIRECTIONAL (one-way authentication), MUTUAL (two-way authentication).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cert_id_lists_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_id_lists_python" style="color: inherit; text-decoration: inherit;">cert_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>List of server certificate ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="ssl_mode_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssl_mode_python" style="color: inherit; text-decoration: inherit;">ssl_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Authentication type. Values: UNIDIRECTIONAL (one-way authentication), MUTUAL (two-way authentication).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="certidlists_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certidlists_yaml" style="color: inherit; text-decoration: inherit;">cert<wbr>Id<wbr>Lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>List of server certificate ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="sslmode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslmode_yaml" style="color: inherit; text-decoration: inherit;">ssl<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Authentication type. Values: UNIDIRECTIONAL (one-way authentication), MUTUAL (two-way authentication).</dd></dl>
+</pulumi-choosable>
+</div>
 
 ## Import
 
 
 
-CLB listener can be imported using the id (version >= 1.47.0), e.g.
+CLB listener can be imported using the clbId#listenerId (version >= 1.47.0), e.g.
 
 ```sh
-$ pulumi import tencentcloud:Clb/listener:Listener foo lb-7a0t6zqb#lbl-hh141sn9
+$ pulumi import tencentcloud:Clb/listener:Listener example lb-7a0t6zqb#lbl-hh141sn9
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -5291,7 +8401,6 @@ $ pulumi import tencentcloud:Clb/listener:Listener foo lb-7a0t6zqb#lbl-hh141sn9
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

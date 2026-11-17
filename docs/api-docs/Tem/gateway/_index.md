@@ -2,9 +2,11 @@
 ---
 title: "Gateway"
 title_tag: "tencentcloud.Tem.Gateway"
-meta_desc: "Documentation for the tencentcloud.Tem.Gateway resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a tem gateway"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,87 +18,165 @@ Provides a resource to create a tem gateway
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const gateway = new tencentcloud.tem.Gateway("gateway", {ingress: {
-    addressIpVersion: "IPV4",
-    environmentId: "en-853mggjm",
     ingressName: "demo",
-    mixed: false,
+    environmentId: "en-853mggjm",
+    addressIpVersion: "IPV4",
     rewriteType: "NONE",
+    mixed: false,
     rules: [
         {
             host: "test.com",
+            protocol: "http",
             http: {
                 paths: [{
+                    path: "/",
                     backend: {
                         serviceName: "demo",
                         servicePort: 80,
                     },
-                    path: "/",
                 }],
             },
-            protocol: "http",
         },
         {
             host: "hello.com",
+            protocol: "http",
             http: {
                 paths: [{
+                    path: "/",
                     backend: {
                         serviceName: "hello",
                         servicePort: 36000,
                     },
-                    path: "/",
                 }],
             },
-            protocol: "http",
         },
     ],
 }});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-gateway = tencentcloud.tem.Gateway("gateway", ingress=tencentcloud.tem.GatewayIngressArgs(
-    address_ip_version="IPV4",
-    environment_id="en-853mggjm",
-    ingress_name="demo",
-    mixed=False,
-    rewrite_type="NONE",
-    rules=[
-        tencentcloud.tem.GatewayIngressRuleArgs(
-            host="test.com",
-            http=tencentcloud.tem.GatewayIngressRuleHttpArgs(
-                paths=[tencentcloud.tem.GatewayIngressRuleHttpPathArgs(
-                    backend=tencentcloud.tem.GatewayIngressRuleHttpPathBackendArgs(
-                        service_name="demo",
-                        service_port=80,
-                    ),
-                    path="/",
-                )],
-            ),
-            protocol="http",
-        ),
-        tencentcloud.tem.GatewayIngressRuleArgs(
-            host="hello.com",
-            http=tencentcloud.tem.GatewayIngressRuleHttpArgs(
-                paths=[tencentcloud.tem.GatewayIngressRuleHttpPathArgs(
-                    backend=tencentcloud.tem.GatewayIngressRuleHttpPathBackendArgs(
-                        service_name="hello",
-                        service_port=36000,
-                    ),
-                    path="/",
-                )],
-            ),
-            protocol="http",
-        ),
+gateway = tencentcloud.tem.Gateway("gateway", ingress={
+    "ingress_name": "demo",
+    "environment_id": "en-853mggjm",
+    "address_ip_version": "IPV4",
+    "rewrite_type": "NONE",
+    "mixed": False,
+    "rules": [
+        {
+            "host": "test.com",
+            "protocol": "http",
+            "http": {
+                "paths": [{
+                    "path": "/",
+                    "backend": {
+                        "service_name": "demo",
+                        "service_port": 80,
+                    },
+                }],
+            },
+        },
+        {
+            "host": "hello.com",
+            "protocol": "http",
+            "http": {
+                "paths": [{
+                    "path": "/",
+                    "backend": {
+                        "service_name": "hello",
+                        "service_port": 36000,
+                    },
+                }],
+            },
+        },
     ],
-))
+})
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tem"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tem.NewGateway(ctx, "gateway", &tem.GatewayArgs{
+			Ingress: &tem.GatewayIngressArgs{
+				IngressName:      pulumi.String("demo"),
+				EnvironmentId:    pulumi.String("en-853mggjm"),
+				AddressIpVersion: pulumi.String("IPV4"),
+				RewriteType:      pulumi.String("NONE"),
+				Mixed:            pulumi.Bool(false),
+				Rules: tem.GatewayIngressRuleArray{
+					&tem.GatewayIngressRuleArgs{
+						Host:     pulumi.String("test.com"),
+						Protocol: pulumi.String("http"),
+						Http: &tem.GatewayIngressRuleHttpArgs{
+							Paths: tem.GatewayIngressRuleHttpPathArray{
+								&tem.GatewayIngressRuleHttpPathArgs{
+									Path: pulumi.String("/"),
+									Backend: &tem.GatewayIngressRuleHttpPathBackendArgs{
+										ServiceName: pulumi.String("demo"),
+										ServicePort: pulumi.Int(80),
+									},
+								},
+							},
+						},
+					},
+					&tem.GatewayIngressRuleArgs{
+						Host:     pulumi.String("hello.com"),
+						Protocol: pulumi.String("http"),
+						Http: &tem.GatewayIngressRuleHttpArgs{
+							Paths: tem.GatewayIngressRuleHttpPathArray{
+								&tem.GatewayIngressRuleHttpPathArgs{
+									Path: pulumi.String("/"),
+									Backend: &tem.GatewayIngressRuleHttpPathBackendArgs{
+										ServiceName: pulumi.String("hello"),
+										ServicePort: pulumi.Int(36000),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -109,52 +189,52 @@ return await Deployment.RunAsync(() =>
     {
         Ingress = new Tencentcloud.Tem.Inputs.GatewayIngressArgs
         {
-            AddressIpVersion = "IPV4",
-            EnvironmentId = "en-853mggjm",
             IngressName = "demo",
-            Mixed = false,
+            EnvironmentId = "en-853mggjm",
+            AddressIpVersion = "IPV4",
             RewriteType = "NONE",
+            Mixed = false,
             Rules = new[]
             {
                 new Tencentcloud.Tem.Inputs.GatewayIngressRuleArgs
                 {
                     Host = "test.com",
+                    Protocol = "http",
                     Http = new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpArgs
                     {
                         Paths = new[]
                         {
                             new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpPathArgs
                             {
+                                Path = "/",
                                 Backend = new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpPathBackendArgs
                                 {
                                     ServiceName = "demo",
                                     ServicePort = 80,
                                 },
-                                Path = "/",
                             },
                         },
                     },
-                    Protocol = "http",
                 },
                 new Tencentcloud.Tem.Inputs.GatewayIngressRuleArgs
                 {
                     Host = "hello.com",
+                    Protocol = "http",
                     Http = new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpArgs
                     {
                         Paths = new[]
                         {
                             new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpPathArgs
                             {
+                                Path = "/",
                                 Backend = new Tencentcloud.Tem.Inputs.GatewayIngressRuleHttpPathBackendArgs
                                 {
                                     ServiceName = "hello",
                                     ServicePort = 36000,
                                 },
-                                Path = "/",
                             },
                         },
                     },
-                    Protocol = "http",
                 },
             },
         },
@@ -162,64 +242,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tem"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tem.NewGateway(ctx, "gateway", &Tem.GatewayArgs{
-			Ingress: &tem.GatewayIngressArgs{
-				AddressIpVersion: pulumi.String("IPV4"),
-				EnvironmentId:    pulumi.String("en-853mggjm"),
-				IngressName:      pulumi.String("demo"),
-				Mixed:            pulumi.Bool(false),
-				RewriteType:      pulumi.String("NONE"),
-				Rules: tem.GatewayIngressRuleArray{
-					&tem.GatewayIngressRuleArgs{
-						Host: pulumi.String("test.com"),
-						Http: &tem.GatewayIngressRuleHttpArgs{
-							Paths: tem.GatewayIngressRuleHttpPathArray{
-								&tem.GatewayIngressRuleHttpPathArgs{
-									Backend: &tem.GatewayIngressRuleHttpPathBackendArgs{
-										ServiceName: pulumi.String("demo"),
-										ServicePort: pulumi.Int(80),
-									},
-									Path: pulumi.String("/"),
-								},
-							},
-						},
-						Protocol: pulumi.String("http"),
-					},
-					&tem.GatewayIngressRuleArgs{
-						Host: pulumi.String("hello.com"),
-						Http: &tem.GatewayIngressRuleHttpArgs{
-							Paths: tem.GatewayIngressRuleHttpPathArray{
-								&tem.GatewayIngressRuleHttpPathArgs{
-									Backend: &tem.GatewayIngressRuleHttpPathBackendArgs{
-										ServiceName: pulumi.String("hello"),
-										ServicePort: pulumi.Int(36000),
-									},
-									Path: pulumi.String("/"),
-								},
-							},
-						},
-						Protocol: pulumi.String("http"),
-					},
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -229,8 +256,12 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tem.Gateway;
 import com.pulumi.tencentcloud.Tem.GatewayArgs;
 import com.pulumi.tencentcloud.Tem.inputs.GatewayIngressArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Tem.inputs.GatewayIngressRuleArgs;
+import com.pulumi.tencentcloud.Tem.inputs.GatewayIngressRuleHttpArgs;
+import com.pulumi.tencentcloud.Tem.inputs.GatewayIngressRuleHttpPathArgs;
+import com.pulumi.tencentcloud.Tem.inputs.GatewayIngressRuleHttpPathBackendArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -242,39 +273,39 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var gateway = new Gateway("gateway", GatewayArgs.builder()        
+        var gateway = new Gateway("gateway", GatewayArgs.builder()
             .ingress(GatewayIngressArgs.builder()
-                .addressIpVersion("IPV4")
-                .environmentId("en-853mggjm")
                 .ingressName("demo")
-                .mixed(false)
+                .environmentId("en-853mggjm")
+                .addressIpVersion("IPV4")
                 .rewriteType("NONE")
+                .mixed(false)
                 .rules(                
                     GatewayIngressRuleArgs.builder()
                         .host("test.com")
+                        .protocol("http")
                         .http(GatewayIngressRuleHttpArgs.builder()
                             .paths(GatewayIngressRuleHttpPathArgs.builder()
+                                .path("/")
                                 .backend(GatewayIngressRuleHttpPathBackendArgs.builder()
                                     .serviceName("demo")
                                     .servicePort(80)
                                     .build())
-                                .path("/")
                                 .build())
                             .build())
-                        .protocol("http")
                         .build(),
                     GatewayIngressRuleArgs.builder()
                         .host("hello.com")
+                        .protocol("http")
                         .http(GatewayIngressRuleHttpArgs.builder()
                             .paths(GatewayIngressRuleHttpPathArgs.builder()
+                                .path("/")
                                 .backend(GatewayIngressRuleHttpPathBackendArgs.builder()
                                     .serviceName("hello")
                                     .servicePort(36000)
                                     .build())
-                                .path("/")
                                 .build())
                             .build())
-                        .protocol("http")
                         .build())
                 .build())
             .build());
@@ -282,94 +313,173 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   gateway:
     type: tencentcloud:Tem:Gateway
     properties:
       ingress:
-        addressIpVersion: IPV4
-        environmentId: en-853mggjm
         ingressName: demo
-        mixed: false
+        environmentId: en-853mggjm
+        addressIpVersion: IPV4
         rewriteType: NONE
+        mixed: false
         rules:
           - host: test.com
+            protocol: http
             http:
               paths:
-                - backend:
+                - path: /
+                  backend:
                     serviceName: demo
                     servicePort: 80
-                  path: /
-            protocol: http
           - host: hello.com
+            protocol: http
             http:
               paths:
-                - backend:
+                - path: /
+                  backend:
                     serviceName: hello
                     servicePort: 36000
-                  path: /
-            protocol: http
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tem_gateway" "gateway" {
+  ingress = {
+    ingress_name       = "demo"
+    environment_id     = "en-853mggjm"
+    address_ip_version = "IPV4"
+    rewrite_type       = "NONE"
+    mixed              = false
+    rules = [{
+      "host"     = "test.com"
+      "protocol" = "http"
+      "http" = {
+        "paths" = [{
+          "path" = "/"
+          "backend" = {
+            "serviceName" = "demo"
+            "servicePort" = 80
+          }
+        }]
+      }
+      }, {
+      "host"     = "hello.com"
+      "protocol" = "http"
+      "http" = {
+        "paths" = [{
+          "path" = "/"
+          "backend" = {
+            "serviceName" = "hello"
+            "servicePort" = 36000
+          }
+        }]
+      }
+    }]
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [ModifyIngress](https://www.tencentcloud.com/document/api/1094/42018)
+* Read: [DescribeIngress](https://www.tencentcloud.com/document/api/1094/42021)
+* Update: [ModifyIngress](https://www.tencentcloud.com/document/api/1094/42018)
+* Delete: [DeleteIngress](https://www.tencentcloud.com/document/api/1094/42022)
 
 
 ## Create Gateway Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-            <span class="nx">ingress</span><span class="p">:</span> <span class="nx">Optional[_tem.GatewayIngressArgs]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[GatewayArgs]</a></span> = None<span class="p">,</span>
-            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+            <span class="nx">ingress</span><span class="p">:</span> <span class="nx">Optional[GatewayIngressArgs]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewGateway</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Gateway</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewGateway</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Gateway</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Gateway</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GatewayArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tem:Gateway</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tem:Gateway</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tem_gateway&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -390,7 +500,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -507,11 +617,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Gateway Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -525,10 +643,9 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingress_csharp" style="color: inherit; text-decoration: inherit;">Ingress</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gatewayingress">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Gateway<wbr>Ingress<wbr>Args</a></span>
+        <span class="property-type"><a href="#gatewayingress">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Gateway<wbr>Ingress</a></span>
     </dt>
-    <dd><p>gateway properties.</p>
-</dd></dl>
+    <dd>gateway properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -542,8 +659,21 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingress">Gateway<wbr>Ingress<wbr>Args</a></span>
     </dt>
-    <dd><p>gateway properties.</p>
-</dd></dl>
+    <dd>gateway properties.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="ingress_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingress_hcl" style="color: inherit; text-decoration: inherit;">ingress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gatewayingress">object</a></span>
+    </dt>
+    <dd>gateway properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -555,10 +685,9 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingress_java" style="color: inherit; text-decoration: inherit;">ingress</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gatewayingress">Gateway<wbr>Ingress<wbr>Args</a></span>
+        <span class="property-type"><a href="#gatewayingress">Gateway<wbr>Ingress</a></span>
     </dt>
-    <dd><p>gateway properties.</p>
-</dd></dl>
+    <dd>gateway properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -570,10 +699,9 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingress_nodejs" style="color: inherit; text-decoration: inherit;">ingress</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gatewayingress">Gateway<wbr>Ingress<wbr>Args</a></span>
+        <span class="property-type"><a href="#gatewayingress">Gateway<wbr>Ingress</a></span>
     </dt>
-    <dd><p>gateway properties.</p>
-</dd></dl>
+    <dd>gateway properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -587,8 +715,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingress">Gateway<wbr>Ingress<wbr>Args</a></span>
     </dt>
-    <dd><p>gateway properties.</p>
-</dd></dl>
+    <dd>gateway properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -602,8 +729,7 @@ The Gateway resource accepts the following [input](/docs/intro/concepts/inputs-o
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingress">Property Map</a></span>
     </dt>
-    <dd><p>gateway properties.</p>
-</dd></dl>
+    <dd>gateway properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -624,8 +750,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -639,8 +764,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -654,8 +792,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -669,8 +806,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -684,8 +820,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -699,8 +834,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -710,120 +844,159 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Gateway resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">GatewayState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Gateway</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">GatewayState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Gateway</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">ingress</span><span class="p">:</span> <span class="nx">Optional[_tem.GatewayIngressArgs]</span> = None<span class="p">) -&gt;</span> Gateway</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">ingress</span><span class="p">:</span> <span class="nx">Optional[GatewayIngressArgs]</span> = None<span class="p">) -&gt;</span> Gateway</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetGateway<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">GatewayState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Gateway</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetGateway<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">GatewayState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Gateway</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Gateway</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GatewayState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Gateway</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GatewayState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Gateway</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GatewayState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Gateway</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GatewayState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingGateway</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tem:Gateway</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tem_gateway</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GatewayState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GatewayState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -831,28 +1004,31 @@ Get an existing Gateway resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GatewayState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -860,28 +1036,31 @@ Get an existing Gateway resource's state with the given name, ID, and optional e
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GatewayState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -899,10 +1078,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingress_csharp" style="color: inherit; text-decoration: inherit;">Ingress</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gatewayingress">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Gateway<wbr>Ingress<wbr>Args</a></span>
+        <span class="property-type"><a href="#gatewayingress">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Gateway<wbr>Ingress</a></span>
     </dt>
-    <dd><p>gateway properties.</p>
-</dd></dl>
+    <dd>gateway properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -916,8 +1094,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingress">Gateway<wbr>Ingress<wbr>Args</a></span>
     </dt>
-    <dd><p>gateway properties.</p>
-</dd></dl>
+    <dd>gateway properties.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_ingress_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingress_hcl" style="color: inherit; text-decoration: inherit;">ingress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gatewayingress">object</a></span>
+    </dt>
+    <dd>gateway properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -929,10 +1120,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingress_java" style="color: inherit; text-decoration: inherit;">ingress</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gatewayingress">Gateway<wbr>Ingress<wbr>Args</a></span>
+        <span class="property-type"><a href="#gatewayingress">Gateway<wbr>Ingress</a></span>
     </dt>
-    <dd><p>gateway properties.</p>
-</dd></dl>
+    <dd>gateway properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -944,10 +1134,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingress_nodejs" style="color: inherit; text-decoration: inherit;">ingress</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gatewayingress">Gateway<wbr>Ingress<wbr>Args</a></span>
+        <span class="property-type"><a href="#gatewayingress">Gateway<wbr>Ingress</a></span>
     </dt>
-    <dd><p>gateway properties.</p>
-</dd></dl>
+    <dd>gateway properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -961,8 +1150,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingress">Gateway<wbr>Ingress<wbr>Args</a></span>
     </dt>
-    <dd><p>gateway properties.</p>
-</dd></dl>
+    <dd>gateway properties.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -976,8 +1164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingress">Property Map</a></span>
     </dt>
-    <dd><p>gateway properties.</p>
-</dd></dl>
+    <dd>gateway properties.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -992,7 +1179,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="gatewayingress">Gateway<wbr>Ingress</h4>
+<h4 id="gatewayingress">
+Gateway<wbr>Ingress<pulumi-choosable type="language" values="python,go" class="inline">, Gateway<wbr>Ingress<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1004,8 +1193,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ip version, support IPV4.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ip version, support IPV4.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_csharp" style="color: inherit; text-decoration: inherit;">Environment<wbr>Id</a>
@@ -1013,8 +1201,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>environment ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ingressname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingressname_csharp" style="color: inherit; text-decoration: inherit;">Ingress<wbr>Name</a>
@@ -1022,8 +1209,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway name.</p>
-</dd><dt class="property-required"
+    <dd>gateway name.</dd><dt class="property-required"
             title="Required">
         <span id="mixed_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixed_csharp" style="color: inherit; text-decoration: inherit;">Mixed</a>
@@ -1031,8 +1217,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>mixing HTTP and HTTPS.</p>
-</dd><dt class="property-required"
+    <dd>mixing HTTP and HTTPS.</dd><dt class="property-required"
             title="Required">
         <span id="rules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_csharp" style="color: inherit; text-decoration: inherit;">Rules</a>
@@ -1040,8 +1225,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Gateway<wbr>Ingress<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>proxy rules.</p>
-</dd><dt class="property-optional"
+    <dd>proxy rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="clbid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_csharp" style="color: inherit; text-decoration: inherit;">Clb<wbr>Id</a>
@@ -1049,8 +1233,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>related CLB ID, support binding existing clb, does not support modification.</p>
-</dd><dt class="property-optional"
+    <dd>related CLB ID, support binding existing clb, does not support modification.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1058,8 +1241,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="rewritetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewritetype_csharp" style="color: inherit; text-decoration: inherit;">Rewrite<wbr>Type</a>
@@ -1067,8 +1249,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>redirect mode, support AUTO and NONE.</p>
-</dd><dt class="property-optional"
+    <dd>redirect mode, support AUTO and NONE.</dd><dt class="property-optional"
             title="Optional">
         <span id="tls_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tls_csharp" style="color: inherit; text-decoration: inherit;">Tls</a>
@@ -1076,8 +1257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingresstl">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Gateway<wbr>Ingress<wbr>Tl&gt;</a></span>
     </dt>
-    <dd><p>ingress TLS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>ingress TLS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="vip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_csharp" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -1085,8 +1265,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway vip.</p>
-</dd></dl>
+    <dd>gateway vip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1100,8 +1279,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ip version, support IPV4.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ip version, support IPV4.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_go" style="color: inherit; text-decoration: inherit;">Environment<wbr>Id</a>
@@ -1109,8 +1287,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>environment ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ingressname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingressname_go" style="color: inherit; text-decoration: inherit;">Ingress<wbr>Name</a>
@@ -1118,8 +1295,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway name.</p>
-</dd><dt class="property-required"
+    <dd>gateway name.</dd><dt class="property-required"
             title="Required">
         <span id="mixed_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixed_go" style="color: inherit; text-decoration: inherit;">Mixed</a>
@@ -1127,8 +1303,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>mixing HTTP and HTTPS.</p>
-</dd><dt class="property-required"
+    <dd>mixing HTTP and HTTPS.</dd><dt class="property-required"
             title="Required">
         <span id="rules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_go" style="color: inherit; text-decoration: inherit;">Rules</a>
@@ -1136,8 +1311,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrule">[]Gateway<wbr>Ingress<wbr>Rule</a></span>
     </dt>
-    <dd><p>proxy rules.</p>
-</dd><dt class="property-optional"
+    <dd>proxy rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="clbid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_go" style="color: inherit; text-decoration: inherit;">Clb<wbr>Id</a>
@@ -1145,8 +1319,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>related CLB ID, support binding existing clb, does not support modification.</p>
-</dd><dt class="property-optional"
+    <dd>related CLB ID, support binding existing clb, does not support modification.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1154,8 +1327,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="rewritetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewritetype_go" style="color: inherit; text-decoration: inherit;">Rewrite<wbr>Type</a>
@@ -1163,8 +1335,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>redirect mode, support AUTO and NONE.</p>
-</dd><dt class="property-optional"
+    <dd>redirect mode, support AUTO and NONE.</dd><dt class="property-optional"
             title="Optional">
         <span id="tls_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tls_go" style="color: inherit; text-decoration: inherit;">Tls</a>
@@ -1172,8 +1343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingresstl">[]Gateway<wbr>Ingress<wbr>Tl</a></span>
     </dt>
-    <dd><p>ingress TLS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>ingress TLS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -1181,8 +1351,93 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway vip.</p>
-</dd></dl>
+    <dd>gateway vip.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="address_ip_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_ip_version_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>ip_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ip version, support IPV4.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="environment_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_id_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>environment ID.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="ingress_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingress_name_hcl" style="color: inherit; text-decoration: inherit;">ingress_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>gateway name.</dd><dt class="property-required"
+            title="Required">
+        <span id="mixed_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixed_hcl" style="color: inherit; text-decoration: inherit;">mixed</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>mixing HTTP and HTTPS.</dd><dt class="property-required"
+            title="Required">
+        <span id="rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_hcl" style="color: inherit; text-decoration: inherit;">rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gatewayingressrule">list(object)</a></span>
+    </dt>
+    <dd>proxy rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>related CLB ID, support binding existing clb, does not support modification.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>creation time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rewrite_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewrite_type_hcl" style="color: inherit; text-decoration: inherit;">rewrite_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>redirect mode, support AUTO and NONE.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tls_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tls_hcl" style="color: inherit; text-decoration: inherit;">tls</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gatewayingresstl">list(object)</a></span>
+    </dt>
+    <dd>ingress TLS configurations.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>gateway vip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1196,8 +1451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ip version, support IPV4.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ip version, support IPV4.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_java" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -1205,8 +1459,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>environment ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ingressname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingressname_java" style="color: inherit; text-decoration: inherit;">ingress<wbr>Name</a>
@@ -1214,8 +1467,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>gateway name.</p>
-</dd><dt class="property-required"
+    <dd>gateway name.</dd><dt class="property-required"
             title="Required">
         <span id="mixed_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixed_java" style="color: inherit; text-decoration: inherit;">mixed</a>
@@ -1223,8 +1475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>mixing HTTP and HTTPS.</p>
-</dd><dt class="property-required"
+    <dd>mixing HTTP and HTTPS.</dd><dt class="property-required"
             title="Required">
         <span id="rules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_java" style="color: inherit; text-decoration: inherit;">rules</a>
@@ -1232,8 +1483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrule">List&lt;Gateway<wbr>Ingress<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>proxy rules.</p>
-</dd><dt class="property-optional"
+    <dd>proxy rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="clbid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_java" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -1241,8 +1491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>related CLB ID, support binding existing clb, does not support modification.</p>
-</dd><dt class="property-optional"
+    <dd>related CLB ID, support binding existing clb, does not support modification.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1250,8 +1499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="rewritetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewritetype_java" style="color: inherit; text-decoration: inherit;">rewrite<wbr>Type</a>
@@ -1259,8 +1507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>redirect mode, support AUTO and NONE.</p>
-</dd><dt class="property-optional"
+    <dd>redirect mode, support AUTO and NONE.</dd><dt class="property-optional"
             title="Optional">
         <span id="tls_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tls_java" style="color: inherit; text-decoration: inherit;">tls</a>
@@ -1268,8 +1515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingresstl">List&lt;Gateway<wbr>Ingress<wbr>Tl&gt;</a></span>
     </dt>
-    <dd><p>ingress TLS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>ingress TLS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1277,8 +1523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>gateway vip.</p>
-</dd></dl>
+    <dd>gateway vip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1292,8 +1537,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ip version, support IPV4.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ip version, support IPV4.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_nodejs" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -1301,8 +1545,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>environment ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ingressname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingressname_nodejs" style="color: inherit; text-decoration: inherit;">ingress<wbr>Name</a>
@@ -1310,8 +1553,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway name.</p>
-</dd><dt class="property-required"
+    <dd>gateway name.</dd><dt class="property-required"
             title="Required">
         <span id="mixed_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixed_nodejs" style="color: inherit; text-decoration: inherit;">mixed</a>
@@ -1319,8 +1561,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>mixing HTTP and HTTPS.</p>
-</dd><dt class="property-required"
+    <dd>mixing HTTP and HTTPS.</dd><dt class="property-required"
             title="Required">
         <span id="rules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_nodejs" style="color: inherit; text-decoration: inherit;">rules</a>
@@ -1328,8 +1569,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrule">Gateway<wbr>Ingress<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>proxy rules.</p>
-</dd><dt class="property-optional"
+    <dd>proxy rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="clbid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_nodejs" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -1337,8 +1577,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>related CLB ID, support binding existing clb, does not support modification.</p>
-</dd><dt class="property-optional"
+    <dd>related CLB ID, support binding existing clb, does not support modification.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1346,8 +1585,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="rewritetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewritetype_nodejs" style="color: inherit; text-decoration: inherit;">rewrite<wbr>Type</a>
@@ -1355,8 +1593,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>redirect mode, support AUTO and NONE.</p>
-</dd><dt class="property-optional"
+    <dd>redirect mode, support AUTO and NONE.</dd><dt class="property-optional"
             title="Optional">
         <span id="tls_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tls_nodejs" style="color: inherit; text-decoration: inherit;">tls</a>
@@ -1364,8 +1601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingresstl">Gateway<wbr>Ingress<wbr>Tl[]</a></span>
     </dt>
-    <dd><p>ingress TLS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>ingress TLS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1373,8 +1609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>gateway vip.</p>
-</dd></dl>
+    <dd>gateway vip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1388,8 +1623,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ip version, support IPV4.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ip version, support IPV4.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environment_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_id_python" style="color: inherit; text-decoration: inherit;">environment_<wbr>id</a>
@@ -1397,8 +1631,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>environment ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ingress_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingress_name_python" style="color: inherit; text-decoration: inherit;">ingress_<wbr>name</a>
@@ -1406,8 +1639,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>gateway name.</p>
-</dd><dt class="property-required"
+    <dd>gateway name.</dd><dt class="property-required"
             title="Required">
         <span id="mixed_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixed_python" style="color: inherit; text-decoration: inherit;">mixed</a>
@@ -1415,17 +1647,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>mixing HTTP and HTTPS.</p>
-</dd><dt class="property-required"
+    <dd>mixing HTTP and HTTPS.</dd><dt class="property-required"
             title="Required">
         <span id="rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_python" style="color: inherit; text-decoration: inherit;">rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gatewayingressrule">Gateway<wbr>Ingress<wbr>Rule]</a></span>
+        <span class="property-type"><a href="#gatewayingressrule">Sequence[Gateway<wbr>Ingress<wbr>Rule]</a></span>
     </dt>
-    <dd><p>proxy rules.</p>
-</dd><dt class="property-optional"
+    <dd>proxy rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="clb_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_python" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
@@ -1433,8 +1663,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>related CLB ID, support binding existing clb, does not support modification.</p>
-</dd><dt class="property-optional"
+    <dd>related CLB ID, support binding existing clb, does not support modification.</dd><dt class="property-optional"
             title="Optional">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1442,8 +1671,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="rewrite_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewrite_type_python" style="color: inherit; text-decoration: inherit;">rewrite_<wbr>type</a>
@@ -1451,17 +1679,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>redirect mode, support AUTO and NONE.</p>
-</dd><dt class="property-optional"
+    <dd>redirect mode, support AUTO and NONE.</dd><dt class="property-optional"
             title="Optional">
         <span id="tls_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tls_python" style="color: inherit; text-decoration: inherit;">tls</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gatewayingresstl">Gateway<wbr>Ingress<wbr>Tl]</a></span>
+        <span class="property-type"><a href="#gatewayingresstl">Sequence[Gateway<wbr>Ingress<wbr>Tl]</a></span>
     </dt>
-    <dd><p>ingress TLS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>ingress TLS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1469,8 +1695,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>gateway vip.</p>
-</dd></dl>
+    <dd>gateway vip.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1484,8 +1709,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ip version, support IPV4.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ip version, support IPV4.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environmentid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_yaml" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -1493,8 +1717,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>environment ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>environment ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="ingressname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingressname_yaml" style="color: inherit; text-decoration: inherit;">ingress<wbr>Name</a>
@@ -1502,8 +1725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>gateway name.</p>
-</dd><dt class="property-required"
+    <dd>gateway name.</dd><dt class="property-required"
             title="Required">
         <span id="mixed_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixed_yaml" style="color: inherit; text-decoration: inherit;">mixed</a>
@@ -1511,8 +1733,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>mixing HTTP and HTTPS.</p>
-</dd><dt class="property-required"
+    <dd>mixing HTTP and HTTPS.</dd><dt class="property-required"
             title="Required">
         <span id="rules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_yaml" style="color: inherit; text-decoration: inherit;">rules</a>
@@ -1520,8 +1741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>proxy rules.</p>
-</dd><dt class="property-optional"
+    <dd>proxy rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="clbid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_yaml" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -1529,8 +1749,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>related CLB ID, support binding existing clb, does not support modification.</p>
-</dd><dt class="property-optional"
+    <dd>related CLB ID, support binding existing clb, does not support modification.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1538,8 +1757,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>creation time.</p>
-</dd><dt class="property-optional"
+    <dd>creation time.</dd><dt class="property-optional"
             title="Optional">
         <span id="rewritetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rewritetype_yaml" style="color: inherit; text-decoration: inherit;">rewrite<wbr>Type</a>
@@ -1547,8 +1765,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>redirect mode, support AUTO and NONE.</p>
-</dd><dt class="property-optional"
+    <dd>redirect mode, support AUTO and NONE.</dd><dt class="property-optional"
             title="Optional">
         <span id="tls_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tls_yaml" style="color: inherit; text-decoration: inherit;">tls</a>
@@ -1556,8 +1773,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingresstl">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>ingress TLS configurations.</p>
-</dd><dt class="property-optional"
+    <dd>ingress TLS configurations.</dd><dt class="property-optional"
             title="Optional">
         <span id="vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1565,12 +1781,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>gateway vip.</p>
-</dd></dl>
+    <dd>gateway vip.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="gatewayingressrule">Gateway<wbr>Ingress<wbr>Rule</h4>
+<h4 id="gatewayingressrule">
+Gateway<wbr>Ingress<wbr>Rule<pulumi-choosable type="language" values="python,go" class="inline">, Gateway<wbr>Ingress<wbr>Rule<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1582,8 +1799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttp">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Gateway<wbr>Ingress<wbr>Rule<wbr>Http</a></span>
     </dt>
-    <dd><p>rule payload.</p>
-</dd><dt class="property-optional"
+    <dd>rule payload.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_csharp" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -1591,8 +1807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>host name.</p>
-</dd><dt class="property-optional"
+    <dd>host name.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1600,8 +1815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd></dl>
+    <dd>protocol.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1615,8 +1829,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttp">Gateway<wbr>Ingress<wbr>Rule<wbr>Http</a></span>
     </dt>
-    <dd><p>rule payload.</p>
-</dd><dt class="property-optional"
+    <dd>rule payload.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_go" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -1624,8 +1837,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>host name.</p>
-</dd><dt class="property-optional"
+    <dd>host name.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1633,8 +1845,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd></dl>
+    <dd>protocol.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="http_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_hcl" style="color: inherit; text-decoration: inherit;">http</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gatewayingressrulehttp">object</a></span>
+    </dt>
+    <dd>rule payload.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>host name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>protocol.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1648,8 +1889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttp">Gateway<wbr>Ingress<wbr>Rule<wbr>Http</a></span>
     </dt>
-    <dd><p>rule payload.</p>
-</dd><dt class="property-optional"
+    <dd>rule payload.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_java" style="color: inherit; text-decoration: inherit;">host</a>
@@ -1657,8 +1897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>host name.</p>
-</dd><dt class="property-optional"
+    <dd>host name.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1666,8 +1905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd></dl>
+    <dd>protocol.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1681,8 +1919,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttp">Gateway<wbr>Ingress<wbr>Rule<wbr>Http</a></span>
     </dt>
-    <dd><p>rule payload.</p>
-</dd><dt class="property-optional"
+    <dd>rule payload.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_nodejs" style="color: inherit; text-decoration: inherit;">host</a>
@@ -1690,8 +1927,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>host name.</p>
-</dd><dt class="property-optional"
+    <dd>host name.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1699,8 +1935,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd></dl>
+    <dd>protocol.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1714,8 +1949,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttp">Gateway<wbr>Ingress<wbr>Rule<wbr>Http</a></span>
     </dt>
-    <dd><p>rule payload.</p>
-</dd><dt class="property-optional"
+    <dd>rule payload.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_python" style="color: inherit; text-decoration: inherit;">host</a>
@@ -1723,8 +1957,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>host name.</p>
-</dd><dt class="property-optional"
+    <dd>host name.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1732,8 +1965,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd></dl>
+    <dd>protocol.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1747,8 +1979,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttp">Property Map</a></span>
     </dt>
-    <dd><p>rule payload.</p>
-</dd><dt class="property-optional"
+    <dd>rule payload.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_yaml" style="color: inherit; text-decoration: inherit;">host</a>
@@ -1756,8 +1987,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>host name.</p>
-</dd><dt class="property-optional"
+    <dd>host name.</dd><dt class="property-optional"
             title="Optional">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1765,12 +1995,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>protocol.</p>
-</dd></dl>
+    <dd>protocol.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="gatewayingressrulehttp">Gateway<wbr>Ingress<wbr>Rule<wbr>Http</h4>
+<h4 id="gatewayingressrulehttp">
+Gateway<wbr>Ingress<wbr>Rule<wbr>Http<pulumi-choosable type="language" values="python,go" class="inline">, Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1782,8 +2013,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttppath">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path&gt;</a></span>
     </dt>
-    <dd><p>path payload.</p>
-</dd></dl>
+    <dd>path payload.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1797,8 +2027,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttppath">[]Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path</a></span>
     </dt>
-    <dd><p>path payload.</p>
-</dd></dl>
+    <dd>path payload.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="paths_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paths_hcl" style="color: inherit; text-decoration: inherit;">paths</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gatewayingressrulehttppath">list(object)</a></span>
+    </dt>
+    <dd>path payload.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1812,8 +2055,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttppath">List&lt;Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path&gt;</a></span>
     </dt>
-    <dd><p>path payload.</p>
-</dd></dl>
+    <dd>path payload.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1827,8 +2069,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttppath">Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path[]</a></span>
     </dt>
-    <dd><p>path payload.</p>
-</dd></dl>
+    <dd>path payload.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1840,10 +2081,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paths_python" style="color: inherit; text-decoration: inherit;">paths</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gatewayingressrulehttppath">Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path]</a></span>
+        <span class="property-type"><a href="#gatewayingressrulehttppath">Sequence[Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path]</a></span>
     </dt>
-    <dd><p>path payload.</p>
-</dd></dl>
+    <dd>path payload.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1857,12 +2097,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttppath">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>path payload.</p>
-</dd></dl>
+    <dd>path payload.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="gatewayingressrulehttppath">Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path</h4>
+<h4 id="gatewayingressrulehttppath">
+Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path<pulumi-choosable type="language" values="python,go" class="inline">, Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1874,8 +2115,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttppathbackend">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tem.<wbr>Inputs.<wbr>Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path<wbr>Backend</a></span>
     </dt>
-    <dd><p>backend payload.</p>
-</dd><dt class="property-required"
+    <dd>backend payload.</dd><dt class="property-required"
             title="Required">
         <span id="path_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_csharp" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -1883,8 +2123,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>path.</p>
-</dd></dl>
+    <dd>path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1898,8 +2137,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttppathbackend">Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path<wbr>Backend</a></span>
     </dt>
-    <dd><p>backend payload.</p>
-</dd><dt class="property-required"
+    <dd>backend payload.</dd><dt class="property-required"
             title="Required">
         <span id="path_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_go" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -1907,8 +2145,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>path.</p>
-</dd></dl>
+    <dd>path.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="backend_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backend_hcl" style="color: inherit; text-decoration: inherit;">backend</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gatewayingressrulehttppathbackend">object</a></span>
+    </dt>
+    <dd>backend payload.</dd><dt class="property-required"
+            title="Required">
+        <span id="path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_hcl" style="color: inherit; text-decoration: inherit;">path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1922,8 +2181,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttppathbackend">Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path<wbr>Backend</a></span>
     </dt>
-    <dd><p>backend payload.</p>
-</dd><dt class="property-required"
+    <dd>backend payload.</dd><dt class="property-required"
             title="Required">
         <span id="path_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_java" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1931,8 +2189,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>path.</p>
-</dd></dl>
+    <dd>path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1946,8 +2203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttppathbackend">Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path<wbr>Backend</a></span>
     </dt>
-    <dd><p>backend payload.</p>
-</dd><dt class="property-required"
+    <dd>backend payload.</dd><dt class="property-required"
             title="Required">
         <span id="path_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_nodejs" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1955,8 +2211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>path.</p>
-</dd></dl>
+    <dd>path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1970,8 +2225,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttppathbackend">Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path<wbr>Backend</a></span>
     </dt>
-    <dd><p>backend payload.</p>
-</dd><dt class="property-required"
+    <dd>backend payload.</dd><dt class="property-required"
             title="Required">
         <span id="path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_python" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1979,8 +2233,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>path.</p>
-</dd></dl>
+    <dd>path.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1994,8 +2247,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gatewayingressrulehttppathbackend">Property Map</a></span>
     </dt>
-    <dd><p>backend payload.</p>
-</dd><dt class="property-required"
+    <dd>backend payload.</dd><dt class="property-required"
             title="Required">
         <span id="path_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_yaml" style="color: inherit; text-decoration: inherit;">path</a>
@@ -2003,12 +2255,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>path.</p>
-</dd></dl>
+    <dd>path.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="gatewayingressrulehttppathbackend">Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path<wbr>Backend</h4>
+<h4 id="gatewayingressrulehttppathbackend">
+Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path<wbr>Backend<pulumi-choosable type="language" values="python,go" class="inline">, Gateway<wbr>Ingress<wbr>Rule<wbr>Http<wbr>Path<wbr>Backend<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2020,8 +2273,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>backend name.</p>
-</dd><dt class="property-required"
+    <dd>backend name.</dd><dt class="property-required"
             title="Required">
         <span id="serviceport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceport_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Port</a>
@@ -2029,8 +2281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>backend port.</p>
-</dd></dl>
+    <dd>backend port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2044,8 +2295,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>backend name.</p>
-</dd><dt class="property-required"
+    <dd>backend name.</dd><dt class="property-required"
             title="Required">
         <span id="serviceport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceport_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Port</a>
@@ -2053,8 +2303,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>backend port.</p>
-</dd></dl>
+    <dd>backend port.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="service_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_name_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>backend name.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_port_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>backend port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2068,8 +2339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>backend name.</p>
-</dd><dt class="property-required"
+    <dd>backend name.</dd><dt class="property-required"
             title="Required">
         <span id="serviceport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceport_java" style="color: inherit; text-decoration: inherit;">service<wbr>Port</a>
@@ -2077,8 +2347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>backend port.</p>
-</dd></dl>
+    <dd>backend port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2092,8 +2361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>backend name.</p>
-</dd><dt class="property-required"
+    <dd>backend name.</dd><dt class="property-required"
             title="Required">
         <span id="serviceport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceport_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Port</a>
@@ -2101,8 +2369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>backend port.</p>
-</dd></dl>
+    <dd>backend port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2116,8 +2383,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>backend name.</p>
-</dd><dt class="property-required"
+    <dd>backend name.</dd><dt class="property-required"
             title="Required">
         <span id="service_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_port_python" style="color: inherit; text-decoration: inherit;">service_<wbr>port</a>
@@ -2125,8 +2391,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>backend port.</p>
-</dd></dl>
+    <dd>backend port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2140,8 +2405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>backend name.</p>
-</dd><dt class="property-required"
+    <dd>backend name.</dd><dt class="property-required"
             title="Required">
         <span id="serviceport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serviceport_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Port</a>
@@ -2149,12 +2413,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>backend port.</p>
-</dd></dl>
+    <dd>backend port.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="gatewayingresstl">Gateway<wbr>Ingress<wbr>Tl</h4>
+<h4 id="gatewayingresstl">
+Gateway<wbr>Ingress<wbr>Tl<pulumi-choosable type="language" values="python,go" class="inline">, Gateway<wbr>Ingress<wbr>Tl<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2166,8 +2431,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-required"
+    <dd>certificate ID.</dd><dt class="property-required"
             title="Required">
         <span id="hosts_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosts_csharp" style="color: inherit; text-decoration: inherit;">Hosts</a>
@@ -2175,8 +2439,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>host names.</p>
-</dd><dt class="property-optional"
+    <dd>host names.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -2184,8 +2447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>secret name, if you use a certificate, you don't need to fill in this field.</p>
-</dd></dl>
+    <dd>secret name, if you use a certificate, you don't need to fill in this field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2199,8 +2461,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-required"
+    <dd>certificate ID.</dd><dt class="property-required"
             title="Required">
         <span id="hosts_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosts_go" style="color: inherit; text-decoration: inherit;">Hosts</a>
@@ -2208,8 +2469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>host names.</p>
-</dd><dt class="property-optional"
+    <dd>host names.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -2217,8 +2477,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>secret name, if you use a certificate, you don't need to fill in this field.</p>
-</dd></dl>
+    <dd>secret name, if you use a certificate, you don't need to fill in this field.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_id_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>certificate ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="hosts_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosts_hcl" style="color: inherit; text-decoration: inherit;">hosts</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>host names.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="secret_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>secret name, if you use a certificate, you don't need to fill in this field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2232,8 +2521,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-required"
+    <dd>certificate ID.</dd><dt class="property-required"
             title="Required">
         <span id="hosts_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosts_java" style="color: inherit; text-decoration: inherit;">hosts</a>
@@ -2241,8 +2529,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>host names.</p>
-</dd><dt class="property-optional"
+    <dd>host names.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -2250,8 +2537,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>secret name, if you use a certificate, you don't need to fill in this field.</p>
-</dd></dl>
+    <dd>secret name, if you use a certificate, you don't need to fill in this field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2265,8 +2551,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-required"
+    <dd>certificate ID.</dd><dt class="property-required"
             title="Required">
         <span id="hosts_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosts_nodejs" style="color: inherit; text-decoration: inherit;">hosts</a>
@@ -2274,8 +2559,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>host names.</p>
-</dd><dt class="property-optional"
+    <dd>host names.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -2283,8 +2567,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>secret name, if you use a certificate, you don't need to fill in this field.</p>
-</dd></dl>
+    <dd>secret name, if you use a certificate, you don't need to fill in this field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2298,8 +2581,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-required"
+    <dd>certificate ID.</dd><dt class="property-required"
             title="Required">
         <span id="hosts_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosts_python" style="color: inherit; text-decoration: inherit;">hosts</a>
@@ -2307,8 +2589,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>host names.</p>
-</dd><dt class="property-optional"
+    <dd>host names.</dd><dt class="property-optional"
             title="Optional">
         <span id="secret_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
@@ -2316,8 +2597,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>secret name, if you use a certificate, you don't need to fill in this field.</p>
-</dd></dl>
+    <dd>secret name, if you use a certificate, you don't need to fill in this field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2331,8 +2611,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>certificate ID.</p>
-</dd><dt class="property-required"
+    <dd>certificate ID.</dd><dt class="property-required"
             title="Required">
         <span id="hosts_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosts_yaml" style="color: inherit; text-decoration: inherit;">hosts</a>
@@ -2340,8 +2619,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>host names.</p>
-</dd><dt class="property-optional"
+    <dd>host names.</dd><dt class="property-optional"
             title="Optional">
         <span id="secretname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -2349,8 +2627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>secret name, if you use a certificate, you don't need to fill in this field.</p>
-</dd></dl>
+    <dd>secret name, if you use a certificate, you don't need to fill in this field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2359,11 +2636,13 @@ The following state arguments are supported:
 
 
 tem gateway can be imported using the id, e.g.
-
 ```sh
 $ pulumi import tencentcloud:Tem/gateway:Gateway gateway environmentId#gatewayName
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2375,7 +2654,6 @@ $ pulumi import tencentcloud:Tem/gateway:Gateway gateway environmentId#gatewayNa
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

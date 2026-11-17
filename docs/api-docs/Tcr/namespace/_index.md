@@ -2,9 +2,11 @@
 ---
 title: "Namespace"
 title_tag: "tencentcloud.Tcr.Namespace"
-meta_desc: "Documentation for the tencentcloud.Tcr.Namespace resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create tcr namespace."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,19 +20,26 @@ Use this resource to create tcr namespace.
 
 ### Create a tcr namespace instance
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
+const example = new tencentcloud.tcr.Instance("example", {
+    name: "tf-example-tcr",
     instanceType: "premium",
     tags: {
         createdBy: "terraform",
     },
 });
-const exampleNamespace = new tencentcloud.tcr.Namespace("exampleNamespace", {
-    instanceId: exampleInstance.id,
+const exampleNamespace = new tencentcloud.tcr.Namespace("example", {
+    instanceId: example.id,
+    name: "example",
     isPublic: true,
     isAutoScan: true,
     isPreventVul: true,
@@ -38,27 +47,96 @@ const exampleNamespace = new tencentcloud.tcr.Namespace("exampleNamespace", {
     cveWhitelistItems: [{
         cveId: "cve-xxxxx",
     }],
+    tags: {
+        env: "production",
+        createdBy: "terraform",
+    },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_instance = tencentcloud.tcr.Instance("exampleInstance",
+example = tencentcloud.tcr.Instance("example",
+    name="tf-example-tcr",
     instance_type="premium",
     tags={
         "createdBy": "terraform",
     })
-example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
-    instance_id=example_instance.id,
+example_namespace = tencentcloud.tcr.Namespace("example",
+    instance_id=example.id,
+    name="example",
     is_public=True,
     is_auto_scan=True,
     is_prevent_vul=True,
     severity="medium",
-    cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
-        cve_id="cve-xxxxx",
-    )])
+    cve_whitelist_items=[{
+        "cve_id": "cve-xxxxx",
+    }],
+    tags={
+        "env": "production",
+        "createdBy": "terraform",
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcr"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example, err := tcr.NewInstance(ctx, "example", &tcr.InstanceArgs{
+			Name:         pulumi.String("tf-example-tcr"),
+			InstanceType: pulumi.String("premium"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = tcr.NewNamespace(ctx, "example", &tcr.NamespaceArgs{
+			InstanceId:   example.ID().ToIDOutput().ToStringOutput(),
+			Name:         pulumi.String("example"),
+			IsPublic:     pulumi.Bool(true),
+			IsAutoScan:   pulumi.Bool(true),
+			IsPreventVul: pulumi.Bool(true),
+			Severity:     pulumi.String("medium"),
+			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+				&tcr.NamespaceCveWhitelistItemArgs{
+					CveId: pulumi.String("cve-xxxxx"),
+				},
+			},
+			Tags: pulumi.StringMap{
+				"env":       pulumi.String("production"),
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -67,8 +145,9 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new()
+    var example = new Tencentcloud.Tcr.Instance("example", new()
     {
+        Name = "tf-example-tcr",
         InstanceType = "premium",
         Tags = 
         {
@@ -76,9 +155,10 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new()
+    var exampleNamespace = new Tencentcloud.Tcr.Namespace("example", new()
     {
-        InstanceId = exampleInstance.Id,
+        InstanceId = example.Id,
+        Name = "example",
         IsPublic = true,
         IsAutoScan = true,
         IsPreventVul = true,
@@ -90,48 +170,20 @@ return await Deployment.RunAsync(() =>
                 CveId = "cve-xxxxx",
             },
         },
+        Tags = 
+        {
+            { "env", "production" },
+            { "createdBy", "terraform" },
+        },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
-			InstanceType: pulumi.String("premium"),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
-			InstanceId:   exampleInstance.ID(),
-			IsPublic:     pulumi.Bool(true),
-			IsAutoScan:   pulumi.Bool(true),
-			IsPreventVul: pulumi.Bool(true),
-			Severity:     pulumi.String("medium"),
-			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
-				&tcr.NamespaceCveWhitelistItemArgs{
-					CveId: pulumi.String("cve-xxxxx"),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -143,8 +195,8 @@ import com.pulumi.tencentcloud.Tcr.InstanceArgs;
 import com.pulumi.tencentcloud.Tcr.Namespace;
 import com.pulumi.tencentcloud.Tcr.NamespaceArgs;
 import com.pulumi.tencentcloud.Tcr.inputs.NamespaceCveWhitelistItemArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -156,13 +208,15 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var exampleInstance = new Instance("exampleInstance", InstanceArgs.builder()        
+        var example = new Instance("example", InstanceArgs.builder()
+            .name("tf-example-tcr")
             .instanceType("premium")
             .tags(Map.of("createdBy", "terraform"))
             .build());
 
-        var exampleNamespace = new Namespace("exampleNamespace", NamespaceArgs.builder()        
-            .instanceId(exampleInstance.id())
+        var exampleNamespace = new Namespace("exampleNamespace", NamespaceArgs.builder()
+            .instanceId(example.id())
+            .name("example")
             .isPublic(true)
             .isAutoScan(true)
             .isPreventVul(true)
@@ -170,95 +224,177 @@ public class App {
             .cveWhitelistItems(NamespaceCveWhitelistItemArgs.builder()
                 .cveId("cve-xxxxx")
                 .build())
+            .tags(Map.ofEntries(
+                Map.entry("env", "production"),
+                Map.entry("createdBy", "terraform")
+            ))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  exampleInstance:
+  example:
     type: tencentcloud:Tcr:Instance
     properties:
+      name: tf-example-tcr
       instanceType: premium
       tags:
         createdBy: terraform
   exampleNamespace:
     type: tencentcloud:Tcr:Namespace
+    name: example
     properties:
-      instanceId: ${exampleInstance.id}
+      instanceId: ${example.id}
+      name: example
       isPublic: true
       isAutoScan: true
       isPreventVul: true
       severity: medium
       cveWhitelistItems:
         - cveId: cve-xxxxx
+      tags:
+        env: production
+        createdBy: terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tcr_instance" "example" {
+  name          = "tf-example-tcr"
+  instance_type = "premium"
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+resource "tencentcloud_tcr_namespace" "example" {
+  instance_id    = tencentcloud_tcr_instance.example.id
+  name           = "example"
+  is_public      = true
+  is_auto_scan   = true
+  is_prevent_vul = true
+  severity       = "medium"
+  cve_whitelist_items {
+    cve_id = "cve-xxxxx"
+  }
+  tags = {
+    "env"       = "production"
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateNamespace](https://www.tencentcloud.com/document/api/1051/50698)
+* Read: [DescribeNamespaces](https://www.tencentcloud.com/document/api/1051/50693)
+* Update:
+  - [ModifyNamespace](https://www.tencentcloud.com/document/api/1051/50692)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Delete:
+  - [DeleteNamespace](https://www.tencentcloud.com/document/api/1051/50696)
+  - [DescribeNamespaces](https://www.tencentcloud.com/document/api/1051/50693)
 
 
 ## Create Namespace Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-              <span class="nx">cve_whitelist_items</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tcr.NamespaceCveWhitelistItemArgs]]</span> = None<span class="p">,</span>
               <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">cve_whitelist_items</span><span class="p">:</span> <span class="nx">Optional[Sequence[NamespaceCveWhitelistItemArgs]]</span> = None<span class="p">,</span>
               <span class="nx">is_auto_scan</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
               <span class="nx">is_prevent_vul</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
               <span class="nx">is_public</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
               <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">severity</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+              <span class="nx">severity</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewNamespace</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Namespace</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewNamespace</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Namespace</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcr:Namespace</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcr:Namespace</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tcr_namespace&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -279,7 +415,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -396,11 +532,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Namespace Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Namespace resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -416,17 +560,15 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cvewhitelistitems_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvewhitelistitems_csharp" style="color: inherit; text-decoration: inherit;">Cve<wbr>Whitelist<wbr>Items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#namespacecvewhitelistitem">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcr.<wbr>Inputs.<wbr>Namespace<wbr>Cve<wbr>Whitelist<wbr>Item<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#namespacecvewhitelistitem">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcr.<wbr>Inputs.<wbr>Namespace<wbr>Cve<wbr>Whitelist<wbr>Item&gt;</a></span>
     </dt>
-    <dd><p>Vulnerability Whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Vulnerability Whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="isautoscan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautoscan_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Auto<wbr>Scan</a>
@@ -434,8 +576,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispreventvul_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispreventvul_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Prevent<wbr>Vul</a>
@@ -443,8 +584,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispublic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispublic_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Public</a>
@@ -452,8 +592,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate that the namespace is public or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -461,8 +600,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</dd><dt class="property-optional"
             title="Optional">
         <span id="severity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#severity_csharp" style="color: inherit; text-decoration: inherit;">Severity</a>
@@ -470,8 +608,15 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</p>
-</dd></dl>
+    <dd>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
+    </dt>
+    <dd>Tag key-value pairs for the TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -485,8 +630,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cvewhitelistitems_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvewhitelistitems_go" style="color: inherit; text-decoration: inherit;">Cve<wbr>Whitelist<wbr>Items</a>
@@ -494,8 +638,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#namespacecvewhitelistitem">[]Namespace<wbr>Cve<wbr>Whitelist<wbr>Item<wbr>Args</a></span>
     </dt>
-    <dd><p>Vulnerability Whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Vulnerability Whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="isautoscan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautoscan_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Auto<wbr>Scan</a>
@@ -503,8 +646,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispreventvul_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispreventvul_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Prevent<wbr>Vul</a>
@@ -512,8 +654,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispublic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispublic_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Public</a>
@@ -521,8 +662,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate that the namespace is public or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -530,8 +670,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</dd><dt class="property-optional"
             title="Optional">
         <span id="severity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#severity_go" style="color: inherit; text-decoration: inherit;">Severity</a>
@@ -539,8 +678,85 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</p>
-</dd></dl>
+    <dd>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map[string]string</span>
+    </dt>
+    <dd>Tag key-value pairs for the TCR namespace.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TCR instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cve_whitelist_items_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cve_whitelist_items_hcl" style="color: inherit; text-decoration: inherit;">cve_<wbr>whitelist_<wbr>items</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespacecvewhitelistitem">list(object)</a></span>
+    </dt>
+    <dd>Vulnerability Whitelist.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_auto_scan_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_auto_scan_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>auto_<wbr>scan</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_prevent_vul_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_prevent_vul_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>prevent_<wbr>vul</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_public_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_public_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>public</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate that the namespace is public or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="severity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#severity_hcl" style="color: inherit; text-decoration: inherit;">severity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag key-value pairs for the TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -554,17 +770,15 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cvewhitelistitems_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvewhitelistitems_java" style="color: inherit; text-decoration: inherit;">cve<wbr>Whitelist<wbr>Items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#namespacecvewhitelistitem">List&lt;Namespace<wbr>Cve<wbr>Whitelist<wbr>Item<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#namespacecvewhitelistitem">List&lt;Namespace<wbr>Cve<wbr>Whitelist<wbr>Item&gt;</a></span>
     </dt>
-    <dd><p>Vulnerability Whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Vulnerability Whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="isautoscan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautoscan_java" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Scan</a>
@@ -572,8 +786,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispreventvul_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispreventvul_java" style="color: inherit; text-decoration: inherit;">is<wbr>Prevent<wbr>Vul</a>
@@ -581,8 +794,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispublic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispublic_java" style="color: inherit; text-decoration: inherit;">is<wbr>Public</a>
@@ -590,8 +802,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate that the namespace is public or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -599,8 +810,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</dd><dt class="property-optional"
             title="Optional">
         <span id="severity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#severity_java" style="color: inherit; text-decoration: inherit;">severity</a>
@@ -608,8 +818,15 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</p>
-</dd></dl>
+    <dd>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
+    </dt>
+    <dd>Tag key-value pairs for the TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -623,17 +840,15 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cvewhitelistitems_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvewhitelistitems_nodejs" style="color: inherit; text-decoration: inherit;">cve<wbr>Whitelist<wbr>Items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#namespacecvewhitelistitem">Namespace<wbr>Cve<wbr>Whitelist<wbr>Item<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#namespacecvewhitelistitem">Namespace<wbr>Cve<wbr>Whitelist<wbr>Item[]</a></span>
     </dt>
-    <dd><p>Vulnerability Whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Vulnerability Whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="isautoscan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautoscan_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Scan</a>
@@ -641,8 +856,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispreventvul_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispreventvul_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Prevent<wbr>Vul</a>
@@ -650,8 +864,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispublic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispublic_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Public</a>
@@ -659,8 +872,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate that the namespace is public or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -668,8 +880,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</dd><dt class="property-optional"
             title="Optional">
         <span id="severity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#severity_nodejs" style="color: inherit; text-decoration: inherit;">severity</a>
@@ -677,8 +888,15 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</p>
-</dd></dl>
+    <dd>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">{[key: string]: string}</span>
+    </dt>
+    <dd>Tag key-value pairs for the TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -692,17 +910,15 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cve_whitelist_items_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cve_whitelist_items_python" style="color: inherit; text-decoration: inherit;">cve_<wbr>whitelist_<wbr>items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#namespacecvewhitelistitem">Namespace<wbr>Cve<wbr>Whitelist<wbr>Item<wbr>Args]</a></span>
+        <span class="property-type"><a href="#namespacecvewhitelistitem">Sequence[Namespace<wbr>Cve<wbr>Whitelist<wbr>Item<wbr>Args]</a></span>
     </dt>
-    <dd><p>Vulnerability Whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Vulnerability Whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_auto_scan_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_auto_scan_python" style="color: inherit; text-decoration: inherit;">is_<wbr>auto_<wbr>scan</a>
@@ -710,8 +926,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_prevent_vul_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_prevent_vul_python" style="color: inherit; text-decoration: inherit;">is_<wbr>prevent_<wbr>vul</a>
@@ -719,8 +934,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_public_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_public_python" style="color: inherit; text-decoration: inherit;">is_<wbr>public</a>
@@ -728,8 +942,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate that the namespace is public or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -737,8 +950,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</dd><dt class="property-optional"
             title="Optional">
         <span id="severity_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#severity_python" style="color: inherit; text-decoration: inherit;">severity</a>
@@ -746,8 +958,15 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</p>
-</dd></dl>
+    <dd>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Mapping[str, str]</span>
+    </dt>
+    <dd>Tag key-value pairs for the TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -761,8 +980,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cvewhitelistitems_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cvewhitelistitems_yaml" style="color: inherit; text-decoration: inherit;">cve<wbr>Whitelist<wbr>Items</a>
@@ -770,8 +988,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#namespacecvewhitelistitem">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Vulnerability Whitelist.</p>
-</dd><dt class="property-optional"
+    <dd>Vulnerability Whitelist.</dd><dt class="property-optional"
             title="Optional">
         <span id="isautoscan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isautoscan_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Scan</a>
@@ -779,8 +996,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispreventvul_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispreventvul_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Prevent<wbr>Vul</a>
@@ -788,8 +1004,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispublic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispublic_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Public</a>
@@ -797,8 +1012,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate that the namespace is public or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -806,8 +1020,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</dd><dt class="property-optional"
             title="Optional">
         <span id="severity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#severity_yaml" style="color: inherit; text-decoration: inherit;">severity</a>
@@ -815,8 +1028,15 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</p>
-</dd></dl>
+    <dd>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String&gt;</span>
+    </dt>
+    <dd>Tag key-value pairs for the TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -837,8 +1057,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -852,8 +1071,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -867,8 +1099,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -882,8 +1113,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -897,8 +1127,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -912,8 +1141,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -923,126 +1151,166 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Namespace resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">NamespaceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Namespace</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">NamespaceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Namespace</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">cve_whitelist_items</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tcr.NamespaceCveWhitelistItemArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">cve_whitelist_items</span><span class="p">:</span> <span class="nx">Optional[Sequence[NamespaceCveWhitelistItemArgs]]</span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">is_auto_scan</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">is_prevent_vul</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">is_public</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">severity</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Namespace</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">severity</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">) -&gt;</span> Namespace</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetNamespace<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">NamespaceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Namespace</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetNamespace<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">NamespaceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Namespace</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Namespace</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NamespaceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Namespace</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NamespaceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Namespace</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NamespaceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Namespace</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NamespaceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingNamespace</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tcr:Namespace</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tcr_namespace</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NamespaceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NamespaceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1050,28 +1318,31 @@ Get an existing Namespace resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NamespaceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1079,28 +1350,31 @@ Get an existing Namespace resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NamespaceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1118,10 +1392,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cvewhitelistitems_csharp" style="color: inherit; text-decoration: inherit;">Cve<wbr>Whitelist<wbr>Items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#namespacecvewhitelistitem">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcr.<wbr>Inputs.<wbr>Namespace<wbr>Cve<wbr>Whitelist<wbr>Item<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#namespacecvewhitelistitem">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcr.<wbr>Inputs.<wbr>Namespace<wbr>Cve<wbr>Whitelist<wbr>Item&gt;</a></span>
     </dt>
-    <dd><p>Vulnerability Whitelist.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vulnerability Whitelist.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1129,8 +1402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isautoscan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isautoscan_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Auto<wbr>Scan</a>
@@ -1138,8 +1410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ispreventvul_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ispreventvul_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Prevent<wbr>Vul</a>
@@ -1147,8 +1418,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ispublic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ispublic_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Public</a>
@@ -1156,8 +1426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate that the namespace is public or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1165,8 +1434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_severity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_severity_csharp" style="color: inherit; text-decoration: inherit;">Severity</a>
@@ -1174,8 +1442,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</p>
-</dd></dl>
+    <dd>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
+    </dt>
+    <dd>Tag key-value pairs for the TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1189,8 +1464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#namespacecvewhitelistitem">[]Namespace<wbr>Cve<wbr>Whitelist<wbr>Item<wbr>Args</a></span>
     </dt>
-    <dd><p>Vulnerability Whitelist.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vulnerability Whitelist.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1198,8 +1472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isautoscan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isautoscan_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Auto<wbr>Scan</a>
@@ -1207,8 +1480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ispreventvul_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ispreventvul_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Prevent<wbr>Vul</a>
@@ -1216,8 +1488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ispublic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ispublic_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Public</a>
@@ -1225,8 +1496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate that the namespace is public or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1234,8 +1504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_severity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_severity_go" style="color: inherit; text-decoration: inherit;">Severity</a>
@@ -1243,8 +1512,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</p>
-</dd></dl>
+    <dd>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map[string]string</span>
+    </dt>
+    <dd>Tag key-value pairs for the TCR namespace.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_cve_whitelist_items_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cve_whitelist_items_hcl" style="color: inherit; text-decoration: inherit;">cve_<wbr>whitelist_<wbr>items</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespacecvewhitelistitem">list(object)</a></span>
+    </dt>
+    <dd>Vulnerability Whitelist.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TCR instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_auto_scan_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_auto_scan_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>auto_<wbr>scan</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_prevent_vul_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_prevent_vul_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>prevent_<wbr>vul</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_public_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_public_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>public</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate that the namespace is public or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_severity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_severity_hcl" style="color: inherit; text-decoration: inherit;">severity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag key-value pairs for the TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1256,10 +1602,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cvewhitelistitems_java" style="color: inherit; text-decoration: inherit;">cve<wbr>Whitelist<wbr>Items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#namespacecvewhitelistitem">List&lt;Namespace<wbr>Cve<wbr>Whitelist<wbr>Item<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#namespacecvewhitelistitem">List&lt;Namespace<wbr>Cve<wbr>Whitelist<wbr>Item&gt;</a></span>
     </dt>
-    <dd><p>Vulnerability Whitelist.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vulnerability Whitelist.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1267,8 +1612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isautoscan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isautoscan_java" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Scan</a>
@@ -1276,8 +1620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ispreventvul_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ispreventvul_java" style="color: inherit; text-decoration: inherit;">is<wbr>Prevent<wbr>Vul</a>
@@ -1285,8 +1628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ispublic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ispublic_java" style="color: inherit; text-decoration: inherit;">is<wbr>Public</a>
@@ -1294,8 +1636,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate that the namespace is public or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1303,8 +1644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_severity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_severity_java" style="color: inherit; text-decoration: inherit;">severity</a>
@@ -1312,8 +1652,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</p>
-</dd></dl>
+    <dd>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
+    </dt>
+    <dd>Tag key-value pairs for the TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1325,10 +1672,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cvewhitelistitems_nodejs" style="color: inherit; text-decoration: inherit;">cve<wbr>Whitelist<wbr>Items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#namespacecvewhitelistitem">Namespace<wbr>Cve<wbr>Whitelist<wbr>Item<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#namespacecvewhitelistitem">Namespace<wbr>Cve<wbr>Whitelist<wbr>Item[]</a></span>
     </dt>
-    <dd><p>Vulnerability Whitelist.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vulnerability Whitelist.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1336,8 +1682,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isautoscan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isautoscan_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Scan</a>
@@ -1345,8 +1690,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ispreventvul_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ispreventvul_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Prevent<wbr>Vul</a>
@@ -1354,8 +1698,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ispublic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ispublic_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Public</a>
@@ -1363,8 +1706,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate that the namespace is public or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1372,8 +1714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_severity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_severity_nodejs" style="color: inherit; text-decoration: inherit;">severity</a>
@@ -1381,8 +1722,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</p>
-</dd></dl>
+    <dd>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">{[key: string]: string}</span>
+    </dt>
+    <dd>Tag key-value pairs for the TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1394,10 +1742,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cve_whitelist_items_python" style="color: inherit; text-decoration: inherit;">cve_<wbr>whitelist_<wbr>items</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#namespacecvewhitelistitem">Namespace<wbr>Cve<wbr>Whitelist<wbr>Item<wbr>Args]</a></span>
+        <span class="property-type"><a href="#namespacecvewhitelistitem">Sequence[Namespace<wbr>Cve<wbr>Whitelist<wbr>Item<wbr>Args]</a></span>
     </dt>
-    <dd><p>Vulnerability Whitelist.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vulnerability Whitelist.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1405,8 +1752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_auto_scan_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_auto_scan_python" style="color: inherit; text-decoration: inherit;">is_<wbr>auto_<wbr>scan</a>
@@ -1414,8 +1760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_prevent_vul_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_prevent_vul_python" style="color: inherit; text-decoration: inherit;">is_<wbr>prevent_<wbr>vul</a>
@@ -1423,8 +1768,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_public_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_public_python" style="color: inherit; text-decoration: inherit;">is_<wbr>public</a>
@@ -1432,8 +1776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate that the namespace is public or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1441,8 +1784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_severity_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_severity_python" style="color: inherit; text-decoration: inherit;">severity</a>
@@ -1450,8 +1792,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</p>
-</dd></dl>
+    <dd>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Mapping[str, str]</span>
+    </dt>
+    <dd>Tag key-value pairs for the TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1465,8 +1814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#namespacecvewhitelistitem">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Vulnerability Whitelist.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Vulnerability Whitelist.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1474,8 +1822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TCR instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TCR instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isautoscan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isautoscan_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Auto<wbr>Scan</a>
@@ -1483,8 +1830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Scanning level, <code>True</code> is automatic, <code>False</code> is manual. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ispreventvul_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ispreventvul_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Prevent<wbr>Vul</a>
@@ -1492,8 +1838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blocking switch, <code>True</code> is open, <code>False</code> is closed. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ispublic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ispublic_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Public</a>
@@ -1501,8 +1846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate that the namespace is public or not. Default is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicate that the namespace is public or not. Default is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1510,8 +1854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the TCR namespace. Valid length is [2~30]. It can only contain lowercase letters, numbers and separators (<code>.</code>, <code>_</code>, <code>-</code>), and cannot start, end or continue with separators.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_severity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_severity_yaml" style="color: inherit; text-decoration: inherit;">severity</a>
@@ -1519,8 +1862,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</p>
-</dd></dl>
+    <dd>Block vulnerability level, currently only supports <code>low</code>, <code>medium</code>, <code>high</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String&gt;</span>
+    </dt>
+    <dd>Tag key-value pairs for the TCR namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1535,7 +1885,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="namespacecvewhitelistitem">Namespace<wbr>Cve<wbr>Whitelist<wbr>Item</h4>
+<h4 id="namespacecvewhitelistitem">
+Namespace<wbr>Cve<wbr>Whitelist<wbr>Item<pulumi-choosable type="language" values="python,go" class="inline">, Namespace<wbr>Cve<wbr>Whitelist<wbr>Item<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1547,8 +1899,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vulnerability Whitelist ID.</p>
-</dd></dl>
+    <dd>Vulnerability Whitelist ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1562,8 +1913,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vulnerability Whitelist ID.</p>
-</dd></dl>
+    <dd>Vulnerability Whitelist ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="cve_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cve_id_hcl" style="color: inherit; text-decoration: inherit;">cve_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vulnerability Whitelist ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1577,8 +1941,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vulnerability Whitelist ID.</p>
-</dd></dl>
+    <dd>Vulnerability Whitelist ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1592,8 +1955,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vulnerability Whitelist ID.</p>
-</dd></dl>
+    <dd>Vulnerability Whitelist ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1607,8 +1969,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vulnerability Whitelist ID.</p>
-</dd></dl>
+    <dd>Vulnerability Whitelist ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1622,8 +1983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vulnerability Whitelist ID.</p>
-</dd></dl>
+    <dd>Vulnerability Whitelist ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1639,6 +1999,9 @@ $ pulumi import tencentcloud:Tcr/namespace:Namespace example tcr_instance_id#nam
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1648,7 +2011,6 @@ $ pulumi import tencentcloud:Tcr/namespace:Namespace example tcr_instance_id#nam
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

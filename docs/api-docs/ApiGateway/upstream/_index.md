@@ -2,9 +2,11 @@
 ---
 title: "Upstream"
 title_tag: "tencentcloud.ApiGateway.Upstream"
-meta_desc: "Documentation for the tencentcloud.ApiGateway.Upstream resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a apigateway upstream"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,20 +20,24 @@ Provides a resource to create a apigateway upstream
 
 ### Create a basic VPC channel
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
+const zones = tencentcloud.availability.getZonesByProduct({
     product: "cvm",
 });
-const images = tencentcloud.Images.getInstance({
+const images = tencentcloud.images.getInstance({
     imageTypes: ["PUBLIC_IMAGE"],
     imageNameRegex: "Final",
 });
-const instanceTypes = tencentcloud.Instance.getTypes({
+const instanceTypes = tencentcloud.instance.getTypes({
     filters: [{
         name: "instance-family",
         values: ["S5"],
@@ -39,14 +45,18 @@ const instanceTypes = tencentcloud.Instance.getTypes({
     cpuCoreCount: 2,
     excludeSoldOut: true,
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     availabilityZone: zones.then(zones => zones.zones?.[3]?.name),
+    name: "subnet-example",
     vpcId: vpc.id,
     cidrBlock: "10.0.0.0/16",
     isMulticast: false,
 });
-const exampleInstance = new tencentcloud.instance.Instance("exampleInstance", {
+const example = new tencentcloud.instance.Instance("example", {
     instanceName: "tf_example",
     availabilityZone: zones.then(zones => zones.zones?.[3]?.name),
     imageId: images.then(images => images.images?.[0]?.imageId),
@@ -66,7 +76,7 @@ const exampleInstance = new tencentcloud.instance.Instance("exampleInstance", {
         tagKey: "tagValue",
     },
 });
-const exampleUpstream = new tencentcloud.apigateway.Upstream("exampleUpstream", {
+const exampleUpstream = new tencentcloud.apigateway.Upstream("example", {
     scheme: "HTTP",
     algorithm: "ROUND-ROBIN",
     uniqVpcId: vpc.id,
@@ -78,7 +88,7 @@ const exampleUpstream = new tencentcloud.apigateway.Upstream("exampleUpstream", 
         host: "1.1.1.1",
         port: 9090,
         weight: 10,
-        vmInstanceId: exampleInstance.id,
+        vmInstanceId: example.id,
         tags: ["tags"],
     }],
     tags: {
@@ -86,27 +96,35 @@ const exampleUpstream = new tencentcloud.apigateway.Upstream("exampleUpstream", 
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="cvm")
-images = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+zones = tencentcloud.availability.get_zones_by_product(product="cvm")
+images = tencentcloud.images.get_instance(image_types=["PUBLIC_IMAGE"],
     image_name_regex="Final")
-instance_types = tencentcloud.Instance.get_types(filters=[tencentcloud.instance.GetTypesFilterArgs(
-        name="instance-family",
-        values=["S5"],
-    )],
+instance_types = tencentcloud.instance.get_types(filters=[{
+        "name": "instance-family",
+        "values": ["S5"],
+    }],
     cpu_core_count=2,
     exclude_sold_out=True)
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     availability_zone=zones.zones[3].name,
+    name="subnet-example",
     vpc_id=vpc.id,
     cidr_block="10.0.0.0/16",
     is_multicast=False)
-example_instance = tencentcloud.instance.Instance("exampleInstance",
+example = tencentcloud.instance.Instance("example",
     instance_name="tf_example",
     availability_zone=zones.zones[3].name,
     image_id=images.images[0].image_id,
@@ -117,15 +135,15 @@ example_instance = tencentcloud.instance.Instance("exampleInstance",
     project_id=0,
     vpc_id=vpc.id,
     subnet_id=subnet.id,
-    data_disks=[tencentcloud.instance.InstanceDataDiskArgs(
-        data_disk_type="CLOUD_PREMIUM",
-        data_disk_size=50,
-        encrypt=False,
-    )],
+    data_disks=[{
+        "data_disk_type": "CLOUD_PREMIUM",
+        "data_disk_size": 50,
+        "encrypt": False,
+    }],
     tags={
         "tagKey": "tagValue",
     })
-example_upstream = tencentcloud.api_gateway.Upstream("exampleUpstream",
+example_upstream = tencentcloud.apigateway.Upstream("example",
     scheme="HTTP",
     algorithm="ROUND-ROBIN",
     uniq_vpc_id=vpc.id,
@@ -133,22 +151,148 @@ example_upstream = tencentcloud.api_gateway.Upstream("exampleUpstream",
     upstream_description="desc.",
     upstream_type="IP_PORT",
     retries=5,
-    nodes=[tencentcloud.api_gateway.UpstreamNodeArgs(
-        host="1.1.1.1",
-        port=9090,
-        weight=10,
-        vm_instance_id=example_instance.id,
-        tags=["tags"],
-    )],
+    nodes=[{
+        "host": "1.1.1.1",
+        "port": 9090,
+        "weight": 10,
+        "vm_instance_id": example.id,
+        "tags": ["tags"],
+    }],
     tags={
         "createdBy": "terraform",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/instance"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "cvm",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		images2, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			ImageTypes: []string{
+				"PUBLIC_IMAGE",
+			},
+			ImageNameRegex: pulumi.StringRef("Final"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		instanceTypes, err := instance.GetTypes(ctx, &instance.GetTypesArgs{
+			Filters: []instance.GetTypesFilter{
+				{
+					Name: "instance-family",
+					Values: []string{
+						"S5",
+					},
+				},
+			},
+			CpuCoreCount:   pulumi.IntRef(2),
+			ExcludeSoldOut: pulumi.BoolRef(true),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			AvailabilityZone: pulumi.String(zones.Zones[3].Name),
+			Name:             pulumi.String("subnet-example"),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			CidrBlock:        pulumi.String("10.0.0.0/16"),
+			IsMulticast:      pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		example, err := instance.NewInstance(ctx, "example", &instance.InstanceArgs{
+			InstanceName:     pulumi.String("tf_example"),
+			AvailabilityZone: pulumi.String(zones.Zones[3].Name),
+			ImageId:          pulumi.String(images2.Images[0].ImageId),
+			InstanceType:     pulumi.String(instanceTypes.InstanceTypes[0].InstanceType),
+			SystemDiskType:   pulumi.String("CLOUD_PREMIUM"),
+			SystemDiskSize:   pulumi.Int(50),
+			Hostname:         pulumi.String("terraform"),
+			ProjectId:        pulumi.Int(0),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+			DataDisks: instance.InstanceDataDiskArray{
+				&instance.InstanceDataDiskArgs{
+					DataDiskType: pulumi.String("CLOUD_PREMIUM"),
+					DataDiskSize: pulumi.Int(50),
+					Encrypt:      pulumi.Bool(false),
+				},
+			},
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = apigateway.NewUpstream(ctx, "example", &apigateway.UpstreamArgs{
+			Scheme:              pulumi.String("HTTP"),
+			Algorithm:           pulumi.String("ROUND-ROBIN"),
+			UniqVpcId:           vpc2.ID().ToIDOutput().ToStringOutput(),
+			UpstreamName:        pulumi.String("tf_example"),
+			UpstreamDescription: pulumi.String("desc."),
+			UpstreamType:        pulumi.String("IP_PORT"),
+			Retries:             pulumi.Int(5),
+			Nodes: apigateway.UpstreamNodeArray{
+				&apigateway.UpstreamNodeArgs{
+					Host:         pulumi.String("1.1.1.1"),
+					Port:         pulumi.Int(9090),
+					Weight:       pulumi.Int(10),
+					VmInstanceId: example.ID().ToIDOutput().ToStringOutput(),
+					Tags: pulumi.StringArray{
+						pulumi.String("tags"),
+					},
+				},
+			},
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -186,18 +330,20 @@ return await Deployment.RunAsync(() =>
 
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-example",
         CidrBlock = "10.0.0.0/16",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[3]?.Name),
+        Name = "subnet-example",
         VpcId = vpc.Id,
         CidrBlock = "10.0.0.0/16",
         IsMulticast = false,
     });
 
-    var exampleInstance = new Tencentcloud.Instance.Instance("exampleInstance", new()
+    var example = new Tencentcloud.Instance.Instance("example", new()
     {
         InstanceName = "tf_example",
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[3]?.Name),
@@ -224,7 +370,7 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleUpstream = new Tencentcloud.ApiGateway.Upstream("exampleUpstream", new()
+    var exampleUpstream = new Tencentcloud.ApiGateway.Upstream("example", new()
     {
         Scheme = "HTTP",
         Algorithm = "ROUND-ROBIN",
@@ -240,7 +386,7 @@ return await Deployment.RunAsync(() =>
                 Host = "1.1.1.1",
                 Port = 9090,
                 Weight = 10,
-                VmInstanceId = exampleInstance.Id,
+                VmInstanceId = example.Id,
                 Tags = new[]
                 {
                     "tags",
@@ -255,121 +401,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-			Product: "cvm",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		images, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-			ImageTypes: []string{
-				"PUBLIC_IMAGE",
-			},
-			ImageNameRegex: pulumi.StringRef("Final"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		instanceTypes, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
-			Filters: []instance.GetTypesFilter{
-				{
-					Name: "instance-family",
-					Values: []string{
-						"S5",
-					},
-				},
-			},
-			CpuCoreCount:   pulumi.IntRef(2),
-			ExcludeSoldOut: pulumi.BoolRef(true),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			AvailabilityZone: pulumi.String(zones.Zones[3].Name),
-			VpcId:            vpc.ID(),
-			CidrBlock:        pulumi.String("10.0.0.0/16"),
-			IsMulticast:      pulumi.Bool(false),
-		})
-		if err != nil {
-			return err
-		}
-		exampleInstance, err := Instance.NewInstance(ctx, "exampleInstance", &Instance.InstanceArgs{
-			InstanceName:     pulumi.String("tf_example"),
-			AvailabilityZone: pulumi.String(zones.Zones[3].Name),
-			ImageId:          pulumi.String(images.Images[0].ImageId),
-			InstanceType:     pulumi.String(instanceTypes.InstanceTypes[0].InstanceType),
-			SystemDiskType:   pulumi.String("CLOUD_PREMIUM"),
-			SystemDiskSize:   pulumi.Int(50),
-			Hostname:         pulumi.String("terraform"),
-			ProjectId:        pulumi.Int(0),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
-			DataDisks: instance.InstanceDataDiskArray{
-				&instance.InstanceDataDiskArgs{
-					DataDiskType: pulumi.String("CLOUD_PREMIUM"),
-					DataDiskSize: pulumi.Int(50),
-					Encrypt:      pulumi.Bool(false),
-				},
-			},
-			Tags: pulumi.Map{
-				"tagKey": pulumi.Any("tagValue"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = ApiGateway.NewUpstream(ctx, "exampleUpstream", &ApiGateway.UpstreamArgs{
-			Scheme:              pulumi.String("HTTP"),
-			Algorithm:           pulumi.String("ROUND-ROBIN"),
-			UniqVpcId:           vpc.ID(),
-			UpstreamName:        pulumi.String("tf_example"),
-			UpstreamDescription: pulumi.String("desc."),
-			UpstreamType:        pulumi.String("IP_PORT"),
-			Retries:             pulumi.Int(5),
-			Nodes: apigateway.UpstreamNodeArray{
-				&apigateway.UpstreamNodeArgs{
-					Host:         pulumi.String("1.1.1.1"),
-					Port:         pulumi.Int(9090),
-					Weight:       pulumi.Int(10),
-					VmInstanceId: exampleInstance.ID(),
-					Tags: pulumi.StringArray{
-						pulumi.String("tags"),
-					},
-				},
-			},
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -382,18 +418,13 @@ import com.pulumi.tencentcloud.Images.ImagesFunctions;
 import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
 import com.pulumi.tencentcloud.Instance.InstanceFunctions;
 import com.pulumi.tencentcloud.Instance.inputs.GetTypesArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
-import com.pulumi.tencentcloud.Instance.Instance;
-import com.pulumi.tencentcloud.Instance.InstanceArgs;
+import com.pulumi.tencentcloud.Instance.inputs.GetTypesFilterArgs;
 import com.pulumi.tencentcloud.Instance.inputs.InstanceDataDiskArgs;
 import com.pulumi.tencentcloud.ApiGateway.Upstream;
 import com.pulumi.tencentcloud.ApiGateway.UpstreamArgs;
 import com.pulumi.tencentcloud.ApiGateway.inputs.UpstreamNodeArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -423,22 +454,24 @@ public class App {
             .excludeSoldOut(true)
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[3].name()))
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
+            .availabilityZone(zones.zones()[3].name())
+            .name("subnet-example")
             .vpcId(vpc.id())
             .cidrBlock("10.0.0.0/16")
             .isMulticast(false)
             .build());
 
-        var exampleInstance = new Instance("exampleInstance", InstanceArgs.builder()        
+        var example = new com.pulumi.tencentcloud.Instance.Instance("example", com.pulumi.tencentcloud.Instance.InstanceArgs.builder()
             .instanceName("tf_example")
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[3].name()))
-            .imageId(images.applyValue(getInstanceResult -> getInstanceResult.images()[0].imageId()))
-            .instanceType(instanceTypes.applyValue(getTypesResult -> getTypesResult.instanceTypes()[0].instanceType()))
+            .availabilityZone(zones.zones()[3].name())
+            .imageId(images.images()[0].imageId())
+            .instanceType(instanceTypes.instanceTypes()[0].instanceType())
             .systemDiskType("CLOUD_PREMIUM")
             .systemDiskSize(50)
             .hostname("terraform")
@@ -453,7 +486,7 @@ public class App {
             .tags(Map.of("tagKey", "tagValue"))
             .build());
 
-        var exampleUpstream = new Upstream("exampleUpstream", UpstreamArgs.builder()        
+        var exampleUpstream = new Upstream("exampleUpstream", UpstreamArgs.builder()
             .scheme("HTTP")
             .algorithm("ROUND-ROBIN")
             .uniqVpcId(vpc.id())
@@ -465,7 +498,7 @@ public class App {
                 .host("1.1.1.1")
                 .port(9090)
                 .weight(10)
-                .vmInstanceId(exampleInstance.id())
+                .vmInstanceId(example.id())
                 .tags("tags")
                 .build())
             .tags(Map.of("createdBy", "terraform"))
@@ -474,20 +507,27 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-example
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       availabilityZone: ${zones.zones[3].name}
+      name: subnet-example
       vpcId: ${vpc.id}
       cidrBlock: 10.0.0.0/16
       isMulticast: false
-  exampleInstance:
+  example:
     type: tencentcloud:Instance:Instance
     properties:
       instanceName: tf_example
@@ -508,6 +548,7 @@ resources:
         tagKey: tagValue
   exampleUpstream:
     type: tencentcloud:ApiGateway:Upstream
+    name: example
     properties:
       scheme: HTTP
       algorithm: ROUND-ROBIN
@@ -520,7 +561,7 @@ resources:
         - host: 1.1.1.1
           port: 9090
           weight: 10
-          vmInstanceId: ${exampleInstance.id}
+          vmInstanceId: ${example.id}
           tags:
             - tags
       tags:
@@ -528,20 +569,20 @@ resources:
 variables:
   zones:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: cvm
   images:
     fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments:
+      function: tencentcloud:Images:getInstance
+      arguments:
         imageTypes:
           - PUBLIC_IMAGE
         imageNameRegex: Final
   instanceTypes:
     fn::invoke:
-      Function: tencentcloud:Instance:getTypes
-      Arguments:
+      function: tencentcloud:Instance:getTypes
+      arguments:
         filters:
           - name: instance-family
             values:
@@ -549,11 +590,99 @@ variables:
         cpuCoreCount: 2
         excludeSoldOut: true
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "cvm"
+}
+data "tencentcloud_images_getinstance" "images" {
+  image_types      = ["PUBLIC_IMAGE"]
+  image_name_regex = "Final"
+}
+data "tencentcloud_instance_gettypes" "instanceTypes" {
+  filters {
+    name   = "instance-family"
+    values = ["S5"]
+  }
+  cpu_core_count   = 2
+  exclude_sold_out = true
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[3].name
+  name              = "subnet-example"
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  cidr_block        = "10.0.0.0/16"
+  is_multicast      = false
+}
+resource "tencentcloud_instance_instance" "example" {
+  instance_name     = "tf_example"
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[3].name
+  image_id          = data.tencentcloud_images_getinstance.images.images[0].image_id
+  instance_type     = data.tencentcloud_instance_gettypes.instanceTypes.instance_types[0].instance_type
+  system_disk_type  = "CLOUD_PREMIUM"
+  system_disk_size  = 50
+  hostname          = "terraform"
+  project_id        = 0
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  subnet_id         = tencentcloud_subnet_instance.subnet.id
+  data_disks {
+    data_disk_type = "CLOUD_PREMIUM"
+    data_disk_size = 50
+    encrypt        = false
+  }
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+resource "tencentcloud_apigateway_upstream" "example" {
+  scheme               = "HTTP"
+  algorithm            = "ROUND-ROBIN"
+  uniq_vpc_id          = tencentcloud_vpc_instance.vpc.id
+  upstream_name        = "tf_example"
+  upstream_description = "desc."
+  upstream_type        = "IP_PORT"
+  retries              = 5
+  nodes {
+    host           = "1.1.1.1"
+    port           = 9090
+    weight         = 10
+    vm_instance_id = tencentcloud_instance_instance.example.id
+    tags           = ["tags"]
+  }
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Create a complete VPC channel
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -561,7 +690,7 @@ import * as tencentcloud from "@tencentcloud_iac/pulumi";
 const example = new tencentcloud.apigateway.Upstream("example", {
     scheme: "HTTP",
     algorithm: "ROUND-ROBIN",
-    uniqVpcId: tencentcloud_vpc.vpc.id,
+    uniqVpcId: vpc.id,
     upstreamName: "tf_example",
     upstreamDescription: "desc.",
     upstreamType: "IP_PORT",
@@ -570,7 +699,7 @@ const example = new tencentcloud.apigateway.Upstream("example", {
         host: "1.1.1.1",
         port: 9090,
         weight: 10,
-        vmInstanceId: tencentcloud_instance.example.id,
+        vmInstanceId: exampleTencentcloudInstance.id,
         tags: ["tags"],
     }],
     healthChecker: {
@@ -591,42 +720,110 @@ const example = new tencentcloud.apigateway.Upstream("example", {
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-example = tencentcloud.api_gateway.Upstream("example",
+example = tencentcloud.apigateway.Upstream("example",
     scheme="HTTP",
     algorithm="ROUND-ROBIN",
-    uniq_vpc_id=tencentcloud_vpc["vpc"]["id"],
+    uniq_vpc_id=vpc["id"],
     upstream_name="tf_example",
     upstream_description="desc.",
     upstream_type="IP_PORT",
     retries=5,
-    nodes=[tencentcloud.api_gateway.UpstreamNodeArgs(
-        host="1.1.1.1",
-        port=9090,
-        weight=10,
-        vm_instance_id=tencentcloud_instance["example"]["id"],
-        tags=["tags"],
-    )],
-    health_checker=tencentcloud.api_gateway.UpstreamHealthCheckerArgs(
-        enable_active_check=True,
-        enable_passive_check=True,
-        healthy_http_status="200",
-        unhealthy_http_status="500",
-        tcp_failure_threshold=5,
-        timeout_threshold=5,
-        http_failure_threshold=3,
-        active_check_http_path="/",
-        active_check_timeout=5,
-        active_check_interval=5,
-        unhealthy_timeout=30,
-    ),
+    nodes=[{
+        "host": "1.1.1.1",
+        "port": 9090,
+        "weight": 10,
+        "vm_instance_id": example_tencentcloud_instance["id"],
+        "tags": ["tags"],
+    }],
+    health_checker={
+        "enable_active_check": True,
+        "enable_passive_check": True,
+        "healthy_http_status": "200",
+        "unhealthy_http_status": "500",
+        "tcp_failure_threshold": 5,
+        "timeout_threshold": 5,
+        "http_failure_threshold": 3,
+        "active_check_http_path": "/",
+        "active_check_timeout": 5,
+        "active_check_interval": 5,
+        "unhealthy_timeout": 30,
+    },
     tags={
         "createdBy": "terraform",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := apigateway.NewUpstream(ctx, "example", &apigateway.UpstreamArgs{
+			Scheme:              pulumi.String("HTTP"),
+			Algorithm:           pulumi.String("ROUND-ROBIN"),
+			UniqVpcId:           pulumi.Any(vpc.Id),
+			UpstreamName:        pulumi.String("tf_example"),
+			UpstreamDescription: pulumi.String("desc."),
+			UpstreamType:        pulumi.String("IP_PORT"),
+			Retries:             pulumi.Int(5),
+			Nodes: apigateway.UpstreamNodeArray{
+				&apigateway.UpstreamNodeArgs{
+					Host:         pulumi.String("1.1.1.1"),
+					Port:         pulumi.Int(9090),
+					Weight:       pulumi.Int(10),
+					VmInstanceId: pulumi.Any(exampleTencentcloudInstance.Id),
+					Tags: pulumi.StringArray{
+						pulumi.String("tags"),
+					},
+				},
+			},
+			HealthChecker: &apigateway.UpstreamHealthCheckerArgs{
+				EnableActiveCheck:    pulumi.Bool(true),
+				EnablePassiveCheck:   pulumi.Bool(true),
+				HealthyHttpStatus:    pulumi.String("200"),
+				UnhealthyHttpStatus:  pulumi.String("500"),
+				TcpFailureThreshold:  pulumi.Int(5),
+				TimeoutThreshold:     pulumi.Int(5),
+				HttpFailureThreshold: pulumi.Int(3),
+				ActiveCheckHttpPath:  pulumi.String("/"),
+				ActiveCheckTimeout:   pulumi.Int(5),
+				ActiveCheckInterval:  pulumi.Int(5),
+				UnhealthyTimeout:     pulumi.Int(30),
+			},
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -639,7 +836,7 @@ return await Deployment.RunAsync(() =>
     {
         Scheme = "HTTP",
         Algorithm = "ROUND-ROBIN",
-        UniqVpcId = tencentcloud_vpc.Vpc.Id,
+        UniqVpcId = vpc.Id,
         UpstreamName = "tf_example",
         UpstreamDescription = "desc.",
         UpstreamType = "IP_PORT",
@@ -651,7 +848,7 @@ return await Deployment.RunAsync(() =>
                 Host = "1.1.1.1",
                 Port = 9090,
                 Weight = 10,
-                VmInstanceId = tencentcloud_instance.Example.Id,
+                VmInstanceId = exampleTencentcloudInstance.Id,
                 Tags = new[]
                 {
                     "tags",
@@ -680,59 +877,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := ApiGateway.NewUpstream(ctx, "example", &ApiGateway.UpstreamArgs{
-			Scheme:              pulumi.String("HTTP"),
-			Algorithm:           pulumi.String("ROUND-ROBIN"),
-			UniqVpcId:           pulumi.Any(tencentcloud_vpc.Vpc.Id),
-			UpstreamName:        pulumi.String("tf_example"),
-			UpstreamDescription: pulumi.String("desc."),
-			UpstreamType:        pulumi.String("IP_PORT"),
-			Retries:             pulumi.Int(5),
-			Nodes: apigateway.UpstreamNodeArray{
-				&apigateway.UpstreamNodeArgs{
-					Host:         pulumi.String("1.1.1.1"),
-					Port:         pulumi.Int(9090),
-					Weight:       pulumi.Int(10),
-					VmInstanceId: pulumi.Any(tencentcloud_instance.Example.Id),
-					Tags: pulumi.StringArray{
-						pulumi.String("tags"),
-					},
-				},
-			},
-			HealthChecker: &apigateway.UpstreamHealthCheckerArgs{
-				EnableActiveCheck:    pulumi.Bool(true),
-				EnablePassiveCheck:   pulumi.Bool(true),
-				HealthyHttpStatus:    pulumi.String("200"),
-				UnhealthyHttpStatus:  pulumi.String("500"),
-				TcpFailureThreshold:  pulumi.Int(5),
-				TimeoutThreshold:     pulumi.Int(5),
-				HttpFailureThreshold: pulumi.Int(3),
-				ActiveCheckHttpPath:  pulumi.String("/"),
-				ActiveCheckTimeout:   pulumi.Int(5),
-				ActiveCheckInterval:  pulumi.Int(5),
-				UnhealthyTimeout:     pulumi.Int(30),
-			},
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -743,8 +892,8 @@ import com.pulumi.tencentcloud.ApiGateway.Upstream;
 import com.pulumi.tencentcloud.ApiGateway.UpstreamArgs;
 import com.pulumi.tencentcloud.ApiGateway.inputs.UpstreamNodeArgs;
 import com.pulumi.tencentcloud.ApiGateway.inputs.UpstreamHealthCheckerArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -756,10 +905,10 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Upstream("example", UpstreamArgs.builder()        
+        var example = new Upstream("example", UpstreamArgs.builder()
             .scheme("HTTP")
             .algorithm("ROUND-ROBIN")
-            .uniqVpcId(tencentcloud_vpc.vpc().id())
+            .uniqVpcId(vpc.id())
             .upstreamName("tf_example")
             .upstreamDescription("desc.")
             .upstreamType("IP_PORT")
@@ -768,7 +917,7 @@ public class App {
                 .host("1.1.1.1")
                 .port(9090)
                 .weight(10)
-                .vmInstanceId(tencentcloud_instance.example().id())
+                .vmInstanceId(exampleTencentcloudInstance.id())
                 .tags("tags")
                 .build())
             .healthChecker(UpstreamHealthCheckerArgs.builder()
@@ -790,6 +939,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
@@ -797,7 +951,7 @@ resources:
     properties:
       scheme: HTTP
       algorithm: ROUND-ROBIN
-      uniqVpcId: ${tencentcloud_vpc.vpc.id}
+      uniqVpcId: ${vpc.id}
       upstreamName: tf_example
       upstreamDescription: desc.
       upstreamType: IP_PORT
@@ -806,7 +960,7 @@ resources:
         - host: 1.1.1.1
           port: 9090
           weight: 10
-          vmInstanceId: ${tencentcloud_instance.example.id}
+          vmInstanceId: ${exampleTencentcloudInstance.id}
           tags:
             - tags
       healthChecker:
@@ -824,76 +978,154 @@ resources:
       tags:
         createdBy: terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_apigateway_upstream" "example" {
+  scheme               = "HTTP"
+  algorithm            = "ROUND-ROBIN"
+  uniq_vpc_id          = vpc.id
+  upstream_name        = "tf_example"
+  upstream_description = "desc."
+  upstream_type        = "IP_PORT"
+  retries              = 5
+  nodes {
+    host           = "1.1.1.1"
+    port           = 9090
+    weight         = 10
+    vm_instance_id = exampleTencentcloudInstance.id
+    tags           = ["tags"]
+  }
+  health_checker = {
+    enable_active_check    = true
+    enable_passive_check   = true
+    healthy_http_status    = "200"
+    unhealthy_http_status  = "500"
+    tcp_failure_threshold  = 5
+    timeout_threshold      = 5
+    http_failure_threshold = 3
+    active_check_http_path = "/"
+    active_check_timeout   = 5
+    active_check_interval  = 5
+    unhealthy_timeout      = 30
+  }
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateUpstream](https://www.tencentcloud.com/search/?wd=CreateUpstream&type=document&lang=en)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+  - [DescribeUpstreams](https://www.tencentcloud.com/search/?wd=DescribeUpstreams&type=document&lang=en)
+* Update:
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [ModifyUpstream](https://www.tencentcloud.com/search/?wd=ModifyUpstream&type=document&lang=en)
+* Delete: [DeleteUpstream](https://www.tencentcloud.com/search/?wd=DeleteUpstream&type=document&lang=en)
 
 
 ## Create Upstream Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Upstream</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UpstreamArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Upstream</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UpstreamArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Upstream</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UpstreamArgs</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Upstream</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
              <span class="nx">algorithm</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">health_checker</span><span class="p">:</span> <span class="nx">Optional[_apigateway.UpstreamHealthCheckerArgs]</span> = None<span class="p">,</span>
-             <span class="nx">k8s_services</span><span class="p">:</span> <span class="nx">Optional[Sequence[_apigateway.UpstreamK8sServiceArgs]]</span> = None<span class="p">,</span>
-             <span class="nx">nodes</span><span class="p">:</span> <span class="nx">Optional[Sequence[_apigateway.UpstreamNodeArgs]]</span> = None<span class="p">,</span>
-             <span class="nx">retries</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">scheme</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
              <span class="nx">uniq_vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">health_checker</span><span class="p">:</span> <span class="nx">Optional[UpstreamHealthCheckerArgs]</span> = None<span class="p">,</span>
+             <span class="nx">k8s_services</span><span class="p">:</span> <span class="nx">Optional[Sequence[UpstreamK8sServiceArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">nodes</span><span class="p">:</span> <span class="nx">Optional[Sequence[UpstreamNodeArgs]]</span> = None<span class="p">,</span>
+             <span class="nx">retries</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
              <span class="nx">upstream_description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">upstream_host</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">upstream_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">upstream_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Upstream</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">UpstreamArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">upstream_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewUpstream</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">UpstreamArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Upstream</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewUpstream</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">UpstreamArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Upstream</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Upstream</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UpstreamArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Upstream</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UpstreamArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Upstream</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UpstreamArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Upstream</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">UpstreamArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:Upstream</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:Upstream</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_api_gateway_upstream&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -914,7 +1146,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -1031,11 +1263,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Upstream Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -1051,8 +1291,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Load balancing algorithm, value range: ROUND-ROBIN.</p>
-</dd><dt class="property-required"
+    <dd>Load balancing algorithm, value range: ROUND-ROBIN.</dd><dt class="property-required"
             title="Required">
         <span id="scheme_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheme_csharp" style="color: inherit; text-decoration: inherit;">Scheme</a>
@@ -1060,8 +1299,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</p>
-</dd><dt class="property-required"
+    <dd>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_csharp" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -1069,35 +1307,31 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC Unique ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecker_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecker_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Checker</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamhealthchecker">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Upstream<wbr>Health<wbr>Checker<wbr>Args</a></span>
+        <span class="property-type"><a href="#upstreamhealthchecker">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Upstream<wbr>Health<wbr>Checker</a></span>
     </dt>
-    <dd><p>Health check configuration, currently only supports VPC channels.</p>
-</dd><dt class="property-optional"
+    <dd>Health check configuration, currently only supports VPC channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="k8sservices_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#k8sservices_csharp" style="color: inherit; text-decoration: inherit;">K8s<wbr>Services</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamk8sservice">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Upstream<wbr>K8s<wbr>Service<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#upstreamk8sservice">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Upstream<wbr>K8s<wbr>Service&gt;</a></span>
     </dt>
-    <dd><p>Configuration of K8S container service.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of K8S container service.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodes_csharp" style="color: inherit; text-decoration: inherit;">Nodes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Upstream<wbr>Node<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#upstreamnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Upstream<wbr>Node&gt;</a></span>
     </dt>
-    <dd><p>Backend nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Backend nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="retries_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retries_csharp" style="color: inherit; text-decoration: inherit;">Retries</a>
@@ -1105,17 +1339,15 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Request retry count, default to 3 times.</p>
-</dd><dt class="property-optional"
+    <dd>Request retry count, default to 3 times.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamdescription_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamdescription_csharp" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Description</a>
@@ -1123,8 +1355,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend channel description.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel description.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamhost_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamhost_csharp" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Host</a>
@@ -1132,8 +1363,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host request header forwarded by gateway to backend.</p>
-</dd><dt class="property-optional"
+    <dd>Host request header forwarded by gateway to backend.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamname_csharp" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Name</a>
@@ -1141,8 +1371,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend channel name.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel name.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamtype_csharp" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Type</a>
@@ -1150,8 +1379,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend access type, value range: IP_PORT, K8S.</p>
-</dd></dl>
+    <dd>Backend access type, value range: IP_PORT, K8S.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1165,8 +1393,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Load balancing algorithm, value range: ROUND-ROBIN.</p>
-</dd><dt class="property-required"
+    <dd>Load balancing algorithm, value range: ROUND-ROBIN.</dd><dt class="property-required"
             title="Required">
         <span id="scheme_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheme_go" style="color: inherit; text-decoration: inherit;">Scheme</a>
@@ -1174,8 +1401,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</p>
-</dd><dt class="property-required"
+    <dd>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_go" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -1183,8 +1409,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC Unique ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecker_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecker_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Checker</a>
@@ -1192,8 +1417,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamhealthchecker">Upstream<wbr>Health<wbr>Checker<wbr>Args</a></span>
     </dt>
-    <dd><p>Health check configuration, currently only supports VPC channels.</p>
-</dd><dt class="property-optional"
+    <dd>Health check configuration, currently only supports VPC channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="k8sservices_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#k8sservices_go" style="color: inherit; text-decoration: inherit;">K8s<wbr>Services</a>
@@ -1201,8 +1425,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamk8sservice">[]Upstream<wbr>K8s<wbr>Service<wbr>Args</a></span>
     </dt>
-    <dd><p>Configuration of K8S container service.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of K8S container service.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodes_go" style="color: inherit; text-decoration: inherit;">Nodes</a>
@@ -1210,8 +1433,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamnode">[]Upstream<wbr>Node<wbr>Args</a></span>
     </dt>
-    <dd><p>Backend nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Backend nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="retries_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retries_go" style="color: inherit; text-decoration: inherit;">Retries</a>
@@ -1219,17 +1441,15 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Request retry count, default to 3 times.</p>
-</dd><dt class="property-optional"
+    <dd>Request retry count, default to 3 times.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamdescription_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamdescription_go" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Description</a>
@@ -1237,8 +1457,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend channel description.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel description.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamhost_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamhost_go" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Host</a>
@@ -1246,8 +1465,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host request header forwarded by gateway to backend.</p>
-</dd><dt class="property-optional"
+    <dd>Host request header forwarded by gateway to backend.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamname_go" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Name</a>
@@ -1255,8 +1473,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend channel name.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel name.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamtype_go" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Type</a>
@@ -1264,8 +1481,109 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend access type, value range: IP_PORT, K8S.</p>
-</dd></dl>
+    <dd>Backend access type, value range: IP_PORT, K8S.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#algorithm_hcl" style="color: inherit; text-decoration: inherit;">algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Load balancing algorithm, value range: ROUND-ROBIN.</dd><dt class="property-required"
+            title="Required">
+        <span id="scheme_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheme_hcl" style="color: inherit; text-decoration: inherit;">scheme</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</dd><dt class="property-required"
+            title="Required">
+        <span id="uniq_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC Unique ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_checker_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_checker_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>checker</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#upstreamhealthchecker">object</a></span>
+    </dt>
+    <dd>Health check configuration, currently only supports VPC channels.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="k8s_services_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#k8s_services_hcl" style="color: inherit; text-decoration: inherit;">k8s_<wbr>services</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#upstreamk8sservice">list(object)</a></span>
+    </dt>
+    <dd>Configuration of K8S container service.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="nodes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodes_hcl" style="color: inherit; text-decoration: inherit;">nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#upstreamnode">list(object)</a></span>
+    </dt>
+    <dd>Backend nodes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="retries_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retries_hcl" style="color: inherit; text-decoration: inherit;">retries</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Request retry count, default to 3 times.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="upstream_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstream_description_hcl" style="color: inherit; text-decoration: inherit;">upstream_<wbr>description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend channel description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="upstream_host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstream_host_hcl" style="color: inherit; text-decoration: inherit;">upstream_<wbr>host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Host request header forwarded by gateway to backend.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="upstream_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstream_name_hcl" style="color: inherit; text-decoration: inherit;">upstream_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend channel name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="upstream_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstream_type_hcl" style="color: inherit; text-decoration: inherit;">upstream_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend access type, value range: IP_PORT, K8S.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1279,8 +1597,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Load balancing algorithm, value range: ROUND-ROBIN.</p>
-</dd><dt class="property-required"
+    <dd>Load balancing algorithm, value range: ROUND-ROBIN.</dd><dt class="property-required"
             title="Required">
         <span id="scheme_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheme_java" style="color: inherit; text-decoration: inherit;">scheme</a>
@@ -1288,8 +1605,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</p>
-</dd><dt class="property-required"
+    <dd>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_java" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -1297,35 +1613,31 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC Unique ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecker_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecker_java" style="color: inherit; text-decoration: inherit;">health<wbr>Checker</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamhealthchecker">Upstream<wbr>Health<wbr>Checker<wbr>Args</a></span>
+        <span class="property-type"><a href="#upstreamhealthchecker">Upstream<wbr>Health<wbr>Checker</a></span>
     </dt>
-    <dd><p>Health check configuration, currently only supports VPC channels.</p>
-</dd><dt class="property-optional"
+    <dd>Health check configuration, currently only supports VPC channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="k8sservices_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#k8sservices_java" style="color: inherit; text-decoration: inherit;">k8s<wbr>Services</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamk8sservice">List&lt;Upstream<wbr>K8s<wbr>Service<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#upstreamk8sservice">List&lt;Upstream<wbr>K8s<wbr>Service&gt;</a></span>
     </dt>
-    <dd><p>Configuration of K8S container service.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of K8S container service.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodes_java" style="color: inherit; text-decoration: inherit;">nodes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamnode">List&lt;Upstream<wbr>Node<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#upstreamnode">List&lt;Upstream<wbr>Node&gt;</a></span>
     </dt>
-    <dd><p>Backend nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Backend nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="retries_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retries_java" style="color: inherit; text-decoration: inherit;">retries</a>
@@ -1333,17 +1645,15 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Request retry count, default to 3 times.</p>
-</dd><dt class="property-optional"
+    <dd>Request retry count, default to 3 times.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamdescription_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamdescription_java" style="color: inherit; text-decoration: inherit;">upstream<wbr>Description</a>
@@ -1351,8 +1661,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend channel description.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel description.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamhost_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamhost_java" style="color: inherit; text-decoration: inherit;">upstream<wbr>Host</a>
@@ -1360,8 +1669,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host request header forwarded by gateway to backend.</p>
-</dd><dt class="property-optional"
+    <dd>Host request header forwarded by gateway to backend.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamname_java" style="color: inherit; text-decoration: inherit;">upstream<wbr>Name</a>
@@ -1369,8 +1677,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend channel name.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel name.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamtype_java" style="color: inherit; text-decoration: inherit;">upstream<wbr>Type</a>
@@ -1378,8 +1685,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend access type, value range: IP_PORT, K8S.</p>
-</dd></dl>
+    <dd>Backend access type, value range: IP_PORT, K8S.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1393,8 +1699,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Load balancing algorithm, value range: ROUND-ROBIN.</p>
-</dd><dt class="property-required"
+    <dd>Load balancing algorithm, value range: ROUND-ROBIN.</dd><dt class="property-required"
             title="Required">
         <span id="scheme_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheme_nodejs" style="color: inherit; text-decoration: inherit;">scheme</a>
@@ -1402,8 +1707,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</p>
-</dd><dt class="property-required"
+    <dd>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_nodejs" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -1411,35 +1715,31 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC Unique ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecker_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecker_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Checker</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamhealthchecker">Upstream<wbr>Health<wbr>Checker<wbr>Args</a></span>
+        <span class="property-type"><a href="#upstreamhealthchecker">Upstream<wbr>Health<wbr>Checker</a></span>
     </dt>
-    <dd><p>Health check configuration, currently only supports VPC channels.</p>
-</dd><dt class="property-optional"
+    <dd>Health check configuration, currently only supports VPC channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="k8sservices_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#k8sservices_nodejs" style="color: inherit; text-decoration: inherit;">k8s<wbr>Services</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamk8sservice">Upstream<wbr>K8s<wbr>Service<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#upstreamk8sservice">Upstream<wbr>K8s<wbr>Service[]</a></span>
     </dt>
-    <dd><p>Configuration of K8S container service.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of K8S container service.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodes_nodejs" style="color: inherit; text-decoration: inherit;">nodes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamnode">Upstream<wbr>Node<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#upstreamnode">Upstream<wbr>Node[]</a></span>
     </dt>
-    <dd><p>Backend nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Backend nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="retries_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retries_nodejs" style="color: inherit; text-decoration: inherit;">retries</a>
@@ -1447,17 +1747,15 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Request retry count, default to 3 times.</p>
-</dd><dt class="property-optional"
+    <dd>Request retry count, default to 3 times.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamdescription_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamdescription_nodejs" style="color: inherit; text-decoration: inherit;">upstream<wbr>Description</a>
@@ -1465,8 +1763,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend channel description.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel description.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamhost_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamhost_nodejs" style="color: inherit; text-decoration: inherit;">upstream<wbr>Host</a>
@@ -1474,8 +1771,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host request header forwarded by gateway to backend.</p>
-</dd><dt class="property-optional"
+    <dd>Host request header forwarded by gateway to backend.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamname_nodejs" style="color: inherit; text-decoration: inherit;">upstream<wbr>Name</a>
@@ -1483,8 +1779,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend channel name.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel name.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamtype_nodejs" style="color: inherit; text-decoration: inherit;">upstream<wbr>Type</a>
@@ -1492,8 +1787,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend access type, value range: IP_PORT, K8S.</p>
-</dd></dl>
+    <dd>Backend access type, value range: IP_PORT, K8S.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1507,8 +1801,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Load balancing algorithm, value range: ROUND-ROBIN.</p>
-</dd><dt class="property-required"
+    <dd>Load balancing algorithm, value range: ROUND-ROBIN.</dd><dt class="property-required"
             title="Required">
         <span id="scheme_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheme_python" style="color: inherit; text-decoration: inherit;">scheme</a>
@@ -1516,8 +1809,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</p>
-</dd><dt class="property-required"
+    <dd>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</dd><dt class="property-required"
             title="Required">
         <span id="uniq_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_vpc_id_python" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
@@ -1525,8 +1817,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC Unique ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="health_checker_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_checker_python" style="color: inherit; text-decoration: inherit;">health_<wbr>checker</a>
@@ -1534,26 +1825,23 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamhealthchecker">Upstream<wbr>Health<wbr>Checker<wbr>Args</a></span>
     </dt>
-    <dd><p>Health check configuration, currently only supports VPC channels.</p>
-</dd><dt class="property-optional"
+    <dd>Health check configuration, currently only supports VPC channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="k8s_services_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#k8s_services_python" style="color: inherit; text-decoration: inherit;">k8s_<wbr>services</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamk8sservice">Upstream<wbr>K8s<wbr>Service<wbr>Args]</a></span>
+        <span class="property-type"><a href="#upstreamk8sservice">Sequence[Upstream<wbr>K8s<wbr>Service<wbr>Args]</a></span>
     </dt>
-    <dd><p>Configuration of K8S container service.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of K8S container service.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodes_python" style="color: inherit; text-decoration: inherit;">nodes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamnode">Upstream<wbr>Node<wbr>Args]</a></span>
+        <span class="property-type"><a href="#upstreamnode">Sequence[Upstream<wbr>Node<wbr>Args]</a></span>
     </dt>
-    <dd><p>Backend nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Backend nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="retries_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retries_python" style="color: inherit; text-decoration: inherit;">retries</a>
@@ -1561,17 +1849,15 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Request retry count, default to 3 times.</p>
-</dd><dt class="property-optional"
+    <dd>Request retry count, default to 3 times.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstream_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstream_description_python" style="color: inherit; text-decoration: inherit;">upstream_<wbr>description</a>
@@ -1579,8 +1865,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Backend channel description.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel description.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstream_host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstream_host_python" style="color: inherit; text-decoration: inherit;">upstream_<wbr>host</a>
@@ -1588,8 +1873,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Host request header forwarded by gateway to backend.</p>
-</dd><dt class="property-optional"
+    <dd>Host request header forwarded by gateway to backend.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstream_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstream_name_python" style="color: inherit; text-decoration: inherit;">upstream_<wbr>name</a>
@@ -1597,8 +1881,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Backend channel name.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel name.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstream_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstream_type_python" style="color: inherit; text-decoration: inherit;">upstream_<wbr>type</a>
@@ -1606,8 +1889,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Backend access type, value range: IP_PORT, K8S.</p>
-</dd></dl>
+    <dd>Backend access type, value range: IP_PORT, K8S.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1621,8 +1903,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Load balancing algorithm, value range: ROUND-ROBIN.</p>
-</dd><dt class="property-required"
+    <dd>Load balancing algorithm, value range: ROUND-ROBIN.</dd><dt class="property-required"
             title="Required">
         <span id="scheme_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheme_yaml" style="color: inherit; text-decoration: inherit;">scheme</a>
@@ -1630,8 +1911,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</p>
-</dd><dt class="property-required"
+    <dd>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</dd><dt class="property-required"
             title="Required">
         <span id="uniqvpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_yaml" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -1639,8 +1919,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC Unique ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="healthchecker_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecker_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Checker</a>
@@ -1648,8 +1927,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamhealthchecker">Property Map</a></span>
     </dt>
-    <dd><p>Health check configuration, currently only supports VPC channels.</p>
-</dd><dt class="property-optional"
+    <dd>Health check configuration, currently only supports VPC channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="k8sservices_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#k8sservices_yaml" style="color: inherit; text-decoration: inherit;">k8s<wbr>Services</a>
@@ -1657,8 +1935,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamk8sservice">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Configuration of K8S container service.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of K8S container service.</dd><dt class="property-optional"
             title="Optional">
         <span id="nodes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nodes_yaml" style="color: inherit; text-decoration: inherit;">nodes</a>
@@ -1666,8 +1943,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamnode">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Backend nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Backend nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="retries_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retries_yaml" style="color: inherit; text-decoration: inherit;">retries</a>
@@ -1675,17 +1951,15 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Request retry count, default to 3 times.</p>
-</dd><dt class="property-optional"
+    <dd>Request retry count, default to 3 times.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamdescription_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamdescription_yaml" style="color: inherit; text-decoration: inherit;">upstream<wbr>Description</a>
@@ -1693,8 +1967,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend channel description.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel description.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamhost_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamhost_yaml" style="color: inherit; text-decoration: inherit;">upstream<wbr>Host</a>
@@ -1702,8 +1975,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host request header forwarded by gateway to backend.</p>
-</dd><dt class="property-optional"
+    <dd>Host request header forwarded by gateway to backend.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamname_yaml" style="color: inherit; text-decoration: inherit;">upstream<wbr>Name</a>
@@ -1711,8 +1983,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend channel name.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel name.</dd><dt class="property-optional"
             title="Optional">
         <span id="upstreamtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#upstreamtype_yaml" style="color: inherit; text-decoration: inherit;">upstream<wbr>Type</a>
@@ -1720,8 +1991,7 @@ The Upstream resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend access type, value range: IP_PORT, K8S.</p>
-</dd></dl>
+    <dd>Backend access type, value range: IP_PORT, K8S.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1742,8 +2012,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1757,8 +2026,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1772,8 +2054,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1787,8 +2068,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1802,8 +2082,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1817,8 +2096,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1828,131 +2106,170 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Upstream resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">UpstreamState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Upstream</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">UpstreamState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Upstream</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">algorithm</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">health_checker</span><span class="p">:</span> <span class="nx">Optional[_apigateway.UpstreamHealthCheckerArgs]</span> = None<span class="p">,</span>
-        <span class="nx">k8s_services</span><span class="p">:</span> <span class="nx">Optional[Sequence[_apigateway.UpstreamK8sServiceArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">nodes</span><span class="p">:</span> <span class="nx">Optional[Sequence[_apigateway.UpstreamNodeArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">health_checker</span><span class="p">:</span> <span class="nx">Optional[UpstreamHealthCheckerArgs]</span> = None<span class="p">,</span>
+        <span class="nx">k8s_services</span><span class="p">:</span> <span class="nx">Optional[Sequence[UpstreamK8sServiceArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">nodes</span><span class="p">:</span> <span class="nx">Optional[Sequence[UpstreamNodeArgs]]</span> = None<span class="p">,</span>
         <span class="nx">retries</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">scheme</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">uniq_vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">upstream_description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">upstream_host</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">upstream_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">upstream_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Upstream</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetUpstream<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">UpstreamState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Upstream</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetUpstream<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">UpstreamState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Upstream</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Upstream</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UpstreamState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Upstream</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UpstreamState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Upstream</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UpstreamState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Upstream</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">UpstreamState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingUpstream</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:ApiGateway:Upstream</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_api_gateway_upstream</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UpstreamState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UpstreamState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1960,28 +2277,31 @@ Get an existing Upstream resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UpstreamState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1989,28 +2309,31 @@ Get an existing Upstream resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">UpstreamState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2030,35 +2353,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Load balancing algorithm, value range: ROUND-ROBIN.</p>
-</dd><dt class="property-optional"
+    <dd>Load balancing algorithm, value range: ROUND-ROBIN.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecker_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecker_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Checker</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamhealthchecker">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Upstream<wbr>Health<wbr>Checker<wbr>Args</a></span>
+        <span class="property-type"><a href="#upstreamhealthchecker">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Upstream<wbr>Health<wbr>Checker</a></span>
     </dt>
-    <dd><p>Health check configuration, currently only supports VPC channels.</p>
-</dd><dt class="property-optional"
+    <dd>Health check configuration, currently only supports VPC channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_k8sservices_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_k8sservices_csharp" style="color: inherit; text-decoration: inherit;">K8s<wbr>Services</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamk8sservice">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Upstream<wbr>K8s<wbr>Service<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#upstreamk8sservice">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Upstream<wbr>K8s<wbr>Service&gt;</a></span>
     </dt>
-    <dd><p>Configuration of K8S container service.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of K8S container service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodes_csharp" style="color: inherit; text-decoration: inherit;">Nodes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Upstream<wbr>Node<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#upstreamnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Upstream<wbr>Node&gt;</a></span>
     </dt>
-    <dd><p>Backend nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Backend nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retries_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retries_csharp" style="color: inherit; text-decoration: inherit;">Retries</a>
@@ -2066,8 +2385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Request retry count, default to 3 times.</p>
-</dd><dt class="property-optional"
+    <dd>Request retry count, default to 3 times.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheme_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheme_csharp" style="color: inherit; text-decoration: inherit;">Scheme</a>
@@ -2075,17 +2393,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</p>
-</dd><dt class="property-optional"
+    <dd>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_csharp" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -2093,8 +2409,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC Unique ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamdescription_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamdescription_csharp" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Description</a>
@@ -2102,8 +2417,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend channel description.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamhost_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamhost_csharp" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Host</a>
@@ -2111,8 +2425,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host request header forwarded by gateway to backend.</p>
-</dd><dt class="property-optional"
+    <dd>Host request header forwarded by gateway to backend.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamname_csharp" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Name</a>
@@ -2120,8 +2433,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend channel name.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamtype_csharp" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Type</a>
@@ -2129,8 +2441,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend access type, value range: IP_PORT, K8S.</p>
-</dd></dl>
+    <dd>Backend access type, value range: IP_PORT, K8S.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2144,8 +2455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Load balancing algorithm, value range: ROUND-ROBIN.</p>
-</dd><dt class="property-optional"
+    <dd>Load balancing algorithm, value range: ROUND-ROBIN.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecker_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecker_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Checker</a>
@@ -2153,8 +2463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamhealthchecker">Upstream<wbr>Health<wbr>Checker<wbr>Args</a></span>
     </dt>
-    <dd><p>Health check configuration, currently only supports VPC channels.</p>
-</dd><dt class="property-optional"
+    <dd>Health check configuration, currently only supports VPC channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_k8sservices_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_k8sservices_go" style="color: inherit; text-decoration: inherit;">K8s<wbr>Services</a>
@@ -2162,8 +2471,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamk8sservice">[]Upstream<wbr>K8s<wbr>Service<wbr>Args</a></span>
     </dt>
-    <dd><p>Configuration of K8S container service.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of K8S container service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodes_go" style="color: inherit; text-decoration: inherit;">Nodes</a>
@@ -2171,8 +2479,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamnode">[]Upstream<wbr>Node<wbr>Args</a></span>
     </dt>
-    <dd><p>Backend nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Backend nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retries_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retries_go" style="color: inherit; text-decoration: inherit;">Retries</a>
@@ -2180,8 +2487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Request retry count, default to 3 times.</p>
-</dd><dt class="property-optional"
+    <dd>Request retry count, default to 3 times.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheme_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheme_go" style="color: inherit; text-decoration: inherit;">Scheme</a>
@@ -2189,17 +2495,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</p>
-</dd><dt class="property-optional"
+    <dd>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_go" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -2207,8 +2511,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC Unique ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamdescription_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamdescription_go" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Description</a>
@@ -2216,8 +2519,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend channel description.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamhost_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamhost_go" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Host</a>
@@ -2225,8 +2527,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host request header forwarded by gateway to backend.</p>
-</dd><dt class="property-optional"
+    <dd>Host request header forwarded by gateway to backend.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamname_go" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Name</a>
@@ -2234,8 +2535,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend channel name.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamtype_go" style="color: inherit; text-decoration: inherit;">Upstream<wbr>Type</a>
@@ -2243,8 +2543,109 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend access type, value range: IP_PORT, K8S.</p>
-</dd></dl>
+    <dd>Backend access type, value range: IP_PORT, K8S.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_algorithm_hcl" style="color: inherit; text-decoration: inherit;">algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Load balancing algorithm, value range: ROUND-ROBIN.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_checker_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_checker_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>checker</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#upstreamhealthchecker">object</a></span>
+    </dt>
+    <dd>Health check configuration, currently only supports VPC channels.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_k8s_services_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_k8s_services_hcl" style="color: inherit; text-decoration: inherit;">k8s_<wbr>services</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#upstreamk8sservice">list(object)</a></span>
+    </dt>
+    <dd>Configuration of K8S container service.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_nodes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodes_hcl" style="color: inherit; text-decoration: inherit;">nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#upstreamnode">list(object)</a></span>
+    </dt>
+    <dd>Backend nodes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_retries_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retries_hcl" style="color: inherit; text-decoration: inherit;">retries</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Request retry count, default to 3 times.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scheme_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheme_hcl" style="color: inherit; text-decoration: inherit;">scheme</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_uniq_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniq_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC Unique ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_upstream_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstream_description_hcl" style="color: inherit; text-decoration: inherit;">upstream_<wbr>description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend channel description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_upstream_host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstream_host_hcl" style="color: inherit; text-decoration: inherit;">upstream_<wbr>host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Host request header forwarded by gateway to backend.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_upstream_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstream_name_hcl" style="color: inherit; text-decoration: inherit;">upstream_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend channel name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_upstream_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstream_type_hcl" style="color: inherit; text-decoration: inherit;">upstream_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend access type, value range: IP_PORT, K8S.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2258,35 +2659,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Load balancing algorithm, value range: ROUND-ROBIN.</p>
-</dd><dt class="property-optional"
+    <dd>Load balancing algorithm, value range: ROUND-ROBIN.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecker_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecker_java" style="color: inherit; text-decoration: inherit;">health<wbr>Checker</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamhealthchecker">Upstream<wbr>Health<wbr>Checker<wbr>Args</a></span>
+        <span class="property-type"><a href="#upstreamhealthchecker">Upstream<wbr>Health<wbr>Checker</a></span>
     </dt>
-    <dd><p>Health check configuration, currently only supports VPC channels.</p>
-</dd><dt class="property-optional"
+    <dd>Health check configuration, currently only supports VPC channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_k8sservices_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_k8sservices_java" style="color: inherit; text-decoration: inherit;">k8s<wbr>Services</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamk8sservice">List&lt;Upstream<wbr>K8s<wbr>Service<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#upstreamk8sservice">List&lt;Upstream<wbr>K8s<wbr>Service&gt;</a></span>
     </dt>
-    <dd><p>Configuration of K8S container service.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of K8S container service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodes_java" style="color: inherit; text-decoration: inherit;">nodes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamnode">List&lt;Upstream<wbr>Node<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#upstreamnode">List&lt;Upstream<wbr>Node&gt;</a></span>
     </dt>
-    <dd><p>Backend nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Backend nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retries_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retries_java" style="color: inherit; text-decoration: inherit;">retries</a>
@@ -2294,8 +2691,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Request retry count, default to 3 times.</p>
-</dd><dt class="property-optional"
+    <dd>Request retry count, default to 3 times.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheme_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheme_java" style="color: inherit; text-decoration: inherit;">scheme</a>
@@ -2303,17 +2699,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</p>
-</dd><dt class="property-optional"
+    <dd>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_java" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -2321,8 +2715,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC Unique ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamdescription_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamdescription_java" style="color: inherit; text-decoration: inherit;">upstream<wbr>Description</a>
@@ -2330,8 +2723,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend channel description.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamhost_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamhost_java" style="color: inherit; text-decoration: inherit;">upstream<wbr>Host</a>
@@ -2339,8 +2731,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host request header forwarded by gateway to backend.</p>
-</dd><dt class="property-optional"
+    <dd>Host request header forwarded by gateway to backend.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamname_java" style="color: inherit; text-decoration: inherit;">upstream<wbr>Name</a>
@@ -2348,8 +2739,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend channel name.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamtype_java" style="color: inherit; text-decoration: inherit;">upstream<wbr>Type</a>
@@ -2357,8 +2747,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend access type, value range: IP_PORT, K8S.</p>
-</dd></dl>
+    <dd>Backend access type, value range: IP_PORT, K8S.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2372,35 +2761,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Load balancing algorithm, value range: ROUND-ROBIN.</p>
-</dd><dt class="property-optional"
+    <dd>Load balancing algorithm, value range: ROUND-ROBIN.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecker_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecker_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Checker</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamhealthchecker">Upstream<wbr>Health<wbr>Checker<wbr>Args</a></span>
+        <span class="property-type"><a href="#upstreamhealthchecker">Upstream<wbr>Health<wbr>Checker</a></span>
     </dt>
-    <dd><p>Health check configuration, currently only supports VPC channels.</p>
-</dd><dt class="property-optional"
+    <dd>Health check configuration, currently only supports VPC channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_k8sservices_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_k8sservices_nodejs" style="color: inherit; text-decoration: inherit;">k8s<wbr>Services</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamk8sservice">Upstream<wbr>K8s<wbr>Service<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#upstreamk8sservice">Upstream<wbr>K8s<wbr>Service[]</a></span>
     </dt>
-    <dd><p>Configuration of K8S container service.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of K8S container service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodes_nodejs" style="color: inherit; text-decoration: inherit;">nodes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamnode">Upstream<wbr>Node<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#upstreamnode">Upstream<wbr>Node[]</a></span>
     </dt>
-    <dd><p>Backend nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Backend nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retries_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retries_nodejs" style="color: inherit; text-decoration: inherit;">retries</a>
@@ -2408,8 +2793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Request retry count, default to 3 times.</p>
-</dd><dt class="property-optional"
+    <dd>Request retry count, default to 3 times.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheme_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheme_nodejs" style="color: inherit; text-decoration: inherit;">scheme</a>
@@ -2417,17 +2801,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</p>
-</dd><dt class="property-optional"
+    <dd>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_nodejs" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -2435,8 +2817,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC Unique ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamdescription_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamdescription_nodejs" style="color: inherit; text-decoration: inherit;">upstream<wbr>Description</a>
@@ -2444,8 +2825,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend channel description.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamhost_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamhost_nodejs" style="color: inherit; text-decoration: inherit;">upstream<wbr>Host</a>
@@ -2453,8 +2833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host request header forwarded by gateway to backend.</p>
-</dd><dt class="property-optional"
+    <dd>Host request header forwarded by gateway to backend.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamname_nodejs" style="color: inherit; text-decoration: inherit;">upstream<wbr>Name</a>
@@ -2462,8 +2841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend channel name.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamtype_nodejs" style="color: inherit; text-decoration: inherit;">upstream<wbr>Type</a>
@@ -2471,8 +2849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Backend access type, value range: IP_PORT, K8S.</p>
-</dd></dl>
+    <dd>Backend access type, value range: IP_PORT, K8S.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2486,8 +2863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Load balancing algorithm, value range: ROUND-ROBIN.</p>
-</dd><dt class="property-optional"
+    <dd>Load balancing algorithm, value range: ROUND-ROBIN.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_health_checker_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_checker_python" style="color: inherit; text-decoration: inherit;">health_<wbr>checker</a>
@@ -2495,26 +2871,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamhealthchecker">Upstream<wbr>Health<wbr>Checker<wbr>Args</a></span>
     </dt>
-    <dd><p>Health check configuration, currently only supports VPC channels.</p>
-</dd><dt class="property-optional"
+    <dd>Health check configuration, currently only supports VPC channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_k8s_services_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_k8s_services_python" style="color: inherit; text-decoration: inherit;">k8s_<wbr>services</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamk8sservice">Upstream<wbr>K8s<wbr>Service<wbr>Args]</a></span>
+        <span class="property-type"><a href="#upstreamk8sservice">Sequence[Upstream<wbr>K8s<wbr>Service<wbr>Args]</a></span>
     </dt>
-    <dd><p>Configuration of K8S container service.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of K8S container service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodes_python" style="color: inherit; text-decoration: inherit;">nodes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamnode">Upstream<wbr>Node<wbr>Args]</a></span>
+        <span class="property-type"><a href="#upstreamnode">Sequence[Upstream<wbr>Node<wbr>Args]</a></span>
     </dt>
-    <dd><p>Backend nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Backend nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retries_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retries_python" style="color: inherit; text-decoration: inherit;">retries</a>
@@ -2522,8 +2895,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Request retry count, default to 3 times.</p>
-</dd><dt class="property-optional"
+    <dd>Request retry count, default to 3 times.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheme_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheme_python" style="color: inherit; text-decoration: inherit;">scheme</a>
@@ -2531,17 +2903,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</p>
-</dd><dt class="property-optional"
+    <dd>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniq_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniq_vpc_id_python" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
@@ -2549,8 +2919,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC Unique ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstream_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstream_description_python" style="color: inherit; text-decoration: inherit;">upstream_<wbr>description</a>
@@ -2558,8 +2927,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Backend channel description.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstream_host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstream_host_python" style="color: inherit; text-decoration: inherit;">upstream_<wbr>host</a>
@@ -2567,8 +2935,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Host request header forwarded by gateway to backend.</p>
-</dd><dt class="property-optional"
+    <dd>Host request header forwarded by gateway to backend.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstream_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstream_name_python" style="color: inherit; text-decoration: inherit;">upstream_<wbr>name</a>
@@ -2576,8 +2943,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Backend channel name.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstream_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstream_type_python" style="color: inherit; text-decoration: inherit;">upstream_<wbr>type</a>
@@ -2585,8 +2951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Backend access type, value range: IP_PORT, K8S.</p>
-</dd></dl>
+    <dd>Backend access type, value range: IP_PORT, K8S.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2600,8 +2965,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Load balancing algorithm, value range: ROUND-ROBIN.</p>
-</dd><dt class="property-optional"
+    <dd>Load balancing algorithm, value range: ROUND-ROBIN.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_healthchecker_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecker_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Checker</a>
@@ -2609,8 +2973,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamhealthchecker">Property Map</a></span>
     </dt>
-    <dd><p>Health check configuration, currently only supports VPC channels.</p>
-</dd><dt class="property-optional"
+    <dd>Health check configuration, currently only supports VPC channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_k8sservices_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_k8sservices_yaml" style="color: inherit; text-decoration: inherit;">k8s<wbr>Services</a>
@@ -2618,8 +2981,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamk8sservice">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Configuration of K8S container service.</p>
-</dd><dt class="property-optional"
+    <dd>Configuration of K8S container service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_nodes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodes_yaml" style="color: inherit; text-decoration: inherit;">nodes</a>
@@ -2627,8 +2989,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamnode">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Backend nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Backend nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retries_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retries_yaml" style="color: inherit; text-decoration: inherit;">retries</a>
@@ -2636,8 +2997,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Request retry count, default to 3 times.</p>
-</dd><dt class="property-optional"
+    <dd>Request retry count, default to 3 times.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scheme_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scheme_yaml" style="color: inherit; text-decoration: inherit;">scheme</a>
@@ -2645,17 +3005,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</p>
-</dd><dt class="property-optional"
+    <dd>Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_yaml" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -2663,8 +3021,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC Unique ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC Unique ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamdescription_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamdescription_yaml" style="color: inherit; text-decoration: inherit;">upstream<wbr>Description</a>
@@ -2672,8 +3029,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend channel description.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamhost_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamhost_yaml" style="color: inherit; text-decoration: inherit;">upstream<wbr>Host</a>
@@ -2681,8 +3037,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host request header forwarded by gateway to backend.</p>
-</dd><dt class="property-optional"
+    <dd>Host request header forwarded by gateway to backend.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamname_yaml" style="color: inherit; text-decoration: inherit;">upstream<wbr>Name</a>
@@ -2690,8 +3045,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend channel name.</p>
-</dd><dt class="property-optional"
+    <dd>Backend channel name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_upstreamtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_upstreamtype_yaml" style="color: inherit; text-decoration: inherit;">upstream<wbr>Type</a>
@@ -2699,8 +3053,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Backend access type, value range: IP_PORT, K8S.</p>
-</dd></dl>
+    <dd>Backend access type, value range: IP_PORT, K8S.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2715,7 +3068,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="upstreamhealthchecker">Upstream<wbr>Health<wbr>Checker</h4>
+<h4 id="upstreamhealthchecker">
+Upstream<wbr>Health<wbr>Checker<pulumi-choosable type="language" values="python,go" class="inline">, Upstream<wbr>Health<wbr>Checker<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2727,8 +3082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Identify whether active health checks are enabled.</p>
-</dd><dt class="property-required"
+    <dd>Identify whether active health checks are enabled.</dd><dt class="property-required"
             title="Required">
         <span id="enablepassivecheck_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepassivecheck_csharp" style="color: inherit; text-decoration: inherit;">Enable<wbr>Passive<wbr>Check</a>
@@ -2736,8 +3090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Identify whether passive health checks are enabled.</p>
-</dd><dt class="property-required"
+    <dd>Identify whether passive health checks are enabled.</dd><dt class="property-required"
             title="Required">
         <span id="healthyhttpstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthyhttpstatus_csharp" style="color: inherit; text-decoration: inherit;">Healthy<wbr>Http<wbr>Status</a>
@@ -2745,8 +3098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The HTTP status code that determines a successful request during a health check.</p>
-</dd><dt class="property-required"
+    <dd>The HTTP status code that determines a successful request during a health check.</dd><dt class="property-required"
             title="Required">
         <span id="httpfailurethreshold_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpfailurethreshold_csharp" style="color: inherit; text-decoration: inherit;">Http<wbr>Failure<wbr>Threshold</a>
@@ -2754,8 +3106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP continuous error threshold. 0 means HTTP checking is disabled. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>HTTP continuous error threshold. 0 means HTTP checking is disabled. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="tcpfailurethreshold_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpfailurethreshold_csharp" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Failure<wbr>Threshold</a>
@@ -2763,8 +3114,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>TCP continuous error threshold. 0 indicates disabling TCP checking. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>TCP continuous error threshold. 0 indicates disabling TCP checking. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="timeoutthreshold_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutthreshold_csharp" style="color: inherit; text-decoration: inherit;">Timeout<wbr>Threshold</a>
@@ -2772,8 +3122,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Continuous timeout threshold. 0 indicates disabling timeout checking. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>Continuous timeout threshold. 0 indicates disabling timeout checking. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="unhealthyhttpstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthyhttpstatus_csharp" style="color: inherit; text-decoration: inherit;">Unhealthy<wbr>Http<wbr>Status</a>
@@ -2781,8 +3130,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The HTTP status code that determines a failed request during a health check.</p>
-</dd><dt class="property-optional"
+    <dd>The HTTP status code that determines a failed request during a health check.</dd><dt class="property-optional"
             title="Optional">
         <span id="activecheckhttppath_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#activecheckhttppath_csharp" style="color: inherit; text-decoration: inherit;">Active<wbr>Check<wbr>Http<wbr>Path</a>
@@ -2790,8 +3138,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detect the requested path during active health checks. The default is'/'.</p>
-</dd><dt class="property-optional"
+    <dd>Detect the requested path during active health checks. The default is'/'.</dd><dt class="property-optional"
             title="Optional">
         <span id="activecheckinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#activecheckinterval_csharp" style="color: inherit; text-decoration: inherit;">Active<wbr>Check<wbr>Interval</a>
@@ -2799,8 +3146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The time interval for active health checks is 5 seconds by default.</p>
-</dd><dt class="property-optional"
+    <dd>The time interval for active health checks is 5 seconds by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="activechecktimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#activechecktimeout_csharp" style="color: inherit; text-decoration: inherit;">Active<wbr>Check<wbr>Timeout</a>
@@ -2808,8 +3154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The detection request for active health check timed out in seconds. The default is 5 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>The detection request for active health check timed out in seconds. The default is 5 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="unhealthytimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthytimeout_csharp" style="color: inherit; text-decoration: inherit;">Unhealthy<wbr>Timeout</a>
@@ -2817,9 +3162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.</p>
-<p>The <code>k8s_service</code> object supports the following:</p>
-</dd></dl>
+    <dd>The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2833,8 +3176,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Identify whether active health checks are enabled.</p>
-</dd><dt class="property-required"
+    <dd>Identify whether active health checks are enabled.</dd><dt class="property-required"
             title="Required">
         <span id="enablepassivecheck_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepassivecheck_go" style="color: inherit; text-decoration: inherit;">Enable<wbr>Passive<wbr>Check</a>
@@ -2842,8 +3184,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Identify whether passive health checks are enabled.</p>
-</dd><dt class="property-required"
+    <dd>Identify whether passive health checks are enabled.</dd><dt class="property-required"
             title="Required">
         <span id="healthyhttpstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthyhttpstatus_go" style="color: inherit; text-decoration: inherit;">Healthy<wbr>Http<wbr>Status</a>
@@ -2851,8 +3192,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The HTTP status code that determines a successful request during a health check.</p>
-</dd><dt class="property-required"
+    <dd>The HTTP status code that determines a successful request during a health check.</dd><dt class="property-required"
             title="Required">
         <span id="httpfailurethreshold_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpfailurethreshold_go" style="color: inherit; text-decoration: inherit;">Http<wbr>Failure<wbr>Threshold</a>
@@ -2860,8 +3200,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP continuous error threshold. 0 means HTTP checking is disabled. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>HTTP continuous error threshold. 0 means HTTP checking is disabled. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="tcpfailurethreshold_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpfailurethreshold_go" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Failure<wbr>Threshold</a>
@@ -2869,8 +3208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>TCP continuous error threshold. 0 indicates disabling TCP checking. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>TCP continuous error threshold. 0 indicates disabling TCP checking. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="timeoutthreshold_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutthreshold_go" style="color: inherit; text-decoration: inherit;">Timeout<wbr>Threshold</a>
@@ -2878,8 +3216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Continuous timeout threshold. 0 indicates disabling timeout checking. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>Continuous timeout threshold. 0 indicates disabling timeout checking. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="unhealthyhttpstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthyhttpstatus_go" style="color: inherit; text-decoration: inherit;">Unhealthy<wbr>Http<wbr>Status</a>
@@ -2887,8 +3224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The HTTP status code that determines a failed request during a health check.</p>
-</dd><dt class="property-optional"
+    <dd>The HTTP status code that determines a failed request during a health check.</dd><dt class="property-optional"
             title="Optional">
         <span id="activecheckhttppath_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#activecheckhttppath_go" style="color: inherit; text-decoration: inherit;">Active<wbr>Check<wbr>Http<wbr>Path</a>
@@ -2896,8 +3232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detect the requested path during active health checks. The default is'/'.</p>
-</dd><dt class="property-optional"
+    <dd>Detect the requested path during active health checks. The default is'/'.</dd><dt class="property-optional"
             title="Optional">
         <span id="activecheckinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#activecheckinterval_go" style="color: inherit; text-decoration: inherit;">Active<wbr>Check<wbr>Interval</a>
@@ -2905,8 +3240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The time interval for active health checks is 5 seconds by default.</p>
-</dd><dt class="property-optional"
+    <dd>The time interval for active health checks is 5 seconds by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="activechecktimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#activechecktimeout_go" style="color: inherit; text-decoration: inherit;">Active<wbr>Check<wbr>Timeout</a>
@@ -2914,8 +3248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The detection request for active health check timed out in seconds. The default is 5 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>The detection request for active health check timed out in seconds. The default is 5 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="unhealthytimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthytimeout_go" style="color: inherit; text-decoration: inherit;">Unhealthy<wbr>Timeout</a>
@@ -2923,9 +3256,101 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.</p>
-<p>The <code>k8s_service</code> object supports the following:</p>
-</dd></dl>
+    <dd>The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="enable_active_check_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_active_check_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>active_<wbr>check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Identify whether active health checks are enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="enable_passive_check_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_passive_check_hcl" style="color: inherit; text-decoration: inherit;">enable_<wbr>passive_<wbr>check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Identify whether passive health checks are enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="healthy_http_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthy_http_status_hcl" style="color: inherit; text-decoration: inherit;">healthy_<wbr>http_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HTTP status code that determines a successful request during a health check.</dd><dt class="property-required"
+            title="Required">
+        <span id="http_failure_threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_failure_threshold_hcl" style="color: inherit; text-decoration: inherit;">http_<wbr>failure_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>HTTP continuous error threshold. 0 means HTTP checking is disabled. Value range: [0, 254].</dd><dt class="property-required"
+            title="Required">
+        <span id="tcp_failure_threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_failure_threshold_hcl" style="color: inherit; text-decoration: inherit;">tcp_<wbr>failure_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>TCP continuous error threshold. 0 indicates disabling TCP checking. Value range: [0, 254].</dd><dt class="property-required"
+            title="Required">
+        <span id="timeout_threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_threshold_hcl" style="color: inherit; text-decoration: inherit;">timeout_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Continuous timeout threshold. 0 indicates disabling timeout checking. Value range: [0, 254].</dd><dt class="property-required"
+            title="Required">
+        <span id="unhealthy_http_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthy_http_status_hcl" style="color: inherit; text-decoration: inherit;">unhealthy_<wbr>http_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HTTP status code that determines a failed request during a health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="active_check_http_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#active_check_http_path_hcl" style="color: inherit; text-decoration: inherit;">active_<wbr>check_<wbr>http_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Detect the requested path during active health checks. The default is'/'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="active_check_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#active_check_interval_hcl" style="color: inherit; text-decoration: inherit;">active_<wbr>check_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The time interval for active health checks is 5 seconds by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="active_check_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#active_check_timeout_hcl" style="color: inherit; text-decoration: inherit;">active_<wbr>check_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The detection request for active health check timed out in seconds. The default is 5 seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="unhealthy_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthy_timeout_hcl" style="color: inherit; text-decoration: inherit;">unhealthy_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2939,8 +3364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Identify whether active health checks are enabled.</p>
-</dd><dt class="property-required"
+    <dd>Identify whether active health checks are enabled.</dd><dt class="property-required"
             title="Required">
         <span id="enablepassivecheck_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepassivecheck_java" style="color: inherit; text-decoration: inherit;">enable<wbr>Passive<wbr>Check</a>
@@ -2948,8 +3372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Identify whether passive health checks are enabled.</p>
-</dd><dt class="property-required"
+    <dd>Identify whether passive health checks are enabled.</dd><dt class="property-required"
             title="Required">
         <span id="healthyhttpstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthyhttpstatus_java" style="color: inherit; text-decoration: inherit;">healthy<wbr>Http<wbr>Status</a>
@@ -2957,8 +3380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The HTTP status code that determines a successful request during a health check.</p>
-</dd><dt class="property-required"
+    <dd>The HTTP status code that determines a successful request during a health check.</dd><dt class="property-required"
             title="Required">
         <span id="httpfailurethreshold_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpfailurethreshold_java" style="color: inherit; text-decoration: inherit;">http<wbr>Failure<wbr>Threshold</a>
@@ -2966,8 +3388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>HTTP continuous error threshold. 0 means HTTP checking is disabled. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>HTTP continuous error threshold. 0 means HTTP checking is disabled. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="tcpfailurethreshold_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpfailurethreshold_java" style="color: inherit; text-decoration: inherit;">tcp<wbr>Failure<wbr>Threshold</a>
@@ -2975,8 +3396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>TCP continuous error threshold. 0 indicates disabling TCP checking. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>TCP continuous error threshold. 0 indicates disabling TCP checking. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="timeoutthreshold_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutthreshold_java" style="color: inherit; text-decoration: inherit;">timeout<wbr>Threshold</a>
@@ -2984,8 +3404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Continuous timeout threshold. 0 indicates disabling timeout checking. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>Continuous timeout threshold. 0 indicates disabling timeout checking. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="unhealthyhttpstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthyhttpstatus_java" style="color: inherit; text-decoration: inherit;">unhealthy<wbr>Http<wbr>Status</a>
@@ -2993,8 +3412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The HTTP status code that determines a failed request during a health check.</p>
-</dd><dt class="property-optional"
+    <dd>The HTTP status code that determines a failed request during a health check.</dd><dt class="property-optional"
             title="Optional">
         <span id="activecheckhttppath_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#activecheckhttppath_java" style="color: inherit; text-decoration: inherit;">active<wbr>Check<wbr>Http<wbr>Path</a>
@@ -3002,8 +3420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detect the requested path during active health checks. The default is'/'.</p>
-</dd><dt class="property-optional"
+    <dd>Detect the requested path during active health checks. The default is'/'.</dd><dt class="property-optional"
             title="Optional">
         <span id="activecheckinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#activecheckinterval_java" style="color: inherit; text-decoration: inherit;">active<wbr>Check<wbr>Interval</a>
@@ -3011,8 +3428,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The time interval for active health checks is 5 seconds by default.</p>
-</dd><dt class="property-optional"
+    <dd>The time interval for active health checks is 5 seconds by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="activechecktimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#activechecktimeout_java" style="color: inherit; text-decoration: inherit;">active<wbr>Check<wbr>Timeout</a>
@@ -3020,8 +3436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The detection request for active health check timed out in seconds. The default is 5 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>The detection request for active health check timed out in seconds. The default is 5 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="unhealthytimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthytimeout_java" style="color: inherit; text-decoration: inherit;">unhealthy<wbr>Timeout</a>
@@ -3029,9 +3444,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.</p>
-<p>The <code>k8s_service</code> object supports the following:</p>
-</dd></dl>
+    <dd>The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3045,8 +3458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Identify whether active health checks are enabled.</p>
-</dd><dt class="property-required"
+    <dd>Identify whether active health checks are enabled.</dd><dt class="property-required"
             title="Required">
         <span id="enablepassivecheck_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepassivecheck_nodejs" style="color: inherit; text-decoration: inherit;">enable<wbr>Passive<wbr>Check</a>
@@ -3054,8 +3466,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Identify whether passive health checks are enabled.</p>
-</dd><dt class="property-required"
+    <dd>Identify whether passive health checks are enabled.</dd><dt class="property-required"
             title="Required">
         <span id="healthyhttpstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthyhttpstatus_nodejs" style="color: inherit; text-decoration: inherit;">healthy<wbr>Http<wbr>Status</a>
@@ -3063,8 +3474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The HTTP status code that determines a successful request during a health check.</p>
-</dd><dt class="property-required"
+    <dd>The HTTP status code that determines a successful request during a health check.</dd><dt class="property-required"
             title="Required">
         <span id="httpfailurethreshold_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpfailurethreshold_nodejs" style="color: inherit; text-decoration: inherit;">http<wbr>Failure<wbr>Threshold</a>
@@ -3072,8 +3482,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>HTTP continuous error threshold. 0 means HTTP checking is disabled. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>HTTP continuous error threshold. 0 means HTTP checking is disabled. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="tcpfailurethreshold_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpfailurethreshold_nodejs" style="color: inherit; text-decoration: inherit;">tcp<wbr>Failure<wbr>Threshold</a>
@@ -3081,8 +3490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>TCP continuous error threshold. 0 indicates disabling TCP checking. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>TCP continuous error threshold. 0 indicates disabling TCP checking. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="timeoutthreshold_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutthreshold_nodejs" style="color: inherit; text-decoration: inherit;">timeout<wbr>Threshold</a>
@@ -3090,8 +3498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Continuous timeout threshold. 0 indicates disabling timeout checking. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>Continuous timeout threshold. 0 indicates disabling timeout checking. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="unhealthyhttpstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthyhttpstatus_nodejs" style="color: inherit; text-decoration: inherit;">unhealthy<wbr>Http<wbr>Status</a>
@@ -3099,8 +3506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The HTTP status code that determines a failed request during a health check.</p>
-</dd><dt class="property-optional"
+    <dd>The HTTP status code that determines a failed request during a health check.</dd><dt class="property-optional"
             title="Optional">
         <span id="activecheckhttppath_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#activecheckhttppath_nodejs" style="color: inherit; text-decoration: inherit;">active<wbr>Check<wbr>Http<wbr>Path</a>
@@ -3108,8 +3514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detect the requested path during active health checks. The default is'/'.</p>
-</dd><dt class="property-optional"
+    <dd>Detect the requested path during active health checks. The default is'/'.</dd><dt class="property-optional"
             title="Optional">
         <span id="activecheckinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#activecheckinterval_nodejs" style="color: inherit; text-decoration: inherit;">active<wbr>Check<wbr>Interval</a>
@@ -3117,8 +3522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The time interval for active health checks is 5 seconds by default.</p>
-</dd><dt class="property-optional"
+    <dd>The time interval for active health checks is 5 seconds by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="activechecktimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#activechecktimeout_nodejs" style="color: inherit; text-decoration: inherit;">active<wbr>Check<wbr>Timeout</a>
@@ -3126,8 +3530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The detection request for active health check timed out in seconds. The default is 5 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>The detection request for active health check timed out in seconds. The default is 5 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="unhealthytimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthytimeout_nodejs" style="color: inherit; text-decoration: inherit;">unhealthy<wbr>Timeout</a>
@@ -3135,9 +3538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.</p>
-<p>The <code>k8s_service</code> object supports the following:</p>
-</dd></dl>
+    <dd>The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3151,8 +3552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Identify whether active health checks are enabled.</p>
-</dd><dt class="property-required"
+    <dd>Identify whether active health checks are enabled.</dd><dt class="property-required"
             title="Required">
         <span id="enable_passive_check_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_passive_check_python" style="color: inherit; text-decoration: inherit;">enable_<wbr>passive_<wbr>check</a>
@@ -3160,8 +3560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Identify whether passive health checks are enabled.</p>
-</dd><dt class="property-required"
+    <dd>Identify whether passive health checks are enabled.</dd><dt class="property-required"
             title="Required">
         <span id="healthy_http_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthy_http_status_python" style="color: inherit; text-decoration: inherit;">healthy_<wbr>http_<wbr>status</a>
@@ -3169,8 +3568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The HTTP status code that determines a successful request during a health check.</p>
-</dd><dt class="property-required"
+    <dd>The HTTP status code that determines a successful request during a health check.</dd><dt class="property-required"
             title="Required">
         <span id="http_failure_threshold_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_failure_threshold_python" style="color: inherit; text-decoration: inherit;">http_<wbr>failure_<wbr>threshold</a>
@@ -3178,8 +3576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTP continuous error threshold. 0 means HTTP checking is disabled. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>HTTP continuous error threshold. 0 means HTTP checking is disabled. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="tcp_failure_threshold_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_failure_threshold_python" style="color: inherit; text-decoration: inherit;">tcp_<wbr>failure_<wbr>threshold</a>
@@ -3187,8 +3584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>TCP continuous error threshold. 0 indicates disabling TCP checking. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>TCP continuous error threshold. 0 indicates disabling TCP checking. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="timeout_threshold_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_threshold_python" style="color: inherit; text-decoration: inherit;">timeout_<wbr>threshold</a>
@@ -3196,8 +3592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Continuous timeout threshold. 0 indicates disabling timeout checking. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>Continuous timeout threshold. 0 indicates disabling timeout checking. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="unhealthy_http_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthy_http_status_python" style="color: inherit; text-decoration: inherit;">unhealthy_<wbr>http_<wbr>status</a>
@@ -3205,8 +3600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The HTTP status code that determines a failed request during a health check.</p>
-</dd><dt class="property-optional"
+    <dd>The HTTP status code that determines a failed request during a health check.</dd><dt class="property-optional"
             title="Optional">
         <span id="active_check_http_path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#active_check_http_path_python" style="color: inherit; text-decoration: inherit;">active_<wbr>check_<wbr>http_<wbr>path</a>
@@ -3214,8 +3608,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Detect the requested path during active health checks. The default is'/'.</p>
-</dd><dt class="property-optional"
+    <dd>Detect the requested path during active health checks. The default is'/'.</dd><dt class="property-optional"
             title="Optional">
         <span id="active_check_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#active_check_interval_python" style="color: inherit; text-decoration: inherit;">active_<wbr>check_<wbr>interval</a>
@@ -3223,8 +3616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The time interval for active health checks is 5 seconds by default.</p>
-</dd><dt class="property-optional"
+    <dd>The time interval for active health checks is 5 seconds by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="active_check_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#active_check_timeout_python" style="color: inherit; text-decoration: inherit;">active_<wbr>check_<wbr>timeout</a>
@@ -3232,8 +3624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The detection request for active health check timed out in seconds. The default is 5 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>The detection request for active health check timed out in seconds. The default is 5 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="unhealthy_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthy_timeout_python" style="color: inherit; text-decoration: inherit;">unhealthy_<wbr>timeout</a>
@@ -3241,9 +3632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.</p>
-<p>The <code>k8s_service</code> object supports the following:</p>
-</dd></dl>
+    <dd>The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3257,8 +3646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Identify whether active health checks are enabled.</p>
-</dd><dt class="property-required"
+    <dd>Identify whether active health checks are enabled.</dd><dt class="property-required"
             title="Required">
         <span id="enablepassivecheck_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enablepassivecheck_yaml" style="color: inherit; text-decoration: inherit;">enable<wbr>Passive<wbr>Check</a>
@@ -3266,8 +3654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Identify whether passive health checks are enabled.</p>
-</dd><dt class="property-required"
+    <dd>Identify whether passive health checks are enabled.</dd><dt class="property-required"
             title="Required">
         <span id="healthyhttpstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthyhttpstatus_yaml" style="color: inherit; text-decoration: inherit;">healthy<wbr>Http<wbr>Status</a>
@@ -3275,8 +3662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The HTTP status code that determines a successful request during a health check.</p>
-</dd><dt class="property-required"
+    <dd>The HTTP status code that determines a successful request during a health check.</dd><dt class="property-required"
             title="Required">
         <span id="httpfailurethreshold_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpfailurethreshold_yaml" style="color: inherit; text-decoration: inherit;">http<wbr>Failure<wbr>Threshold</a>
@@ -3284,8 +3670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>HTTP continuous error threshold. 0 means HTTP checking is disabled. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>HTTP continuous error threshold. 0 means HTTP checking is disabled. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="tcpfailurethreshold_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpfailurethreshold_yaml" style="color: inherit; text-decoration: inherit;">tcp<wbr>Failure<wbr>Threshold</a>
@@ -3293,8 +3678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>TCP continuous error threshold. 0 indicates disabling TCP checking. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>TCP continuous error threshold. 0 indicates disabling TCP checking. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="timeoutthreshold_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoutthreshold_yaml" style="color: inherit; text-decoration: inherit;">timeout<wbr>Threshold</a>
@@ -3302,8 +3686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Continuous timeout threshold. 0 indicates disabling timeout checking. Value range: [0, 254].</p>
-</dd><dt class="property-required"
+    <dd>Continuous timeout threshold. 0 indicates disabling timeout checking. Value range: [0, 254].</dd><dt class="property-required"
             title="Required">
         <span id="unhealthyhttpstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthyhttpstatus_yaml" style="color: inherit; text-decoration: inherit;">unhealthy<wbr>Http<wbr>Status</a>
@@ -3311,8 +3694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The HTTP status code that determines a failed request during a health check.</p>
-</dd><dt class="property-optional"
+    <dd>The HTTP status code that determines a failed request during a health check.</dd><dt class="property-optional"
             title="Optional">
         <span id="activecheckhttppath_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#activecheckhttppath_yaml" style="color: inherit; text-decoration: inherit;">active<wbr>Check<wbr>Http<wbr>Path</a>
@@ -3320,8 +3702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detect the requested path during active health checks. The default is'/'.</p>
-</dd><dt class="property-optional"
+    <dd>Detect the requested path during active health checks. The default is'/'.</dd><dt class="property-optional"
             title="Optional">
         <span id="activecheckinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#activecheckinterval_yaml" style="color: inherit; text-decoration: inherit;">active<wbr>Check<wbr>Interval</a>
@@ -3329,8 +3710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The time interval for active health checks is 5 seconds by default.</p>
-</dd><dt class="property-optional"
+    <dd>The time interval for active health checks is 5 seconds by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="activechecktimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#activechecktimeout_yaml" style="color: inherit; text-decoration: inherit;">active<wbr>Check<wbr>Timeout</a>
@@ -3338,8 +3718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The detection request for active health check timed out in seconds. The default is 5 seconds.</p>
-</dd><dt class="property-optional"
+    <dd>The detection request for active health check timed out in seconds. The default is 5 seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="unhealthytimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unhealthytimeout_yaml" style="color: inherit; text-decoration: inherit;">unhealthy<wbr>Timeout</a>
@@ -3347,13 +3726,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.</p>
-<p>The <code>k8s_service</code> object supports the following:</p>
-</dd></dl>
+    <dd>The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="upstreamk8sservice">Upstream<wbr>K8s<wbr>Service</h4>
+<h4 id="upstreamk8sservice">
+Upstream<wbr>K8s<wbr>Service<pulumi-choosable type="language" values="python,go" class="inline">, Upstream<wbr>K8s<wbr>Service<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3365,8 +3744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>K8s cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>K8s cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="extralabels_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extralabels_csharp" style="color: inherit; text-decoration: inherit;">Extra<wbr>Labels</a>
@@ -3374,8 +3752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamk8sserviceextralabel">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Inputs.<wbr>Upstream<wbr>K8s<wbr>Service<wbr>Extra<wbr>Label&gt;</a></span>
     </dt>
-    <dd><p>Additional Selected Pod Label.</p>
-</dd><dt class="property-required"
+    <dd>Additional Selected Pod Label.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -3383,8 +3760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Container namespace.</p>
-</dd><dt class="property-required"
+    <dd>Container namespace.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -3392,8 +3768,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of service.</p>
-</dd><dt class="property-required"
+    <dd>Port of service.</dd><dt class="property-required"
             title="Required">
         <span id="servicename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Name</a>
@@ -3401,8 +3776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the container service.</p>
-</dd><dt class="property-required"
+    <dd>The name of the container service.</dd><dt class="property-required"
             title="Required">
         <span id="weight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -3410,8 +3784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>weight.</p>
-</dd><dt class="property-optional"
+    <dd>weight.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -3419,8 +3792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Customized service name, optional.</p>
-</dd></dl>
+    <dd>Customized service name, optional.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3434,8 +3806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>K8s cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>K8s cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="extralabels_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extralabels_go" style="color: inherit; text-decoration: inherit;">Extra<wbr>Labels</a>
@@ -3443,8 +3814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamk8sserviceextralabel">[]Upstream<wbr>K8s<wbr>Service<wbr>Extra<wbr>Label</a></span>
     </dt>
-    <dd><p>Additional Selected Pod Label.</p>
-</dd><dt class="property-required"
+    <dd>Additional Selected Pod Label.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -3452,8 +3822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Container namespace.</p>
-</dd><dt class="property-required"
+    <dd>Container namespace.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -3461,8 +3830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of service.</p>
-</dd><dt class="property-required"
+    <dd>Port of service.</dd><dt class="property-required"
             title="Required">
         <span id="servicename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Name</a>
@@ -3470,8 +3838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the container service.</p>
-</dd><dt class="property-required"
+    <dd>The name of the container service.</dd><dt class="property-required"
             title="Required">
         <span id="weight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -3479,8 +3846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>weight.</p>
-</dd><dt class="property-optional"
+    <dd>weight.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -3488,8 +3854,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Customized service name, optional.</p>
-</dd></dl>
+    <dd>Customized service name, optional.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>K8s cluster ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="extra_labels_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extra_labels_hcl" style="color: inherit; text-decoration: inherit;">extra_<wbr>labels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#upstreamk8sserviceextralabel">list(object)</a></span>
+    </dt>
+    <dd>Additional Selected Pod Label.</dd><dt class="property-required"
+            title="Required">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Container namespace.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of service.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_name_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the container service.</dd><dt class="property-required"
+            title="Required">
+        <span id="weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>weight.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Customized service name, optional.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3503,8 +3930,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>K8s cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>K8s cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="extralabels_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extralabels_java" style="color: inherit; text-decoration: inherit;">extra<wbr>Labels</a>
@@ -3512,8 +3938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamk8sserviceextralabel">List&lt;Upstream<wbr>K8s<wbr>Service<wbr>Extra<wbr>Label&gt;</a></span>
     </dt>
-    <dd><p>Additional Selected Pod Label.</p>
-</dd><dt class="property-required"
+    <dd>Additional Selected Pod Label.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3521,8 +3946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Container namespace.</p>
-</dd><dt class="property-required"
+    <dd>Container namespace.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -3530,8 +3954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of service.</p>
-</dd><dt class="property-required"
+    <dd>Port of service.</dd><dt class="property-required"
             title="Required">
         <span id="servicename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_java" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -3539,8 +3962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the container service.</p>
-</dd><dt class="property-required"
+    <dd>The name of the container service.</dd><dt class="property-required"
             title="Required">
         <span id="weight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -3548,8 +3970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>weight.</p>
-</dd><dt class="property-optional"
+    <dd>weight.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3557,8 +3978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Customized service name, optional.</p>
-</dd></dl>
+    <dd>Customized service name, optional.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3572,8 +3992,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>K8s cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>K8s cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="extralabels_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extralabels_nodejs" style="color: inherit; text-decoration: inherit;">extra<wbr>Labels</a>
@@ -3581,8 +4000,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamk8sserviceextralabel">Upstream<wbr>K8s<wbr>Service<wbr>Extra<wbr>Label[]</a></span>
     </dt>
-    <dd><p>Additional Selected Pod Label.</p>
-</dd><dt class="property-required"
+    <dd>Additional Selected Pod Label.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3590,8 +4008,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Container namespace.</p>
-</dd><dt class="property-required"
+    <dd>Container namespace.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -3599,8 +4016,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of service.</p>
-</dd><dt class="property-required"
+    <dd>Port of service.</dd><dt class="property-required"
             title="Required">
         <span id="servicename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -3608,8 +4024,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the container service.</p>
-</dd><dt class="property-required"
+    <dd>The name of the container service.</dd><dt class="property-required"
             title="Required">
         <span id="weight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -3617,8 +4032,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>weight.</p>
-</dd><dt class="property-optional"
+    <dd>weight.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3626,8 +4040,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Customized service name, optional.</p>
-</dd></dl>
+    <dd>Customized service name, optional.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3641,17 +4054,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>K8s cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>K8s cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="extra_labels_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extra_labels_python" style="color: inherit; text-decoration: inherit;">extra_<wbr>labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#upstreamk8sserviceextralabel">Upstream<wbr>K8s<wbr>Service<wbr>Extra<wbr>Label]</a></span>
+        <span class="property-type"><a href="#upstreamk8sserviceextralabel">Sequence[Upstream<wbr>K8s<wbr>Service<wbr>Extra<wbr>Label]</a></span>
     </dt>
-    <dd><p>Additional Selected Pod Label.</p>
-</dd><dt class="property-required"
+    <dd>Additional Selected Pod Label.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3659,8 +4070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Container namespace.</p>
-</dd><dt class="property-required"
+    <dd>Container namespace.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -3668,8 +4078,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of service.</p>
-</dd><dt class="property-required"
+    <dd>Port of service.</dd><dt class="property-required"
             title="Required">
         <span id="service_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_name_python" style="color: inherit; text-decoration: inherit;">service_<wbr>name</a>
@@ -3677,8 +4086,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the container service.</p>
-</dd><dt class="property-required"
+    <dd>The name of the container service.</dd><dt class="property-required"
             title="Required">
         <span id="weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -3686,8 +4094,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>weight.</p>
-</dd><dt class="property-optional"
+    <dd>weight.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3695,8 +4102,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Customized service name, optional.</p>
-</dd></dl>
+    <dd>Customized service name, optional.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3710,8 +4116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>K8s cluster ID.</p>
-</dd><dt class="property-required"
+    <dd>K8s cluster ID.</dd><dt class="property-required"
             title="Required">
         <span id="extralabels_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extralabels_yaml" style="color: inherit; text-decoration: inherit;">extra<wbr>Labels</a>
@@ -3719,8 +4124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#upstreamk8sserviceextralabel">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Additional Selected Pod Label.</p>
-</dd><dt class="property-required"
+    <dd>Additional Selected Pod Label.</dd><dt class="property-required"
             title="Required">
         <span id="namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3728,8 +4132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Container namespace.</p>
-</dd><dt class="property-required"
+    <dd>Container namespace.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -3737,8 +4140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of service.</p>
-</dd><dt class="property-required"
+    <dd>Port of service.</dd><dt class="property-required"
             title="Required">
         <span id="servicename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -3746,8 +4148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the container service.</p>
-</dd><dt class="property-required"
+    <dd>The name of the container service.</dd><dt class="property-required"
             title="Required">
         <span id="weight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -3755,8 +4156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>weight.</p>
-</dd><dt class="property-optional"
+    <dd>weight.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -3764,12 +4164,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Customized service name, optional.</p>
-</dd></dl>
+    <dd>Customized service name, optional.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="upstreamk8sserviceextralabel">Upstream<wbr>K8s<wbr>Service<wbr>Extra<wbr>Label</h4>
+<h4 id="upstreamk8sserviceextralabel">
+Upstream<wbr>K8s<wbr>Service<wbr>Extra<wbr>Label<pulumi-choosable type="language" values="python,go" class="inline">, Upstream<wbr>K8s<wbr>Service<wbr>Extra<wbr>Label<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3781,8 +4182,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of Label.</p>
-</dd><dt class="property-required"
+    <dd>Key of Label.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -3790,8 +4190,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of Label.</p>
-</dd></dl>
+    <dd>Value of Label.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3805,8 +4204,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of Label.</p>
-</dd><dt class="property-required"
+    <dd>Key of Label.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -3814,8 +4212,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of Label.</p>
-</dd></dl>
+    <dd>Value of Label.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key of Label.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value of Label.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3829,8 +4248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of Label.</p>
-</dd><dt class="property-required"
+    <dd>Key of Label.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3838,8 +4256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of Label.</p>
-</dd></dl>
+    <dd>Value of Label.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3853,8 +4270,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of Label.</p>
-</dd><dt class="property-required"
+    <dd>Key of Label.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3862,8 +4278,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of Label.</p>
-</dd></dl>
+    <dd>Value of Label.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3877,8 +4292,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key of Label.</p>
-</dd><dt class="property-required"
+    <dd>Key of Label.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3886,8 +4300,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Value of Label.</p>
-</dd></dl>
+    <dd>Value of Label.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3901,8 +4314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of Label.</p>
-</dd><dt class="property-required"
+    <dd>Key of Label.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3910,12 +4322,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of Label.</p>
-</dd></dl>
+    <dd>Value of Label.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="upstreamnode">Upstream<wbr>Node</h4>
+<h4 id="upstreamnode">
+Upstream<wbr>Node<pulumi-choosable type="language" values="python,go" class="inline">, Upstream<wbr>Node<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3927,8 +4340,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP or domain name.</p>
-</dd><dt class="property-required"
+    <dd>IP or domain name.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -3936,8 +4348,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port [0, 65535].</p>
-</dd><dt class="property-required"
+    <dd>Port [0, 65535].</dd><dt class="property-required"
             title="Required">
         <span id="weight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -3945,8 +4356,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight [0, 100], 0 is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Weight [0, 100], 0 is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -3954,8 +4364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_csharp" style="color: inherit; text-decoration: inherit;">Name<wbr>Space</a>
@@ -3963,8 +4372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>K8S namespaceNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>K8S namespaceNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Name</a>
@@ -3972,8 +4380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>K8S container service nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>K8S container service nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="source_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_csharp" style="color: inherit; text-decoration: inherit;">Source</a>
@@ -3981,8 +4388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source of Node, value range: K8SNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Source of Node, value range: K8SNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
@@ -3990,8 +4396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Dye labelNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Dye labelNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqueservicename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqueservicename_csharp" style="color: inherit; text-decoration: inherit;">Unique<wbr>Service<wbr>Name</a>
@@ -3999,8 +4404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service name recorded internally by API gatewayNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Unique service name recorded internally by API gatewayNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="vminstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vminstanceid_csharp" style="color: inherit; text-decoration: inherit;">Vm<wbr>Instance<wbr>Id</a>
@@ -4008,8 +4412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CVM instance IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>CVM instance IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4023,8 +4426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP or domain name.</p>
-</dd><dt class="property-required"
+    <dd>IP or domain name.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -4032,8 +4434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port [0, 65535].</p>
-</dd><dt class="property-required"
+    <dd>Port [0, 65535].</dd><dt class="property-required"
             title="Required">
         <span id="weight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -4041,8 +4442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight [0, 100], 0 is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Weight [0, 100], 0 is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -4050,8 +4450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_go" style="color: inherit; text-decoration: inherit;">Name<wbr>Space</a>
@@ -4059,8 +4458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>K8S namespaceNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>K8S namespaceNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Name</a>
@@ -4068,8 +4466,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>K8S container service nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>K8S container service nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="source_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_go" style="color: inherit; text-decoration: inherit;">Source</a>
@@ -4077,8 +4474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source of Node, value range: K8SNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Source of Node, value range: K8SNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
@@ -4086,8 +4482,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Dye labelNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Dye labelNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqueservicename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqueservicename_go" style="color: inherit; text-decoration: inherit;">Unique<wbr>Service<wbr>Name</a>
@@ -4095,8 +4490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service name recorded internally by API gatewayNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Unique service name recorded internally by API gatewayNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="vminstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vminstanceid_go" style="color: inherit; text-decoration: inherit;">Vm<wbr>Instance<wbr>Id</a>
@@ -4104,8 +4498,93 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CVM instance IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>CVM instance IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP or domain name.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port [0, 65535].</dd><dt class="property-required"
+            title="Required">
+        <span id="weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Weight [0, 100], 0 is disabled.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_space_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_space_hcl" style="color: inherit; text-decoration: inherit;">name_<wbr>space</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>K8S namespaceNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="service_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_name_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>K8S container service nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_hcl" style="color: inherit; text-decoration: inherit;">source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Source of Node, value range: K8SNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Dye labelNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="unique_service_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unique_service_name_hcl" style="color: inherit; text-decoration: inherit;">unique_<wbr>service_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unique service name recorded internally by API gatewayNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vm_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vm_instance_id_hcl" style="color: inherit; text-decoration: inherit;">vm_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CVM instance IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4119,8 +4598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP or domain name.</p>
-</dd><dt class="property-required"
+    <dd>IP or domain name.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4128,8 +4606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port [0, 65535].</p>
-</dd><dt class="property-required"
+    <dd>Port [0, 65535].</dd><dt class="property-required"
             title="Required">
         <span id="weight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -4137,8 +4614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Weight [0, 100], 0 is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Weight [0, 100], 0 is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -4146,8 +4622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_java" style="color: inherit; text-decoration: inherit;">name<wbr>Space</a>
@@ -4155,8 +4630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>K8S namespaceNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>K8S namespaceNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_java" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -4164,8 +4638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>K8S container service nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>K8S container service nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="source_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_java" style="color: inherit; text-decoration: inherit;">source</a>
@@ -4173,8 +4646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Source of Node, value range: K8SNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Source of Node, value range: K8SNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -4182,8 +4654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Dye labelNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Dye labelNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqueservicename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqueservicename_java" style="color: inherit; text-decoration: inherit;">unique<wbr>Service<wbr>Name</a>
@@ -4191,8 +4662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique service name recorded internally by API gatewayNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Unique service name recorded internally by API gatewayNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="vminstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vminstanceid_java" style="color: inherit; text-decoration: inherit;">vm<wbr>Instance<wbr>Id</a>
@@ -4200,8 +4670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CVM instance IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>CVM instance IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4215,8 +4684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP or domain name.</p>
-</dd><dt class="property-required"
+    <dd>IP or domain name.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4224,8 +4692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port [0, 65535].</p>
-</dd><dt class="property-required"
+    <dd>Port [0, 65535].</dd><dt class="property-required"
             title="Required">
         <span id="weight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -4233,8 +4700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Weight [0, 100], 0 is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Weight [0, 100], 0 is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -4242,8 +4708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_nodejs" style="color: inherit; text-decoration: inherit;">name<wbr>Space</a>
@@ -4251,8 +4716,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>K8S namespaceNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>K8S namespaceNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -4260,8 +4724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>K8S container service nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>K8S container service nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="source_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_nodejs" style="color: inherit; text-decoration: inherit;">source</a>
@@ -4269,8 +4732,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source of Node, value range: K8SNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Source of Node, value range: K8SNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -4278,8 +4740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Dye labelNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Dye labelNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqueservicename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqueservicename_nodejs" style="color: inherit; text-decoration: inherit;">unique<wbr>Service<wbr>Name</a>
@@ -4287,8 +4748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unique service name recorded internally by API gatewayNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Unique service name recorded internally by API gatewayNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="vminstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vminstanceid_nodejs" style="color: inherit; text-decoration: inherit;">vm<wbr>Instance<wbr>Id</a>
@@ -4296,8 +4756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CVM instance IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>CVM instance IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4311,8 +4770,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP or domain name.</p>
-</dd><dt class="property-required"
+    <dd>IP or domain name.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4320,8 +4778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port [0, 65535].</p>
-</dd><dt class="property-required"
+    <dd>Port [0, 65535].</dd><dt class="property-required"
             title="Required">
         <span id="weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -4329,8 +4786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight [0, 100], 0 is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Weight [0, 100], 0 is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -4338,8 +4794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_space_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_space_python" style="color: inherit; text-decoration: inherit;">name_<wbr>space</a>
@@ -4347,8 +4802,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>K8S namespaceNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>K8S namespaceNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="service_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_name_python" style="color: inherit; text-decoration: inherit;">service_<wbr>name</a>
@@ -4356,8 +4810,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>K8S container service nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>K8S container service nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="source_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_python" style="color: inherit; text-decoration: inherit;">source</a>
@@ -4365,8 +4818,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Source of Node, value range: K8SNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Source of Node, value range: K8SNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -4374,8 +4826,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Dye labelNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Dye labelNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="unique_service_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unique_service_name_python" style="color: inherit; text-decoration: inherit;">unique_<wbr>service_<wbr>name</a>
@@ -4383,8 +4834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unique service name recorded internally by API gatewayNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Unique service name recorded internally by API gatewayNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="vm_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vm_instance_id_python" style="color: inherit; text-decoration: inherit;">vm_<wbr>instance_<wbr>id</a>
@@ -4392,8 +4842,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CVM instance IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>CVM instance IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4407,8 +4856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP or domain name.</p>
-</dd><dt class="property-required"
+    <dd>IP or domain name.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -4416,8 +4864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port [0, 65535].</p>
-</dd><dt class="property-required"
+    <dd>Port [0, 65535].</dd><dt class="property-required"
             title="Required">
         <span id="weight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -4425,8 +4872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Weight [0, 100], 0 is disabled.</p>
-</dd><dt class="property-optional"
+    <dd>Weight [0, 100], 0 is disabled.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -4434,8 +4880,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the TKE clusterNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_yaml" style="color: inherit; text-decoration: inherit;">name<wbr>Space</a>
@@ -4443,8 +4888,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>K8S namespaceNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>K8S namespaceNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicename_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Name</a>
@@ -4452,8 +4896,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>K8S container service nameNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>K8S container service nameNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="source_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_yaml" style="color: inherit; text-decoration: inherit;">source</a>
@@ -4461,8 +4904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Source of Node, value range: K8SNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Source of Node, value range: K8SNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
@@ -4470,8 +4912,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Dye labelNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Dye labelNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqueservicename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqueservicename_yaml" style="color: inherit; text-decoration: inherit;">unique<wbr>Service<wbr>Name</a>
@@ -4479,8 +4920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unique service name recorded internally by API gatewayNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>Unique service name recorded internally by API gatewayNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="vminstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vminstanceid_yaml" style="color: inherit; text-decoration: inherit;">vm<wbr>Instance<wbr>Id</a>
@@ -4488,8 +4928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CVM instance IDNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>CVM instance IDNote: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4505,6 +4944,9 @@ $ pulumi import tencentcloud:ApiGateway/upstream:Upstream upstream upstream_id
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -4514,7 +4956,6 @@ $ pulumi import tencentcloud:ApiGateway/upstream:Upstream upstream upstream_id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

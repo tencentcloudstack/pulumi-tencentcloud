@@ -2,9 +2,11 @@
 ---
 title: "getAcls"
 title_tag: "tencentcloud.Ckafka.getAcls"
-meta_desc: "Documentation for the tencentcloud.Ckafka.getAcls function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed acl information of Ckafka"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,60 +18,57 @@ Use this data source to query detailed acl information of Ckafka
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Ckafka.getAcls({
-    host: "2",
+const foo = tencentcloud.ckafka.getAcls({
     instanceId: "ckafka-f9ife4zz",
-    resourceName: "topic-tf-test",
     resourceType: "TOPIC",
+    resourceName: "topic-tf-test",
+    host: "2",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Ckafka.get_acls(host="2",
-    instance_id="ckafka-f9ife4zz",
+foo = tencentcloud.ckafka.get_acls(instance_id="ckafka-f9ife4zz",
+    resource_type="TOPIC",
     resource_name="topic-tf-test",
-    resource_type="TOPIC")
+    host="2")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Ckafka.GetAcls.Invoke(new()
-    {
-        Host = "2",
-        InstanceId = "ckafka-f9ife4zz",
-        ResourceName = "topic-tf-test",
-        ResourceType = "TOPIC",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ckafka"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ckafka.GetAcls(ctx, &ckafka.GetAclsArgs{
-			Host:         pulumi.StringRef("2"),
+		_, err := ckafka.GetAcls(ctx, &ckafka.GetAclsArgs{
 			InstanceId:   "ckafka-f9ife4zz",
-			ResourceName: "topic-tf-test",
 			ResourceType: "TOPIC",
+			ResourceName: "topic-tf-test",
+			Host:         pulumi.StringRef("2"),
 		}, nil)
 		if err != nil {
 			return err
@@ -78,6 +77,34 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = Tencentcloud.Ckafka.GetAcls.Invoke(new()
+    {
+        InstanceId = "ckafka-f9ife4zz",
+        ResourceType = "TOPIC",
+        ResourceName = "topic-tf-test",
+        Host = "2",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -86,8 +113,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ckafka.CkafkaFunctions;
 import com.pulumi.tencentcloud.Ckafka.inputs.GetAclsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -100,28 +127,64 @@ public class App {
 
     public static void stack(Context ctx) {
         final var foo = CkafkaFunctions.getAcls(GetAclsArgs.builder()
-            .host("2")
             .instanceId("ckafka-f9ife4zz")
-            .resourceName("topic-tf-test")
             .resourceType("TOPIC")
+            .resourceName("topic-tf-test")
+            .host("2")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   foo:
     fn::invoke:
-      Function: tencentcloud:Ckafka:getAcls
-      Arguments:
-        host: '2'
+      function: tencentcloud:Ckafka:getAcls
+      arguments:
         instanceId: ckafka-f9ife4zz
-        resourceName: topic-tf-test
         resourceType: TOPIC
+        resourceName: topic-tf-test
+        host: '2'
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_ckafka_getacls" "foo" {
+  instance_id   = "ckafka-f9ife4zz"
+  resource_type = "TOPIC"
+  resource_name = "topic-tf-test"
+  host          = "2"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeACL](https://www.tencentcloud.com/document/api/597/35364)
+  - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+  - [DescribeTopicAttributes](https://www.tencentcloud.com/document/api/597/35342)
 
 
 
@@ -133,7 +196,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -141,9 +204,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getAcls<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAclsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAclsResult</a></span>></span
+><span class="k">function </span>getAcls<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAclsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAclsResult</a></span>></span
 ><span class="k">
-function </span>getAclsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAclsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAclsResult</a></span>></span
+function </span>getAclsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAclsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAclsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -159,12 +222,12 @@ function </span>getAclsOutput<span class="p">(</span><span class="nx">args</span
              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetAclsResult</span
 ><span class="k">
-def </span>get_acls_output<span class="p">(</span><span class="nx">host</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">resource_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAclsResult]</span
+def </span>get_acls_output<span class="p">(</span><span class="nx">host</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">resource_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAclsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -189,7 +252,8 @@ func </span>GetAclsOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetAcls </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetAclsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetAclsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetAclsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAclsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAclsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAclsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAclsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAclsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -198,7 +262,8 @@ func </span>GetAclsOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetAclsResult</a></span>> </span>getAcls<span class="p">(</span><span class="nx">GetAclsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAclsResult</a></span>> </span>getAcls<span class="p">(</span><span class="nx">GetAclsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAclsResult</a></span>> </span>getAcls<span class="p">(</span><span class="nx">GetAclsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -210,6 +275,15 @@ func </span>GetAclsOutput<span class="p">(</span><span class="nx">ctx</span><spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Ckafka/getAcls:getAcls
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_ckafka_get_acls&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +302,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the ckafka instance.</p>
-</dd><dt class="property-required"
+    <dd>Id of the ckafka instance.</dd><dt class="property-required"
             title="Required">
         <span id="resourcename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Name</a>
@@ -237,8 +310,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-required"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -246,8 +318,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional"
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_csharp" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -255,8 +326,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host substr used for querying.</p>
-</dd><dt class="property-optional"
+    <dd>Host substr used for querying.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -264,8 +334,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -279,8 +348,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the ckafka instance.</p>
-</dd><dt class="property-required"
+    <dd>Id of the ckafka instance.</dd><dt class="property-required"
             title="Required">
         <span id="resourcename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Name</a>
@@ -288,8 +356,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-required"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -297,8 +364,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional"
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_go" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -306,8 +372,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host substr used for querying.</p>
-</dd><dt class="property-optional"
+    <dd>Host substr used for querying.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -315,8 +380,53 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the ckafka instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_name_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Host substr used for querying.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -330,8 +440,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the ckafka instance.</p>
-</dd><dt class="property-required"
+    <dd>Id of the ckafka instance.</dd><dt class="property-required"
             title="Required">
         <span id="resourcename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Name</a>
@@ -339,8 +448,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-required"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -348,8 +456,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional"
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_java" style="color: inherit; text-decoration: inherit;">host</a>
@@ -357,8 +464,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host substr used for querying.</p>
-</dd><dt class="property-optional"
+    <dd>Host substr used for querying.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -366,8 +472,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -381,8 +486,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the ckafka instance.</p>
-</dd><dt class="property-required"
+    <dd>Id of the ckafka instance.</dd><dt class="property-required"
             title="Required">
         <span id="resourcename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Name</a>
@@ -390,8 +494,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-required"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -399,8 +502,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional"
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_nodejs" style="color: inherit; text-decoration: inherit;">host</a>
@@ -408,8 +510,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host substr used for querying.</p>
-</dd><dt class="property-optional"
+    <dd>Host substr used for querying.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -417,8 +518,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -432,8 +532,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the ckafka instance.</p>
-</dd><dt class="property-required"
+    <dd>Id of the ckafka instance.</dd><dt class="property-required"
             title="Required">
         <span id="resource_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_name_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>name</a>
@@ -441,8 +540,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-required"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-required"
             title="Required">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -450,8 +548,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional"
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_python" style="color: inherit; text-decoration: inherit;">host</a>
@@ -459,8 +556,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Host substr used for querying.</p>
-</dd><dt class="property-optional"
+    <dd>Host substr used for querying.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -468,8 +564,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -483,8 +578,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the ckafka instance.</p>
-</dd><dt class="property-required"
+    <dd>Id of the ckafka instance.</dd><dt class="property-required"
             title="Required">
         <span id="resourcename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Name</a>
@@ -492,8 +586,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-required"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -501,8 +594,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-optional"
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_yaml" style="color: inherit; text-decoration: inherit;">host</a>
@@ -510,8 +602,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host substr used for querying.</p>
-</dd><dt class="property-optional"
+    <dd>Host substr used for querying.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -519,8 +610,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -543,8 +633,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaclsacllist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Outputs.<wbr>Get<wbr>Acls<wbr>Acl<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of ckafka acls. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka acls. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -552,8 +641,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -569,8 +657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>.</p>
-</dd><dt class="property-"
+    <dd>ACL resource name, which is related to <code>resourceType</code>.</dd><dt class="property-"
             title="">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -578,8 +665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource type.</p>
-</dd><dt class="property-"
+    <dd>ACL resource type.</dd><dt class="property-"
             title="">
         <span id="host_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_csharp" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -587,8 +673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address allowed to access.</p>
-</dd><dt class="property-"
+    <dd>IP address allowed to access.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -610,8 +695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaclsacllist">[]Get<wbr>Acls<wbr>Acl<wbr>List</a></span>
     </dt>
-    <dd><p>A list of ckafka acls. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka acls. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -619,8 +703,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -636,8 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>.</p>
-</dd><dt class="property-"
+    <dd>ACL resource name, which is related to <code>resourceType</code>.</dd><dt class="property-"
             title="">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -645,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource type.</p>
-</dd><dt class="property-"
+    <dd>ACL resource type.</dd><dt class="property-"
             title="">
         <span id="host_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_go" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -654,11 +735,72 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address allowed to access.</p>
-</dd><dt class="property-"
+    <dd>IP address allowed to access.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="acl_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_lists_hcl" style="color: inherit; text-decoration: inherit;">acl_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getaclsacllist">list(object)</a></span>
+    </dt>
+    <dd>A list of ckafka acls. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="resource_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_name_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL resource name, which is related to <code>resourceType</code>.</dd><dt class="property-"
+            title="">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL resource type.</dd><dt class="property-"
+            title="">
+        <span id="host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP address allowed to access.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -677,8 +819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaclsacllist">List&lt;Get<wbr>Acls<wbr>Acl<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of ckafka acls. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka acls. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -686,8 +827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -703,8 +843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>.</p>
-</dd><dt class="property-"
+    <dd>ACL resource name, which is related to <code>resourceType</code>.</dd><dt class="property-"
             title="">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -712,8 +851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource type.</p>
-</dd><dt class="property-"
+    <dd>ACL resource type.</dd><dt class="property-"
             title="">
         <span id="host_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_java" style="color: inherit; text-decoration: inherit;">host</a>
@@ -721,8 +859,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address allowed to access.</p>
-</dd><dt class="property-"
+    <dd>IP address allowed to access.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -744,8 +881,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaclsacllist">Get<wbr>Acls<wbr>Acl<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of ckafka acls. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka acls. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -753,8 +889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -770,8 +905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>.</p>
-</dd><dt class="property-"
+    <dd>ACL resource name, which is related to <code>resourceType</code>.</dd><dt class="property-"
             title="">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -779,8 +913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource type.</p>
-</dd><dt class="property-"
+    <dd>ACL resource type.</dd><dt class="property-"
             title="">
         <span id="host_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_nodejs" style="color: inherit; text-decoration: inherit;">host</a>
@@ -788,8 +921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address allowed to access.</p>
-</dd><dt class="property-"
+    <dd>IP address allowed to access.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -809,10 +941,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#acl_lists_python" style="color: inherit; text-decoration: inherit;">acl_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getaclsacllist">Get<wbr>Acls<wbr>Acl<wbr>List]</a></span>
+        <span class="property-type"><a href="#getaclsacllist">Sequence[Get<wbr>Acls<wbr>Acl<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of ckafka acls. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka acls. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -820,8 +951,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -837,8 +967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>.</p>
-</dd><dt class="property-"
+    <dd>ACL resource name, which is related to <code>resourceType</code>.</dd><dt class="property-"
             title="">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -846,8 +975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL resource type.</p>
-</dd><dt class="property-"
+    <dd>ACL resource type.</dd><dt class="property-"
             title="">
         <span id="host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_python" style="color: inherit; text-decoration: inherit;">host</a>
@@ -855,8 +983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP address allowed to access.</p>
-</dd><dt class="property-"
+    <dd>IP address allowed to access.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -878,8 +1005,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaclsacllist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of ckafka acls. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of ckafka acls. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -887,8 +1013,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -904,8 +1029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>.</p>
-</dd><dt class="property-"
+    <dd>ACL resource name, which is related to <code>resourceType</code>.</dd><dt class="property-"
             title="">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -913,8 +1037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource type.</p>
-</dd><dt class="property-"
+    <dd>ACL resource type.</dd><dt class="property-"
             title="">
         <span id="host_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_yaml" style="color: inherit; text-decoration: inherit;">host</a>
@@ -922,8 +1045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address allowed to access.</p>
-</dd><dt class="property-"
+    <dd>IP address allowed to access.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -955,8 +1077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host substr used for querying.</p>
-</dd><dt class="property-required"
+    <dd>Host substr used for querying.</dd><dt class="property-required"
             title="Required">
         <span id="operationtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationtype_csharp" style="color: inherit; text-decoration: inherit;">Operation<wbr>Type</a>
@@ -964,8 +1085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL operation mode.</p>
-</dd><dt class="property-required"
+    <dd>ACL operation mode.</dd><dt class="property-required"
             title="Required">
         <span id="permissiontype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permissiontype_csharp" style="color: inherit; text-decoration: inherit;">Permission<wbr>Type</a>
@@ -973,8 +1093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL permission type, valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>, and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-required"
+    <dd>ACL permission type, valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>, and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-required"
             title="Required">
         <span id="principal_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_csharp" style="color: inherit; text-decoration: inherit;">Principal</a>
@@ -982,8 +1101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User which can access. <code>*</code> means that any user can access.</p>
-</dd><dt class="property-required"
+    <dd>User which can access. <code>*</code> means that any user can access.</dd><dt class="property-required"
             title="Required">
         <span id="resourcename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Name</a>
@@ -991,8 +1109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-required"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1000,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1015,8 +1131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host substr used for querying.</p>
-</dd><dt class="property-required"
+    <dd>Host substr used for querying.</dd><dt class="property-required"
             title="Required">
         <span id="operationtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationtype_go" style="color: inherit; text-decoration: inherit;">Operation<wbr>Type</a>
@@ -1024,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL operation mode.</p>
-</dd><dt class="property-required"
+    <dd>ACL operation mode.</dd><dt class="property-required"
             title="Required">
         <span id="permissiontype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permissiontype_go" style="color: inherit; text-decoration: inherit;">Permission<wbr>Type</a>
@@ -1033,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL permission type, valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>, and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-required"
+    <dd>ACL permission type, valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>, and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-required"
             title="Required">
         <span id="principal_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_go" style="color: inherit; text-decoration: inherit;">Principal</a>
@@ -1042,8 +1155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User which can access. <code>*</code> means that any user can access.</p>
-</dd><dt class="property-required"
+    <dd>User which can access. <code>*</code> means that any user can access.</dd><dt class="property-required"
             title="Required">
         <span id="resourcename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Name</a>
@@ -1051,8 +1163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-required"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1060,8 +1171,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Host substr used for querying.</dd><dt class="property-required"
+            title="Required">
+        <span id="operation_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_type_hcl" style="color: inherit; text-decoration: inherit;">operation_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL operation mode.</dd><dt class="property-required"
+            title="Required">
+        <span id="permission_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permission_type_hcl" style="color: inherit; text-decoration: inherit;">permission_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL permission type, valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>, and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-required"
+            title="Required">
+        <span id="principal_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_hcl" style="color: inherit; text-decoration: inherit;">principal</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User which can access. <code>*</code> means that any user can access.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_name_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1075,8 +1239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host substr used for querying.</p>
-</dd><dt class="property-required"
+    <dd>Host substr used for querying.</dd><dt class="property-required"
             title="Required">
         <span id="operationtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationtype_java" style="color: inherit; text-decoration: inherit;">operation<wbr>Type</a>
@@ -1084,8 +1247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL operation mode.</p>
-</dd><dt class="property-required"
+    <dd>ACL operation mode.</dd><dt class="property-required"
             title="Required">
         <span id="permissiontype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permissiontype_java" style="color: inherit; text-decoration: inherit;">permission<wbr>Type</a>
@@ -1093,8 +1255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL permission type, valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>, and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-required"
+    <dd>ACL permission type, valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>, and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-required"
             title="Required">
         <span id="principal_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_java" style="color: inherit; text-decoration: inherit;">principal</a>
@@ -1102,8 +1263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User which can access. <code>*</code> means that any user can access.</p>
-</dd><dt class="property-required"
+    <dd>User which can access. <code>*</code> means that any user can access.</dd><dt class="property-required"
             title="Required">
         <span id="resourcename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Name</a>
@@ -1111,8 +1271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-required"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1120,8 +1279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1135,8 +1293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host substr used for querying.</p>
-</dd><dt class="property-required"
+    <dd>Host substr used for querying.</dd><dt class="property-required"
             title="Required">
         <span id="operationtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationtype_nodejs" style="color: inherit; text-decoration: inherit;">operation<wbr>Type</a>
@@ -1144,8 +1301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL operation mode.</p>
-</dd><dt class="property-required"
+    <dd>ACL operation mode.</dd><dt class="property-required"
             title="Required">
         <span id="permissiontype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permissiontype_nodejs" style="color: inherit; text-decoration: inherit;">permission<wbr>Type</a>
@@ -1153,8 +1309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL permission type, valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>, and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-required"
+    <dd>ACL permission type, valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>, and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-required"
             title="Required">
         <span id="principal_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_nodejs" style="color: inherit; text-decoration: inherit;">principal</a>
@@ -1162,8 +1317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User which can access. <code>*</code> means that any user can access.</p>
-</dd><dt class="property-required"
+    <dd>User which can access. <code>*</code> means that any user can access.</dd><dt class="property-required"
             title="Required">
         <span id="resourcename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Name</a>
@@ -1171,8 +1325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-required"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1180,8 +1333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1195,8 +1347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Host substr used for querying.</p>
-</dd><dt class="property-required"
+    <dd>Host substr used for querying.</dd><dt class="property-required"
             title="Required">
         <span id="operation_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_type_python" style="color: inherit; text-decoration: inherit;">operation_<wbr>type</a>
@@ -1204,8 +1355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL operation mode.</p>
-</dd><dt class="property-required"
+    <dd>ACL operation mode.</dd><dt class="property-required"
             title="Required">
         <span id="permission_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permission_type_python" style="color: inherit; text-decoration: inherit;">permission_<wbr>type</a>
@@ -1213,8 +1363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL permission type, valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>, and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-required"
+    <dd>ACL permission type, valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>, and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-required"
             title="Required">
         <span id="principal_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_python" style="color: inherit; text-decoration: inherit;">principal</a>
@@ -1222,8 +1371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User which can access. <code>*</code> means that any user can access.</p>
-</dd><dt class="property-required"
+    <dd>User which can access. <code>*</code> means that any user can access.</dd><dt class="property-required"
             title="Required">
         <span id="resource_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_name_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>name</a>
@@ -1231,8 +1379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-required"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-required"
             title="Required">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -1240,8 +1387,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1255,8 +1401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host substr used for querying.</p>
-</dd><dt class="property-required"
+    <dd>Host substr used for querying.</dd><dt class="property-required"
             title="Required">
         <span id="operationtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operationtype_yaml" style="color: inherit; text-decoration: inherit;">operation<wbr>Type</a>
@@ -1264,8 +1409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL operation mode.</p>
-</dd><dt class="property-required"
+    <dd>ACL operation mode.</dd><dt class="property-required"
             title="Required">
         <span id="permissiontype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#permissiontype_yaml" style="color: inherit; text-decoration: inherit;">permission<wbr>Type</a>
@@ -1273,8 +1417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL permission type, valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>, and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd><dt class="property-required"
+    <dd>ACL permission type, valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>DENY</code>, <code>ALLOW</code>, and <code>ALLOW</code> by default. Currently, CKafka supports <code>ALLOW</code> (equivalent to allow list), and other fields will be used for future ACLs compatible with open-source Kafka.</dd><dt class="property-required"
             title="Required">
         <span id="principal_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#principal_yaml" style="color: inherit; text-decoration: inherit;">principal</a>
@@ -1282,8 +1425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User which can access. <code>*</code> means that any user can access.</p>
-</dd><dt class="property-required"
+    <dd>User which can access. <code>*</code> means that any user can access.</dd><dt class="property-required"
             title="Required">
         <span id="resourcename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcename_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Name</a>
@@ -1291,8 +1433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource name, which is related to <code>resource_type</code>. For example, if <code>resource_type</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resource_type</code> is <code>GROUP</code>, this field indicates the group name.</p>
-</dd><dt class="property-required"
+    <dd>ACL resource name, which is related to <code>resourceType</code>. For example, if <code>resourceType</code> is <code>TOPIC</code>, this field indicates the topic name; if <code>resourceType</code> is <code>GROUP</code>, this field indicates the group name.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1300,8 +1441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</p>
-</dd></dl>
+    <dd>ACL resource type. Valid values are <code>UNKNOWN</code>, <code>ANY</code>, <code>TOPIC</code>, <code>GROUP</code>, <code>CLUSTER</code>, <code>TRANSACTIONAL_ID</code>. Currently, only <code>TOPIC</code> is available, and other fields will be used for future ACLs compatible with open-source Kafka.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1316,7 +1456,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

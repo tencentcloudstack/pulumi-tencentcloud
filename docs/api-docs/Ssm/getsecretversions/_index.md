@@ -2,9 +2,11 @@
 ---
 title: "getSecretVersions"
 title_tag: "tencentcloud.Ssm.getSecretVersions"
-meta_desc: "Documentation for the tencentcloud.Ssm.getSecretVersions function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of SSM secret version"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,13 +18,17 @@ Use this data source to query detailed information of SSM secret version
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleSecret = new tencentcloud.ssm.Secret("exampleSecret", {
+const exampleSecret = new tencentcloud.ssm.Secret("example", {
     secretName: "tf-example",
     description: "desc.",
     tags: {
@@ -34,17 +40,22 @@ const v1 = new tencentcloud.ssm.SecretVersion("v1", {
     versionId: "v1",
     secretBinary: "MTIzMTIzMTIzMTIzMTIzQQ==",
 });
-const exampleSecretVersions = tencentcloud.Ssm.getSecretVersionsOutput({
+const example = tencentcloud.ssm.getSecretVersionsOutput({
     secretName: v1.secretName,
     versionId: v1.versionId,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_secret = tencentcloud.ssm.Secret("exampleSecret",
+example_secret = tencentcloud.ssm.Secret("example",
     secret_name="tf-example",
     description="desc.",
     tags={
@@ -54,19 +65,64 @@ v1 = tencentcloud.ssm.SecretVersion("v1",
     secret_name=example_secret.secret_name,
     version_id="v1",
     secret_binary="MTIzMTIzMTIzMTIzMTIzQQ==")
-example_secret_versions = tencentcloud.Ssm.get_secret_versions_output(secret_name=v1.secret_name,
+example = tencentcloud.ssm.get_secret_versions_output(secret_name=v1.secret_name,
     version_id=v1.version_id)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ssm"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		exampleSecret, err := ssm.NewSecret(ctx, "example", &ssm.SecretArgs{
+			SecretName:  pulumi.String("tf-example"),
+			Description: pulumi.String("desc."),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		v1, err := ssm.NewSecretVersion(ctx, "v1", &ssm.SecretVersionArgs{
+			SecretName:   exampleSecret.SecretName,
+			VersionId:    pulumi.String("v1"),
+			SecretBinary: pulumi.String("MTIzMTIzMTIzMTIzMTIzQQ=="),
+		})
+		if err != nil {
+			return err
+		}
+		_ = ssm.GetSecretVersionsOutput(ctx, ssm.GetSecretVersionsOutputArgs{
+			SecretName: v1.SecretName,
+			VersionId:  v1.VersionId,
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new()
+    var exampleSecret = new Tencentcloud.Ssm.Secret("example", new()
     {
         SecretName = "tf-example",
         Description = "desc.",
@@ -83,7 +139,7 @@ return await Deployment.RunAsync(() =>
         SecretBinary = "MTIzMTIzMTIzMTIzMTIzQQ==",
     });
 
-    var exampleSecretVersions = Tencentcloud.Ssm.GetSecretVersions.Invoke(new()
+    var example = Tencentcloud.Ssm.GetSecretVersions.Invoke(new()
     {
         SecretName = v1.SecretName,
         VersionId = v1.VersionId,
@@ -91,42 +147,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		exampleSecret, err := Ssm.NewSecret(ctx, "exampleSecret", &Ssm.SecretArgs{
-			SecretName:  pulumi.String("tf-example"),
-			Description: pulumi.String("desc."),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		v1, err := Ssm.NewSecretVersion(ctx, "v1", &Ssm.SecretVersionArgs{
-			SecretName:   exampleSecret.SecretName,
-			VersionId:    pulumi.String("v1"),
-			SecretBinary: pulumi.String("MTIzMTIzMTIzMTIzMTIzQQ=="),
-		})
-		if err != nil {
-			return err
-		}
-		_ = Ssm.GetSecretVersionsOutput(ctx, ssm.GetSecretVersionsOutputArgs{
-			SecretName: v1.SecretName,
-			VersionId:  v1.VersionId,
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -139,8 +164,8 @@ import com.pulumi.tencentcloud.Ssm.SecretVersion;
 import com.pulumi.tencentcloud.Ssm.SecretVersionArgs;
 import com.pulumi.tencentcloud.Ssm.SsmFunctions;
 import com.pulumi.tencentcloud.Ssm.inputs.GetSecretVersionsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -152,19 +177,19 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var exampleSecret = new Secret("exampleSecret", SecretArgs.builder()        
+        var exampleSecret = new Secret("exampleSecret", SecretArgs.builder()
             .secretName("tf-example")
             .description("desc.")
             .tags(Map.of("createdBy", "terraform"))
             .build());
 
-        var v1 = new SecretVersion("v1", SecretVersionArgs.builder()        
+        var v1 = new SecretVersion("v1", SecretVersionArgs.builder()
             .secretName(exampleSecret.secretName())
             .versionId("v1")
             .secretBinary("MTIzMTIzMTIzMTIzMTIzQQ==")
             .build());
 
-        final var exampleSecretVersions = SsmFunctions.getSecretVersions(GetSecretVersionsArgs.builder()
+        final var example = SsmFunctions.getSecretVersions(GetSecretVersionsArgs.builder()
             .secretName(v1.secretName())
             .versionId(v1.versionId())
             .build());
@@ -172,10 +197,16 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   exampleSecret:
     type: tencentcloud:Ssm:Secret
+    name: example
     properties:
       secretName: tf-example
       description: desc.
@@ -188,15 +219,57 @@ resources:
       versionId: v1
       secretBinary: MTIzMTIzMTIzMTIzMTIzQQ==
 variables:
-  exampleSecretVersions:
+  example:
     fn::invoke:
-      Function: tencentcloud:Ssm:getSecretVersions
-      Arguments:
+      function: tencentcloud:Ssm:getSecretVersions
+      arguments:
         secretName: ${v1.secretName}
         versionId: ${v1.versionId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_ssm_getsecretversions" "example" {
+  secret_name = tencentcloud_ssm_secretversion.v1.secret_name
+  version_id  = tencentcloud_ssm_secretversion.v1.version_id
+}
+
+resource "tencentcloud_ssm_secret" "example" {
+  secret_name = "tf-example"
+  description = "desc."
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+resource "tencentcloud_ssm_secretversion" "v1" {
+  secret_name   = tencentcloud_ssm_secret.example.secret_name
+  version_id    = "v1"
+  secret_binary = "MTIzMTIzMTIzMTIzMTIzQQ=="
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+  - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+  - [ListSecretVersionIds](https://www.tencentcloud.com/document/api/1078/38647)
 
 
 
@@ -208,7 +281,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -216,9 +289,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getSecretVersions<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecretVersionsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSecretVersionsResult</a></span>></span
+><span class="k">function </span>getSecretVersions<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecretVersionsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSecretVersionsResult</a></span>></span
 ><span class="k">
-function </span>getSecretVersionsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecretVersionsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSecretVersionsResult</a></span>></span
+function </span>getSecretVersionsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecretVersionsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSecretVersionsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -232,10 +305,10 @@ function </span>getSecretVersionsOutput<span class="p">(</span><span class="nx">
                         <span class="nx">version_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetSecretVersionsResult</span
 ><span class="k">
-def </span>get_secret_versions_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">version_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSecretVersionsResult]</span
+def </span>get_secret_versions_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">secret_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">version_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSecretVersionsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -260,7 +333,8 @@ func </span>GetSecretVersionsOutput<span class="p">(</span><span class="nx">ctx<
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetSecretVersions </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetSecretVersionsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetSecretVersionsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetSecretVersionsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSecretVersionsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSecretVersionsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSecretVersionsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSecretVersionsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSecretVersionsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -269,7 +343,8 @@ func </span>GetSecretVersionsOutput<span class="p">(</span><span class="nx">ctx<
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetSecretVersionsResult</a></span>> </span>getSecretVersions<span class="p">(</span><span class="nx">GetSecretVersionsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSecretVersionsResult</a></span>> </span>getSecretVersions<span class="p">(</span><span class="nx">GetSecretVersionsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSecretVersionsResult</a></span>> </span>getSecretVersions<span class="p">(</span><span class="nx">GetSecretVersionsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -281,6 +356,15 @@ func </span>GetSecretVersionsOutput<span class="p">(</span><span class="nx">ctx<
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Ssm/getSecretVersions:getSecretVersions
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_ssm_get_secret_versions&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -299,8 +383,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name used to filter result.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -308,8 +391,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="versionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_csharp" style="color: inherit; text-decoration: inherit;">Version<wbr>Id</a>
@@ -317,8 +399,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VersionId used to filter result.</p>
-</dd></dl>
+    <dd>VersionId used to filter result.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -332,8 +413,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name used to filter result.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -341,8 +421,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="versionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_go" style="color: inherit; text-decoration: inherit;">Version<wbr>Id</a>
@@ -350,8 +429,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VersionId used to filter result.</p>
-</dd></dl>
+    <dd>VersionId used to filter result.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="secret_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Secret name used to filter result.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="version_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_id_hcl" style="color: inherit; text-decoration: inherit;">version_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VersionId used to filter result.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -365,8 +473,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name used to filter result.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -374,8 +481,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="versionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_java" style="color: inherit; text-decoration: inherit;">version<wbr>Id</a>
@@ -383,8 +489,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VersionId used to filter result.</p>
-</dd></dl>
+    <dd>VersionId used to filter result.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -398,8 +503,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name used to filter result.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -407,8 +511,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="versionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_nodejs" style="color: inherit; text-decoration: inherit;">version<wbr>Id</a>
@@ -416,8 +519,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VersionId used to filter result.</p>
-</dd></dl>
+    <dd>VersionId used to filter result.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -431,8 +533,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name used to filter result.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -440,8 +541,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="version_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_id_python" style="color: inherit; text-decoration: inherit;">version_<wbr>id</a>
@@ -449,8 +549,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VersionId used to filter result.</p>
-</dd></dl>
+    <dd>VersionId used to filter result.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -464,8 +563,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secret name used to filter result.</p>
-</dd><dt class="property-optional"
+    <dd>Secret name used to filter result.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -473,8 +571,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="versionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_yaml" style="color: inherit; text-decoration: inherit;">version<wbr>Id</a>
@@ -482,8 +579,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VersionId used to filter result.</p>
-</dd></dl>
+    <dd>VersionId used to filter result.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -506,8 +602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secretname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -523,8 +618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecretversionssecretversionlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ssm.<wbr>Outputs.<wbr>Get<wbr>Secret<wbr>Versions<wbr>Secret<wbr>Version<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of SSM secret versions. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-"
+    <dd>A list of SSM secret versions. When secret status is <code>Disabled</code>, this field will not update anymore.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -540,8 +634,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of secret.</p>
-</dd></dl>
+    <dd>Version of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -555,8 +648,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secretname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>Name</a>
@@ -572,8 +664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecretversionssecretversionlist">[]Get<wbr>Secret<wbr>Versions<wbr>Secret<wbr>Version<wbr>List</a></span>
     </dt>
-    <dd><p>A list of SSM secret versions. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-"
+    <dd>A list of SSM secret versions. When secret status is <code>Disabled</code>, this field will not update anymore.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -589,8 +680,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of secret.</p>
-</dd></dl>
+    <dd>Version of secret.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="secret_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="secret_version_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_version_lists_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>version_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsecretversionssecretversionlist">list(object)</a></span>
+    </dt>
+    <dd>A list of SSM secret versions. When secret status is <code>Disabled</code>, this field will not update anymore.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="version_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_id_hcl" style="color: inherit; text-decoration: inherit;">version_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -604,8 +740,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secretname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_java" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -621,8 +756,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecretversionssecretversionlist">List&lt;Get<wbr>Secret<wbr>Versions<wbr>Secret<wbr>Version<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of SSM secret versions. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-"
+    <dd>A list of SSM secret versions. When secret status is <code>Disabled</code>, this field will not update anymore.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -638,8 +772,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of secret.</p>
-</dd></dl>
+    <dd>Version of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -653,8 +786,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secretname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -670,8 +802,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecretversionssecretversionlist">Get<wbr>Secret<wbr>Versions<wbr>Secret<wbr>Version<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of SSM secret versions. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-"
+    <dd>A list of SSM secret versions. When secret status is <code>Disabled</code>, this field will not update anymore.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -687,8 +818,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of secret.</p>
-</dd></dl>
+    <dd>Version of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -702,8 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secret_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_name_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>name</a>
@@ -717,10 +846,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_version_lists_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>version_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsecretversionssecretversionlist">Get<wbr>Secret<wbr>Versions<wbr>Secret<wbr>Version<wbr>List]</a></span>
+        <span class="property-type"><a href="#getsecretversionssecretversionlist">Sequence[Get<wbr>Secret<wbr>Versions<wbr>Secret<wbr>Version<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of SSM secret versions. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-"
+    <dd>A list of SSM secret versions. When secret status is <code>Disabled</code>, this field will not update anymore.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -736,8 +864,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of secret.</p>
-</dd></dl>
+    <dd>Version of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -751,8 +878,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="secretname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretname_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>Name</a>
@@ -768,8 +894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecretversionssecretversionlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of SSM secret versions. When secret status is <code>Disabled</code>, this field will not update anymore.</p>
-</dd><dt class="property-"
+    <dd>A list of SSM secret versions. When secret status is <code>Disabled</code>, this field will not update anymore.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -785,8 +910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of secret.</p>
-</dd></dl>
+    <dd>Version of secret.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -810,8 +934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The base64-encoded binary secret.</p>
-</dd><dt class="property-required"
+    <dd>The base64-encoded binary secret.</dd><dt class="property-required"
             title="Required">
         <span id="secretstring_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretstring_csharp" style="color: inherit; text-decoration: inherit;">Secret<wbr>String</a>
@@ -819,8 +942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The string text of secret.</p>
-</dd><dt class="property-required"
+    <dd>The string text of secret.</dd><dt class="property-required"
             title="Required">
         <span id="versionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_csharp" style="color: inherit; text-decoration: inherit;">Version<wbr>Id</a>
@@ -828,8 +950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VersionId used to filter result.</p>
-</dd></dl>
+    <dd>VersionId used to filter result.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -843,8 +964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The base64-encoded binary secret.</p>
-</dd><dt class="property-required"
+    <dd>The base64-encoded binary secret.</dd><dt class="property-required"
             title="Required">
         <span id="secretstring_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretstring_go" style="color: inherit; text-decoration: inherit;">Secret<wbr>String</a>
@@ -852,8 +972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The string text of secret.</p>
-</dd><dt class="property-required"
+    <dd>The string text of secret.</dd><dt class="property-required"
             title="Required">
         <span id="versionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_go" style="color: inherit; text-decoration: inherit;">Version<wbr>Id</a>
@@ -861,8 +980,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VersionId used to filter result.</p>
-</dd></dl>
+    <dd>VersionId used to filter result.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="secret_binary_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_binary_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>binary</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The base64-encoded binary secret.</dd><dt class="property-required"
+            title="Required">
+        <span id="secret_string_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_string_hcl" style="color: inherit; text-decoration: inherit;">secret_<wbr>string</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The string text of secret.</dd><dt class="property-required"
+            title="Required">
+        <span id="version_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_id_hcl" style="color: inherit; text-decoration: inherit;">version_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VersionId used to filter result.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -876,8 +1024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The base64-encoded binary secret.</p>
-</dd><dt class="property-required"
+    <dd>The base64-encoded binary secret.</dd><dt class="property-required"
             title="Required">
         <span id="secretstring_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretstring_java" style="color: inherit; text-decoration: inherit;">secret<wbr>String</a>
@@ -885,8 +1032,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The string text of secret.</p>
-</dd><dt class="property-required"
+    <dd>The string text of secret.</dd><dt class="property-required"
             title="Required">
         <span id="versionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_java" style="color: inherit; text-decoration: inherit;">version<wbr>Id</a>
@@ -894,8 +1040,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VersionId used to filter result.</p>
-</dd></dl>
+    <dd>VersionId used to filter result.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -909,8 +1054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The base64-encoded binary secret.</p>
-</dd><dt class="property-required"
+    <dd>The base64-encoded binary secret.</dd><dt class="property-required"
             title="Required">
         <span id="secretstring_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretstring_nodejs" style="color: inherit; text-decoration: inherit;">secret<wbr>String</a>
@@ -918,8 +1062,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The string text of secret.</p>
-</dd><dt class="property-required"
+    <dd>The string text of secret.</dd><dt class="property-required"
             title="Required">
         <span id="versionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_nodejs" style="color: inherit; text-decoration: inherit;">version<wbr>Id</a>
@@ -927,8 +1070,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VersionId used to filter result.</p>
-</dd></dl>
+    <dd>VersionId used to filter result.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -942,8 +1084,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The base64-encoded binary secret.</p>
-</dd><dt class="property-required"
+    <dd>The base64-encoded binary secret.</dd><dt class="property-required"
             title="Required">
         <span id="secret_string_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secret_string_python" style="color: inherit; text-decoration: inherit;">secret_<wbr>string</a>
@@ -951,8 +1092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The string text of secret.</p>
-</dd><dt class="property-required"
+    <dd>The string text of secret.</dd><dt class="property-required"
             title="Required">
         <span id="version_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_id_python" style="color: inherit; text-decoration: inherit;">version_<wbr>id</a>
@@ -960,8 +1100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VersionId used to filter result.</p>
-</dd></dl>
+    <dd>VersionId used to filter result.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -975,8 +1114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The base64-encoded binary secret.</p>
-</dd><dt class="property-required"
+    <dd>The base64-encoded binary secret.</dd><dt class="property-required"
             title="Required">
         <span id="secretstring_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#secretstring_yaml" style="color: inherit; text-decoration: inherit;">secret<wbr>String</a>
@@ -984,8 +1122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The string text of secret.</p>
-</dd><dt class="property-required"
+    <dd>The string text of secret.</dd><dt class="property-required"
             title="Required">
         <span id="versionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#versionid_yaml" style="color: inherit; text-decoration: inherit;">version<wbr>Id</a>
@@ -993,8 +1130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VersionId used to filter result.</p>
-</dd></dl>
+    <dd>VersionId used to filter result.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1009,7 +1145,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

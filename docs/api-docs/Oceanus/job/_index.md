@@ -2,9 +2,11 @@
 ---
 title: "Job"
 title_tag: "tencentcloud.Oceanus.Job"
-meta_desc: "Documentation for the tencentcloud.Oceanus.Job resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a oceanus job"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,36 +18,86 @@ Provides a resource to create a oceanus job
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.oceanus.Job("example", {
-    clusterId: "cluster-1kcd524h",
-    clusterType: 2,
-    cuMem: 4,
-    flinkVersion: "Flink-1.16",
-    folderId: "folder-7ctl246z",
+    name: "tf_example_job",
     jobType: 1,
+    clusterType: 2,
+    clusterId: "cluster-1kcd524h",
+    cuMem: 4,
     remark: "remark.",
+    folderId: "folder-7ctl246z",
+    flinkVersion: "Flink-1.16",
     workSpaceId: "space-2idq8wbr",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.oceanus.Job("example",
-    cluster_id="cluster-1kcd524h",
-    cluster_type=2,
-    cu_mem=4,
-    flink_version="Flink-1.16",
-    folder_id="folder-7ctl246z",
+    name="tf_example_job",
     job_type=1,
+    cluster_type=2,
+    cluster_id="cluster-1kcd524h",
+    cu_mem=4,
     remark="remark.",
+    folder_id="folder-7ctl246z",
+    flink_version="Flink-1.16",
     work_space_id="space-2idq8wbr")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/oceanus"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := oceanus.NewJob(ctx, "example", &oceanus.JobArgs{
+			Name:         pulumi.String("tf_example_job"),
+			JobType:      pulumi.Int(1),
+			ClusterType:  pulumi.Int(2),
+			ClusterId:    pulumi.String("cluster-1kcd524h"),
+			CuMem:        pulumi.Int(4),
+			Remark:       pulumi.String("remark."),
+			FolderId:     pulumi.String("folder-7ctl246z"),
+			FlinkVersion: pulumi.String("Flink-1.16"),
+			WorkSpaceId:  pulumi.String("space-2idq8wbr"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -56,45 +108,24 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Oceanus.Job("example", new()
     {
-        ClusterId = "cluster-1kcd524h",
-        ClusterType = 2,
-        CuMem = 4,
-        FlinkVersion = "Flink-1.16",
-        FolderId = "folder-7ctl246z",
+        Name = "tf_example_job",
         JobType = 1,
+        ClusterType = 2,
+        ClusterId = "cluster-1kcd524h",
+        CuMem = 4,
         Remark = "remark.",
+        FolderId = "folder-7ctl246z",
+        FlinkVersion = "Flink-1.16",
         WorkSpaceId = "space-2idq8wbr",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Oceanus.NewJob(ctx, "example", &Oceanus.JobArgs{
-			ClusterId:    pulumi.String("cluster-1kcd524h"),
-			ClusterType:  pulumi.Int(2),
-			CuMem:        pulumi.Int(4),
-			FlinkVersion: pulumi.String("Flink-1.16"),
-			FolderId:     pulumi.String("folder-7ctl246z"),
-			JobType:      pulumi.Int(1),
-			Remark:       pulumi.String("remark."),
-			WorkSpaceId:  pulumi.String("space-2idq8wbr"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -103,8 +134,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Oceanus.Job;
 import com.pulumi.tencentcloud.Oceanus.JobArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -116,102 +147,160 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Job("example", JobArgs.builder()        
-            .clusterId("cluster-1kcd524h")
-            .clusterType(2)
-            .cuMem(4)
-            .flinkVersion("Flink-1.16")
-            .folderId("folder-7ctl246z")
+        var example = new Job("example", JobArgs.builder()
+            .name("tf_example_job")
             .jobType(1)
+            .clusterType(2)
+            .clusterId("cluster-1kcd524h")
+            .cuMem(4)
             .remark("remark.")
+            .folderId("folder-7ctl246z")
+            .flinkVersion("Flink-1.16")
             .workSpaceId("space-2idq8wbr")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Oceanus:Job
     properties:
-      clusterId: cluster-1kcd524h
-      clusterType: 2
-      cuMem: 4
-      flinkVersion: Flink-1.16
-      folderId: folder-7ctl246z
+      name: tf_example_job
       jobType: 1
+      clusterType: 2
+      clusterId: cluster-1kcd524h
+      cuMem: 4
       remark: remark.
+      folderId: folder-7ctl246z
+      flinkVersion: Flink-1.16
       workSpaceId: space-2idq8wbr
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_oceanus_job" "example" {
+  name          = "tf_example_job"
+  job_type      = 1
+  cluster_type  = 2
+  cluster_id    = "cluster-1kcd524h"
+  cu_mem        = 4
+  remark        = "remark."
+  folder_id     = "folder-7ctl246z"
+  flink_version = "Flink-1.16"
+  work_space_id = "space-2idq8wbr"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateJob](https://www.tencentcloud.com/search/?wd=CreateJob&type=document&lang=en)
+* Read: [DescribeJobs](https://www.tencentcloud.com/search/?wd=DescribeJobs&type=document&lang=en)
+* Update: [ModifyJob](https://www.tencentcloud.com/search/?wd=ModifyJob&type=document&lang=en)
+* Delete: [DeleteJobs](https://www.tencentcloud.com/search/?wd=DeleteJobs&type=document&lang=en)
 
 
 
 ## Create Job Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Job</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">JobArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Job</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">JobArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Job</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">JobArgs</a></span><span class="p">,</span>
+        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Job</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">cluster_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">job_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">cu_mem</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">flink_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">folder_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">job_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">work_space_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Job</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">JobArgs</a></span><span class="p">,</span>
-        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+        <span class="nx">work_space_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewJob</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">JobArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Job</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewJob</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">JobArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Job</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Job</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">JobArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Job</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">JobArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Job</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">JobArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Job</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">JobArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Oceanus:Job</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Oceanus:Job</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_oceanus_job&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -232,7 +321,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -349,11 +438,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Job Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Job resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -369,8 +466,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</p>
-</dd><dt class="property-required"
+    <dd>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</dd><dt class="property-required"
             title="Required">
         <span id="jobtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobtype_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Type</a>
@@ -378,8 +474,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -387,8 +482,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</p>
-</dd><dt class="property-optional"
+    <dd>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</dd><dt class="property-optional"
             title="Optional">
         <span id="cumem_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cumem_csharp" style="color: inherit; text-decoration: inherit;">Cu<wbr>Mem</a>
@@ -396,8 +490,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</p>
-</dd><dt class="property-optional"
+    <dd>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</dd><dt class="property-optional"
             title="Optional">
         <span id="flinkversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flinkversion_csharp" style="color: inherit; text-decoration: inherit;">Flink<wbr>Version</a>
@@ -405,8 +498,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Flink version that the job runs.</p>
-</dd><dt class="property-optional"
+    <dd>The Flink version that the job runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="folderid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#folderid_csharp" style="color: inherit; text-decoration: inherit;">Folder<wbr>Id</a>
@@ -414,8 +506,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The folder ID to which the job name belongs. The root directory is root.</p>
-</dd><dt class="property-optional"
+    <dd>The folder ID to which the job name belongs. The root directory is root.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -423,8 +514,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -432,8 +522,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The remark information of the job. It can be set arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The remark information of the job. It can be set arbitrarily.</dd><dt class="property-optional"
             title="Optional">
         <span id="workspaceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workspaceid_csharp" style="color: inherit; text-decoration: inherit;">Work<wbr>Space<wbr>Id</a>
@@ -441,8 +530,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The workspace SerialId.</p>
-</dd></dl>
+    <dd>The workspace SerialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -456,8 +544,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</p>
-</dd><dt class="property-required"
+    <dd>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</dd><dt class="property-required"
             title="Required">
         <span id="jobtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobtype_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Type</a>
@@ -465,8 +552,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -474,8 +560,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</p>
-</dd><dt class="property-optional"
+    <dd>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</dd><dt class="property-optional"
             title="Optional">
         <span id="cumem_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cumem_go" style="color: inherit; text-decoration: inherit;">Cu<wbr>Mem</a>
@@ -483,8 +568,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</p>
-</dd><dt class="property-optional"
+    <dd>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</dd><dt class="property-optional"
             title="Optional">
         <span id="flinkversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flinkversion_go" style="color: inherit; text-decoration: inherit;">Flink<wbr>Version</a>
@@ -492,8 +576,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Flink version that the job runs.</p>
-</dd><dt class="property-optional"
+    <dd>The Flink version that the job runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="folderid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#folderid_go" style="color: inherit; text-decoration: inherit;">Folder<wbr>Id</a>
@@ -501,8 +584,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The folder ID to which the job name belongs. The root directory is root.</p>
-</dd><dt class="property-optional"
+    <dd>The folder ID to which the job name belongs. The root directory is root.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -510,8 +592,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -519,8 +600,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The remark information of the job. It can be set arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The remark information of the job. It can be set arbitrarily.</dd><dt class="property-optional"
             title="Optional">
         <span id="workspaceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workspaceid_go" style="color: inherit; text-decoration: inherit;">Work<wbr>Space<wbr>Id</a>
@@ -528,8 +608,85 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The workspace SerialId.</p>
-</dd></dl>
+    <dd>The workspace SerialId.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_type_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="job_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_type_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cu_mem_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cu_mem_hcl" style="color: inherit; text-decoration: inherit;">cu_<wbr>mem</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="flink_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flink_version_hcl" style="color: inherit; text-decoration: inherit;">flink_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The Flink version that the job runs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="folder_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#folder_id_hcl" style="color: inherit; text-decoration: inherit;">folder_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The folder ID to which the job name belongs. The root directory is root.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The remark information of the job. It can be set arbitrarily.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="work_space_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#work_space_id_hcl" style="color: inherit; text-decoration: inherit;">work_<wbr>space_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The workspace SerialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -543,8 +700,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</p>
-</dd><dt class="property-required"
+    <dd>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</dd><dt class="property-required"
             title="Required">
         <span id="jobtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobtype_java" style="color: inherit; text-decoration: inherit;">job<wbr>Type</a>
@@ -552,8 +708,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -561,8 +716,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</p>
-</dd><dt class="property-optional"
+    <dd>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</dd><dt class="property-optional"
             title="Optional">
         <span id="cumem_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cumem_java" style="color: inherit; text-decoration: inherit;">cu<wbr>Mem</a>
@@ -570,8 +724,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</p>
-</dd><dt class="property-optional"
+    <dd>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</dd><dt class="property-optional"
             title="Optional">
         <span id="flinkversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flinkversion_java" style="color: inherit; text-decoration: inherit;">flink<wbr>Version</a>
@@ -579,8 +732,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The Flink version that the job runs.</p>
-</dd><dt class="property-optional"
+    <dd>The Flink version that the job runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="folderid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#folderid_java" style="color: inherit; text-decoration: inherit;">folder<wbr>Id</a>
@@ -588,8 +740,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The folder ID to which the job name belongs. The root directory is root.</p>
-</dd><dt class="property-optional"
+    <dd>The folder ID to which the job name belongs. The root directory is root.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -597,8 +748,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -606,8 +756,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The remark information of the job. It can be set arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The remark information of the job. It can be set arbitrarily.</dd><dt class="property-optional"
             title="Optional">
         <span id="workspaceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workspaceid_java" style="color: inherit; text-decoration: inherit;">work<wbr>Space<wbr>Id</a>
@@ -615,8 +764,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The workspace SerialId.</p>
-</dd></dl>
+    <dd>The workspace SerialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -630,8 +778,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</p>
-</dd><dt class="property-required"
+    <dd>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</dd><dt class="property-required"
             title="Required">
         <span id="jobtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobtype_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Type</a>
@@ -639,8 +786,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -648,8 +794,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</p>
-</dd><dt class="property-optional"
+    <dd>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</dd><dt class="property-optional"
             title="Optional">
         <span id="cumem_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cumem_nodejs" style="color: inherit; text-decoration: inherit;">cu<wbr>Mem</a>
@@ -657,8 +802,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</p>
-</dd><dt class="property-optional"
+    <dd>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</dd><dt class="property-optional"
             title="Optional">
         <span id="flinkversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flinkversion_nodejs" style="color: inherit; text-decoration: inherit;">flink<wbr>Version</a>
@@ -666,8 +810,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Flink version that the job runs.</p>
-</dd><dt class="property-optional"
+    <dd>The Flink version that the job runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="folderid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#folderid_nodejs" style="color: inherit; text-decoration: inherit;">folder<wbr>Id</a>
@@ -675,8 +818,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The folder ID to which the job name belongs. The root directory is root.</p>
-</dd><dt class="property-optional"
+    <dd>The folder ID to which the job name belongs. The root directory is root.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -684,8 +826,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -693,8 +834,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The remark information of the job. It can be set arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The remark information of the job. It can be set arbitrarily.</dd><dt class="property-optional"
             title="Optional">
         <span id="workspaceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workspaceid_nodejs" style="color: inherit; text-decoration: inherit;">work<wbr>Space<wbr>Id</a>
@@ -702,8 +842,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The workspace SerialId.</p>
-</dd></dl>
+    <dd>The workspace SerialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -717,8 +856,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</p>
-</dd><dt class="property-required"
+    <dd>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</dd><dt class="property-required"
             title="Required">
         <span id="job_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_type_python" style="color: inherit; text-decoration: inherit;">job_<wbr>type</a>
@@ -726,8 +864,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</dd><dt class="property-optional"
             title="Optional">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -735,8 +872,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</p>
-</dd><dt class="property-optional"
+    <dd>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</dd><dt class="property-optional"
             title="Optional">
         <span id="cu_mem_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cu_mem_python" style="color: inherit; text-decoration: inherit;">cu_<wbr>mem</a>
@@ -744,8 +880,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</p>
-</dd><dt class="property-optional"
+    <dd>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</dd><dt class="property-optional"
             title="Optional">
         <span id="flink_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flink_version_python" style="color: inherit; text-decoration: inherit;">flink_<wbr>version</a>
@@ -753,8 +888,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The Flink version that the job runs.</p>
-</dd><dt class="property-optional"
+    <dd>The Flink version that the job runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="folder_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#folder_id_python" style="color: inherit; text-decoration: inherit;">folder_<wbr>id</a>
@@ -762,8 +896,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The folder ID to which the job name belongs. The root directory is root.</p>
-</dd><dt class="property-optional"
+    <dd>The folder ID to which the job name belongs. The root directory is root.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -771,8 +904,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -780,8 +912,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The remark information of the job. It can be set arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The remark information of the job. It can be set arbitrarily.</dd><dt class="property-optional"
             title="Optional">
         <span id="work_space_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#work_space_id_python" style="color: inherit; text-decoration: inherit;">work_<wbr>space_<wbr>id</a>
@@ -789,8 +920,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The workspace SerialId.</p>
-</dd></dl>
+    <dd>The workspace SerialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -804,8 +934,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</p>
-</dd><dt class="property-required"
+    <dd>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</dd><dt class="property-required"
             title="Required">
         <span id="jobtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobtype_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Type</a>
@@ -813,8 +942,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -822,8 +950,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</p>
-</dd><dt class="property-optional"
+    <dd>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</dd><dt class="property-optional"
             title="Optional">
         <span id="cumem_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cumem_yaml" style="color: inherit; text-decoration: inherit;">cu<wbr>Mem</a>
@@ -831,8 +958,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</p>
-</dd><dt class="property-optional"
+    <dd>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</dd><dt class="property-optional"
             title="Optional">
         <span id="flinkversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#flinkversion_yaml" style="color: inherit; text-decoration: inherit;">flink<wbr>Version</a>
@@ -840,8 +966,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The Flink version that the job runs.</p>
-</dd><dt class="property-optional"
+    <dd>The Flink version that the job runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="folderid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#folderid_yaml" style="color: inherit; text-decoration: inherit;">folder<wbr>Id</a>
@@ -849,8 +974,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The folder ID to which the job name belongs. The root directory is root.</p>
-</dd><dt class="property-optional"
+    <dd>The folder ID to which the job name belongs. The root directory is root.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -858,8 +982,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -867,8 +990,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The remark information of the job. It can be set arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The remark information of the job. It can be set arbitrarily.</dd><dt class="property-optional"
             title="Optional">
         <span id="workspaceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workspaceid_yaml" style="color: inherit; text-decoration: inherit;">work<wbr>Space<wbr>Id</a>
@@ -876,8 +998,7 @@ The Job resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The workspace SerialId.</p>
-</dd></dl>
+    <dd>The workspace SerialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -898,8 +1019,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -913,8 +1033,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -928,8 +1061,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -943,8 +1075,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -958,8 +1089,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -973,8 +1103,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -984,18 +1113,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Job resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">JobState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Job</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">JobState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Job</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1008,104 +1137,143 @@ Get an existing Job resource's state with the given name, ID, and optional extra
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">work_space_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Job</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetJob<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">JobState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Job</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetJob<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">JobState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Job</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Job</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">JobState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Job</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">JobState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Job</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">JobState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Job</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">JobState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingJob</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Oceanus:Job</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_oceanus_job</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">JobState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">JobState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1113,28 +1281,31 @@ Get an existing Job resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">JobState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1142,28 +1313,31 @@ Get an existing Job resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">JobState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1183,8 +1357,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</p>
-</dd><dt class="property-optional"
+    <dd>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertype_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -1192,8 +1365,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cumem_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cumem_csharp" style="color: inherit; text-decoration: inherit;">Cu<wbr>Mem</a>
@@ -1201,8 +1373,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</p>
-</dd><dt class="property-optional"
+    <dd>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flinkversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flinkversion_csharp" style="color: inherit; text-decoration: inherit;">Flink<wbr>Version</a>
@@ -1210,8 +1381,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Flink version that the job runs.</p>
-</dd><dt class="property-optional"
+    <dd>The Flink version that the job runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_folderid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_folderid_csharp" style="color: inherit; text-decoration: inherit;">Folder<wbr>Id</a>
@@ -1219,8 +1389,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The folder ID to which the job name belongs. The root directory is root.</p>
-</dd><dt class="property-optional"
+    <dd>The folder ID to which the job name belongs. The root directory is root.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobtype_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Type</a>
@@ -1228,8 +1397,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1237,8 +1405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1246,8 +1413,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The remark information of the job. It can be set arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The remark information of the job. It can be set arbitrarily.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_workspaceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workspaceid_csharp" style="color: inherit; text-decoration: inherit;">Work<wbr>Space<wbr>Id</a>
@@ -1255,8 +1421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The workspace SerialId.</p>
-</dd></dl>
+    <dd>The workspace SerialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1270,8 +1435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</p>
-</dd><dt class="property-optional"
+    <dd>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertype_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -1279,8 +1443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cumem_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cumem_go" style="color: inherit; text-decoration: inherit;">Cu<wbr>Mem</a>
@@ -1288,8 +1451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</p>
-</dd><dt class="property-optional"
+    <dd>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flinkversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flinkversion_go" style="color: inherit; text-decoration: inherit;">Flink<wbr>Version</a>
@@ -1297,8 +1459,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Flink version that the job runs.</p>
-</dd><dt class="property-optional"
+    <dd>The Flink version that the job runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_folderid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_folderid_go" style="color: inherit; text-decoration: inherit;">Folder<wbr>Id</a>
@@ -1306,8 +1467,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The folder ID to which the job name belongs. The root directory is root.</p>
-</dd><dt class="property-optional"
+    <dd>The folder ID to which the job name belongs. The root directory is root.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobtype_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Type</a>
@@ -1315,8 +1475,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1324,8 +1483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1333,8 +1491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The remark information of the job. It can be set arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The remark information of the job. It can be set arbitrarily.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_workspaceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workspaceid_go" style="color: inherit; text-decoration: inherit;">Work<wbr>Space<wbr>Id</a>
@@ -1342,8 +1499,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The workspace SerialId.</p>
-</dd></dl>
+    <dd>The workspace SerialId.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_type_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cu_mem_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cu_mem_hcl" style="color: inherit; text-decoration: inherit;">cu_<wbr>mem</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_flink_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flink_version_hcl" style="color: inherit; text-decoration: inherit;">flink_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The Flink version that the job runs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_folder_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_folder_id_hcl" style="color: inherit; text-decoration: inherit;">folder_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The folder ID to which the job name belongs. The root directory is root.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_job_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_job_type_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The remark information of the job. It can be set arbitrarily.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_work_space_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_work_space_id_hcl" style="color: inherit; text-decoration: inherit;">work_<wbr>space_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The workspace SerialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1357,8 +1591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</p>
-</dd><dt class="property-optional"
+    <dd>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertype_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -1366,8 +1599,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cumem_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cumem_java" style="color: inherit; text-decoration: inherit;">cu<wbr>Mem</a>
@@ -1375,8 +1607,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</p>
-</dd><dt class="property-optional"
+    <dd>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flinkversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flinkversion_java" style="color: inherit; text-decoration: inherit;">flink<wbr>Version</a>
@@ -1384,8 +1615,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The Flink version that the job runs.</p>
-</dd><dt class="property-optional"
+    <dd>The Flink version that the job runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_folderid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_folderid_java" style="color: inherit; text-decoration: inherit;">folder<wbr>Id</a>
@@ -1393,8 +1623,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The folder ID to which the job name belongs. The root directory is root.</p>
-</dd><dt class="property-optional"
+    <dd>The folder ID to which the job name belongs. The root directory is root.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobtype_java" style="color: inherit; text-decoration: inherit;">job<wbr>Type</a>
@@ -1402,8 +1631,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1411,8 +1639,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1420,8 +1647,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The remark information of the job. It can be set arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The remark information of the job. It can be set arbitrarily.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_workspaceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workspaceid_java" style="color: inherit; text-decoration: inherit;">work<wbr>Space<wbr>Id</a>
@@ -1429,8 +1655,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The workspace SerialId.</p>
-</dd></dl>
+    <dd>The workspace SerialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1444,8 +1669,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</p>
-</dd><dt class="property-optional"
+    <dd>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertype_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -1453,8 +1677,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cumem_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cumem_nodejs" style="color: inherit; text-decoration: inherit;">cu<wbr>Mem</a>
@@ -1462,8 +1685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</p>
-</dd><dt class="property-optional"
+    <dd>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flinkversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flinkversion_nodejs" style="color: inherit; text-decoration: inherit;">flink<wbr>Version</a>
@@ -1471,8 +1693,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Flink version that the job runs.</p>
-</dd><dt class="property-optional"
+    <dd>The Flink version that the job runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_folderid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_folderid_nodejs" style="color: inherit; text-decoration: inherit;">folder<wbr>Id</a>
@@ -1480,8 +1701,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The folder ID to which the job name belongs. The root directory is root.</p>
-</dd><dt class="property-optional"
+    <dd>The folder ID to which the job name belongs. The root directory is root.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobtype_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Type</a>
@@ -1489,8 +1709,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1498,8 +1717,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1507,8 +1725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The remark information of the job. It can be set arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The remark information of the job. It can be set arbitrarily.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_workspaceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workspaceid_nodejs" style="color: inherit; text-decoration: inherit;">work<wbr>Space<wbr>Id</a>
@@ -1516,8 +1733,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The workspace SerialId.</p>
-</dd></dl>
+    <dd>The workspace SerialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1531,8 +1747,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</p>
-</dd><dt class="property-optional"
+    <dd>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cluster_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_type_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
@@ -1540,8 +1755,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cu_mem_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cu_mem_python" style="color: inherit; text-decoration: inherit;">cu_<wbr>mem</a>
@@ -1549,8 +1763,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</p>
-</dd><dt class="property-optional"
+    <dd>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flink_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flink_version_python" style="color: inherit; text-decoration: inherit;">flink_<wbr>version</a>
@@ -1558,8 +1771,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The Flink version that the job runs.</p>
-</dd><dt class="property-optional"
+    <dd>The Flink version that the job runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_folder_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_folder_id_python" style="color: inherit; text-decoration: inherit;">folder_<wbr>id</a>
@@ -1567,8 +1779,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The folder ID to which the job name belongs. The root directory is root.</p>
-</dd><dt class="property-optional"
+    <dd>The folder ID to which the job name belongs. The root directory is root.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_job_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_job_type_python" style="color: inherit; text-decoration: inherit;">job_<wbr>type</a>
@@ -1576,8 +1787,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1585,8 +1795,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1594,8 +1803,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The remark information of the job. It can be set arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The remark information of the job. It can be set arbitrarily.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_work_space_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_work_space_id_python" style="color: inherit; text-decoration: inherit;">work_<wbr>space_<wbr>id</a>
@@ -1603,8 +1811,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The workspace SerialId.</p>
-</dd></dl>
+    <dd>The workspace SerialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1618,8 +1825,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</p>
-</dd><dt class="property-optional"
+    <dd>When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_clustertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clustertype_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -1627,8 +1833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cumem_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cumem_yaml" style="color: inherit; text-decoration: inherit;">cu<wbr>Mem</a>
@@ -1636,8 +1841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</p>
-</dd><dt class="property-optional"
+    <dd>Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_flinkversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_flinkversion_yaml" style="color: inherit; text-decoration: inherit;">flink<wbr>Version</a>
@@ -1645,8 +1849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The Flink version that the job runs.</p>
-</dd><dt class="property-optional"
+    <dd>The Flink version that the job runs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_folderid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_folderid_yaml" style="color: inherit; text-decoration: inherit;">folder<wbr>Id</a>
@@ -1654,8 +1857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The folder ID to which the job name belongs. The root directory is root.</p>
-</dd><dt class="property-optional"
+    <dd>The folder ID to which the job name belongs. The root directory is root.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_jobtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_jobtype_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Type</a>
@@ -1663,8 +1865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</p>
-</dd><dt class="property-optional"
+    <dd>The type of the job. 1 indicates SQL job, and 2 indicates JAR job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1672,8 +1873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</p>
-</dd><dt class="property-optional"
+    <dd>The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1681,8 +1881,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The remark information of the job. It can be set arbitrarily.</p>
-</dd><dt class="property-optional"
+    <dd>The remark information of the job. It can be set arbitrarily.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_workspaceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workspaceid_yaml" style="color: inherit; text-decoration: inherit;">work<wbr>Space<wbr>Id</a>
@@ -1690,8 +1889,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The workspace SerialId.</p>
-</dd></dl>
+    <dd>The workspace SerialId.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1710,7 +1908,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

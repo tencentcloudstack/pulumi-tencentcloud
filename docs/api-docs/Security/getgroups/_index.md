@@ -2,9 +2,11 @@
 ---
 title: "getGroups"
 title_tag: "tencentcloud.Security.getGroups"
-meta_desc: "Documentation for the tencentcloud.Security.getGroups function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of security groups."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,49 +18,47 @@ Use this data source to query detailed information of security groups.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Query all security groups
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const sglab = tencentcloud.Security.getGroups({
-    securityGroupId: tencentcloud_security_group.sglab.id,
-});
+const example = tencentcloud.security.getGroups({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-sglab = tencentcloud.Security.get_groups(security_group_id=tencentcloud_security_group["sglab"]["id"])
+example = tencentcloud.security.get_groups()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var sglab = Tencentcloud.Security.GetGroups.Invoke(new()
-    {
-        SecurityGroupId = tencentcloud_security_group.Sglab.Id,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Security.GetGroups(ctx, &security.GetGroupsArgs{
-			SecurityGroupId: pulumi.StringRef(tencentcloud_security_group.Sglab.Id),
-		}, nil)
+		_, err := security.GetGroups(ctx, &security.GetGroupsArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -66,6 +66,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Security.GetGroups.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -74,8 +96,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Security.SecurityFunctions;
 import com.pulumi.tencentcloud.Security.inputs.GetGroupsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -87,22 +109,44 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var sglab = SecurityFunctions.getGroups(GetGroupsArgs.builder()
-            .securityGroupId(tencentcloud_security_group.sglab().id())
+        final var example = SecurityFunctions.getGroups(GetGroupsArgs.builder()
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
-  sglab:
+  example:
     fn::invoke:
-      Function: tencentcloud:Security:getGroups
-      Arguments:
-        securityGroupId: ${tencentcloud_security_group.sglab.id}
+      function: tencentcloud:Security:getGroups
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_security_getgroups" "example" {
+}
+```
+</pulumi-choosable>
+</div>
+
 
 
 
@@ -115,7 +159,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +167,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getGroups<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>></span
+><span class="k">function </span>getGroups<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>></span
 ><span class="k">
-function </span>getGroupsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>></span
+function </span>getGroupsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetGroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -138,15 +182,15 @@ function </span>getGroupsOutput<span class="p">(</span><span class="nx">args</sp
                <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">security_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+               <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetGroupsResult</span
 ><span class="k">
-def </span>get_groups_output<span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">security_group_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetGroupsResult]</span
+def </span>get_groups_output<span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">project_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">security_group_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetGroupsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -171,7 +215,8 @@ func </span>GetGroupsOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetGroups </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -180,7 +225,8 @@ func </span>GetGroupsOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>> </span>getGroups<span class="p">(</span><span class="nx">GetGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>> </span>getGroups<span class="p">(</span><span class="nx">GetGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetGroupsResult</a></span>> </span>getGroups<span class="p">(</span><span class="nx">GetGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -192,6 +238,15 @@ func </span>GetGroupsOutput<span class="p">(</span><span class="nx">ctx</span><s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Security/getGroups:getGroups
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_security_get_groups&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -210,8 +265,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -219,8 +273,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -228,8 +281,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Id</a>
@@ -237,17 +289,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security group to be queried. Conflict with <code>name</code> and <code>project_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried. Conflict with <code>name</code> and <code>projectId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd></dl>
+    <dd>Tags of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -261,8 +311,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -270,8 +319,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -279,8 +327,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Id</a>
@@ -288,17 +335,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security group to be queried. Conflict with <code>name</code> and <code>project_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried. Conflict with <code>name</code> and <code>projectId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd></dl>
+    <dd>Tags of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_id_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the security group to be queried. Conflict with <code>name</code> and <code>projectId</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -312,8 +403,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -321,8 +411,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -330,8 +419,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Id</a>
@@ -339,17 +427,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the security group to be queried. Conflict with <code>name</code> and <code>project_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried. Conflict with <code>name</code> and <code>projectId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd></dl>
+    <dd>Tags of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -363,8 +449,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -372,8 +457,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -381,8 +465,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Id</a>
@@ -390,17 +473,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security group to be queried. Conflict with <code>name</code> and <code>project_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried. Conflict with <code>name</code> and <code>projectId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd></dl>
+    <dd>Tags of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -414,8 +495,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -423,8 +503,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -432,8 +511,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="security_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_id_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>id</a>
@@ -441,17 +519,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the security group to be queried. Conflict with <code>name</code> and <code>project_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried. Conflict with <code>name</code> and <code>projectId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd></dl>
+    <dd>Tags of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -465,8 +541,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -474,8 +549,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -483,8 +557,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Id</a>
@@ -492,17 +565,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the security group to be queried. Conflict with <code>name</code> and <code>project_id</code>.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group to be queried. Conflict with <code>name</code> and <code>projectId</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd></dl>
+    <dd>Tags of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -525,8 +596,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -534,8 +604,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupssecuritygroup">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Security.<wbr>Outputs.<wbr>Get<wbr>Groups<wbr>Security<wbr>Group&gt;</a></span>
     </dt>
-    <dd><p>Information list of security group.</p>
-</dd><dt class="property-"
+    <dd>Information list of security group.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -543,8 +612,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security group.</p>
-</dd><dt class="property-"
+    <dd>Name of the security group.</dd><dt class="property-"
             title="">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -552,8 +620,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the security group.</p>
-</dd><dt class="property-"
+    <dd>Project ID of the security group.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -569,17 +636,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-"
+    <dd>ID of the security group.</dd><dt class="property-"
             title="">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the security group.</p>
-</dd></dl>
+    <dd>Tags of the security group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -593,8 +658,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -602,8 +666,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupssecuritygroup">[]Get<wbr>Groups<wbr>Security<wbr>Group</a></span>
     </dt>
-    <dd><p>Information list of security group.</p>
-</dd><dt class="property-"
+    <dd>Information list of security group.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -611,8 +674,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security group.</p>
-</dd><dt class="property-"
+    <dd>Name of the security group.</dd><dt class="property-"
             title="">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -620,8 +682,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the security group.</p>
-</dd><dt class="property-"
+    <dd>Project ID of the security group.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -637,17 +698,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-"
+    <dd>ID of the security group.</dd><dt class="property-"
             title="">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the security group.</p>
-</dd></dl>
+    <dd>Tags of the security group.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getgroupssecuritygroup">list(object)</a></span>
+    </dt>
+    <dd>Information list of security group.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the security group.</dd><dt class="property-"
+            title="">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID of the security group.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="security_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_id_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the security group.</dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the security group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -661,8 +782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -670,8 +790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupssecuritygroup">List&lt;Get<wbr>Groups<wbr>Group&gt;</a></span>
     </dt>
-    <dd><p>Information list of security group.</p>
-</dd><dt class="property-"
+    <dd>Information list of security group.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -679,8 +798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the security group.</p>
-</dd><dt class="property-"
+    <dd>Name of the security group.</dd><dt class="property-"
             title="">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -688,8 +806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID of the security group.</p>
-</dd><dt class="property-"
+    <dd>Project ID of the security group.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -705,17 +822,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-"
+    <dd>ID of the security group.</dd><dt class="property-"
             title="">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the security group.</p>
-</dd></dl>
+    <dd>Tags of the security group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -729,8 +844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -738,8 +852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupssecuritygroup">Get<wbr>Groups<wbr>Security<wbr>Group[]</a></span>
     </dt>
-    <dd><p>Information list of security group.</p>
-</dd><dt class="property-"
+    <dd>Information list of security group.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -747,8 +860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security group.</p>
-</dd><dt class="property-"
+    <dd>Name of the security group.</dd><dt class="property-"
             title="">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -756,8 +868,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID of the security group.</p>
-</dd><dt class="property-"
+    <dd>Project ID of the security group.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -773,17 +884,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-"
+    <dd>ID of the security group.</dd><dt class="property-"
             title="">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the security group.</p>
-</dd></dl>
+    <dd>Tags of the security group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -797,17 +906,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getgroupssecuritygroup">Get<wbr>Groups<wbr>Security<wbr>Group]</a></span>
+        <span class="property-type"><a href="#getgroupssecuritygroup">Sequence[Get<wbr>Groups<wbr>Security<wbr>Group]</a></span>
     </dt>
-    <dd><p>Information list of security group.</p>
-</dd><dt class="property-"
+    <dd>Information list of security group.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -815,8 +922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the security group.</p>
-</dd><dt class="property-"
+    <dd>Name of the security group.</dd><dt class="property-"
             title="">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -824,8 +930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the security group.</p>
-</dd><dt class="property-"
+    <dd>Project ID of the security group.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -841,17 +946,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-"
+    <dd>ID of the security group.</dd><dt class="property-"
             title="">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the security group.</p>
-</dd></dl>
+    <dd>Tags of the security group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -865,8 +968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -874,8 +976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getgroupssecuritygroup">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information list of security group.</p>
-</dd><dt class="property-"
+    <dd>Information list of security group.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -883,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the security group.</p>
-</dd><dt class="property-"
+    <dd>Name of the security group.</dd><dt class="property-"
             title="">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -892,8 +992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID of the security group.</p>
-</dd><dt class="property-"
+    <dd>Project ID of the security group.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -909,17 +1008,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-"
+    <dd>ID of the security group.</dd><dt class="property-"
             title="">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the security group.</p>
-</dd></dl>
+    <dd>Tags of the security group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -943,8 +1040,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of security group binding resources.</p>
-</dd><dt class="property-required"
+    <dd>Number of security group binding resources.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -952,8 +1048,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of security group.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of security group.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -961,8 +1056,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the security group.</p>
-</dd><dt class="property-required"
+    <dd>Description of the security group.</dd><dt class="property-required"
             title="Required">
         <span id="egresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_csharp" style="color: inherit; text-decoration: inherit;">Egresses</a>
@@ -970,8 +1064,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Egress rules set. For items like <code>[action]#[cidr_ip]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</p>
-</dd><dt class="property-required"
+    <dd>Egress rules set. For items like <code>[action]#[cidrIp]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</dd><dt class="property-required"
             title="Required">
         <span id="ingresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_csharp" style="color: inherit; text-decoration: inherit;">Ingresses</a>
@@ -979,8 +1072,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Ingress rules set. For items like <code>[action]#[cidr_ip]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</p>
-</dd><dt class="property-required"
+    <dd>Ingress rules set. For items like <code>[action]#[cidrIp]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -988,8 +1080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -997,8 +1088,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Id</a>
@@ -1006,17 +1096,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security group to be queried. Conflict with <code>name</code> and <code>project_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the security group to be queried. Conflict with <code>name</code> and <code>projectId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd></dl>
+    <dd>Tags of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1030,8 +1118,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of security group binding resources.</p>
-</dd><dt class="property-required"
+    <dd>Number of security group binding resources.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1039,8 +1126,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of security group.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of security group.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1048,8 +1134,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the security group.</p>
-</dd><dt class="property-required"
+    <dd>Description of the security group.</dd><dt class="property-required"
             title="Required">
         <span id="egresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_go" style="color: inherit; text-decoration: inherit;">Egresses</a>
@@ -1057,8 +1142,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Egress rules set. For items like <code>[action]#[cidr_ip]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</p>
-</dd><dt class="property-required"
+    <dd>Egress rules set. For items like <code>[action]#[cidrIp]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</dd><dt class="property-required"
             title="Required">
         <span id="ingresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_go" style="color: inherit; text-decoration: inherit;">Ingresses</a>
@@ -1066,8 +1150,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Ingress rules set. For items like <code>[action]#[cidr_ip]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</p>
-</dd><dt class="property-required"
+    <dd>Ingress rules set. For items like <code>[action]#[cidrIp]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1075,8 +1158,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1084,8 +1166,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Id</a>
@@ -1093,17 +1174,93 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security group to be queried. Conflict with <code>name</code> and <code>project_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the security group to be queried. Conflict with <code>name</code> and <code>projectId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd></dl>
+    <dd>Tags of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="be_associate_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#be_associate_count_hcl" style="color: inherit; text-decoration: inherit;">be_<wbr>associate_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of security group binding resources.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of security group.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the security group.</dd><dt class="property-required"
+            title="Required">
+        <span id="egresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_hcl" style="color: inherit; text-decoration: inherit;">egresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Egress rules set. For items like <code>[action]#[cidrIp]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</dd><dt class="property-required"
+            title="Required">
+        <span id="ingresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_hcl" style="color: inherit; text-decoration: inherit;">ingresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Ingress rules set. For items like <code>[action]#[cidrIp]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="security_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_id_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the security group to be queried. Conflict with <code>name</code> and <code>projectId</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1117,8 +1274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of security group binding resources.</p>
-</dd><dt class="property-required"
+    <dd>Number of security group binding resources.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1126,8 +1282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of security group.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of security group.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1135,8 +1290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the security group.</p>
-</dd><dt class="property-required"
+    <dd>Description of the security group.</dd><dt class="property-required"
             title="Required">
         <span id="egresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_java" style="color: inherit; text-decoration: inherit;">egresses</a>
@@ -1144,8 +1298,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Egress rules set. For items like <code>[action]#[cidr_ip]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</p>
-</dd><dt class="property-required"
+    <dd>Egress rules set. For items like <code>[action]#[cidrIp]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</dd><dt class="property-required"
             title="Required">
         <span id="ingresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_java" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -1153,8 +1306,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Ingress rules set. For items like <code>[action]#[cidr_ip]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</p>
-</dd><dt class="property-required"
+    <dd>Ingress rules set. For items like <code>[action]#[cidrIp]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1162,8 +1314,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1171,8 +1322,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Id</a>
@@ -1180,17 +1330,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the security group to be queried. Conflict with <code>name</code> and <code>project_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the security group to be queried. Conflict with <code>name</code> and <code>projectId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd></dl>
+    <dd>Tags of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1204,8 +1352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of security group binding resources.</p>
-</dd><dt class="property-required"
+    <dd>Number of security group binding resources.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1213,8 +1360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of security group.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of security group.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1222,8 +1368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the security group.</p>
-</dd><dt class="property-required"
+    <dd>Description of the security group.</dd><dt class="property-required"
             title="Required">
         <span id="egresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_nodejs" style="color: inherit; text-decoration: inherit;">egresses</a>
@@ -1231,8 +1376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Egress rules set. For items like <code>[action]#[cidr_ip]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</p>
-</dd><dt class="property-required"
+    <dd>Egress rules set. For items like <code>[action]#[cidrIp]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</dd><dt class="property-required"
             title="Required">
         <span id="ingresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_nodejs" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -1240,8 +1384,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Ingress rules set. For items like <code>[action]#[cidr_ip]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</p>
-</dd><dt class="property-required"
+    <dd>Ingress rules set. For items like <code>[action]#[cidrIp]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1249,8 +1392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1258,8 +1400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Id</a>
@@ -1267,17 +1408,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the security group to be queried. Conflict with <code>name</code> and <code>project_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the security group to be queried. Conflict with <code>name</code> and <code>projectId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd></dl>
+    <dd>Tags of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1291,8 +1430,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of security group binding resources.</p>
-</dd><dt class="property-required"
+    <dd>Number of security group binding resources.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1300,8 +1438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of security group.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of security group.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1309,8 +1446,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the security group.</p>
-</dd><dt class="property-required"
+    <dd>Description of the security group.</dd><dt class="property-required"
             title="Required">
         <span id="egresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_python" style="color: inherit; text-decoration: inherit;">egresses</a>
@@ -1318,8 +1454,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Egress rules set. For items like <code>[action]#[cidr_ip]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</p>
-</dd><dt class="property-required"
+    <dd>Egress rules set. For items like <code>[action]#[cidrIp]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</dd><dt class="property-required"
             title="Required">
         <span id="ingresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_python" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -1327,8 +1462,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Ingress rules set. For items like <code>[action]#[cidr_ip]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</p>
-</dd><dt class="property-required"
+    <dd>Ingress rules set. For items like <code>[action]#[cidrIp]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1336,8 +1470,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1345,8 +1478,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="security_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_id_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>id</a>
@@ -1354,17 +1486,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the security group to be queried. Conflict with <code>name</code> and <code>project_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the security group to be queried. Conflict with <code>name</code> and <code>projectId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd></dl>
+    <dd>Tags of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1378,8 +1508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of security group binding resources.</p>
-</dd><dt class="property-required"
+    <dd>Number of security group binding resources.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1387,8 +1516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of security group.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of security group.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1396,8 +1524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the security group.</p>
-</dd><dt class="property-required"
+    <dd>Description of the security group.</dd><dt class="property-required"
             title="Required">
         <span id="egresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_yaml" style="color: inherit; text-decoration: inherit;">egresses</a>
@@ -1405,8 +1532,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Egress rules set. For items like <code>[action]#[cidr_ip]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</p>
-</dd><dt class="property-required"
+    <dd>Egress rules set. For items like <code>[action]#[cidrIp]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</dd><dt class="property-required"
             title="Required">
         <span id="ingresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_yaml" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -1414,8 +1540,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Ingress rules set. For items like <code>[action]#[cidr_ip]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</p>
-</dd><dt class="property-required"
+    <dd>Ingress rules set. For items like <code>[action]#[cidrIp]#[port]#[protocol]</code>, it means a regular rule; for items like <code>sg-XXXX</code>, it means a nested security group.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1423,8 +1548,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>Name of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1432,8 +1556,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Id</a>
@@ -1441,17 +1564,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the security group to be queried. Conflict with <code>name</code> and <code>project_id</code>.</p>
-</dd><dt class="property-required"
+    <dd>ID of the security group to be queried. Conflict with <code>name</code> and <code>projectId</code>.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the security group to be queried. Conflict with <code>security_group_id</code>.</p>
-</dd></dl>
+    <dd>Tags of the security group to be queried. Conflict with <code>securityGroupId</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1466,7 +1587,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

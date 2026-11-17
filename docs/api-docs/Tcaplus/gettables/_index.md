@@ -2,9 +2,11 @@
 ---
 title: "getTables"
 title_tag: "tencentcloud.Tcaplus.getTables"
-meta_desc: "Documentation for the tencentcloud.Tcaplus.getTables function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query TcaplusDB tables."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -25,7 +27,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -33,9 +35,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getTables<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTablesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetTablesResult</a></span>></span
+><span class="k">function </span>getTables<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTablesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetTablesResult</a></span>></span
 ><span class="k">
-function </span>getTablesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTablesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetTablesResult</a></span>></span
+function </span>getTablesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTablesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetTablesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -51,12 +53,12 @@ function </span>getTablesOutput<span class="p">(</span><span class="nx">args</sp
                <span class="nx">tablegroup_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetTablesResult</span
 ><span class="k">
-def </span>get_tables_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">table_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">table_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">tablegroup_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetTablesResult]</span
+def </span>get_tables_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">table_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">table_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">tablegroup_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetTablesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -81,7 +83,8 @@ func </span>GetTablesOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetTables </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetTablesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetTablesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetTablesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTablesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetTablesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTablesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetTablesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTablesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -90,7 +93,8 @@ func </span>GetTablesOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetTablesResult</a></span>> </span>getTables<span class="p">(</span><span class="nx">GetTablesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetTablesResult</a></span>> </span>getTables<span class="p">(</span><span class="nx">GetTablesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetTablesResult</a></span>> </span>getTables<span class="p">(</span><span class="nx">GetTablesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -102,6 +106,15 @@ func </span>GetTablesOutput<span class="p">(</span><span class="nx">ctx</span><s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tcaplus/getTables:getTables
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tcaplus_get_tables&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -120,8 +133,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -129,8 +141,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File for saving results.</p>
-</dd><dt class="property-optional"
+    <dd>File for saving results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tableid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableid_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Id</a>
@@ -138,8 +149,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table ID to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Table ID to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Name</a>
@@ -147,8 +157,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table name to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Table name to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_csharp" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -156,8 +165,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to be query.</p>
-</dd></dl>
+    <dd>ID of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -171,8 +179,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -180,8 +187,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File for saving results.</p>
-</dd><dt class="property-optional"
+    <dd>File for saving results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tableid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableid_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Id</a>
@@ -189,8 +195,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table ID to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Table ID to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Name</a>
@@ -198,8 +203,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table name to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Table name to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_go" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -207,8 +211,53 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to be query.</p>
-</dd></dl>
+    <dd>ID of the table group to be query.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TcaplusDB cluster to be query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File for saving results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="table_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_id_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Table ID to be query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="table_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_name_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Table name to be query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tablegroup_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_id_hcl" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -222,8 +271,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -231,8 +279,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File for saving results.</p>
-</dd><dt class="property-optional"
+    <dd>File for saving results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tableid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableid_java" style="color: inherit; text-decoration: inherit;">table<wbr>Id</a>
@@ -240,8 +287,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table ID to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Table ID to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_java" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -249,8 +295,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table name to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Table name to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_java" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -258,8 +303,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the table group to be query.</p>
-</dd></dl>
+    <dd>ID of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -273,8 +317,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -282,8 +325,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File for saving results.</p>
-</dd><dt class="property-optional"
+    <dd>File for saving results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tableid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableid_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Id</a>
@@ -291,8 +333,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table ID to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Table ID to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -300,8 +341,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table name to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Table name to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_nodejs" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -309,8 +349,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to be query.</p>
-</dd></dl>
+    <dd>ID of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +363,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -333,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File for saving results.</p>
-</dd><dt class="property-optional"
+    <dd>File for saving results.</dd><dt class="property-optional"
             title="Optional">
         <span id="table_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_id_python" style="color: inherit; text-decoration: inherit;">table_<wbr>id</a>
@@ -342,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Table ID to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Table ID to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="table_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_name_python" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
@@ -351,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Table name to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Table name to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroup_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_id_python" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
@@ -360,8 +395,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the table group to be query.</p>
-</dd></dl>
+    <dd>ID of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -375,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TcaplusDB cluster to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the TcaplusDB cluster to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -384,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File for saving results.</p>
-</dd><dt class="property-optional"
+    <dd>File for saving results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tableid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableid_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Id</a>
@@ -393,8 +425,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table ID to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Table ID to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -402,8 +433,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table name to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Table name to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_yaml" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -411,8 +441,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the table group to be query.</p>
-</dd></dl>
+    <dd>ID of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -443,8 +472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -452,8 +480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettableslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcaplus.<wbr>Outputs.<wbr>Get<wbr>Tables<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of TcaplusDB tables. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>A list of TcaplusDB tables. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -469,8 +496,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>ID of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="tablename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Name</a>
@@ -478,8 +504,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="tablegroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_csharp" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -487,8 +512,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table group id of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Table group id of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -510,8 +534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -519,8 +542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettableslist">[]Get<wbr>Tables<wbr>List</a></span>
     </dt>
-    <dd><p>A list of TcaplusDB tables. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>A list of TcaplusDB tables. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -536,8 +558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>ID of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="tablename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Name</a>
@@ -545,8 +566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="tablegroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_go" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -554,8 +574,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table group id of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Table group id of the TcaplusDB table.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettableslist">list(object)</a></span>
+    </dt>
+    <dd>A list of TcaplusDB tables. Each element contains the following attributes.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="table_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_id_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the TcaplusDB table.</dd><dt class="property-"
+            title="">
+        <span id="table_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_name_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-"
+            title="">
+        <span id="tablegroup_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_id_hcl" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Table group id of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -577,8 +658,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -586,8 +666,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettableslist">List&lt;Get<wbr>Tables<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of TcaplusDB tables. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>A list of TcaplusDB tables. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -603,8 +682,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>ID of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="tablename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_java" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -612,8 +690,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="tablegroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_java" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -621,8 +698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table group id of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Table group id of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -644,8 +720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -653,8 +728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettableslist">Get<wbr>Tables<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of TcaplusDB tables. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>A list of TcaplusDB tables. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -670,8 +744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>ID of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="tablename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -679,8 +752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="tablegroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_nodejs" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -688,8 +760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table group id of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Table group id of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -711,17 +782,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gettableslist">Get<wbr>Tables<wbr>List]</a></span>
+        <span class="property-type"><a href="#gettableslist">Sequence[Get<wbr>Tables<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of TcaplusDB tables. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>A list of TcaplusDB tables. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -737,8 +806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>ID of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="table_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_name_python" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
@@ -746,8 +814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="tablegroup_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_id_python" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
@@ -755,8 +822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Table group id of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Table group id of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -778,8 +844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -787,8 +852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettableslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of TcaplusDB tables. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>A list of TcaplusDB tables. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -804,8 +868,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>ID of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="tablename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -813,8 +876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the TcaplusDB table.</p>
-</dd><dt class="property-"
+    <dd>Name of the TcaplusDB table.</dd><dt class="property-"
             title="">
         <span id="tablegroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_yaml" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -822,8 +884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table group id of the TcaplusDB table.</p>
-</dd></dl>
+    <dd>Table group id of the TcaplusDB table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -847,8 +908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -856,8 +916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Description of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="error_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_csharp" style="color: inherit; text-decoration: inherit;">Error</a>
@@ -865,8 +924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Error message for creating TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Error message for creating TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="idlid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idlid_csharp" style="color: inherit; text-decoration: inherit;">Idl<wbr>Id</a>
@@ -874,8 +932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL file id of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>IDL file id of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="reservedreadcu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedreadcu_csharp" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Read<wbr>Cu</a>
@@ -883,8 +940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="reservedvolume_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedvolume_csharp" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Volume</a>
@@ -892,8 +948,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit:GB).</p>
-</dd><dt class="property-required"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit:GB).</dd><dt class="property-required"
             title="Required">
         <span id="reservedwritecu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedwritecu_csharp" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Write<wbr>Cu</a>
@@ -901,8 +956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -910,8 +964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tableid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableid_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Id</a>
@@ -919,8 +972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table ID to be query.</p>
-</dd><dt class="property-required"
+    <dd>Table ID to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tableidltype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableidltype_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Idl<wbr>Type</a>
@@ -928,8 +980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL type of  the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>IDL type of  the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tablename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Name</a>
@@ -937,8 +988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table name to be query.</p>
-</dd><dt class="property-required"
+    <dd>Table name to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tablesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablesize_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Size</a>
@@ -946,8 +996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Size of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tabletype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tabletype_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Type</a>
@@ -955,8 +1004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Type of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_csharp" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -964,8 +1012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to be query.</p>
-</dd></dl>
+    <dd>ID of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -979,8 +1026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -988,8 +1034,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Description of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="error_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_go" style="color: inherit; text-decoration: inherit;">Error</a>
@@ -997,8 +1042,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Error message for creating TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Error message for creating TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="idlid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idlid_go" style="color: inherit; text-decoration: inherit;">Idl<wbr>Id</a>
@@ -1006,8 +1050,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL file id of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>IDL file id of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="reservedreadcu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedreadcu_go" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Read<wbr>Cu</a>
@@ -1015,8 +1058,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="reservedvolume_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedvolume_go" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Volume</a>
@@ -1024,8 +1066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit:GB).</p>
-</dd><dt class="property-required"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit:GB).</dd><dt class="property-required"
             title="Required">
         <span id="reservedwritecu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedwritecu_go" style="color: inherit; text-decoration: inherit;">Reserved<wbr>Write<wbr>Cu</a>
@@ -1033,8 +1074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1042,8 +1082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tableid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableid_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Id</a>
@@ -1051,8 +1090,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table ID to be query.</p>
-</dd><dt class="property-required"
+    <dd>Table ID to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tableidltype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableidltype_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Idl<wbr>Type</a>
@@ -1060,8 +1098,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL type of  the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>IDL type of  the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tablename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Name</a>
@@ -1069,8 +1106,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table name to be query.</p>
-</dd><dt class="property-required"
+    <dd>Table name to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tablesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablesize_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Size</a>
@@ -1078,8 +1114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Size of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tabletype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tabletype_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Type</a>
@@ -1087,8 +1122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Type of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_go" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -1096,8 +1130,125 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to be query.</p>
-</dd></dl>
+    <dd>ID of the table group to be query.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the TcaplusDB table.</dd><dt class="property-required"
+            title="Required">
+        <span id="error_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_hcl" style="color: inherit; text-decoration: inherit;">error</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Error message for creating TcaplusDB table.</dd><dt class="property-required"
+            title="Required">
+        <span id="idl_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idl_id_hcl" style="color: inherit; text-decoration: inherit;">idl_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IDL file id of the TcaplusDB table.</dd><dt class="property-required"
+            title="Required">
+        <span id="reserved_read_cu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_read_cu_hcl" style="color: inherit; text-decoration: inherit;">reserved_<wbr>read_<wbr>cu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-required"
+            title="Required">
+        <span id="reserved_volume_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_volume_hcl" style="color: inherit; text-decoration: inherit;">reserved_<wbr>volume</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Reserved storage capacity of the TcaplusDB table (unit:GB).</dd><dt class="property-required"
+            title="Required">
+        <span id="reserved_write_cu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_write_cu_hcl" style="color: inherit; text-decoration: inherit;">reserved_<wbr>write_<wbr>cu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-required"
+            title="Required">
+        <span id="table_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_id_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Table ID to be query.</dd><dt class="property-required"
+            title="Required">
+        <span id="table_idl_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_idl_type_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>idl_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IDL type of  the TcaplusDB table.</dd><dt class="property-required"
+            title="Required">
+        <span id="table_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_name_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Table name to be query.</dd><dt class="property-required"
+            title="Required">
+        <span id="table_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_size_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Size of the TcaplusDB table.</dd><dt class="property-required"
+            title="Required">
+        <span id="table_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_type_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the TcaplusDB table.</dd><dt class="property-required"
+            title="Required">
+        <span id="tablegroup_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_id_hcl" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1111,8 +1262,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1120,8 +1270,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Description of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="error_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_java" style="color: inherit; text-decoration: inherit;">error</a>
@@ -1129,8 +1278,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Error message for creating TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Error message for creating TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="idlid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idlid_java" style="color: inherit; text-decoration: inherit;">idl<wbr>Id</a>
@@ -1138,8 +1286,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IDL file id of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>IDL file id of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="reservedreadcu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedreadcu_java" style="color: inherit; text-decoration: inherit;">reserved<wbr>Read<wbr>Cu</a>
@@ -1147,8 +1294,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="reservedvolume_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedvolume_java" style="color: inherit; text-decoration: inherit;">reserved<wbr>Volume</a>
@@ -1156,8 +1302,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit:GB).</p>
-</dd><dt class="property-required"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit:GB).</dd><dt class="property-required"
             title="Required">
         <span id="reservedwritecu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedwritecu_java" style="color: inherit; text-decoration: inherit;">reserved<wbr>Write<wbr>Cu</a>
@@ -1165,8 +1310,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1174,8 +1318,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tableid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableid_java" style="color: inherit; text-decoration: inherit;">table<wbr>Id</a>
@@ -1183,8 +1326,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table ID to be query.</p>
-</dd><dt class="property-required"
+    <dd>Table ID to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tableidltype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableidltype_java" style="color: inherit; text-decoration: inherit;">table<wbr>Idl<wbr>Type</a>
@@ -1192,8 +1334,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IDL type of  the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>IDL type of  the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tablename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_java" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -1201,8 +1342,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table name to be query.</p>
-</dd><dt class="property-required"
+    <dd>Table name to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tablesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablesize_java" style="color: inherit; text-decoration: inherit;">table<wbr>Size</a>
@@ -1210,8 +1350,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Size of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tabletype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tabletype_java" style="color: inherit; text-decoration: inherit;">table<wbr>Type</a>
@@ -1219,8 +1358,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Type of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_java" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -1228,8 +1366,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the table group to be query.</p>
-</dd></dl>
+    <dd>ID of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1243,8 +1380,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1252,8 +1388,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Description of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="error_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_nodejs" style="color: inherit; text-decoration: inherit;">error</a>
@@ -1261,8 +1396,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Error message for creating TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Error message for creating TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="idlid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idlid_nodejs" style="color: inherit; text-decoration: inherit;">idl<wbr>Id</a>
@@ -1270,8 +1404,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL file id of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>IDL file id of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="reservedreadcu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedreadcu_nodejs" style="color: inherit; text-decoration: inherit;">reserved<wbr>Read<wbr>Cu</a>
@@ -1279,8 +1412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="reservedvolume_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedvolume_nodejs" style="color: inherit; text-decoration: inherit;">reserved<wbr>Volume</a>
@@ -1288,8 +1420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit:GB).</p>
-</dd><dt class="property-required"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit:GB).</dd><dt class="property-required"
             title="Required">
         <span id="reservedwritecu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedwritecu_nodejs" style="color: inherit; text-decoration: inherit;">reserved<wbr>Write<wbr>Cu</a>
@@ -1297,8 +1428,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1306,8 +1436,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tableid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableid_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Id</a>
@@ -1315,8 +1444,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table ID to be query.</p>
-</dd><dt class="property-required"
+    <dd>Table ID to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tableidltype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableidltype_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Idl<wbr>Type</a>
@@ -1324,8 +1452,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IDL type of  the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>IDL type of  the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tablename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -1333,8 +1460,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Table name to be query.</p>
-</dd><dt class="property-required"
+    <dd>Table name to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tablesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablesize_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Size</a>
@@ -1342,8 +1468,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Size of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tabletype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tabletype_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Type</a>
@@ -1351,8 +1476,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Type of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_nodejs" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -1360,8 +1484,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the table group to be query.</p>
-</dd></dl>
+    <dd>ID of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1375,8 +1498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1384,8 +1506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Description of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="error_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_python" style="color: inherit; text-decoration: inherit;">error</a>
@@ -1393,8 +1514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Error message for creating TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Error message for creating TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="idl_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idl_id_python" style="color: inherit; text-decoration: inherit;">idl_<wbr>id</a>
@@ -1402,8 +1522,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IDL file id of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>IDL file id of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="reserved_read_cu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_read_cu_python" style="color: inherit; text-decoration: inherit;">reserved_<wbr>read_<wbr>cu</a>
@@ -1411,8 +1530,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="reserved_volume_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_volume_python" style="color: inherit; text-decoration: inherit;">reserved_<wbr>volume</a>
@@ -1420,8 +1538,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit:GB).</p>
-</dd><dt class="property-required"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit:GB).</dd><dt class="property-required"
             title="Required">
         <span id="reserved_write_cu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reserved_write_cu_python" style="color: inherit; text-decoration: inherit;">reserved_<wbr>write_<wbr>cu</a>
@@ -1429,8 +1546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1438,8 +1554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="table_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_id_python" style="color: inherit; text-decoration: inherit;">table_<wbr>id</a>
@@ -1447,8 +1562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Table ID to be query.</p>
-</dd><dt class="property-required"
+    <dd>Table ID to be query.</dd><dt class="property-required"
             title="Required">
         <span id="table_idl_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_idl_type_python" style="color: inherit; text-decoration: inherit;">table_<wbr>idl_<wbr>type</a>
@@ -1456,8 +1570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IDL type of  the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>IDL type of  the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="table_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_name_python" style="color: inherit; text-decoration: inherit;">table_<wbr>name</a>
@@ -1465,8 +1578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Table name to be query.</p>
-</dd><dt class="property-required"
+    <dd>Table name to be query.</dd><dt class="property-required"
             title="Required">
         <span id="table_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_size_python" style="color: inherit; text-decoration: inherit;">table_<wbr>size</a>
@@ -1474,8 +1586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Size of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="table_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_type_python" style="color: inherit; text-decoration: inherit;">table_<wbr>type</a>
@@ -1483,8 +1594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Type of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroup_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_id_python" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
@@ -1492,8 +1602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the table group to be query.</p>
-</dd></dl>
+    <dd>ID of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1507,8 +1616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1516,8 +1624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Description of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="error_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_yaml" style="color: inherit; text-decoration: inherit;">error</a>
@@ -1525,8 +1632,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Error message for creating TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Error message for creating TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="idlid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#idlid_yaml" style="color: inherit; text-decoration: inherit;">idl<wbr>Id</a>
@@ -1534,8 +1640,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IDL file id of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>IDL file id of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="reservedreadcu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedreadcu_yaml" style="color: inherit; text-decoration: inherit;">reserved<wbr>Read<wbr>Cu</a>
@@ -1543,8 +1648,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Reserved read capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved read capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="reservedvolume_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedvolume_yaml" style="color: inherit; text-decoration: inherit;">reserved<wbr>Volume</a>
@@ -1552,8 +1656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Reserved storage capacity of the TcaplusDB table (unit:GB).</p>
-</dd><dt class="property-required"
+    <dd>Reserved storage capacity of the TcaplusDB table (unit:GB).</dd><dt class="property-required"
             title="Required">
         <span id="reservedwritecu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reservedwritecu_yaml" style="color: inherit; text-decoration: inherit;">reserved<wbr>Write<wbr>Cu</a>
@@ -1561,8 +1664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Reserved write capacity units of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Reserved write capacity units of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1570,8 +1672,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Status of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tableid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableid_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Id</a>
@@ -1579,8 +1680,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table ID to be query.</p>
-</dd><dt class="property-required"
+    <dd>Table ID to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tableidltype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tableidltype_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Idl<wbr>Type</a>
@@ -1588,8 +1688,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IDL type of  the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>IDL type of  the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tablename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablename_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Name</a>
@@ -1597,8 +1696,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Table name to be query.</p>
-</dd><dt class="property-required"
+    <dd>Table name to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tablesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablesize_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Size</a>
@@ -1606,8 +1704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Size of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Size of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tabletype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tabletype_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Type</a>
@@ -1615,8 +1712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the TcaplusDB table.</p>
-</dd><dt class="property-required"
+    <dd>Type of the TcaplusDB table.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_yaml" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -1624,8 +1720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the table group to be query.</p>
-</dd></dl>
+    <dd>ID of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1640,7 +1735,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

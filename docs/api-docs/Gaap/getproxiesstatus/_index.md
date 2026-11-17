@@ -2,9 +2,11 @@
 ---
 title: "getProxiesStatus"
 title_tag: "tencentcloud.Gaap.getProxiesStatus"
-meta_desc: "Documentation for the tencentcloud.Gaap.getProxiesStatus function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of gaap proxies status"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,68 @@ Use this data source to query detailed information of gaap proxies status
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const proxiesStatus = tencentcloud.Gaap.getProxiesStatus({
+const proxiesStatus = tencentcloud.gaap.getProxiesStatus({
     proxyIds: ["link-xxxxxx"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-proxies_status = tencentcloud.Gaap.get_proxies_status(proxy_ids=["link-xxxxxx"])
+proxies_status = tencentcloud.gaap.get_proxies_status(proxy_ids=["link-xxxxxx"])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := gaap.GetProxiesStatus(ctx, &gaap.GetProxiesStatusArgs{
+			ProxyIds: []string{
+				"link-xxxxxx",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,28 +93,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Gaap.GetProxiesStatus(ctx, &gaap.GetProxiesStatusArgs{
-			ProxyIds: []string{
-				"link-xxxxxx",
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -79,8 +106,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetProxiesStatusArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,47 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   proxiesStatus:
     fn::invoke:
-      Function: tencentcloud:Gaap:getProxiesStatus
-      Arguments:
+      function: tencentcloud:Gaap:getProxiesStatus
+      arguments:
         proxyIds:
           - link-xxxxxx
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getproxiesstatus" "proxiesStatus" {
+  proxy_ids = ["link-xxxxxx"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeProxiesStatus](https://www.tencentcloud.com/document/api/608/33100)
 
 
 
@@ -121,7 +178,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +186,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getProxiesStatus<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxiesStatusArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProxiesStatusResult</a></span>></span
+><span class="k">function </span>getProxiesStatus<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxiesStatusArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProxiesStatusResult</a></span>></span
 ><span class="k">
-function </span>getProxiesStatusOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxiesStatusOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProxiesStatusResult</a></span>></span
+function </span>getProxiesStatusOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProxiesStatusOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProxiesStatusResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -144,9 +201,9 @@ function </span>getProxiesStatusOutput<span class="p">(</span><span class="nx">a
                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetProxiesStatusResult</span
 ><span class="k">
-def </span>get_proxies_status_output<span class="p">(</span><span class="nx">proxy_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProxiesStatusResult]</span
+def </span>get_proxies_status_output<span class="p">(</span><span class="nx">proxy_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProxiesStatusResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -171,7 +228,8 @@ func </span>GetProxiesStatusOutput<span class="p">(</span><span class="nx">ctx</
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetProxiesStatus </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetProxiesStatusResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetProxiesStatusArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetProxiesStatusResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProxiesStatusInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProxiesStatusResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProxiesStatusInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProxiesStatusResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProxiesStatusInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -180,7 +238,8 @@ func </span>GetProxiesStatusOutput<span class="p">(</span><span class="nx">ctx</
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetProxiesStatusResult</a></span>> </span>getProxiesStatus<span class="p">(</span><span class="nx">GetProxiesStatusArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProxiesStatusResult</a></span>> </span>getProxiesStatus<span class="p">(</span><span class="nx">GetProxiesStatusArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProxiesStatusResult</a></span>> </span>getProxiesStatus<span class="p">(</span><span class="nx">GetProxiesStatusArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -192,6 +251,15 @@ func </span>GetProxiesStatusOutput<span class="p">(</span><span class="nx">ctx</
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getProxiesStatus:getProxiesStatus
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_proxies_status&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -210,8 +278,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of Proxy IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of Proxy IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -219,8 +286,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -234,8 +300,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of Proxy IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of Proxy IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -243,8 +308,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="proxy_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_ids_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of Proxy IDs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -258,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of Proxy IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of Proxy IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -267,8 +352,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -282,8 +366,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of Proxy IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of Proxy IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -291,8 +374,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -306,8 +388,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of Proxy IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of Proxy IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -315,8 +396,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -330,8 +410,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of Proxy IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of Proxy IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -339,8 +418,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -363,8 +441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancestatussets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatussets_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Status<wbr>Sets</a>
@@ -372,8 +449,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxiesstatusinstancestatusset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Proxies<wbr>Status<wbr>Instance<wbr>Status<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Proxy status list.</p>
-</dd><dt class="property-"
+    <dd>Proxy status list.</dd><dt class="property-"
             title="">
         <span id="proxyids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyids_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Ids</a>
@@ -403,8 +479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancestatussets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatussets_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Status<wbr>Sets</a>
@@ -412,8 +487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxiesstatusinstancestatusset">[]Get<wbr>Proxies<wbr>Status<wbr>Instance<wbr>Status<wbr>Set</a></span>
     </dt>
-    <dd><p>Proxy status list.</p>
-</dd><dt class="property-"
+    <dd>Proxy status list.</dd><dt class="property-"
             title="">
         <span id="proxyids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyids_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Ids</a>
@@ -434,6 +508,44 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_status_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_status_sets_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>status_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getproxiesstatusinstancestatusset">list(object)</a></span>
+    </dt>
+    <dd>Proxy status list.</dd><dt class="property-"
+            title="">
+        <span id="proxy_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_ids_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -443,8 +555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancestatussets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatussets_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Status<wbr>Sets</a>
@@ -452,8 +563,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxiesstatusinstancestatusset">List&lt;Get<wbr>Proxies<wbr>Status<wbr>Instance<wbr>Status<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Proxy status list.</p>
-</dd><dt class="property-"
+    <dd>Proxy status list.</dd><dt class="property-"
             title="">
         <span id="proxyids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyids_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Ids</a>
@@ -483,8 +593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancestatussets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatussets_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Status<wbr>Sets</a>
@@ -492,8 +601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxiesstatusinstancestatusset">Get<wbr>Proxies<wbr>Status<wbr>Instance<wbr>Status<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Proxy status list.</p>
-</dd><dt class="property-"
+    <dd>Proxy status list.</dd><dt class="property-"
             title="">
         <span id="proxyids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyids_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Ids</a>
@@ -523,17 +631,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_status_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_status_sets_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>status_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getproxiesstatusinstancestatusset">Get<wbr>Proxies<wbr>Status<wbr>Instance<wbr>Status<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getproxiesstatusinstancestatusset">Sequence[Get<wbr>Proxies<wbr>Status<wbr>Instance<wbr>Status<wbr>Set]</a></span>
     </dt>
-    <dd><p>Proxy status list.</p>
-</dd><dt class="property-"
+    <dd>Proxy status list.</dd><dt class="property-"
             title="">
         <span id="proxy_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_ids_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>ids</a>
@@ -563,8 +669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancestatussets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatussets_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Status<wbr>Sets</a>
@@ -572,8 +677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getproxiesstatusinstancestatusset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Proxy status list.</p>
-</dd><dt class="property-"
+    <dd>Proxy status list.</dd><dt class="property-"
             title="">
         <span id="proxyids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyids_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Ids</a>
@@ -613,8 +717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy instance ID.</p>
-</dd><dt class="property-required"
+    <dd>proxy instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -622,7 +725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy status.Among them:</p>
+    <dd>proxy status.Among them:</p>
 <ul>
 <li>RUNNING indicates running;</li>
 <li>CREATING indicates being created;</li>
@@ -634,8 +737,7 @@ The following output properties are available:
 <li>ISOLATING indicates being isolated;</li>
 <li>ISOLATED indicates that it has been isolated;</li>
 <li>MOVING indicates that migration is in progress.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -649,8 +751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy instance ID.</p>
-</dd><dt class="property-required"
+    <dd>proxy instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -658,7 +759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy status.Among them:</p>
+    <dd>proxy status.Among them:</p>
 <ul>
 <li>RUNNING indicates running;</li>
 <li>CREATING indicates being created;</li>
@@ -670,8 +771,41 @@ The following output properties are available:
 <li>ISOLATING indicates being isolated;</li>
 <li>ISOLATED indicates that it has been isolated;</li>
 <li>MOVING indicates that migration is in progress.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>proxy instance ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>proxy status.Among them:</p>
+<ul>
+<li>RUNNING indicates running;</li>
+<li>CREATING indicates being created;</li>
+<li>DESTROYING indicates being destroyed;</li>
+<li>OPENING indicates being opened;</li>
+<li>CLOSING indicates being closed;</li>
+<li>Closed indicates that it has been closed;</li>
+<li>ADJUSTING represents a configuration change in progress;</li>
+<li>ISOLATING indicates being isolated;</li>
+<li>ISOLATED indicates that it has been isolated;</li>
+<li>MOVING indicates that migration is in progress.</li>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -685,8 +819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>proxy instance ID.</p>
-</dd><dt class="property-required"
+    <dd>proxy instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -694,7 +827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>proxy status.Among them:</p>
+    <dd>proxy status.Among them:</p>
 <ul>
 <li>RUNNING indicates running;</li>
 <li>CREATING indicates being created;</li>
@@ -706,8 +839,7 @@ The following output properties are available:
 <li>ISOLATING indicates being isolated;</li>
 <li>ISOLATED indicates that it has been isolated;</li>
 <li>MOVING indicates that migration is in progress.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -721,8 +853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy instance ID.</p>
-</dd><dt class="property-required"
+    <dd>proxy instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -730,7 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>proxy status.Among them:</p>
+    <dd>proxy status.Among them:</p>
 <ul>
 <li>RUNNING indicates running;</li>
 <li>CREATING indicates being created;</li>
@@ -742,8 +873,7 @@ The following output properties are available:
 <li>ISOLATING indicates being isolated;</li>
 <li>ISOLATED indicates that it has been isolated;</li>
 <li>MOVING indicates that migration is in progress.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -757,8 +887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>proxy instance ID.</p>
-</dd><dt class="property-required"
+    <dd>proxy instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -766,7 +895,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>proxy status.Among them:</p>
+    <dd>proxy status.Among them:</p>
 <ul>
 <li>RUNNING indicates running;</li>
 <li>CREATING indicates being created;</li>
@@ -778,8 +907,7 @@ The following output properties are available:
 <li>ISOLATING indicates being isolated;</li>
 <li>ISOLATED indicates that it has been isolated;</li>
 <li>MOVING indicates that migration is in progress.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -793,8 +921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>proxy instance ID.</p>
-</dd><dt class="property-required"
+    <dd>proxy instance ID.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -802,7 +929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>proxy status.Among them:</p>
+    <dd>proxy status.Among them:</p>
 <ul>
 <li>RUNNING indicates running;</li>
 <li>CREATING indicates being created;</li>
@@ -814,8 +941,7 @@ The following output properties are available:
 <li>ISOLATING indicates being isolated;</li>
 <li>ISOLATED indicates that it has been isolated;</li>
 <li>MOVING indicates that migration is in progress.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -830,7 +956,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

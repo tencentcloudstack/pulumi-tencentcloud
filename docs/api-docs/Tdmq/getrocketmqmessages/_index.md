@@ -2,9 +2,11 @@
 ---
 title: "getRocketmqMessages"
 title_tag: "tencentcloud.Tdmq.getRocketmqMessages"
-meta_desc: "Documentation for the tencentcloud.Tdmq.getRocketmqMessages function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tdmq message"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,64 +18,60 @@ Use this data source to query detailed information of tdmq message
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const message = tencentcloud.Tdmq.getRocketmqMessages({
+const message = tencentcloud.tdmq.getRocketmqMessages({
     clusterId: "rocketmq-rkrbm52djmro",
     environmentId: "keep_ns",
+    topicName: "keep-topic",
     msgId: "A9FE8D0567FE15DB97425FC08EEF0000",
     queryDlqMsg: false,
-    topicName: "keep-topic",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-message = tencentcloud.Tdmq.get_rocketmq_messages(cluster_id="rocketmq-rkrbm52djmro",
+message = tencentcloud.tdmq.get_rocketmq_messages(cluster_id="rocketmq-rkrbm52djmro",
     environment_id="keep_ns",
+    topic_name="keep-topic",
     msg_id="A9FE8D0567FE15DB97425FC08EEF0000",
-    query_dlq_msg=False,
-    topic_name="keep-topic")
+    query_dlq_msg=False)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var message = Tencentcloud.Tdmq.GetRocketmqMessages.Invoke(new()
-    {
-        ClusterId = "rocketmq-rkrbm52djmro",
-        EnvironmentId = "keep_ns",
-        MsgId = "A9FE8D0567FE15DB97425FC08EEF0000",
-        QueryDlqMsg = false,
-        TopicName = "keep-topic",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tdmq"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tdmq.GetRocketmqMessages(ctx, &tdmq.GetRocketmqMessagesArgs{
+		_, err := tdmq.GetRocketmqMessages(ctx, &tdmq.GetRocketmqMessagesArgs{
 			ClusterId:     "rocketmq-rkrbm52djmro",
 			EnvironmentId: "keep_ns",
+			TopicName:     "keep-topic",
 			MsgId:         "A9FE8D0567FE15DB97425FC08EEF0000",
 			QueryDlqMsg:   pulumi.BoolRef(false),
-			TopicName:     "keep-topic",
 		}, nil)
 		if err != nil {
 			return err
@@ -82,6 +80,35 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var message = Tencentcloud.Tdmq.GetRocketmqMessages.Invoke(new()
+    {
+        ClusterId = "rocketmq-rkrbm52djmro",
+        EnvironmentId = "keep_ns",
+        TopicName = "keep-topic",
+        MsgId = "A9FE8D0567FE15DB97425FC08EEF0000",
+        QueryDlqMsg = false,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -90,8 +117,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tdmq.TdmqFunctions;
 import com.pulumi.tencentcloud.Tdmq.inputs.GetRocketmqMessagesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -106,28 +133,62 @@ public class App {
         final var message = TdmqFunctions.getRocketmqMessages(GetRocketmqMessagesArgs.builder()
             .clusterId("rocketmq-rkrbm52djmro")
             .environmentId("keep_ns")
+            .topicName("keep-topic")
             .msgId("A9FE8D0567FE15DB97425FC08EEF0000")
             .queryDlqMsg(false)
-            .topicName("keep-topic")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   message:
     fn::invoke:
-      Function: tencentcloud:Tdmq:getRocketmqMessages
-      Arguments:
+      function: tencentcloud:Tdmq:getRocketmqMessages
+      arguments:
         clusterId: rocketmq-rkrbm52djmro
         environmentId: keep_ns
+        topicName: keep-topic
         msgId: A9FE8D0567FE15DB97425FC08EEF0000
         queryDlqMsg: false
-        topicName: keep-topic
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tdmq_getrocketmqmessages" "message" {
+  cluster_id     = "rocketmq-rkrbm52djmro"
+  environment_id = "keep_ns"
+  topic_name     = "keep-topic"
+  msg_id         = "A9FE8D0567FE15DB97425FC08EEF0000"
+  query_dlq_msg  = false
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeRocketMQMsg](https://www.tencentcloud.com/search/?wd=DescribeRocketMQMsg&type=document&lang=en)
 
 
 
@@ -139,7 +200,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -147,9 +208,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getRocketmqMessages<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRocketmqMessagesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRocketmqMessagesResult</a></span>></span
+><span class="k">function </span>getRocketmqMessages<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRocketmqMessagesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRocketmqMessagesResult</a></span>></span
 ><span class="k">
-function </span>getRocketmqMessagesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRocketmqMessagesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRocketmqMessagesResult</a></span>></span
+function </span>getRocketmqMessagesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRocketmqMessagesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRocketmqMessagesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -166,13 +227,13 @@ function </span>getRocketmqMessagesOutput<span class="p">(</span><span class="nx
                           <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetRocketmqMessagesResult</span
 ><span class="k">
-def </span>get_rocketmq_messages_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">environment_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">msg_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">query_dlq_msg</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRocketmqMessagesResult]</span
+def </span>get_rocketmq_messages_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">environment_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">msg_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">query_dlq_msg</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRocketmqMessagesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -197,7 +258,8 @@ func </span>GetRocketmqMessagesOutput<span class="p">(</span><span class="nx">ct
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetRocketmqMessages </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetRocketmqMessagesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetRocketmqMessagesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetRocketmqMessagesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRocketmqMessagesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRocketmqMessagesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRocketmqMessagesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRocketmqMessagesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRocketmqMessagesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -206,7 +268,8 @@ func </span>GetRocketmqMessagesOutput<span class="p">(</span><span class="nx">ct
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetRocketmqMessagesResult</a></span>> </span>getRocketmqMessages<span class="p">(</span><span class="nx">GetRocketmqMessagesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRocketmqMessagesResult</a></span>> </span>getRocketmqMessages<span class="p">(</span><span class="nx">GetRocketmqMessagesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRocketmqMessagesResult</a></span>> </span>getRocketmqMessages<span class="p">(</span><span class="nx">GetRocketmqMessagesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -218,6 +281,15 @@ func </span>GetRocketmqMessagesOutput<span class="p">(</span><span class="nx">ct
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tdmq/getRocketmqMessages:getRocketmqMessages
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tdmq_get_rocketmq_messages&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -236,8 +308,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster id.</p>
-</dd><dt class="property-required"
+    <dd>Cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="environmentid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_csharp" style="color: inherit; text-decoration: inherit;">Environment<wbr>Id</a>
@@ -245,8 +316,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Environment.</p>
-</dd><dt class="property-required"
+    <dd>Environment.</dd><dt class="property-required"
             title="Required">
         <span id="msgid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgid_csharp" style="color: inherit; text-decoration: inherit;">Msg<wbr>Id</a>
@@ -254,8 +324,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message ID.</p>
-</dd><dt class="property-required"
+    <dd>Message ID.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -263,8 +332,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic, groupId is passed when querying dead letters.</p>
-</dd><dt class="property-optional"
+    <dd>Topic, groupId is passed when querying dead letters.</dd><dt class="property-optional"
             title="Optional">
         <span id="querydlqmsg_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#querydlqmsg_csharp" style="color: inherit; text-decoration: inherit;">Query<wbr>Dlq<wbr>Msg</a>
@@ -272,8 +340,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>The value is true when querying dead letters, only valid for Rocketmq.</p>
-</dd><dt class="property-optional"
+    <dd>The value is true when querying dead letters, only valid for Rocketmq.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -281,8 +348,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -296,8 +362,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster id.</p>
-</dd><dt class="property-required"
+    <dd>Cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="environmentid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_go" style="color: inherit; text-decoration: inherit;">Environment<wbr>Id</a>
@@ -305,8 +370,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Environment.</p>
-</dd><dt class="property-required"
+    <dd>Environment.</dd><dt class="property-required"
             title="Required">
         <span id="msgid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgid_go" style="color: inherit; text-decoration: inherit;">Msg<wbr>Id</a>
@@ -314,8 +378,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message ID.</p>
-</dd><dt class="property-required"
+    <dd>Message ID.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -323,8 +386,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic, groupId is passed when querying dead letters.</p>
-</dd><dt class="property-optional"
+    <dd>Topic, groupId is passed when querying dead letters.</dd><dt class="property-optional"
             title="Optional">
         <span id="querydlqmsg_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#querydlqmsg_go" style="color: inherit; text-decoration: inherit;">Query<wbr>Dlq<wbr>Msg</a>
@@ -332,8 +394,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>The value is true when querying dead letters, only valid for Rocketmq.</p>
-</dd><dt class="property-optional"
+    <dd>The value is true when querying dead letters, only valid for Rocketmq.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -341,8 +402,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster id.</dd><dt class="property-required"
+            title="Required">
+        <span id="environment_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_id_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Environment.</dd><dt class="property-required"
+            title="Required">
+        <span id="msg_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_id_hcl" style="color: inherit; text-decoration: inherit;">msg_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Message ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Topic, groupId is passed when querying dead letters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="query_dlq_msg_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#query_dlq_msg_hcl" style="color: inherit; text-decoration: inherit;">query_<wbr>dlq_<wbr>msg</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The value is true when querying dead letters, only valid for Rocketmq.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -356,8 +470,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster id.</p>
-</dd><dt class="property-required"
+    <dd>Cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="environmentid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_java" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -365,8 +478,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Environment.</p>
-</dd><dt class="property-required"
+    <dd>Environment.</dd><dt class="property-required"
             title="Required">
         <span id="msgid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgid_java" style="color: inherit; text-decoration: inherit;">msg<wbr>Id</a>
@@ -374,8 +486,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Message ID.</p>
-</dd><dt class="property-required"
+    <dd>Message ID.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -383,8 +494,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic, groupId is passed when querying dead letters.</p>
-</dd><dt class="property-optional"
+    <dd>Topic, groupId is passed when querying dead letters.</dd><dt class="property-optional"
             title="Optional">
         <span id="querydlqmsg_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#querydlqmsg_java" style="color: inherit; text-decoration: inherit;">query<wbr>Dlq<wbr>Msg</a>
@@ -392,8 +502,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>The value is true when querying dead letters, only valid for Rocketmq.</p>
-</dd><dt class="property-optional"
+    <dd>The value is true when querying dead letters, only valid for Rocketmq.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -401,8 +510,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -416,8 +524,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster id.</p>
-</dd><dt class="property-required"
+    <dd>Cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="environmentid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_nodejs" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -425,8 +532,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Environment.</p>
-</dd><dt class="property-required"
+    <dd>Environment.</dd><dt class="property-required"
             title="Required">
         <span id="msgid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgid_nodejs" style="color: inherit; text-decoration: inherit;">msg<wbr>Id</a>
@@ -434,8 +540,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message ID.</p>
-</dd><dt class="property-required"
+    <dd>Message ID.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -443,8 +548,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic, groupId is passed when querying dead letters.</p>
-</dd><dt class="property-optional"
+    <dd>Topic, groupId is passed when querying dead letters.</dd><dt class="property-optional"
             title="Optional">
         <span id="querydlqmsg_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#querydlqmsg_nodejs" style="color: inherit; text-decoration: inherit;">query<wbr>Dlq<wbr>Msg</a>
@@ -452,8 +556,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>The value is true when querying dead letters, only valid for Rocketmq.</p>
-</dd><dt class="property-optional"
+    <dd>The value is true when querying dead letters, only valid for Rocketmq.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -461,8 +564,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -476,8 +578,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster id.</p>
-</dd><dt class="property-required"
+    <dd>Cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="environment_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_id_python" style="color: inherit; text-decoration: inherit;">environment_<wbr>id</a>
@@ -485,8 +586,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Environment.</p>
-</dd><dt class="property-required"
+    <dd>Environment.</dd><dt class="property-required"
             title="Required">
         <span id="msg_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_id_python" style="color: inherit; text-decoration: inherit;">msg_<wbr>id</a>
@@ -494,8 +594,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Message ID.</p>
-</dd><dt class="property-required"
+    <dd>Message ID.</dd><dt class="property-required"
             title="Required">
         <span id="topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
@@ -503,8 +602,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Topic, groupId is passed when querying dead letters.</p>
-</dd><dt class="property-optional"
+    <dd>Topic, groupId is passed when querying dead letters.</dd><dt class="property-optional"
             title="Optional">
         <span id="query_dlq_msg_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#query_dlq_msg_python" style="color: inherit; text-decoration: inherit;">query_<wbr>dlq_<wbr>msg</a>
@@ -512,8 +610,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>The value is true when querying dead letters, only valid for Rocketmq.</p>
-</dd><dt class="property-optional"
+    <dd>The value is true when querying dead letters, only valid for Rocketmq.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -521,8 +618,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -536,8 +632,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster id.</p>
-</dd><dt class="property-required"
+    <dd>Cluster id.</dd><dt class="property-required"
             title="Required">
         <span id="environmentid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environmentid_yaml" style="color: inherit; text-decoration: inherit;">environment<wbr>Id</a>
@@ -545,8 +640,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Environment.</p>
-</dd><dt class="property-required"
+    <dd>Environment.</dd><dt class="property-required"
             title="Required">
         <span id="msgid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgid_yaml" style="color: inherit; text-decoration: inherit;">msg<wbr>Id</a>
@@ -554,8 +648,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Message ID.</p>
-</dd><dt class="property-required"
+    <dd>Message ID.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -563,8 +656,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic, groupId is passed when querying dead letters.</p>
-</dd><dt class="property-optional"
+    <dd>Topic, groupId is passed when querying dead letters.</dd><dt class="property-optional"
             title="Optional">
         <span id="querydlqmsg_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#querydlqmsg_yaml" style="color: inherit; text-decoration: inherit;">query<wbr>Dlq<wbr>Msg</a>
@@ -572,8 +664,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>The value is true when querying dead letters, only valid for Rocketmq.</p>
-</dd><dt class="property-optional"
+    <dd>The value is true when querying dead letters, only valid for Rocketmq.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -581,8 +672,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -605,8 +695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message body.</p>
-</dd><dt class="property-"
+    <dd>Message body.</dd><dt class="property-"
             title="">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -630,8 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="messagetracks_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messagetracks_csharp" style="color: inherit; text-decoration: inherit;">Message<wbr>Tracks</a>
@@ -639,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrocketmqmessagesmessagetrack">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tdmq.<wbr>Outputs.<wbr>Get<wbr>Rocketmq<wbr>Messages<wbr>Message<wbr>Track&gt;</a></span>
     </dt>
-    <dd><p>Consumer Group ConsumptionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Consumer Group ConsumptionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="msgid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgid_csharp" style="color: inherit; text-decoration: inherit;">Msg<wbr>Id</a>
@@ -656,8 +743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Production time.</p>
-</dd><dt class="property-"
+    <dd>Production time.</dd><dt class="property-"
             title="">
         <span id="produceraddr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#produceraddr_csharp" style="color: inherit; text-decoration: inherit;">Producer<wbr>Addr</a>
@@ -665,8 +751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Producer address.</p>
-</dd><dt class="property-"
+    <dd>Producer address.</dd><dt class="property-"
             title="">
         <span id="properties_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#properties_csharp" style="color: inherit; text-decoration: inherit;">Properties</a>
@@ -674,8 +759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detailed parameters.</p>
-</dd><dt class="property-"
+    <dd>Detailed parameters.</dd><dt class="property-"
             title="">
         <span id="showtopicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#showtopicname_csharp" style="color: inherit; text-decoration: inherit;">Show<wbr>Topic<wbr>Name</a>
@@ -683,8 +767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The topic name displayed on the details pageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>The topic name displayed on the details pageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="topicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -722,8 +805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message body.</p>
-</dd><dt class="property-"
+    <dd>Message body.</dd><dt class="property-"
             title="">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -747,8 +829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="messagetracks_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messagetracks_go" style="color: inherit; text-decoration: inherit;">Message<wbr>Tracks</a>
@@ -756,8 +837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrocketmqmessagesmessagetrack">[]Get<wbr>Rocketmq<wbr>Messages<wbr>Message<wbr>Track</a></span>
     </dt>
-    <dd><p>Consumer Group ConsumptionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Consumer Group ConsumptionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="msgid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgid_go" style="color: inherit; text-decoration: inherit;">Msg<wbr>Id</a>
@@ -773,8 +853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Production time.</p>
-</dd><dt class="property-"
+    <dd>Production time.</dd><dt class="property-"
             title="">
         <span id="produceraddr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#produceraddr_go" style="color: inherit; text-decoration: inherit;">Producer<wbr>Addr</a>
@@ -782,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Producer address.</p>
-</dd><dt class="property-"
+    <dd>Producer address.</dd><dt class="property-"
             title="">
         <span id="properties_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#properties_go" style="color: inherit; text-decoration: inherit;">Properties</a>
@@ -791,8 +869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detailed parameters.</p>
-</dd><dt class="property-"
+    <dd>Detailed parameters.</dd><dt class="property-"
             title="">
         <span id="showtopicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#showtopicname_go" style="color: inherit; text-decoration: inherit;">Show<wbr>Topic<wbr>Name</a>
@@ -800,8 +877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The topic name displayed on the details pageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>The topic name displayed on the details pageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="topicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -830,6 +906,116 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="body_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#body_hcl" style="color: inherit; text-decoration: inherit;">body</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Message body.</dd><dt class="property-"
+            title="">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="environment_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environment_id_hcl" style="color: inherit; text-decoration: inherit;">environment_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="message_tracks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_tracks_hcl" style="color: inherit; text-decoration: inherit;">message_<wbr>tracks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getrocketmqmessagesmessagetrack">list(object)</a></span>
+    </dt>
+    <dd>Consumer Group ConsumptionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
+            title="">
+        <span id="msg_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_id_hcl" style="color: inherit; text-decoration: inherit;">msg_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="produce_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#produce_time_hcl" style="color: inherit; text-decoration: inherit;">produce_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Production time.</dd><dt class="property-"
+            title="">
+        <span id="producer_addr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producer_addr_hcl" style="color: inherit; text-decoration: inherit;">producer_<wbr>addr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Producer address.</dd><dt class="property-"
+            title="">
+        <span id="properties_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#properties_hcl" style="color: inherit; text-decoration: inherit;">properties</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Detailed parameters.</dd><dt class="property-"
+            title="">
+        <span id="show_topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#show_topic_name_hcl" style="color: inherit; text-decoration: inherit;">show_<wbr>topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The topic name displayed on the details pageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
+            title="">
+        <span id="topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="query_dlq_msg_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#query_dlq_msg_hcl" style="color: inherit; text-decoration: inherit;">query_<wbr>dlq_<wbr>msg</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -839,8 +1025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Message body.</p>
-</dd><dt class="property-"
+    <dd>Message body.</dd><dt class="property-"
             title="">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -864,8 +1049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="messagetracks_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messagetracks_java" style="color: inherit; text-decoration: inherit;">message<wbr>Tracks</a>
@@ -873,8 +1057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrocketmqmessagesmessagetrack">List&lt;Get<wbr>Rocketmq<wbr>Messages<wbr>Message<wbr>Track&gt;</a></span>
     </dt>
-    <dd><p>Consumer Group ConsumptionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Consumer Group ConsumptionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="msgid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgid_java" style="color: inherit; text-decoration: inherit;">msg<wbr>Id</a>
@@ -890,8 +1073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Production time.</p>
-</dd><dt class="property-"
+    <dd>Production time.</dd><dt class="property-"
             title="">
         <span id="produceraddr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#produceraddr_java" style="color: inherit; text-decoration: inherit;">producer<wbr>Addr</a>
@@ -899,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Producer address.</p>
-</dd><dt class="property-"
+    <dd>Producer address.</dd><dt class="property-"
             title="">
         <span id="properties_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#properties_java" style="color: inherit; text-decoration: inherit;">properties</a>
@@ -908,8 +1089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detailed parameters.</p>
-</dd><dt class="property-"
+    <dd>Detailed parameters.</dd><dt class="property-"
             title="">
         <span id="showtopicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#showtopicname_java" style="color: inherit; text-decoration: inherit;">show<wbr>Topic<wbr>Name</a>
@@ -917,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The topic name displayed on the details pageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>The topic name displayed on the details pageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="topicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -956,8 +1135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Message body.</p>
-</dd><dt class="property-"
+    <dd>Message body.</dd><dt class="property-"
             title="">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -981,8 +1159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="messagetracks_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messagetracks_nodejs" style="color: inherit; text-decoration: inherit;">message<wbr>Tracks</a>
@@ -990,8 +1167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrocketmqmessagesmessagetrack">Get<wbr>Rocketmq<wbr>Messages<wbr>Message<wbr>Track[]</a></span>
     </dt>
-    <dd><p>Consumer Group ConsumptionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Consumer Group ConsumptionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="msgid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgid_nodejs" style="color: inherit; text-decoration: inherit;">msg<wbr>Id</a>
@@ -1007,8 +1183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Production time.</p>
-</dd><dt class="property-"
+    <dd>Production time.</dd><dt class="property-"
             title="">
         <span id="produceraddr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#produceraddr_nodejs" style="color: inherit; text-decoration: inherit;">producer<wbr>Addr</a>
@@ -1016,8 +1191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Producer address.</p>
-</dd><dt class="property-"
+    <dd>Producer address.</dd><dt class="property-"
             title="">
         <span id="properties_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#properties_nodejs" style="color: inherit; text-decoration: inherit;">properties</a>
@@ -1025,8 +1199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Detailed parameters.</p>
-</dd><dt class="property-"
+    <dd>Detailed parameters.</dd><dt class="property-"
             title="">
         <span id="showtopicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#showtopicname_nodejs" style="color: inherit; text-decoration: inherit;">show<wbr>Topic<wbr>Name</a>
@@ -1034,8 +1207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The topic name displayed on the details pageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>The topic name displayed on the details pageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="topicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1073,8 +1245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Message body.</p>
-</dd><dt class="property-"
+    <dd>Message body.</dd><dt class="property-"
             title="">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -1098,17 +1269,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="message_tracks_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_tracks_python" style="color: inherit; text-decoration: inherit;">message_<wbr>tracks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getrocketmqmessagesmessagetrack">Get<wbr>Rocketmq<wbr>Messages<wbr>Message<wbr>Track]</a></span>
+        <span class="property-type"><a href="#getrocketmqmessagesmessagetrack">Sequence[Get<wbr>Rocketmq<wbr>Messages<wbr>Message<wbr>Track]</a></span>
     </dt>
-    <dd><p>Consumer Group ConsumptionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Consumer Group ConsumptionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="msg_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_id_python" style="color: inherit; text-decoration: inherit;">msg_<wbr>id</a>
@@ -1124,8 +1293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Production time.</p>
-</dd><dt class="property-"
+    <dd>Production time.</dd><dt class="property-"
             title="">
         <span id="producer_addr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#producer_addr_python" style="color: inherit; text-decoration: inherit;">producer_<wbr>addr</a>
@@ -1133,8 +1301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Producer address.</p>
-</dd><dt class="property-"
+    <dd>Producer address.</dd><dt class="property-"
             title="">
         <span id="properties_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#properties_python" style="color: inherit; text-decoration: inherit;">properties</a>
@@ -1142,8 +1309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Detailed parameters.</p>
-</dd><dt class="property-"
+    <dd>Detailed parameters.</dd><dt class="property-"
             title="">
         <span id="show_topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#show_topic_name_python" style="color: inherit; text-decoration: inherit;">show_<wbr>topic_<wbr>name</a>
@@ -1151,8 +1317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The topic name displayed on the details pageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>The topic name displayed on the details pageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
@@ -1190,8 +1355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Message body.</p>
-</dd><dt class="property-"
+    <dd>Message body.</dd><dt class="property-"
             title="">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1215,8 +1379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="messagetracks_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messagetracks_yaml" style="color: inherit; text-decoration: inherit;">message<wbr>Tracks</a>
@@ -1224,8 +1387,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrocketmqmessagesmessagetrack">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Consumer Group ConsumptionNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Consumer Group ConsumptionNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="msgid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgid_yaml" style="color: inherit; text-decoration: inherit;">msg<wbr>Id</a>
@@ -1241,8 +1403,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Production time.</p>
-</dd><dt class="property-"
+    <dd>Production time.</dd><dt class="property-"
             title="">
         <span id="produceraddr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#produceraddr_yaml" style="color: inherit; text-decoration: inherit;">producer<wbr>Addr</a>
@@ -1250,8 +1411,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Producer address.</p>
-</dd><dt class="property-"
+    <dd>Producer address.</dd><dt class="property-"
             title="">
         <span id="properties_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#properties_yaml" style="color: inherit; text-decoration: inherit;">properties</a>
@@ -1259,8 +1419,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Detailed parameters.</p>
-</dd><dt class="property-"
+    <dd>Detailed parameters.</dd><dt class="property-"
             title="">
         <span id="showtopicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#showtopicname_yaml" style="color: inherit; text-decoration: inherit;">show<wbr>Topic<wbr>Name</a>
@@ -1268,8 +1427,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The topic name displayed on the details pageNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>The topic name displayed on the details pageNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="topicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1317,8 +1475,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>consumption status.</p>
-</dd><dt class="property-required"
+    <dd>consumption status.</dd><dt class="property-required"
             title="Required">
         <span id="exceptiondesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exceptiondesc_csharp" style="color: inherit; text-decoration: inherit;">Exception<wbr>Desc</a>
@@ -1326,8 +1483,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exception informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Exception informationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="group_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_csharp" style="color: inherit; text-decoration: inherit;">Group</a>
@@ -1335,8 +1491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>consumer group.</p>
-</dd><dt class="property-required"
+    <dd>consumer group.</dd><dt class="property-required"
             title="Required">
         <span id="tracktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracktype_csharp" style="color: inherit; text-decoration: inherit;">Track<wbr>Type</a>
@@ -1344,8 +1499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message track type.</p>
-</dd></dl>
+    <dd>message track type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1359,8 +1513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>consumption status.</p>
-</dd><dt class="property-required"
+    <dd>consumption status.</dd><dt class="property-required"
             title="Required">
         <span id="exceptiondesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exceptiondesc_go" style="color: inherit; text-decoration: inherit;">Exception<wbr>Desc</a>
@@ -1368,8 +1521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exception informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Exception informationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="group_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_go" style="color: inherit; text-decoration: inherit;">Group</a>
@@ -1377,8 +1529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>consumer group.</p>
-</dd><dt class="property-required"
+    <dd>consumer group.</dd><dt class="property-required"
             title="Required">
         <span id="tracktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracktype_go" style="color: inherit; text-decoration: inherit;">Track<wbr>Type</a>
@@ -1386,8 +1537,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message track type.</p>
-</dd></dl>
+    <dd>message track type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="consume_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#consume_status_hcl" style="color: inherit; text-decoration: inherit;">consume_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>consumption status.</dd><dt class="property-required"
+            title="Required">
+        <span id="exception_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exception_desc_hcl" style="color: inherit; text-decoration: inherit;">exception_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Exception informationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="group_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_hcl" style="color: inherit; text-decoration: inherit;">group</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>consumer group.</dd><dt class="property-required"
+            title="Required">
+        <span id="track_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#track_type_hcl" style="color: inherit; text-decoration: inherit;">track_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>message track type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1401,8 +1589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>consumption status.</p>
-</dd><dt class="property-required"
+    <dd>consumption status.</dd><dt class="property-required"
             title="Required">
         <span id="exceptiondesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exceptiondesc_java" style="color: inherit; text-decoration: inherit;">exception<wbr>Desc</a>
@@ -1410,8 +1597,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Exception informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Exception informationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="group_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_java" style="color: inherit; text-decoration: inherit;">group</a>
@@ -1419,8 +1605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>consumer group.</p>
-</dd><dt class="property-required"
+    <dd>consumer group.</dd><dt class="property-required"
             title="Required">
         <span id="tracktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracktype_java" style="color: inherit; text-decoration: inherit;">track<wbr>Type</a>
@@ -1428,8 +1613,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message track type.</p>
-</dd></dl>
+    <dd>message track type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1443,8 +1627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>consumption status.</p>
-</dd><dt class="property-required"
+    <dd>consumption status.</dd><dt class="property-required"
             title="Required">
         <span id="exceptiondesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exceptiondesc_nodejs" style="color: inherit; text-decoration: inherit;">exception<wbr>Desc</a>
@@ -1452,8 +1635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Exception informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Exception informationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="group_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_nodejs" style="color: inherit; text-decoration: inherit;">group</a>
@@ -1461,8 +1643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>consumer group.</p>
-</dd><dt class="property-required"
+    <dd>consumer group.</dd><dt class="property-required"
             title="Required">
         <span id="tracktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracktype_nodejs" style="color: inherit; text-decoration: inherit;">track<wbr>Type</a>
@@ -1470,8 +1651,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>message track type.</p>
-</dd></dl>
+    <dd>message track type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1485,8 +1665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>consumption status.</p>
-</dd><dt class="property-required"
+    <dd>consumption status.</dd><dt class="property-required"
             title="Required">
         <span id="exception_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exception_desc_python" style="color: inherit; text-decoration: inherit;">exception_<wbr>desc</a>
@@ -1494,8 +1673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Exception informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Exception informationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="group_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_python" style="color: inherit; text-decoration: inherit;">group</a>
@@ -1503,8 +1681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>consumer group.</p>
-</dd><dt class="property-required"
+    <dd>consumer group.</dd><dt class="property-required"
             title="Required">
         <span id="track_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#track_type_python" style="color: inherit; text-decoration: inherit;">track_<wbr>type</a>
@@ -1512,8 +1689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>message track type.</p>
-</dd></dl>
+    <dd>message track type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1527,8 +1703,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>consumption status.</p>
-</dd><dt class="property-required"
+    <dd>consumption status.</dd><dt class="property-required"
             title="Required">
         <span id="exceptiondesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exceptiondesc_yaml" style="color: inherit; text-decoration: inherit;">exception<wbr>Desc</a>
@@ -1536,8 +1711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Exception informationNote: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Exception informationNote: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="group_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_yaml" style="color: inherit; text-decoration: inherit;">group</a>
@@ -1545,8 +1719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>consumer group.</p>
-</dd><dt class="property-required"
+    <dd>consumer group.</dd><dt class="property-required"
             title="Required">
         <span id="tracktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracktype_yaml" style="color: inherit; text-decoration: inherit;">track<wbr>Type</a>
@@ -1554,8 +1727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>message track type.</p>
-</dd></dl>
+    <dd>message track type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1570,7 +1742,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

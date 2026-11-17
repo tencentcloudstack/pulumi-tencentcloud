@@ -2,9 +2,11 @@
 ---
 title: "Topic"
 title_tag: "tencentcloud.Cls.Topic"
-meta_desc: "Documentation for the tencentcloud.Cls.Topic resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a cls topic. NOTE: Field encryption can only be enabled, not disabled. NOTE: Field customKmsInfo is for user-defined KMS."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,22 +16,33 @@ no_edit_this_page: true
 
 Provides a resource to create a cls topic.
 
+> **NOTE:** Field `encryption` can only be enabled, not disabled.
+
+> **NOTE:** Field `customKmsInfo` is for user-defined KMS key. If not set, the CLS default key (alias KMS-CLS) is used.
+
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Create a standard cls topic
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleLogset = new tencentcloud.cls.Logset("exampleLogset", {
+const example = new tencentcloud.cls.Logset("example", {
     logsetName: "tf_example",
     tags: {
-        demo: "test",
+        tagKey: "tagValue",
     },
 });
-const exampleTopic = new tencentcloud.cls.Topic("exampleTopic", {
+const exampleTopic = new tencentcloud.cls.Topic("example", {
     topicName: "tf_example",
-    logsetId: exampleLogset.id,
+    logsetId: example.id,
     autoSplit: false,
     maxSplitPartitions: 20,
     partitionCount: 1,
@@ -38,22 +51,27 @@ const exampleTopic = new tencentcloud.cls.Topic("exampleTopic", {
     describes: "Test Demo.",
     hotPeriod: 10,
     tags: {
-        test: "test",
+        tagKey: "tagValue",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_logset = tencentcloud.cls.Logset("exampleLogset",
+example = tencentcloud.cls.Logset("example",
     logset_name="tf_example",
     tags={
-        "demo": "test",
+        "tagKey": "tagValue",
     })
-example_topic = tencentcloud.cls.Topic("exampleTopic",
+example_topic = tencentcloud.cls.Topic("example",
     topic_name="tf_example",
-    logset_id=example_logset.id,
+    logset_id=example.id,
     auto_split=False,
     max_split_partitions=20,
     partition_count=1,
@@ -62,67 +80,36 @@ example_topic = tencentcloud.cls.Topic("exampleTopic",
     describes="Test Demo.",
     hot_period=10,
     tags={
-        "test": "test",
+        "tagKey": "tagValue",
     })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var exampleLogset = new Tencentcloud.Cls.Logset("exampleLogset", new()
-    {
-        LogsetName = "tf_example",
-        Tags = 
-        {
-            { "demo", "test" },
-        },
-    });
-
-    var exampleTopic = new Tencentcloud.Cls.Topic("exampleTopic", new()
-    {
-        TopicName = "tf_example",
-        LogsetId = exampleLogset.Id,
-        AutoSplit = false,
-        MaxSplitPartitions = 20,
-        PartitionCount = 1,
-        Period = 30,
-        StorageType = "hot",
-        Describes = "Test Demo.",
-        HotPeriod = 10,
-        Tags = 
-        {
-            { "test", "test" },
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		exampleLogset, err := Cls.NewLogset(ctx, "exampleLogset", &Cls.LogsetArgs{
+		example, err := cls.NewLogset(ctx, "example", &cls.LogsetArgs{
 			LogsetName: pulumi.String("tf_example"),
-			Tags: pulumi.Map{
-				"demo": pulumi.Any("test"),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
 			},
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Cls.NewTopic(ctx, "exampleTopic", &Cls.TopicArgs{
+		_, err = cls.NewTopic(ctx, "example", &cls.TopicArgs{
 			TopicName:          pulumi.String("tf_example"),
-			LogsetId:           exampleLogset.ID(),
+			LogsetId:           example.ID().ToIDOutput().ToStringOutput(),
 			AutoSplit:          pulumi.Bool(false),
 			MaxSplitPartitions: pulumi.Int(20),
 			PartitionCount:     pulumi.Int(1),
@@ -130,8 +117,8 @@ func main() {
 			StorageType:        pulumi.String("hot"),
 			Describes:          pulumi.String("Test Demo."),
 			HotPeriod:          pulumi.Int(10),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
 			},
 		})
 		if err != nil {
@@ -141,6 +128,52 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Cls.Logset("example", new()
+    {
+        LogsetName = "tf_example",
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+    var exampleTopic = new Tencentcloud.Cls.Topic("example", new()
+    {
+        TopicName = "tf_example",
+        LogsetId = example.Id,
+        AutoSplit = false,
+        MaxSplitPartitions = 20,
+        PartitionCount = 1,
+        Period = 30,
+        StorageType = "hot",
+        Describes = "Test Demo.",
+        HotPeriod = 10,
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -151,8 +184,8 @@ import com.pulumi.tencentcloud.Cls.Logset;
 import com.pulumi.tencentcloud.Cls.LogsetArgs;
 import com.pulumi.tencentcloud.Cls.Topic;
 import com.pulumi.tencentcloud.Cls.TopicArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -164,14 +197,14 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var exampleLogset = new Logset("exampleLogset", LogsetArgs.builder()        
+        var example = new Logset("example", LogsetArgs.builder()
             .logsetName("tf_example")
-            .tags(Map.of("demo", "test"))
+            .tags(Map.of("tagKey", "tagValue"))
             .build());
 
-        var exampleTopic = new Topic("exampleTopic", TopicArgs.builder()        
+        var exampleTopic = new Topic("exampleTopic", TopicArgs.builder()
             .topicName("tf_example")
-            .logsetId(exampleLogset.id())
+            .logsetId(example.id())
             .autoSplit(false)
             .maxSplitPartitions(20)
             .partitionCount(1)
@@ -179,25 +212,31 @@ public class App {
             .storageType("hot")
             .describes("Test Demo.")
             .hotPeriod(10)
-            .tags(Map.of("test", "test"))
+            .tags(Map.of("tagKey", "tagValue"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  exampleLogset:
+  example:
     type: tencentcloud:Cls:Logset
     properties:
       logsetName: tf_example
       tags:
-        demo: test
+        tagKey: tagValue
   exampleTopic:
     type: tencentcloud:Cls:Topic
+    name: example
     properties:
       topicName: tf_example
-      logsetId: ${exampleLogset.id}
+      logsetId: ${example.id}
       autoSplit: false
       maxSplitPartitions: 20
       partitionCount: 1
@@ -206,76 +245,1066 @@ resources:
       describes: Test Demo.
       hotPeriod: 10
       tags:
-        test: test
+        tagKey: tagValue
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cls_logset" "example" {
+  logset_name = "tf_example"
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+resource "tencentcloud_cls_topic" "example" {
+  topic_name           = "tf_example"
+  logset_id            = tencentcloud_cls_logset.example.id
+  auto_split           = false
+  max_split_partitions = 20
+  partition_count      = 1
+  period               = 30
+  storage_type         = "hot"
+  describes            = "Test Demo."
+  hot_period           = 10
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a cls topic with web tracking
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.cls.Logset("example", {
+    logsetName: "tf_example",
+    tags: {
+        tagKey: "tagValue",
+    },
+});
+const exampleTopic = new tencentcloud.cls.Topic("example", {
+    topicName: "tf_example",
+    logsetId: example.id,
+    autoSplit: false,
+    maxSplitPartitions: 20,
+    partitionCount: 1,
+    period: 30,
+    storageType: "hot",
+    describes: "Test Demo.",
+    hotPeriod: 10,
+    isWebTracking: true,
+    "extends": {
+        anonymousAccess: {
+            operations: [
+                "trackLog",
+                "realtimeProducer",
+            ],
+            conditions: [{
+                attributes: "VpcID",
+                rule: 1,
+                conditionValue: "vpc-ahr3xajx",
+            }],
+        },
+    },
+    tags: {
+        tagKey: "tagValue",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.cls.Logset("example",
+    logset_name="tf_example",
+    tags={
+        "tagKey": "tagValue",
+    })
+example_topic = tencentcloud.cls.Topic("example",
+    topic_name="tf_example",
+    logset_id=example.id,
+    auto_split=False,
+    max_split_partitions=20,
+    partition_count=1,
+    period=30,
+    storage_type="hot",
+    describes="Test Demo.",
+    hot_period=10,
+    is_web_tracking=True,
+    extends={
+        "anonymous_access": {
+            "operations": [
+                "trackLog",
+                "realtimeProducer",
+            ],
+            "conditions": [{
+                "attributes": "VpcID",
+                "rule": 1,
+                "condition_value": "vpc-ahr3xajx",
+            }],
+        },
+    },
+    tags={
+        "tagKey": "tagValue",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example, err := cls.NewLogset(ctx, "example", &cls.LogsetArgs{
+			LogsetName: pulumi.String("tf_example"),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = cls.NewTopic(ctx, "example", &cls.TopicArgs{
+			TopicName:          pulumi.String("tf_example"),
+			LogsetId:           example.ID().ToIDOutput().ToStringOutput(),
+			AutoSplit:          pulumi.Bool(false),
+			MaxSplitPartitions: pulumi.Int(20),
+			PartitionCount:     pulumi.Int(1),
+			Period:             pulumi.Int(30),
+			StorageType:        pulumi.String("hot"),
+			Describes:          pulumi.String("Test Demo."),
+			HotPeriod:          pulumi.Int(10),
+			IsWebTracking:      pulumi.Bool(true),
+			Extends: &cls.TopicExtendsArgs{
+				AnonymousAccess: &cls.TopicExtendsAnonymousAccessArgs{
+					Operations: pulumi.StringArray{
+						pulumi.String("trackLog"),
+						pulumi.String("realtimeProducer"),
+					},
+					Conditions: cls.TopicExtendsAnonymousAccessConditionArray{
+						&cls.TopicExtendsAnonymousAccessConditionArgs{
+							Attributes:     pulumi.String("VpcID"),
+							Rule:           pulumi.Int(1),
+							ConditionValue: pulumi.String("vpc-ahr3xajx"),
+						},
+					},
+				},
+			},
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Cls.Logset("example", new()
+    {
+        LogsetName = "tf_example",
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+    var exampleTopic = new Tencentcloud.Cls.Topic("example", new()
+    {
+        TopicName = "tf_example",
+        LogsetId = example.Id,
+        AutoSplit = false,
+        MaxSplitPartitions = 20,
+        PartitionCount = 1,
+        Period = 30,
+        StorageType = "hot",
+        Describes = "Test Demo.",
+        HotPeriod = 10,
+        IsWebTracking = true,
+        Extends = new Tencentcloud.Cls.Inputs.TopicExtendsArgs
+        {
+            AnonymousAccess = new Tencentcloud.Cls.Inputs.TopicExtendsAnonymousAccessArgs
+            {
+                Operations = new[]
+                {
+                    "trackLog",
+                    "realtimeProducer",
+                },
+                Conditions = new[]
+                {
+                    new Tencentcloud.Cls.Inputs.TopicExtendsAnonymousAccessConditionArgs
+                    {
+                        Attributes = "VpcID",
+                        Rule = 1,
+                        ConditionValue = "vpc-ahr3xajx",
+                    },
+                },
+            },
+        },
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cls.Logset;
+import com.pulumi.tencentcloud.Cls.LogsetArgs;
+import com.pulumi.tencentcloud.Cls.Topic;
+import com.pulumi.tencentcloud.Cls.TopicArgs;
+import com.pulumi.tencentcloud.Cls.inputs.TopicExtendsArgs;
+import com.pulumi.tencentcloud.Cls.inputs.TopicExtendsAnonymousAccessArgs;
+import com.pulumi.tencentcloud.Cls.inputs.TopicExtendsAnonymousAccessConditionArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Logset("example", LogsetArgs.builder()
+            .logsetName("tf_example")
+            .tags(Map.of("tagKey", "tagValue"))
+            .build());
+
+        var exampleTopic = new Topic("exampleTopic", TopicArgs.builder()
+            .topicName("tf_example")
+            .logsetId(example.id())
+            .autoSplit(false)
+            .maxSplitPartitions(20)
+            .partitionCount(1)
+            .period(30)
+            .storageType("hot")
+            .describes("Test Demo.")
+            .hotPeriod(10)
+            .isWebTracking(true)
+            .extends_(TopicExtendsArgs.builder()
+                .anonymousAccess(TopicExtendsAnonymousAccessArgs.builder()
+                    .operations(                    
+                        "trackLog",
+                        "realtimeProducer")
+                    .conditions(TopicExtendsAnonymousAccessConditionArgs.builder()
+                        .attributes("VpcID")
+                        .rule(1)
+                        .conditionValue("vpc-ahr3xajx")
+                        .build())
+                    .build())
+                .build())
+            .tags(Map.of("tagKey", "tagValue"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Cls:Logset
+    properties:
+      logsetName: tf_example
+      tags:
+        tagKey: tagValue
+  exampleTopic:
+    type: tencentcloud:Cls:Topic
+    name: example
+    properties:
+      topicName: tf_example
+      logsetId: ${example.id}
+      autoSplit: false
+      maxSplitPartitions: 20
+      partitionCount: 1
+      period: 30
+      storageType: hot
+      describes: Test Demo.
+      hotPeriod: 10
+      isWebTracking: true
+      extends:
+        anonymousAccess:
+          operations:
+            - trackLog
+            - realtimeProducer
+          conditions:
+            - attributes: VpcID
+              rule: 1
+              conditionValue: vpc-ahr3xajx
+      tags:
+        tagKey: tagValue
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cls_logset" "example" {
+  logset_name = "tf_example"
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+resource "tencentcloud_cls_topic" "example" {
+  topic_name           = "tf_example"
+  logset_id            = tencentcloud_cls_logset.example.id
+  auto_split           = false
+  max_split_partitions = 20
+  partition_count      = 1
+  period               = 30
+  storage_type         = "hot"
+  describes            = "Test Demo."
+  hot_period           = 10
+  is_web_tracking      = true
+  extends = {
+    anonymous_access = {
+      operations = ["trackLog", "realtimeProducer"]
+      conditions = [{
+        "attributes"     = "VpcID"
+        "rule"           = 1
+        "conditionValue" = "vpc-ahr3xajx"
+      }]
+    }
+  }
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a cls metric topic(biz_type=1)
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.cls.Logset("example", {
+    logsetName: "tf_example",
+    tags: {
+        tagKey: "tagValue",
+    },
+});
+const exampleTopic = new tencentcloud.cls.Topic("example", {
+    topicName: "tf_example",
+    logsetId: example.id,
+    autoSplit: false,
+    maxSplitPartitions: 20,
+    partitionCount: 1,
+    period: 30,
+    storageType: "hot",
+    describes: "Test Demo.",
+    bizType: 1,
+    tags: {
+        tagKey: "tagValue",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.cls.Logset("example",
+    logset_name="tf_example",
+    tags={
+        "tagKey": "tagValue",
+    })
+example_topic = tencentcloud.cls.Topic("example",
+    topic_name="tf_example",
+    logset_id=example.id,
+    auto_split=False,
+    max_split_partitions=20,
+    partition_count=1,
+    period=30,
+    storage_type="hot",
+    describes="Test Demo.",
+    biz_type=1,
+    tags={
+        "tagKey": "tagValue",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example, err := cls.NewLogset(ctx, "example", &cls.LogsetArgs{
+			LogsetName: pulumi.String("tf_example"),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = cls.NewTopic(ctx, "example", &cls.TopicArgs{
+			TopicName:          pulumi.String("tf_example"),
+			LogsetId:           example.ID().ToIDOutput().ToStringOutput(),
+			AutoSplit:          pulumi.Bool(false),
+			MaxSplitPartitions: pulumi.Int(20),
+			PartitionCount:     pulumi.Int(1),
+			Period:             pulumi.Int(30),
+			StorageType:        pulumi.String("hot"),
+			Describes:          pulumi.String("Test Demo."),
+			BizType:            pulumi.Int(1),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Cls.Logset("example", new()
+    {
+        LogsetName = "tf_example",
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+    var exampleTopic = new Tencentcloud.Cls.Topic("example", new()
+    {
+        TopicName = "tf_example",
+        LogsetId = example.Id,
+        AutoSplit = false,
+        MaxSplitPartitions = 20,
+        PartitionCount = 1,
+        Period = 30,
+        StorageType = "hot",
+        Describes = "Test Demo.",
+        BizType = 1,
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cls.Logset;
+import com.pulumi.tencentcloud.Cls.LogsetArgs;
+import com.pulumi.tencentcloud.Cls.Topic;
+import com.pulumi.tencentcloud.Cls.TopicArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Logset("example", LogsetArgs.builder()
+            .logsetName("tf_example")
+            .tags(Map.of("tagKey", "tagValue"))
+            .build());
+
+        var exampleTopic = new Topic("exampleTopic", TopicArgs.builder()
+            .topicName("tf_example")
+            .logsetId(example.id())
+            .autoSplit(false)
+            .maxSplitPartitions(20)
+            .partitionCount(1)
+            .period(30)
+            .storageType("hot")
+            .describes("Test Demo.")
+            .bizType(1)
+            .tags(Map.of("tagKey", "tagValue"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Cls:Logset
+    properties:
+      logsetName: tf_example
+      tags:
+        tagKey: tagValue
+  exampleTopic:
+    type: tencentcloud:Cls:Topic
+    name: example
+    properties:
+      topicName: tf_example
+      logsetId: ${example.id}
+      autoSplit: false
+      maxSplitPartitions: 20
+      partitionCount: 1
+      period: 30
+      storageType: hot
+      describes: Test Demo.
+      bizType: 1
+      tags:
+        tagKey: tagValue
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cls_logset" "example" {
+  logset_name = "tf_example"
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+resource "tencentcloud_cls_topic" "example" {
+  topic_name           = "tf_example"
+  logset_id            = tencentcloud_cls_logset.example.id
+  auto_split           = false
+  max_split_partitions = 20
+  partition_count      = 1
+  period               = 30
+  storage_type         = "hot"
+  describes            = "Test Demo."
+  biz_type             = 1
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a cls topic with custom KMS key (encryption=1)
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.cls.Logset("example", {
+    logsetName: "tf_example",
+    tags: {
+        tagKey: "tagValue",
+    },
+});
+const exampleTopic = new tencentcloud.cls.Topic("example", {
+    topicName: "tf_example",
+    logsetId: example.id,
+    autoSplit: false,
+    maxSplitPartitions: 20,
+    partitionCount: 1,
+    period: 30,
+    storageType: "hot",
+    describes: "Test Demo.",
+    encryption: 1,
+    customKmsInfo: {
+        kmsRegion: "ap-guangzhou",
+        kmsKeyId: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    tags: {
+        tagKey: "tagValue",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.cls.Logset("example",
+    logset_name="tf_example",
+    tags={
+        "tagKey": "tagValue",
+    })
+example_topic = tencentcloud.cls.Topic("example",
+    topic_name="tf_example",
+    logset_id=example.id,
+    auto_split=False,
+    max_split_partitions=20,
+    partition_count=1,
+    period=30,
+    storage_type="hot",
+    describes="Test Demo.",
+    encryption=1,
+    custom_kms_info={
+        "kms_region": "ap-guangzhou",
+        "kms_key_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    },
+    tags={
+        "tagKey": "tagValue",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example, err := cls.NewLogset(ctx, "example", &cls.LogsetArgs{
+			LogsetName: pulumi.String("tf_example"),
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = cls.NewTopic(ctx, "example", &cls.TopicArgs{
+			TopicName:          pulumi.String("tf_example"),
+			LogsetId:           example.ID().ToIDOutput().ToStringOutput(),
+			AutoSplit:          pulumi.Bool(false),
+			MaxSplitPartitions: pulumi.Int(20),
+			PartitionCount:     pulumi.Int(1),
+			Period:             pulumi.Int(30),
+			StorageType:        pulumi.String("hot"),
+			Describes:          pulumi.String("Test Demo."),
+			Encryption:         pulumi.Int(1),
+			CustomKmsInfo: &cls.TopicCustomKmsInfoArgs{
+				KmsRegion: pulumi.String("ap-guangzhou"),
+				KmsKeyId:  pulumi.String("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"),
+			},
+			Tags: pulumi.StringMap{
+				"tagKey": pulumi.String("tagValue"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Cls.Logset("example", new()
+    {
+        LogsetName = "tf_example",
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+    var exampleTopic = new Tencentcloud.Cls.Topic("example", new()
+    {
+        TopicName = "tf_example",
+        LogsetId = example.Id,
+        AutoSplit = false,
+        MaxSplitPartitions = 20,
+        PartitionCount = 1,
+        Period = 30,
+        StorageType = "hot",
+        Describes = "Test Demo.",
+        Encryption = 1,
+        CustomKmsInfo = new Tencentcloud.Cls.Inputs.TopicCustomKmsInfoArgs
+        {
+            KmsRegion = "ap-guangzhou",
+            KmsKeyId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        },
+        Tags = 
+        {
+            { "tagKey", "tagValue" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cls.Logset;
+import com.pulumi.tencentcloud.Cls.LogsetArgs;
+import com.pulumi.tencentcloud.Cls.Topic;
+import com.pulumi.tencentcloud.Cls.TopicArgs;
+import com.pulumi.tencentcloud.Cls.inputs.TopicCustomKmsInfoArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Logset("example", LogsetArgs.builder()
+            .logsetName("tf_example")
+            .tags(Map.of("tagKey", "tagValue"))
+            .build());
+
+        var exampleTopic = new Topic("exampleTopic", TopicArgs.builder()
+            .topicName("tf_example")
+            .logsetId(example.id())
+            .autoSplit(false)
+            .maxSplitPartitions(20)
+            .partitionCount(1)
+            .period(30)
+            .storageType("hot")
+            .describes("Test Demo.")
+            .encryption(1)
+            .customKmsInfo(TopicCustomKmsInfoArgs.builder()
+                .kmsRegion("ap-guangzhou")
+                .kmsKeyId("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
+                .build())
+            .tags(Map.of("tagKey", "tagValue"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Cls:Logset
+    properties:
+      logsetName: tf_example
+      tags:
+        tagKey: tagValue
+  exampleTopic:
+    type: tencentcloud:Cls:Topic
+    name: example
+    properties:
+      topicName: tf_example
+      logsetId: ${example.id}
+      autoSplit: false
+      maxSplitPartitions: 20
+      partitionCount: 1
+      period: 30
+      storageType: hot
+      describes: Test Demo.
+      encryption: 1
+      customKmsInfo:
+        kmsRegion: ap-guangzhou
+        kmsKeyId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      tags:
+        tagKey: tagValue
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cls_logset" "example" {
+  logset_name = "tf_example"
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+resource "tencentcloud_cls_topic" "example" {
+  topic_name           = "tf_example"
+  logset_id            = tencentcloud_cls_logset.example.id
+  auto_split           = false
+  max_split_partitions = 20
+  partition_count      = 1
+  period               = 30
+  storage_type         = "hot"
+  describes            = "Test Demo."
+  encryption           = 1
+  custom_kms_info = {
+    kms_region = "ap-guangzhou"
+    kms_key_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  }
+  tags = {
+    "tagKey" = "tagValue"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateTopic](https://www.tencentcloud.com/document/api/614/42785)
+* Read: [DescribeTopics](https://www.tencentcloud.com/document/api/614/42783)
+* Update:
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [ModifyTopic](https://www.tencentcloud.com/document/api/614/42782)
+* Delete: [DeleteTopic](https://www.tencentcloud.com/document/api/614/42784)
 
 
 ## Create Topic Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p">,</span>
+          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-          <span class="nx">auto_split</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-          <span class="nx">describes</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">hot_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">logset_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">hot_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">describes</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">encryption</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">extends</span><span class="p">:</span> <span class="nx">Optional[TopicExtendsArgs]</span> = None<span class="p">,</span>
+          <span class="nx">auto_split</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+          <span class="nx">is_web_tracking</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+          <span class="nx">custom_kms_info</span><span class="p">:</span> <span class="nx">Optional[TopicCustomKmsInfoArgs]</span> = None<span class="p">,</span>
           <span class="nx">max_split_partitions</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">partition_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
           <span class="nx">storage_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-          <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-          <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p">,</span>
-          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+          <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+          <span class="nx">biz_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTopic</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Topic</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTopic</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Topic</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Topic</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TopicArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cls:Topic</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cls:Topic</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cls_topic&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -296,7 +1325,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -413,11 +1442,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Topic Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Topic resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -433,8 +1470,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset ID.</p>
-</dd><dt class="property-required"
+    <dd>Logset ID. Get the logset ID via <code>DescribeLogsets</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -442,8 +1478,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic name.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic name. Constraints: cannot be an empty string, cannot contain the <code>|</code> character, and cannot use the following reserved names: <code>clsServiceLog</code>, <code>loglistenerStatus</code>, <code>loglistenerAlarm</code>, <code>loglistenerBusiness</code>, <code>clsServiceMetric</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autosplit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autosplit_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Split</a>
@@ -451,8 +1486,23 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable automatic split. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable automatic split. Default value: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="biztype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#biztype_csharp" style="color: inherit; text-decoration: inherit;">Biz<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Topic type. <code>0</code>: log topic (default), <code>1</code>: metric topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="customkmsinfo_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customkmsinfo_csharp" style="color: inherit; text-decoration: inherit;">Custom<wbr>Kms<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topiccustomkmsinfo">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Topic<wbr>Custom<wbr>Kms<wbr>Info</a></span>
+    </dt>
+    <dd>User-defined KMS key information. If empty, the default key (alias <code>KMS-CLS</code>) is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="describes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#describes_csharp" style="color: inherit; text-decoration: inherit;">Describes</a>
@@ -460,8 +1510,23 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log Topic Description.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encryption_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryption_csharp" style="color: inherit; text-decoration: inherit;">Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. <code>0</code> or not passed: no encryption; <code>1</code>: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="extends_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extends_csharp" style="color: inherit; text-decoration: inherit;">Extends</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextends">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Topic<wbr>Extends</a></span>
+    </dt>
+    <dd>Topic extension information.</dd><dt class="property-optional"
             title="Optional">
         <span id="hotperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hotperiod_csharp" style="color: inherit; text-decoration: inherit;">Hot<wbr>Period</a>
@@ -469,8 +1534,15 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: turn off log settling. Non-<code>0</code>: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when <code>storageType</code> is <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="iswebtracking_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iswebtracking_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Web<wbr>Tracking</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Free authentication switch. <code>false</code>: closed (default); <code>true</code>: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxsplitpartitions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsplitpartitions_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Split<wbr>Partitions</a>
@@ -478,8 +1550,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="partitioncount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitioncount_csharp" style="color: inherit; text-decoration: inherit;">Partition<wbr>Count</a>
@@ -487,8 +1558,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of log topic partitions. Default value: 1. Maximum value: 10.</p>
-</dd><dt class="property-optional"
+    <dd>Number of log topic partitions. Default: 1, maximum: 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -496,8 +1566,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Lifecycle in days. Value range: 1~366. Default value: 30.</p>
-</dd><dt class="property-optional"
+    <dd>Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value <code>3640</code> means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value <code>3640</code> means permanent retention. Metric topic: 1 to 3600 days, value <code>3640</code> means permanent retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -505,17 +1574,15 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic storage type. Valid values: <code>hot</code>: standard storage; <code>cold</code>: infrequent storage. Default value: <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list. Up to 10 tag key-value pairs are supported and must be unique.</p>
-</dd></dl>
+    <dd>Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -529,8 +1596,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset ID.</p>
-</dd><dt class="property-required"
+    <dd>Logset ID. Get the logset ID via <code>DescribeLogsets</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -538,8 +1604,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic name.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic name. Constraints: cannot be an empty string, cannot contain the <code>|</code> character, and cannot use the following reserved names: <code>clsServiceLog</code>, <code>loglistenerStatus</code>, <code>loglistenerAlarm</code>, <code>loglistenerBusiness</code>, <code>clsServiceMetric</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autosplit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autosplit_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Split</a>
@@ -547,8 +1612,23 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable automatic split. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable automatic split. Default value: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="biztype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#biztype_go" style="color: inherit; text-decoration: inherit;">Biz<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Topic type. <code>0</code>: log topic (default), <code>1</code>: metric topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="customkmsinfo_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customkmsinfo_go" style="color: inherit; text-decoration: inherit;">Custom<wbr>Kms<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topiccustomkmsinfo">Topic<wbr>Custom<wbr>Kms<wbr>Info<wbr>Args</a></span>
+    </dt>
+    <dd>User-defined KMS key information. If empty, the default key (alias <code>KMS-CLS</code>) is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="describes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#describes_go" style="color: inherit; text-decoration: inherit;">Describes</a>
@@ -556,8 +1636,23 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log Topic Description.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encryption_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryption_go" style="color: inherit; text-decoration: inherit;">Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. <code>0</code> or not passed: no encryption; <code>1</code>: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="extends_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extends_go" style="color: inherit; text-decoration: inherit;">Extends</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextends">Topic<wbr>Extends<wbr>Args</a></span>
+    </dt>
+    <dd>Topic extension information.</dd><dt class="property-optional"
             title="Optional">
         <span id="hotperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hotperiod_go" style="color: inherit; text-decoration: inherit;">Hot<wbr>Period</a>
@@ -565,8 +1660,15 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: turn off log settling. Non-<code>0</code>: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when <code>storageType</code> is <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="iswebtracking_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iswebtracking_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Web<wbr>Tracking</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Free authentication switch. <code>false</code>: closed (default); <code>true</code>: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxsplitpartitions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsplitpartitions_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Split<wbr>Partitions</a>
@@ -574,8 +1676,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="partitioncount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitioncount_go" style="color: inherit; text-decoration: inherit;">Partition<wbr>Count</a>
@@ -583,8 +1684,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of log topic partitions. Default value: 1. Maximum value: 10.</p>
-</dd><dt class="property-optional"
+    <dd>Number of log topic partitions. Default: 1, maximum: 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -592,8 +1692,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Lifecycle in days. Value range: 1~366. Default value: 30.</p>
-</dd><dt class="property-optional"
+    <dd>Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value <code>3640</code> means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value <code>3640</code> means permanent retention. Metric topic: 1 to 3600 days, value <code>3640</code> means permanent retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -601,17 +1700,141 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic storage type. Valid values: <code>hot</code>: standard storage; <code>cold</code>: infrequent storage. Default value: <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list. Up to 10 tag key-value pairs are supported and must be unique.</p>
-</dd></dl>
+    <dd>Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="logset_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logset_id_hcl" style="color: inherit; text-decoration: inherit;">logset_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Logset ID. Get the logset ID via <code>DescribeLogsets</code> API.</dd><dt class="property-required"
+            title="Required">
+        <span id="topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log topic name. Constraints: cannot be an empty string, cannot contain the <code>|</code> character, and cannot use the following reserved names: <code>clsServiceLog</code>, <code>loglistenerStatus</code>, <code>loglistenerAlarm</code>, <code>loglistenerBusiness</code>, <code>clsServiceMetric</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_split_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_split_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>split</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable automatic split. Default value: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="biz_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#biz_type_hcl" style="color: inherit; text-decoration: inherit;">biz_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Topic type. <code>0</code>: log topic (default), <code>1</code>: metric topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="custom_kms_info_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_kms_info_hcl" style="color: inherit; text-decoration: inherit;">custom_<wbr>kms_<wbr>info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topiccustomkmsinfo">object</a></span>
+    </dt>
+    <dd>User-defined KMS key information. If empty, the default key (alias <code>KMS-CLS</code>) is used.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="describes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#describes_hcl" style="color: inherit; text-decoration: inherit;">describes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log topic description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encryption_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryption_hcl" style="color: inherit; text-decoration: inherit;">encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. <code>0</code> or not passed: no encryption; <code>1</code>: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="extends_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extends_hcl" style="color: inherit; text-decoration: inherit;">extends</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextends">object</a></span>
+    </dt>
+    <dd>Topic extension information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hot_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hot_period_hcl" style="color: inherit; text-decoration: inherit;">hot_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd><code>0</code>: turn off log settling. Non-<code>0</code>: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when <code>storageType</code> is <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_web_tracking_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_web_tracking_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>web_<wbr>tracking</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Free authentication switch. <code>false</code>: closed (default); <code>true</code>: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="max_split_partitions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_split_partitions_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>split_<wbr>partitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: <code>50</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="partition_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_count_hcl" style="color: inherit; text-decoration: inherit;">partition_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of log topic partitions. Default: 1, maximum: 10.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value <code>3640</code> means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value <code>3640</code> means permanent retention. Metric topic: 1 to 3600 days, value <code>3640</code> means permanent retention.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log topic storage type. Valid values: <code>hot</code>: standard storage; <code>cold</code>: infrequent storage. Default value: <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -625,8 +1848,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Logset ID.</p>
-</dd><dt class="property-required"
+    <dd>Logset ID. Get the logset ID via <code>DescribeLogsets</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -634,8 +1856,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log topic name.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic name. Constraints: cannot be an empty string, cannot contain the <code>|</code> character, and cannot use the following reserved names: <code>clsServiceLog</code>, <code>loglistenerStatus</code>, <code>loglistenerAlarm</code>, <code>loglistenerBusiness</code>, <code>clsServiceMetric</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autosplit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autosplit_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Split</a>
@@ -643,8 +1864,23 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable automatic split. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable automatic split. Default value: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="biztype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#biztype_java" style="color: inherit; text-decoration: inherit;">biz<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Topic type. <code>0</code>: log topic (default), <code>1</code>: metric topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="customkmsinfo_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customkmsinfo_java" style="color: inherit; text-decoration: inherit;">custom<wbr>Kms<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topiccustomkmsinfo">Topic<wbr>Custom<wbr>Kms<wbr>Info</a></span>
+    </dt>
+    <dd>User-defined KMS key information. If empty, the default key (alias <code>KMS-CLS</code>) is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="describes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#describes_java" style="color: inherit; text-decoration: inherit;">describes</a>
@@ -652,8 +1888,23 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log Topic Description.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encryption_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryption_java" style="color: inherit; text-decoration: inherit;">encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. <code>0</code> or not passed: no encryption; <code>1</code>: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="extends__java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extends__java" style="color: inherit; text-decoration: inherit;">extends_</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextends">Topic<wbr>Extends</a></span>
+    </dt>
+    <dd>Topic extension information.</dd><dt class="property-optional"
             title="Optional">
         <span id="hotperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hotperiod_java" style="color: inherit; text-decoration: inherit;">hot<wbr>Period</a>
@@ -661,8 +1912,15 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: turn off log settling. Non-<code>0</code>: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when <code>storageType</code> is <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="iswebtracking_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iswebtracking_java" style="color: inherit; text-decoration: inherit;">is<wbr>Web<wbr>Tracking</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Free authentication switch. <code>false</code>: closed (default); <code>true</code>: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxsplitpartitions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsplitpartitions_java" style="color: inherit; text-decoration: inherit;">max<wbr>Split<wbr>Partitions</a>
@@ -670,8 +1928,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="partitioncount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitioncount_java" style="color: inherit; text-decoration: inherit;">partition<wbr>Count</a>
@@ -679,8 +1936,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of log topic partitions. Default value: 1. Maximum value: 10.</p>
-</dd><dt class="property-optional"
+    <dd>Number of log topic partitions. Default: 1, maximum: 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -688,8 +1944,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Lifecycle in days. Value range: 1~366. Default value: 30.</p>
-</dd><dt class="property-optional"
+    <dd>Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value <code>3640</code> means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value <code>3640</code> means permanent retention. Metric topic: 1 to 3600 days, value <code>3640</code> means permanent retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -697,17 +1952,15 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic storage type. Valid values: <code>hot</code>: standard storage; <code>cold</code>: infrequent storage. Default value: <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list. Up to 10 tag key-value pairs are supported and must be unique.</p>
-</dd></dl>
+    <dd>Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -721,8 +1974,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset ID.</p>
-</dd><dt class="property-required"
+    <dd>Logset ID. Get the logset ID via <code>DescribeLogsets</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -730,8 +1982,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic name.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic name. Constraints: cannot be an empty string, cannot contain the <code>|</code> character, and cannot use the following reserved names: <code>clsServiceLog</code>, <code>loglistenerStatus</code>, <code>loglistenerAlarm</code>, <code>loglistenerBusiness</code>, <code>clsServiceMetric</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autosplit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autosplit_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Split</a>
@@ -739,8 +1990,23 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable automatic split. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable automatic split. Default value: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="biztype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#biztype_nodejs" style="color: inherit; text-decoration: inherit;">biz<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Topic type. <code>0</code>: log topic (default), <code>1</code>: metric topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="customkmsinfo_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customkmsinfo_nodejs" style="color: inherit; text-decoration: inherit;">custom<wbr>Kms<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topiccustomkmsinfo">Topic<wbr>Custom<wbr>Kms<wbr>Info</a></span>
+    </dt>
+    <dd>User-defined KMS key information. If empty, the default key (alias <code>KMS-CLS</code>) is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="describes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#describes_nodejs" style="color: inherit; text-decoration: inherit;">describes</a>
@@ -748,8 +2014,23 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log Topic Description.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encryption_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryption_nodejs" style="color: inherit; text-decoration: inherit;">encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. <code>0</code> or not passed: no encryption; <code>1</code>: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="extends_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extends_nodejs" style="color: inherit; text-decoration: inherit;">extends</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextends">Topic<wbr>Extends</a></span>
+    </dt>
+    <dd>Topic extension information.</dd><dt class="property-optional"
             title="Optional">
         <span id="hotperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hotperiod_nodejs" style="color: inherit; text-decoration: inherit;">hot<wbr>Period</a>
@@ -757,8 +2038,15 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: turn off log settling. Non-<code>0</code>: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when <code>storageType</code> is <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="iswebtracking_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iswebtracking_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Web<wbr>Tracking</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Free authentication switch. <code>false</code>: closed (default); <code>true</code>: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxsplitpartitions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsplitpartitions_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Split<wbr>Partitions</a>
@@ -766,8 +2054,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="partitioncount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitioncount_nodejs" style="color: inherit; text-decoration: inherit;">partition<wbr>Count</a>
@@ -775,8 +2062,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of log topic partitions. Default value: 1. Maximum value: 10.</p>
-</dd><dt class="property-optional"
+    <dd>Number of log topic partitions. Default: 1, maximum: 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -784,8 +2070,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Lifecycle in days. Value range: 1~366. Default value: 30.</p>
-</dd><dt class="property-optional"
+    <dd>Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value <code>3640</code> means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value <code>3640</code> means permanent retention. Metric topic: 1 to 3600 days, value <code>3640</code> means permanent retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -793,17 +2078,15 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic storage type. Valid values: <code>hot</code>: standard storage; <code>cold</code>: infrequent storage. Default value: <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list. Up to 10 tag key-value pairs are supported and must be unique.</p>
-</dd></dl>
+    <dd>Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -817,8 +2100,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Logset ID.</p>
-</dd><dt class="property-required"
+    <dd>Logset ID. Get the logset ID via <code>DescribeLogsets</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
@@ -826,8 +2108,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log topic name.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic name. Constraints: cannot be an empty string, cannot contain the <code>|</code> character, and cannot use the following reserved names: <code>clsServiceLog</code>, <code>loglistenerStatus</code>, <code>loglistenerAlarm</code>, <code>loglistenerBusiness</code>, <code>clsServiceMetric</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_split_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_split_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>split</a>
@@ -835,8 +2116,23 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable automatic split. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable automatic split. Default value: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="biz_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#biz_type_python" style="color: inherit; text-decoration: inherit;">biz_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Topic type. <code>0</code>: log topic (default), <code>1</code>: metric topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="custom_kms_info_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#custom_kms_info_python" style="color: inherit; text-decoration: inherit;">custom_<wbr>kms_<wbr>info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topiccustomkmsinfo">Topic<wbr>Custom<wbr>Kms<wbr>Info<wbr>Args</a></span>
+    </dt>
+    <dd>User-defined KMS key information. If empty, the default key (alias <code>KMS-CLS</code>) is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="describes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#describes_python" style="color: inherit; text-decoration: inherit;">describes</a>
@@ -844,8 +2140,23 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log Topic Description.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encryption_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryption_python" style="color: inherit; text-decoration: inherit;">encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. <code>0</code> or not passed: no encryption; <code>1</code>: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="extends_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extends_python" style="color: inherit; text-decoration: inherit;">extends</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextends">Topic<wbr>Extends<wbr>Args</a></span>
+    </dt>
+    <dd>Topic extension information.</dd><dt class="property-optional"
             title="Optional">
         <span id="hot_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hot_period_python" style="color: inherit; text-decoration: inherit;">hot_<wbr>period</a>
@@ -853,8 +2164,15 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: turn off log settling. Non-<code>0</code>: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when <code>storageType</code> is <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_web_tracking_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_web_tracking_python" style="color: inherit; text-decoration: inherit;">is_<wbr>web_<wbr>tracking</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Free authentication switch. <code>false</code>: closed (default); <code>true</code>: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="max_split_partitions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_split_partitions_python" style="color: inherit; text-decoration: inherit;">max_<wbr>split_<wbr>partitions</a>
@@ -862,8 +2180,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="partition_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partition_count_python" style="color: inherit; text-decoration: inherit;">partition_<wbr>count</a>
@@ -871,8 +2188,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of log topic partitions. Default value: 1. Maximum value: 10.</p>
-</dd><dt class="property-optional"
+    <dd>Number of log topic partitions. Default: 1, maximum: 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -880,8 +2196,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Lifecycle in days. Value range: 1~366. Default value: 30.</p>
-</dd><dt class="property-optional"
+    <dd>Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value <code>3640</code> means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value <code>3640</code> means permanent retention. Metric topic: 1 to 3600 days, value <code>3640</code> means permanent retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
@@ -889,17 +2204,15 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic storage type. Valid values: <code>hot</code>: standard storage; <code>cold</code>: infrequent storage. Default value: <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list. Up to 10 tag key-value pairs are supported and must be unique.</p>
-</dd></dl>
+    <dd>Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -913,8 +2226,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Logset ID.</p>
-</dd><dt class="property-required"
+    <dd>Logset ID. Get the logset ID via <code>DescribeLogsets</code> API.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -922,8 +2234,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log topic name.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic name. Constraints: cannot be an empty string, cannot contain the <code>|</code> character, and cannot use the following reserved names: <code>clsServiceLog</code>, <code>loglistenerStatus</code>, <code>loglistenerAlarm</code>, <code>loglistenerBusiness</code>, <code>clsServiceMetric</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="autosplit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autosplit_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Split</a>
@@ -931,8 +2242,23 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable automatic split. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable automatic split. Default value: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="biztype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#biztype_yaml" style="color: inherit; text-decoration: inherit;">biz<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Topic type. <code>0</code>: log topic (default), <code>1</code>: metric topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="customkmsinfo_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#customkmsinfo_yaml" style="color: inherit; text-decoration: inherit;">custom<wbr>Kms<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topiccustomkmsinfo">Property Map</a></span>
+    </dt>
+    <dd>User-defined KMS key information. If empty, the default key (alias <code>KMS-CLS</code>) is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="describes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#describes_yaml" style="color: inherit; text-decoration: inherit;">describes</a>
@@ -940,8 +2266,23 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log Topic Description.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encryption_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryption_yaml" style="color: inherit; text-decoration: inherit;">encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. <code>0</code> or not passed: no encryption; <code>1</code>: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="extends_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extends_yaml" style="color: inherit; text-decoration: inherit;">extends</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextends">Property Map</a></span>
+    </dt>
+    <dd>Topic extension information.</dd><dt class="property-optional"
             title="Optional">
         <span id="hotperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hotperiod_yaml" style="color: inherit; text-decoration: inherit;">hot<wbr>Period</a>
@@ -949,8 +2290,15 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: turn off log settling. Non-<code>0</code>: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when <code>storageType</code> is <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="iswebtracking_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iswebtracking_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Web<wbr>Tracking</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Free authentication switch. <code>false</code>: closed (default); <code>true</code>: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="maxsplitpartitions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsplitpartitions_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Split<wbr>Partitions</a>
@@ -958,8 +2306,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="partitioncount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitioncount_yaml" style="color: inherit; text-decoration: inherit;">partition<wbr>Count</a>
@@ -967,8 +2314,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of log topic partitions. Default value: 1. Maximum value: 10.</p>
-</dd><dt class="property-optional"
+    <dd>Number of log topic partitions. Default: 1, maximum: 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -976,8 +2322,7 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Lifecycle in days. Value range: 1~366. Default value: 30.</p>
-</dd><dt class="property-optional"
+    <dd>Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value <code>3640</code> means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value <code>3640</code> means permanent retention. Metric topic: 1 to 3600 days, value <code>3640</code> means permanent retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="storagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -985,17 +2330,15 @@ The Topic resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic storage type. Valid values: <code>hot</code>: standard storage; <code>cold</code>: infrequent storage. Default value: <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list. Up to 10 tag key-value pairs are supported and must be unique.</p>
-</dd></dl>
+    <dd>Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1016,8 +2359,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1031,8 +2373,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1046,8 +2401,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1061,8 +2415,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1076,8 +2429,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1091,8 +2443,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1102,129 +2453,173 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Topic resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TopicState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Topic</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TopicState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Topic</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">auto_split</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">biz_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">custom_kms_info</span><span class="p">:</span> <span class="nx">Optional[TopicCustomKmsInfoArgs]</span> = None<span class="p">,</span>
         <span class="nx">describes</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">encryption</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">extends</span><span class="p">:</span> <span class="nx">Optional[TopicExtendsArgs]</span> = None<span class="p">,</span>
         <span class="nx">hot_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">is_web_tracking</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">logset_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">max_split_partitions</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">partition_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">storage_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Topic</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTopic<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TopicState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Topic</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTopic<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TopicState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Topic</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Topic</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TopicState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Topic</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TopicState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Topic</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TopicState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Topic</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TopicState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingTopic</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cls:Topic</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cls_topic</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TopicState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TopicState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1232,28 +2627,31 @@ Get an existing Topic resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TopicState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1261,28 +2659,31 @@ Get an existing Topic resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TopicState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1302,8 +2703,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable automatic split. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable automatic split. Default value: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_biztype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_biztype_csharp" style="color: inherit; text-decoration: inherit;">Biz<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Topic type. <code>0</code>: log topic (default), <code>1</code>: metric topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_customkmsinfo_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customkmsinfo_csharp" style="color: inherit; text-decoration: inherit;">Custom<wbr>Kms<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topiccustomkmsinfo">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Topic<wbr>Custom<wbr>Kms<wbr>Info</a></span>
+    </dt>
+    <dd>User-defined KMS key information. If empty, the default key (alias <code>KMS-CLS</code>) is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_describes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_describes_csharp" style="color: inherit; text-decoration: inherit;">Describes</a>
@@ -1311,8 +2727,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log Topic Description.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encryption_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryption_csharp" style="color: inherit; text-decoration: inherit;">Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. <code>0</code> or not passed: no encryption; <code>1</code>: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_extends_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_extends_csharp" style="color: inherit; text-decoration: inherit;">Extends</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextends">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Topic<wbr>Extends</a></span>
+    </dt>
+    <dd>Topic extension information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hotperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hotperiod_csharp" style="color: inherit; text-decoration: inherit;">Hot<wbr>Period</a>
@@ -1320,8 +2751,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: turn off log settling. Non-<code>0</code>: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when <code>storageType</code> is <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_iswebtracking_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_iswebtracking_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Web<wbr>Tracking</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Free authentication switch. <code>false</code>: closed (default); <code>true</code>: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetid_csharp" style="color: inherit; text-decoration: inherit;">Logset<wbr>Id</a>
@@ -1329,8 +2767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset ID.</p>
-</dd><dt class="property-optional"
+    <dd>Logset ID. Get the logset ID via <code>DescribeLogsets</code> API.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsplitpartitions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsplitpartitions_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Split<wbr>Partitions</a>
@@ -1338,8 +2775,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partitioncount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitioncount_csharp" style="color: inherit; text-decoration: inherit;">Partition<wbr>Count</a>
@@ -1347,8 +2783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of log topic partitions. Default value: 1. Maximum value: 10.</p>
-</dd><dt class="property-optional"
+    <dd>Number of log topic partitions. Default: 1, maximum: 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -1356,8 +2791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Lifecycle in days. Value range: 1~366. Default value: 30.</p>
-</dd><dt class="property-optional"
+    <dd>Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value <code>3640</code> means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value <code>3640</code> means permanent retention. Metric topic: 1 to 3600 days, value <code>3640</code> means permanent retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -1365,17 +2799,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic storage type. Valid values: <code>hot</code>: standard storage; <code>cold</code>: infrequent storage. Default value: <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list. Up to 10 tag key-value pairs are supported and must be unique.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -1383,8 +2815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic name.</p>
-</dd></dl>
+    <dd>Log topic name. Constraints: cannot be an empty string, cannot contain the <code>|</code> character, and cannot use the following reserved names: <code>clsServiceLog</code>, <code>loglistenerStatus</code>, <code>loglistenerAlarm</code>, <code>loglistenerBusiness</code>, <code>clsServiceMetric</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1398,8 +2829,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable automatic split. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable automatic split. Default value: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_biztype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_biztype_go" style="color: inherit; text-decoration: inherit;">Biz<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Topic type. <code>0</code>: log topic (default), <code>1</code>: metric topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_customkmsinfo_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customkmsinfo_go" style="color: inherit; text-decoration: inherit;">Custom<wbr>Kms<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topiccustomkmsinfo">Topic<wbr>Custom<wbr>Kms<wbr>Info<wbr>Args</a></span>
+    </dt>
+    <dd>User-defined KMS key information. If empty, the default key (alias <code>KMS-CLS</code>) is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_describes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_describes_go" style="color: inherit; text-decoration: inherit;">Describes</a>
@@ -1407,8 +2853,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log Topic Description.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encryption_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryption_go" style="color: inherit; text-decoration: inherit;">Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. <code>0</code> or not passed: no encryption; <code>1</code>: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_extends_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_extends_go" style="color: inherit; text-decoration: inherit;">Extends</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextends">Topic<wbr>Extends<wbr>Args</a></span>
+    </dt>
+    <dd>Topic extension information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hotperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hotperiod_go" style="color: inherit; text-decoration: inherit;">Hot<wbr>Period</a>
@@ -1416,8 +2877,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: turn off log settling. Non-<code>0</code>: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when <code>storageType</code> is <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_iswebtracking_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_iswebtracking_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Web<wbr>Tracking</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Free authentication switch. <code>false</code>: closed (default); <code>true</code>: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetid_go" style="color: inherit; text-decoration: inherit;">Logset<wbr>Id</a>
@@ -1425,8 +2893,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset ID.</p>
-</dd><dt class="property-optional"
+    <dd>Logset ID. Get the logset ID via <code>DescribeLogsets</code> API.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsplitpartitions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsplitpartitions_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Split<wbr>Partitions</a>
@@ -1434,8 +2901,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partitioncount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitioncount_go" style="color: inherit; text-decoration: inherit;">Partition<wbr>Count</a>
@@ -1443,8 +2909,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of log topic partitions. Default value: 1. Maximum value: 10.</p>
-</dd><dt class="property-optional"
+    <dd>Number of log topic partitions. Default: 1, maximum: 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -1452,8 +2917,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Lifecycle in days. Value range: 1~366. Default value: 30.</p>
-</dd><dt class="property-optional"
+    <dd>Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value <code>3640</code> means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value <code>3640</code> means permanent retention. Metric topic: 1 to 3600 days, value <code>3640</code> means permanent retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -1461,17 +2925,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic storage type. Valid values: <code>hot</code>: standard storage; <code>cold</code>: infrequent storage. Default value: <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list. Up to 10 tag key-value pairs are supported and must be unique.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -1479,8 +2941,133 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic name.</p>
-</dd></dl>
+    <dd>Log topic name. Constraints: cannot be an empty string, cannot contain the <code>|</code> character, and cannot use the following reserved names: <code>clsServiceLog</code>, <code>loglistenerStatus</code>, <code>loglistenerAlarm</code>, <code>loglistenerBusiness</code>, <code>clsServiceMetric</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_split_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_split_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>split</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable automatic split. Default value: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_biz_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_biz_type_hcl" style="color: inherit; text-decoration: inherit;">biz_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Topic type. <code>0</code>: log topic (default), <code>1</code>: metric topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_custom_kms_info_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_custom_kms_info_hcl" style="color: inherit; text-decoration: inherit;">custom_<wbr>kms_<wbr>info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topiccustomkmsinfo">object</a></span>
+    </dt>
+    <dd>User-defined KMS key information. If empty, the default key (alias <code>KMS-CLS</code>) is used.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_describes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_describes_hcl" style="color: inherit; text-decoration: inherit;">describes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log topic description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encryption_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryption_hcl" style="color: inherit; text-decoration: inherit;">encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. <code>0</code> or not passed: no encryption; <code>1</code>: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_extends_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_extends_hcl" style="color: inherit; text-decoration: inherit;">extends</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextends">object</a></span>
+    </dt>
+    <dd>Topic extension information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hot_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hot_period_hcl" style="color: inherit; text-decoration: inherit;">hot_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd><code>0</code>: turn off log settling. Non-<code>0</code>: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when <code>storageType</code> is <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_web_tracking_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_web_tracking_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>web_<wbr>tracking</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Free authentication switch. <code>false</code>: closed (default); <code>true</code>: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_logset_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logset_id_hcl" style="color: inherit; text-decoration: inherit;">logset_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Logset ID. Get the logset ID via <code>DescribeLogsets</code> API.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_split_partitions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_split_partitions_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>split_<wbr>partitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: <code>50</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_partition_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partition_count_hcl" style="color: inherit; text-decoration: inherit;">partition_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of log topic partitions. Default: 1, maximum: 10.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value <code>3640</code> means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value <code>3640</code> means permanent retention. Metric topic: 1 to 3600 days, value <code>3640</code> means permanent retention.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_storage_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_type_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log topic storage type. Valid values: <code>hot</code>: standard storage; <code>cold</code>: infrequent storage. Default value: <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log topic name. Constraints: cannot be an empty string, cannot contain the <code>|</code> character, and cannot use the following reserved names: <code>clsServiceLog</code>, <code>loglistenerStatus</code>, <code>loglistenerAlarm</code>, <code>loglistenerBusiness</code>, <code>clsServiceMetric</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1494,8 +3081,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable automatic split. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable automatic split. Default value: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_biztype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_biztype_java" style="color: inherit; text-decoration: inherit;">biz<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Topic type. <code>0</code>: log topic (default), <code>1</code>: metric topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_customkmsinfo_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customkmsinfo_java" style="color: inherit; text-decoration: inherit;">custom<wbr>Kms<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topiccustomkmsinfo">Topic<wbr>Custom<wbr>Kms<wbr>Info</a></span>
+    </dt>
+    <dd>User-defined KMS key information. If empty, the default key (alias <code>KMS-CLS</code>) is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_describes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_describes_java" style="color: inherit; text-decoration: inherit;">describes</a>
@@ -1503,8 +3105,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log Topic Description.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encryption_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryption_java" style="color: inherit; text-decoration: inherit;">encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. <code>0</code> or not passed: no encryption; <code>1</code>: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_extends__java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_extends__java" style="color: inherit; text-decoration: inherit;">extends_</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextends">Topic<wbr>Extends</a></span>
+    </dt>
+    <dd>Topic extension information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hotperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hotperiod_java" style="color: inherit; text-decoration: inherit;">hot<wbr>Period</a>
@@ -1512,8 +3129,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: turn off log settling. Non-<code>0</code>: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when <code>storageType</code> is <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_iswebtracking_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_iswebtracking_java" style="color: inherit; text-decoration: inherit;">is<wbr>Web<wbr>Tracking</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Free authentication switch. <code>false</code>: closed (default); <code>true</code>: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetid_java" style="color: inherit; text-decoration: inherit;">logset<wbr>Id</a>
@@ -1521,8 +3145,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Logset ID.</p>
-</dd><dt class="property-optional"
+    <dd>Logset ID. Get the logset ID via <code>DescribeLogsets</code> API.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsplitpartitions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsplitpartitions_java" style="color: inherit; text-decoration: inherit;">max<wbr>Split<wbr>Partitions</a>
@@ -1530,8 +3153,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partitioncount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitioncount_java" style="color: inherit; text-decoration: inherit;">partition<wbr>Count</a>
@@ -1539,8 +3161,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of log topic partitions. Default value: 1. Maximum value: 10.</p>
-</dd><dt class="property-optional"
+    <dd>Number of log topic partitions. Default: 1, maximum: 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1548,8 +3169,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Lifecycle in days. Value range: 1~366. Default value: 30.</p>
-</dd><dt class="property-optional"
+    <dd>Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value <code>3640</code> means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value <code>3640</code> means permanent retention. Metric topic: 1 to 3600 days, value <code>3640</code> means permanent retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -1557,17 +3177,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic storage type. Valid values: <code>hot</code>: standard storage; <code>cold</code>: infrequent storage. Default value: <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list. Up to 10 tag key-value pairs are supported and must be unique.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1575,8 +3193,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log topic name.</p>
-</dd></dl>
+    <dd>Log topic name. Constraints: cannot be an empty string, cannot contain the <code>|</code> character, and cannot use the following reserved names: <code>clsServiceLog</code>, <code>loglistenerStatus</code>, <code>loglistenerAlarm</code>, <code>loglistenerBusiness</code>, <code>clsServiceMetric</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1590,8 +3207,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to enable automatic split. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable automatic split. Default value: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_biztype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_biztype_nodejs" style="color: inherit; text-decoration: inherit;">biz<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Topic type. <code>0</code>: log topic (default), <code>1</code>: metric topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_customkmsinfo_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customkmsinfo_nodejs" style="color: inherit; text-decoration: inherit;">custom<wbr>Kms<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topiccustomkmsinfo">Topic<wbr>Custom<wbr>Kms<wbr>Info</a></span>
+    </dt>
+    <dd>User-defined KMS key information. If empty, the default key (alias <code>KMS-CLS</code>) is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_describes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_describes_nodejs" style="color: inherit; text-decoration: inherit;">describes</a>
@@ -1599,8 +3231,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log Topic Description.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encryption_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryption_nodejs" style="color: inherit; text-decoration: inherit;">encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. <code>0</code> or not passed: no encryption; <code>1</code>: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_extends_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_extends_nodejs" style="color: inherit; text-decoration: inherit;">extends</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextends">Topic<wbr>Extends</a></span>
+    </dt>
+    <dd>Topic extension information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hotperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hotperiod_nodejs" style="color: inherit; text-decoration: inherit;">hot<wbr>Period</a>
@@ -1608,8 +3255,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: turn off log settling. Non-<code>0</code>: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when <code>storageType</code> is <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_iswebtracking_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_iswebtracking_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Web<wbr>Tracking</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Free authentication switch. <code>false</code>: closed (default); <code>true</code>: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetid_nodejs" style="color: inherit; text-decoration: inherit;">logset<wbr>Id</a>
@@ -1617,8 +3271,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Logset ID.</p>
-</dd><dt class="property-optional"
+    <dd>Logset ID. Get the logset ID via <code>DescribeLogsets</code> API.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsplitpartitions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsplitpartitions_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Split<wbr>Partitions</a>
@@ -1626,8 +3279,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partitioncount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitioncount_nodejs" style="color: inherit; text-decoration: inherit;">partition<wbr>Count</a>
@@ -1635,8 +3287,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of log topic partitions. Default value: 1. Maximum value: 10.</p>
-</dd><dt class="property-optional"
+    <dd>Number of log topic partitions. Default: 1, maximum: 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1644,8 +3295,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Lifecycle in days. Value range: 1~366. Default value: 30.</p>
-</dd><dt class="property-optional"
+    <dd>Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value <code>3640</code> means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value <code>3640</code> means permanent retention. Metric topic: 1 to 3600 days, value <code>3640</code> means permanent retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -1653,17 +3303,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic storage type. Valid values: <code>hot</code>: standard storage; <code>cold</code>: infrequent storage. Default value: <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list. Up to 10 tag key-value pairs are supported and must be unique.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1671,8 +3319,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Log topic name.</p>
-</dd></dl>
+    <dd>Log topic name. Constraints: cannot be an empty string, cannot contain the <code>|</code> character, and cannot use the following reserved names: <code>clsServiceLog</code>, <code>loglistenerStatus</code>, <code>loglistenerAlarm</code>, <code>loglistenerBusiness</code>, <code>clsServiceMetric</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1686,8 +3333,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to enable automatic split. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable automatic split. Default value: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_biz_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_biz_type_python" style="color: inherit; text-decoration: inherit;">biz_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Topic type. <code>0</code>: log topic (default), <code>1</code>: metric topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_custom_kms_info_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_custom_kms_info_python" style="color: inherit; text-decoration: inherit;">custom_<wbr>kms_<wbr>info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topiccustomkmsinfo">Topic<wbr>Custom<wbr>Kms<wbr>Info<wbr>Args</a></span>
+    </dt>
+    <dd>User-defined KMS key information. If empty, the default key (alias <code>KMS-CLS</code>) is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_describes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_describes_python" style="color: inherit; text-decoration: inherit;">describes</a>
@@ -1695,8 +3357,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log Topic Description.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encryption_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryption_python" style="color: inherit; text-decoration: inherit;">encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. <code>0</code> or not passed: no encryption; <code>1</code>: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_extends_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_extends_python" style="color: inherit; text-decoration: inherit;">extends</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextends">Topic<wbr>Extends<wbr>Args</a></span>
+    </dt>
+    <dd>Topic extension information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hot_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hot_period_python" style="color: inherit; text-decoration: inherit;">hot_<wbr>period</a>
@@ -1704,8 +3381,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: turn off log settling. Non-<code>0</code>: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when <code>storageType</code> is <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_web_tracking_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_web_tracking_python" style="color: inherit; text-decoration: inherit;">is_<wbr>web_<wbr>tracking</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Free authentication switch. <code>false</code>: closed (default); <code>true</code>: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logset_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logset_id_python" style="color: inherit; text-decoration: inherit;">logset_<wbr>id</a>
@@ -1713,8 +3397,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Logset ID.</p>
-</dd><dt class="property-optional"
+    <dd>Logset ID. Get the logset ID via <code>DescribeLogsets</code> API.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_split_partitions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_split_partitions_python" style="color: inherit; text-decoration: inherit;">max_<wbr>split_<wbr>partitions</a>
@@ -1722,8 +3405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partition_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partition_count_python" style="color: inherit; text-decoration: inherit;">partition_<wbr>count</a>
@@ -1731,8 +3413,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of log topic partitions. Default value: 1. Maximum value: 10.</p>
-</dd><dt class="property-optional"
+    <dd>Number of log topic partitions. Default: 1, maximum: 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1740,8 +3421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Lifecycle in days. Value range: 1~366. Default value: 30.</p>
-</dd><dt class="property-optional"
+    <dd>Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value <code>3640</code> means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value <code>3640</code> means permanent retention. Metric topic: 1 to 3600 days, value <code>3640</code> means permanent retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storage_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storage_type_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
@@ -1749,17 +3429,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic storage type. Valid values: <code>hot</code>: standard storage; <code>cold</code>: infrequent storage. Default value: <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list. Up to 10 tag key-value pairs are supported and must be unique.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_name_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
@@ -1767,8 +3445,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Log topic name.</p>
-</dd></dl>
+    <dd>Log topic name. Constraints: cannot be an empty string, cannot contain the <code>|</code> character, and cannot use the following reserved names: <code>clsServiceLog</code>, <code>loglistenerStatus</code>, <code>loglistenerAlarm</code>, <code>loglistenerBusiness</code>, <code>clsServiceMetric</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1782,8 +3459,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to enable automatic split. Default value: true.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable automatic split. Default value: <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_biztype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_biztype_yaml" style="color: inherit; text-decoration: inherit;">biz<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Topic type. <code>0</code>: log topic (default), <code>1</code>: metric topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_customkmsinfo_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_customkmsinfo_yaml" style="color: inherit; text-decoration: inherit;">custom<wbr>Kms<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topiccustomkmsinfo">Property Map</a></span>
+    </dt>
+    <dd>User-defined KMS key information. If empty, the default key (alias <code>KMS-CLS</code>) is used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_describes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_describes_yaml" style="color: inherit; text-decoration: inherit;">describes</a>
@@ -1791,8 +3483,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log Topic Description.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encryption_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryption_yaml" style="color: inherit; text-decoration: inherit;">encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. <code>0</code> or not passed: no encryption; <code>1</code>: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_extends_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_extends_yaml" style="color: inherit; text-decoration: inherit;">extends</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextends">Property Map</a></span>
+    </dt>
+    <dd>Topic extension information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hotperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hotperiod_yaml" style="color: inherit; text-decoration: inherit;">hot<wbr>Period</a>
@@ -1800,8 +3507,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.</p>
-</dd><dt class="property-optional"
+    <dd><code>0</code>: turn off log settling. Non-<code>0</code>: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when <code>storageType</code> is <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_iswebtracking_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_iswebtracking_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Web<wbr>Tracking</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Free authentication switch. <code>false</code>: closed (default); <code>true</code>: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_logsetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_logsetid_yaml" style="color: inherit; text-decoration: inherit;">logset<wbr>Id</a>
@@ -1809,8 +3523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Logset ID.</p>
-</dd><dt class="property-optional"
+    <dd>Logset ID. Get the logset ID via <code>DescribeLogsets</code> API.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsplitpartitions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsplitpartitions_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Split<wbr>Partitions</a>
@@ -1818,8 +3531,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partitioncount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitioncount_yaml" style="color: inherit; text-decoration: inherit;">partition<wbr>Count</a>
@@ -1827,8 +3539,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of log topic partitions. Default value: 1. Maximum value: 10.</p>
-</dd><dt class="property-optional"
+    <dd>Number of log topic partitions. Default: 1, maximum: 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -1836,8 +3547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Lifecycle in days. Value range: 1~366. Default value: 30.</p>
-</dd><dt class="property-optional"
+    <dd>Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value <code>3640</code> means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value <code>3640</code> means permanent retention. Metric topic: 1 to 3600 days, value <code>3640</code> means permanent retention.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_storagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_storagetype_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -1845,17 +3555,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.</p>
-</dd><dt class="property-optional"
+    <dd>Log topic storage type. Valid values: <code>hot</code>: standard storage; <code>cold</code>: infrequent storage. Default value: <code>hot</code>. Not supported for metric topics.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list. Up to 10 tag key-value pairs are supported and must be unique.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1863,8 +3571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Log topic name.</p>
-</dd></dl>
+    <dd>Log topic name. Constraints: cannot be an empty string, cannot contain the <code>|</code> character, and cannot use the following reserved names: <code>clsServiceLog</code>, <code>loglistenerStatus</code>, <code>loglistenerAlarm</code>, <code>loglistenerBusiness</code>, <code>clsServiceMetric</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1874,6 +3581,642 @@ The following state arguments are supported:
 
 
 
+
+## Supporting Types
+
+
+
+<h4 id="topiccustomkmsinfo">
+Topic<wbr>Custom<wbr>Kms<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Topic<wbr>Custom<wbr>Kms<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="kmskeyid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>KMS key ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="kmsregion_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>KMS region. Refer to Tencent Cloud KMS documentation for supported regions. Format: <code>ap-guangzhou</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="kmskeyid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>KMS key ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="kmsregion_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>KMS region. Refer to Tencent Cloud KMS documentation for supported regions. Format: <code>ap-guangzhou</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="kms_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_id_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>KMS key ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="kms_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_region_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>KMS region. Refer to Tencent Cloud KMS documentation for supported regions. Format: <code>ap-guangzhou</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="kmskeyid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>KMS key ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="kmsregion_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>KMS region. Refer to Tencent Cloud KMS documentation for supported regions. Format: <code>ap-guangzhou</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="kmskeyid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>KMS key ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="kmsregion_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>KMS region. Refer to Tencent Cloud KMS documentation for supported regions. Format: <code>ap-guangzhou</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="kms_key_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_id_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>KMS key ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="kms_region_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_region_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>KMS region. Refer to Tencent Cloud KMS documentation for supported regions. Format: <code>ap-guangzhou</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="kmskeyid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>KMS key ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="kmsregion_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>KMS region. Refer to Tencent Cloud KMS documentation for supported regions. Format: <code>ap-guangzhou</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="topicextends">
+Topic<wbr>Extends<pulumi-choosable type="language" values="python,go" class="inline">, Topic<wbr>Extends<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="anonymousaccess_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anonymousaccess_csharp" style="color: inherit; text-decoration: inherit;">Anonymous<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextendsanonymousaccess">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Topic<wbr>Extends<wbr>Anonymous<wbr>Access</a></span>
+    </dt>
+    <dd>Log topic authentication free configuration information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="anonymousaccess_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anonymousaccess_go" style="color: inherit; text-decoration: inherit;">Anonymous<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextendsanonymousaccess">Topic<wbr>Extends<wbr>Anonymous<wbr>Access</a></span>
+    </dt>
+    <dd>Log topic authentication free configuration information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="anonymous_access_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anonymous_access_hcl" style="color: inherit; text-decoration: inherit;">anonymous_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextendsanonymousaccess">object</a></span>
+    </dt>
+    <dd>Log topic authentication free configuration information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="anonymousaccess_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anonymousaccess_java" style="color: inherit; text-decoration: inherit;">anonymous<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextendsanonymousaccess">Topic<wbr>Extends<wbr>Anonymous<wbr>Access</a></span>
+    </dt>
+    <dd>Log topic authentication free configuration information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="anonymousaccess_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anonymousaccess_nodejs" style="color: inherit; text-decoration: inherit;">anonymous<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextendsanonymousaccess">Topic<wbr>Extends<wbr>Anonymous<wbr>Access</a></span>
+    </dt>
+    <dd>Log topic authentication free configuration information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="anonymous_access_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anonymous_access_python" style="color: inherit; text-decoration: inherit;">anonymous_<wbr>access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextendsanonymousaccess">Topic<wbr>Extends<wbr>Anonymous<wbr>Access</a></span>
+    </dt>
+    <dd>Log topic authentication free configuration information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="anonymousaccess_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anonymousaccess_yaml" style="color: inherit; text-decoration: inherit;">anonymous<wbr>Access</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextendsanonymousaccess">Property Map</a></span>
+    </dt>
+    <dd>Log topic authentication free configuration information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="topicextendsanonymousaccess">
+Topic<wbr>Extends<wbr>Anonymous<wbr>Access<pulumi-choosable type="language" values="python,go" class="inline">, Topic<wbr>Extends<wbr>Anonymous<wbr>Access<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="conditions_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_csharp" style="color: inherit; text-decoration: inherit;">Conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextendsanonymousaccesscondition">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Topic<wbr>Extends<wbr>Anonymous<wbr>Access<wbr>Condition&gt;</a></span>
+    </dt>
+    <dd>Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="operations_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operations_csharp" style="color: inherit; text-decoration: inherit;">Operations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="conditions_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_go" style="color: inherit; text-decoration: inherit;">Conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextendsanonymousaccesscondition">[]Topic<wbr>Extends<wbr>Anonymous<wbr>Access<wbr>Condition</a></span>
+    </dt>
+    <dd>Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="operations_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operations_go" style="color: inherit; text-decoration: inherit;">Operations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="conditions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_hcl" style="color: inherit; text-decoration: inherit;">conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextendsanonymousaccesscondition">list(object)</a></span>
+    </dt>
+    <dd>Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="operations_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operations_hcl" style="color: inherit; text-decoration: inherit;">operations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="conditions_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_java" style="color: inherit; text-decoration: inherit;">conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextendsanonymousaccesscondition">List&lt;Topic<wbr>Extends<wbr>Anonymous<wbr>Access<wbr>Condition&gt;</a></span>
+    </dt>
+    <dd>Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="operations_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operations_java" style="color: inherit; text-decoration: inherit;">operations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="conditions_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_nodejs" style="color: inherit; text-decoration: inherit;">conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextendsanonymousaccesscondition">Topic<wbr>Extends<wbr>Anonymous<wbr>Access<wbr>Condition[]</a></span>
+    </dt>
+    <dd>Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="operations_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operations_nodejs" style="color: inherit; text-decoration: inherit;">operations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="conditions_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_python" style="color: inherit; text-decoration: inherit;">conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextendsanonymousaccesscondition">Sequence[Topic<wbr>Extends<wbr>Anonymous<wbr>Access<wbr>Condition]</a></span>
+    </dt>
+    <dd>Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="operations_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operations_python" style="color: inherit; text-decoration: inherit;">operations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="conditions_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_yaml" style="color: inherit; text-decoration: inherit;">conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#topicextendsanonymousaccesscondition">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="operations_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operations_yaml" style="color: inherit; text-decoration: inherit;">operations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="topicextendsanonymousaccesscondition">
+Topic<wbr>Extends<wbr>Anonymous<wbr>Access<wbr>Condition<pulumi-choosable type="language" values="python,go" class="inline">, Topic<wbr>Extends<wbr>Anonymous<wbr>Access<wbr>Condition<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="attributes_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attributes_csharp" style="color: inherit; text-decoration: inherit;">Attributes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Condition attribute, currently only VpcID is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="conditionvalue_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditionvalue_csharp" style="color: inherit; text-decoration: inherit;">Condition<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The value of the corresponding conditional attribute.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_csharp" style="color: inherit; text-decoration: inherit;">Rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Conditional rule, 1: equal, 2: not equal.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="attributes_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attributes_go" style="color: inherit; text-decoration: inherit;">Attributes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Condition attribute, currently only VpcID is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="conditionvalue_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditionvalue_go" style="color: inherit; text-decoration: inherit;">Condition<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The value of the corresponding conditional attribute.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_go" style="color: inherit; text-decoration: inherit;">Rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Conditional rule, 1: equal, 2: not equal.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="attributes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attributes_hcl" style="color: inherit; text-decoration: inherit;">attributes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Condition attribute, currently only VpcID is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_value_hcl" style="color: inherit; text-decoration: inherit;">condition_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The value of the corresponding conditional attribute.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_hcl" style="color: inherit; text-decoration: inherit;">rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Conditional rule, 1: equal, 2: not equal.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="attributes_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attributes_java" style="color: inherit; text-decoration: inherit;">attributes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Condition attribute, currently only VpcID is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="conditionvalue_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditionvalue_java" style="color: inherit; text-decoration: inherit;">condition<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The value of the corresponding conditional attribute.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_java" style="color: inherit; text-decoration: inherit;">rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Conditional rule, 1: equal, 2: not equal.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="attributes_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attributes_nodejs" style="color: inherit; text-decoration: inherit;">attributes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Condition attribute, currently only VpcID is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="conditionvalue_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditionvalue_nodejs" style="color: inherit; text-decoration: inherit;">condition<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The value of the corresponding conditional attribute.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_nodejs" style="color: inherit; text-decoration: inherit;">rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Conditional rule, 1: equal, 2: not equal.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="attributes_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attributes_python" style="color: inherit; text-decoration: inherit;">attributes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Condition attribute, currently only VpcID is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_value_python" style="color: inherit; text-decoration: inherit;">condition_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The value of the corresponding conditional attribute.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_python" style="color: inherit; text-decoration: inherit;">rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Conditional rule, 1: equal, 2: not equal.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="attributes_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attributes_yaml" style="color: inherit; text-decoration: inherit;">attributes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Condition attribute, currently only VpcID is supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="conditionvalue_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditionvalue_yaml" style="color: inherit; text-decoration: inherit;">condition<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The value of the corresponding conditional attribute.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_yaml" style="color: inherit; text-decoration: inherit;">rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Conditional rule, 1: equal, 2: not equal.</dd></dl>
+</pulumi-choosable>
+</div>
 
 ## Import
 
@@ -1885,6 +4228,15 @@ cls topic can be imported using the id, e.g.
 $ pulumi import tencentcloud:Cls/topic:Topic example 2f5764c1-c833-44c5-84c7-950979b2a278
 ```
 
+cls metric topic (biz_type=1) can be imported using the id with "#1" suffix, e.g.
+
+```sh
+$ pulumi import tencentcloud:Cls/topic:Topic example 2f5764c1-c833-44c5-84c7-950979b2a278#1
+```
+
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1896,7 +4248,6 @@ $ pulumi import tencentcloud:Cls/topic:Topic example 2f5764c1-c833-44c5-84c7-950
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

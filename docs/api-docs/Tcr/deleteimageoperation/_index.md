@@ -2,9 +2,11 @@
 ---
 title: "DeleteImageOperation"
 title_tag: "tencentcloud.Tcr.DeleteImageOperation"
-meta_desc: "Documentation for the tencentcloud.Tcr.DeleteImageOperation resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to delete the specified tcr image."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,19 +20,26 @@ Provides a resource to delete the specified tcr image.
 
 ### To delete the specified image
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
+const example = new tencentcloud.tcr.Instance("example", {
+    name: "tf-example-tcr",
     instanceType: "premium",
     tags: {
         createdBy: "terraform",
     },
 });
-const exampleNamespace = new tencentcloud.tcr.Namespace("exampleNamespace", {
-    instanceId: exampleInstance.id,
+const exampleNamespace = new tencentcloud.tcr.Namespace("example", {
+    instanceId: example.id,
+    name: "tf_example_ns",
     isPublic: true,
     isAutoScan: true,
     isPreventVul: true,
@@ -39,101 +48,72 @@ const exampleNamespace = new tencentcloud.tcr.Namespace("exampleNamespace", {
         cveId: "cve-xxxxx",
     }],
 });
-const exampleDeleteImageOperation = new tencentcloud.tcr.DeleteImageOperation("exampleDeleteImageOperation", {
-    registryId: exampleInstance.id,
+const exampleDeleteImageOperation = new tencentcloud.tcr.DeleteImageOperation("example", {
+    registryId: example.id,
     repositoryName: "repo",
     imageVersion: "v1",
     namespaceName: exampleNamespace.name,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_instance = tencentcloud.tcr.Instance("exampleInstance",
+example = tencentcloud.tcr.Instance("example",
+    name="tf-example-tcr",
     instance_type="premium",
     tags={
         "createdBy": "terraform",
     })
-example_namespace = tencentcloud.tcr.Namespace("exampleNamespace",
-    instance_id=example_instance.id,
+example_namespace = tencentcloud.tcr.Namespace("example",
+    instance_id=example.id,
+    name="tf_example_ns",
     is_public=True,
     is_auto_scan=True,
     is_prevent_vul=True,
     severity="medium",
-    cve_whitelist_items=[tencentcloud.tcr.NamespaceCveWhitelistItemArgs(
-        cve_id="cve-xxxxx",
-    )])
-example_delete_image_operation = tencentcloud.tcr.DeleteImageOperation("exampleDeleteImageOperation",
-    registry_id=example_instance.id,
+    cve_whitelist_items=[{
+        "cve_id": "cve-xxxxx",
+    }])
+example_delete_image_operation = tencentcloud.tcr.DeleteImageOperation("example",
+    registry_id=example.id,
     repository_name="repo",
     image_version="v1",
     namespace_name=example_namespace.name)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new()
-    {
-        InstanceType = "premium",
-        Tags = 
-        {
-            { "createdBy", "terraform" },
-        },
-    });
-
-    var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new()
-    {
-        InstanceId = exampleInstance.Id,
-        IsPublic = true,
-        IsAutoScan = true,
-        IsPreventVul = true,
-        Severity = "medium",
-        CveWhitelistItems = new[]
-        {
-            new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
-            {
-                CveId = "cve-xxxxx",
-            },
-        },
-    });
-
-    var exampleDeleteImageOperation = new Tencentcloud.Tcr.DeleteImageOperation("exampleDeleteImageOperation", new()
-    {
-        RegistryId = exampleInstance.Id,
-        RepositoryName = "repo",
-        ImageVersion = "v1",
-        NamespaceName = exampleNamespace.Name,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcr"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+		example, err := tcr.NewInstance(ctx, "example", &tcr.InstanceArgs{
+			Name:         pulumi.String("tf-example-tcr"),
 			InstanceType: pulumi.String("premium"),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
 			},
 		})
 		if err != nil {
 			return err
 		}
-		exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
-			InstanceId:   exampleInstance.ID(),
+		exampleNamespace, err := tcr.NewNamespace(ctx, "example", &tcr.NamespaceArgs{
+			InstanceId:   example.ID().ToIDOutput().ToStringOutput(),
+			Name:         pulumi.String("tf_example_ns"),
 			IsPublic:     pulumi.Bool(true),
 			IsAutoScan:   pulumi.Bool(true),
 			IsPreventVul: pulumi.Bool(true),
@@ -147,8 +127,8 @@ func main() {
 		if err != nil {
 			return err
 		}
-		_, err = Tcr.NewDeleteImageOperation(ctx, "exampleDeleteImageOperation", &Tcr.DeleteImageOperationArgs{
-			RegistryId:     exampleInstance.ID(),
+		_, err = tcr.NewDeleteImageOperation(ctx, "example", &tcr.DeleteImageOperationArgs{
+			RegistryId:     example.ID().ToIDOutput().ToStringOutput(),
 			RepositoryName: pulumi.String("repo"),
 			ImageVersion:   pulumi.String("v1"),
 			NamespaceName:  exampleNamespace.Name,
@@ -160,6 +140,61 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Tcr.Instance("example", new()
+    {
+        Name = "tf-example-tcr",
+        InstanceType = "premium",
+        Tags = 
+        {
+            { "createdBy", "terraform" },
+        },
+    });
+
+    var exampleNamespace = new Tencentcloud.Tcr.Namespace("example", new()
+    {
+        InstanceId = example.Id,
+        Name = "tf_example_ns",
+        IsPublic = true,
+        IsAutoScan = true,
+        IsPreventVul = true,
+        Severity = "medium",
+        CveWhitelistItems = new[]
+        {
+            new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+            {
+                CveId = "cve-xxxxx",
+            },
+        },
+    });
+
+    var exampleDeleteImageOperation = new Tencentcloud.Tcr.DeleteImageOperation("example", new()
+    {
+        RegistryId = example.Id,
+        RepositoryName = "repo",
+        ImageVersion = "v1",
+        NamespaceName = exampleNamespace.Name,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -173,8 +208,8 @@ import com.pulumi.tencentcloud.Tcr.NamespaceArgs;
 import com.pulumi.tencentcloud.Tcr.inputs.NamespaceCveWhitelistItemArgs;
 import com.pulumi.tencentcloud.Tcr.DeleteImageOperation;
 import com.pulumi.tencentcloud.Tcr.DeleteImageOperationArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -186,13 +221,15 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var exampleInstance = new Instance("exampleInstance", InstanceArgs.builder()        
+        var example = new Instance("example", InstanceArgs.builder()
+            .name("tf-example-tcr")
             .instanceType("premium")
             .tags(Map.of("createdBy", "terraform"))
             .build());
 
-        var exampleNamespace = new Namespace("exampleNamespace", NamespaceArgs.builder()        
-            .instanceId(exampleInstance.id())
+        var exampleNamespace = new Namespace("exampleNamespace", NamespaceArgs.builder()
+            .instanceId(example.id())
+            .name("tf_example_ns")
             .isPublic(true)
             .isAutoScan(true)
             .isPreventVul(true)
@@ -202,8 +239,8 @@ public class App {
                 .build())
             .build());
 
-        var exampleDeleteImageOperation = new DeleteImageOperation("exampleDeleteImageOperation", DeleteImageOperationArgs.builder()        
-            .registryId(exampleInstance.id())
+        var exampleDeleteImageOperation = new DeleteImageOperation("exampleDeleteImageOperation", DeleteImageOperationArgs.builder()
+            .registryId(example.id())
             .repositoryName("repo")
             .imageVersion("v1")
             .namespaceName(exampleNamespace.name())
@@ -212,18 +249,26 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  exampleInstance:
+  example:
     type: tencentcloud:Tcr:Instance
     properties:
+      name: tf-example-tcr
       instanceType: premium
       tags:
         createdBy: terraform
   exampleNamespace:
     type: tencentcloud:Tcr:Namespace
+    name: example
     properties:
-      instanceId: ${exampleInstance.id}
+      instanceId: ${example.id}
+      name: tf_example_ns
       isPublic: true
       isAutoScan: true
       isPreventVul: true
@@ -232,76 +277,137 @@ resources:
         - cveId: cve-xxxxx
   exampleDeleteImageOperation:
     type: tencentcloud:Tcr:DeleteImageOperation
+    name: example
     properties:
-      registryId: ${exampleInstance.id}
+      registryId: ${example.id}
       repositoryName: repo
       imageVersion: v1
-      # the image want to delete
       namespaceName: ${exampleNamespace.name}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tcr_instance" "example" {
+  name          = "tf-example-tcr"
+  instance_type = "premium"
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+resource "tencentcloud_tcr_namespace" "example" {
+  instance_id    = tencentcloud_tcr_instance.example.id
+  name           = "tf_example_ns"
+  is_public      = true
+  is_auto_scan   = true
+  is_prevent_vul = true
+  severity       = "medium"
+  cve_whitelist_items {
+    cve_id = "cve-xxxxx"
+  }
+}
+resource "tencentcloud_tcr_deleteimageoperation" "example" {
+  registry_id     = tencentcloud_tcr_instance.example.id
+  repository_name = "repo"
+  image_version   = "v1"
+  namespace_name  = tencentcloud_tcr_namespace.example.name
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [DeleteImage](https://www.tencentcloud.com/document/api/1051/50726)
 
 
 
 ## Create DeleteImageOperation Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">DeleteImageOperation</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DeleteImageOperationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">DeleteImageOperation</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DeleteImageOperationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">DeleteImageOperation</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DeleteImageOperationArgs</a></span><span class="p">,</span>
+                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">DeleteImageOperation</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                          <span class="nx">image_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                          <span class="nx">namespace_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                          <span class="nx">registry_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                         <span class="nx">repository_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">DeleteImageOperation</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DeleteImageOperationArgs</a></span><span class="p">,</span>
-                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                         <span class="nx">repository_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDeleteImageOperation</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DeleteImageOperationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DeleteImageOperation</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDeleteImageOperation</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DeleteImageOperationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DeleteImageOperation</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">DeleteImageOperation</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DeleteImageOperationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">DeleteImageOperation</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DeleteImageOperationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">DeleteImageOperation</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DeleteImageOperationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">DeleteImageOperation</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DeleteImageOperationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcr:DeleteImageOperation</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcr:DeleteImageOperation</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tcr_delete_image_operation&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -322,7 +428,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -439,11 +545,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## DeleteImageOperation Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The DeleteImageOperation resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -459,8 +573,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>image version name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>image version name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="namespacename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -468,8 +581,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>namespace name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="registryid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_csharp" style="color: inherit; text-decoration: inherit;">Registry<wbr>Id</a>
@@ -477,8 +589,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>instance id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="repositoryname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryname_csharp" style="color: inherit; text-decoration: inherit;">Repository<wbr>Name</a>
@@ -486,8 +597,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd></dl>
+    <dd>repository name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -501,8 +611,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>image version name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>image version name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="namespacename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -510,8 +619,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>namespace name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="registryid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_go" style="color: inherit; text-decoration: inherit;">Registry<wbr>Id</a>
@@ -519,8 +627,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>instance id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="repositoryname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryname_go" style="color: inherit; text-decoration: inherit;">Repository<wbr>Name</a>
@@ -528,8 +635,45 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd></dl>
+    <dd>repository name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="image_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_version_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>image version name.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="namespace_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace name.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="registry_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registry_id_hcl" style="color: inherit; text-decoration: inherit;">registry_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="repository_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repository_name_hcl" style="color: inherit; text-decoration: inherit;">repository_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>repository name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -543,8 +687,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>image version name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>image version name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="namespacename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -552,8 +695,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>namespace name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="registryid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_java" style="color: inherit; text-decoration: inherit;">registry<wbr>Id</a>
@@ -561,8 +703,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>instance id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="repositoryname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryname_java" style="color: inherit; text-decoration: inherit;">repository<wbr>Name</a>
@@ -570,8 +711,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd></dl>
+    <dd>repository name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -585,8 +725,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>image version name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>image version name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="namespacename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -594,8 +733,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>namespace name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="registryid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_nodejs" style="color: inherit; text-decoration: inherit;">registry<wbr>Id</a>
@@ -603,8 +741,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>instance id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="repositoryname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryname_nodejs" style="color: inherit; text-decoration: inherit;">repository<wbr>Name</a>
@@ -612,8 +749,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd></dl>
+    <dd>repository name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -627,8 +763,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>image version name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>image version name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="namespace_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_name_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
@@ -636,8 +771,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>namespace name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="registry_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registry_id_python" style="color: inherit; text-decoration: inherit;">registry_<wbr>id</a>
@@ -645,8 +779,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>instance id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="repository_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repository_name_python" style="color: inherit; text-decoration: inherit;">repository_<wbr>name</a>
@@ -654,8 +787,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd></dl>
+    <dd>repository name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -669,8 +801,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>image version name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>image version name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="namespacename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespacename_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -678,8 +809,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>namespace name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="registryid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#registryid_yaml" style="color: inherit; text-decoration: inherit;">registry<wbr>Id</a>
@@ -687,8 +817,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>instance id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="repositoryname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repositoryname_yaml" style="color: inherit; text-decoration: inherit;">repository<wbr>Name</a>
@@ -696,8 +825,7 @@ The DeleteImageOperation resource accepts the following [input](/docs/intro/conc
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd></dl>
+    <dd>repository name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -718,8 +846,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -733,8 +860,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -748,8 +888,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -763,8 +902,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -778,8 +916,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -793,8 +930,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -804,18 +940,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing DeleteImageOperation resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DeleteImageOperationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">DeleteImageOperation</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DeleteImageOperationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">DeleteImageOperation</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -823,104 +959,143 @@ Get an existing DeleteImageOperation resource's state with the given name, ID, a
         <span class="nx">namespace_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">registry_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">repository_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> DeleteImageOperation</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDeleteImageOperation<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DeleteImageOperationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DeleteImageOperation</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDeleteImageOperation<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DeleteImageOperationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DeleteImageOperation</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">DeleteImageOperation</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DeleteImageOperationState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">DeleteImageOperation</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DeleteImageOperationState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">DeleteImageOperation</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DeleteImageOperationState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">DeleteImageOperation</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DeleteImageOperationState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingDeleteImageOperation</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tcr:DeleteImageOperation</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tcr_delete_image_operation</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DeleteImageOperationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DeleteImageOperationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -928,28 +1103,31 @@ Get an existing DeleteImageOperation resource's state with the given name, ID, a
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DeleteImageOperationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -957,28 +1135,31 @@ Get an existing DeleteImageOperation resource's state with the given name, ID, a
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DeleteImageOperationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -998,8 +1179,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>image version name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>image version name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespacename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacename_csharp" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -1007,8 +1187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>namespace name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_registryid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_registryid_csharp" style="color: inherit; text-decoration: inherit;">Registry<wbr>Id</a>
@@ -1016,8 +1195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>instance id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_repositoryname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_repositoryname_csharp" style="color: inherit; text-decoration: inherit;">Repository<wbr>Name</a>
@@ -1025,8 +1203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd></dl>
+    <dd>repository name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1040,8 +1217,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>image version name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>image version name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespacename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacename_go" style="color: inherit; text-decoration: inherit;">Namespace<wbr>Name</a>
@@ -1049,8 +1225,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>namespace name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_registryid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_registryid_go" style="color: inherit; text-decoration: inherit;">Registry<wbr>Id</a>
@@ -1058,8 +1233,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>instance id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_repositoryname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_repositoryname_go" style="color: inherit; text-decoration: inherit;">Repository<wbr>Name</a>
@@ -1067,8 +1241,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd></dl>
+    <dd>repository name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_image_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_image_version_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>image version name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_namespace_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_name_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>namespace name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_registry_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_registry_id_hcl" style="color: inherit; text-decoration: inherit;">registry_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_repository_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_repository_name_hcl" style="color: inherit; text-decoration: inherit;">repository_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>repository name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1082,8 +1293,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>image version name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>image version name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespacename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacename_java" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -1091,8 +1301,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>namespace name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_registryid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_registryid_java" style="color: inherit; text-decoration: inherit;">registry<wbr>Id</a>
@@ -1100,8 +1309,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>instance id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_repositoryname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_repositoryname_java" style="color: inherit; text-decoration: inherit;">repository<wbr>Name</a>
@@ -1109,8 +1317,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd></dl>
+    <dd>repository name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1124,8 +1331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>image version name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>image version name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespacename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacename_nodejs" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -1133,8 +1339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>namespace name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_registryid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_registryid_nodejs" style="color: inherit; text-decoration: inherit;">registry<wbr>Id</a>
@@ -1142,8 +1347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>instance id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_repositoryname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_repositoryname_nodejs" style="color: inherit; text-decoration: inherit;">repository<wbr>Name</a>
@@ -1151,8 +1355,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd></dl>
+    <dd>repository name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1166,8 +1369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>image version name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>image version name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespace_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_name_python" style="color: inherit; text-decoration: inherit;">namespace_<wbr>name</a>
@@ -1175,8 +1377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>namespace name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_registry_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_registry_id_python" style="color: inherit; text-decoration: inherit;">registry_<wbr>id</a>
@@ -1184,8 +1385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>instance id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_repository_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_repository_name_python" style="color: inherit; text-decoration: inherit;">repository_<wbr>name</a>
@@ -1193,8 +1393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd></dl>
+    <dd>repository name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1208,8 +1407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>image version name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>image version name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespacename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespacename_yaml" style="color: inherit; text-decoration: inherit;">namespace<wbr>Name</a>
@@ -1217,8 +1415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>namespace name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>namespace name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_registryid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_registryid_yaml" style="color: inherit; text-decoration: inherit;">registry<wbr>Id</a>
@@ -1226,8 +1423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>instance id.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_repositoryname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_repositoryname_yaml" style="color: inherit; text-decoration: inherit;">repository<wbr>Name</a>
@@ -1235,8 +1431,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>repository name.</p>
-</dd></dl>
+    <dd>repository name.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1255,7 +1450,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

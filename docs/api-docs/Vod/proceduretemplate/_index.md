@@ -2,9 +2,11 @@
 ---
 title: "ProcedureTemplate"
 title_tag: "tencentcloud.Vod.ProcedureTemplate"
-meta_desc: "Documentation for the tencentcloud.Vod.ProcedureTemplate resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a VOD procedure template."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -17,66 +19,81 @@ Provide a resource to create a VOD procedure template.
 
 
 ## Create ProcedureTemplate Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ProcedureTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">ProcedureTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ProcedureTemplate</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">ProcedureTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ProcedureTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                      <span class="nx">ai_analysis_task</span><span class="p">:</span> <span class="nx">Optional[_vod.ProcedureTemplateAiAnalysisTaskArgs]</span> = None<span class="p">,</span>
-                      <span class="nx">ai_recognition_task</span><span class="p">:</span> <span class="nx">Optional[_vod.ProcedureTemplateAiRecognitionTaskArgs]</span> = None<span class="p">,</span>
-                      <span class="nx">comment</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                      <span class="nx">media_process_task</span><span class="p">:</span> <span class="nx">Optional[_vod.ProcedureTemplateMediaProcessTaskArgs]</span> = None<span class="p">,</span>
-                      <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                      <span class="nx">review_audio_video_task</span><span class="p">:</span> <span class="nx">Optional[_vod.ProcedureTemplateReviewAudioVideoTaskArgs]</span> = None<span class="p">,</span>
-                      <span class="nx">sub_app_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ProcedureTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                       <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[ProcedureTemplateArgs]</a></span> = None<span class="p">,</span>
-                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ProcedureTemplate</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                      <span class="nx">ai_analysis_task</span><span class="p">:</span> <span class="nx">Optional[ProcedureTemplateAiAnalysisTaskArgs]</span> = None<span class="p">,</span>
+                      <span class="nx">ai_recognition_task</span><span class="p">:</span> <span class="nx">Optional[ProcedureTemplateAiRecognitionTaskArgs]</span> = None<span class="p">,</span>
+                      <span class="nx">comment</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                      <span class="nx">media_process_task</span><span class="p">:</span> <span class="nx">Optional[ProcedureTemplateMediaProcessTaskArgs]</span> = None<span class="p">,</span>
+                      <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                      <span class="nx">review_audio_video_task</span><span class="p">:</span> <span class="nx">Optional[ProcedureTemplateReviewAudioVideoTaskArgs]</span> = None<span class="p">,</span>
+                      <span class="nx">sub_app_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewProcedureTemplate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">ProcedureTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ProcedureTemplate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewProcedureTemplate</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">ProcedureTemplateArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ProcedureTemplate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ProcedureTemplate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProcedureTemplateArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ProcedureTemplate</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProcedureTemplateArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ProcedureTemplate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProcedureTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ProcedureTemplate</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ProcedureTemplateArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vod:ProcedureTemplate</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vod:ProcedureTemplate</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_vod_procedure_template&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -97,7 +114,7 @@ Provide a resource to create a VOD procedure template.
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -214,11 +231,19 @@ Provide a resource to create a VOD procedure template.
 </pulumi-choosable>
 </div>
 
+
+
 ## ProcedureTemplate Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ProcedureTemplate resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -232,19 +257,17 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aianalysistask_csharp" style="color: inherit; text-decoration: inherit;">Ai<wbr>Analysis<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplateaianalysistask">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplateaianalysistask">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task</a></span>
     </dt>
-    <dd><p>Parameter of AI-based content analysis task.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter of AI-based content analysis task.</dd><dt class="property-optional"
             title="Optional">
         <span id="airecognitiontask_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#airecognitiontask_csharp" style="color: inherit; text-decoration: inherit;">Ai<wbr>Recognition<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplateairecognitiontask">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplateairecognitiontask">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_csharp" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -252,17 +275,15 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="mediaprocesstask_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mediaprocesstask_csharp" style="color: inherit; text-decoration: inherit;">Media<wbr>Process<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task</a></span>
     </dt>
-    <dd><p>Parameter of video processing task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Parameter of video processing task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -270,17 +291,15 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow name (up to 20 characters).</p>
-</dd><dt class="property-optional"
+    <dd>Task flow name (up to 20 characters).</dd><dt class="property-optional"
             title="Optional">
         <span id="reviewaudiovideotask_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reviewaudiovideotask_csharp" style="color: inherit; text-decoration: inherit;">Review<wbr>Audio<wbr>Video<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -288,8 +307,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd></dl>
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -303,8 +321,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplateaianalysistask">Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Parameter of AI-based content analysis task.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter of AI-based content analysis task.</dd><dt class="property-optional"
             title="Optional">
         <span id="airecognitiontask_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#airecognitiontask_go" style="color: inherit; text-decoration: inherit;">Ai<wbr>Recognition<wbr>Task</a>
@@ -312,8 +329,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplateairecognitiontask">Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_go" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -321,8 +337,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="mediaprocesstask_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mediaprocesstask_go" style="color: inherit; text-decoration: inherit;">Media<wbr>Process<wbr>Task</a>
@@ -330,8 +345,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Parameter of video processing task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Parameter of video processing task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -339,8 +353,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow name (up to 20 characters).</p>
-</dd><dt class="property-optional"
+    <dd>Task flow name (up to 20 characters).</dd><dt class="property-optional"
             title="Optional">
         <span id="reviewaudiovideotask_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reviewaudiovideotask_go" style="color: inherit; text-decoration: inherit;">Review<wbr>Audio<wbr>Video<wbr>Task</a>
@@ -348,8 +361,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -357,8 +369,69 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd></dl>
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="ai_analysis_task_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ai_analysis_task_hcl" style="color: inherit; text-decoration: inherit;">ai_<wbr>analysis_<wbr>task</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplateaianalysistask">object</a></span>
+    </dt>
+    <dd>Parameter of AI-based content analysis task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ai_recognition_task_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ai_recognition_task_hcl" style="color: inherit; text-decoration: inherit;">ai_<wbr>recognition_<wbr>task</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplateairecognitiontask">object</a></span>
+    </dt>
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="comment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_hcl" style="color: inherit; text-decoration: inherit;">comment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="media_process_task_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#media_process_task_hcl" style="color: inherit; text-decoration: inherit;">media_<wbr>process_<wbr>task</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstask">object</a></span>
+    </dt>
+    <dd>Parameter of video processing task.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task flow name (up to 20 characters).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="review_audio_video_task_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#review_audio_video_task_hcl" style="color: inherit; text-decoration: inherit;">review_<wbr>audio_<wbr>video_<wbr>task</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">object</a></span>
+    </dt>
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -370,19 +443,17 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aianalysistask_java" style="color: inherit; text-decoration: inherit;">ai<wbr>Analysis<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplateaianalysistask">Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplateaianalysistask">Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task</a></span>
     </dt>
-    <dd><p>Parameter of AI-based content analysis task.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter of AI-based content analysis task.</dd><dt class="property-optional"
             title="Optional">
         <span id="airecognitiontask_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#airecognitiontask_java" style="color: inherit; text-decoration: inherit;">ai<wbr>Recognition<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplateairecognitiontask">Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplateairecognitiontask">Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_java" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -390,17 +461,15 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="mediaprocesstask_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mediaprocesstask_java" style="color: inherit; text-decoration: inherit;">media<wbr>Process<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task</a></span>
     </dt>
-    <dd><p>Parameter of video processing task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Parameter of video processing task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -408,17 +477,15 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task flow name (up to 20 characters).</p>
-</dd><dt class="property-optional"
+    <dd>Task flow name (up to 20 characters).</dd><dt class="property-optional"
             title="Optional">
         <span id="reviewaudiovideotask_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reviewaudiovideotask_java" style="color: inherit; text-decoration: inherit;">review<wbr>Audio<wbr>Video<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_java" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -426,8 +493,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd></dl>
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -439,19 +505,17 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aianalysistask_nodejs" style="color: inherit; text-decoration: inherit;">ai<wbr>Analysis<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplateaianalysistask">Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplateaianalysistask">Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task</a></span>
     </dt>
-    <dd><p>Parameter of AI-based content analysis task.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter of AI-based content analysis task.</dd><dt class="property-optional"
             title="Optional">
         <span id="airecognitiontask_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#airecognitiontask_nodejs" style="color: inherit; text-decoration: inherit;">ai<wbr>Recognition<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplateairecognitiontask">Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplateairecognitiontask">Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_nodejs" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -459,17 +523,15 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="mediaprocesstask_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mediaprocesstask_nodejs" style="color: inherit; text-decoration: inherit;">media<wbr>Process<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task</a></span>
     </dt>
-    <dd><p>Parameter of video processing task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Parameter of video processing task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -477,17 +539,15 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow name (up to 20 characters).</p>
-</dd><dt class="property-optional"
+    <dd>Task flow name (up to 20 characters).</dd><dt class="property-optional"
             title="Optional">
         <span id="reviewaudiovideotask_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reviewaudiovideotask_nodejs" style="color: inherit; text-decoration: inherit;">review<wbr>Audio<wbr>Video<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -495,8 +555,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd></dl>
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -510,8 +569,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplateaianalysistask">Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Parameter of AI-based content analysis task.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter of AI-based content analysis task.</dd><dt class="property-optional"
             title="Optional">
         <span id="ai_recognition_task_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ai_recognition_task_python" style="color: inherit; text-decoration: inherit;">ai_<wbr>recognition_<wbr>task</a>
@@ -519,8 +577,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplateairecognitiontask">Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_python" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -528,8 +585,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="media_process_task_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#media_process_task_python" style="color: inherit; text-decoration: inherit;">media_<wbr>process_<wbr>task</a>
@@ -537,8 +593,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Parameter of video processing task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Parameter of video processing task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -546,8 +601,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task flow name (up to 20 characters).</p>
-</dd><dt class="property-optional"
+    <dd>Task flow name (up to 20 characters).</dd><dt class="property-optional"
             title="Optional">
         <span id="review_audio_video_task_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#review_audio_video_task_python" style="color: inherit; text-decoration: inherit;">review_<wbr>audio_<wbr>video_<wbr>task</a>
@@ -555,8 +609,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="sub_app_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_app_id_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
@@ -564,8 +617,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd></dl>
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -579,8 +631,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplateaianalysistask">Property Map</a></span>
     </dt>
-    <dd><p>Parameter of AI-based content analysis task.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter of AI-based content analysis task.</dd><dt class="property-optional"
             title="Optional">
         <span id="airecognitiontask_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#airecognitiontask_yaml" style="color: inherit; text-decoration: inherit;">ai<wbr>Recognition<wbr>Task</a>
@@ -588,8 +639,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplateairecognitiontask">Property Map</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="comment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#comment_yaml" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -597,8 +647,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="mediaprocesstask_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mediaprocesstask_yaml" style="color: inherit; text-decoration: inherit;">media<wbr>Process<wbr>Task</a>
@@ -606,8 +655,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Property Map</a></span>
     </dt>
-    <dd><p>Parameter of video processing task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Parameter of video processing task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -615,8 +663,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task flow name (up to 20 characters).</p>
-</dd><dt class="property-optional"
+    <dd>Task flow name (up to 20 characters).</dd><dt class="property-optional"
             title="Optional">
         <span id="reviewaudiovideotask_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reviewaudiovideotask_yaml" style="color: inherit; text-decoration: inherit;">review<wbr>Audio<wbr>Video<wbr>Task</a>
@@ -624,8 +671,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Property Map</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="subappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subappid_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -633,8 +679,7 @@ The ProcedureTemplate resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd></dl>
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -655,8 +700,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -664,8 +708,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -673,12 +716,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-"
+</ul></dd><dt class="property-"
             title="">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -686,8 +728,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -701,8 +742,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -710,8 +750,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -719,12 +758,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-"
+</ul></dd><dt class="property-"
             title="">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -732,8 +770,49 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template type, value range:</p>
+<ul>
+<li>Preset: system preset template;</li>
+<li>Custom: user-defined templates.</li>
+</ul></dd><dt class="property-"
+            title="">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -747,8 +826,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -756,8 +834,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -765,12 +842,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-"
+</ul></dd><dt class="property-"
             title="">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -778,8 +854,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -793,8 +868,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -802,8 +876,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -811,12 +884,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-"
+</ul></dd><dt class="property-"
             title="">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -824,8 +896,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -839,8 +910,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -848,8 +918,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -857,12 +926,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-"
+</ul></dd><dt class="property-"
             title="">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -870,8 +938,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -885,8 +952,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -894,8 +960,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -903,12 +968,11 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-"
+</ul></dd><dt class="property-"
             title="">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -916,8 +980,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -927,129 +990,168 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ProcedureTemplate resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ProcedureTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ProcedureTemplate</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ProcedureTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ProcedureTemplate</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">ai_analysis_task</span><span class="p">:</span> <span class="nx">Optional[_vod.ProcedureTemplateAiAnalysisTaskArgs]</span> = None<span class="p">,</span>
-        <span class="nx">ai_recognition_task</span><span class="p">:</span> <span class="nx">Optional[_vod.ProcedureTemplateAiRecognitionTaskArgs]</span> = None<span class="p">,</span>
+        <span class="nx">ai_analysis_task</span><span class="p">:</span> <span class="nx">Optional[ProcedureTemplateAiAnalysisTaskArgs]</span> = None<span class="p">,</span>
+        <span class="nx">ai_recognition_task</span><span class="p">:</span> <span class="nx">Optional[ProcedureTemplateAiRecognitionTaskArgs]</span> = None<span class="p">,</span>
         <span class="nx">comment</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">media_process_task</span><span class="p">:</span> <span class="nx">Optional[_vod.ProcedureTemplateMediaProcessTaskArgs]</span> = None<span class="p">,</span>
+        <span class="nx">media_process_task</span><span class="p">:</span> <span class="nx">Optional[ProcedureTemplateMediaProcessTaskArgs]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">review_audio_video_task</span><span class="p">:</span> <span class="nx">Optional[_vod.ProcedureTemplateReviewAudioVideoTaskArgs]</span> = None<span class="p">,</span>
+        <span class="nx">review_audio_video_task</span><span class="p">:</span> <span class="nx">Optional[ProcedureTemplateReviewAudioVideoTaskArgs]</span> = None<span class="p">,</span>
         <span class="nx">sub_app_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">update_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> ProcedureTemplate</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetProcedureTemplate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ProcedureTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ProcedureTemplate</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetProcedureTemplate<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ProcedureTemplateState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ProcedureTemplate</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ProcedureTemplate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ProcedureTemplateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ProcedureTemplate</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ProcedureTemplateState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ProcedureTemplate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ProcedureTemplateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ProcedureTemplate</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ProcedureTemplateState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingProcedureTemplate</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Vod:ProcedureTemplate</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_vod_procedure_template</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ProcedureTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ProcedureTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1057,28 +1159,31 @@ Get an existing ProcedureTemplate resource's state with the given name, ID, and 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ProcedureTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1086,28 +1191,31 @@ Get an existing ProcedureTemplate resource's state with the given name, ID, and 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ProcedureTemplateState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1125,19 +1233,17 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_aianalysistask_csharp" style="color: inherit; text-decoration: inherit;">Ai<wbr>Analysis<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplateaianalysistask">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplateaianalysistask">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task</a></span>
     </dt>
-    <dd><p>Parameter of AI-based content analysis task.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter of AI-based content analysis task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_airecognitiontask_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_airecognitiontask_csharp" style="color: inherit; text-decoration: inherit;">Ai<wbr>Recognition<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplateairecognitiontask">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplateairecognitiontask">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_csharp" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -1145,8 +1251,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1154,17 +1259,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mediaprocesstask_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mediaprocesstask_csharp" style="color: inherit; text-decoration: inherit;">Media<wbr>Process<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task</a></span>
     </dt>
-    <dd><p>Parameter of video processing task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Parameter of video processing task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1172,17 +1275,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow name (up to 20 characters).</p>
-</dd><dt class="property-optional"
+    <dd>Task flow name (up to 20 characters).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_reviewaudiovideotask_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reviewaudiovideotask_csharp" style="color: inherit; text-decoration: inherit;">Review<wbr>Audio<wbr>Video<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_csharp" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -1190,8 +1291,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1199,12 +1299,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1212,8 +1311,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1227,8 +1325,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplateaianalysistask">Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Parameter of AI-based content analysis task.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter of AI-based content analysis task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_airecognitiontask_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_airecognitiontask_go" style="color: inherit; text-decoration: inherit;">Ai<wbr>Recognition<wbr>Task</a>
@@ -1236,8 +1333,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplateairecognitiontask">Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_go" style="color: inherit; text-decoration: inherit;">Comment</a>
@@ -1245,8 +1341,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1254,8 +1349,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mediaprocesstask_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mediaprocesstask_go" style="color: inherit; text-decoration: inherit;">Media<wbr>Process<wbr>Task</a>
@@ -1263,8 +1357,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Parameter of video processing task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Parameter of video processing task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1272,8 +1365,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow name (up to 20 characters).</p>
-</dd><dt class="property-optional"
+    <dd>Task flow name (up to 20 characters).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_reviewaudiovideotask_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reviewaudiovideotask_go" style="color: inherit; text-decoration: inherit;">Review<wbr>Audio<wbr>Video<wbr>Task</a>
@@ -1281,8 +1373,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_go" style="color: inherit; text-decoration: inherit;">Sub<wbr>App<wbr>Id</a>
@@ -1290,8 +1381,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1299,12 +1389,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1312,8 +1401,97 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_ai_analysis_task_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ai_analysis_task_hcl" style="color: inherit; text-decoration: inherit;">ai_<wbr>analysis_<wbr>task</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplateaianalysistask">object</a></span>
+    </dt>
+    <dd>Parameter of AI-based content analysis task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ai_recognition_task_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ai_recognition_task_hcl" style="color: inherit; text-decoration: inherit;">ai_<wbr>recognition_<wbr>task</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplateairecognitiontask">object</a></span>
+    </dt>
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_comment_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_hcl" style="color: inherit; text-decoration: inherit;">comment</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_media_process_task_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_media_process_task_hcl" style="color: inherit; text-decoration: inherit;">media_<wbr>process_<wbr>task</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstask">object</a></span>
+    </dt>
+    <dd>Parameter of video processing task.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task flow name (up to 20 characters).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_review_audio_video_task_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_review_audio_video_task_hcl" style="color: inherit; text-decoration: inherit;">review_<wbr>audio_<wbr>video_<wbr>task</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">object</a></span>
+    </dt>
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sub_app_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sub_app_id_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Template type, value range:</p>
+<ul>
+<li>Preset: system preset template;</li>
+<li>Custom: user-defined templates.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1325,19 +1503,17 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_aianalysistask_java" style="color: inherit; text-decoration: inherit;">ai<wbr>Analysis<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplateaianalysistask">Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplateaianalysistask">Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task</a></span>
     </dt>
-    <dd><p>Parameter of AI-based content analysis task.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter of AI-based content analysis task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_airecognitiontask_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_airecognitiontask_java" style="color: inherit; text-decoration: inherit;">ai<wbr>Recognition<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplateairecognitiontask">Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplateairecognitiontask">Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_java" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -1345,8 +1521,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1354,17 +1529,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mediaprocesstask_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mediaprocesstask_java" style="color: inherit; text-decoration: inherit;">media<wbr>Process<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task</a></span>
     </dt>
-    <dd><p>Parameter of video processing task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Parameter of video processing task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1372,17 +1545,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task flow name (up to 20 characters).</p>
-</dd><dt class="property-optional"
+    <dd>Task flow name (up to 20 characters).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_reviewaudiovideotask_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reviewaudiovideotask_java" style="color: inherit; text-decoration: inherit;">review<wbr>Audio<wbr>Video<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_java" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -1390,8 +1561,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1399,12 +1569,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1412,8 +1581,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1425,19 +1593,17 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_aianalysistask_nodejs" style="color: inherit; text-decoration: inherit;">ai<wbr>Analysis<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplateaianalysistask">Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplateaianalysistask">Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task</a></span>
     </dt>
-    <dd><p>Parameter of AI-based content analysis task.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter of AI-based content analysis task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_airecognitiontask_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_airecognitiontask_nodejs" style="color: inherit; text-decoration: inherit;">ai<wbr>Recognition<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplateairecognitiontask">Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplateairecognitiontask">Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_nodejs" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -1445,8 +1611,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1454,17 +1619,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mediaprocesstask_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mediaprocesstask_nodejs" style="color: inherit; text-decoration: inherit;">media<wbr>Process<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task</a></span>
     </dt>
-    <dd><p>Parameter of video processing task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Parameter of video processing task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1472,17 +1635,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task flow name (up to 20 characters).</p>
-</dd><dt class="property-optional"
+    <dd>Task flow name (up to 20 characters).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_reviewaudiovideotask_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reviewaudiovideotask_nodejs" style="color: inherit; text-decoration: inherit;">review<wbr>Audio<wbr>Video<wbr>Task</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task<wbr>Args</a></span>
+        <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_nodejs" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -1490,8 +1651,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1499,12 +1659,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1512,8 +1671,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1527,8 +1685,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplateaianalysistask">Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Parameter of AI-based content analysis task.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter of AI-based content analysis task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ai_recognition_task_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ai_recognition_task_python" style="color: inherit; text-decoration: inherit;">ai_<wbr>recognition_<wbr>task</a>
@@ -1536,8 +1693,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplateairecognitiontask">Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_python" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -1545,8 +1701,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1554,8 +1709,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_media_process_task_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_media_process_task_python" style="color: inherit; text-decoration: inherit;">media_<wbr>process_<wbr>task</a>
@@ -1563,8 +1717,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Parameter of video processing task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Parameter of video processing task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1572,8 +1725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task flow name (up to 20 characters).</p>
-</dd><dt class="property-optional"
+    <dd>Task flow name (up to 20 characters).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_review_audio_video_task_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_review_audio_video_task_python" style="color: inherit; text-decoration: inherit;">review_<wbr>audio_<wbr>video_<wbr>task</a>
@@ -1581,8 +1733,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sub_app_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sub_app_id_python" style="color: inherit; text-decoration: inherit;">sub_<wbr>app_<wbr>id</a>
@@ -1590,8 +1741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1599,12 +1749,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1612,8 +1761,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1627,8 +1775,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplateaianalysistask">Property Map</a></span>
     </dt>
-    <dd><p>Parameter of AI-based content analysis task.</p>
-</dd><dt class="property-optional"
+    <dd>Parameter of AI-based content analysis task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_airecognitiontask_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_airecognitiontask_yaml" style="color: inherit; text-decoration: inherit;">ai<wbr>Recognition<wbr>Task</a>
@@ -1636,8 +1783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplateairecognitiontask">Property Map</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_comment_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_comment_yaml" style="color: inherit; text-decoration: inherit;">comment</a>
@@ -1645,8 +1791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template description. Length limit: 256 characters.</p>
-</dd><dt class="property-optional"
+    <dd>Template description. Length limit: 256 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1654,8 +1799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of template in ISO date format.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of template in ISO date format.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_mediaprocesstask_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_mediaprocesstask_yaml" style="color: inherit; text-decoration: inherit;">media<wbr>Process<wbr>Task</a>
@@ -1663,8 +1807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstask">Property Map</a></span>
     </dt>
-    <dd><p>Parameter of video processing task.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Parameter of video processing task.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1672,8 +1815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task flow name (up to 20 characters).</p>
-</dd><dt class="property-optional"
+    <dd>Task flow name (up to 20 characters).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_reviewaudiovideotask_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_reviewaudiovideotask_yaml" style="color: inherit; text-decoration: inherit;">review<wbr>Audio<wbr>Video<wbr>Task</a>
@@ -1681,8 +1823,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatereviewaudiovideotask">Property Map</a></span>
     </dt>
-    <dd><p>Type parameter of AI-based content recognition task.</p>
-</dd><dt class="property-optional"
+    <dd>Type parameter of AI-based content recognition task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subappid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subappid_yaml" style="color: inherit; text-decoration: inherit;">sub<wbr>App<wbr>Id</a>
@@ -1690,8 +1831,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</p>
-</dd><dt class="property-optional"
+    <dd>The VOD <a href="https://intl.cloud.tencent.com/document/product/266/14574">application</a> ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1699,12 +1839,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Template type, value range:</p>
+    <dd>Template type, value range:</p>
 <ul>
 <li>Preset: system preset template;</li>
 <li>Custom: user-defined templates.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1712,8 +1851,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time of template in ISO date format.</p>
-</dd></dl>
+    <dd>Last modified time of template in ISO date format.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1728,7 +1866,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="proceduretemplateaianalysistask">Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task</h4>
+<h4 id="proceduretemplateaianalysistask">
+Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Ai<wbr>Analysis<wbr>Task<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1740,8 +1880,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video content analysis template ID.</p>
-</dd></dl>
+    <dd>Video content analysis template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1755,8 +1894,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video content analysis template ID.</p>
-</dd></dl>
+    <dd>Video content analysis template ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#definition_hcl" style="color: inherit; text-decoration: inherit;">definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Video content analysis template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1770,8 +1922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Video content analysis template ID.</p>
-</dd></dl>
+    <dd>Video content analysis template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1785,8 +1936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video content analysis template ID.</p>
-</dd></dl>
+    <dd>Video content analysis template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1800,8 +1950,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Video content analysis template ID.</p>
-</dd></dl>
+    <dd>Video content analysis template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1815,12 +1964,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Video content analysis template ID.</p>
-</dd></dl>
+    <dd>Video content analysis template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplateairecognitiontask">Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task</h4>
+<h4 id="proceduretemplateairecognitiontask">
+Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Ai<wbr>Recognition<wbr>Task<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1832,8 +1982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intelligent video recognition template ID.</p>
-</dd></dl>
+    <dd>Intelligent video recognition template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1847,8 +1996,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intelligent video recognition template ID.</p>
-</dd></dl>
+    <dd>Intelligent video recognition template ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#definition_hcl" style="color: inherit; text-decoration: inherit;">definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Intelligent video recognition template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1862,8 +2024,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Intelligent video recognition template ID.</p>
-</dd></dl>
+    <dd>Intelligent video recognition template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1877,8 +2038,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Intelligent video recognition template ID.</p>
-</dd></dl>
+    <dd>Intelligent video recognition template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1892,8 +2052,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Intelligent video recognition template ID.</p>
-</dd></dl>
+    <dd>Intelligent video recognition template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1907,12 +2066,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Intelligent video recognition template ID.</p>
-</dd></dl>
+    <dd>Intelligent video recognition template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstask">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task</h4>
+<h4 id="proceduretemplatemediaprocesstask">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1924,8 +2084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="animatedgraphictasklists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#animatedgraphictasklists_csharp" style="color: inherit; text-decoration: inherit;">Animated<wbr>Graphic<wbr>Task<wbr>Lists</a>
@@ -1933,8 +2092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskanimatedgraphictasklist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Animated<wbr>Graphic<wbr>Task<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="coverbysnapshottasklists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coverbysnapshottasklists_csharp" style="color: inherit; text-decoration: inherit;">Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>Lists</a>
@@ -1942,8 +2100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskcoverbysnapshottasklist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagespritetasklists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagespritetasklists_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Sprite<wbr>Task<wbr>Lists</a>
@@ -1951,8 +2108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskimagespritetasklist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Image<wbr>Sprite<wbr>Task<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="samplesnapshottasklists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samplesnapshottasklists_csharp" style="color: inherit; text-decoration: inherit;">Sample<wbr>Snapshot<wbr>Task<wbr>Lists</a>
@@ -1960,8 +2116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksamplesnapshottasklist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotbytimeoffsettasklists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotbytimeoffsettasklists_csharp" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>Lists</a>
@@ -1969,8 +2124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="transcodetasklists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transcodetasklists_csharp" style="color: inherit; text-decoration: inherit;">Transcode<wbr>Task<wbr>Lists</a>
@@ -1978,8 +2132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1993,8 +2146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklist">[]Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List</a></span>
     </dt>
-    <dd><p>List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="animatedgraphictasklists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#animatedgraphictasklists_go" style="color: inherit; text-decoration: inherit;">Animated<wbr>Graphic<wbr>Task<wbr>Lists</a>
@@ -2002,8 +2154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskanimatedgraphictasklist">[]Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Animated<wbr>Graphic<wbr>Task<wbr>List</a></span>
     </dt>
-    <dd><p>List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="coverbysnapshottasklists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coverbysnapshottasklists_go" style="color: inherit; text-decoration: inherit;">Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>Lists</a>
@@ -2011,8 +2162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskcoverbysnapshottasklist">[]Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List</a></span>
     </dt>
-    <dd><p>List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagespritetasklists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagespritetasklists_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Sprite<wbr>Task<wbr>Lists</a>
@@ -2020,8 +2170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskimagespritetasklist">[]Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Image<wbr>Sprite<wbr>Task<wbr>List</a></span>
     </dt>
-    <dd><p>List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="samplesnapshottasklists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samplesnapshottasklists_go" style="color: inherit; text-decoration: inherit;">Sample<wbr>Snapshot<wbr>Task<wbr>Lists</a>
@@ -2029,8 +2178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksamplesnapshottasklist">[]Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List</a></span>
     </dt>
-    <dd><p>List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotbytimeoffsettasklists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotbytimeoffsettasklists_go" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>Lists</a>
@@ -2038,8 +2186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklist">[]Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List</a></span>
     </dt>
-    <dd><p>List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="transcodetasklists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transcodetasklists_go" style="color: inherit; text-decoration: inherit;">Transcode<wbr>Task<wbr>Lists</a>
@@ -2047,8 +2194,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklist">[]Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List</a></span>
     </dt>
-    <dd><p>List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="adaptive_dynamic_streaming_task_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adaptive_dynamic_streaming_task_lists_hcl" style="color: inherit; text-decoration: inherit;">adaptive_<wbr>dynamic_<wbr>streaming_<wbr>task_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklist">list(object)</a></span>
+    </dt>
+    <dd>List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="animated_graphic_task_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#animated_graphic_task_lists_hcl" style="color: inherit; text-decoration: inherit;">animated_<wbr>graphic_<wbr>task_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskanimatedgraphictasklist">list(object)</a></span>
+    </dt>
+    <dd>List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cover_by_snapshot_task_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cover_by_snapshot_task_lists_hcl" style="color: inherit; text-decoration: inherit;">cover_<wbr>by_<wbr>snapshot_<wbr>task_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskcoverbysnapshottasklist">list(object)</a></span>
+    </dt>
+    <dd>List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="image_sprite_task_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_sprite_task_lists_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>sprite_<wbr>task_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskimagespritetasklist">list(object)</a></span>
+    </dt>
+    <dd>List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sample_snapshot_task_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sample_snapshot_task_lists_hcl" style="color: inherit; text-decoration: inherit;">sample_<wbr>snapshot_<wbr>task_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasksamplesnapshottasklist">list(object)</a></span>
+    </dt>
+    <dd>List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snapshot_by_time_offset_task_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_by_time_offset_task_lists_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>by_<wbr>time_<wbr>offset_<wbr>task_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklist">list(object)</a></span>
+    </dt>
+    <dd>List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="transcode_task_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transcode_task_lists_hcl" style="color: inherit; text-decoration: inherit;">transcode_<wbr>task_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklist">list(object)</a></span>
+    </dt>
+    <dd>List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2062,8 +2270,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklist">List&lt;Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="animatedgraphictasklists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#animatedgraphictasklists_java" style="color: inherit; text-decoration: inherit;">animated<wbr>Graphic<wbr>Task<wbr>Lists</a>
@@ -2071,8 +2278,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskanimatedgraphictasklist">List&lt;Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Animated<wbr>Graphic<wbr>Task<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="coverbysnapshottasklists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coverbysnapshottasklists_java" style="color: inherit; text-decoration: inherit;">cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>Lists</a>
@@ -2080,8 +2286,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskcoverbysnapshottasklist">List&lt;Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagespritetasklists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagespritetasklists_java" style="color: inherit; text-decoration: inherit;">image<wbr>Sprite<wbr>Task<wbr>Lists</a>
@@ -2089,8 +2294,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskimagespritetasklist">List&lt;Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Image<wbr>Sprite<wbr>Task<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="samplesnapshottasklists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samplesnapshottasklists_java" style="color: inherit; text-decoration: inherit;">sample<wbr>Snapshot<wbr>Task<wbr>Lists</a>
@@ -2098,8 +2302,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksamplesnapshottasklist">List&lt;Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotbytimeoffsettasklists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotbytimeoffsettasklists_java" style="color: inherit; text-decoration: inherit;">snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>Lists</a>
@@ -2107,8 +2310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklist">List&lt;Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="transcodetasklists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transcodetasklists_java" style="color: inherit; text-decoration: inherit;">transcode<wbr>Task<wbr>Lists</a>
@@ -2116,8 +2318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklist">List&lt;Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2131,8 +2332,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="animatedgraphictasklists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#animatedgraphictasklists_nodejs" style="color: inherit; text-decoration: inherit;">animated<wbr>Graphic<wbr>Task<wbr>Lists</a>
@@ -2140,8 +2340,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskanimatedgraphictasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Animated<wbr>Graphic<wbr>Task<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="coverbysnapshottasklists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coverbysnapshottasklists_nodejs" style="color: inherit; text-decoration: inherit;">cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>Lists</a>
@@ -2149,8 +2348,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskcoverbysnapshottasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagespritetasklists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagespritetasklists_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Sprite<wbr>Task<wbr>Lists</a>
@@ -2158,8 +2356,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskimagespritetasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Image<wbr>Sprite<wbr>Task<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="samplesnapshottasklists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samplesnapshottasklists_nodejs" style="color: inherit; text-decoration: inherit;">sample<wbr>Snapshot<wbr>Task<wbr>Lists</a>
@@ -2167,8 +2364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksamplesnapshottasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotbytimeoffsettasklists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotbytimeoffsettasklists_nodejs" style="color: inherit; text-decoration: inherit;">snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>Lists</a>
@@ -2176,8 +2372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="transcodetasklists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transcodetasklists_nodejs" style="color: inherit; text-decoration: inherit;">transcode<wbr>Task<wbr>Lists</a>
@@ -2185,8 +2380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2198,64 +2392,57 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#adaptive_dynamic_streaming_task_lists_python" style="color: inherit; text-decoration: inherit;">adaptive_<wbr>dynamic_<wbr>streaming_<wbr>task_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List]</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklist">Sequence[Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List]</a></span>
     </dt>
-    <dd><p>List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="animated_graphic_task_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#animated_graphic_task_lists_python" style="color: inherit; text-decoration: inherit;">animated_<wbr>graphic_<wbr>task_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskanimatedgraphictasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Animated<wbr>Graphic<wbr>Task<wbr>List]</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskanimatedgraphictasklist">Sequence[Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Animated<wbr>Graphic<wbr>Task<wbr>List]</a></span>
     </dt>
-    <dd><p>List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="cover_by_snapshot_task_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cover_by_snapshot_task_lists_python" style="color: inherit; text-decoration: inherit;">cover_<wbr>by_<wbr>snapshot_<wbr>task_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskcoverbysnapshottasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List]</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskcoverbysnapshottasklist">Sequence[Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List]</a></span>
     </dt>
-    <dd><p>List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="image_sprite_task_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_sprite_task_lists_python" style="color: inherit; text-decoration: inherit;">image_<wbr>sprite_<wbr>task_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskimagespritetasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Image<wbr>Sprite<wbr>Task<wbr>List]</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskimagespritetasklist">Sequence[Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Image<wbr>Sprite<wbr>Task<wbr>List]</a></span>
     </dt>
-    <dd><p>List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="sample_snapshot_task_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sample_snapshot_task_lists_python" style="color: inherit; text-decoration: inherit;">sample_<wbr>snapshot_<wbr>task_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstasksamplesnapshottasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List]</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasksamplesnapshottasklist">Sequence[Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List]</a></span>
     </dt>
-    <dd><p>List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshot_by_time_offset_task_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_by_time_offset_task_lists_python" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>by_<wbr>time_<wbr>offset_<wbr>task_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List]</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklist">Sequence[Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List]</a></span>
     </dt>
-    <dd><p>List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="transcode_task_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transcode_task_lists_python" style="color: inherit; text-decoration: inherit;">transcode_<wbr>task_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List]</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklist">Sequence[Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List]</a></span>
     </dt>
-    <dd><p>List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2269,8 +2456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="animatedgraphictasklists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#animatedgraphictasklists_yaml" style="color: inherit; text-decoration: inherit;">animated<wbr>Graphic<wbr>Task<wbr>Lists</a>
@@ -2278,8 +2464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskanimatedgraphictasklist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of animated image generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="coverbysnapshottasklists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coverbysnapshottasklists_yaml" style="color: inherit; text-decoration: inherit;">cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>Lists</a>
@@ -2287,8 +2472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskcoverbysnapshottasklist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of cover generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="imagespritetasklists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagespritetasklists_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Sprite<wbr>Task<wbr>Lists</a>
@@ -2296,8 +2480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskimagespritetasklist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of image sprite generating tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="samplesnapshottasklists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#samplesnapshottasklists_yaml" style="color: inherit; text-decoration: inherit;">sample<wbr>Snapshot<wbr>Task<wbr>Lists</a>
@@ -2305,8 +2488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksamplesnapshottasklist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of sampled screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotbytimeoffsettasklists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotbytimeoffsettasklists_yaml" style="color: inherit; text-decoration: inherit;">snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>Lists</a>
@@ -2314,8 +2496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of time point screen capturing tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="transcodetasklists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#transcodetasklists_yaml" style="color: inherit; text-decoration: inherit;">transcode<wbr>Task<wbr>Lists</a>
@@ -2323,12 +2504,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of transcoding tasks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List</h4>
+<h4 id="proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklist">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2340,8 +2522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Adaptive bitrate streaming template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="subtitlelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subtitlelists_csharp" style="color: inherit; text-decoration: inherit;">Subtitle<wbr>Lists</a>
@@ -2349,8 +2530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.</p>
-</dd><dt class="property-optional"
+    <dd>Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_csharp" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Lists</a>
@@ -2358,8 +2538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklistwatermarklist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List<wbr>Watermark<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2373,8 +2552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Adaptive bitrate streaming template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="subtitlelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subtitlelists_go" style="color: inherit; text-decoration: inherit;">Subtitle<wbr>Lists</a>
@@ -2382,8 +2560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.</p>
-</dd><dt class="property-optional"
+    <dd>Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_go" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Lists</a>
@@ -2391,8 +2568,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklistwatermarklist">[]Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List<wbr>Watermark<wbr>List</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#definition_hcl" style="color: inherit; text-decoration: inherit;">definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subtitle_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subtitle_lists_hcl" style="color: inherit; text-decoration: inherit;">subtitle_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="watermark_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_lists_hcl" style="color: inherit; text-decoration: inherit;">watermark_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklistwatermarklist">list(object)</a></span>
+    </dt>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2406,8 +2612,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Adaptive bitrate streaming template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="subtitlelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subtitlelists_java" style="color: inherit; text-decoration: inherit;">subtitle<wbr>Lists</a>
@@ -2415,8 +2620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.</p>
-</dd><dt class="property-optional"
+    <dd>Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_java" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -2424,8 +2628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklistwatermarklist">List&lt;Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List<wbr>Watermark<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2439,8 +2642,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Adaptive bitrate streaming template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="subtitlelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subtitlelists_nodejs" style="color: inherit; text-decoration: inherit;">subtitle<wbr>Lists</a>
@@ -2448,8 +2650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.</p>
-</dd><dt class="property-optional"
+    <dd>Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_nodejs" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -2457,8 +2658,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklistwatermarklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List<wbr>Watermark<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2472,8 +2672,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Adaptive bitrate streaming template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="subtitle_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subtitle_lists_python" style="color: inherit; text-decoration: inherit;">subtitle_<wbr>lists</a>
@@ -2481,17 +2680,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.</p>
-</dd><dt class="property-optional"
+    <dd>Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermark_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_lists_python" style="color: inherit; text-decoration: inherit;">watermark_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklistwatermarklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List<wbr>Watermark<wbr>List]</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklistwatermarklist">Sequence[Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List<wbr>Watermark<wbr>List]</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2505,8 +2702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Adaptive bitrate streaming template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="subtitlelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subtitlelists_yaml" style="color: inherit; text-decoration: inherit;">subtitle<wbr>Lists</a>
@@ -2514,8 +2710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.</p>
-</dd><dt class="property-optional"
+    <dd>Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_yaml" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -2523,12 +2718,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklistwatermarklist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklistwatermarklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List<wbr>Watermark<wbr>List</h4>
+<h4 id="proceduretemplatemediaprocesstaskadaptivedynamicstreamingtasklistwatermarklist">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List<wbr>Watermark<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Adaptive<wbr>Dynamic<wbr>Streaming<wbr>Task<wbr>List<wbr>Watermark<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2540,8 +2736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time<wbr>Offset</a>
@@ -2549,8 +2744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -2558,8 +2752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_csharp" style="color: inherit; text-decoration: inherit;">Svg<wbr>Content</a>
@@ -2567,8 +2760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_csharp" style="color: inherit; text-decoration: inherit;">Text<wbr>Content</a>
@@ -2576,8 +2768,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2591,8 +2782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time<wbr>Offset</a>
@@ -2600,8 +2790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -2609,8 +2798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_go" style="color: inherit; text-decoration: inherit;">Svg<wbr>Content</a>
@@ -2618,8 +2806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_go" style="color: inherit; text-decoration: inherit;">Text<wbr>Content</a>
@@ -2627,8 +2814,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#definition_hcl" style="color: inherit; text-decoration: inherit;">definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="end_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="start_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="svg_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svg_content_hcl" style="color: inherit; text-decoration: inherit;">svg_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="text_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#text_content_hcl" style="color: inherit; text-decoration: inherit;">text_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2642,8 +2874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -2651,8 +2882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -2660,8 +2890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_java" style="color: inherit; text-decoration: inherit;">svg<wbr>Content</a>
@@ -2669,8 +2898,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_java" style="color: inherit; text-decoration: inherit;">text<wbr>Content</a>
@@ -2678,8 +2906,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2693,8 +2920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -2702,8 +2928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -2711,8 +2936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_nodejs" style="color: inherit; text-decoration: inherit;">svg<wbr>Content</a>
@@ -2720,8 +2944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_nodejs" style="color: inherit; text-decoration: inherit;">text<wbr>Content</a>
@@ -2729,8 +2952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2744,8 +2966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="end_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
@@ -2753,8 +2974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="start_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
@@ -2762,8 +2982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svg_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svg_content_python" style="color: inherit; text-decoration: inherit;">svg_<wbr>content</a>
@@ -2771,8 +2990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="text_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#text_content_python" style="color: inherit; text-decoration: inherit;">text_<wbr>content</a>
@@ -2780,8 +2998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2795,8 +3012,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -2804,8 +3020,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -2813,8 +3028,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_yaml" style="color: inherit; text-decoration: inherit;">svg<wbr>Content</a>
@@ -2822,8 +3036,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_yaml" style="color: inherit; text-decoration: inherit;">text<wbr>Content</a>
@@ -2831,12 +3044,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstaskanimatedgraphictasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Animated<wbr>Graphic<wbr>Task<wbr>List</h4>
+<h4 id="proceduretemplatemediaprocesstaskanimatedgraphictasklist">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Animated<wbr>Graphic<wbr>Task<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Animated<wbr>Graphic<wbr>Task<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2848,8 +3062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Animated image generating template ID.</p>
-</dd><dt class="property-required"
+    <dd>Animated image generating template ID.</dd><dt class="property-required"
             title="Required">
         <span id="endtimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time<wbr>Offset</a>
@@ -2857,8 +3070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>End time of animated image in video in seconds.</p>
-</dd><dt class="property-required"
+    <dd>End time of animated image in video in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="starttimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -2866,8 +3078,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Start time of animated image in video in seconds.</p>
-</dd></dl>
+    <dd>Start time of animated image in video in seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2881,8 +3092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Animated image generating template ID.</p>
-</dd><dt class="property-required"
+    <dd>Animated image generating template ID.</dd><dt class="property-required"
             title="Required">
         <span id="endtimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time<wbr>Offset</a>
@@ -2890,8 +3100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>End time of animated image in video in seconds.</p>
-</dd><dt class="property-required"
+    <dd>End time of animated image in video in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="starttimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -2899,8 +3108,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Start time of animated image in video in seconds.</p>
-</dd></dl>
+    <dd>Start time of animated image in video in seconds.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#definition_hcl" style="color: inherit; text-decoration: inherit;">definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Animated image generating template ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="end_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End time of animated image in video in seconds.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start time of animated image in video in seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2914,8 +3152,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Animated image generating template ID.</p>
-</dd><dt class="property-required"
+    <dd>Animated image generating template ID.</dd><dt class="property-required"
             title="Required">
         <span id="endtimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -2923,8 +3160,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>End time of animated image in video in seconds.</p>
-</dd><dt class="property-required"
+    <dd>End time of animated image in video in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="starttimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -2932,8 +3168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Start time of animated image in video in seconds.</p>
-</dd></dl>
+    <dd>Start time of animated image in video in seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2947,8 +3182,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Animated image generating template ID.</p>
-</dd><dt class="property-required"
+    <dd>Animated image generating template ID.</dd><dt class="property-required"
             title="Required">
         <span id="endtimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -2956,8 +3190,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End time of animated image in video in seconds.</p>
-</dd><dt class="property-required"
+    <dd>End time of animated image in video in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="starttimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -2965,8 +3198,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Start time of animated image in video in seconds.</p>
-</dd></dl>
+    <dd>Start time of animated image in video in seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2980,8 +3212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Animated image generating template ID.</p>
-</dd><dt class="property-required"
+    <dd>Animated image generating template ID.</dd><dt class="property-required"
             title="Required">
         <span id="end_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
@@ -2989,8 +3220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>End time of animated image in video in seconds.</p>
-</dd><dt class="property-required"
+    <dd>End time of animated image in video in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="start_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
@@ -2998,8 +3228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Start time of animated image in video in seconds.</p>
-</dd></dl>
+    <dd>Start time of animated image in video in seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3013,8 +3242,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Animated image generating template ID.</p>
-</dd><dt class="property-required"
+    <dd>Animated image generating template ID.</dd><dt class="property-required"
             title="Required">
         <span id="endtimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -3022,8 +3250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End time of animated image in video in seconds.</p>
-</dd><dt class="property-required"
+    <dd>End time of animated image in video in seconds.</dd><dt class="property-required"
             title="Required">
         <span id="starttimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -3031,12 +3258,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Start time of animated image in video in seconds.</p>
-</dd></dl>
+    <dd>Start time of animated image in video in seconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstaskcoverbysnapshottasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List</h4>
+<h4 id="proceduretemplatemediaprocesstaskcoverbysnapshottasklist">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3048,8 +3276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time point screen capturing template ID.</p>
-</dd><dt class="property-required"
+    <dd>Watermarking template ID.</dd><dt class="property-required"
             title="Required">
         <span id="positiontype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#positiontype_csharp" style="color: inherit; text-decoration: inherit;">Position<wbr>Type</a>
@@ -3057,8 +3284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Screen capturing mode. Valid values: <code>Time</code>, <code>Percent</code>. <code>Time</code>: screen captures by time point, <code>Percent</code>: screen captures by percentage.</p>
-</dd><dt class="property-required"
+    <dd>Screen capturing mode. Valid values: <code>Time</code>, <code>Percent</code>. <code>Time</code>: screen captures by time point, <code>Percent</code>: screen captures by percentage.</dd><dt class="property-required"
             title="Required">
         <span id="positionvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#positionvalue_csharp" style="color: inherit; text-decoration: inherit;">Position<wbr>Value</a>
@@ -3066,8 +3292,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Screenshot position: For time point screen capturing, this means to take a screenshot at a specified time point (in seconds) and use it as the cover. For percentage screen capturing, this value means to take a screenshot at a specified percentage of the video duration and use it as the cover.</p>
-</dd><dt class="property-optional"
+    <dd>Screenshot position: For time point screen capturing, this means to take a screenshot at a specified time point (in seconds) and use it as the cover. For percentage screen capturing, this value means to take a screenshot at a specified percentage of the video duration and use it as the cover.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_csharp" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Lists</a>
@@ -3075,8 +3300,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskcoverbysnapshottasklistwatermarklist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3090,8 +3314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time point screen capturing template ID.</p>
-</dd><dt class="property-required"
+    <dd>Watermarking template ID.</dd><dt class="property-required"
             title="Required">
         <span id="positiontype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#positiontype_go" style="color: inherit; text-decoration: inherit;">Position<wbr>Type</a>
@@ -3099,8 +3322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Screen capturing mode. Valid values: <code>Time</code>, <code>Percent</code>. <code>Time</code>: screen captures by time point, <code>Percent</code>: screen captures by percentage.</p>
-</dd><dt class="property-required"
+    <dd>Screen capturing mode. Valid values: <code>Time</code>, <code>Percent</code>. <code>Time</code>: screen captures by time point, <code>Percent</code>: screen captures by percentage.</dd><dt class="property-required"
             title="Required">
         <span id="positionvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#positionvalue_go" style="color: inherit; text-decoration: inherit;">Position<wbr>Value</a>
@@ -3108,8 +3330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Screenshot position: For time point screen capturing, this means to take a screenshot at a specified time point (in seconds) and use it as the cover. For percentage screen capturing, this value means to take a screenshot at a specified percentage of the video duration and use it as the cover.</p>
-</dd><dt class="property-optional"
+    <dd>Screenshot position: For time point screen capturing, this means to take a screenshot at a specified time point (in seconds) and use it as the cover. For percentage screen capturing, this value means to take a screenshot at a specified percentage of the video duration and use it as the cover.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_go" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Lists</a>
@@ -3117,8 +3338,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskcoverbysnapshottasklistwatermarklist">[]Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#definition_hcl" style="color: inherit; text-decoration: inherit;">definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermarking template ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="position_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#position_type_hcl" style="color: inherit; text-decoration: inherit;">position_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Screen capturing mode. Valid values: <code>Time</code>, <code>Percent</code>. <code>Time</code>: screen captures by time point, <code>Percent</code>: screen captures by percentage.</dd><dt class="property-required"
+            title="Required">
+        <span id="position_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#position_value_hcl" style="color: inherit; text-decoration: inherit;">position_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Screenshot position: For time point screen capturing, this means to take a screenshot at a specified time point (in seconds) and use it as the cover. For percentage screen capturing, this value means to take a screenshot at a specified percentage of the video duration and use it as the cover.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="watermark_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_lists_hcl" style="color: inherit; text-decoration: inherit;">watermark_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskcoverbysnapshottasklistwatermarklist">list(object)</a></span>
+    </dt>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3132,8 +3390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time point screen capturing template ID.</p>
-</dd><dt class="property-required"
+    <dd>Watermarking template ID.</dd><dt class="property-required"
             title="Required">
         <span id="positiontype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#positiontype_java" style="color: inherit; text-decoration: inherit;">position<wbr>Type</a>
@@ -3141,8 +3398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Screen capturing mode. Valid values: <code>Time</code>, <code>Percent</code>. <code>Time</code>: screen captures by time point, <code>Percent</code>: screen captures by percentage.</p>
-</dd><dt class="property-required"
+    <dd>Screen capturing mode. Valid values: <code>Time</code>, <code>Percent</code>. <code>Time</code>: screen captures by time point, <code>Percent</code>: screen captures by percentage.</dd><dt class="property-required"
             title="Required">
         <span id="positionvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#positionvalue_java" style="color: inherit; text-decoration: inherit;">position<wbr>Value</a>
@@ -3150,8 +3406,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Screenshot position: For time point screen capturing, this means to take a screenshot at a specified time point (in seconds) and use it as the cover. For percentage screen capturing, this value means to take a screenshot at a specified percentage of the video duration and use it as the cover.</p>
-</dd><dt class="property-optional"
+    <dd>Screenshot position: For time point screen capturing, this means to take a screenshot at a specified time point (in seconds) and use it as the cover. For percentage screen capturing, this value means to take a screenshot at a specified percentage of the video duration and use it as the cover.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_java" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -3159,8 +3414,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskcoverbysnapshottasklistwatermarklist">List&lt;Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3174,8 +3428,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time point screen capturing template ID.</p>
-</dd><dt class="property-required"
+    <dd>Watermarking template ID.</dd><dt class="property-required"
             title="Required">
         <span id="positiontype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#positiontype_nodejs" style="color: inherit; text-decoration: inherit;">position<wbr>Type</a>
@@ -3183,8 +3436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Screen capturing mode. Valid values: <code>Time</code>, <code>Percent</code>. <code>Time</code>: screen captures by time point, <code>Percent</code>: screen captures by percentage.</p>
-</dd><dt class="property-required"
+    <dd>Screen capturing mode. Valid values: <code>Time</code>, <code>Percent</code>. <code>Time</code>: screen captures by time point, <code>Percent</code>: screen captures by percentage.</dd><dt class="property-required"
             title="Required">
         <span id="positionvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#positionvalue_nodejs" style="color: inherit; text-decoration: inherit;">position<wbr>Value</a>
@@ -3192,8 +3444,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Screenshot position: For time point screen capturing, this means to take a screenshot at a specified time point (in seconds) and use it as the cover. For percentage screen capturing, this value means to take a screenshot at a specified percentage of the video duration and use it as the cover.</p>
-</dd><dt class="property-optional"
+    <dd>Screenshot position: For time point screen capturing, this means to take a screenshot at a specified time point (in seconds) and use it as the cover. For percentage screen capturing, this value means to take a screenshot at a specified percentage of the video duration and use it as the cover.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_nodejs" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -3201,8 +3452,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskcoverbysnapshottasklistwatermarklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3216,8 +3466,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Time point screen capturing template ID.</p>
-</dd><dt class="property-required"
+    <dd>Watermarking template ID.</dd><dt class="property-required"
             title="Required">
         <span id="position_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#position_type_python" style="color: inherit; text-decoration: inherit;">position_<wbr>type</a>
@@ -3225,8 +3474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Screen capturing mode. Valid values: <code>Time</code>, <code>Percent</code>. <code>Time</code>: screen captures by time point, <code>Percent</code>: screen captures by percentage.</p>
-</dd><dt class="property-required"
+    <dd>Screen capturing mode. Valid values: <code>Time</code>, <code>Percent</code>. <code>Time</code>: screen captures by time point, <code>Percent</code>: screen captures by percentage.</dd><dt class="property-required"
             title="Required">
         <span id="position_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#position_value_python" style="color: inherit; text-decoration: inherit;">position_<wbr>value</a>
@@ -3234,17 +3482,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Screenshot position: For time point screen capturing, this means to take a screenshot at a specified time point (in seconds) and use it as the cover. For percentage screen capturing, this value means to take a screenshot at a specified percentage of the video duration and use it as the cover.</p>
-</dd><dt class="property-optional"
+    <dd>Screenshot position: For time point screen capturing, this means to take a screenshot at a specified time point (in seconds) and use it as the cover. For percentage screen capturing, this value means to take a screenshot at a specified percentage of the video duration and use it as the cover.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermark_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_lists_python" style="color: inherit; text-decoration: inherit;">watermark_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskcoverbysnapshottasklistwatermarklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List]</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstaskcoverbysnapshottasklistwatermarklist">Sequence[Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List]</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3258,8 +3504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time point screen capturing template ID.</p>
-</dd><dt class="property-required"
+    <dd>Watermarking template ID.</dd><dt class="property-required"
             title="Required">
         <span id="positiontype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#positiontype_yaml" style="color: inherit; text-decoration: inherit;">position<wbr>Type</a>
@@ -3267,8 +3512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Screen capturing mode. Valid values: <code>Time</code>, <code>Percent</code>. <code>Time</code>: screen captures by time point, <code>Percent</code>: screen captures by percentage.</p>
-</dd><dt class="property-required"
+    <dd>Screen capturing mode. Valid values: <code>Time</code>, <code>Percent</code>. <code>Time</code>: screen captures by time point, <code>Percent</code>: screen captures by percentage.</dd><dt class="property-required"
             title="Required">
         <span id="positionvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#positionvalue_yaml" style="color: inherit; text-decoration: inherit;">position<wbr>Value</a>
@@ -3276,8 +3520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Screenshot position: For time point screen capturing, this means to take a screenshot at a specified time point (in seconds) and use it as the cover. For percentage screen capturing, this value means to take a screenshot at a specified percentage of the video duration and use it as the cover.</p>
-</dd><dt class="property-optional"
+    <dd>Screenshot position: For time point screen capturing, this means to take a screenshot at a specified time point (in seconds) and use it as the cover. For percentage screen capturing, this value means to take a screenshot at a specified percentage of the video duration and use it as the cover.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_yaml" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -3285,12 +3528,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstaskcoverbysnapshottasklistwatermarklist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstaskcoverbysnapshottasklistwatermarklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List</h4>
+<h4 id="proceduretemplatemediaprocesstaskcoverbysnapshottasklistwatermarklist">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Cover<wbr>By<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3302,8 +3546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time<wbr>Offset</a>
@@ -3311,8 +3554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -3320,8 +3562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_csharp" style="color: inherit; text-decoration: inherit;">Svg<wbr>Content</a>
@@ -3329,8 +3570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_csharp" style="color: inherit; text-decoration: inherit;">Text<wbr>Content</a>
@@ -3338,8 +3578,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3353,8 +3592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time<wbr>Offset</a>
@@ -3362,8 +3600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -3371,8 +3608,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_go" style="color: inherit; text-decoration: inherit;">Svg<wbr>Content</a>
@@ -3380,8 +3616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_go" style="color: inherit; text-decoration: inherit;">Text<wbr>Content</a>
@@ -3389,8 +3624,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#definition_hcl" style="color: inherit; text-decoration: inherit;">definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="end_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="start_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="svg_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svg_content_hcl" style="color: inherit; text-decoration: inherit;">svg_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="text_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#text_content_hcl" style="color: inherit; text-decoration: inherit;">text_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3404,8 +3684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -3413,8 +3692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -3422,8 +3700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_java" style="color: inherit; text-decoration: inherit;">svg<wbr>Content</a>
@@ -3431,8 +3708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_java" style="color: inherit; text-decoration: inherit;">text<wbr>Content</a>
@@ -3440,8 +3716,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3455,8 +3730,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -3464,8 +3738,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -3473,8 +3746,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_nodejs" style="color: inherit; text-decoration: inherit;">svg<wbr>Content</a>
@@ -3482,8 +3754,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_nodejs" style="color: inherit; text-decoration: inherit;">text<wbr>Content</a>
@@ -3491,8 +3762,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3506,8 +3776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="end_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
@@ -3515,8 +3784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="start_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
@@ -3524,8 +3792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svg_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svg_content_python" style="color: inherit; text-decoration: inherit;">svg_<wbr>content</a>
@@ -3533,8 +3800,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="text_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#text_content_python" style="color: inherit; text-decoration: inherit;">text_<wbr>content</a>
@@ -3542,8 +3808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3557,8 +3822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -3566,8 +3830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -3575,8 +3838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_yaml" style="color: inherit; text-decoration: inherit;">svg<wbr>Content</a>
@@ -3584,8 +3846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_yaml" style="color: inherit; text-decoration: inherit;">text<wbr>Content</a>
@@ -3593,12 +3854,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstaskimagespritetasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Image<wbr>Sprite<wbr>Task<wbr>List</h4>
+<h4 id="proceduretemplatemediaprocesstaskimagespritetasklist">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Image<wbr>Sprite<wbr>Task<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Image<wbr>Sprite<wbr>Task<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3610,8 +3872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image sprite generating template ID.</p>
-</dd></dl>
+    <dd>Image sprite generating template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3625,8 +3886,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image sprite generating template ID.</p>
-</dd></dl>
+    <dd>Image sprite generating template ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#definition_hcl" style="color: inherit; text-decoration: inherit;">definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Image sprite generating template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3640,8 +3914,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Image sprite generating template ID.</p>
-</dd></dl>
+    <dd>Image sprite generating template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3655,8 +3928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Image sprite generating template ID.</p>
-</dd></dl>
+    <dd>Image sprite generating template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3670,8 +3942,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Image sprite generating template ID.</p>
-</dd></dl>
+    <dd>Image sprite generating template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3685,12 +3956,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Image sprite generating template ID.</p>
-</dd></dl>
+    <dd>Image sprite generating template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstasksamplesnapshottasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List</h4>
+<h4 id="proceduretemplatemediaprocesstasksamplesnapshottasklist">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3702,8 +3974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sampled screen capturing template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_csharp" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Lists</a>
@@ -3711,8 +3982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksamplesnapshottasklistwatermarklist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3726,8 +3996,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sampled screen capturing template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_go" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Lists</a>
@@ -3735,8 +4004,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksamplesnapshottasklistwatermarklist">[]Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#definition_hcl" style="color: inherit; text-decoration: inherit;">definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="watermark_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_lists_hcl" style="color: inherit; text-decoration: inherit;">watermark_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasksamplesnapshottasklistwatermarklist">list(object)</a></span>
+    </dt>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3750,8 +4040,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sampled screen capturing template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_java" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -3759,8 +4048,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksamplesnapshottasklistwatermarklist">List&lt;Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3774,8 +4062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Sampled screen capturing template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_nodejs" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -3783,8 +4070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksamplesnapshottasklistwatermarklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3798,17 +4084,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Sampled screen capturing template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermark_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_lists_python" style="color: inherit; text-decoration: inherit;">watermark_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstasksamplesnapshottasklistwatermarklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List]</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasksamplesnapshottasklistwatermarklist">Sequence[Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List]</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3822,8 +4106,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Sampled screen capturing template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_yaml" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -3831,12 +4114,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksamplesnapshottasklistwatermarklist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstasksamplesnapshottasklistwatermarklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List</h4>
+<h4 id="proceduretemplatemediaprocesstasksamplesnapshottasklistwatermarklist">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Sample<wbr>Snapshot<wbr>Task<wbr>List<wbr>Watermark<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3848,8 +4132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time<wbr>Offset</a>
@@ -3857,8 +4140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -3866,8 +4148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_csharp" style="color: inherit; text-decoration: inherit;">Svg<wbr>Content</a>
@@ -3875,8 +4156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_csharp" style="color: inherit; text-decoration: inherit;">Text<wbr>Content</a>
@@ -3884,8 +4164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3899,8 +4178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time<wbr>Offset</a>
@@ -3908,8 +4186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -3917,8 +4194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_go" style="color: inherit; text-decoration: inherit;">Svg<wbr>Content</a>
@@ -3926,8 +4202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_go" style="color: inherit; text-decoration: inherit;">Text<wbr>Content</a>
@@ -3935,8 +4210,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#definition_hcl" style="color: inherit; text-decoration: inherit;">definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="end_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="start_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="svg_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svg_content_hcl" style="color: inherit; text-decoration: inherit;">svg_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="text_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#text_content_hcl" style="color: inherit; text-decoration: inherit;">text_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3950,8 +4270,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -3959,8 +4278,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -3968,8 +4286,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_java" style="color: inherit; text-decoration: inherit;">svg<wbr>Content</a>
@@ -3977,8 +4294,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_java" style="color: inherit; text-decoration: inherit;">text<wbr>Content</a>
@@ -3986,8 +4302,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4001,8 +4316,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -4010,8 +4324,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -4019,8 +4332,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_nodejs" style="color: inherit; text-decoration: inherit;">svg<wbr>Content</a>
@@ -4028,8 +4340,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_nodejs" style="color: inherit; text-decoration: inherit;">text<wbr>Content</a>
@@ -4037,8 +4348,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4052,8 +4362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="end_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
@@ -4061,8 +4370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="start_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
@@ -4070,8 +4378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svg_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svg_content_python" style="color: inherit; text-decoration: inherit;">svg_<wbr>content</a>
@@ -4079,8 +4386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="text_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#text_content_python" style="color: inherit; text-decoration: inherit;">text_<wbr>content</a>
@@ -4088,8 +4394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4103,8 +4408,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -4112,8 +4416,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -4121,8 +4424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_yaml" style="color: inherit; text-decoration: inherit;">svg<wbr>Content</a>
@@ -4130,8 +4432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_yaml" style="color: inherit; text-decoration: inherit;">text<wbr>Content</a>
@@ -4139,12 +4440,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List</h4>
+<h4 id="proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklist">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4156,8 +4458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time point screen capturing template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="exttimeoffsetlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exttimeoffsetlists_csharp" style="color: inherit; text-decoration: inherit;">Ext<wbr>Time<wbr>Offset<wbr>Lists</a>
@@ -4165,8 +4466,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The list of screenshot time points. <code>s</code> and <code>%</code> formats are supported: When a time point string ends with <code>s</code>, its unit is second. For example, <code>3.5s</code> means the 3.5th second of the video; When a time point string ends with <code>%</code>, it is marked with corresponding percentage of the video duration. For example, <code>10%</code> means that the time point is at the 10% of the video entire duration.</p>
-</dd><dt class="property-optional"
+    <dd>The list of screenshot time points. <code>s</code> and <code>%</code> formats are supported: When a time point string ends with <code>s</code>, its unit is second. For example, <code>3.5s</code> means the 3.5th second of the video; When a time point string ends with <code>%</code>, it is marked with corresponding percentage of the video duration. For example, <code>10%</code> means that the time point is at the 10% of the video entire duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoffsetlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoffsetlists_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Offset<wbr>Lists</a>
@@ -4174,8 +4474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;double&gt;</span>
     </dt>
-    <dd><p>List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_csharp" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Lists</a>
@@ -4183,8 +4482,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklistwatermarklist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List<wbr>Watermark<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4198,8 +4496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time point screen capturing template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="exttimeoffsetlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exttimeoffsetlists_go" style="color: inherit; text-decoration: inherit;">Ext<wbr>Time<wbr>Offset<wbr>Lists</a>
@@ -4207,8 +4504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The list of screenshot time points. <code>s</code> and <code>%</code> formats are supported: When a time point string ends with <code>s</code>, its unit is second. For example, <code>3.5s</code> means the 3.5th second of the video; When a time point string ends with <code>%</code>, it is marked with corresponding percentage of the video duration. For example, <code>10%</code> means that the time point is at the 10% of the video entire duration.</p>
-</dd><dt class="property-optional"
+    <dd>The list of screenshot time points. <code>s</code> and <code>%</code> formats are supported: When a time point string ends with <code>s</code>, its unit is second. For example, <code>3.5s</code> means the 3.5th second of the video; When a time point string ends with <code>%</code>, it is marked with corresponding percentage of the video duration. For example, <code>10%</code> means that the time point is at the 10% of the video entire duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoffsetlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoffsetlists_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Offset<wbr>Lists</a>
@@ -4216,8 +4512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]float64</span>
     </dt>
-    <dd><p>List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_go" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Lists</a>
@@ -4225,8 +4520,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklistwatermarklist">[]Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List<wbr>Watermark<wbr>List</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#definition_hcl" style="color: inherit; text-decoration: inherit;">definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ext_time_offset_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ext_time_offset_lists_hcl" style="color: inherit; text-decoration: inherit;">ext_<wbr>time_<wbr>offset_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The list of screenshot time points. <code>s</code> and <code>%</code> formats are supported: When a time point string ends with <code>s</code>, its unit is second. For example, <code>3.5s</code> means the 3.5th second of the video; When a time point string ends with <code>%</code>, it is marked with corresponding percentage of the video duration. For example, <code>10%</code> means that the time point is at the 10% of the video entire duration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="time_offset_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_offset_lists_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>offset_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="watermark_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_lists_hcl" style="color: inherit; text-decoration: inherit;">watermark_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklistwatermarklist">list(object)</a></span>
+    </dt>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4240,8 +4572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time point screen capturing template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="exttimeoffsetlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exttimeoffsetlists_java" style="color: inherit; text-decoration: inherit;">ext<wbr>Time<wbr>Offset<wbr>Lists</a>
@@ -4249,8 +4580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The list of screenshot time points. <code>s</code> and <code>%</code> formats are supported: When a time point string ends with <code>s</code>, its unit is second. For example, <code>3.5s</code> means the 3.5th second of the video; When a time point string ends with <code>%</code>, it is marked with corresponding percentage of the video duration. For example, <code>10%</code> means that the time point is at the 10% of the video entire duration.</p>
-</dd><dt class="property-optional"
+    <dd>The list of screenshot time points. <code>s</code> and <code>%</code> formats are supported: When a time point string ends with <code>s</code>, its unit is second. For example, <code>3.5s</code> means the 3.5th second of the video; When a time point string ends with <code>%</code>, it is marked with corresponding percentage of the video duration. For example, <code>10%</code> means that the time point is at the 10% of the video entire duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoffsetlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoffsetlists_java" style="color: inherit; text-decoration: inherit;">time<wbr>Offset<wbr>Lists</a>
@@ -4258,8 +4588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Double&gt;</span>
     </dt>
-    <dd><p>List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_java" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -4267,8 +4596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklistwatermarklist">List&lt;Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List<wbr>Watermark<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4282,8 +4610,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time point screen capturing template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="exttimeoffsetlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exttimeoffsetlists_nodejs" style="color: inherit; text-decoration: inherit;">ext<wbr>Time<wbr>Offset<wbr>Lists</a>
@@ -4291,8 +4618,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The list of screenshot time points. <code>s</code> and <code>%</code> formats are supported: When a time point string ends with <code>s</code>, its unit is second. For example, <code>3.5s</code> means the 3.5th second of the video; When a time point string ends with <code>%</code>, it is marked with corresponding percentage of the video duration. For example, <code>10%</code> means that the time point is at the 10% of the video entire duration.</p>
-</dd><dt class="property-optional"
+    <dd>The list of screenshot time points. <code>s</code> and <code>%</code> formats are supported: When a time point string ends with <code>s</code>, its unit is second. For example, <code>3.5s</code> means the 3.5th second of the video; When a time point string ends with <code>%</code>, it is marked with corresponding percentage of the video duration. For example, <code>10%</code> means that the time point is at the 10% of the video entire duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoffsetlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoffsetlists_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Offset<wbr>Lists</a>
@@ -4300,8 +4626,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_nodejs" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -4309,8 +4634,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklistwatermarklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List<wbr>Watermark<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4324,8 +4648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Time point screen capturing template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ext_time_offset_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ext_time_offset_lists_python" style="color: inherit; text-decoration: inherit;">ext_<wbr>time_<wbr>offset_<wbr>lists</a>
@@ -4333,8 +4656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The list of screenshot time points. <code>s</code> and <code>%</code> formats are supported: When a time point string ends with <code>s</code>, its unit is second. For example, <code>3.5s</code> means the 3.5th second of the video; When a time point string ends with <code>%</code>, it is marked with corresponding percentage of the video duration. For example, <code>10%</code> means that the time point is at the 10% of the video entire duration.</p>
-</dd><dt class="property-optional"
+    <dd>The list of screenshot time points. <code>s</code> and <code>%</code> formats are supported: When a time point string ends with <code>s</code>, its unit is second. For example, <code>3.5s</code> means the 3.5th second of the video; When a time point string ends with <code>%</code>, it is marked with corresponding percentage of the video duration. For example, <code>10%</code> means that the time point is at the 10% of the video entire duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="time_offset_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_offset_lists_python" style="color: inherit; text-decoration: inherit;">time_<wbr>offset_<wbr>lists</a>
@@ -4342,17 +4664,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[float]</span>
     </dt>
-    <dd><p>List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermark_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_lists_python" style="color: inherit; text-decoration: inherit;">watermark_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklistwatermarklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List<wbr>Watermark<wbr>List]</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklistwatermarklist">Sequence[Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List<wbr>Watermark<wbr>List]</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4366,8 +4686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time point screen capturing template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="exttimeoffsetlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exttimeoffsetlists_yaml" style="color: inherit; text-decoration: inherit;">ext<wbr>Time<wbr>Offset<wbr>Lists</a>
@@ -4375,8 +4694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The list of screenshot time points. <code>s</code> and <code>%</code> formats are supported: When a time point string ends with <code>s</code>, its unit is second. For example, <code>3.5s</code> means the 3.5th second of the video; When a time point string ends with <code>%</code>, it is marked with corresponding percentage of the video duration. For example, <code>10%</code> means that the time point is at the 10% of the video entire duration.</p>
-</dd><dt class="property-optional"
+    <dd>The list of screenshot time points. <code>s</code> and <code>%</code> formats are supported: When a time point string ends with <code>s</code>, its unit is second. For example, <code>3.5s</code> means the 3.5th second of the video; When a time point string ends with <code>%</code>, it is marked with corresponding percentage of the video duration. For example, <code>10%</code> means that the time point is at the 10% of the video entire duration.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeoffsetlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeoffsetlists_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Offset<wbr>Lists</a>
@@ -4384,8 +4702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_yaml" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -4393,12 +4710,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklistwatermarklist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklistwatermarklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List<wbr>Watermark<wbr>List</h4>
+<h4 id="proceduretemplatemediaprocesstasksnapshotbytimeoffsettasklistwatermarklist">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List<wbr>Watermark<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Snapshot<wbr>By<wbr>Time<wbr>Offset<wbr>Task<wbr>List<wbr>Watermark<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4410,8 +4728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time<wbr>Offset</a>
@@ -4419,8 +4736,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -4428,8 +4744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_csharp" style="color: inherit; text-decoration: inherit;">Svg<wbr>Content</a>
@@ -4437,8 +4752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_csharp" style="color: inherit; text-decoration: inherit;">Text<wbr>Content</a>
@@ -4446,8 +4760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4461,8 +4774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time<wbr>Offset</a>
@@ -4470,8 +4782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -4479,8 +4790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_go" style="color: inherit; text-decoration: inherit;">Svg<wbr>Content</a>
@@ -4488,8 +4798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_go" style="color: inherit; text-decoration: inherit;">Text<wbr>Content</a>
@@ -4497,8 +4806,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#definition_hcl" style="color: inherit; text-decoration: inherit;">definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="end_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="start_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="svg_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svg_content_hcl" style="color: inherit; text-decoration: inherit;">svg_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="text_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#text_content_hcl" style="color: inherit; text-decoration: inherit;">text_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4512,8 +4866,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -4521,8 +4874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -4530,8 +4882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_java" style="color: inherit; text-decoration: inherit;">svg<wbr>Content</a>
@@ -4539,8 +4890,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_java" style="color: inherit; text-decoration: inherit;">text<wbr>Content</a>
@@ -4548,8 +4898,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4563,8 +4912,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -4572,8 +4920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -4581,8 +4928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_nodejs" style="color: inherit; text-decoration: inherit;">svg<wbr>Content</a>
@@ -4590,8 +4936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_nodejs" style="color: inherit; text-decoration: inherit;">text<wbr>Content</a>
@@ -4599,8 +4944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4614,8 +4958,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="end_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
@@ -4623,8 +4966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="start_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
@@ -4632,8 +4974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svg_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svg_content_python" style="color: inherit; text-decoration: inherit;">svg_<wbr>content</a>
@@ -4641,8 +4982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="text_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#text_content_python" style="color: inherit; text-decoration: inherit;">text_<wbr>content</a>
@@ -4650,8 +4990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4665,8 +5004,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -4674,8 +5012,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -4683,8 +5020,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_yaml" style="color: inherit; text-decoration: inherit;">svg<wbr>Content</a>
@@ -4692,8 +5028,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_yaml" style="color: inherit; text-decoration: inherit;">text<wbr>Content</a>
@@ -4701,12 +5036,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstasktranscodetasklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List</h4>
+<h4 id="proceduretemplatemediaprocesstasktranscodetasklist">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4718,8 +5054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video transcoding template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="copyrightwatermark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#copyrightwatermark_csharp" style="color: inherit; text-decoration: inherit;">Copy<wbr>Right<wbr>Watermark</a>
@@ -4727,8 +5062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistcopyrightwatermark">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Copy<wbr>Right<wbr>Watermark</a></span>
     </dt>
-    <dd><p>opyright watermark.</p>
-</dd><dt class="property-optional"
+    <dd>opyright watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time<wbr>Offset</a>
@@ -4736,8 +5070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="headtaillists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headtaillists_csharp" style="color: inherit; text-decoration: inherit;">Head<wbr>Tail<wbr>Lists</a>
@@ -4745,8 +5078,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistheadtaillist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Head<wbr>Tail<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="mosaiclists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mosaiclists_csharp" style="color: inherit; text-decoration: inherit;">Mosaic<wbr>Lists</a>
@@ -4754,8 +5086,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistmosaiclist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Mosaic<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of blurs. Up to 10 ones can be supported.</p>
-</dd><dt class="property-optional"
+    <dd>List of blurs. Up to 10 ones can be supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -4763,8 +5094,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracewatermark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracewatermark_csharp" style="color: inherit; text-decoration: inherit;">Trace<wbr>Watermark</a>
@@ -4772,8 +5102,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklisttracewatermark">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Trace<wbr>Watermark</a></span>
     </dt>
-    <dd><p>Digital watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Digital watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_csharp" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Lists</a>
@@ -4781,8 +5110,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistwatermarklist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Vod.<wbr>Inputs.<wbr>Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Watermark<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4796,8 +5124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video transcoding template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="copyrightwatermark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#copyrightwatermark_go" style="color: inherit; text-decoration: inherit;">Copy<wbr>Right<wbr>Watermark</a>
@@ -4805,8 +5132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistcopyrightwatermark">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Copy<wbr>Right<wbr>Watermark</a></span>
     </dt>
-    <dd><p>opyright watermark.</p>
-</dd><dt class="property-optional"
+    <dd>opyright watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time<wbr>Offset</a>
@@ -4814,8 +5140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="headtaillists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headtaillists_go" style="color: inherit; text-decoration: inherit;">Head<wbr>Tail<wbr>Lists</a>
@@ -4823,8 +5148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistheadtaillist">[]Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Head<wbr>Tail<wbr>List</a></span>
     </dt>
-    <dd><p>List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="mosaiclists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mosaiclists_go" style="color: inherit; text-decoration: inherit;">Mosaic<wbr>Lists</a>
@@ -4832,8 +5156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistmosaiclist">[]Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Mosaic<wbr>List</a></span>
     </dt>
-    <dd><p>List of blurs. Up to 10 ones can be supported.</p>
-</dd><dt class="property-optional"
+    <dd>List of blurs. Up to 10 ones can be supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -4841,8 +5164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracewatermark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracewatermark_go" style="color: inherit; text-decoration: inherit;">Trace<wbr>Watermark</a>
@@ -4850,8 +5172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklisttracewatermark">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Trace<wbr>Watermark</a></span>
     </dt>
-    <dd><p>Digital watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Digital watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_go" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Lists</a>
@@ -4859,8 +5180,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistwatermarklist">[]Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Watermark<wbr>List</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#definition_hcl" style="color: inherit; text-decoration: inherit;">definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="copy_right_watermark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#copy_right_watermark_hcl" style="color: inherit; text-decoration: inherit;">copy_<wbr>right_<wbr>watermark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistcopyrightwatermark">object</a></span>
+    </dt>
+    <dd>opyright watermark.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="end_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="head_tail_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#head_tail_lists_hcl" style="color: inherit; text-decoration: inherit;">head_<wbr>tail_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistheadtaillist">list(object)</a></span>
+    </dt>
+    <dd>List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mosaic_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mosaic_lists_hcl" style="color: inherit; text-decoration: inherit;">mosaic_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistmosaiclist">list(object)</a></span>
+    </dt>
+    <dd>List of blurs. Up to 10 ones can be supported.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="start_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="trace_watermark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_watermark_hcl" style="color: inherit; text-decoration: inherit;">trace_<wbr>watermark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklisttracewatermark">object</a></span>
+    </dt>
+    <dd>Digital watermark.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="watermark_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_lists_hcl" style="color: inherit; text-decoration: inherit;">watermark_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistwatermarklist">list(object)</a></span>
+    </dt>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4874,8 +5264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Video transcoding template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="copyrightwatermark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#copyrightwatermark_java" style="color: inherit; text-decoration: inherit;">copy<wbr>Right<wbr>Watermark</a>
@@ -4883,8 +5272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistcopyrightwatermark">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Copy<wbr>Right<wbr>Watermark</a></span>
     </dt>
-    <dd><p>opyright watermark.</p>
-</dd><dt class="property-optional"
+    <dd>opyright watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -4892,8 +5280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="headtaillists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headtaillists_java" style="color: inherit; text-decoration: inherit;">head<wbr>Tail<wbr>Lists</a>
@@ -4901,8 +5288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistheadtaillist">List&lt;Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Head<wbr>Tail<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="mosaiclists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mosaiclists_java" style="color: inherit; text-decoration: inherit;">mosaic<wbr>Lists</a>
@@ -4910,8 +5296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistmosaiclist">List&lt;Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Mosaic<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of blurs. Up to 10 ones can be supported.</p>
-</dd><dt class="property-optional"
+    <dd>List of blurs. Up to 10 ones can be supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -4919,8 +5304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracewatermark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracewatermark_java" style="color: inherit; text-decoration: inherit;">trace<wbr>Watermark</a>
@@ -4928,8 +5312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklisttracewatermark">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Trace<wbr>Watermark</a></span>
     </dt>
-    <dd><p>Digital watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Digital watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_java" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -4937,8 +5320,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistwatermarklist">List&lt;Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Watermark<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4952,8 +5334,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video transcoding template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="copyrightwatermark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#copyrightwatermark_nodejs" style="color: inherit; text-decoration: inherit;">copy<wbr>Right<wbr>Watermark</a>
@@ -4961,8 +5342,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistcopyrightwatermark">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Copy<wbr>Right<wbr>Watermark</a></span>
     </dt>
-    <dd><p>opyright watermark.</p>
-</dd><dt class="property-optional"
+    <dd>opyright watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -4970,8 +5350,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="headtaillists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headtaillists_nodejs" style="color: inherit; text-decoration: inherit;">head<wbr>Tail<wbr>Lists</a>
@@ -4979,8 +5358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistheadtaillist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Head<wbr>Tail<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="mosaiclists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mosaiclists_nodejs" style="color: inherit; text-decoration: inherit;">mosaic<wbr>Lists</a>
@@ -4988,8 +5366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistmosaiclist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Mosaic<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of blurs. Up to 10 ones can be supported.</p>
-</dd><dt class="property-optional"
+    <dd>List of blurs. Up to 10 ones can be supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -4997,8 +5374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracewatermark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracewatermark_nodejs" style="color: inherit; text-decoration: inherit;">trace<wbr>Watermark</a>
@@ -5006,8 +5382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklisttracewatermark">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Trace<wbr>Watermark</a></span>
     </dt>
-    <dd><p>Digital watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Digital watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_nodejs" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -5015,8 +5390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistwatermarklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Watermark<wbr>List[]</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5030,8 +5404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Video transcoding template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="copy_right_watermark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#copy_right_watermark_python" style="color: inherit; text-decoration: inherit;">copy_<wbr>right_<wbr>watermark</a>
@@ -5039,8 +5412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistcopyrightwatermark">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Copy<wbr>Right<wbr>Watermark</a></span>
     </dt>
-    <dd><p>opyright watermark.</p>
-</dd><dt class="property-optional"
+    <dd>opyright watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="end_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
@@ -5048,26 +5420,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="head_tail_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#head_tail_lists_python" style="color: inherit; text-decoration: inherit;">head_<wbr>tail_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistheadtaillist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Head<wbr>Tail<wbr>List]</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistheadtaillist">Sequence[Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Head<wbr>Tail<wbr>List]</a></span>
     </dt>
-    <dd><p>List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="mosaic_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mosaic_lists_python" style="color: inherit; text-decoration: inherit;">mosaic_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistmosaiclist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Mosaic<wbr>List]</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistmosaiclist">Sequence[Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Mosaic<wbr>List]</a></span>
     </dt>
-    <dd><p>List of blurs. Up to 10 ones can be supported.</p>
-</dd><dt class="property-optional"
+    <dd>List of blurs. Up to 10 ones can be supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="start_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
@@ -5075,8 +5444,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="trace_watermark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trace_watermark_python" style="color: inherit; text-decoration: inherit;">trace_<wbr>watermark</a>
@@ -5084,17 +5452,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklisttracewatermark">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Trace<wbr>Watermark</a></span>
     </dt>
-    <dd><p>Digital watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Digital watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermark_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_lists_python" style="color: inherit; text-decoration: inherit;">watermark_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistwatermarklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Watermark<wbr>List]</a></span>
+        <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistwatermarklist">Sequence[Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Watermark<wbr>List]</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5108,8 +5474,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Video transcoding template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="copyrightwatermark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#copyrightwatermark_yaml" style="color: inherit; text-decoration: inherit;">copy<wbr>Right<wbr>Watermark</a>
@@ -5117,8 +5482,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistcopyrightwatermark">Property Map</a></span>
     </dt>
-    <dd><p>opyright watermark.</p>
-</dd><dt class="property-optional"
+    <dd>opyright watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -5126,8 +5490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="headtaillists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headtaillists_yaml" style="color: inherit; text-decoration: inherit;">head<wbr>Tail<wbr>Lists</a>
@@ -5135,8 +5498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistheadtaillist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="mosaiclists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mosaiclists_yaml" style="color: inherit; text-decoration: inherit;">mosaic<wbr>Lists</a>
@@ -5144,8 +5506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistmosaiclist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of blurs. Up to 10 ones can be supported.</p>
-</dd><dt class="property-optional"
+    <dd>List of blurs. Up to 10 ones can be supported.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -5153,8 +5514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="tracewatermark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tracewatermark_yaml" style="color: inherit; text-decoration: inherit;">trace<wbr>Watermark</a>
@@ -5162,8 +5522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklisttracewatermark">Property Map</a></span>
     </dt>
-    <dd><p>Digital watermark.</p>
-</dd><dt class="property-optional"
+    <dd>Digital watermark.</dd><dt class="property-optional"
             title="Optional">
         <span id="watermarklists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarklists_yaml" style="color: inherit; text-decoration: inherit;">watermark<wbr>Lists</a>
@@ -5171,12 +5530,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#proceduretemplatemediaprocesstasktranscodetasklistwatermarklist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>List of up to <code>10</code> image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstasktranscodetasklistcopyrightwatermark">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Copy<wbr>Right<wbr>Watermark</h4>
+<h4 id="proceduretemplatemediaprocesstasktranscodetasklistcopyrightwatermark">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Copy<wbr>Right<wbr>Watermark<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Copy<wbr>Right<wbr>Watermark<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5188,8 +5548,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Copyright information, maximum length is 200 characters.</p>
-</dd></dl>
+    <dd>Copyright information, maximum length is 200 characters.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5203,8 +5562,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Copyright information, maximum length is 200 characters.</p>
-</dd></dl>
+    <dd>Copyright information, maximum length is 200 characters.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="text_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#text_hcl" style="color: inherit; text-decoration: inherit;">text</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Copyright information, maximum length is 200 characters.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5218,8 +5590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Copyright information, maximum length is 200 characters.</p>
-</dd></dl>
+    <dd>Copyright information, maximum length is 200 characters.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5233,8 +5604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Copyright information, maximum length is 200 characters.</p>
-</dd></dl>
+    <dd>Copyright information, maximum length is 200 characters.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5248,8 +5618,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Copyright information, maximum length is 200 characters.</p>
-</dd></dl>
+    <dd>Copyright information, maximum length is 200 characters.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5263,12 +5632,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Copyright information, maximum length is 200 characters.</p>
-</dd></dl>
+    <dd>Copyright information, maximum length is 200 characters.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstasktranscodetasklistheadtaillist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Head<wbr>Tail<wbr>List</h4>
+<h4 id="proceduretemplatemediaprocesstasktranscodetasklistheadtaillist">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Head<wbr>Tail<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Head<wbr>Tail<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5280,8 +5650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video opening/closing credits configuration template ID.</p>
-</dd></dl>
+    <dd>Video opening/closing credits configuration template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5295,8 +5664,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video opening/closing credits configuration template ID.</p>
-</dd></dl>
+    <dd>Video opening/closing credits configuration template ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#definition_hcl" style="color: inherit; text-decoration: inherit;">definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Video opening/closing credits configuration template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5310,8 +5692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Video opening/closing credits configuration template ID.</p>
-</dd></dl>
+    <dd>Video opening/closing credits configuration template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5325,8 +5706,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Video opening/closing credits configuration template ID.</p>
-</dd></dl>
+    <dd>Video opening/closing credits configuration template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5340,8 +5720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Video opening/closing credits configuration template ID.</p>
-</dd></dl>
+    <dd>Video opening/closing credits configuration template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5355,12 +5734,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Video opening/closing credits configuration template ID.</p>
-</dd></dl>
+    <dd>Video opening/closing credits configuration template ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstasktranscodetasklistmosaiclist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Mosaic<wbr>List</h4>
+<h4 id="proceduretemplatemediaprocesstasktranscodetasklistmosaiclist">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Mosaic<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Mosaic<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5372,8 +5752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin position, which currently can only be: <code>TopLeft</code>: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text. Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position, which currently can only be: <code>TopLeft</code>: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text. Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time<wbr>Offset</a>
@@ -5381,8 +5760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_csharp" style="color: inherit; text-decoration: inherit;">Height</a>
@@ -5390,8 +5768,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Blur height. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>height</code> of the blur will be the specified percentage of the video height; for example, 10% means that Height is 10% of the video height; If the string ends in <code>px</code>, the <code>height</code> of the blur will be in px; for example, 100px means that Height is 100 px. Default value: <code>10%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blur height. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>height</code> of the blur will be the specified percentage of the video height; for example, 10% means that Height is 10% of the video height; If the string ends in <code>px</code>, the <code>height</code> of the blur will be in px; for example, 100px means that Height is 100 px. Default value: <code>10%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -5399,8 +5776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_csharp" style="color: inherit; text-decoration: inherit;">Width</a>
@@ -5408,8 +5784,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Blur width. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>width</code> of the blur will be the specified percentage of the video width; for example, 10% means that <code>width</code> is 10% of the video width; If the string ends in <code>px</code>, the <code>width</code> of the blur will be in px; for example, 100px means that Width is 100 px. Default value: <code>10%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blur width. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>width</code> of the blur will be the specified percentage of the video width; for example, 10% means that <code>width</code> is 10% of the video width; If the string ends in <code>px</code>, the <code>width</code> of the blur will be in px; for example, 100px means that Width is 100 px. Default value: <code>10%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="xpos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#xpos_csharp" style="color: inherit; text-decoration: inherit;">XPos</a>
@@ -5417,8 +5792,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the blur relative to the origin of coordinates of the video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the XPos of the blur will be the specified percentage of the video width; for example, 10% means that XPos is 10% of the video width; If the string ends in <code>px</code>, the XPos of the blur will be the specified px; for example, 100px means that XPos is 100 px. Default value: <code>0px</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the blur relative to the origin of coordinates of the video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the XPos of the blur will be the specified percentage of the video width; for example, 10% means that XPos is 10% of the video width; If the string ends in <code>px</code>, the XPos of the blur will be the specified px; for example, 100px means that XPos is 100 px. Default value: <code>0px</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ypos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ypos_csharp" style="color: inherit; text-decoration: inherit;">YPos</a>
@@ -5426,8 +5800,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vertical position of the origin of blur relative to the origin of coordinates of video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the YPos of the blur will be the specified percentage of the video height; for example, 10% means that YPos is 10% of the video height; If the string ends in <code>px</code>, the YPos of the blur will be the specified px; for example, 100px means that YPos is 100 px. Default value: <code>0px</code>.</p>
-</dd></dl>
+    <dd>Vertical position of the origin of blur relative to the origin of coordinates of video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the YPos of the blur will be the specified percentage of the video height; for example, 10% means that YPos is 10% of the video height; If the string ends in <code>px</code>, the YPos of the blur will be the specified px; for example, 100px means that YPos is 100 px. Default value: <code>0px</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5441,8 +5814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin position, which currently can only be: <code>TopLeft</code>: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text. Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position, which currently can only be: <code>TopLeft</code>: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text. Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time<wbr>Offset</a>
@@ -5450,8 +5822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_go" style="color: inherit; text-decoration: inherit;">Height</a>
@@ -5459,8 +5830,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Blur height. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>height</code> of the blur will be the specified percentage of the video height; for example, 10% means that Height is 10% of the video height; If the string ends in <code>px</code>, the <code>height</code> of the blur will be in px; for example, 100px means that Height is 100 px. Default value: <code>10%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blur height. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>height</code> of the blur will be the specified percentage of the video height; for example, 10% means that Height is 10% of the video height; If the string ends in <code>px</code>, the <code>height</code> of the blur will be in px; for example, 100px means that Height is 100 px. Default value: <code>10%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -5468,8 +5838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_go" style="color: inherit; text-decoration: inherit;">Width</a>
@@ -5477,8 +5846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Blur width. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>width</code> of the blur will be the specified percentage of the video width; for example, 10% means that <code>width</code> is 10% of the video width; If the string ends in <code>px</code>, the <code>width</code> of the blur will be in px; for example, 100px means that Width is 100 px. Default value: <code>10%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blur width. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>width</code> of the blur will be the specified percentage of the video width; for example, 10% means that <code>width</code> is 10% of the video width; If the string ends in <code>px</code>, the <code>width</code> of the blur will be in px; for example, 100px means that Width is 100 px. Default value: <code>10%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="xpos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#xpos_go" style="color: inherit; text-decoration: inherit;">XPos</a>
@@ -5486,8 +5854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the blur relative to the origin of coordinates of the video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the XPos of the blur will be the specified percentage of the video width; for example, 10% means that XPos is 10% of the video width; If the string ends in <code>px</code>, the XPos of the blur will be the specified px; for example, 100px means that XPos is 100 px. Default value: <code>0px</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the blur relative to the origin of coordinates of the video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the XPos of the blur will be the specified percentage of the video width; for example, 10% means that XPos is 10% of the video width; If the string ends in <code>px</code>, the XPos of the blur will be the specified px; for example, 100px means that XPos is 100 px. Default value: <code>0px</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ypos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ypos_go" style="color: inherit; text-decoration: inherit;">YPos</a>
@@ -5495,8 +5862,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vertical position of the origin of blur relative to the origin of coordinates of video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the YPos of the blur will be the specified percentage of the video height; for example, 10% means that YPos is 10% of the video height; If the string ends in <code>px</code>, the YPos of the blur will be the specified px; for example, 100px means that YPos is 100 px. Default value: <code>0px</code>.</p>
-</dd></dl>
+    <dd>Vertical position of the origin of blur relative to the origin of coordinates of video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the YPos of the blur will be the specified percentage of the video height; for example, 10% means that YPos is 10% of the video height; If the string ends in <code>px</code>, the YPos of the blur will be the specified px; for example, 100px means that YPos is 100 px. Default value: <code>0px</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="coordinate_origin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#coordinate_origin_hcl" style="color: inherit; text-decoration: inherit;">coordinate_<wbr>origin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Origin position, which currently can only be: <code>TopLeft</code>: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text. Default value: TopLeft.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="end_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="height_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_hcl" style="color: inherit; text-decoration: inherit;">height</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Blur height. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>height</code> of the blur will be the specified percentage of the video height; for example, 10% means that Height is 10% of the video height; If the string ends in <code>px</code>, the <code>height</code> of the blur will be in px; for example, 100px means that Height is 100 px. Default value: <code>10%</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="start_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="width_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_hcl" style="color: inherit; text-decoration: inherit;">width</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Blur width. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>width</code> of the blur will be the specified percentage of the video width; for example, 10% means that <code>width</code> is 10% of the video width; If the string ends in <code>px</code>, the <code>width</code> of the blur will be in px; for example, 100px means that Width is 100 px. Default value: <code>10%</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="x_pos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#x_pos_hcl" style="color: inherit; text-decoration: inherit;">x_<wbr>pos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The horizontal position of the origin of the blur relative to the origin of coordinates of the video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the XPos of the blur will be the specified percentage of the video width; for example, 10% means that XPos is 10% of the video width; If the string ends in <code>px</code>, the XPos of the blur will be the specified px; for example, 100px means that XPos is 100 px. Default value: <code>0px</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="y_pos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#y_pos_hcl" style="color: inherit; text-decoration: inherit;">y_<wbr>pos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Vertical position of the origin of blur relative to the origin of coordinates of video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the YPos of the blur will be the specified percentage of the video height; for example, 10% means that YPos is 10% of the video height; If the string ends in <code>px</code>, the YPos of the blur will be the specified px; for example, 100px means that YPos is 100 px. Default value: <code>0px</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5510,8 +5938,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Origin position, which currently can only be: <code>TopLeft</code>: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text. Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position, which currently can only be: <code>TopLeft</code>: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text. Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -5519,8 +5946,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_java" style="color: inherit; text-decoration: inherit;">height</a>
@@ -5528,8 +5954,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Blur height. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>height</code> of the blur will be the specified percentage of the video height; for example, 10% means that Height is 10% of the video height; If the string ends in <code>px</code>, the <code>height</code> of the blur will be in px; for example, 100px means that Height is 100 px. Default value: <code>10%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blur height. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>height</code> of the blur will be the specified percentage of the video height; for example, 10% means that Height is 10% of the video height; If the string ends in <code>px</code>, the <code>height</code> of the blur will be in px; for example, 100px means that Height is 100 px. Default value: <code>10%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -5537,8 +5962,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_java" style="color: inherit; text-decoration: inherit;">width</a>
@@ -5546,8 +5970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Blur width. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>width</code> of the blur will be the specified percentage of the video width; for example, 10% means that <code>width</code> is 10% of the video width; If the string ends in <code>px</code>, the <code>width</code> of the blur will be in px; for example, 100px means that Width is 100 px. Default value: <code>10%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blur width. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>width</code> of the blur will be the specified percentage of the video width; for example, 10% means that <code>width</code> is 10% of the video width; If the string ends in <code>px</code>, the <code>width</code> of the blur will be in px; for example, 100px means that Width is 100 px. Default value: <code>10%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="xpos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#xpos_java" style="color: inherit; text-decoration: inherit;">x<wbr>Pos</a>
@@ -5555,8 +5978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the blur relative to the origin of coordinates of the video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the XPos of the blur will be the specified percentage of the video width; for example, 10% means that XPos is 10% of the video width; If the string ends in <code>px</code>, the XPos of the blur will be the specified px; for example, 100px means that XPos is 100 px. Default value: <code>0px</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the blur relative to the origin of coordinates of the video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the XPos of the blur will be the specified percentage of the video width; for example, 10% means that XPos is 10% of the video width; If the string ends in <code>px</code>, the XPos of the blur will be the specified px; for example, 100px means that XPos is 100 px. Default value: <code>0px</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ypos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ypos_java" style="color: inherit; text-decoration: inherit;">y<wbr>Pos</a>
@@ -5564,8 +5986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vertical position of the origin of blur relative to the origin of coordinates of video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the YPos of the blur will be the specified percentage of the video height; for example, 10% means that YPos is 10% of the video height; If the string ends in <code>px</code>, the YPos of the blur will be the specified px; for example, 100px means that YPos is 100 px. Default value: <code>0px</code>.</p>
-</dd></dl>
+    <dd>Vertical position of the origin of blur relative to the origin of coordinates of video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the YPos of the blur will be the specified percentage of the video height; for example, 10% means that YPos is 10% of the video height; If the string ends in <code>px</code>, the YPos of the blur will be the specified px; for example, 100px means that YPos is 100 px. Default value: <code>0px</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5579,8 +6000,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Origin position, which currently can only be: <code>TopLeft</code>: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text. Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position, which currently can only be: <code>TopLeft</code>: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text. Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -5588,8 +6008,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_nodejs" style="color: inherit; text-decoration: inherit;">height</a>
@@ -5597,8 +6016,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Blur height. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>height</code> of the blur will be the specified percentage of the video height; for example, 10% means that Height is 10% of the video height; If the string ends in <code>px</code>, the <code>height</code> of the blur will be in px; for example, 100px means that Height is 100 px. Default value: <code>10%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blur height. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>height</code> of the blur will be the specified percentage of the video height; for example, 10% means that Height is 10% of the video height; If the string ends in <code>px</code>, the <code>height</code> of the blur will be in px; for example, 100px means that Height is 100 px. Default value: <code>10%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -5606,8 +6024,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_nodejs" style="color: inherit; text-decoration: inherit;">width</a>
@@ -5615,8 +6032,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Blur width. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>width</code> of the blur will be the specified percentage of the video width; for example, 10% means that <code>width</code> is 10% of the video width; If the string ends in <code>px</code>, the <code>width</code> of the blur will be in px; for example, 100px means that Width is 100 px. Default value: <code>10%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blur width. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>width</code> of the blur will be the specified percentage of the video width; for example, 10% means that <code>width</code> is 10% of the video width; If the string ends in <code>px</code>, the <code>width</code> of the blur will be in px; for example, 100px means that Width is 100 px. Default value: <code>10%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="xpos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#xpos_nodejs" style="color: inherit; text-decoration: inherit;">x<wbr>Pos</a>
@@ -5624,8 +6040,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the blur relative to the origin of coordinates of the video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the XPos of the blur will be the specified percentage of the video width; for example, 10% means that XPos is 10% of the video width; If the string ends in <code>px</code>, the XPos of the blur will be the specified px; for example, 100px means that XPos is 100 px. Default value: <code>0px</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the blur relative to the origin of coordinates of the video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the XPos of the blur will be the specified percentage of the video width; for example, 10% means that XPos is 10% of the video width; If the string ends in <code>px</code>, the XPos of the blur will be the specified px; for example, 100px means that XPos is 100 px. Default value: <code>0px</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ypos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ypos_nodejs" style="color: inherit; text-decoration: inherit;">y<wbr>Pos</a>
@@ -5633,8 +6048,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Vertical position of the origin of blur relative to the origin of coordinates of video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the YPos of the blur will be the specified percentage of the video height; for example, 10% means that YPos is 10% of the video height; If the string ends in <code>px</code>, the YPos of the blur will be the specified px; for example, 100px means that YPos is 100 px. Default value: <code>0px</code>.</p>
-</dd></dl>
+    <dd>Vertical position of the origin of blur relative to the origin of coordinates of video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the YPos of the blur will be the specified percentage of the video height; for example, 10% means that YPos is 10% of the video height; If the string ends in <code>px</code>, the YPos of the blur will be the specified px; for example, 100px means that YPos is 100 px. Default value: <code>0px</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5648,8 +6062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Origin position, which currently can only be: <code>TopLeft</code>: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text. Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position, which currently can only be: <code>TopLeft</code>: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text. Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="end_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
@@ -5657,8 +6070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_python" style="color: inherit; text-decoration: inherit;">height</a>
@@ -5666,8 +6078,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Blur height. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>height</code> of the blur will be the specified percentage of the video height; for example, 10% means that Height is 10% of the video height; If the string ends in <code>px</code>, the <code>height</code> of the blur will be in px; for example, 100px means that Height is 100 px. Default value: <code>10%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blur height. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>height</code> of the blur will be the specified percentage of the video height; for example, 10% means that Height is 10% of the video height; If the string ends in <code>px</code>, the <code>height</code> of the blur will be in px; for example, 100px means that Height is 100 px. Default value: <code>10%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="start_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
@@ -5675,8 +6086,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_python" style="color: inherit; text-decoration: inherit;">width</a>
@@ -5684,8 +6094,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Blur width. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>width</code> of the blur will be the specified percentage of the video width; for example, 10% means that <code>width</code> is 10% of the video width; If the string ends in <code>px</code>, the <code>width</code> of the blur will be in px; for example, 100px means that Width is 100 px. Default value: <code>10%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blur width. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>width</code> of the blur will be the specified percentage of the video width; for example, 10% means that <code>width</code> is 10% of the video width; If the string ends in <code>px</code>, the <code>width</code> of the blur will be in px; for example, 100px means that Width is 100 px. Default value: <code>10%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="x_pos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#x_pos_python" style="color: inherit; text-decoration: inherit;">x_<wbr>pos</a>
@@ -5693,8 +6102,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the blur relative to the origin of coordinates of the video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the XPos of the blur will be the specified percentage of the video width; for example, 10% means that XPos is 10% of the video width; If the string ends in <code>px</code>, the XPos of the blur will be the specified px; for example, 100px means that XPos is 100 px. Default value: <code>0px</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the blur relative to the origin of coordinates of the video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the XPos of the blur will be the specified percentage of the video width; for example, 10% means that XPos is 10% of the video width; If the string ends in <code>px</code>, the XPos of the blur will be the specified px; for example, 100px means that XPos is 100 px. Default value: <code>0px</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="y_pos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#y_pos_python" style="color: inherit; text-decoration: inherit;">y_<wbr>pos</a>
@@ -5702,8 +6110,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Vertical position of the origin of blur relative to the origin of coordinates of video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the YPos of the blur will be the specified percentage of the video height; for example, 10% means that YPos is 10% of the video height; If the string ends in <code>px</code>, the YPos of the blur will be the specified px; for example, 100px means that YPos is 100 px. Default value: <code>0px</code>.</p>
-</dd></dl>
+    <dd>Vertical position of the origin of blur relative to the origin of coordinates of video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the YPos of the blur will be the specified percentage of the video height; for example, 10% means that YPos is 10% of the video height; If the string ends in <code>px</code>, the YPos of the blur will be the specified px; for example, 100px means that YPos is 100 px. Default value: <code>0px</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5717,8 +6124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Origin position, which currently can only be: <code>TopLeft</code>: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text. Default value: TopLeft.</p>
-</dd><dt class="property-optional"
+    <dd>Origin position, which currently can only be: <code>TopLeft</code>: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text. Default value: TopLeft.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -5726,8 +6132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the blur will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the blur will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="height_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#height_yaml" style="color: inherit; text-decoration: inherit;">height</a>
@@ -5735,8 +6140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Blur height. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>height</code> of the blur will be the specified percentage of the video height; for example, 10% means that Height is 10% of the video height; If the string ends in <code>px</code>, the <code>height</code> of the blur will be in px; for example, 100px means that Height is 100 px. Default value: <code>10%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blur height. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>height</code> of the blur will be the specified percentage of the video height; for example, 10% means that Height is 10% of the video height; If the string ends in <code>px</code>, the <code>height</code> of the blur will be in px; for example, 100px means that Height is 100 px. Default value: <code>10%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -5744,8 +6148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of blur in seconds. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame. If this parameter is left empty or <code>0</code> is entered, the blur will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the blur will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="width_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#width_yaml" style="color: inherit; text-decoration: inherit;">width</a>
@@ -5753,8 +6156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Blur width. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>width</code> of the blur will be the specified percentage of the video width; for example, 10% means that <code>width</code> is 10% of the video width; If the string ends in <code>px</code>, the <code>width</code> of the blur will be in px; for example, 100px means that Width is 100 px. Default value: <code>10%</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Blur width. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the <code>width</code> of the blur will be the specified percentage of the video width; for example, 10% means that <code>width</code> is 10% of the video width; If the string ends in <code>px</code>, the <code>width</code> of the blur will be in px; for example, 100px means that Width is 100 px. Default value: <code>10%</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="xpos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#xpos_yaml" style="color: inherit; text-decoration: inherit;">x<wbr>Pos</a>
@@ -5762,8 +6164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The horizontal position of the origin of the blur relative to the origin of coordinates of the video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the XPos of the blur will be the specified percentage of the video width; for example, 10% means that XPos is 10% of the video width; If the string ends in <code>px</code>, the XPos of the blur will be the specified px; for example, 100px means that XPos is 100 px. Default value: <code>0px</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The horizontal position of the origin of the blur relative to the origin of coordinates of the video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the XPos of the blur will be the specified percentage of the video width; for example, 10% means that XPos is 10% of the video width; If the string ends in <code>px</code>, the XPos of the blur will be the specified px; for example, 100px means that XPos is 100 px. Default value: <code>0px</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ypos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ypos_yaml" style="color: inherit; text-decoration: inherit;">y<wbr>Pos</a>
@@ -5771,12 +6172,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Vertical position of the origin of blur relative to the origin of coordinates of video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the YPos of the blur will be the specified percentage of the video height; for example, 10% means that YPos is 10% of the video height; If the string ends in <code>px</code>, the YPos of the blur will be the specified px; for example, 100px means that YPos is 100 px. Default value: <code>0px</code>.</p>
-</dd></dl>
+    <dd>Vertical position of the origin of blur relative to the origin of coordinates of video. <code>%</code> and <code>px</code> formats are supported: If the string ends in <code>%</code>, the YPos of the blur will be the specified percentage of the video height; for example, 10% means that YPos is 10% of the video height; If the string ends in <code>px</code>, the YPos of the blur will be the specified px; for example, 100px means that YPos is 100 px. Default value: <code>0px</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstasktranscodetasklisttracewatermark">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Trace<wbr>Watermark</h4>
+<h4 id="proceduretemplatemediaprocesstasktranscodetasklisttracewatermark">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Trace<wbr>Watermark<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Trace<wbr>Watermark<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5788,8 +6190,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.</p>
-</dd></dl>
+    <dd>Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5803,8 +6204,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.</p>
-</dd></dl>
+    <dd>Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_hcl" style="color: inherit; text-decoration: inherit;">switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5818,8 +6232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.</p>
-</dd></dl>
+    <dd>Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5833,8 +6246,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.</p>
-</dd></dl>
+    <dd>Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5848,8 +6260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.</p>
-</dd></dl>
+    <dd>Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5863,12 +6274,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.</p>
-</dd></dl>
+    <dd>Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatemediaprocesstasktranscodetasklistwatermarklist">Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Watermark<wbr>List</h4>
+<h4 id="proceduretemplatemediaprocesstasktranscodetasklistwatermarklist">
+Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Watermark<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Media<wbr>Process<wbr>Task<wbr>Transcode<wbr>Task<wbr>List<wbr>Watermark<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5880,8 +6292,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time<wbr>Offset</a>
@@ -5889,8 +6300,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -5898,8 +6308,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_csharp" style="color: inherit; text-decoration: inherit;">Svg<wbr>Content</a>
@@ -5907,8 +6316,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_csharp" style="color: inherit; text-decoration: inherit;">Text<wbr>Content</a>
@@ -5916,8 +6324,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5931,8 +6338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time<wbr>Offset</a>
@@ -5940,8 +6346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -5949,8 +6354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_go" style="color: inherit; text-decoration: inherit;">Svg<wbr>Content</a>
@@ -5958,8 +6362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_go" style="color: inherit; text-decoration: inherit;">Text<wbr>Content</a>
@@ -5967,8 +6370,53 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#definition_hcl" style="color: inherit; text-decoration: inherit;">definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="end_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="start_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="svg_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svg_content_hcl" style="color: inherit; text-decoration: inherit;">svg_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="text_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#text_content_hcl" style="color: inherit; text-decoration: inherit;">text_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5982,8 +6430,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -5991,8 +6438,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -6000,8 +6446,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_java" style="color: inherit; text-decoration: inherit;">svg<wbr>Content</a>
@@ -6009,8 +6454,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_java" style="color: inherit; text-decoration: inherit;">text<wbr>Content</a>
@@ -6018,8 +6462,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6033,8 +6476,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -6042,8 +6484,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -6051,8 +6492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_nodejs" style="color: inherit; text-decoration: inherit;">svg<wbr>Content</a>
@@ -6060,8 +6500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_nodejs" style="color: inherit; text-decoration: inherit;">text<wbr>Content</a>
@@ -6069,8 +6508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6084,8 +6522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="end_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
@@ -6093,8 +6530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="start_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
@@ -6102,8 +6538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svg_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svg_content_python" style="color: inherit; text-decoration: inherit;">svg_<wbr>content</a>
@@ -6111,8 +6546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="text_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#text_content_python" style="color: inherit; text-decoration: inherit;">text_<wbr>content</a>
@@ -6120,8 +6554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6135,8 +6568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Watermarking template ID.</p>
-</dd><dt class="property-optional"
+    <dd>Watermarking template ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtimeoffset_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time<wbr>Offset</a>
@@ -6144,8 +6576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>End time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will exist till the last video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will exist till second n; If this value is smaller than <code>0</code> (e.g., -n), the watermark will exist till second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -6153,8 +6584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</p>
-</dd><dt class="property-optional"
+    <dd>Start time offset of a watermark in seconds. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame. If this parameter is left blank or <code>0</code> is entered, the watermark will appear upon the first video frame; If this value is greater than <code>0</code> (e.g., n), the watermark will appear at second n after the first video frame; If this value is smaller than <code>0</code> (e.g., -n), the watermark will appear at second n before the last video frame.</dd><dt class="property-optional"
             title="Optional">
         <span id="svgcontent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#svgcontent_yaml" style="color: inherit; text-decoration: inherit;">svg<wbr>Content</a>
@@ -6162,8 +6592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-optional"
+    <dd>SVG content of up to <code>2000000</code> characters. This needs to be entered only when the watermark type is <code>SVG</code>. Note: this field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="textcontent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#textcontent_yaml" style="color: inherit; text-decoration: inherit;">text<wbr>Content</a>
@@ -6171,12 +6600,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Text content of up to <code>100</code> characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="proceduretemplatereviewaudiovideotask">Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task</h4>
+<h4 id="proceduretemplatereviewaudiovideotask">
+Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task<pulumi-choosable type="language" values="python,go" class="inline">, Procedure<wbr>Template<wbr>Review<wbr>Audio<wbr>Video<wbr>Task<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -6188,8 +6618,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Review template.</p>
-</dd><dt class="property-optional"
+    <dd>Review template.</dd><dt class="property-optional"
             title="Optional">
         <span id="reviewcontents_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reviewcontents_csharp" style="color: inherit; text-decoration: inherit;">Review<wbr>Contents</a>
@@ -6197,8 +6626,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The type of moderated content. Valid values:</p>
-</dd></dl>
+    <dd>The type of moderated content. Valid values:</p>
+<ul>
+<li><code>Media</code>: The original audio/video;</li>
+<li><code>Cover</code>: Thumbnails.</li>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6212,8 +6644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Review template.</p>
-</dd><dt class="property-optional"
+    <dd>Review template.</dd><dt class="property-optional"
             title="Optional">
         <span id="reviewcontents_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reviewcontents_go" style="color: inherit; text-decoration: inherit;">Review<wbr>Contents</a>
@@ -6221,8 +6652,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The type of moderated content. Valid values:</p>
-</dd></dl>
+    <dd>The type of moderated content. Valid values:</p>
+<ul>
+<li><code>Media</code>: The original audio/video;</li>
+<li><code>Cover</code>: Thumbnails.</li>
+</ul></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="definition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#definition_hcl" style="color: inherit; text-decoration: inherit;">definition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Review template.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="review_contents_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#review_contents_hcl" style="color: inherit; text-decoration: inherit;">review_<wbr>contents</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The type of moderated content. Valid values:</p>
+<ul>
+<li><code>Media</code>: The original audio/video;</li>
+<li><code>Cover</code>: Thumbnails.</li>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6236,8 +6696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Review template.</p>
-</dd><dt class="property-optional"
+    <dd>Review template.</dd><dt class="property-optional"
             title="Optional">
         <span id="reviewcontents_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reviewcontents_java" style="color: inherit; text-decoration: inherit;">review<wbr>Contents</a>
@@ -6245,8 +6704,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The type of moderated content. Valid values:</p>
-</dd></dl>
+    <dd>The type of moderated content. Valid values:</p>
+<ul>
+<li><code>Media</code>: The original audio/video;</li>
+<li><code>Cover</code>: Thumbnails.</li>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6260,8 +6722,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Review template.</p>
-</dd><dt class="property-optional"
+    <dd>Review template.</dd><dt class="property-optional"
             title="Optional">
         <span id="reviewcontents_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reviewcontents_nodejs" style="color: inherit; text-decoration: inherit;">review<wbr>Contents</a>
@@ -6269,8 +6730,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The type of moderated content. Valid values:</p>
-</dd></dl>
+    <dd>The type of moderated content. Valid values:</p>
+<ul>
+<li><code>Media</code>: The original audio/video;</li>
+<li><code>Cover</code>: Thumbnails.</li>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6284,8 +6748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Review template.</p>
-</dd><dt class="property-optional"
+    <dd>Review template.</dd><dt class="property-optional"
             title="Optional">
         <span id="review_contents_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#review_contents_python" style="color: inherit; text-decoration: inherit;">review_<wbr>contents</a>
@@ -6293,8 +6756,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The type of moderated content. Valid values:</p>
-</dd></dl>
+    <dd>The type of moderated content. Valid values:</p>
+<ul>
+<li><code>Media</code>: The original audio/video;</li>
+<li><code>Cover</code>: Thumbnails.</li>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6308,8 +6774,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Review template.</p>
-</dd><dt class="property-optional"
+    <dd>Review template.</dd><dt class="property-optional"
             title="Optional">
         <span id="reviewcontents_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#reviewcontents_yaml" style="color: inherit; text-decoration: inherit;">review<wbr>Contents</a>
@@ -6317,8 +6782,11 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The type of moderated content. Valid values:</p>
-</dd></dl>
+    <dd>The type of moderated content. Valid values:</p>
+<ul>
+<li><code>Media</code>: The original audio/video;</li>
+<li><code>Cover</code>: Thumbnails.</li>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6333,6 +6801,8 @@ $ pulumi import tencentcloud:Vod/procedureTemplate:ProcedureTemplate foo tf-proc
 ```
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
 
 
 
@@ -6343,7 +6813,6 @@ $ pulumi import tencentcloud:Vod/procedureTemplate:ProcedureTemplate foo tf-proc
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

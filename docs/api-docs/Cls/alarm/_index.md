@@ -2,9 +2,11 @@
 ---
 title: "Alarm"
 title_tag: "tencentcloud.Cls.Alarm"
-meta_desc: "Documentation for the tencentcloud.Cls.Alarm resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a cls alarm"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,84 +18,180 @@ Provides a resource to create a cls alarm
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Use single condition with alarmNoticeIds
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.cls.Alarm("example", {
-    alarmLevel: 0,
-    alarmNoticeIds: ["notice-0850756b-245d-4bc7-bb27-2a58fffc780b"],
+    name: "tf-example",
+    alarmNoticeIds: ["notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101"],
     alarmPeriod: 15,
+    condition: "$1.source='10.0.0.1'",
+    alarmLevel: 1,
+    messageTemplate: "{{.Label}}",
+    status: true,
+    triggerCount: 1,
     alarmTargets: [{
-        endTimeOffset: 0,
-        logsetId: "33aaf0ae-6163-411b-a415-9f27450f68db",
-        number: 1,
+        logsetId: "e74efb8e-f647-48b2-a725-43f11b122081",
+        topicId: "59cf3ec0-1612-4157-be3f-341b2e7a53cb",
         query: "status:>500 | select count(*) as errorCounts",
         startTimeOffset: -15,
+        endTimeOffset: 0,
+        number: 1,
         syntaxRule: 1,
-        topicId: "88735a07-bea4-4985-8763-e9deb6da4fad",
     }],
     analyses: [{
+        content: "__FILENAME__",
+        name: "terraform",
+        type: "field",
         configInfos: [{
             key: "QueryIndex",
             value: "1",
         }],
-        content: "__FILENAME__",
-        name: "terraform",
-        type: "field",
     }],
-    condition: "test",
-    messageTemplate: "{{.Label}}",
     monitorTime: {
         time: 1,
         type: "Period",
     },
-    status: true,
+    classifications: {
+        env: "production",
+        service: "api-gateway",
+    },
     tags: {
         createdBy: "terraform",
     },
-    triggerCount: 1,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.cls.Alarm("example",
-    alarm_level=0,
-    alarm_notice_ids=["notice-0850756b-245d-4bc7-bb27-2a58fffc780b"],
+    name="tf-example",
+    alarm_notice_ids=["notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101"],
     alarm_period=15,
-    alarm_targets=[tencentcloud.cls.AlarmAlarmTargetArgs(
-        end_time_offset=0,
-        logset_id="33aaf0ae-6163-411b-a415-9f27450f68db",
-        number=1,
-        query="status:>500 | select count(*) as errorCounts",
-        start_time_offset=-15,
-        syntax_rule=1,
-        topic_id="88735a07-bea4-4985-8763-e9deb6da4fad",
-    )],
-    analyses=[tencentcloud.cls.AlarmAnalysisArgs(
-        config_infos=[tencentcloud.cls.AlarmAnalysisConfigInfoArgs(
-            key="QueryIndex",
-            value="1",
-        )],
-        content="__FILENAME__",
-        name="terraform",
-        type="field",
-    )],
-    condition="test",
+    condition="$1.source='10.0.0.1'",
+    alarm_level=1,
     message_template="{{.Label}}",
-    monitor_time=tencentcloud.cls.AlarmMonitorTimeArgs(
-        time=1,
-        type="Period",
-    ),
     status=True,
+    trigger_count=1,
+    alarm_targets=[{
+        "logset_id": "e74efb8e-f647-48b2-a725-43f11b122081",
+        "topic_id": "59cf3ec0-1612-4157-be3f-341b2e7a53cb",
+        "query": "status:>500 | select count(*) as errorCounts",
+        "start_time_offset": -15,
+        "end_time_offset": 0,
+        "number": 1,
+        "syntax_rule": 1,
+    }],
+    analyses=[{
+        "content": "__FILENAME__",
+        "name": "terraform",
+        "type": "field",
+        "config_infos": [{
+            "key": "QueryIndex",
+            "value": "1",
+        }],
+    }],
+    monitor_time={
+        "time": 1,
+        "type": "Period",
+    },
+    classifications={
+        "env": "production",
+        "service": "api-gateway",
+    },
     tags={
         "createdBy": "terraform",
-    },
-    trigger_count=1)
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cls.NewAlarm(ctx, "example", &cls.AlarmArgs{
+			Name: pulumi.String("tf-example"),
+			AlarmNoticeIds: pulumi.StringArray{
+				pulumi.String("notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101"),
+			},
+			AlarmPeriod:     pulumi.Int(15),
+			Condition:       pulumi.String("$1.source='10.0.0.1'"),
+			AlarmLevel:      pulumi.Int(1),
+			MessageTemplate: pulumi.String("{{.Label}}"),
+			Status:          pulumi.Bool(true),
+			TriggerCount:    pulumi.Int(1),
+			AlarmTargets: cls.AlarmAlarmTargetArray{
+				&cls.AlarmAlarmTargetArgs{
+					LogsetId:        pulumi.String("e74efb8e-f647-48b2-a725-43f11b122081"),
+					TopicId:         pulumi.String("59cf3ec0-1612-4157-be3f-341b2e7a53cb"),
+					Query:           pulumi.String("status:>500 | select count(*) as errorCounts"),
+					StartTimeOffset: pulumi.Int(-15),
+					EndTimeOffset:   pulumi.Int(0),
+					Number:          pulumi.Int(1),
+					SyntaxRule:      pulumi.Int(1),
+				},
+			},
+			Analyses: cls.AlarmAnalysisArray{
+				&cls.AlarmAnalysisArgs{
+					Content: pulumi.String("__FILENAME__"),
+					Name:    pulumi.String("terraform"),
+					Type:    pulumi.String("field"),
+					ConfigInfos: cls.AlarmAnalysisConfigInfoArray{
+						&cls.AlarmAnalysisConfigInfoArgs{
+							Key:   pulumi.String("QueryIndex"),
+							Value: pulumi.String("1"),
+						},
+					},
+				},
+			},
+			MonitorTime: &cls.AlarmMonitorTimeArgs{
+				Time: pulumi.Int(1),
+				Type: pulumi.String("Period"),
+			},
+			Classifications: pulumi.StringMap{
+				"env":     pulumi.String("production"),
+				"service": pulumi.String("api-gateway"),
+			},
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -104,29 +202,37 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Cls.Alarm("example", new()
     {
-        AlarmLevel = 0,
+        Name = "tf-example",
         AlarmNoticeIds = new[]
         {
-            "notice-0850756b-245d-4bc7-bb27-2a58fffc780b",
+            "notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101",
         },
         AlarmPeriod = 15,
+        Condition = "$1.source='10.0.0.1'",
+        AlarmLevel = 1,
+        MessageTemplate = "{{.Label}}",
+        Status = true,
+        TriggerCount = 1,
         AlarmTargets = new[]
         {
             new Tencentcloud.Cls.Inputs.AlarmAlarmTargetArgs
             {
-                EndTimeOffset = 0,
-                LogsetId = "33aaf0ae-6163-411b-a415-9f27450f68db",
-                Number = 1,
+                LogsetId = "e74efb8e-f647-48b2-a725-43f11b122081",
+                TopicId = "59cf3ec0-1612-4157-be3f-341b2e7a53cb",
                 Query = "status:>500 | select count(*) as errorCounts",
                 StartTimeOffset = -15,
+                EndTimeOffset = 0,
+                Number = 1,
                 SyntaxRule = 1,
-                TopicId = "88735a07-bea4-4985-8763-e9deb6da4fad",
             },
         },
         Analyses = new[]
         {
             new Tencentcloud.Cls.Inputs.AlarmAnalysisArgs
             {
+                Content = "__FILENAME__",
+                Name = "terraform",
+                Type = "field",
                 ConfigInfos = new[]
                 {
                     new Tencentcloud.Cls.Inputs.AlarmAnalysisConfigInfoArgs
@@ -135,87 +241,31 @@ return await Deployment.RunAsync(() =>
                         Value = "1",
                     },
                 },
-                Content = "__FILENAME__",
-                Name = "terraform",
-                Type = "field",
             },
         },
-        Condition = "test",
-        MessageTemplate = "{{.Label}}",
         MonitorTime = new Tencentcloud.Cls.Inputs.AlarmMonitorTimeArgs
         {
             Time = 1,
             Type = "Period",
         },
-        Status = true,
+        Classifications = 
+        {
+            { "env", "production" },
+            { "service", "api-gateway" },
+        },
         Tags = 
         {
             { "createdBy", "terraform" },
         },
-        TriggerCount = 1,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cls.NewAlarm(ctx, "example", &Cls.AlarmArgs{
-			AlarmLevel: pulumi.Int(0),
-			AlarmNoticeIds: pulumi.StringArray{
-				pulumi.String("notice-0850756b-245d-4bc7-bb27-2a58fffc780b"),
-			},
-			AlarmPeriod: pulumi.Int(15),
-			AlarmTargets: cls.AlarmAlarmTargetArray{
-				&cls.AlarmAlarmTargetArgs{
-					EndTimeOffset:   pulumi.Int(0),
-					LogsetId:        pulumi.String("33aaf0ae-6163-411b-a415-9f27450f68db"),
-					Number:          pulumi.Int(1),
-					Query:           pulumi.String("status:>500 | select count(*) as errorCounts"),
-					StartTimeOffset: -15,
-					SyntaxRule:      pulumi.Int(1),
-					TopicId:         pulumi.String("88735a07-bea4-4985-8763-e9deb6da4fad"),
-				},
-			},
-			Analyses: cls.AlarmAnalysisArray{
-				&cls.AlarmAnalysisArgs{
-					ConfigInfos: cls.AlarmAnalysisConfigInfoArray{
-						&cls.AlarmAnalysisConfigInfoArgs{
-							Key:   pulumi.String("QueryIndex"),
-							Value: pulumi.String("1"),
-						},
-					},
-					Content: pulumi.String("__FILENAME__"),
-					Name:    pulumi.String("terraform"),
-					Type:    pulumi.String("field"),
-				},
-			},
-			Condition:       pulumi.String("test"),
-			MessageTemplate: pulumi.String("{{.Label}}"),
-			MonitorTime: &cls.AlarmMonitorTimeArgs{
-				Time: pulumi.Int(1),
-				Type: pulumi.String("Period"),
-			},
-			Status: pulumi.Bool(true),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-			TriggerCount: pulumi.Int(1),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -226,9 +276,10 @@ import com.pulumi.tencentcloud.Cls.Alarm;
 import com.pulumi.tencentcloud.Cls.AlarmArgs;
 import com.pulumi.tencentcloud.Cls.inputs.AlarmAlarmTargetArgs;
 import com.pulumi.tencentcloud.Cls.inputs.AlarmAnalysisArgs;
+import com.pulumi.tencentcloud.Cls.inputs.AlarmAnalysisConfigInfoArgs;
 import com.pulumi.tencentcloud.Cls.inputs.AlarmMonitorTimeArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -240,113 +291,1238 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Alarm("example", AlarmArgs.builder()        
-            .alarmLevel(0)
-            .alarmNoticeIds("notice-0850756b-245d-4bc7-bb27-2a58fffc780b")
+        var example = new Alarm("example", AlarmArgs.builder()
+            .name("tf-example")
+            .alarmNoticeIds("notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101")
             .alarmPeriod(15)
+            .condition("$1.source='10.0.0.1'")
+            .alarmLevel(1)
+            .messageTemplate("{{.Label}}")
+            .status(true)
+            .triggerCount(1)
             .alarmTargets(AlarmAlarmTargetArgs.builder()
-                .endTimeOffset(0)
-                .logsetId("33aaf0ae-6163-411b-a415-9f27450f68db")
-                .number(1)
+                .logsetId("e74efb8e-f647-48b2-a725-43f11b122081")
+                .topicId("59cf3ec0-1612-4157-be3f-341b2e7a53cb")
                 .query("status:>500 | select count(*) as errorCounts")
-                .startTimeOffset("TODO: GenUnaryOpExpression")
+                .startTimeOffset(-15)
+                .endTimeOffset(0)
+                .number(1)
                 .syntaxRule(1)
-                .topicId("88735a07-bea4-4985-8763-e9deb6da4fad")
                 .build())
             .analyses(AlarmAnalysisArgs.builder()
+                .content("__FILENAME__")
+                .name("terraform")
+                .type("field")
                 .configInfos(AlarmAnalysisConfigInfoArgs.builder()
                     .key("QueryIndex")
                     .value("1")
                     .build())
-                .content("__FILENAME__")
-                .name("terraform")
-                .type("field")
                 .build())
-            .condition("test")
-            .messageTemplate("{{.Label}}")
             .monitorTime(AlarmMonitorTimeArgs.builder()
                 .time(1)
                 .type("Period")
                 .build())
-            .status(true)
+            .classifications(Map.ofEntries(
+                Map.entry("env", "production"),
+                Map.entry("service", "api-gateway")
+            ))
             .tags(Map.of("createdBy", "terraform"))
-            .triggerCount(1)
             .build());
 
     }
 }
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
 
+```yaml
+resources:
+  example:
+    type: tencentcloud:Cls:Alarm
+    properties:
+      name: tf-example
+      alarmNoticeIds:
+        - notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101
+      alarmPeriod: 15
+      condition: $1.source='10.0.0.1'
+      alarmLevel: 1
+      messageTemplate: '{{.Label}}'
+      status: true
+      triggerCount: 1
+      alarmTargets:
+        - logsetId: e74efb8e-f647-48b2-a725-43f11b122081
+          topicId: 59cf3ec0-1612-4157-be3f-341b2e7a53cb
+          query: status:>500 | select count(*) as errorCounts
+          startTimeOffset: -15
+          endTimeOffset: 0
+          number: 1
+          syntaxRule: 1
+      analyses:
+        - content: __FILENAME__
+          name: terraform
+          type: field
+          configInfos:
+            - key: QueryIndex
+              value: '1'
+      monitorTime:
+        time: 1
+        type: Period
+      classifications:
+        env: production
+        service: api-gateway
+      tags:
+        createdBy: terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cls_alarm" "example" {
+  name             = "tf-example"
+  alarm_notice_ids = ["notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101"]
+  alarm_period     = 15
+  condition        = "$1.source='10.0.0.1'"
+  alarm_level      = 1
+  message_template = "{{.Label}}"
+  status           = true
+  trigger_count    = 1
+  alarm_targets {
+    logset_id         = "e74efb8e-f647-48b2-a725-43f11b122081"
+    topic_id          = "59cf3ec0-1612-4157-be3f-341b2e7a53cb"
+    query             = "status:>500 | select count(*) as errorCounts"
+    start_time_offset = -15
+    end_time_offset   = 0
+    number            = 1
+    syntax_rule       = 1
+  }
+  analyses {
+    content = "__FILENAME__"
+    name    = "terraform"
+    type    = "field"
+    config_infos {
+      key   = "QueryIndex"
+      value = "1"
+    }
+  }
+  monitor_time = {
+    time = 1
+    type = "Period"
+  }
+  classifications = {
+    "env"     = "production"
+    "service" = "api-gateway"
+  }
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### are mutually exclusive. You can only use one of them.
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const exampleMonitorNotice = new tencentcloud.cls.Alarm("example_monitor_notice", {
+    name: "tf-example-monitor-notice",
+    monitorNotice: {
+        notices: [
+            {
+                noticeId: "notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101",
+                contentTmplId: "tmpl-5f7c8a9b-1234-5678-90ab-cdef12345678",
+                alarmLevels: [
+                    1,
+                    2,
+                ],
+            },
+            {
+                noticeId: "notice-d3bf54ff-2b5c-5d5b-bf4f-f92582391202",
+                contentTmplId: "tmpl-6g8d9b0c-2345-6789-01bc-def123456789",
+                alarmLevels: [3],
+            },
+        ],
+    },
+    alarmPeriod: 15,
+    condition: "$1.errorCounts > 100",
+    alarmLevel: 1,
+    messageTemplate: "{{.Label}}",
+    status: true,
+    triggerCount: 1,
+    alarmTargets: [{
+        logsetId: "e74efb8e-f647-48b2-a725-43f11b122081",
+        topicId: "59cf3ec0-1612-4157-be3f-341b2e7a53cb",
+        query: "status:>500 | select count(*) as errorCounts",
+        startTimeOffset: -15,
+        endTimeOffset: 0,
+        number: 1,
+        syntaxRule: 1,
+    }],
+    analyses: [{
+        content: "__FILENAME__",
+        name: "terraform",
+        type: "field",
+        configInfos: [{
+            key: "QueryIndex",
+            value: "1",
+        }],
+    }],
+    monitorTime: {
+        time: 1,
+        type: "Period",
+    },
+    classifications: {
+        env: "production",
+        service: "data-pipeline",
+    },
+    tags: {
+        createdBy: "terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example_monitor_notice = tencentcloud.cls.Alarm("example_monitor_notice",
+    name="tf-example-monitor-notice",
+    monitor_notice={
+        "notices": [
+            {
+                "notice_id": "notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101",
+                "content_tmpl_id": "tmpl-5f7c8a9b-1234-5678-90ab-cdef12345678",
+                "alarm_levels": [
+                    1,
+                    2,
+                ],
+            },
+            {
+                "notice_id": "notice-d3bf54ff-2b5c-5d5b-bf4f-f92582391202",
+                "content_tmpl_id": "tmpl-6g8d9b0c-2345-6789-01bc-def123456789",
+                "alarm_levels": [3],
+            },
+        ],
+    },
+    alarm_period=15,
+    condition="$1.errorCounts > 100",
+    alarm_level=1,
+    message_template="{{.Label}}",
+    status=True,
+    trigger_count=1,
+    alarm_targets=[{
+        "logset_id": "e74efb8e-f647-48b2-a725-43f11b122081",
+        "topic_id": "59cf3ec0-1612-4157-be3f-341b2e7a53cb",
+        "query": "status:>500 | select count(*) as errorCounts",
+        "start_time_offset": -15,
+        "end_time_offset": 0,
+        "number": 1,
+        "syntax_rule": 1,
+    }],
+    analyses=[{
+        "content": "__FILENAME__",
+        "name": "terraform",
+        "type": "field",
+        "config_infos": [{
+            "key": "QueryIndex",
+            "value": "1",
+        }],
+    }],
+    monitor_time={
+        "time": 1,
+        "type": "Period",
+    },
+    classifications={
+        "env": "production",
+        "service": "data-pipeline",
+    },
+    tags={
+        "createdBy": "terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cls.NewAlarm(ctx, "example_monitor_notice", &cls.AlarmArgs{
+			Name: pulumi.String("tf-example-monitor-notice"),
+			MonitorNotice: &cls.AlarmMonitorNoticeArgs{
+				Notices: cls.AlarmMonitorNoticeNoticeArray{
+					&cls.AlarmMonitorNoticeNoticeArgs{
+						NoticeId:      pulumi.String("notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101"),
+						ContentTmplId: pulumi.String("tmpl-5f7c8a9b-1234-5678-90ab-cdef12345678"),
+						AlarmLevels: pulumi.IntArray{
+							pulumi.Int(1),
+							pulumi.Int(2),
+						},
+					},
+					&cls.AlarmMonitorNoticeNoticeArgs{
+						NoticeId:      pulumi.String("notice-d3bf54ff-2b5c-5d5b-bf4f-f92582391202"),
+						ContentTmplId: pulumi.String("tmpl-6g8d9b0c-2345-6789-01bc-def123456789"),
+						AlarmLevels: pulumi.IntArray{
+							pulumi.Int(3),
+						},
+					},
+				},
+			},
+			AlarmPeriod:     pulumi.Int(15),
+			Condition:       pulumi.String("$1.errorCounts > 100"),
+			AlarmLevel:      pulumi.Int(1),
+			MessageTemplate: pulumi.String("{{.Label}}"),
+			Status:          pulumi.Bool(true),
+			TriggerCount:    pulumi.Int(1),
+			AlarmTargets: cls.AlarmAlarmTargetArray{
+				&cls.AlarmAlarmTargetArgs{
+					LogsetId:        pulumi.String("e74efb8e-f647-48b2-a725-43f11b122081"),
+					TopicId:         pulumi.String("59cf3ec0-1612-4157-be3f-341b2e7a53cb"),
+					Query:           pulumi.String("status:>500 | select count(*) as errorCounts"),
+					StartTimeOffset: pulumi.Int(-15),
+					EndTimeOffset:   pulumi.Int(0),
+					Number:          pulumi.Int(1),
+					SyntaxRule:      pulumi.Int(1),
+				},
+			},
+			Analyses: cls.AlarmAnalysisArray{
+				&cls.AlarmAnalysisArgs{
+					Content: pulumi.String("__FILENAME__"),
+					Name:    pulumi.String("terraform"),
+					Type:    pulumi.String("field"),
+					ConfigInfos: cls.AlarmAnalysisConfigInfoArray{
+						&cls.AlarmAnalysisConfigInfoArgs{
+							Key:   pulumi.String("QueryIndex"),
+							Value: pulumi.String("1"),
+						},
+					},
+				},
+			},
+			MonitorTime: &cls.AlarmMonitorTimeArgs{
+				Time: pulumi.Int(1),
+				Type: pulumi.String("Period"),
+			},
+			Classifications: pulumi.StringMap{
+				"env":     pulumi.String("production"),
+				"service": pulumi.String("data-pipeline"),
+			},
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var exampleMonitorNotice = new Tencentcloud.Cls.Alarm("example_monitor_notice", new()
+    {
+        Name = "tf-example-monitor-notice",
+        MonitorNotice = new Tencentcloud.Cls.Inputs.AlarmMonitorNoticeArgs
+        {
+            Notices = new[]
+            {
+                new Tencentcloud.Cls.Inputs.AlarmMonitorNoticeNoticeArgs
+                {
+                    NoticeId = "notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101",
+                    ContentTmplId = "tmpl-5f7c8a9b-1234-5678-90ab-cdef12345678",
+                    AlarmLevels = new[]
+                    {
+                        1,
+                        2,
+                    },
+                },
+                new Tencentcloud.Cls.Inputs.AlarmMonitorNoticeNoticeArgs
+                {
+                    NoticeId = "notice-d3bf54ff-2b5c-5d5b-bf4f-f92582391202",
+                    ContentTmplId = "tmpl-6g8d9b0c-2345-6789-01bc-def123456789",
+                    AlarmLevels = new[]
+                    {
+                        3,
+                    },
+                },
+            },
+        },
+        AlarmPeriod = 15,
+        Condition = "$1.errorCounts > 100",
+        AlarmLevel = 1,
+        MessageTemplate = "{{.Label}}",
+        Status = true,
+        TriggerCount = 1,
+        AlarmTargets = new[]
+        {
+            new Tencentcloud.Cls.Inputs.AlarmAlarmTargetArgs
+            {
+                LogsetId = "e74efb8e-f647-48b2-a725-43f11b122081",
+                TopicId = "59cf3ec0-1612-4157-be3f-341b2e7a53cb",
+                Query = "status:>500 | select count(*) as errorCounts",
+                StartTimeOffset = -15,
+                EndTimeOffset = 0,
+                Number = 1,
+                SyntaxRule = 1,
+            },
+        },
+        Analyses = new[]
+        {
+            new Tencentcloud.Cls.Inputs.AlarmAnalysisArgs
+            {
+                Content = "__FILENAME__",
+                Name = "terraform",
+                Type = "field",
+                ConfigInfos = new[]
+                {
+                    new Tencentcloud.Cls.Inputs.AlarmAnalysisConfigInfoArgs
+                    {
+                        Key = "QueryIndex",
+                        Value = "1",
+                    },
+                },
+            },
+        },
+        MonitorTime = new Tencentcloud.Cls.Inputs.AlarmMonitorTimeArgs
+        {
+            Time = 1,
+            Type = "Period",
+        },
+        Classifications = 
+        {
+            { "env", "production" },
+            { "service", "data-pipeline" },
+        },
+        Tags = 
+        {
+            { "createdBy", "terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cls.Alarm;
+import com.pulumi.tencentcloud.Cls.AlarmArgs;
+import com.pulumi.tencentcloud.Cls.inputs.AlarmMonitorNoticeArgs;
+import com.pulumi.tencentcloud.Cls.inputs.AlarmMonitorNoticeNoticeArgs;
+import com.pulumi.tencentcloud.Cls.inputs.AlarmAlarmTargetArgs;
+import com.pulumi.tencentcloud.Cls.inputs.AlarmAnalysisArgs;
+import com.pulumi.tencentcloud.Cls.inputs.AlarmAnalysisConfigInfoArgs;
+import com.pulumi.tencentcloud.Cls.inputs.AlarmMonitorTimeArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var exampleMonitorNotice = new Alarm("exampleMonitorNotice", AlarmArgs.builder()
+            .name("tf-example-monitor-notice")
+            .monitorNotice(AlarmMonitorNoticeArgs.builder()
+                .notices(                
+                    AlarmMonitorNoticeNoticeArgs.builder()
+                        .noticeId("notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101")
+                        .contentTmplId("tmpl-5f7c8a9b-1234-5678-90ab-cdef12345678")
+                        .alarmLevels(                        
+                            1,
+                            2)
+                        .build(),
+                    AlarmMonitorNoticeNoticeArgs.builder()
+                        .noticeId("notice-d3bf54ff-2b5c-5d5b-bf4f-f92582391202")
+                        .contentTmplId("tmpl-6g8d9b0c-2345-6789-01bc-def123456789")
+                        .alarmLevels(3)
+                        .build())
+                .build())
+            .alarmPeriod(15)
+            .condition("$1.errorCounts > 100")
+            .alarmLevel(1)
+            .messageTemplate("{{.Label}}")
+            .status(true)
+            .triggerCount(1)
+            .alarmTargets(AlarmAlarmTargetArgs.builder()
+                .logsetId("e74efb8e-f647-48b2-a725-43f11b122081")
+                .topicId("59cf3ec0-1612-4157-be3f-341b2e7a53cb")
+                .query("status:>500 | select count(*) as errorCounts")
+                .startTimeOffset(-15)
+                .endTimeOffset(0)
+                .number(1)
+                .syntaxRule(1)
+                .build())
+            .analyses(AlarmAnalysisArgs.builder()
+                .content("__FILENAME__")
+                .name("terraform")
+                .type("field")
+                .configInfos(AlarmAnalysisConfigInfoArgs.builder()
+                    .key("QueryIndex")
+                    .value("1")
+                    .build())
+                .build())
+            .monitorTime(AlarmMonitorTimeArgs.builder()
+                .time(1)
+                .type("Period")
+                .build())
+            .classifications(Map.ofEntries(
+                Map.entry("env", "production"),
+                Map.entry("service", "data-pipeline")
+            ))
+            .tags(Map.of("createdBy", "terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  exampleMonitorNotice:
+    type: tencentcloud:Cls:Alarm
+    name: example_monitor_notice
+    properties:
+      name: tf-example-monitor-notice
+      monitorNotice:
+        notices:
+          - noticeId: notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101
+            contentTmplId: tmpl-5f7c8a9b-1234-5678-90ab-cdef12345678
+            alarmLevels:
+              - 1
+              - 2
+          - noticeId: notice-d3bf54ff-2b5c-5d5b-bf4f-f92582391202
+            contentTmplId: tmpl-6g8d9b0c-2345-6789-01bc-def123456789
+            alarmLevels:
+              - 3
+      alarmPeriod: 15
+      condition: $1.errorCounts > 100
+      alarmLevel: 1
+      messageTemplate: '{{.Label}}'
+      status: true
+      triggerCount: 1
+      alarmTargets:
+        - logsetId: e74efb8e-f647-48b2-a725-43f11b122081
+          topicId: 59cf3ec0-1612-4157-be3f-341b2e7a53cb
+          query: status:>500 | select count(*) as errorCounts
+          startTimeOffset: -15
+          endTimeOffset: 0
+          number: 1
+          syntaxRule: 1
+      analyses:
+        - content: __FILENAME__
+          name: terraform
+          type: field
+          configInfos:
+            - key: QueryIndex
+              value: '1'
+      monitorTime:
+        time: 1
+        type: Period
+      classifications:
+        env: production
+        service: data-pipeline
+      tags:
+        createdBy: terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cls_alarm" "example_monitor_notice" {
+  name = "tf-example-monitor-notice"
+  monitor_notice = {
+    notices = [{
+      "noticeId"      = "notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101"
+      "contentTmplId" = "tmpl-5f7c8a9b-1234-5678-90ab-cdef12345678"
+      "alarmLevels"   = [1, 2]
+      }, {
+      "noticeId"      = "notice-d3bf54ff-2b5c-5d5b-bf4f-f92582391202"
+      "contentTmplId" = "tmpl-6g8d9b0c-2345-6789-01bc-def123456789"
+      "alarmLevels"   = [3]
+    }]
+  }
+  # Alert levels: 1=Critical, 2=Warning
+  # Only send Info level alerts
+  alarm_period     = 15
+  condition        = "$1.errorCounts > 100"
+  alarm_level      = 1
+  message_template = "{{.Label}}"
+  status           = true
+  trigger_count    = 1
+  alarm_targets {
+    logset_id         = "e74efb8e-f647-48b2-a725-43f11b122081"
+    topic_id          = "59cf3ec0-1612-4157-be3f-341b2e7a53cb"
+    query             = "status:>500 | select count(*) as errorCounts"
+    start_time_offset = -15
+    end_time_offset   = 0
+    number            = 1
+    syntax_rule       = 1
+  }
+  analyses {
+    content = "__FILENAME__"
+    name    = "terraform"
+    type    = "field"
+    config_infos {
+      key   = "QueryIndex"
+      value = "1"
+    }
+  }
+  monitor_time = {
+    time = 1
+    type = "Period"
+  }
+  classifications = {
+    "env"     = "production"
+    "service" = "data-pipeline"
+  }
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Use multi conditions
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.cls.Alarm("example", {
+    name: "tf-example",
+    alarmNoticeIds: ["notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101"],
+    alarmPeriod: 15,
+    messageTemplate: "{{.Label}}",
+    status: true,
+    triggerCount: 1,
+    alarmTargets: [{
+        logsetId: "e74efb8e-f647-48b2-a725-43f11b122081",
+        topicId: "59cf3ec0-1612-4157-be3f-341b2e7a53cb",
+        query: "status:>500 | select count(*) as errorCounts",
+        startTimeOffset: -15,
+        endTimeOffset: 0,
+        number: 1,
+        syntaxRule: 1,
+    }],
+    analyses: [{
+        content: "__FILENAME__",
+        name: "terraform",
+        type: "field",
+        configInfos: [{
+            key: "QueryIndex",
+            value: "1",
+        }],
+    }],
+    multiConditions: [
+        {
+            condition: "[$1.__QUERYCOUNT__]> 0",
+            alarmLevel: 1,
+        },
+        {
+            condition: "$1.source='10.0.0.1'",
+            alarmLevel: 2,
+        },
+    ],
+    monitorTime: {
+        time: 1,
+        type: "Period",
+    },
+    classifications: {
+        env: "staging",
+        service: "data-pipeline",
+    },
+    tags: {
+        createdBy: "terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.cls.Alarm("example",
+    name="tf-example",
+    alarm_notice_ids=["notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101"],
+    alarm_period=15,
+    message_template="{{.Label}}",
+    status=True,
+    trigger_count=1,
+    alarm_targets=[{
+        "logset_id": "e74efb8e-f647-48b2-a725-43f11b122081",
+        "topic_id": "59cf3ec0-1612-4157-be3f-341b2e7a53cb",
+        "query": "status:>500 | select count(*) as errorCounts",
+        "start_time_offset": -15,
+        "end_time_offset": 0,
+        "number": 1,
+        "syntax_rule": 1,
+    }],
+    analyses=[{
+        "content": "__FILENAME__",
+        "name": "terraform",
+        "type": "field",
+        "config_infos": [{
+            "key": "QueryIndex",
+            "value": "1",
+        }],
+    }],
+    multi_conditions=[
+        {
+            "condition": "[$1.__QUERYCOUNT__]> 0",
+            "alarm_level": 1,
+        },
+        {
+            "condition": "$1.source='10.0.0.1'",
+            "alarm_level": 2,
+        },
+    ],
+    monitor_time={
+        "time": 1,
+        "type": "Period",
+    },
+    classifications={
+        "env": "staging",
+        "service": "data-pipeline",
+    },
+    tags={
+        "createdBy": "terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cls.NewAlarm(ctx, "example", &cls.AlarmArgs{
+			Name: pulumi.String("tf-example"),
+			AlarmNoticeIds: pulumi.StringArray{
+				pulumi.String("notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101"),
+			},
+			AlarmPeriod:     pulumi.Int(15),
+			MessageTemplate: pulumi.String("{{.Label}}"),
+			Status:          pulumi.Bool(true),
+			TriggerCount:    pulumi.Int(1),
+			AlarmTargets: cls.AlarmAlarmTargetArray{
+				&cls.AlarmAlarmTargetArgs{
+					LogsetId:        pulumi.String("e74efb8e-f647-48b2-a725-43f11b122081"),
+					TopicId:         pulumi.String("59cf3ec0-1612-4157-be3f-341b2e7a53cb"),
+					Query:           pulumi.String("status:>500 | select count(*) as errorCounts"),
+					StartTimeOffset: pulumi.Int(-15),
+					EndTimeOffset:   pulumi.Int(0),
+					Number:          pulumi.Int(1),
+					SyntaxRule:      pulumi.Int(1),
+				},
+			},
+			Analyses: cls.AlarmAnalysisArray{
+				&cls.AlarmAnalysisArgs{
+					Content: pulumi.String("__FILENAME__"),
+					Name:    pulumi.String("terraform"),
+					Type:    pulumi.String("field"),
+					ConfigInfos: cls.AlarmAnalysisConfigInfoArray{
+						&cls.AlarmAnalysisConfigInfoArgs{
+							Key:   pulumi.String("QueryIndex"),
+							Value: pulumi.String("1"),
+						},
+					},
+				},
+			},
+			MultiConditions: cls.AlarmMultiConditionArray{
+				&cls.AlarmMultiConditionArgs{
+					Condition:  pulumi.String("[$1.__QUERYCOUNT__]> 0"),
+					AlarmLevel: pulumi.Int(1),
+				},
+				&cls.AlarmMultiConditionArgs{
+					Condition:  pulumi.String("$1.source='10.0.0.1'"),
+					AlarmLevel: pulumi.Int(2),
+				},
+			},
+			MonitorTime: &cls.AlarmMonitorTimeArgs{
+				Time: pulumi.Int(1),
+				Type: pulumi.String("Period"),
+			},
+			Classifications: pulumi.StringMap{
+				"env":     pulumi.String("staging"),
+				"service": pulumi.String("data-pipeline"),
+			},
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Cls.Alarm("example", new()
+    {
+        Name = "tf-example",
+        AlarmNoticeIds = new[]
+        {
+            "notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101",
+        },
+        AlarmPeriod = 15,
+        MessageTemplate = "{{.Label}}",
+        Status = true,
+        TriggerCount = 1,
+        AlarmTargets = new[]
+        {
+            new Tencentcloud.Cls.Inputs.AlarmAlarmTargetArgs
+            {
+                LogsetId = "e74efb8e-f647-48b2-a725-43f11b122081",
+                TopicId = "59cf3ec0-1612-4157-be3f-341b2e7a53cb",
+                Query = "status:>500 | select count(*) as errorCounts",
+                StartTimeOffset = -15,
+                EndTimeOffset = 0,
+                Number = 1,
+                SyntaxRule = 1,
+            },
+        },
+        Analyses = new[]
+        {
+            new Tencentcloud.Cls.Inputs.AlarmAnalysisArgs
+            {
+                Content = "__FILENAME__",
+                Name = "terraform",
+                Type = "field",
+                ConfigInfos = new[]
+                {
+                    new Tencentcloud.Cls.Inputs.AlarmAnalysisConfigInfoArgs
+                    {
+                        Key = "QueryIndex",
+                        Value = "1",
+                    },
+                },
+            },
+        },
+        MultiConditions = new[]
+        {
+            new Tencentcloud.Cls.Inputs.AlarmMultiConditionArgs
+            {
+                Condition = "[$1.__QUERYCOUNT__]> 0",
+                AlarmLevel = 1,
+            },
+            new Tencentcloud.Cls.Inputs.AlarmMultiConditionArgs
+            {
+                Condition = "$1.source='10.0.0.1'",
+                AlarmLevel = 2,
+            },
+        },
+        MonitorTime = new Tencentcloud.Cls.Inputs.AlarmMonitorTimeArgs
+        {
+            Time = 1,
+            Type = "Period",
+        },
+        Classifications = 
+        {
+            { "env", "staging" },
+            { "service", "data-pipeline" },
+        },
+        Tags = 
+        {
+            { "createdBy", "terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cls.Alarm;
+import com.pulumi.tencentcloud.Cls.AlarmArgs;
+import com.pulumi.tencentcloud.Cls.inputs.AlarmAlarmTargetArgs;
+import com.pulumi.tencentcloud.Cls.inputs.AlarmAnalysisArgs;
+import com.pulumi.tencentcloud.Cls.inputs.AlarmAnalysisConfigInfoArgs;
+import com.pulumi.tencentcloud.Cls.inputs.AlarmMultiConditionArgs;
+import com.pulumi.tencentcloud.Cls.inputs.AlarmMonitorTimeArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Alarm("example", AlarmArgs.builder()
+            .name("tf-example")
+            .alarmNoticeIds("notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101")
+            .alarmPeriod(15)
+            .messageTemplate("{{.Label}}")
+            .status(true)
+            .triggerCount(1)
+            .alarmTargets(AlarmAlarmTargetArgs.builder()
+                .logsetId("e74efb8e-f647-48b2-a725-43f11b122081")
+                .topicId("59cf3ec0-1612-4157-be3f-341b2e7a53cb")
+                .query("status:>500 | select count(*) as errorCounts")
+                .startTimeOffset(-15)
+                .endTimeOffset(0)
+                .number(1)
+                .syntaxRule(1)
+                .build())
+            .analyses(AlarmAnalysisArgs.builder()
+                .content("__FILENAME__")
+                .name("terraform")
+                .type("field")
+                .configInfos(AlarmAnalysisConfigInfoArgs.builder()
+                    .key("QueryIndex")
+                    .value("1")
+                    .build())
+                .build())
+            .multiConditions(            
+                AlarmMultiConditionArgs.builder()
+                    .condition("[$1.__QUERYCOUNT__]> 0")
+                    .alarmLevel(1)
+                    .build(),
+                AlarmMultiConditionArgs.builder()
+                    .condition("$1.source='10.0.0.1'")
+                    .alarmLevel(2)
+                    .build())
+            .monitorTime(AlarmMonitorTimeArgs.builder()
+                .time(1)
+                .type("Period")
+                .build())
+            .classifications(Map.ofEntries(
+                Map.entry("env", "staging"),
+                Map.entry("service", "data-pipeline")
+            ))
+            .tags(Map.of("createdBy", "terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Cls:Alarm
+    properties:
+      name: tf-example
+      alarmNoticeIds:
+        - notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101
+      alarmPeriod: 15
+      messageTemplate: '{{.Label}}'
+      status: true
+      triggerCount: 1
+      alarmTargets:
+        - logsetId: e74efb8e-f647-48b2-a725-43f11b122081
+          topicId: 59cf3ec0-1612-4157-be3f-341b2e7a53cb
+          query: status:>500 | select count(*) as errorCounts
+          startTimeOffset: -15
+          endTimeOffset: 0
+          number: 1
+          syntaxRule: 1
+      analyses:
+        - content: __FILENAME__
+          name: terraform
+          type: field
+          configInfos:
+            - key: QueryIndex
+              value: '1'
+      multiConditions:
+        - condition: '[$1.__QUERYCOUNT__]> 0'
+          alarmLevel: 1
+        - condition: $1.source='10.0.0.1'
+          alarmLevel: 2
+      monitorTime:
+        time: 1
+        type: Period
+      classifications:
+        env: staging
+        service: data-pipeline
+      tags:
+        createdBy: terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_cls_alarm" "example" {
+  name             = "tf-example"
+  alarm_notice_ids = ["notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101"]
+  alarm_period     = 15
+  message_template = "{{.Label}}"
+  status           = true
+  trigger_count    = 1
+  alarm_targets {
+    logset_id         = "e74efb8e-f647-48b2-a725-43f11b122081"
+    topic_id          = "59cf3ec0-1612-4157-be3f-341b2e7a53cb"
+    query             = "status:>500 | select count(*) as errorCounts"
+    start_time_offset = -15
+    end_time_offset   = 0
+    number            = 1
+    syntax_rule       = 1
+  }
+  analyses {
+    content = "__FILENAME__"
+    name    = "terraform"
+    type    = "field"
+    config_infos {
+      key   = "QueryIndex"
+      value = "1"
+    }
+  }
+  multi_conditions {
+    condition   = "[$1.__QUERYCOUNT__]> 0"
+    alarm_level = 1
+  }
+  multi_conditions {
+    condition   = "$1.source='10.0.0.1'"
+    alarm_level = 2
+  }
+  monitor_time = {
+    time = 1
+    type = "Period"
+  }
+  classifications = {
+    "env"     = "staging"
+    "service" = "data-pipeline"
+  }
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateAlarm](https://www.tencentcloud.com/document/api/614/42830)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeAlarms](https://www.tencentcloud.com/document/api/614/42825)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [ModifyAlarm](https://www.tencentcloud.com/document/api/614/42823)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Delete: [DeleteAlarm](https://www.tencentcloud.com/document/api/614/42828)
 
 
 ## Create Alarm Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Alarm</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AlarmArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Alarm</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AlarmArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Alarm</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-          <span class="nx">alarm_level</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-          <span class="nx">alarm_notice_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-          <span class="nx">alarm_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-          <span class="nx">alarm_targets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cls.AlarmAlarmTargetArgs]]</span> = None<span class="p">,</span>
-          <span class="nx">analyses</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cls.AlarmAnalysisArgs]]</span> = None<span class="p">,</span>
-          <span class="nx">call_back</span><span class="p">:</span> <span class="nx">Optional[_cls.AlarmCallBackArgs]</span> = None<span class="p">,</span>
-          <span class="nx">condition</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">message_template</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">monitor_time</span><span class="p">:</span> <span class="nx">Optional[_cls.AlarmMonitorTimeArgs]</span> = None<span class="p">,</span>
-          <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-          <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-          <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-          <span class="nx">trigger_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Alarm</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
           <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AlarmArgs</a></span><span class="p">,</span>
-          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Alarm</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+          <span class="nx">monitor_time</span><span class="p">:</span> <span class="nx">Optional[AlarmMonitorTimeArgs]</span> = None<span class="p">,</span>
+          <span class="nx">trigger_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">alarm_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">alarm_targets</span><span class="p">:</span> <span class="nx">Optional[Sequence[AlarmAlarmTargetArgs]]</span> = None<span class="p">,</span>
+          <span class="nx">message_template</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">call_back</span><span class="p">:</span> <span class="nx">Optional[AlarmCallBackArgs]</span> = None<span class="p">,</span>
+          <span class="nx">classifications</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+          <span class="nx">condition</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">alarm_level</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+          <span class="nx">monitor_notice</span><span class="p">:</span> <span class="nx">Optional[AlarmMonitorNoticeArgs]</span> = None<span class="p">,</span>
+          <span class="nx">analyses</span><span class="p">:</span> <span class="nx">Optional[Sequence[AlarmAnalysisArgs]]</span> = None<span class="p">,</span>
+          <span class="nx">multi_conditions</span><span class="p">:</span> <span class="nx">Optional[Sequence[AlarmMultiConditionArgs]]</span> = None<span class="p">,</span>
+          <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+          <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+          <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+          <span class="nx">alarm_notice_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAlarm</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AlarmArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Alarm</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAlarm</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AlarmArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Alarm</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Alarm</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AlarmArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Alarm</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AlarmArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Alarm</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AlarmArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Alarm</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AlarmArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cls:Alarm</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cls:Alarm</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cls_alarm&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -367,7 +1543,7 @@ public class App {
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -484,11 +1660,19 @@ public class App {
 </pulumi-choosable>
 </div>
 
+
+
 ## Alarm Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -498,50 +1682,29 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="alarmnoticeids_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnoticeids_csharp" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Notice<wbr>Ids</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">List&lt;string&gt;</span>
-    </dt>
-    <dd><p>list of alarm notice id.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="alarmperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmperiod_csharp" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Period</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>alarm repeat cycle.</p>
-</dd><dt class="property-required"
+    <dd>alarm repeat cycle.</dd><dt class="property-required"
             title="Required">
         <span id="alarmtargets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmtargets_csharp" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmalarmtarget">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Alarm<wbr>Target<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmalarmtarget">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Alarm<wbr>Target&gt;</a></span>
     </dt>
-    <dd><p>list of alarm target.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="condition_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_csharp" style="color: inherit; text-decoration: inherit;">Condition</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>triggering conditions.</p>
-</dd><dt class="property-required"
+    <dd>list of alarm target.</dd><dt class="property-required"
             title="Required">
         <span id="monitortime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitortime_csharp" style="color: inherit; text-decoration: inherit;">Monitor<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmmonitortime">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Monitor<wbr>Time<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmmonitortime">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Monitor<wbr>Time</a></span>
     </dt>
-    <dd><p>monitor task execution time.</p>
-</dd><dt class="property-required"
+    <dd>monitor task execution time.</dd><dt class="property-required"
             title="Required">
         <span id="triggercount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggercount_csharp" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Count</a>
@@ -549,8 +1712,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>continuous cycle.</p>
-</dd><dt class="property-optional"
+    <dd>continuous cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="alarmlevel_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmlevel_csharp" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Level</a>
@@ -558,26 +1720,47 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alarmnoticeids_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnoticeids_csharp" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Notice<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="analyses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#analyses_csharp" style="color: inherit; text-decoration: inherit;">Analyses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmanalysis">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Analysis<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmanalysis">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Analysis&gt;</a></span>
     </dt>
-    <dd><p>multidimensional analysis.</p>
-</dd><dt class="property-optional"
+    <dd>multidimensional analysis.</dd><dt class="property-optional"
             title="Optional">
         <span id="callback_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#callback_csharp" style="color: inherit; text-decoration: inherit;">Call<wbr>Back</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmcallback">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Call<wbr>Back<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmcallback">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Call<wbr>Back</a></span>
     </dt>
-    <dd><p>user define callback.</p>
-</dd><dt class="property-optional"
+    <dd>user define callback.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="classifications_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classifications_csharp" style="color: inherit; text-decoration: inherit;">Classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
+    </dt>
+    <dd>Alarm classification information map. Key must match regex <code>^a-z$</code>, value length cannot exceed 200 characters. Maximum 20 entries.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_csharp" style="color: inherit; text-decoration: inherit;">Condition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="messagetemplate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messagetemplate_csharp" style="color: inherit; text-decoration: inherit;">Message<wbr>Template</a>
@@ -585,8 +1768,23 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user define alarm notice.</p>
-</dd><dt class="property-optional"
+    <dd>user define alarm notice.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monitornotice_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitornotice_csharp" style="color: inherit; text-decoration: inherit;">Monitor<wbr>Notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornotice">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Monitor<wbr>Notice</a></span>
+    </dt>
+    <dd>Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multiconditions_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multiconditions_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmulticondition">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Multi<wbr>Condition&gt;</a></span>
+    </dt>
+    <dd>Multiple triggering conditions.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -594,8 +1792,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>log alarm name.</p>
-</dd><dt class="property-optional"
+    <dd>log alarm name.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -603,17 +1800,15 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to enable the alarm policy.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable the alarm policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -621,23 +1816,13 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="alarmnoticeids_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnoticeids_go" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Notice<wbr>Ids</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">[]string</span>
-    </dt>
-    <dd><p>list of alarm notice id.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="alarmperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmperiod_go" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Period</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>alarm repeat cycle.</p>
-</dd><dt class="property-required"
+    <dd>alarm repeat cycle.</dd><dt class="property-required"
             title="Required">
         <span id="alarmtargets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmtargets_go" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Targets</a>
@@ -645,17 +1830,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmalarmtarget">[]Alarm<wbr>Alarm<wbr>Target<wbr>Args</a></span>
     </dt>
-    <dd><p>list of alarm target.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="condition_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_go" style="color: inherit; text-decoration: inherit;">Condition</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>triggering conditions.</p>
-</dd><dt class="property-required"
+    <dd>list of alarm target.</dd><dt class="property-required"
             title="Required">
         <span id="monitortime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitortime_go" style="color: inherit; text-decoration: inherit;">Monitor<wbr>Time</a>
@@ -663,8 +1838,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmmonitortime">Alarm<wbr>Monitor<wbr>Time<wbr>Args</a></span>
     </dt>
-    <dd><p>monitor task execution time.</p>
-</dd><dt class="property-required"
+    <dd>monitor task execution time.</dd><dt class="property-required"
             title="Required">
         <span id="triggercount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggercount_go" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Count</a>
@@ -672,8 +1846,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>continuous cycle.</p>
-</dd><dt class="property-optional"
+    <dd>continuous cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="alarmlevel_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmlevel_go" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Level</a>
@@ -681,8 +1854,15 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alarmnoticeids_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnoticeids_go" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Notice<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="analyses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#analyses_go" style="color: inherit; text-decoration: inherit;">Analyses</a>
@@ -690,8 +1870,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmanalysis">[]Alarm<wbr>Analysis<wbr>Args</a></span>
     </dt>
-    <dd><p>multidimensional analysis.</p>
-</dd><dt class="property-optional"
+    <dd>multidimensional analysis.</dd><dt class="property-optional"
             title="Optional">
         <span id="callback_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#callback_go" style="color: inherit; text-decoration: inherit;">Call<wbr>Back</a>
@@ -699,8 +1878,23 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmcallback">Alarm<wbr>Call<wbr>Back<wbr>Args</a></span>
     </dt>
-    <dd><p>user define callback.</p>
-</dd><dt class="property-optional"
+    <dd>user define callback.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="classifications_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classifications_go" style="color: inherit; text-decoration: inherit;">Classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map[string]string</span>
+    </dt>
+    <dd>Alarm classification information map. Key must match regex <code>^a-z$</code>, value length cannot exceed 200 characters. Maximum 20 entries.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_go" style="color: inherit; text-decoration: inherit;">Condition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="messagetemplate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messagetemplate_go" style="color: inherit; text-decoration: inherit;">Message<wbr>Template</a>
@@ -708,8 +1902,23 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user define alarm notice.</p>
-</dd><dt class="property-optional"
+    <dd>user define alarm notice.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monitornotice_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitornotice_go" style="color: inherit; text-decoration: inherit;">Monitor<wbr>Notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornotice">Alarm<wbr>Monitor<wbr>Notice<wbr>Args</a></span>
+    </dt>
+    <dd>Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multiconditions_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multiconditions_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmulticondition">[]Alarm<wbr>Multi<wbr>Condition<wbr>Args</a></span>
+    </dt>
+    <dd>Multiple triggering conditions.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -717,8 +1926,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>log alarm name.</p>
-</dd><dt class="property-optional"
+    <dd>log alarm name.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -726,17 +1934,149 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to enable the alarm policy.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable the alarm policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="alarm_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_period_hcl" style="color: inherit; text-decoration: inherit;">alarm_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>alarm repeat cycle.</dd><dt class="property-required"
+            title="Required">
+        <span id="alarm_targets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_targets_hcl" style="color: inherit; text-decoration: inherit;">alarm_<wbr>targets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmalarmtarget">list(object)</a></span>
+    </dt>
+    <dd>list of alarm target.</dd><dt class="property-required"
+            title="Required">
+        <span id="monitor_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitor_time_hcl" style="color: inherit; text-decoration: inherit;">monitor_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitortime">object</a></span>
+    </dt>
+    <dd>monitor task execution time.</dd><dt class="property-required"
+            title="Required">
+        <span id="trigger_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_count_hcl" style="color: inherit; text-decoration: inherit;">trigger_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>continuous cycle.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alarm_level_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_level_hcl" style="color: inherit; text-decoration: inherit;">alarm_<wbr>level</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alarm_notice_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_notice_ids_hcl" style="color: inherit; text-decoration: inherit;">alarm_<wbr>notice_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="analyses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#analyses_hcl" style="color: inherit; text-decoration: inherit;">analyses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmanalysis">list(object)</a></span>
+    </dt>
+    <dd>multidimensional analysis.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="call_back_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#call_back_hcl" style="color: inherit; text-decoration: inherit;">call_<wbr>back</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmcallback">object</a></span>
+    </dt>
+    <dd>user define callback.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="classifications_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classifications_hcl" style="color: inherit; text-decoration: inherit;">classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Alarm classification information map. Key must match regex <code>^a-z$</code>, value length cannot exceed 200 characters. Maximum 20 entries.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_hcl" style="color: inherit; text-decoration: inherit;">condition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger condition.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="message_template_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_template_hcl" style="color: inherit; text-decoration: inherit;">message_<wbr>template</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>user define alarm notice.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monitor_notice_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitor_notice_hcl" style="color: inherit; text-decoration: inherit;">monitor_<wbr>notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornotice">object</a></span>
+    </dt>
+    <dd>Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multi_conditions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_conditions_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmulticondition">list(object)</a></span>
+    </dt>
+    <dd>Multiple triggering conditions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>log alarm name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>whether to enable the alarm policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -744,50 +2084,29 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="alarmnoticeids_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnoticeids_java" style="color: inherit; text-decoration: inherit;">alarm<wbr>Notice<wbr>Ids</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">List&lt;String&gt;</span>
-    </dt>
-    <dd><p>list of alarm notice id.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="alarmperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmperiod_java" style="color: inherit; text-decoration: inherit;">alarm<wbr>Period</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>alarm repeat cycle.</p>
-</dd><dt class="property-required"
+    <dd>alarm repeat cycle.</dd><dt class="property-required"
             title="Required">
         <span id="alarmtargets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmtargets_java" style="color: inherit; text-decoration: inherit;">alarm<wbr>Targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmalarmtarget">List&lt;Alarm<wbr>Alarm<wbr>Target<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmalarmtarget">List&lt;Alarm<wbr>Alarm<wbr>Target&gt;</a></span>
     </dt>
-    <dd><p>list of alarm target.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="condition_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_java" style="color: inherit; text-decoration: inherit;">condition</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>triggering conditions.</p>
-</dd><dt class="property-required"
+    <dd>list of alarm target.</dd><dt class="property-required"
             title="Required">
         <span id="monitortime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitortime_java" style="color: inherit; text-decoration: inherit;">monitor<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmmonitortime">Alarm<wbr>Monitor<wbr>Time<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmmonitortime">Alarm<wbr>Monitor<wbr>Time</a></span>
     </dt>
-    <dd><p>monitor task execution time.</p>
-</dd><dt class="property-required"
+    <dd>monitor task execution time.</dd><dt class="property-required"
             title="Required">
         <span id="triggercount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggercount_java" style="color: inherit; text-decoration: inherit;">trigger<wbr>Count</a>
@@ -795,8 +2114,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>continuous cycle.</p>
-</dd><dt class="property-optional"
+    <dd>continuous cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="alarmlevel_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmlevel_java" style="color: inherit; text-decoration: inherit;">alarm<wbr>Level</a>
@@ -804,26 +2122,47 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alarmnoticeids_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnoticeids_java" style="color: inherit; text-decoration: inherit;">alarm<wbr>Notice<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="analyses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#analyses_java" style="color: inherit; text-decoration: inherit;">analyses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmanalysis">List&lt;Alarm<wbr>Analysis<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmanalysis">List&lt;Alarm<wbr>Analysis&gt;</a></span>
     </dt>
-    <dd><p>multidimensional analysis.</p>
-</dd><dt class="property-optional"
+    <dd>multidimensional analysis.</dd><dt class="property-optional"
             title="Optional">
         <span id="callback_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#callback_java" style="color: inherit; text-decoration: inherit;">call<wbr>Back</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmcallback">Alarm<wbr>Call<wbr>Back<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmcallback">Alarm<wbr>Call<wbr>Back</a></span>
     </dt>
-    <dd><p>user define callback.</p>
-</dd><dt class="property-optional"
+    <dd>user define callback.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="classifications_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classifications_java" style="color: inherit; text-decoration: inherit;">classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
+    </dt>
+    <dd>Alarm classification information map. Key must match regex <code>^a-z$</code>, value length cannot exceed 200 characters. Maximum 20 entries.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_java" style="color: inherit; text-decoration: inherit;">condition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="messagetemplate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messagetemplate_java" style="color: inherit; text-decoration: inherit;">message<wbr>Template</a>
@@ -831,8 +2170,23 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>user define alarm notice.</p>
-</dd><dt class="property-optional"
+    <dd>user define alarm notice.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monitornotice_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitornotice_java" style="color: inherit; text-decoration: inherit;">monitor<wbr>Notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornotice">Alarm<wbr>Monitor<wbr>Notice</a></span>
+    </dt>
+    <dd>Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multiconditions_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multiconditions_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmulticondition">List&lt;Alarm<wbr>Multi<wbr>Condition&gt;</a></span>
+    </dt>
+    <dd>Multiple triggering conditions.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -840,8 +2194,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>log alarm name.</p>
-</dd><dt class="property-optional"
+    <dd>log alarm name.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -849,17 +2202,15 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>whether to enable the alarm policy.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable the alarm policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -867,50 +2218,29 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="alarmnoticeids_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnoticeids_nodejs" style="color: inherit; text-decoration: inherit;">alarm<wbr>Notice<wbr>Ids</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string[]</span>
-    </dt>
-    <dd><p>list of alarm notice id.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="alarmperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmperiod_nodejs" style="color: inherit; text-decoration: inherit;">alarm<wbr>Period</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>alarm repeat cycle.</p>
-</dd><dt class="property-required"
+    <dd>alarm repeat cycle.</dd><dt class="property-required"
             title="Required">
         <span id="alarmtargets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmtargets_nodejs" style="color: inherit; text-decoration: inherit;">alarm<wbr>Targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmalarmtarget">Alarm<wbr>Alarm<wbr>Target<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#alarmalarmtarget">Alarm<wbr>Alarm<wbr>Target[]</a></span>
     </dt>
-    <dd><p>list of alarm target.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="condition_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_nodejs" style="color: inherit; text-decoration: inherit;">condition</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>triggering conditions.</p>
-</dd><dt class="property-required"
+    <dd>list of alarm target.</dd><dt class="property-required"
             title="Required">
         <span id="monitortime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitortime_nodejs" style="color: inherit; text-decoration: inherit;">monitor<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmmonitortime">Alarm<wbr>Monitor<wbr>Time<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmmonitortime">Alarm<wbr>Monitor<wbr>Time</a></span>
     </dt>
-    <dd><p>monitor task execution time.</p>
-</dd><dt class="property-required"
+    <dd>monitor task execution time.</dd><dt class="property-required"
             title="Required">
         <span id="triggercount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggercount_nodejs" style="color: inherit; text-decoration: inherit;">trigger<wbr>Count</a>
@@ -918,8 +2248,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>continuous cycle.</p>
-</dd><dt class="property-optional"
+    <dd>continuous cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="alarmlevel_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmlevel_nodejs" style="color: inherit; text-decoration: inherit;">alarm<wbr>Level</a>
@@ -927,26 +2256,47 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alarmnoticeids_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnoticeids_nodejs" style="color: inherit; text-decoration: inherit;">alarm<wbr>Notice<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="analyses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#analyses_nodejs" style="color: inherit; text-decoration: inherit;">analyses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmanalysis">Alarm<wbr>Analysis<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#alarmanalysis">Alarm<wbr>Analysis[]</a></span>
     </dt>
-    <dd><p>multidimensional analysis.</p>
-</dd><dt class="property-optional"
+    <dd>multidimensional analysis.</dd><dt class="property-optional"
             title="Optional">
         <span id="callback_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#callback_nodejs" style="color: inherit; text-decoration: inherit;">call<wbr>Back</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmcallback">Alarm<wbr>Call<wbr>Back<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmcallback">Alarm<wbr>Call<wbr>Back</a></span>
     </dt>
-    <dd><p>user define callback.</p>
-</dd><dt class="property-optional"
+    <dd>user define callback.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="classifications_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classifications_nodejs" style="color: inherit; text-decoration: inherit;">classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">{[key: string]: string}</span>
+    </dt>
+    <dd>Alarm classification information map. Key must match regex <code>^a-z$</code>, value length cannot exceed 200 characters. Maximum 20 entries.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_nodejs" style="color: inherit; text-decoration: inherit;">condition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="messagetemplate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messagetemplate_nodejs" style="color: inherit; text-decoration: inherit;">message<wbr>Template</a>
@@ -954,8 +2304,23 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user define alarm notice.</p>
-</dd><dt class="property-optional"
+    <dd>user define alarm notice.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monitornotice_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitornotice_nodejs" style="color: inherit; text-decoration: inherit;">monitor<wbr>Notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornotice">Alarm<wbr>Monitor<wbr>Notice</a></span>
+    </dt>
+    <dd>Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multiconditions_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multiconditions_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmulticondition">Alarm<wbr>Multi<wbr>Condition[]</a></span>
+    </dt>
+    <dd>Multiple triggering conditions.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -963,8 +2328,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>log alarm name.</p>
-</dd><dt class="property-optional"
+    <dd>log alarm name.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -972,17 +2336,15 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>whether to enable the alarm policy.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable the alarm policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -990,41 +2352,21 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="alarm_notice_ids_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_notice_ids_python" style="color: inherit; text-decoration: inherit;">alarm_<wbr>notice_<wbr>ids</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">Sequence[str]</span>
-    </dt>
-    <dd><p>list of alarm notice id.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="alarm_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_period_python" style="color: inherit; text-decoration: inherit;">alarm_<wbr>period</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>alarm repeat cycle.</p>
-</dd><dt class="property-required"
+    <dd>alarm repeat cycle.</dd><dt class="property-required"
             title="Required">
         <span id="alarm_targets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_targets_python" style="color: inherit; text-decoration: inherit;">alarm_<wbr>targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmalarmtarget">Alarm<wbr>Alarm<wbr>Target<wbr>Args]</a></span>
+        <span class="property-type"><a href="#alarmalarmtarget">Sequence[Alarm<wbr>Alarm<wbr>Target<wbr>Args]</a></span>
     </dt>
-    <dd><p>list of alarm target.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="condition_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_python" style="color: inherit; text-decoration: inherit;">condition</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">str</span>
-    </dt>
-    <dd><p>triggering conditions.</p>
-</dd><dt class="property-required"
+    <dd>list of alarm target.</dd><dt class="property-required"
             title="Required">
         <span id="monitor_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitor_time_python" style="color: inherit; text-decoration: inherit;">monitor_<wbr>time</a>
@@ -1032,8 +2374,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmmonitortime">Alarm<wbr>Monitor<wbr>Time<wbr>Args</a></span>
     </dt>
-    <dd><p>monitor task execution time.</p>
-</dd><dt class="property-required"
+    <dd>monitor task execution time.</dd><dt class="property-required"
             title="Required">
         <span id="trigger_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_count_python" style="color: inherit; text-decoration: inherit;">trigger_<wbr>count</a>
@@ -1041,8 +2382,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>continuous cycle.</p>
-</dd><dt class="property-optional"
+    <dd>continuous cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="alarm_level_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_level_python" style="color: inherit; text-decoration: inherit;">alarm_<wbr>level</a>
@@ -1050,17 +2390,23 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alarm_notice_ids_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_notice_ids_python" style="color: inherit; text-decoration: inherit;">alarm_<wbr>notice_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="analyses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#analyses_python" style="color: inherit; text-decoration: inherit;">analyses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmanalysis">Alarm<wbr>Analysis<wbr>Args]</a></span>
+        <span class="property-type"><a href="#alarmanalysis">Sequence[Alarm<wbr>Analysis<wbr>Args]</a></span>
     </dt>
-    <dd><p>multidimensional analysis.</p>
-</dd><dt class="property-optional"
+    <dd>multidimensional analysis.</dd><dt class="property-optional"
             title="Optional">
         <span id="call_back_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#call_back_python" style="color: inherit; text-decoration: inherit;">call_<wbr>back</a>
@@ -1068,8 +2414,23 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmcallback">Alarm<wbr>Call<wbr>Back<wbr>Args</a></span>
     </dt>
-    <dd><p>user define callback.</p>
-</dd><dt class="property-optional"
+    <dd>user define callback.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="classifications_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classifications_python" style="color: inherit; text-decoration: inherit;">classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Mapping[str, str]</span>
+    </dt>
+    <dd>Alarm classification information map. Key must match regex <code>^a-z$</code>, value length cannot exceed 200 characters. Maximum 20 entries.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_python" style="color: inherit; text-decoration: inherit;">condition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="message_template_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_template_python" style="color: inherit; text-decoration: inherit;">message_<wbr>template</a>
@@ -1077,8 +2438,23 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>user define alarm notice.</p>
-</dd><dt class="property-optional"
+    <dd>user define alarm notice.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monitor_notice_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitor_notice_python" style="color: inherit; text-decoration: inherit;">monitor_<wbr>notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornotice">Alarm<wbr>Monitor<wbr>Notice<wbr>Args</a></span>
+    </dt>
+    <dd>Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multi_conditions_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_conditions_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmulticondition">Sequence[Alarm<wbr>Multi<wbr>Condition<wbr>Args]</a></span>
+    </dt>
+    <dd>Multiple triggering conditions.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1086,8 +2462,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>log alarm name.</p>
-</dd><dt class="property-optional"
+    <dd>log alarm name.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1095,17 +2470,15 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to enable the alarm policy.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable the alarm policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1113,23 +2486,13 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
-        <span id="alarmnoticeids_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnoticeids_yaml" style="color: inherit; text-decoration: inherit;">alarm<wbr>Notice<wbr>Ids</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">List&lt;String&gt;</span>
-    </dt>
-    <dd><p>list of alarm notice id.</p>
-</dd><dt class="property-required"
-            title="Required">
         <span id="alarmperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmperiod_yaml" style="color: inherit; text-decoration: inherit;">alarm<wbr>Period</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>alarm repeat cycle.</p>
-</dd><dt class="property-required"
+    <dd>alarm repeat cycle.</dd><dt class="property-required"
             title="Required">
         <span id="alarmtargets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmtargets_yaml" style="color: inherit; text-decoration: inherit;">alarm<wbr>Targets</a>
@@ -1137,17 +2500,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmalarmtarget">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>list of alarm target.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="condition_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_yaml" style="color: inherit; text-decoration: inherit;">condition</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>triggering conditions.</p>
-</dd><dt class="property-required"
+    <dd>list of alarm target.</dd><dt class="property-required"
             title="Required">
         <span id="monitortime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitortime_yaml" style="color: inherit; text-decoration: inherit;">monitor<wbr>Time</a>
@@ -1155,8 +2508,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmmonitortime">Property Map</a></span>
     </dt>
-    <dd><p>monitor task execution time.</p>
-</dd><dt class="property-required"
+    <dd>monitor task execution time.</dd><dt class="property-required"
             title="Required">
         <span id="triggercount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggercount_yaml" style="color: inherit; text-decoration: inherit;">trigger<wbr>Count</a>
@@ -1164,8 +2516,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>continuous cycle.</p>
-</dd><dt class="property-optional"
+    <dd>continuous cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="alarmlevel_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmlevel_yaml" style="color: inherit; text-decoration: inherit;">alarm<wbr>Level</a>
@@ -1173,8 +2524,15 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alarmnoticeids_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmnoticeids_yaml" style="color: inherit; text-decoration: inherit;">alarm<wbr>Notice<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="analyses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#analyses_yaml" style="color: inherit; text-decoration: inherit;">analyses</a>
@@ -1182,8 +2540,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmanalysis">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>multidimensional analysis.</p>
-</dd><dt class="property-optional"
+    <dd>multidimensional analysis.</dd><dt class="property-optional"
             title="Optional">
         <span id="callback_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#callback_yaml" style="color: inherit; text-decoration: inherit;">call<wbr>Back</a>
@@ -1191,8 +2548,23 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmcallback">Property Map</a></span>
     </dt>
-    <dd><p>user define callback.</p>
-</dd><dt class="property-optional"
+    <dd>user define callback.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="classifications_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classifications_yaml" style="color: inherit; text-decoration: inherit;">classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String&gt;</span>
+    </dt>
+    <dd>Alarm classification information map. Key must match regex <code>^a-z$</code>, value length cannot exceed 200 characters. Maximum 20 entries.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_yaml" style="color: inherit; text-decoration: inherit;">condition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="messagetemplate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#messagetemplate_yaml" style="color: inherit; text-decoration: inherit;">message<wbr>Template</a>
@@ -1200,8 +2572,23 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>user define alarm notice.</p>
-</dd><dt class="property-optional"
+    <dd>user define alarm notice.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="monitornotice_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitornotice_yaml" style="color: inherit; text-decoration: inherit;">monitor<wbr>Notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornotice">Property Map</a></span>
+    </dt>
+    <dd>Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multiconditions_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multiconditions_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmulticondition">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Multiple triggering conditions.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1209,8 +2596,7 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>log alarm name.</p>
-</dd><dt class="property-optional"
+    <dd>log alarm name.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1218,17 +2604,15 @@ The Alarm resource accepts the following [input](/docs/intro/concepts/inputs-out
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>whether to enable the alarm policy.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable the alarm policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1249,8 +2633,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1264,8 +2647,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1279,8 +2675,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1294,8 +2689,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1309,8 +2703,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1324,8 +2717,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1335,132 +2727,174 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Alarm resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AlarmState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Alarm</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AlarmState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Alarm</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">alarm_level</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">alarm_notice_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">alarm_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">alarm_targets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cls.AlarmAlarmTargetArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">analyses</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cls.AlarmAnalysisArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">call_back</span><span class="p">:</span> <span class="nx">Optional[_cls.AlarmCallBackArgs]</span> = None<span class="p">,</span>
+        <span class="nx">alarm_targets</span><span class="p">:</span> <span class="nx">Optional[Sequence[AlarmAlarmTargetArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">analyses</span><span class="p">:</span> <span class="nx">Optional[Sequence[AlarmAnalysisArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">call_back</span><span class="p">:</span> <span class="nx">Optional[AlarmCallBackArgs]</span> = None<span class="p">,</span>
+        <span class="nx">classifications</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">condition</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">message_template</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">monitor_time</span><span class="p">:</span> <span class="nx">Optional[_cls.AlarmMonitorTimeArgs]</span> = None<span class="p">,</span>
+        <span class="nx">monitor_notice</span><span class="p">:</span> <span class="nx">Optional[AlarmMonitorNoticeArgs]</span> = None<span class="p">,</span>
+        <span class="nx">monitor_time</span><span class="p">:</span> <span class="nx">Optional[AlarmMonitorTimeArgs]</span> = None<span class="p">,</span>
+        <span class="nx">multi_conditions</span><span class="p">:</span> <span class="nx">Optional[Sequence[AlarmMultiConditionArgs]]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">trigger_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> Alarm</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAlarm<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AlarmState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Alarm</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAlarm<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AlarmState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Alarm</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Alarm</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AlarmState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Alarm</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AlarmState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Alarm</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AlarmState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Alarm</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AlarmState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingAlarm</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cls:Alarm</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cls_alarm</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AlarmState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AlarmState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1468,28 +2902,31 @@ Get an existing Alarm resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AlarmState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1497,28 +2934,31 @@ Get an existing Alarm resource's state with the given name, ID, and optional ext
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AlarmState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1538,8 +2978,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarmnoticeids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarmnoticeids_csharp" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Notice<wbr>Ids</a>
@@ -1547,8 +2986,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>list of alarm notice id.</p>
-</dd><dt class="property-optional"
+    <dd>List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarmperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarmperiod_csharp" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Period</a>
@@ -1556,35 +2994,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>alarm repeat cycle.</p>
-</dd><dt class="property-optional"
+    <dd>alarm repeat cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarmtargets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarmtargets_csharp" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmalarmtarget">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Alarm<wbr>Target<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmalarmtarget">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Alarm<wbr>Target&gt;</a></span>
     </dt>
-    <dd><p>list of alarm target.</p>
-</dd><dt class="property-optional"
+    <dd>list of alarm target.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_analyses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_analyses_csharp" style="color: inherit; text-decoration: inherit;">Analyses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmanalysis">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Analysis<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmanalysis">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Analysis&gt;</a></span>
     </dt>
-    <dd><p>multidimensional analysis.</p>
-</dd><dt class="property-optional"
+    <dd>multidimensional analysis.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_callback_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_callback_csharp" style="color: inherit; text-decoration: inherit;">Call<wbr>Back</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmcallback">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Call<wbr>Back<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmcallback">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Call<wbr>Back</a></span>
     </dt>
-    <dd><p>user define callback.</p>
-</dd><dt class="property-optional"
+    <dd>user define callback.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_classifications_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_classifications_csharp" style="color: inherit; text-decoration: inherit;">Classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
+    </dt>
+    <dd>Alarm classification information map. Key must match regex <code>^a-z$</code>, value length cannot exceed 200 characters. Maximum 20 entries.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_condition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_condition_csharp" style="color: inherit; text-decoration: inherit;">Condition</a>
@@ -1592,8 +3034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>triggering conditions.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_messagetemplate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_messagetemplate_csharp" style="color: inherit; text-decoration: inherit;">Message<wbr>Template</a>
@@ -1601,17 +3042,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user define alarm notice.</p>
-</dd><dt class="property-optional"
+    <dd>user define alarm notice.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_monitornotice_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitornotice_csharp" style="color: inherit; text-decoration: inherit;">Monitor<wbr>Notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornotice">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Monitor<wbr>Notice</a></span>
+    </dt>
+    <dd>Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_monitortime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitortime_csharp" style="color: inherit; text-decoration: inherit;">Monitor<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmmonitortime">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Monitor<wbr>Time<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmmonitortime">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Monitor<wbr>Time</a></span>
     </dt>
-    <dd><p>monitor task execution time.</p>
-</dd><dt class="property-optional"
+    <dd>monitor task execution time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multiconditions_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multiconditions_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmulticondition">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Multi<wbr>Condition&gt;</a></span>
+    </dt>
+    <dd>Multiple triggering conditions.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1619,8 +3074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>log alarm name.</p>
-</dd><dt class="property-optional"
+    <dd>log alarm name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1628,17 +3082,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to enable the alarm policy.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable the alarm policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggercount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggercount_csharp" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Count</a>
@@ -1646,8 +3098,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>continuous cycle.</p>
-</dd></dl>
+    <dd>continuous cycle.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1661,8 +3112,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarmnoticeids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarmnoticeids_go" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Notice<wbr>Ids</a>
@@ -1670,8 +3120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>list of alarm notice id.</p>
-</dd><dt class="property-optional"
+    <dd>List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarmperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarmperiod_go" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Period</a>
@@ -1679,8 +3128,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>alarm repeat cycle.</p>
-</dd><dt class="property-optional"
+    <dd>alarm repeat cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarmtargets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarmtargets_go" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Targets</a>
@@ -1688,8 +3136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmalarmtarget">[]Alarm<wbr>Alarm<wbr>Target<wbr>Args</a></span>
     </dt>
-    <dd><p>list of alarm target.</p>
-</dd><dt class="property-optional"
+    <dd>list of alarm target.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_analyses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_analyses_go" style="color: inherit; text-decoration: inherit;">Analyses</a>
@@ -1697,8 +3144,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmanalysis">[]Alarm<wbr>Analysis<wbr>Args</a></span>
     </dt>
-    <dd><p>multidimensional analysis.</p>
-</dd><dt class="property-optional"
+    <dd>multidimensional analysis.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_callback_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_callback_go" style="color: inherit; text-decoration: inherit;">Call<wbr>Back</a>
@@ -1706,8 +3152,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmcallback">Alarm<wbr>Call<wbr>Back<wbr>Args</a></span>
     </dt>
-    <dd><p>user define callback.</p>
-</dd><dt class="property-optional"
+    <dd>user define callback.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_classifications_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_classifications_go" style="color: inherit; text-decoration: inherit;">Classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map[string]string</span>
+    </dt>
+    <dd>Alarm classification information map. Key must match regex <code>^a-z$</code>, value length cannot exceed 200 characters. Maximum 20 entries.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_condition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_condition_go" style="color: inherit; text-decoration: inherit;">Condition</a>
@@ -1715,8 +3168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>triggering conditions.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_messagetemplate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_messagetemplate_go" style="color: inherit; text-decoration: inherit;">Message<wbr>Template</a>
@@ -1724,8 +3176,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user define alarm notice.</p>
-</dd><dt class="property-optional"
+    <dd>user define alarm notice.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_monitornotice_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitornotice_go" style="color: inherit; text-decoration: inherit;">Monitor<wbr>Notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornotice">Alarm<wbr>Monitor<wbr>Notice<wbr>Args</a></span>
+    </dt>
+    <dd>Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_monitortime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitortime_go" style="color: inherit; text-decoration: inherit;">Monitor<wbr>Time</a>
@@ -1733,8 +3192,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmmonitortime">Alarm<wbr>Monitor<wbr>Time<wbr>Args</a></span>
     </dt>
-    <dd><p>monitor task execution time.</p>
-</dd><dt class="property-optional"
+    <dd>monitor task execution time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multiconditions_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multiconditions_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmulticondition">[]Alarm<wbr>Multi<wbr>Condition<wbr>Args</a></span>
+    </dt>
+    <dd>Multiple triggering conditions.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1742,8 +3208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>log alarm name.</p>
-</dd><dt class="property-optional"
+    <dd>log alarm name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1751,17 +3216,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to enable the alarm policy.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable the alarm policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggercount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggercount_go" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Count</a>
@@ -1769,8 +3232,141 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>continuous cycle.</p>
-</dd></dl>
+    <dd>continuous cycle.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_alarm_level_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarm_level_hcl" style="color: inherit; text-decoration: inherit;">alarm_<wbr>level</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_alarm_notice_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarm_notice_ids_hcl" style="color: inherit; text-decoration: inherit;">alarm_<wbr>notice_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_alarm_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarm_period_hcl" style="color: inherit; text-decoration: inherit;">alarm_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>alarm repeat cycle.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_alarm_targets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarm_targets_hcl" style="color: inherit; text-decoration: inherit;">alarm_<wbr>targets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmalarmtarget">list(object)</a></span>
+    </dt>
+    <dd>list of alarm target.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_analyses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_analyses_hcl" style="color: inherit; text-decoration: inherit;">analyses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmanalysis">list(object)</a></span>
+    </dt>
+    <dd>multidimensional analysis.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_call_back_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_call_back_hcl" style="color: inherit; text-decoration: inherit;">call_<wbr>back</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmcallback">object</a></span>
+    </dt>
+    <dd>user define callback.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_classifications_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_classifications_hcl" style="color: inherit; text-decoration: inherit;">classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Alarm classification information map. Key must match regex <code>^a-z$</code>, value length cannot exceed 200 characters. Maximum 20 entries.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_condition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_condition_hcl" style="color: inherit; text-decoration: inherit;">condition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger condition.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_message_template_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_message_template_hcl" style="color: inherit; text-decoration: inherit;">message_<wbr>template</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>user define alarm notice.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_monitor_notice_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitor_notice_hcl" style="color: inherit; text-decoration: inherit;">monitor_<wbr>notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornotice">object</a></span>
+    </dt>
+    <dd>Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_monitor_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitor_time_hcl" style="color: inherit; text-decoration: inherit;">monitor_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitortime">object</a></span>
+    </dt>
+    <dd>monitor task execution time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multi_conditions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multi_conditions_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmulticondition">list(object)</a></span>
+    </dt>
+    <dd>Multiple triggering conditions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>log alarm name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>whether to enable the alarm policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_trigger_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trigger_count_hcl" style="color: inherit; text-decoration: inherit;">trigger_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>continuous cycle.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1784,8 +3380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarmnoticeids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarmnoticeids_java" style="color: inherit; text-decoration: inherit;">alarm<wbr>Notice<wbr>Ids</a>
@@ -1793,8 +3388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>list of alarm notice id.</p>
-</dd><dt class="property-optional"
+    <dd>List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarmperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarmperiod_java" style="color: inherit; text-decoration: inherit;">alarm<wbr>Period</a>
@@ -1802,35 +3396,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>alarm repeat cycle.</p>
-</dd><dt class="property-optional"
+    <dd>alarm repeat cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarmtargets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarmtargets_java" style="color: inherit; text-decoration: inherit;">alarm<wbr>Targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmalarmtarget">List&lt;Alarm<wbr>Alarm<wbr>Target<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmalarmtarget">List&lt;Alarm<wbr>Alarm<wbr>Target&gt;</a></span>
     </dt>
-    <dd><p>list of alarm target.</p>
-</dd><dt class="property-optional"
+    <dd>list of alarm target.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_analyses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_analyses_java" style="color: inherit; text-decoration: inherit;">analyses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmanalysis">List&lt;Alarm<wbr>Analysis<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmanalysis">List&lt;Alarm<wbr>Analysis&gt;</a></span>
     </dt>
-    <dd><p>multidimensional analysis.</p>
-</dd><dt class="property-optional"
+    <dd>multidimensional analysis.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_callback_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_callback_java" style="color: inherit; text-decoration: inherit;">call<wbr>Back</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmcallback">Alarm<wbr>Call<wbr>Back<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmcallback">Alarm<wbr>Call<wbr>Back</a></span>
     </dt>
-    <dd><p>user define callback.</p>
-</dd><dt class="property-optional"
+    <dd>user define callback.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_classifications_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_classifications_java" style="color: inherit; text-decoration: inherit;">classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
+    </dt>
+    <dd>Alarm classification information map. Key must match regex <code>^a-z$</code>, value length cannot exceed 200 characters. Maximum 20 entries.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_condition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_condition_java" style="color: inherit; text-decoration: inherit;">condition</a>
@@ -1838,8 +3436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>triggering conditions.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_messagetemplate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_messagetemplate_java" style="color: inherit; text-decoration: inherit;">message<wbr>Template</a>
@@ -1847,17 +3444,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>user define alarm notice.</p>
-</dd><dt class="property-optional"
+    <dd>user define alarm notice.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_monitornotice_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitornotice_java" style="color: inherit; text-decoration: inherit;">monitor<wbr>Notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornotice">Alarm<wbr>Monitor<wbr>Notice</a></span>
+    </dt>
+    <dd>Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_monitortime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitortime_java" style="color: inherit; text-decoration: inherit;">monitor<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmmonitortime">Alarm<wbr>Monitor<wbr>Time<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmmonitortime">Alarm<wbr>Monitor<wbr>Time</a></span>
     </dt>
-    <dd><p>monitor task execution time.</p>
-</dd><dt class="property-optional"
+    <dd>monitor task execution time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multiconditions_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multiconditions_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmulticondition">List&lt;Alarm<wbr>Multi<wbr>Condition&gt;</a></span>
+    </dt>
+    <dd>Multiple triggering conditions.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1865,8 +3476,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>log alarm name.</p>
-</dd><dt class="property-optional"
+    <dd>log alarm name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1874,17 +3484,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>whether to enable the alarm policy.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable the alarm policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggercount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggercount_java" style="color: inherit; text-decoration: inherit;">trigger<wbr>Count</a>
@@ -1892,8 +3500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>continuous cycle.</p>
-</dd></dl>
+    <dd>continuous cycle.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1907,8 +3514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarmnoticeids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarmnoticeids_nodejs" style="color: inherit; text-decoration: inherit;">alarm<wbr>Notice<wbr>Ids</a>
@@ -1916,8 +3522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>list of alarm notice id.</p>
-</dd><dt class="property-optional"
+    <dd>List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarmperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarmperiod_nodejs" style="color: inherit; text-decoration: inherit;">alarm<wbr>Period</a>
@@ -1925,35 +3530,39 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>alarm repeat cycle.</p>
-</dd><dt class="property-optional"
+    <dd>alarm repeat cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarmtargets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarmtargets_nodejs" style="color: inherit; text-decoration: inherit;">alarm<wbr>Targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmalarmtarget">Alarm<wbr>Alarm<wbr>Target<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#alarmalarmtarget">Alarm<wbr>Alarm<wbr>Target[]</a></span>
     </dt>
-    <dd><p>list of alarm target.</p>
-</dd><dt class="property-optional"
+    <dd>list of alarm target.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_analyses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_analyses_nodejs" style="color: inherit; text-decoration: inherit;">analyses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmanalysis">Alarm<wbr>Analysis<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#alarmanalysis">Alarm<wbr>Analysis[]</a></span>
     </dt>
-    <dd><p>multidimensional analysis.</p>
-</dd><dt class="property-optional"
+    <dd>multidimensional analysis.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_callback_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_callback_nodejs" style="color: inherit; text-decoration: inherit;">call<wbr>Back</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmcallback">Alarm<wbr>Call<wbr>Back<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmcallback">Alarm<wbr>Call<wbr>Back</a></span>
     </dt>
-    <dd><p>user define callback.</p>
-</dd><dt class="property-optional"
+    <dd>user define callback.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_classifications_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_classifications_nodejs" style="color: inherit; text-decoration: inherit;">classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">{[key: string]: string}</span>
+    </dt>
+    <dd>Alarm classification information map. Key must match regex <code>^a-z$</code>, value length cannot exceed 200 characters. Maximum 20 entries.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_condition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_condition_nodejs" style="color: inherit; text-decoration: inherit;">condition</a>
@@ -1961,8 +3570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>triggering conditions.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_messagetemplate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_messagetemplate_nodejs" style="color: inherit; text-decoration: inherit;">message<wbr>Template</a>
@@ -1970,17 +3578,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>user define alarm notice.</p>
-</dd><dt class="property-optional"
+    <dd>user define alarm notice.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_monitornotice_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitornotice_nodejs" style="color: inherit; text-decoration: inherit;">monitor<wbr>Notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornotice">Alarm<wbr>Monitor<wbr>Notice</a></span>
+    </dt>
+    <dd>Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_monitortime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitortime_nodejs" style="color: inherit; text-decoration: inherit;">monitor<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmmonitortime">Alarm<wbr>Monitor<wbr>Time<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmmonitortime">Alarm<wbr>Monitor<wbr>Time</a></span>
     </dt>
-    <dd><p>monitor task execution time.</p>
-</dd><dt class="property-optional"
+    <dd>monitor task execution time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multiconditions_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multiconditions_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmulticondition">Alarm<wbr>Multi<wbr>Condition[]</a></span>
+    </dt>
+    <dd>Multiple triggering conditions.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1988,8 +3610,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>log alarm name.</p>
-</dd><dt class="property-optional"
+    <dd>log alarm name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1997,17 +3618,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>whether to enable the alarm policy.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable the alarm policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggercount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggercount_nodejs" style="color: inherit; text-decoration: inherit;">trigger<wbr>Count</a>
@@ -2015,8 +3634,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>continuous cycle.</p>
-</dd></dl>
+    <dd>continuous cycle.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2030,8 +3648,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarm_notice_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarm_notice_ids_python" style="color: inherit; text-decoration: inherit;">alarm_<wbr>notice_<wbr>ids</a>
@@ -2039,8 +3656,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>list of alarm notice id.</p>
-</dd><dt class="property-optional"
+    <dd>List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarm_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarm_period_python" style="color: inherit; text-decoration: inherit;">alarm_<wbr>period</a>
@@ -2048,26 +3664,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>alarm repeat cycle.</p>
-</dd><dt class="property-optional"
+    <dd>alarm repeat cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarm_targets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarm_targets_python" style="color: inherit; text-decoration: inherit;">alarm_<wbr>targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmalarmtarget">Alarm<wbr>Alarm<wbr>Target<wbr>Args]</a></span>
+        <span class="property-type"><a href="#alarmalarmtarget">Sequence[Alarm<wbr>Alarm<wbr>Target<wbr>Args]</a></span>
     </dt>
-    <dd><p>list of alarm target.</p>
-</dd><dt class="property-optional"
+    <dd>list of alarm target.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_analyses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_analyses_python" style="color: inherit; text-decoration: inherit;">analyses</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmanalysis">Alarm<wbr>Analysis<wbr>Args]</a></span>
+        <span class="property-type"><a href="#alarmanalysis">Sequence[Alarm<wbr>Analysis<wbr>Args]</a></span>
     </dt>
-    <dd><p>multidimensional analysis.</p>
-</dd><dt class="property-optional"
+    <dd>multidimensional analysis.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_call_back_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_call_back_python" style="color: inherit; text-decoration: inherit;">call_<wbr>back</a>
@@ -2075,8 +3688,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmcallback">Alarm<wbr>Call<wbr>Back<wbr>Args</a></span>
     </dt>
-    <dd><p>user define callback.</p>
-</dd><dt class="property-optional"
+    <dd>user define callback.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_classifications_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_classifications_python" style="color: inherit; text-decoration: inherit;">classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Mapping[str, str]</span>
+    </dt>
+    <dd>Alarm classification information map. Key must match regex <code>^a-z$</code>, value length cannot exceed 200 characters. Maximum 20 entries.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_condition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_condition_python" style="color: inherit; text-decoration: inherit;">condition</a>
@@ -2084,8 +3704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>triggering conditions.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_message_template_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_message_template_python" style="color: inherit; text-decoration: inherit;">message_<wbr>template</a>
@@ -2093,8 +3712,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>user define alarm notice.</p>
-</dd><dt class="property-optional"
+    <dd>user define alarm notice.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_monitor_notice_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitor_notice_python" style="color: inherit; text-decoration: inherit;">monitor_<wbr>notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornotice">Alarm<wbr>Monitor<wbr>Notice<wbr>Args</a></span>
+    </dt>
+    <dd>Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_monitor_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitor_time_python" style="color: inherit; text-decoration: inherit;">monitor_<wbr>time</a>
@@ -2102,8 +3728,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmmonitortime">Alarm<wbr>Monitor<wbr>Time<wbr>Args</a></span>
     </dt>
-    <dd><p>monitor task execution time.</p>
-</dd><dt class="property-optional"
+    <dd>monitor task execution time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multi_conditions_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multi_conditions_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmulticondition">Sequence[Alarm<wbr>Multi<wbr>Condition<wbr>Args]</a></span>
+    </dt>
+    <dd>Multiple triggering conditions.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2111,8 +3744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>log alarm name.</p>
-</dd><dt class="property-optional"
+    <dd>log alarm name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2120,17 +3752,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>whether to enable the alarm policy.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable the alarm policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_trigger_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trigger_count_python" style="color: inherit; text-decoration: inherit;">trigger_<wbr>count</a>
@@ -2138,8 +3768,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>continuous cycle.</p>
-</dd></dl>
+    <dd>continuous cycle.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2153,8 +3782,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarmnoticeids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarmnoticeids_yaml" style="color: inherit; text-decoration: inherit;">alarm<wbr>Notice<wbr>Ids</a>
@@ -2162,8 +3790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>list of alarm notice id.</p>
-</dd><dt class="property-optional"
+    <dd>List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarmperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarmperiod_yaml" style="color: inherit; text-decoration: inherit;">alarm<wbr>Period</a>
@@ -2171,8 +3798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>alarm repeat cycle.</p>
-</dd><dt class="property-optional"
+    <dd>alarm repeat cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_alarmtargets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alarmtargets_yaml" style="color: inherit; text-decoration: inherit;">alarm<wbr>Targets</a>
@@ -2180,8 +3806,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmalarmtarget">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>list of alarm target.</p>
-</dd><dt class="property-optional"
+    <dd>list of alarm target.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_analyses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_analyses_yaml" style="color: inherit; text-decoration: inherit;">analyses</a>
@@ -2189,8 +3814,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmanalysis">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>multidimensional analysis.</p>
-</dd><dt class="property-optional"
+    <dd>multidimensional analysis.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_callback_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_callback_yaml" style="color: inherit; text-decoration: inherit;">call<wbr>Back</a>
@@ -2198,8 +3822,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmcallback">Property Map</a></span>
     </dt>
-    <dd><p>user define callback.</p>
-</dd><dt class="property-optional"
+    <dd>user define callback.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_classifications_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_classifications_yaml" style="color: inherit; text-decoration: inherit;">classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String&gt;</span>
+    </dt>
+    <dd>Alarm classification information map. Key must match regex <code>^a-z$</code>, value length cannot exceed 200 characters. Maximum 20 entries.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_condition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_condition_yaml" style="color: inherit; text-decoration: inherit;">condition</a>
@@ -2207,8 +3838,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>triggering conditions.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_messagetemplate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_messagetemplate_yaml" style="color: inherit; text-decoration: inherit;">message<wbr>Template</a>
@@ -2216,8 +3846,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>user define alarm notice.</p>
-</dd><dt class="property-optional"
+    <dd>user define alarm notice.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_monitornotice_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitornotice_yaml" style="color: inherit; text-decoration: inherit;">monitor<wbr>Notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornotice">Property Map</a></span>
+    </dt>
+    <dd>Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_monitortime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitortime_yaml" style="color: inherit; text-decoration: inherit;">monitor<wbr>Time</a>
@@ -2225,8 +3862,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmmonitortime">Property Map</a></span>
     </dt>
-    <dd><p>monitor task execution time.</p>
-</dd><dt class="property-optional"
+    <dd>monitor task execution time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multiconditions_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multiconditions_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmulticondition">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Multiple triggering conditions.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2234,8 +3878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>log alarm name.</p>
-</dd><dt class="property-optional"
+    <dd>log alarm name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2243,17 +3886,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>whether to enable the alarm policy.</p>
-</dd><dt class="property-optional"
+    <dd>whether to enable the alarm policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggercount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggercount_yaml" style="color: inherit; text-decoration: inherit;">trigger<wbr>Count</a>
@@ -2261,8 +3902,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>continuous cycle.</p>
-</dd></dl>
+    <dd>continuous cycle.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2277,7 +3917,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="alarmalarmtarget">Alarm<wbr>Alarm<wbr>Target</h4>
+<h4 id="alarmalarmtarget">
+Alarm<wbr>Alarm<wbr>Target<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Alarm<wbr>Target<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2289,8 +3931,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>search end time of offset.</p>
-</dd><dt class="property-required"
+    <dd>search end time of offset.</dd><dt class="property-required"
             title="Required">
         <span id="logsetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_csharp" style="color: inherit; text-decoration: inherit;">Logset<wbr>Id</a>
@@ -2298,8 +3939,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>logset id.</p>
-</dd><dt class="property-required"
+    <dd>logset id.</dd><dt class="property-required"
             title="Required">
         <span id="number_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_csharp" style="color: inherit; text-decoration: inherit;">Number</a>
@@ -2307,8 +3947,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the number of alarm object.</p>
-</dd><dt class="property-required"
+    <dd>the number of alarm object.</dd><dt class="property-required"
             title="Required">
         <span id="query_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#query_csharp" style="color: inherit; text-decoration: inherit;">Query</a>
@@ -2316,8 +3955,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>query rules.</p>
-</dd><dt class="property-required"
+    <dd>query rules.</dd><dt class="property-required"
             title="Required">
         <span id="starttimeoffset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -2325,8 +3963,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>search start time of offset.</p>
-</dd><dt class="property-required"
+    <dd>search start time of offset.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Id</a>
@@ -2334,8 +3971,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>topic id.</p>
-</dd><dt class="property-optional"
+    <dd>topic id.</dd><dt class="property-optional"
             title="Optional">
         <span id="syntaxrule_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syntaxrule_csharp" style="color: inherit; text-decoration: inherit;">Syntax<wbr>Rule</a>
@@ -2343,8 +3979,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.</p>
-</dd></dl>
+    <dd>Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2358,8 +3993,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>search end time of offset.</p>
-</dd><dt class="property-required"
+    <dd>search end time of offset.</dd><dt class="property-required"
             title="Required">
         <span id="logsetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_go" style="color: inherit; text-decoration: inherit;">Logset<wbr>Id</a>
@@ -2367,8 +4001,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>logset id.</p>
-</dd><dt class="property-required"
+    <dd>logset id.</dd><dt class="property-required"
             title="Required">
         <span id="number_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_go" style="color: inherit; text-decoration: inherit;">Number</a>
@@ -2376,8 +4009,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the number of alarm object.</p>
-</dd><dt class="property-required"
+    <dd>the number of alarm object.</dd><dt class="property-required"
             title="Required">
         <span id="query_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#query_go" style="color: inherit; text-decoration: inherit;">Query</a>
@@ -2385,8 +4017,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>query rules.</p>
-</dd><dt class="property-required"
+    <dd>query rules.</dd><dt class="property-required"
             title="Required">
         <span id="starttimeoffset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time<wbr>Offset</a>
@@ -2394,8 +4025,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>search start time of offset.</p>
-</dd><dt class="property-required"
+    <dd>search start time of offset.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Id</a>
@@ -2403,8 +4033,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>topic id.</p>
-</dd><dt class="property-optional"
+    <dd>topic id.</dd><dt class="property-optional"
             title="Optional">
         <span id="syntaxrule_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syntaxrule_go" style="color: inherit; text-decoration: inherit;">Syntax<wbr>Rule</a>
@@ -2412,8 +4041,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.</p>
-</dd></dl>
+    <dd>Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="end_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_offset_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>search end time of offset.</dd><dt class="property-required"
+            title="Required">
+        <span id="logset_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logset_id_hcl" style="color: inherit; text-decoration: inherit;">logset_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>logset id.</dd><dt class="property-required"
+            title="Required">
+        <span id="number_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_hcl" style="color: inherit; text-decoration: inherit;">number</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>the number of alarm object.</dd><dt class="property-required"
+            title="Required">
+        <span id="query_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#query_hcl" style="color: inherit; text-decoration: inherit;">query</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>query rules.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>search start time of offset.</dd><dt class="property-required"
+            title="Required">
+        <span id="topic_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_id_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>topic id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="syntax_rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syntax_rule_hcl" style="color: inherit; text-decoration: inherit;">syntax_<wbr>rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2427,8 +4117,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>search end time of offset.</p>
-</dd><dt class="property-required"
+    <dd>search end time of offset.</dd><dt class="property-required"
             title="Required">
         <span id="logsetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_java" style="color: inherit; text-decoration: inherit;">logset<wbr>Id</a>
@@ -2436,8 +4125,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>logset id.</p>
-</dd><dt class="property-required"
+    <dd>logset id.</dd><dt class="property-required"
             title="Required">
         <span id="number_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_java" style="color: inherit; text-decoration: inherit;">number</a>
@@ -2445,8 +4133,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>the number of alarm object.</p>
-</dd><dt class="property-required"
+    <dd>the number of alarm object.</dd><dt class="property-required"
             title="Required">
         <span id="query_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#query_java" style="color: inherit; text-decoration: inherit;">query</a>
@@ -2454,8 +4141,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>query rules.</p>
-</dd><dt class="property-required"
+    <dd>query rules.</dd><dt class="property-required"
             title="Required">
         <span id="starttimeoffset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -2463,8 +4149,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>search start time of offset.</p>
-</dd><dt class="property-required"
+    <dd>search start time of offset.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -2472,8 +4157,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>topic id.</p>
-</dd><dt class="property-optional"
+    <dd>topic id.</dd><dt class="property-optional"
             title="Optional">
         <span id="syntaxrule_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syntaxrule_java" style="color: inherit; text-decoration: inherit;">syntax<wbr>Rule</a>
@@ -2481,8 +4165,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.</p>
-</dd></dl>
+    <dd>Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2496,8 +4179,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>search end time of offset.</p>
-</dd><dt class="property-required"
+    <dd>search end time of offset.</dd><dt class="property-required"
             title="Required">
         <span id="logsetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_nodejs" style="color: inherit; text-decoration: inherit;">logset<wbr>Id</a>
@@ -2505,8 +4187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>logset id.</p>
-</dd><dt class="property-required"
+    <dd>logset id.</dd><dt class="property-required"
             title="Required">
         <span id="number_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_nodejs" style="color: inherit; text-decoration: inherit;">number</a>
@@ -2514,8 +4195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>the number of alarm object.</p>
-</dd><dt class="property-required"
+    <dd>the number of alarm object.</dd><dt class="property-required"
             title="Required">
         <span id="query_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#query_nodejs" style="color: inherit; text-decoration: inherit;">query</a>
@@ -2523,8 +4203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>query rules.</p>
-</dd><dt class="property-required"
+    <dd>query rules.</dd><dt class="property-required"
             title="Required">
         <span id="starttimeoffset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -2532,8 +4211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>search start time of offset.</p>
-</dd><dt class="property-required"
+    <dd>search start time of offset.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -2541,8 +4219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>topic id.</p>
-</dd><dt class="property-optional"
+    <dd>topic id.</dd><dt class="property-optional"
             title="Optional">
         <span id="syntaxrule_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syntaxrule_nodejs" style="color: inherit; text-decoration: inherit;">syntax<wbr>Rule</a>
@@ -2550,8 +4227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.</p>
-</dd></dl>
+    <dd>Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2565,8 +4241,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>search end time of offset.</p>
-</dd><dt class="property-required"
+    <dd>search end time of offset.</dd><dt class="property-required"
             title="Required">
         <span id="logset_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logset_id_python" style="color: inherit; text-decoration: inherit;">logset_<wbr>id</a>
@@ -2574,8 +4249,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>logset id.</p>
-</dd><dt class="property-required"
+    <dd>logset id.</dd><dt class="property-required"
             title="Required">
         <span id="number_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_python" style="color: inherit; text-decoration: inherit;">number</a>
@@ -2583,8 +4257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the number of alarm object.</p>
-</dd><dt class="property-required"
+    <dd>the number of alarm object.</dd><dt class="property-required"
             title="Required">
         <span id="query_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#query_python" style="color: inherit; text-decoration: inherit;">query</a>
@@ -2592,8 +4265,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>query rules.</p>
-</dd><dt class="property-required"
+    <dd>query rules.</dd><dt class="property-required"
             title="Required">
         <span id="start_time_offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_offset_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time_<wbr>offset</a>
@@ -2601,8 +4273,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>search start time of offset.</p>
-</dd><dt class="property-required"
+    <dd>search start time of offset.</dd><dt class="property-required"
             title="Required">
         <span id="topic_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_id_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>id</a>
@@ -2610,8 +4281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>topic id.</p>
-</dd><dt class="property-optional"
+    <dd>topic id.</dd><dt class="property-optional"
             title="Optional">
         <span id="syntax_rule_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syntax_rule_python" style="color: inherit; text-decoration: inherit;">syntax_<wbr>rule</a>
@@ -2619,8 +4289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.</p>
-</dd></dl>
+    <dd>Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2634,8 +4303,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>search end time of offset.</p>
-</dd><dt class="property-required"
+    <dd>search end time of offset.</dd><dt class="property-required"
             title="Required">
         <span id="logsetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_yaml" style="color: inherit; text-decoration: inherit;">logset<wbr>Id</a>
@@ -2643,8 +4311,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>logset id.</p>
-</dd><dt class="property-required"
+    <dd>logset id.</dd><dt class="property-required"
             title="Required">
         <span id="number_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_yaml" style="color: inherit; text-decoration: inherit;">number</a>
@@ -2652,8 +4319,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>the number of alarm object.</p>
-</dd><dt class="property-required"
+    <dd>the number of alarm object.</dd><dt class="property-required"
             title="Required">
         <span id="query_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#query_yaml" style="color: inherit; text-decoration: inherit;">query</a>
@@ -2661,8 +4327,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>query rules.</p>
-</dd><dt class="property-required"
+    <dd>query rules.</dd><dt class="property-required"
             title="Required">
         <span id="starttimeoffset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttimeoffset_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time<wbr>Offset</a>
@@ -2670,8 +4335,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>search start time of offset.</p>
-</dd><dt class="property-required"
+    <dd>search start time of offset.</dd><dt class="property-required"
             title="Required">
         <span id="topicid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicid_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Id</a>
@@ -2679,8 +4343,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>topic id.</p>
-</dd><dt class="property-optional"
+    <dd>topic id.</dd><dt class="property-optional"
             title="Optional">
         <span id="syntaxrule_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syntaxrule_yaml" style="color: inherit; text-decoration: inherit;">syntax<wbr>Rule</a>
@@ -2688,12 +4351,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.</p>
-</dd></dl>
+    <dd>Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="alarmanalysis">Alarm<wbr>Analysis</h4>
+<h4 id="alarmanalysis">
+Alarm<wbr>Analysis<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Analysis<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2705,8 +4369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>analysis content.</p>
-</dd><dt class="property-required"
+    <dd>analysis content.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2714,8 +4377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>analysis name.</p>
-</dd><dt class="property-required"
+    <dd>analysis name.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2723,8 +4385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>analysis type.</p>
-</dd><dt class="property-optional"
+    <dd>analysis type.</dd><dt class="property-optional"
             title="Optional">
         <span id="configinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configinfos_csharp" style="color: inherit; text-decoration: inherit;">Config<wbr>Infos</a>
@@ -2732,8 +4393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmanalysisconfiginfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Analysis<wbr>Config<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>configuration.</p>
-</dd></dl>
+    <dd>configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2747,8 +4407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>analysis content.</p>
-</dd><dt class="property-required"
+    <dd>analysis content.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2756,8 +4415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>analysis name.</p>
-</dd><dt class="property-required"
+    <dd>analysis name.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -2765,8 +4423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>analysis type.</p>
-</dd><dt class="property-optional"
+    <dd>analysis type.</dd><dt class="property-optional"
             title="Optional">
         <span id="configinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configinfos_go" style="color: inherit; text-decoration: inherit;">Config<wbr>Infos</a>
@@ -2774,8 +4431,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmanalysisconfiginfo">[]Alarm<wbr>Analysis<wbr>Config<wbr>Info</a></span>
     </dt>
-    <dd><p>configuration.</p>
-</dd></dl>
+    <dd>configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_hcl" style="color: inherit; text-decoration: inherit;">content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>analysis content.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>analysis name.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>analysis type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="config_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_infos_hcl" style="color: inherit; text-decoration: inherit;">config_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmanalysisconfiginfo">list(object)</a></span>
+    </dt>
+    <dd>configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2789,8 +4483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>analysis content.</p>
-</dd><dt class="property-required"
+    <dd>analysis content.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2798,8 +4491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>analysis name.</p>
-</dd><dt class="property-required"
+    <dd>analysis name.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2807,8 +4499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>analysis type.</p>
-</dd><dt class="property-optional"
+    <dd>analysis type.</dd><dt class="property-optional"
             title="Optional">
         <span id="configinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configinfos_java" style="color: inherit; text-decoration: inherit;">config<wbr>Infos</a>
@@ -2816,8 +4507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmanalysisconfiginfo">List&lt;Alarm<wbr>Analysis<wbr>Config<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>configuration.</p>
-</dd></dl>
+    <dd>configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2831,8 +4521,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>analysis content.</p>
-</dd><dt class="property-required"
+    <dd>analysis content.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2840,8 +4529,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>analysis name.</p>
-</dd><dt class="property-required"
+    <dd>analysis name.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2849,8 +4537,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>analysis type.</p>
-</dd><dt class="property-optional"
+    <dd>analysis type.</dd><dt class="property-optional"
             title="Optional">
         <span id="configinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configinfos_nodejs" style="color: inherit; text-decoration: inherit;">config<wbr>Infos</a>
@@ -2858,8 +4545,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmanalysisconfiginfo">Alarm<wbr>Analysis<wbr>Config<wbr>Info[]</a></span>
     </dt>
-    <dd><p>configuration.</p>
-</dd></dl>
+    <dd>configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2873,8 +4559,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>analysis content.</p>
-</dd><dt class="property-required"
+    <dd>analysis content.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2882,8 +4567,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>analysis name.</p>
-</dd><dt class="property-required"
+    <dd>analysis name.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2891,17 +4575,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>analysis type.</p>
-</dd><dt class="property-optional"
+    <dd>analysis type.</dd><dt class="property-optional"
             title="Optional">
         <span id="config_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_infos_python" style="color: inherit; text-decoration: inherit;">config_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmanalysisconfiginfo">Alarm<wbr>Analysis<wbr>Config<wbr>Info]</a></span>
+        <span class="property-type"><a href="#alarmanalysisconfiginfo">Sequence[Alarm<wbr>Analysis<wbr>Config<wbr>Info]</a></span>
     </dt>
-    <dd><p>configuration.</p>
-</dd></dl>
+    <dd>configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2915,8 +4597,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>analysis content.</p>
-</dd><dt class="property-required"
+    <dd>analysis content.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2924,8 +4605,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>analysis name.</p>
-</dd><dt class="property-required"
+    <dd>analysis name.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -2933,8 +4613,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>analysis type.</p>
-</dd><dt class="property-optional"
+    <dd>analysis type.</dd><dt class="property-optional"
             title="Optional">
         <span id="configinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configinfos_yaml" style="color: inherit; text-decoration: inherit;">config<wbr>Infos</a>
@@ -2942,12 +4621,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmanalysisconfiginfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>configuration.</p>
-</dd></dl>
+    <dd>configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="alarmanalysisconfiginfo">Alarm<wbr>Analysis<wbr>Config<wbr>Info</h4>
+<h4 id="alarmanalysisconfiginfo">
+Alarm<wbr>Analysis<wbr>Config<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Analysis<wbr>Config<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2959,8 +4639,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2968,8 +4647,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2983,8 +4661,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2992,8 +4669,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3007,8 +4705,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3016,8 +4713,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3031,8 +4727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3040,8 +4735,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3055,8 +4749,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3064,8 +4757,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3079,8 +4771,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>key.</p>
-</dd><dt class="property-required"
+    <dd>key.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -3088,12 +4779,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>value.</p>
-</dd></dl>
+    <dd>value.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="alarmcallback">Alarm<wbr>Call<wbr>Back</h4>
+<h4 id="alarmcallback">
+Alarm<wbr>Call<wbr>Back<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Call<wbr>Back<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3105,8 +4797,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>callback body.</p>
-</dd><dt class="property-optional"
+    <dd>callback body.</dd><dt class="property-optional"
             title="Optional">
         <span id="headers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headers_csharp" style="color: inherit; text-decoration: inherit;">Headers</a>
@@ -3114,8 +4805,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>callback headers.</p>
-</dd></dl>
+    <dd>callback headers.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3129,8 +4819,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>callback body.</p>
-</dd><dt class="property-optional"
+    <dd>callback body.</dd><dt class="property-optional"
             title="Optional">
         <span id="headers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headers_go" style="color: inherit; text-decoration: inherit;">Headers</a>
@@ -3138,8 +4827,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>callback headers.</p>
-</dd></dl>
+    <dd>callback headers.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="body_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#body_hcl" style="color: inherit; text-decoration: inherit;">body</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>callback body.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headers_hcl" style="color: inherit; text-decoration: inherit;">headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>callback headers.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3153,8 +4863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>callback body.</p>
-</dd><dt class="property-optional"
+    <dd>callback body.</dd><dt class="property-optional"
             title="Optional">
         <span id="headers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headers_java" style="color: inherit; text-decoration: inherit;">headers</a>
@@ -3162,8 +4871,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>callback headers.</p>
-</dd></dl>
+    <dd>callback headers.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3177,8 +4885,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>callback body.</p>
-</dd><dt class="property-optional"
+    <dd>callback body.</dd><dt class="property-optional"
             title="Optional">
         <span id="headers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headers_nodejs" style="color: inherit; text-decoration: inherit;">headers</a>
@@ -3186,8 +4893,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>callback headers.</p>
-</dd></dl>
+    <dd>callback headers.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3201,8 +4907,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>callback body.</p>
-</dd><dt class="property-optional"
+    <dd>callback body.</dd><dt class="property-optional"
             title="Optional">
         <span id="headers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headers_python" style="color: inherit; text-decoration: inherit;">headers</a>
@@ -3210,8 +4915,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>callback headers.</p>
-</dd></dl>
+    <dd>callback headers.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3225,8 +4929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>callback body.</p>
-</dd><dt class="property-optional"
+    <dd>callback body.</dd><dt class="property-optional"
             title="Optional">
         <span id="headers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#headers_yaml" style="color: inherit; text-decoration: inherit;">headers</a>
@@ -3234,12 +4937,329 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>callback headers.</p>
-</dd></dl>
+    <dd>callback headers.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="alarmmonitortime">Alarm<wbr>Monitor<wbr>Time</h4>
+<h4 id="alarmmonitornotice">
+Alarm<wbr>Monitor<wbr>Notice<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Monitor<wbr>Notice<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="notices_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notices_csharp" style="color: inherit; text-decoration: inherit;">Notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornoticenotice">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cls.<wbr>Inputs.<wbr>Alarm<wbr>Monitor<wbr>Notice<wbr>Notice&gt;</a></span>
+    </dt>
+    <dd>List of monitor notice rules.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="notices_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notices_go" style="color: inherit; text-decoration: inherit;">Notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornoticenotice">[]Alarm<wbr>Monitor<wbr>Notice<wbr>Notice</a></span>
+    </dt>
+    <dd>List of monitor notice rules.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="notices_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notices_hcl" style="color: inherit; text-decoration: inherit;">notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornoticenotice">list(object)</a></span>
+    </dt>
+    <dd>List of monitor notice rules.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="notices_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notices_java" style="color: inherit; text-decoration: inherit;">notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornoticenotice">List&lt;Alarm<wbr>Monitor<wbr>Notice<wbr>Notice&gt;</a></span>
+    </dt>
+    <dd>List of monitor notice rules.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="notices_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notices_nodejs" style="color: inherit; text-decoration: inherit;">notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornoticenotice">Alarm<wbr>Monitor<wbr>Notice<wbr>Notice[]</a></span>
+    </dt>
+    <dd>List of monitor notice rules.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="notices_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notices_python" style="color: inherit; text-decoration: inherit;">notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornoticenotice">Sequence[Alarm<wbr>Monitor<wbr>Notice<wbr>Notice]</a></span>
+    </dt>
+    <dd>List of monitor notice rules.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="notices_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notices_yaml" style="color: inherit; text-decoration: inherit;">notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmmonitornoticenotice">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>List of monitor notice rules.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="alarmmonitornoticenotice">
+Alarm<wbr>Monitor<wbr>Notice<wbr>Notice<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Monitor<wbr>Notice<wbr>Notice<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="noticeid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeid_csharp" style="color: inherit; text-decoration: inherit;">Notice<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Observable platform notification template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alarmlevels_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmlevels_csharp" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Levels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;int&gt;</span>
+    </dt>
+    <dd>Alarm levels. 0: Warning; 1: Info; 2: Critical.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contenttmplid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttmplid_csharp" style="color: inherit; text-decoration: inherit;">Content<wbr>Tmpl<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Observable platform content template ID. If empty, use default content template.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="noticeid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeid_go" style="color: inherit; text-decoration: inherit;">Notice<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Observable platform notification template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alarmlevels_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmlevels_go" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Levels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]int</span>
+    </dt>
+    <dd>Alarm levels. 0: Warning; 1: Info; 2: Critical.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contenttmplid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttmplid_go" style="color: inherit; text-decoration: inherit;">Content<wbr>Tmpl<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Observable platform content template ID. If empty, use default content template.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="notice_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notice_id_hcl" style="color: inherit; text-decoration: inherit;">notice_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Observable platform notification template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alarm_levels_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_levels_hcl" style="color: inherit; text-decoration: inherit;">alarm_<wbr>levels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Alarm levels. 0: Warning; 1: Info; 2: Critical.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="content_tmpl_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_tmpl_id_hcl" style="color: inherit; text-decoration: inherit;">content_<wbr>tmpl_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Observable platform content template ID. If empty, use default content template.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="noticeid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeid_java" style="color: inherit; text-decoration: inherit;">notice<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Observable platform notification template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alarmlevels_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmlevels_java" style="color: inherit; text-decoration: inherit;">alarm<wbr>Levels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;Integer&gt;</span>
+    </dt>
+    <dd>Alarm levels. 0: Warning; 1: Info; 2: Critical.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contenttmplid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttmplid_java" style="color: inherit; text-decoration: inherit;">content<wbr>Tmpl<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Observable platform content template ID. If empty, use default content template.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="noticeid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeid_nodejs" style="color: inherit; text-decoration: inherit;">notice<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Observable platform notification template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alarmlevels_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmlevels_nodejs" style="color: inherit; text-decoration: inherit;">alarm<wbr>Levels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number[]</span>
+    </dt>
+    <dd>Alarm levels. 0: Warning; 1: Info; 2: Critical.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contenttmplid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttmplid_nodejs" style="color: inherit; text-decoration: inherit;">content<wbr>Tmpl<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Observable platform content template ID. If empty, use default content template.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="notice_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notice_id_python" style="color: inherit; text-decoration: inherit;">notice_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Observable platform notification template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alarm_levels_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_levels_python" style="color: inherit; text-decoration: inherit;">alarm_<wbr>levels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[int]</span>
+    </dt>
+    <dd>Alarm levels. 0: Warning; 1: Info; 2: Critical.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="content_tmpl_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_tmpl_id_python" style="color: inherit; text-decoration: inherit;">content_<wbr>tmpl_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Observable platform content template ID. If empty, use default content template.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="noticeid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeid_yaml" style="color: inherit; text-decoration: inherit;">notice<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Observable platform notification template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alarmlevels_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmlevels_yaml" style="color: inherit; text-decoration: inherit;">alarm<wbr>Levels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;Number&gt;</span>
+    </dt>
+    <dd>Alarm levels. 0: Warning; 1: Info; 2: Critical.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="contenttmplid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttmplid_yaml" style="color: inherit; text-decoration: inherit;">content<wbr>Tmpl<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Observable platform content template ID. If empty, use default content template.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="alarmmonitortime">
+Alarm<wbr>Monitor<wbr>Time<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Monitor<wbr>Time<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3251,8 +5271,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>time period or point in time.</p>
-</dd><dt class="property-required"
+    <dd>time period or point in time.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -3260,8 +5279,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Period for periodic execution, Fixed for regular execution.</p>
-</dd></dl>
+    <dd>Period for periodic execution, Fixed for regular execution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3275,8 +5293,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>time period or point in time.</p>
-</dd><dt class="property-required"
+    <dd>time period or point in time.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -3284,8 +5301,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Period for periodic execution, Fixed for regular execution.</p>
-</dd></dl>
+    <dd>Period for periodic execution, Fixed for regular execution.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_hcl" style="color: inherit; text-decoration: inherit;">time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>time period or point in time.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Period for periodic execution, Fixed for regular execution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3299,8 +5337,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>time period or point in time.</p>
-</dd><dt class="property-required"
+    <dd>time period or point in time.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3308,8 +5345,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Period for periodic execution, Fixed for regular execution.</p>
-</dd></dl>
+    <dd>Period for periodic execution, Fixed for regular execution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3323,8 +5359,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>time period or point in time.</p>
-</dd><dt class="property-required"
+    <dd>time period or point in time.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3332,8 +5367,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Period for periodic execution, Fixed for regular execution.</p>
-</dd></dl>
+    <dd>Period for periodic execution, Fixed for regular execution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3347,8 +5381,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>time period or point in time.</p>
-</dd><dt class="property-required"
+    <dd>time period or point in time.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3356,8 +5389,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Period for periodic execution, Fixed for regular execution.</p>
-</dd></dl>
+    <dd>Period for periodic execution, Fixed for regular execution.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3371,8 +5403,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>time period or point in time.</p>
-</dd><dt class="property-required"
+    <dd>time period or point in time.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -3380,8 +5411,165 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Period for periodic execution, Fixed for regular execution.</p>
-</dd></dl>
+    <dd>Period for periodic execution, Fixed for regular execution.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="alarmmulticondition">
+Alarm<wbr>Multi<wbr>Condition<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Multi<wbr>Condition<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="alarmlevel_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmlevel_csharp" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Level</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_csharp" style="color: inherit; text-decoration: inherit;">Condition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger condition.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="alarmlevel_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmlevel_go" style="color: inherit; text-decoration: inherit;">Alarm<wbr>Level</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_go" style="color: inherit; text-decoration: inherit;">Condition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger condition.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="alarm_level_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_level_hcl" style="color: inherit; text-decoration: inherit;">alarm_<wbr>level</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_hcl" style="color: inherit; text-decoration: inherit;">condition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger condition.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="alarmlevel_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmlevel_java" style="color: inherit; text-decoration: inherit;">alarm<wbr>Level</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_java" style="color: inherit; text-decoration: inherit;">condition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Trigger condition.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="alarmlevel_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmlevel_nodejs" style="color: inherit; text-decoration: inherit;">alarm<wbr>Level</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_nodejs" style="color: inherit; text-decoration: inherit;">condition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger condition.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="alarm_level_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarm_level_python" style="color: inherit; text-decoration: inherit;">alarm_<wbr>level</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_python" style="color: inherit; text-decoration: inherit;">condition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Trigger condition.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="alarmlevel_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alarmlevel_yaml" style="color: inherit; text-decoration: inherit;">alarm<wbr>Level</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="condition_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#condition_yaml" style="color: inherit; text-decoration: inherit;">condition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Trigger condition.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3397,6 +5585,9 @@ $ pulumi import tencentcloud:Cls/alarm:Alarm example alarm-d8529662-e10f-440c-ba
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -3406,7 +5597,6 @@ $ pulumi import tencentcloud:Cls/alarm:Alarm example alarm-d8529662-e10f-440c-ba
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

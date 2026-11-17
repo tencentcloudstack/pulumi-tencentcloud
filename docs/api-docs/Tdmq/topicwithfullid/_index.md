@@ -2,9 +2,11 @@
 ---
 title: "TopicWithFullId"
 title_tag: "tencentcloud.Tdmq.TopicWithFullId"
-meta_desc: "Documentation for the tencentcloud.Tdmq.TopicWithFullId resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a TDMQ topic with full id."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,131 +18,103 @@ Provide a resource to create a TDMQ topic with full id.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleInstance = new tencentcloud.tdmq.Instance("exampleInstance", {
+const example = new tencentcloud.tdmq.Instance("example", {
     clusterName: "tf_example",
     remark: "remark.",
     tags: {
         createdBy: "terraform",
     },
 });
-const exampleNamespace = new tencentcloud.tdmq.Namespace("exampleNamespace", {
+const exampleNamespace = new tencentcloud.tdmq.Namespace("example", {
     environName: "tf_example",
     msgTtl: 300,
-    clusterId: exampleInstance.id,
+    clusterId: example.id,
     retentionPolicy: {
         timeInMinutes: 60,
         sizeInMb: 10,
     },
     remark: "remark.",
 });
-const exampleTopicWithFullId = new tencentcloud.tdmq.TopicWithFullId("exampleTopicWithFullId", {
+const exampleTopicWithFullId = new tencentcloud.tdmq.TopicWithFullId("example", {
     environId: exampleNamespace.environName,
-    clusterId: exampleInstance.id,
+    clusterId: example.id,
     topicName: "tf-example-topic",
     partitions: 6,
     pulsarTopicType: 3,
     remark: "remark.",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_instance = tencentcloud.tdmq.Instance("exampleInstance",
+example = tencentcloud.tdmq.Instance("example",
     cluster_name="tf_example",
     remark="remark.",
     tags={
         "createdBy": "terraform",
     })
-example_namespace = tencentcloud.tdmq.Namespace("exampleNamespace",
+example_namespace = tencentcloud.tdmq.Namespace("example",
     environ_name="tf_example",
     msg_ttl=300,
-    cluster_id=example_instance.id,
-    retention_policy=tencentcloud.tdmq.NamespaceRetentionPolicyArgs(
-        time_in_minutes=60,
-        size_in_mb=10,
-    ),
+    cluster_id=example.id,
+    retention_policy={
+        "time_in_minutes": 60,
+        "size_in_mb": 10,
+    },
     remark="remark.")
-example_topic_with_full_id = tencentcloud.tdmq.TopicWithFullId("exampleTopicWithFullId",
+example_topic_with_full_id = tencentcloud.tdmq.TopicWithFullId("example",
     environ_id=example_namespace.environ_name,
-    cluster_id=example_instance.id,
+    cluster_id=example.id,
     topic_name="tf-example-topic",
     partitions=6,
     pulsar_topic_type=3,
     remark="remark.")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new()
-    {
-        ClusterName = "tf_example",
-        Remark = "remark.",
-        Tags = 
-        {
-            { "createdBy", "terraform" },
-        },
-    });
-
-    var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new()
-    {
-        EnvironName = "tf_example",
-        MsgTtl = 300,
-        ClusterId = exampleInstance.Id,
-        RetentionPolicy = new Tencentcloud.Tdmq.Inputs.NamespaceRetentionPolicyArgs
-        {
-            TimeInMinutes = 60,
-            SizeInMb = 10,
-        },
-        Remark = "remark.",
-    });
-
-    var exampleTopicWithFullId = new Tencentcloud.Tdmq.TopicWithFullId("exampleTopicWithFullId", new()
-    {
-        EnvironId = exampleNamespace.EnvironName,
-        ClusterId = exampleInstance.Id,
-        TopicName = "tf-example-topic",
-        Partitions = 6,
-        PulsarTopicType = 3,
-        Remark = "remark.",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tdmq"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		exampleInstance, err := Tdmq.NewInstance(ctx, "exampleInstance", &Tdmq.InstanceArgs{
+		example, err := tdmq.NewInstance(ctx, "example", &tdmq.InstanceArgs{
 			ClusterName: pulumi.String("tf_example"),
 			Remark:      pulumi.String("remark."),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
 			},
 		})
 		if err != nil {
 			return err
 		}
-		exampleNamespace, err := Tdmq.NewNamespace(ctx, "exampleNamespace", &Tdmq.NamespaceArgs{
+		exampleNamespace, err := tdmq.NewNamespace(ctx, "example", &tdmq.NamespaceArgs{
 			EnvironName: pulumi.String("tf_example"),
 			MsgTtl:      pulumi.Int(300),
-			ClusterId:   exampleInstance.ID(),
+			ClusterId:   example.ID().ToIDOutput().ToStringOutput(),
 			RetentionPolicy: &tdmq.NamespaceRetentionPolicyArgs{
 				TimeInMinutes: pulumi.Int(60),
 				SizeInMb:      pulumi.Int(10),
@@ -150,9 +124,9 @@ func main() {
 		if err != nil {
 			return err
 		}
-		_, err = Tdmq.NewTopicWithFullId(ctx, "exampleTopicWithFullId", &Tdmq.TopicWithFullIdArgs{
+		_, err = tdmq.NewTopicWithFullId(ctx, "example", &tdmq.TopicWithFullIdArgs{
 			EnvironId:       exampleNamespace.EnvironName,
-			ClusterId:       exampleInstance.ID(),
+			ClusterId:       example.ID().ToIDOutput().ToStringOutput(),
 			TopicName:       pulumi.String("tf-example-topic"),
 			Partitions:      pulumi.Int(6),
 			PulsarTopicType: pulumi.Int(3),
@@ -165,6 +139,59 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Tdmq.Instance("example", new()
+    {
+        ClusterName = "tf_example",
+        Remark = "remark.",
+        Tags = 
+        {
+            { "createdBy", "terraform" },
+        },
+    });
+
+    var exampleNamespace = new Tencentcloud.Tdmq.Namespace("example", new()
+    {
+        EnvironName = "tf_example",
+        MsgTtl = 300,
+        ClusterId = example.Id,
+        RetentionPolicy = new Tencentcloud.Tdmq.Inputs.NamespaceRetentionPolicyArgs
+        {
+            TimeInMinutes = 60,
+            SizeInMb = 10,
+        },
+        Remark = "remark.",
+    });
+
+    var exampleTopicWithFullId = new Tencentcloud.Tdmq.TopicWithFullId("example", new()
+    {
+        EnvironId = exampleNamespace.EnvironName,
+        ClusterId = example.Id,
+        TopicName = "tf-example-topic",
+        Partitions = 6,
+        PulsarTopicType = 3,
+        Remark = "remark.",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -178,8 +205,8 @@ import com.pulumi.tencentcloud.Tdmq.NamespaceArgs;
 import com.pulumi.tencentcloud.Tdmq.inputs.NamespaceRetentionPolicyArgs;
 import com.pulumi.tencentcloud.Tdmq.TopicWithFullId;
 import com.pulumi.tencentcloud.Tdmq.TopicWithFullIdArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -191,16 +218,16 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var exampleInstance = new Instance("exampleInstance", InstanceArgs.builder()        
+        var example = new Instance("example", InstanceArgs.builder()
             .clusterName("tf_example")
             .remark("remark.")
             .tags(Map.of("createdBy", "terraform"))
             .build());
 
-        var exampleNamespace = new Namespace("exampleNamespace", NamespaceArgs.builder()        
+        var exampleNamespace = new Namespace("exampleNamespace", NamespaceArgs.builder()
             .environName("tf_example")
             .msgTtl(300)
-            .clusterId(exampleInstance.id())
+            .clusterId(example.id())
             .retentionPolicy(NamespaceRetentionPolicyArgs.builder()
                 .timeInMinutes(60)
                 .sizeInMb(10)
@@ -208,9 +235,9 @@ public class App {
             .remark("remark.")
             .build());
 
-        var exampleTopicWithFullId = new TopicWithFullId("exampleTopicWithFullId", TopicWithFullIdArgs.builder()        
+        var exampleTopicWithFullId = new TopicWithFullId("exampleTopicWithFullId", TopicWithFullIdArgs.builder()
             .environId(exampleNamespace.environName())
-            .clusterId(exampleInstance.id())
+            .clusterId(example.id())
             .topicName("tf-example-topic")
             .partitions(6)
             .pulsarTopicType(3)
@@ -220,9 +247,14 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  exampleInstance:
+  example:
     type: tencentcloud:Tdmq:Instance
     properties:
       clusterName: tf_example
@@ -231,89 +263,156 @@ resources:
         createdBy: terraform
   exampleNamespace:
     type: tencentcloud:Tdmq:Namespace
+    name: example
     properties:
       environName: tf_example
       msgTtl: 300
-      clusterId: ${exampleInstance.id}
+      clusterId: ${example.id}
       retentionPolicy:
         timeInMinutes: 60
         sizeInMb: 10
       remark: remark.
   exampleTopicWithFullId:
     type: tencentcloud:Tdmq:TopicWithFullId
+    name: example
     properties:
       environId: ${exampleNamespace.environName}
-      clusterId: ${exampleInstance.id}
+      clusterId: ${example.id}
       topicName: tf-example-topic
       partitions: 6
       pulsarTopicType: 3
       remark: remark.
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tdmq_instance" "example" {
+  cluster_name = "tf_example"
+  remark       = "remark."
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+resource "tencentcloud_tdmq_namespace" "example" {
+  environ_name = "tf_example"
+  msg_ttl      = 300
+  cluster_id   = tencentcloud_tdmq_instance.example.id
+  retention_policy = {
+    time_in_minutes = 60
+    size_in_mb      = 10
+  }
+  remark = "remark."
+}
+resource "tencentcloud_tdmq_topicwithfullid" "example" {
+  environ_id        = tencentcloud_tdmq_namespace.example.environ_name
+  cluster_id        = tencentcloud_tdmq_instance.example.id
+  topic_name        = "tf-example-topic"
+  partitions        = 6
+  pulsar_topic_type = 3
+  remark            = "remark."
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateTopic](https://www.tencentcloud.com/search/?wd=CreateTopic&type=document&lang=en)
+* Read: [DescribeTopics](https://www.tencentcloud.com/search/?wd=DescribeTopics&type=document&lang=en)
+* Update: [ModifyTopic](https://www.tencentcloud.com/search/?wd=ModifyTopic&type=document&lang=en)
+* Delete: [DeleteTopics](https://www.tencentcloud.com/search/?wd=DeleteTopics&type=document&lang=en)
 
 
 ## Create TopicWithFullId Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">TopicWithFullId</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TopicWithFullIdArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">TopicWithFullId</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TopicWithFullIdArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">TopicWithFullId</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TopicWithFullIdArgs</a></span><span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">TopicWithFullId</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                     <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">environ_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">partitions</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                    <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">pulsar_topic_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                     <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                    <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                    <span class="nx">topic_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">TopicWithFullId</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TopicWithFullIdArgs</a></span><span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                    <span class="nx">topic_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTopicWithFullId</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TopicWithFullIdArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TopicWithFullId</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTopicWithFullId</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TopicWithFullIdArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TopicWithFullId</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">TopicWithFullId</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TopicWithFullIdArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">TopicWithFullId</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TopicWithFullIdArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">TopicWithFullId</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TopicWithFullIdArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">TopicWithFullId</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TopicWithFullIdArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tdmq:TopicWithFullId</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tdmq:TopicWithFullId</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tdmq_topic_with_full_id&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -334,7 +433,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -451,11 +550,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## TopicWithFullId Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -471,8 +578,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environid_csharp" style="color: inherit; text-decoration: inherit;">Environ<wbr>Id</a>
@@ -480,8 +586,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of tdmq namespace.</p>
-</dd><dt class="property-required"
+    <dd>The name of tdmq namespace.</dd><dt class="property-required"
             title="Required">
         <span id="partitions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitions_csharp" style="color: inherit; text-decoration: inherit;">Partitions</a>
@@ -489,8 +594,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The partitions of topic.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The partitions of topic.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="topicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -498,8 +602,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of topic to be created.</p>
-</dd><dt class="property-optional"
+    <dd>The name of topic to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="pulsartopictype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pulsartopictype_csharp" style="color: inherit; text-decoration: inherit;">Pulsar<wbr>Topic<wbr>Type</a>
@@ -507,8 +610,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</p>
-</dd><dt class="property-optional"
+    <dd>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -516,8 +618,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Description of the namespace.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="topictype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topictype_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Type</a>
@@ -525,9 +626,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.</p>
-<p class="property-message">Deprecated:<p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p>
-</p></dd></dl>
+    <dd>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.<p class="property-message">Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -541,8 +640,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environid_go" style="color: inherit; text-decoration: inherit;">Environ<wbr>Id</a>
@@ -550,8 +648,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of tdmq namespace.</p>
-</dd><dt class="property-required"
+    <dd>The name of tdmq namespace.</dd><dt class="property-required"
             title="Required">
         <span id="partitions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitions_go" style="color: inherit; text-decoration: inherit;">Partitions</a>
@@ -559,8 +656,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The partitions of topic.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The partitions of topic.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="topicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -568,8 +664,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of topic to be created.</p>
-</dd><dt class="property-optional"
+    <dd>The name of topic to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="pulsartopictype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pulsartopictype_go" style="color: inherit; text-decoration: inherit;">Pulsar<wbr>Topic<wbr>Type</a>
@@ -577,8 +672,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</p>
-</dd><dt class="property-optional"
+    <dd>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -586,8 +680,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Description of the namespace.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="topictype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topictype_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Type</a>
@@ -595,9 +688,69 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.</p>
-<p class="property-message">Deprecated:<p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p>
-</p></dd></dl>
+    <dd>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.<p class="property-message">Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="environ_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environ_id_hcl" style="color: inherit; text-decoration: inherit;">environ_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of tdmq namespace.</dd><dt class="property-required"
+            title="Required">
+        <span id="partitions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitions_hcl" style="color: inherit; text-decoration: inherit;">partitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The partitions of topic.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of topic to be created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="pulsar_topic_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pulsar_topic_type_hcl" style="color: inherit; text-decoration: inherit;">pulsar_<wbr>topic_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the namespace.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="topic_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_type_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.<p class="property-message">Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -611,8 +764,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environid_java" style="color: inherit; text-decoration: inherit;">environ<wbr>Id</a>
@@ -620,8 +772,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of tdmq namespace.</p>
-</dd><dt class="property-required"
+    <dd>The name of tdmq namespace.</dd><dt class="property-required"
             title="Required">
         <span id="partitions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitions_java" style="color: inherit; text-decoration: inherit;">partitions</a>
@@ -629,8 +780,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The partitions of topic.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The partitions of topic.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="topicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -638,8 +788,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of topic to be created.</p>
-</dd><dt class="property-optional"
+    <dd>The name of topic to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="pulsartopictype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pulsartopictype_java" style="color: inherit; text-decoration: inherit;">pulsar<wbr>Topic<wbr>Type</a>
@@ -647,8 +796,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</p>
-</dd><dt class="property-optional"
+    <dd>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -656,8 +804,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Description of the namespace.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="topictype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topictype_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Type</a>
@@ -665,9 +812,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.</p>
-<p class="property-message">Deprecated:<p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p>
-</p></dd></dl>
+    <dd>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.<p class="property-message">Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -681,8 +826,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environid_nodejs" style="color: inherit; text-decoration: inherit;">environ<wbr>Id</a>
@@ -690,8 +834,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of tdmq namespace.</p>
-</dd><dt class="property-required"
+    <dd>The name of tdmq namespace.</dd><dt class="property-required"
             title="Required">
         <span id="partitions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitions_nodejs" style="color: inherit; text-decoration: inherit;">partitions</a>
@@ -699,8 +842,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The partitions of topic.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The partitions of topic.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="topicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -708,8 +850,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of topic to be created.</p>
-</dd><dt class="property-optional"
+    <dd>The name of topic to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="pulsartopictype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pulsartopictype_nodejs" style="color: inherit; text-decoration: inherit;">pulsar<wbr>Topic<wbr>Type</a>
@@ -717,8 +858,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</p>
-</dd><dt class="property-optional"
+    <dd>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -726,8 +866,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Description of the namespace.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="topictype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topictype_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Type</a>
@@ -735,9 +874,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.</p>
-<p class="property-message">Deprecated:<p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p>
-</p></dd></dl>
+    <dd>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.<p class="property-message">Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -751,8 +888,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environ_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environ_id_python" style="color: inherit; text-decoration: inherit;">environ_<wbr>id</a>
@@ -760,8 +896,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of tdmq namespace.</p>
-</dd><dt class="property-required"
+    <dd>The name of tdmq namespace.</dd><dt class="property-required"
             title="Required">
         <span id="partitions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitions_python" style="color: inherit; text-decoration: inherit;">partitions</a>
@@ -769,8 +904,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The partitions of topic.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The partitions of topic.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
@@ -778,8 +912,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of topic to be created.</p>
-</dd><dt class="property-optional"
+    <dd>The name of topic to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="pulsar_topic_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pulsar_topic_type_python" style="color: inherit; text-decoration: inherit;">pulsar_<wbr>topic_<wbr>type</a>
@@ -787,8 +920,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</p>
-</dd><dt class="property-optional"
+    <dd>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -796,8 +928,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Description of the namespace.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="topic_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_type_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>type</a>
@@ -805,9 +936,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.</p>
-<p class="property-message">Deprecated:<p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p>
-</p></dd></dl>
+    <dd>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.<p class="property-message">Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -821,8 +950,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="environid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environid_yaml" style="color: inherit; text-decoration: inherit;">environ<wbr>Id</a>
@@ -830,8 +958,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of tdmq namespace.</p>
-</dd><dt class="property-required"
+    <dd>The name of tdmq namespace.</dd><dt class="property-required"
             title="Required">
         <span id="partitions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#partitions_yaml" style="color: inherit; text-decoration: inherit;">partitions</a>
@@ -839,8 +966,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The partitions of topic.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The partitions of topic.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="topicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -848,8 +974,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of topic to be created.</p>
-</dd><dt class="property-optional"
+    <dd>The name of topic to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="pulsartopictype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pulsartopictype_yaml" style="color: inherit; text-decoration: inherit;">pulsar<wbr>Topic<wbr>Type</a>
@@ -857,8 +982,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</p>
-</dd><dt class="property-optional"
+    <dd>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -866,8 +990,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Description of the namespace.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="topictype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topictype_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Type</a>
@@ -875,9 +998,7 @@ The TopicWithFullId resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.</p>
-<p class="property-message">Deprecated:<p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p>
-</p></dd></dl>
+    <dd>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.<p class="property-message">Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -898,8 +1019,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -907,8 +1027,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -922,8 +1041,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -931,8 +1049,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of resource.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -946,8 +1085,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -955,8 +1093,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -970,8 +1107,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -979,8 +1115,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -994,8 +1129,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1003,8 +1137,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1018,8 +1151,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-"
+    <dd>Creation time of resource.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1027,8 +1159,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1038,18 +1169,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing TopicWithFullId resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TopicWithFullIdState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">TopicWithFullId</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TopicWithFullIdState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">TopicWithFullId</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1061,104 +1192,143 @@ Get an existing TopicWithFullId resource's state with the given name, ID, and op
         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">topic_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> TopicWithFullId</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTopicWithFullId<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TopicWithFullIdState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TopicWithFullId</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTopicWithFullId<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TopicWithFullIdState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TopicWithFullId</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">TopicWithFullId</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TopicWithFullIdState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">TopicWithFullId</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TopicWithFullIdState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">TopicWithFullId</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TopicWithFullIdState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">TopicWithFullId</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TopicWithFullIdState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingTopicWithFullId</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tdmq:TopicWithFullId</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tdmq_topic_with_full_id</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TopicWithFullIdState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TopicWithFullIdState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1166,28 +1336,31 @@ Get an existing TopicWithFullId resource's state with the given name, ID, and op
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TopicWithFullIdState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1195,28 +1368,31 @@ Get an existing TopicWithFullId resource's state with the given name, ID, and op
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TopicWithFullIdState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1236,8 +1412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-optional"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1245,8 +1420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of resource.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environid_csharp" style="color: inherit; text-decoration: inherit;">Environ<wbr>Id</a>
@@ -1254,8 +1428,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of tdmq namespace.</p>
-</dd><dt class="property-optional"
+    <dd>The name of tdmq namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partitions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitions_csharp" style="color: inherit; text-decoration: inherit;">Partitions</a>
@@ -1263,8 +1436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The partitions of topic.</p>
-</dd><dt class="property-optional"
+    <dd>The partitions of topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pulsartopictype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pulsartopictype_csharp" style="color: inherit; text-decoration: inherit;">Pulsar<wbr>Topic<wbr>Type</a>
@@ -1272,8 +1444,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</p>
-</dd><dt class="property-optional"
+    <dd>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1281,8 +1452,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Description of the namespace.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_topicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -1290,8 +1460,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of topic to be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The name of topic to be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_topictype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topictype_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Type</a>
@@ -1299,9 +1468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.</p>
-<p class="property-message">Deprecated:<p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p>
-</p></dd></dl>
+    <dd>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.<p class="property-message">Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1315,8 +1482,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-optional"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1324,8 +1490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of resource.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environid_go" style="color: inherit; text-decoration: inherit;">Environ<wbr>Id</a>
@@ -1333,8 +1498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of tdmq namespace.</p>
-</dd><dt class="property-optional"
+    <dd>The name of tdmq namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partitions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitions_go" style="color: inherit; text-decoration: inherit;">Partitions</a>
@@ -1342,8 +1506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The partitions of topic.</p>
-</dd><dt class="property-optional"
+    <dd>The partitions of topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pulsartopictype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pulsartopictype_go" style="color: inherit; text-decoration: inherit;">Pulsar<wbr>Topic<wbr>Type</a>
@@ -1351,8 +1514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</p>
-</dd><dt class="property-optional"
+    <dd>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1360,8 +1522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Description of the namespace.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_topicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -1369,8 +1530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of topic to be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The name of topic to be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_topictype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topictype_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Type</a>
@@ -1378,9 +1538,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.</p>
-<p class="property-message">Deprecated:<p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p>
-</p></dd></dl>
+    <dd>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.<p class="property-message">Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of resource.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_environ_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environ_id_hcl" style="color: inherit; text-decoration: inherit;">environ_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of tdmq namespace.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_partitions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitions_hcl" style="color: inherit; text-decoration: inherit;">partitions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The partitions of topic.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_pulsar_topic_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pulsar_topic_type_hcl" style="color: inherit; text-decoration: inherit;">pulsar_<wbr>topic_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the namespace.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of topic to be created.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="state_topic_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_type_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.<p class="property-message">Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1394,8 +1622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-optional"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1403,8 +1630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of resource.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environid_java" style="color: inherit; text-decoration: inherit;">environ<wbr>Id</a>
@@ -1412,8 +1638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of tdmq namespace.</p>
-</dd><dt class="property-optional"
+    <dd>The name of tdmq namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partitions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitions_java" style="color: inherit; text-decoration: inherit;">partitions</a>
@@ -1421,8 +1646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The partitions of topic.</p>
-</dd><dt class="property-optional"
+    <dd>The partitions of topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pulsartopictype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pulsartopictype_java" style="color: inherit; text-decoration: inherit;">pulsar<wbr>Topic<wbr>Type</a>
@@ -1430,8 +1654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</p>
-</dd><dt class="property-optional"
+    <dd>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1439,8 +1662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Description of the namespace.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_topicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1448,8 +1670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of topic to be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The name of topic to be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_topictype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topictype_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Type</a>
@@ -1457,9 +1678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.</p>
-<p class="property-message">Deprecated:<p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p>
-</p></dd></dl>
+    <dd>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.<p class="property-message">Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1473,8 +1692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-optional"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1482,8 +1700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of resource.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environid_nodejs" style="color: inherit; text-decoration: inherit;">environ<wbr>Id</a>
@@ -1491,8 +1708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of tdmq namespace.</p>
-</dd><dt class="property-optional"
+    <dd>The name of tdmq namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partitions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitions_nodejs" style="color: inherit; text-decoration: inherit;">partitions</a>
@@ -1500,8 +1716,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The partitions of topic.</p>
-</dd><dt class="property-optional"
+    <dd>The partitions of topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pulsartopictype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pulsartopictype_nodejs" style="color: inherit; text-decoration: inherit;">pulsar<wbr>Topic<wbr>Type</a>
@@ -1509,8 +1724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</p>
-</dd><dt class="property-optional"
+    <dd>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1518,8 +1732,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Description of the namespace.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_topicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1527,8 +1740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of topic to be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The name of topic to be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_topictype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topictype_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Type</a>
@@ -1536,9 +1748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.</p>
-<p class="property-message">Deprecated:<p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p>
-</p></dd></dl>
+    <dd>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.<p class="property-message">Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1552,8 +1762,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-optional"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1561,8 +1770,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of resource.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environ_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environ_id_python" style="color: inherit; text-decoration: inherit;">environ_<wbr>id</a>
@@ -1570,8 +1778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of tdmq namespace.</p>
-</dd><dt class="property-optional"
+    <dd>The name of tdmq namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partitions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitions_python" style="color: inherit; text-decoration: inherit;">partitions</a>
@@ -1579,8 +1786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The partitions of topic.</p>
-</dd><dt class="property-optional"
+    <dd>The partitions of topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pulsar_topic_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pulsar_topic_type_python" style="color: inherit; text-decoration: inherit;">pulsar_<wbr>topic_<wbr>type</a>
@@ -1588,8 +1794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</p>
-</dd><dt class="property-optional"
+    <dd>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1597,8 +1802,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Description of the namespace.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_name_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
@@ -1606,8 +1810,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of topic to be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The name of topic to be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_topic_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_type_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>type</a>
@@ -1615,9 +1818,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.</p>
-<p class="property-message">Deprecated:<p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p>
-</p></dd></dl>
+    <dd>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.<p class="property-message">Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1631,8 +1832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-optional"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1640,8 +1840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of resource.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time of resource.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_environid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environid_yaml" style="color: inherit; text-decoration: inherit;">environ<wbr>Id</a>
@@ -1649,8 +1848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of tdmq namespace.</p>
-</dd><dt class="property-optional"
+    <dd>The name of tdmq namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_partitions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_partitions_yaml" style="color: inherit; text-decoration: inherit;">partitions</a>
@@ -1658,8 +1856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The partitions of topic.</p>
-</dd><dt class="property-optional"
+    <dd>The partitions of topic.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pulsartopictype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pulsartopictype_yaml" style="color: inherit; text-decoration: inherit;">pulsar<wbr>Topic<wbr>Type</a>
@@ -1667,8 +1864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</p>
-</dd><dt class="property-optional"
+    <dd>Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1676,8 +1872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Description of the namespace.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_topicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1685,8 +1880,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of topic to be created.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The name of topic to be created.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_topictype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topictype_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Type</a>
@@ -1694,9 +1888,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.</p>
-<p class="property-message">Deprecated:<p>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p>
-</p></dd></dl>
+    <dd>This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.<p class="property-message">Deprecated: This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.</p></dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1719,6 +1911,9 @@ $ pulumi import tencentcloud:Tdmq/topicWithFullId:TopicWithFullId test ${cluster
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1728,7 +1923,6 @@ $ pulumi import tencentcloud:Tdmq/topicWithFullId:TopicWithFullId test ${cluster
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

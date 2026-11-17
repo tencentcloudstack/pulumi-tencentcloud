@@ -2,9 +2,11 @@
 ---
 title: "getCluster"
 title_tag: "tencentcloud.Cynosdb.getCluster"
-meta_desc: "Documentation for the tencentcloud.Cynosdb.getCluster function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of cynosdb cluster"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,32 +18,75 @@ Use this data source to query detailed information of cynosdb cluster
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const cluster = tencentcloud.Cynosdb.getCluster({
+const cluster = tencentcloud.cynosdb.getCluster({
     clusterId: "cynosdbmysql-bws8h88b",
     database: "users",
     table: "tb_user_name",
     tableType: "all",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-cluster = tencentcloud.Cynosdb.get_cluster(cluster_id="cynosdbmysql-bws8h88b",
+cluster = tencentcloud.cynosdb.get_cluster(cluster_id="cynosdbmysql-bws8h88b",
     database="users",
     table="tb_user_name",
     table_type="all")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cynosdb.GetCluster(ctx, &cynosdb.GetClusterArgs{
+			ClusterId: "cynosdbmysql-bws8h88b",
+			Database:  pulumi.StringRef("users"),
+			Table:     pulumi.StringRef("tb_user_name"),
+			TableType: pulumi.StringRef("all"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -55,29 +100,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cynosdb.GetCluster(ctx, &cynosdb.GetClusterArgs{
-			ClusterId: "cynosdbmysql-bws8h88b",
-			Database:  pulumi.StringRef("users"),
-			Table:     pulumi.StringRef("tb_user_name"),
-			TableType: pulumi.StringRef("all"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -86,8 +113,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cynosdb.CynosdbFunctions;
 import com.pulumi.tencentcloud.Cynosdb.inputs.GetClusterArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -109,19 +136,52 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   cluster:
     fn::invoke:
-      Function: tencentcloud:Cynosdb:getCluster
-      Arguments:
+      function: tencentcloud:Cynosdb:getCluster
+      arguments:
         clusterId: cynosdbmysql-bws8h88b
         database: users
         table: tb_user_name
         tableType: all
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cynosdb_getcluster" "cluster" {
+  cluster_id = "cynosdbmysql-bws8h88b"
+  database   = "users"
+  table      = "tb_user_name"
+  table_type = "all"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [SearchClusterTables](https://www.tencentcloud.com/document/api/1098/52494)
 
 
 
@@ -133,7 +193,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -141,9 +201,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getCluster<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClusterArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>></span
+><span class="k">function </span>getCluster<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClusterArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>></span
 ><span class="k">
-function </span>getClusterOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClusterOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>></span
+function </span>getClusterOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetClusterOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -159,12 +219,12 @@ function </span>getClusterOutput<span class="p">(</span><span class="nx">args</s
                 <span class="nx">table_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetClusterResult</span
 ><span class="k">
-def </span>get_cluster_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">database</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">table</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">table_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetClusterResult]</span
+def </span>get_cluster_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">database</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">table</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">table_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetClusterResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,12 +233,12 @@ def </span>get_cluster_output<span class="p">(</span><span class="nx">cluster_id
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetCluster<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetClusterArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetClusterResult</a></span>, error)</span
+><span class="k">func </span>LookupCluster<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupClusterArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupClusterResult</a></span>, error)</span
 ><span class="k">
-func </span>GetClusterOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetClusterOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetClusterResultOutput</span
+func </span>LookupClusterOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupClusterOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupClusterResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetCluster` in the Go SDK.
+&gt; Note: This function is named `LookupCluster` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -189,7 +249,8 @@ func </span>GetClusterOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetCluster </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetClusterArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClusterInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClusterInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetClusterInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -198,7 +259,8 @@ func </span>GetClusterOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>> </span>getCluster<span class="p">(</span><span class="nx">GetClusterArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>> </span>getCluster<span class="p">(</span><span class="nx">GetClusterArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetClusterResult</a></span>> </span>getCluster<span class="p">(</span><span class="nx">GetClusterArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -210,6 +272,15 @@ func </span>GetClusterOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cynosdb/getCluster:getCluster
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cynosdb_get_cluster&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +299,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="database_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_csharp" style="color: inherit; text-decoration: inherit;">Database</a>
@@ -237,8 +307,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -246,8 +315,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="table_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_csharp" style="color: inherit; text-decoration: inherit;">Table</a>
@@ -255,8 +323,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data Table Name.</p>
-</dd><dt class="property-optional"
+    <dd>Data Table Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="tabletype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tabletype_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Type</a>
@@ -264,8 +331,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data table type: view: only return view, base_ Table: only returns the basic table, all: returns the view and table.</p>
-</dd></dl>
+    <dd>Data table type: view: only return view, base_ Table: only returns the basic table, all: returns the view and table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -279,8 +345,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="database_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_go" style="color: inherit; text-decoration: inherit;">Database</a>
@@ -288,8 +353,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -297,8 +361,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="table_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_go" style="color: inherit; text-decoration: inherit;">Table</a>
@@ -306,8 +369,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data Table Name.</p>
-</dd><dt class="property-optional"
+    <dd>Data Table Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="tabletype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tabletype_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Type</a>
@@ -315,8 +377,53 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data table type: view: only return view, base_ Table: only returns the basic table, all: returns the view and table.</p>
-</dd></dl>
+    <dd>Data table type: view: only return view, base_ Table: only returns the basic table, all: returns the view and table.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="database_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_hcl" style="color: inherit; text-decoration: inherit;">database</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="table_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_hcl" style="color: inherit; text-decoration: inherit;">table</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data Table Name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="table_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_type_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data table type: view: only return view, base_ Table: only returns the basic table, all: returns the view and table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -330,8 +437,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="database_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_java" style="color: inherit; text-decoration: inherit;">database</a>
@@ -339,8 +445,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -348,8 +453,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="table_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_java" style="color: inherit; text-decoration: inherit;">table</a>
@@ -357,8 +461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data Table Name.</p>
-</dd><dt class="property-optional"
+    <dd>Data Table Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="tabletype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tabletype_java" style="color: inherit; text-decoration: inherit;">table<wbr>Type</a>
@@ -366,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data table type: view: only return view, base_ Table: only returns the basic table, all: returns the view and table.</p>
-</dd></dl>
+    <dd>Data table type: view: only return view, base_ Table: only returns the basic table, all: returns the view and table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -381,8 +483,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="database_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_nodejs" style="color: inherit; text-decoration: inherit;">database</a>
@@ -390,8 +491,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -399,8 +499,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="table_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_nodejs" style="color: inherit; text-decoration: inherit;">table</a>
@@ -408,8 +507,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data Table Name.</p>
-</dd><dt class="property-optional"
+    <dd>Data Table Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="tabletype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tabletype_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Type</a>
@@ -417,8 +515,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data table type: view: only return view, base_ Table: only returns the basic table, all: returns the view and table.</p>
-</dd></dl>
+    <dd>Data table type: view: only return view, base_ Table: only returns the basic table, all: returns the view and table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -432,8 +529,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="database_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_python" style="color: inherit; text-decoration: inherit;">database</a>
@@ -441,8 +537,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -450,8 +545,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="table_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_python" style="color: inherit; text-decoration: inherit;">table</a>
@@ -459,8 +553,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data Table Name.</p>
-</dd><dt class="property-optional"
+    <dd>Data Table Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="table_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_type_python" style="color: inherit; text-decoration: inherit;">table_<wbr>type</a>
@@ -468,8 +561,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data table type: view: only return view, base_ Table: only returns the basic table, all: returns the view and table.</p>
-</dd></dl>
+    <dd>Data table type: view: only return view, base_ Table: only returns the basic table, all: returns the view and table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -483,8 +575,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="database_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_yaml" style="color: inherit; text-decoration: inherit;">database</a>
@@ -492,8 +583,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -501,8 +591,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="table_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_yaml" style="color: inherit; text-decoration: inherit;">table</a>
@@ -510,8 +599,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data Table Name.</p>
-</dd><dt class="property-optional"
+    <dd>Data Table Name.</dd><dt class="property-optional"
             title="Optional">
         <span id="tabletype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tabletype_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Type</a>
@@ -519,8 +607,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data table type: view: only return view, base_ Table: only returns the basic table, all: returns the view and table.</p>
-</dd></dl>
+    <dd>Data table type: view: only return view, base_ Table: only returns the basic table, all: returns the view and table.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -551,8 +638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tables_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_csharp" style="color: inherit; text-decoration: inherit;">Tables</a>
@@ -560,8 +646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclustertable">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Outputs.<wbr>Get<wbr>Cluster<wbr>Table&gt;</a></span>
     </dt>
-    <dd><p>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="database_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_csharp" style="color: inherit; text-decoration: inherit;">Database</a>
@@ -569,8 +654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Database name note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -616,8 +700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tables_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_go" style="color: inherit; text-decoration: inherit;">Tables</a>
@@ -625,8 +708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclustertable">[]Get<wbr>Cluster<wbr>Table</a></span>
     </dt>
-    <dd><p>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="database_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_go" style="color: inherit; text-decoration: inherit;">Database</a>
@@ -634,8 +716,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Database name note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -664,6 +745,68 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="tables_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_hcl" style="color: inherit; text-decoration: inherit;">tables</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getclustertable">list(object)</a></span>
+    </dt>
+    <dd>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="database_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_hcl" style="color: inherit; text-decoration: inherit;">database</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database name note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="table_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_hcl" style="color: inherit; text-decoration: inherit;">table</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="table_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_type_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -681,8 +824,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tables_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_java" style="color: inherit; text-decoration: inherit;">tables</a>
@@ -690,8 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclustertable">List&lt;Get<wbr>Cluster<wbr>Table&gt;</a></span>
     </dt>
-    <dd><p>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="database_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_java" style="color: inherit; text-decoration: inherit;">database</a>
@@ -699,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Database name note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -746,8 +886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tables_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_nodejs" style="color: inherit; text-decoration: inherit;">tables</a>
@@ -755,8 +894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclustertable">Get<wbr>Cluster<wbr>Table[]</a></span>
     </dt>
-    <dd><p>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="database_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_nodejs" style="color: inherit; text-decoration: inherit;">database</a>
@@ -764,8 +902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Database name note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -811,17 +948,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tables_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_python" style="color: inherit; text-decoration: inherit;">tables</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getclustertable">Get<wbr>Cluster<wbr>Table]</a></span>
+        <span class="property-type"><a href="#getclustertable">Sequence[Get<wbr>Cluster<wbr>Table]</a></span>
     </dt>
-    <dd><p>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="database_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_python" style="color: inherit; text-decoration: inherit;">database</a>
@@ -829,8 +964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database name note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Database name note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -876,8 +1010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="tables_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_yaml" style="color: inherit; text-decoration: inherit;">tables</a>
@@ -885,8 +1018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getclustertable">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="database_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_yaml" style="color: inherit; text-decoration: inherit;">database</a>
@@ -894,8 +1026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-"
+    <dd>Database name note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -943,8 +1074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="tables_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_csharp" style="color: inherit; text-decoration: inherit;">Tables</a>
@@ -952,8 +1082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -967,8 +1096,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="tables_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_go" style="color: inherit; text-decoration: inherit;">Tables</a>
@@ -976,8 +1104,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="database_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#database_hcl" style="color: inherit; text-decoration: inherit;">database</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database name.</dd><dt class="property-required"
+            title="Required">
+        <span id="tables_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_hcl" style="color: inherit; text-decoration: inherit;">tables</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -991,8 +1140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="tables_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_java" style="color: inherit; text-decoration: inherit;">tables</a>
@@ -1000,8 +1148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1015,8 +1162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="tables_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_nodejs" style="color: inherit; text-decoration: inherit;">tables</a>
@@ -1024,8 +1170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1039,8 +1184,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="tables_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_python" style="color: inherit; text-decoration: inherit;">tables</a>
@@ -1048,8 +1192,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1063,8 +1206,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="tables_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tables_yaml" style="color: inherit; text-decoration: inherit;">tables</a>
@@ -1072,8 +1214,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd></dl>
+    <dd>Table Name List Note: This field may return null, indicating that a valid value cannot be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1088,7 +1229,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

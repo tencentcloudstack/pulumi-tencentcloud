@@ -2,9 +2,11 @@
 ---
 title: "getPolicies"
 title_tag: "tencentcloud.Cam.getPolicies"
-meta_desc: "Documentation for the tencentcloud.Cam.getPolicies function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of CAM policies"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,68 +18,47 @@ Use this data source to query detailed information of CAM policies
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Query all policies
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Cam.getPolicies({
-    policyId: tencentcloud_cam_policy.foo.id,
-});
-const bar = tencentcloud.Cam.getPolicies({
-    policyId: tencentcloud_cam_policy.foo.id,
-    name: "tf-auto-test",
-});
+const example = tencentcloud.cam.getPolicies({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Cam.get_policies(policy_id=tencentcloud_cam_policy["foo"]["id"])
-bar = tencentcloud.Cam.get_policies(policy_id=tencentcloud_cam_policy["foo"]["id"],
-    name="tf-auto-test")
+example = tencentcloud.cam.get_policies()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Cam.GetPolicies.Invoke(new()
-    {
-        PolicyId = tencentcloud_cam_policy.Foo.Id,
-    });
-
-    var bar = Tencentcloud.Cam.GetPolicies.Invoke(new()
-    {
-        PolicyId = tencentcloud_cam_policy.Foo.Id,
-        Name = "tf-auto-test",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cam"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
-			PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		_, err = Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
-			PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
-			Name:     pulumi.StringRef("tf-auto-test"),
-		}, nil)
+		_, err := cam.GetPolicies(ctx, &cam.GetPoliciesArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -85,6 +66,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Cam.GetPolicies.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -93,8 +96,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cam.CamFunctions;
 import com.pulumi.tencentcloud.Cam.inputs.GetPoliciesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -106,34 +109,211 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var foo = CamFunctions.getPolicies(GetPoliciesArgs.builder()
-            .policyId(tencentcloud_cam_policy.foo().id())
-            .build());
-
-        final var bar = CamFunctions.getPolicies(GetPoliciesArgs.builder()
-            .policyId(tencentcloud_cam_policy.foo().id())
-            .name("tf-auto-test")
+        final var example = CamFunctions.getPolicies(GetPoliciesArgs.builder()
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
-  foo:
+  example:
     fn::invoke:
-      Function: tencentcloud:Cam:getPolicies
-      Arguments:
-        policyId: ${tencentcloud_cam_policy.foo.id}
-  bar:
-    fn::invoke:
-      Function: tencentcloud:Cam:getPolicies
-      Arguments:
-        policyId: ${tencentcloud_cam_policy.foo.id}
-        name: tf-auto-test
+      function: tencentcloud:Cam:getPolicies
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cam_getpolicies" "example" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Query policies by filter
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = tencentcloud.cam.getPolicies({
+    name: "tf-example",
+    policyId: "236215899",
+    type: 1,
+    createMode: 2,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+
+example = tencentcloud.cam.get_policies(name="tf-example",
+    policy_id="236215899",
+    type=1,
+    create_mode=2)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cam"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
+			Name:       pulumi.StringRef("tf-example"),
+			PolicyId:   pulumi.StringRef("236215899"),
+			Type:       pulumi.IntRef(1),
+			CreateMode: pulumi.IntRef(2),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Cam.GetPolicies.Invoke(new()
+    {
+        Name = "tf-example",
+        PolicyId = "236215899",
+        Type = 1,
+        CreateMode = 2,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cam.CamFunctions;
+import com.pulumi.tencentcloud.Cam.inputs.GetPoliciesArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var example = CamFunctions.getPolicies(GetPoliciesArgs.builder()
+            .name("tf-example")
+            .policyId("236215899")
+            .type(1)
+            .createMode(2)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+variables:
+  example:
+    fn::invoke:
+      function: tencentcloud:Cam:getPolicies
+      arguments:
+        name: tf-example
+        policyId: '236215899'
+        type: 1
+        createMode: 2
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cam_getpolicies" "example" {
+  name        = "tf-example"
+  policy_id   = "236215899"
+  type        = 1
+  create_mode = 2
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [ListPolicies](https://www.tencentcloud.com/document/api/598/32240)
 
 
 
@@ -145,7 +325,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -153,9 +333,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getPolicies<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPoliciesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPoliciesResult</a></span>></span
+><span class="k">function </span>getPolicies<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPoliciesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPoliciesResult</a></span>></span
 ><span class="k">
-function </span>getPoliciesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPoliciesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPoliciesResult</a></span>></span
+function </span>getPoliciesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPoliciesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPoliciesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -166,19 +346,23 @@ function </span>getPoliciesOutput<span class="p">(</span><span class="nx">args</
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
 ><span class="k">def </span>get_policies<span class="p">(</span><span class="nx">create_mode</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                  <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">key_word</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">policy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">scope</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetPoliciesResult</span
 ><span class="k">
-def </span>get_policies_output<span class="p">(</span><span class="nx">create_mode</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                 <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">policy_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPoliciesResult]</span
+def </span>get_policies_output<span class="p">(</span><span class="nx">create_mode</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                 <span class="nx">description</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">key_word</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">policy_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">scope</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPoliciesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -203,7 +387,8 @@ func </span>GetPoliciesOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetPolicies </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetPoliciesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetPoliciesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetPoliciesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPoliciesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPoliciesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPoliciesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPoliciesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPoliciesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -212,7 +397,8 @@ func </span>GetPoliciesOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetPoliciesResult</a></span>> </span>getPolicies<span class="p">(</span><span class="nx">GetPoliciesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPoliciesResult</a></span>> </span>getPolicies<span class="p">(</span><span class="nx">GetPoliciesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPoliciesResult</a></span>> </span>getPolicies<span class="p">(</span><span class="nx">GetPoliciesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -224,6 +410,15 @@ func </span>GetPoliciesOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cam/getPolicies:getPolicies
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cam_get_policies&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -242,8 +437,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-optional"
+    <dd>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -251,8 +445,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of the CAM policy.</p>
-</dd><dt class="property-optional"
+    <dd>The description of the CAM policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keyword_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Match by strategy name.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -260,8 +461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -269,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -278,8 +477,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scope_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scope_csharp" style="color: inherit; text-decoration: inherit;">Scope</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available values are 'All', 'QCS', and' Local '.' All 'retrieves all policies,' QCS' retrieves preset policies, 'Local' retrieves custom policies, and defaults to 'All'.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -287,8 +493,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -302,8 +507,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-optional"
+    <dd>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -311,8 +515,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of the CAM policy.</p>
-</dd><dt class="property-optional"
+    <dd>The description of the CAM policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keyword_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Match by strategy name.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -320,8 +531,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -329,8 +539,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -338,8 +547,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scope_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scope_go" style="color: inherit; text-decoration: inherit;">Scope</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available values are 'All', 'QCS', and' Local '.' All 'retrieves all policies,' QCS' retrieves preset policies, 'Local' retrieves custom policies, and defaults to 'All'.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -347,8 +563,77 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="create_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_mode_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The description of the CAM policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_word_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_word_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Match by strategy name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scope_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scope_hcl" style="color: inherit; text-decoration: inherit;">scope</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available values are 'All', 'QCS', and' Local '.' All 'retrieves all policies,' QCS' retrieves preset policies, 'Local' retrieves custom policies, and defaults to 'All'.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -362,8 +647,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-optional"
+    <dd>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -371,8 +655,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The description of the CAM policy.</p>
-</dd><dt class="property-optional"
+    <dd>The description of the CAM policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keyword_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_java" style="color: inherit; text-decoration: inherit;">key<wbr>Word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Match by strategy name.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -380,8 +671,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -389,8 +679,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -398,8 +687,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scope_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scope_java" style="color: inherit; text-decoration: inherit;">scope</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Available values are 'All', 'QCS', and' Local '.' All 'retrieves all policies,' QCS' retrieves preset policies, 'Local' retrieves custom policies, and defaults to 'All'.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -407,8 +703,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -422,8 +717,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-optional"
+    <dd>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -431,8 +725,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of the CAM policy.</p>
-</dd><dt class="property-optional"
+    <dd>The description of the CAM policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keyword_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Match by strategy name.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -440,8 +741,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -449,8 +749,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -458,8 +757,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scope_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scope_nodejs" style="color: inherit; text-decoration: inherit;">scope</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available values are 'All', 'QCS', and' Local '.' All 'retrieves all policies,' QCS' retrieves preset policies, 'Local' retrieves custom policies, and defaults to 'All'.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -467,8 +773,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -482,8 +787,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-optional"
+    <dd>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -491,8 +795,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The description of the CAM policy.</p>
-</dd><dt class="property-optional"
+    <dd>The description of the CAM policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_word_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_word_python" style="color: inherit; text-decoration: inherit;">key_<wbr>word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Match by strategy name.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -500,8 +811,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -509,8 +819,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -518,8 +827,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scope_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scope_python" style="color: inherit; text-decoration: inherit;">scope</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Available values are 'All', 'QCS', and' Local '.' All 'retrieves all policies,' QCS' retrieves preset policies, 'Local' retrieves custom policies, and defaults to 'All'.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -527,8 +843,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -542,8 +857,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-optional"
+    <dd>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -551,8 +865,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The description of the CAM policy.</p>
-</dd><dt class="property-optional"
+    <dd>The description of the CAM policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keyword_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Match by strategy name.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -560,8 +881,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -569,8 +889,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -578,8 +897,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scope_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scope_yaml" style="color: inherit; text-decoration: inherit;">scope</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Available values are 'All', 'QCS', and' Local '.' All 'retrieves all policies,' QCS' retrieves preset policies, 'Local' retrieves custom policies, and defaults to 'All'.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -587,8 +913,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -611,8 +936,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policylists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policylists_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Lists</a>
@@ -620,8 +944,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpoliciespolicylist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cam.<wbr>Outputs.<wbr>Get<wbr>Policies<wbr>Policy<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of CAM policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="createmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Mode</a>
@@ -629,8 +952,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-"
+    <dd>Mode of creation of policy strategy. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-"
             title="">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -638,8 +960,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CAM policy.</p>
-</dd><dt class="property-"
+    <dd>Description of CAM policy.</dd><dt class="property-"
+            title="">
+        <span id="keyword_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -647,8 +976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM policy.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM policy.</dd><dt class="property-"
             title="">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -656,11 +984,18 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the policy strategy.</p>
-</dd><dt class="property-"
+    <dd>ID of the policy strategy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="scope_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scope_csharp" style="color: inherit; text-decoration: inherit;">Scope</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -673,8 +1008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of the policy strategy. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -688,8 +1022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policylists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policylists_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Lists</a>
@@ -697,8 +1030,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpoliciespolicylist">[]Get<wbr>Policies<wbr>Policy<wbr>List</a></span>
     </dt>
-    <dd><p>A list of CAM policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="createmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Mode</a>
@@ -706,8 +1038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-"
+    <dd>Mode of creation of policy strategy. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-"
             title="">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -715,8 +1046,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CAM policy.</p>
-</dd><dt class="property-"
+    <dd>Description of CAM policy.</dd><dt class="property-"
+            title="">
+        <span id="keyword_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -724,8 +1062,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM policy.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM policy.</dd><dt class="property-"
             title="">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -733,11 +1070,18 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the policy strategy.</p>
-</dd><dt class="property-"
+    <dd>ID of the policy strategy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="scope_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scope_go" style="color: inherit; text-decoration: inherit;">Scope</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -750,8 +1094,93 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of the policy strategy. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="policy_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_lists_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getpoliciespolicylist">list(object)</a></span>
+    </dt>
+    <dd>A list of CAM policies. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="create_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_mode_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Mode of creation of policy strategy. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-"
+            title="">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of CAM policy.</dd><dt class="property-"
+            title="">
+        <span id="key_word_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_word_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CAM policy.</dd><dt class="property-"
+            title="">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the policy strategy.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="scope_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scope_hcl" style="color: inherit; text-decoration: inherit;">scope</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Type of the policy strategy. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -765,8 +1194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policylists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policylists_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Lists</a>
@@ -774,8 +1202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpoliciespolicylist">List&lt;Get<wbr>Policies<wbr>Policy<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of CAM policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="createmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_java" style="color: inherit; text-decoration: inherit;">create<wbr>Mode</a>
@@ -783,8 +1210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-"
+    <dd>Mode of creation of policy strategy. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-"
             title="">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -792,8 +1218,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of CAM policy.</p>
-</dd><dt class="property-"
+    <dd>Description of CAM policy.</dd><dt class="property-"
+            title="">
+        <span id="keyword_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_java" style="color: inherit; text-decoration: inherit;">key<wbr>Word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -801,8 +1234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CAM policy.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM policy.</dd><dt class="property-"
             title="">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -810,11 +1242,18 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the policy strategy.</p>
-</dd><dt class="property-"
+    <dd>ID of the policy strategy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="scope_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scope_java" style="color: inherit; text-decoration: inherit;">scope</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
@@ -827,8 +1266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Type of the policy strategy. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -842,8 +1280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policylists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policylists_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Lists</a>
@@ -851,8 +1288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpoliciespolicylist">Get<wbr>Policies<wbr>Policy<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of CAM policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="createmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Mode</a>
@@ -860,8 +1296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-"
+    <dd>Mode of creation of policy strategy. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-"
             title="">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -869,8 +1304,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CAM policy.</p>
-</dd><dt class="property-"
+    <dd>Description of CAM policy.</dd><dt class="property-"
+            title="">
+        <span id="keyword_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -878,8 +1320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM policy.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM policy.</dd><dt class="property-"
             title="">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -887,11 +1328,18 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the policy strategy.</p>
-</dd><dt class="property-"
+    <dd>ID of the policy strategy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="scope_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scope_nodejs" style="color: inherit; text-decoration: inherit;">scope</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -904,8 +1352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Type of the policy strategy. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -919,17 +1366,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policy_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_lists_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getpoliciespolicylist">Get<wbr>Policies<wbr>Policy<wbr>List]</a></span>
+        <span class="property-type"><a href="#getpoliciespolicylist">Sequence[Get<wbr>Policies<wbr>Policy<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of CAM policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="create_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_mode_python" style="color: inherit; text-decoration: inherit;">create_<wbr>mode</a>
@@ -937,8 +1382,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-"
+    <dd>Mode of creation of policy strategy. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-"
             title="">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -946,8 +1390,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of CAM policy.</p>
-</dd><dt class="property-"
+    <dd>Description of CAM policy.</dd><dt class="property-"
+            title="">
+        <span id="key_word_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_word_python" style="color: inherit; text-decoration: inherit;">key_<wbr>word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -955,8 +1406,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CAM policy.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM policy.</dd><dt class="property-"
             title="">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -964,11 +1414,18 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the policy strategy.</p>
-</dd><dt class="property-"
+    <dd>ID of the policy strategy.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="scope_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scope_python" style="color: inherit; text-decoration: inherit;">scope</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
@@ -981,8 +1438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of the policy strategy. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -996,8 +1452,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policylists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policylists_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Lists</a>
@@ -1005,8 +1460,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getpoliciespolicylist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of CAM policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="createmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Mode</a>
@@ -1014,8 +1468,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-"
+    <dd>Mode of creation of policy strategy. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-"
             title="">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1023,8 +1476,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of CAM policy.</p>
-</dd><dt class="property-"
+    <dd>Description of CAM policy.</dd><dt class="property-"
+            title="">
+        <span id="keyword_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Word</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1032,8 +1492,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CAM policy.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM policy.</dd><dt class="property-"
             title="">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1041,11 +1500,18 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the policy strategy.</p>
-</dd><dt class="property-"
+    <dd>ID of the policy strategy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="scope_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scope_yaml" style="color: inherit; text-decoration: inherit;">scope</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
@@ -1058,8 +1524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Type of the policy strategy. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1083,8 +1548,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of attached users.</p>
-</dd><dt class="property-required"
+    <dd>Number of attached users.</dd><dt class="property-required"
             title="Required">
         <span id="createmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Mode</a>
@@ -1092,8 +1556,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-required"
+    <dd>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1101,8 +1564,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CAM policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CAM policy.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1110,8 +1572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of the CAM policy.</p>
-</dd><dt class="property-required"
+    <dd>The description of the CAM policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1119,8 +1580,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -1128,8 +1588,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="servicetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Type</a>
@@ -1137,8 +1596,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of attached products.</p>
-</dd><dt class="property-required"
+    <dd>Name of attached products.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1146,8 +1604,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1161,8 +1618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of attached users.</p>
-</dd><dt class="property-required"
+    <dd>Number of attached users.</dd><dt class="property-required"
             title="Required">
         <span id="createmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Mode</a>
@@ -1170,8 +1626,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-required"
+    <dd>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1179,8 +1634,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CAM policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CAM policy.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1188,8 +1642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of the CAM policy.</p>
-</dd><dt class="property-required"
+    <dd>The description of the CAM policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1197,8 +1650,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -1206,8 +1658,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="servicetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Type</a>
@@ -1215,8 +1666,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of attached products.</p>
-</dd><dt class="property-required"
+    <dd>Name of attached products.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1224,8 +1674,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="attachments_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attachments_hcl" style="color: inherit; text-decoration: inherit;">attachments</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of attached users.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_mode_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the CAM policy.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The description of the CAM policy.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="service_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_type_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of attached products.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1239,8 +1758,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of attached users.</p>
-</dd><dt class="property-required"
+    <dd>Number of attached users.</dd><dt class="property-required"
             title="Required">
         <span id="createmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_java" style="color: inherit; text-decoration: inherit;">create<wbr>Mode</a>
@@ -1248,8 +1766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-required"
+    <dd>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1257,8 +1774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CAM policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CAM policy.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1266,8 +1782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The description of the CAM policy.</p>
-</dd><dt class="property-required"
+    <dd>The description of the CAM policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1275,8 +1790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1284,8 +1798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="servicetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_java" style="color: inherit; text-decoration: inherit;">service<wbr>Type</a>
@@ -1293,8 +1806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of attached products.</p>
-</dd><dt class="property-required"
+    <dd>Name of attached products.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1302,8 +1814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1317,8 +1828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of attached users.</p>
-</dd><dt class="property-required"
+    <dd>Number of attached users.</dd><dt class="property-required"
             title="Required">
         <span id="createmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Mode</a>
@@ -1326,8 +1836,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-required"
+    <dd>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1335,8 +1844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CAM policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CAM policy.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1344,8 +1852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The description of the CAM policy.</p>
-</dd><dt class="property-required"
+    <dd>The description of the CAM policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1353,8 +1860,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1362,8 +1868,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="servicetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Type</a>
@@ -1371,8 +1876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of attached products.</p>
-</dd><dt class="property-required"
+    <dd>Name of attached products.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1380,8 +1884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1395,8 +1898,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of attached users.</p>
-</dd><dt class="property-required"
+    <dd>Number of attached users.</dd><dt class="property-required"
             title="Required">
         <span id="create_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_mode_python" style="color: inherit; text-decoration: inherit;">create_<wbr>mode</a>
@@ -1404,8 +1906,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-required"
+    <dd>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1413,8 +1914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the CAM policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CAM policy.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1422,8 +1922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The description of the CAM policy.</p>
-</dd><dt class="property-required"
+    <dd>The description of the CAM policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1431,8 +1930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -1440,8 +1938,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="service_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_type_python" style="color: inherit; text-decoration: inherit;">service_<wbr>type</a>
@@ -1449,8 +1946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of attached products.</p>
-</dd><dt class="property-required"
+    <dd>Name of attached products.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1458,8 +1954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1473,8 +1968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of attached users.</p>
-</dd><dt class="property-required"
+    <dd>Number of attached users.</dd><dt class="property-required"
             title="Required">
         <span id="createmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Mode</a>
@@ -1482,8 +1976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</p>
-</dd><dt class="property-required"
+    <dd>Mode of creation of policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means policy was created with console, and <code>2</code> means it was created by strategies.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1491,8 +1984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CAM policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CAM policy.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1500,8 +1992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The description of the CAM policy.</p>
-</dd><dt class="property-required"
+    <dd>The description of the CAM policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1509,8 +2000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1518,8 +2008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="servicetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Type</a>
@@ -1527,8 +2016,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of attached products.</p>
-</dd><dt class="property-required"
+    <dd>Name of attached products.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1536,8 +2024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</p>
-</dd></dl>
+    <dd>Type of the policy strategy. Valid values: <code>1</code>, <code>2</code>. <code>1</code> means customer strategy and <code>2</code> means preset strategy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1552,7 +2039,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

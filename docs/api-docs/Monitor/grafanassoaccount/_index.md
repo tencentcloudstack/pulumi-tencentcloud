@@ -2,9 +2,11 @@
 ---
 title: "GrafanaSsoAccount"
 title_tag: "tencentcloud.Monitor.GrafanaSsoAccount"
-meta_desc: "Documentation for the tencentcloud.Monitor.GrafanaSsoAccount resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a monitor grafana ssoAccount"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,17 +18,26 @@ Provides a resource to create a monitor grafana ssoAccount
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const config = new pulumi.Config();
 const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-6";
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_monitor_vpc",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     vpcId: vpc.id,
     availabilityZone: availabilityZone,
+    name: "tf_monitor_subnet",
     cidrBlock: "10.0.1.0/24",
 });
 const foo = new tencentcloud.monitor.GrafanaInstance("foo", {
@@ -49,6 +60,11 @@ const ssoAccount = new tencentcloud.monitor.GrafanaSsoAccount("ssoAccount", {
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -57,10 +73,13 @@ config = pulumi.Config()
 availability_zone = config.get("availabilityZone")
 if availability_zone is None:
     availability_zone = "ap-guangzhou-6"
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_monitor_vpc")
 subnet = tencentcloud.subnet.Instance("subnet",
     vpc_id=vpc.id,
     availability_zone=availability_zone,
+    name="tf_monitor_subnet",
     cidr_block="10.0.1.0/24")
 foo = tencentcloud.monitor.GrafanaInstance("foo",
     instance_name="test-grafana",
@@ -75,11 +94,88 @@ sso_account = tencentcloud.monitor.GrafanaSsoAccount("ssoAccount",
     instance_id=foo.id,
     user_id="111",
     notes="desc12222",
-    roles=[tencentcloud.monitor.GrafanaSsoAccountRoleArgs(
-        organization="Main Org.",
-        role="Admin",
-    )])
+    roles=[{
+        "organization": "Main Org.",
+        "role": "Admin",
+    }])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-6"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("tf_monitor_vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(availabilityZone),
+			Name:             pulumi.String("tf_monitor_subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+		})
+		if err != nil {
+			return err
+		}
+		foo, err := monitor.NewGrafanaInstance(ctx, "foo", &monitor.GrafanaInstanceArgs{
+			InstanceName: pulumi.String("test-grafana"),
+			VpcId:        vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetIds: pulumi.StringArray{
+				subnet2.ID().ToIDOutput().ToStringOutput(),
+			},
+			GrafanaInitPassword: pulumi.String("1234567890"),
+			EnableInternet:      pulumi.Bool(false),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("test"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = monitor.NewGrafanaSsoAccount(ctx, "ssoAccount", &monitor.GrafanaSsoAccountArgs{
+			InstanceId: foo.ID().ToIDOutput().ToStringOutput(),
+			UserId:     pulumi.String("111"),
+			Notes:      pulumi.String("desc12222"),
+			Roles: monitor.GrafanaSsoAccountRoleArray{
+				&monitor.GrafanaSsoAccountRoleArgs{
+					Organization: pulumi.String("Main Org."),
+					Role:         pulumi.String("Admin"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -93,12 +189,14 @@ return await Deployment.RunAsync(() =>
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
         CidrBlock = "10.0.0.0/16",
+        Name = "tf_monitor_vpc",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         VpcId = vpc.Id,
         AvailabilityZone = availabilityZone,
+        Name = "tf_monitor_subnet",
         CidrBlock = "10.0.1.0/24",
     });
 
@@ -135,88 +233,24 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		cfg := config.New(ctx, "")
-		availabilityZone := "ap-guangzhou-6"
-		if param := cfg.Get("availabilityZone"); param != "" {
-			availabilityZone = param
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			VpcId:            vpc.ID(),
-			AvailabilityZone: pulumi.String(availabilityZone),
-			CidrBlock:        pulumi.String("10.0.1.0/24"),
-		})
-		if err != nil {
-			return err
-		}
-		foo, err := Monitor.NewGrafanaInstance(ctx, "foo", &Monitor.GrafanaInstanceArgs{
-			InstanceName: pulumi.String("test-grafana"),
-			VpcId:        vpc.ID(),
-			SubnetIds: pulumi.StringArray{
-				subnet.ID(),
-			},
-			GrafanaInitPassword: pulumi.String("1234567890"),
-			EnableInternet:      pulumi.Bool(false),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Monitor.NewGrafanaSsoAccount(ctx, "ssoAccount", &Monitor.GrafanaSsoAccountArgs{
-			InstanceId: foo.ID(),
-			UserId:     pulumi.String("111"),
-			Notes:      pulumi.String("desc12222"),
-			Roles: monitor.GrafanaSsoAccountRoleArray{
-				&monitor.GrafanaSsoAccountRoleArgs{
-					Organization: pulumi.String("Main Org."),
-					Role:         pulumi.String("Admin"),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.Monitor.GrafanaInstance;
 import com.pulumi.tencentcloud.Monitor.GrafanaInstanceArgs;
 import com.pulumi.tencentcloud.Monitor.GrafanaSsoAccount;
 import com.pulumi.tencentcloud.Monitor.GrafanaSsoAccountArgs;
 import com.pulumi.tencentcloud.Monitor.inputs.GrafanaSsoAccountRoleArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -230,17 +264,19 @@ public class App {
     public static void stack(Context ctx) {
         final var config = ctx.config();
         final var availabilityZone = config.get("availabilityZone").orElse("ap-guangzhou-6");
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
             .cidrBlock("10.0.0.0/16")
+            .name("tf_monitor_vpc")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .vpcId(vpc.id())
             .availabilityZone(availabilityZone)
+            .name("tf_monitor_subnet")
             .cidrBlock("10.0.1.0/24")
             .build());
 
-        var foo = new GrafanaInstance("foo", GrafanaInstanceArgs.builder()        
+        var foo = new GrafanaInstance("foo", GrafanaInstanceArgs.builder()
             .instanceName("test-grafana")
             .vpcId(vpc.id())
             .subnetIds(subnet.id())
@@ -249,7 +285,7 @@ public class App {
             .tags(Map.of("createdBy", "test"))
             .build());
 
-        var ssoAccount = new GrafanaSsoAccount("ssoAccount", GrafanaSsoAccountArgs.builder()        
+        var ssoAccount = new GrafanaSsoAccount("ssoAccount", GrafanaSsoAccountArgs.builder()
             .instanceId(foo.id())
             .userId("111")
             .notes("desc12222")
@@ -262,6 +298,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 configuration:
   availabilityZone:
@@ -272,11 +313,13 @@ resources:
     type: tencentcloud:Vpc:Instance
     properties:
       cidrBlock: 10.0.0.0/16
+      name: tf_monitor_vpc
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       vpcId: ${vpc.id}
       availabilityZone: ${availabilityZone}
+      name: tf_monitor_subnet
       cidrBlock: 10.0.1.0/24
   foo:
     type: tencentcloud:Monitor:GrafanaInstance
@@ -299,68 +342,141 @@ resources:
         - organization: Main Org.
           role: Admin
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_monitor_vpc"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = var.availabilityZone
+  name              = "tf_monitor_subnet"
+  cidr_block        = "10.0.1.0/24"
+}
+resource "tencentcloud_monitor_grafanainstance" "foo" {
+  instance_name         = "test-grafana"
+  vpc_id                = tencentcloud_vpc_instance.vpc.id
+  subnet_ids            = [tencentcloud_subnet_instance.subnet.id]
+  grafana_init_password = "1234567890"
+  enable_internet       = false
+  tags = {
+    "createdBy" = "test"
+  }
+}
+resource "tencentcloud_monitor_grafanassoaccount" "ssoAccount" {
+  instance_id = tencentcloud_monitor_grafanainstance.foo.id
+  user_id     = "111"
+  notes       = "desc12222"
+  roles {
+    organization = "Main Org."
+    role         = "Admin"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-6"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateSSOAccount](https://www.tencentcloud.com/document/api/248/49767)
+* Read: [DescribeSSOAccount](https://www.tencentcloud.com/document/api/248/49754)
+* Update: [UpdateSSOAccount](https://www.tencentcloud.com/document/api/248/49740)
+* Delete: [DeleteSSOAccount](https://www.tencentcloud.com/document/api/248/49763)
 
 
 ## Create GrafanaSsoAccount Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">GrafanaSsoAccount</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GrafanaSsoAccountArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">GrafanaSsoAccount</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GrafanaSsoAccountArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">GrafanaSsoAccount</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                      <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GrafanaSsoAccountArgs</a></span><span class="p">,</span>
+                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">GrafanaSsoAccount</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                       <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                      <span class="nx">user_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                       <span class="nx">notes</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                      <span class="nx">roles</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.GrafanaSsoAccountRoleArgs]]</span> = None<span class="p">,</span>
-                      <span class="nx">user_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">GrafanaSsoAccount</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                      <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">GrafanaSsoAccountArgs</a></span><span class="p">,</span>
-                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                      <span class="nx">roles</span><span class="p">:</span> <span class="nx">Optional[Sequence[GrafanaSsoAccountRoleArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewGrafanaSsoAccount</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">GrafanaSsoAccountArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">GrafanaSsoAccount</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewGrafanaSsoAccount</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">GrafanaSsoAccountArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">GrafanaSsoAccount</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">GrafanaSsoAccount</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GrafanaSsoAccountArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">GrafanaSsoAccount</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GrafanaSsoAccountArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">GrafanaSsoAccount</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GrafanaSsoAccountArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">GrafanaSsoAccount</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">GrafanaSsoAccountArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Monitor:GrafanaSsoAccount</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Monitor:GrafanaSsoAccount</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_monitor_grafana_sso_account&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -381,7 +497,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -498,11 +614,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## GrafanaSsoAccount Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -518,8 +642,7 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>grafana instance id.</p>
-</dd><dt class="property-required"
+    <dd>grafana instance id.</dd><dt class="property-required"
             title="Required">
         <span id="userid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Id</a>
@@ -527,8 +650,7 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sub account uin of specific user.</p>
-</dd><dt class="property-optional"
+    <dd>sub account uin of specific user.</dd><dt class="property-optional"
             title="Optional">
         <span id="notes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notes_csharp" style="color: inherit; text-decoration: inherit;">Notes</a>
@@ -536,17 +658,15 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account related description.</p>
-</dd><dt class="property-optional"
+    <dd>account related description.</dd><dt class="property-optional"
             title="Optional">
         <span id="roles_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roles_csharp" style="color: inherit; text-decoration: inherit;">Roles</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grafanassoaccountrole">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Grafana<wbr>Sso<wbr>Account<wbr>Role<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#grafanassoaccountrole">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Grafana<wbr>Sso<wbr>Account<wbr>Role&gt;</a></span>
     </dt>
-    <dd><p>grafana role.</p>
-</dd></dl>
+    <dd>grafana role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -560,8 +680,7 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>grafana instance id.</p>
-</dd><dt class="property-required"
+    <dd>grafana instance id.</dd><dt class="property-required"
             title="Required">
         <span id="userid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_go" style="color: inherit; text-decoration: inherit;">User<wbr>Id</a>
@@ -569,8 +688,7 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sub account uin of specific user.</p>
-</dd><dt class="property-optional"
+    <dd>sub account uin of specific user.</dd><dt class="property-optional"
             title="Optional">
         <span id="notes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notes_go" style="color: inherit; text-decoration: inherit;">Notes</a>
@@ -578,8 +696,7 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account related description.</p>
-</dd><dt class="property-optional"
+    <dd>account related description.</dd><dt class="property-optional"
             title="Optional">
         <span id="roles_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roles_go" style="color: inherit; text-decoration: inherit;">Roles</a>
@@ -587,8 +704,45 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#grafanassoaccountrole">[]Grafana<wbr>Sso<wbr>Account<wbr>Role<wbr>Args</a></span>
     </dt>
-    <dd><p>grafana role.</p>
-</dd></dl>
+    <dd>grafana role.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>grafana instance id.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>sub account uin of specific user.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="notes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notes_hcl" style="color: inherit; text-decoration: inherit;">notes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>account related description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="roles_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roles_hcl" style="color: inherit; text-decoration: inherit;">roles</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#grafanassoaccountrole">list(object)</a></span>
+    </dt>
+    <dd>grafana role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -602,8 +756,7 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>grafana instance id.</p>
-</dd><dt class="property-required"
+    <dd>grafana instance id.</dd><dt class="property-required"
             title="Required">
         <span id="userid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_java" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -611,8 +764,7 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>sub account uin of specific user.</p>
-</dd><dt class="property-optional"
+    <dd>sub account uin of specific user.</dd><dt class="property-optional"
             title="Optional">
         <span id="notes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notes_java" style="color: inherit; text-decoration: inherit;">notes</a>
@@ -620,17 +772,15 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>account related description.</p>
-</dd><dt class="property-optional"
+    <dd>account related description.</dd><dt class="property-optional"
             title="Optional">
         <span id="roles_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roles_java" style="color: inherit; text-decoration: inherit;">roles</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grafanassoaccountrole">List&lt;Grafana<wbr>Sso<wbr>Account<wbr>Role<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#grafanassoaccountrole">List&lt;Grafana<wbr>Sso<wbr>Account<wbr>Role&gt;</a></span>
     </dt>
-    <dd><p>grafana role.</p>
-</dd></dl>
+    <dd>grafana role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -644,8 +794,7 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>grafana instance id.</p>
-</dd><dt class="property-required"
+    <dd>grafana instance id.</dd><dt class="property-required"
             title="Required">
         <span id="userid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -653,8 +802,7 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sub account uin of specific user.</p>
-</dd><dt class="property-optional"
+    <dd>sub account uin of specific user.</dd><dt class="property-optional"
             title="Optional">
         <span id="notes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notes_nodejs" style="color: inherit; text-decoration: inherit;">notes</a>
@@ -662,17 +810,15 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account related description.</p>
-</dd><dt class="property-optional"
+    <dd>account related description.</dd><dt class="property-optional"
             title="Optional">
         <span id="roles_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roles_nodejs" style="color: inherit; text-decoration: inherit;">roles</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grafanassoaccountrole">Grafana<wbr>Sso<wbr>Account<wbr>Role<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#grafanassoaccountrole">Grafana<wbr>Sso<wbr>Account<wbr>Role[]</a></span>
     </dt>
-    <dd><p>grafana role.</p>
-</dd></dl>
+    <dd>grafana role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -686,8 +832,7 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>grafana instance id.</p>
-</dd><dt class="property-required"
+    <dd>grafana instance id.</dd><dt class="property-required"
             title="Required">
         <span id="user_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_python" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
@@ -695,8 +840,7 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>sub account uin of specific user.</p>
-</dd><dt class="property-optional"
+    <dd>sub account uin of specific user.</dd><dt class="property-optional"
             title="Optional">
         <span id="notes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notes_python" style="color: inherit; text-decoration: inherit;">notes</a>
@@ -704,17 +848,15 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>account related description.</p>
-</dd><dt class="property-optional"
+    <dd>account related description.</dd><dt class="property-optional"
             title="Optional">
         <span id="roles_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roles_python" style="color: inherit; text-decoration: inherit;">roles</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grafanassoaccountrole">Grafana<wbr>Sso<wbr>Account<wbr>Role<wbr>Args]</a></span>
+        <span class="property-type"><a href="#grafanassoaccountrole">Sequence[Grafana<wbr>Sso<wbr>Account<wbr>Role<wbr>Args]</a></span>
     </dt>
-    <dd><p>grafana role.</p>
-</dd></dl>
+    <dd>grafana role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -728,8 +870,7 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>grafana instance id.</p>
-</dd><dt class="property-required"
+    <dd>grafana instance id.</dd><dt class="property-required"
             title="Required">
         <span id="userid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -737,8 +878,7 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>sub account uin of specific user.</p>
-</dd><dt class="property-optional"
+    <dd>sub account uin of specific user.</dd><dt class="property-optional"
             title="Optional">
         <span id="notes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notes_yaml" style="color: inherit; text-decoration: inherit;">notes</a>
@@ -746,8 +886,7 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>account related description.</p>
-</dd><dt class="property-optional"
+    <dd>account related description.</dd><dt class="property-optional"
             title="Optional">
         <span id="roles_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roles_yaml" style="color: inherit; text-decoration: inherit;">roles</a>
@@ -755,8 +894,7 @@ The GrafanaSsoAccount resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#grafanassoaccountrole">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>grafana role.</p>
-</dd></dl>
+    <dd>grafana role.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -777,8 +915,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -792,8 +929,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -807,8 +957,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -822,8 +971,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -837,8 +985,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -852,8 +999,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -863,123 +1009,162 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing GrafanaSsoAccount resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">GrafanaSsoAccountState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">GrafanaSsoAccount</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">GrafanaSsoAccountState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">GrafanaSsoAccount</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">notes</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">roles</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.GrafanaSsoAccountRoleArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">roles</span><span class="p">:</span> <span class="nx">Optional[Sequence[GrafanaSsoAccountRoleArgs]]</span> = None<span class="p">,</span>
         <span class="nx">user_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> GrafanaSsoAccount</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetGrafanaSsoAccount<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">GrafanaSsoAccountState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">GrafanaSsoAccount</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetGrafanaSsoAccount<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">GrafanaSsoAccountState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">GrafanaSsoAccount</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">GrafanaSsoAccount</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GrafanaSsoAccountState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">GrafanaSsoAccount</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GrafanaSsoAccountState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">GrafanaSsoAccount</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GrafanaSsoAccountState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">GrafanaSsoAccount</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">GrafanaSsoAccountState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingGrafanaSsoAccount</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Monitor:GrafanaSsoAccount</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_monitor_grafana_sso_account</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GrafanaSsoAccountState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GrafanaSsoAccountState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -987,28 +1172,31 @@ Get an existing GrafanaSsoAccount resource's state with the given name, ID, and 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GrafanaSsoAccountState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1016,28 +1204,31 @@ Get an existing GrafanaSsoAccount resource's state with the given name, ID, and 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">GrafanaSsoAccountState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1057,8 +1248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>grafana instance id.</p>
-</dd><dt class="property-optional"
+    <dd>grafana instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notes_csharp" style="color: inherit; text-decoration: inherit;">Notes</a>
@@ -1066,17 +1256,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account related description.</p>
-</dd><dt class="property-optional"
+    <dd>account related description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_roles_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_roles_csharp" style="color: inherit; text-decoration: inherit;">Roles</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grafanassoaccountrole">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Grafana<wbr>Sso<wbr>Account<wbr>Role<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#grafanassoaccountrole">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Grafana<wbr>Sso<wbr>Account<wbr>Role&gt;</a></span>
     </dt>
-    <dd><p>grafana role.</p>
-</dd><dt class="property-optional"
+    <dd>grafana role.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userid_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Id</a>
@@ -1084,8 +1272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sub account uin of specific user.</p>
-</dd></dl>
+    <dd>sub account uin of specific user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1099,8 +1286,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>grafana instance id.</p>
-</dd><dt class="property-optional"
+    <dd>grafana instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notes_go" style="color: inherit; text-decoration: inherit;">Notes</a>
@@ -1108,8 +1294,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account related description.</p>
-</dd><dt class="property-optional"
+    <dd>account related description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_roles_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_roles_go" style="color: inherit; text-decoration: inherit;">Roles</a>
@@ -1117,8 +1302,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#grafanassoaccountrole">[]Grafana<wbr>Sso<wbr>Account<wbr>Role<wbr>Args</a></span>
     </dt>
-    <dd><p>grafana role.</p>
-</dd><dt class="property-optional"
+    <dd>grafana role.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userid_go" style="color: inherit; text-decoration: inherit;">User<wbr>Id</a>
@@ -1126,8 +1310,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sub account uin of specific user.</p>
-</dd></dl>
+    <dd>sub account uin of specific user.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>grafana instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_notes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notes_hcl" style="color: inherit; text-decoration: inherit;">notes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>account related description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_roles_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_roles_hcl" style="color: inherit; text-decoration: inherit;">roles</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#grafanassoaccountrole">list(object)</a></span>
+    </dt>
+    <dd>grafana role.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_user_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_id_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>sub account uin of specific user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1141,8 +1362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>grafana instance id.</p>
-</dd><dt class="property-optional"
+    <dd>grafana instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notes_java" style="color: inherit; text-decoration: inherit;">notes</a>
@@ -1150,17 +1370,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>account related description.</p>
-</dd><dt class="property-optional"
+    <dd>account related description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_roles_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_roles_java" style="color: inherit; text-decoration: inherit;">roles</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grafanassoaccountrole">List&lt;Grafana<wbr>Sso<wbr>Account<wbr>Role<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#grafanassoaccountrole">List&lt;Grafana<wbr>Sso<wbr>Account<wbr>Role&gt;</a></span>
     </dt>
-    <dd><p>grafana role.</p>
-</dd><dt class="property-optional"
+    <dd>grafana role.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userid_java" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -1168,8 +1386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>sub account uin of specific user.</p>
-</dd></dl>
+    <dd>sub account uin of specific user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1183,8 +1400,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>grafana instance id.</p>
-</dd><dt class="property-optional"
+    <dd>grafana instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notes_nodejs" style="color: inherit; text-decoration: inherit;">notes</a>
@@ -1192,17 +1408,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>account related description.</p>
-</dd><dt class="property-optional"
+    <dd>account related description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_roles_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_roles_nodejs" style="color: inherit; text-decoration: inherit;">roles</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grafanassoaccountrole">Grafana<wbr>Sso<wbr>Account<wbr>Role<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#grafanassoaccountrole">Grafana<wbr>Sso<wbr>Account<wbr>Role[]</a></span>
     </dt>
-    <dd><p>grafana role.</p>
-</dd><dt class="property-optional"
+    <dd>grafana role.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userid_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -1210,8 +1424,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>sub account uin of specific user.</p>
-</dd></dl>
+    <dd>sub account uin of specific user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1225,8 +1438,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>grafana instance id.</p>
-</dd><dt class="property-optional"
+    <dd>grafana instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notes_python" style="color: inherit; text-decoration: inherit;">notes</a>
@@ -1234,17 +1446,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>account related description.</p>
-</dd><dt class="property-optional"
+    <dd>account related description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_roles_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_roles_python" style="color: inherit; text-decoration: inherit;">roles</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#grafanassoaccountrole">Grafana<wbr>Sso<wbr>Account<wbr>Role<wbr>Args]</a></span>
+        <span class="property-type"><a href="#grafanassoaccountrole">Sequence[Grafana<wbr>Sso<wbr>Account<wbr>Role<wbr>Args]</a></span>
     </dt>
-    <dd><p>grafana role.</p>
-</dd><dt class="property-optional"
+    <dd>grafana role.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_user_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_id_python" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
@@ -1252,8 +1462,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>sub account uin of specific user.</p>
-</dd></dl>
+    <dd>sub account uin of specific user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1267,8 +1476,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>grafana instance id.</p>
-</dd><dt class="property-optional"
+    <dd>grafana instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notes_yaml" style="color: inherit; text-decoration: inherit;">notes</a>
@@ -1276,8 +1484,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>account related description.</p>
-</dd><dt class="property-optional"
+    <dd>account related description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_roles_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_roles_yaml" style="color: inherit; text-decoration: inherit;">roles</a>
@@ -1285,8 +1492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#grafanassoaccountrole">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>grafana role.</p>
-</dd><dt class="property-optional"
+    <dd>grafana role.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userid_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -1294,8 +1500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>sub account uin of specific user.</p>
-</dd></dl>
+    <dd>sub account uin of specific user.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1310,7 +1515,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="grafanassoaccountrole">Grafana<wbr>Sso<wbr>Account<wbr>Role</h4>
+<h4 id="grafanassoaccountrole">
+Grafana<wbr>Sso<wbr>Account<wbr>Role<pulumi-choosable type="language" values="python,go" class="inline">, Grafana<wbr>Sso<wbr>Account<wbr>Role<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1322,8 +1529,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Grafana organization id string.</p>
-</dd><dt class="property-required"
+    <dd>Grafana organization id string.</dd><dt class="property-required"
             title="Required">
         <span id="role_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_csharp" style="color: inherit; text-decoration: inherit;">Role</a>
@@ -1331,8 +1537,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Grafana role, one of {Admin,Editor,Viewer}.</p>
-</dd></dl>
+    <dd>Grafana role, one of {Admin,Editor,Viewer}.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1346,8 +1551,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Grafana organization id string.</p>
-</dd><dt class="property-required"
+    <dd>Grafana organization id string.</dd><dt class="property-required"
             title="Required">
         <span id="role_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_go" style="color: inherit; text-decoration: inherit;">Role</a>
@@ -1355,8 +1559,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Grafana role, one of {Admin,Editor,Viewer}.</p>
-</dd></dl>
+    <dd>Grafana role, one of {Admin,Editor,Viewer}.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="organization_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#organization_hcl" style="color: inherit; text-decoration: inherit;">organization</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Grafana organization id string.</dd><dt class="property-required"
+            title="Required">
+        <span id="role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_hcl" style="color: inherit; text-decoration: inherit;">role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Grafana role, one of {Admin,Editor,Viewer}.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1370,8 +1595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Grafana organization id string.</p>
-</dd><dt class="property-required"
+    <dd>Grafana organization id string.</dd><dt class="property-required"
             title="Required">
         <span id="role_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_java" style="color: inherit; text-decoration: inherit;">role</a>
@@ -1379,8 +1603,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Grafana role, one of {Admin,Editor,Viewer}.</p>
-</dd></dl>
+    <dd>Grafana role, one of {Admin,Editor,Viewer}.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1394,8 +1617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Grafana organization id string.</p>
-</dd><dt class="property-required"
+    <dd>Grafana organization id string.</dd><dt class="property-required"
             title="Required">
         <span id="role_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_nodejs" style="color: inherit; text-decoration: inherit;">role</a>
@@ -1403,8 +1625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Grafana role, one of {Admin,Editor,Viewer}.</p>
-</dd></dl>
+    <dd>Grafana role, one of {Admin,Editor,Viewer}.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1418,8 +1639,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Grafana organization id string.</p>
-</dd><dt class="property-required"
+    <dd>Grafana organization id string.</dd><dt class="property-required"
             title="Required">
         <span id="role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_python" style="color: inherit; text-decoration: inherit;">role</a>
@@ -1427,8 +1647,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Grafana role, one of {Admin,Editor,Viewer}.</p>
-</dd></dl>
+    <dd>Grafana role, one of {Admin,Editor,Viewer}.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1442,8 +1661,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Grafana organization id string.</p>
-</dd><dt class="property-required"
+    <dd>Grafana organization id string.</dd><dt class="property-required"
             title="Required">
         <span id="role_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#role_yaml" style="color: inherit; text-decoration: inherit;">role</a>
@@ -1451,8 +1669,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Grafana role, one of {Admin,Editor,Viewer}.</p>
-</dd></dl>
+    <dd>Grafana role, one of {Admin,Editor,Viewer}.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1461,11 +1678,13 @@ The following state arguments are supported:
 
 
 monitor grafana ssoAccount can be imported using the instance_id#user_id, e.g.
-
 ```sh
 $ pulumi import tencentcloud:Monitor/grafanaSsoAccount:GrafanaSsoAccount ssoAccount grafana-50nj6v00#111
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1477,7 +1696,6 @@ $ pulumi import tencentcloud:Monitor/grafanaSsoAccount:GrafanaSsoAccount ssoAcco
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

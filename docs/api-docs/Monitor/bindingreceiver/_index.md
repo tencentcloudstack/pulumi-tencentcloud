@@ -2,9 +2,11 @@
 ---
 title: "BindingReceiver"
 title_tag: "tencentcloud.Monitor.BindingReceiver"
-meta_desc: "Documentation for the tencentcloud.Monitor.BindingReceiver resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource for bind receivers to a policy group resource."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,65 +16,438 @@ no_edit_this_page: true
 
 Provides a resource for bind receivers to a policy group resource.
 
+## Example Usage
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const groups = tencentcloud.cam.getGroups({});
+const group = new tencentcloud.index.MonitorPolicyGroup("group", {
+    groupName: "nice_group",
+    policyViewName: "cvm_device",
+    remark: "this is a test policy group",
+    conditions: [{
+        metricId: 33,
+        alarmNotifyType: 1,
+        alarmNotifyPeriod: 600,
+        calcType: 1,
+        calcValue: 3,
+        calcPeriod: 300,
+        continuePeriod: 2,
+    }],
+});
+const receiver = new tencentcloud.monitor.BindingReceiver("receiver", {
+    groupId: Number(group.id),
+    receivers: {
+        startTime: 0,
+        endTime: 86399,
+        notifyWays: ["SMS"],
+        receiverType: "group",
+        receiverGroupLists: [output(groups.then(groups => groups.groupLists?.[0]?.groupId)).apply(x =>Number(x))],
+        receiveLanguage: "en-US",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+groups = tencentcloud.cam.get_groups()
+group = tencentcloud.MonitorPolicyGroup("group",
+    group_name=nice_group,
+    policy_view_name=cvm_device,
+    remark=this is a test policy group,
+    conditions=[{
+        metricId: 33,
+        alarmNotifyType: 1,
+        alarmNotifyPeriod: 600,
+        calcType: 1,
+        calcValue: 3,
+        calcPeriod: 300,
+        continuePeriod: 2,
+    }])
+receiver = tencentcloud.monitor.BindingReceiver("receiver",
+    group_id=int(group["id"]),
+    receivers={
+        "start_time": 0,
+        "end_time": 86399,
+        "notify_ways": ["SMS"],
+        "receiver_type": "group",
+        "receiver_group_lists": [output(groups.group_lists[0].group_id).apply(lambda x: int(x))],
+        "receive_language": "en-US",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cam"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		groups, err := cam.GetGroups(ctx, &cam.GetGroupsArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		group, err := tencentcloud.NewMonitorPolicyGroup(ctx, "group", &tencentcloud.MonitorPolicyGroupArgs{
+			GroupName:      "nice_group",
+			PolicyViewName: "cvm_device",
+			Remark:         "this is a test policy group",
+			Conditions: []map[string]int{
+				{
+					"metricId":          33,
+					"alarmNotifyType":   1,
+					"alarmNotifyPeriod": 600,
+					"calcType":          1,
+					"calcValue":         3,
+					"calcPeriod":        300,
+					"continuePeriod":    2,
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = monitor.NewBindingReceiver(ctx, "receiver", &monitor.BindingReceiverArgs{
+			GroupId: group.Id,
+			Receivers: &monitor.BindingReceiverReceiversArgs{
+				StartTime: pulumi.Int(0),
+				EndTime:   pulumi.Int(86399),
+				NotifyWays: pulumi.StringArray{
+					pulumi.String("SMS"),
+				},
+				ReceiverType: pulumi.String("group"),
+				ReceiverGroupLists: pulumi.IntArray{
+					pulumi.String(groups.GroupLists[0].GroupId),
+				},
+				ReceiveLanguage: pulumi.String("en-US"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var groups = Tencentcloud.Cam.GetGroups.Invoke();
+
+    var @group = new Tencentcloud.MonitorPolicyGroup("group", new()
+    {
+        GroupName = "nice_group",
+        PolicyViewName = "cvm_device",
+        Remark = "this is a test policy group",
+        Conditions = new[]
+        {
+            
+            {
+                { "metricId", 33 },
+                { "alarmNotifyType", 1 },
+                { "alarmNotifyPeriod", 600 },
+                { "calcType", 1 },
+                { "calcValue", 3 },
+                { "calcPeriod", 300 },
+                { "continuePeriod", 2 },
+            },
+        },
+    });
+
+    var receiver = new Tencentcloud.Monitor.BindingReceiver("receiver", new()
+    {
+        GroupId = @group.Id,
+        Receivers = new Tencentcloud.Monitor.Inputs.BindingReceiverReceiversArgs
+        {
+            StartTime = 0,
+            EndTime = 86399,
+            NotifyWays = new[]
+            {
+                "SMS",
+            },
+            ReceiverType = "group",
+            ReceiverGroupLists = new[]
+            {
+                groups.Apply(getGroupsResult => getGroupsResult.GroupLists[0]?.GroupId),
+            },
+            ReceiveLanguage = "en-US",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Cam.CamFunctions;
+import com.pulumi.tencentcloud.Cam.inputs.GetGroupsArgs;
+import com.pulumi.tencentcloud.MonitorPolicyGroup;
+import com.pulumi.tencentcloud.MonitorPolicyGroupArgs;
+import com.pulumi.tencentcloud.Monitor.BindingReceiver;
+import com.pulumi.tencentcloud.Monitor.BindingReceiverArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.BindingReceiverReceiversArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var groups = CamFunctions.getGroups(GetGroupsArgs.builder()
+            .build());
+
+        var group = new MonitorPolicyGroup("group", MonitorPolicyGroupArgs.builder()
+            .groupName("nice_group")
+            .policyViewName("cvm_device")
+            .remark("this is a test policy group")
+            .conditions(Arrays.asList(Map.ofEntries(
+                Map.entry("metricId", 33),
+                Map.entry("alarmNotifyType", 1),
+                Map.entry("alarmNotifyPeriod", 600),
+                Map.entry("calcType", 1),
+                Map.entry("calcValue", 3),
+                Map.entry("calcPeriod", 300),
+                Map.entry("continuePeriod", 2)
+            )))
+            .build());
+
+        var receiver = new BindingReceiver("receiver", BindingReceiverArgs.builder()
+            .groupId(group.id())
+            .receivers(BindingReceiverReceiversArgs.builder()
+                .startTime(0)
+                .endTime(86399)
+                .notifyWays("SMS")
+                .receiverType("group")
+                .receiverGroupLists(groups.groupLists()[0].groupId())
+                .receiveLanguage("en-US")
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  group:
+    type: tencentcloud:MonitorPolicyGroup
+    properties:
+      groupName: nice_group
+      policyViewName: cvm_device
+      remark: this is a test policy group
+      conditions:
+        - metricId: 33
+          alarmNotifyType: 1
+          alarmNotifyPeriod: 600
+          calcType: 1
+          calcValue: 3
+          calcPeriod: 300
+          continuePeriod: 2
+  receiver:
+    type: tencentcloud:Monitor:BindingReceiver
+    properties:
+      groupId: ${group.id}
+      receivers:
+        startTime: 0
+        endTime: 86399
+        notifyWays:
+          - SMS
+        receiverType: group
+        receiverGroupLists:
+          - ${groups.groupLists[0].groupId}
+        receiveLanguage: en-US
+variables:
+  groups:
+    fn::invoke:
+      function: tencentcloud:Cam:getGroups
+      arguments: {}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cam_getgroups" "groups" {
+}
+
+resource "tencentcloud_monitorpolicygroup" "group" {
+  group_name       = "nice_group"
+  policy_view_name = "cvm_device"
+  remark           = "this is a test policy group"
+  conditions = [{
+    "metricId"          = 33
+    "alarmNotifyType"   = 1
+    "alarmNotifyPeriod" = 600
+    "calcType"          = 1
+    "calcValue"         = 3
+    "calcPeriod"        = 300
+    "continuePeriod"    = 2
+  }]
+}
+resource "tencentcloud_monitor_bindingreceiver" "receiver" {
+  group_id = tencentcloud_monitorpolicygroup.group.id
+  receivers = {
+    start_time           = 0
+    end_time             = 86399
+    notify_ways          = ["SMS"]
+    receiver_type        = "group"
+    receiver_group_lists = [data.tencentcloud_cam_getgroups.groups.group_lists[0].group_id]
+    receive_language     = "en-US"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+  - [ModifyAlarmReceivers](https://www.tencentcloud.com/document/api/248/35975)
+* Read: [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+* Update:
+  - [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+  - [ModifyAlarmReceivers](https://www.tencentcloud.com/document/api/248/35975)
+* Delete:
+  - [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+  - [ModifyAlarmReceivers](https://www.tencentcloud.com/document/api/248/35975)
 
 
 
 ## Create BindingReceiver Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">BindingReceiver</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BindingReceiverArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">BindingReceiver</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BindingReceiverArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">BindingReceiver</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BindingReceiverArgs</a></span><span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">BindingReceiver</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                     <span class="nx">group_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                    <span class="nx">receivers</span><span class="p">:</span> <span class="nx">Optional[_monitor.BindingReceiverReceiversArgs]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">BindingReceiver</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BindingReceiverArgs</a></span><span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                    <span class="nx">receivers</span><span class="p">:</span> <span class="nx">Optional[BindingReceiverReceiversArgs]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewBindingReceiver</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">BindingReceiverArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BindingReceiver</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewBindingReceiver</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">BindingReceiverArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BindingReceiver</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">BindingReceiver</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BindingReceiverArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">BindingReceiver</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BindingReceiverArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">BindingReceiver</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BindingReceiverArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">BindingReceiver</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BindingReceiverArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Monitor:BindingReceiver</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Monitor:BindingReceiver</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_monitor_binding_receiver&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -93,7 +468,7 @@ Provides a resource for bind receivers to a policy group resource.
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -210,11 +585,19 @@ Provides a resource for bind receivers to a policy group resource.
 </pulumi-choosable>
 </div>
 
+
+
 ## BindingReceiver Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The BindingReceiver resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -230,17 +613,15 @@ The BindingReceiver resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Policy group ID for binding receivers.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for binding receivers.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_csharp" style="color: inherit; text-decoration: inherit;">Receivers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bindingreceiverreceivers">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Binding<wbr>Receiver<wbr>Receivers<wbr>Args</a></span>
+        <span class="property-type"><a href="#bindingreceiverreceivers">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Binding<wbr>Receiver<wbr>Receivers</a></span>
     </dt>
-    <dd><p>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -254,8 +635,7 @@ The BindingReceiver resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Policy group ID for binding receivers.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for binding receivers.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_go" style="color: inherit; text-decoration: inherit;">Receivers</a>
@@ -263,8 +643,29 @@ The BindingReceiver resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bindingreceiverreceivers">Binding<wbr>Receiver<wbr>Receivers<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Policy group ID for binding receivers.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="receivers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_hcl" style="color: inherit; text-decoration: inherit;">receivers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bindingreceiverreceivers">object</a></span>
+    </dt>
+    <dd>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,17 +679,15 @@ The BindingReceiver resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Policy group ID for binding receivers.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for binding receivers.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_java" style="color: inherit; text-decoration: inherit;">receivers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bindingreceiverreceivers">Binding<wbr>Receiver<wbr>Receivers<wbr>Args</a></span>
+        <span class="property-type"><a href="#bindingreceiverreceivers">Binding<wbr>Receiver<wbr>Receivers</a></span>
     </dt>
-    <dd><p>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -302,17 +701,15 @@ The BindingReceiver resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Policy group ID for binding receivers.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for binding receivers.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_nodejs" style="color: inherit; text-decoration: inherit;">receivers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bindingreceiverreceivers">Binding<wbr>Receiver<wbr>Receivers<wbr>Args</a></span>
+        <span class="property-type"><a href="#bindingreceiverreceivers">Binding<wbr>Receiver<wbr>Receivers</a></span>
     </dt>
-    <dd><p>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -326,8 +723,7 @@ The BindingReceiver resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Policy group ID for binding receivers.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for binding receivers.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_python" style="color: inherit; text-decoration: inherit;">receivers</a>
@@ -335,8 +731,7 @@ The BindingReceiver resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bindingreceiverreceivers">Binding<wbr>Receiver<wbr>Receivers<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -350,8 +745,7 @@ The BindingReceiver resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Policy group ID for binding receivers.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for binding receivers.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivers_yaml" style="color: inherit; text-decoration: inherit;">receivers</a>
@@ -359,8 +753,7 @@ The BindingReceiver resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bindingreceiverreceivers">Property Map</a></span>
     </dt>
-    <dd><p>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -381,8 +774,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -396,8 +788,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -411,8 +816,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -426,8 +830,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -441,8 +844,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -456,8 +858,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -467,121 +868,160 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing BindingReceiver resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">BindingReceiverState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">BindingReceiver</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">BindingReceiverState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">BindingReceiver</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">group_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">receivers</span><span class="p">:</span> <span class="nx">Optional[_monitor.BindingReceiverReceiversArgs]</span> = None<span class="p">) -&gt;</span> BindingReceiver</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">receivers</span><span class="p">:</span> <span class="nx">Optional[BindingReceiverReceiversArgs]</span> = None<span class="p">) -&gt;</span> BindingReceiver</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetBindingReceiver<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">BindingReceiverState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BindingReceiver</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetBindingReceiver<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">BindingReceiverState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BindingReceiver</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">BindingReceiver</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BindingReceiverState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">BindingReceiver</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BindingReceiverState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">BindingReceiver</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BindingReceiverState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">BindingReceiver</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BindingReceiverState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingBindingReceiver</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Monitor:BindingReceiver</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_monitor_binding_receiver</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BindingReceiverState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BindingReceiverState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -589,28 +1029,31 @@ Get an existing BindingReceiver resource's state with the given name, ID, and op
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BindingReceiverState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -618,28 +1061,31 @@ Get an existing BindingReceiver resource's state with the given name, ID, and op
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BindingReceiverState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -659,17 +1105,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Policy group ID for binding receivers.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for binding receivers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_receivers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receivers_csharp" style="color: inherit; text-decoration: inherit;">Receivers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bindingreceiverreceivers">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Binding<wbr>Receiver<wbr>Receivers<wbr>Args</a></span>
+        <span class="property-type"><a href="#bindingreceiverreceivers">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Binding<wbr>Receiver<wbr>Receivers</a></span>
     </dt>
-    <dd><p>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -683,8 +1127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Policy group ID for binding receivers.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for binding receivers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_receivers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receivers_go" style="color: inherit; text-decoration: inherit;">Receivers</a>
@@ -692,8 +1135,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bindingreceiverreceivers">Binding<wbr>Receiver<wbr>Receivers<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Policy group ID for binding receivers.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_receivers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receivers_hcl" style="color: inherit; text-decoration: inherit;">receivers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#bindingreceiverreceivers">object</a></span>
+    </dt>
+    <dd>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -707,17 +1171,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Policy group ID for binding receivers.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for binding receivers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_receivers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receivers_java" style="color: inherit; text-decoration: inherit;">receivers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bindingreceiverreceivers">Binding<wbr>Receiver<wbr>Receivers<wbr>Args</a></span>
+        <span class="property-type"><a href="#bindingreceiverreceivers">Binding<wbr>Receiver<wbr>Receivers</a></span>
     </dt>
-    <dd><p>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -731,17 +1193,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Policy group ID for binding receivers.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for binding receivers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_receivers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receivers_nodejs" style="color: inherit; text-decoration: inherit;">receivers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#bindingreceiverreceivers">Binding<wbr>Receiver<wbr>Receivers<wbr>Args</a></span>
+        <span class="property-type"><a href="#bindingreceiverreceivers">Binding<wbr>Receiver<wbr>Receivers</a></span>
     </dt>
-    <dd><p>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -755,8 +1215,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Policy group ID for binding receivers.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for binding receivers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_receivers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receivers_python" style="color: inherit; text-decoration: inherit;">receivers</a>
@@ -764,8 +1223,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bindingreceiverreceivers">Binding<wbr>Receiver<wbr>Receivers<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -779,8 +1237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Policy group ID for binding receivers.</p>
-</dd><dt class="property-optional"
+    <dd>Policy group ID for binding receivers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_receivers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_receivers_yaml" style="color: inherit; text-decoration: inherit;">receivers</a>
@@ -788,8 +1245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#bindingreceiverreceivers">Property Map</a></span>
     </dt>
-    <dd><p>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -804,7 +1260,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="bindingreceiverreceivers">Binding<wbr>Receiver<wbr>Receivers</h4>
+<h4 id="bindingreceiverreceivers">
+Binding<wbr>Receiver<wbr>Receivers<pulumi-choosable type="language" values="python,go" class="inline">, Binding<wbr>Receiver<wbr>Receivers<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -816,8 +1274,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="receivertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivertype_csharp" style="color: inherit; text-decoration: inherit;">Receiver<wbr>Type</a>
@@ -825,8 +1282,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Receive type. Optional <code>group</code>,<code>user</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Receive type. Optional <code>group</code>,<code>user</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -834,8 +1290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End of alarm period. Meaning with <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End of alarm period. Meaning with <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivelanguage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivelanguage_csharp" style="color: inherit; text-decoration: inherit;">Receive<wbr>Language</a>
@@ -843,8 +1298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alert sending language. Optional <code>en-US</code>,<code>zh-CN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Alert sending language. Optional <code>en-US</code>,<code>zh-CN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivergrouplists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivergrouplists_csharp" style="color: inherit; text-decoration: inherit;">Receiver<wbr>Group<wbr>Lists</a>
@@ -852,8 +1306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Alarm receive group ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm receive group ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="receiveruserlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiveruserlists_csharp" style="color: inherit; text-decoration: inherit;">Receiver<wbr>User<wbr>Lists</a>
@@ -861,8 +1314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Alarm receiver ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm receiver ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -870,8 +1322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</p>
-</dd></dl>
+    <dd>Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -885,8 +1336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="receivertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivertype_go" style="color: inherit; text-decoration: inherit;">Receiver<wbr>Type</a>
@@ -894,8 +1344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Receive type. Optional <code>group</code>,<code>user</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Receive type. Optional <code>group</code>,<code>user</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -903,8 +1352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End of alarm period. Meaning with <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End of alarm period. Meaning with <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivelanguage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivelanguage_go" style="color: inherit; text-decoration: inherit;">Receive<wbr>Language</a>
@@ -912,8 +1360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alert sending language. Optional <code>en-US</code>,<code>zh-CN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Alert sending language. Optional <code>en-US</code>,<code>zh-CN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivergrouplists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivergrouplists_go" style="color: inherit; text-decoration: inherit;">Receiver<wbr>Group<wbr>Lists</a>
@@ -921,8 +1368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Alarm receive group ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm receive group ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="receiveruserlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiveruserlists_go" style="color: inherit; text-decoration: inherit;">Receiver<wbr>User<wbr>Lists</a>
@@ -930,8 +1376,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Alarm receiver ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm receiver ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -939,8 +1384,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</p>
-</dd></dl>
+    <dd>Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="notify_ways_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notify_ways_hcl" style="color: inherit; text-decoration: inherit;">notify_<wbr>ways</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="receiver_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiver_type_hcl" style="color: inherit; text-decoration: inherit;">receiver_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Receive type. Optional <code>group</code>,<code>user</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End of alarm period. Meaning with <code>startTime</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="receive_language_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receive_language_hcl" style="color: inherit; text-decoration: inherit;">receive_<wbr>language</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alert sending language. Optional <code>en-US</code>,<code>zh-CN</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="receiver_group_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiver_group_lists_hcl" style="color: inherit; text-decoration: inherit;">receiver_<wbr>group_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Alarm receive group ID list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="receiver_user_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiver_user_lists_hcl" style="color: inherit; text-decoration: inherit;">receiver_<wbr>user_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Alarm receiver ID list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -954,8 +1460,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="receivertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivertype_java" style="color: inherit; text-decoration: inherit;">receiver<wbr>Type</a>
@@ -963,8 +1468,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Receive type. Optional <code>group</code>,<code>user</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Receive type. Optional <code>group</code>,<code>user</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -972,8 +1476,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>End of alarm period. Meaning with <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End of alarm period. Meaning with <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivelanguage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivelanguage_java" style="color: inherit; text-decoration: inherit;">receive<wbr>Language</a>
@@ -981,8 +1484,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alert sending language. Optional <code>en-US</code>,<code>zh-CN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Alert sending language. Optional <code>en-US</code>,<code>zh-CN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivergrouplists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivergrouplists_java" style="color: inherit; text-decoration: inherit;">receiver<wbr>Group<wbr>Lists</a>
@@ -990,8 +1492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Alarm receive group ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm receive group ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="receiveruserlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiveruserlists_java" style="color: inherit; text-decoration: inherit;">receiver<wbr>User<wbr>Lists</a>
@@ -999,8 +1500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Alarm receiver ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm receiver ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1008,8 +1508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</p>
-</dd></dl>
+    <dd>Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1023,8 +1522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="receivertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivertype_nodejs" style="color: inherit; text-decoration: inherit;">receiver<wbr>Type</a>
@@ -1032,8 +1530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Receive type. Optional <code>group</code>,<code>user</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Receive type. Optional <code>group</code>,<code>user</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1041,8 +1538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End of alarm period. Meaning with <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End of alarm period. Meaning with <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivelanguage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivelanguage_nodejs" style="color: inherit; text-decoration: inherit;">receive<wbr>Language</a>
@@ -1050,8 +1546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alert sending language. Optional <code>en-US</code>,<code>zh-CN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Alert sending language. Optional <code>en-US</code>,<code>zh-CN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivergrouplists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivergrouplists_nodejs" style="color: inherit; text-decoration: inherit;">receiver<wbr>Group<wbr>Lists</a>
@@ -1059,8 +1554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Alarm receive group ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm receive group ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="receiveruserlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiveruserlists_nodejs" style="color: inherit; text-decoration: inherit;">receiver<wbr>User<wbr>Lists</a>
@@ -1068,8 +1562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Alarm receiver ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm receiver ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1077,8 +1570,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</p>
-</dd></dl>
+    <dd>Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1092,8 +1584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="receiver_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiver_type_python" style="color: inherit; text-decoration: inherit;">receiver_<wbr>type</a>
@@ -1101,8 +1592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Receive type. Optional <code>group</code>,<code>user</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Receive type. Optional <code>group</code>,<code>user</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -1110,8 +1600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End of alarm period. Meaning with <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End of alarm period. Meaning with <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="receive_language_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receive_language_python" style="color: inherit; text-decoration: inherit;">receive_<wbr>language</a>
@@ -1119,8 +1608,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Alert sending language. Optional <code>en-US</code>,<code>zh-CN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Alert sending language. Optional <code>en-US</code>,<code>zh-CN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="receiver_group_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiver_group_lists_python" style="color: inherit; text-decoration: inherit;">receiver_<wbr>group_<wbr>lists</a>
@@ -1128,8 +1616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Alarm receive group ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm receive group ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="receiver_user_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiver_user_lists_python" style="color: inherit; text-decoration: inherit;">receiver_<wbr>user_<wbr>lists</a>
@@ -1137,8 +1624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Alarm receiver ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm receiver ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -1146,8 +1632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</p>
-</dd></dl>
+    <dd>Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1161,8 +1646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</p>
-</dd><dt class="property-required"
+    <dd>Method of warning notification.Optional <code>CALL</code>,<code>EMAIL</code>,<code>SITE</code>,<code>SMS</code>,<code>WECHAT</code>.</dd><dt class="property-required"
             title="Required">
         <span id="receivertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivertype_yaml" style="color: inherit; text-decoration: inherit;">receiver<wbr>Type</a>
@@ -1170,8 +1654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Receive type. Optional <code>group</code>,<code>user</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Receive type. Optional <code>group</code>,<code>user</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1179,8 +1662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End of alarm period. Meaning with <code>start_time</code>.</p>
-</dd><dt class="property-optional"
+    <dd>End of alarm period. Meaning with <code>startTime</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivelanguage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivelanguage_yaml" style="color: inherit; text-decoration: inherit;">receive<wbr>Language</a>
@@ -1188,8 +1670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alert sending language. Optional <code>en-US</code>,<code>zh-CN</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Alert sending language. Optional <code>en-US</code>,<code>zh-CN</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivergrouplists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivergrouplists_yaml" style="color: inherit; text-decoration: inherit;">receiver<wbr>Group<wbr>Lists</a>
@@ -1197,8 +1678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Alarm receive group ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm receive group ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="receiveruserlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiveruserlists_yaml" style="color: inherit; text-decoration: inherit;">receiver<wbr>User<wbr>Lists</a>
@@ -1206,8 +1686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Alarm receiver ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm receiver ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1215,8 +1694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</p>
-</dd></dl>
+    <dd>Alarm period start time. Valid value ranges: (0~86399). which removes the date after it is converted to Beijing time as a Unix timestamp, for example 7200 means '10:0:0'.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1228,7 +1706,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

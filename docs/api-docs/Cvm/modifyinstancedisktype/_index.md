@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Cvm.ModifyInstanceDiskType"
 meta_desc: "Documentation for the tencentcloud.Cvm.ModifyInstanceDiskType resource with examples, input properties, output properties, lookup functions, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,62 +18,77 @@ no_edit_this_page: true
 
 
 ## Create ModifyInstanceDiskType Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ModifyInstanceDiskType</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ModifyInstanceDiskTypeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ModifyInstanceDiskType</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ModifyInstanceDiskTypeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ModifyInstanceDiskType</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                           <span class="nx">data_disks</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cvm.ModifyInstanceDiskTypeDataDiskArgs]]</span> = None<span class="p">,</span>
-                           <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                           <span class="nx">system_disk</span><span class="p">:</span> <span class="nx">Optional[_cvm.ModifyInstanceDiskTypeSystemDiskArgs]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ModifyInstanceDiskType</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                            <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ModifyInstanceDiskTypeArgs</a></span><span class="p">,</span>
-                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ModifyInstanceDiskType</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                           <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                           <span class="nx">data_disks</span><span class="p">:</span> <span class="nx">Optional[Sequence[ModifyInstanceDiskTypeDataDiskArgs]]</span> = None<span class="p">,</span>
+                           <span class="nx">system_disk</span><span class="p">:</span> <span class="nx">Optional[ModifyInstanceDiskTypeSystemDiskArgs]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewModifyInstanceDiskType</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ModifyInstanceDiskTypeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ModifyInstanceDiskType</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewModifyInstanceDiskType</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ModifyInstanceDiskTypeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ModifyInstanceDiskType</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ModifyInstanceDiskType</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ModifyInstanceDiskTypeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ModifyInstanceDiskType</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ModifyInstanceDiskTypeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ModifyInstanceDiskType</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ModifyInstanceDiskTypeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ModifyInstanceDiskType</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ModifyInstanceDiskTypeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cvm:ModifyInstanceDiskType</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Cvm:ModifyInstanceDiskType</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_cvm_modify_instance_disk_type&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -92,7 +109,7 @@ no_edit_this_page: true
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -209,11 +226,19 @@ no_edit_this_page: true
 </pulumi-choosable>
 </div>
 
+
+
 ## ModifyInstanceDiskType Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ModifyInstanceDiskType resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -229,29 +254,23 @@ The ModifyInstanceDiskType resource accepts the following [input](/docs/intro/co
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="datadisks_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cvm.<wbr>Inputs.<wbr>Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cvm.<wbr>Inputs.<wbr>Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk&gt;</a></span>
     </dt>
-    <dd><p>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be
-converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter
-is only supported for instances of the CDHPAID type.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter is only supported for instances of the CDHPAID type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="systemdisk_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisk_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cvm.<wbr>Inputs.<wbr>Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk<wbr>Args</a></span>
+        <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cvm.<wbr>Inputs.<wbr>Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk</a></span>
     </dt>
-    <dd><p>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to
-be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</p>
-</dd></dl>
+    <dd>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -265,8 +284,7 @@ be converted, and specify the value of DiskType. Only CDHPAID type instances are
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="datadisks_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Disks</a>
@@ -274,10 +292,7 @@ be converted, and specify the value of DiskType. Only CDHPAID type instances are
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#modifyinstancedisktypedatadisk">[]Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk<wbr>Args</a></span>
     </dt>
-    <dd><p>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be
-converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter
-is only supported for instances of the CDHPAID type.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter is only supported for instances of the CDHPAID type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="systemdisk_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisk_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk</a>
@@ -285,9 +300,37 @@ is only supported for instances of the CDHPAID type.</p>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk<wbr>Args</a></span>
     </dt>
-    <dd><p>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to
-be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</p>
-</dd></dl>
+    <dd>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="data_disks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disks_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>disks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">list(object)</a></span>
+    </dt>
+    <dd>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter is only supported for instances of the CDHPAID type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="system_disk_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">object</a></span>
+    </dt>
+    <dd>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -301,29 +344,23 @@ be converted, and specify the value of DiskType. Only CDHPAID type instances are
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="datadisks_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_java" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">List&lt;Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">List&lt;Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk&gt;</a></span>
     </dt>
-    <dd><p>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be
-converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter
-is only supported for instances of the CDHPAID type.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter is only supported for instances of the CDHPAID type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="systemdisk_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisk_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk<wbr>Args</a></span>
+        <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk</a></span>
     </dt>
-    <dd><p>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to
-be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</p>
-</dd></dl>
+    <dd>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -337,29 +374,23 @@ be converted, and specify the value of DiskType. Only CDHPAID type instances are
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="datadisks_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk[]</a></span>
     </dt>
-    <dd><p>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be
-converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter
-is only supported for instances of the CDHPAID type.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter is only supported for instances of the CDHPAID type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="systemdisk_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisk_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk<wbr>Args</a></span>
+        <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk</a></span>
     </dt>
-    <dd><p>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to
-be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</p>
-</dd></dl>
+    <dd>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -373,19 +404,15 @@ be converted, and specify the value of DiskType. Only CDHPAID type instances are
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="data_disks_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disks_python" style="color: inherit; text-decoration: inherit;">data_<wbr>disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk<wbr>Args]</a></span>
+        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">Sequence[Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk<wbr>Args]</a></span>
     </dt>
-    <dd><p>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be
-converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter
-is only supported for instances of the CDHPAID type.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter is only supported for instances of the CDHPAID type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="system_disk_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk</a>
@@ -393,9 +420,7 @@ is only supported for instances of the CDHPAID type.</p>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk<wbr>Args</a></span>
     </dt>
-    <dd><p>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to
-be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</p>
-</dd></dl>
+    <dd>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -409,8 +434,7 @@ be converted, and specify the value of DiskType. Only CDHPAID type instances are
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="datadisks_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
@@ -418,10 +442,7 @@ be converted, and specify the value of DiskType. Only CDHPAID type instances are
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#modifyinstancedisktypedatadisk">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be
-converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter
-is only supported for instances of the CDHPAID type.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter is only supported for instances of the CDHPAID type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="systemdisk_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisk_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk</a>
@@ -429,9 +450,7 @@ is only supported for instances of the CDHPAID type.</p>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Property Map</a></span>
     </dt>
-    <dd><p>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to
-be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</p>
-</dd></dl>
+    <dd>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -452,8 +471,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -467,8 +485,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -482,8 +513,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -497,8 +527,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -512,8 +541,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -527,8 +555,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -538,122 +565,161 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ModifyInstanceDiskType resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ModifyInstanceDiskTypeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ModifyInstanceDiskType</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ModifyInstanceDiskTypeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ModifyInstanceDiskType</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">data_disks</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cvm.ModifyInstanceDiskTypeDataDiskArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">data_disks</span><span class="p">:</span> <span class="nx">Optional[Sequence[ModifyInstanceDiskTypeDataDiskArgs]]</span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">system_disk</span><span class="p">:</span> <span class="nx">Optional[_cvm.ModifyInstanceDiskTypeSystemDiskArgs]</span> = None<span class="p">) -&gt;</span> ModifyInstanceDiskType</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">system_disk</span><span class="p">:</span> <span class="nx">Optional[ModifyInstanceDiskTypeSystemDiskArgs]</span> = None<span class="p">) -&gt;</span> ModifyInstanceDiskType</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetModifyInstanceDiskType<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ModifyInstanceDiskTypeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ModifyInstanceDiskType</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetModifyInstanceDiskType<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ModifyInstanceDiskTypeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ModifyInstanceDiskType</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ModifyInstanceDiskType</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ModifyInstanceDiskTypeState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ModifyInstanceDiskType</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ModifyInstanceDiskTypeState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ModifyInstanceDiskType</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ModifyInstanceDiskTypeState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ModifyInstanceDiskType</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ModifyInstanceDiskTypeState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingModifyInstanceDiskType</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Cvm:ModifyInstanceDiskType</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_cvm_modify_instance_disk_type</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ModifyInstanceDiskTypeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ModifyInstanceDiskTypeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -661,28 +727,31 @@ Get an existing ModifyInstanceDiskType resource's state with the given name, ID,
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ModifyInstanceDiskTypeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -690,28 +759,31 @@ Get an existing ModifyInstanceDiskType resource's state with the given name, ID,
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ModifyInstanceDiskTypeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -729,12 +801,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datadisks_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cvm.<wbr>Inputs.<wbr>Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cvm.<wbr>Inputs.<wbr>Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk&gt;</a></span>
     </dt>
-    <dd><p>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be
-converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter
-is only supported for instances of the CDHPAID type.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter is only supported for instances of the CDHPAID type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -742,18 +811,15 @@ is only supported for instances of the CDHPAID type.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_systemdisk_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisk_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cvm.<wbr>Inputs.<wbr>Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk<wbr>Args</a></span>
+        <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cvm.<wbr>Inputs.<wbr>Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk</a></span>
     </dt>
-    <dd><p>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to
-be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</p>
-</dd></dl>
+    <dd>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -767,10 +833,7 @@ be converted, and specify the value of DiskType. Only CDHPAID type instances are
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#modifyinstancedisktypedatadisk">[]Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk<wbr>Args</a></span>
     </dt>
-    <dd><p>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be
-converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter
-is only supported for instances of the CDHPAID type.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter is only supported for instances of the CDHPAID type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -778,8 +841,7 @@ is only supported for instances of the CDHPAID type.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_systemdisk_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisk_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk</a>
@@ -787,9 +849,37 @@ is only supported for instances of the CDHPAID type.</p>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk<wbr>Args</a></span>
     </dt>
-    <dd><p>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to
-be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</p>
-</dd></dl>
+    <dd>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_data_disks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_data_disks_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>disks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">list(object)</a></span>
+    </dt>
+    <dd>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter is only supported for instances of the CDHPAID type.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_system_disk_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_system_disk_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">object</a></span>
+    </dt>
+    <dd>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -801,12 +891,9 @@ be converted, and specify the value of DiskType. Only CDHPAID type instances are
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datadisks_java" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">List&lt;Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">List&lt;Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk&gt;</a></span>
     </dt>
-    <dd><p>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be
-converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter
-is only supported for instances of the CDHPAID type.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter is only supported for instances of the CDHPAID type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -814,18 +901,15 @@ is only supported for instances of the CDHPAID type.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_systemdisk_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisk_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk<wbr>Args</a></span>
+        <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk</a></span>
     </dt>
-    <dd><p>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to
-be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</p>
-</dd></dl>
+    <dd>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -837,12 +921,9 @@ be converted, and specify the value of DiskType. Only CDHPAID type instances are
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datadisks_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk[]</a></span>
     </dt>
-    <dd><p>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be
-converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter
-is only supported for instances of the CDHPAID type.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter is only supported for instances of the CDHPAID type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -850,18 +931,15 @@ is only supported for instances of the CDHPAID type.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_systemdisk_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisk_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk<wbr>Args</a></span>
+        <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk</a></span>
     </dt>
-    <dd><p>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to
-be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</p>
-</dd></dl>
+    <dd>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -873,12 +951,9 @@ be converted, and specify the value of DiskType. Only CDHPAID type instances are
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_data_disks_python" style="color: inherit; text-decoration: inherit;">data_<wbr>disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk<wbr>Args]</a></span>
+        <span class="property-type"><a href="#modifyinstancedisktypedatadisk">Sequence[Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk<wbr>Args]</a></span>
     </dt>
-    <dd><p>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be
-converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter
-is only supported for instances of the CDHPAID type.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter is only supported for instances of the CDHPAID type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -886,8 +961,7 @@ is only supported for instances of the CDHPAID type.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_system_disk_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_system_disk_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk</a>
@@ -895,9 +969,7 @@ is only supported for instances of the CDHPAID type.</p>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk<wbr>Args</a></span>
     </dt>
-    <dd><p>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to
-be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</p>
-</dd></dl>
+    <dd>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -911,10 +983,7 @@ be converted, and specify the value of DiskType. Only CDHPAID type instances are
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#modifyinstancedisktypedatadisk">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be
-converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter
-is only supported for instances of the CDHPAID type.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter is only supported for instances of the CDHPAID type.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -922,8 +991,7 @@ is only supported for instances of the CDHPAID type.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_systemdisk_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisk_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk</a>
@@ -931,9 +999,7 @@ is only supported for instances of the CDHPAID type.</p>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#modifyinstancedisktypesystemdisk">Property Map</a></span>
     </dt>
-    <dd><p>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to
-be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</p>
-</dd></dl>
+    <dd>For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -948,7 +1014,9 @@ be converted, and specify the value of DiskType. Only CDHPAID type instances are
 
 
 
-<h4 id="modifyinstancedisktypedatadisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk</h4>
+<h4 id="modifyinstancedisktypedatadisk">
+Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk<pulumi-choosable type="language" values="python,go" class="inline">, Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>Data<wbr>Disk<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -960,8 +1028,7 @@ be converted, and specify the value of DiskType. Only CDHPAID type instances are
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.</dd><dt class="property-optional"
             title="Optional">
         <span id="cdcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_csharp" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
@@ -969,8 +1036,7 @@ be converted, and specify the value of DiskType. Only CDHPAID type instances are
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dedicated cluster to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated cluster to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletewithinstance_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletewithinstance_csharp" style="color: inherit; text-decoration: inherit;">Delete<wbr>With<wbr>Instance</a>
@@ -978,13 +1044,12 @@ be converted, and specify the value of DiskType. Only CDHPAID type instances are
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to terminate the data disk when its CVM is terminated. Valid values:</p>
+    <dd>Whether to terminate the data disk when its CVM is terminated. Valid values:</p>
 <ul>
 <li>TRUE: terminate the data disk when its CVM is terminated. This value only supports pay-as-you-go cloud disks billed on an hourly basis.</li>
 <li>FALSE: retain the data disk when its CVM is terminated.
 Default value: TRUE.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="diskid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskid_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Id</a>
@@ -992,8 +1057,7 @@ Default value: TRUE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -1001,7 +1065,7 @@ Default value: TRUE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk type. Valid values:</p>
+    <dd>Data disk type. Valid values:</p>
 <ul>
 <li>LOCAL_BASIC: local hard disk;</li>
 <li>LOCAL_SSD: local SSD hard disk;</li>
@@ -1014,8 +1078,7 @@ Default value: TRUE.</li>
 <li>CLOUD_TSSD: extremely fast SSD cloud disk;</li>
 <li>CLOUD_BSSD: general-purpose SSD cloud disk;
 Default value: LOCAL_BASIC.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_csharp" style="color: inherit; text-decoration: inherit;">Encrypt</a>
@@ -1023,13 +1086,12 @@ Default value: LOCAL_BASIC.</li>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether the data disk is encrypted. Valid values:</p>
+    <dd>Specifies whether the data disk is encrypted. Valid values:</p>
 <ul>
 <li>TRUE: encrypted</li>
 <li>FALSE: not encrypted
 Default value: FALSE.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="kmskeyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
@@ -1037,8 +1099,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_csharp" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -1046,8 +1107,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughputperformance_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_csharp" style="color: inherit; text-decoration: inherit;">Throughput<wbr>Performance</a>
@@ -1055,8 +1115,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cloud disk performance, in MB/s.</p>
-</dd></dl>
+    <dd>Cloud disk performance, in MB/s.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1070,8 +1129,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.</dd><dt class="property-optional"
             title="Optional">
         <span id="cdcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_go" style="color: inherit; text-decoration: inherit;">Cdc<wbr>Id</a>
@@ -1079,8 +1137,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dedicated cluster to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated cluster to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletewithinstance_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletewithinstance_go" style="color: inherit; text-decoration: inherit;">Delete<wbr>With<wbr>Instance</a>
@@ -1088,13 +1145,12 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to terminate the data disk when its CVM is terminated. Valid values:</p>
+    <dd>Whether to terminate the data disk when its CVM is terminated. Valid values:</p>
 <ul>
 <li>TRUE: terminate the data disk when its CVM is terminated. This value only supports pay-as-you-go cloud disks billed on an hourly basis.</li>
 <li>FALSE: retain the data disk when its CVM is terminated.
 Default value: TRUE.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="diskid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskid_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Id</a>
@@ -1102,8 +1158,7 @@ Default value: TRUE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -1111,7 +1166,7 @@ Default value: TRUE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk type. Valid values:</p>
+    <dd>Data disk type. Valid values:</p>
 <ul>
 <li>LOCAL_BASIC: local hard disk;</li>
 <li>LOCAL_SSD: local SSD hard disk;</li>
@@ -1124,8 +1179,7 @@ Default value: TRUE.</li>
 <li>CLOUD_TSSD: extremely fast SSD cloud disk;</li>
 <li>CLOUD_BSSD: general-purpose SSD cloud disk;
 Default value: LOCAL_BASIC.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_go" style="color: inherit; text-decoration: inherit;">Encrypt</a>
@@ -1133,13 +1187,12 @@ Default value: LOCAL_BASIC.</li>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether the data disk is encrypted. Valid values:</p>
+    <dd>Specifies whether the data disk is encrypted. Valid values:</p>
 <ul>
 <li>TRUE: encrypted</li>
 <li>FALSE: not encrypted
 Default value: FALSE.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="kmskeyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>Id</a>
@@ -1147,8 +1200,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_go" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -1156,8 +1208,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughputperformance_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_go" style="color: inherit; text-decoration: inherit;">Throughput<wbr>Performance</a>
@@ -1165,8 +1216,108 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cloud disk performance, in MB/s.</p>
-</dd></dl>
+    <dd>Cloud disk performance, in MB/s.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dedicated cluster to which the instance belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="delete_with_instance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_with_instance_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>with_<wbr>instance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to terminate the data disk when its CVM is terminated. Valid values:</p>
+<ul>
+<li>TRUE: terminate the data disk when its CVM is terminated. This value only supports pay-as-you-go cloud disks billed on an hourly basis.</li>
+<li>FALSE: retain the data disk when its CVM is terminated.
+Default value: TRUE.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_id_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data disk type. Valid values:</p>
+<ul>
+<li>LOCAL_BASIC: local hard disk;</li>
+<li>LOCAL_SSD: local SSD hard disk;</li>
+<li>LOCAL_NVME: local NVME hard disk, which is strongly related to InstanceType and cannot be specified;</li>
+<li>LOCAL_PRO: local HDD hard disk, which is strongly related to InstanceType and cannot be specified;</li>
+<li>CLOUD_BASIC: ordinary cloud disk;</li>
+<li>CLOUD_PREMIUM: high-performance cloud disk;</li>
+<li>CLOUD_SSD:SSD cloud disk;</li>
+<li>CLOUD_HSSD: enhanced SSD cloud disk;</li>
+<li>CLOUD_TSSD: extremely fast SSD cloud disk;</li>
+<li>CLOUD_BSSD: general-purpose SSD cloud disk;
+Default value: LOCAL_BASIC.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="encrypt_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_hcl" style="color: inherit; text-decoration: inherit;">encrypt</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specifies whether the data disk is encrypted. Valid values:</p>
+<ul>
+<li>TRUE: encrypted</li>
+<li>FALSE: not encrypted
+Default value: FALSE.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="kms_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_id_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snapshot_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="throughput_performance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughput_performance_hcl" style="color: inherit; text-decoration: inherit;">throughput_<wbr>performance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Cloud disk performance, in MB/s.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1180,8 +1331,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.</dd><dt class="property-optional"
             title="Optional">
         <span id="cdcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_java" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
@@ -1189,8 +1339,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dedicated cluster to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated cluster to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletewithinstance_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletewithinstance_java" style="color: inherit; text-decoration: inherit;">delete<wbr>With<wbr>Instance</a>
@@ -1198,13 +1347,12 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to terminate the data disk when its CVM is terminated. Valid values:</p>
+    <dd>Whether to terminate the data disk when its CVM is terminated. Valid values:</p>
 <ul>
 <li>TRUE: terminate the data disk when its CVM is terminated. This value only supports pay-as-you-go cloud disks billed on an hourly basis.</li>
 <li>FALSE: retain the data disk when its CVM is terminated.
 Default value: TRUE.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="diskid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskid_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Id</a>
@@ -1212,8 +1360,7 @@ Default value: TRUE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1221,7 +1368,7 @@ Default value: TRUE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data disk type. Valid values:</p>
+    <dd>Data disk type. Valid values:</p>
 <ul>
 <li>LOCAL_BASIC: local hard disk;</li>
 <li>LOCAL_SSD: local SSD hard disk;</li>
@@ -1234,8 +1381,7 @@ Default value: TRUE.</li>
 <li>CLOUD_TSSD: extremely fast SSD cloud disk;</li>
 <li>CLOUD_BSSD: general-purpose SSD cloud disk;
 Default value: LOCAL_BASIC.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_java" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -1243,13 +1389,12 @@ Default value: LOCAL_BASIC.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specifies whether the data disk is encrypted. Valid values:</p>
+    <dd>Specifies whether the data disk is encrypted. Valid values:</p>
 <ul>
 <li>TRUE: encrypted</li>
 <li>FALSE: not encrypted
 Default value: FALSE.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="kmskeyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -1257,8 +1402,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_java" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -1266,8 +1410,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughputperformance_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_java" style="color: inherit; text-decoration: inherit;">throughput<wbr>Performance</a>
@@ -1275,8 +1418,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Cloud disk performance, in MB/s.</p>
-</dd></dl>
+    <dd>Cloud disk performance, in MB/s.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1290,8 +1432,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.</dd><dt class="property-optional"
             title="Optional">
         <span id="cdcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_nodejs" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
@@ -1299,8 +1440,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dedicated cluster to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated cluster to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletewithinstance_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletewithinstance_nodejs" style="color: inherit; text-decoration: inherit;">delete<wbr>With<wbr>Instance</a>
@@ -1308,13 +1448,12 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether to terminate the data disk when its CVM is terminated. Valid values:</p>
+    <dd>Whether to terminate the data disk when its CVM is terminated. Valid values:</p>
 <ul>
 <li>TRUE: terminate the data disk when its CVM is terminated. This value only supports pay-as-you-go cloud disks billed on an hourly basis.</li>
 <li>FALSE: retain the data disk when its CVM is terminated.
 Default value: TRUE.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="diskid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskid_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Id</a>
@@ -1322,8 +1461,7 @@ Default value: TRUE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1331,7 +1469,7 @@ Default value: TRUE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk type. Valid values:</p>
+    <dd>Data disk type. Valid values:</p>
 <ul>
 <li>LOCAL_BASIC: local hard disk;</li>
 <li>LOCAL_SSD: local SSD hard disk;</li>
@@ -1344,8 +1482,7 @@ Default value: TRUE.</li>
 <li>CLOUD_TSSD: extremely fast SSD cloud disk;</li>
 <li>CLOUD_BSSD: general-purpose SSD cloud disk;
 Default value: LOCAL_BASIC.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_nodejs" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -1353,13 +1490,12 @@ Default value: LOCAL_BASIC.</li>
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specifies whether the data disk is encrypted. Valid values:</p>
+    <dd>Specifies whether the data disk is encrypted. Valid values:</p>
 <ul>
 <li>TRUE: encrypted</li>
 <li>FALSE: not encrypted
 Default value: FALSE.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="kmskeyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -1367,8 +1503,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_nodejs" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -1376,8 +1511,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughputperformance_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_nodejs" style="color: inherit; text-decoration: inherit;">throughput<wbr>Performance</a>
@@ -1385,8 +1519,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Cloud disk performance, in MB/s.</p>
-</dd></dl>
+    <dd>Cloud disk performance, in MB/s.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1400,8 +1533,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.</dd><dt class="property-optional"
             title="Optional">
         <span id="cdc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_python" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
@@ -1409,8 +1541,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the dedicated cluster to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated cluster to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="delete_with_instance_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_with_instance_python" style="color: inherit; text-decoration: inherit;">delete_<wbr>with_<wbr>instance</a>
@@ -1418,13 +1549,12 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether to terminate the data disk when its CVM is terminated. Valid values:</p>
+    <dd>Whether to terminate the data disk when its CVM is terminated. Valid values:</p>
 <ul>
 <li>TRUE: terminate the data disk when its CVM is terminated. This value only supports pay-as-you-go cloud disks billed on an hourly basis.</li>
 <li>FALSE: retain the data disk when its CVM is terminated.
 Default value: TRUE.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="disk_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_id_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>id</a>
@@ -1432,8 +1562,7 @@ Default value: TRUE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
@@ -1441,7 +1570,7 @@ Default value: TRUE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data disk type. Valid values:</p>
+    <dd>Data disk type. Valid values:</p>
 <ul>
 <li>LOCAL_BASIC: local hard disk;</li>
 <li>LOCAL_SSD: local SSD hard disk;</li>
@@ -1454,8 +1583,7 @@ Default value: TRUE.</li>
 <li>CLOUD_TSSD: extremely fast SSD cloud disk;</li>
 <li>CLOUD_BSSD: general-purpose SSD cloud disk;
 Default value: LOCAL_BASIC.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_python" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -1463,13 +1591,12 @@ Default value: LOCAL_BASIC.</li>
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specifies whether the data disk is encrypted. Valid values:</p>
+    <dd>Specifies whether the data disk is encrypted. Valid values:</p>
 <ul>
 <li>TRUE: encrypted</li>
 <li>FALSE: not encrypted
 Default value: FALSE.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="kms_key_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_key_id_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>key_<wbr>id</a>
@@ -1477,8 +1604,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshot_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_python" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
@@ -1486,8 +1612,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughput_performance_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughput_performance_python" style="color: inherit; text-decoration: inherit;">throughput_<wbr>performance</a>
@@ -1495,8 +1620,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Cloud disk performance, in MB/s.</p>
-</dd></dl>
+    <dd>Cloud disk performance, in MB/s.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1510,8 +1634,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.</dd><dt class="property-optional"
             title="Optional">
         <span id="cdcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdcid_yaml" style="color: inherit; text-decoration: inherit;">cdc<wbr>Id</a>
@@ -1519,8 +1642,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dedicated cluster to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated cluster to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="deletewithinstance_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deletewithinstance_yaml" style="color: inherit; text-decoration: inherit;">delete<wbr>With<wbr>Instance</a>
@@ -1528,13 +1650,12 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether to terminate the data disk when its CVM is terminated. Valid values:</p>
+    <dd>Whether to terminate the data disk when its CVM is terminated. Valid values:</p>
 <ul>
 <li>TRUE: terminate the data disk when its CVM is terminated. This value only supports pay-as-you-go cloud disks billed on an hourly basis.</li>
 <li>FALSE: retain the data disk when its CVM is terminated.
 Default value: TRUE.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="diskid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskid_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Id</a>
@@ -1542,8 +1663,7 @@ Default value: TRUE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1551,7 +1671,7 @@ Default value: TRUE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data disk type. Valid values:</p>
+    <dd>Data disk type. Valid values:</p>
 <ul>
 <li>LOCAL_BASIC: local hard disk;</li>
 <li>LOCAL_SSD: local SSD hard disk;</li>
@@ -1564,8 +1684,7 @@ Default value: TRUE.</li>
 <li>CLOUD_TSSD: extremely fast SSD cloud disk;</li>
 <li>CLOUD_BSSD: general-purpose SSD cloud disk;
 Default value: LOCAL_BASIC.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="encrypt_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_yaml" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -1573,13 +1692,12 @@ Default value: LOCAL_BASIC.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specifies whether the data disk is encrypted. Valid values:</p>
+    <dd>Specifies whether the data disk is encrypted. Valid values:</p>
 <ul>
 <li>TRUE: encrypted</li>
 <li>FALSE: not encrypted
 Default value: FALSE.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="kmskeyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeyid_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Key<wbr>Id</a>
@@ -1587,8 +1705,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_yaml" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -1596,8 +1713,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.</dd><dt class="property-optional"
             title="Optional">
         <span id="throughputperformance_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#throughputperformance_yaml" style="color: inherit; text-decoration: inherit;">throughput<wbr>Performance</a>
@@ -1605,12 +1721,13 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Cloud disk performance, in MB/s.</p>
-</dd></dl>
+    <dd>Cloud disk performance, in MB/s.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="modifyinstancedisktypesystemdisk">Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk</h4>
+<h4 id="modifyinstancedisktypesystemdisk">
+Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk<pulumi-choosable type="language" values="python,go" class="inline">, Modify<wbr>Instance<wbr>Disk<wbr>Type<wbr>System<wbr>Disk<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1622,8 +1739,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dedicated cluster to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated cluster to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskid_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Id</a>
@@ -1631,8 +1747,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -1640,8 +1755,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>System disk size; unit: GB; default value: 50 GB.</p>
-</dd><dt class="property-optional"
+    <dd>System disk size; unit: GB; default value: 50 GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -1649,7 +1763,7 @@ Default value: FALSE.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk type. Valid values:- LOCAL_BASIC: local disk</p>
+    <dd>System disk type. Valid values:- LOCAL_BASIC: local disk</p>
 <ul>
 <li>LOCAL_SSD: local SSD disk</li>
 <li>CLOUD_BASIC: ordinary cloud disk</li>
@@ -1657,8 +1771,7 @@ Default value: FALSE.</li>
 <li>CLOUD_PREMIUM: Premium cloud storage</li>
 <li>CLOUD_BSSD: Balanced SSD
 The disk currently in stock will be used by default.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1672,8 +1785,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dedicated cluster to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated cluster to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskid_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Id</a>
@@ -1681,8 +1793,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -1690,8 +1801,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>System disk size; unit: GB; default value: 50 GB.</p>
-</dd><dt class="property-optional"
+    <dd>System disk size; unit: GB; default value: 50 GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -1699,7 +1809,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk type. Valid values:- LOCAL_BASIC: local disk</p>
+    <dd>System disk type. Valid values:- LOCAL_BASIC: local disk</p>
 <ul>
 <li>LOCAL_SSD: local SSD disk</li>
 <li>CLOUD_BASIC: ordinary cloud disk</li>
@@ -1707,8 +1817,53 @@ The disk currently in stock will be used by default.</li>
 <li>CLOUD_PREMIUM: Premium cloud storage</li>
 <li>CLOUD_BSSD: Balanced SSD
 The disk currently in stock will be used by default.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="cdc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cdc_id_hcl" style="color: inherit; text-decoration: inherit;">cdc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the dedicated cluster to which the instance belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_id_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>System disk size; unit: GB; default value: 50 GB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System disk type. Valid values:- LOCAL_BASIC: local disk</p>
+<ul>
+<li>LOCAL_SSD: local SSD disk</li>
+<li>CLOUD_BASIC: ordinary cloud disk</li>
+<li>CLOUD_SSD: SSD cloud disk</li>
+<li>CLOUD_PREMIUM: Premium cloud storage</li>
+<li>CLOUD_BSSD: Balanced SSD
+The disk currently in stock will be used by default.</li>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1722,8 +1877,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dedicated cluster to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated cluster to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskid_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Id</a>
@@ -1731,8 +1885,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -1740,8 +1893,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>System disk size; unit: GB; default value: 50 GB.</p>
-</dd><dt class="property-optional"
+    <dd>System disk size; unit: GB; default value: 50 GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1749,7 +1901,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System disk type. Valid values:- LOCAL_BASIC: local disk</p>
+    <dd>System disk type. Valid values:- LOCAL_BASIC: local disk</p>
 <ul>
 <li>LOCAL_SSD: local SSD disk</li>
 <li>CLOUD_BASIC: ordinary cloud disk</li>
@@ -1757,8 +1909,7 @@ The disk currently in stock will be used by default.</li>
 <li>CLOUD_PREMIUM: Premium cloud storage</li>
 <li>CLOUD_BSSD: Balanced SSD
 The disk currently in stock will be used by default.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1772,8 +1923,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the dedicated cluster to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated cluster to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskid_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Id</a>
@@ -1781,8 +1931,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -1790,8 +1939,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>System disk size; unit: GB; default value: 50 GB.</p>
-</dd><dt class="property-optional"
+    <dd>System disk size; unit: GB; default value: 50 GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1799,7 +1947,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk type. Valid values:- LOCAL_BASIC: local disk</p>
+    <dd>System disk type. Valid values:- LOCAL_BASIC: local disk</p>
 <ul>
 <li>LOCAL_SSD: local SSD disk</li>
 <li>CLOUD_BASIC: ordinary cloud disk</li>
@@ -1807,8 +1955,7 @@ The disk currently in stock will be used by default.</li>
 <li>CLOUD_PREMIUM: Premium cloud storage</li>
 <li>CLOUD_BSSD: Balanced SSD
 The disk currently in stock will be used by default.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1822,8 +1969,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the dedicated cluster to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated cluster to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_id_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>id</a>
@@ -1831,8 +1977,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
@@ -1840,8 +1985,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>System disk size; unit: GB; default value: 50 GB.</p>
-</dd><dt class="property-optional"
+    <dd>System disk size; unit: GB; default value: 50 GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
@@ -1849,7 +1993,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>System disk type. Valid values:- LOCAL_BASIC: local disk</p>
+    <dd>System disk type. Valid values:- LOCAL_BASIC: local disk</p>
 <ul>
 <li>LOCAL_SSD: local SSD disk</li>
 <li>CLOUD_BASIC: ordinary cloud disk</li>
@@ -1857,8 +2001,7 @@ The disk currently in stock will be used by default.</li>
 <li>CLOUD_PREMIUM: Premium cloud storage</li>
 <li>CLOUD_BSSD: Balanced SSD
 The disk currently in stock will be used by default.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1872,8 +2015,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the dedicated cluster to which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the dedicated cluster to which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="diskid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#diskid_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Id</a>
@@ -1881,8 +2023,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.</p>
-</dd><dt class="property-optional"
+    <dd>System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -1890,8 +2031,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>System disk size; unit: GB; default value: 50 GB.</p>
-</dd><dt class="property-optional"
+    <dd>System disk size; unit: GB; default value: 50 GB.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -1899,7 +2039,7 @@ The disk currently in stock will be used by default.</li>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System disk type. Valid values:- LOCAL_BASIC: local disk</p>
+    <dd>System disk type. Valid values:- LOCAL_BASIC: local disk</p>
 <ul>
 <li>LOCAL_SSD: local SSD disk</li>
 <li>CLOUD_BASIC: ordinary cloud disk</li>
@@ -1907,8 +2047,7 @@ The disk currently in stock will be used by default.</li>
 <li>CLOUD_PREMIUM: Premium cloud storage</li>
 <li>CLOUD_BSSD: Balanced SSD
 The disk currently in stock will be used by default.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1920,7 +2059,6 @@ The disk currently in stock will be used by default.</li>
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

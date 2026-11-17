@@ -2,9 +2,11 @@
 ---
 title: "getLayer7Listeners"
 title_tag: "tencentcloud.Gaap.getLayer7Listeners"
-meta_desc: "Documentation for the tencentcloud.Gaap.getLayer7Listeners function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query gaap layer7 listeners."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,91 +18,77 @@ Use this data source to query gaap layer7 listeners.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+const foo = new tencentcloud.gaap.Proxy("foo", {
+    name: "ci-test-gaap-proxy",
     bandwidth: 10,
     concurrent: 2,
     accessRegion: "SouthChina",
     realserverRegion: "NorthChina",
 });
-const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("fooLayer7Listener", {
+const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("foo", {
     protocol: "HTTP",
+    name: "ci-test-gaap-l7-listener",
     port: 80,
-    proxyId: fooProxy.id,
+    proxyId: foo.id,
 });
-const listenerId = tencentcloud.Gaap.getLayer7ListenersOutput({
+const listenerId = tencentcloud.gaap.getLayer7ListenersOutput({
     protocol: "HTTP",
-    proxyId: fooProxy.id,
+    proxyId: foo.id,
     listenerId: fooLayer7Listener.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+foo = tencentcloud.gaap.Proxy("foo",
+    name="ci-test-gaap-proxy",
     bandwidth=10,
     concurrent=2,
     access_region="SouthChina",
     realserver_region="NorthChina")
-foo_layer7_listener = tencentcloud.gaap.Layer7Listener("fooLayer7Listener",
+foo_layer7_listener = tencentcloud.gaap.Layer7Listener("foo",
     protocol="HTTP",
+    name="ci-test-gaap-l7-listener",
     port=80,
-    proxy_id=foo_proxy.id)
-listener_id = tencentcloud.Gaap.get_layer7_listeners_output(protocol="HTTP",
-    proxy_id=foo_proxy.id,
+    proxy_id=foo.id)
+listener_id = tencentcloud.gaap.get_layer7_listeners_output(protocol="HTTP",
+    proxy_id=foo.id,
     listener_id=foo_layer7_listener.id)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
-    {
-        Bandwidth = 10,
-        Concurrent = 2,
-        AccessRegion = "SouthChina",
-        RealserverRegion = "NorthChina",
-    });
-
-    var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
-    {
-        Protocol = "HTTP",
-        Port = 80,
-        ProxyId = fooProxy.Id,
-    });
-
-    var listenerId = Tencentcloud.Gaap.GetLayer7Listeners.Invoke(new()
-    {
-        Protocol = "HTTP",
-        ProxyId = fooProxy.Id,
-        ListenerId = fooLayer7Listener.Id,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+		foo, err := gaap.NewProxy(ctx, "foo", &gaap.ProxyArgs{
+			Name:             pulumi.String("ci-test-gaap-proxy"),
 			Bandwidth:        pulumi.Int(10),
 			Concurrent:       pulumi.Int(2),
 			AccessRegion:     pulumi.String("SouthChina"),
@@ -109,23 +97,68 @@ func main() {
 		if err != nil {
 			return err
 		}
-		fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
+		fooLayer7Listener, err := gaap.NewLayer7Listener(ctx, "foo", &gaap.Layer7ListenerArgs{
 			Protocol: pulumi.String("HTTP"),
+			Name:     pulumi.String("ci-test-gaap-l7-listener"),
 			Port:     pulumi.Int(80),
-			ProxyId:  fooProxy.ID(),
+			ProxyId:  foo.ID().ToIDOutput().ToStringOutput(),
 		})
 		if err != nil {
 			return err
 		}
-		_ = Gaap.GetLayer7ListenersOutput(ctx, gaap.GetLayer7ListenersOutputArgs{
+		_ = gaap.GetLayer7ListenersOutput(ctx, gaap.GetLayer7ListenersOutputArgs{
 			Protocol:   pulumi.String("HTTP"),
-			ProxyId:    fooProxy.ID(),
-			ListenerId: fooLayer7Listener.ID(),
+			ProxyId:    foo.ID().ToIDOutput().ToStringOutput(),
+			ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 		}, nil)
 		return nil
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = new Tencentcloud.Gaap.Proxy("foo", new()
+    {
+        Name = "ci-test-gaap-proxy",
+        Bandwidth = 10,
+        Concurrent = 2,
+        AccessRegion = "SouthChina",
+        RealserverRegion = "NorthChina",
+    });
+
+    var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("foo", new()
+    {
+        Protocol = "HTTP",
+        Name = "ci-test-gaap-l7-listener",
+        Port = 80,
+        ProxyId = foo.Id,
+    });
+
+    var listenerId = Tencentcloud.Gaap.GetLayer7Listeners.Invoke(new()
+    {
+        Protocol = "HTTP",
+        ProxyId = foo.Id,
+        ListenerId = fooLayer7Listener.Id,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -138,8 +171,8 @@ import com.pulumi.tencentcloud.Gaap.Layer7Listener;
 import com.pulumi.tencentcloud.Gaap.Layer7ListenerArgs;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetLayer7ListenersArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -151,54 +184,107 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fooProxy = new Proxy("fooProxy", ProxyArgs.builder()        
+        var foo = new Proxy("foo", ProxyArgs.builder()
+            .name("ci-test-gaap-proxy")
             .bandwidth(10)
             .concurrent(2)
             .accessRegion("SouthChina")
             .realserverRegion("NorthChina")
             .build());
 
-        var fooLayer7Listener = new Layer7Listener("fooLayer7Listener", Layer7ListenerArgs.builder()        
+        var fooLayer7Listener = new Layer7Listener("fooLayer7Listener", Layer7ListenerArgs.builder()
             .protocol("HTTP")
+            .name("ci-test-gaap-l7-listener")
             .port(80)
-            .proxyId(fooProxy.id())
+            .proxyId(foo.id())
             .build());
 
         final var listenerId = GaapFunctions.getLayer7Listeners(GetLayer7ListenersArgs.builder()
             .protocol("HTTP")
-            .proxyId(fooProxy.id())
+            .proxyId(foo.id())
             .listenerId(fooLayer7Listener.id())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  fooProxy:
+  foo:
     type: tencentcloud:Gaap:Proxy
     properties:
+      name: ci-test-gaap-proxy
       bandwidth: 10
       concurrent: 2
       accessRegion: SouthChina
       realserverRegion: NorthChina
   fooLayer7Listener:
     type: tencentcloud:Gaap:Layer7Listener
+    name: foo
     properties:
       protocol: HTTP
+      name: ci-test-gaap-l7-listener
       port: 80
-      proxyId: ${fooProxy.id}
+      proxyId: ${foo.id}
 variables:
   listenerId:
     fn::invoke:
-      Function: tencentcloud:Gaap:getLayer7Listeners
-      Arguments:
+      function: tencentcloud:Gaap:getLayer7Listeners
+      arguments:
         protocol: HTTP
-        proxyId: ${fooProxy.id}
+        proxyId: ${foo.id}
         listenerId: ${fooLayer7Listener.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getlayer7listeners" "listenerId" {
+  protocol    = "HTTP"
+  proxy_id    = tencentcloud_gaap_proxy.foo.id
+  listener_id = tencentcloud_gaap_layer7listener.foo.id
+}
+
+resource "tencentcloud_gaap_proxy" "foo" {
+  name              = "ci-test-gaap-proxy"
+  bandwidth         = 10
+  concurrent        = 2
+  access_region     = "SouthChina"
+  realserver_region = "NorthChina"
+}
+resource "tencentcloud_gaap_layer7listener" "foo" {
+  protocol = "HTTP"
+  name     = "ci-test-gaap-l7-listener"
+  port     = 80
+  proxy_id = tencentcloud_gaap_proxy.foo.id
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [DescribeHTTPListeners](https://www.tencentcloud.com/document/api/608/33071)
+  - [DescribeHTTPSListeners](https://www.tencentcloud.com/document/api/608/33070)
 
 
 
@@ -210,7 +296,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -218,9 +304,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getLayer7Listeners<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetLayer7ListenersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetLayer7ListenersResult</a></span>></span
+><span class="k">function </span>getLayer7Listeners<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetLayer7ListenersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetLayer7ListenersResult</a></span>></span
 ><span class="k">
-function </span>getLayer7ListenersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetLayer7ListenersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetLayer7ListenersResult</a></span>></span
+function </span>getLayer7ListenersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetLayer7ListenersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetLayer7ListenersResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -229,7 +315,8 @@ function </span>getLayer7ListenersOutput<span class="p">(</span><span class="nx"
 <div>
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
-><span class="k">def </span>get_layer7_listeners<span class="p">(</span><span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+><span class="k">def </span>get_layer7_listeners<span class="p">(</span><span class="nx">group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                         <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                          <span class="nx">listener_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                          <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                          <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -237,13 +324,14 @@ function </span>getLayer7ListenersOutput<span class="p">(</span><span class="nx"
                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetLayer7ListenersResult</span
 ><span class="k">
-def </span>get_layer7_listeners_output<span class="p">(</span><span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">listener_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                         <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">proxy_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetLayer7ListenersResult]</span
+def </span>get_layer7_listeners_output<span class="p">(</span><span class="nx">group_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">listener_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">port</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                         <span class="nx">protocol</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">proxy_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetLayer7ListenersResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -268,7 +356,8 @@ func </span>GetLayer7ListenersOutput<span class="p">(</span><span class="nx">ctx
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetLayer7Listeners </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetLayer7ListenersResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetLayer7ListenersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetLayer7ListenersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetLayer7ListenersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetLayer7ListenersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetLayer7ListenersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetLayer7ListenersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetLayer7ListenersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -277,7 +366,8 @@ func </span>GetLayer7ListenersOutput<span class="p">(</span><span class="nx">ctx
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetLayer7ListenersResult</a></span>> </span>getLayer7Listeners<span class="p">(</span><span class="nx">GetLayer7ListenersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetLayer7ListenersResult</a></span>> </span>getLayer7Listeners<span class="p">(</span><span class="nx">GetLayer7ListenersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetLayer7ListenersResult</a></span>> </span>getLayer7Listeners<span class="p">(</span><span class="nx">GetLayer7ListenersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -289,6 +379,15 @@ func </span>GetLayer7ListenersOutput<span class="p">(</span><span class="nx">ctx
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getLayer7Listeners:getLayer7Listeners
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_layer7_listeners&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -307,8 +406,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="groupid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -316,8 +422,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenername_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Name</a>
@@ -325,8 +430,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -334,8 +438,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -343,8 +446,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -352,8 +454,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -367,8 +468,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="groupid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -376,8 +484,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenername_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Name</a>
@@ -385,8 +492,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -394,8 +500,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -403,8 +508,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -412,8 +516,69 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="listener_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_name_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the layer7 listener to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the layer7 listener to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="proxy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -427,8 +592,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="groupid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -436,8 +608,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenername_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -445,8 +616,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -454,8 +624,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -463,8 +632,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -472,8 +640,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -487,8 +654,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="groupid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -496,8 +670,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenername_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -505,8 +678,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -514,8 +686,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -523,8 +694,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -532,8 +702,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -547,8 +716,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="group_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -556,8 +732,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="listener_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_name_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>name</a>
@@ -565,8 +740,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -574,8 +748,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
@@ -583,8 +756,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -592,8 +764,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -607,8 +778,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="groupid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Group id.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -616,8 +794,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="listenername_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenername_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Name</a>
@@ -625,8 +802,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -634,8 +810,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Port of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -643,8 +818,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -652,8 +826,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -676,8 +849,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listeners_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listeners_csharp" style="color: inherit; text-decoration: inherit;">Listeners</a>
@@ -685,8 +857,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlayer7listenerslistener">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Layer7Listeners<wbr>Listener&gt;</a></span>
     </dt>
-    <dd><p>An information list of layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -694,8 +865,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the layer7 listener.</dd><dt class="property-"
+            title="">
+        <span id="groupid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -719,8 +897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Port of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="proxyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -728,8 +905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -751,8 +927,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listeners_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listeners_go" style="color: inherit; text-decoration: inherit;">Listeners</a>
@@ -760,8 +935,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlayer7listenerslistener">[]Get<wbr>Layer7Listeners<wbr>Listener</a></span>
     </dt>
-    <dd><p>An information list of layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -769,8 +943,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the layer7 listener.</dd><dt class="property-"
+            title="">
+        <span id="groupid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -794,8 +975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Port of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="proxyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -803,11 +983,88 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="listeners_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listeners_hcl" style="color: inherit; text-decoration: inherit;">listeners</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getlayer7listenerslistener">list(object)</a></span>
+    </dt>
+    <dd>An information list of layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the layer7 listener.</dd><dt class="property-"
+            title="">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="listener_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_name_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the layer7 listener.</dd><dt class="property-"
+            title="">
+        <span id="proxy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP proxy.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -826,8 +1083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listeners_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listeners_java" style="color: inherit; text-decoration: inherit;">listeners</a>
@@ -835,8 +1091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlayer7listenerslistener">List&lt;Get<wbr>Layer7Listeners<wbr>Listener&gt;</a></span>
     </dt>
-    <dd><p>An information list of layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -844,8 +1099,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the layer7 listener.</dd><dt class="property-"
+            title="">
+        <span id="groupid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -869,8 +1131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Port of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="proxyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -878,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -901,8 +1161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listeners_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listeners_nodejs" style="color: inherit; text-decoration: inherit;">listeners</a>
@@ -910,8 +1169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlayer7listenerslistener">Get<wbr>Layer7Listeners<wbr>Listener[]</a></span>
     </dt>
-    <dd><p>An information list of layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -919,8 +1177,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the layer7 listener.</dd><dt class="property-"
+            title="">
+        <span id="groupid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -944,8 +1209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Port of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="proxyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -953,8 +1217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -976,17 +1239,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listeners_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listeners_python" style="color: inherit; text-decoration: inherit;">listeners</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getlayer7listenerslistener">Get<wbr>Layer7Listeners<wbr>Listener]</a></span>
+        <span class="property-type"><a href="#getlayer7listenerslistener">Sequence[Get<wbr>Layer7Listeners<wbr>Listener]</a></span>
     </dt>
-    <dd><p>An information list of layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -994,8 +1255,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the layer7 listener.</dd><dt class="property-"
+            title="">
+        <span id="group_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -1019,8 +1287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Port of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="proxy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
@@ -1028,8 +1295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1051,8 +1317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listeners_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listeners_yaml" style="color: inherit; text-decoration: inherit;">listeners</a>
@@ -1060,8 +1325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlayer7listenerslistener">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1069,8 +1333,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Protocol of the layer7 listener.</dd><dt class="property-"
+            title="">
+        <span id="groupid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd></dd><dt class="property-"
             title="">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1094,8 +1365,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>Port of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="proxyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1103,8 +1373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy.</p>
-</dd><dt class="property-"
+    <dd>ID of the GAAP proxy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1136,8 +1405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication.</p>
-</dd><dt class="property-required"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication.</dd><dt class="property-required"
             title="Required">
         <span id="certificateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_csharp" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -1145,8 +1413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Certificate ID of the layer7 listener.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="clientcertificateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateid_csharp" style="color: inherit; text-decoration: inherit;">Client<wbr>Certificate<wbr>Id</a>
@@ -1154,9 +1421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead. ID of the client certificate.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead. ID of the client certificate.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="clientcertificateids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateids_csharp" style="color: inherit; text-decoration: inherit;">Client<wbr>Certificate<wbr>Ids</a>
@@ -1164,8 +1429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of the client certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID list of the client certificate.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1173,8 +1437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="forwardprotocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Protocol</a>
@@ -1182,8 +1445,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol type of the forwarding.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type of the forwarding.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1191,8 +1453,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1200,8 +1461,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>Name of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1209,8 +1469,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1218,8 +1477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -1227,8 +1485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1236,8 +1493,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd><dt class="property-required"
+            title="Required">
+        <span id="tlsciphers_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlsciphers_csharp" style="color: inherit; text-decoration: inherit;">Tls<wbr>Ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-required"
+            title="Required">
+        <span id="tlssupportversions_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlssupportversions_csharp" style="color: inherit; text-decoration: inherit;">Tls<wbr>Support<wbr>Versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1251,8 +1523,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication.</p>
-</dd><dt class="property-required"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication.</dd><dt class="property-required"
             title="Required">
         <span id="certificateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_go" style="color: inherit; text-decoration: inherit;">Certificate<wbr>Id</a>
@@ -1260,8 +1531,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Certificate ID of the layer7 listener.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="clientcertificateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateid_go" style="color: inherit; text-decoration: inherit;">Client<wbr>Certificate<wbr>Id</a>
@@ -1269,9 +1539,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead. ID of the client certificate.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead. ID of the client certificate.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="clientcertificateids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateids_go" style="color: inherit; text-decoration: inherit;">Client<wbr>Certificate<wbr>Ids</a>
@@ -1279,8 +1547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of the client certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID list of the client certificate.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1288,8 +1555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="forwardprotocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Protocol</a>
@@ -1297,8 +1563,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol type of the forwarding.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type of the forwarding.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1306,8 +1571,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1315,8 +1579,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>Name of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1324,8 +1587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1333,8 +1595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -1342,8 +1603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1351,8 +1611,141 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd><dt class="property-required"
+            title="Required">
+        <span id="tlsciphers_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlsciphers_go" style="color: inherit; text-decoration: inherit;">Tls<wbr>Ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-required"
+            title="Required">
+        <span id="tlssupportversions_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlssupportversions_go" style="color: inherit; text-decoration: inherit;">Tls<wbr>Support<wbr>Versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="auth_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auth_type_hcl" style="color: inherit; text-decoration: inherit;">auth_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication.</dd><dt class="property-required"
+            title="Required">
+        <span id="certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_id_hcl" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Certificate ID of the layer7 listener.</dd><dt class="property-required property-deprecated"
+            title="Required, Deprecated">
+        <span id="client_certificate_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_certificate_id_hcl" style="color: inherit; text-decoration: inherit;">client_<wbr>certificate_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead. ID of the client certificate.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead.</p></dd><dt class="property-required"
+            title="Required">
+        <span id="client_certificate_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_certificate_ids_hcl" style="color: inherit; text-decoration: inherit;">client_<wbr>certificate_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of the client certificate.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-required"
+            title="Required">
+        <span id="forward_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_protocol_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol type of the forwarding.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the layer7 listener.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the layer7 listener.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the layer7 listener to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="proxy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Status of the layer7 listener.</dd><dt class="property-required"
+            title="Required">
+        <span id="tls_ciphers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tls_ciphers_hcl" style="color: inherit; text-decoration: inherit;">tls_<wbr>ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-required"
+            title="Required">
+        <span id="tls_support_versions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tls_support_versions_hcl" style="color: inherit; text-decoration: inherit;">tls_<wbr>support_<wbr>versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1366,8 +1759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication.</p>
-</dd><dt class="property-required"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication.</dd><dt class="property-required"
             title="Required">
         <span id="certificateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_java" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -1375,8 +1767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Certificate ID of the layer7 listener.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="clientcertificateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateid_java" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Id</a>
@@ -1384,9 +1775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead. ID of the client certificate.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead. ID of the client certificate.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="clientcertificateids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateids_java" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Ids</a>
@@ -1394,8 +1783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of the client certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID list of the client certificate.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1403,8 +1791,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="forwardprotocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Protocol</a>
@@ -1412,8 +1799,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol type of the forwarding.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type of the forwarding.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1421,8 +1807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1430,8 +1815,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>Name of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1439,8 +1823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1448,8 +1831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1457,8 +1839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1466,8 +1847,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd><dt class="property-required"
+            title="Required">
+        <span id="tlsciphers_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlsciphers_java" style="color: inherit; text-decoration: inherit;">tls<wbr>Ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-required"
+            title="Required">
+        <span id="tlssupportversions_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlssupportversions_java" style="color: inherit; text-decoration: inherit;">tls<wbr>Support<wbr>Versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1481,8 +1877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication.</p>
-</dd><dt class="property-required"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication.</dd><dt class="property-required"
             title="Required">
         <span id="certificateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_nodejs" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -1490,8 +1885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Certificate ID of the layer7 listener.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="clientcertificateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateid_nodejs" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Id</a>
@@ -1499,9 +1893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead. ID of the client certificate.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead. ID of the client certificate.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="clientcertificateids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateids_nodejs" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Ids</a>
@@ -1509,8 +1901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of the client certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID list of the client certificate.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1518,8 +1909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="forwardprotocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Protocol</a>
@@ -1527,8 +1917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol type of the forwarding.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type of the forwarding.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1536,8 +1925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1545,8 +1933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>Name of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1554,8 +1941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1563,8 +1949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1572,8 +1957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1581,8 +1965,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd><dt class="property-required"
+            title="Required">
+        <span id="tlsciphers_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlsciphers_nodejs" style="color: inherit; text-decoration: inherit;">tls<wbr>Ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-required"
+            title="Required">
+        <span id="tlssupportversions_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlssupportversions_nodejs" style="color: inherit; text-decoration: inherit;">tls<wbr>Support<wbr>Versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1596,8 +1995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication.</p>
-</dd><dt class="property-required"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication.</dd><dt class="property-required"
             title="Required">
         <span id="certificate_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificate_id_python" style="color: inherit; text-decoration: inherit;">certificate_<wbr>id</a>
@@ -1605,8 +2003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Certificate ID of the layer7 listener.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="client_certificate_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_certificate_id_python" style="color: inherit; text-decoration: inherit;">client_<wbr>certificate_<wbr>id</a>
@@ -1614,9 +2011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead. ID of the client certificate.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead. ID of the client certificate.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="client_certificate_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#client_certificate_ids_python" style="color: inherit; text-decoration: inherit;">client_<wbr>certificate_<wbr>ids</a>
@@ -1624,8 +2019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of the client certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID list of the client certificate.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1633,8 +2027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="forward_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_protocol_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>protocol</a>
@@ -1642,8 +2035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol type of the forwarding.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type of the forwarding.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1651,8 +2043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1660,8 +2051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>Name of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1669,8 +2059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1678,8 +2067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-required"
             title="Required">
         <span id="proxy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
@@ -1687,8 +2075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1696,8 +2083,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd><dt class="property-required"
+            title="Required">
+        <span id="tls_ciphers_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tls_ciphers_python" style="color: inherit; text-decoration: inherit;">tls_<wbr>ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-required"
+            title="Required">
+        <span id="tls_support_versions_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tls_support_versions_python" style="color: inherit; text-decoration: inherit;">tls_<wbr>support_<wbr>versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1711,8 +2113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication.</p>
-</dd><dt class="property-required"
+    <dd>Authentication type of the layer7 listener. <code>0</code> is one-way authentication and <code>1</code> is mutual authentication.</dd><dt class="property-required"
             title="Required">
         <span id="certificateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certificateid_yaml" style="color: inherit; text-decoration: inherit;">certificate<wbr>Id</a>
@@ -1720,8 +2121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Certificate ID of the layer7 listener.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Certificate ID of the layer7 listener.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="clientcertificateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateid_yaml" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Id</a>
@@ -1729,9 +2129,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead. ID of the client certificate.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.26.0. Use <code>client_certificate_ids</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead. ID of the client certificate.<p class="property-message">Deprecated: It has been deprecated from version 1.26.0. Use <code>clientCertificateIds</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="clientcertificateids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clientcertificateids_yaml" style="color: inherit; text-decoration: inherit;">client<wbr>Certificate<wbr>Ids</a>
@@ -1739,8 +2137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of the client certificate.</p>
-</dd><dt class="property-required"
+    <dd>ID list of the client certificate.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1748,8 +2145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="forwardprotocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardprotocol_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Protocol</a>
@@ -1757,8 +2153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol type of the forwarding.</p>
-</dd><dt class="property-required"
+    <dd>Protocol type of the forwarding.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1766,8 +2161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1775,8 +2169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the layer7 listener.</p>
-</dd><dt class="property-required"
+    <dd>Name of the layer7 listener.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1784,8 +2177,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Port of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1793,8 +2185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the layer7 listener to be queried. Valid values: <code>HTTP</code> and <code>HTTPS</code>.</dd><dt class="property-required"
             title="Required">
         <span id="proxyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1802,8 +2193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP proxy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP proxy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1811,8 +2201,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Status of the layer7 listener.</p>
-</dd></dl>
+    <dd>Status of the layer7 listener.</dd><dt class="property-required"
+            title="Required">
+        <span id="tlsciphers_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlsciphers_yaml" style="color: inherit; text-decoration: inherit;">tls<wbr>Ciphers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).</dd><dt class="property-required"
+            title="Required">
+        <span id="tlssupportversions_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tlssupportversions_yaml" style="color: inherit; text-decoration: inherit;">tls<wbr>Support<wbr>Versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1827,7 +2232,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

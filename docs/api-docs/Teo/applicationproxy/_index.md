@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Teo.ApplicationProxy"
 meta_desc: "Documentation for the tencentcloud.Teo.ApplicationProxy resource with examples, input properties, output properties, lookup functions, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,68 +18,83 @@ no_edit_this_page: true
 
 
 ## Create ApplicationProxy Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ApplicationProxy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ApplicationProxyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ApplicationProxy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ApplicationProxyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ApplicationProxy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                     <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ApplicationProxyArgs</a></span><span class="p">,</span>
+                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ApplicationProxy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                      <span class="nx">accelerate_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                     <span class="nx">ipv6</span><span class="p">:</span> <span class="nx">Optional[_teo.ApplicationProxyIpv6Args]</span> = None<span class="p">,</span>
                      <span class="nx">plat_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">proxy_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                     <span class="nx">proxy_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">security_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                     <span class="nx">zone_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                     <span class="nx">ipv6</span><span class="p">:</span> <span class="nx">Optional[ApplicationProxyIpv6Args]</span> = None<span class="p">,</span>
+                     <span class="nx">proxy_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                      <span class="nx">session_persist_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                     <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                     <span class="nx">zone_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ApplicationProxy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                     <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ApplicationProxyArgs</a></span><span class="p">,</span>
-                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                     <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewApplicationProxy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ApplicationProxyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ApplicationProxy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewApplicationProxy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ApplicationProxyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ApplicationProxy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ApplicationProxy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ApplicationProxyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ApplicationProxy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ApplicationProxyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ApplicationProxy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ApplicationProxyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ApplicationProxy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ApplicationProxyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Teo:ApplicationProxy</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Teo:ApplicationProxy</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_teo_application_proxy&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -98,7 +115,7 @@ no_edit_this_page: true
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -215,11 +232,19 @@ no_edit_this_page: true
 </pulumi-choosable>
 </div>
 
+
+
 ## ApplicationProxy Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ApplicationProxy resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -237,8 +262,7 @@ The ApplicationProxy resource accepts the following [input](/docs/intro/concepts
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable acceleration.- <code>1</code>: Enable acceleration.</li>
-</ul>
-</dd><dt class="property-required"
+</ul></dd><dt class="property-required"
             title="Required">
         <span id="plattype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plattype_csharp" style="color: inherit; text-decoration: inherit;">Plat<wbr>Type</a>
@@ -246,8 +270,7 @@ The ApplicationProxy resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</dd><dt class="property-required"
             title="Required">
         <span id="proxyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyname_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Name</a>
@@ -255,9 +278,7 @@ The ApplicationProxy resource accepts the following [input](/docs/intro/concepts
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is
-the name of proxy application.</p>
-</dd><dt class="property-required"
+    <dd>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is the name of proxy application.</dd><dt class="property-required"
             title="Required">
         <span id="securitytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitytype_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Type</a>
@@ -267,8 +288,7 @@ the name of proxy application.</p>
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable security protection.- <code>1</code>: Enable security protection.</li>
-</ul>
-</dd><dt class="property-required"
+</ul></dd><dt class="property-required"
             title="Required">
         <span id="zoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -276,17 +296,15 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site ID.</p>
-</dd><dt class="property-optional"
+    <dd>Site ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_csharp" style="color: inherit; text-decoration: inherit;">Ipv6</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#applicationproxyipv6">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Teo.<wbr>Inputs.<wbr>Application<wbr>Proxy<wbr>Ipv6Args</a></span>
+        <span class="property-type"><a href="#applicationproxyipv6">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Teo.<wbr>Inputs.<wbr>Application<wbr>Proxy<wbr>Ipv6</a></span>
     </dt>
-    <dd><p>IPv6 access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>IPv6 access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxytype_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Type</a>
@@ -294,8 +312,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</p>
-</dd><dt class="property-optional"
+    <dd>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessionpersisttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionpersisttime_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Persist<wbr>Time</a>
@@ -303,8 +320,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -312,9 +328,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>:
-Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</p>
-</dd></dl>
+    <dd>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>: Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -330,8 +344,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable acceleration.- <code>1</code>: Enable acceleration.</li>
-</ul>
-</dd><dt class="property-required"
+</ul></dd><dt class="property-required"
             title="Required">
         <span id="plattype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plattype_go" style="color: inherit; text-decoration: inherit;">Plat<wbr>Type</a>
@@ -339,8 +352,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</dd><dt class="property-required"
             title="Required">
         <span id="proxyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyname_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Name</a>
@@ -348,9 +360,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is
-the name of proxy application.</p>
-</dd><dt class="property-required"
+    <dd>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is the name of proxy application.</dd><dt class="property-required"
             title="Required">
         <span id="securitytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitytype_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Type</a>
@@ -360,8 +370,7 @@ the name of proxy application.</p>
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable security protection.- <code>1</code>: Enable security protection.</li>
-</ul>
-</dd><dt class="property-required"
+</ul></dd><dt class="property-required"
             title="Required">
         <span id="zoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -369,8 +378,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site ID.</p>
-</dd><dt class="property-optional"
+    <dd>Site ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_go" style="color: inherit; text-decoration: inherit;">Ipv6</a>
@@ -378,8 +386,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationproxyipv6">Application<wbr>Proxy<wbr>Ipv6Args</a></span>
     </dt>
-    <dd><p>IPv6 access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>IPv6 access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxytype_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Type</a>
@@ -387,8 +394,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</p>
-</dd><dt class="property-optional"
+    <dd>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessionpersisttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionpersisttime_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Persist<wbr>Time</a>
@@ -396,8 +402,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -405,9 +410,89 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>:
-Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</p>
-</dd></dl>
+    <dd>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>: Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="accelerate_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accelerate_type_hcl" style="color: inherit; text-decoration: inherit;">accelerate_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd><ul>
+<li><code>0</code>: Disable acceleration.- <code>1</code>: Enable acceleration.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="plat_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plat_type_hcl" style="color: inherit; text-decoration: inherit;">plat_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</dd><dt class="property-required"
+            title="Required">
+        <span id="proxy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_name_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is the name of proxy application.</dd><dt class="property-required"
+            title="Required">
+        <span id="security_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_type_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd><ul>
+<li><code>0</code>: Disable security protection.- <code>1</code>: Enable security protection.</li>
+</ul></dd><dt class="property-required"
+            title="Required">
+        <span id="zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Site ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv6_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_hcl" style="color: inherit; text-decoration: inherit;">ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#applicationproxyipv6">object</a></span>
+    </dt>
+    <dd>IPv6 access configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="proxy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_type_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="session_persist_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_persist_time_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>persist_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>: Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -423,8 +508,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable acceleration.- <code>1</code>: Enable acceleration.</li>
-</ul>
-</dd><dt class="property-required"
+</ul></dd><dt class="property-required"
             title="Required">
         <span id="plattype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plattype_java" style="color: inherit; text-decoration: inherit;">plat<wbr>Type</a>
@@ -432,8 +516,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</dd><dt class="property-required"
             title="Required">
         <span id="proxyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyname_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Name</a>
@@ -441,9 +524,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is
-the name of proxy application.</p>
-</dd><dt class="property-required"
+    <dd>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is the name of proxy application.</dd><dt class="property-required"
             title="Required">
         <span id="securitytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitytype_java" style="color: inherit; text-decoration: inherit;">security<wbr>Type</a>
@@ -453,8 +534,7 @@ the name of proxy application.</p>
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable security protection.- <code>1</code>: Enable security protection.</li>
-</ul>
-</dd><dt class="property-required"
+</ul></dd><dt class="property-required"
             title="Required">
         <span id="zoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -462,17 +542,15 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Site ID.</p>
-</dd><dt class="property-optional"
+    <dd>Site ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_java" style="color: inherit; text-decoration: inherit;">ipv6</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#applicationproxyipv6">Application<wbr>Proxy<wbr>Ipv6Args</a></span>
+        <span class="property-type"><a href="#applicationproxyipv6">Application<wbr>Proxy<wbr>Ipv6</a></span>
     </dt>
-    <dd><p>IPv6 access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>IPv6 access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxytype_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Type</a>
@@ -480,8 +558,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</p>
-</dd><dt class="property-optional"
+    <dd>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessionpersisttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionpersisttime_java" style="color: inherit; text-decoration: inherit;">session<wbr>Persist<wbr>Time</a>
@@ -489,8 +566,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -498,9 +574,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>:
-Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</p>
-</dd></dl>
+    <dd>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>: Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -516,8 +590,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable acceleration.- <code>1</code>: Enable acceleration.</li>
-</ul>
-</dd><dt class="property-required"
+</ul></dd><dt class="property-required"
             title="Required">
         <span id="plattype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plattype_nodejs" style="color: inherit; text-decoration: inherit;">plat<wbr>Type</a>
@@ -525,8 +598,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</dd><dt class="property-required"
             title="Required">
         <span id="proxyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyname_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Name</a>
@@ -534,9 +606,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is
-the name of proxy application.</p>
-</dd><dt class="property-required"
+    <dd>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is the name of proxy application.</dd><dt class="property-required"
             title="Required">
         <span id="securitytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitytype_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Type</a>
@@ -546,8 +616,7 @@ the name of proxy application.</p>
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable security protection.- <code>1</code>: Enable security protection.</li>
-</ul>
-</dd><dt class="property-required"
+</ul></dd><dt class="property-required"
             title="Required">
         <span id="zoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -555,17 +624,15 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site ID.</p>
-</dd><dt class="property-optional"
+    <dd>Site ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_nodejs" style="color: inherit; text-decoration: inherit;">ipv6</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#applicationproxyipv6">Application<wbr>Proxy<wbr>Ipv6Args</a></span>
+        <span class="property-type"><a href="#applicationproxyipv6">Application<wbr>Proxy<wbr>Ipv6</a></span>
     </dt>
-    <dd><p>IPv6 access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>IPv6 access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxytype_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Type</a>
@@ -573,8 +640,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</p>
-</dd><dt class="property-optional"
+    <dd>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessionpersisttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionpersisttime_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Persist<wbr>Time</a>
@@ -582,8 +648,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -591,9 +656,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>:
-Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</p>
-</dd></dl>
+    <dd>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>: Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -609,8 +672,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable acceleration.- <code>1</code>: Enable acceleration.</li>
-</ul>
-</dd><dt class="property-required"
+</ul></dd><dt class="property-required"
             title="Required">
         <span id="plat_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plat_type_python" style="color: inherit; text-decoration: inherit;">plat_<wbr>type</a>
@@ -618,8 +680,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</dd><dt class="property-required"
             title="Required">
         <span id="proxy_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_name_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>name</a>
@@ -627,9 +688,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is
-the name of proxy application.</p>
-</dd><dt class="property-required"
+    <dd>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is the name of proxy application.</dd><dt class="property-required"
             title="Required">
         <span id="security_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_type_python" style="color: inherit; text-decoration: inherit;">security_<wbr>type</a>
@@ -639,8 +698,7 @@ the name of proxy application.</p>
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable security protection.- <code>1</code>: Enable security protection.</li>
-</ul>
-</dd><dt class="property-required"
+</ul></dd><dt class="property-required"
             title="Required">
         <span id="zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
@@ -648,8 +706,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Site ID.</p>
-</dd><dt class="property-optional"
+    <dd>Site ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_python" style="color: inherit; text-decoration: inherit;">ipv6</a>
@@ -657,8 +714,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationproxyipv6">Application<wbr>Proxy<wbr>Ipv6Args</a></span>
     </dt>
-    <dd><p>IPv6 access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>IPv6 access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxy_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_type_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>type</a>
@@ -666,8 +722,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</p>
-</dd><dt class="property-optional"
+    <dd>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="session_persist_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_persist_time_python" style="color: inherit; text-decoration: inherit;">session_<wbr>persist_<wbr>time</a>
@@ -675,8 +730,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -684,9 +738,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>:
-Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</p>
-</dd></dl>
+    <dd>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>: Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -702,8 +754,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable acceleration.- <code>1</code>: Enable acceleration.</li>
-</ul>
-</dd><dt class="property-required"
+</ul></dd><dt class="property-required"
             title="Required">
         <span id="plattype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plattype_yaml" style="color: inherit; text-decoration: inherit;">plat<wbr>Type</a>
@@ -711,8 +762,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</dd><dt class="property-required"
             title="Required">
         <span id="proxyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyname_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Name</a>
@@ -720,9 +770,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is
-the name of proxy application.</p>
-</dd><dt class="property-required"
+    <dd>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is the name of proxy application.</dd><dt class="property-required"
             title="Required">
         <span id="securitytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitytype_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Type</a>
@@ -732,8 +780,7 @@ the name of proxy application.</p>
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable security protection.- <code>1</code>: Enable security protection.</li>
-</ul>
-</dd><dt class="property-required"
+</ul></dd><dt class="property-required"
             title="Required">
         <span id="zoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -741,8 +788,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Site ID.</p>
-</dd><dt class="property-optional"
+    <dd>Site ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="ipv6_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_yaml" style="color: inherit; text-decoration: inherit;">ipv6</a>
@@ -750,8 +796,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationproxyipv6">Property Map</a></span>
     </dt>
-    <dd><p>IPv6 access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>IPv6 access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="proxytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxytype_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Type</a>
@@ -759,8 +804,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</p>
-</dd><dt class="property-optional"
+    <dd>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="sessionpersisttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionpersisttime_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Persist<wbr>Time</a>
@@ -768,8 +812,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -777,9 +820,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>:
-Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</p>
-</dd></dl>
+    <dd>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>: Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -800,8 +841,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-"
+    <dd>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-"
             title="">
         <span id="banstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#banstatus_csharp" style="color: inherit; text-decoration: inherit;">Ban<wbr>Status</a>
@@ -809,8 +849,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</p>
-</dd><dt class="property-"
+    <dd>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</dd><dt class="property-"
             title="">
         <span id="hostid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Id</a>
@@ -818,8 +857,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</p>
-</dd><dt class="property-"
+    <dd>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -827,8 +865,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -836,8 +873,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy ID.</p>
-</dd><dt class="property-"
+    <dd>Proxy ID.</dd><dt class="property-"
             title="">
         <span id="schedulevalues_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedulevalues_csharp" style="color: inherit; text-decoration: inherit;">Schedule<wbr>Values</a>
@@ -845,8 +881,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Scheduling information.</p>
-</dd><dt class="property-"
+    <dd>Scheduling information.</dd><dt class="property-"
             title="">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -854,8 +889,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modification date.</p>
-</dd></dl>
+    <dd>Last modification date.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -869,8 +903,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-"
+    <dd>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-"
             title="">
         <span id="banstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#banstatus_go" style="color: inherit; text-decoration: inherit;">Ban<wbr>Status</a>
@@ -878,8 +911,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</p>
-</dd><dt class="property-"
+    <dd>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</dd><dt class="property-"
             title="">
         <span id="hostid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Id</a>
@@ -887,8 +919,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</p>
-</dd><dt class="property-"
+    <dd>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -896,8 +927,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -905,8 +935,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy ID.</p>
-</dd><dt class="property-"
+    <dd>Proxy ID.</dd><dt class="property-"
             title="">
         <span id="schedulevalues_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedulevalues_go" style="color: inherit; text-decoration: inherit;">Schedule<wbr>Values</a>
@@ -914,8 +943,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Scheduling information.</p>
-</dd><dt class="property-"
+    <dd>Scheduling information.</dd><dt class="property-"
             title="">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -923,8 +951,69 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modification date.</p>
-</dd></dl>
+    <dd>Last modification date.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="area_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_hcl" style="color: inherit; text-decoration: inherit;">area</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-"
+            title="">
+        <span id="ban_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ban_status_hcl" style="color: inherit; text-decoration: inherit;">ban_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</dd><dt class="property-"
+            title="">
+        <span id="host_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_id_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="proxy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Proxy ID.</dd><dt class="property-"
+            title="">
+        <span id="schedule_values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedule_values_hcl" style="color: inherit; text-decoration: inherit;">schedule_<wbr>values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Scheduling information.</dd><dt class="property-"
+            title="">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modification date.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -938,8 +1027,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-"
+    <dd>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-"
             title="">
         <span id="banstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#banstatus_java" style="color: inherit; text-decoration: inherit;">ban<wbr>Status</a>
@@ -947,8 +1035,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</p>
-</dd><dt class="property-"
+    <dd>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</dd><dt class="property-"
             title="">
         <span id="hostid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_java" style="color: inherit; text-decoration: inherit;">host<wbr>Id</a>
@@ -956,8 +1043,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</p>
-</dd><dt class="property-"
+    <dd>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -965,8 +1051,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -974,8 +1059,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proxy ID.</p>
-</dd><dt class="property-"
+    <dd>Proxy ID.</dd><dt class="property-"
             title="">
         <span id="schedulevalues_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedulevalues_java" style="color: inherit; text-decoration: inherit;">schedule<wbr>Values</a>
@@ -983,8 +1067,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Scheduling information.</p>
-</dd><dt class="property-"
+    <dd>Scheduling information.</dd><dt class="property-"
             title="">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -992,8 +1075,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modification date.</p>
-</dd></dl>
+    <dd>Last modification date.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1007,8 +1089,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-"
+    <dd>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-"
             title="">
         <span id="banstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#banstatus_nodejs" style="color: inherit; text-decoration: inherit;">ban<wbr>Status</a>
@@ -1016,8 +1097,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</p>
-</dd><dt class="property-"
+    <dd>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</dd><dt class="property-"
             title="">
         <span id="hostid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Id</a>
@@ -1025,8 +1105,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</p>
-</dd><dt class="property-"
+    <dd>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1034,8 +1113,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1043,8 +1121,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy ID.</p>
-</dd><dt class="property-"
+    <dd>Proxy ID.</dd><dt class="property-"
             title="">
         <span id="schedulevalues_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedulevalues_nodejs" style="color: inherit; text-decoration: inherit;">schedule<wbr>Values</a>
@@ -1052,8 +1129,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Scheduling information.</p>
-</dd><dt class="property-"
+    <dd>Scheduling information.</dd><dt class="property-"
             title="">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1061,8 +1137,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modification date.</p>
-</dd></dl>
+    <dd>Last modification date.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1076,8 +1151,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-"
+    <dd>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-"
             title="">
         <span id="ban_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ban_status_python" style="color: inherit; text-decoration: inherit;">ban_<wbr>status</a>
@@ -1085,8 +1159,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</p>
-</dd><dt class="property-"
+    <dd>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</dd><dt class="property-"
             title="">
         <span id="host_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_id_python" style="color: inherit; text-decoration: inherit;">host_<wbr>id</a>
@@ -1094,8 +1167,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</p>
-</dd><dt class="property-"
+    <dd>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1103,8 +1175,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxy_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
@@ -1112,8 +1183,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Proxy ID.</p>
-</dd><dt class="property-"
+    <dd>Proxy ID.</dd><dt class="property-"
             title="">
         <span id="schedule_values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedule_values_python" style="color: inherit; text-decoration: inherit;">schedule_<wbr>values</a>
@@ -1121,8 +1191,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Scheduling information.</p>
-</dd><dt class="property-"
+    <dd>Scheduling information.</dd><dt class="property-"
             title="">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1130,8 +1199,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modification date.</p>
-</dd></dl>
+    <dd>Last modification date.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1145,8 +1213,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-"
+    <dd>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-"
             title="">
         <span id="banstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#banstatus_yaml" style="color: inherit; text-decoration: inherit;">ban<wbr>Status</a>
@@ -1154,8 +1221,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</p>
-</dd><dt class="property-"
+    <dd>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</dd><dt class="property-"
             title="">
         <span id="hostid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostid_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Id</a>
@@ -1163,8 +1229,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</p>
-</dd><dt class="property-"
+    <dd>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1172,8 +1237,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="proxyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#proxyid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1181,8 +1245,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proxy ID.</p>
-</dd><dt class="property-"
+    <dd>Proxy ID.</dd><dt class="property-"
             title="">
         <span id="schedulevalues_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedulevalues_yaml" style="color: inherit; text-decoration: inherit;">schedule<wbr>Values</a>
@@ -1190,8 +1253,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Scheduling information.</p>
-</dd><dt class="property-"
+    <dd>Scheduling information.</dd><dt class="property-"
             title="">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1199,8 +1261,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modification date.</p>
-</dd></dl>
+    <dd>Last modification date.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1210,18 +1271,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ApplicationProxy resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ApplicationProxyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ApplicationProxy</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ApplicationProxyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ApplicationProxy</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1229,7 +1290,7 @@ Get an existing ApplicationProxy resource's state with the given name, ID, and o
         <span class="nx">area</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">ban_status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">host_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">ipv6</span><span class="p">:</span> <span class="nx">Optional[_teo.ApplicationProxyIpv6Args]</span> = None<span class="p">,</span>
+        <span class="nx">ipv6</span><span class="p">:</span> <span class="nx">Optional[ApplicationProxyIpv6Args]</span> = None<span class="p">,</span>
         <span class="nx">plat_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">proxy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">proxy_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -1240,104 +1301,143 @@ Get an existing ApplicationProxy resource's state with the given name, ID, and o
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">update_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">zone_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> ApplicationProxy</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetApplicationProxy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ApplicationProxyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ApplicationProxy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetApplicationProxy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ApplicationProxyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ApplicationProxy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ApplicationProxy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ApplicationProxyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ApplicationProxy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ApplicationProxyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ApplicationProxy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ApplicationProxyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ApplicationProxy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ApplicationProxyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingApplicationProxy</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Teo:ApplicationProxy</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_teo_application_proxy</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ApplicationProxyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ApplicationProxyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1345,28 +1445,31 @@ Get an existing ApplicationProxy resource's state with the given name, ID, and o
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ApplicationProxyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1374,28 +1477,31 @@ Get an existing ApplicationProxy resource's state with the given name, ID, and o
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ApplicationProxyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1417,8 +1523,7 @@ The following state arguments are supported:
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable acceleration.- <code>1</code>: Enable acceleration.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_area_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_area_csharp" style="color: inherit; text-decoration: inherit;">Area</a>
@@ -1426,8 +1531,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_banstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_banstatus_csharp" style="color: inherit; text-decoration: inherit;">Ban<wbr>Status</a>
@@ -1435,8 +1539,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostid_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Id</a>
@@ -1444,17 +1547,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</p>
-</dd><dt class="property-optional"
+    <dd>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv6_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv6_csharp" style="color: inherit; text-decoration: inherit;">Ipv6</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#applicationproxyipv6">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Teo.<wbr>Inputs.<wbr>Application<wbr>Proxy<wbr>Ipv6Args</a></span>
+        <span class="property-type"><a href="#applicationproxyipv6">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Teo.<wbr>Inputs.<wbr>Application<wbr>Proxy<wbr>Ipv6</a></span>
     </dt>
-    <dd><p>IPv6 access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>IPv6 access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_plattype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_plattype_csharp" style="color: inherit; text-decoration: inherit;">Plat<wbr>Type</a>
@@ -1462,8 +1563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyid_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -1471,8 +1571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy ID.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyname_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Name</a>
@@ -1480,9 +1579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is
-the name of proxy application.</p>
-</dd><dt class="property-optional"
+    <dd>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is the name of proxy application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxytype_csharp" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Type</a>
@@ -1490,8 +1587,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</p>
-</dd><dt class="property-optional"
+    <dd>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_schedulevalues_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedulevalues_csharp" style="color: inherit; text-decoration: inherit;">Schedule<wbr>Values</a>
@@ -1499,8 +1595,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Scheduling information.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitytype_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Type</a>
@@ -1510,8 +1605,7 @@ the name of proxy application.</p>
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable security protection.- <code>1</code>: Enable security protection.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessionpersisttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionpersisttime_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Persist<wbr>Time</a>
@@ -1519,8 +1613,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1528,9 +1621,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>:
-Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</p>
-</dd><dt class="property-optional"
+    <dd>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>: Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1538,8 +1629,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modification date.</p>
-</dd><dt class="property-optional"
+    <dd>Last modification date.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -1547,8 +1637,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site ID.</p>
-</dd></dl>
+    <dd>Site ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1564,8 +1653,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable acceleration.- <code>1</code>: Enable acceleration.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_area_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_area_go" style="color: inherit; text-decoration: inherit;">Area</a>
@@ -1573,8 +1661,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_banstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_banstatus_go" style="color: inherit; text-decoration: inherit;">Ban<wbr>Status</a>
@@ -1582,8 +1669,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostid_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Id</a>
@@ -1591,8 +1677,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</p>
-</dd><dt class="property-optional"
+    <dd>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv6_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv6_go" style="color: inherit; text-decoration: inherit;">Ipv6</a>
@@ -1600,8 +1685,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationproxyipv6">Application<wbr>Proxy<wbr>Ipv6Args</a></span>
     </dt>
-    <dd><p>IPv6 access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>IPv6 access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_plattype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_plattype_go" style="color: inherit; text-decoration: inherit;">Plat<wbr>Type</a>
@@ -1609,8 +1693,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyid_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Id</a>
@@ -1618,8 +1701,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy ID.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyname_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Name</a>
@@ -1627,9 +1709,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is
-the name of proxy application.</p>
-</dd><dt class="property-optional"
+    <dd>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is the name of proxy application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxytype_go" style="color: inherit; text-decoration: inherit;">Proxy<wbr>Type</a>
@@ -1637,8 +1717,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</p>
-</dd><dt class="property-optional"
+    <dd>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_schedulevalues_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedulevalues_go" style="color: inherit; text-decoration: inherit;">Schedule<wbr>Values</a>
@@ -1646,8 +1725,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Scheduling information.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitytype_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Type</a>
@@ -1657,8 +1735,7 @@ the name of proxy application.</p>
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable security protection.- <code>1</code>: Enable security protection.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessionpersisttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionpersisttime_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Persist<wbr>Time</a>
@@ -1666,8 +1743,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1675,9 +1751,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>:
-Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</p>
-</dd><dt class="property-optional"
+    <dd>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>: Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -1685,8 +1759,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modification date.</p>
-</dd><dt class="property-optional"
+    <dd>Last modification date.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -1694,8 +1767,137 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site ID.</p>
-</dd></dl>
+    <dd>Site ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_accelerate_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_accelerate_type_hcl" style="color: inherit; text-decoration: inherit;">accelerate_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd><ul>
+<li><code>0</code>: Disable acceleration.- <code>1</code>: Enable acceleration.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_area_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_area_hcl" style="color: inherit; text-decoration: inherit;">area</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ban_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ban_status_hcl" style="color: inherit; text-decoration: inherit;">ban_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_host_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_id_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipv6_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv6_hcl" style="color: inherit; text-decoration: inherit;">ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#applicationproxyipv6">object</a></span>
+    </dt>
+    <dd>IPv6 access configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_plat_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_plat_type_hcl" style="color: inherit; text-decoration: inherit;">plat_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_proxy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_id_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Proxy ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_proxy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_name_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is the name of proxy application.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_proxy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_type_hcl" style="color: inherit; text-decoration: inherit;">proxy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_schedule_values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedule_values_hcl" style="color: inherit; text-decoration: inherit;">schedule_<wbr>values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Scheduling information.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_security_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_type_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd><ul>
+<li><code>0</code>: Disable security protection.- <code>1</code>: Enable security protection.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_session_persist_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_session_persist_time_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>persist_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>: Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modification date.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Site ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1711,8 +1913,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable acceleration.- <code>1</code>: Enable acceleration.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_area_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_area_java" style="color: inherit; text-decoration: inherit;">area</a>
@@ -1720,8 +1921,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_banstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_banstatus_java" style="color: inherit; text-decoration: inherit;">ban<wbr>Status</a>
@@ -1729,8 +1929,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostid_java" style="color: inherit; text-decoration: inherit;">host<wbr>Id</a>
@@ -1738,17 +1937,15 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</p>
-</dd><dt class="property-optional"
+    <dd>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv6_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv6_java" style="color: inherit; text-decoration: inherit;">ipv6</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#applicationproxyipv6">Application<wbr>Proxy<wbr>Ipv6Args</a></span>
+        <span class="property-type"><a href="#applicationproxyipv6">Application<wbr>Proxy<wbr>Ipv6</a></span>
     </dt>
-    <dd><p>IPv6 access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>IPv6 access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_plattype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_plattype_java" style="color: inherit; text-decoration: inherit;">plat<wbr>Type</a>
@@ -1756,8 +1953,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyid_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1765,8 +1961,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proxy ID.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyname_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Name</a>
@@ -1774,9 +1969,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is
-the name of proxy application.</p>
-</dd><dt class="property-optional"
+    <dd>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is the name of proxy application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxytype_java" style="color: inherit; text-decoration: inherit;">proxy<wbr>Type</a>
@@ -1784,8 +1977,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</p>
-</dd><dt class="property-optional"
+    <dd>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_schedulevalues_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedulevalues_java" style="color: inherit; text-decoration: inherit;">schedule<wbr>Values</a>
@@ -1793,8 +1985,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Scheduling information.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitytype_java" style="color: inherit; text-decoration: inherit;">security<wbr>Type</a>
@@ -1804,8 +1995,7 @@ the name of proxy application.</p>
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable security protection.- <code>1</code>: Enable security protection.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessionpersisttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionpersisttime_java" style="color: inherit; text-decoration: inherit;">session<wbr>Persist<wbr>Time</a>
@@ -1813,8 +2003,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1822,9 +2011,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>:
-Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</p>
-</dd><dt class="property-optional"
+    <dd>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>: Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1832,8 +2019,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modification date.</p>
-</dd><dt class="property-optional"
+    <dd>Last modification date.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -1841,8 +2027,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Site ID.</p>
-</dd></dl>
+    <dd>Site ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1858,8 +2043,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable acceleration.- <code>1</code>: Enable acceleration.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_area_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_area_nodejs" style="color: inherit; text-decoration: inherit;">area</a>
@@ -1867,8 +2051,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_banstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_banstatus_nodejs" style="color: inherit; text-decoration: inherit;">ban<wbr>Status</a>
@@ -1876,8 +2059,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostid_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Id</a>
@@ -1885,17 +2067,15 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</p>
-</dd><dt class="property-optional"
+    <dd>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv6_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv6_nodejs" style="color: inherit; text-decoration: inherit;">ipv6</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#applicationproxyipv6">Application<wbr>Proxy<wbr>Ipv6Args</a></span>
+        <span class="property-type"><a href="#applicationproxyipv6">Application<wbr>Proxy<wbr>Ipv6</a></span>
     </dt>
-    <dd><p>IPv6 access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>IPv6 access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_plattype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_plattype_nodejs" style="color: inherit; text-decoration: inherit;">plat<wbr>Type</a>
@@ -1903,8 +2083,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyid_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -1912,8 +2091,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Proxy ID.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyname_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Name</a>
@@ -1921,9 +2099,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is
-the name of proxy application.</p>
-</dd><dt class="property-optional"
+    <dd>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is the name of proxy application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxytype_nodejs" style="color: inherit; text-decoration: inherit;">proxy<wbr>Type</a>
@@ -1931,8 +2107,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</p>
-</dd><dt class="property-optional"
+    <dd>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_schedulevalues_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedulevalues_nodejs" style="color: inherit; text-decoration: inherit;">schedule<wbr>Values</a>
@@ -1940,8 +2115,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Scheduling information.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitytype_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Type</a>
@@ -1951,8 +2125,7 @@ the name of proxy application.</p>
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable security protection.- <code>1</code>: Enable security protection.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessionpersisttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionpersisttime_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Persist<wbr>Time</a>
@@ -1960,8 +2133,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1969,9 +2141,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>:
-Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</p>
-</dd><dt class="property-optional"
+    <dd>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>: Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1979,8 +2149,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modification date.</p>
-</dd><dt class="property-optional"
+    <dd>Last modification date.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -1988,8 +2157,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Site ID.</p>
-</dd></dl>
+    <dd>Site ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2005,8 +2173,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable acceleration.- <code>1</code>: Enable acceleration.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_area_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_area_python" style="color: inherit; text-decoration: inherit;">area</a>
@@ -2014,8 +2181,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ban_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ban_status_python" style="color: inherit; text-decoration: inherit;">ban_<wbr>status</a>
@@ -2023,8 +2189,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_id_python" style="color: inherit; text-decoration: inherit;">host_<wbr>id</a>
@@ -2032,8 +2197,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</p>
-</dd><dt class="property-optional"
+    <dd>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv6_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv6_python" style="color: inherit; text-decoration: inherit;">ipv6</a>
@@ -2041,8 +2205,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationproxyipv6">Application<wbr>Proxy<wbr>Ipv6Args</a></span>
     </dt>
-    <dd><p>IPv6 access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>IPv6 access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_plat_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_plat_type_python" style="color: inherit; text-decoration: inherit;">plat_<wbr>type</a>
@@ -2050,8 +2213,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_id_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>id</a>
@@ -2059,8 +2221,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Proxy ID.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxy_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_name_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>name</a>
@@ -2068,9 +2229,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is
-the name of proxy application.</p>
-</dd><dt class="property-optional"
+    <dd>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is the name of proxy application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxy_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxy_type_python" style="color: inherit; text-decoration: inherit;">proxy_<wbr>type</a>
@@ -2078,8 +2237,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</p>
-</dd><dt class="property-optional"
+    <dd>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_schedule_values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedule_values_python" style="color: inherit; text-decoration: inherit;">schedule_<wbr>values</a>
@@ -2087,8 +2245,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Scheduling information.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_security_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_type_python" style="color: inherit; text-decoration: inherit;">security_<wbr>type</a>
@@ -2098,8 +2255,7 @@ the name of proxy application.</p>
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable security protection.- <code>1</code>: Enable security protection.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_session_persist_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_session_persist_time_python" style="color: inherit; text-decoration: inherit;">session_<wbr>persist_<wbr>time</a>
@@ -2107,8 +2263,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2116,9 +2271,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>:
-Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</p>
-</dd><dt class="property-optional"
+    <dd>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>: Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -2126,8 +2279,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modification date.</p>
-</dd><dt class="property-optional"
+    <dd>Last modification date.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
@@ -2135,8 +2287,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Site ID.</p>
-</dd></dl>
+    <dd>Site ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2152,8 +2303,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable acceleration.- <code>1</code>: Enable acceleration.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_area_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_area_yaml" style="color: inherit; text-decoration: inherit;">area</a>
@@ -2161,8 +2311,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Acceleration area. Valid values: <code>mainland</code>, <code>overseas</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_banstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_banstatus_yaml" style="color: inherit; text-decoration: inherit;">ban<wbr>Status</a>
@@ -2170,8 +2319,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Application proxy block status. Valid values: <code>banned</code>, <code>banning</code>, <code>recover</code>, <code>recovering</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostid_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Id</a>
@@ -2179,8 +2327,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</p>
-</dd><dt class="property-optional"
+    <dd>When <code>ProxyType</code> is hostname, this field is the ID of the subdomain.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ipv6_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv6_yaml" style="color: inherit; text-decoration: inherit;">ipv6</a>
@@ -2188,8 +2335,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#applicationproxyipv6">Property Map</a></span>
     </dt>
-    <dd><p>IPv6 access configuration.</p>
-</dd><dt class="property-optional"
+    <dd>IPv6 access configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_plattype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_plattype_yaml" style="color: inherit; text-decoration: inherit;">plat<wbr>Type</a>
@@ -2197,8 +2343,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling mode.- <code>ip</code>: Anycast IP.- <code>domain</code>: CNAME.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyid_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Id</a>
@@ -2206,8 +2351,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Proxy ID.</p>
-</dd><dt class="property-optional"
+    <dd>Proxy ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxyname_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Name</a>
@@ -2215,9 +2359,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is
-the name of proxy application.</p>
-</dd><dt class="property-optional"
+    <dd>When <code>ProxyType</code> is hostname, <code>ProxyName</code> is the domain or subdomain name.When <code>ProxyType</code> is instance, <code>ProxyName</code> is the name of proxy application.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_proxytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_proxytype_yaml" style="color: inherit; text-decoration: inherit;">proxy<wbr>Type</a>
@@ -2225,8 +2367,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</p>
-</dd><dt class="property-optional"
+    <dd>Layer 4 proxy mode. Valid values:- <code>hostname</code>: subdomain mode.- <code>instance</code>: instance mode.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_schedulevalues_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedulevalues_yaml" style="color: inherit; text-decoration: inherit;">schedule<wbr>Values</a>
@@ -2234,8 +2375,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Scheduling information.</p>
-</dd><dt class="property-optional"
+    <dd>Scheduling information.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitytype_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Type</a>
@@ -2245,8 +2385,7 @@ the name of proxy application.</p>
     </dt>
     <dd><ul>
 <li><code>0</code>: Disable security protection.- <code>1</code>: Enable security protection.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_sessionpersisttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionpersisttime_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Persist<wbr>Time</a>
@@ -2254,8 +2393,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</p>
-</dd><dt class="property-optional"
+    <dd>Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2263,9 +2401,7 @@ the name of proxy application.</p>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>:
-Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</p>
-</dd><dt class="property-optional"
+    <dd>Status of this application proxy. Valid values to set is <code>online</code> and <code>offline</code>.- <code>online</code>: Enable.- <code>offline</code>: Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating.- <code>fail</code>: Deploy or deactivate failed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2273,8 +2409,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modification date.</p>
-</dd><dt class="property-optional"
+    <dd>Last modification date.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -2282,8 +2417,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Site ID.</p>
-</dd></dl>
+    <dd>Site ID.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2298,7 +2432,9 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
 
 
 
-<h4 id="applicationproxyipv6">Application<wbr>Proxy<wbr>Ipv6</h4>
+<h4 id="applicationproxyipv6">
+Application<wbr>Proxy<wbr>Ipv6<pulumi-choosable type="language" values="python,go" class="inline">, Application<wbr>Proxy<wbr>Ipv6<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2312,8 +2448,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
     </dt>
     <dd><ul>
 <li><code>on</code>: Enable.- <code>off</code>: Disable.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2329,8 +2464,23 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
     </dt>
     <dd><ul>
 <li><code>on</code>: Enable.- <code>off</code>: Disable.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#switch_hcl" style="color: inherit; text-decoration: inherit;">switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><ul>
+<li><code>on</code>: Enable.- <code>off</code>: Disable.</li>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2346,8 +2496,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
     </dt>
     <dd><ul>
 <li><code>on</code>: Enable.- <code>off</code>: Disable.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2363,8 +2512,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
     </dt>
     <dd><ul>
 <li><code>on</code>: Enable.- <code>off</code>: Disable.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2380,8 +2528,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
     </dt>
     <dd><ul>
 <li><code>on</code>: Enable.- <code>off</code>: Disable.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2397,8 +2544,7 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
     </dt>
     <dd><ul>
 <li><code>on</code>: Enable.- <code>off</code>: Disable.</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2410,7 +2556,6 @@ Disable.- <code>progress</code>: Deploying.- <code>stopping</code>: Deactivating
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getRegion"
 title_tag: "tencentcloud.Ckafka.getRegion"
-meta_desc: "Documentation for the tencentcloud.Ckafka.getRegion function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of ckafka region"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,42 +18,45 @@ Use this data source to query detailed information of ckafka region
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const region = tencentcloud.Ckafka.getRegion({});
+const region = tencentcloud.ckafka.getRegion({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-region = tencentcloud.Ckafka.get_region()
+region = tencentcloud.ckafka.get_region()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var region = Tencentcloud.Ckafka.GetRegion.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ckafka"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ckafka.GetRegion(ctx, nil, nil)
+		_, err := ckafka.GetRegion(ctx, &ckafka.GetRegionArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -59,6 +64,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var region = Tencentcloud.Ckafka.GetRegion.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -67,8 +94,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ckafka.CkafkaFunctions;
 import com.pulumi.tencentcloud.Ckafka.inputs.GetRegionArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -80,20 +107,50 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var region = CkafkaFunctions.getRegion();
+        final var region = CkafkaFunctions.getRegion(GetRegionArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   region:
     fn::invoke:
-      Function: tencentcloud:Ckafka:getRegion
-      Arguments: {}
+      function: tencentcloud:Ckafka:getRegion
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_ckafka_getregion" "region" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeRegion](https://www.tencentcloud.com/document/api/597/40317)
 
 
 
@@ -105,7 +162,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -113,9 +170,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getRegion<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRegionArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRegionResult</a></span>></span
+><span class="k">function </span>getRegion<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRegionArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRegionResult</a></span>></span
 ><span class="k">
-function </span>getRegionOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRegionOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRegionResult</a></span>></span
+function </span>getRegionOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRegionOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRegionResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -127,8 +184,8 @@ function </span>getRegionOutput<span class="p">(</span><span class="nx">args</sp
 ><span class="k">def </span>get_region<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetRegionResult</span
 ><span class="k">
-def </span>get_region_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRegionResult]</span
+def </span>get_region_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRegionResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -137,12 +194,12 @@ def </span>get_region_output<span class="p">(</span><span class="nx">result_outp
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetRegion<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetRegionArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetRegionResult</a></span>, error)</span
+><span class="k">func </span>LookupRegion<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupRegionArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupRegionResult</a></span>, error)</span
 ><span class="k">
-func </span>GetRegionOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetRegionOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetRegionResultOutput</span
+func </span>LookupRegionOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupRegionOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupRegionResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetRegion` in the Go SDK.
+&gt; Note: This function is named `LookupRegion` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -153,7 +210,8 @@ func </span>GetRegionOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetRegion </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetRegionResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetRegionArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetRegionResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRegionInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRegionResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRegionInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRegionResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRegionInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -162,7 +220,8 @@ func </span>GetRegionOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetRegionResult</a></span>> </span>getRegion<span class="p">(</span><span class="nx">GetRegionArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRegionResult</a></span>> </span>getRegion<span class="p">(</span><span class="nx">GetRegionArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRegionResult</a></span>> </span>getRegion<span class="p">(</span><span class="nx">GetRegionArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,6 +233,15 @@ func </span>GetRegionOutput<span class="p">(</span><span class="nx">ctx</span><s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Ckafka/getRegion:getRegion
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_ckafka_get_region&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -192,8 +260,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -207,8 +274,21 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -222,8 +302,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -237,8 +316,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -267,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -291,8 +367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_csharp" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -300,8 +375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getregionresult">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Ckafka.<wbr>Outputs.<wbr>Get<wbr>Region<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>Return a list of region enumeration results.</p>
-</dd><dt class="property-"
+    <dd>Return a list of region enumeration results.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -323,8 +397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_go" style="color: inherit; text-decoration: inherit;">Results</a>
@@ -332,11 +405,40 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getregionresult">[]Get<wbr>Region<wbr>Result</a></span>
     </dt>
-    <dd><p>Return a list of region enumeration results.</p>
-</dd><dt class="property-"
+    <dd>Return a list of region enumeration results.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="results_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_hcl" style="color: inherit; text-decoration: inherit;">results</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getregionresult">list(object)</a></span>
+    </dt>
+    <dd>Return a list of region enumeration results.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -355,8 +457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_java" style="color: inherit; text-decoration: inherit;">results</a>
@@ -364,8 +465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getregionresult">List&lt;Get<wbr>Region<wbr>Result&gt;</a></span>
     </dt>
-    <dd><p>Return a list of region enumeration results.</p>
-</dd><dt class="property-"
+    <dd>Return a list of region enumeration results.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -387,8 +487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_nodejs" style="color: inherit; text-decoration: inherit;">results</a>
@@ -396,8 +495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getregionresult">Get<wbr>Region<wbr>Result[]</a></span>
     </dt>
-    <dd><p>Return a list of region enumeration results.</p>
-</dd><dt class="property-"
+    <dd>Return a list of region enumeration results.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -419,17 +517,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_python" style="color: inherit; text-decoration: inherit;">results</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getregionresult">Get<wbr>Region<wbr>Result]</a></span>
+        <span class="property-type"><a href="#getregionresult">Sequence[Get<wbr>Region<wbr>Result]</a></span>
     </dt>
-    <dd><p>Return a list of region enumeration results.</p>
-</dd><dt class="property-"
+    <dd>Return a list of region enumeration results.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -451,8 +547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="results_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#results_yaml" style="color: inherit; text-decoration: inherit;">results</a>
@@ -460,8 +555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getregionresult">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Return a list of region enumeration results.</p>
-</dd><dt class="property-"
+    <dd>Return a list of region enumeration results.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -493,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>area name.</p>
-</dd><dt class="property-required"
+    <dd>area name.</dd><dt class="property-required"
             title="Required">
         <span id="ipv6_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_csharp" style="color: inherit; text-decoration: inherit;">Ipv6</a>
@@ -502,8 +595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to support ipv6, 0: means not supported, 1: means supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support ipv6, 0: means not supported, 1: means supported.</dd><dt class="property-required"
             title="Required">
         <span id="multizone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizone_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone</a>
@@ -511,8 +603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to support cross-availability zones, 0: means not supported, 1: means supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support cross-availability zones, 0: means not supported, 1: means supported.</dd><dt class="property-required"
             title="Required">
         <span id="regioncode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regioncode_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Code</a>
@@ -520,8 +611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region Code.</p>
-</dd><dt class="property-required"
+    <dd>Region Code.</dd><dt class="property-required"
             title="Required">
         <span id="regioncodev3_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regioncodev3_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Code<wbr>V3</a>
@@ -529,8 +619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region Code(V3 version).</p>
-</dd><dt class="property-required"
+    <dd>Region Code(V3 version).</dd><dt class="property-required"
             title="Required">
         <span id="regionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Id</a>
@@ -538,8 +627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>region ID.</p>
-</dd><dt class="property-required"
+    <dd>region ID.</dd><dt class="property-required"
             title="Required">
         <span id="regionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_csharp" style="color: inherit; text-decoration: inherit;">Region<wbr>Name</a>
@@ -547,8 +635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>geographical name.</p>
-</dd><dt class="property-required"
+    <dd>geographical name.</dd><dt class="property-required"
             title="Required">
         <span id="support_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_csharp" style="color: inherit; text-decoration: inherit;">Support</a>
@@ -556,8 +643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>NONE: The default value does not support any special models CVM: Supports CVM types.</p>
-</dd></dl>
+    <dd>NONE: The default value does not support any special models CVM: Supports CVM types.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -571,8 +657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>area name.</p>
-</dd><dt class="property-required"
+    <dd>area name.</dd><dt class="property-required"
             title="Required">
         <span id="ipv6_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_go" style="color: inherit; text-decoration: inherit;">Ipv6</a>
@@ -580,8 +665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to support ipv6, 0: means not supported, 1: means supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support ipv6, 0: means not supported, 1: means supported.</dd><dt class="property-required"
             title="Required">
         <span id="multizone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizone_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone</a>
@@ -589,8 +673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to support cross-availability zones, 0: means not supported, 1: means supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support cross-availability zones, 0: means not supported, 1: means supported.</dd><dt class="property-required"
             title="Required">
         <span id="regioncode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regioncode_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Code</a>
@@ -598,8 +681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region Code.</p>
-</dd><dt class="property-required"
+    <dd>Region Code.</dd><dt class="property-required"
             title="Required">
         <span id="regioncodev3_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regioncodev3_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Code<wbr>V3</a>
@@ -607,8 +689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region Code(V3 version).</p>
-</dd><dt class="property-required"
+    <dd>Region Code(V3 version).</dd><dt class="property-required"
             title="Required">
         <span id="regionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Id</a>
@@ -616,8 +697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>region ID.</p>
-</dd><dt class="property-required"
+    <dd>region ID.</dd><dt class="property-required"
             title="Required">
         <span id="regionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_go" style="color: inherit; text-decoration: inherit;">Region<wbr>Name</a>
@@ -625,8 +705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>geographical name.</p>
-</dd><dt class="property-required"
+    <dd>geographical name.</dd><dt class="property-required"
             title="Required">
         <span id="support_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_go" style="color: inherit; text-decoration: inherit;">Support</a>
@@ -634,8 +713,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>NONE: The default value does not support any special models CVM: Supports CVM types.</p>
-</dd></dl>
+    <dd>NONE: The default value does not support any special models CVM: Supports CVM types.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="area_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_name_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>area name.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv6_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_hcl" style="color: inherit; text-decoration: inherit;">ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to support ipv6, 0: means not supported, 1: means supported.</dd><dt class="property-required"
+            title="Required">
+        <span id="multi_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_zone_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to support cross-availability zones, 0: means not supported, 1: means supported.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_code_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region Code.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_code_v3_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_code_v3_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>code_<wbr>v3</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region Code(V3 version).</dd><dt class="property-required"
+            title="Required">
+        <span id="region_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_id_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>region ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="region_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_name_hcl" style="color: inherit; text-decoration: inherit;">region_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>geographical name.</dd><dt class="property-required"
+            title="Required">
+        <span id="support_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_hcl" style="color: inherit; text-decoration: inherit;">support</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>NONE: The default value does not support any special models CVM: Supports CVM types.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -649,8 +797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>area name.</p>
-</dd><dt class="property-required"
+    <dd>area name.</dd><dt class="property-required"
             title="Required">
         <span id="ipv6_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_java" style="color: inherit; text-decoration: inherit;">ipv6</a>
@@ -658,8 +805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to support ipv6, 0: means not supported, 1: means supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support ipv6, 0: means not supported, 1: means supported.</dd><dt class="property-required"
             title="Required">
         <span id="multizone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizone_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone</a>
@@ -667,8 +813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to support cross-availability zones, 0: means not supported, 1: means supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support cross-availability zones, 0: means not supported, 1: means supported.</dd><dt class="property-required"
             title="Required">
         <span id="regioncode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regioncode_java" style="color: inherit; text-decoration: inherit;">region<wbr>Code</a>
@@ -676,8 +821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region Code.</p>
-</dd><dt class="property-required"
+    <dd>Region Code.</dd><dt class="property-required"
             title="Required">
         <span id="regioncodev3_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regioncodev3_java" style="color: inherit; text-decoration: inherit;">region<wbr>Code<wbr>V3</a>
@@ -685,8 +829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region Code(V3 version).</p>
-</dd><dt class="property-required"
+    <dd>Region Code(V3 version).</dd><dt class="property-required"
             title="Required">
         <span id="regionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_java" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -694,8 +837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>region ID.</p>
-</dd><dt class="property-required"
+    <dd>region ID.</dd><dt class="property-required"
             title="Required">
         <span id="regionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_java" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -703,8 +845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>geographical name.</p>
-</dd><dt class="property-required"
+    <dd>geographical name.</dd><dt class="property-required"
             title="Required">
         <span id="support_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_java" style="color: inherit; text-decoration: inherit;">support</a>
@@ -712,8 +853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>NONE: The default value does not support any special models CVM: Supports CVM types.</p>
-</dd></dl>
+    <dd>NONE: The default value does not support any special models CVM: Supports CVM types.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -727,8 +867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>area name.</p>
-</dd><dt class="property-required"
+    <dd>area name.</dd><dt class="property-required"
             title="Required">
         <span id="ipv6_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_nodejs" style="color: inherit; text-decoration: inherit;">ipv6</a>
@@ -736,8 +875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to support ipv6, 0: means not supported, 1: means supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support ipv6, 0: means not supported, 1: means supported.</dd><dt class="property-required"
             title="Required">
         <span id="multizone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizone_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone</a>
@@ -745,8 +883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to support cross-availability zones, 0: means not supported, 1: means supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support cross-availability zones, 0: means not supported, 1: means supported.</dd><dt class="property-required"
             title="Required">
         <span id="regioncode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regioncode_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Code</a>
@@ -754,8 +891,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region Code.</p>
-</dd><dt class="property-required"
+    <dd>Region Code.</dd><dt class="property-required"
             title="Required">
         <span id="regioncodev3_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regioncodev3_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Code<wbr>V3</a>
@@ -763,8 +899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region Code(V3 version).</p>
-</dd><dt class="property-required"
+    <dd>Region Code(V3 version).</dd><dt class="property-required"
             title="Required">
         <span id="regionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -772,8 +907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>region ID.</p>
-</dd><dt class="property-required"
+    <dd>region ID.</dd><dt class="property-required"
             title="Required">
         <span id="regionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_nodejs" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -781,8 +915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>geographical name.</p>
-</dd><dt class="property-required"
+    <dd>geographical name.</dd><dt class="property-required"
             title="Required">
         <span id="support_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_nodejs" style="color: inherit; text-decoration: inherit;">support</a>
@@ -790,8 +923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>NONE: The default value does not support any special models CVM: Supports CVM types.</p>
-</dd></dl>
+    <dd>NONE: The default value does not support any special models CVM: Supports CVM types.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -805,8 +937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>area name.</p>
-</dd><dt class="property-required"
+    <dd>area name.</dd><dt class="property-required"
             title="Required">
         <span id="ipv6_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_python" style="color: inherit; text-decoration: inherit;">ipv6</a>
@@ -814,8 +945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to support ipv6, 0: means not supported, 1: means supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support ipv6, 0: means not supported, 1: means supported.</dd><dt class="property-required"
             title="Required">
         <span id="multi_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_zone_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone</a>
@@ -823,8 +953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to support cross-availability zones, 0: means not supported, 1: means supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support cross-availability zones, 0: means not supported, 1: means supported.</dd><dt class="property-required"
             title="Required">
         <span id="region_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_code_python" style="color: inherit; text-decoration: inherit;">region_<wbr>code</a>
@@ -832,8 +961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region Code.</p>
-</dd><dt class="property-required"
+    <dd>Region Code.</dd><dt class="property-required"
             title="Required">
         <span id="region_code_v3_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_code_v3_python" style="color: inherit; text-decoration: inherit;">region_<wbr>code_<wbr>v3</a>
@@ -841,8 +969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region Code(V3 version).</p>
-</dd><dt class="property-required"
+    <dd>Region Code(V3 version).</dd><dt class="property-required"
             title="Required">
         <span id="region_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_id_python" style="color: inherit; text-decoration: inherit;">region_<wbr>id</a>
@@ -850,8 +977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>region ID.</p>
-</dd><dt class="property-required"
+    <dd>region ID.</dd><dt class="property-required"
             title="Required">
         <span id="region_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_name_python" style="color: inherit; text-decoration: inherit;">region_<wbr>name</a>
@@ -859,8 +985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>geographical name.</p>
-</dd><dt class="property-required"
+    <dd>geographical name.</dd><dt class="property-required"
             title="Required">
         <span id="support_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_python" style="color: inherit; text-decoration: inherit;">support</a>
@@ -868,8 +993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>NONE: The default value does not support any special models CVM: Supports CVM types.</p>
-</dd></dl>
+    <dd>NONE: The default value does not support any special models CVM: Supports CVM types.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -883,8 +1007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>area name.</p>
-</dd><dt class="property-required"
+    <dd>area name.</dd><dt class="property-required"
             title="Required">
         <span id="ipv6_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_yaml" style="color: inherit; text-decoration: inherit;">ipv6</a>
@@ -892,8 +1015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to support ipv6, 0: means not supported, 1: means supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support ipv6, 0: means not supported, 1: means supported.</dd><dt class="property-required"
             title="Required">
         <span id="multizone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizone_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone</a>
@@ -901,8 +1023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to support cross-availability zones, 0: means not supported, 1: means supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether to support cross-availability zones, 0: means not supported, 1: means supported.</dd><dt class="property-required"
             title="Required">
         <span id="regioncode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regioncode_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Code</a>
@@ -910,8 +1031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region Code.</p>
-</dd><dt class="property-required"
+    <dd>Region Code.</dd><dt class="property-required"
             title="Required">
         <span id="regioncodev3_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regioncodev3_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Code<wbr>V3</a>
@@ -919,8 +1039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region Code(V3 version).</p>
-</dd><dt class="property-required"
+    <dd>Region Code(V3 version).</dd><dt class="property-required"
             title="Required">
         <span id="regionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionid_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Id</a>
@@ -928,8 +1047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>region ID.</p>
-</dd><dt class="property-required"
+    <dd>region ID.</dd><dt class="property-required"
             title="Required">
         <span id="regionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#regionname_yaml" style="color: inherit; text-decoration: inherit;">region<wbr>Name</a>
@@ -937,8 +1055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>geographical name.</p>
-</dd><dt class="property-required"
+    <dd>geographical name.</dd><dt class="property-required"
             title="Required">
         <span id="support_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_yaml" style="color: inherit; text-decoration: inherit;">support</a>
@@ -946,8 +1063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>NONE: The default value does not support any special models CVM: Supports CVM types.</p>
-</dd></dl>
+    <dd>NONE: The default value does not support any special models CVM: Supports CVM types.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -962,7 +1078,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

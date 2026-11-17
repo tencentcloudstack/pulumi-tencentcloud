@@ -2,9 +2,11 @@
 ---
 title: "getZoneConfig"
 title_tag: "tencentcloud.Cynosdb.getZoneConfig"
-meta_desc: "Documentation for the tencentcloud.Cynosdb.getZoneConfig function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query which instance types of Redis are available in a specific region."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,42 +18,45 @@ Use this data source to query which instance types of Redis are available in a s
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Cynosdb.getZoneConfig({});
+const foo = tencentcloud.cynosdb.getZoneConfig({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Cynosdb.get_zone_config()
+foo = tencentcloud.cynosdb.get_zone_config()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Cynosdb.GetZoneConfig.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cynosdb.GetZoneConfig(ctx, nil, nil)
+		_, err := cynosdb.GetZoneConfig(ctx, &cynosdb.GetZoneConfigArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -59,6 +64,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = Tencentcloud.Cynosdb.GetZoneConfig.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -67,8 +94,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cynosdb.CynosdbFunctions;
 import com.pulumi.tencentcloud.Cynosdb.inputs.GetZoneConfigArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -80,20 +107,50 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var foo = CynosdbFunctions.getZoneConfig();
+        final var foo = CynosdbFunctions.getZoneConfig(GetZoneConfigArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   foo:
     fn::invoke:
-      Function: tencentcloud:Cynosdb:getZoneConfig
-      Arguments: {}
+      function: tencentcloud:Cynosdb:getZoneConfig
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cynosdb_getzoneconfig" "foo" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeInstanceSpecs](https://www.tencentcloud.com/document/api/1098/40748)
 
 
 
@@ -105,7 +162,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -113,9 +170,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getZoneConfig<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneConfigArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>></span
+><span class="k">function </span>getZoneConfig<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneConfigArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>></span
 ><span class="k">
-function </span>getZoneConfigOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneConfigOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>></span
+function </span>getZoneConfigOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetZoneConfigOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -127,8 +184,8 @@ function </span>getZoneConfigOutput<span class="p">(</span><span class="nx">args
 ><span class="k">def </span>get_zone_config<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetZoneConfigResult</span
 ><span class="k">
-def </span>get_zone_config_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetZoneConfigResult]</span
+def </span>get_zone_config_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetZoneConfigResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -153,7 +210,8 @@ func </span>GetZoneConfigOutput<span class="p">(</span><span class="nx">ctx</spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetZoneConfig </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetZoneConfigArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneConfigInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneConfigInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetZoneConfigInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -162,7 +220,8 @@ func </span>GetZoneConfigOutput<span class="p">(</span><span class="nx">ctx</spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> </span>getZoneConfig<span class="p">(</span><span class="nx">GetZoneConfigArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> </span>getZoneConfig<span class="p">(</span><span class="nx">GetZoneConfigArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetZoneConfigResult</a></span>> </span>getZoneConfig<span class="p">(</span><span class="nx">GetZoneConfigArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,6 +233,15 @@ func </span>GetZoneConfigOutput<span class="p">(</span><span class="nx">ctx</spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cynosdb/getZoneConfig:getZoneConfig
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cynosdb_get_zone_config&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -192,8 +260,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -207,8 +274,21 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -222,8 +302,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -237,8 +316,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -267,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -291,8 +367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -300,8 +375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Outputs.<wbr>Get<wbr>Zone<wbr>Config<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of zone. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -323,8 +397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -332,11 +405,40 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglist">[]Get<wbr>Zone<wbr>Config<wbr>List</a></span>
     </dt>
-    <dd><p>A list of zone. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzoneconfiglist">list(object)</a></span>
+    </dt>
+    <dd>A list of zone. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -355,8 +457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -364,8 +465,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglist">List&lt;Get<wbr>Zone<wbr>Config<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of zone. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -387,8 +487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -396,8 +495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglist">Get<wbr>Zone<wbr>Config<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of zone. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -419,17 +517,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzoneconfiglist">Get<wbr>Zone<wbr>Config<wbr>List]</a></span>
+        <span class="property-type"><a href="#getzoneconfiglist">Sequence[Get<wbr>Zone<wbr>Config<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of zone. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -451,8 +547,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -460,8 +555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of zone. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of zone. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -493,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance CPU, unit: core.</p>
-</dd><dt class="property-required"
+    <dd>Instance CPU, unit: core.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_csharp" style="color: inherit; text-decoration: inherit;">Machine<wbr>Type</a>
@@ -502,8 +595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Machine type.</p>
-</dd><dt class="property-required"
+    <dd>Machine type.</dd><dt class="property-required"
             title="Required">
         <span id="maxiobandwidth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxiobandwidth_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Io<wbr>Bandwidth</a>
@@ -511,8 +603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max io bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Max io bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="maxstoragesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstoragesize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Storage<wbr>Size</a>
@@ -520,8 +611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum available storage for the instance, unit GB.</p>
-</dd><dt class="property-required"
+    <dd>The maximum available storage for the instance, unit GB.</dd><dt class="property-required"
             title="Required">
         <span id="memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -529,8 +619,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance memory, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="minstoragesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minstoragesize_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Storage<wbr>Size</a>
@@ -538,8 +627,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum available storage of the instance, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Minimum available storage of the instance, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="zonestockinfos_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonestockinfos_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Stock<wbr>Infos</a>
@@ -547,8 +635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglistzonestockinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Inputs.<wbr>Get<wbr>Zone<wbr>Config<wbr>List<wbr>Zone<wbr>Stock<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Regional inventory information.</p>
-</dd></dl>
+    <dd>Regional inventory information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -562,8 +649,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance CPU, unit: core.</p>
-</dd><dt class="property-required"
+    <dd>Instance CPU, unit: core.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_go" style="color: inherit; text-decoration: inherit;">Machine<wbr>Type</a>
@@ -571,8 +657,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Machine type.</p>
-</dd><dt class="property-required"
+    <dd>Machine type.</dd><dt class="property-required"
             title="Required">
         <span id="maxiobandwidth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxiobandwidth_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Io<wbr>Bandwidth</a>
@@ -580,8 +665,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max io bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Max io bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="maxstoragesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstoragesize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Storage<wbr>Size</a>
@@ -589,8 +673,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum available storage for the instance, unit GB.</p>
-</dd><dt class="property-required"
+    <dd>The maximum available storage for the instance, unit GB.</dd><dt class="property-required"
             title="Required">
         <span id="memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -598,8 +681,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance memory, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="minstoragesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minstoragesize_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Storage<wbr>Size</a>
@@ -607,8 +689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum available storage of the instance, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Minimum available storage of the instance, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="zonestockinfos_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonestockinfos_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Stock<wbr>Infos</a>
@@ -616,8 +697,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglistzonestockinfo">[]Get<wbr>Zone<wbr>Config<wbr>List<wbr>Zone<wbr>Stock<wbr>Info</a></span>
     </dt>
-    <dd><p>Regional inventory information.</p>
-</dd></dl>
+    <dd>Regional inventory information.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance CPU, unit: core.</dd><dt class="property-required"
+            title="Required">
+        <span id="machine_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machine_type_hcl" style="color: inherit; text-decoration: inherit;">machine_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Machine type.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_io_bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_io_bandwidth_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>io_<wbr>bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Max io bandwidth.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_storage_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_storage_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>storage_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum available storage for the instance, unit GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance memory, unit: GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_storage_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_storage_size_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>storage_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum available storage of the instance, unit: GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_stock_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_stock_infos_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>stock_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getzoneconfiglistzonestockinfo">list(object)</a></span>
+    </dt>
+    <dd>Regional inventory information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -631,8 +773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance CPU, unit: core.</p>
-</dd><dt class="property-required"
+    <dd>Instance CPU, unit: core.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_java" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -640,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Machine type.</p>
-</dd><dt class="property-required"
+    <dd>Machine type.</dd><dt class="property-required"
             title="Required">
         <span id="maxiobandwidth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxiobandwidth_java" style="color: inherit; text-decoration: inherit;">max<wbr>Io<wbr>Bandwidth</a>
@@ -649,8 +789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Max io bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Max io bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="maxstoragesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstoragesize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Storage<wbr>Size</a>
@@ -658,8 +797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum available storage for the instance, unit GB.</p>
-</dd><dt class="property-required"
+    <dd>The maximum available storage for the instance, unit GB.</dd><dt class="property-required"
             title="Required">
         <span id="memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -667,8 +805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance memory, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="minstoragesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minstoragesize_java" style="color: inherit; text-decoration: inherit;">min<wbr>Storage<wbr>Size</a>
@@ -676,8 +813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Minimum available storage of the instance, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Minimum available storage of the instance, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="zonestockinfos_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonestockinfos_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Stock<wbr>Infos</a>
@@ -685,8 +821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglistzonestockinfo">List&lt;Get<wbr>Zone<wbr>Config<wbr>List<wbr>Zone<wbr>Stock<wbr>Info&gt;</a></span>
     </dt>
-    <dd><p>Regional inventory information.</p>
-</dd></dl>
+    <dd>Regional inventory information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -700,8 +835,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance CPU, unit: core.</p>
-</dd><dt class="property-required"
+    <dd>Instance CPU, unit: core.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_nodejs" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -709,8 +843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Machine type.</p>
-</dd><dt class="property-required"
+    <dd>Machine type.</dd><dt class="property-required"
             title="Required">
         <span id="maxiobandwidth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxiobandwidth_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Io<wbr>Bandwidth</a>
@@ -718,8 +851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Max io bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Max io bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="maxstoragesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstoragesize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Storage<wbr>Size</a>
@@ -727,8 +859,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum available storage for the instance, unit GB.</p>
-</dd><dt class="property-required"
+    <dd>The maximum available storage for the instance, unit GB.</dd><dt class="property-required"
             title="Required">
         <span id="memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -736,8 +867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance memory, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="minstoragesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minstoragesize_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Storage<wbr>Size</a>
@@ -745,8 +875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Minimum available storage of the instance, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Minimum available storage of the instance, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="zonestockinfos_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonestockinfos_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Stock<wbr>Infos</a>
@@ -754,8 +883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglistzonestockinfo">Get<wbr>Zone<wbr>Config<wbr>List<wbr>Zone<wbr>Stock<wbr>Info[]</a></span>
     </dt>
-    <dd><p>Regional inventory information.</p>
-</dd></dl>
+    <dd>Regional inventory information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -769,8 +897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance CPU, unit: core.</p>
-</dd><dt class="property-required"
+    <dd>Instance CPU, unit: core.</dd><dt class="property-required"
             title="Required">
         <span id="machine_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machine_type_python" style="color: inherit; text-decoration: inherit;">machine_<wbr>type</a>
@@ -778,8 +905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Machine type.</p>
-</dd><dt class="property-required"
+    <dd>Machine type.</dd><dt class="property-required"
             title="Required">
         <span id="max_io_bandwidth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_io_bandwidth_python" style="color: inherit; text-decoration: inherit;">max_<wbr>io_<wbr>bandwidth</a>
@@ -787,8 +913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max io bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Max io bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="max_storage_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_storage_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>storage_<wbr>size</a>
@@ -796,8 +921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum available storage for the instance, unit GB.</p>
-</dd><dt class="property-required"
+    <dd>The maximum available storage for the instance, unit GB.</dd><dt class="property-required"
             title="Required">
         <span id="memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -805,8 +929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance memory, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="min_storage_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_storage_size_python" style="color: inherit; text-decoration: inherit;">min_<wbr>storage_<wbr>size</a>
@@ -814,17 +937,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum available storage of the instance, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Minimum available storage of the instance, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="zone_stock_infos_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_stock_infos_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>stock_<wbr>infos</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getzoneconfiglistzonestockinfo">Get<wbr>Zone<wbr>Config<wbr>List<wbr>Zone<wbr>Stock<wbr>Info]</a></span>
+        <span class="property-type"><a href="#getzoneconfiglistzonestockinfo">Sequence[Get<wbr>Zone<wbr>Config<wbr>List<wbr>Zone<wbr>Stock<wbr>Info]</a></span>
     </dt>
-    <dd><p>Regional inventory information.</p>
-</dd></dl>
+    <dd>Regional inventory information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -838,8 +959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance CPU, unit: core.</p>
-</dd><dt class="property-required"
+    <dd>Instance CPU, unit: core.</dd><dt class="property-required"
             title="Required">
         <span id="machinetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_yaml" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -847,8 +967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Machine type.</p>
-</dd><dt class="property-required"
+    <dd>Machine type.</dd><dt class="property-required"
             title="Required">
         <span id="maxiobandwidth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxiobandwidth_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Io<wbr>Bandwidth</a>
@@ -856,8 +975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Max io bandwidth.</p>
-</dd><dt class="property-required"
+    <dd>Max io bandwidth.</dd><dt class="property-required"
             title="Required">
         <span id="maxstoragesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxstoragesize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Storage<wbr>Size</a>
@@ -865,8 +983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum available storage for the instance, unit GB.</p>
-</dd><dt class="property-required"
+    <dd>The maximum available storage for the instance, unit GB.</dd><dt class="property-required"
             title="Required">
         <span id="memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -874,8 +991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance memory, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Instance memory, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="minstoragesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minstoragesize_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Storage<wbr>Size</a>
@@ -883,8 +999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Minimum available storage of the instance, unit: GB.</p>
-</dd><dt class="property-required"
+    <dd>Minimum available storage of the instance, unit: GB.</dd><dt class="property-required"
             title="Required">
         <span id="zonestockinfos_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonestockinfos_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Stock<wbr>Infos</a>
@@ -892,8 +1007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getzoneconfiglistzonestockinfo">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Regional inventory information.</p>
-</dd></dl>
+    <dd>Regional inventory information.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -911,8 +1025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Has stock.</p>
-</dd><dt class="property-required"
+    <dd>Has stock.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -920,8 +1033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -935,8 +1047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Has stock.</p>
-</dd><dt class="property-required"
+    <dd>Has stock.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -944,8 +1055,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="has_stock_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#has_stock_hcl" style="color: inherit; text-decoration: inherit;">has_<wbr>stock</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Has stock.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -959,8 +1091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Has stock.</p>
-</dd><dt class="property-required"
+    <dd>Has stock.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -968,8 +1099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -983,8 +1113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Has stock.</p>
-</dd><dt class="property-required"
+    <dd>Has stock.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -992,8 +1121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1007,8 +1135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Has stock.</p>
-</dd><dt class="property-required"
+    <dd>Has stock.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1016,8 +1143,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1031,8 +1157,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Has stock.</p>
-</dd><dt class="property-required"
+    <dd>Has stock.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1040,8 +1165,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1056,7 +1180,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

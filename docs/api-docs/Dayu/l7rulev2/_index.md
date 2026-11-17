@@ -2,9 +2,11 @@
 ---
 title: "L7RuleV2"
 title_tag: "tencentcloud.Dayu.L7RuleV2"
-meta_desc: "Documentation for the tencentcloud.Dayu.L7RuleV2 resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create dayu new layer 7 rule NOTE: This resource only support resource Anti-DDoS of type bgpip"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,21 +20,23 @@ Use this resource to create dayu new layer 7 rule
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const tencentcloudDayuL7RuleV2 = new tencentcloud.dayu.L7RuleV2("tencentcloudDayuL7RuleV2", {
+const tencentcloudDayuL7RuleV2 = new tencentcloud.dayu.L7RuleV2("tencentcloud_dayu_l7_rule_v2", {
+    resourceType: "bgpip",
     resourceId: "bgpip-000004xe",
     resourceIp: "119.28.217.162",
-    resourceType: "bgpip",
     rule: {
-        domain: "github.com",
-        keepEnable: false,
+        keepEnable: Number(false),
         keeptime: 0,
-        lbType: 1,
-        protocol: "http",
         sourceLists: [
             {
                 source: "1.2.3.5",
@@ -43,37 +47,95 @@ const tencentcloudDayuL7RuleV2 = new tencentcloud.dayu.L7RuleV2("tencentcloudDay
                 weight: 100,
             },
         ],
+        lbType: 1,
+        protocol: "http",
         sourceType: 2,
+        domain: "github.com",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-tencentcloud_dayu_l7_rule_v2 = tencentcloud.dayu.L7RuleV2("tencentcloudDayuL7RuleV2",
+tencentcloud_dayu_l7_rule_v2 = tencentcloud.dayu.L7RuleV2("tencentcloud_dayu_l7_rule_v2",
+    resource_type="bgpip",
     resource_id="bgpip-000004xe",
     resource_ip="119.28.217.162",
-    resource_type="bgpip",
-    rule=tencentcloud.dayu.L7RuleV2RuleArgs(
-        domain="github.com",
-        keep_enable=False,
-        keeptime=0,
-        lb_type=1,
-        protocol="http",
-        source_lists=[
-            tencentcloud.dayu.L7RuleV2RuleSourceListArgs(
-                source="1.2.3.5",
-                weight=100,
-            ),
-            tencentcloud.dayu.L7RuleV2RuleSourceListArgs(
-                source="1.2.3.6",
-                weight=100,
-            ),
+    rule={
+        "keep_enable": int(False),
+        "keeptime": 0,
+        "source_lists": [
+            {
+                "source": "1.2.3.5",
+                "weight": 100,
+            },
+            {
+                "source": "1.2.3.6",
+                "weight": 100,
+            },
         ],
-        source_type=2,
-    ))
+        "lb_type": 1,
+        "protocol": "http",
+        "source_type": 2,
+        "domain": "github.com",
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dayu"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dayu.NewL7RuleV2(ctx, "tencentcloud_dayu_l7_rule_v2", &dayu.L7RuleV2Args{
+			ResourceType: pulumi.String("bgpip"),
+			ResourceId:   pulumi.String("bgpip-000004xe"),
+			ResourceIp:   pulumi.String("119.28.217.162"),
+			Rule: &dayu.L7RuleV2RuleArgs{
+				KeepEnable: pulumi.Int(false),
+				Keeptime:   pulumi.Int(0),
+				SourceLists: dayu.L7RuleV2RuleSourceListArray{
+					&dayu.L7RuleV2RuleSourceListArgs{
+						Source: pulumi.String("1.2.3.5"),
+						Weight: pulumi.Int(100),
+					},
+					&dayu.L7RuleV2RuleSourceListArgs{
+						Source: pulumi.String("1.2.3.6"),
+						Weight: pulumi.Int(100),
+					},
+				},
+				LbType:     pulumi.Int(1),
+				Protocol:   pulumi.String("http"),
+				SourceType: pulumi.Int(2),
+				Domain:     pulumi.String("github.com"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -82,18 +144,15 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var tencentcloudDayuL7RuleV2 = new Tencentcloud.Dayu.L7RuleV2("tencentcloudDayuL7RuleV2", new()
+    var tencentcloudDayuL7RuleV2 = new Tencentcloud.Dayu.L7RuleV2("tencentcloud_dayu_l7_rule_v2", new()
     {
+        ResourceType = "bgpip",
         ResourceId = "bgpip-000004xe",
         ResourceIp = "119.28.217.162",
-        ResourceType = "bgpip",
         Rule = new Tencentcloud.Dayu.Inputs.L7RuleV2RuleArgs
         {
-            Domain = "github.com",
             KeepEnable = false,
             Keeptime = 0,
-            LbType = 1,
-            Protocol = "http",
             SourceLists = new[]
             {
                 new Tencentcloud.Dayu.Inputs.L7RuleV2RuleSourceListArgs
@@ -107,52 +166,20 @@ return await Deployment.RunAsync(() =>
                     Weight = 100,
                 },
             },
+            LbType = 1,
+            Protocol = "http",
             SourceType = 2,
+            Domain = "github.com",
         },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dayu.NewL7RuleV2(ctx, "tencentcloudDayuL7RuleV2", &Dayu.L7RuleV2Args{
-			ResourceId:   pulumi.String("bgpip-000004xe"),
-			ResourceIp:   pulumi.String("119.28.217.162"),
-			ResourceType: pulumi.String("bgpip"),
-			Rule: &dayu.L7RuleV2RuleArgs{
-				Domain:     pulumi.String("github.com"),
-				KeepEnable: pulumi.Int(false),
-				Keeptime:   pulumi.Int(0),
-				LbType:     pulumi.Int(1),
-				Protocol:   pulumi.String("http"),
-				SourceLists: dayu.L7RuleV2RuleSourceListArray{
-					&dayu.L7RuleV2RuleSourceListArgs{
-						Source: pulumi.String("1.2.3.5"),
-						Weight: pulumi.Int(100),
-					},
-					&dayu.L7RuleV2RuleSourceListArgs{
-						Source: pulumi.String("1.2.3.6"),
-						Weight: pulumi.Int(100),
-					},
-				},
-				SourceType: pulumi.Int(2),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -162,8 +189,9 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dayu.L7RuleV2;
 import com.pulumi.tencentcloud.Dayu.L7RuleV2Args;
 import com.pulumi.tencentcloud.Dayu.inputs.L7RuleV2RuleArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Dayu.inputs.L7RuleV2RuleSourceListArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -175,16 +203,13 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var tencentcloudDayuL7RuleV2 = new L7RuleV2("tencentcloudDayuL7RuleV2", L7RuleV2Args.builder()        
+        var tencentcloudDayuL7RuleV2 = new L7RuleV2("tencentcloudDayuL7RuleV2", L7RuleV2Args.builder()
+            .resourceType("bgpip")
             .resourceId("bgpip-000004xe")
             .resourceIp("119.28.217.162")
-            .resourceType("bgpip")
             .rule(L7RuleV2RuleArgs.builder()
-                .domain("github.com")
-                .keepEnable(false)
+                .keepEnable(%!v(PANIC=Format method: not a number))
                 .keeptime(0)
-                .lbType(1)
-                .protocol("http")
                 .sourceLists(                
                     L7RuleV2RuleSourceListArgs.builder()
                         .source("1.2.3.5")
@@ -194,97 +219,170 @@ public class App {
                         .source("1.2.3.6")
                         .weight(100)
                         .build())
+                .lbType(1)
+                .protocol("http")
                 .sourceType(2)
+                .domain("github.com")
                 .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   tencentcloudDayuL7RuleV2:
     type: tencentcloud:Dayu:L7RuleV2
+    name: tencentcloud_dayu_l7_rule_v2
     properties:
+      resourceType: bgpip
       resourceId: bgpip-000004xe
       resourceIp: 119.28.217.162
-      resourceType: bgpip
       rule:
-        domain: github.com
         keepEnable: false
         keeptime: 0
-        lbType: 1
-        protocol: http
         sourceLists:
           - source: 1.2.3.5
             weight: 100
           - source: 1.2.3.6
             weight: 100
+        lbType: 1
+        protocol: http
         sourceType: 2
+        domain: github.com
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_dayu_l7rulev2" "tencentcloud_dayu_l7_rule_v2" {
+  resource_type = "bgpip"
+  resource_id   = "bgpip-000004xe"
+  resource_ip   = "119.28.217.162"
+  rule = {
+    keep_enable = false
+    keeptime    = 0
+    source_lists = [{
+      "source" = "1.2.3.5"
+      "weight" = 100
+      }, {
+      "source" = "1.2.3.6"
+      "weight" = 100
+    }]
+    lb_type     = 1
+    protocol    = "http"
+    source_type = 2
+    domain      = "github.com"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateNewL7Rules](https://www.tencentcloud.com/search/?wd=CreateNewL7Rules&type=document&lang=en)
+* Read: [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&type=document&lang=en)
+* Update:
+  - [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&type=document&lang=en)
+  - [ModifyNewDomainRules](https://www.tencentcloud.com/search/?wd=ModifyNewDomainRules&type=document&lang=en)
+* Delete:
+  - [DeleteNewL7Rules](https://www.tencentcloud.com/search/?wd=DeleteNewL7Rules&type=document&lang=en)
+  - [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&type=document&lang=en)
 
 
 
 ## Create L7RuleV2 Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">L7RuleV2</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">L7RuleV2Args</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">L7RuleV2</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">L7RuleV2Args</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">L7RuleV2</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">L7RuleV2Args</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">L7RuleV2</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
              <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">resource_ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">rule</span><span class="p">:</span> <span class="nx">Optional[_dayu.L7RuleV2RuleArgs]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">L7RuleV2</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">L7RuleV2Args</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">rule</span><span class="p">:</span> <span class="nx">Optional[L7RuleV2RuleArgs]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewL7RuleV2</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">L7RuleV2Args</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">L7RuleV2</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewL7RuleV2</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">L7RuleV2Args</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">L7RuleV2</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">L7RuleV2</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">L7RuleV2Args</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">L7RuleV2</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">L7RuleV2Args</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">L7RuleV2</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">L7RuleV2Args</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">L7RuleV2</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">L7RuleV2Args</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dayu:L7RuleV2</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dayu:L7RuleV2</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_dayu_l7_rule_v2&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -305,7 +403,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -422,11 +520,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## L7RuleV2 Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -442,8 +548,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the layer 7 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourceip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceip_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Ip</a>
@@ -451,8 +556,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Ip of the resource that the layer 7 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -460,17 +564,15 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rule_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_csharp" style="color: inherit; text-decoration: inherit;">Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#l7rulev2rule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>L7Rule<wbr>V2Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#l7rulev2rule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>L7Rule<wbr>V2Rule</a></span>
     </dt>
-    <dd><p>A list of layer 7 rules. Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of layer 7 rules. Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -484,8 +586,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the layer 7 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourceip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceip_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Ip</a>
@@ -493,8 +594,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Ip of the resource that the layer 7 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -502,8 +602,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rule_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_go" style="color: inherit; text-decoration: inherit;">Rule</a>
@@ -511,8 +610,45 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#l7rulev2rule">L7Rule<wbr>V2Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of layer 7 rules. Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of layer 7 rules. Each element contains the following attributes:</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the resource that the layer 7 rule works for.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="resource_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_ip_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ip of the resource that the layer 7 rule works for.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_hcl" style="color: inherit; text-decoration: inherit;">rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#l7rulev2rule">object</a></span>
+    </dt>
+    <dd>A list of layer 7 rules. Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -526,8 +662,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the layer 7 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourceip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceip_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Ip</a>
@@ -535,8 +670,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Ip of the resource that the layer 7 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -544,17 +678,15 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rule_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_java" style="color: inherit; text-decoration: inherit;">rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#l7rulev2rule">L7Rule<wbr>V2Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#l7rulev2rule">L7Rule<wbr>V2Rule</a></span>
     </dt>
-    <dd><p>A list of layer 7 rules. Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of layer 7 rules. Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -568,8 +700,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the layer 7 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourceip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceip_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Ip</a>
@@ -577,8 +708,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Ip of the resource that the layer 7 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -586,17 +716,15 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rule_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_nodejs" style="color: inherit; text-decoration: inherit;">rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#l7rulev2rule">L7Rule<wbr>V2Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#l7rulev2rule">L7Rule<wbr>V2Rule</a></span>
     </dt>
-    <dd><p>A list of layer 7 rules. Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of layer 7 rules. Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -610,8 +738,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the layer 7 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resource_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_ip_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>ip</a>
@@ -619,8 +746,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ip of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Ip of the resource that the layer 7 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -628,8 +754,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rule_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_python" style="color: inherit; text-decoration: inherit;">rule</a>
@@ -637,8 +762,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#l7rulev2rule">L7Rule<wbr>V2Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of layer 7 rules. Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of layer 7 rules. Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -652,8 +776,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the resource that the layer 7 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourceip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceip_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Ip</a>
@@ -661,8 +784,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Ip of the resource that the layer 7 rule works for.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -670,8 +792,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="rule_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_yaml" style="color: inherit; text-decoration: inherit;">rule</a>
@@ -679,8 +800,7 @@ The L7RuleV2 resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#l7rulev2rule">Property Map</a></span>
     </dt>
-    <dd><p>A list of layer 7 rules. Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of layer 7 rules. Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -701,8 +821,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -716,8 +835,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -731,8 +863,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -746,8 +877,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -761,8 +891,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -776,8 +905,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -787,123 +915,162 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing L7RuleV2 resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">L7RuleV2State</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">L7RuleV2</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">L7RuleV2State</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">L7RuleV2</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">resource_ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">rule</span><span class="p">:</span> <span class="nx">Optional[_dayu.L7RuleV2RuleArgs]</span> = None<span class="p">) -&gt;</span> L7RuleV2</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">rule</span><span class="p">:</span> <span class="nx">Optional[L7RuleV2RuleArgs]</span> = None<span class="p">) -&gt;</span> L7RuleV2</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetL7RuleV2<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">L7RuleV2State</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">L7RuleV2</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetL7RuleV2<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">L7RuleV2State</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">L7RuleV2</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">L7RuleV2</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">L7RuleV2State</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">L7RuleV2</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">L7RuleV2State</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">L7RuleV2</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">L7RuleV2State</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">L7RuleV2</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">L7RuleV2State</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingL7RuleV2</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Dayu:L7RuleV2</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_dayu_l7_rule_v2</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">L7RuleV2State</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">L7RuleV2State</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -911,28 +1078,31 @@ Get an existing L7RuleV2 resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">L7RuleV2State</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -940,28 +1110,31 @@ Get an existing L7RuleV2 resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">L7RuleV2State</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -981,8 +1154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the layer 7 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceip_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Ip</a>
@@ -990,8 +1162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the resource that the layer 7 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -999,17 +1170,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_csharp" style="color: inherit; text-decoration: inherit;">Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#l7rulev2rule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>L7Rule<wbr>V2Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#l7rulev2rule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>L7Rule<wbr>V2Rule</a></span>
     </dt>
-    <dd><p>A list of layer 7 rules. Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of layer 7 rules. Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1023,8 +1192,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the layer 7 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceip_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Ip</a>
@@ -1032,8 +1200,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the resource that the layer 7 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1041,8 +1208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_go" style="color: inherit; text-decoration: inherit;">Rule</a>
@@ -1050,8 +1216,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#l7rulev2rule">L7Rule<wbr>V2Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of layer 7 rules. Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of layer 7 rules. Each element contains the following attributes:</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the resource that the layer 7 rule works for.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_resource_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_ip_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Ip of the resource that the layer 7 rule works for.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_hcl" style="color: inherit; text-decoration: inherit;">rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#l7rulev2rule">object</a></span>
+    </dt>
+    <dd>A list of layer 7 rules. Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1065,8 +1268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the layer 7 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceip_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Ip</a>
@@ -1074,8 +1276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the resource that the layer 7 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1083,17 +1284,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_java" style="color: inherit; text-decoration: inherit;">rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#l7rulev2rule">L7Rule<wbr>V2Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#l7rulev2rule">L7Rule<wbr>V2Rule</a></span>
     </dt>
-    <dd><p>A list of layer 7 rules. Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of layer 7 rules. Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1107,8 +1306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the layer 7 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceip_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Ip</a>
@@ -1116,8 +1314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Ip of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the resource that the layer 7 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1125,17 +1322,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_nodejs" style="color: inherit; text-decoration: inherit;">rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#l7rulev2rule">L7Rule<wbr>V2Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#l7rulev2rule">L7Rule<wbr>V2Rule</a></span>
     </dt>
-    <dd><p>A list of layer 7 rules. Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of layer 7 rules. Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1149,8 +1344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the layer 7 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resource_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_ip_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>ip</a>
@@ -1158,8 +1352,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Ip of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the resource that the layer 7 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -1167,8 +1360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_python" style="color: inherit; text-decoration: inherit;">rule</a>
@@ -1176,8 +1368,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#l7rulev2rule">L7Rule<wbr>V2Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of layer 7 rules. Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of layer 7 rules. Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1191,8 +1382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the resource that the layer 7 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourceip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceip_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Ip</a>
@@ -1200,8 +1390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Ip of the resource that the layer 7 rule works for.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Ip of the resource that the layer 7 rule works for.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1209,8 +1398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the layer 7 rule works for, valid value is <code>bgpip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_rule_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_yaml" style="color: inherit; text-decoration: inherit;">rule</a>
@@ -1218,8 +1406,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#l7rulev2rule">Property Map</a></span>
     </dt>
-    <dd><p>A list of layer 7 rules. Each element contains the following attributes:</p>
-</dd></dl>
+    <dd>A list of layer 7 rules. Each element contains the following attributes:</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1234,7 +1421,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="l7rulev2rule">L7Rule<wbr>V2Rule</h4>
+<h4 id="l7rulev2rule">
+L7Rule<wbr>V2Rule<pulumi-choosable type="language" values="python,go" class="inline">, L7Rule<wbr>V2Rule<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1246,8 +1435,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Domain of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="keepenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepenable_csharp" style="color: inherit; text-decoration: inherit;">Keep<wbr>Enable</a>
@@ -1255,8 +1443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>session hold switch.</p>
-</dd><dt class="property-required"
+    <dd>session hold switch.</dd><dt class="property-required"
             title="Required">
         <span id="keeptime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keeptime_csharp" style="color: inherit; text-decoration: inherit;">Keeptime</a>
@@ -1264,8 +1451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The keeptime of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The keeptime of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="lbtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbtype_csharp" style="color: inherit; text-decoration: inherit;">Lb<wbr>Type</a>
@@ -1273,8 +1459,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-required"
+    <dd>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1282,8 +1467,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelists_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Lists</a>
@@ -1299,8 +1483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-optional"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccenable_csharp" style="color: inherit; text-decoration: inherit;">Cc<wbr>Enable</a>
@@ -1308,8 +1491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.</p>
-</dd><dt class="property-optional"
+    <dd>HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="certtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certtype_csharp" style="color: inherit; text-decoration: inherit;">Cert<wbr>Type</a>
@@ -1317,8 +1499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.</p>
-</dd><dt class="property-optional"
+    <dd>The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.</dd><dt class="property-optional"
             title="Optional">
         <span id="httpstohttpenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpstohttpenable_csharp" style="color: inherit; text-decoration: inherit;">Https<wbr>To<wbr>Http<wbr>Enable</a>
@@ -1326,8 +1507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="sslid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslid_csharp" style="color: inherit; text-decoration: inherit;">Ssl<wbr>Id</a>
@@ -1335,8 +1515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.</p>
-</dd></dl>
+    <dd>When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1350,8 +1529,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Domain of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="keepenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepenable_go" style="color: inherit; text-decoration: inherit;">Keep<wbr>Enable</a>
@@ -1359,8 +1537,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>session hold switch.</p>
-</dd><dt class="property-required"
+    <dd>session hold switch.</dd><dt class="property-required"
             title="Required">
         <span id="keeptime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keeptime_go" style="color: inherit; text-decoration: inherit;">Keeptime</a>
@@ -1368,8 +1545,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The keeptime of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The keeptime of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="lbtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbtype_go" style="color: inherit; text-decoration: inherit;">Lb<wbr>Type</a>
@@ -1377,8 +1553,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-required"
+    <dd>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1386,8 +1561,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelists_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Lists</a>
@@ -1403,8 +1577,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-optional"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccenable_go" style="color: inherit; text-decoration: inherit;">Cc<wbr>Enable</a>
@@ -1412,8 +1585,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.</p>
-</dd><dt class="property-optional"
+    <dd>HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="certtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certtype_go" style="color: inherit; text-decoration: inherit;">Cert<wbr>Type</a>
@@ -1421,8 +1593,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.</p>
-</dd><dt class="property-optional"
+    <dd>The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.</dd><dt class="property-optional"
             title="Optional">
         <span id="httpstohttpenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpstohttpenable_go" style="color: inherit; text-decoration: inherit;">Https<wbr>To<wbr>Http<wbr>Enable</a>
@@ -1430,8 +1601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="sslid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslid_go" style="color: inherit; text-decoration: inherit;">Ssl<wbr>Id</a>
@@ -1439,8 +1609,101 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.</p>
-</dd></dl>
+    <dd>When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="keep_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keep_enable_hcl" style="color: inherit; text-decoration: inherit;">keep_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>session hold switch.</dd><dt class="property-required"
+            title="Required">
+        <span id="keeptime_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keeptime_hcl" style="color: inherit; text-decoration: inherit;">keeptime</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The keeptime of the layer 4 rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="lb_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lb_type_hcl" style="color: inherit; text-decoration: inherit;">lb_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol of the rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="source_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_lists_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#l7rulev2rulesourcelist">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-required"
+            title="Required">
+        <span id="source_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_type_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cc_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cc_enable_hcl" style="color: inherit; text-decoration: inherit;">cc_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cert_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_type_hcl" style="color: inherit; text-decoration: inherit;">cert_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="https_to_http_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#https_to_http_enable_hcl" style="color: inherit; text-decoration: inherit;">https_<wbr>to_<wbr>http_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ssl_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssl_id_hcl" style="color: inherit; text-decoration: inherit;">ssl_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1454,8 +1717,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Domain of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="keepenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepenable_java" style="color: inherit; text-decoration: inherit;">keep<wbr>Enable</a>
@@ -1463,8 +1725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>session hold switch.</p>
-</dd><dt class="property-required"
+    <dd>session hold switch.</dd><dt class="property-required"
             title="Required">
         <span id="keeptime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keeptime_java" style="color: inherit; text-decoration: inherit;">keeptime</a>
@@ -1472,8 +1733,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The keeptime of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The keeptime of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="lbtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbtype_java" style="color: inherit; text-decoration: inherit;">lb<wbr>Type</a>
@@ -1481,8 +1741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-required"
+    <dd>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1490,8 +1749,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelists_java" style="color: inherit; text-decoration: inherit;">source<wbr>Lists</a>
@@ -1507,8 +1765,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-optional"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccenable_java" style="color: inherit; text-decoration: inherit;">cc<wbr>Enable</a>
@@ -1516,8 +1773,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.</p>
-</dd><dt class="property-optional"
+    <dd>HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="certtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certtype_java" style="color: inherit; text-decoration: inherit;">cert<wbr>Type</a>
@@ -1525,8 +1781,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.</p>
-</dd><dt class="property-optional"
+    <dd>The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.</dd><dt class="property-optional"
             title="Optional">
         <span id="httpstohttpenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpstohttpenable_java" style="color: inherit; text-decoration: inherit;">https<wbr>To<wbr>Http<wbr>Enable</a>
@@ -1534,8 +1789,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="sslid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslid_java" style="color: inherit; text-decoration: inherit;">ssl<wbr>Id</a>
@@ -1543,8 +1797,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.</p>
-</dd></dl>
+    <dd>When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1558,8 +1811,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Domain of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="keepenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepenable_nodejs" style="color: inherit; text-decoration: inherit;">keep<wbr>Enable</a>
@@ -1567,8 +1819,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>session hold switch.</p>
-</dd><dt class="property-required"
+    <dd>session hold switch.</dd><dt class="property-required"
             title="Required">
         <span id="keeptime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keeptime_nodejs" style="color: inherit; text-decoration: inherit;">keeptime</a>
@@ -1576,8 +1827,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The keeptime of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The keeptime of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="lbtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbtype_nodejs" style="color: inherit; text-decoration: inherit;">lb<wbr>Type</a>
@@ -1585,8 +1835,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-required"
+    <dd>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1594,8 +1843,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelists_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Lists</a>
@@ -1611,8 +1859,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-optional"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccenable_nodejs" style="color: inherit; text-decoration: inherit;">cc<wbr>Enable</a>
@@ -1620,8 +1867,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.</p>
-</dd><dt class="property-optional"
+    <dd>HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="certtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certtype_nodejs" style="color: inherit; text-decoration: inherit;">cert<wbr>Type</a>
@@ -1629,8 +1875,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.</p>
-</dd><dt class="property-optional"
+    <dd>The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.</dd><dt class="property-optional"
             title="Optional">
         <span id="httpstohttpenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpstohttpenable_nodejs" style="color: inherit; text-decoration: inherit;">https<wbr>To<wbr>Http<wbr>Enable</a>
@@ -1638,8 +1883,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="sslid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslid_nodejs" style="color: inherit; text-decoration: inherit;">ssl<wbr>Id</a>
@@ -1647,8 +1891,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.</p>
-</dd></dl>
+    <dd>When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1662,8 +1905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Domain of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="keep_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keep_enable_python" style="color: inherit; text-decoration: inherit;">keep_<wbr>enable</a>
@@ -1671,8 +1913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>session hold switch.</p>
-</dd><dt class="property-required"
+    <dd>session hold switch.</dd><dt class="property-required"
             title="Required">
         <span id="keeptime_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keeptime_python" style="color: inherit; text-decoration: inherit;">keeptime</a>
@@ -1680,8 +1921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The keeptime of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The keeptime of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="lb_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lb_type_python" style="color: inherit; text-decoration: inherit;">lb_<wbr>type</a>
@@ -1689,8 +1929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-required"
+    <dd>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1698,14 +1937,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="source_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_lists_python" style="color: inherit; text-decoration: inherit;">source_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#l7rulev2rulesourcelist">L7Rule<wbr>V2Rule<wbr>Source<wbr>List]</a></span>
+        <span class="property-type"><a href="#l7rulev2rulesourcelist">Sequence[L7Rule<wbr>V2Rule<wbr>Source<wbr>List]</a></span>
     </dt>
     <dd></dd><dt class="property-required"
             title="Required">
@@ -1715,8 +1953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-optional"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="cc_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cc_enable_python" style="color: inherit; text-decoration: inherit;">cc_<wbr>enable</a>
@@ -1724,8 +1961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.</p>
-</dd><dt class="property-optional"
+    <dd>HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="cert_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cert_type_python" style="color: inherit; text-decoration: inherit;">cert_<wbr>type</a>
@@ -1733,8 +1969,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.</p>
-</dd><dt class="property-optional"
+    <dd>The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.</dd><dt class="property-optional"
             title="Optional">
         <span id="https_to_http_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#https_to_http_enable_python" style="color: inherit; text-decoration: inherit;">https_<wbr>to_<wbr>http_<wbr>enable</a>
@@ -1742,8 +1977,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="ssl_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ssl_id_python" style="color: inherit; text-decoration: inherit;">ssl_<wbr>id</a>
@@ -1751,8 +1985,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.</p>
-</dd></dl>
+    <dd>When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1766,8 +1999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Domain of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="keepenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepenable_yaml" style="color: inherit; text-decoration: inherit;">keep<wbr>Enable</a>
@@ -1775,8 +2007,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>session hold switch.</p>
-</dd><dt class="property-required"
+    <dd>session hold switch.</dd><dt class="property-required"
             title="Required">
         <span id="keeptime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keeptime_yaml" style="color: inherit; text-decoration: inherit;">keeptime</a>
@@ -1784,8 +2015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The keeptime of the layer 4 rule.</p>
-</dd><dt class="property-required"
+    <dd>The keeptime of the layer 4 rule.</dd><dt class="property-required"
             title="Required">
         <span id="lbtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbtype_yaml" style="color: inherit; text-decoration: inherit;">lb<wbr>Type</a>
@@ -1793,8 +2023,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</p>
-</dd><dt class="property-required"
+    <dd>LB type of the rule, <code>1</code> for weight cycling and <code>2</code> for IP hash.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1802,8 +2031,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol of the rule.</p>
-</dd><dt class="property-required"
+    <dd>Protocol of the rule.</dd><dt class="property-required"
             title="Required">
         <span id="sourcelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcelists_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Lists</a>
@@ -1819,8 +2047,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</p>
-</dd><dt class="property-optional"
+    <dd>Source type, <code>1</code> for source of host, <code>2</code> for source of IP.</dd><dt class="property-optional"
             title="Optional">
         <span id="ccenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ccenable_yaml" style="color: inherit; text-decoration: inherit;">cc<wbr>Enable</a>
@@ -1828,8 +2055,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.</p>
-</dd><dt class="property-optional"
+    <dd>HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="certtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#certtype_yaml" style="color: inherit; text-decoration: inherit;">cert<wbr>Type</a>
@@ -1837,8 +2063,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.</p>
-</dd><dt class="property-optional"
+    <dd>The source of the certificate must be filled in when the forwarding protocol is https, the value [2 (Tencent Cloud Hosting Certificate)], and 0 when the forwarding protocol is http.</dd><dt class="property-optional"
             title="Optional">
         <span id="httpstohttpenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpstohttpenable_yaml" style="color: inherit; text-decoration: inherit;">https<wbr>To<wbr>Http<wbr>Enable</a>
@@ -1846,8 +2071,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the Https protocol to use Http back-to-source, take the value [0 (off), 1 (on)], do not fill in the default is off, defaule is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="sslid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sslid_yaml" style="color: inherit; text-decoration: inherit;">ssl<wbr>Id</a>
@@ -1855,12 +2079,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.</p>
-</dd></dl>
+    <dd>When the certificate source is a Tencent Cloud managed certificate, this field must be filled in with the managed certificate ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="l7rulev2rulesourcelist">L7Rule<wbr>V2Rule<wbr>Source<wbr>List</h4>
+<h4 id="l7rulev2rulesourcelist">
+L7Rule<wbr>V2Rule<wbr>Source<wbr>List<pulumi-choosable type="language" values="python,go" class="inline">, L7Rule<wbr>V2Rule<wbr>Source<wbr>List<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1872,8 +2097,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="weight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -1881,8 +2105,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight of the source.</p>
-</dd></dl>
+    <dd>Weight of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1896,8 +2119,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="weight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -1905,8 +2127,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight of the source.</p>
-</dd></dl>
+    <dd>Weight of the source.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_hcl" style="color: inherit; text-decoration: inherit;">source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Source IP or domain.</dd><dt class="property-required"
+            title="Required">
+        <span id="weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Weight of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1920,8 +2163,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Source IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="weight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1929,8 +2171,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Weight of the source.</p>
-</dd></dl>
+    <dd>Weight of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1944,8 +2185,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Source IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="weight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1953,8 +2193,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Weight of the source.</p>
-</dd></dl>
+    <dd>Weight of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1968,8 +2207,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Source IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1977,8 +2215,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight of the source.</p>
-</dd></dl>
+    <dd>Weight of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1992,8 +2229,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Source IP or domain.</p>
-</dd><dt class="property-required"
+    <dd>Source IP or domain.</dd><dt class="property-required"
             title="Required">
         <span id="weight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2001,8 +2237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Weight of the source.</p>
-</dd></dl>
+    <dd>Weight of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2014,7 +2249,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

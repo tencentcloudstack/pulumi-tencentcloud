@@ -2,9 +2,11 @@
 ---
 title: "getScalingGroups"
 title_tag: "tencentcloud.As.getScalingGroups"
-meta_desc: "Documentation for the tencentcloud.As.getScalingGroups function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query the detail information of an existing autoscaling group."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,56 +18,54 @@ Use this data source to query the detail information of an existing autoscaling 
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const asScalingGroups = tencentcloud.As.getScalingGroups({
+const asScalingGroups = tencentcloud.as.getScalingGroups({
+    scalingGroupName: "myasgroup",
     configurationId: "asc-oqio4yyj",
     resultOutputFile: "my_test_path",
-    scalingGroupName: "myasgroup",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-as_scaling_groups = tencentcloud.As.get_scaling_groups(configuration_id="asc-oqio4yyj",
-    result_output_file="my_test_path",
-    scaling_group_name="myasgroup")
+as_scaling_groups = tencentcloud.as_.get_scaling_groups(scaling_group_name="myasgroup",
+    configuration_id="asc-oqio4yyj",
+    result_output_file="my_test_path")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var asScalingGroups = Tencentcloud.As.GetScalingGroups.Invoke(new()
-    {
-        ConfigurationId = "asc-oqio4yyj",
-        ResultOutputFile = "my_test_path",
-        ScalingGroupName = "myasgroup",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := As.GetScalingGroups(ctx, &as.GetScalingGroupsArgs{
+		_, err := as.GetScalingGroups(ctx, &as.GetScalingGroupsArgs{
+			ScalingGroupName: pulumi.StringRef("myasgroup"),
 			ConfigurationId:  pulumi.StringRef("asc-oqio4yyj"),
 			ResultOutputFile: pulumi.StringRef("my_test_path"),
-			ScalingGroupName: pulumi.StringRef("myasgroup"),
 		}, nil)
 		if err != nil {
 			return err
@@ -74,6 +74,33 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var asScalingGroups = Tencentcloud.As.GetScalingGroups.Invoke(new()
+    {
+        ScalingGroupName = "myasgroup",
+        ConfigurationId = "asc-oqio4yyj",
+        ResultOutputFile = "my_test_path",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -82,8 +109,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.As.AsFunctions;
 import com.pulumi.tencentcloud.As.inputs.GetScalingGroupsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -96,26 +123,58 @@ public class App {
 
     public static void stack(Context ctx) {
         final var asScalingGroups = AsFunctions.getScalingGroups(GetScalingGroupsArgs.builder()
+            .scalingGroupName("myasgroup")
             .configurationId("asc-oqio4yyj")
             .resultOutputFile("my_test_path")
-            .scalingGroupName("myasgroup")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   asScalingGroups:
     fn::invoke:
-      Function: tencentcloud:As:getScalingGroups
-      Arguments:
+      function: tencentcloud:As:getScalingGroups
+      arguments:
+        scalingGroupName: myasgroup
         configurationId: asc-oqio4yyj
         resultOutputFile: my_test_path
-        scalingGroupName: myasgroup
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_as_getscalinggroups" "asScalingGroups" {
+  scaling_group_name = "myasgroup"
+  configuration_id   = "asc-oqio4yyj"
+  result_output_file = "my_test_path"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/31013)
 
 
 
@@ -127,7 +186,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -135,9 +194,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getScalingGroups<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetScalingGroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetScalingGroupsResult</a></span>></span
+><span class="k">function </span>getScalingGroups<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetScalingGroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetScalingGroupsResult</a></span>></span
 ><span class="k">
-function </span>getScalingGroupsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetScalingGroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetScalingGroupsResult</a></span>></span
+function </span>getScalingGroupsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetScalingGroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetScalingGroupsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -150,15 +209,15 @@ function </span>getScalingGroupsOutput<span class="p">(</span><span class="nx">a
                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                        <span class="nx">scaling_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                        <span class="nx">scaling_group_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                       <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+                       <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetScalingGroupsResult</span
 ><span class="k">
-def </span>get_scaling_groups_output<span class="p">(</span><span class="nx">configuration_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">scaling_group_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">scaling_group_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetScalingGroupsResult]</span
+def </span>get_scaling_groups_output<span class="p">(</span><span class="nx">configuration_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">scaling_group_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">scaling_group_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetScalingGroupsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -183,7 +242,8 @@ func </span>GetScalingGroupsOutput<span class="p">(</span><span class="nx">ctx</
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetScalingGroups </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetScalingGroupsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetScalingGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetScalingGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetScalingGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetScalingGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetScalingGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetScalingGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetScalingGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -192,7 +252,8 @@ func </span>GetScalingGroupsOutput<span class="p">(</span><span class="nx">ctx</
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetScalingGroupsResult</a></span>> </span>getScalingGroups<span class="p">(</span><span class="nx">GetScalingGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetScalingGroupsResult</a></span>> </span>getScalingGroups<span class="p">(</span><span class="nx">GetScalingGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetScalingGroupsResult</a></span>> </span>getScalingGroups<span class="p">(</span><span class="nx">GetScalingGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -204,6 +265,15 @@ func </span>GetScalingGroupsOutput<span class="p">(</span><span class="nx">ctx</
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:As/getScalingGroups:getScalingGroups
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_as_get_scaling_groups&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -222,8 +292,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter results by launch configuration ID.</p>
-</dd><dt class="property-optional"
+    <dd>Filter results by launch configuration ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -231,8 +300,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -240,8 +308,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified scaling group ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified scaling group ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Name</a>
@@ -249,17 +316,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A scaling group name used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A scaling group name used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags used to query.</p>
-</dd></dl>
+    <dd>Tags used to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -273,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter results by launch configuration ID.</p>
-</dd><dt class="property-optional"
+    <dd>Filter results by launch configuration ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -282,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -291,8 +354,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified scaling group ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified scaling group ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Name</a>
@@ -300,17 +362,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A scaling group name used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A scaling group name used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags used to query.</p>
-</dd></dl>
+    <dd>Tags used to query.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="configuration_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_id_hcl" style="color: inherit; text-decoration: inherit;">configuration_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter results by launch configuration ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A specified scaling group ID used to query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scaling_group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_name_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A scaling group name used to query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags used to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +430,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter results by launch configuration ID.</p>
-</dd><dt class="property-optional"
+    <dd>Filter results by launch configuration ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -333,8 +438,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -342,8 +446,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A specified scaling group ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified scaling group ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -351,17 +454,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A scaling group name used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A scaling group name used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags used to query.</p>
-</dd></dl>
+    <dd>Tags used to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -375,8 +476,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter results by launch configuration ID.</p>
-</dd><dt class="property-optional"
+    <dd>Filter results by launch configuration ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -384,8 +484,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -393,8 +492,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified scaling group ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified scaling group ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -402,17 +500,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A scaling group name used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A scaling group name used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags used to query.</p>
-</dd></dl>
+    <dd>Tags used to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -426,8 +522,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter results by launch configuration ID.</p>
-</dd><dt class="property-optional"
+    <dd>Filter results by launch configuration ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -435,8 +530,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scaling_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
@@ -444,8 +538,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A specified scaling group ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified scaling group ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="scaling_group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_name_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>name</a>
@@ -453,17 +546,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A scaling group name used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A scaling group name used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags used to query.</p>
-</dd></dl>
+    <dd>Tags used to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -477,8 +568,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter results by launch configuration ID.</p>
-</dd><dt class="property-optional"
+    <dd>Filter results by launch configuration ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -486,8 +576,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -495,8 +584,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A specified scaling group ID used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A specified scaling group ID used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalinggroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -504,17 +592,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A scaling group name used to query.</p>
-</dd><dt class="property-optional"
+    <dd>A scaling group name used to query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags used to query.</p>
-</dd></dl>
+    <dd>Tags used to query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -537,8 +623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scalinggrouplists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggrouplists_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Lists</a>
@@ -546,8 +631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalinggroupsscalinggrouplist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Outputs.<wbr>Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of scaling group. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of scaling group. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="configurationid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationid_csharp" style="color: inherit; text-decoration: inherit;">Configuration<wbr>Id</a>
@@ -555,8 +639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration ID.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -572,8 +655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-"
+    <dd>Auto scaling group ID.</dd><dt class="property-"
             title="">
         <span id="scalinggroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Name</a>
@@ -581,17 +663,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling group name.</p>
-</dd><dt class="property-"
+    <dd>Auto scaling group name.</dd><dt class="property-"
             title="">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the scaling group.</p>
-</dd></dl>
+    <dd>Tags of the scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -605,8 +685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scalinggrouplists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggrouplists_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Lists</a>
@@ -614,8 +693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalinggroupsscalinggrouplist">[]Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List</a></span>
     </dt>
-    <dd><p>A list of scaling group. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of scaling group. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="configurationid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationid_go" style="color: inherit; text-decoration: inherit;">Configuration<wbr>Id</a>
@@ -623,8 +701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration ID.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -640,8 +717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-"
+    <dd>Auto scaling group ID.</dd><dt class="property-"
             title="">
         <span id="scalinggroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Name</a>
@@ -649,17 +725,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling group name.</p>
-</dd><dt class="property-"
+    <dd>Auto scaling group name.</dd><dt class="property-"
             title="">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the scaling group.</p>
-</dd></dl>
+    <dd>Tags of the scaling group.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="scaling_group_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_lists_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getscalinggroupsscalinggrouplist">list(object)</a></span>
+    </dt>
+    <dd>A list of scaling group. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="configuration_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_id_hcl" style="color: inherit; text-decoration: inherit;">configuration_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Launch configuration ID.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Auto scaling group ID.</dd><dt class="property-"
+            title="">
+        <span id="scaling_group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_name_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Auto scaling group name.</dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -673,8 +809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scalinggrouplists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggrouplists_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Lists</a>
@@ -682,8 +817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalinggroupsscalinggrouplist">List&lt;Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of scaling group. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of scaling group. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="configurationid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationid_java" style="color: inherit; text-decoration: inherit;">configuration<wbr>Id</a>
@@ -691,8 +825,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration ID.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -708,8 +841,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-"
+    <dd>Auto scaling group ID.</dd><dt class="property-"
             title="">
         <span id="scalinggroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -717,17 +849,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto scaling group name.</p>
-</dd><dt class="property-"
+    <dd>Auto scaling group name.</dd><dt class="property-"
             title="">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the scaling group.</p>
-</dd></dl>
+    <dd>Tags of the scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -741,8 +871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scalinggrouplists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggrouplists_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Lists</a>
@@ -750,8 +879,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalinggroupsscalinggrouplist">Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of scaling group. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of scaling group. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="configurationid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationid_nodejs" style="color: inherit; text-decoration: inherit;">configuration<wbr>Id</a>
@@ -759,8 +887,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration ID.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -776,8 +903,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-"
+    <dd>Auto scaling group ID.</dd><dt class="property-"
             title="">
         <span id="scalinggroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -785,17 +911,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling group name.</p>
-</dd><dt class="property-"
+    <dd>Auto scaling group name.</dd><dt class="property-"
             title="">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the scaling group.</p>
-</dd></dl>
+    <dd>Tags of the scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -809,17 +933,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scaling_group_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_lists_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getscalinggroupsscalinggrouplist">Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List]</a></span>
+        <span class="property-type"><a href="#getscalinggroupsscalinggrouplist">Sequence[Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of scaling group. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of scaling group. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="configuration_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_id_python" style="color: inherit; text-decoration: inherit;">configuration_<wbr>id</a>
@@ -827,8 +949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration ID.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -844,8 +965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-"
+    <dd>Auto scaling group ID.</dd><dt class="property-"
             title="">
         <span id="scaling_group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_name_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>name</a>
@@ -853,17 +973,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Auto scaling group name.</p>
-</dd><dt class="property-"
+    <dd>Auto scaling group name.</dd><dt class="property-"
             title="">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the scaling group.</p>
-</dd></dl>
+    <dd>Tags of the scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -877,8 +995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scalinggrouplists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggrouplists_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Lists</a>
@@ -886,8 +1003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getscalinggroupsscalinggrouplist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of scaling group. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of scaling group. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="configurationid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configurationid_yaml" style="color: inherit; text-decoration: inherit;">configuration<wbr>Id</a>
@@ -895,8 +1011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Launch configuration ID.</p>
-</dd><dt class="property-"
+    <dd>Launch configuration ID.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -912,8 +1027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-"
+    <dd>Auto scaling group ID.</dd><dt class="property-"
             title="">
         <span id="scalinggroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -921,17 +1035,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto scaling group name.</p>
-</dd><dt class="property-"
+    <dd>Auto scaling group name.</dd><dt class="property-"
             title="">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the scaling group.</p>
-</dd></dl>
+    <dd>Tags of the scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -955,8 +1067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter results by launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Filter results by launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -964,8 +1075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the AS group was created.</dd><dt class="property-required"
             title="Required">
         <span id="defaultcooldown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultcooldown_csharp" style="color: inherit; text-decoration: inherit;">Default<wbr>Cooldown</a>
@@ -973,8 +1083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Default cooldown time of scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Default cooldown time of scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="desiredcapacity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacity_csharp" style="color: inherit; text-decoration: inherit;">Desired<wbr>Capacity</a>
@@ -982,17 +1091,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The desired number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The desired number of CVM instances.</dd><dt class="property-required"
             title="Required">
-        <span id="forwardbalancerids_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardbalancerids_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Balancer<wbr>Ids</a>
+        <span id="forwardloadbalancers_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardloadbalancers_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Load<wbr>Balancers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardbalancerid">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Balancer<wbr>Id&gt;</a></span>
+        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardloadbalancer">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Load<wbr>Balancer&gt;</a></span>
     </dt>
-    <dd><p>A list of application clb ids.</p>
-</dd><dt class="property-required"
+    <dd>A list of application clb.</dd><dt class="property-required"
             title="Required">
         <span id="instancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -1000,8 +1107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of instance.</p>
-</dd><dt class="property-required"
+    <dd>Number of instance.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerids_csharp" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Ids</a>
@@ -1009,8 +1115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A list of traditional clb ids which the CVM instances attached to.</p>
-</dd><dt class="property-required"
+    <dd>A list of traditional clb ids which the CVM instances attached to.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -1018,8 +1123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of CVM instances.</dd><dt class="property-required"
             title="Required">
         <span id="minsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
@@ -1027,8 +1131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The minimum number of CVM instances.</dd><dt class="property-required"
             title="Required">
         <span id="multizonesubnetpolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizonesubnetpolicy_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -1036,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-required"
+    <dd>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1045,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the scaling group belongs. Default value is 0.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the scaling group belongs. Default value is 0.</dd><dt class="property-required"
             title="Required">
         <span id="retrypolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrypolicy_csharp" style="color: inherit; text-decoration: inherit;">Retry<wbr>Policy</a>
@@ -1054,8 +1155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A retry policy can be used when a creation fails.</p>
-</dd><dt class="property-required"
+    <dd>A retry policy can be used when a creation fails.</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -1063,8 +1163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified scaling group ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified scaling group ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Name</a>
@@ -1072,8 +1171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A scaling group name used to query.</p>
-</dd><dt class="property-required"
+    <dd>A scaling group name used to query.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1081,8 +1179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Current status of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="subnetids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -1090,17 +1187,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A list of subnet IDs.</p>
-</dd><dt class="property-required"
+    <dd>A list of subnet IDs.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags used to query.</p>
-</dd><dt class="property-required"
+    <dd>Tags used to query.</dd><dt class="property-required"
             title="Required">
         <span id="terminationpolicies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationpolicies_csharp" style="color: inherit; text-decoration: inherit;">Termination<wbr>Policies</a>
@@ -1108,8 +1203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A policy used to select a CVM instance to be terminated from the scaling group.</p>
-</dd><dt class="property-required"
+    <dd>A policy used to select a CVM instance to be terminated from the scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1117,8 +1211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc with which the instance is associated.</dd><dt class="property-required"
             title="Required">
         <span id="zones_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_csharp" style="color: inherit; text-decoration: inherit;">Zones</a>
@@ -1126,8 +1219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A list of available zones.</p>
-</dd></dl>
+    <dd>A list of available zones.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1141,8 +1233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter results by launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Filter results by launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1150,8 +1241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the AS group was created.</dd><dt class="property-required"
             title="Required">
         <span id="defaultcooldown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultcooldown_go" style="color: inherit; text-decoration: inherit;">Default<wbr>Cooldown</a>
@@ -1159,8 +1249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Default cooldown time of scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Default cooldown time of scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="desiredcapacity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacity_go" style="color: inherit; text-decoration: inherit;">Desired<wbr>Capacity</a>
@@ -1168,17 +1257,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The desired number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The desired number of CVM instances.</dd><dt class="property-required"
             title="Required">
-        <span id="forwardbalancerids_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardbalancerids_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Balancer<wbr>Ids</a>
+        <span id="forwardloadbalancers_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardloadbalancers_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Load<wbr>Balancers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardbalancerid">[]Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Balancer<wbr>Id</a></span>
+        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardloadbalancer">[]Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Load<wbr>Balancer</a></span>
     </dt>
-    <dd><p>A list of application clb ids.</p>
-</dd><dt class="property-required"
+    <dd>A list of application clb.</dd><dt class="property-required"
             title="Required">
         <span id="instancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -1186,8 +1273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of instance.</p>
-</dd><dt class="property-required"
+    <dd>Number of instance.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerids_go" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Ids</a>
@@ -1195,8 +1281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A list of traditional clb ids which the CVM instances attached to.</p>
-</dd><dt class="property-required"
+    <dd>A list of traditional clb ids which the CVM instances attached to.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -1204,8 +1289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of CVM instances.</dd><dt class="property-required"
             title="Required">
         <span id="minsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
@@ -1213,8 +1297,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The minimum number of CVM instances.</dd><dt class="property-required"
             title="Required">
         <span id="multizonesubnetpolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizonesubnetpolicy_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -1222,8 +1305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-required"
+    <dd>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1231,8 +1313,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the scaling group belongs. Default value is 0.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the scaling group belongs. Default value is 0.</dd><dt class="property-required"
             title="Required">
         <span id="retrypolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrypolicy_go" style="color: inherit; text-decoration: inherit;">Retry<wbr>Policy</a>
@@ -1240,8 +1321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A retry policy can be used when a creation fails.</p>
-</dd><dt class="property-required"
+    <dd>A retry policy can be used when a creation fails.</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -1249,8 +1329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified scaling group ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified scaling group ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Name</a>
@@ -1258,8 +1337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A scaling group name used to query.</p>
-</dd><dt class="property-required"
+    <dd>A scaling group name used to query.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1267,8 +1345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Current status of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="subnetids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -1276,17 +1353,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A list of subnet IDs.</p>
-</dd><dt class="property-required"
+    <dd>A list of subnet IDs.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags used to query.</p>
-</dd><dt class="property-required"
+    <dd>Tags used to query.</dd><dt class="property-required"
             title="Required">
         <span id="terminationpolicies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationpolicies_go" style="color: inherit; text-decoration: inherit;">Termination<wbr>Policies</a>
@@ -1294,8 +1369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A policy used to select a CVM instance to be terminated from the scaling group.</p>
-</dd><dt class="property-required"
+    <dd>A policy used to select a CVM instance to be terminated from the scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1303,8 +1377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc with which the instance is associated.</dd><dt class="property-required"
             title="Required">
         <span id="zones_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_go" style="color: inherit; text-decoration: inherit;">Zones</a>
@@ -1312,8 +1385,173 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A list of available zones.</p>
-</dd></dl>
+    <dd>A list of available zones.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="configuration_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_id_hcl" style="color: inherit; text-decoration: inherit;">configuration_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter results by launch configuration ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time when the AS group was created.</dd><dt class="property-required"
+            title="Required">
+        <span id="default_cooldown_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_cooldown_hcl" style="color: inherit; text-decoration: inherit;">default_<wbr>cooldown</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Default cooldown time of scaling group.</dd><dt class="property-required"
+            title="Required">
+        <span id="desired_capacity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desired_capacity_hcl" style="color: inherit; text-decoration: inherit;">desired_<wbr>capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The desired number of CVM instances.</dd><dt class="property-required"
+            title="Required">
+        <span id="forward_load_balancers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_load_balancers_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>load_<wbr>balancers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardloadbalancer">list(object)</a></span>
+    </dt>
+    <dd>A list of application clb.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="load_balancer_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_ids_hcl" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A list of traditional clb ids which the CVM instances attached to.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The maximum number of CVM instances.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_size_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The minimum number of CVM instances.</dd><dt class="property-required"
+            title="Required">
+        <span id="multi_zone_subnet_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_zone_subnet_policy_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>subnet_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project to which the scaling group belongs. Default value is 0.</dd><dt class="property-required"
+            title="Required">
+        <span id="retry_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retry_policy_hcl" style="color: inherit; text-decoration: inherit;">retry_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A retry policy can be used when a creation fails.</dd><dt class="property-required"
+            title="Required">
+        <span id="scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A specified scaling group ID used to query.</dd><dt class="property-required"
+            title="Required">
+        <span id="scaling_group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_name_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A scaling group name used to query.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Current status of a scaling group.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_ids_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A list of subnet IDs.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags used to query.</dd><dt class="property-required"
+            title="Required">
+        <span id="termination_policies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#termination_policies_hcl" style="color: inherit; text-decoration: inherit;">termination_<wbr>policies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A policy used to select a CVM instance to be terminated from the scaling group.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the vpc with which the instance is associated.</dd><dt class="property-required"
+            title="Required">
+        <span id="zones_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_hcl" style="color: inherit; text-decoration: inherit;">zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A list of available zones.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1327,8 +1565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter results by launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Filter results by launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1336,8 +1573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the AS group was created.</dd><dt class="property-required"
             title="Required">
         <span id="defaultcooldown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultcooldown_java" style="color: inherit; text-decoration: inherit;">default<wbr>Cooldown</a>
@@ -1345,8 +1581,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Default cooldown time of scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Default cooldown time of scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="desiredcapacity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacity_java" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity</a>
@@ -1354,17 +1589,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The desired number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The desired number of CVM instances.</dd><dt class="property-required"
             title="Required">
-        <span id="forwardbalancerids_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardbalancerids_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Balancer<wbr>Ids</a>
+        <span id="forwardloadbalancers_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardloadbalancers_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Load<wbr>Balancers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardbalancerid">List&lt;Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Balancer<wbr>Id&gt;</a></span>
+        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardloadbalancer">List&lt;Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Load<wbr>Balancer&gt;</a></span>
     </dt>
-    <dd><p>A list of application clb ids.</p>
-</dd><dt class="property-required"
+    <dd>A list of application clb.</dd><dt class="property-required"
             title="Required">
         <span id="instancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1372,8 +1605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of instance.</p>
-</dd><dt class="property-required"
+    <dd>Number of instance.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerids_java" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Ids</a>
@@ -1381,8 +1613,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of traditional clb ids which the CVM instances attached to.</p>
-</dd><dt class="property-required"
+    <dd>A list of traditional clb ids which the CVM instances attached to.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -1390,8 +1621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The maximum number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of CVM instances.</dd><dt class="property-required"
             title="Required">
         <span id="minsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_java" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -1399,8 +1629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The minimum number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The minimum number of CVM instances.</dd><dt class="property-required"
             title="Required">
         <span id="multizonesubnetpolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizonesubnetpolicy_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -1408,8 +1637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-required"
+    <dd>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1417,8 +1645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project to which the scaling group belongs. Default value is 0.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the scaling group belongs. Default value is 0.</dd><dt class="property-required"
             title="Required">
         <span id="retrypolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrypolicy_java" style="color: inherit; text-decoration: inherit;">retry<wbr>Policy</a>
@@ -1426,8 +1653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A retry policy can be used when a creation fails.</p>
-</dd><dt class="property-required"
+    <dd>A retry policy can be used when a creation fails.</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1435,8 +1661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A specified scaling group ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified scaling group ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -1444,8 +1669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A scaling group name used to query.</p>
-</dd><dt class="property-required"
+    <dd>A scaling group name used to query.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1453,8 +1677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Current status of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="subnetids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -1462,17 +1685,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of subnet IDs.</p>
-</dd><dt class="property-required"
+    <dd>A list of subnet IDs.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags used to query.</p>
-</dd><dt class="property-required"
+    <dd>Tags used to query.</dd><dt class="property-required"
             title="Required">
         <span id="terminationpolicies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationpolicies_java" style="color: inherit; text-decoration: inherit;">termination<wbr>Policies</a>
@@ -1480,8 +1701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A policy used to select a CVM instance to be terminated from the scaling group.</p>
-</dd><dt class="property-required"
+    <dd>A policy used to select a CVM instance to be terminated from the scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1489,8 +1709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc with which the instance is associated.</dd><dt class="property-required"
             title="Required">
         <span id="zones_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_java" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -1498,8 +1717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of available zones.</p>
-</dd></dl>
+    <dd>A list of available zones.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1513,8 +1731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter results by launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Filter results by launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1522,8 +1739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the AS group was created.</dd><dt class="property-required"
             title="Required">
         <span id="defaultcooldown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultcooldown_nodejs" style="color: inherit; text-decoration: inherit;">default<wbr>Cooldown</a>
@@ -1531,8 +1747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Default cooldown time of scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Default cooldown time of scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="desiredcapacity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacity_nodejs" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity</a>
@@ -1540,17 +1755,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The desired number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The desired number of CVM instances.</dd><dt class="property-required"
             title="Required">
-        <span id="forwardbalancerids_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardbalancerids_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Balancer<wbr>Ids</a>
+        <span id="forwardloadbalancers_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardloadbalancers_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Load<wbr>Balancers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardbalancerid">Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Balancer<wbr>Id[]</a></span>
+        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardloadbalancer">Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Load<wbr>Balancer[]</a></span>
     </dt>
-    <dd><p>A list of application clb ids.</p>
-</dd><dt class="property-required"
+    <dd>A list of application clb.</dd><dt class="property-required"
             title="Required">
         <span id="instancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1558,8 +1771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of instance.</p>
-</dd><dt class="property-required"
+    <dd>Number of instance.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerids_nodejs" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Ids</a>
@@ -1567,8 +1779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A list of traditional clb ids which the CVM instances attached to.</p>
-</dd><dt class="property-required"
+    <dd>A list of traditional clb ids which the CVM instances attached to.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -1576,8 +1787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The maximum number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of CVM instances.</dd><dt class="property-required"
             title="Required">
         <span id="minsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -1585,8 +1795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The minimum number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The minimum number of CVM instances.</dd><dt class="property-required"
             title="Required">
         <span id="multizonesubnetpolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizonesubnetpolicy_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -1594,8 +1803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-required"
+    <dd>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1603,8 +1811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project to which the scaling group belongs. Default value is 0.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the scaling group belongs. Default value is 0.</dd><dt class="property-required"
             title="Required">
         <span id="retrypolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrypolicy_nodejs" style="color: inherit; text-decoration: inherit;">retry<wbr>Policy</a>
@@ -1612,8 +1819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A retry policy can be used when a creation fails.</p>
-</dd><dt class="property-required"
+    <dd>A retry policy can be used when a creation fails.</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1621,8 +1827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A specified scaling group ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified scaling group ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -1630,8 +1835,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A scaling group name used to query.</p>
-</dd><dt class="property-required"
+    <dd>A scaling group name used to query.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1639,8 +1843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Current status of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="subnetids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -1648,17 +1851,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A list of subnet IDs.</p>
-</dd><dt class="property-required"
+    <dd>A list of subnet IDs.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags used to query.</p>
-</dd><dt class="property-required"
+    <dd>Tags used to query.</dd><dt class="property-required"
             title="Required">
         <span id="terminationpolicies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationpolicies_nodejs" style="color: inherit; text-decoration: inherit;">termination<wbr>Policies</a>
@@ -1666,8 +1867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A policy used to select a CVM instance to be terminated from the scaling group.</p>
-</dd><dt class="property-required"
+    <dd>A policy used to select a CVM instance to be terminated from the scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1675,8 +1875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc with which the instance is associated.</dd><dt class="property-required"
             title="Required">
         <span id="zones_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_nodejs" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -1684,8 +1883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A list of available zones.</p>
-</dd></dl>
+    <dd>A list of available zones.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1699,8 +1897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter results by launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Filter results by launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1708,8 +1905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the AS group was created.</dd><dt class="property-required"
             title="Required">
         <span id="default_cooldown_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_cooldown_python" style="color: inherit; text-decoration: inherit;">default_<wbr>cooldown</a>
@@ -1717,8 +1913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Default cooldown time of scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Default cooldown time of scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="desired_capacity_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desired_capacity_python" style="color: inherit; text-decoration: inherit;">desired_<wbr>capacity</a>
@@ -1726,17 +1921,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The desired number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The desired number of CVM instances.</dd><dt class="property-required"
             title="Required">
-        <span id="forward_balancer_ids_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_balancer_ids_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>balancer_<wbr>ids</a>
+        <span id="forward_load_balancers_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_load_balancers_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>load_<wbr>balancers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardbalancerid">Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Balancer<wbr>Id]</a></span>
+        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardloadbalancer">Sequence[Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Load<wbr>Balancer]</a></span>
     </dt>
-    <dd><p>A list of application clb ids.</p>
-</dd><dt class="property-required"
+    <dd>A list of application clb.</dd><dt class="property-required"
             title="Required">
         <span id="instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
@@ -1744,8 +1937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of instance.</p>
-</dd><dt class="property-required"
+    <dd>Number of instance.</dd><dt class="property-required"
             title="Required">
         <span id="load_balancer_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_ids_python" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>ids</a>
@@ -1753,8 +1945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A list of traditional clb ids which the CVM instances attached to.</p>
-</dd><dt class="property-required"
+    <dd>A list of traditional clb ids which the CVM instances attached to.</dd><dt class="property-required"
             title="Required">
         <span id="max_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
@@ -1762,8 +1953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The maximum number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of CVM instances.</dd><dt class="property-required"
             title="Required">
         <span id="min_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_size_python" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
@@ -1771,8 +1961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The minimum number of CVM instances.</dd><dt class="property-required"
             title="Required">
         <span id="multi_zone_subnet_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_zone_subnet_policy_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>subnet_<wbr>policy</a>
@@ -1780,8 +1969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-required"
+    <dd>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1789,8 +1977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to which the scaling group belongs. Default value is 0.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the scaling group belongs. Default value is 0.</dd><dt class="property-required"
             title="Required">
         <span id="retry_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retry_policy_python" style="color: inherit; text-decoration: inherit;">retry_<wbr>policy</a>
@@ -1798,8 +1985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A retry policy can be used when a creation fails.</p>
-</dd><dt class="property-required"
+    <dd>A retry policy can be used when a creation fails.</dd><dt class="property-required"
             title="Required">
         <span id="scaling_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
@@ -1807,8 +1993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A specified scaling group ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified scaling group ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="scaling_group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_name_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>name</a>
@@ -1816,8 +2001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A scaling group name used to query.</p>
-</dd><dt class="property-required"
+    <dd>A scaling group name used to query.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1825,8 +2009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Current status of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_ids_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
@@ -1834,17 +2017,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A list of subnet IDs.</p>
-</dd><dt class="property-required"
+    <dd>A list of subnet IDs.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags used to query.</p>
-</dd><dt class="property-required"
+    <dd>Tags used to query.</dd><dt class="property-required"
             title="Required">
         <span id="termination_policies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#termination_policies_python" style="color: inherit; text-decoration: inherit;">termination_<wbr>policies</a>
@@ -1852,8 +2033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A policy used to select a CVM instance to be terminated from the scaling group.</p>
-</dd><dt class="property-required"
+    <dd>A policy used to select a CVM instance to be terminated from the scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1861,8 +2041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc with which the instance is associated.</dd><dt class="property-required"
             title="Required">
         <span id="zones_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_python" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -1870,8 +2049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A list of available zones.</p>
-</dd></dl>
+    <dd>A list of available zones.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1885,8 +2063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter results by launch configuration ID.</p>
-</dd><dt class="property-required"
+    <dd>Filter results by launch configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1894,8 +2071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-required"
+    <dd>The time when the AS group was created.</dd><dt class="property-required"
             title="Required">
         <span id="defaultcooldown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultcooldown_yaml" style="color: inherit; text-decoration: inherit;">default<wbr>Cooldown</a>
@@ -1903,8 +2079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Default cooldown time of scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Default cooldown time of scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="desiredcapacity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacity_yaml" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity</a>
@@ -1912,17 +2087,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The desired number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The desired number of CVM instances.</dd><dt class="property-required"
             title="Required">
-        <span id="forwardbalancerids_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardbalancerids_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Balancer<wbr>Ids</a>
+        <span id="forwardloadbalancers_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardloadbalancers_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Load<wbr>Balancers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardbalancerid">List&lt;Property Map&gt;</a></span>
+        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardloadbalancer">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of application clb ids.</p>
-</dd><dt class="property-required"
+    <dd>A list of application clb.</dd><dt class="property-required"
             title="Required">
         <span id="instancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1930,8 +2103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of instance.</p>
-</dd><dt class="property-required"
+    <dd>Number of instance.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerids_yaml" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Ids</a>
@@ -1939,8 +2111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of traditional clb ids which the CVM instances attached to.</p>
-</dd><dt class="property-required"
+    <dd>A list of traditional clb ids which the CVM instances attached to.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -1948,8 +2119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The maximum number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The maximum number of CVM instances.</dd><dt class="property-required"
             title="Required">
         <span id="minsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -1957,8 +2127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The minimum number of CVM instances.</p>
-</dd><dt class="property-required"
+    <dd>The minimum number of CVM instances.</dd><dt class="property-required"
             title="Required">
         <span id="multizonesubnetpolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizonesubnetpolicy_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -1966,8 +2135,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-required"
+    <dd>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1975,8 +2143,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project to which the scaling group belongs. Default value is 0.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project to which the scaling group belongs. Default value is 0.</dd><dt class="property-required"
             title="Required">
         <span id="retrypolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrypolicy_yaml" style="color: inherit; text-decoration: inherit;">retry<wbr>Policy</a>
@@ -1984,8 +2151,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A retry policy can be used when a creation fails.</p>
-</dd><dt class="property-required"
+    <dd>A retry policy can be used when a creation fails.</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1993,8 +2159,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A specified scaling group ID used to query.</p>
-</dd><dt class="property-required"
+    <dd>A specified scaling group ID used to query.</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -2002,8 +2167,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A scaling group name used to query.</p>
-</dd><dt class="property-required"
+    <dd>A scaling group name used to query.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2011,8 +2175,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Current status of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="subnetids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -2020,17 +2183,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of subnet IDs.</p>
-</dd><dt class="property-required"
+    <dd>A list of subnet IDs.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags used to query.</p>
-</dd><dt class="property-required"
+    <dd>Tags used to query.</dd><dt class="property-required"
             title="Required">
         <span id="terminationpolicies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationpolicies_yaml" style="color: inherit; text-decoration: inherit;">termination<wbr>Policies</a>
@@ -2038,8 +2199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A policy used to select a CVM instance to be terminated from the scaling group.</p>
-</dd><dt class="property-required"
+    <dd>A policy used to select a CVM instance to be terminated from the scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2047,8 +2207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the vpc with which the instance is associated.</p>
-</dd><dt class="property-required"
+    <dd>ID of the vpc with which the instance is associated.</dd><dt class="property-required"
             title="Required">
         <span id="zones_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_yaml" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -2056,12 +2215,11 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of available zones.</p>
-</dd></dl>
+    <dd>A list of available zones.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="getscalinggroupsscalinggrouplistforwardbalancerid">Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Balancer<wbr>Id</h4>
+<h4 id="getscalinggroupsscalinggrouplistforwardloadbalancer">Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Load<wbr>Balancer</h4>
 
 
 
@@ -2075,8 +2233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener ID for application load balancers.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID for application load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerid_csharp" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Id</a>
@@ -2084,8 +2241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of available load balancers.</p>
-</dd><dt class="property-required"
+    <dd>ID of available load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="locationid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#locationid_csharp" style="color: inherit; text-decoration: inherit;">Location<wbr>Id</a>
@@ -2093,17 +2249,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of forwarding rules.</p>
-</dd><dt class="property-required"
+    <dd>ID of forwarding rules.</dd><dt class="property-required"
             title="Required">
         <span id="targetattributes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetattributes_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Attributes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardbalanceridtargetattribute">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Target<wbr>Attribute&gt;</a></span>
+        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardloadbalancertargetattribute">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Load<wbr>Balancer<wbr>Target<wbr>Attribute&gt;</a></span>
     </dt>
-    <dd><p>Attribute list of target rules.</p>
-</dd></dl>
+    <dd>Attribute list of target rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2117,8 +2271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener ID for application load balancers.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID for application load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerid_go" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Id</a>
@@ -2126,8 +2279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of available load balancers.</p>
-</dd><dt class="property-required"
+    <dd>ID of available load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="locationid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#locationid_go" style="color: inherit; text-decoration: inherit;">Location<wbr>Id</a>
@@ -2135,17 +2287,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of forwarding rules.</p>
-</dd><dt class="property-required"
+    <dd>ID of forwarding rules.</dd><dt class="property-required"
             title="Required">
         <span id="targetattributes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetattributes_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Attributes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardbalanceridtargetattribute">[]Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Target<wbr>Attribute</a></span>
+        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardloadbalancertargetattribute">[]Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Load<wbr>Balancer<wbr>Target<wbr>Attribute</a></span>
     </dt>
-    <dd><p>Attribute list of target rules.</p>
-</dd></dl>
+    <dd>Attribute list of target rules.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Listener ID for application load balancers.</dd><dt class="property-required"
+            title="Required">
+        <span id="load_balancer_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_id_hcl" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of available load balancers.</dd><dt class="property-required"
+            title="Required">
+        <span id="location_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_id_hcl" style="color: inherit; text-decoration: inherit;">location_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of forwarding rules.</dd><dt class="property-required"
+            title="Required">
+        <span id="target_attributes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_attributes_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>attributes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardloadbalancertargetattribute">list(object)</a></span>
+    </dt>
+    <dd>Attribute list of target rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2159,8 +2347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Listener ID for application load balancers.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID for application load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerid_java" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Id</a>
@@ -2168,8 +2355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of available load balancers.</p>
-</dd><dt class="property-required"
+    <dd>ID of available load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="locationid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#locationid_java" style="color: inherit; text-decoration: inherit;">location<wbr>Id</a>
@@ -2177,17 +2363,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of forwarding rules.</p>
-</dd><dt class="property-required"
+    <dd>ID of forwarding rules.</dd><dt class="property-required"
             title="Required">
         <span id="targetattributes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetattributes_java" style="color: inherit; text-decoration: inherit;">target<wbr>Attributes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardbalanceridtargetattribute">List&lt;Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Target<wbr>Attribute&gt;</a></span>
+        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardloadbalancertargetattribute">List&lt;Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Load<wbr>Balancer<wbr>Target<wbr>Attribute&gt;</a></span>
     </dt>
-    <dd><p>Attribute list of target rules.</p>
-</dd></dl>
+    <dd>Attribute list of target rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2201,8 +2385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener ID for application load balancers.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID for application load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerid_nodejs" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Id</a>
@@ -2210,8 +2393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of available load balancers.</p>
-</dd><dt class="property-required"
+    <dd>ID of available load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="locationid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#locationid_nodejs" style="color: inherit; text-decoration: inherit;">location<wbr>Id</a>
@@ -2219,17 +2401,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of forwarding rules.</p>
-</dd><dt class="property-required"
+    <dd>ID of forwarding rules.</dd><dt class="property-required"
             title="Required">
         <span id="targetattributes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetattributes_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Attributes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardbalanceridtargetattribute">Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Target<wbr>Attribute[]</a></span>
+        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardloadbalancertargetattribute">Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Load<wbr>Balancer<wbr>Target<wbr>Attribute[]</a></span>
     </dt>
-    <dd><p>Attribute list of target rules.</p>
-</dd></dl>
+    <dd>Attribute list of target rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2243,8 +2423,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Listener ID for application load balancers.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID for application load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="load_balancer_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_id_python" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>id</a>
@@ -2252,8 +2431,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of available load balancers.</p>
-</dd><dt class="property-required"
+    <dd>ID of available load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="location_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#location_id_python" style="color: inherit; text-decoration: inherit;">location_<wbr>id</a>
@@ -2261,17 +2439,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of forwarding rules.</p>
-</dd><dt class="property-required"
+    <dd>ID of forwarding rules.</dd><dt class="property-required"
             title="Required">
         <span id="target_attributes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_attributes_python" style="color: inherit; text-decoration: inherit;">target_<wbr>attributes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardbalanceridtargetattribute">Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Target<wbr>Attribute]</a></span>
+        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardloadbalancertargetattribute">Sequence[Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Load<wbr>Balancer<wbr>Target<wbr>Attribute]</a></span>
     </dt>
-    <dd><p>Attribute list of target rules.</p>
-</dd></dl>
+    <dd>Attribute list of target rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2285,8 +2461,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Listener ID for application load balancers.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID for application load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerid_yaml" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Id</a>
@@ -2294,8 +2469,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of available load balancers.</p>
-</dd><dt class="property-required"
+    <dd>ID of available load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="locationid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#locationid_yaml" style="color: inherit; text-decoration: inherit;">location<wbr>Id</a>
@@ -2303,21 +2477,19 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of forwarding rules.</p>
-</dd><dt class="property-required"
+    <dd>ID of forwarding rules.</dd><dt class="property-required"
             title="Required">
         <span id="targetattributes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetattributes_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Attributes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardbalanceridtargetattribute">List&lt;Property Map&gt;</a></span>
+        <span class="property-type"><a href="#getscalinggroupsscalinggrouplistforwardloadbalancertargetattribute">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Attribute list of target rules.</p>
-</dd></dl>
+    <dd>Attribute list of target rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="getscalinggroupsscalinggrouplistforwardbalanceridtargetattribute">Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Target<wbr>Attribute</h4>
+<h4 id="getscalinggroupsscalinggrouplistforwardloadbalancertargetattribute">Get<wbr>Scaling<wbr>Groups<wbr>Scaling<wbr>Group<wbr>List<wbr>Forward<wbr>Load<wbr>Balancer<wbr>Target<wbr>Attribute</h4>
 
 
 
@@ -2331,8 +2503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number.</p>
-</dd><dt class="property-required"
+    <dd>Port number.</dd><dt class="property-required"
             title="Required">
         <span id="weight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -2340,8 +2511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight.</p>
-</dd></dl>
+    <dd>Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2355,8 +2525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number.</p>
-</dd><dt class="property-required"
+    <dd>Port number.</dd><dt class="property-required"
             title="Required">
         <span id="weight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -2364,8 +2533,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight.</p>
-</dd></dl>
+    <dd>Weight.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port number.</dd><dt class="property-required"
+            title="Required">
+        <span id="weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2379,8 +2569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port number.</p>
-</dd><dt class="property-required"
+    <dd>Port number.</dd><dt class="property-required"
             title="Required">
         <span id="weight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2388,8 +2577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Weight.</p>
-</dd></dl>
+    <dd>Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2403,8 +2591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port number.</p>
-</dd><dt class="property-required"
+    <dd>Port number.</dd><dt class="property-required"
             title="Required">
         <span id="weight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2412,8 +2599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Weight.</p>
-</dd></dl>
+    <dd>Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2427,8 +2613,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number.</p>
-</dd><dt class="property-required"
+    <dd>Port number.</dd><dt class="property-required"
             title="Required">
         <span id="weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2436,8 +2621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight.</p>
-</dd></dl>
+    <dd>Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2451,8 +2635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port number.</p>
-</dd><dt class="property-required"
+    <dd>Port number.</dd><dt class="property-required"
             title="Required">
         <span id="weight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2460,8 +2643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Weight.</p>
-</dd></dl>
+    <dd>Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2476,7 +2658,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

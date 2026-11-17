@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Kms.Key"
 meta_desc: "Documentation for the tencentcloud.Kms.Key resource with examples, input properties, output properties, lookup functions, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,7 +20,12 @@ Provide a resource to create a KMS key.
 
 ### Create and enable a instance.
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -26,13 +33,19 @@ import * as tencentcloud from "@tencentcloud_iac/pulumi";
 const example = new tencentcloud.kms.Key("example", {
     alias: "tf-example-kms-key",
     description: "example of kms key",
-    isEnabled: true,
     keyRotationEnabled: false,
+    isEnabled: true,
+    pendingDeleteWindowInDays: 7,
     tags: {
-        createdBy: "terraform",
+        createdBy: "Terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -40,12 +53,50 @@ import tencentcloud_iac_pulumi as tencentcloud
 example = tencentcloud.kms.Key("example",
     alias="tf-example-kms-key",
     description="example of kms key",
-    is_enabled=True,
     key_rotation_enabled=False,
+    is_enabled=True,
+    pending_delete_window_in_days=7,
     tags={
-        "createdBy": "terraform",
+        "createdBy": "Terraform",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kms"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := kms.NewKey(ctx, "example", &kms.KeyArgs{
+			Alias:                     pulumi.String("tf-example-kms-key"),
+			Description:               pulumi.String("example of kms key"),
+			KeyRotationEnabled:        pulumi.Bool(false),
+			IsEnabled:                 pulumi.Bool(true),
+			PendingDeleteWindowInDays: pulumi.Int(7),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -58,42 +109,22 @@ return await Deployment.RunAsync(() =>
     {
         Alias = "tf-example-kms-key",
         Description = "example of kms key",
-        IsEnabled = true,
         KeyRotationEnabled = false,
+        IsEnabled = true,
+        PendingDeleteWindowInDays = 7,
         Tags = 
         {
-            { "createdBy", "terraform" },
+            { "createdBy", "Terraform" },
         },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Kms.NewKey(ctx, "example", &Kms.KeyArgs{
-			Alias:              pulumi.String("tf-example-kms-key"),
-			Description:        pulumi.String("example of kms key"),
-			IsEnabled:          pulumi.Bool(true),
-			KeyRotationEnabled: pulumi.Bool(false),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -102,8 +133,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Kms.Key;
 import com.pulumi.tencentcloud.Kms.KeyArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -115,17 +146,23 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Key("example", KeyArgs.builder()        
+        var example = new Key("example", KeyArgs.builder()
             .alias("tf-example-kms-key")
             .description("example of kms key")
-            .isEnabled(true)
             .keyRotationEnabled(false)
-            .tags(Map.of("createdBy", "terraform"))
+            .isEnabled(true)
+            .pendingDeleteWindowInDays(7)
+            .tags(Map.of("createdBy", "Terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
@@ -133,190 +170,109 @@ resources:
     properties:
       alias: tf-example-kms-key
       description: example of kms key
-      isEnabled: true
       keyRotationEnabled: false
+      isEnabled: true
+      pendingDeleteWindowInDays: 7
       tags:
-        createdBy: terraform
+        createdBy: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### Specify the Key Usage as an asymmetry method.
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+resource "tencentcloud_kms_key" "example" {
+  alias                         = "tf-example-kms-key"
+  description                   = "example of kms key"
+  key_rotation_enabled          = false
+  is_enabled                    = true
+  pending_delete_window_in_days = 7
+  tags = {
+    "createdBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create kms instance with key rotation and rotate days.
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const example2 = new tencentcloud.kms.Key("example2", {
+const example = new tencentcloud.kms.Key("example", {
     alias: "tf-example-kms-key",
     description: "example of kms key",
-    isEnabled: false,
-    keyUsage: "ASYMMETRIC_DECRYPT_RSA_2048",
-});
-```
-```python
-import pulumi
-import tencentcloud_iac_pulumi as tencentcloud
-
-example2 = tencentcloud.kms.Key("example2",
-    alias="tf-example-kms-key",
-    description="example of kms key",
-    is_enabled=False,
-    key_usage="ASYMMETRIC_DECRYPT_RSA_2048")
-```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-
-return await Deployment.RunAsync(() => 
-{
-    var example2 = new Tencentcloud.Kms.Key("example2", new()
-    {
-        Alias = "tf-example-kms-key",
-        Description = "example of kms key",
-        IsEnabled = false,
-        KeyUsage = "ASYMMETRIC_DECRYPT_RSA_2048",
-    });
-
-});
-```
-```go
-package main
-
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Kms.NewKey(ctx, "example2", &Kms.KeyArgs{
-			Alias:       pulumi.String("tf-example-kms-key"),
-			Description: pulumi.String("example of kms key"),
-			IsEnabled:   pulumi.Bool(false),
-			KeyUsage:    pulumi.String("ASYMMETRIC_DECRYPT_RSA_2048"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
-```java
-package generated_program;
-
-import com.pulumi.Context;
-import com.pulumi.Pulumi;
-import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Kms.Key;
-import com.pulumi.tencentcloud.Kms.KeyArgs;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-public class App {
-    public static void main(String[] args) {
-        Pulumi.run(App::stack);
-    }
-
-    public static void stack(Context ctx) {
-        var example2 = new Key("example2", KeyArgs.builder()        
-            .alias("tf-example-kms-key")
-            .description("example of kms key")
-            .isEnabled(false)
-            .keyUsage("ASYMMETRIC_DECRYPT_RSA_2048")
-            .build());
-
-    }
-}
-```
-```yaml
-resources:
-  example2:
-    type: tencentcloud:Kms:Key
-    properties:
-      alias: tf-example-kms-key
-      description: example of kms key
-      isEnabled: false
-      keyUsage: ASYMMETRIC_DECRYPT_RSA_2048
-```
-<!--End PulumiCodeChooser -->
-
-### Disable the kms key instance.
-
-<!--Start PulumiCodeChooser -->
-```typescript
-import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
-
-const example3 = new tencentcloud.kms.Key("example3", {
-    alias: "tf-example-kms-key",
-    description: "example of kms key",
-    isEnabled: false,
-    keyRotationEnabled: false,
+    keyUsage: "ENCRYPT_DECRYPT",
+    keyRotationEnabled: true,
+    rotateDays: 30,
+    isEnabled: true,
     tags: {
-        "test-tag": "unit-test",
+        createdBy: "Terraform",
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-example3 = tencentcloud.kms.Key("example3",
+example = tencentcloud.kms.Key("example",
     alias="tf-example-kms-key",
     description="example of kms key",
-    is_enabled=False,
-    key_rotation_enabled=False,
+    key_usage="ENCRYPT_DECRYPT",
+    key_rotation_enabled=True,
+    rotate_days=30,
+    is_enabled=True,
     tags={
-        "test-tag": "unit-test",
+        "createdBy": "Terraform",
     })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var example3 = new Tencentcloud.Kms.Key("example3", new()
-    {
-        Alias = "tf-example-kms-key",
-        Description = "example of kms key",
-        IsEnabled = false,
-        KeyRotationEnabled = false,
-        Tags = 
-        {
-            { "test-tag", "unit-test" },
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kms"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Kms.NewKey(ctx, "example3", &Kms.KeyArgs{
+		_, err := kms.NewKey(ctx, "example", &kms.KeyArgs{
 			Alias:              pulumi.String("tf-example-kms-key"),
 			Description:        pulumi.String("example of kms key"),
-			IsEnabled:          pulumi.Bool(false),
-			KeyRotationEnabled: pulumi.Bool(false),
-			Tags: pulumi.Map{
-				"test-tag": pulumi.Any("unit-test"),
+			KeyUsage:           pulumi.String("ENCRYPT_DECRYPT"),
+			KeyRotationEnabled: pulumi.Bool(true),
+			RotateDays:         pulumi.Int(30),
+			IsEnabled:          pulumi.Bool(true),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("Terraform"),
 			},
 		})
 		if err != nil {
@@ -326,6 +282,40 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Kms.Key("example", new()
+    {
+        Alias = "tf-example-kms-key",
+        Description = "example of kms key",
+        KeyUsage = "ENCRYPT_DECRYPT",
+        KeyRotationEnabled = true,
+        RotateDays = 30,
+        IsEnabled = true,
+        Tags = 
+        {
+            { "createdBy", "Terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -334,8 +324,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Kms.Key;
 import com.pulumi.tencentcloud.Kms.KeyArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -347,95 +337,707 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example3 = new Key("example3", KeyArgs.builder()        
+        var example = new Key("example", KeyArgs.builder()
             .alias("tf-example-kms-key")
             .description("example of kms key")
-            .isEnabled(false)
-            .keyRotationEnabled(false)
-            .tags(Map.of("test-tag", "unit-test"))
+            .keyUsage("ENCRYPT_DECRYPT")
+            .keyRotationEnabled(true)
+            .rotateDays(30)
+            .isEnabled(true)
+            .tags(Map.of("createdBy", "Terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  example3:
+  example:
     type: tencentcloud:Kms:Key
     properties:
       alias: tf-example-kms-key
       description: example of kms key
-      isEnabled: false
-      keyRotationEnabled: false
+      keyUsage: ENCRYPT_DECRYPT
+      keyRotationEnabled: true
+      rotateDays: 30
+      isEnabled: true
       tags:
-        test-tag: unit-test
+        createdBy: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_kms_key" "example" {
+  alias                = "tf-example-kms-key"
+  description          = "example of kms key"
+  key_usage            = "ENCRYPT_DECRYPT"
+  key_rotation_enabled = true
+  rotate_days          = 30
+  is_enabled           = true
+  tags = {
+    "createdBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create kms instance with HSM
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.kms.Key("example", {
+    alias: "tf-example-kms-key",
+    description: "example of kms key",
+    keyRotationEnabled: false,
+    isEnabled: true,
+    pendingDeleteWindowInDays: 7,
+    hsmClusterId: "cls-hsm-mwpd9cjm",
+    tags: {
+        createdBy: "Terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.kms.Key("example",
+    alias="tf-example-kms-key",
+    description="example of kms key",
+    key_rotation_enabled=False,
+    is_enabled=True,
+    pending_delete_window_in_days=7,
+    hsm_cluster_id="cls-hsm-mwpd9cjm",
+    tags={
+        "createdBy": "Terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kms"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := kms.NewKey(ctx, "example", &kms.KeyArgs{
+			Alias:                     pulumi.String("tf-example-kms-key"),
+			Description:               pulumi.String("example of kms key"),
+			KeyRotationEnabled:        pulumi.Bool(false),
+			IsEnabled:                 pulumi.Bool(true),
+			PendingDeleteWindowInDays: pulumi.Int(7),
+			HsmClusterId:              pulumi.String("cls-hsm-mwpd9cjm"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Kms.Key("example", new()
+    {
+        Alias = "tf-example-kms-key",
+        Description = "example of kms key",
+        KeyRotationEnabled = false,
+        IsEnabled = true,
+        PendingDeleteWindowInDays = 7,
+        HsmClusterId = "cls-hsm-mwpd9cjm",
+        Tags = 
+        {
+            { "createdBy", "Terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Kms.Key;
+import com.pulumi.tencentcloud.Kms.KeyArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Key("example", KeyArgs.builder()
+            .alias("tf-example-kms-key")
+            .description("example of kms key")
+            .keyRotationEnabled(false)
+            .isEnabled(true)
+            .pendingDeleteWindowInDays(7)
+            .hsmClusterId("cls-hsm-mwpd9cjm")
+            .tags(Map.of("createdBy", "Terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Kms:Key
+    properties:
+      alias: tf-example-kms-key
+      description: example of kms key
+      keyRotationEnabled: false
+      isEnabled: true
+      pendingDeleteWindowInDays: 7
+      hsmClusterId: cls-hsm-mwpd9cjm
+      tags:
+        createdBy: Terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_kms_key" "example" {
+  alias                         = "tf-example-kms-key"
+  description                   = "example of kms key"
+  key_rotation_enabled          = false
+  is_enabled                    = true
+  pending_delete_window_in_days = 7
+  hsm_cluster_id                = "cls-hsm-mwpd9cjm"
+  tags = {
+    "createdBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Specify the Key Usage as an asymmetry method.
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.kms.Key("example", {
+    alias: "tf-example-kms-key",
+    description: "example of kms key",
+    keyUsage: "ASYMMETRIC_DECRYPT_RSA_2048",
+    isEnabled: false,
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.kms.Key("example",
+    alias="tf-example-kms-key",
+    description="example of kms key",
+    key_usage="ASYMMETRIC_DECRYPT_RSA_2048",
+    is_enabled=False)
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kms"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := kms.NewKey(ctx, "example", &kms.KeyArgs{
+			Alias:       pulumi.String("tf-example-kms-key"),
+			Description: pulumi.String("example of kms key"),
+			KeyUsage:    pulumi.String("ASYMMETRIC_DECRYPT_RSA_2048"),
+			IsEnabled:   pulumi.Bool(false),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Kms.Key("example", new()
+    {
+        Alias = "tf-example-kms-key",
+        Description = "example of kms key",
+        KeyUsage = "ASYMMETRIC_DECRYPT_RSA_2048",
+        IsEnabled = false,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Kms.Key;
+import com.pulumi.tencentcloud.Kms.KeyArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Key("example", KeyArgs.builder()
+            .alias("tf-example-kms-key")
+            .description("example of kms key")
+            .keyUsage("ASYMMETRIC_DECRYPT_RSA_2048")
+            .isEnabled(false)
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Kms:Key
+    properties:
+      alias: tf-example-kms-key
+      description: example of kms key
+      keyUsage: ASYMMETRIC_DECRYPT_RSA_2048
+      isEnabled: false
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_kms_key" "example" {
+  alias       = "tf-example-kms-key"
+  description = "example of kms key"
+  key_usage   = "ASYMMETRIC_DECRYPT_RSA_2048"
+  is_enabled  = false
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Disable the kms key instance.
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.kms.Key("example", {
+    alias: "tf-example-kms-key",
+    description: "example of kms key",
+    keyRotationEnabled: false,
+    isEnabled: false,
+    tags: {
+        createdBy: "Terraform",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.kms.Key("example",
+    alias="tf-example-kms-key",
+    description="example of kms key",
+    key_rotation_enabled=False,
+    is_enabled=False,
+    tags={
+        "createdBy": "Terraform",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kms"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := kms.NewKey(ctx, "example", &kms.KeyArgs{
+			Alias:              pulumi.String("tf-example-kms-key"),
+			Description:        pulumi.String("example of kms key"),
+			KeyRotationEnabled: pulumi.Bool(false),
+			IsEnabled:          pulumi.Bool(false),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Kms.Key("example", new()
+    {
+        Alias = "tf-example-kms-key",
+        Description = "example of kms key",
+        KeyRotationEnabled = false,
+        IsEnabled = false,
+        Tags = 
+        {
+            { "createdBy", "Terraform" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Kms.Key;
+import com.pulumi.tencentcloud.Kms.KeyArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Key("example", KeyArgs.builder()
+            .alias("tf-example-kms-key")
+            .description("example of kms key")
+            .keyRotationEnabled(false)
+            .isEnabled(false)
+            .tags(Map.of("createdBy", "Terraform"))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Kms:Key
+    properties:
+      alias: tf-example-kms-key
+      description: example of kms key
+      keyRotationEnabled: false
+      isEnabled: false
+      tags:
+        createdBy: Terraform
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_kms_key" "example" {
+  alias                = "tf-example-kms-key"
+  description          = "example of kms key"
+  key_rotation_enabled = false
+  is_enabled           = false
+  tags = {
+    "createdBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [ArchiveKey](https://www.tencentcloud.com/document/api/1030/38198)
+  - [CreateKey](https://www.tencentcloud.com/document/api/1030/32199)
+  - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+  - [DisableKey](https://www.tencentcloud.com/document/api/1030/32195)
+  - [EnableKeyRotation](https://www.tencentcloud.com/document/api/1030/32191)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [UpdateAlias](https://www.tencentcloud.com/document/api/1030/32182)
+  - [UpdateKeyDescription](https://www.tencentcloud.com/document/api/1030/32181)
+* Delete:
+  - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+  - [DisableKey](https://www.tencentcloud.com/document/api/1030/32195)
+  - [ScheduleKeyDeletion](https://www.tencentcloud.com/document/api/1030/33534)
 
 
 ## Create Key Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Key</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">KeyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Key</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">KeyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Key</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">KeyArgs</a></span><span class="p">,</span>
+        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Key</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">alias</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">hsm_cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">is_archived</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">is_enabled</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">key_rotation_enabled</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">key_usage</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">pending_delete_window_in_days</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Key</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">KeyArgs</a></span><span class="p">,</span>
-        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+        <span class="nx">rotate_days</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewKey</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">KeyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Key</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewKey</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">KeyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Key</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Key</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">KeyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Key</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">KeyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Key</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">KeyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Key</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">KeyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Kms:Key</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Kms:Key</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_kms_key&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -456,7 +1058,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -573,11 +1175,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Key Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Key resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -593,8 +1203,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -602,8 +1211,15 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CMK. The maximum is 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CMK. The maximum is 1024 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hsmclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_csharp" style="color: inherit; text-decoration: inherit;">Hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
             title="Optional">
         <span id="isarchived_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isarchived_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Archived</a>
@@ -611,8 +1227,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>is_enabled</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>isEnabled</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isenabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isenabled_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Enabled</a>
@@ -620,8 +1235,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>is_archived</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>isArchived</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyrotationenabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyrotationenabled_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Rotation<wbr>Enabled</a>
@@ -629,8 +1243,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation, valid when key_usage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable key rotation, valid when keyUsage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="keyusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Usage</a>
@@ -638,8 +1251,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="pendingdeletewindowindays_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pendingdeletewindowindays_csharp" style="color: inherit; text-decoration: inherit;">Pending<wbr>Delete<wbr>Window<wbr>In<wbr>Days</a>
@@ -647,17 +1259,23 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</p>
-</dd><dt class="property-optional"
+    <dd>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rotatedays_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotatedays_csharp" style="color: inherit; text-decoration: inherit;">Rotate<wbr>Days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Key rotation period in days, range 7~365, default 365. Only effective when <code>keyUsage</code> is <code>ENCRYPT_DECRYPT</code> and <code>keyRotationEnabled</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of CMK.</p>
-</dd></dl>
+    <dd>Tags of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -671,8 +1289,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -680,8 +1297,15 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CMK. The maximum is 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CMK. The maximum is 1024 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hsmclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_go" style="color: inherit; text-decoration: inherit;">Hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
             title="Optional">
         <span id="isarchived_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isarchived_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Archived</a>
@@ -689,8 +1313,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>is_enabled</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>isEnabled</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isenabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isenabled_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Enabled</a>
@@ -698,8 +1321,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>is_archived</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>isArchived</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyrotationenabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyrotationenabled_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Rotation<wbr>Enabled</a>
@@ -707,8 +1329,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation, valid when key_usage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable key rotation, valid when keyUsage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="keyusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Usage</a>
@@ -716,8 +1337,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="pendingdeletewindowindays_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pendingdeletewindowindays_go" style="color: inherit; text-decoration: inherit;">Pending<wbr>Delete<wbr>Window<wbr>In<wbr>Days</a>
@@ -725,17 +1345,109 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</p>
-</dd><dt class="property-optional"
+    <dd>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rotatedays_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotatedays_go" style="color: inherit; text-decoration: inherit;">Rotate<wbr>Days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Key rotation period in days, range 7~365, default 365. Only effective when <code>keyUsage</code> is <code>ENCRYPT_DECRYPT</code> and <code>keyRotationEnabled</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of CMK.</p>
-</dd></dl>
+    <dd>Tags of CMK.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of CMK. The maximum is 1024 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hsm_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsm_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">hsm_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_archived_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_archived_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>archived</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>isEnabled</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_enabled_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>isArchived</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_rotation_enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_rotation_enabled_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>rotation_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to enable key rotation, valid when keyUsage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="key_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_usage_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="pending_delete_window_in_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pending_delete_window_in_days_hcl" style="color: inherit; text-decoration: inherit;">pending_<wbr>delete_<wbr>window_<wbr>in_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rotate_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotate_days_hcl" style="color: inherit; text-decoration: inherit;">rotate_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Key rotation period in days, range 7~365, default 365. Only effective when <code>keyUsage</code> is <code>ENCRYPT_DECRYPT</code> and <code>keyRotationEnabled</code> is <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -749,8 +1461,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -758,8 +1469,15 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of CMK. The maximum is 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CMK. The maximum is 1024 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hsmclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_java" style="color: inherit; text-decoration: inherit;">hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
             title="Optional">
         <span id="isarchived_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isarchived_java" style="color: inherit; text-decoration: inherit;">is<wbr>Archived</a>
@@ -767,8 +1485,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>is_enabled</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>isEnabled</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isenabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isenabled_java" style="color: inherit; text-decoration: inherit;">is<wbr>Enabled</a>
@@ -776,8 +1493,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>is_archived</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>isArchived</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyrotationenabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyrotationenabled_java" style="color: inherit; text-decoration: inherit;">key<wbr>Rotation<wbr>Enabled</a>
@@ -785,8 +1501,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation, valid when key_usage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable key rotation, valid when keyUsage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="keyusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_java" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -794,8 +1509,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="pendingdeletewindowindays_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pendingdeletewindowindays_java" style="color: inherit; text-decoration: inherit;">pending<wbr>Delete<wbr>Window<wbr>In<wbr>Days</a>
@@ -803,17 +1517,23 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</p>
-</dd><dt class="property-optional"
+    <dd>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rotatedays_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotatedays_java" style="color: inherit; text-decoration: inherit;">rotate<wbr>Days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Key rotation period in days, range 7~365, default 365. Only effective when <code>keyUsage</code> is <code>ENCRYPT_DECRYPT</code> and <code>keyRotationEnabled</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of CMK.</p>
-</dd></dl>
+    <dd>Tags of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -827,8 +1547,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -836,8 +1555,15 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CMK. The maximum is 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CMK. The maximum is 1024 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hsmclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_nodejs" style="color: inherit; text-decoration: inherit;">hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
             title="Optional">
         <span id="isarchived_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isarchived_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Archived</a>
@@ -845,8 +1571,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>is_enabled</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>isEnabled</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isenabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isenabled_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Enabled</a>
@@ -854,8 +1579,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>is_archived</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>isArchived</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyrotationenabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyrotationenabled_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Rotation<wbr>Enabled</a>
@@ -863,8 +1587,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation, valid when key_usage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable key rotation, valid when keyUsage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="keyusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -872,8 +1595,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="pendingdeletewindowindays_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pendingdeletewindowindays_nodejs" style="color: inherit; text-decoration: inherit;">pending<wbr>Delete<wbr>Window<wbr>In<wbr>Days</a>
@@ -881,17 +1603,23 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</p>
-</dd><dt class="property-optional"
+    <dd>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rotatedays_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotatedays_nodejs" style="color: inherit; text-decoration: inherit;">rotate<wbr>Days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Key rotation period in days, range 7~365, default 365. Only effective when <code>keyUsage</code> is <code>ENCRYPT_DECRYPT</code> and <code>keyRotationEnabled</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of CMK.</p>
-</dd></dl>
+    <dd>Tags of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -905,8 +1633,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -914,8 +1641,15 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of CMK. The maximum is 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CMK. The maximum is 1024 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hsm_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsm_cluster_id_python" style="color: inherit; text-decoration: inherit;">hsm_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
             title="Optional">
         <span id="is_archived_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_archived_python" style="color: inherit; text-decoration: inherit;">is_<wbr>archived</a>
@@ -923,8 +1657,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>is_enabled</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>isEnabled</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_enabled_python" style="color: inherit; text-decoration: inherit;">is_<wbr>enabled</a>
@@ -932,8 +1665,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>is_archived</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>isArchived</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_rotation_enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_rotation_enabled_python" style="color: inherit; text-decoration: inherit;">key_<wbr>rotation_<wbr>enabled</a>
@@ -941,8 +1673,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation, valid when key_usage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable key rotation, valid when keyUsage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="key_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_usage_python" style="color: inherit; text-decoration: inherit;">key_<wbr>usage</a>
@@ -950,8 +1681,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="pending_delete_window_in_days_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pending_delete_window_in_days_python" style="color: inherit; text-decoration: inherit;">pending_<wbr>delete_<wbr>window_<wbr>in_<wbr>days</a>
@@ -959,17 +1689,23 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</p>
-</dd><dt class="property-optional"
+    <dd>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rotate_days_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotate_days_python" style="color: inherit; text-decoration: inherit;">rotate_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Key rotation period in days, range 7~365, default 365. Only effective when <code>keyUsage</code> is <code>ENCRYPT_DECRYPT</code> and <code>keyRotationEnabled</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of CMK.</p>
-</dd></dl>
+    <dd>Tags of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -983,8 +1719,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -992,8 +1727,15 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of CMK. The maximum is 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CMK. The maximum is 1024 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hsmclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hsmclusterid_yaml" style="color: inherit; text-decoration: inherit;">hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
             title="Optional">
         <span id="isarchived_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isarchived_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Archived</a>
@@ -1001,8 +1743,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>is_enabled</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>isEnabled</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="isenabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isenabled_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Enabled</a>
@@ -1010,8 +1751,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>is_archived</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>isArchived</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyrotationenabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyrotationenabled_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Rotation<wbr>Enabled</a>
@@ -1019,8 +1759,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation, valid when key_usage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable key rotation, valid when keyUsage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="keyusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyusage_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -1028,8 +1767,7 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="pendingdeletewindowindays_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pendingdeletewindowindays_yaml" style="color: inherit; text-decoration: inherit;">pending<wbr>Delete<wbr>Window<wbr>In<wbr>Days</a>
@@ -1037,17 +1775,23 @@ The Key resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</p>
-</dd><dt class="property-optional"
+    <dd>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rotatedays_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rotatedays_yaml" style="color: inherit; text-decoration: inherit;">rotate<wbr>Days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Key rotation period in days, range 7~365, default 365. Only effective when <code>keyUsage</code> is <code>ENCRYPT_DECRYPT</code> and <code>keyRotationEnabled</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of CMK.</p>
-</dd></dl>
+    <dd>Tags of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1068,8 +1812,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="kmskeystate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmskeystate_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>State</a>
@@ -1077,8 +1820,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd></dl>
+    <dd>State of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1092,8 +1834,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keystate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_go" style="color: inherit; text-decoration: inherit;">Key<wbr>State</a>
@@ -1101,8 +1842,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd></dl>
+    <dd>State of CMK.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="key_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_state_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1116,8 +1878,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keystate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_java" style="color: inherit; text-decoration: inherit;">key<wbr>State</a>
@@ -1125,8 +1886,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd></dl>
+    <dd>State of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1140,8 +1900,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keystate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>State</a>
@@ -1149,8 +1908,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd></dl>
+    <dd>State of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1164,8 +1922,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="key_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_state_python" style="color: inherit; text-decoration: inherit;">key_<wbr>state</a>
@@ -1173,8 +1930,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd></dl>
+    <dd>State of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1188,8 +1944,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="keystate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keystate_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>State</a>
@@ -1197,8 +1952,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd></dl>
+    <dd>State of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1208,128 +1962,169 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Key resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">KeyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Key</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">KeyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Key</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">alias</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">description</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">hsm_cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">is_archived</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">is_enabled</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">key_rotation_enabled</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">key_state</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">key_usage</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">pending_delete_window_in_days</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">) -&gt;</span> Key</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">rotate_days</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">) -&gt;</span> Key</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetKey<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">KeyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Key</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetKey<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">KeyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Key</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Key</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">KeyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Key</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">KeyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Key</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">KeyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Key</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">KeyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingKey</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Kms:Key</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_kms_key</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">KeyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">KeyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1337,28 +2132,31 @@ Get an existing Key resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">KeyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1366,28 +2164,31 @@ Get an existing Key resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">KeyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1407,8 +2208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1416,8 +2216,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CMK. The maximum is 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CMK. The maximum is 1024 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hsmclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hsmclusterid_csharp" style="color: inherit; text-decoration: inherit;">Hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isarchived_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isarchived_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Archived</a>
@@ -1425,8 +2232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>is_enabled</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>isEnabled</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isenabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isenabled_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Enabled</a>
@@ -1434,8 +2240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>is_archived</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>isArchived</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyrotationenabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyrotationenabled_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Rotation<wbr>Enabled</a>
@@ -1443,8 +2248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation, valid when key_usage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specify whether to enable key rotation, valid when keyUsage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_keyusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyusage_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Usage</a>
@@ -1452,8 +2256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_kmskeystate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmskeystate_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Key<wbr>State</a>
@@ -1461,8 +2264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd><dt class="property-optional"
+    <dd>State of CMK.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pendingdeletewindowindays_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pendingdeletewindowindays_csharp" style="color: inherit; text-decoration: inherit;">Pending<wbr>Delete<wbr>Window<wbr>In<wbr>Days</a>
@@ -1470,17 +2272,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</p>
-</dd><dt class="property-optional"
+    <dd>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rotatedays_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rotatedays_csharp" style="color: inherit; text-decoration: inherit;">Rotate<wbr>Days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Key rotation period in days, range 7~365, default 365. Only effective when <code>keyUsage</code> is <code>ENCRYPT_DECRYPT</code> and <code>keyRotationEnabled</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of CMK.</p>
-</dd></dl>
+    <dd>Tags of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1494,8 +2302,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -1503,8 +2310,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CMK. The maximum is 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CMK. The maximum is 1024 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hsmclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hsmclusterid_go" style="color: inherit; text-decoration: inherit;">Hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isarchived_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isarchived_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Archived</a>
@@ -1512,8 +2326,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>is_enabled</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>isEnabled</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isenabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isenabled_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Enabled</a>
@@ -1521,8 +2334,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>is_archived</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>isArchived</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyrotationenabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyrotationenabled_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Rotation<wbr>Enabled</a>
@@ -1530,8 +2342,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation, valid when key_usage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key rotation, valid when keyUsage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keystate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keystate_go" style="color: inherit; text-decoration: inherit;">Key<wbr>State</a>
@@ -1539,8 +2350,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of CMK.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_keyusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyusage_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Usage</a>
@@ -1548,8 +2358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pendingdeletewindowindays_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pendingdeletewindowindays_go" style="color: inherit; text-decoration: inherit;">Pending<wbr>Delete<wbr>Window<wbr>In<wbr>Days</a>
@@ -1557,17 +2366,117 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</p>
-</dd><dt class="property-optional"
+    <dd>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rotatedays_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rotatedays_go" style="color: inherit; text-decoration: inherit;">Rotate<wbr>Days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Key rotation period in days, range 7~365, default 365. Only effective when <code>keyUsage</code> is <code>ENCRYPT_DECRYPT</code> and <code>keyRotationEnabled</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of CMK.</p>
-</dd></dl>
+    <dd>Tags of CMK.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_alias_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alias_hcl" style="color: inherit; text-decoration: inherit;">alias</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of CMK. The maximum is 1024 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hsm_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hsm_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">hsm_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_archived_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_archived_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>archived</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>isEnabled</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_enabled_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>isArchived</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_key_rotation_enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_rotation_enabled_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>rotation_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to enable key rotation, valid when keyUsage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_key_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_state_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of CMK.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_key_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_usage_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_pending_delete_window_in_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pending_delete_window_in_days_hcl" style="color: inherit; text-decoration: inherit;">pending_<wbr>delete_<wbr>window_<wbr>in_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rotate_days_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rotate_days_hcl" style="color: inherit; text-decoration: inherit;">rotate_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Key rotation period in days, range 7~365, default 365. Only effective when <code>keyUsage</code> is <code>ENCRYPT_DECRYPT</code> and <code>keyRotationEnabled</code> is <code>true</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1581,8 +2490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1590,8 +2498,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of CMK. The maximum is 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CMK. The maximum is 1024 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hsmclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hsmclusterid_java" style="color: inherit; text-decoration: inherit;">hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isarchived_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isarchived_java" style="color: inherit; text-decoration: inherit;">is<wbr>Archived</a>
@@ -1599,8 +2514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>is_enabled</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>isEnabled</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isenabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isenabled_java" style="color: inherit; text-decoration: inherit;">is<wbr>Enabled</a>
@@ -1608,8 +2522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>is_archived</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>isArchived</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyrotationenabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyrotationenabled_java" style="color: inherit; text-decoration: inherit;">key<wbr>Rotation<wbr>Enabled</a>
@@ -1617,8 +2530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation, valid when key_usage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key rotation, valid when keyUsage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keystate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keystate_java" style="color: inherit; text-decoration: inherit;">key<wbr>State</a>
@@ -1626,8 +2538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of CMK.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_keyusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyusage_java" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -1635,8 +2546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pendingdeletewindowindays_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pendingdeletewindowindays_java" style="color: inherit; text-decoration: inherit;">pending<wbr>Delete<wbr>Window<wbr>In<wbr>Days</a>
@@ -1644,17 +2554,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</p>
-</dd><dt class="property-optional"
+    <dd>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rotatedays_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rotatedays_java" style="color: inherit; text-decoration: inherit;">rotate<wbr>Days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Key rotation period in days, range 7~365, default 365. Only effective when <code>keyUsage</code> is <code>ENCRYPT_DECRYPT</code> and <code>keyRotationEnabled</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of CMK.</p>
-</dd></dl>
+    <dd>Tags of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1668,8 +2584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1677,8 +2592,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of CMK. The maximum is 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CMK. The maximum is 1024 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hsmclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hsmclusterid_nodejs" style="color: inherit; text-decoration: inherit;">hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isarchived_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isarchived_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Archived</a>
@@ -1686,8 +2608,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>is_enabled</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>isEnabled</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isenabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isenabled_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Enabled</a>
@@ -1695,8 +2616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>is_archived</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>isArchived</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyrotationenabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyrotationenabled_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Rotation<wbr>Enabled</a>
@@ -1704,8 +2624,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation, valid when key_usage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key rotation, valid when keyUsage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keystate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keystate_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>State</a>
@@ -1713,8 +2632,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of CMK.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_keyusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyusage_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -1722,8 +2640,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pendingdeletewindowindays_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pendingdeletewindowindays_nodejs" style="color: inherit; text-decoration: inherit;">pending<wbr>Delete<wbr>Window<wbr>In<wbr>Days</a>
@@ -1731,17 +2648,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</p>
-</dd><dt class="property-optional"
+    <dd>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rotatedays_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rotatedays_nodejs" style="color: inherit; text-decoration: inherit;">rotate<wbr>Days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Key rotation period in days, range 7~365, default 365. Only effective when <code>keyUsage</code> is <code>ENCRYPT_DECRYPT</code> and <code>keyRotationEnabled</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of CMK.</p>
-</dd></dl>
+    <dd>Tags of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1755,8 +2678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1764,8 +2686,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of CMK. The maximum is 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CMK. The maximum is 1024 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hsm_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hsm_cluster_id_python" style="color: inherit; text-decoration: inherit;">hsm_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_archived_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_archived_python" style="color: inherit; text-decoration: inherit;">is_<wbr>archived</a>
@@ -1773,8 +2702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>is_enabled</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>isEnabled</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_is_enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_enabled_python" style="color: inherit; text-decoration: inherit;">is_<wbr>enabled</a>
@@ -1782,8 +2710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>is_archived</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>isArchived</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_key_rotation_enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_rotation_enabled_python" style="color: inherit; text-decoration: inherit;">key_<wbr>rotation_<wbr>enabled</a>
@@ -1791,8 +2718,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation, valid when key_usage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key rotation, valid when keyUsage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_key_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_state_python" style="color: inherit; text-decoration: inherit;">key_<wbr>state</a>
@@ -1800,8 +2726,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of CMK.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_key_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_usage_python" style="color: inherit; text-decoration: inherit;">key_<wbr>usage</a>
@@ -1809,8 +2734,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pending_delete_window_in_days_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pending_delete_window_in_days_python" style="color: inherit; text-decoration: inherit;">pending_<wbr>delete_<wbr>window_<wbr>in_<wbr>days</a>
@@ -1818,17 +2742,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</p>
-</dd><dt class="property-optional"
+    <dd>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rotate_days_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rotate_days_python" style="color: inherit; text-decoration: inherit;">rotate_<wbr>days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Key rotation period in days, range 7~365, default 365. Only effective when <code>keyUsage</code> is <code>ENCRYPT_DECRYPT</code> and <code>keyRotationEnabled</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of CMK.</p>
-</dd></dl>
+    <dd>Tags of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1842,8 +2772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1851,8 +2780,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of CMK. The maximum is 1024 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>Description of CMK. The maximum is 1024 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hsmclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hsmclusterid_yaml" style="color: inherit; text-decoration: inherit;">hsm<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isarchived_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isarchived_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Archived</a>
@@ -1860,8 +2796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>is_enabled</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to archive key. Default value is <code>false</code>. This field is conflict with <code>isEnabled</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_isenabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isenabled_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Enabled</a>
@@ -1869,8 +2804,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>is_archived</code>, valid when key_state is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key. Default value is <code>false</code>. This field is conflict with <code>isArchived</code>, valid when keyState is <code>Enabled</code>, <code>Disabled</code>, <code>Archived</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyrotationenabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyrotationenabled_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Rotation<wbr>Enabled</a>
@@ -1878,8 +2812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to enable key rotation, valid when key_usage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to enable key rotation, valid when keyUsage is <code>ENCRYPT_DECRYPT</code>. Default value is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keystate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keystate_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>State</a>
@@ -1887,8 +2820,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of CMK.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of CMK.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_keyusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyusage_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Usage</a>
@@ -1896,8 +2828,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Usage of CMK. Available values include <code>ENCRYPT_DECRYPT</code>, <code>ASYMMETRIC_DECRYPT_RSA_2048</code>, <code>ASYMMETRIC_DECRYPT_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_SM2</code>, <code>ASYMMETRIC_SIGN_VERIFY_RSA_2048</code>, <code>ASYMMETRIC_SIGN_VERIFY_ECC</code>. Default value is <code>ENCRYPT_DECRYPT</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_pendingdeletewindowindays_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_pendingdeletewindowindays_yaml" style="color: inherit; text-decoration: inherit;">pending<wbr>Delete<wbr>Window<wbr>In<wbr>Days</a>
@@ -1905,17 +2836,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</p>
-</dd><dt class="property-optional"
+    <dd>Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_rotatedays_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rotatedays_yaml" style="color: inherit; text-decoration: inherit;">rotate<wbr>Days</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Key rotation period in days, range 7~365, default 365. Only effective when <code>keyUsage</code> is <code>ENCRYPT_DECRYPT</code> and <code>keyRotationEnabled</code> is <code>true</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of CMK.</p>
-</dd></dl>
+    <dd>Tags of CMK.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1933,9 +2870,12 @@ The following state arguments are supported:
 KMS keys can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Kms/key:Key foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
+$ pulumi import tencentcloud:Kms/key:Key example 287e8f40-7cbb-11eb-9a3a-5254004f7f94
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1947,7 +2887,6 @@ $ pulumi import tencentcloud:Kms/key:Key foo 287e8f40-7cbb-11eb-9a3a-5254004f7f9
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "Attachment"
 title_tag: "tencentcloud.Clb.Attachment"
-meta_desc: "Documentation for the tencentcloud.Clb.Attachment resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a CLB attachment. NOTE: This resource is designed to manage the entire set of binding relationships associated with a."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,14 +20,19 @@ Provides a resource to create a CLB attachment.
 
 ## Example Usage
 
-### Bind a Cvm instance
+### Bind a Cvm instance by using ruleId
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.clb.Attachment("foo", {
+const example = new tencentcloud.clb.Attachment("example", {
     clbId: "lb-k2zjp9lv",
     listenerId: "lbl-hh141sn9",
     ruleId: "loc-4xxr2cy7",
@@ -36,57 +43,41 @@ const foo = new tencentcloud.clb.Attachment("foo", {
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.clb.Attachment("foo",
+example = tencentcloud.clb.Attachment("example",
     clb_id="lb-k2zjp9lv",
     listener_id="lbl-hh141sn9",
     rule_id="loc-4xxr2cy7",
-    targets=[tencentcloud.clb.AttachmentTargetArgs(
-        instance_id="ins-1flbqyp8",
-        port=80,
-        weight=10,
-    )])
+    targets=[{
+        "instance_id": "ins-1flbqyp8",
+        "port": 80,
+        "weight": 10,
+    }])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Clb.Attachment("foo", new()
-    {
-        ClbId = "lb-k2zjp9lv",
-        ListenerId = "lbl-hh141sn9",
-        RuleId = "loc-4xxr2cy7",
-        Targets = new[]
-        {
-            new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
-            {
-                InstanceId = "ins-1flbqyp8",
-                Port = 80,
-                Weight = 10,
-            },
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewAttachment(ctx, "foo", &Clb.AttachmentArgs{
+		_, err := clb.NewAttachment(ctx, "example", &clb.AttachmentArgs{
 			ClbId:      pulumi.String("lb-k2zjp9lv"),
 			ListenerId: pulumi.String("lbl-hh141sn9"),
 			RuleId:     pulumi.String("loc-4xxr2cy7"),
@@ -105,6 +96,42 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Attachment("example", new()
+    {
+        ClbId = "lb-k2zjp9lv",
+        ListenerId = "lbl-hh141sn9",
+        RuleId = "loc-4xxr2cy7",
+        Targets = new[]
+        {
+            new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
+            {
+                InstanceId = "ins-1flbqyp8",
+                Port = 80,
+                Weight = 10,
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -114,8 +141,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clb.Attachment;
 import com.pulumi.tencentcloud.Clb.AttachmentArgs;
 import com.pulumi.tencentcloud.Clb.inputs.AttachmentTargetArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -127,7 +154,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Attachment("foo", AttachmentArgs.builder()        
+        var example = new Attachment("example", AttachmentArgs.builder()
             .clbId("lb-k2zjp9lv")
             .listenerId("lbl-hh141sn9")
             .ruleId("loc-4xxr2cy7")
@@ -141,9 +168,14 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  foo:
+  example:
     type: tencentcloud:Clb:Attachment
     properties:
       clbId: lb-k2zjp9lv
@@ -154,16 +186,250 @@ resources:
           port: 80
           weight: 10
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### Bind multiple Cvm instances
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+resource "tencentcloud_clb_attachment" "example" {
+  clb_id      = "lb-k2zjp9lv"
+  listener_id = "lbl-hh141sn9"
+  rule_id     = "loc-4xxr2cy7"
+  targets {
+    instance_id = "ins-1flbqyp8"
+    port        = 80
+    weight      = 10
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Bind a Cvm instance by using domian and url
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.clb.Attachment("foo", {
+const example = new tencentcloud.clb.Attachment("example", {
+    clbId: "lb-k2zjp9lv",
+    listenerId: "lbl-hh141sn9",
+    domain: "test.com",
+    url: "/",
+    targets: [{
+        instanceId: "ins-1flbqyp8",
+        port: 80,
+        weight: 10,
+    }],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.clb.Attachment("example",
+    clb_id="lb-k2zjp9lv",
+    listener_id="lbl-hh141sn9",
+    domain="test.com",
+    url="/",
+    targets=[{
+        "instance_id": "ins-1flbqyp8",
+        "port": 80,
+        "weight": 10,
+    }])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clb.NewAttachment(ctx, "example", &clb.AttachmentArgs{
+			ClbId:      pulumi.String("lb-k2zjp9lv"),
+			ListenerId: pulumi.String("lbl-hh141sn9"),
+			Domain:     pulumi.String("test.com"),
+			Url:        pulumi.String("/"),
+			Targets: clb.AttachmentTargetArray{
+				&clb.AttachmentTargetArgs{
+					InstanceId: pulumi.String("ins-1flbqyp8"),
+					Port:       pulumi.Int(80),
+					Weight:     pulumi.Int(10),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Attachment("example", new()
+    {
+        ClbId = "lb-k2zjp9lv",
+        ListenerId = "lbl-hh141sn9",
+        Domain = "test.com",
+        Url = "/",
+        Targets = new[]
+        {
+            new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
+            {
+                InstanceId = "ins-1flbqyp8",
+                Port = 80,
+                Weight = 10,
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Clb.Attachment;
+import com.pulumi.tencentcloud.Clb.AttachmentArgs;
+import com.pulumi.tencentcloud.Clb.inputs.AttachmentTargetArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Attachment("example", AttachmentArgs.builder()
+            .clbId("lb-k2zjp9lv")
+            .listenerId("lbl-hh141sn9")
+            .domain("test.com")
+            .url("/")
+            .targets(AttachmentTargetArgs.builder()
+                .instanceId("ins-1flbqyp8")
+                .port(80)
+                .weight(10)
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Clb:Attachment
+    properties:
+      clbId: lb-k2zjp9lv
+      listenerId: lbl-hh141sn9
+      domain: test.com
+      url: /
+      targets:
+        - instanceId: ins-1flbqyp8
+          port: 80
+          weight: 10
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_attachment" "example" {
+  clb_id      = "lb-k2zjp9lv"
+  listener_id = "lbl-hh141sn9"
+  domain      = "test.com"
+  url         = "/"
+  targets {
+    instance_id = "ins-1flbqyp8"
+    port        = 80
+    weight      = 10
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Bind multiple Cvm instances by using ruleId
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.clb.Attachment("example", {
     clbId: "lb-k2zjp9lv",
     listenerId: "lbl-hh141sn9",
     ruleId: "loc-4xxr2cy7",
@@ -181,70 +447,48 @@ const foo = new tencentcloud.clb.Attachment("foo", {
     ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.clb.Attachment("foo",
+example = tencentcloud.clb.Attachment("example",
     clb_id="lb-k2zjp9lv",
     listener_id="lbl-hh141sn9",
     rule_id="loc-4xxr2cy7",
     targets=[
-        tencentcloud.clb.AttachmentTargetArgs(
-            instance_id="ins-1flbqyp8",
-            port=80,
-            weight=10,
-        ),
-        tencentcloud.clb.AttachmentTargetArgs(
-            instance_id="ins-ekloqpa1",
-            port=81,
-            weight=10,
-        ),
+        {
+            "instance_id": "ins-1flbqyp8",
+            "port": 80,
+            "weight": 10,
+        },
+        {
+            "instance_id": "ins-ekloqpa1",
+            "port": 81,
+            "weight": 10,
+        },
     ])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Clb.Attachment("foo", new()
-    {
-        ClbId = "lb-k2zjp9lv",
-        ListenerId = "lbl-hh141sn9",
-        RuleId = "loc-4xxr2cy7",
-        Targets = new[]
-        {
-            new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
-            {
-                InstanceId = "ins-1flbqyp8",
-                Port = 80,
-                Weight = 10,
-            },
-            new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
-            {
-                InstanceId = "ins-ekloqpa1",
-                Port = 81,
-                Weight = 10,
-            },
-        },
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewAttachment(ctx, "foo", &Clb.AttachmentArgs{
+		_, err := clb.NewAttachment(ctx, "example", &clb.AttachmentArgs{
 			ClbId:      pulumi.String("lb-k2zjp9lv"),
 			ListenerId: pulumi.String("lbl-hh141sn9"),
 			RuleId:     pulumi.String("loc-4xxr2cy7"),
@@ -268,6 +512,48 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Attachment("example", new()
+    {
+        ClbId = "lb-k2zjp9lv",
+        ListenerId = "lbl-hh141sn9",
+        RuleId = "loc-4xxr2cy7",
+        Targets = new[]
+        {
+            new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
+            {
+                InstanceId = "ins-1flbqyp8",
+                Port = 80,
+                Weight = 10,
+            },
+            new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
+            {
+                InstanceId = "ins-ekloqpa1",
+                Port = 81,
+                Weight = 10,
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -277,8 +563,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clb.Attachment;
 import com.pulumi.tencentcloud.Clb.AttachmentArgs;
 import com.pulumi.tencentcloud.Clb.inputs.AttachmentTargetArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -290,7 +576,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Attachment("foo", AttachmentArgs.builder()        
+        var example = new Attachment("example", AttachmentArgs.builder()
             .clbId("lb-k2zjp9lv")
             .listenerId("lbl-hh141sn9")
             .ruleId("loc-4xxr2cy7")
@@ -310,9 +596,14 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  foo:
+  example:
     type: tencentcloud:Clb:Attachment
     properties:
       clbId: lb-k2zjp9lv
@@ -326,85 +617,128 @@ resources:
           port: 81
           weight: 10
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### Bind backend target is ENI
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+resource "tencentcloud_clb_attachment" "example" {
+  clb_id      = "lb-k2zjp9lv"
+  listener_id = "lbl-hh141sn9"
+  rule_id     = "loc-4xxr2cy7"
+  targets {
+    instance_id = "ins-1flbqyp8"
+    port        = 80
+    weight      = 10
+  }
+  targets {
+    instance_id = "ins-ekloqpa1"
+    port        = 81
+    weight      = 10
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Bind multiple Cvm instances by using domian and url
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = new tencentcloud.clb.Attachment("foo", {
+const example = new tencentcloud.clb.Attachment("example", {
     clbId: "lb-k2zjp9lv",
     listenerId: "lbl-hh141sn9",
-    ruleId: "loc-4xxr2cy7",
-    targets: [{
-        eniIp: "example-ip",
-        port: 23,
-        weight: 50,
-    }],
+    domain: "test.com",
+    url: "/",
+    targets: [
+        {
+            instanceId: "ins-1flbqyp8",
+            port: 80,
+            weight: 10,
+        },
+        {
+            instanceId: "ins-ekloqpa1",
+            port: 81,
+            weight: 10,
+        },
+    ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo = tencentcloud.clb.Attachment("foo",
+example = tencentcloud.clb.Attachment("example",
     clb_id="lb-k2zjp9lv",
     listener_id="lbl-hh141sn9",
-    rule_id="loc-4xxr2cy7",
-    targets=[tencentcloud.clb.AttachmentTargetArgs(
-        eni_ip="example-ip",
-        port=23,
-        weight=50,
-    )])
-```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-
-return await Deployment.RunAsync(() => 
-{
-    var foo = new Tencentcloud.Clb.Attachment("foo", new()
-    {
-        ClbId = "lb-k2zjp9lv",
-        ListenerId = "lbl-hh141sn9",
-        RuleId = "loc-4xxr2cy7",
-        Targets = new[]
+    domain="test.com",
+    url="/",
+    targets=[
         {
-            new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
-            {
-                EniIp = "example-ip",
-                Port = 23,
-                Weight = 50,
-            },
+            "instance_id": "ins-1flbqyp8",
+            "port": 80,
+            "weight": 10,
         },
-    });
-
-});
+        {
+            "instance_id": "ins-ekloqpa1",
+            "port": 81,
+            "weight": 10,
+        },
+    ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewAttachment(ctx, "foo", &Clb.AttachmentArgs{
+		_, err := clb.NewAttachment(ctx, "example", &clb.AttachmentArgs{
 			ClbId:      pulumi.String("lb-k2zjp9lv"),
 			ListenerId: pulumi.String("lbl-hh141sn9"),
-			RuleId:     pulumi.String("loc-4xxr2cy7"),
+			Domain:     pulumi.String("test.com"),
+			Url:        pulumi.String("/"),
 			Targets: clb.AttachmentTargetArray{
 				&clb.AttachmentTargetArgs{
-					EniIp:  pulumi.String("example-ip"),
-					Port:   pulumi.Int(23),
-					Weight: pulumi.Int(50),
+					InstanceId: pulumi.String("ins-1flbqyp8"),
+					Port:       pulumi.Int(80),
+					Weight:     pulumi.Int(10),
+				},
+				&clb.AttachmentTargetArgs{
+					InstanceId: pulumi.String("ins-ekloqpa1"),
+					Port:       pulumi.Int(81),
+					Weight:     pulumi.Int(10),
 				},
 			},
 		})
@@ -415,6 +749,49 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Attachment("example", new()
+    {
+        ClbId = "lb-k2zjp9lv",
+        ListenerId = "lbl-hh141sn9",
+        Domain = "test.com",
+        Url = "/",
+        Targets = new[]
+        {
+            new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
+            {
+                InstanceId = "ins-1flbqyp8",
+                Port = 80,
+                Weight = 10,
+            },
+            new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
+            {
+                InstanceId = "ins-ekloqpa1",
+                Port = 81,
+                Weight = 10,
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -424,8 +801,8 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clb.Attachment;
 import com.pulumi.tencentcloud.Clb.AttachmentArgs;
 import com.pulumi.tencentcloud.Clb.inputs.AttachmentTargetArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -437,13 +814,225 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Attachment("foo", AttachmentArgs.builder()        
+        var example = new Attachment("example", AttachmentArgs.builder()
+            .clbId("lb-k2zjp9lv")
+            .listenerId("lbl-hh141sn9")
+            .domain("test.com")
+            .url("/")
+            .targets(            
+                AttachmentTargetArgs.builder()
+                    .instanceId("ins-1flbqyp8")
+                    .port(80)
+                    .weight(10)
+                    .build(),
+                AttachmentTargetArgs.builder()
+                    .instanceId("ins-ekloqpa1")
+                    .port(81)
+                    .weight(10)
+                    .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Clb:Attachment
+    properties:
+      clbId: lb-k2zjp9lv
+      listenerId: lbl-hh141sn9
+      domain: test.com
+      url: /
+      targets:
+        - instanceId: ins-1flbqyp8
+          port: 80
+          weight: 10
+        - instanceId: ins-ekloqpa1
+          port: 81
+          weight: 10
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_attachment" "example" {
+  clb_id      = "lb-k2zjp9lv"
+  listener_id = "lbl-hh141sn9"
+  domain      = "test.com"
+  url         = "/"
+  targets {
+    instance_id = "ins-1flbqyp8"
+    port        = 80
+    weight      = 10
+  }
+  targets {
+    instance_id = "ins-ekloqpa1"
+    port        = 81
+    weight      = 10
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Bind backend target is ENI by using ruleId
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.clb.Attachment("example", {
+    clbId: "lb-k2zjp9lv",
+    listenerId: "lbl-hh141sn9",
+    ruleId: "loc-4xxr2cy7",
+    targets: [{
+        eniIp: "172.16.16.52",
+        port: 8090,
+        weight: 50,
+    }],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.clb.Attachment("example",
+    clb_id="lb-k2zjp9lv",
+    listener_id="lbl-hh141sn9",
+    rule_id="loc-4xxr2cy7",
+    targets=[{
+        "eni_ip": "172.16.16.52",
+        "port": 8090,
+        "weight": 50,
+    }])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clb.NewAttachment(ctx, "example", &clb.AttachmentArgs{
+			ClbId:      pulumi.String("lb-k2zjp9lv"),
+			ListenerId: pulumi.String("lbl-hh141sn9"),
+			RuleId:     pulumi.String("loc-4xxr2cy7"),
+			Targets: clb.AttachmentTargetArray{
+				&clb.AttachmentTargetArgs{
+					EniIp:  pulumi.String("172.16.16.52"),
+					Port:   pulumi.Int(8090),
+					Weight: pulumi.Int(50),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Attachment("example", new()
+    {
+        ClbId = "lb-k2zjp9lv",
+        ListenerId = "lbl-hh141sn9",
+        RuleId = "loc-4xxr2cy7",
+        Targets = new[]
+        {
+            new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
+            {
+                EniIp = "172.16.16.52",
+                Port = 8090,
+                Weight = 50,
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Clb.Attachment;
+import com.pulumi.tencentcloud.Clb.AttachmentArgs;
+import com.pulumi.tencentcloud.Clb.inputs.AttachmentTargetArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Attachment("example", AttachmentArgs.builder()
             .clbId("lb-k2zjp9lv")
             .listenerId("lbl-hh141sn9")
             .ruleId("loc-4xxr2cy7")
             .targets(AttachmentTargetArgs.builder()
-                .eniIp("example-ip")
-                .port(23)
+                .eniIp("172.16.16.52")
+                .port(8090)
                 .weight(50)
                 .build())
             .build());
@@ -451,81 +1040,344 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  foo:
+  example:
     type: tencentcloud:Clb:Attachment
     properties:
       clbId: lb-k2zjp9lv
       listenerId: lbl-hh141sn9
       ruleId: loc-4xxr2cy7
       targets:
-        - eniIp: example-ip
-          port: 23
+        - eniIp: 172.16.16.52
+          port: 8090
           weight: 50
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_attachment" "example" {
+  clb_id      = "lb-k2zjp9lv"
+  listener_id = "lbl-hh141sn9"
+  rule_id     = "loc-4xxr2cy7"
+  targets {
+    eni_ip = "172.16.16.52"
+    port   = 8090
+    weight = 50
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Bind backend target is ENI by using domian and url
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.clb.Attachment("example", {
+    clbId: "lb-k2zjp9lv",
+    listenerId: "lbl-hh141sn9",
+    domain: "test.com",
+    url: "/path",
+    targets: [{
+        eniIp: "172.16.16.52",
+        port: 8090,
+        weight: 50,
+    }],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.clb.Attachment("example",
+    clb_id="lb-k2zjp9lv",
+    listener_id="lbl-hh141sn9",
+    domain="test.com",
+    url="/path",
+    targets=[{
+        "eni_ip": "172.16.16.52",
+        "port": 8090,
+        "weight": 50,
+    }])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clb.NewAttachment(ctx, "example", &clb.AttachmentArgs{
+			ClbId:      pulumi.String("lb-k2zjp9lv"),
+			ListenerId: pulumi.String("lbl-hh141sn9"),
+			Domain:     pulumi.String("test.com"),
+			Url:        pulumi.String("/path"),
+			Targets: clb.AttachmentTargetArray{
+				&clb.AttachmentTargetArgs{
+					EniIp:  pulumi.String("172.16.16.52"),
+					Port:   pulumi.Int(8090),
+					Weight: pulumi.Int(50),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Attachment("example", new()
+    {
+        ClbId = "lb-k2zjp9lv",
+        ListenerId = "lbl-hh141sn9",
+        Domain = "test.com",
+        Url = "/path",
+        Targets = new[]
+        {
+            new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
+            {
+                EniIp = "172.16.16.52",
+                Port = 8090,
+                Weight = 50,
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Clb.Attachment;
+import com.pulumi.tencentcloud.Clb.AttachmentArgs;
+import com.pulumi.tencentcloud.Clb.inputs.AttachmentTargetArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new Attachment("example", AttachmentArgs.builder()
+            .clbId("lb-k2zjp9lv")
+            .listenerId("lbl-hh141sn9")
+            .domain("test.com")
+            .url("/path")
+            .targets(AttachmentTargetArgs.builder()
+                .eniIp("172.16.16.52")
+                .port(8090)
+                .weight(50)
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:Clb:Attachment
+    properties:
+      clbId: lb-k2zjp9lv
+      listenerId: lbl-hh141sn9
+      domain: test.com
+      url: /path
+      targets:
+        - eniIp: 172.16.16.52
+          port: 8090
+          weight: 50
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_attachment" "example" {
+  clb_id      = "lb-k2zjp9lv"
+  listener_id = "lbl-hh141sn9"
+  domain      = "test.com"
+  url         = "/path"
+  targets {
+    eni_ip = "172.16.16.52"
+    port   = 8090
+    weight = 50
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [RegisterTargets](https://www.tencentcloud.com/document/api/214/33809)
+* Read:
+  - [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+  - [DescribeTargets](https://www.tencentcloud.com/document/api/214/33824)
+* Update:
+  - [ModifyTargetWeight](https://www.tencentcloud.com/document/api/214/33811)
+  - [RegisterTargets](https://www.tencentcloud.com/document/api/214/33809)
+* Delete: [DeregisterTargets](https://www.tencentcloud.com/document/api/214/33832)
 
 
 ## Create Attachment Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Attachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Attachment</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Attachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AttachmentArgs</a></span><span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Attachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                <span class="nx">clb_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">targets</span><span class="p">:</span> <span class="nx">Optional[Sequence[AttachmentTargetArgs]]</span> = None<span class="p">,</span>
+               <span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">targets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_clb.AttachmentTargetArgs]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Attachment</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AttachmentArgs</a></span><span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+               <span class="nx">url</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Attachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAttachment</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AttachmentArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Attachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Attachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Attachment</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Attachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Attachment</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AttachmentArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Clb:Attachment</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Clb:Attachment</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_clb_attachment&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -546,7 +1398,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -663,11 +1515,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Attachment Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Attachment resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -683,8 +1543,7 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -692,17 +1551,23 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener.</dd><dt class="property-required"
             title="Required">
         <span id="targets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targets_csharp" style="color: inherit; text-decoration: inherit;">Targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#attachmenttarget">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Attachment<wbr>Target<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#attachmenttarget">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Attachment<wbr>Target&gt;</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Information of the backends to be attached.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="domain_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -710,8 +1575,15 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="url_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_csharp" style="color: inherit; text-decoration: inherit;">Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>URL of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -725,8 +1597,7 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -734,8 +1605,7 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener.</dd><dt class="property-required"
             title="Required">
         <span id="targets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targets_go" style="color: inherit; text-decoration: inherit;">Targets</a>
@@ -743,8 +1613,15 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#attachmenttarget">[]Attachment<wbr>Target<wbr>Args</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Information of the backends to be attached.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="domain_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -752,8 +1629,69 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="url_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_go" style="color: inherit; text-decoration: inherit;">Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>URL of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB listener.</dd><dt class="property-required"
+            title="Required">
+        <span id="targets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targets_hcl" style="color: inherit; text-decoration: inherit;">targets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#attachmenttarget">list(object)</a></span>
+    </dt>
+    <dd>Information of the backends to be attached.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_hcl" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>URL of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -767,8 +1705,7 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -776,17 +1713,23 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener.</dd><dt class="property-required"
             title="Required">
         <span id="targets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targets_java" style="color: inherit; text-decoration: inherit;">targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#attachmenttarget">List&lt;Attachment<wbr>Target<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#attachmenttarget">List&lt;Attachment<wbr>Target&gt;</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Information of the backends to be attached.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="domain_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Domain of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -794,8 +1737,15 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="url_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_java" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>URL of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -809,8 +1759,7 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -818,17 +1767,23 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener.</dd><dt class="property-required"
             title="Required">
         <span id="targets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targets_nodejs" style="color: inherit; text-decoration: inherit;">targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#attachmenttarget">Attachment<wbr>Target<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#attachmenttarget">Attachment<wbr>Target[]</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Information of the backends to be attached.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="domain_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -836,8 +1791,15 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="url_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_nodejs" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>URL of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -851,8 +1813,7 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -860,17 +1821,23 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener.</dd><dt class="property-required"
             title="Required">
         <span id="targets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targets_python" style="color: inherit; text-decoration: inherit;">targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#attachmenttarget">Attachment<wbr>Target<wbr>Args]</a></span>
+        <span class="property-type"><a href="#attachmenttarget">Sequence[Attachment<wbr>Target<wbr>Args]</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Information of the backends to be attached.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="domain_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Domain of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -878,8 +1845,15 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="url_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_python" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>URL of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -893,8 +1867,7 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -902,8 +1875,7 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB listener.</dd><dt class="property-required"
             title="Required">
         <span id="targets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targets_yaml" style="color: inherit; text-decoration: inherit;">targets</a>
@@ -911,8 +1883,15 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#attachmenttarget">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Information of the backends to be attached.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="domain_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Domain of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -920,8 +1899,15 @@ The Attachment resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</p>
-</dd></dl>
+    <dd>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="url_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_yaml" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>URL of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -942,8 +1928,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="protocoltype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocoltype_csharp" style="color: inherit; text-decoration: inherit;">Protocol<wbr>Type</a>
@@ -951,8 +1936,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of protocol within the listener.</p>
-</dd></dl>
+    <dd>Type of protocol within the listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -966,8 +1950,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="protocoltype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocoltype_go" style="color: inherit; text-decoration: inherit;">Protocol<wbr>Type</a>
@@ -975,8 +1958,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of protocol within the listener.</p>
-</dd></dl>
+    <dd>Type of protocol within the listener.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="protocol_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_type_hcl" style="color: inherit; text-decoration: inherit;">protocol_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of protocol within the listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -990,8 +1994,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="protocoltype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocoltype_java" style="color: inherit; text-decoration: inherit;">protocol<wbr>Type</a>
@@ -999,8 +2002,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of protocol within the listener.</p>
-</dd></dl>
+    <dd>Type of protocol within the listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1014,8 +2016,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="protocoltype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocoltype_nodejs" style="color: inherit; text-decoration: inherit;">protocol<wbr>Type</a>
@@ -1023,8 +2024,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of protocol within the listener.</p>
-</dd></dl>
+    <dd>Type of protocol within the listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1038,8 +2038,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="protocol_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_type_python" style="color: inherit; text-decoration: inherit;">protocol_<wbr>type</a>
@@ -1047,8 +2046,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of protocol within the listener.</p>
-</dd></dl>
+    <dd>Type of protocol within the listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1062,8 +2060,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="protocoltype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocoltype_yaml" style="color: inherit; text-decoration: inherit;">protocol<wbr>Type</a>
@@ -1071,8 +2068,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of protocol within the listener.</p>
-</dd></dl>
+    <dd>Type of protocol within the listener.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1082,124 +2078,165 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Attachment resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Attachment</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Attachment</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">clb_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">protocol_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">rule_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">targets</span><span class="p">:</span> <span class="nx">Optional[Sequence[_clb.AttachmentTargetArgs]]</span> = None<span class="p">) -&gt;</span> Attachment</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">targets</span><span class="p">:</span> <span class="nx">Optional[Sequence[AttachmentTargetArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Attachment</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Attachment</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAttachment<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AttachmentState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Attachment</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Attachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Attachment</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AttachmentState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Attachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Attachment</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AttachmentState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingAttachment</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Clb:Attachment</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_clb_attachment</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1207,28 +2244,31 @@ Get an existing Attachment resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1236,28 +2276,31 @@ Get an existing Attachment resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AttachmentState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1277,8 +2320,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_domain_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -1286,8 +2336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocoltype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocoltype_csharp" style="color: inherit; text-decoration: inherit;">Protocol<wbr>Type</a>
@@ -1295,8 +2344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of protocol within the listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of protocol within the listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -1304,17 +2352,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targets_csharp" style="color: inherit; text-decoration: inherit;">Targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#attachmenttarget">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Attachment<wbr>Target<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#attachmenttarget">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Attachment<wbr>Target&gt;</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd></dl>
+    <dd>Information of the backends to be attached.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_url_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_url_csharp" style="color: inherit; text-decoration: inherit;">Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>URL of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1328,8 +2382,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_domain_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -1337,8 +2398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocoltype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocoltype_go" style="color: inherit; text-decoration: inherit;">Protocol<wbr>Type</a>
@@ -1346,8 +2406,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of protocol within the listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of protocol within the listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -1355,8 +2414,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targets_go" style="color: inherit; text-decoration: inherit;">Targets</a>
@@ -1364,8 +2422,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#attachmenttarget">[]Attachment<wbr>Target<wbr>Args</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd></dl>
+    <dd>Information of the backends to be attached.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_url_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_url_go" style="color: inherit; text-decoration: inherit;">Url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>URL of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB listener.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_protocol_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_type_hcl" style="color: inherit; text-decoration: inherit;">protocol_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of protocol within the listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_targets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targets_hcl" style="color: inherit; text-decoration: inherit;">targets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#attachmenttarget">list(object)</a></span>
+    </dt>
+    <dd>Information of the backends to be attached.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_url_hcl" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>URL of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1379,8 +2506,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_domain_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Domain of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1388,8 +2522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocoltype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocoltype_java" style="color: inherit; text-decoration: inherit;">protocol<wbr>Type</a>
@@ -1397,8 +2530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of protocol within the listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of protocol within the listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1406,17 +2538,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targets_java" style="color: inherit; text-decoration: inherit;">targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#attachmenttarget">List&lt;Attachment<wbr>Target<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#attachmenttarget">List&lt;Attachment<wbr>Target&gt;</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd></dl>
+    <dd>Information of the backends to be attached.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_url_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_url_java" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>URL of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1430,8 +2568,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_domain_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1439,8 +2584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocoltype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocoltype_nodejs" style="color: inherit; text-decoration: inherit;">protocol<wbr>Type</a>
@@ -1448,8 +2592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of protocol within the listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of protocol within the listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1457,17 +2600,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targets_nodejs" style="color: inherit; text-decoration: inherit;">targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#attachmenttarget">Attachment<wbr>Target<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#attachmenttarget">Attachment<wbr>Target[]</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd></dl>
+    <dd>Information of the backends to be attached.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_url_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_url_nodejs" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>URL of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1481,8 +2630,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_domain_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Domain of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -1490,8 +2646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_type_python" style="color: inherit; text-decoration: inherit;">protocol_<wbr>type</a>
@@ -1499,8 +2654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of protocol within the listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of protocol within the listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -1508,17 +2662,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targets_python" style="color: inherit; text-decoration: inherit;">targets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#attachmenttarget">Attachment<wbr>Target<wbr>Args]</a></span>
+        <span class="property-type"><a href="#attachmenttarget">Sequence[Attachment<wbr>Target<wbr>Args]</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd></dl>
+    <dd>Information of the backends to be attached.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_url_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_url_python" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>URL of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1532,8 +2692,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the CLB.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_domain_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Domain of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1541,8 +2708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocoltype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocoltype_yaml" style="color: inherit; text-decoration: inherit;">protocol<wbr>Type</a>
@@ -1550,8 +2716,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of protocol within the listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Type of protocol within the listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -1559,8 +2724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB listener rule. Only supports listeners of <code>HTTPS</code> and <code>HTTP</code> protocol.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_targets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targets_yaml" style="color: inherit; text-decoration: inherit;">targets</a>
@@ -1568,8 +2732,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#attachmenttarget">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information of the backends to be attached.</p>
-</dd></dl>
+    <dd>Information of the backends to be attached.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_url_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_url_yaml" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>URL of the target forwarding rule. Does not take effect when parameter <code>ruleId</code> is provided.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1584,7 +2755,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="attachmenttarget">Attachment<wbr>Target</h4>
+<h4 id="attachmenttarget">
+Attachment<wbr>Target<pulumi-choosable type="language" values="python,go" class="inline">, Attachment<wbr>Target<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1596,8 +2769,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the backend server. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Port of the backend server. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="eniip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eniip_csharp" style="color: inherit; text-decoration: inherit;">Eni<wbr>Ip</a>
@@ -1605,8 +2777,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Eni IP address of the backend server, conflict with <code>instance_id</code> but must specify one of them.</p>
-</dd><dt class="property-optional"
+    <dd>Eni IP address of the backend server, conflict with <code>instanceId</code> but must specify one of them.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1614,8 +2785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CVM Instance Id of the backend server, conflict with <code>eni_ip</code> but must specify one of them.</p>
-</dd><dt class="property-optional"
+    <dd>CVM Instance Id of the backend server, conflict with <code>eniIp</code> but must specify one of them.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -1623,8 +2793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to <code>10</code>.</p>
-</dd></dl>
+    <dd>Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to <code>10</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1638,8 +2807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the backend server. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Port of the backend server. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="eniip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eniip_go" style="color: inherit; text-decoration: inherit;">Eni<wbr>Ip</a>
@@ -1647,8 +2815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Eni IP address of the backend server, conflict with <code>instance_id</code> but must specify one of them.</p>
-</dd><dt class="property-optional"
+    <dd>Eni IP address of the backend server, conflict with <code>instanceId</code> but must specify one of them.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1656,8 +2823,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CVM Instance Id of the backend server, conflict with <code>eni_ip</code> but must specify one of them.</p>
-</dd><dt class="property-optional"
+    <dd>CVM Instance Id of the backend server, conflict with <code>eniIp</code> but must specify one of them.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -1665,8 +2831,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to <code>10</code>.</p>
-</dd></dl>
+    <dd>Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to <code>10</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the backend server. Valid value ranges: (0~65535).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="eni_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eni_ip_hcl" style="color: inherit; text-decoration: inherit;">eni_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Eni IP address of the backend server, conflict with <code>instanceId</code> but must specify one of them.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CVM Instance Id of the backend server, conflict with <code>eniIp</code> but must specify one of them.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to <code>10</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1680,8 +2883,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the backend server. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Port of the backend server. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="eniip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eniip_java" style="color: inherit; text-decoration: inherit;">eni<wbr>Ip</a>
@@ -1689,8 +2891,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Eni IP address of the backend server, conflict with <code>instance_id</code> but must specify one of them.</p>
-</dd><dt class="property-optional"
+    <dd>Eni IP address of the backend server, conflict with <code>instanceId</code> but must specify one of them.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1698,8 +2899,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CVM Instance Id of the backend server, conflict with <code>eni_ip</code> but must specify one of them.</p>
-</dd><dt class="property-optional"
+    <dd>CVM Instance Id of the backend server, conflict with <code>eniIp</code> but must specify one of them.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1707,8 +2907,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to <code>10</code>.</p>
-</dd></dl>
+    <dd>Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to <code>10</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1722,8 +2921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the backend server. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Port of the backend server. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="eniip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eniip_nodejs" style="color: inherit; text-decoration: inherit;">eni<wbr>Ip</a>
@@ -1731,8 +2929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Eni IP address of the backend server, conflict with <code>instance_id</code> but must specify one of them.</p>
-</dd><dt class="property-optional"
+    <dd>Eni IP address of the backend server, conflict with <code>instanceId</code> but must specify one of them.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1740,8 +2937,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CVM Instance Id of the backend server, conflict with <code>eni_ip</code> but must specify one of them.</p>
-</dd><dt class="property-optional"
+    <dd>CVM Instance Id of the backend server, conflict with <code>eniIp</code> but must specify one of them.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1749,8 +2945,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to <code>10</code>.</p>
-</dd></dl>
+    <dd>Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to <code>10</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1764,8 +2959,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the backend server. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Port of the backend server. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="eni_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eni_ip_python" style="color: inherit; text-decoration: inherit;">eni_<wbr>ip</a>
@@ -1773,8 +2967,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Eni IP address of the backend server, conflict with <code>instance_id</code> but must specify one of them.</p>
-</dd><dt class="property-optional"
+    <dd>Eni IP address of the backend server, conflict with <code>instanceId</code> but must specify one of them.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1782,8 +2975,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CVM Instance Id of the backend server, conflict with <code>eni_ip</code> but must specify one of them.</p>
-</dd><dt class="property-optional"
+    <dd>CVM Instance Id of the backend server, conflict with <code>eniIp</code> but must specify one of them.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1791,8 +2983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to <code>10</code>.</p>
-</dd></dl>
+    <dd>Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to <code>10</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1806,8 +2997,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the backend server. Valid value ranges: (0~65535).</p>
-</dd><dt class="property-optional"
+    <dd>Port of the backend server. Valid value ranges: (0~65535).</dd><dt class="property-optional"
             title="Optional">
         <span id="eniip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eniip_yaml" style="color: inherit; text-decoration: inherit;">eni<wbr>Ip</a>
@@ -1815,8 +3005,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Eni IP address of the backend server, conflict with <code>instance_id</code> but must specify one of them.</p>
-</dd><dt class="property-optional"
+    <dd>Eni IP address of the backend server, conflict with <code>instanceId</code> but must specify one of them.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1824,8 +3013,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CVM Instance Id of the backend server, conflict with <code>eni_ip</code> but must specify one of them.</p>
-</dd><dt class="property-optional"
+    <dd>CVM Instance Id of the backend server, conflict with <code>eniIp</code> but must specify one of them.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1833,8 +3021,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to <code>10</code>.</p>
-</dd></dl>
+    <dd>Forwarding weight of the backend service. Valid value ranges: (0~100). defaults to <code>10</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1844,10 +3031,27 @@ The following state arguments are supported:
 
 CLB attachment can be imported using the id, e.g.
 
+If use ruleId
+
 ```sh
-$ pulumi import tencentcloud:Clb/attachment:Attachment foo loc-4xxr2cy7#lbl-hh141sn9#lb-7a0t6zqb
+$ pulumi import tencentcloud:Clb/attachment:Attachment example loc-4xxr2cy7#lbl-hh141sn9#lb-7a0t6zqb
 ```
 
+If use domain & url
+
+```sh
+$ pulumi import tencentcloud:Clb/attachment:Attachment example test.com,/path#lbl-hh141sn9#lb-7a0t6zqb
+```
+
+Of if use layer-4 forwarding rule
+
+```sh
+$ pulumi import tencentcloud:Clb/attachment:Attachment example ""#lbl-hh141sn9#lb-7a0t6zqb
+```
+
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1859,7 +3063,6 @@ $ pulumi import tencentcloud:Clb/attachment:Attachment foo loc-4xxr2cy7#lbl-hh14
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

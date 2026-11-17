@@ -2,9 +2,11 @@
 ---
 title: "getBatchs"
 title_tag: "tencentcloud.Cos.getBatchs"
-meta_desc: "Documentation for the tencentcloud.Cos.getBatchs function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query the COS batch. NOTE: The current resource does not support cosDomain."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,54 +16,55 @@ no_edit_this_page: true
 
 Use this data source to query the COS batch.
 
+> **NOTE:** The current resource does not support `cosDomain`.
+
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const cosBatchs = tencentcloud.Cos.getBatchs({
-    appid: "xxxxxx",
+const cosBatchs = tencentcloud.cos.getBatchs({
     uin: "xxxxxx",
+    appid: Number("xxxxxx"),
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-cos_batchs = tencentcloud.Cos.get_batchs(appid="xxxxxx",
-    uin="xxxxxx")
+cos_batchs = tencentcloud.cos.get_batchs(uin="xxxxxx",
+    appid=int("xxxxxx"))
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var cosBatchs = Tencentcloud.Cos.GetBatchs.Invoke(new()
-    {
-        Appid = "xxxxxx",
-        Uin = "xxxxxx",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cos.GetBatchs(ctx, &cos.GetBatchsArgs{
-			Appid: "xxxxxx",
+		_, err := cos.GetBatchs(ctx, &cos.GetBatchsArgs{
 			Uin:   "xxxxxx",
+			Appid: "xxxxxx",
 		}, nil)
 		if err != nil {
 			return err
@@ -70,6 +73,32 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var cosBatchs = Tencentcloud.Cos.GetBatchs.Invoke(new()
+    {
+        Uin = "xxxxxx",
+        Appid = "xxxxxx",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -78,8 +107,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cos.CosFunctions;
 import com.pulumi.tencentcloud.Cos.inputs.GetBatchsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,23 +121,48 @@ public class App {
 
     public static void stack(Context ctx) {
         final var cosBatchs = CosFunctions.getBatchs(GetBatchsArgs.builder()
-            .appid("xxxxxx")
             .uin("xxxxxx")
+            .appid("xxxxxx")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   cosBatchs:
     fn::invoke:
-      Function: tencentcloud:Cos:getBatchs
-      Arguments:
-        appid: xxxxxx
+      function: tencentcloud:Cos:getBatchs
+      arguments:
         uin: xxxxxx
+        appid: xxxxxx
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cos_getbatchs" "cosBatchs" {
+  uin   = "xxxxxx"
+  appid = "xxxxxx"
+}
+```
+</pulumi-choosable>
+</div>
 
 
 
@@ -121,7 +175,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +183,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getBatchs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBatchsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBatchsResult</a></span>></span
+><span class="k">function </span>getBatchs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBatchsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBatchsResult</a></span>></span
 ><span class="k">
-function </span>getBatchsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBatchsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBatchsResult</a></span>></span
+function </span>getBatchsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBatchsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBatchsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -146,11 +200,11 @@ function </span>getBatchsOutput<span class="p">(</span><span class="nx">args</sp
                <span class="nx">uin</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetBatchsResult</span
 ><span class="k">
-def </span>get_batchs_output<span class="p">(</span><span class="nx">appid</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-               <span class="nx">job_statuses</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">uin</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBatchsResult]</span
+def </span>get_batchs_output<span class="p">(</span><span class="nx">appid</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+               <span class="nx">job_statuses</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">uin</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBatchsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -175,7 +229,8 @@ func </span>GetBatchsOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetBatchs </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetBatchsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetBatchsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetBatchsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBatchsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBatchsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBatchsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBatchsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBatchsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -184,7 +239,8 @@ func </span>GetBatchsOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetBatchsResult</a></span>> </span>getBatchs<span class="p">(</span><span class="nx">GetBatchsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBatchsResult</a></span>> </span>getBatchs<span class="p">(</span><span class="nx">GetBatchsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBatchsResult</a></span>> </span>getBatchs<span class="p">(</span><span class="nx">GetBatchsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -196,6 +252,15 @@ func </span>GetBatchsOutput<span class="p">(</span><span class="nx">ctx</span><s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cos/getBatchs:getBatchs
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cos_get_batchs&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -214,8 +279,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-required"
+    <dd>Appid.</dd><dt class="property-required"
             title="Required">
         <span id="uin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_csharp" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -223,8 +287,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd><dt class="property-optional"
+    <dd>Uin.</dd><dt class="property-optional"
             title="Optional">
         <span id="jobstatuses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobstatuses_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Statuses</a>
@@ -232,8 +295,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The task status information you need to query. If you do not specify a task status, COS returns the status of all tasks that have been executed, including those that are in progress. If you specify a task status, COS returns the task in the specified state. Optional task states include: Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</p>
-</dd><dt class="property-optional"
+    <dd>The task status information you need to query. If you do not specify a task status, COS returns the status of all tasks that have been executed, including those that are in progress. If you specify a task status, COS returns the task in the specified state. Optional task states include: Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -241,8 +303,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -256,8 +317,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-required"
+    <dd>Appid.</dd><dt class="property-required"
             title="Required">
         <span id="uin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_go" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -265,8 +325,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd><dt class="property-optional"
+    <dd>Uin.</dd><dt class="property-optional"
             title="Optional">
         <span id="jobstatuses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobstatuses_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Statuses</a>
@@ -274,8 +333,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The task status information you need to query. If you do not specify a task status, COS returns the status of all tasks that have been executed, including those that are in progress. If you specify a task status, COS returns the task in the specified state. Optional task states include: Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</p>
-</dd><dt class="property-optional"
+    <dd>The task status information you need to query. If you do not specify a task status, COS returns the status of all tasks that have been executed, including those that are in progress. If you specify a task status, COS returns the task in the specified state. Optional task states include: Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -283,8 +341,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="appid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#appid_hcl" style="color: inherit; text-decoration: inherit;">appid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Appid.</dd><dt class="property-required"
+            title="Required">
+        <span id="uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_hcl" style="color: inherit; text-decoration: inherit;">uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Uin.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="job_statuses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_statuses_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>statuses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The task status information you need to query. If you do not specify a task status, COS returns the status of all tasks that have been executed, including those that are in progress. If you specify a task status, COS returns the task in the specified state. Optional task states include: Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -298,8 +393,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-required"
+    <dd>Appid.</dd><dt class="property-required"
             title="Required">
         <span id="uin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_java" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -307,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd><dt class="property-optional"
+    <dd>Uin.</dd><dt class="property-optional"
             title="Optional">
         <span id="jobstatuses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobstatuses_java" style="color: inherit; text-decoration: inherit;">job<wbr>Statuses</a>
@@ -316,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The task status information you need to query. If you do not specify a task status, COS returns the status of all tasks that have been executed, including those that are in progress. If you specify a task status, COS returns the task in the specified state. Optional task states include: Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</p>
-</dd><dt class="property-optional"
+    <dd>The task status information you need to query. If you do not specify a task status, COS returns the status of all tasks that have been executed, including those that are in progress. If you specify a task status, COS returns the task in the specified state. Optional task states include: Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -325,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -340,8 +431,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-required"
+    <dd>Appid.</dd><dt class="property-required"
             title="Required">
         <span id="uin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_nodejs" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -349,8 +439,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd><dt class="property-optional"
+    <dd>Uin.</dd><dt class="property-optional"
             title="Optional">
         <span id="jobstatuses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobstatuses_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Statuses</a>
@@ -358,8 +447,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The task status information you need to query. If you do not specify a task status, COS returns the status of all tasks that have been executed, including those that are in progress. If you specify a task status, COS returns the task in the specified state. Optional task states include: Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</p>
-</dd><dt class="property-optional"
+    <dd>The task status information you need to query. If you do not specify a task status, COS returns the status of all tasks that have been executed, including those that are in progress. If you specify a task status, COS returns the task in the specified state. Optional task states include: Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -367,8 +455,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -382,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-required"
+    <dd>Appid.</dd><dt class="property-required"
             title="Required">
         <span id="uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_python" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -391,8 +477,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd><dt class="property-optional"
+    <dd>Uin.</dd><dt class="property-optional"
             title="Optional">
         <span id="job_statuses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_statuses_python" style="color: inherit; text-decoration: inherit;">job_<wbr>statuses</a>
@@ -400,8 +485,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The task status information you need to query. If you do not specify a task status, COS returns the status of all tasks that have been executed, including those that are in progress. If you specify a task status, COS returns the task in the specified state. Optional task states include: Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</p>
-</dd><dt class="property-optional"
+    <dd>The task status information you need to query. If you do not specify a task status, COS returns the status of all tasks that have been executed, including those that are in progress. If you specify a task status, COS returns the task in the specified state. Optional task states include: Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -409,8 +493,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -424,8 +507,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Appid.</p>
-</dd><dt class="property-required"
+    <dd>Appid.</dd><dt class="property-required"
             title="Required">
         <span id="uin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_yaml" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -433,8 +515,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Uin.</p>
-</dd><dt class="property-optional"
+    <dd>Uin.</dd><dt class="property-optional"
             title="Optional">
         <span id="jobstatuses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobstatuses_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Statuses</a>
@@ -442,8 +523,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The task status information you need to query. If you do not specify a task status, COS returns the status of all tasks that have been executed, including those that are in progress. If you specify a task status, COS returns the task in the specified state. Optional task states include: Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</p>
-</dd><dt class="property-optional"
+    <dd>The task status information you need to query. If you do not specify a task status, COS returns the status of all tasks that have been executed, including those that are in progress. If you specify a task status, COS returns the task in the specified state. Optional task states include: Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -451,8 +531,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -483,8 +562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobs_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobs_csharp" style="color: inherit; text-decoration: inherit;">Jobs</a>
@@ -492,8 +570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbatchsjob">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Outputs.<wbr>Get<wbr>Batchs<wbr>Job&gt;</a></span>
     </dt>
-    <dd><p>Multiple batch processing task information.</p>
-</dd><dt class="property-"
+    <dd>Multiple batch processing task information.</dd><dt class="property-"
             title="">
         <span id="uin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_csharp" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -539,8 +616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobs_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobs_go" style="color: inherit; text-decoration: inherit;">Jobs</a>
@@ -548,8 +624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbatchsjob">[]Get<wbr>Batchs<wbr>Job</a></span>
     </dt>
-    <dd><p>Multiple batch processing task information.</p>
-</dd><dt class="property-"
+    <dd>Multiple batch processing task information.</dd><dt class="property-"
             title="">
         <span id="uin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_go" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -578,6 +653,60 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="appid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#appid_hcl" style="color: inherit; text-decoration: inherit;">appid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="jobs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobs_hcl" style="color: inherit; text-decoration: inherit;">jobs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbatchsjob">list(object)</a></span>
+    </dt>
+    <dd>Multiple batch processing task information.</dd><dt class="property-"
+            title="">
+        <span id="uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_hcl" style="color: inherit; text-decoration: inherit;">uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="job_statuses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_statuses_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>statuses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -595,8 +724,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobs_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobs_java" style="color: inherit; text-decoration: inherit;">jobs</a>
@@ -604,8 +732,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbatchsjob">List&lt;Get<wbr>Batchs<wbr>Job&gt;</a></span>
     </dt>
-    <dd><p>Multiple batch processing task information.</p>
-</dd><dt class="property-"
+    <dd>Multiple batch processing task information.</dd><dt class="property-"
             title="">
         <span id="uin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_java" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -651,8 +778,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobs_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobs_nodejs" style="color: inherit; text-decoration: inherit;">jobs</a>
@@ -660,8 +786,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbatchsjob">Get<wbr>Batchs<wbr>Job[]</a></span>
     </dt>
-    <dd><p>Multiple batch processing task information.</p>
-</dd><dt class="property-"
+    <dd>Multiple batch processing task information.</dd><dt class="property-"
             title="">
         <span id="uin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_nodejs" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -707,17 +832,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobs_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobs_python" style="color: inherit; text-decoration: inherit;">jobs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbatchsjob">Get<wbr>Batchs<wbr>Job]</a></span>
+        <span class="property-type"><a href="#getbatchsjob">Sequence[Get<wbr>Batchs<wbr>Job]</a></span>
     </dt>
-    <dd><p>Multiple batch processing task information.</p>
-</dd><dt class="property-"
+    <dd>Multiple batch processing task information.</dd><dt class="property-"
             title="">
         <span id="uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_python" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -763,8 +886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="jobs_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobs_yaml" style="color: inherit; text-decoration: inherit;">jobs</a>
@@ -772,8 +894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbatchsjob">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Multiple batch processing task information.</p>
-</dd><dt class="property-"
+    <dd>Multiple batch processing task information.</dd><dt class="property-"
             title="">
         <span id="uin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_yaml" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -821,8 +942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job creation time.</p>
-</dd><dt class="property-required"
+    <dd>Job creation time.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -830,8 +950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mission description. The length is limited to 0-256 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Mission description. The length is limited to 0-256 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -839,8 +958,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job ID. The length is limited to 1-64 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Job ID. The length is limited to 1-64 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="operation_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_csharp" style="color: inherit; text-decoration: inherit;">Operation</a>
@@ -848,8 +966,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.</p>
-</dd><dt class="property-required"
+    <dd>Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.</dd><dt class="property-required"
             title="Required">
         <span id="priority_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_csharp" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -857,8 +974,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.</p>
-</dd><dt class="property-required"
+    <dd>Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.</dd><dt class="property-required"
             title="Required">
         <span id="progresssummaries_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#progresssummaries_csharp" style="color: inherit; text-decoration: inherit;">Progress<wbr>Summaries</a>
@@ -866,8 +982,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbatchsjobprogresssummary">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Batchs<wbr>Job<wbr>Progress<wbr>Summary&gt;</a></span>
     </dt>
-    <dd><p>Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.</p>
-</dd><dt class="property-required"
+    <dd>Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -875,8 +990,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</p>
-</dd><dt class="property-required"
+    <dd>Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</dd><dt class="property-required"
             title="Required">
         <span id="terminationdate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationdate_csharp" style="color: inherit; text-decoration: inherit;">Termination<wbr>Date</a>
@@ -884,8 +998,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The end time of the batch processing job.</p>
-</dd></dl>
+    <dd>The end time of the batch processing job.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -899,8 +1012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job creation time.</p>
-</dd><dt class="property-required"
+    <dd>Job creation time.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -908,8 +1020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mission description. The length is limited to 0-256 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Mission description. The length is limited to 0-256 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -917,8 +1028,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job ID. The length is limited to 1-64 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Job ID. The length is limited to 1-64 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="operation_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_go" style="color: inherit; text-decoration: inherit;">Operation</a>
@@ -926,8 +1036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.</p>
-</dd><dt class="property-required"
+    <dd>Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.</dd><dt class="property-required"
             title="Required">
         <span id="priority_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_go" style="color: inherit; text-decoration: inherit;">Priority</a>
@@ -935,8 +1044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.</p>
-</dd><dt class="property-required"
+    <dd>Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.</dd><dt class="property-required"
             title="Required">
         <span id="progresssummaries_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#progresssummaries_go" style="color: inherit; text-decoration: inherit;">Progress<wbr>Summaries</a>
@@ -944,8 +1052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbatchsjobprogresssummary">[]Get<wbr>Batchs<wbr>Job<wbr>Progress<wbr>Summary</a></span>
     </dt>
-    <dd><p>Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.</p>
-</dd><dt class="property-required"
+    <dd>Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -953,8 +1060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</p>
-</dd><dt class="property-required"
+    <dd>Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</dd><dt class="property-required"
             title="Required">
         <span id="terminationdate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationdate_go" style="color: inherit; text-decoration: inherit;">Termination<wbr>Date</a>
@@ -962,8 +1068,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The end time of the batch processing job.</p>
-</dd></dl>
+    <dd>The end time of the batch processing job.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="creation_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#creation_time_hcl" style="color: inherit; text-decoration: inherit;">creation_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Job creation time.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Mission description. The length is limited to 0-256 bytes.</dd><dt class="property-required"
+            title="Required">
+        <span id="job_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Job ID. The length is limited to 1-64 bytes.</dd><dt class="property-required"
+            title="Required">
+        <span id="operation_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_hcl" style="color: inherit; text-decoration: inherit;">operation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.</dd><dt class="property-required"
+            title="Required">
+        <span id="priority_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_hcl" style="color: inherit; text-decoration: inherit;">priority</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.</dd><dt class="property-required"
+            title="Required">
+        <span id="progress_summaries_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#progress_summaries_hcl" style="color: inherit; text-decoration: inherit;">progress_<wbr>summaries</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbatchsjobprogresssummary">list(object)</a></span>
+    </dt>
+    <dd>Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</dd><dt class="property-required"
+            title="Required">
+        <span id="termination_date_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#termination_date_hcl" style="color: inherit; text-decoration: inherit;">termination_<wbr>date</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The end time of the batch processing job.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -977,8 +1152,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job creation time.</p>
-</dd><dt class="property-required"
+    <dd>Job creation time.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -986,8 +1160,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mission description. The length is limited to 0-256 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Mission description. The length is limited to 0-256 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_java" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -995,8 +1168,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job ID. The length is limited to 1-64 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Job ID. The length is limited to 1-64 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="operation_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_java" style="color: inherit; text-decoration: inherit;">operation</a>
@@ -1004,8 +1176,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.</p>
-</dd><dt class="property-required"
+    <dd>Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.</dd><dt class="property-required"
             title="Required">
         <span id="priority_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_java" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1013,8 +1184,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.</p>
-</dd><dt class="property-required"
+    <dd>Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.</dd><dt class="property-required"
             title="Required">
         <span id="progresssummaries_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#progresssummaries_java" style="color: inherit; text-decoration: inherit;">progress<wbr>Summaries</a>
@@ -1022,8 +1192,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbatchsjobprogresssummary">List&lt;Get<wbr>Batchs<wbr>Job<wbr>Progress<wbr>Summary&gt;</a></span>
     </dt>
-    <dd><p>Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.</p>
-</dd><dt class="property-required"
+    <dd>Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1031,8 +1200,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</p>
-</dd><dt class="property-required"
+    <dd>Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</dd><dt class="property-required"
             title="Required">
         <span id="terminationdate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationdate_java" style="color: inherit; text-decoration: inherit;">termination<wbr>Date</a>
@@ -1040,8 +1208,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The end time of the batch processing job.</p>
-</dd></dl>
+    <dd>The end time of the batch processing job.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1055,8 +1222,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job creation time.</p>
-</dd><dt class="property-required"
+    <dd>Job creation time.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1064,8 +1230,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Mission description. The length is limited to 0-256 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Mission description. The length is limited to 0-256 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -1073,8 +1238,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job ID. The length is limited to 1-64 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Job ID. The length is limited to 1-64 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="operation_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_nodejs" style="color: inherit; text-decoration: inherit;">operation</a>
@@ -1082,8 +1246,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.</p>
-</dd><dt class="property-required"
+    <dd>Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.</dd><dt class="property-required"
             title="Required">
         <span id="priority_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_nodejs" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1091,8 +1254,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.</p>
-</dd><dt class="property-required"
+    <dd>Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.</dd><dt class="property-required"
             title="Required">
         <span id="progresssummaries_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#progresssummaries_nodejs" style="color: inherit; text-decoration: inherit;">progress<wbr>Summaries</a>
@@ -1100,8 +1262,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbatchsjobprogresssummary">Get<wbr>Batchs<wbr>Job<wbr>Progress<wbr>Summary[]</a></span>
     </dt>
-    <dd><p>Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.</p>
-</dd><dt class="property-required"
+    <dd>Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1109,8 +1270,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</p>
-</dd><dt class="property-required"
+    <dd>Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</dd><dt class="property-required"
             title="Required">
         <span id="terminationdate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationdate_nodejs" style="color: inherit; text-decoration: inherit;">termination<wbr>Date</a>
@@ -1118,8 +1278,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The end time of the batch processing job.</p>
-</dd></dl>
+    <dd>The end time of the batch processing job.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1133,8 +1292,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Job creation time.</p>
-</dd><dt class="property-required"
+    <dd>Job creation time.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1142,8 +1300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Mission description. The length is limited to 0-256 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Mission description. The length is limited to 0-256 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="job_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_python" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
@@ -1151,8 +1308,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Job ID. The length is limited to 1-64 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Job ID. The length is limited to 1-64 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="operation_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_python" style="color: inherit; text-decoration: inherit;">operation</a>
@@ -1160,8 +1316,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.</p>
-</dd><dt class="property-required"
+    <dd>Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.</dd><dt class="property-required"
             title="Required">
         <span id="priority_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_python" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1169,17 +1324,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.</p>
-</dd><dt class="property-required"
+    <dd>Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.</dd><dt class="property-required"
             title="Required">
         <span id="progress_summaries_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#progress_summaries_python" style="color: inherit; text-decoration: inherit;">progress_<wbr>summaries</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbatchsjobprogresssummary">Get<wbr>Batchs<wbr>Job<wbr>Progress<wbr>Summary]</a></span>
+        <span class="property-type"><a href="#getbatchsjobprogresssummary">Sequence[Get<wbr>Batchs<wbr>Job<wbr>Progress<wbr>Summary]</a></span>
     </dt>
-    <dd><p>Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.</p>
-</dd><dt class="property-required"
+    <dd>Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1187,8 +1340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</p>
-</dd><dt class="property-required"
+    <dd>Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</dd><dt class="property-required"
             title="Required">
         <span id="termination_date_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#termination_date_python" style="color: inherit; text-decoration: inherit;">termination_<wbr>date</a>
@@ -1196,8 +1348,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The end time of the batch processing job.</p>
-</dd></dl>
+    <dd>The end time of the batch processing job.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1211,8 +1362,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job creation time.</p>
-</dd><dt class="property-required"
+    <dd>Job creation time.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1220,8 +1370,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Mission description. The length is limited to 0-256 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Mission description. The length is limited to 0-256 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -1229,8 +1378,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job ID. The length is limited to 1-64 bytes.</p>
-</dd><dt class="property-required"
+    <dd>Job ID. The length is limited to 1-64 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="operation_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operation_yaml" style="color: inherit; text-decoration: inherit;">operation</a>
@@ -1238,8 +1386,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.</p>
-</dd><dt class="property-required"
+    <dd>Actions performed on objects in a batch processing job. For example, COSPutObjectCopy.</dd><dt class="property-required"
             title="Required">
         <span id="priority_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_yaml" style="color: inherit; text-decoration: inherit;">priority</a>
@@ -1247,8 +1394,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.</p>
-</dd><dt class="property-required"
+    <dd>Mission priority. Tasks with higher values will be given priority. The priority size is limited to 0-2147483647.</dd><dt class="property-required"
             title="Required">
         <span id="progresssummaries_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#progresssummaries_yaml" style="color: inherit; text-decoration: inherit;">progress<wbr>Summaries</a>
@@ -1256,8 +1402,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbatchsjobprogresssummary">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.</p>
-</dd><dt class="property-required"
+    <dd>Summary of the status of task implementation. Describe the total number of operations performed in this task, the number of successful operations, and the number of failed operations.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1265,8 +1410,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</p>
-</dd><dt class="property-required"
+    <dd>Task execution status. Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.</dd><dt class="property-required"
             title="Required">
         <span id="terminationdate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationdate_yaml" style="color: inherit; text-decoration: inherit;">termination<wbr>Date</a>
@@ -1274,8 +1418,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The end time of the batch processing job.</p>
-</dd></dl>
+    <dd>The end time of the batch processing job.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1293,8 +1436,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The current failed Operand.</p>
-</dd><dt class="property-required"
+    <dd>The current failed Operand.</dd><dt class="property-required"
             title="Required">
         <span id="numberoftaskssucceeded_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberoftaskssucceeded_csharp" style="color: inherit; text-decoration: inherit;">Number<wbr>Of<wbr>Tasks<wbr>Succeeded</a>
@@ -1302,8 +1444,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The current successful Operand.</p>
-</dd><dt class="property-required"
+    <dd>The current successful Operand.</dd><dt class="property-required"
             title="Required">
         <span id="totalnumberoftasks_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalnumberoftasks_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Number<wbr>Of<wbr>Tasks</a>
@@ -1311,8 +1452,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total Operand.</p>
-</dd></dl>
+    <dd>Total Operand.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1326,8 +1466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The current failed Operand.</p>
-</dd><dt class="property-required"
+    <dd>The current failed Operand.</dd><dt class="property-required"
             title="Required">
         <span id="numberoftaskssucceeded_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberoftaskssucceeded_go" style="color: inherit; text-decoration: inherit;">Number<wbr>Of<wbr>Tasks<wbr>Succeeded</a>
@@ -1335,8 +1474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The current successful Operand.</p>
-</dd><dt class="property-required"
+    <dd>The current successful Operand.</dd><dt class="property-required"
             title="Required">
         <span id="totalnumberoftasks_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalnumberoftasks_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Number<wbr>Of<wbr>Tasks</a>
@@ -1344,8 +1482,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total Operand.</p>
-</dd></dl>
+    <dd>Total Operand.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="number_of_tasks_failed_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_of_tasks_failed_hcl" style="color: inherit; text-decoration: inherit;">number_<wbr>of_<wbr>tasks_<wbr>failed</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The current failed Operand.</dd><dt class="property-required"
+            title="Required">
+        <span id="number_of_tasks_succeeded_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_of_tasks_succeeded_hcl" style="color: inherit; text-decoration: inherit;">number_<wbr>of_<wbr>tasks_<wbr>succeeded</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The current successful Operand.</dd><dt class="property-required"
+            title="Required">
+        <span id="total_number_of_tasks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_number_of_tasks_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>number_<wbr>of_<wbr>tasks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total Operand.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1359,8 +1526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The current failed Operand.</p>
-</dd><dt class="property-required"
+    <dd>The current failed Operand.</dd><dt class="property-required"
             title="Required">
         <span id="numberoftaskssucceeded_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberoftaskssucceeded_java" style="color: inherit; text-decoration: inherit;">number<wbr>Of<wbr>Tasks<wbr>Succeeded</a>
@@ -1368,8 +1534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The current successful Operand.</p>
-</dd><dt class="property-required"
+    <dd>The current successful Operand.</dd><dt class="property-required"
             title="Required">
         <span id="totalnumberoftasks_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalnumberoftasks_java" style="color: inherit; text-decoration: inherit;">total<wbr>Number<wbr>Of<wbr>Tasks</a>
@@ -1377,8 +1542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total Operand.</p>
-</dd></dl>
+    <dd>Total Operand.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1392,8 +1556,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The current failed Operand.</p>
-</dd><dt class="property-required"
+    <dd>The current failed Operand.</dd><dt class="property-required"
             title="Required">
         <span id="numberoftaskssucceeded_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberoftaskssucceeded_nodejs" style="color: inherit; text-decoration: inherit;">number<wbr>Of<wbr>Tasks<wbr>Succeeded</a>
@@ -1401,8 +1564,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The current successful Operand.</p>
-</dd><dt class="property-required"
+    <dd>The current successful Operand.</dd><dt class="property-required"
             title="Required">
         <span id="totalnumberoftasks_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalnumberoftasks_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Number<wbr>Of<wbr>Tasks</a>
@@ -1410,8 +1572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total Operand.</p>
-</dd></dl>
+    <dd>Total Operand.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1425,8 +1586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The current failed Operand.</p>
-</dd><dt class="property-required"
+    <dd>The current failed Operand.</dd><dt class="property-required"
             title="Required">
         <span id="number_of_tasks_succeeded_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#number_of_tasks_succeeded_python" style="color: inherit; text-decoration: inherit;">number_<wbr>of_<wbr>tasks_<wbr>succeeded</a>
@@ -1434,8 +1594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The current successful Operand.</p>
-</dd><dt class="property-required"
+    <dd>The current successful Operand.</dd><dt class="property-required"
             title="Required">
         <span id="total_number_of_tasks_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_number_of_tasks_python" style="color: inherit; text-decoration: inherit;">total_<wbr>number_<wbr>of_<wbr>tasks</a>
@@ -1443,8 +1602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total Operand.</p>
-</dd></dl>
+    <dd>Total Operand.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1458,8 +1616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The current failed Operand.</p>
-</dd><dt class="property-required"
+    <dd>The current failed Operand.</dd><dt class="property-required"
             title="Required">
         <span id="numberoftaskssucceeded_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numberoftaskssucceeded_yaml" style="color: inherit; text-decoration: inherit;">number<wbr>Of<wbr>Tasks<wbr>Succeeded</a>
@@ -1467,8 +1624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The current successful Operand.</p>
-</dd><dt class="property-required"
+    <dd>The current successful Operand.</dd><dt class="property-required"
             title="Required">
         <span id="totalnumberoftasks_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalnumberoftasks_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Number<wbr>Of<wbr>Tasks</a>
@@ -1476,8 +1632,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total Operand.</p>
-</dd></dl>
+    <dd>Total Operand.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1492,7 +1647,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

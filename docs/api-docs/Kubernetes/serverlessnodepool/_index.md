@@ -2,9 +2,11 @@
 ---
 title: "ServerlessNodePool"
 title_tag: "tencentcloud.Kubernetes.ServerlessNodePool"
-meta_desc: "Documentation for the tencentcloud.Kubernetes.ServerlessNodePool resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create serverless node pool of cluster."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,26 +20,30 @@ Provide a resource to create serverless node pool of cluster.
 
 ### Add serverless node pool to a cluster
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const config = new pulumi.Config();
 const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
 const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
-const vpc = tencentcloud.Vpc.getSubnets({
+const vpc = tencentcloud.vpc.getSubnets({
     isDefault: true,
     availabilityZone: availabilityZone,
 });
 const vpcId = vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId);
 const subnetId = vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId);
-const sg = tencentcloud.Security.getGroups({
+const sg = tencentcloud.security.getGroups({
     name: "default",
 });
 const sgId = sg.then(sg => sg.securityGroups?.[0]?.securityGroupId);
-const exampleCluster = new tencentcloud.kubernetes.Cluster("exampleCluster", {
+const example = new tencentcloud.kubernetes.Cluster("example", {
     vpcId: vpcId,
     clusterCidr: exampleClusterCidr,
     clusterMaxPodNum: 32,
@@ -47,8 +53,9 @@ const exampleCluster = new tencentcloud.kubernetes.Cluster("exampleCluster", {
     clusterVersion: "1.18.4",
     clusterDeployType: "MANAGED_CLUSTER",
 });
-const exampleServerlessNodePool = new tencentcloud.kubernetes.ServerlessNodePool("exampleServerlessNodePool", {
-    clusterId: exampleCluster.id,
+const exampleServerlessNodePool = new tencentcloud.kubernetes.ServerlessNodePool("example", {
+    clusterId: example.id,
+    name: "tf_example_serverless_node_pool",
     serverlessNodes: [
         {
             displayName: "tf_example_serverless_node1",
@@ -66,6 +73,11 @@ const exampleServerlessNodePool = new tencentcloud.kubernetes.ServerlessNodePool
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
@@ -78,13 +90,13 @@ if availability_zone is None:
 example_cluster_cidr = config.get("exampleClusterCidr")
 if example_cluster_cidr is None:
     example_cluster_cidr = "10.31.0.0/16"
-vpc = tencentcloud.Vpc.get_subnets(is_default=True,
+vpc = tencentcloud.vpc.get_subnets(is_default=True,
     availability_zone=availability_zone)
 vpc_id = vpc.instance_lists[0].vpc_id
 subnet_id = vpc.instance_lists[0].subnet_id
-sg = tencentcloud.Security.get_groups(name="default")
+sg = tencentcloud.security.get_groups(name="default")
 sg_id = sg.security_groups[0].security_group_id
-example_cluster = tencentcloud.kubernetes.Cluster("exampleCluster",
+example = tencentcloud.kubernetes.Cluster("example",
     vpc_id=vpc_id,
     cluster_cidr=example_cluster_cidr,
     cluster_max_pod_num=32,
@@ -93,17 +105,18 @@ example_cluster = tencentcloud.kubernetes.Cluster("exampleCluster",
     cluster_max_service_num=32,
     cluster_version="1.18.4",
     cluster_deploy_type="MANAGED_CLUSTER")
-example_serverless_node_pool = tencentcloud.kubernetes.ServerlessNodePool("exampleServerlessNodePool",
-    cluster_id=example_cluster.id,
+example_serverless_node_pool = tencentcloud.kubernetes.ServerlessNodePool("example",
+    cluster_id=example.id,
+    name="tf_example_serverless_node_pool",
     serverless_nodes=[
-        tencentcloud.kubernetes.ServerlessNodePoolServerlessNodeArgs(
-            display_name="tf_example_serverless_node1",
-            subnet_id=subnet_id,
-        ),
-        tencentcloud.kubernetes.ServerlessNodePoolServerlessNodeArgs(
-            display_name="tf_example_serverless_node2",
-            subnet_id=subnet_id,
-        ),
+        {
+            "display_name": "tf_example_serverless_node1",
+            "subnet_id": subnet_id,
+        },
+        {
+            "display_name": "tf_example_serverless_node2",
+            "subnet_id": subnet_id,
+        },
     ],
     security_group_ids=[sg_id],
     labels={
@@ -111,11 +124,99 @@ example_serverless_node_pool = tencentcloud.kubernetes.ServerlessNodePool("examp
         "label2": "value2",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		availabilityZone := "ap-guangzhou-3"
+		if param := cfg.Get("availabilityZone"); param != "" {
+			availabilityZone = param
+		}
+		exampleClusterCidr := "10.31.0.0/16"
+		if param := cfg.Get("exampleClusterCidr"); param != "" {
+			exampleClusterCidr = param
+		}
+		vpc2, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+			IsDefault:        pulumi.BoolRef(true),
+			AvailabilityZone: pulumi.StringRef(availabilityZone),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpcId := vpc2.InstanceLists[0].VpcId
+		subnetId := vpc2.InstanceLists[0].SubnetId
+		sg, err := security.GetGroups(ctx, &security.GetGroupsArgs{
+			Name: pulumi.StringRef("default"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		sgId := sg.SecurityGroups[0].SecurityGroupId
+		example, err := kubernetes.NewCluster(ctx, "example", &kubernetes.ClusterArgs{
+			VpcId:                pulumi.String(vpcId),
+			ClusterCidr:          pulumi.String(exampleClusterCidr),
+			ClusterMaxPodNum:     pulumi.Int(32),
+			ClusterName:          pulumi.String("tf_example_cluster"),
+			ClusterDesc:          pulumi.String("tf example cluster"),
+			ClusterMaxServiceNum: pulumi.Int(32),
+			ClusterVersion:       pulumi.String("1.18.4"),
+			ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = kubernetes.NewServerlessNodePool(ctx, "example", &kubernetes.ServerlessNodePoolArgs{
+			ClusterId: example.ID().ToIDOutput().ToStringOutput(),
+			Name:      pulumi.String("tf_example_serverless_node_pool"),
+			ServerlessNodes: kubernetes.ServerlessNodePoolServerlessNodeArray{
+				&kubernetes.ServerlessNodePoolServerlessNodeArgs{
+					DisplayName: pulumi.String("tf_example_serverless_node1"),
+					SubnetId:    pulumi.String(subnetId),
+				},
+				&kubernetes.ServerlessNodePoolServerlessNodeArgs{
+					DisplayName: pulumi.String("tf_example_serverless_node2"),
+					SubnetId:    pulumi.String(subnetId),
+				},
+			},
+			SecurityGroupIds: pulumi.StringArray{
+				pulumi.String(sgId),
+			},
+			Labels: pulumi.StringMap{
+				"label1": pulumi.String("value1"),
+				"label2": pulumi.String("value2"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -140,7 +241,7 @@ return await Deployment.RunAsync(() =>
 
     var sgId = sg.Apply(getGroupsResult => getGroupsResult.SecurityGroups[0]?.SecurityGroupId);
 
-    var exampleCluster = new Tencentcloud.Kubernetes.Cluster("exampleCluster", new()
+    var example = new Tencentcloud.Kubernetes.Cluster("example", new()
     {
         VpcId = vpcId,
         ClusterCidr = exampleClusterCidr,
@@ -152,9 +253,10 @@ return await Deployment.RunAsync(() =>
         ClusterDeployType = "MANAGED_CLUSTER",
     });
 
-    var exampleServerlessNodePool = new Tencentcloud.Kubernetes.ServerlessNodePool("exampleServerlessNodePool", new()
+    var exampleServerlessNodePool = new Tencentcloud.Kubernetes.ServerlessNodePool("example", new()
     {
-        ClusterId = exampleCluster.Id,
+        ClusterId = example.Id,
+        Name = "tf_example_serverless_node_pool",
         ServerlessNodes = new[]
         {
             new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolServerlessNodeArgs
@@ -181,84 +283,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		cfg := config.New(ctx, "")
-		availabilityZone := "ap-guangzhou-3"
-		if param := cfg.Get("availabilityZone"); param != "" {
-			availabilityZone = param
-		}
-		exampleClusterCidr := "10.31.0.0/16"
-		if param := cfg.Get("exampleClusterCidr"); param != "" {
-			exampleClusterCidr = param
-		}
-		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-			IsDefault:        pulumi.BoolRef(true),
-			AvailabilityZone: pulumi.StringRef(availabilityZone),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpcId := vpc.InstanceLists[0].VpcId
-		subnetId := vpc.InstanceLists[0].SubnetId
-		sg, err := Security.GetGroups(ctx, &security.GetGroupsArgs{
-			Name: pulumi.StringRef("default"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		sgId := sg.SecurityGroups[0].SecurityGroupId
-		exampleCluster, err := Kubernetes.NewCluster(ctx, "exampleCluster", &Kubernetes.ClusterArgs{
-			VpcId:                pulumi.String(vpcId),
-			ClusterCidr:          pulumi.String(exampleClusterCidr),
-			ClusterMaxPodNum:     pulumi.Int(32),
-			ClusterName:          pulumi.String("tf_example_cluster"),
-			ClusterDesc:          pulumi.String("tf example cluster"),
-			ClusterMaxServiceNum: pulumi.Int(32),
-			ClusterVersion:       pulumi.String("1.18.4"),
-			ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Kubernetes.NewServerlessNodePool(ctx, "exampleServerlessNodePool", &Kubernetes.ServerlessNodePoolArgs{
-			ClusterId: exampleCluster.ID(),
-			ServerlessNodes: kubernetes.ServerlessNodePoolServerlessNodeArray{
-				&kubernetes.ServerlessNodePoolServerlessNodeArgs{
-					DisplayName: pulumi.String("tf_example_serverless_node1"),
-					SubnetId:    pulumi.String(subnetId),
-				},
-				&kubernetes.ServerlessNodePoolServerlessNodeArgs{
-					DisplayName: pulumi.String("tf_example_serverless_node2"),
-					SubnetId:    pulumi.String(subnetId),
-				},
-			},
-			SecurityGroupIds: pulumi.StringArray{
-				pulumi.String(sgId),
-			},
-			Labels: pulumi.Map{
-				"label1": pulumi.Any("value1"),
-				"label2": pulumi.Any("value2"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -274,8 +303,8 @@ import com.pulumi.tencentcloud.Kubernetes.ClusterArgs;
 import com.pulumi.tencentcloud.Kubernetes.ServerlessNodePool;
 import com.pulumi.tencentcloud.Kubernetes.ServerlessNodePoolArgs;
 import com.pulumi.tencentcloud.Kubernetes.inputs.ServerlessNodePoolServerlessNodeArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -295,17 +324,17 @@ public class App {
             .availabilityZone(availabilityZone)
             .build());
 
-        final var vpcId = vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].vpcId());
+        final var vpcId = vpc.instanceLists()[0].vpcId();
 
-        final var subnetId = vpc.applyValue(getSubnetsResult -> getSubnetsResult.instanceLists()[0].subnetId());
+        final var subnetId = vpc.instanceLists()[0].subnetId();
 
         final var sg = SecurityFunctions.getGroups(GetGroupsArgs.builder()
             .name("default")
             .build());
 
-        final var sgId = sg.applyValue(getGroupsResult -> getGroupsResult.securityGroups()[0].securityGroupId());
+        final var sgId = sg.securityGroups()[0].securityGroupId();
 
-        var exampleCluster = new Cluster("exampleCluster", ClusterArgs.builder()        
+        var example = new Cluster("example", ClusterArgs.builder()
             .vpcId(vpcId)
             .clusterCidr(exampleClusterCidr)
             .clusterMaxPodNum(32)
@@ -316,8 +345,9 @@ public class App {
             .clusterDeployType("MANAGED_CLUSTER")
             .build());
 
-        var exampleServerlessNodePool = new ServerlessNodePool("exampleServerlessNodePool", ServerlessNodePoolArgs.builder()        
-            .clusterId(exampleCluster.id())
+        var exampleServerlessNodePool = new ServerlessNodePool("exampleServerlessNodePool", ServerlessNodePoolArgs.builder()
+            .clusterId(example.id())
+            .name("tf_example_serverless_node_pool")
             .serverlessNodes(            
                 ServerlessNodePoolServerlessNodeArgs.builder()
                     .displayName("tf_example_serverless_node1")
@@ -337,6 +367,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 configuration:
   availabilityZone:
@@ -346,7 +381,7 @@ configuration:
     type: string
     default: 10.31.0.0/16
 resources:
-  exampleCluster:
+  example:
     type: tencentcloud:Kubernetes:Cluster
     properties:
       vpcId: ${vpcId}
@@ -359,8 +394,10 @@ resources:
       clusterDeployType: MANAGED_CLUSTER
   exampleServerlessNodePool:
     type: tencentcloud:Kubernetes:ServerlessNodePool
+    name: example
     properties:
-      clusterId: ${exampleCluster.id}
+      clusterId: ${example.id}
+      name: tf_example_serverless_node_pool
       serverlessNodes:
         - displayName: tf_example_serverless_node1
           subnetId: ${subnetId}
@@ -377,40 +414,115 @@ variables:
   sgId: ${sg.securityGroups[0].securityGroupId}
   vpc:
     fn::invoke:
-      Function: tencentcloud:Vpc:getSubnets
-      Arguments:
+      function: tencentcloud:Vpc:getSubnets
+      arguments:
         isDefault: true
         availabilityZone: ${availabilityZone}
   sg:
     fn::invoke:
-      Function: tencentcloud:Security:getGroups
-      Arguments:
+      function: tencentcloud:Security:getGroups
+      arguments:
         name: default
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_vpc_getsubnets" "vpc" {
+  is_default        = true
+  availability_zone = var.availabilityZone
+}
+data "tencentcloud_security_getgroups" "sg" {
+  name = "default"
+}
+
+resource "tencentcloud_kubernetes_cluster" "example" {
+  vpc_id                  = local.vpcId
+  cluster_cidr            = var.exampleClusterCidr
+  cluster_max_pod_num     = 32
+  cluster_name            = "tf_example_cluster"
+  cluster_desc            = "tf example cluster"
+  cluster_max_service_num = 32
+  cluster_version         = "1.18.4"
+  cluster_deploy_type     = "MANAGED_CLUSTER"
+}
+resource "tencentcloud_kubernetes_serverlessnodepool" "example" {
+  cluster_id = tencentcloud_kubernetes_cluster.example.id
+  name       = "tf_example_serverless_node_pool"
+  serverless_nodes {
+    display_name = "tf_example_serverless_node1"
+    subnet_id    = local.subnetId
+  }
+  serverless_nodes {
+    display_name = "tf_example_serverless_node2"
+    subnet_id    = local.subnetId
+  }
+  security_group_ids = [local.sgId]
+  labels = {
+    "label1" = "value1"
+    "label2" = "value2"
+  }
+}
+variable "availabilityZone" {
+  type    = string
+  default = "ap-guangzhou-3"
+}
+variable "exampleClusterCidr" {
+  type    = string
+  default = "10.31.0.0/16"
+}
+locals {
+  vpcId = data.tencentcloud_vpc_getsubnets.vpc.instance_lists[0].vpc_id
+}
+locals {
+  subnetId = data.tencentcloud_vpc_getsubnets.vpc.instance_lists[0].subnet_id
+}
+locals {
+  sgId = data.tencentcloud_security_getgroups.sg.security_groups[0].security_group_id
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Adding taints to the virtual nodes under this node pool
 
 The pods without appropriate tolerations will not be scheduled on this node. Refer [taint-and-toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details.
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.kubernetes.ServerlessNodePool("example", {
-    clusterId: tencentcloud_kubernetes_cluster.example.id,
+    clusterId: exampleTencentcloudKubernetesCluster.id,
+    name: "tf_example_serverless_node_pool",
     serverlessNodes: [
         {
             displayName: "tf_example_serverless_node1",
-            subnetId: local.subnet_id,
+            subnetId: subnetId,
         },
         {
             displayName: "tf_example_serverless_node2",
-            subnetId: local.subnet_id,
+            subnetId: subnetId,
         },
     ],
-    securityGroupIds: [local.sg_id],
+    securityGroupIds: [sgId],
     labels: {
         label1: "value1",
         label2: "value2",
@@ -429,40 +541,106 @@ const example = new tencentcloud.kubernetes.ServerlessNodePool("example", {
     ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.kubernetes.ServerlessNodePool("example",
-    cluster_id=tencentcloud_kubernetes_cluster["example"]["id"],
+    cluster_id=example_tencentcloud_kubernetes_cluster["id"],
+    name="tf_example_serverless_node_pool",
     serverless_nodes=[
-        tencentcloud.kubernetes.ServerlessNodePoolServerlessNodeArgs(
-            display_name="tf_example_serverless_node1",
-            subnet_id=local["subnet_id"],
-        ),
-        tencentcloud.kubernetes.ServerlessNodePoolServerlessNodeArgs(
-            display_name="tf_example_serverless_node2",
-            subnet_id=local["subnet_id"],
-        ),
+        {
+            "display_name": "tf_example_serverless_node1",
+            "subnet_id": subnet_id,
+        },
+        {
+            "display_name": "tf_example_serverless_node2",
+            "subnet_id": subnet_id,
+        },
     ],
-    security_group_ids=[local["sg_id"]],
+    security_group_ids=[sg_id],
     labels={
         "label1": "value1",
         "label2": "value2",
     },
     taints=[
-        tencentcloud.kubernetes.ServerlessNodePoolTaintArgs(
-            key="key1",
-            value="value1",
-            effect="NoSchedule",
-        ),
-        tencentcloud.kubernetes.ServerlessNodePoolTaintArgs(
-            key="key1",
-            value="value1",
-            effect="NoExecute",
-        ),
+        {
+            "key": "key1",
+            "value": "value1",
+            "effect": "NoSchedule",
+        },
+        {
+            "key": "key1",
+            "value": "value1",
+            "effect": "NoExecute",
+        },
     ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := kubernetes.NewServerlessNodePool(ctx, "example", &kubernetes.ServerlessNodePoolArgs{
+			ClusterId: pulumi.Any(exampleTencentcloudKubernetesCluster.Id),
+			Name:      pulumi.String("tf_example_serverless_node_pool"),
+			ServerlessNodes: kubernetes.ServerlessNodePoolServerlessNodeArray{
+				&kubernetes.ServerlessNodePoolServerlessNodeArgs{
+					DisplayName: pulumi.String("tf_example_serverless_node1"),
+					SubnetId:    pulumi.Any(subnetId),
+				},
+				&kubernetes.ServerlessNodePoolServerlessNodeArgs{
+					DisplayName: pulumi.String("tf_example_serverless_node2"),
+					SubnetId:    pulumi.Any(subnetId),
+				},
+			},
+			SecurityGroupIds: pulumi.StringArray{
+				sgId,
+			},
+			Labels: pulumi.StringMap{
+				"label1": pulumi.String("value1"),
+				"label2": pulumi.String("value2"),
+			},
+			Taints: kubernetes.ServerlessNodePoolTaintArray{
+				&kubernetes.ServerlessNodePoolTaintArgs{
+					Key:    pulumi.String("key1"),
+					Value:  pulumi.String("value1"),
+					Effect: pulumi.String("NoSchedule"),
+				},
+				&kubernetes.ServerlessNodePoolTaintArgs{
+					Key:    pulumi.String("key1"),
+					Value:  pulumi.String("value1"),
+					Effect: pulumi.String("NoExecute"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -473,23 +651,24 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Kubernetes.ServerlessNodePool("example", new()
     {
-        ClusterId = tencentcloud_kubernetes_cluster.Example.Id,
+        ClusterId = exampleTencentcloudKubernetesCluster.Id,
+        Name = "tf_example_serverless_node_pool",
         ServerlessNodes = new[]
         {
             new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolServerlessNodeArgs
             {
                 DisplayName = "tf_example_serverless_node1",
-                SubnetId = local.Subnet_id,
+                SubnetId = subnetId,
             },
             new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolServerlessNodeArgs
             {
                 DisplayName = "tf_example_serverless_node2",
-                SubnetId = local.Subnet_id,
+                SubnetId = subnetId,
             },
         },
         SecurityGroupIds = new[]
         {
-            local.Sg_id,
+            sgId,
         },
         Labels = 
         {
@@ -515,55 +694,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Kubernetes.NewServerlessNodePool(ctx, "example", &Kubernetes.ServerlessNodePoolArgs{
-			ClusterId: pulumi.Any(tencentcloud_kubernetes_cluster.Example.Id),
-			ServerlessNodes: kubernetes.ServerlessNodePoolServerlessNodeArray{
-				&kubernetes.ServerlessNodePoolServerlessNodeArgs{
-					DisplayName: pulumi.String("tf_example_serverless_node1"),
-					SubnetId:    pulumi.Any(local.Subnet_id),
-				},
-				&kubernetes.ServerlessNodePoolServerlessNodeArgs{
-					DisplayName: pulumi.String("tf_example_serverless_node2"),
-					SubnetId:    pulumi.Any(local.Subnet_id),
-				},
-			},
-			SecurityGroupIds: pulumi.StringArray{
-				local.Sg_id,
-			},
-			Labels: pulumi.Map{
-				"label1": pulumi.Any("value1"),
-				"label2": pulumi.Any("value2"),
-			},
-			Taints: kubernetes.ServerlessNodePoolTaintArray{
-				&kubernetes.ServerlessNodePoolTaintArgs{
-					Key:    pulumi.String("key1"),
-					Value:  pulumi.String("value1"),
-					Effect: pulumi.String("NoSchedule"),
-				},
-				&kubernetes.ServerlessNodePoolTaintArgs{
-					Key:    pulumi.String("key1"),
-					Value:  pulumi.String("value1"),
-					Effect: pulumi.String("NoExecute"),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -574,8 +709,8 @@ import com.pulumi.tencentcloud.Kubernetes.ServerlessNodePool;
 import com.pulumi.tencentcloud.Kubernetes.ServerlessNodePoolArgs;
 import com.pulumi.tencentcloud.Kubernetes.inputs.ServerlessNodePoolServerlessNodeArgs;
 import com.pulumi.tencentcloud.Kubernetes.inputs.ServerlessNodePoolTaintArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -587,18 +722,19 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new ServerlessNodePool("example", ServerlessNodePoolArgs.builder()        
-            .clusterId(tencentcloud_kubernetes_cluster.example().id())
+        var example = new ServerlessNodePool("example", ServerlessNodePoolArgs.builder()
+            .clusterId(exampleTencentcloudKubernetesCluster.id())
+            .name("tf_example_serverless_node_pool")
             .serverlessNodes(            
                 ServerlessNodePoolServerlessNodeArgs.builder()
                     .displayName("tf_example_serverless_node1")
-                    .subnetId(local.subnet_id())
+                    .subnetId(subnetId)
                     .build(),
                 ServerlessNodePoolServerlessNodeArgs.builder()
                     .displayName("tf_example_serverless_node2")
-                    .subnetId(local.subnet_id())
+                    .subnetId(subnetId)
                     .build())
-            .securityGroupIds(local.sg_id())
+            .securityGroupIds(sgId)
             .labels(Map.ofEntries(
                 Map.entry("label1", "value1"),
                 Map.entry("label2", "value2")
@@ -619,19 +755,25 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Kubernetes:ServerlessNodePool
     properties:
-      clusterId: ${tencentcloud_kubernetes_cluster.example.id}
+      clusterId: ${exampleTencentcloudKubernetesCluster.id}
+      name: tf_example_serverless_node_pool
       serverlessNodes:
         - displayName: tf_example_serverless_node1
-          subnetId: ${local.subnet_id}
+          subnetId: ${subnetId}
         - displayName: tf_example_serverless_node2
-          subnetId: ${local.subnet_id}
+          subnetId: ${subnetId}
       securityGroupIds:
-        - ${local.sg_id}
+        - ${sgId}
       labels:
         label1: value1
         label2: value2
@@ -643,70 +785,141 @@ resources:
           value: value1
           effect: NoExecute
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_kubernetes_serverlessnodepool" "example" {
+  cluster_id = exampleTencentcloudKubernetesCluster.id
+  name       = "tf_example_serverless_node_pool"
+  serverless_nodes {
+    display_name = "tf_example_serverless_node1"
+    subnet_id    = subnetId
+  }
+  serverless_nodes {
+    display_name = "tf_example_serverless_node2"
+    subnet_id    = subnetId
+  }
+  security_group_ids = [sgId]
+  labels = {
+    "label1" = "value1"
+    "label2" = "value2"
+  }
+  taints {
+    key    = "key1"
+    value  = "value1"
+    effect = "NoSchedule"
+  }
+  taints {
+    key    = "key1"
+    value  = "value1"
+    effect = "NoExecute"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateClusterVirtualNodePool](https://www.tencentcloud.com/document/api/457/53275)
+  - [DescribeClusterVirtualNodePools](https://www.tencentcloud.com/document/api/457/53271)
+* Read: [DescribeClusterVirtualNodePools](https://www.tencentcloud.com/document/api/457/53271)
+* Update: [ModifyClusterVirtualNodePool](https://www.tencentcloud.com/document/api/457/53269)
+* Delete:
+  - [DeleteClusterVirtualNodePool](https://www.tencentcloud.com/document/api/457/53273)
+  - [DescribeClusterVirtualNodePools](https://www.tencentcloud.com/document/api/457/53271)
 
 
 ## Create ServerlessNodePool Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ServerlessNodePool</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ServerlessNodePoolArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ServerlessNodePool</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ServerlessNodePoolArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ServerlessNodePool</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                       <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ServerlessNodePoolArgs</a></span><span class="p">,</span>
+                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ServerlessNodePool</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                        <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                       <span class="nx">labels</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+                       <span class="nx">serverless_nodes</span><span class="p">:</span> <span class="nx">Optional[Sequence[ServerlessNodePoolServerlessNodeArgs]]</span> = None<span class="p">,</span>
+                       <span class="nx">labels</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                        <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                        <span class="nx">security_group_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">serverless_nodes</span><span class="p">:</span> <span class="nx">Optional[Sequence[_kubernetes.ServerlessNodePoolServerlessNodeArgs]]</span> = None<span class="p">,</span>
-                       <span class="nx">taints</span><span class="p">:</span> <span class="nx">Optional[Sequence[_kubernetes.ServerlessNodePoolTaintArgs]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ServerlessNodePool</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                       <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ServerlessNodePoolArgs</a></span><span class="p">,</span>
-                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                       <span class="nx">taints</span><span class="p">:</span> <span class="nx">Optional[Sequence[ServerlessNodePoolTaintArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewServerlessNodePool</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ServerlessNodePoolArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ServerlessNodePool</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewServerlessNodePool</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ServerlessNodePoolArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ServerlessNodePool</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ServerlessNodePool</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ServerlessNodePoolArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ServerlessNodePool</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ServerlessNodePoolArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ServerlessNodePool</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ServerlessNodePoolArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ServerlessNodePool</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ServerlessNodePoolArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Kubernetes:ServerlessNodePool</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Kubernetes:ServerlessNodePool</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_kubernetes_serverless_node_pool&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -727,7 +940,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -844,11 +1057,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## ServerlessNodePool Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ServerlessNodePool resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -864,26 +1085,23 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster id of serverless node pool.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>cluster id of serverless node pool.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serverlessnodes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverlessnodes_csharp" style="color: inherit; text-decoration: inherit;">Serverless<wbr>Nodes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node&gt;</a></span>
     </dt>
-    <dd><p>node list of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>node list of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_csharp" style="color: inherit; text-decoration: inherit;">Labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>labels of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>labels of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -891,8 +1109,7 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>serverless node pool name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>serverless node pool name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="securitygroupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
@@ -900,17 +1117,15 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>security groups of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>security groups of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="taints_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taints_csharp" style="color: inherit; text-decoration: inherit;">Taints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serverlessnodepooltaint">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Serverless<wbr>Node<wbr>Pool<wbr>Taint<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#serverlessnodepooltaint">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Serverless<wbr>Node<wbr>Pool<wbr>Taint&gt;</a></span>
     </dt>
-    <dd><p>taints of serverless node.</p>
-</dd></dl>
+    <dd>taints of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -924,8 +1139,7 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster id of serverless node pool.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>cluster id of serverless node pool.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serverlessnodes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverlessnodes_go" style="color: inherit; text-decoration: inherit;">Serverless<wbr>Nodes</a>
@@ -933,17 +1147,15 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serverlessnodepoolserverlessnode">[]Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node<wbr>Args</a></span>
     </dt>
-    <dd><p>node list of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>node list of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_go" style="color: inherit; text-decoration: inherit;">Labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>labels of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>labels of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -951,8 +1163,7 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>serverless node pool name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>serverless node pool name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="securitygroupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
@@ -960,8 +1171,7 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>security groups of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>security groups of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="taints_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taints_go" style="color: inherit; text-decoration: inherit;">Taints</a>
@@ -969,8 +1179,61 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serverlessnodepooltaint">[]Serverless<wbr>Node<wbr>Pool<wbr>Taint<wbr>Args</a></span>
     </dt>
-    <dd><p>taints of serverless node.</p>
-</dd></dl>
+    <dd>taints of serverless node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster id of serverless node pool.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="serverless_nodes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverless_nodes_hcl" style="color: inherit; text-decoration: inherit;">serverless_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">list(object)</a></span>
+    </dt>
+    <dd>node list of serverless node pool.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="labels_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_hcl" style="color: inherit; text-decoration: inherit;">labels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>labels of serverless node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>serverless node pool name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="security_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_ids_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>security groups of serverless node pool.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="taints_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taints_hcl" style="color: inherit; text-decoration: inherit;">taints</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#serverlessnodepooltaint">list(object)</a></span>
+    </dt>
+    <dd>taints of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -984,26 +1247,23 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster id of serverless node pool.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>cluster id of serverless node pool.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serverlessnodes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverlessnodes_java" style="color: inherit; text-decoration: inherit;">serverless<wbr>Nodes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">List&lt;Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">List&lt;Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node&gt;</a></span>
     </dt>
-    <dd><p>node list of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>node list of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_java" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>labels of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>labels of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1011,8 +1271,7 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>serverless node pool name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>serverless node pool name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="securitygroupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -1020,17 +1279,15 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>security groups of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>security groups of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="taints_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taints_java" style="color: inherit; text-decoration: inherit;">taints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serverlessnodepooltaint">List&lt;Serverless<wbr>Node<wbr>Pool<wbr>Taint<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#serverlessnodepooltaint">List&lt;Serverless<wbr>Node<wbr>Pool<wbr>Taint&gt;</a></span>
     </dt>
-    <dd><p>taints of serverless node.</p>
-</dd></dl>
+    <dd>taints of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1044,26 +1301,23 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster id of serverless node pool.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>cluster id of serverless node pool.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serverlessnodes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverlessnodes_nodejs" style="color: inherit; text-decoration: inherit;">serverless<wbr>Nodes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node[]</a></span>
     </dt>
-    <dd><p>node list of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>node list of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_nodejs" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>labels of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>labels of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1071,8 +1325,7 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>serverless node pool name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>serverless node pool name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="securitygroupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -1080,17 +1333,15 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>security groups of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>security groups of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="taints_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taints_nodejs" style="color: inherit; text-decoration: inherit;">taints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serverlessnodepooltaint">Serverless<wbr>Node<wbr>Pool<wbr>Taint<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#serverlessnodepooltaint">Serverless<wbr>Node<wbr>Pool<wbr>Taint[]</a></span>
     </dt>
-    <dd><p>taints of serverless node.</p>
-</dd></dl>
+    <dd>taints of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1104,26 +1355,23 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster id of serverless node pool.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>cluster id of serverless node pool.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serverless_nodes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverless_nodes_python" style="color: inherit; text-decoration: inherit;">serverless_<wbr>nodes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node<wbr>Args]</a></span>
+        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">Sequence[Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node<wbr>Args]</a></span>
     </dt>
-    <dd><p>node list of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>node list of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_python" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>labels of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>labels of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1131,8 +1379,7 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>serverless node pool name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>serverless node pool name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="security_group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_ids_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
@@ -1140,17 +1387,15 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>security groups of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>security groups of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="taints_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taints_python" style="color: inherit; text-decoration: inherit;">taints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serverlessnodepooltaint">Serverless<wbr>Node<wbr>Pool<wbr>Taint<wbr>Args]</a></span>
+        <span class="property-type"><a href="#serverlessnodepooltaint">Sequence[Serverless<wbr>Node<wbr>Pool<wbr>Taint<wbr>Args]</a></span>
     </dt>
-    <dd><p>taints of serverless node.</p>
-</dd></dl>
+    <dd>taints of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1164,8 +1409,7 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster id of serverless node pool.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>cluster id of serverless node pool.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="serverlessnodes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#serverlessnodes_yaml" style="color: inherit; text-decoration: inherit;">serverless<wbr>Nodes</a>
@@ -1173,17 +1417,15 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serverlessnodepoolserverlessnode">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>node list of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>node list of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="labels_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_yaml" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>labels of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>labels of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1191,8 +1433,7 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>serverless node pool name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>serverless node pool name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="securitygroupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -1200,8 +1441,7 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>security groups of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>security groups of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="taints_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taints_yaml" style="color: inherit; text-decoration: inherit;">taints</a>
@@ -1209,8 +1449,7 @@ The ServerlessNodePool resource accepts the following [input](/docs/intro/concep
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serverlessnodepooltaint">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>taints of serverless node.</p>
-</dd></dl>
+    <dd>taints of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1231,8 +1470,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lifestate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifestate_csharp" style="color: inherit; text-decoration: inherit;">Life<wbr>State</a>
@@ -1240,8 +1478,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>life state of serverless node pool.</p>
-</dd></dl>
+    <dd>life state of serverless node pool.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1255,8 +1492,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lifestate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifestate_go" style="color: inherit; text-decoration: inherit;">Life<wbr>State</a>
@@ -1264,8 +1500,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>life state of serverless node pool.</p>
-</dd></dl>
+    <dd>life state of serverless node pool.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="life_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#life_state_hcl" style="color: inherit; text-decoration: inherit;">life_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>life state of serverless node pool.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1279,8 +1536,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lifestate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifestate_java" style="color: inherit; text-decoration: inherit;">life<wbr>State</a>
@@ -1288,8 +1544,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>life state of serverless node pool.</p>
-</dd></dl>
+    <dd>life state of serverless node pool.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1303,8 +1558,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lifestate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifestate_nodejs" style="color: inherit; text-decoration: inherit;">life<wbr>State</a>
@@ -1312,8 +1566,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>life state of serverless node pool.</p>
-</dd></dl>
+    <dd>life state of serverless node pool.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1327,8 +1580,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="life_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#life_state_python" style="color: inherit; text-decoration: inherit;">life_<wbr>state</a>
@@ -1336,8 +1588,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>life state of serverless node pool.</p>
-</dd></dl>
+    <dd>life state of serverless node pool.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1351,8 +1602,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lifestate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lifestate_yaml" style="color: inherit; text-decoration: inherit;">life<wbr>State</a>
@@ -1360,8 +1610,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>life state of serverless node pool.</p>
-</dd></dl>
+    <dd>life state of serverless node pool.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1371,126 +1620,165 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ServerlessNodePool resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ServerlessNodePoolState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ServerlessNodePool</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ServerlessNodePoolState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ServerlessNodePool</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">labels</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">labels</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">life_state</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">security_group_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-        <span class="nx">serverless_nodes</span><span class="p">:</span> <span class="nx">Optional[Sequence[_kubernetes.ServerlessNodePoolServerlessNodeArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">taints</span><span class="p">:</span> <span class="nx">Optional[Sequence[_kubernetes.ServerlessNodePoolTaintArgs]]</span> = None<span class="p">) -&gt;</span> ServerlessNodePool</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">serverless_nodes</span><span class="p">:</span> <span class="nx">Optional[Sequence[ServerlessNodePoolServerlessNodeArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">taints</span><span class="p">:</span> <span class="nx">Optional[Sequence[ServerlessNodePoolTaintArgs]]</span> = None<span class="p">) -&gt;</span> ServerlessNodePool</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetServerlessNodePool<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ServerlessNodePoolState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ServerlessNodePool</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetServerlessNodePool<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ServerlessNodePoolState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ServerlessNodePool</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ServerlessNodePool</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ServerlessNodePoolState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ServerlessNodePool</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ServerlessNodePoolState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ServerlessNodePool</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ServerlessNodePoolState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ServerlessNodePool</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ServerlessNodePoolState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingServerlessNodePool</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Kubernetes:ServerlessNodePool</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_kubernetes_serverless_node_pool</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ServerlessNodePoolState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ServerlessNodePoolState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1498,28 +1786,31 @@ Get an existing ServerlessNodePool resource's state with the given name, ID, and
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ServerlessNodePoolState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1527,28 +1818,31 @@ Get an existing ServerlessNodePool resource's state with the given name, ID, and
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ServerlessNodePoolState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1568,17 +1862,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster id of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>cluster id of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_csharp" style="color: inherit; text-decoration: inherit;">Labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>labels of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>labels of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifestate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifestate_csharp" style="color: inherit; text-decoration: inherit;">Life<wbr>State</a>
@@ -1586,8 +1878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>life state of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>life state of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1595,8 +1886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>serverless node pool name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>serverless node pool name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_securitygroupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
@@ -1604,26 +1894,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>security groups of serverless node pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>security groups of serverless node pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serverlessnodes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverlessnodes_csharp" style="color: inherit; text-decoration: inherit;">Serverless<wbr>Nodes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node&gt;</a></span>
     </dt>
-    <dd><p>node list of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>node list of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taints_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taints_csharp" style="color: inherit; text-decoration: inherit;">Taints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serverlessnodepooltaint">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Serverless<wbr>Node<wbr>Pool<wbr>Taint<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#serverlessnodepooltaint">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Kubernetes.<wbr>Inputs.<wbr>Serverless<wbr>Node<wbr>Pool<wbr>Taint&gt;</a></span>
     </dt>
-    <dd><p>taints of serverless node.</p>
-</dd></dl>
+    <dd>taints of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1637,17 +1924,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster id of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>cluster id of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_go" style="color: inherit; text-decoration: inherit;">Labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>labels of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>labels of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifestate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifestate_go" style="color: inherit; text-decoration: inherit;">Life<wbr>State</a>
@@ -1655,8 +1940,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>life state of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>life state of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1664,8 +1948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>serverless node pool name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>serverless node pool name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_securitygroupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
@@ -1673,8 +1956,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>security groups of serverless node pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>security groups of serverless node pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serverlessnodes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverlessnodes_go" style="color: inherit; text-decoration: inherit;">Serverless<wbr>Nodes</a>
@@ -1682,8 +1964,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serverlessnodepoolserverlessnode">[]Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node<wbr>Args</a></span>
     </dt>
-    <dd><p>node list of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>node list of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taints_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taints_go" style="color: inherit; text-decoration: inherit;">Taints</a>
@@ -1691,8 +1972,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serverlessnodepooltaint">[]Serverless<wbr>Node<wbr>Pool<wbr>Taint<wbr>Args</a></span>
     </dt>
-    <dd><p>taints of serverless node.</p>
-</dd></dl>
+    <dd>taints of serverless node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cluster id of serverless node pool.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_labels_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_hcl" style="color: inherit; text-decoration: inherit;">labels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>labels of serverless node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_life_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_life_state_hcl" style="color: inherit; text-decoration: inherit;">life_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>life state of serverless node pool.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>serverless node pool name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_security_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_group_ids_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>security groups of serverless node pool.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_serverless_nodes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverless_nodes_hcl" style="color: inherit; text-decoration: inherit;">serverless_<wbr>nodes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">list(object)</a></span>
+    </dt>
+    <dd>node list of serverless node pool.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_taints_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taints_hcl" style="color: inherit; text-decoration: inherit;">taints</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#serverlessnodepooltaint">list(object)</a></span>
+    </dt>
+    <dd>taints of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1706,17 +2048,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster id of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>cluster id of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_java" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>labels of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>labels of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifestate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifestate_java" style="color: inherit; text-decoration: inherit;">life<wbr>State</a>
@@ -1724,8 +2064,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>life state of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>life state of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1733,8 +2072,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>serverless node pool name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>serverless node pool name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_securitygroupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -1742,26 +2080,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>security groups of serverless node pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>security groups of serverless node pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serverlessnodes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverlessnodes_java" style="color: inherit; text-decoration: inherit;">serverless<wbr>Nodes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">List&lt;Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">List&lt;Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node&gt;</a></span>
     </dt>
-    <dd><p>node list of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>node list of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taints_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taints_java" style="color: inherit; text-decoration: inherit;">taints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serverlessnodepooltaint">List&lt;Serverless<wbr>Node<wbr>Pool<wbr>Taint<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#serverlessnodepooltaint">List&lt;Serverless<wbr>Node<wbr>Pool<wbr>Taint&gt;</a></span>
     </dt>
-    <dd><p>taints of serverless node.</p>
-</dd></dl>
+    <dd>taints of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1775,17 +2110,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cluster id of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>cluster id of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_nodejs" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>labels of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>labels of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifestate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifestate_nodejs" style="color: inherit; text-decoration: inherit;">life<wbr>State</a>
@@ -1793,8 +2126,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>life state of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>life state of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1802,8 +2134,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>serverless node pool name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>serverless node pool name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_securitygroupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -1811,26 +2142,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>security groups of serverless node pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>security groups of serverless node pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serverlessnodes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverlessnodes_nodejs" style="color: inherit; text-decoration: inherit;">serverless<wbr>Nodes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node[]</a></span>
     </dt>
-    <dd><p>node list of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>node list of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taints_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taints_nodejs" style="color: inherit; text-decoration: inherit;">taints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serverlessnodepooltaint">Serverless<wbr>Node<wbr>Pool<wbr>Taint<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#serverlessnodepooltaint">Serverless<wbr>Node<wbr>Pool<wbr>Taint[]</a></span>
     </dt>
-    <dd><p>taints of serverless node.</p>
-</dd></dl>
+    <dd>taints of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1844,17 +2172,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cluster id of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>cluster id of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_python" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>labels of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>labels of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_life_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_life_state_python" style="color: inherit; text-decoration: inherit;">life_<wbr>state</a>
@@ -1862,8 +2188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>life state of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>life state of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1871,8 +2196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>serverless node pool name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>serverless node pool name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_security_group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_group_ids_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
@@ -1880,26 +2204,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>security groups of serverless node pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>security groups of serverless node pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serverless_nodes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverless_nodes_python" style="color: inherit; text-decoration: inherit;">serverless_<wbr>nodes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node<wbr>Args]</a></span>
+        <span class="property-type"><a href="#serverlessnodepoolserverlessnode">Sequence[Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node<wbr>Args]</a></span>
     </dt>
-    <dd><p>node list of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>node list of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taints_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taints_python" style="color: inherit; text-decoration: inherit;">taints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#serverlessnodepooltaint">Serverless<wbr>Node<wbr>Pool<wbr>Taint<wbr>Args]</a></span>
+        <span class="property-type"><a href="#serverlessnodepooltaint">Sequence[Serverless<wbr>Node<wbr>Pool<wbr>Taint<wbr>Args]</a></span>
     </dt>
-    <dd><p>taints of serverless node.</p>
-</dd></dl>
+    <dd>taints of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1913,17 +2234,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cluster id of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>cluster id of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_labels_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_labels_yaml" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>labels of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>labels of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_lifestate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lifestate_yaml" style="color: inherit; text-decoration: inherit;">life<wbr>State</a>
@@ -1931,8 +2250,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>life state of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>life state of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1940,8 +2258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>serverless node pool name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>serverless node pool name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_securitygroupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -1949,8 +2266,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>security groups of serverless node pool.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>security groups of serverless node pool.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serverlessnodes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serverlessnodes_yaml" style="color: inherit; text-decoration: inherit;">serverless<wbr>Nodes</a>
@@ -1958,8 +2274,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serverlessnodepoolserverlessnode">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>node list of serverless node pool.</p>
-</dd><dt class="property-optional"
+    <dd>node list of serverless node pool.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taints_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taints_yaml" style="color: inherit; text-decoration: inherit;">taints</a>
@@ -1967,8 +2282,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#serverlessnodepooltaint">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>taints of serverless node.</p>
-</dd></dl>
+    <dd>taints of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1983,7 +2297,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="serverlessnodepoolserverlessnode">Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node</h4>
+<h4 id="serverlessnodepoolserverlessnode">
+Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node<pulumi-choosable type="language" values="python,go" class="inline">, Serverless<wbr>Node<wbr>Pool<wbr>Serverless<wbr>Node<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1995,8 +2311,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet id of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>subnet id of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="displayname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_csharp" style="color: inherit; text-decoration: inherit;">Display<wbr>Name</a>
@@ -2004,8 +2319,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>display name of serverless node.</p>
-</dd></dl>
+    <dd>display name of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2019,8 +2333,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet id of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>subnet id of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="displayname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_go" style="color: inherit; text-decoration: inherit;">Display<wbr>Name</a>
@@ -2028,8 +2341,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>display name of serverless node.</p>
-</dd></dl>
+    <dd>display name of serverless node.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>subnet id of serverless node.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="display_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#display_name_hcl" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>display name of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2043,8 +2377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet id of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>subnet id of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="displayname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_java" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -2052,8 +2385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>display name of serverless node.</p>
-</dd></dl>
+    <dd>display name of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2067,8 +2399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>subnet id of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>subnet id of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="displayname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_nodejs" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -2076,8 +2407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>display name of serverless node.</p>
-</dd></dl>
+    <dd>display name of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2091,8 +2421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>subnet id of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>subnet id of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="display_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#display_name_python" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
@@ -2100,8 +2429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>display name of serverless node.</p>
-</dd></dl>
+    <dd>display name of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2115,8 +2443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>subnet id of serverless node.</p>
-</dd><dt class="property-optional"
+    <dd>subnet id of serverless node.</dd><dt class="property-optional"
             title="Optional">
         <span id="displayname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_yaml" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -2124,12 +2451,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>display name of serverless node.</p>
-</dd></dl>
+    <dd>display name of serverless node.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="serverlessnodepooltaint">Serverless<wbr>Node<wbr>Pool<wbr>Taint</h4>
+<h4 id="serverlessnodepooltaint">
+Serverless<wbr>Node<wbr>Pool<wbr>Taint<pulumi-choosable type="language" values="python,go" class="inline">, Serverless<wbr>Node<wbr>Pool<wbr>Taint<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2141,8 +2469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</p>
-</dd><dt class="property-required"
+    <dd>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</dd><dt class="property-required"
             title="Required">
         <span id="key_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_csharp" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -2150,8 +2477,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-required"
+    <dd>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2159,8 +2485,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the taint.</p>
-</dd></dl>
+    <dd>Value of the taint.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2174,8 +2499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</p>
-</dd><dt class="property-required"
+    <dd>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</dd><dt class="property-required"
             title="Required">
         <span id="key_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_go" style="color: inherit; text-decoration: inherit;">Key</a>
@@ -2183,8 +2507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-required"
+    <dd>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2192,8 +2515,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the taint.</p>
-</dd></dl>
+    <dd>Value of the taint.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="effect_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#effect_hcl" style="color: inherit; text-decoration: inherit;">effect</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value of the taint.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2207,8 +2559,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</p>
-</dd><dt class="property-required"
+    <dd>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</dd><dt class="property-required"
             title="Required">
         <span id="key_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_java" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2216,8 +2567,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-required"
+    <dd>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2225,8 +2575,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of the taint.</p>
-</dd></dl>
+    <dd>Value of the taint.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2240,8 +2589,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</p>
-</dd><dt class="property-required"
+    <dd>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</dd><dt class="property-required"
             title="Required">
         <span id="key_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_nodejs" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2249,8 +2597,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-required"
+    <dd>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2258,8 +2605,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of the taint.</p>
-</dd></dl>
+    <dd>Value of the taint.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2273,8 +2619,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</p>
-</dd><dt class="property-required"
+    <dd>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</dd><dt class="property-required"
             title="Required">
         <span id="key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_python" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2282,8 +2627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-required"
+    <dd>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2291,8 +2635,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Value of the taint.</p>
-</dd></dl>
+    <dd>Value of the taint.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2306,8 +2649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</p>
-</dd><dt class="property-required"
+    <dd>Effect of the taint. Valid values are: <code>NoSchedule</code>, <code>PreferNoSchedule</code>, <code>NoExecute</code>.</dd><dt class="property-required"
             title="Required">
         <span id="key_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_yaml" style="color: inherit; text-decoration: inherit;">key</a>
@@ -2315,8 +2657,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</p>
-</dd><dt class="property-required"
+    <dd>Key of the taint. The taint key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2324,8 +2665,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of the taint.</p>
-</dd></dl>
+    <dd>Value of the taint.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2333,12 +2673,15 @@ The following state arguments are supported:
 
 
 
-serverless node pool can be imported, e.g.
+serverless node pool can be imported using the clusterId#nodePoolId, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool test cls-xxx#np-xxx
+$ pulumi import tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool example cls-62ch3v24#np-5avod190
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -2350,7 +2693,6 @@ $ pulumi import tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool te
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getBundle"
 title_tag: "tencentcloud.Lighthouse.getBundle"
-meta_desc: "Documentation for the tencentcloud.Lighthouse.getBundle function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of lighthouse bundle"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,42 +18,45 @@ Use this data source to query detailed information of lighthouse bundle
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const bundle = tencentcloud.Lighthouse.getBundle({});
+const bundle = tencentcloud.lighthouse.getBundle({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-bundle = tencentcloud.Lighthouse.get_bundle()
+bundle = tencentcloud.lighthouse.get_bundle()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var bundle = Tencentcloud.Lighthouse.GetBundle.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/lighthouse"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Lighthouse.GetBundle(ctx, nil, nil)
+		_, err := lighthouse.GetBundle(ctx, &lighthouse.GetBundleArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -59,6 +64,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var bundle = Tencentcloud.Lighthouse.GetBundle.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -67,8 +94,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Lighthouse.LighthouseFunctions;
 import com.pulumi.tencentcloud.Lighthouse.inputs.GetBundleArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -80,20 +107,50 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var bundle = LighthouseFunctions.getBundle();
+        final var bundle = LighthouseFunctions.getBundle(GetBundleArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   bundle:
     fn::invoke:
-      Function: tencentcloud:Lighthouse:getBundle
-      Arguments: {}
+      function: tencentcloud:Lighthouse:getBundle
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_lighthouse_getbundle" "bundle" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeBundles](https://www.tencentcloud.com/document/api/1103/42472)
 
 
 
@@ -105,7 +162,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -113,9 +170,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getBundle<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBundleArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBundleResult</a></span>></span
+><span class="k">function </span>getBundle<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBundleArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBundleResult</a></span>></span
 ><span class="k">
-function </span>getBundleOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBundleOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBundleResult</a></span>></span
+function </span>getBundleOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBundleOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBundleResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -125,20 +182,20 @@ function </span>getBundleOutput<span class="p">(</span><span class="nx">args</sp
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
 ><span class="k">def </span>get_bundle<span class="p">(</span><span class="nx">bundle_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-               <span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_lighthouse.GetBundleFilter]]</span> = None<span class="p">,</span>
+               <span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetBundleFilter]]</span> = None<span class="p">,</span>
                <span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                <span class="nx">offset</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">zones</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetBundleResult</span
 ><span class="k">
-def </span>get_bundle_output<span class="p">(</span><span class="nx">bundle_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-               <span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_lighthouse.GetBundleFilterArgs]]]]</span> = None<span class="p">,</span>
-               <span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-               <span class="nx">offset</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-               <span class="nx">zones</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBundleResult]</span
+def </span>get_bundle_output<span class="p">(</span><span class="nx">bundle_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+               <span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetBundleFilterArgs]]]]</span> = None<span class="p">,</span>
+               <span class="nx">limit</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+               <span class="nx">offset</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+               <span class="nx">zones</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBundleResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -163,7 +220,8 @@ func </span>GetBundleOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetBundle </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetBundleResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetBundleArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetBundleResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBundleInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBundleResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBundleInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBundleResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBundleInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -172,7 +230,8 @@ func </span>GetBundleOutput<span class="p">(</span><span class="nx">ctx</span><s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetBundleResult</a></span>> </span>getBundle<span class="p">(</span><span class="nx">GetBundleArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBundleResult</a></span>> </span>getBundle<span class="p">(</span><span class="nx">GetBundleArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBundleResult</a></span>> </span>getBundle<span class="p">(</span><span class="nx">GetBundleArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -184,6 +243,15 @@ func </span>GetBundleOutput<span class="p">(</span><span class="nx">ctx</span><s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Lighthouse/getBundle:getBundle
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_lighthouse_get_bundle&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -202,8 +270,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Bundle ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Bundle ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -211,15 +278,14 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlefilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Get<wbr>Bundle<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter list.</p>
+    <dd>Filter list.</p>
 <ul>
 <li><code>bundle-id</code>: filter by the bundle ID.</li>
 <li><code>support-platform-type</code>: filter by system type, valid values: <code>LINUX_UNIX</code>, <code>WINDOWS</code>.</li>
 <li><code>bundle-type</code>: filter according to package type, valid values: <code>GENERAL_BUNDLE</code>, <code>STORAGE_BUNDLE</code>, <code>ENTERPRISE_BUNDLE</code>, <code>EXCLUSIVE_BUNDLE</code>, <code>BEFAST_BUNDLE</code>.</li>
 <li><code>bundle-state</code>: filter according to package status, valid values: <code>ONLINE</code>, <code>OFFLINE</code>.
 NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Values is 5. Parameter does not support specifying both BundleIds and Filters.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -227,8 +293,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of returned results. Default value is 20. Maximum value is 100.</p>
-</dd><dt class="property-optional"
+    <dd>Number of returned results. Default value is 20. Maximum value is 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -236,8 +301,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset. Default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Offset. Default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -245,8 +309,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_csharp" style="color: inherit; text-decoration: inherit;">Zones</a>
@@ -254,8 +317,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Zone list, which contains all zones by default.</p>
-</dd></dl>
+    <dd>Zone list, which contains all zones by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -269,8 +331,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Bundle ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Bundle ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -278,15 +339,14 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlefilter">[]Get<wbr>Bundle<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter list.</p>
+    <dd>Filter list.</p>
 <ul>
 <li><code>bundle-id</code>: filter by the bundle ID.</li>
 <li><code>support-platform-type</code>: filter by system type, valid values: <code>LINUX_UNIX</code>, <code>WINDOWS</code>.</li>
 <li><code>bundle-type</code>: filter according to package type, valid values: <code>GENERAL_BUNDLE</code>, <code>STORAGE_BUNDLE</code>, <code>ENTERPRISE_BUNDLE</code>, <code>EXCLUSIVE_BUNDLE</code>, <code>BEFAST_BUNDLE</code>.</li>
 <li><code>bundle-state</code>: filter according to package status, valid values: <code>ONLINE</code>, <code>OFFLINE</code>.
 NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Values is 5. Parameter does not support specifying both BundleIds and Filters.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -294,8 +354,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of returned results. Default value is 20. Maximum value is 100.</p>
-</dd><dt class="property-optional"
+    <dd>Number of returned results. Default value is 20. Maximum value is 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -303,8 +362,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset. Default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Offset. Default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -312,8 +370,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_go" style="color: inherit; text-decoration: inherit;">Zones</a>
@@ -321,8 +378,68 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Zone list, which contains all zones by default.</p>
-</dd></dl>
+    <dd>Zone list, which contains all zones by default.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="bundle_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundle_ids_hcl" style="color: inherit; text-decoration: inherit;">bundle_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Bundle ID list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbundlefilter">list(object)</a></span>
+    </dt>
+    <dd>Filter list.</p>
+<ul>
+<li><code>bundle-id</code>: filter by the bundle ID.</li>
+<li><code>support-platform-type</code>: filter by system type, valid values: <code>LINUX_UNIX</code>, <code>WINDOWS</code>.</li>
+<li><code>bundle-type</code>: filter according to package type, valid values: <code>GENERAL_BUNDLE</code>, <code>STORAGE_BUNDLE</code>, <code>ENTERPRISE_BUNDLE</code>, <code>EXCLUSIVE_BUNDLE</code>, <code>BEFAST_BUNDLE</code>.</li>
+<li><code>bundle-state</code>: filter according to package status, valid values: <code>ONLINE</code>, <code>OFFLINE</code>.
+NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Values is 5. Parameter does not support specifying both BundleIds and Filters.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of returned results. Default value is 20. Maximum value is 100.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Offset. Default value is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zones_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_hcl" style="color: inherit; text-decoration: inherit;">zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Zone list, which contains all zones by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -336,8 +453,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Bundle ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Bundle ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -345,15 +461,14 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlefilter">List&lt;Get<wbr>Bundle<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter list.</p>
+    <dd>Filter list.</p>
 <ul>
 <li><code>bundle-id</code>: filter by the bundle ID.</li>
 <li><code>support-platform-type</code>: filter by system type, valid values: <code>LINUX_UNIX</code>, <code>WINDOWS</code>.</li>
 <li><code>bundle-type</code>: filter according to package type, valid values: <code>GENERAL_BUNDLE</code>, <code>STORAGE_BUNDLE</code>, <code>ENTERPRISE_BUNDLE</code>, <code>EXCLUSIVE_BUNDLE</code>, <code>BEFAST_BUNDLE</code>.</li>
 <li><code>bundle-state</code>: filter according to package status, valid values: <code>ONLINE</code>, <code>OFFLINE</code>.
 NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Values is 5. Parameter does not support specifying both BundleIds and Filters.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -361,8 +476,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of returned results. Default value is 20. Maximum value is 100.</p>
-</dd><dt class="property-optional"
+    <dd>Number of returned results. Default value is 20. Maximum value is 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -370,8 +484,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Offset. Default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Offset. Default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -379,8 +492,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_java" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -388,8 +500,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Zone list, which contains all zones by default.</p>
-</dd></dl>
+    <dd>Zone list, which contains all zones by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -403,8 +514,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Bundle ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Bundle ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -412,15 +522,14 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlefilter">Get<wbr>Bundle<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>Filter list.</p>
+    <dd>Filter list.</p>
 <ul>
 <li><code>bundle-id</code>: filter by the bundle ID.</li>
 <li><code>support-platform-type</code>: filter by system type, valid values: <code>LINUX_UNIX</code>, <code>WINDOWS</code>.</li>
 <li><code>bundle-type</code>: filter according to package type, valid values: <code>GENERAL_BUNDLE</code>, <code>STORAGE_BUNDLE</code>, <code>ENTERPRISE_BUNDLE</code>, <code>EXCLUSIVE_BUNDLE</code>, <code>BEFAST_BUNDLE</code>.</li>
 <li><code>bundle-state</code>: filter according to package status, valid values: <code>ONLINE</code>, <code>OFFLINE</code>.
 NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Values is 5. Parameter does not support specifying both BundleIds and Filters.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -428,8 +537,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of returned results. Default value is 20. Maximum value is 100.</p>
-</dd><dt class="property-optional"
+    <dd>Number of returned results. Default value is 20. Maximum value is 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -437,8 +545,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Offset. Default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Offset. Default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -446,8 +553,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_nodejs" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -455,8 +561,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Zone list, which contains all zones by default.</p>
-</dd></dl>
+    <dd>Zone list, which contains all zones by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -470,24 +575,22 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Bundle ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Bundle ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbundlefilter">Get<wbr>Bundle<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getbundlefilter">Sequence[Get<wbr>Bundle<wbr>Filter]</a></span>
     </dt>
-    <dd><p>Filter list.</p>
+    <dd>Filter list.</p>
 <ul>
 <li><code>bundle-id</code>: filter by the bundle ID.</li>
 <li><code>support-platform-type</code>: filter by system type, valid values: <code>LINUX_UNIX</code>, <code>WINDOWS</code>.</li>
 <li><code>bundle-type</code>: filter according to package type, valid values: <code>GENERAL_BUNDLE</code>, <code>STORAGE_BUNDLE</code>, <code>ENTERPRISE_BUNDLE</code>, <code>EXCLUSIVE_BUNDLE</code>, <code>BEFAST_BUNDLE</code>.</li>
 <li><code>bundle-state</code>: filter according to package status, valid values: <code>ONLINE</code>, <code>OFFLINE</code>.
 NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Values is 5. Parameter does not support specifying both BundleIds and Filters.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -495,8 +598,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of returned results. Default value is 20. Maximum value is 100.</p>
-</dd><dt class="property-optional"
+    <dd>Number of returned results. Default value is 20. Maximum value is 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -504,8 +606,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset. Default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Offset. Default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -513,8 +614,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_python" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -522,8 +622,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Zone list, which contains all zones by default.</p>
-</dd></dl>
+    <dd>Zone list, which contains all zones by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -537,8 +636,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Bundle ID list.</p>
-</dd><dt class="property-optional"
+    <dd>Bundle ID list.</dd><dt class="property-optional"
             title="Optional">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -546,15 +644,14 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlefilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Filter list.</p>
+    <dd>Filter list.</p>
 <ul>
 <li><code>bundle-id</code>: filter by the bundle ID.</li>
 <li><code>support-platform-type</code>: filter by system type, valid values: <code>LINUX_UNIX</code>, <code>WINDOWS</code>.</li>
 <li><code>bundle-type</code>: filter according to package type, valid values: <code>GENERAL_BUNDLE</code>, <code>STORAGE_BUNDLE</code>, <code>ENTERPRISE_BUNDLE</code>, <code>EXCLUSIVE_BUNDLE</code>, <code>BEFAST_BUNDLE</code>.</li>
 <li><code>bundle-state</code>: filter according to package status, valid values: <code>ONLINE</code>, <code>OFFLINE</code>.
 NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Values is 5. Parameter does not support specifying both BundleIds and Filters.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -562,8 +659,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of returned results. Default value is 20. Maximum value is 100.</p>
-</dd><dt class="property-optional"
+    <dd>Number of returned results. Default value is 20. Maximum value is 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -571,8 +667,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Offset. Default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Offset. Default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -580,8 +675,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_yaml" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -589,8 +683,7 @@ NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Va
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Zone list, which contains all zones by default.</p>
-</dd></dl>
+    <dd>Zone list, which contains all zones by default.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -613,8 +706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlebundleset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Outputs.<wbr>Get<wbr>Bundle<wbr>Bundle<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of bundle details.</p>
-</dd><dt class="property-"
+    <dd>List of bundle details.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -622,8 +714,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="bundleids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundleids_csharp" style="color: inherit; text-decoration: inherit;">Bundle<wbr>Ids</a>
@@ -685,8 +776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlebundleset">[]Get<wbr>Bundle<wbr>Bundle<wbr>Set</a></span>
     </dt>
-    <dd><p>List of bundle details.</p>
-</dd><dt class="property-"
+    <dd>List of bundle details.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -694,8 +784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="bundleids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundleids_go" style="color: inherit; text-decoration: inherit;">Bundle<wbr>Ids</a>
@@ -748,6 +837,76 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="bundle_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundle_sets_hcl" style="color: inherit; text-decoration: inherit;">bundle_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbundlebundleset">list(object)</a></span>
+    </dt>
+    <dd>List of bundle details.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="bundle_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundle_ids_hcl" style="color: inherit; text-decoration: inherit;">bundle_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbundlefilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="zones_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_hcl" style="color: inherit; text-decoration: inherit;">zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -757,8 +916,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlebundleset">List&lt;Get<wbr>Bundle<wbr>Bundle<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of bundle details.</p>
-</dd><dt class="property-"
+    <dd>List of bundle details.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -766,8 +924,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="bundleids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundleids_java" style="color: inherit; text-decoration: inherit;">bundle<wbr>Ids</a>
@@ -829,8 +986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlebundleset">Get<wbr>Bundle<wbr>Bundle<wbr>Set[]</a></span>
     </dt>
-    <dd><p>List of bundle details.</p>
-</dd><dt class="property-"
+    <dd>List of bundle details.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -838,8 +994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="bundleids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundleids_nodejs" style="color: inherit; text-decoration: inherit;">bundle<wbr>Ids</a>
@@ -899,10 +1054,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundle_sets_python" style="color: inherit; text-decoration: inherit;">bundle_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbundlebundleset">Get<wbr>Bundle<wbr>Bundle<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getbundlebundleset">Sequence[Get<wbr>Bundle<wbr>Bundle<wbr>Set]</a></span>
     </dt>
-    <dd><p>List of bundle details.</p>
-</dd><dt class="property-"
+    <dd>List of bundle details.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -910,8 +1064,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="bundle_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundle_ids_python" style="color: inherit; text-decoration: inherit;">bundle_<wbr>ids</a>
@@ -925,7 +1078,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbundlefilter">Get<wbr>Bundle<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getbundlefilter">Sequence[Get<wbr>Bundle<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -973,8 +1126,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlebundleset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of bundle details.</p>
-</dd><dt class="property-"
+    <dd>List of bundle details.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -982,8 +1134,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="bundleids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundleids_yaml" style="color: inherit; text-decoration: inherit;">bundle<wbr>Ids</a>
@@ -1055,8 +1206,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.</p>
-</dd><dt class="property-required"
+    <dd>Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.</dd><dt class="property-required"
             title="Required">
         <span id="bundleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundleid_csharp" style="color: inherit; text-decoration: inherit;">Bundle<wbr>Id</a>
@@ -1064,8 +1214,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package ID.</p>
-</dd><dt class="property-required"
+    <dd>Package ID.</dd><dt class="property-required"
             title="Required">
         <span id="bundlesalesstate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundlesalesstate_csharp" style="color: inherit; text-decoration: inherit;">Bundle<wbr>Sales<wbr>State</a>
@@ -1073,8 +1222,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package sale status. Valid values are AVAILABLE, SOLD_OUT.</p>
-</dd><dt class="property-required"
+    <dd>Package sale status. Valid values are AVAILABLE, SOLD_OUT.</dd><dt class="property-required"
             title="Required">
         <span id="bundletype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundletype_csharp" style="color: inherit; text-decoration: inherit;">Bundle<wbr>Type</a>
@@ -1082,8 +1230,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.</p>
-</dd><dt class="property-required"
+    <dd>Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_csharp" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -1091,8 +1238,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CPU.</p>
-</dd><dt class="property-required"
+    <dd>CPU.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -1100,8 +1246,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network billing mode.</p>
-</dd><dt class="property-required"
+    <dd>Network billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1109,8 +1254,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Peak bandwidth in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Peak bandwidth in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -1118,8 +1262,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB.</dd><dt class="property-required"
             title="Required">
         <span id="monthlytraffic_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlytraffic_csharp" style="color: inherit; text-decoration: inherit;">Monthly<wbr>Traffic</a>
@@ -1127,8 +1270,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Monthly network traffic in Gb.</p>
-</dd><dt class="property-required"
+    <dd>Monthly network traffic in Gb.</dd><dt class="property-required"
             title="Required">
         <span id="prices_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prices_csharp" style="color: inherit; text-decoration: inherit;">Prices</a>
@@ -1136,8 +1278,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlebundlesetprice">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Get<wbr>Bundle<wbr>Bundle<wbr>Set<wbr>Price&gt;</a></span>
     </dt>
-    <dd><p>Current package unit price information.</p>
-</dd><dt class="property-required"
+    <dd>Current package unit price information.</dd><dt class="property-required"
             title="Required">
         <span id="supportlinuxunixplatform_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportlinuxunixplatform_csharp" style="color: inherit; text-decoration: inherit;">Support<wbr>Linux<wbr>Unix<wbr>Platform</a>
@@ -1145,8 +1286,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether Linux/Unix is supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether Linux/Unix is supported.</dd><dt class="property-required"
             title="Required">
         <span id="supportwindowsplatform_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportwindowsplatform_csharp" style="color: inherit; text-decoration: inherit;">Support<wbr>Windows<wbr>Platform</a>
@@ -1154,8 +1294,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether Windows is supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether Windows is supported.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Size</a>
@@ -1163,8 +1302,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>System disk size.</p>
-</dd><dt class="property-required"
+    <dd>System disk size.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Type</a>
@@ -1172,8 +1310,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk type.</p>
-</dd></dl>
+    <dd>System disk type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1187,8 +1324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.</p>
-</dd><dt class="property-required"
+    <dd>Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.</dd><dt class="property-required"
             title="Required">
         <span id="bundleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundleid_go" style="color: inherit; text-decoration: inherit;">Bundle<wbr>Id</a>
@@ -1196,8 +1332,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package ID.</p>
-</dd><dt class="property-required"
+    <dd>Package ID.</dd><dt class="property-required"
             title="Required">
         <span id="bundlesalesstate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundlesalesstate_go" style="color: inherit; text-decoration: inherit;">Bundle<wbr>Sales<wbr>State</a>
@@ -1205,8 +1340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package sale status. Valid values are AVAILABLE, SOLD_OUT.</p>
-</dd><dt class="property-required"
+    <dd>Package sale status. Valid values are AVAILABLE, SOLD_OUT.</dd><dt class="property-required"
             title="Required">
         <span id="bundletype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundletype_go" style="color: inherit; text-decoration: inherit;">Bundle<wbr>Type</a>
@@ -1214,8 +1348,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.</p>
-</dd><dt class="property-required"
+    <dd>Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_go" style="color: inherit; text-decoration: inherit;">Cpu</a>
@@ -1223,8 +1356,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CPU.</p>
-</dd><dt class="property-required"
+    <dd>CPU.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -1232,8 +1364,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network billing mode.</p>
-</dd><dt class="property-required"
+    <dd>Network billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1241,8 +1372,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Peak bandwidth in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Peak bandwidth in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -1250,8 +1380,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB.</dd><dt class="property-required"
             title="Required">
         <span id="monthlytraffic_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlytraffic_go" style="color: inherit; text-decoration: inherit;">Monthly<wbr>Traffic</a>
@@ -1259,8 +1388,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Monthly network traffic in Gb.</p>
-</dd><dt class="property-required"
+    <dd>Monthly network traffic in Gb.</dd><dt class="property-required"
             title="Required">
         <span id="prices_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prices_go" style="color: inherit; text-decoration: inherit;">Prices</a>
@@ -1268,8 +1396,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlebundlesetprice">[]Get<wbr>Bundle<wbr>Bundle<wbr>Set<wbr>Price</a></span>
     </dt>
-    <dd><p>Current package unit price information.</p>
-</dd><dt class="property-required"
+    <dd>Current package unit price information.</dd><dt class="property-required"
             title="Required">
         <span id="supportlinuxunixplatform_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportlinuxunixplatform_go" style="color: inherit; text-decoration: inherit;">Support<wbr>Linux<wbr>Unix<wbr>Platform</a>
@@ -1277,8 +1404,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether Linux/Unix is supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether Linux/Unix is supported.</dd><dt class="property-required"
             title="Required">
         <span id="supportwindowsplatform_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportwindowsplatform_go" style="color: inherit; text-decoration: inherit;">Support<wbr>Windows<wbr>Platform</a>
@@ -1286,8 +1412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether Windows is supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether Windows is supported.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Size</a>
@@ -1295,8 +1420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>System disk size.</p>
-</dd><dt class="property-required"
+    <dd>System disk size.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Type</a>
@@ -1304,8 +1428,125 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk type.</p>
-</dd></dl>
+    <dd>System disk type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bundle_display_label_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundle_display_label_hcl" style="color: inherit; text-decoration: inherit;">bundle_<wbr>display_<wbr>label</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.</dd><dt class="property-required"
+            title="Required">
+        <span id="bundle_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundle_id_hcl" style="color: inherit; text-decoration: inherit;">bundle_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Package ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="bundle_sales_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundle_sales_state_hcl" style="color: inherit; text-decoration: inherit;">bundle_<wbr>sales_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Package sale status. Valid values are AVAILABLE, SOLD_OUT.</dd><dt class="property-required"
+            title="Required">
+        <span id="bundle_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundle_type_hcl" style="color: inherit; text-decoration: inherit;">bundle_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.</dd><dt class="property-required"
+            title="Required">
+        <span id="cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>CPU.</dd><dt class="property-required"
+            title="Required">
+        <span id="internet_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network billing mode.</dd><dt class="property-required"
+            title="Required">
+        <span id="internet_max_bandwidth_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_max_bandwidth_out_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Peak bandwidth in Mbps.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="monthly_traffic_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthly_traffic_hcl" style="color: inherit; text-decoration: inherit;">monthly_<wbr>traffic</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Monthly network traffic in Gb.</dd><dt class="property-required"
+            title="Required">
+        <span id="prices_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prices_hcl" style="color: inherit; text-decoration: inherit;">prices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbundlebundlesetprice">list(object)</a></span>
+    </dt>
+    <dd>Current package unit price information.</dd><dt class="property-required"
+            title="Required">
+        <span id="support_linux_unix_platform_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_linux_unix_platform_hcl" style="color: inherit; text-decoration: inherit;">support_<wbr>linux_<wbr>unix_<wbr>platform</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Linux/Unix is supported.</dd><dt class="property-required"
+            title="Required">
+        <span id="support_windows_platform_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_windows_platform_hcl" style="color: inherit; text-decoration: inherit;">support_<wbr>windows_<wbr>platform</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Windows is supported.</dd><dt class="property-required"
+            title="Required">
+        <span id="system_disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_size_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>System disk size.</dd><dt class="property-required"
+            title="Required">
+        <span id="system_disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_type_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>System disk type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1319,8 +1560,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.</p>
-</dd><dt class="property-required"
+    <dd>Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.</dd><dt class="property-required"
             title="Required">
         <span id="bundleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundleid_java" style="color: inherit; text-decoration: inherit;">bundle<wbr>Id</a>
@@ -1328,8 +1568,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Package ID.</p>
-</dd><dt class="property-required"
+    <dd>Package ID.</dd><dt class="property-required"
             title="Required">
         <span id="bundlesalesstate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundlesalesstate_java" style="color: inherit; text-decoration: inherit;">bundle<wbr>Sales<wbr>State</a>
@@ -1337,8 +1576,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Package sale status. Valid values are AVAILABLE, SOLD_OUT.</p>
-</dd><dt class="property-required"
+    <dd>Package sale status. Valid values are AVAILABLE, SOLD_OUT.</dd><dt class="property-required"
             title="Required">
         <span id="bundletype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundletype_java" style="color: inherit; text-decoration: inherit;">bundle<wbr>Type</a>
@@ -1346,8 +1584,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.</p>
-</dd><dt class="property-required"
+    <dd>Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_java" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -1355,8 +1592,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>CPU.</p>
-</dd><dt class="property-required"
+    <dd>CPU.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -1364,8 +1600,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network billing mode.</p>
-</dd><dt class="property-required"
+    <dd>Network billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1373,8 +1608,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Peak bandwidth in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Peak bandwidth in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1382,8 +1616,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB.</dd><dt class="property-required"
             title="Required">
         <span id="monthlytraffic_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlytraffic_java" style="color: inherit; text-decoration: inherit;">monthly<wbr>Traffic</a>
@@ -1391,8 +1624,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Monthly network traffic in Gb.</p>
-</dd><dt class="property-required"
+    <dd>Monthly network traffic in Gb.</dd><dt class="property-required"
             title="Required">
         <span id="prices_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prices_java" style="color: inherit; text-decoration: inherit;">prices</a>
@@ -1400,8 +1632,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlebundlesetprice">List&lt;Get<wbr>Bundle<wbr>Bundle<wbr>Set<wbr>Price&gt;</a></span>
     </dt>
-    <dd><p>Current package unit price information.</p>
-</dd><dt class="property-required"
+    <dd>Current package unit price information.</dd><dt class="property-required"
             title="Required">
         <span id="supportlinuxunixplatform_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportlinuxunixplatform_java" style="color: inherit; text-decoration: inherit;">support<wbr>Linux<wbr>Unix<wbr>Platform</a>
@@ -1409,8 +1640,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether Linux/Unix is supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether Linux/Unix is supported.</dd><dt class="property-required"
             title="Required">
         <span id="supportwindowsplatform_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportwindowsplatform_java" style="color: inherit; text-decoration: inherit;">support<wbr>Windows<wbr>Platform</a>
@@ -1418,8 +1648,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether Windows is supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether Windows is supported.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -1427,8 +1656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>System disk size.</p>
-</dd><dt class="property-required"
+    <dd>System disk size.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -1436,8 +1664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System disk type.</p>
-</dd></dl>
+    <dd>System disk type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1451,8 +1678,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.</p>
-</dd><dt class="property-required"
+    <dd>Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.</dd><dt class="property-required"
             title="Required">
         <span id="bundleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundleid_nodejs" style="color: inherit; text-decoration: inherit;">bundle<wbr>Id</a>
@@ -1460,8 +1686,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package ID.</p>
-</dd><dt class="property-required"
+    <dd>Package ID.</dd><dt class="property-required"
             title="Required">
         <span id="bundlesalesstate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundlesalesstate_nodejs" style="color: inherit; text-decoration: inherit;">bundle<wbr>Sales<wbr>State</a>
@@ -1469,8 +1694,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package sale status. Valid values are AVAILABLE, SOLD_OUT.</p>
-</dd><dt class="property-required"
+    <dd>Package sale status. Valid values are AVAILABLE, SOLD_OUT.</dd><dt class="property-required"
             title="Required">
         <span id="bundletype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundletype_nodejs" style="color: inherit; text-decoration: inherit;">bundle<wbr>Type</a>
@@ -1478,8 +1702,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.</p>
-</dd><dt class="property-required"
+    <dd>Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_nodejs" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -1487,8 +1710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>CPU.</p>
-</dd><dt class="property-required"
+    <dd>CPU.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -1496,8 +1718,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network billing mode.</p>
-</dd><dt class="property-required"
+    <dd>Network billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1505,8 +1726,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Peak bandwidth in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Peak bandwidth in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1514,8 +1734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB.</dd><dt class="property-required"
             title="Required">
         <span id="monthlytraffic_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlytraffic_nodejs" style="color: inherit; text-decoration: inherit;">monthly<wbr>Traffic</a>
@@ -1523,8 +1742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Monthly network traffic in Gb.</p>
-</dd><dt class="property-required"
+    <dd>Monthly network traffic in Gb.</dd><dt class="property-required"
             title="Required">
         <span id="prices_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prices_nodejs" style="color: inherit; text-decoration: inherit;">prices</a>
@@ -1532,8 +1750,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlebundlesetprice">Get<wbr>Bundle<wbr>Bundle<wbr>Set<wbr>Price[]</a></span>
     </dt>
-    <dd><p>Current package unit price information.</p>
-</dd><dt class="property-required"
+    <dd>Current package unit price information.</dd><dt class="property-required"
             title="Required">
         <span id="supportlinuxunixplatform_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportlinuxunixplatform_nodejs" style="color: inherit; text-decoration: inherit;">support<wbr>Linux<wbr>Unix<wbr>Platform</a>
@@ -1541,8 +1758,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether Linux/Unix is supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether Linux/Unix is supported.</dd><dt class="property-required"
             title="Required">
         <span id="supportwindowsplatform_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportwindowsplatform_nodejs" style="color: inherit; text-decoration: inherit;">support<wbr>Windows<wbr>Platform</a>
@@ -1550,8 +1766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether Windows is supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether Windows is supported.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -1559,8 +1774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>System disk size.</p>
-</dd><dt class="property-required"
+    <dd>System disk size.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -1568,8 +1782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>System disk type.</p>
-</dd></dl>
+    <dd>System disk type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1583,8 +1796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.</p>
-</dd><dt class="property-required"
+    <dd>Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.</dd><dt class="property-required"
             title="Required">
         <span id="bundle_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundle_id_python" style="color: inherit; text-decoration: inherit;">bundle_<wbr>id</a>
@@ -1592,8 +1804,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Package ID.</p>
-</dd><dt class="property-required"
+    <dd>Package ID.</dd><dt class="property-required"
             title="Required">
         <span id="bundle_sales_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundle_sales_state_python" style="color: inherit; text-decoration: inherit;">bundle_<wbr>sales_<wbr>state</a>
@@ -1601,8 +1812,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Package sale status. Valid values are AVAILABLE, SOLD_OUT.</p>
-</dd><dt class="property-required"
+    <dd>Package sale status. Valid values are AVAILABLE, SOLD_OUT.</dd><dt class="property-required"
             title="Required">
         <span id="bundle_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundle_type_python" style="color: inherit; text-decoration: inherit;">bundle_<wbr>type</a>
@@ -1610,8 +1820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.</p>
-</dd><dt class="property-required"
+    <dd>Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_python" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -1619,8 +1828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CPU.</p>
-</dd><dt class="property-required"
+    <dd>CPU.</dd><dt class="property-required"
             title="Required">
         <span id="internet_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
@@ -1628,8 +1836,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network billing mode.</p>
-</dd><dt class="property-required"
+    <dd>Network billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="internet_max_bandwidth_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_max_bandwidth_out_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
@@ -1637,8 +1844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Peak bandwidth in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Peak bandwidth in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1646,8 +1852,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB.</dd><dt class="property-required"
             title="Required">
         <span id="monthly_traffic_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthly_traffic_python" style="color: inherit; text-decoration: inherit;">monthly_<wbr>traffic</a>
@@ -1655,17 +1860,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Monthly network traffic in Gb.</p>
-</dd><dt class="property-required"
+    <dd>Monthly network traffic in Gb.</dd><dt class="property-required"
             title="Required">
         <span id="prices_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prices_python" style="color: inherit; text-decoration: inherit;">prices</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbundlebundlesetprice">Get<wbr>Bundle<wbr>Bundle<wbr>Set<wbr>Price]</a></span>
+        <span class="property-type"><a href="#getbundlebundlesetprice">Sequence[Get<wbr>Bundle<wbr>Bundle<wbr>Set<wbr>Price]</a></span>
     </dt>
-    <dd><p>Current package unit price information.</p>
-</dd><dt class="property-required"
+    <dd>Current package unit price information.</dd><dt class="property-required"
             title="Required">
         <span id="support_linux_unix_platform_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_linux_unix_platform_python" style="color: inherit; text-decoration: inherit;">support_<wbr>linux_<wbr>unix_<wbr>platform</a>
@@ -1673,8 +1876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether Linux/Unix is supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether Linux/Unix is supported.</dd><dt class="property-required"
             title="Required">
         <span id="support_windows_platform_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#support_windows_platform_python" style="color: inherit; text-decoration: inherit;">support_<wbr>windows_<wbr>platform</a>
@@ -1682,8 +1884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether Windows is supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether Windows is supported.</dd><dt class="property-required"
             title="Required">
         <span id="system_disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_size_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>size</a>
@@ -1691,8 +1892,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>System disk size.</p>
-</dd><dt class="property-required"
+    <dd>System disk size.</dd><dt class="property-required"
             title="Required">
         <span id="system_disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_type_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>type</a>
@@ -1700,8 +1900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>System disk type.</p>
-</dd></dl>
+    <dd>System disk type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1715,8 +1914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.</p>
-</dd><dt class="property-required"
+    <dd>Package tag.Valid values:ACTIVITY: promotional packageNORMAL: regular packageCAREFREE: carefree package.</dd><dt class="property-required"
             title="Required">
         <span id="bundleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundleid_yaml" style="color: inherit; text-decoration: inherit;">bundle<wbr>Id</a>
@@ -1724,8 +1922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Package ID.</p>
-</dd><dt class="property-required"
+    <dd>Package ID.</dd><dt class="property-required"
             title="Required">
         <span id="bundlesalesstate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundlesalesstate_yaml" style="color: inherit; text-decoration: inherit;">bundle<wbr>Sales<wbr>State</a>
@@ -1733,8 +1930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Package sale status. Valid values are AVAILABLE, SOLD_OUT.</p>
-</dd><dt class="property-required"
+    <dd>Package sale status. Valid values are AVAILABLE, SOLD_OUT.</dd><dt class="property-required"
             title="Required">
         <span id="bundletype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bundletype_yaml" style="color: inherit; text-decoration: inherit;">bundle<wbr>Type</a>
@@ -1742,8 +1938,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.</p>
-</dd><dt class="property-required"
+    <dd>Package type.Valid values:GENERAL_BUNDLE: generalSTORAGE_BUNDLE: Storage.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_yaml" style="color: inherit; text-decoration: inherit;">cpu</a>
@@ -1751,8 +1946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>CPU.</p>
-</dd><dt class="property-required"
+    <dd>CPU.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -1760,8 +1954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network billing mode.</p>
-</dd><dt class="property-required"
+    <dd>Network billing mode.</dd><dt class="property-required"
             title="Required">
         <span id="internetmaxbandwidthout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1769,8 +1962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Peak bandwidth in Mbps.</p>
-</dd><dt class="property-required"
+    <dd>Peak bandwidth in Mbps.</dd><dt class="property-required"
             title="Required">
         <span id="memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1778,8 +1970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory size in GB.</dd><dt class="property-required"
             title="Required">
         <span id="monthlytraffic_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monthlytraffic_yaml" style="color: inherit; text-decoration: inherit;">monthly<wbr>Traffic</a>
@@ -1787,8 +1978,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Monthly network traffic in Gb.</p>
-</dd><dt class="property-required"
+    <dd>Monthly network traffic in Gb.</dd><dt class="property-required"
             title="Required">
         <span id="prices_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prices_yaml" style="color: inherit; text-decoration: inherit;">prices</a>
@@ -1796,8 +1986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlebundlesetprice">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Current package unit price information.</p>
-</dd><dt class="property-required"
+    <dd>Current package unit price information.</dd><dt class="property-required"
             title="Required">
         <span id="supportlinuxunixplatform_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportlinuxunixplatform_yaml" style="color: inherit; text-decoration: inherit;">support<wbr>Linux<wbr>Unix<wbr>Platform</a>
@@ -1805,8 +1994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether Linux/Unix is supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether Linux/Unix is supported.</dd><dt class="property-required"
             title="Required">
         <span id="supportwindowsplatform_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#supportwindowsplatform_yaml" style="color: inherit; text-decoration: inherit;">support<wbr>Windows<wbr>Platform</a>
@@ -1814,8 +2002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether Windows is supported.</p>
-</dd><dt class="property-required"
+    <dd>Whether Windows is supported.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -1823,8 +2010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>System disk size.</p>
-</dd><dt class="property-required"
+    <dd>System disk size.</dd><dt class="property-required"
             title="Required">
         <span id="systemdisktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -1832,8 +2018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>System disk type.</p>
-</dd></dl>
+    <dd>System disk type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1851,8 +2036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlebundlesetpriceinstanceprice">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Inputs.<wbr>Get<wbr>Bundle<wbr>Bundle<wbr>Set<wbr>Price<wbr>Instance<wbr>Price&gt;</a></span>
     </dt>
-    <dd><p>Instance price.</p>
-</dd></dl>
+    <dd>Instance price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1866,8 +2050,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlebundlesetpriceinstanceprice">[]Get<wbr>Bundle<wbr>Bundle<wbr>Set<wbr>Price<wbr>Instance<wbr>Price</a></span>
     </dt>
-    <dd><p>Instance price.</p>
-</dd></dl>
+    <dd>Instance price.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_prices_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_prices_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>prices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbundlebundlesetpriceinstanceprice">list(object)</a></span>
+    </dt>
+    <dd>Instance price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1881,8 +2078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlebundlesetpriceinstanceprice">List&lt;Get<wbr>Bundle<wbr>Bundle<wbr>Set<wbr>Price<wbr>Instance<wbr>Price&gt;</a></span>
     </dt>
-    <dd><p>Instance price.</p>
-</dd></dl>
+    <dd>Instance price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1896,8 +2092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlebundlesetpriceinstanceprice">Get<wbr>Bundle<wbr>Bundle<wbr>Set<wbr>Price<wbr>Instance<wbr>Price[]</a></span>
     </dt>
-    <dd><p>Instance price.</p>
-</dd></dl>
+    <dd>Instance price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1909,10 +2104,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_prices_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>prices</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbundlebundlesetpriceinstanceprice">Get<wbr>Bundle<wbr>Bundle<wbr>Set<wbr>Price<wbr>Instance<wbr>Price]</a></span>
+        <span class="property-type"><a href="#getbundlebundlesetpriceinstanceprice">Sequence[Get<wbr>Bundle<wbr>Bundle<wbr>Set<wbr>Price<wbr>Instance<wbr>Price]</a></span>
     </dt>
-    <dd><p>Instance price.</p>
-</dd></dl>
+    <dd>Instance price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1926,8 +2120,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbundlebundlesetpriceinstanceprice">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Instance price.</p>
-</dd></dl>
+    <dd>Instance price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1945,8 +2138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Currency unit. Valid values: CNY and USD.</p>
-</dd><dt class="property-required"
+    <dd>Currency unit. Valid values: CNY and USD.</dd><dt class="property-required"
             title="Required">
         <span id="discount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_csharp" style="color: inherit; text-decoration: inherit;">Discount</a>
@@ -1954,8 +2146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Discount.</p>
-</dd><dt class="property-required"
+    <dd>Discount.</dd><dt class="property-required"
             title="Required">
         <span id="discountprice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discountprice_csharp" style="color: inherit; text-decoration: inherit;">Discount<wbr>Price</a>
@@ -1963,8 +2154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Discounted price.</p>
-</dd><dt class="property-required"
+    <dd>Discounted price.</dd><dt class="property-required"
             title="Required">
         <span id="originalbundleprice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalbundleprice_csharp" style="color: inherit; text-decoration: inherit;">Original<wbr>Bundle<wbr>Price</a>
@@ -1972,8 +2162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Original package unit price.</p>
-</dd><dt class="property-required"
+    <dd>Original package unit price.</dd><dt class="property-required"
             title="Required">
         <span id="originalprice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalprice_csharp" style="color: inherit; text-decoration: inherit;">Original<wbr>Price</a>
@@ -1981,8 +2170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Original price.</p>
-</dd></dl>
+    <dd>Original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1996,8 +2184,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Currency unit. Valid values: CNY and USD.</p>
-</dd><dt class="property-required"
+    <dd>Currency unit. Valid values: CNY and USD.</dd><dt class="property-required"
             title="Required">
         <span id="discount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_go" style="color: inherit; text-decoration: inherit;">Discount</a>
@@ -2005,8 +2192,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Discount.</p>
-</dd><dt class="property-required"
+    <dd>Discount.</dd><dt class="property-required"
             title="Required">
         <span id="discountprice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discountprice_go" style="color: inherit; text-decoration: inherit;">Discount<wbr>Price</a>
@@ -2014,8 +2200,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Discounted price.</p>
-</dd><dt class="property-required"
+    <dd>Discounted price.</dd><dt class="property-required"
             title="Required">
         <span id="originalbundleprice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalbundleprice_go" style="color: inherit; text-decoration: inherit;">Original<wbr>Bundle<wbr>Price</a>
@@ -2023,8 +2208,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Original package unit price.</p>
-</dd><dt class="property-required"
+    <dd>Original package unit price.</dd><dt class="property-required"
             title="Required">
         <span id="originalprice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalprice_go" style="color: inherit; text-decoration: inherit;">Original<wbr>Price</a>
@@ -2032,8 +2216,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Original price.</p>
-</dd></dl>
+    <dd>Original price.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="currency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#currency_hcl" style="color: inherit; text-decoration: inherit;">currency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Currency unit. Valid values: CNY and USD.</dd><dt class="property-required"
+            title="Required">
+        <span id="discount_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_hcl" style="color: inherit; text-decoration: inherit;">discount</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Discount.</dd><dt class="property-required"
+            title="Required">
+        <span id="discount_price_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_price_hcl" style="color: inherit; text-decoration: inherit;">discount_<wbr>price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Discounted price.</dd><dt class="property-required"
+            title="Required">
+        <span id="original_bundle_price_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#original_bundle_price_hcl" style="color: inherit; text-decoration: inherit;">original_<wbr>bundle_<wbr>price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Original package unit price.</dd><dt class="property-required"
+            title="Required">
+        <span id="original_price_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#original_price_hcl" style="color: inherit; text-decoration: inherit;">original_<wbr>price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2047,8 +2276,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Currency unit. Valid values: CNY and USD.</p>
-</dd><dt class="property-required"
+    <dd>Currency unit. Valid values: CNY and USD.</dd><dt class="property-required"
             title="Required">
         <span id="discount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_java" style="color: inherit; text-decoration: inherit;">discount</a>
@@ -2056,8 +2284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Discount.</p>
-</dd><dt class="property-required"
+    <dd>Discount.</dd><dt class="property-required"
             title="Required">
         <span id="discountprice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discountprice_java" style="color: inherit; text-decoration: inherit;">discount<wbr>Price</a>
@@ -2065,8 +2292,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Discounted price.</p>
-</dd><dt class="property-required"
+    <dd>Discounted price.</dd><dt class="property-required"
             title="Required">
         <span id="originalbundleprice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalbundleprice_java" style="color: inherit; text-decoration: inherit;">original<wbr>Bundle<wbr>Price</a>
@@ -2074,8 +2300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Original package unit price.</p>
-</dd><dt class="property-required"
+    <dd>Original package unit price.</dd><dt class="property-required"
             title="Required">
         <span id="originalprice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalprice_java" style="color: inherit; text-decoration: inherit;">original<wbr>Price</a>
@@ -2083,8 +2308,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Original price.</p>
-</dd></dl>
+    <dd>Original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2098,8 +2322,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Currency unit. Valid values: CNY and USD.</p>
-</dd><dt class="property-required"
+    <dd>Currency unit. Valid values: CNY and USD.</dd><dt class="property-required"
             title="Required">
         <span id="discount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_nodejs" style="color: inherit; text-decoration: inherit;">discount</a>
@@ -2107,8 +2330,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Discount.</p>
-</dd><dt class="property-required"
+    <dd>Discount.</dd><dt class="property-required"
             title="Required">
         <span id="discountprice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discountprice_nodejs" style="color: inherit; text-decoration: inherit;">discount<wbr>Price</a>
@@ -2116,8 +2338,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Discounted price.</p>
-</dd><dt class="property-required"
+    <dd>Discounted price.</dd><dt class="property-required"
             title="Required">
         <span id="originalbundleprice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalbundleprice_nodejs" style="color: inherit; text-decoration: inherit;">original<wbr>Bundle<wbr>Price</a>
@@ -2125,8 +2346,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Original package unit price.</p>
-</dd><dt class="property-required"
+    <dd>Original package unit price.</dd><dt class="property-required"
             title="Required">
         <span id="originalprice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalprice_nodejs" style="color: inherit; text-decoration: inherit;">original<wbr>Price</a>
@@ -2134,8 +2354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Original price.</p>
-</dd></dl>
+    <dd>Original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2149,8 +2368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Currency unit. Valid values: CNY and USD.</p>
-</dd><dt class="property-required"
+    <dd>Currency unit. Valid values: CNY and USD.</dd><dt class="property-required"
             title="Required">
         <span id="discount_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_python" style="color: inherit; text-decoration: inherit;">discount</a>
@@ -2158,8 +2376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Discount.</p>
-</dd><dt class="property-required"
+    <dd>Discount.</dd><dt class="property-required"
             title="Required">
         <span id="discount_price_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_price_python" style="color: inherit; text-decoration: inherit;">discount_<wbr>price</a>
@@ -2167,8 +2384,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Discounted price.</p>
-</dd><dt class="property-required"
+    <dd>Discounted price.</dd><dt class="property-required"
             title="Required">
         <span id="original_bundle_price_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#original_bundle_price_python" style="color: inherit; text-decoration: inherit;">original_<wbr>bundle_<wbr>price</a>
@@ -2176,8 +2392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Original package unit price.</p>
-</dd><dt class="property-required"
+    <dd>Original package unit price.</dd><dt class="property-required"
             title="Required">
         <span id="original_price_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#original_price_python" style="color: inherit; text-decoration: inherit;">original_<wbr>price</a>
@@ -2185,8 +2400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Original price.</p>
-</dd></dl>
+    <dd>Original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2200,8 +2414,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Currency unit. Valid values: CNY and USD.</p>
-</dd><dt class="property-required"
+    <dd>Currency unit. Valid values: CNY and USD.</dd><dt class="property-required"
             title="Required">
         <span id="discount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discount_yaml" style="color: inherit; text-decoration: inherit;">discount</a>
@@ -2209,8 +2422,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Discount.</p>
-</dd><dt class="property-required"
+    <dd>Discount.</dd><dt class="property-required"
             title="Required">
         <span id="discountprice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#discountprice_yaml" style="color: inherit; text-decoration: inherit;">discount<wbr>Price</a>
@@ -2218,8 +2430,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Discounted price.</p>
-</dd><dt class="property-required"
+    <dd>Discounted price.</dd><dt class="property-required"
             title="Required">
         <span id="originalbundleprice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalbundleprice_yaml" style="color: inherit; text-decoration: inherit;">original<wbr>Bundle<wbr>Price</a>
@@ -2227,8 +2438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Original package unit price.</p>
-</dd><dt class="property-required"
+    <dd>Original package unit price.</dd><dt class="property-required"
             title="Required">
         <span id="originalprice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#originalprice_yaml" style="color: inherit; text-decoration: inherit;">original<wbr>Price</a>
@@ -2236,8 +2446,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Original price.</p>
-</dd></dl>
+    <dd>Original price.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2255,8 +2464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>Field to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -2264,8 +2472,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Filter value of field.</p>
-</dd></dl>
+    <dd>Filter value of field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2279,8 +2486,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>Field to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -2288,8 +2494,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Filter value of field.</p>
-</dd></dl>
+    <dd>Filter value of field.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Field to be filtered.</dd><dt class="property-required"
+            title="Required">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Filter value of field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2303,8 +2530,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Field to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>Field to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -2312,8 +2538,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Filter value of field.</p>
-</dd></dl>
+    <dd>Filter value of field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2327,8 +2552,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Field to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>Field to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -2336,8 +2560,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Filter value of field.</p>
-</dd></dl>
+    <dd>Filter value of field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2351,8 +2574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Field to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>Field to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -2360,8 +2582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Filter value of field.</p>
-</dd></dl>
+    <dd>Filter value of field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2375,8 +2596,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Field to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>Field to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -2384,8 +2604,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Filter value of field.</p>
-</dd></dl>
+    <dd>Filter value of field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2400,7 +2619,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

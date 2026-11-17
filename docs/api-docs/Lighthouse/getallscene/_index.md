@@ -2,9 +2,11 @@
 ---
 title: "getAllScene"
 title_tag: "tencentcloud.Lighthouse.getAllScene"
-meta_desc: "Documentation for the tencentcloud.Lighthouse.getAllScene function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of all region lighthouse scene"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,52 +18,51 @@ Use this data source to query detailed information of all region lighthouse scen
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const scene = tencentcloud.Lighthouse.getAllScene({
-    limit: 20,
+const scene = tencentcloud.lighthouse.getAllScene({
     offset: 0,
+    limit: 20,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-scene = tencentcloud.Lighthouse.get_all_scene(limit=20,
-    offset=0)
+scene = tencentcloud.lighthouse.get_all_scene(offset=0,
+    limit=20)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var scene = Tencentcloud.Lighthouse.GetAllScene.Invoke(new()
-    {
-        Limit = 20,
-        Offset = 0,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/lighthouse"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Lighthouse.GetAllScene(ctx, &lighthouse.GetAllSceneArgs{
-			Limit:  pulumi.IntRef(20),
+		_, err := lighthouse.GetAllScene(ctx, &lighthouse.GetAllSceneArgs{
 			Offset: pulumi.IntRef(0),
+			Limit:  pulumi.IntRef(20),
 		}, nil)
 		if err != nil {
 			return err
@@ -70,6 +71,32 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var scene = Tencentcloud.Lighthouse.GetAllScene.Invoke(new()
+    {
+        Offset = 0,
+        Limit = 20,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Lighthouse.LighthouseFunctions;
 import com.pulumi.tencentcloud.Lighthouse.inputs.GetAllSceneArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,24 +119,55 @@ public class App {
 
     public static void stack(Context ctx) {
         final var scene = LighthouseFunctions.getAllScene(GetAllSceneArgs.builder()
-            .limit(20)
             .offset(0)
+            .limit(20)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   scene:
     fn::invoke:
-      Function: tencentcloud:Lighthouse:getAllScene
-      Arguments:
-        limit: 20
+      function: tencentcloud:Lighthouse:getAllScene
+      arguments:
         offset: 0
+        limit: 20
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_lighthouse_getallscene" "scene" {
+  offset = 0
+  limit  = 20
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeAllScenes](https://www.tencentcloud.com/document/api/1103/52167)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getAllScene<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAllSceneArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAllSceneResult</a></span>></span
+><span class="k">function </span>getAllScene<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAllSceneArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAllSceneResult</a></span>></span
 ><span class="k">
-function </span>getAllSceneOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAllSceneOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAllSceneResult</a></span>></span
+function </span>getAllSceneOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAllSceneOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAllSceneResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -146,11 +204,11 @@ function </span>getAllSceneOutput<span class="p">(</span><span class="nx">args</
                   <span class="nx">scene_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetAllSceneResult</span
 ><span class="k">
-def </span>get_all_scene_output<span class="p">(</span><span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                  <span class="nx">offset</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">scene_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAllSceneResult]</span
+def </span>get_all_scene_output<span class="p">(</span><span class="nx">limit</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                  <span class="nx">offset</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">scene_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAllSceneResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -175,7 +233,8 @@ func </span>GetAllSceneOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetAllScene </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetAllSceneResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetAllSceneArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetAllSceneResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAllSceneInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAllSceneResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAllSceneInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAllSceneResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAllSceneInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -184,7 +243,8 @@ func </span>GetAllSceneOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetAllSceneResult</a></span>> </span>getAllScene<span class="p">(</span><span class="nx">GetAllSceneArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAllSceneResult</a></span>> </span>getAllScene<span class="p">(</span><span class="nx">GetAllSceneArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAllSceneResult</a></span>> </span>getAllScene<span class="p">(</span><span class="nx">GetAllSceneArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -196,6 +256,15 @@ func </span>GetAllSceneOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Lighthouse/getAllScene:getAllScene
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_lighthouse_get_all_scene&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -214,8 +283,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of returned results. Default value is 20. Maximum value is 100.</p>
-</dd><dt class="property-optional"
+    <dd>Number of returned results. Default value is 20. Maximum value is 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -223,8 +291,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset. Default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Offset. Default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -232,8 +299,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sceneids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneids_csharp" style="color: inherit; text-decoration: inherit;">Scene<wbr>Ids</a>
@@ -241,8 +307,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of scene IDs.</p>
-</dd></dl>
+    <dd>List of scene IDs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -256,8 +321,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of returned results. Default value is 20. Maximum value is 100.</p>
-</dd><dt class="property-optional"
+    <dd>Number of returned results. Default value is 20. Maximum value is 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -265,8 +329,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset. Default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Offset. Default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -274,8 +337,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sceneids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneids_go" style="color: inherit; text-decoration: inherit;">Scene<wbr>Ids</a>
@@ -283,8 +345,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of scene IDs.</p>
-</dd></dl>
+    <dd>List of scene IDs.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of returned results. Default value is 20. Maximum value is 100.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Offset. Default value is 0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scene_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_ids_hcl" style="color: inherit; text-decoration: inherit;">scene_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of scene IDs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -298,8 +397,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of returned results. Default value is 20. Maximum value is 100.</p>
-</dd><dt class="property-optional"
+    <dd>Number of returned results. Default value is 20. Maximum value is 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -307,8 +405,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Offset. Default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Offset. Default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -316,8 +413,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sceneids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneids_java" style="color: inherit; text-decoration: inherit;">scene<wbr>Ids</a>
@@ -325,8 +421,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of scene IDs.</p>
-</dd></dl>
+    <dd>List of scene IDs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -340,8 +435,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of returned results. Default value is 20. Maximum value is 100.</p>
-</dd><dt class="property-optional"
+    <dd>Number of returned results. Default value is 20. Maximum value is 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -349,8 +443,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Offset. Default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Offset. Default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -358,8 +451,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sceneids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneids_nodejs" style="color: inherit; text-decoration: inherit;">scene<wbr>Ids</a>
@@ -367,8 +459,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of scene IDs.</p>
-</dd></dl>
+    <dd>List of scene IDs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -382,8 +473,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of returned results. Default value is 20. Maximum value is 100.</p>
-</dd><dt class="property-optional"
+    <dd>Number of returned results. Default value is 20. Maximum value is 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -391,8 +481,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset. Default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Offset. Default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -400,8 +489,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="scene_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_ids_python" style="color: inherit; text-decoration: inherit;">scene_<wbr>ids</a>
@@ -409,8 +497,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of scene IDs.</p>
-</dd></dl>
+    <dd>List of scene IDs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -424,8 +511,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of returned results. Default value is 20. Maximum value is 100.</p>
-</dd><dt class="property-optional"
+    <dd>Number of returned results. Default value is 20. Maximum value is 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -433,8 +519,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Offset. Default value is 0.</p>
-</dd><dt class="property-optional"
+    <dd>Offset. Default value is 0.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -442,8 +527,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="sceneids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneids_yaml" style="color: inherit; text-decoration: inherit;">scene<wbr>Ids</a>
@@ -451,8 +535,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of scene IDs.</p>
-</dd></dl>
+    <dd>List of scene IDs.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -475,8 +558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scenesets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenesets_csharp" style="color: inherit; text-decoration: inherit;">Scene<wbr>Sets</a>
@@ -484,8 +566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getallscenesceneset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Lighthouse.<wbr>Outputs.<wbr>Get<wbr>All<wbr>Scene<wbr>Scene<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of scene info.</p>
-</dd><dt class="property-"
+    <dd>List of scene info.</dd><dt class="property-"
             title="">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -531,8 +612,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scenesets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenesets_go" style="color: inherit; text-decoration: inherit;">Scene<wbr>Sets</a>
@@ -540,8 +620,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getallscenesceneset">[]Get<wbr>All<wbr>Scene<wbr>Scene<wbr>Set</a></span>
     </dt>
-    <dd><p>List of scene info.</p>
-</dd><dt class="property-"
+    <dd>List of scene info.</dd><dt class="property-"
             title="">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -578,6 +657,60 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="scene_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_sets_hcl" style="color: inherit; text-decoration: inherit;">scene_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getallscenesceneset">list(object)</a></span>
+    </dt>
+    <dd>List of scene info.</dd><dt class="property-"
+            title="">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="scene_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_ids_hcl" style="color: inherit; text-decoration: inherit;">scene_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -587,8 +720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scenesets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenesets_java" style="color: inherit; text-decoration: inherit;">scene<wbr>Sets</a>
@@ -596,8 +728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getallscenesceneset">List&lt;Get<wbr>All<wbr>Scene<wbr>Scene<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of scene info.</p>
-</dd><dt class="property-"
+    <dd>List of scene info.</dd><dt class="property-"
             title="">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -643,8 +774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scenesets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenesets_nodejs" style="color: inherit; text-decoration: inherit;">scene<wbr>Sets</a>
@@ -652,8 +782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getallscenesceneset">Get<wbr>All<wbr>Scene<wbr>Scene<wbr>Set[]</a></span>
     </dt>
-    <dd><p>List of scene info.</p>
-</dd><dt class="property-"
+    <dd>List of scene info.</dd><dt class="property-"
             title="">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -699,17 +828,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scene_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_sets_python" style="color: inherit; text-decoration: inherit;">scene_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getallscenesceneset">Get<wbr>All<wbr>Scene<wbr>Scene<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getallscenesceneset">Sequence[Get<wbr>All<wbr>Scene<wbr>Scene<wbr>Set]</a></span>
     </dt>
-    <dd><p>List of scene info.</p>
-</dd><dt class="property-"
+    <dd>List of scene info.</dd><dt class="property-"
             title="">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -755,8 +882,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="scenesets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scenesets_yaml" style="color: inherit; text-decoration: inherit;">scene<wbr>Sets</a>
@@ -764,8 +890,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getallscenesceneset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of scene info.</p>
-</dd><dt class="property-"
+    <dd>List of scene info.</dd><dt class="property-"
             title="">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -821,8 +946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Use scene description.</p>
-</dd><dt class="property-required"
+    <dd>Use scene description.</dd><dt class="property-required"
             title="Required">
         <span id="displayname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_csharp" style="color: inherit; text-decoration: inherit;">Display<wbr>Name</a>
@@ -830,8 +954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Use the scene presentation name.</p>
-</dd><dt class="property-required"
+    <dd>Use the scene presentation name.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_csharp" style="color: inherit; text-decoration: inherit;">Scene<wbr>Id</a>
@@ -839,8 +962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Use scene Id.</p>
-</dd></dl>
+    <dd>Use scene Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -854,8 +976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Use scene description.</p>
-</dd><dt class="property-required"
+    <dd>Use scene description.</dd><dt class="property-required"
             title="Required">
         <span id="displayname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_go" style="color: inherit; text-decoration: inherit;">Display<wbr>Name</a>
@@ -863,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Use the scene presentation name.</p>
-</dd><dt class="property-required"
+    <dd>Use the scene presentation name.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_go" style="color: inherit; text-decoration: inherit;">Scene<wbr>Id</a>
@@ -872,8 +992,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Use scene Id.</p>
-</dd></dl>
+    <dd>Use scene Id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Use scene description.</dd><dt class="property-required"
+            title="Required">
+        <span id="display_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#display_name_hcl" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Use the scene presentation name.</dd><dt class="property-required"
+            title="Required">
+        <span id="scene_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_id_hcl" style="color: inherit; text-decoration: inherit;">scene_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Use scene Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -887,8 +1036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Use scene description.</p>
-</dd><dt class="property-required"
+    <dd>Use scene description.</dd><dt class="property-required"
             title="Required">
         <span id="displayname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_java" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -896,8 +1044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Use the scene presentation name.</p>
-</dd><dt class="property-required"
+    <dd>Use the scene presentation name.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_java" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -905,8 +1052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Use scene Id.</p>
-</dd></dl>
+    <dd>Use scene Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -920,8 +1066,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Use scene description.</p>
-</dd><dt class="property-required"
+    <dd>Use scene description.</dd><dt class="property-required"
             title="Required">
         <span id="displayname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_nodejs" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -929,8 +1074,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Use the scene presentation name.</p>
-</dd><dt class="property-required"
+    <dd>Use the scene presentation name.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_nodejs" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -938,8 +1082,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Use scene Id.</p>
-</dd></dl>
+    <dd>Use scene Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -953,8 +1096,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Use scene description.</p>
-</dd><dt class="property-required"
+    <dd>Use scene description.</dd><dt class="property-required"
             title="Required">
         <span id="display_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#display_name_python" style="color: inherit; text-decoration: inherit;">display_<wbr>name</a>
@@ -962,8 +1104,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Use the scene presentation name.</p>
-</dd><dt class="property-required"
+    <dd>Use the scene presentation name.</dd><dt class="property-required"
             title="Required">
         <span id="scene_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_id_python" style="color: inherit; text-decoration: inherit;">scene_<wbr>id</a>
@@ -971,8 +1112,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Use scene Id.</p>
-</dd></dl>
+    <dd>Use scene Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -986,8 +1126,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Use scene description.</p>
-</dd><dt class="property-required"
+    <dd>Use scene description.</dd><dt class="property-required"
             title="Required">
         <span id="displayname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#displayname_yaml" style="color: inherit; text-decoration: inherit;">display<wbr>Name</a>
@@ -995,8 +1134,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Use the scene presentation name.</p>
-</dd><dt class="property-required"
+    <dd>Use the scene presentation name.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_yaml" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -1004,8 +1142,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Use scene Id.</p>
-</dd></dl>
+    <dd>Use scene Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1020,7 +1157,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "BackupConfig"
 title_tag: "tencentcloud.Redis.BackupConfig"
-meta_desc: "Documentation for the tencentcloud.Redis.BackupConfig resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create a backup config of redis."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,69 +20,154 @@ Use this resource to create a backup config of redis.
 
 ### Set configuration for automatic backups
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zone = tencentcloud.Redis.getZoneConfig({
+const zone = tencentcloud.redis.getZoneConfig({
     typeId: 7,
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    cidrBlock: "10.0.0.0/16",
+    name: "tf_redis_vpc",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     vpcId: vpc.id,
     availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
+    name: "tf_redis_subnet",
     cidrBlock: "10.0.1.0/24",
 });
-const fooInstance = new tencentcloud.redis.Instance("fooInstance", {
+const example = new tencentcloud.redis.Instance("example", {
     availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
     typeId: zone.then(zone => zone.lists?.[1]?.typeId),
-    password: "test12345789",
+    password: "Password@123",
     memSize: 8192,
     redisShardNum: zone.then(zone => zone.lists?.[1]?.redisShardNums?.[0]),
     redisReplicasNum: zone.then(zone => zone.lists?.[1]?.redisReplicasNums?.[0]),
+    name: "tf_example",
     port: 6379,
     vpcId: vpc.id,
     subnetId: subnet.id,
 });
-const fooBackupConfig = new tencentcloud.redis.BackupConfig("fooBackupConfig", {
-    redisId: fooInstance.id,
+const exampleBackupConfig = new tencentcloud.redis.BackupConfig("example", {
+    redisId: example.id,
     backupTime: "04:00-05:00",
-    backupPeriods: ["Monday"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zone = tencentcloud.Redis.get_zone_config(type_id=7)
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+zone = tencentcloud.redis.get_zone_config(type_id=7)
+vpc = tencentcloud.vpc.Instance("vpc",
+    cidr_block="10.0.0.0/16",
+    name="tf_redis_vpc")
 subnet = tencentcloud.subnet.Instance("subnet",
     vpc_id=vpc.id,
     availability_zone=zone.lists[1].zone,
+    name="tf_redis_subnet",
     cidr_block="10.0.1.0/24")
-foo_instance = tencentcloud.redis.Instance("fooInstance",
+example = tencentcloud.redis.Instance("example",
     availability_zone=zone.lists[1].zone,
     type_id=zone.lists[1].type_id,
-    password="test12345789",
+    password="Password@123",
     mem_size=8192,
     redis_shard_num=zone.lists[1].redis_shard_nums[0],
     redis_replicas_num=zone.lists[1].redis_replicas_nums[0],
+    name="tf_example",
     port=6379,
     vpc_id=vpc.id,
     subnet_id=subnet.id)
-foo_backup_config = tencentcloud.redis.BackupConfig("fooBackupConfig",
-    redis_id=foo_instance.id,
-    backup_time="04:00-05:00",
-    backup_periods=["Monday"])
+example_backup_config = tencentcloud.redis.BackupConfig("example",
+    redis_id=example.id,
+    backup_time="04:00-05:00")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/redis"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zone, err := redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+			TypeId: pulumi.IntRef(7),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+			Name:      pulumi.String("tf_redis_vpc"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
+			Name:             pulumi.String("tf_redis_subnet"),
+			CidrBlock:        pulumi.String("10.0.1.0/24"),
+		})
+		if err != nil {
+			return err
+		}
+		example, err := redis.NewInstance(ctx, "example", &redis.InstanceArgs{
+			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
+			TypeId:           pulumi.Int(zone.Lists[1].TypeId),
+			Password:         pulumi.String("Password@123"),
+			MemSize:          pulumi.Int(8192),
+			RedisShardNum:    pulumi.Int(zone.Lists[1].RedisShardNums[0]),
+			RedisReplicasNum: pulumi.Int(zone.Lists[1].RedisReplicasNums[0]),
+			Name:             pulumi.String("tf_example"),
+			Port:             pulumi.Int(6379),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = redis.NewBackupConfig(ctx, "example", &redis.BackupConfigArgs{
+			RedisId:    example.ID().ToIDOutput().ToStringOutput(),
+			BackupTime: pulumi.String("04:00-05:00"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -93,100 +180,44 @@ return await Deployment.RunAsync(() =>
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
         CidrBlock = "10.0.0.0/16",
+        Name = "tf_redis_vpc",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         VpcId = vpc.Id,
         AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.Zone),
+        Name = "tf_redis_subnet",
         CidrBlock = "10.0.1.0/24",
     });
 
-    var fooInstance = new Tencentcloud.Redis.Instance("fooInstance", new()
+    var example = new Tencentcloud.Redis.Instance("example", new()
     {
         AvailabilityZone = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.Zone),
         TypeId = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.TypeId),
-        Password = "test12345789",
+        Password = "Password@123",
         MemSize = 8192,
         RedisShardNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.RedisShardNums[0]),
         RedisReplicasNum = zone.Apply(getZoneConfigResult => getZoneConfigResult.Lists[1]?.RedisReplicasNums[0]),
+        Name = "tf_example",
         Port = 6379,
         VpcId = vpc.Id,
         SubnetId = subnet.Id,
     });
 
-    var fooBackupConfig = new Tencentcloud.Redis.BackupConfig("fooBackupConfig", new()
+    var exampleBackupConfig = new Tencentcloud.Redis.BackupConfig("example", new()
     {
-        RedisId = fooInstance.Id,
+        RedisId = example.Id,
         BackupTime = "04:00-05:00",
-        BackupPeriods = new[]
-        {
-            "Monday",
-        },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
-			TypeId: pulumi.IntRef(7),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			VpcId:            vpc.ID(),
-			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
-			CidrBlock:        pulumi.String("10.0.1.0/24"),
-		})
-		if err != nil {
-			return err
-		}
-		fooInstance, err := Redis.NewInstance(ctx, "fooInstance", &Redis.InstanceArgs{
-			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
-			TypeId:           pulumi.Int(zone.Lists[1].TypeId),
-			Password:         pulumi.String("test12345789"),
-			MemSize:          pulumi.Int(8192),
-			RedisShardNum:    pulumi.Int(zone.Lists[1].RedisShardNums[0]),
-			RedisReplicasNum: pulumi.Int(zone.Lists[1].RedisReplicasNums[0]),
-			Port:             pulumi.Int(6379),
-			VpcId:            vpc.ID(),
-			SubnetId:         subnet.ID(),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Redis.NewBackupConfig(ctx, "fooBackupConfig", &Redis.BackupConfigArgs{
-			RedisId:    fooInstance.ID(),
-			BackupTime: pulumi.String("04:00-05:00"),
-			BackupPeriods: pulumi.StringArray{
-				pulumi.String("Monday"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -195,16 +226,10 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Redis.RedisFunctions;
 import com.pulumi.tencentcloud.Redis.inputs.GetZoneConfigArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
-import com.pulumi.tencentcloud.Redis.Instance;
-import com.pulumi.tencentcloud.Redis.InstanceArgs;
 import com.pulumi.tencentcloud.Redis.BackupConfig;
 import com.pulumi.tencentcloud.Redis.BackupConfigArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -220,136 +245,214 @@ public class App {
             .typeId(7)
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
             .cidrBlock("10.0.0.0/16")
+            .name("tf_redis_vpc")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .vpcId(vpc.id())
-            .availabilityZone(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[1].zone()))
+            .availabilityZone(zone.lists()[1].zone())
+            .name("tf_redis_subnet")
             .cidrBlock("10.0.1.0/24")
             .build());
 
-        var fooInstance = new Instance("fooInstance", InstanceArgs.builder()        
-            .availabilityZone(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[1].zone()))
-            .typeId(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[1].typeId()))
-            .password("test12345789")
+        var example = new com.pulumi.tencentcloud.Redis.Instance("example", com.pulumi.tencentcloud.Redis.InstanceArgs.builder()
+            .availabilityZone(zone.lists()[1].zone())
+            .typeId(zone.lists()[1].typeId())
+            .password("Password@123")
             .memSize(8192)
-            .redisShardNum(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[1].redisShardNums()[0]))
-            .redisReplicasNum(zone.applyValue(getZoneConfigResult -> getZoneConfigResult.lists()[1].redisReplicasNums()[0]))
+            .redisShardNum(zone.lists()[1].redisShardNums()[0])
+            .redisReplicasNum(zone.lists()[1].redisReplicasNums()[0])
+            .name("tf_example")
             .port(6379)
             .vpcId(vpc.id())
             .subnetId(subnet.id())
             .build());
 
-        var fooBackupConfig = new BackupConfig("fooBackupConfig", BackupConfigArgs.builder()        
-            .redisId(fooInstance.id())
+        var exampleBackupConfig = new BackupConfig("exampleBackupConfig", BackupConfigArgs.builder()
+            .redisId(example.id())
             .backupTime("04:00-05:00")
-            .backupPeriods("Monday")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
       cidrBlock: 10.0.0.0/16
+      name: tf_redis_vpc
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       vpcId: ${vpc.id}
       availabilityZone: ${zone.lists[1].zone}
+      name: tf_redis_subnet
       cidrBlock: 10.0.1.0/24
-  fooInstance:
+  example:
     type: tencentcloud:Redis:Instance
     properties:
       availabilityZone: ${zone.lists[1].zone}
       typeId: ${zone.lists[1].typeId}
-      password: test12345789
+      password: Password@123
       memSize: 8192
       redisShardNum: ${zone.lists[1].redisShardNums[0]}
       redisReplicasNum: ${zone.lists[1].redisReplicasNums[0]}
+      name: tf_example
       port: 6379
       vpcId: ${vpc.id}
       subnetId: ${subnet.id}
-  fooBackupConfig:
+  exampleBackupConfig:
     type: tencentcloud:Redis:BackupConfig
+    name: example
     properties:
-      redisId: ${fooInstance.id}
+      redisId: ${example.id}
       backupTime: 04:00-05:00
-      backupPeriods:
-        - Monday
 variables:
   zone:
     fn::invoke:
-      Function: tencentcloud:Redis:getZoneConfig
-      Arguments:
+      function: tencentcloud:Redis:getZoneConfig
+      arguments:
         typeId: 7
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_redis_getzoneconfig" "zone" {
+  type_id = 7
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  name       = "tf_redis_vpc"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  availability_zone = data.tencentcloud_redis_getzoneconfig.zone.lists[1].zone
+  name              = "tf_redis_subnet"
+  cidr_block        = "10.0.1.0/24"
+}
+resource "tencentcloud_redis_instance" "example" {
+  availability_zone  = data.tencentcloud_redis_getzoneconfig.zone.lists[1].zone
+  type_id            = data.tencentcloud_redis_getzoneconfig.zone.lists[1].type_id
+  password           = "Password@123"
+  mem_size           = 8192
+  redis_shard_num    = data.tencentcloud_redis_getzoneconfig.zone.lists[1].redis_shard_nums[0]
+  redis_replicas_num = data.tencentcloud_redis_getzoneconfig.zone.lists[1].redis_replicas_nums[0]
+  name               = "tf_example"
+  port               = 6379
+  vpc_id             = tencentcloud_vpc_instance.vpc.id
+  subnet_id          = tencentcloud_subnet_instance.subnet.id
+}
+resource "tencentcloud_redis_backupconfig" "example" {
+  redis_id    = tencentcloud_redis_instance.example.id
+  backup_time = "04:00-05:00"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Read: [DescribeAutoBackupConfig](https://www.tencentcloud.com/document/api/239/32068)
+* Update: [ModifyAutoBackupConfig](https://www.tencentcloud.com/document/api/239/32058)
+* Delete: [ModifyAutoBackupConfig](https://www.tencentcloud.com/document/api/239/32058)
 
 
 ## Create BackupConfig Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">BackupConfig</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BackupConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">BackupConfig</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BackupConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">BackupConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                 <span class="nx">backup_periods</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">backup_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">redis_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">BackupConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">BackupConfigArgs</a></span><span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">BackupConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                 <span class="nx">backup_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">redis_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">backup_periods</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewBackupConfig</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">BackupConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BackupConfig</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewBackupConfig</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">BackupConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BackupConfig</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">BackupConfig</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BackupConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">BackupConfig</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BackupConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">BackupConfig</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BackupConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">BackupConfig</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">BackupConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Redis:BackupConfig</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Redis:BackupConfig</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_redis_backup_config&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -370,7 +473,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -487,11 +590,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## BackupConfig Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The BackupConfig resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -507,8 +618,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifys what time the backup action should take place. And the time interval should be one hour.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Specifys what time the backup action should take place. And the time interval should be one hour.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="redisid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisid_csharp" style="color: inherit; text-decoration: inherit;">Redis<wbr>Id</a>
@@ -516,8 +626,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a redis instance to which the policy will be applied.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>ID of a redis instance to which the policy will be applied.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="backupperiods_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupperiods_csharp" style="color: inherit; text-decoration: inherit;">Backup<wbr>Periods</a>
@@ -525,9 +634,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.58.2. It makes no difference to online config at all</p>
-</p></dd></dl>
+    <dd>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -541,8 +648,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifys what time the backup action should take place. And the time interval should be one hour.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Specifys what time the backup action should take place. And the time interval should be one hour.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="redisid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisid_go" style="color: inherit; text-decoration: inherit;">Redis<wbr>Id</a>
@@ -550,8 +656,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a redis instance to which the policy will be applied.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>ID of a redis instance to which the policy will be applied.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="backupperiods_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupperiods_go" style="color: inherit; text-decoration: inherit;">Backup<wbr>Periods</a>
@@ -559,9 +664,37 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.58.2. It makes no difference to online config at all</p>
-</p></dd></dl>
+    <dd>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all</p></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="backup_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_time_hcl" style="color: inherit; text-decoration: inherit;">backup_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifys what time the backup action should take place. And the time interval should be one hour.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="redis_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_id_hcl" style="color: inherit; text-decoration: inherit;">redis_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a redis instance to which the policy will be applied.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="backup_periods_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_periods_hcl" style="color: inherit; text-decoration: inherit;">backup_<wbr>periods</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -575,8 +708,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifys what time the backup action should take place. And the time interval should be one hour.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Specifys what time the backup action should take place. And the time interval should be one hour.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="redisid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisid_java" style="color: inherit; text-decoration: inherit;">redis<wbr>Id</a>
@@ -584,8 +716,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a redis instance to which the policy will be applied.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>ID of a redis instance to which the policy will be applied.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="backupperiods_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupperiods_java" style="color: inherit; text-decoration: inherit;">backup<wbr>Periods</a>
@@ -593,9 +724,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.58.2. It makes no difference to online config at all</p>
-</p></dd></dl>
+    <dd>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -609,8 +738,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifys what time the backup action should take place. And the time interval should be one hour.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Specifys what time the backup action should take place. And the time interval should be one hour.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="redisid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisid_nodejs" style="color: inherit; text-decoration: inherit;">redis<wbr>Id</a>
@@ -618,8 +746,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a redis instance to which the policy will be applied.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>ID of a redis instance to which the policy will be applied.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="backupperiods_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupperiods_nodejs" style="color: inherit; text-decoration: inherit;">backup<wbr>Periods</a>
@@ -627,9 +754,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.58.2. It makes no difference to online config at all</p>
-</p></dd></dl>
+    <dd>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -643,8 +768,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifys what time the backup action should take place. And the time interval should be one hour.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Specifys what time the backup action should take place. And the time interval should be one hour.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="redis_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redis_id_python" style="color: inherit; text-decoration: inherit;">redis_<wbr>id</a>
@@ -652,8 +776,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a redis instance to which the policy will be applied.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>ID of a redis instance to which the policy will be applied.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="backup_periods_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_periods_python" style="color: inherit; text-decoration: inherit;">backup_<wbr>periods</a>
@@ -661,9 +784,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.58.2. It makes no difference to online config at all</p>
-</p></dd></dl>
+    <dd>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -677,8 +798,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifys what time the backup action should take place. And the time interval should be one hour.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Specifys what time the backup action should take place. And the time interval should be one hour.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="redisid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#redisid_yaml" style="color: inherit; text-decoration: inherit;">redis<wbr>Id</a>
@@ -686,8 +806,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a redis instance to which the policy will be applied.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>ID of a redis instance to which the policy will be applied.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="backupperiods_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupperiods_yaml" style="color: inherit; text-decoration: inherit;">backup<wbr>Periods</a>
@@ -695,9 +814,7 @@ The BackupConfig resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.58.2. It makes no difference to online config at all</p>
-</p></dd></dl>
+    <dd>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all</p></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -718,8 +835,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -733,8 +849,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -748,8 +877,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -763,8 +891,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -778,8 +905,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -793,8 +919,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -804,122 +929,161 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing BackupConfig resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">BackupConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">BackupConfig</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">BackupConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">BackupConfig</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">backup_periods</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">backup_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">redis_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> BackupConfig</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetBackupConfig<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">BackupConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BackupConfig</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetBackupConfig<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">BackupConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">BackupConfig</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">BackupConfig</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BackupConfigState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">BackupConfig</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BackupConfigState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">BackupConfig</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BackupConfigState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">BackupConfig</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">BackupConfigState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingBackupConfig</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Redis:BackupConfig</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_redis_backup_config</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BackupConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BackupConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -927,28 +1091,31 @@ Get an existing BackupConfig resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BackupConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -956,28 +1123,31 @@ Get an existing BackupConfig resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">BackupConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -997,9 +1167,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.58.2. It makes no difference to online config at all</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_backuptime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_backuptime_csharp" style="color: inherit; text-decoration: inherit;">Backup<wbr>Time</a>
@@ -1007,8 +1175,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifys what time the backup action should take place. And the time interval should be one hour.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys what time the backup action should take place. And the time interval should be one hour.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_redisid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisid_csharp" style="color: inherit; text-decoration: inherit;">Redis<wbr>Id</a>
@@ -1016,8 +1183,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a redis instance to which the policy will be applied.</p>
-</dd></dl>
+    <dd>ID of a redis instance to which the policy will be applied.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1031,9 +1197,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.58.2. It makes no difference to online config at all</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_backuptime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_backuptime_go" style="color: inherit; text-decoration: inherit;">Backup<wbr>Time</a>
@@ -1041,8 +1205,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifys what time the backup action should take place. And the time interval should be one hour.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys what time the backup action should take place. And the time interval should be one hour.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_redisid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisid_go" style="color: inherit; text-decoration: inherit;">Redis<wbr>Id</a>
@@ -1050,8 +1213,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a redis instance to which the policy will be applied.</p>
-</dd></dl>
+    <dd>ID of a redis instance to which the policy will be applied.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="state_backup_periods_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_backup_periods_hcl" style="color: inherit; text-decoration: inherit;">backup_<wbr>periods</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_backup_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_backup_time_hcl" style="color: inherit; text-decoration: inherit;">backup_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specifys what time the backup action should take place. And the time interval should be one hour.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_redis_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redis_id_hcl" style="color: inherit; text-decoration: inherit;">redis_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a redis instance to which the policy will be applied.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1065,9 +1257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.58.2. It makes no difference to online config at all</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_backuptime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_backuptime_java" style="color: inherit; text-decoration: inherit;">backup<wbr>Time</a>
@@ -1075,8 +1265,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifys what time the backup action should take place. And the time interval should be one hour.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys what time the backup action should take place. And the time interval should be one hour.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_redisid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisid_java" style="color: inherit; text-decoration: inherit;">redis<wbr>Id</a>
@@ -1084,8 +1273,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a redis instance to which the policy will be applied.</p>
-</dd></dl>
+    <dd>ID of a redis instance to which the policy will be applied.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1099,9 +1287,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.58.2. It makes no difference to online config at all</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_backuptime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_backuptime_nodejs" style="color: inherit; text-decoration: inherit;">backup<wbr>Time</a>
@@ -1109,8 +1295,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specifys what time the backup action should take place. And the time interval should be one hour.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys what time the backup action should take place. And the time interval should be one hour.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_redisid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisid_nodejs" style="color: inherit; text-decoration: inherit;">redis<wbr>Id</a>
@@ -1118,8 +1303,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a redis instance to which the policy will be applied.</p>
-</dd></dl>
+    <dd>ID of a redis instance to which the policy will be applied.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1133,9 +1317,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.58.2. It makes no difference to online config at all</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_backup_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_backup_time_python" style="color: inherit; text-decoration: inherit;">backup_<wbr>time</a>
@@ -1143,8 +1325,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specifys what time the backup action should take place. And the time interval should be one hour.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys what time the backup action should take place. And the time interval should be one hour.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_redis_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redis_id_python" style="color: inherit; text-decoration: inherit;">redis_<wbr>id</a>
@@ -1152,8 +1333,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a redis instance to which the policy will be applied.</p>
-</dd></dl>
+    <dd>ID of a redis instance to which the policy will be applied.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1167,9 +1347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.58.2. It makes no difference to online config at all</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: <code>Monday</code>, <code>Tuesday</code>, <code>Wednesday</code>, <code>Thursday</code>, <code>Friday</code>, <code>Saturday</code> and <code>Sunday</code>.<p class="property-message">Deprecated: It has been deprecated from version 1.58.2. It makes no difference to online config at all</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_backuptime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_backuptime_yaml" style="color: inherit; text-decoration: inherit;">backup<wbr>Time</a>
@@ -1177,8 +1355,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specifys what time the backup action should take place. And the time interval should be one hour.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Specifys what time the backup action should take place. And the time interval should be one hour.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_redisid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_redisid_yaml" style="color: inherit; text-decoration: inherit;">redis<wbr>Id</a>
@@ -1186,8 +1363,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a redis instance to which the policy will be applied.</p>
-</dd></dl>
+    <dd>ID of a redis instance to which the policy will be applied.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1205,9 +1381,12 @@ The following state arguments are supported:
 Redis  backup config can be imported, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Redis/backupConfig:BackupConfig foo redis-id
+$ pulumi import tencentcloud:Redis/backupConfig:BackupConfig example crs-cqdfdzvt
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1219,7 +1398,6 @@ $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig foo redis-id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

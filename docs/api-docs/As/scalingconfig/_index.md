@@ -2,9 +2,11 @@
 ---
 title: "ScalingConfig"
 title_tag: "tencentcloud.As.ScalingConfig"
-meta_desc: "Documentation for the tencentcloud.As.ScalingConfig resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a configuration for an AS (Auto scaling) instance. NOTE: In order to ensure the integrity of customer data, if the cvm."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,24 +16,30 @@ no_edit_this_page: true
 
 Provides a resource to create a configuration for an AS (Auto scaling) instance.
 
-> **NOTE:**  In order to ensure the integrity of customer data, if the cvm instance was destroyed due to shrinking, it will keep the cbs associate with cvm by default. If you want to destroy together, please set `delete_with_instance` to `true`.
+> **NOTE:**  In order to ensure the integrity of customer data, if the cvm instance was destroyed due to shrinking, it will keep the cbs associate with cvm by default. If you want to destroy together, please set `deleteWithInstance` to `true`.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Create a normal configuration
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleInstance = tencentcloud.Images.getInstance({
+const example = tencentcloud.images.getInstance({
     imageTypes: ["PUBLIC_IMAGE"],
-    osName: "TencentOS Server 3.2 (Final)",
+    osName: "TencentOS Server 4 for x86_64",
 });
-const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
-    configurationName: "example-launch-configuration",
-    imageId: exampleInstance.then(exampleInstance => exampleInstance.images?.[0]?.imageId),
-    instanceTypes: ["SA1.SMALL1"],
+const exampleScalingConfig = new tencentcloud.as.ScalingConfig("example", {
+    configurationName: "tf-example",
+    imageId: example.then(example => example.images?.[0]?.imageId),
+    instanceTypes: ["SA5.MEDIUM4"],
     projectId: 0,
     systemDiskType: "CLOUD_PREMIUM",
     systemDiskSize: 50,
@@ -45,74 +53,160 @@ const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingCo
     password: "Test@123#",
     enhancedSecurityService: false,
     enhancedMonitorService: false,
+    enhancedAutomationToolsService: false,
     userData: "dGVzdA==",
     hostNameSettings: {
-        hostName: "host-name-test",
+        hostName: "host-name",
         hostNameStyle: "UNIQUE",
     },
     instanceTags: {
         tag: "example",
     },
+    tags: {
+        createdBy: "Terraform",
+        owner: "tf",
+    },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_instance = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
-    os_name="TencentOS Server 3.2 (Final)")
-example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
-    configuration_name="example-launch-configuration",
-    image_id=example_instance.images[0].image_id,
-    instance_types=["SA1.SMALL1"],
+example = tencentcloud.images.get_instance(image_types=["PUBLIC_IMAGE"],
+    os_name="TencentOS Server 4 for x86_64")
+example_scaling_config = tencentcloud.as_.ScalingConfig("example",
+    configuration_name="tf-example",
+    image_id=example.images[0].image_id,
+    instance_types=["SA5.MEDIUM4"],
     project_id=0,
     system_disk_type="CLOUD_PREMIUM",
     system_disk_size=50,
-    data_disks=[tencentcloud.as_.ScalingConfigDataDiskArgs(
-        disk_type="CLOUD_PREMIUM",
-        disk_size=50,
-    )],
+    data_disks=[{
+        "disk_type": "CLOUD_PREMIUM",
+        "disk_size": 50,
+    }],
     internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
     internet_max_bandwidth_out=10,
     public_ip_assigned=True,
     password="Test@123#",
     enhanced_security_service=False,
     enhanced_monitor_service=False,
+    enhanced_automation_tools_service=False,
     user_data="dGVzdA==",
-    host_name_settings=tencentcloud.as_.ScalingConfigHostNameSettingsArgs(
-        host_name="host-name-test",
-        host_name_style="UNIQUE",
-    ),
+    host_name_settings={
+        "host_name": "host-name",
+        "host_name_style": "UNIQUE",
+    },
     instance_tags={
         "tag": "example",
+    },
+    tags={
+        "createdBy": "Terraform",
+        "owner": "tf",
     })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			ImageTypes: []string{
+				"PUBLIC_IMAGE",
+			},
+			OsName: pulumi.StringRef("TencentOS Server 4 for x86_64"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		_, err = as.NewScalingConfig(ctx, "example", &as.ScalingConfigArgs{
+			ConfigurationName: pulumi.String("tf-example"),
+			ImageId:           pulumi.String(example.Images[0].ImageId),
+			InstanceTypes: pulumi.StringArray{
+				pulumi.String("SA5.MEDIUM4"),
+			},
+			ProjectId:      pulumi.Int(0),
+			SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
+			SystemDiskSize: pulumi.Int(50),
+			DataDisks: as.ScalingConfigDataDiskArray{
+				&as.ScalingConfigDataDiskArgs{
+					DiskType: pulumi.String("CLOUD_PREMIUM"),
+					DiskSize: pulumi.Int(50),
+				},
+			},
+			InternetChargeType:             pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+			InternetMaxBandwidthOut:        pulumi.Int(10),
+			PublicIpAssigned:               pulumi.Bool(true),
+			Password:                       pulumi.String("Test@123#"),
+			EnhancedSecurityService:        pulumi.Bool(false),
+			EnhancedMonitorService:         pulumi.Bool(false),
+			EnhancedAutomationToolsService: pulumi.Bool(false),
+			UserData:                       pulumi.String("dGVzdA=="),
+			HostNameSettings: &as.ScalingConfigHostNameSettingsArgs{
+				HostName:      pulumi.String("host-name"),
+				HostNameStyle: pulumi.String("UNIQUE"),
+			},
+			InstanceTags: pulumi.StringMap{
+				"tag": pulumi.String("example"),
+			},
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("Terraform"),
+				"owner":     pulumi.String("tf"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var exampleInstance = Tencentcloud.Images.GetInstance.Invoke(new()
+    var example = Tencentcloud.Images.GetInstance.Invoke(new()
     {
         ImageTypes = new[]
         {
             "PUBLIC_IMAGE",
         },
-        OsName = "TencentOS Server 3.2 (Final)",
+        OsName = "TencentOS Server 4 for x86_64",
     });
 
-    var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new()
+    var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("example", new()
     {
-        ConfigurationName = "example-launch-configuration",
-        ImageId = exampleInstance.Apply(getInstanceResult => getInstanceResult.Images[0]?.ImageId),
+        ConfigurationName = "tf-example",
+        ImageId = example.Apply(getInstanceResult => getInstanceResult.Images[0]?.ImageId),
         InstanceTypes = new[]
         {
-            "SA1.SMALL1",
+            "SA5.MEDIUM4",
         },
         ProjectId = 0,
         SystemDiskType = "CLOUD_PREMIUM",
@@ -131,77 +225,31 @@ return await Deployment.RunAsync(() =>
         Password = "Test@123#",
         EnhancedSecurityService = false,
         EnhancedMonitorService = false,
+        EnhancedAutomationToolsService = false,
         UserData = "dGVzdA==",
         HostNameSettings = new Tencentcloud.As.Inputs.ScalingConfigHostNameSettingsArgs
         {
-            HostName = "host-name-test",
+            HostName = "host-name",
             HostNameStyle = "UNIQUE",
         },
         InstanceTags = 
         {
             { "tag", "example" },
         },
+        Tags = 
+        {
+            { "createdBy", "Terraform" },
+            { "owner", "tf" },
+        },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		exampleInstance, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-			ImageTypes: []string{
-				"PUBLIC_IMAGE",
-			},
-			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		_, err = As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
-			ConfigurationName: pulumi.String("example-launch-configuration"),
-			ImageId:           pulumi.String(exampleInstance.Images[0].ImageId),
-			InstanceTypes: pulumi.StringArray{
-				pulumi.String("SA1.SMALL1"),
-			},
-			ProjectId:      pulumi.Int(0),
-			SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
-			SystemDiskSize: pulumi.Int(50),
-			DataDisks: as.ScalingConfigDataDiskArray{
-				&as.ScalingConfigDataDiskArgs{
-					DiskType: pulumi.String("CLOUD_PREMIUM"),
-					DiskSize: pulumi.Int(50),
-				},
-			},
-			InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-			InternetMaxBandwidthOut: pulumi.Int(10),
-			PublicIpAssigned:        pulumi.Bool(true),
-			Password:                pulumi.String("Test@123#"),
-			EnhancedSecurityService: pulumi.Bool(false),
-			EnhancedMonitorService:  pulumi.Bool(false),
-			UserData:                pulumi.String("dGVzdA=="),
-			HostNameSettings: &as.ScalingConfigHostNameSettingsArgs{
-				HostName:      pulumi.String("host-name-test"),
-				HostNameStyle: pulumi.String("UNIQUE"),
-			},
-			InstanceTags: pulumi.Map{
-				"tag": pulumi.Any("example"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -214,8 +262,8 @@ import com.pulumi.tencentcloud.As.ScalingConfig;
 import com.pulumi.tencentcloud.As.ScalingConfigArgs;
 import com.pulumi.tencentcloud.As.inputs.ScalingConfigDataDiskArgs;
 import com.pulumi.tencentcloud.As.inputs.ScalingConfigHostNameSettingsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -227,18 +275,18 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var exampleInstance = ImagesFunctions.getInstance(GetInstanceArgs.builder()
+        final var example = ImagesFunctions.getInstance(GetInstanceArgs.builder()
             .imageTypes("PUBLIC_IMAGE")
-            .osName("TencentOS Server 3.2 (Final)")
+            .osName("TencentOS Server 4 for x86_64")
             .build());
 
-        var exampleScalingConfig = new ScalingConfig("exampleScalingConfig", ScalingConfigArgs.builder()        
-            .configurationName("example-launch-configuration")
-            .imageId(exampleInstance.applyValue(getInstanceResult -> getInstanceResult.images()[0].imageId()))
-            .instanceTypes("SA1.SMALL1")
+        var exampleScalingConfig = new ScalingConfig("exampleScalingConfig", ScalingConfigArgs.builder()
+            .configurationName("tf-example")
+            .imageId(example.images()[0].imageId())
+            .instanceTypes("SA5.MEDIUM4")
             .projectId(0)
             .systemDiskType("CLOUD_PREMIUM")
-            .systemDiskSize("50")
+            .systemDiskSize(50)
             .dataDisks(ScalingConfigDataDiskArgs.builder()
                 .diskType("CLOUD_PREMIUM")
                 .diskSize(50)
@@ -249,26 +297,37 @@ public class App {
             .password("Test@123#")
             .enhancedSecurityService(false)
             .enhancedMonitorService(false)
+            .enhancedAutomationToolsService(false)
             .userData("dGVzdA==")
             .hostNameSettings(ScalingConfigHostNameSettingsArgs.builder()
-                .hostName("host-name-test")
+                .hostName("host-name")
                 .hostNameStyle("UNIQUE")
                 .build())
             .instanceTags(Map.of("tag", "example"))
+            .tags(Map.ofEntries(
+                Map.entry("createdBy", "Terraform"),
+                Map.entry("owner", "tf")
+            ))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   exampleScalingConfig:
     type: tencentcloud:As:ScalingConfig
+    name: example
     properties:
-      configurationName: example-launch-configuration
-      imageId: ${exampleInstance.images[0].imageId}
+      configurationName: tf-example
+      imageId: ${example.images[0].imageId}
       instanceTypes:
-        - SA1.SMALL1
+        - SA5.MEDIUM4
       projectId: 0
       systemDiskType: CLOUD_PREMIUM
       systemDiskSize: '50'
@@ -281,121 +340,171 @@ resources:
       password: Test@123#
       enhancedSecurityService: false
       enhancedMonitorService: false
+      enhancedAutomationToolsService: false
       userData: dGVzdA==
       hostNameSettings:
-        hostName: host-name-test
+        hostName: host-name
         hostNameStyle: UNIQUE
       instanceTags:
         tag: example
+      tags:
+        createdBy: Terraform
+        owner: tf
 variables:
-  exampleInstance:
+  example:
     fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments:
+      function: tencentcloud:Images:getInstance
+      arguments:
         imageTypes:
           - PUBLIC_IMAGE
-        osName: TencentOS Server 3.2 (Final)
+        osName: TencentOS Server 4 for x86_64
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### charge type
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+data "tencentcloud_images_getinstance" "example" {
+  image_types = ["PUBLIC_IMAGE"]
+  os_name     = "TencentOS Server 4 for x86_64"
+}
+
+resource "tencentcloud_as_scalingconfig" "example" {
+  configuration_name = "tf-example"
+  image_id           = data.tencentcloud_images_getinstance.example.images[0].image_id
+  instance_types     = ["SA5.MEDIUM4"]
+  project_id         = 0
+  system_disk_type   = "CLOUD_PREMIUM"
+  system_disk_size   = "50"
+  data_disks {
+    disk_type = "CLOUD_PREMIUM"
+    disk_size = 50
+  }
+  internet_charge_type              = "TRAFFIC_POSTPAID_BY_HOUR"
+  internet_max_bandwidth_out        = 10
+  public_ip_assigned                = true
+  password                          = "Test@123#"
+  enhanced_security_service         = false
+  enhanced_monitor_service          = false
+  enhanced_automation_tools_service = false
+  user_data                         = "dGVzdA=="
+  host_name_settings = {
+    host_name       = "host-name"
+    host_name_style = "UNIQUE"
+  }
+  instance_tags = {
+    "tag" = "example"
+  }
+  tags = {
+    "createdBy" = "Terraform"
+    "owner"     = "tf"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Using SPOTPAID charge type
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleInstance = tencentcloud.Images.getInstance({
+const example = tencentcloud.images.getInstance({
     imageTypes: ["PUBLIC_IMAGE"],
-    osName: "TencentOS Server 3.2 (Final)",
+    osName: "TencentOS Server 4 for x86_64",
 });
-const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
-    configurationName: "launch-configuration",
-    imageId: exampleInstance.then(exampleInstance => exampleInstance.images?.[0]?.imageId),
-    instanceTypes: ["SA1.SMALL1"],
+const exampleScalingConfig = new tencentcloud.as.ScalingConfig("example", {
+    configurationName: "tf-example",
+    imageId: example.then(example => example.images?.[0]?.imageId),
+    instanceTypes: ["SA5.MEDIUM4"],
     instanceChargeType: "SPOTPAID",
     spotInstanceType: "one-time",
     spotMaxPrice: "1000",
+    tags: {
+        createdBy: "Terraform",
+        owner: "tf",
+    },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_instance = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
-    os_name="TencentOS Server 3.2 (Final)")
-example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
-    configuration_name="launch-configuration",
-    image_id=example_instance.images[0].image_id,
-    instance_types=["SA1.SMALL1"],
+example = tencentcloud.images.get_instance(image_types=["PUBLIC_IMAGE"],
+    os_name="TencentOS Server 4 for x86_64")
+example_scaling_config = tencentcloud.as_.ScalingConfig("example",
+    configuration_name="tf-example",
+    image_id=example.images[0].image_id,
+    instance_types=["SA5.MEDIUM4"],
     instance_charge_type="SPOTPAID",
     spot_instance_type="one-time",
-    spot_max_price="1000")
+    spot_max_price="1000",
+    tags={
+        "createdBy": "Terraform",
+        "owner": "tf",
+    })
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var exampleInstance = Tencentcloud.Images.GetInstance.Invoke(new()
-    {
-        ImageTypes = new[]
-        {
-            "PUBLIC_IMAGE",
-        },
-        OsName = "TencentOS Server 3.2 (Final)",
-    });
-
-    var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new()
-    {
-        ConfigurationName = "launch-configuration",
-        ImageId = exampleInstance.Apply(getInstanceResult => getInstanceResult.Images[0]?.ImageId),
-        InstanceTypes = new[]
-        {
-            "SA1.SMALL1",
-        },
-        InstanceChargeType = "SPOTPAID",
-        SpotInstanceType = "one-time",
-        SpotMaxPrice = "1000",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		exampleInstance, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+		example, err := images.GetInstance(ctx, &images.GetInstanceArgs{
 			ImageTypes: []string{
 				"PUBLIC_IMAGE",
 			},
-			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+			OsName: pulumi.StringRef("TencentOS Server 4 for x86_64"),
 		}, nil)
 		if err != nil {
 			return err
 		}
-		_, err = As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
-			ConfigurationName: pulumi.String("launch-configuration"),
-			ImageId:           pulumi.String(exampleInstance.Images[0].ImageId),
+		_, err = as.NewScalingConfig(ctx, "example", &as.ScalingConfigArgs{
+			ConfigurationName: pulumi.String("tf-example"),
+			ImageId:           pulumi.String(example.Images[0].ImageId),
 			InstanceTypes: pulumi.StringArray{
-				pulumi.String("SA1.SMALL1"),
+				pulumi.String("SA5.MEDIUM4"),
 			},
 			InstanceChargeType: pulumi.String("SPOTPAID"),
 			SpotInstanceType:   pulumi.String("one-time"),
 			SpotMaxPrice:       pulumi.String("1000"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("Terraform"),
+				"owner":     pulumi.String("tf"),
+			},
 		})
 		if err != nil {
 			return err
@@ -404,6 +513,53 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Images.GetInstance.Invoke(new()
+    {
+        ImageTypes = new[]
+        {
+            "PUBLIC_IMAGE",
+        },
+        OsName = "TencentOS Server 4 for x86_64",
+    });
+
+    var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("example", new()
+    {
+        ConfigurationName = "tf-example",
+        ImageId = example.Apply(getInstanceResult => getInstanceResult.Images[0]?.ImageId),
+        InstanceTypes = new[]
+        {
+            "SA5.MEDIUM4",
+        },
+        InstanceChargeType = "SPOTPAID",
+        SpotInstanceType = "one-time",
+        SpotMaxPrice = "1000",
+        Tags = 
+        {
+            { "createdBy", "Terraform" },
+            { "owner", "tf" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -414,8 +570,8 @@ import com.pulumi.tencentcloud.Images.ImagesFunctions;
 import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
 import com.pulumi.tencentcloud.As.ScalingConfig;
 import com.pulumi.tencentcloud.As.ScalingConfigArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -427,81 +583,1527 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var exampleInstance = ImagesFunctions.getInstance(GetInstanceArgs.builder()
+        final var example = ImagesFunctions.getInstance(GetInstanceArgs.builder()
             .imageTypes("PUBLIC_IMAGE")
-            .osName("TencentOS Server 3.2 (Final)")
+            .osName("TencentOS Server 4 for x86_64")
             .build());
 
-        var exampleScalingConfig = new ScalingConfig("exampleScalingConfig", ScalingConfigArgs.builder()        
-            .configurationName("launch-configuration")
-            .imageId(exampleInstance.applyValue(getInstanceResult -> getInstanceResult.images()[0].imageId()))
-            .instanceTypes("SA1.SMALL1")
+        var exampleScalingConfig = new ScalingConfig("exampleScalingConfig", ScalingConfigArgs.builder()
+            .configurationName("tf-example")
+            .imageId(example.images()[0].imageId())
+            .instanceTypes("SA5.MEDIUM4")
             .instanceChargeType("SPOTPAID")
             .spotInstanceType("one-time")
             .spotMaxPrice("1000")
+            .tags(Map.ofEntries(
+                Map.entry("createdBy", "Terraform"),
+                Map.entry("owner", "tf")
+            ))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   exampleScalingConfig:
     type: tencentcloud:As:ScalingConfig
+    name: example
     properties:
-      configurationName: launch-configuration
-      imageId: ${exampleInstance.images[0].imageId}
+      configurationName: tf-example
+      imageId: ${example.images[0].imageId}
       instanceTypes:
-        - SA1.SMALL1
+        - SA5.MEDIUM4
       instanceChargeType: SPOTPAID
       spotInstanceType: one-time
       spotMaxPrice: '1000'
+      tags:
+        createdBy: Terraform
+        owner: tf
 variables:
-  exampleInstance:
+  example:
     fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments:
+      function: tencentcloud:Images:getInstance
+      arguments:
         imageTypes:
           - PUBLIC_IMAGE
-        osName: TencentOS Server 3.2 (Final)
+        osName: TencentOS Server 4 for x86_64
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_images_getinstance" "example" {
+  image_types = ["PUBLIC_IMAGE"]
+  os_name     = "TencentOS Server 4 for x86_64"
+}
+
+resource "tencentcloud_as_scalingconfig" "example" {
+  configuration_name   = "tf-example"
+  image_id             = data.tencentcloud_images_getinstance.example.images[0].image_id
+  instance_types       = ["SA5.MEDIUM4"]
+  instance_charge_type = "SPOTPAID"
+  spot_instance_type   = "one-time"
+  spot_max_price       = "1000"
+  tags = {
+    "createdBy" = "Terraform"
+    "owner"     = "tf"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Using image family
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.as.ScalingConfig("example", {
+    imageFamily: "business-daily-update",
+    configurationName: "as-test-config",
+    diskTypePolicy: "ORIGINAL",
+    enhancedMonitorService: false,
+    enhancedSecurityService: false,
+    enhancedAutomationToolsService: false,
+    instanceTags: {},
+    instanceTypes: ["S5.SMALL2"],
+    internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+    internetMaxBandwidthOut: 0,
+    keyIds: [],
+    projectId: 0,
+    publicIpAssigned: false,
+    securityGroupIds: ["sg-5275dorp"],
+    systemDiskSize: 50,
+    systemDiskType: "CLOUD_BSSD",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.as_.ScalingConfig("example",
+    image_family="business-daily-update",
+    configuration_name="as-test-config",
+    disk_type_policy="ORIGINAL",
+    enhanced_monitor_service=False,
+    enhanced_security_service=False,
+    enhanced_automation_tools_service=False,
+    instance_tags={},
+    instance_types=["S5.SMALL2"],
+    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+    internet_max_bandwidth_out=0,
+    key_ids=[],
+    project_id=0,
+    public_ip_assigned=False,
+    security_group_ids=["sg-5275dorp"],
+    system_disk_size=50,
+    system_disk_type="CLOUD_BSSD")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := as.NewScalingConfig(ctx, "example", &as.ScalingConfigArgs{
+			ImageFamily:                    pulumi.String("business-daily-update"),
+			ConfigurationName:              pulumi.String("as-test-config"),
+			DiskTypePolicy:                 pulumi.String("ORIGINAL"),
+			EnhancedMonitorService:         pulumi.Bool(false),
+			EnhancedSecurityService:        pulumi.Bool(false),
+			EnhancedAutomationToolsService: pulumi.Bool(false),
+			InstanceTags:                   pulumi.StringMap{},
+			InstanceTypes: pulumi.StringArray{
+				pulumi.String("S5.SMALL2"),
+			},
+			InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+			InternetMaxBandwidthOut: pulumi.Int(0),
+			KeyIds:                  pulumi.StringArray{},
+			ProjectId:               pulumi.Int(0),
+			PublicIpAssigned:        pulumi.Bool(false),
+			SecurityGroupIds: pulumi.StringArray{
+				pulumi.String("sg-5275dorp"),
+			},
+			SystemDiskSize: pulumi.Int(50),
+			SystemDiskType: pulumi.String("CLOUD_BSSD"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.As.ScalingConfig("example", new()
+    {
+        ImageFamily = "business-daily-update",
+        ConfigurationName = "as-test-config",
+        DiskTypePolicy = "ORIGINAL",
+        EnhancedMonitorService = false,
+        EnhancedSecurityService = false,
+        EnhancedAutomationToolsService = false,
+        InstanceTags = null,
+        InstanceTypes = new[]
+        {
+            "S5.SMALL2",
+        },
+        InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+        InternetMaxBandwidthOut = 0,
+        KeyIds = new[] {},
+        ProjectId = 0,
+        PublicIpAssigned = false,
+        SecurityGroupIds = new[]
+        {
+            "sg-5275dorp",
+        },
+        SystemDiskSize = 50,
+        SystemDiskType = "CLOUD_BSSD",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.As.ScalingConfig;
+import com.pulumi.tencentcloud.As.ScalingConfigArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new ScalingConfig("example", ScalingConfigArgs.builder()
+            .imageFamily("business-daily-update")
+            .configurationName("as-test-config")
+            .diskTypePolicy("ORIGINAL")
+            .enhancedMonitorService(false)
+            .enhancedSecurityService(false)
+            .enhancedAutomationToolsService(false)
+            .instanceTags(Map.ofEntries(
+            ))
+            .instanceTypes("S5.SMALL2")
+            .internetChargeType("TRAFFIC_POSTPAID_BY_HOUR")
+            .internetMaxBandwidthOut(0)
+            .keyIds()
+            .projectId(0)
+            .publicIpAssigned(false)
+            .securityGroupIds("sg-5275dorp")
+            .systemDiskSize(50)
+            .systemDiskType("CLOUD_BSSD")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:As:ScalingConfig
+    properties:
+      imageFamily: business-daily-update
+      configurationName: as-test-config
+      diskTypePolicy: ORIGINAL
+      enhancedMonitorService: false
+      enhancedSecurityService: false
+      enhancedAutomationToolsService: false
+      instanceTags: {}
+      instanceTypes:
+        - S5.SMALL2
+      internetChargeType: TRAFFIC_POSTPAID_BY_HOUR
+      internetMaxBandwidthOut: 0
+      keyIds: []
+      projectId: 0
+      publicIpAssigned: false
+      securityGroupIds:
+        - sg-5275dorp
+      systemDiskSize: 50
+      systemDiskType: CLOUD_BSSD
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_as_scalingconfig" "example" {
+  image_family                      = "business-daily-update"
+  configuration_name                = "as-test-config"
+  disk_type_policy                  = "ORIGINAL"
+  enhanced_monitor_service          = false
+  enhanced_security_service         = false
+  enhanced_automation_tools_service = false
+  instance_tags                     = {}
+  instance_types                    = ["S5.SMALL2"]
+  internet_charge_type              = "TRAFFIC_POSTPAID_BY_HOUR"
+  internet_max_bandwidth_out        = 0
+  key_ids                           = []
+  project_id                        = 0
+  public_ip_assigned                = false
+  security_group_ids                = ["sg-5275dorp"]
+  system_disk_size                  = 50
+  system_disk_type                  = "CLOUD_BSSD"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Using DisasterRecoverGroupIds
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.as.ScalingConfig("example", {
+    imageFamily: "business-daily-update",
+    configurationName: "as-test-config",
+    diskTypePolicy: "ORIGINAL",
+    enhancedMonitorService: false,
+    enhancedSecurityService: false,
+    enhancedAutomationToolsService: false,
+    disasterRecoverGroupIds: ["ps-e2u4ew"],
+    instanceTags: {},
+    instanceTypes: ["S5.SMALL2"],
+    internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+    internetMaxBandwidthOut: 0,
+    keyIds: [],
+    projectId: 0,
+    publicIpAssigned: false,
+    securityGroupIds: ["sg-5275dorp"],
+    systemDiskSize: 50,
+    systemDiskType: "CLOUD_BSSD",
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.as_.ScalingConfig("example",
+    image_family="business-daily-update",
+    configuration_name="as-test-config",
+    disk_type_policy="ORIGINAL",
+    enhanced_monitor_service=False,
+    enhanced_security_service=False,
+    enhanced_automation_tools_service=False,
+    disaster_recover_group_ids=["ps-e2u4ew"],
+    instance_tags={},
+    instance_types=["S5.SMALL2"],
+    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+    internet_max_bandwidth_out=0,
+    key_ids=[],
+    project_id=0,
+    public_ip_assigned=False,
+    security_group_ids=["sg-5275dorp"],
+    system_disk_size=50,
+    system_disk_type="CLOUD_BSSD")
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := as.NewScalingConfig(ctx, "example", &as.ScalingConfigArgs{
+			ImageFamily:                    pulumi.String("business-daily-update"),
+			ConfigurationName:              pulumi.String("as-test-config"),
+			DiskTypePolicy:                 pulumi.String("ORIGINAL"),
+			EnhancedMonitorService:         pulumi.Bool(false),
+			EnhancedSecurityService:        pulumi.Bool(false),
+			EnhancedAutomationToolsService: pulumi.Bool(false),
+			DisasterRecoverGroupIds: pulumi.StringArray{
+				pulumi.String("ps-e2u4ew"),
+			},
+			InstanceTags: pulumi.StringMap{},
+			InstanceTypes: pulumi.StringArray{
+				pulumi.String("S5.SMALL2"),
+			},
+			InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+			InternetMaxBandwidthOut: pulumi.Int(0),
+			KeyIds:                  pulumi.StringArray{},
+			ProjectId:               pulumi.Int(0),
+			PublicIpAssigned:        pulumi.Bool(false),
+			SecurityGroupIds: pulumi.StringArray{
+				pulumi.String("sg-5275dorp"),
+			},
+			SystemDiskSize: pulumi.Int(50),
+			SystemDiskType: pulumi.String("CLOUD_BSSD"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.As.ScalingConfig("example", new()
+    {
+        ImageFamily = "business-daily-update",
+        ConfigurationName = "as-test-config",
+        DiskTypePolicy = "ORIGINAL",
+        EnhancedMonitorService = false,
+        EnhancedSecurityService = false,
+        EnhancedAutomationToolsService = false,
+        DisasterRecoverGroupIds = new[]
+        {
+            "ps-e2u4ew",
+        },
+        InstanceTags = null,
+        InstanceTypes = new[]
+        {
+            "S5.SMALL2",
+        },
+        InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+        InternetMaxBandwidthOut = 0,
+        KeyIds = new[] {},
+        ProjectId = 0,
+        PublicIpAssigned = false,
+        SecurityGroupIds = new[]
+        {
+            "sg-5275dorp",
+        },
+        SystemDiskSize = 50,
+        SystemDiskType = "CLOUD_BSSD",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.As.ScalingConfig;
+import com.pulumi.tencentcloud.As.ScalingConfigArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var example = new ScalingConfig("example", ScalingConfigArgs.builder()
+            .imageFamily("business-daily-update")
+            .configurationName("as-test-config")
+            .diskTypePolicy("ORIGINAL")
+            .enhancedMonitorService(false)
+            .enhancedSecurityService(false)
+            .enhancedAutomationToolsService(false)
+            .disasterRecoverGroupIds("ps-e2u4ew")
+            .instanceTags(Map.ofEntries(
+            ))
+            .instanceTypes("S5.SMALL2")
+            .internetChargeType("TRAFFIC_POSTPAID_BY_HOUR")
+            .internetMaxBandwidthOut(0)
+            .keyIds()
+            .projectId(0)
+            .publicIpAssigned(false)
+            .securityGroupIds("sg-5275dorp")
+            .systemDiskSize(50)
+            .systemDiskType("CLOUD_BSSD")
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  example:
+    type: tencentcloud:As:ScalingConfig
+    properties:
+      imageFamily: business-daily-update
+      configurationName: as-test-config
+      diskTypePolicy: ORIGINAL
+      enhancedMonitorService: false
+      enhancedSecurityService: false
+      enhancedAutomationToolsService: false
+      disasterRecoverGroupIds:
+        - ps-e2u4ew
+      instanceTags: {}
+      instanceTypes:
+        - S5.SMALL2
+      internetChargeType: TRAFFIC_POSTPAID_BY_HOUR
+      internetMaxBandwidthOut: 0
+      keyIds: []
+      projectId: 0
+      publicIpAssigned: false
+      securityGroupIds:
+        - sg-5275dorp
+      systemDiskSize: 50
+      systemDiskType: CLOUD_BSSD
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_as_scalingconfig" "example" {
+  image_family                      = "business-daily-update"
+  configuration_name                = "as-test-config"
+  disk_type_policy                  = "ORIGINAL"
+  enhanced_monitor_service          = false
+  enhanced_security_service         = false
+  enhanced_automation_tools_service = false
+  disaster_recover_group_ids        = ["ps-e2u4ew"]
+  instance_tags                     = {}
+  instance_types                    = ["S5.SMALL2"]
+  internet_charge_type              = "TRAFFIC_POSTPAID_BY_HOUR"
+  internet_max_bandwidth_out        = 0
+  key_ids                           = []
+  project_id                        = 0
+  public_ip_assigned                = false
+  security_group_ids                = ["sg-5275dorp"]
+  system_disk_size                  = 50
+  system_disk_type                  = "CLOUD_BSSD"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create a CDC configuration
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = tencentcloud.images.getInstance({
+    imageTypes: ["PUBLIC_IMAGE"],
+    osName: "TencentOS Server 4 for x86_64",
+});
+const exampleScalingConfig = new tencentcloud.as.ScalingConfig("example", {
+    configurationName: "tf-example",
+    imageId: example.then(example => example.images?.[0]?.imageId),
+    instanceTypes: ["SA5.MEDIUM4"],
+    projectId: 0,
+    systemDiskType: "CLOUD_PREMIUM",
+    systemDiskSize: 50,
+    instanceChargeType: "CDCPAID",
+    dedicatedClusterId: "cluster-262n63e8",
+    dataDisks: [{
+        diskType: "CLOUD_PREMIUM",
+        diskSize: 50,
+    }],
+    internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+    internetMaxBandwidthOut: 10,
+    publicIpAssigned: true,
+    password: "Test@123#",
+    enhancedSecurityService: false,
+    enhancedMonitorService: false,
+    enhancedAutomationToolsService: false,
+    userData: "dGVzdA==",
+    hostNameSettings: {
+        hostName: "host-name",
+        hostNameStyle: "UNIQUE",
+    },
+    instanceTags: {
+        tag: "example",
+    },
+    tags: {
+        createdBy: "Terraform",
+        owner: "tf",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.images.get_instance(image_types=["PUBLIC_IMAGE"],
+    os_name="TencentOS Server 4 for x86_64")
+example_scaling_config = tencentcloud.as_.ScalingConfig("example",
+    configuration_name="tf-example",
+    image_id=example.images[0].image_id,
+    instance_types=["SA5.MEDIUM4"],
+    project_id=0,
+    system_disk_type="CLOUD_PREMIUM",
+    system_disk_size=50,
+    instance_charge_type="CDCPAID",
+    dedicated_cluster_id="cluster-262n63e8",
+    data_disks=[{
+        "disk_type": "CLOUD_PREMIUM",
+        "disk_size": 50,
+    }],
+    internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+    internet_max_bandwidth_out=10,
+    public_ip_assigned=True,
+    password="Test@123#",
+    enhanced_security_service=False,
+    enhanced_monitor_service=False,
+    enhanced_automation_tools_service=False,
+    user_data="dGVzdA==",
+    host_name_settings={
+        "host_name": "host-name",
+        "host_name_style": "UNIQUE",
+    },
+    instance_tags={
+        "tag": "example",
+    },
+    tags={
+        "createdBy": "Terraform",
+        "owner": "tf",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			ImageTypes: []string{
+				"PUBLIC_IMAGE",
+			},
+			OsName: pulumi.StringRef("TencentOS Server 4 for x86_64"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		_, err = as.NewScalingConfig(ctx, "example", &as.ScalingConfigArgs{
+			ConfigurationName: pulumi.String("tf-example"),
+			ImageId:           pulumi.String(example.Images[0].ImageId),
+			InstanceTypes: pulumi.StringArray{
+				pulumi.String("SA5.MEDIUM4"),
+			},
+			ProjectId:          pulumi.Int(0),
+			SystemDiskType:     pulumi.String("CLOUD_PREMIUM"),
+			SystemDiskSize:     pulumi.Int(50),
+			InstanceChargeType: pulumi.String("CDCPAID"),
+			DedicatedClusterId: pulumi.String("cluster-262n63e8"),
+			DataDisks: as.ScalingConfigDataDiskArray{
+				&as.ScalingConfigDataDiskArgs{
+					DiskType: pulumi.String("CLOUD_PREMIUM"),
+					DiskSize: pulumi.Int(50),
+				},
+			},
+			InternetChargeType:             pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+			InternetMaxBandwidthOut:        pulumi.Int(10),
+			PublicIpAssigned:               pulumi.Bool(true),
+			Password:                       pulumi.String("Test@123#"),
+			EnhancedSecurityService:        pulumi.Bool(false),
+			EnhancedMonitorService:         pulumi.Bool(false),
+			EnhancedAutomationToolsService: pulumi.Bool(false),
+			UserData:                       pulumi.String("dGVzdA=="),
+			HostNameSettings: &as.ScalingConfigHostNameSettingsArgs{
+				HostName:      pulumi.String("host-name"),
+				HostNameStyle: pulumi.String("UNIQUE"),
+			},
+			InstanceTags: pulumi.StringMap{
+				"tag": pulumi.String("example"),
+			},
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("Terraform"),
+				"owner":     pulumi.String("tf"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Images.GetInstance.Invoke(new()
+    {
+        ImageTypes = new[]
+        {
+            "PUBLIC_IMAGE",
+        },
+        OsName = "TencentOS Server 4 for x86_64",
+    });
+
+    var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("example", new()
+    {
+        ConfigurationName = "tf-example",
+        ImageId = example.Apply(getInstanceResult => getInstanceResult.Images[0]?.ImageId),
+        InstanceTypes = new[]
+        {
+            "SA5.MEDIUM4",
+        },
+        ProjectId = 0,
+        SystemDiskType = "CLOUD_PREMIUM",
+        SystemDiskSize = 50,
+        InstanceChargeType = "CDCPAID",
+        DedicatedClusterId = "cluster-262n63e8",
+        DataDisks = new[]
+        {
+            new Tencentcloud.As.Inputs.ScalingConfigDataDiskArgs
+            {
+                DiskType = "CLOUD_PREMIUM",
+                DiskSize = 50,
+            },
+        },
+        InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+        InternetMaxBandwidthOut = 10,
+        PublicIpAssigned = true,
+        Password = "Test@123#",
+        EnhancedSecurityService = false,
+        EnhancedMonitorService = false,
+        EnhancedAutomationToolsService = false,
+        UserData = "dGVzdA==",
+        HostNameSettings = new Tencentcloud.As.Inputs.ScalingConfigHostNameSettingsArgs
+        {
+            HostName = "host-name",
+            HostNameStyle = "UNIQUE",
+        },
+        InstanceTags = 
+        {
+            { "tag", "example" },
+        },
+        Tags = 
+        {
+            { "createdBy", "Terraform" },
+            { "owner", "tf" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Images.ImagesFunctions;
+import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
+import com.pulumi.tencentcloud.As.ScalingConfig;
+import com.pulumi.tencentcloud.As.ScalingConfigArgs;
+import com.pulumi.tencentcloud.As.inputs.ScalingConfigDataDiskArgs;
+import com.pulumi.tencentcloud.As.inputs.ScalingConfigHostNameSettingsArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var example = ImagesFunctions.getInstance(GetInstanceArgs.builder()
+            .imageTypes("PUBLIC_IMAGE")
+            .osName("TencentOS Server 4 for x86_64")
+            .build());
+
+        var exampleScalingConfig = new ScalingConfig("exampleScalingConfig", ScalingConfigArgs.builder()
+            .configurationName("tf-example")
+            .imageId(example.images()[0].imageId())
+            .instanceTypes("SA5.MEDIUM4")
+            .projectId(0)
+            .systemDiskType("CLOUD_PREMIUM")
+            .systemDiskSize(50)
+            .instanceChargeType("CDCPAID")
+            .dedicatedClusterId("cluster-262n63e8")
+            .dataDisks(ScalingConfigDataDiskArgs.builder()
+                .diskType("CLOUD_PREMIUM")
+                .diskSize(50)
+                .build())
+            .internetChargeType("TRAFFIC_POSTPAID_BY_HOUR")
+            .internetMaxBandwidthOut(10)
+            .publicIpAssigned(true)
+            .password("Test@123#")
+            .enhancedSecurityService(false)
+            .enhancedMonitorService(false)
+            .enhancedAutomationToolsService(false)
+            .userData("dGVzdA==")
+            .hostNameSettings(ScalingConfigHostNameSettingsArgs.builder()
+                .hostName("host-name")
+                .hostNameStyle("UNIQUE")
+                .build())
+            .instanceTags(Map.of("tag", "example"))
+            .tags(Map.ofEntries(
+                Map.entry("createdBy", "Terraform"),
+                Map.entry("owner", "tf")
+            ))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  exampleScalingConfig:
+    type: tencentcloud:As:ScalingConfig
+    name: example
+    properties:
+      configurationName: tf-example
+      imageId: ${example.images[0].imageId}
+      instanceTypes:
+        - SA5.MEDIUM4
+      projectId: 0
+      systemDiskType: CLOUD_PREMIUM
+      systemDiskSize: '50'
+      instanceChargeType: CDCPAID
+      dedicatedClusterId: cluster-262n63e8
+      dataDisks:
+        - diskType: CLOUD_PREMIUM
+          diskSize: 50
+      internetChargeType: TRAFFIC_POSTPAID_BY_HOUR
+      internetMaxBandwidthOut: 10
+      publicIpAssigned: true
+      password: Test@123#
+      enhancedSecurityService: false
+      enhancedMonitorService: false
+      enhancedAutomationToolsService: false
+      userData: dGVzdA==
+      hostNameSettings:
+        hostName: host-name
+        hostNameStyle: UNIQUE
+      instanceTags:
+        tag: example
+      tags:
+        createdBy: Terraform
+        owner: tf
+variables:
+  example:
+    fn::invoke:
+      function: tencentcloud:Images:getInstance
+      arguments:
+        imageTypes:
+          - PUBLIC_IMAGE
+        osName: TencentOS Server 4 for x86_64
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_images_getinstance" "example" {
+  image_types = ["PUBLIC_IMAGE"]
+  os_name     = "TencentOS Server 4 for x86_64"
+}
+
+resource "tencentcloud_as_scalingconfig" "example" {
+  configuration_name   = "tf-example"
+  image_id             = data.tencentcloud_images_getinstance.example.images[0].image_id
+  instance_types       = ["SA5.MEDIUM4"]
+  project_id           = 0
+  system_disk_type     = "CLOUD_PREMIUM"
+  system_disk_size     = "50"
+  instance_charge_type = "CDCPAID"
+  dedicated_cluster_id = "cluster-262n63e8"
+  data_disks {
+    disk_type = "CLOUD_PREMIUM"
+    disk_size = 50
+  }
+  internet_charge_type              = "TRAFFIC_POSTPAID_BY_HOUR"
+  internet_max_bandwidth_out        = 10
+  public_ip_assigned                = true
+  password                          = "Test@123#"
+  enhanced_security_service         = false
+  enhanced_monitor_service          = false
+  enhanced_automation_tools_service = false
+  user_data                         = "dGVzdA=="
+  host_name_settings = {
+    host_name       = "host-name"
+    host_name_style = "UNIQUE"
+  }
+  instance_tags = {
+    "tag" = "example"
+  }
+  tags = {
+    "createdBy" = "Terraform"
+    "owner"     = "tf"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create configuration with AntiDDos Eip
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = tencentcloud.images.getInstance({
+    imageTypes: ["PUBLIC_IMAGE"],
+    osName: "TencentOS Server 4 for x86_64",
+});
+const exampleScalingConfig = new tencentcloud.as.ScalingConfig("example", {
+    configurationName: "tf-example",
+    imageId: example.then(example => example.images?.[0]?.imageId),
+    instanceTypes: ["SA5.MEDIUM4"],
+    projectId: 0,
+    systemDiskType: "CLOUD_HSSD",
+    systemDiskSize: 50,
+    securityGroupIds: ["sg-l222vn6w"],
+    dataDisks: [{
+        diskType: "CLOUD_HSSD",
+        diskSize: 50,
+    }],
+    internetChargeType: "BANDWIDTH_PACKAGE",
+    internetMaxBandwidthOut: 100,
+    publicIpAssigned: true,
+    bandwidthPackageId: "bwp-rp2nx3ab",
+    ipv4AddressType: "AntiDDoSEIP",
+    antiDdosPackageId: "bgp-31400fvq",
+    isKeepEip: true,
+    password: "Test@123#",
+    enhancedSecurityService: false,
+    enhancedMonitorService: false,
+    enhancedAutomationToolsService: false,
+    userData: "dGVzdA==",
+    hostNameSettings: {
+        hostName: "host-name",
+        hostNameStyle: "UNIQUE",
+    },
+    instanceTags: {
+        tag: "example",
+    },
+    tags: {
+        createdBy: "Terraform",
+        owner: "tf",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.images.get_instance(image_types=["PUBLIC_IMAGE"],
+    os_name="TencentOS Server 4 for x86_64")
+example_scaling_config = tencentcloud.as_.ScalingConfig("example",
+    configuration_name="tf-example",
+    image_id=example.images[0].image_id,
+    instance_types=["SA5.MEDIUM4"],
+    project_id=0,
+    system_disk_type="CLOUD_HSSD",
+    system_disk_size=50,
+    security_group_ids=["sg-l222vn6w"],
+    data_disks=[{
+        "disk_type": "CLOUD_HSSD",
+        "disk_size": 50,
+    }],
+    internet_charge_type="BANDWIDTH_PACKAGE",
+    internet_max_bandwidth_out=100,
+    public_ip_assigned=True,
+    bandwidth_package_id="bwp-rp2nx3ab",
+    ipv4_address_type="AntiDDoSEIP",
+    anti_ddos_package_id="bgp-31400fvq",
+    is_keep_eip=True,
+    password="Test@123#",
+    enhanced_security_service=False,
+    enhanced_monitor_service=False,
+    enhanced_automation_tools_service=False,
+    user_data="dGVzdA==",
+    host_name_settings={
+        "host_name": "host-name",
+        "host_name_style": "UNIQUE",
+    },
+    instance_tags={
+        "tag": "example",
+    },
+    tags={
+        "createdBy": "Terraform",
+        "owner": "tf",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			ImageTypes: []string{
+				"PUBLIC_IMAGE",
+			},
+			OsName: pulumi.StringRef("TencentOS Server 4 for x86_64"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		_, err = as.NewScalingConfig(ctx, "example", &as.ScalingConfigArgs{
+			ConfigurationName: pulumi.String("tf-example"),
+			ImageId:           pulumi.String(example.Images[0].ImageId),
+			InstanceTypes: pulumi.StringArray{
+				pulumi.String("SA5.MEDIUM4"),
+			},
+			ProjectId:      pulumi.Int(0),
+			SystemDiskType: pulumi.String("CLOUD_HSSD"),
+			SystemDiskSize: pulumi.Int(50),
+			SecurityGroupIds: pulumi.StringArray{
+				pulumi.String("sg-l222vn6w"),
+			},
+			DataDisks: as.ScalingConfigDataDiskArray{
+				&as.ScalingConfigDataDiskArgs{
+					DiskType: pulumi.String("CLOUD_HSSD"),
+					DiskSize: pulumi.Int(50),
+				},
+			},
+			InternetChargeType:             pulumi.String("BANDWIDTH_PACKAGE"),
+			InternetMaxBandwidthOut:        pulumi.Int(100),
+			PublicIpAssigned:               pulumi.Bool(true),
+			BandwidthPackageId:             pulumi.String("bwp-rp2nx3ab"),
+			Ipv4AddressType:                pulumi.String("AntiDDoSEIP"),
+			AntiDdosPackageId:              pulumi.String("bgp-31400fvq"),
+			IsKeepEip:                      pulumi.Bool(true),
+			Password:                       pulumi.String("Test@123#"),
+			EnhancedSecurityService:        pulumi.Bool(false),
+			EnhancedMonitorService:         pulumi.Bool(false),
+			EnhancedAutomationToolsService: pulumi.Bool(false),
+			UserData:                       pulumi.String("dGVzdA=="),
+			HostNameSettings: &as.ScalingConfigHostNameSettingsArgs{
+				HostName:      pulumi.String("host-name"),
+				HostNameStyle: pulumi.String("UNIQUE"),
+			},
+			InstanceTags: pulumi.StringMap{
+				"tag": pulumi.String("example"),
+			},
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("Terraform"),
+				"owner":     pulumi.String("tf"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Images.GetInstance.Invoke(new()
+    {
+        ImageTypes = new[]
+        {
+            "PUBLIC_IMAGE",
+        },
+        OsName = "TencentOS Server 4 for x86_64",
+    });
+
+    var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("example", new()
+    {
+        ConfigurationName = "tf-example",
+        ImageId = example.Apply(getInstanceResult => getInstanceResult.Images[0]?.ImageId),
+        InstanceTypes = new[]
+        {
+            "SA5.MEDIUM4",
+        },
+        ProjectId = 0,
+        SystemDiskType = "CLOUD_HSSD",
+        SystemDiskSize = 50,
+        SecurityGroupIds = new[]
+        {
+            "sg-l222vn6w",
+        },
+        DataDisks = new[]
+        {
+            new Tencentcloud.As.Inputs.ScalingConfigDataDiskArgs
+            {
+                DiskType = "CLOUD_HSSD",
+                DiskSize = 50,
+            },
+        },
+        InternetChargeType = "BANDWIDTH_PACKAGE",
+        InternetMaxBandwidthOut = 100,
+        PublicIpAssigned = true,
+        BandwidthPackageId = "bwp-rp2nx3ab",
+        Ipv4AddressType = "AntiDDoSEIP",
+        AntiDdosPackageId = "bgp-31400fvq",
+        IsKeepEip = true,
+        Password = "Test@123#",
+        EnhancedSecurityService = false,
+        EnhancedMonitorService = false,
+        EnhancedAutomationToolsService = false,
+        UserData = "dGVzdA==",
+        HostNameSettings = new Tencentcloud.As.Inputs.ScalingConfigHostNameSettingsArgs
+        {
+            HostName = "host-name",
+            HostNameStyle = "UNIQUE",
+        },
+        InstanceTags = 
+        {
+            { "tag", "example" },
+        },
+        Tags = 
+        {
+            { "createdBy", "Terraform" },
+            { "owner", "tf" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Images.ImagesFunctions;
+import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
+import com.pulumi.tencentcloud.As.ScalingConfig;
+import com.pulumi.tencentcloud.As.ScalingConfigArgs;
+import com.pulumi.tencentcloud.As.inputs.ScalingConfigDataDiskArgs;
+import com.pulumi.tencentcloud.As.inputs.ScalingConfigHostNameSettingsArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var example = ImagesFunctions.getInstance(GetInstanceArgs.builder()
+            .imageTypes("PUBLIC_IMAGE")
+            .osName("TencentOS Server 4 for x86_64")
+            .build());
+
+        var exampleScalingConfig = new ScalingConfig("exampleScalingConfig", ScalingConfigArgs.builder()
+            .configurationName("tf-example")
+            .imageId(example.images()[0].imageId())
+            .instanceTypes("SA5.MEDIUM4")
+            .projectId(0)
+            .systemDiskType("CLOUD_HSSD")
+            .systemDiskSize(50)
+            .securityGroupIds("sg-l222vn6w")
+            .dataDisks(ScalingConfigDataDiskArgs.builder()
+                .diskType("CLOUD_HSSD")
+                .diskSize(50)
+                .build())
+            .internetChargeType("BANDWIDTH_PACKAGE")
+            .internetMaxBandwidthOut(100)
+            .publicIpAssigned(true)
+            .bandwidthPackageId("bwp-rp2nx3ab")
+            .ipv4AddressType("AntiDDoSEIP")
+            .antiDdosPackageId("bgp-31400fvq")
+            .isKeepEip(true)
+            .password("Test@123#")
+            .enhancedSecurityService(false)
+            .enhancedMonitorService(false)
+            .enhancedAutomationToolsService(false)
+            .userData("dGVzdA==")
+            .hostNameSettings(ScalingConfigHostNameSettingsArgs.builder()
+                .hostName("host-name")
+                .hostNameStyle("UNIQUE")
+                .build())
+            .instanceTags(Map.of("tag", "example"))
+            .tags(Map.ofEntries(
+                Map.entry("createdBy", "Terraform"),
+                Map.entry("owner", "tf")
+            ))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  exampleScalingConfig:
+    type: tencentcloud:As:ScalingConfig
+    name: example
+    properties:
+      configurationName: tf-example
+      imageId: ${example.images[0].imageId}
+      instanceTypes:
+        - SA5.MEDIUM4
+      projectId: 0
+      systemDiskType: CLOUD_HSSD
+      systemDiskSize: '50'
+      securityGroupIds:
+        - sg-l222vn6w
+      dataDisks:
+        - diskType: CLOUD_HSSD
+          diskSize: 50
+      internetChargeType: BANDWIDTH_PACKAGE
+      internetMaxBandwidthOut: 100
+      publicIpAssigned: true
+      bandwidthPackageId: bwp-rp2nx3ab
+      ipv4AddressType: AntiDDoSEIP
+      antiDdosPackageId: bgp-31400fvq
+      isKeepEip: true
+      password: Test@123#
+      enhancedSecurityService: false
+      enhancedMonitorService: false
+      enhancedAutomationToolsService: false
+      userData: dGVzdA==
+      hostNameSettings:
+        hostName: host-name
+        hostNameStyle: UNIQUE
+      instanceTags:
+        tag: example
+      tags:
+        createdBy: Terraform
+        owner: tf
+variables:
+  example:
+    fn::invoke:
+      function: tencentcloud:Images:getInstance
+      arguments:
+        imageTypes:
+          - PUBLIC_IMAGE
+        osName: TencentOS Server 4 for x86_64
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_images_getinstance" "example" {
+  image_types = ["PUBLIC_IMAGE"]
+  os_name     = "TencentOS Server 4 for x86_64"
+}
+
+resource "tencentcloud_as_scalingconfig" "example" {
+  configuration_name = "tf-example"
+  image_id           = data.tencentcloud_images_getinstance.example.images[0].image_id
+  instance_types     = ["SA5.MEDIUM4"]
+  project_id         = 0
+  system_disk_type   = "CLOUD_HSSD"
+  system_disk_size   = "50"
+  security_group_ids = ["sg-l222vn6w"]
+  data_disks {
+    disk_type = "CLOUD_HSSD"
+    disk_size = 50
+  }
+  internet_charge_type              = "BANDWIDTH_PACKAGE"
+  internet_max_bandwidth_out        = 100
+  public_ip_assigned                = true
+  bandwidth_package_id              = "bwp-rp2nx3ab"
+  ipv4_address_type                 = "AntiDDoSEIP"
+  anti_ddos_package_id              = "bgp-31400fvq"
+  is_keep_eip                       = true
+  password                          = "Test@123#"
+  enhanced_security_service         = false
+  enhanced_monitor_service          = false
+  enhanced_automation_tools_service = false
+  user_data                         = "dGVzdA=="
+  host_name_settings = {
+    host_name       = "host-name"
+    host_name_style = "UNIQUE"
+  }
+  instance_tags = {
+    "tag" = "example"
+  }
+  tags = {
+    "createdBy" = "Terraform"
+    "owner"     = "tf"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateLaunchConfiguration](https://www.tencentcloud.com/document/api/377/31001)
+* Read: [DescribeLaunchConfigurations](https://www.tencentcloud.com/document/api/377/30999)
+* Update:
+  - [ModifyLaunchConfigurationAttributes](https://www.tencentcloud.com/document/api/377/30998)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Delete: [DeleteLaunchConfiguration](https://www.tencentcloud.com/document/api/377/31000)
 
 
 ## Create ScalingConfig Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ScalingConfig</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScalingConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ScalingConfig</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScalingConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ScalingConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScalingConfigArgs</a></span><span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ScalingConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                  <span class="nx">cam_role_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">configuration_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">data_disks</span><span class="p">:</span> <span class="nx">Optional[Sequence[_as_.ScalingConfigDataDiskArgs]]</span> = None<span class="p">,</span>
+                  <span class="nx">instance_types</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">instance_tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+                  <span class="nx">bandwidth_package_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">data_disks</span><span class="p">:</span> <span class="nx">Optional[Sequence[ScalingConfigDataDiskArgs]]</span> = None<span class="p">,</span>
+                  <span class="nx">dedicated_cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">disaster_recover_group_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                   <span class="nx">disk_type_policy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">enhanced_automation_tools_service</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
                   <span class="nx">enhanced_monitor_service</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
                   <span class="nx">enhanced_security_service</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-                  <span class="nx">host_name_settings</span><span class="p">:</span> <span class="nx">Optional[_as_.ScalingConfigHostNameSettingsArgs]</span> = None<span class="p">,</span>
+                  <span class="nx">host_name_settings</span><span class="p">:</span> <span class="nx">Optional[ScalingConfigHostNameSettingsArgs]</span> = None<span class="p">,</span>
+                  <span class="nx">internet_charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">image_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">instance_charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">instance_charge_type_prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                   <span class="nx">instance_charge_type_prepaid_renew_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">instance_name_settings</span><span class="p">:</span> <span class="nx">Optional[_as_.ScalingConfigInstanceNameSettingsArgs]</span> = None<span class="p">,</span>
-                  <span class="nx">instance_tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-                  <span class="nx">instance_types</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">internet_charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">instance_name_settings</span><span class="p">:</span> <span class="nx">Optional[ScalingConfigInstanceNameSettingsArgs]</span> = None<span class="p">,</span>
+                  <span class="nx">cam_role_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">anti_ddos_package_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">image_family</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">internet_max_bandwidth_out</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                  <span class="nx">ipv4_address_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                  <span class="nx">is_keep_eip</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
                   <span class="nx">keep_image_login</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
                   <span class="nx">key_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                   <span class="nx">password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -512,44 +2114,51 @@ variables:
                   <span class="nx">spot_max_price</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">system_disk_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                   <span class="nx">system_disk_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">user_data</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ScalingConfig</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScalingConfigArgs</a></span><span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                  <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+                  <span class="nx">user_data</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewScalingConfig</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ScalingConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ScalingConfig</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewScalingConfig</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ScalingConfigArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ScalingConfig</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ScalingConfig</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScalingConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ScalingConfig</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScalingConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ScalingConfig</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScalingConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ScalingConfig</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScalingConfigArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:As:ScalingConfig</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:As:ScalingConfig</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_as_scaling_config&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -570,7 +2179,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -687,11 +2296,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## ScalingConfig Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ScalingConfig resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -707,17 +2324,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a launch configuration.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="imageid_csharp">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>An available image ID for a cvm instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="instancetypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypes_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Types</a>
@@ -725,8 +2332,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Specified types of CVM instances.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="antiddospackageid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddospackageid_csharp" style="color: inherit; text-decoration: inherit;">Anti<wbr>Ddos<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bandwidthpackageid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bandwidth package ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="camrolename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_csharp" style="color: inherit; text-decoration: inherit;">Cam<wbr>Role<wbr>Name</a>
@@ -734,17 +2356,31 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="datadisks_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfigdatadisk">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Config<wbr>Data<wbr>Disk<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#scalingconfigdatadisk">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Config<wbr>Data<wbr>Disk&gt;</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Configurations of data disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicatedclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_csharp" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disasterrecovergroupids_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disasterrecovergroupids_csharp" style="color: inherit; text-decoration: inherit;">Disaster<wbr>Recover<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>Placement group ID. Only one is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktypepolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktypepolicy_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type<wbr>Policy</a>
@@ -752,8 +2388,15 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enhancedautomationtoolsservice_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedautomationtoolsservice_csharp" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Automation<wbr>Tools<wbr>Service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>To specify whether to enable cloud automation tools service.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhancedmonitorservice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedmonitorservice_csharp" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Monitor<wbr>Service</a>
@@ -761,8 +2404,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhancedsecurityservice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedsecurityservice_csharp" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Security<wbr>Service</a>
@@ -770,17 +2412,31 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostnamesettings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostnamesettings_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Name<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfighostnamesettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#scalingconfighostnamesettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings</a></span>
     </dt>
-    <dd><p>Related settings of the cloud server hostname (HostName).</p>
-</dd><dt class="property-optional"
+    <dd>Related settings of the cloud server hostname (HostName).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="imagefamily_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagefamily_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Image Family Name. Either Image ID or Image Family Name must be provided, but not both.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="imageid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An available image ID for a cvm instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type</a>
@@ -788,8 +2444,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -797,8 +2452,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidrenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -806,26 +2460,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancenamesettings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenamesettings_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfiginstancenamesettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#scalingconfiginstancenamesettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings</a></span>
     </dt>
-    <dd><p>Settings of CVM instance names.</p>
-</dd><dt class="property-optional"
+    <dd>Settings of CVM instance names.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetags_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -833,8 +2484,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -842,8 +2492,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4addresstype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4addresstype_csharp" style="color: inherit; text-decoration: inherit;">Ipv4Address<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="iskeepeip_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iskeepeip_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Keep<wbr>Eip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to delete the bound EIP when the instance is destroyed. Range of values: True: retain the EIP; False: not retain the EIP. Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. WanIP is unaffected by this field and will always be deleted with the instance. Changing this field configuration will take effect immediately for resources already bound to a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="keepimagelogin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepimagelogin_csharp" style="color: inherit; text-decoration: inherit;">Keep<wbr>Image<wbr>Login</a>
@@ -851,8 +2516,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyids_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Ids</a>
@@ -860,8 +2524,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -869,8 +2532,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -878,8 +2540,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifys to which project the configuration belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifys to which project the configuration belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipassigned_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipassigned_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Assigned</a>
@@ -887,8 +2548,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
@@ -896,8 +2556,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to which a CVM instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="spotinstancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotinstancetype_csharp" style="color: inherit; text-decoration: inherit;">Spot<wbr>Instance<wbr>Type</a>
@@ -905,8 +2564,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="spotmaxprice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotmaxprice_csharp" style="color: inherit; text-decoration: inherit;">Spot<wbr>Max<wbr>Price</a>
@@ -914,8 +2572,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Size</a>
@@ -923,8 +2580,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Type</a>
@@ -932,8 +2588,15 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
+    </dt>
+    <dd>Tags of launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="userdata_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Data</a>
@@ -941,8 +2604,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ase64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>ase64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -956,17 +2618,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a launch configuration.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="imageid_go">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>An available image ID for a cvm instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="instancetypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypes_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Types</a>
@@ -974,8 +2626,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Specified types of CVM instances.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="antiddospackageid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddospackageid_go" style="color: inherit; text-decoration: inherit;">Anti<wbr>Ddos<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bandwidthpackageid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_go" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bandwidth package ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="camrolename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_go" style="color: inherit; text-decoration: inherit;">Cam<wbr>Role<wbr>Name</a>
@@ -983,8 +2650,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="datadisks_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Disks</a>
@@ -992,8 +2658,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalingconfigdatadisk">[]Scaling<wbr>Config<wbr>Data<wbr>Disk<wbr>Args</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Configurations of data disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicatedclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_go" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disasterrecovergroupids_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disasterrecovergroupids_go" style="color: inherit; text-decoration: inherit;">Disaster<wbr>Recover<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>Placement group ID. Only one is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktypepolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktypepolicy_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type<wbr>Policy</a>
@@ -1001,8 +2682,15 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enhancedautomationtoolsservice_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedautomationtoolsservice_go" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Automation<wbr>Tools<wbr>Service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>To specify whether to enable cloud automation tools service.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhancedmonitorservice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedmonitorservice_go" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Monitor<wbr>Service</a>
@@ -1010,8 +2698,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhancedsecurityservice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedsecurityservice_go" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Security<wbr>Service</a>
@@ -1019,8 +2706,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostnamesettings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostnamesettings_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Name<wbr>Settings</a>
@@ -1028,8 +2714,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalingconfighostnamesettings">Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings<wbr>Args</a></span>
     </dt>
-    <dd><p>Related settings of the cloud server hostname (HostName).</p>
-</dd><dt class="property-optional"
+    <dd>Related settings of the cloud server hostname (HostName).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="imagefamily_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagefamily_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Image Family Name. Either Image ID or Image Family Name must be provided, but not both.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="imageid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An available image ID for a cvm instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type</a>
@@ -1037,8 +2738,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidperiod_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -1046,8 +2746,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidrenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1055,8 +2754,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancenamesettings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenamesettings_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name<wbr>Settings</a>
@@ -1064,17 +2762,15 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalingconfiginstancenamesettings">Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings<wbr>Args</a></span>
     </dt>
-    <dd><p>Settings of CVM instance names.</p>
-</dd><dt class="property-optional"
+    <dd>Settings of CVM instance names.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetags_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -1082,8 +2778,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1091,8 +2786,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4addresstype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4addresstype_go" style="color: inherit; text-decoration: inherit;">Ipv4Address<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="iskeepeip_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iskeepeip_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Keep<wbr>Eip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to delete the bound EIP when the instance is destroyed. Range of values: True: retain the EIP; False: not retain the EIP. Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. WanIP is unaffected by this field and will always be deleted with the instance. Changing this field configuration will take effect immediately for resources already bound to a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="keepimagelogin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepimagelogin_go" style="color: inherit; text-decoration: inherit;">Keep<wbr>Image<wbr>Login</a>
@@ -1100,8 +2810,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyids_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Ids</a>
@@ -1109,8 +2818,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -1118,8 +2826,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1127,8 +2834,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifys to which project the configuration belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifys to which project the configuration belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipassigned_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipassigned_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Assigned</a>
@@ -1136,8 +2842,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
@@ -1145,8 +2850,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to which a CVM instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="spotinstancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotinstancetype_go" style="color: inherit; text-decoration: inherit;">Spot<wbr>Instance<wbr>Type</a>
@@ -1154,8 +2858,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="spotmaxprice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotmaxprice_go" style="color: inherit; text-decoration: inherit;">Spot<wbr>Max<wbr>Price</a>
@@ -1163,8 +2866,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Size</a>
@@ -1172,8 +2874,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Type</a>
@@ -1181,8 +2882,15 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map[string]string</span>
+    </dt>
+    <dd>Tags of launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="userdata_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_go" style="color: inherit; text-decoration: inherit;">User<wbr>Data</a>
@@ -1190,8 +2898,301 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ase64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>ase64-encoded User Data text, the length limit is 16KB.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="configuration_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_name_hcl" style="color: inherit; text-decoration: inherit;">configuration_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of a launch configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_types_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Specified types of CVM instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="anti_ddos_package_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anti_ddos_package_id_hcl" style="color: inherit; text-decoration: inherit;">anti_<wbr>ddos_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bandwidth_package_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_package_id_hcl" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bandwidth package ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cam_role_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cam_role_name_hcl" style="color: inherit; text-decoration: inherit;">cam_<wbr>role_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="data_disks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disks_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>disks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#scalingconfigdatadisk">list(object)</a></span>
+    </dt>
+    <dd>Configurations of data disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicated_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicated_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disaster_recover_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disaster_recover_group_ids_hcl" style="color: inherit; text-decoration: inherit;">disaster_<wbr>recover_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Placement group ID. Only one is allowed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_type_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_policy_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enhanced_automation_tools_service_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhanced_automation_tools_service_hcl" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>automation_<wbr>tools_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>To specify whether to enable cloud automation tools service.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enhanced_monitor_service_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhanced_monitor_service_hcl" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>monitor_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enhanced_security_service_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhanced_security_service_hcl" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>security_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="host_name_settings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_settings_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>name_<wbr>settings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#scalingconfighostnamesettings">object</a></span>
+    </dt>
+    <dd>Related settings of the cloud server hostname (HostName).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="image_family_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_family_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Image Family Name. Either Image ID or Image Family Name must be provided, but not both.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="image_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_id_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An available image ID for a cvm instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_charge_type_prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_charge_type_prepaid_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_prepaid_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_name_settings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_settings_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name_<wbr>settings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#scalingconfiginstancenamesettings">object</a></span>
+    </dt>
+    <dd>Settings of CVM instance names.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_tags_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="internet_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="internet_max_bandwidth_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_max_bandwidth_out_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4_address_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_address_type_hcl" style="color: inherit; text-decoration: inherit;">ipv4_<wbr>address_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_keep_eip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_keep_eip_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>keep_<wbr>eip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to delete the bound EIP when the instance is destroyed. Range of values: True: retain the EIP; False: not retain the EIP. Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. WanIP is unaffected by this field and will always be deleted with the instance. Changing this field configuration will take effect immediately for resources already bound to a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keep_image_login_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keep_image_login_hcl" style="color: inherit; text-decoration: inherit;">keep_<wbr>image_<wbr>login</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_ids_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of keys.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password to access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifys to which project the configuration belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="public_ip_assigned_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_assigned_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>assigned</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_ids_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Security groups to which a CVM instance belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="spot_instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spot_instance_type_hcl" style="color: inherit; text-decoration: inherit;">spot_<wbr>instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="spot_max_price_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spot_max_price_hcl" style="color: inherit; text-decoration: inherit;">spot_<wbr>max_<wbr>price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="system_disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_size_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="system_disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_type_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of launch configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="user_data_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_data_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ase64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1205,17 +3206,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a launch configuration.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="imageid_java">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_java" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>An available image ID for a cvm instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="instancetypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypes_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Types</a>
@@ -1223,8 +3214,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specified types of CVM instances.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="antiddospackageid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddospackageid_java" style="color: inherit; text-decoration: inherit;">anti<wbr>Ddos<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bandwidthpackageid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_java" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Bandwidth package ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="camrolename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_java" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
@@ -1232,17 +3238,31 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="datadisks_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_java" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfigdatadisk">List&lt;Scaling<wbr>Config<wbr>Data<wbr>Disk<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#scalingconfigdatadisk">List&lt;Scaling<wbr>Config<wbr>Data<wbr>Disk&gt;</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Configurations of data disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicatedclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_java" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disasterrecovergroupids_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disasterrecovergroupids_java" style="color: inherit; text-decoration: inherit;">disaster<wbr>Recover<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Placement group ID. Only one is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktypepolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktypepolicy_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type<wbr>Policy</a>
@@ -1250,8 +3270,15 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enhancedautomationtoolsservice_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedautomationtoolsservice_java" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Automation<wbr>Tools<wbr>Service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>To specify whether to enable cloud automation tools service.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhancedmonitorservice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedmonitorservice_java" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Monitor<wbr>Service</a>
@@ -1259,8 +3286,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhancedsecurityservice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedsecurityservice_java" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Security<wbr>Service</a>
@@ -1268,17 +3294,31 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostnamesettings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostnamesettings_java" style="color: inherit; text-decoration: inherit;">host<wbr>Name<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfighostnamesettings">Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#scalingconfighostnamesettings">Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings</a></span>
     </dt>
-    <dd><p>Related settings of the cloud server hostname (HostName).</p>
-</dd><dt class="property-optional"
+    <dd>Related settings of the cloud server hostname (HostName).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="imagefamily_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagefamily_java" style="color: inherit; text-decoration: inherit;">image<wbr>Family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Image Family Name. Either Image ID or Image Family Name must be provided, but not both.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="imageid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_java" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>An available image ID for a cvm instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -1286,8 +3326,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidperiod_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -1295,8 +3334,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidrenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1304,26 +3342,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancenamesettings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenamesettings_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfiginstancenamesettings">Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#scalingconfiginstancenamesettings">Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings</a></span>
     </dt>
-    <dd><p>Settings of CVM instance names.</p>
-</dd><dt class="property-optional"
+    <dd>Settings of CVM instance names.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetags_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -1331,8 +3366,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1340,8 +3374,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4addresstype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4addresstype_java" style="color: inherit; text-decoration: inherit;">ipv4Address<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="iskeepeip_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iskeepeip_java" style="color: inherit; text-decoration: inherit;">is<wbr>Keep<wbr>Eip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to delete the bound EIP when the instance is destroyed. Range of values: True: retain the EIP; False: not retain the EIP. Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. WanIP is unaffected by this field and will always be deleted with the instance. Changing this field configuration will take effect immediately for resources already bound to a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="keepimagelogin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepimagelogin_java" style="color: inherit; text-decoration: inherit;">keep<wbr>Image<wbr>Login</a>
@@ -1349,8 +3398,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyids_java" style="color: inherit; text-decoration: inherit;">key<wbr>Ids</a>
@@ -1358,8 +3406,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1367,8 +3414,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1376,8 +3422,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifys to which project the configuration belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifys to which project the configuration belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipassigned_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipassigned_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Assigned</a>
@@ -1385,8 +3430,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -1394,8 +3438,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to which a CVM instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="spotinstancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotinstancetype_java" style="color: inherit; text-decoration: inherit;">spot<wbr>Instance<wbr>Type</a>
@@ -1403,8 +3446,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="spotmaxprice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotmaxprice_java" style="color: inherit; text-decoration: inherit;">spot<wbr>Max<wbr>Price</a>
@@ -1412,8 +3454,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -1421,8 +3462,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -1430,8 +3470,15 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
+    </dt>
+    <dd>Tags of launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="userdata_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_java" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -1439,8 +3486,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ase64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>ase64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1454,17 +3500,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a launch configuration.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="imageid_nodejs">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">string</span>
-    </dt>
-    <dd><p>An available image ID for a cvm instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="instancetypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypes_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Types</a>
@@ -1472,8 +3508,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Specified types of CVM instances.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="antiddospackageid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddospackageid_nodejs" style="color: inherit; text-decoration: inherit;">anti<wbr>Ddos<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bandwidthpackageid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bandwidth package ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="camrolename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_nodejs" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
@@ -1481,17 +3532,31 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="datadisks_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfigdatadisk">Scaling<wbr>Config<wbr>Data<wbr>Disk<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#scalingconfigdatadisk">Scaling<wbr>Config<wbr>Data<wbr>Disk[]</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Configurations of data disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicatedclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_nodejs" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disasterrecovergroupids_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disasterrecovergroupids_nodejs" style="color: inherit; text-decoration: inherit;">disaster<wbr>Recover<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>Placement group ID. Only one is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktypepolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktypepolicy_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type<wbr>Policy</a>
@@ -1499,8 +3564,15 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enhancedautomationtoolsservice_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedautomationtoolsservice_nodejs" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Automation<wbr>Tools<wbr>Service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>To specify whether to enable cloud automation tools service.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhancedmonitorservice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedmonitorservice_nodejs" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Monitor<wbr>Service</a>
@@ -1508,8 +3580,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhancedsecurityservice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedsecurityservice_nodejs" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Security<wbr>Service</a>
@@ -1517,17 +3588,31 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostnamesettings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostnamesettings_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Name<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfighostnamesettings">Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#scalingconfighostnamesettings">Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings</a></span>
     </dt>
-    <dd><p>Related settings of the cloud server hostname (HostName).</p>
-</dd><dt class="property-optional"
+    <dd>Related settings of the cloud server hostname (HostName).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="imagefamily_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagefamily_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Image Family Name. Either Image ID or Image Family Name must be provided, but not both.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="imageid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An available image ID for a cvm instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -1535,8 +3620,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -1544,8 +3628,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidrenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -1553,26 +3636,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancenamesettings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenamesettings_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfiginstancenamesettings">Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#scalingconfiginstancenamesettings">Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings</a></span>
     </dt>
-    <dd><p>Settings of CVM instance names.</p>
-</dd><dt class="property-optional"
+    <dd>Settings of CVM instance names.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetags_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -1580,8 +3660,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -1589,8 +3668,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4addresstype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4addresstype_nodejs" style="color: inherit; text-decoration: inherit;">ipv4Address<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="iskeepeip_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iskeepeip_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Keep<wbr>Eip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to delete the bound EIP when the instance is destroyed. Range of values: True: retain the EIP; False: not retain the EIP. Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. WanIP is unaffected by this field and will always be deleted with the instance. Changing this field configuration will take effect immediately for resources already bound to a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="keepimagelogin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepimagelogin_nodejs" style="color: inherit; text-decoration: inherit;">keep<wbr>Image<wbr>Login</a>
@@ -1598,8 +3692,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyids_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Ids</a>
@@ -1607,8 +3700,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1616,8 +3708,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1625,8 +3716,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifys to which project the configuration belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifys to which project the configuration belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipassigned_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipassigned_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Assigned</a>
@@ -1634,8 +3724,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -1643,8 +3732,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to which a CVM instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="spotinstancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotinstancetype_nodejs" style="color: inherit; text-decoration: inherit;">spot<wbr>Instance<wbr>Type</a>
@@ -1652,8 +3740,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="spotmaxprice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotmaxprice_nodejs" style="color: inherit; text-decoration: inherit;">spot<wbr>Max<wbr>Price</a>
@@ -1661,8 +3748,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -1670,8 +3756,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -1679,8 +3764,15 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">{[key: string]: string}</span>
+    </dt>
+    <dd>Tags of launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="userdata_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -1688,8 +3780,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ase64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>ase64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1703,17 +3794,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of a launch configuration.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="image_id_python">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_id_python" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">str</span>
-    </dt>
-    <dd><p>An available image ID for a cvm instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="instance_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_types_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>types</a>
@@ -1721,8 +3802,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Specified types of CVM instances.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="anti_ddos_package_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anti_ddos_package_id_python" style="color: inherit; text-decoration: inherit;">anti_<wbr>ddos_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bandwidth_package_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidth_package_id_python" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Bandwidth package ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="cam_role_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cam_role_name_python" style="color: inherit; text-decoration: inherit;">cam_<wbr>role_<wbr>name</a>
@@ -1730,17 +3826,31 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="data_disks_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_disks_python" style="color: inherit; text-decoration: inherit;">data_<wbr>disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfigdatadisk">Scaling<wbr>Config<wbr>Data<wbr>Disk<wbr>Args]</a></span>
+        <span class="property-type"><a href="#scalingconfigdatadisk">Sequence[Scaling<wbr>Config<wbr>Data<wbr>Disk<wbr>Args]</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Configurations of data disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicated_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicated_cluster_id_python" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disaster_recover_group_ids_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disaster_recover_group_ids_python" style="color: inherit; text-decoration: inherit;">disaster_<wbr>recover_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>Placement group ID. Only one is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_type_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_policy_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type_<wbr>policy</a>
@@ -1748,8 +3858,15 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enhanced_automation_tools_service_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhanced_automation_tools_service_python" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>automation_<wbr>tools_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>To specify whether to enable cloud automation tools service.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhanced_monitor_service_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhanced_monitor_service_python" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>monitor_<wbr>service</a>
@@ -1757,8 +3874,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhanced_security_service_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhanced_security_service_python" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>security_<wbr>service</a>
@@ -1766,8 +3882,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_name_settings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_settings_python" style="color: inherit; text-decoration: inherit;">host_<wbr>name_<wbr>settings</a>
@@ -1775,8 +3890,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalingconfighostnamesettings">Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings<wbr>Args</a></span>
     </dt>
-    <dd><p>Related settings of the cloud server hostname (HostName).</p>
-</dd><dt class="property-optional"
+    <dd>Related settings of the cloud server hostname (HostName).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="image_family_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_family_python" style="color: inherit; text-decoration: inherit;">image_<wbr>family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Image Family Name. Either Image ID or Image Family Name must be provided, but not both.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="image_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#image_id_python" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>An available image ID for a cvm instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type</a>
@@ -1784,8 +3914,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_charge_type_prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_prepaid_period_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>period</a>
@@ -1793,8 +3922,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_charge_type_prepaid_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_charge_type_prepaid_renew_flag_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>renew_<wbr>flag</a>
@@ -1802,8 +3930,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_name_settings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_settings_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name_<wbr>settings</a>
@@ -1811,17 +3938,15 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalingconfiginstancenamesettings">Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings<wbr>Args</a></span>
     </dt>
-    <dd><p>Settings of CVM instance names.</p>
-</dd><dt class="property-optional"
+    <dd>Settings of CVM instance names.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_tags_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="internet_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
@@ -1829,8 +3954,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internet_max_bandwidth_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_max_bandwidth_out_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
@@ -1838,8 +3962,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4_address_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4_address_type_python" style="color: inherit; text-decoration: inherit;">ipv4_<wbr>address_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_keep_eip_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_keep_eip_python" style="color: inherit; text-decoration: inherit;">is_<wbr>keep_<wbr>eip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to delete the bound EIP when the instance is destroyed. Range of values: True: retain the EIP; False: not retain the EIP. Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. WanIP is unaffected by this field and will always be deleted with the instance. Changing this field configuration will take effect immediately for resources already bound to a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="keep_image_login_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keep_image_login_python" style="color: inherit; text-decoration: inherit;">keep_<wbr>image_<wbr>login</a>
@@ -1847,8 +3986,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.</dd><dt class="property-optional"
             title="Optional">
         <span id="key_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_ids_python" style="color: inherit; text-decoration: inherit;">key_<wbr>ids</a>
@@ -1856,8 +3994,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -1865,8 +4002,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1874,8 +4010,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifys to which project the configuration belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifys to which project the configuration belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="public_ip_assigned_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_ip_assigned_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>assigned</a>
@@ -1883,8 +4018,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="security_group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_ids_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
@@ -1892,8 +4026,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to which a CVM instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="spot_instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spot_instance_type_python" style="color: inherit; text-decoration: inherit;">spot_<wbr>instance_<wbr>type</a>
@@ -1901,8 +4034,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="spot_max_price_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spot_max_price_python" style="color: inherit; text-decoration: inherit;">spot_<wbr>max_<wbr>price</a>
@@ -1910,8 +4042,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="system_disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_size_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>size</a>
@@ -1919,8 +4050,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="system_disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#system_disk_type_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>type</a>
@@ -1928,8 +4058,15 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Mapping[str, str]</span>
+    </dt>
+    <dd>Tags of launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="user_data_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_data_python" style="color: inherit; text-decoration: inherit;">user_<wbr>data</a>
@@ -1937,8 +4074,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ase64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>ase64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1952,17 +4088,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a launch configuration.</p>
-</dd><dt class="property-required"
-            title="Required">
-        <span id="imageid_yaml">
-<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
-</span>
-        <span class="property-indicator"></span>
-        <span class="property-type">String</span>
-    </dt>
-    <dd><p>An available image ID for a cvm instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="instancetypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypes_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Types</a>
@@ -1970,8 +4096,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specified types of CVM instances.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="antiddospackageid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#antiddospackageid_yaml" style="color: inherit; text-decoration: inherit;">anti<wbr>Ddos<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bandwidthpackageid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bandwidthpackageid_yaml" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Bandwidth package ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="camrolename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#camrolename_yaml" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
@@ -1979,8 +4120,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="datadisks_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datadisks_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
@@ -1988,8 +4128,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalingconfigdatadisk">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Configurations of data disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dedicatedclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dedicatedclusterid_yaml" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disasterrecovergroupids_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disasterrecovergroupids_yaml" style="color: inherit; text-decoration: inherit;">disaster<wbr>Recover<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Placement group ID. Only one is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktypepolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktypepolicy_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type<wbr>Policy</a>
@@ -1997,8 +4152,15 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enhancedautomationtoolsservice_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedautomationtoolsservice_yaml" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Automation<wbr>Tools<wbr>Service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>To specify whether to enable cloud automation tools service.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhancedmonitorservice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedmonitorservice_yaml" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Monitor<wbr>Service</a>
@@ -2006,8 +4168,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="enhancedsecurityservice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enhancedsecurityservice_yaml" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Security<wbr>Service</a>
@@ -2015,8 +4176,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostnamesettings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostnamesettings_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Name<wbr>Settings</a>
@@ -2024,8 +4184,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalingconfighostnamesettings">Property Map</a></span>
     </dt>
-    <dd><p>Related settings of the cloud server hostname (HostName).</p>
-</dd><dt class="property-optional"
+    <dd>Related settings of the cloud server hostname (HostName).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="imagefamily_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imagefamily_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Image Family Name. Either Image ID or Image Family Name must be provided, but not both.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="imageid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#imageid_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>An available image ID for a cvm instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -2033,8 +4208,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -2042,8 +4216,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancechargetypeprepaidrenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancechargetypeprepaidrenewflag_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -2051,8 +4224,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancenamesettings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenamesettings_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name<wbr>Settings</a>
@@ -2060,17 +4232,15 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalingconfiginstancenamesettings">Property Map</a></span>
     </dt>
-    <dd><p>Settings of CVM instance names.</p>
-</dd><dt class="property-optional"
+    <dd>Settings of CVM instance names.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancetags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetags_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetchargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -2078,8 +4248,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="internetmaxbandwidthout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetmaxbandwidthout_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -2087,8 +4256,23 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipv4addresstype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv4addresstype_yaml" style="color: inherit; text-decoration: inherit;">ipv4Address<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="iskeepeip_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#iskeepeip_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Keep<wbr>Eip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to delete the bound EIP when the instance is destroyed. Range of values: True: retain the EIP; False: not retain the EIP. Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. WanIP is unaffected by this field and will always be deleted with the instance. Changing this field configuration will take effect immediately for resources already bound to a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="keepimagelogin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepimagelogin_yaml" style="color: inherit; text-decoration: inherit;">keep<wbr>Image<wbr>Login</a>
@@ -2096,8 +4280,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.</dd><dt class="property-optional"
             title="Optional">
         <span id="keyids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyids_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Ids</a>
@@ -2105,8 +4288,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -2114,8 +4296,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2123,8 +4304,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifys to which project the configuration belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifys to which project the configuration belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="publicipassigned_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicipassigned_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Assigned</a>
@@ -2132,8 +4312,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupids_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -2141,8 +4320,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to which a CVM instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="spotinstancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotinstancetype_yaml" style="color: inherit; text-decoration: inherit;">spot<wbr>Instance<wbr>Type</a>
@@ -2150,8 +4328,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="spotmaxprice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#spotmaxprice_yaml" style="color: inherit; text-decoration: inherit;">spot<wbr>Max<wbr>Price</a>
@@ -2159,8 +4336,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisksize_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -2168,8 +4344,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="systemdisktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#systemdisktype_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -2177,8 +4352,15 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String&gt;</span>
+    </dt>
+    <dd>Tags of launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="userdata_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userdata_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -2186,8 +4368,7 @@ The ScalingConfig resource accepts the following [input](/docs/intro/concepts/in
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ase64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>ase64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2208,8 +4389,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2217,8 +4397,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2226,8 +4405,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current statues of a launch configuration.</p>
-</dd></dl>
+    <dd>Current statues of a launch configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2241,8 +4419,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2250,8 +4427,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2259,8 +4435,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current statues of a launch configuration.</p>
-</dd></dl>
+    <dd>Current statues of a launch configuration.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time when the launch configuration was created.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Current statues of a launch configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2274,8 +4479,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2283,8 +4487,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2292,8 +4495,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current statues of a launch configuration.</p>
-</dd></dl>
+    <dd>Current statues of a launch configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2307,8 +4509,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2316,8 +4517,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2325,8 +4525,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current statues of a launch configuration.</p>
-</dd></dl>
+    <dd>Current statues of a launch configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2340,8 +4539,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2349,8 +4547,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2358,8 +4555,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Current statues of a launch configuration.</p>
-</dd></dl>
+    <dd>Current statues of a launch configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2373,8 +4569,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2382,8 +4577,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2391,8 +4585,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current statues of a launch configuration.</p>
-</dd></dl>
+    <dd>Current statues of a launch configuration.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2402,38 +4595,46 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ScalingConfig resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ScalingConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ScalingConfig</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ScalingConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ScalingConfig</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+        <span class="nx">anti_ddos_package_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">bandwidth_package_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">cam_role_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">configuration_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">data_disks</span><span class="p">:</span> <span class="nx">Optional[Sequence[_as_.ScalingConfigDataDiskArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">data_disks</span><span class="p">:</span> <span class="nx">Optional[Sequence[ScalingConfigDataDiskArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">dedicated_cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">disaster_recover_group_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">disk_type_policy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">enhanced_automation_tools_service</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">enhanced_monitor_service</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">enhanced_security_service</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-        <span class="nx">host_name_settings</span><span class="p">:</span> <span class="nx">Optional[_as_.ScalingConfigHostNameSettingsArgs]</span> = None<span class="p">,</span>
+        <span class="nx">host_name_settings</span><span class="p">:</span> <span class="nx">Optional[ScalingConfigHostNameSettingsArgs]</span> = None<span class="p">,</span>
+        <span class="nx">image_family</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">image_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">instance_charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">instance_charge_type_prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">instance_charge_type_prepaid_renew_flag</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">instance_name_settings</span><span class="p">:</span> <span class="nx">Optional[_as_.ScalingConfigInstanceNameSettingsArgs]</span> = None<span class="p">,</span>
-        <span class="nx">instance_tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">instance_name_settings</span><span class="p">:</span> <span class="nx">Optional[ScalingConfigInstanceNameSettingsArgs]</span> = None<span class="p">,</span>
+        <span class="nx">instance_tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">instance_types</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">internet_charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">internet_max_bandwidth_out</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">ipv4_address_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">is_keep_eip</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">keep_image_login</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">key_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">password</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -2445,105 +4646,145 @@ Get an existing ScalingConfig resource's state with the given name, ID, and opti
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">system_disk_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">system_disk_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">user_data</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> ScalingConfig</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetScalingConfig<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ScalingConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ScalingConfig</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetScalingConfig<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ScalingConfigState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ScalingConfig</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ScalingConfig</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScalingConfigState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ScalingConfig</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScalingConfigState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ScalingConfig</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScalingConfigState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ScalingConfig</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScalingConfigState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingScalingConfig</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:As:ScalingConfig</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_as_scaling_config</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScalingConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScalingConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2551,28 +4792,31 @@ Get an existing ScalingConfig resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScalingConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2580,28 +4824,31 @@ Get an existing ScalingConfig resource's state with the given name, ID, and opti
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScalingConfigState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2615,14 +4862,29 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_antiddospackageid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_antiddospackageid_csharp" style="color: inherit; text-decoration: inherit;">Anti<wbr>Ddos<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_bandwidthpackageid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_csharp" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bandwidth package ID.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_camrolename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_camrolename_csharp" style="color: inherit; text-decoration: inherit;">Cam<wbr>Role<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_configurationname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_configurationname_csharp" style="color: inherit; text-decoration: inherit;">Configuration<wbr>Name</a>
@@ -2630,8 +4892,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2639,17 +4900,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_datadisks_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datadisks_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfigdatadisk">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Config<wbr>Data<wbr>Disk<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#scalingconfigdatadisk">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Config<wbr>Data<wbr>Disk&gt;</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Configurations of data disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dedicatedclusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicatedclusterid_csharp" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disasterrecovergroupids_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disasterrecovergroupids_csharp" style="color: inherit; text-decoration: inherit;">Disaster<wbr>Recover<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>Placement group ID. Only one is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disktypepolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktypepolicy_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type<wbr>Policy</a>
@@ -2657,8 +4932,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enhancedautomationtoolsservice_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhancedautomationtoolsservice_csharp" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Automation<wbr>Tools<wbr>Service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>To specify whether to enable cloud automation tools service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enhancedmonitorservice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhancedmonitorservice_csharp" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Monitor<wbr>Service</a>
@@ -2666,8 +4948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enhancedsecurityservice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhancedsecurityservice_csharp" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Security<wbr>Service</a>
@@ -2675,17 +4956,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostnamesettings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostnamesettings_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Name<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfighostnamesettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#scalingconfighostnamesettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings</a></span>
     </dt>
-    <dd><p>Related settings of the cloud server hostname (HostName).</p>
-</dd><dt class="property-optional"
+    <dd>Related settings of the cloud server hostname (HostName).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_imagefamily_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imagefamily_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Image Family Name. Either Image ID or Image Family Name must be provided, but not both.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imageid_csharp" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
@@ -2693,8 +4980,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An available image ID for a cvm instance.</p>
-</dd><dt class="property-optional"
+    <dd>An available image ID for a cvm instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type</a>
@@ -2702,8 +4988,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -2711,8 +4996,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidrenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidrenewflag_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -2720,26 +5004,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancenamesettings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancenamesettings_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfiginstancenamesettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#scalingconfiginstancenamesettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings</a></span>
     </dt>
-    <dd><p>Settings of CVM instance names.</p>
-</dd><dt class="property-optional"
+    <dd>Settings of CVM instance names.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetags_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetypes_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Types</a>
@@ -2747,8 +5028,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Specified types of CVM instances.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetchargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -2756,8 +5036,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetmaxbandwidthout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetmaxbandwidthout_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -2765,8 +5044,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipv4addresstype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4addresstype_csharp" style="color: inherit; text-decoration: inherit;">Ipv4Address<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_iskeepeip_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_iskeepeip_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Keep<wbr>Eip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to delete the bound EIP when the instance is destroyed. Range of values: True: retain the EIP; False: not retain the EIP. Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. WanIP is unaffected by this field and will always be deleted with the instance. Changing this field configuration will take effect immediately for resources already bound to a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keepimagelogin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepimagelogin_csharp" style="color: inherit; text-decoration: inherit;">Keep<wbr>Image<wbr>Login</a>
@@ -2774,8 +5068,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyids_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Ids</a>
@@ -2783,8 +5076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_csharp" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -2792,8 +5084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2801,8 +5092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifys to which project the configuration belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifys to which project the configuration belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicipassigned_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicipassigned_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Assigned</a>
@@ -2810,8 +5100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
@@ -2819,8 +5108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to which a CVM instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_spotinstancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_spotinstancetype_csharp" style="color: inherit; text-decoration: inherit;">Spot<wbr>Instance<wbr>Type</a>
@@ -2828,8 +5116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_spotmaxprice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_spotmaxprice_csharp" style="color: inherit; text-decoration: inherit;">Spot<wbr>Max<wbr>Price</a>
@@ -2837,8 +5124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2846,8 +5132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current statues of a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Current statues of a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisksize_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Size</a>
@@ -2855,8 +5140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisktype_csharp" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Type</a>
@@ -2864,8 +5148,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
+    </dt>
+    <dd>Tags of launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userdata_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdata_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Data</a>
@@ -2873,8 +5164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ase64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>ase64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2882,14 +5172,29 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_antiddospackageid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_antiddospackageid_go" style="color: inherit; text-decoration: inherit;">Anti<wbr>Ddos<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_bandwidthpackageid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_go" style="color: inherit; text-decoration: inherit;">Bandwidth<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bandwidth package ID.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_camrolename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_camrolename_go" style="color: inherit; text-decoration: inherit;">Cam<wbr>Role<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_configurationname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_configurationname_go" style="color: inherit; text-decoration: inherit;">Configuration<wbr>Name</a>
@@ -2897,8 +5202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2906,8 +5210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_datadisks_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datadisks_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Disks</a>
@@ -2915,8 +5218,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalingconfigdatadisk">[]Scaling<wbr>Config<wbr>Data<wbr>Disk<wbr>Args</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Configurations of data disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dedicatedclusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicatedclusterid_go" style="color: inherit; text-decoration: inherit;">Dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disasterrecovergroupids_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disasterrecovergroupids_go" style="color: inherit; text-decoration: inherit;">Disaster<wbr>Recover<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>Placement group ID. Only one is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disktypepolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktypepolicy_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type<wbr>Policy</a>
@@ -2924,8 +5242,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enhancedautomationtoolsservice_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhancedautomationtoolsservice_go" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Automation<wbr>Tools<wbr>Service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>To specify whether to enable cloud automation tools service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enhancedmonitorservice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhancedmonitorservice_go" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Monitor<wbr>Service</a>
@@ -2933,8 +5258,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enhancedsecurityservice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhancedsecurityservice_go" style="color: inherit; text-decoration: inherit;">Enhanced<wbr>Security<wbr>Service</a>
@@ -2942,8 +5266,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostnamesettings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostnamesettings_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Name<wbr>Settings</a>
@@ -2951,8 +5274,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalingconfighostnamesettings">Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings<wbr>Args</a></span>
     </dt>
-    <dd><p>Related settings of the cloud server hostname (HostName).</p>
-</dd><dt class="property-optional"
+    <dd>Related settings of the cloud server hostname (HostName).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_imagefamily_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imagefamily_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Image Family Name. Either Image ID or Image Family Name must be provided, but not both.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imageid_go" style="color: inherit; text-decoration: inherit;">Image<wbr>Id</a>
@@ -2960,8 +5290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An available image ID for a cvm instance.</p>
-</dd><dt class="property-optional"
+    <dd>An available image ID for a cvm instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type</a>
@@ -2969,8 +5298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidperiod_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -2978,8 +5306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidrenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidrenewflag_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -2987,8 +5314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancenamesettings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancenamesettings_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name<wbr>Settings</a>
@@ -2996,17 +5322,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalingconfiginstancenamesettings">Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings<wbr>Args</a></span>
     </dt>
-    <dd><p>Settings of CVM instance names.</p>
-</dd><dt class="property-optional"
+    <dd>Settings of CVM instance names.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetags_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetypes_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Types</a>
@@ -3014,8 +5338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Specified types of CVM instances.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetchargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -3023,8 +5346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetmaxbandwidthout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetmaxbandwidthout_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -3032,8 +5354,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipv4addresstype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4addresstype_go" style="color: inherit; text-decoration: inherit;">Ipv4Address<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_iskeepeip_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_iskeepeip_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Keep<wbr>Eip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to delete the bound EIP when the instance is destroyed. Range of values: True: retain the EIP; False: not retain the EIP. Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. WanIP is unaffected by this field and will always be deleted with the instance. Changing this field configuration will take effect immediately for resources already bound to a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keepimagelogin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepimagelogin_go" style="color: inherit; text-decoration: inherit;">Keep<wbr>Image<wbr>Login</a>
@@ -3041,8 +5378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyids_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Ids</a>
@@ -3050,8 +5386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_go" style="color: inherit; text-decoration: inherit;">Password</a>
@@ -3059,8 +5394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -3068,8 +5402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifys to which project the configuration belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifys to which project the configuration belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicipassigned_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicipassigned_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Ip<wbr>Assigned</a>
@@ -3077,8 +5410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Ids</a>
@@ -3086,8 +5418,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to which a CVM instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_spotinstancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_spotinstancetype_go" style="color: inherit; text-decoration: inherit;">Spot<wbr>Instance<wbr>Type</a>
@@ -3095,8 +5426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_spotmaxprice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_spotmaxprice_go" style="color: inherit; text-decoration: inherit;">Spot<wbr>Max<wbr>Price</a>
@@ -3104,8 +5434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -3113,8 +5442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current statues of a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Current statues of a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisksize_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Size</a>
@@ -3122,8 +5450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisktype_go" style="color: inherit; text-decoration: inherit;">System<wbr>Disk<wbr>Type</a>
@@ -3131,8 +5458,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map[string]string</span>
+    </dt>
+    <dd>Tags of launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userdata_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdata_go" style="color: inherit; text-decoration: inherit;">User<wbr>Data</a>
@@ -3140,8 +5474,317 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ase64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>ase64-encoded User Data text, the length limit is 16KB.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_anti_ddos_package_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_anti_ddos_package_id_hcl" style="color: inherit; text-decoration: inherit;">anti_<wbr>ddos_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_bandwidth_package_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_package_id_hcl" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bandwidth package ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cam_role_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cam_role_name_hcl" style="color: inherit; text-decoration: inherit;">cam_<wbr>role_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_configuration_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_configuration_name_hcl" style="color: inherit; text-decoration: inherit;">configuration_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of a launch configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time when the launch configuration was created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_data_disks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_data_disks_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>disks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#scalingconfigdatadisk">list(object)</a></span>
+    </dt>
+    <dd>Configurations of data disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dedicated_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicated_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disaster_recover_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disaster_recover_group_ids_hcl" style="color: inherit; text-decoration: inherit;">disaster_<wbr>recover_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Placement group ID. Only one is allowed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disk_type_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_type_policy_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enhanced_automation_tools_service_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhanced_automation_tools_service_hcl" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>automation_<wbr>tools_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>To specify whether to enable cloud automation tools service.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enhanced_monitor_service_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhanced_monitor_service_hcl" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>monitor_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enhanced_security_service_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhanced_security_service_hcl" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>security_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_host_name_settings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_name_settings_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>name_<wbr>settings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#scalingconfighostnamesettings">object</a></span>
+    </dt>
+    <dd>Related settings of the cloud server hostname (HostName).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_image_family_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_image_family_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Image Family Name. Either Image ID or Image Family Name must be provided, but not both.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_image_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_image_id_hcl" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An available image ID for a cvm instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_charge_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_charge_type_prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_charge_type_prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_charge_type_prepaid_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_charge_type_prepaid_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_name_settings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_settings_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name_<wbr>settings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#scalingconfiginstancenamesettings">object</a></span>
+    </dt>
+    <dd>Settings of CVM instance names.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_tags_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_types_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Specified types of CVM instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_internet_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_charge_type_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_internet_max_bandwidth_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_max_bandwidth_out_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipv4_address_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4_address_type_hcl" style="color: inherit; text-decoration: inherit;">ipv4_<wbr>address_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_keep_eip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_keep_eip_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>keep_<wbr>eip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to delete the bound EIP when the instance is destroyed. Range of values: True: retain the EIP; False: not retain the EIP. Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. WanIP is unaffected by this field and will always be deleted with the instance. Changing this field configuration will take effect immediately for resources already bound to a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_keep_image_login_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keep_image_login_hcl" style="color: inherit; text-decoration: inherit;">keep_<wbr>image_<wbr>login</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_key_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_ids_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of keys.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="state_password_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_hcl" style="color: inherit; text-decoration: inherit;">password</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password to access.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifys to which project the configuration belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_public_ip_assigned_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_ip_assigned_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>assigned</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_security_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_group_ids_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Security groups to which a CVM instance belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_spot_instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_spot_instance_type_hcl" style="color: inherit; text-decoration: inherit;">spot_<wbr>instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_spot_max_price_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_spot_max_price_hcl" style="color: inherit; text-decoration: inherit;">spot_<wbr>max_<wbr>price</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Current statues of a launch configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_system_disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_system_disk_size_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_system_disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_system_disk_type_hcl" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of launch configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_user_data_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_data_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ase64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3149,14 +5792,29 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_antiddospackageid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_antiddospackageid_java" style="color: inherit; text-decoration: inherit;">anti<wbr>Ddos<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_bandwidthpackageid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_java" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Bandwidth package ID.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_camrolename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_camrolename_java" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_configurationname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_configurationname_java" style="color: inherit; text-decoration: inherit;">configuration<wbr>Name</a>
@@ -3164,8 +5822,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3173,17 +5830,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_datadisks_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datadisks_java" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfigdatadisk">List&lt;Scaling<wbr>Config<wbr>Data<wbr>Disk<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#scalingconfigdatadisk">List&lt;Scaling<wbr>Config<wbr>Data<wbr>Disk&gt;</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Configurations of data disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dedicatedclusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicatedclusterid_java" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disasterrecovergroupids_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disasterrecovergroupids_java" style="color: inherit; text-decoration: inherit;">disaster<wbr>Recover<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Placement group ID. Only one is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disktypepolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktypepolicy_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type<wbr>Policy</a>
@@ -3191,8 +5862,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enhancedautomationtoolsservice_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhancedautomationtoolsservice_java" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Automation<wbr>Tools<wbr>Service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>To specify whether to enable cloud automation tools service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enhancedmonitorservice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhancedmonitorservice_java" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Monitor<wbr>Service</a>
@@ -3200,8 +5878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enhancedsecurityservice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhancedsecurityservice_java" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Security<wbr>Service</a>
@@ -3209,17 +5886,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostnamesettings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostnamesettings_java" style="color: inherit; text-decoration: inherit;">host<wbr>Name<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfighostnamesettings">Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#scalingconfighostnamesettings">Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings</a></span>
     </dt>
-    <dd><p>Related settings of the cloud server hostname (HostName).</p>
-</dd><dt class="property-optional"
+    <dd>Related settings of the cloud server hostname (HostName).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_imagefamily_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imagefamily_java" style="color: inherit; text-decoration: inherit;">image<wbr>Family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Image Family Name. Either Image ID or Image Family Name must be provided, but not both.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imageid_java" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -3227,8 +5910,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An available image ID for a cvm instance.</p>
-</dd><dt class="property-optional"
+    <dd>An available image ID for a cvm instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -3236,8 +5918,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidperiod_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -3245,8 +5926,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidrenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidrenewflag_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -3254,26 +5934,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancenamesettings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancenamesettings_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfiginstancenamesettings">Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#scalingconfiginstancenamesettings">Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings</a></span>
     </dt>
-    <dd><p>Settings of CVM instance names.</p>
-</dd><dt class="property-optional"
+    <dd>Settings of CVM instance names.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetags_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetypes_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Types</a>
@@ -3281,8 +5958,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specified types of CVM instances.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetchargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -3290,8 +5966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetmaxbandwidthout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetmaxbandwidthout_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -3299,8 +5974,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipv4addresstype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4addresstype_java" style="color: inherit; text-decoration: inherit;">ipv4Address<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_iskeepeip_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_iskeepeip_java" style="color: inherit; text-decoration: inherit;">is<wbr>Keep<wbr>Eip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to delete the bound EIP when the instance is destroyed. Range of values: True: retain the EIP; False: not retain the EIP. Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. WanIP is unaffected by this field and will always be deleted with the instance. Changing this field configuration will take effect immediately for resources already bound to a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keepimagelogin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepimagelogin_java" style="color: inherit; text-decoration: inherit;">keep<wbr>Image<wbr>Login</a>
@@ -3308,8 +5998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyids_java" style="color: inherit; text-decoration: inherit;">key<wbr>Ids</a>
@@ -3317,8 +6006,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_java" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3326,8 +6014,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3335,8 +6022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifys to which project the configuration belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifys to which project the configuration belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicipassigned_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicipassigned_java" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Assigned</a>
@@ -3344,8 +6030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -3353,8 +6038,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to which a CVM instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_spotinstancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_spotinstancetype_java" style="color: inherit; text-decoration: inherit;">spot<wbr>Instance<wbr>Type</a>
@@ -3362,8 +6046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_spotmaxprice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_spotmaxprice_java" style="color: inherit; text-decoration: inherit;">spot<wbr>Max<wbr>Price</a>
@@ -3371,8 +6054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3380,8 +6062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current statues of a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Current statues of a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisksize_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -3389,8 +6070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisktype_java" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -3398,8 +6078,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
+    </dt>
+    <dd>Tags of launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userdata_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdata_java" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -3407,8 +6094,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ase64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>ase64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3416,14 +6102,29 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_antiddospackageid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_antiddospackageid_nodejs" style="color: inherit; text-decoration: inherit;">anti<wbr>Ddos<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_bandwidthpackageid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_nodejs" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bandwidth package ID.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_camrolename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_camrolename_nodejs" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_configurationname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_configurationname_nodejs" style="color: inherit; text-decoration: inherit;">configuration<wbr>Name</a>
@@ -3431,8 +6132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3440,17 +6140,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_datadisks_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datadisks_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfigdatadisk">Scaling<wbr>Config<wbr>Data<wbr>Disk<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#scalingconfigdatadisk">Scaling<wbr>Config<wbr>Data<wbr>Disk[]</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Configurations of data disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dedicatedclusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicatedclusterid_nodejs" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disasterrecovergroupids_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disasterrecovergroupids_nodejs" style="color: inherit; text-decoration: inherit;">disaster<wbr>Recover<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>Placement group ID. Only one is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disktypepolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktypepolicy_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type<wbr>Policy</a>
@@ -3458,8 +6172,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enhancedautomationtoolsservice_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhancedautomationtoolsservice_nodejs" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Automation<wbr>Tools<wbr>Service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>To specify whether to enable cloud automation tools service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enhancedmonitorservice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhancedmonitorservice_nodejs" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Monitor<wbr>Service</a>
@@ -3467,8 +6188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enhancedsecurityservice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhancedsecurityservice_nodejs" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Security<wbr>Service</a>
@@ -3476,17 +6196,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostnamesettings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostnamesettings_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Name<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfighostnamesettings">Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#scalingconfighostnamesettings">Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings</a></span>
     </dt>
-    <dd><p>Related settings of the cloud server hostname (HostName).</p>
-</dd><dt class="property-optional"
+    <dd>Related settings of the cloud server hostname (HostName).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_imagefamily_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imagefamily_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Image Family Name. Either Image ID or Image Family Name must be provided, but not both.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imageid_nodejs" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -3494,8 +6220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An available image ID for a cvm instance.</p>
-</dd><dt class="property-optional"
+    <dd>An available image ID for a cvm instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -3503,8 +6228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -3512,8 +6236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidrenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidrenewflag_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -3521,26 +6244,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancenamesettings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancenamesettings_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfiginstancenamesettings">Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#scalingconfiginstancenamesettings">Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings</a></span>
     </dt>
-    <dd><p>Settings of CVM instance names.</p>
-</dd><dt class="property-optional"
+    <dd>Settings of CVM instance names.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetags_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetypes_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Types</a>
@@ -3548,8 +6268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Specified types of CVM instances.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetchargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -3557,8 +6276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetmaxbandwidthout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetmaxbandwidthout_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -3566,8 +6284,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipv4addresstype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4addresstype_nodejs" style="color: inherit; text-decoration: inherit;">ipv4Address<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_iskeepeip_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_iskeepeip_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Keep<wbr>Eip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to delete the bound EIP when the instance is destroyed. Range of values: True: retain the EIP; False: not retain the EIP. Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. WanIP is unaffected by this field and will always be deleted with the instance. Changing this field configuration will take effect immediately for resources already bound to a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keepimagelogin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepimagelogin_nodejs" style="color: inherit; text-decoration: inherit;">keep<wbr>Image<wbr>Login</a>
@@ -3575,8 +6308,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyids_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Ids</a>
@@ -3584,8 +6316,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_nodejs" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3593,8 +6324,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3602,8 +6332,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifys to which project the configuration belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifys to which project the configuration belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicipassigned_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicipassigned_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Assigned</a>
@@ -3611,8 +6340,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -3620,8 +6348,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to which a CVM instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_spotinstancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_spotinstancetype_nodejs" style="color: inherit; text-decoration: inherit;">spot<wbr>Instance<wbr>Type</a>
@@ -3629,8 +6356,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_spotmaxprice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_spotmaxprice_nodejs" style="color: inherit; text-decoration: inherit;">spot<wbr>Max<wbr>Price</a>
@@ -3638,8 +6364,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3647,8 +6372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current statues of a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Current statues of a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisksize_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -3656,8 +6380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisktype_nodejs" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -3665,8 +6388,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">{[key: string]: string}</span>
+    </dt>
+    <dd>Tags of launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userdata_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdata_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -3674,8 +6404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ase64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>ase64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3683,14 +6412,29 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_anti_ddos_package_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_anti_ddos_package_id_python" style="color: inherit; text-decoration: inherit;">anti_<wbr>ddos_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_bandwidth_package_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidth_package_id_python" style="color: inherit; text-decoration: inherit;">bandwidth_<wbr>package_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Bandwidth package ID.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_cam_role_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cam_role_name_python" style="color: inherit; text-decoration: inherit;">cam_<wbr>role_<wbr>name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_configuration_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_configuration_name_python" style="color: inherit; text-decoration: inherit;">configuration_<wbr>name</a>
@@ -3698,8 +6442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -3707,17 +6450,31 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_data_disks_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_data_disks_python" style="color: inherit; text-decoration: inherit;">data_<wbr>disks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalingconfigdatadisk">Scaling<wbr>Config<wbr>Data<wbr>Disk<wbr>Args]</a></span>
+        <span class="property-type"><a href="#scalingconfigdatadisk">Sequence[Scaling<wbr>Config<wbr>Data<wbr>Disk<wbr>Args]</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Configurations of data disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dedicated_cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicated_cluster_id_python" style="color: inherit; text-decoration: inherit;">dedicated_<wbr>cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disaster_recover_group_ids_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disaster_recover_group_ids_python" style="color: inherit; text-decoration: inherit;">disaster_<wbr>recover_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>Placement group ID. Only one is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disk_type_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disk_type_policy_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type_<wbr>policy</a>
@@ -3725,8 +6482,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enhanced_automation_tools_service_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhanced_automation_tools_service_python" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>automation_<wbr>tools_<wbr>service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>To specify whether to enable cloud automation tools service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enhanced_monitor_service_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhanced_monitor_service_python" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>monitor_<wbr>service</a>
@@ -3734,8 +6498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enhanced_security_service_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhanced_security_service_python" style="color: inherit; text-decoration: inherit;">enhanced_<wbr>security_<wbr>service</a>
@@ -3743,8 +6506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_host_name_settings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_host_name_settings_python" style="color: inherit; text-decoration: inherit;">host_<wbr>name_<wbr>settings</a>
@@ -3752,8 +6514,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalingconfighostnamesettings">Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings<wbr>Args</a></span>
     </dt>
-    <dd><p>Related settings of the cloud server hostname (HostName).</p>
-</dd><dt class="property-optional"
+    <dd>Related settings of the cloud server hostname (HostName).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_image_family_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_image_family_python" style="color: inherit; text-decoration: inherit;">image_<wbr>family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Image Family Name. Either Image ID or Image Family Name must be provided, but not both.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_image_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_image_id_python" style="color: inherit; text-decoration: inherit;">image_<wbr>id</a>
@@ -3761,8 +6530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>An available image ID for a cvm instance.</p>
-</dd><dt class="property-optional"
+    <dd>An available image ID for a cvm instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_charge_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type</a>
@@ -3770,8 +6538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_charge_type_prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_charge_type_prepaid_period_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>period</a>
@@ -3779,8 +6546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_charge_type_prepaid_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_charge_type_prepaid_renew_flag_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>charge_<wbr>type_<wbr>prepaid_<wbr>renew_<wbr>flag</a>
@@ -3788,8 +6554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_name_settings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_settings_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name_<wbr>settings</a>
@@ -3797,17 +6562,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalingconfiginstancenamesettings">Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings<wbr>Args</a></span>
     </dt>
-    <dd><p>Settings of CVM instance names.</p>
-</dd><dt class="property-optional"
+    <dd>Settings of CVM instance names.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_tags_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_types_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>types</a>
@@ -3815,8 +6578,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Specified types of CVM instances.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internet_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_charge_type_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
@@ -3824,8 +6586,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internet_max_bandwidth_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internet_max_bandwidth_out_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>max_<wbr>bandwidth_<wbr>out</a>
@@ -3833,8 +6594,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipv4_address_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4_address_type_python" style="color: inherit; text-decoration: inherit;">ipv4_<wbr>address_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_is_keep_eip_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_keep_eip_python" style="color: inherit; text-decoration: inherit;">is_<wbr>keep_<wbr>eip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to delete the bound EIP when the instance is destroyed. Range of values: True: retain the EIP; False: not retain the EIP. Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. WanIP is unaffected by this field and will always be deleted with the instance. Changing this field configuration will take effect immediately for resources already bound to a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keep_image_login_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keep_image_login_python" style="color: inherit; text-decoration: inherit;">keep_<wbr>image_<wbr>login</a>
@@ -3842,8 +6618,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_key_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_ids_python" style="color: inherit; text-decoration: inherit;">key_<wbr>ids</a>
@@ -3851,8 +6626,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_python" style="color: inherit; text-decoration: inherit;">password</a>
@@ -3860,8 +6634,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -3869,8 +6642,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifys to which project the configuration belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifys to which project the configuration belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_public_ip_assigned_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_public_ip_assigned_python" style="color: inherit; text-decoration: inherit;">public_<wbr>ip_<wbr>assigned</a>
@@ -3878,8 +6650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_security_group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_group_ids_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>ids</a>
@@ -3887,8 +6658,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to which a CVM instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_spot_instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_spot_instance_type_python" style="color: inherit; text-decoration: inherit;">spot_<wbr>instance_<wbr>type</a>
@@ -3896,8 +6666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_spot_max_price_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_spot_max_price_python" style="color: inherit; text-decoration: inherit;">spot_<wbr>max_<wbr>price</a>
@@ -3905,8 +6674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3914,8 +6682,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Current statues of a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Current statues of a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_system_disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_system_disk_size_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>size</a>
@@ -3923,8 +6690,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_system_disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_system_disk_type_python" style="color: inherit; text-decoration: inherit;">system_<wbr>disk_<wbr>type</a>
@@ -3932,8 +6698,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Mapping[str, str]</span>
+    </dt>
+    <dd>Tags of launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_user_data_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_user_data_python" style="color: inherit; text-decoration: inherit;">user_<wbr>data</a>
@@ -3941,8 +6714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ase64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>ase64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3950,14 +6722,29 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_antiddospackageid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_antiddospackageid_yaml" style="color: inherit; text-decoration: inherit;">anti<wbr>Ddos<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_bandwidthpackageid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_bandwidthpackageid_yaml" style="color: inherit; text-decoration: inherit;">bandwidth<wbr>Package<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Bandwidth package ID.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_camrolename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_camrolename_yaml" style="color: inherit; text-decoration: inherit;">cam<wbr>Role<wbr>Name</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CAM role name authorized to access.</p>
-</dd><dt class="property-optional"
+    <dd>CAM role name authorized to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_configurationname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_configurationname_yaml" style="color: inherit; text-decoration: inherit;">configuration<wbr>Name</a>
@@ -3965,8 +6752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3974,8 +6760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the launch configuration was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the launch configuration was created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_datadisks_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_datadisks_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Disks</a>
@@ -3983,8 +6768,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalingconfigdatadisk">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Configurations of data disk.</p>
-</dd><dt class="property-optional"
+    <dd>Configurations of data disk.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dedicatedclusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dedicatedclusterid_yaml" style="color: inherit; text-decoration: inherit;">dedicated<wbr>Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Dedicated Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_disasterrecovergroupids_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disasterrecovergroupids_yaml" style="color: inherit; text-decoration: inherit;">disaster<wbr>Recover<wbr>Group<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Placement group ID. Only one is allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_disktypepolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_disktypepolicy_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type<wbr>Policy</a>
@@ -3992,8 +6792,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Policy of cloud disk type. Valid values: <code>ORIGINAL</code> and <code>AUTOMATIC</code>. Default is <code>ORIGINAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enhancedautomationtoolsservice_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhancedautomationtoolsservice_yaml" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Automation<wbr>Tools<wbr>Service</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>To specify whether to enable cloud automation tools service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enhancedmonitorservice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhancedmonitorservice_yaml" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Monitor<wbr>Service</a>
@@ -4001,8 +6808,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud monitor service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enhancedsecurityservice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enhancedsecurityservice_yaml" style="color: inherit; text-decoration: inherit;">enhanced<wbr>Security<wbr>Service</a>
@@ -4010,8 +6816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>To specify whether to enable cloud security service. Default is <code>TRUE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_hostnamesettings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hostnamesettings_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Name<wbr>Settings</a>
@@ -4019,8 +6824,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalingconfighostnamesettings">Property Map</a></span>
     </dt>
-    <dd><p>Related settings of the cloud server hostname (HostName).</p>
-</dd><dt class="property-optional"
+    <dd>Related settings of the cloud server hostname (HostName).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_imagefamily_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imagefamily_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Image Family Name. Either Image ID or Image Family Name must be provided, but not both.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_imageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_imageid_yaml" style="color: inherit; text-decoration: inherit;">image<wbr>Id</a>
@@ -4028,8 +6840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An available image ID for a cvm instance.</p>
-</dd><dt class="property-optional"
+    <dd>An available image ID for a cvm instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type</a>
@@ -4037,8 +6848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spot_instance_type</code> and <code>spot_max_price</code> at the same time.</p>
-</dd><dt class="property-optional"
+    <dd>Charge type of instance. Valid values are <code>PREPAID</code>, <code>POSTPAID_BY_HOUR</code>, <code>SPOTPAID</code>, <code>CDCPAID</code>. The default is <code>POSTPAID_BY_HOUR</code>. NOTE: <code>SPOTPAID</code> instance must set <code>spotInstanceType</code> and <code>spotMaxPrice</code> at the same time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Period</a>
@@ -4046,8 +6856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>. Valid values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>24</code>, <code>36</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancechargetypeprepaidrenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancechargetypeprepaidrenewflag_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Charge<wbr>Type<wbr>Prepaid<wbr>Renew<wbr>Flag</a>
@@ -4055,8 +6864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Auto renewal flag. Valid values: <code>NOTIFY_AND_AUTO_RENEW</code>: notify upon expiration and renew automatically, <code>NOTIFY_AND_MANUAL_RENEW</code>: notify upon expiration but do not renew automatically, <code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>: neither notify upon expiration nor renew automatically. Default value: <code>NOTIFY_AND_MANUAL_RENEW</code>. If this parameter is specified as <code>NOTIFY_AND_AUTO_RENEW</code>, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancenamesettings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancenamesettings_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name<wbr>Settings</a>
@@ -4064,17 +6872,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalingconfiginstancenamesettings">Property Map</a></span>
     </dt>
-    <dd><p>Settings of CVM instance names.</p>
-</dd><dt class="property-optional"
+    <dd>Settings of CVM instance names.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetags_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of tags used to associate different resources.</p>
-</dd><dt class="property-optional"
+    <dd>A list of tags used to associate different resources.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancetypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancetypes_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Types</a>
@@ -4082,8 +6888,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specified types of CVM instances.</p>
-</dd><dt class="property-optional"
+    <dd>Specified types of CVM instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetchargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetchargetype_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -4091,8 +6896,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Charge types for network traffic. Valid values: <code>BANDWIDTH_PREPAID</code>, <code>TRAFFIC_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_internetmaxbandwidthout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_internetmaxbandwidthout_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Max<wbr>Bandwidth<wbr>Out</a>
@@ -4100,8 +6904,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max bandwidth of Internet access in Mbps. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipv4addresstype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipv4addresstype_yaml" style="color: inherit; text-decoration: inherit;">ipv4Address<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_iskeepeip_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_iskeepeip_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Keep<wbr>Eip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to delete the bound EIP when the instance is destroyed. Range of values: True: retain the EIP; False: not retain the EIP. Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. WanIP is unaffected by this field and will always be deleted with the instance. Changing this field configuration will take effect immediately for resources already bound to a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keepimagelogin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepimagelogin_yaml" style="color: inherit; text-decoration: inherit;">keep<wbr>Image<wbr>Login</a>
@@ -4109,8 +6928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to keep original settings of a CVM image. And it can't be used with password or key_ids together.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_keyids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyids_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Ids</a>
@@ -4118,8 +6936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of keys.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of keys.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_password_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_password_yaml" style="color: inherit; text-decoration: inherit;">password</a>
@@ -4127,8 +6944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password to access.</p>
-</dd><dt class="property-optional"
+    <dd>Password to access.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -4136,8 +6952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifys to which project the configuration belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifys to which project the configuration belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_publicipassigned_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_publicipassigned_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Ip<wbr>Assigned</a>
@@ -4145,8 +6960,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Specify whether to assign an Internet IP address.</p>
-</dd><dt class="property-optional"
+    <dd>Specify whether to assign an Internet IP address.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroupids_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Ids</a>
@@ -4154,8 +6968,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Security groups to which a CVM instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups to which a CVM instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_spotinstancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_spotinstancetype_yaml" style="color: inherit; text-decoration: inherit;">spot<wbr>Instance<wbr>Type</a>
@@ -4163,8 +6976,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of spot instance, only support <code>one-time</code> now. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_spotmaxprice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_spotmaxprice_yaml" style="color: inherit; text-decoration: inherit;">spot<wbr>Max<wbr>Price</a>
@@ -4172,8 +6984,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instance_charge_type is set to <code>SPOTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Max price of a spot instance, is the format of decimal string, for example &quot;0.50&quot;. Note: it only works when instanceChargeType is set to <code>SPOTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -4181,8 +6992,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current statues of a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>Current statues of a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisksize_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Size</a>
@@ -4190,8 +7000,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Volume of system disk in GB. Default is <code>50</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of system disk in GB. Default is <code>50</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_systemdisktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_systemdisktype_yaml" style="color: inherit; text-decoration: inherit;">system<wbr>Disk<wbr>Type</a>
@@ -4199,8 +7008,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Type of a CVM disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. Default is <code>CLOUD_PREMIUM</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String&gt;</span>
+    </dt>
+    <dd>Tags of launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_userdata_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_userdata_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Data</a>
@@ -4208,8 +7024,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ase64-encoded User Data text, the length limit is 16KB.</p>
-</dd></dl>
+    <dd>ase64-encoded User Data text, the length limit is 16KB.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -4224,7 +7039,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="scalingconfigdatadisk">Scaling<wbr>Config<wbr>Data<wbr>Disk</h4>
+<h4 id="scalingconfigdatadisk">
+Scaling<wbr>Config<wbr>Data<wbr>Disk<pulumi-choosable type="language" values="python,go" class="inline">, Scaling<wbr>Config<wbr>Data<wbr>Disk<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4236,8 +7053,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -4245,8 +7061,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_csharp" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -4254,8 +7069,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Types of disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_csharp" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -4263,8 +7077,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd></dl>
+    <dd>Data disk snapshot ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4278,8 +7091,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Size</a>
@@ -4287,8 +7099,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_go" style="color: inherit; text-decoration: inherit;">Disk<wbr>Type</a>
@@ -4296,8 +7107,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Types of disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_go" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -4305,8 +7115,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd></dl>
+    <dd>Data disk snapshot ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="delete_with_instance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#delete_with_instance_hcl" style="color: inherit; text-decoration: inherit;">delete_<wbr>with_<wbr>instance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="disk_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_hcl" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Types of disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snapshot_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Data disk snapshot ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4320,8 +7167,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -4329,8 +7175,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_java" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -4338,8 +7183,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Types of disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_java" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -4347,8 +7191,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd></dl>
+    <dd>Data disk snapshot ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4362,8 +7205,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -4371,8 +7213,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_nodejs" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -4380,8 +7221,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Types of disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_nodejs" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -4389,8 +7229,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd></dl>
+    <dd>Data disk snapshot ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4404,8 +7243,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_size_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>size</a>
@@ -4413,8 +7251,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disk_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disk_type_python" style="color: inherit; text-decoration: inherit;">disk_<wbr>type</a>
@@ -4422,8 +7259,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Types of disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Types of disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshot_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_python" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
@@ -4431,8 +7267,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd></dl>
+    <dd>Data disk snapshot ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4446,8 +7281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether the disk remove after instance terminated. Default is <code>false</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disksize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disksize_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Size</a>
@@ -4455,8 +7289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Volume of disk in GB. Default is <code>0</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Volume of disk in GB. Default is <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="disktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#disktype_yaml" style="color: inherit; text-decoration: inherit;">disk<wbr>Type</a>
@@ -4464,8 +7297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. valid when disk_type_policy is ORIGINAL.</p>
-</dd><dt class="property-optional"
+    <dd>Types of disk. Valid values: <code>CLOUD_PREMIUM</code> and <code>CLOUD_SSD</code>. valid when diskTypePolicy is ORIGINAL.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_yaml" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -4473,12 +7305,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Data disk snapshot ID.</p>
-</dd></dl>
+    <dd>Data disk snapshot ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="scalingconfighostnamesettings">Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings</h4>
+<h4 id="scalingconfighostnamesettings">
+Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings<pulumi-choosable type="language" values="python,go" class="inline">, Scaling<wbr>Config<wbr>Host<wbr>Name<wbr>Settings<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4490,8 +7323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostnamestyle_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostnamestyle_csharp" style="color: inherit; text-decoration: inherit;">Host<wbr>Name<wbr>Style</a>
@@ -4499,8 +7331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The style of the host name of the cloud server, the value range includes <code>ORIGINAL</code> and <code>UNIQUE</code>, the default is <code>ORIGINAL</code>; <code>ORIGINAL</code>, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; <code>UNIQUE</code>, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.</p>
-</dd></dl>
+    <dd>The style of the host name of the cloud server, the value range includes <code>ORIGINAL</code> and <code>UNIQUE</code>, the default is <code>ORIGINAL</code>; <code>ORIGINAL</code>, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; <code>UNIQUE</code>, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4514,8 +7345,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostnamestyle_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostnamestyle_go" style="color: inherit; text-decoration: inherit;">Host<wbr>Name<wbr>Style</a>
@@ -4523,8 +7353,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The style of the host name of the cloud server, the value range includes <code>ORIGINAL</code> and <code>UNIQUE</code>, the default is <code>ORIGINAL</code>; <code>ORIGINAL</code>, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; <code>UNIQUE</code>, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.</p>
-</dd></dl>
+    <dd>The style of the host name of the cloud server, the value range includes <code>ORIGINAL</code> and <code>UNIQUE</code>, the default is <code>ORIGINAL</code>; <code>ORIGINAL</code>, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; <code>UNIQUE</code>, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="host_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="host_name_style_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_style_hcl" style="color: inherit; text-decoration: inherit;">host_<wbr>name_<wbr>style</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The style of the host name of the cloud server, the value range includes <code>ORIGINAL</code> and <code>UNIQUE</code>, the default is <code>ORIGINAL</code>; <code>ORIGINAL</code>, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; <code>UNIQUE</code>, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4538,8 +7389,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostnamestyle_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostnamestyle_java" style="color: inherit; text-decoration: inherit;">host<wbr>Name<wbr>Style</a>
@@ -4547,8 +7397,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The style of the host name of the cloud server, the value range includes <code>ORIGINAL</code> and <code>UNIQUE</code>, the default is <code>ORIGINAL</code>; <code>ORIGINAL</code>, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; <code>UNIQUE</code>, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.</p>
-</dd></dl>
+    <dd>The style of the host name of the cloud server, the value range includes <code>ORIGINAL</code> and <code>UNIQUE</code>, the default is <code>ORIGINAL</code>; <code>ORIGINAL</code>, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; <code>UNIQUE</code>, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4562,8 +7411,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostnamestyle_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostnamestyle_nodejs" style="color: inherit; text-decoration: inherit;">host<wbr>Name<wbr>Style</a>
@@ -4571,8 +7419,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The style of the host name of the cloud server, the value range includes <code>ORIGINAL</code> and <code>UNIQUE</code>, the default is <code>ORIGINAL</code>; <code>ORIGINAL</code>, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; <code>UNIQUE</code>, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.</p>
-</dd></dl>
+    <dd>The style of the host name of the cloud server, the value range includes <code>ORIGINAL</code> and <code>UNIQUE</code>, the default is <code>ORIGINAL</code>; <code>ORIGINAL</code>, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; <code>UNIQUE</code>, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4586,8 +7433,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="host_name_style_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_name_style_python" style="color: inherit; text-decoration: inherit;">host_<wbr>name_<wbr>style</a>
@@ -4595,8 +7441,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The style of the host name of the cloud server, the value range includes <code>ORIGINAL</code> and <code>UNIQUE</code>, the default is <code>ORIGINAL</code>; <code>ORIGINAL</code>, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; <code>UNIQUE</code>, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.</p>
-</dd></dl>
+    <dd>The style of the host name of the cloud server, the value range includes <code>ORIGINAL</code> and <code>UNIQUE</code>, the default is <code>ORIGINAL</code>; <code>ORIGINAL</code>, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; <code>UNIQUE</code>, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4610,8 +7455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.</p>
-</dd><dt class="property-optional"
+    <dd>The host name of the cloud server; dots (.) and dashes (-) cannot be used as the first and last characters of HostName, and cannot be used consecutively; Windows instances are not supported; other types (Linux, etc.) instances: the character length is [2, 40], it is allowed to support multiple dots, and there is a paragraph between the dots, and each paragraph is allowed to consist of letters (no uppercase and lowercase restrictions), numbers and dashes (-). Pure numbers are not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="hostnamestyle_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hostnamestyle_yaml" style="color: inherit; text-decoration: inherit;">host<wbr>Name<wbr>Style</a>
@@ -4619,12 +7463,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The style of the host name of the cloud server, the value range includes <code>ORIGINAL</code> and <code>UNIQUE</code>, the default is <code>ORIGINAL</code>; <code>ORIGINAL</code>, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; <code>UNIQUE</code>, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.</p>
-</dd></dl>
+    <dd>The style of the host name of the cloud server, the value range includes <code>ORIGINAL</code> and <code>UNIQUE</code>, the default is <code>ORIGINAL</code>; <code>ORIGINAL</code>, the AS directly passes the HostName filled in the input parameter to the CVM, and the CVM may append a sequence to the HostName number, the HostName of the instance in the scaling group will conflict; <code>UNIQUE</code>, the HostName filled in as a parameter is equivalent to the host name prefix, AS and CVM will expand it, and the HostName of the instance in the scaling group can be guaranteed to be unique.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="scalingconfiginstancenamesettings">Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings</h4>
+<h4 id="scalingconfiginstancenamesettings">
+Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings<pulumi-choosable type="language" values="python,go" class="inline">, Scaling<wbr>Config<wbr>Instance<wbr>Name<wbr>Settings<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4636,8 +7481,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CVM instance name.</p>
-</dd><dt class="property-optional"
+    <dd>CVM instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancenamestyle_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenamestyle_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name<wbr>Style</a>
@@ -4645,8 +7489,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default is <code>ORIGINAL</code>.</p>
-</dd></dl>
+    <dd>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default is <code>ORIGINAL</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4660,8 +7503,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CVM instance name.</p>
-</dd><dt class="property-optional"
+    <dd>CVM instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancenamestyle_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenamestyle_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name<wbr>Style</a>
@@ -4669,8 +7511,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default is <code>ORIGINAL</code>.</p>
-</dd></dl>
+    <dd>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default is <code>ORIGINAL</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CVM instance name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_name_style_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_style_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name_<wbr>style</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default is <code>ORIGINAL</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4684,8 +7547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CVM instance name.</p>
-</dd><dt class="property-optional"
+    <dd>CVM instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancenamestyle_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenamestyle_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name<wbr>Style</a>
@@ -4693,8 +7555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default is <code>ORIGINAL</code>.</p>
-</dd></dl>
+    <dd>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default is <code>ORIGINAL</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4708,8 +7569,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CVM instance name.</p>
-</dd><dt class="property-optional"
+    <dd>CVM instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancenamestyle_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenamestyle_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name<wbr>Style</a>
@@ -4717,8 +7577,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default is <code>ORIGINAL</code>.</p>
-</dd></dl>
+    <dd>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default is <code>ORIGINAL</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4732,8 +7591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CVM instance name.</p>
-</dd><dt class="property-optional"
+    <dd>CVM instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_name_style_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_style_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name_<wbr>style</a>
@@ -4741,8 +7599,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default is <code>ORIGINAL</code>.</p>
-</dd></dl>
+    <dd>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default is <code>ORIGINAL</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4756,8 +7613,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CVM instance name.</p>
-</dd><dt class="property-optional"
+    <dd>CVM instance name.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancenamestyle_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancenamestyle_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name<wbr>Style</a>
@@ -4765,8 +7621,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default is <code>ORIGINAL</code>.</p>
-</dd></dl>
+    <dd>Type of CVM instance name. Valid values: <code>ORIGINAL</code> and <code>UNIQUE</code>. Default is <code>ORIGINAL</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4782,6 +7637,9 @@ $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig example asc-n32ymck2
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -4791,7 +7649,6 @@ $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig example asc-n32ymck2
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

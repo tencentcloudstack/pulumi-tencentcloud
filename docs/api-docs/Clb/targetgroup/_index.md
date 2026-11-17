@@ -2,9 +2,11 @@
 ---
 title: "TargetGroup"
 title_tag: "tencentcloud.Clb.TargetGroup"
-meta_desc: "Documentation for the tencentcloud.Clb.TargetGroup resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a CLB target group. NOTE: Currently, v1 target group is not supported set healthCheck anymore, Please use v2 target group."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,26 +16,83 @@ no_edit_this_page: true
 
 Provides a resource to create a CLB target group.
 
+> **NOTE:** Currently, `v1` target group is not supported set `healthCheck` anymore, Please use `v2` target group.
+
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Create V1 target group and tags
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const test = new tencentcloud.clb.TargetGroup("test", {
-    port: 33,
-    targetGroupName: "test",
+    targetGroupName: "test-v1",
+    port: 80,
+    type: "v1",
+    tags: {
+        createdBy: "terraform",
+    },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 test = tencentcloud.clb.TargetGroup("test",
-    port=33,
-    target_group_name="test")
+    target_group_name="test-v1",
+    port=80,
+    type="v1",
+    tags={
+        "createdBy": "terraform",
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clb.NewTargetGroup(ctx, "test", &clb.TargetGroupArgs{
+			TargetGroupName: pulumi.String("test-v1"),
+			Port:            pulumi.Int(80),
+			Type:            pulumi.String("v1"),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -44,33 +103,22 @@ return await Deployment.RunAsync(() =>
 {
     var test = new Tencentcloud.Clb.TargetGroup("test", new()
     {
-        Port = 33,
-        TargetGroupName = "test",
+        TargetGroupName = "test-v1",
+        Port = 80,
+        Type = "v1",
+        Tags = 
+        {
+            { "createdBy", "terraform" },
+        },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.NewTargetGroup(ctx, "test", &Clb.TargetGroupArgs{
-			Port:            pulumi.Int(33),
-			TargetGroupName: pulumi.String("test"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -79,8 +127,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clb.TargetGroup;
 import com.pulumi.tencentcloud.Clb.TargetGroupArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,84 +140,1580 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var test = new TargetGroup("test", TargetGroupArgs.builder()        
-            .port(33)
-            .targetGroupName("test")
+        var test = new TargetGroup("test", TargetGroupArgs.builder()
+            .targetGroupName("test-v1")
+            .port(80)
+            .type("v1")
+            .tags(Map.of("createdBy", "terraform"))
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   test:
     type: tencentcloud:Clb:TargetGroup
     properties:
-      port: 33
-      targetGroupName: test
+      targetGroupName: test-v1
+      port: 80
+      type: v1
+      tags:
+        createdBy: terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_targetgroup" "test" {
+  target_group_name = "test-v1"
+  port              = 80
+  type              = "v1"
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create V2 TCP target group with TCP health check
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const tcpTg = new tencentcloud.clb.TargetGroup("tcp_tg", {
+    targetGroupName: "tcp_tg",
+    vpcId: "vpc-xxxxxx",
+    type: "v2",
+    protocol: "TCP",
+    healthCheck: {
+        healthSwitch: true,
+        protocol: "TCP",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+tcp_tg = tencentcloud.clb.TargetGroup("tcp_tg",
+    target_group_name="tcp_tg",
+    vpc_id="vpc-xxxxxx",
+    type="v2",
+    protocol="TCP",
+    health_check={
+        "health_switch": True,
+        "protocol": "TCP",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clb.NewTargetGroup(ctx, "tcp_tg", &clb.TargetGroupArgs{
+			TargetGroupName: pulumi.String("tcp_tg"),
+			VpcId:           pulumi.String("vpc-xxxxxx"),
+			Type:            pulumi.String("v2"),
+			Protocol:        pulumi.String("TCP"),
+			HealthCheck: &clb.TargetGroupHealthCheckArgs{
+				HealthSwitch: pulumi.Bool(true),
+				Protocol:     pulumi.String("TCP"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var tcpTg = new Tencentcloud.Clb.TargetGroup("tcp_tg", new()
+    {
+        TargetGroupName = "tcp_tg",
+        VpcId = "vpc-xxxxxx",
+        Type = "v2",
+        Protocol = "TCP",
+        HealthCheck = new Tencentcloud.Clb.Inputs.TargetGroupHealthCheckArgs
+        {
+            HealthSwitch = true,
+            Protocol = "TCP",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Clb.TargetGroup;
+import com.pulumi.tencentcloud.Clb.TargetGroupArgs;
+import com.pulumi.tencentcloud.Clb.inputs.TargetGroupHealthCheckArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var tcpTg = new TargetGroup("tcpTg", TargetGroupArgs.builder()
+            .targetGroupName("tcp_tg")
+            .vpcId("vpc-xxxxxx")
+            .type("v2")
+            .protocol("TCP")
+            .healthCheck(TargetGroupHealthCheckArgs.builder()
+                .healthSwitch(true)
+                .protocol("TCP")
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  tcpTg:
+    type: tencentcloud:Clb:TargetGroup
+    name: tcp_tg
+    properties:
+      targetGroupName: tcp_tg
+      vpcId: vpc-xxxxxx
+      type: v2
+      protocol: TCP
+      healthCheck:
+        healthSwitch: true
+        protocol: TCP
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_targetgroup" "tcp_tg" {
+  target_group_name = "tcp_tg"
+  vpc_id            = "vpc-xxxxxx"
+  type              = "v2"
+  protocol          = "TCP"
+  health_check = {
+    health_switch = true
+    protocol      = "TCP"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create V2 target group with advanced features
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const testV2 = new tencentcloud.clb.TargetGroup("test_v2", {
+    targetGroupName: "test-v2",
+    vpcId: "vpc-xxxxxx",
+    port: 80,
+    type: "v2",
+    protocol: "HTTP",
+    scheduleAlgorithm: "WRR",
+    sessionExpireTime: 1800,
+    keepaliveEnable: true,
+    weight: 50,
+    healthCheck: {
+        healthSwitch: true,
+        protocol: "HTTP",
+        port: 8080,
+        timeout: 5,
+        gapTime: 11,
+        goodLimit: 4,
+        badLimit: 4,
+        httpCheckPath: "/health",
+        httpCheckMethod: "GET",
+        httpCheckDomain: "test.com",
+        httpCode: 2,
+    },
+    tags: {
+        createdBy: "terraform",
+        env: "production",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+test_v2 = tencentcloud.clb.TargetGroup("test_v2",
+    target_group_name="test-v2",
+    vpc_id="vpc-xxxxxx",
+    port=80,
+    type="v2",
+    protocol="HTTP",
+    schedule_algorithm="WRR",
+    session_expire_time=1800,
+    keepalive_enable=True,
+    weight=50,
+    health_check={
+        "health_switch": True,
+        "protocol": "HTTP",
+        "port": 8080,
+        "timeout": 5,
+        "gap_time": 11,
+        "good_limit": 4,
+        "bad_limit": 4,
+        "http_check_path": "/health",
+        "http_check_method": "GET",
+        "http_check_domain": "test.com",
+        "http_code": 2,
+    },
+    tags={
+        "createdBy": "terraform",
+        "env": "production",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clb.NewTargetGroup(ctx, "test_v2", &clb.TargetGroupArgs{
+			TargetGroupName:   pulumi.String("test-v2"),
+			VpcId:             pulumi.String("vpc-xxxxxx"),
+			Port:              pulumi.Int(80),
+			Type:              pulumi.String("v2"),
+			Protocol:          pulumi.String("HTTP"),
+			ScheduleAlgorithm: pulumi.String("WRR"),
+			SessionExpireTime: pulumi.Int(1800),
+			KeepaliveEnable:   pulumi.Bool(true),
+			Weight:            pulumi.Int(50),
+			HealthCheck: &clb.TargetGroupHealthCheckArgs{
+				HealthSwitch:    pulumi.Bool(true),
+				Protocol:        pulumi.String("HTTP"),
+				Port:            pulumi.Int(8080),
+				Timeout:         pulumi.Int(5),
+				GapTime:         pulumi.Int(11),
+				GoodLimit:       pulumi.Int(4),
+				BadLimit:        pulumi.Int(4),
+				HttpCheckPath:   pulumi.String("/health"),
+				HttpCheckMethod: pulumi.String("GET"),
+				HttpCheckDomain: pulumi.String("test.com"),
+				HttpCode:        pulumi.Int(2),
+			},
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+				"env":       pulumi.String("production"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var testV2 = new Tencentcloud.Clb.TargetGroup("test_v2", new()
+    {
+        TargetGroupName = "test-v2",
+        VpcId = "vpc-xxxxxx",
+        Port = 80,
+        Type = "v2",
+        Protocol = "HTTP",
+        ScheduleAlgorithm = "WRR",
+        SessionExpireTime = 1800,
+        KeepaliveEnable = true,
+        Weight = 50,
+        HealthCheck = new Tencentcloud.Clb.Inputs.TargetGroupHealthCheckArgs
+        {
+            HealthSwitch = true,
+            Protocol = "HTTP",
+            Port = 8080,
+            Timeout = 5,
+            GapTime = 11,
+            GoodLimit = 4,
+            BadLimit = 4,
+            HttpCheckPath = "/health",
+            HttpCheckMethod = "GET",
+            HttpCheckDomain = "test.com",
+            HttpCode = 2,
+        },
+        Tags = 
+        {
+            { "createdBy", "terraform" },
+            { "env", "production" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Clb.TargetGroup;
+import com.pulumi.tencentcloud.Clb.TargetGroupArgs;
+import com.pulumi.tencentcloud.Clb.inputs.TargetGroupHealthCheckArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var testV2 = new TargetGroup("testV2", TargetGroupArgs.builder()
+            .targetGroupName("test-v2")
+            .vpcId("vpc-xxxxxx")
+            .port(80)
+            .type("v2")
+            .protocol("HTTP")
+            .scheduleAlgorithm("WRR")
+            .sessionExpireTime(1800)
+            .keepaliveEnable(true)
+            .weight(50)
+            .healthCheck(TargetGroupHealthCheckArgs.builder()
+                .healthSwitch(true)
+                .protocol("HTTP")
+                .port(8080)
+                .timeout(5)
+                .gapTime(11)
+                .goodLimit(4)
+                .badLimit(4)
+                .httpCheckPath("/health")
+                .httpCheckMethod("GET")
+                .httpCheckDomain("test.com")
+                .httpCode(2)
+                .build())
+            .tags(Map.ofEntries(
+                Map.entry("createdBy", "terraform"),
+                Map.entry("env", "production")
+            ))
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  testV2:
+    type: tencentcloud:Clb:TargetGroup
+    name: test_v2
+    properties:
+      targetGroupName: test-v2
+      vpcId: vpc-xxxxxx
+      port: 80
+      type: v2
+      protocol: HTTP
+      scheduleAlgorithm: WRR
+      sessionExpireTime: 1800
+      keepaliveEnable: true
+      weight: 50
+      healthCheck:
+        healthSwitch: true
+        protocol: HTTP
+        port: 8080
+        timeout: 5
+        gapTime: 11
+        goodLimit: 4
+        badLimit: 4
+        httpCheckPath: /health
+        httpCheckMethod: GET
+        httpCheckDomain: test.com
+        httpCode: 2
+      tags:
+        createdBy: terraform
+        env: production
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_targetgroup" "test_v2" {
+  target_group_name   = "test-v2"
+  vpc_id              = "vpc-xxxxxx"
+  port                = 80
+  type                = "v2"
+  protocol            = "HTTP"
+  schedule_algorithm  = "WRR"
+  session_expire_time = 1800
+  keepalive_enable    = true
+  weight              = 50
+  health_check = {
+    health_switch     = true
+    protocol          = "HTTP"
+    port              = 8080
+    timeout           = 5
+    gap_time          = 11
+    good_limit        = 4
+    bad_limit         = 4
+    http_check_path   = "/health"
+    http_check_method = "GET"
+    http_check_domain = "test.com"
+    http_code         = 2
+  }
+  # 2xx
+  tags = {
+    "createdBy" = "terraform"
+    "env"       = "production"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create V2 HTTP target group with IP hash scheduling
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const ipHash = new tencentcloud.clb.TargetGroup("ip_hash", {
+    targetGroupName: "ip-hash-tg",
+    vpcId: "vpc-xxxxxxx",
+    type: "v2",
+    protocol: "HTTP",
+    scheduleAlgorithm: "IP_HASH",
+    ipVersion: "IPv4",
+    healthCheck: {
+        healthSwitch: true,
+        protocol: "HTTP",
+        httpCheckDomain: "test.com",
+        timeout: 5,
+        gapTime: 11,
+        goodLimit: 4,
+        badLimit: 4,
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+ip_hash = tencentcloud.clb.TargetGroup("ip_hash",
+    target_group_name="ip-hash-tg",
+    vpc_id="vpc-xxxxxxx",
+    type="v2",
+    protocol="HTTP",
+    schedule_algorithm="IP_HASH",
+    ip_version="IPv4",
+    health_check={
+        "health_switch": True,
+        "protocol": "HTTP",
+        "http_check_domain": "test.com",
+        "timeout": 5,
+        "gap_time": 11,
+        "good_limit": 4,
+        "bad_limit": 4,
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clb.NewTargetGroup(ctx, "ip_hash", &clb.TargetGroupArgs{
+			TargetGroupName:   pulumi.String("ip-hash-tg"),
+			VpcId:             pulumi.String("vpc-xxxxxxx"),
+			Type:              pulumi.String("v2"),
+			Protocol:          pulumi.String("HTTP"),
+			ScheduleAlgorithm: pulumi.String("IP_HASH"),
+			IpVersion:         pulumi.String("IPv4"),
+			HealthCheck: &clb.TargetGroupHealthCheckArgs{
+				HealthSwitch:    pulumi.Bool(true),
+				Protocol:        pulumi.String("HTTP"),
+				HttpCheckDomain: pulumi.String("test.com"),
+				Timeout:         pulumi.Int(5),
+				GapTime:         pulumi.Int(11),
+				GoodLimit:       pulumi.Int(4),
+				BadLimit:        pulumi.Int(4),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var ipHash = new Tencentcloud.Clb.TargetGroup("ip_hash", new()
+    {
+        TargetGroupName = "ip-hash-tg",
+        VpcId = "vpc-xxxxxxx",
+        Type = "v2",
+        Protocol = "HTTP",
+        ScheduleAlgorithm = "IP_HASH",
+        IpVersion = "IPv4",
+        HealthCheck = new Tencentcloud.Clb.Inputs.TargetGroupHealthCheckArgs
+        {
+            HealthSwitch = true,
+            Protocol = "HTTP",
+            HttpCheckDomain = "test.com",
+            Timeout = 5,
+            GapTime = 11,
+            GoodLimit = 4,
+            BadLimit = 4,
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Clb.TargetGroup;
+import com.pulumi.tencentcloud.Clb.TargetGroupArgs;
+import com.pulumi.tencentcloud.Clb.inputs.TargetGroupHealthCheckArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var ipHash = new TargetGroup("ipHash", TargetGroupArgs.builder()
+            .targetGroupName("ip-hash-tg")
+            .vpcId("vpc-xxxxxxx")
+            .type("v2")
+            .protocol("HTTP")
+            .scheduleAlgorithm("IP_HASH")
+            .ipVersion("IPv4")
+            .healthCheck(TargetGroupHealthCheckArgs.builder()
+                .healthSwitch(true)
+                .protocol("HTTP")
+                .httpCheckDomain("test.com")
+                .timeout(5)
+                .gapTime(11)
+                .goodLimit(4)
+                .badLimit(4)
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  ipHash:
+    type: tencentcloud:Clb:TargetGroup
+    name: ip_hash
+    properties:
+      targetGroupName: ip-hash-tg
+      vpcId: vpc-xxxxxxx
+      type: v2
+      protocol: HTTP
+      scheduleAlgorithm: IP_HASH
+      ipVersion: IPv4
+      healthCheck:
+        healthSwitch: true
+        protocol: HTTP
+        httpCheckDomain: test.com
+        timeout: 5
+        gapTime: 11
+        goodLimit: 4
+        badLimit: 4
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_targetgroup" "ip_hash" {
+  target_group_name  = "ip-hash-tg"
+  vpc_id             = "vpc-xxxxxxx"
+  type               = "v2"
+  protocol           = "HTTP"
+  schedule_algorithm = "IP_HASH"
+  ip_version         = "IPv4"
+  health_check = {
+    health_switch     = true
+    protocol          = "HTTP"
+    http_check_domain = "test.com"
+    timeout           = 5
+    gap_time          = 11
+    good_limit        = 4
+    bad_limit         = 4
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create V2 full listener target group
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const fullListener = new tencentcloud.clb.TargetGroup("full_listener", {
+    targetGroupName: "full-listener-tg",
+    vpcId: "vpc-xxxxxx",
+    type: "v2",
+    protocol: "TCP",
+    fullListenSwitch: true,
+    healthCheck: {
+        healthSwitch: true,
+        protocol: "HTTP",
+        httpVersion: "HTTP/1.1",
+        httpCheckPath: "/healthz",
+        httpCheckDomain: "test.com",
+        timeout: 5,
+        gapTime: 11,
+        goodLimit: 4,
+        badLimit: 4,
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+full_listener = tencentcloud.clb.TargetGroup("full_listener",
+    target_group_name="full-listener-tg",
+    vpc_id="vpc-xxxxxx",
+    type="v2",
+    protocol="TCP",
+    full_listen_switch=True,
+    health_check={
+        "health_switch": True,
+        "protocol": "HTTP",
+        "http_version": "HTTP/1.1",
+        "http_check_path": "/healthz",
+        "http_check_domain": "test.com",
+        "timeout": 5,
+        "gap_time": 11,
+        "good_limit": 4,
+        "bad_limit": 4,
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clb.NewTargetGroup(ctx, "full_listener", &clb.TargetGroupArgs{
+			TargetGroupName:  pulumi.String("full-listener-tg"),
+			VpcId:            pulumi.String("vpc-xxxxxx"),
+			Type:             pulumi.String("v2"),
+			Protocol:         pulumi.String("TCP"),
+			FullListenSwitch: pulumi.Bool(true),
+			HealthCheck: &clb.TargetGroupHealthCheckArgs{
+				HealthSwitch:    pulumi.Bool(true),
+				Protocol:        pulumi.String("HTTP"),
+				HttpVersion:     pulumi.String("HTTP/1.1"),
+				HttpCheckPath:   pulumi.String("/healthz"),
+				HttpCheckDomain: pulumi.String("test.com"),
+				Timeout:         pulumi.Int(5),
+				GapTime:         pulumi.Int(11),
+				GoodLimit:       pulumi.Int(4),
+				BadLimit:        pulumi.Int(4),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var fullListener = new Tencentcloud.Clb.TargetGroup("full_listener", new()
+    {
+        TargetGroupName = "full-listener-tg",
+        VpcId = "vpc-xxxxxx",
+        Type = "v2",
+        Protocol = "TCP",
+        FullListenSwitch = true,
+        HealthCheck = new Tencentcloud.Clb.Inputs.TargetGroupHealthCheckArgs
+        {
+            HealthSwitch = true,
+            Protocol = "HTTP",
+            HttpVersion = "HTTP/1.1",
+            HttpCheckPath = "/healthz",
+            HttpCheckDomain = "test.com",
+            Timeout = 5,
+            GapTime = 11,
+            GoodLimit = 4,
+            BadLimit = 4,
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Clb.TargetGroup;
+import com.pulumi.tencentcloud.Clb.TargetGroupArgs;
+import com.pulumi.tencentcloud.Clb.inputs.TargetGroupHealthCheckArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var fullListener = new TargetGroup("fullListener", TargetGroupArgs.builder()
+            .targetGroupName("full-listener-tg")
+            .vpcId("vpc-xxxxxx")
+            .type("v2")
+            .protocol("TCP")
+            .fullListenSwitch(true)
+            .healthCheck(TargetGroupHealthCheckArgs.builder()
+                .healthSwitch(true)
+                .protocol("HTTP")
+                .httpVersion("HTTP/1.1")
+                .httpCheckPath("/healthz")
+                .httpCheckDomain("test.com")
+                .timeout(5)
+                .gapTime(11)
+                .goodLimit(4)
+                .badLimit(4)
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  fullListener:
+    type: tencentcloud:Clb:TargetGroup
+    name: full_listener
+    properties:
+      targetGroupName: full-listener-tg
+      vpcId: vpc-xxxxxx
+      type: v2
+      protocol: TCP
+      fullListenSwitch: true
+      healthCheck:
+        healthSwitch: true
+        protocol: HTTP
+        httpVersion: HTTP/1.1
+        httpCheckPath: /healthz
+        httpCheckDomain: test.com
+        timeout: 5
+        gapTime: 11
+        goodLimit: 4
+        badLimit: 4
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_targetgroup" "full_listener" {
+  target_group_name  = "full-listener-tg"
+  vpc_id             = "vpc-xxxxxx"
+  type               = "v2"
+  protocol           = "TCP"
+  full_listen_switch = true
+  health_check = {
+    health_switch     = true
+    protocol          = "HTTP"
+    http_version      = "HTTP/1.1"
+    http_check_path   = "/healthz"
+    http_check_domain = "test.com"
+    timeout           = 5
+    gap_time          = 11
+    good_limit        = 4
+    bad_limit         = 4
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create IPv6 target group
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const ipv6 = new tencentcloud.clb.TargetGroup("ipv6", {
+    targetGroupName: "ipv6-tg",
+    vpcId: "vpc-xxxxxx",
+    type: "v2",
+    protocol: "HTTP",
+    ipVersion: "IPv6",
+    healthCheck: {
+        healthSwitch: true,
+        protocol: "HTTP",
+        httpCheckDomain: "test.com",
+        timeout: 5,
+        gapTime: 11,
+        goodLimit: 4,
+        badLimit: 4,
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+ipv6 = tencentcloud.clb.TargetGroup("ipv6",
+    target_group_name="ipv6-tg",
+    vpc_id="vpc-xxxxxx",
+    type="v2",
+    protocol="HTTP",
+    ip_version="IPv6",
+    health_check={
+        "health_switch": True,
+        "protocol": "HTTP",
+        "http_check_domain": "test.com",
+        "timeout": 5,
+        "gap_time": 11,
+        "good_limit": 4,
+        "bad_limit": 4,
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clb.NewTargetGroup(ctx, "ipv6", &clb.TargetGroupArgs{
+			TargetGroupName: pulumi.String("ipv6-tg"),
+			VpcId:           pulumi.String("vpc-xxxxxx"),
+			Type:            pulumi.String("v2"),
+			Protocol:        pulumi.String("HTTP"),
+			IpVersion:       pulumi.String("IPv6"),
+			HealthCheck: &clb.TargetGroupHealthCheckArgs{
+				HealthSwitch:    pulumi.Bool(true),
+				Protocol:        pulumi.String("HTTP"),
+				HttpCheckDomain: pulumi.String("test.com"),
+				Timeout:         pulumi.Int(5),
+				GapTime:         pulumi.Int(11),
+				GoodLimit:       pulumi.Int(4),
+				BadLimit:        pulumi.Int(4),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var ipv6 = new Tencentcloud.Clb.TargetGroup("ipv6", new()
+    {
+        TargetGroupName = "ipv6-tg",
+        VpcId = "vpc-xxxxxx",
+        Type = "v2",
+        Protocol = "HTTP",
+        IpVersion = "IPv6",
+        HealthCheck = new Tencentcloud.Clb.Inputs.TargetGroupHealthCheckArgs
+        {
+            HealthSwitch = true,
+            Protocol = "HTTP",
+            HttpCheckDomain = "test.com",
+            Timeout = 5,
+            GapTime = 11,
+            GoodLimit = 4,
+            BadLimit = 4,
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Clb.TargetGroup;
+import com.pulumi.tencentcloud.Clb.TargetGroupArgs;
+import com.pulumi.tencentcloud.Clb.inputs.TargetGroupHealthCheckArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var ipv6 = new TargetGroup("ipv6", TargetGroupArgs.builder()
+            .targetGroupName("ipv6-tg")
+            .vpcId("vpc-xxxxxx")
+            .type("v2")
+            .protocol("HTTP")
+            .ipVersion("IPv6")
+            .healthCheck(TargetGroupHealthCheckArgs.builder()
+                .healthSwitch(true)
+                .protocol("HTTP")
+                .httpCheckDomain("test.com")
+                .timeout(5)
+                .gapTime(11)
+                .goodLimit(4)
+                .badLimit(4)
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  ipv6:
+    type: tencentcloud:Clb:TargetGroup
+    properties:
+      targetGroupName: ipv6-tg
+      vpcId: vpc-xxxxxx
+      type: v2
+      protocol: HTTP
+      ipVersion: IPv6
+      healthCheck:
+        healthSwitch: true
+        protocol: HTTP
+        httpCheckDomain: test.com
+        timeout: 5
+        gapTime: 11
+        goodLimit: 4
+        badLimit: 4
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_targetgroup" "ipv6" {
+  target_group_name = "ipv6-tg"
+  vpc_id            = "vpc-xxxxxx"
+  type              = "v2"
+  protocol          = "HTTP"
+  ip_version        = "IPv6"
+  health_check = {
+    health_switch     = true
+    protocol          = "HTTP"
+    http_check_domain = "test.com"
+    timeout           = 5
+    gap_time          = 11
+    good_limit        = 4
+    bad_limit         = 4
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### Create V2 target group with SNAT enabled
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const snat = new tencentcloud.clb.TargetGroup("snat", {
+    targetGroupName: "snat-tg",
+    vpcId: "vpc-xxxxxx",
+    type: "v2",
+    protocol: "TCP",
+    snatEnable: true,
+    healthCheck: {
+        healthSwitch: true,
+        protocol: "TCP",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+snat = tencentcloud.clb.TargetGroup("snat",
+    target_group_name="snat-tg",
+    vpc_id="vpc-xxxxxx",
+    type="v2",
+    protocol="TCP",
+    snat_enable=True,
+    health_check={
+        "health_switch": True,
+        "protocol": "TCP",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clb.NewTargetGroup(ctx, "snat", &clb.TargetGroupArgs{
+			TargetGroupName: pulumi.String("snat-tg"),
+			VpcId:           pulumi.String("vpc-xxxxxx"),
+			Type:            pulumi.String("v2"),
+			Protocol:        pulumi.String("TCP"),
+			SnatEnable:      pulumi.Bool(true),
+			HealthCheck: &clb.TargetGroupHealthCheckArgs{
+				HealthSwitch: pulumi.Bool(true),
+				Protocol:     pulumi.String("TCP"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var snat = new Tencentcloud.Clb.TargetGroup("snat", new()
+    {
+        TargetGroupName = "snat-tg",
+        VpcId = "vpc-xxxxxx",
+        Type = "v2",
+        Protocol = "TCP",
+        SnatEnable = true,
+        HealthCheck = new Tencentcloud.Clb.Inputs.TargetGroupHealthCheckArgs
+        {
+            HealthSwitch = true,
+            Protocol = "TCP",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Clb.TargetGroup;
+import com.pulumi.tencentcloud.Clb.TargetGroupArgs;
+import com.pulumi.tencentcloud.Clb.inputs.TargetGroupHealthCheckArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var snat = new TargetGroup("snat", TargetGroupArgs.builder()
+            .targetGroupName("snat-tg")
+            .vpcId("vpc-xxxxxx")
+            .type("v2")
+            .protocol("TCP")
+            .snatEnable(true)
+            .healthCheck(TargetGroupHealthCheckArgs.builder()
+                .healthSwitch(true)
+                .protocol("TCP")
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  snat:
+    type: tencentcloud:Clb:TargetGroup
+    properties:
+      targetGroupName: snat-tg
+      vpcId: vpc-xxxxxx
+      type: v2
+      protocol: TCP
+      snatEnable: true
+      healthCheck:
+        healthSwitch: true
+        protocol: TCP
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_targetgroup" "snat" {
+  target_group_name = "snat-tg"
+  vpc_id            = "vpc-xxxxxx"
+  type              = "v2"
+  protocol          = "TCP"
+  snat_enable       = true
+  health_check = {
+    health_switch = true
+    protocol      = "TCP"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateTargetGroup](https://www.tencentcloud.com/document/api/214/33839)
+* Read: [DescribeTargetGroupList](https://www.tencentcloud.com/document/api/214/33827)
+* Update:
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [ModifyTargetGroupAttribute](https://www.tencentcloud.com/document/api/214/33815)
+* Delete: [DeleteTargetGroups](https://www.tencentcloud.com/document/api/214/33834)
 
 
 ## Create TargetGroup Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">TargetGroup</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">TargetGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">TargetGroup</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">?:</span> <span class="nx"><a href="#inputs">TargetGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">TargetGroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                <span class="nx">target_group_instances</span><span class="p">:</span> <span class="nx">Optional[Sequence[_clb.TargetGroupTargetGroupInstanceArgs]]</span> = None<span class="p">,</span>
-                <span class="nx">target_group_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">TargetGroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                 <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">Optional[TargetGroupArgs]</a></span> = None<span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">TargetGroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                <span class="nx">full_listen_switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                <span class="nx">health_check</span><span class="p">:</span> <span class="nx">Optional[TargetGroupHealthCheckArgs]</span> = None<span class="p">,</span>
+                <span class="nx">ip_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">keepalive_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">schedule_algorithm</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">session_expire_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                <span class="nx">snat_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+                <span class="nx">target_group_instances</span><span class="p">:</span> <span class="nx">Optional[Sequence[TargetGroupTargetGroupInstanceArgs]]</span> = None<span class="p">,</span>
+                <span class="nx">target_group_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">weight</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTargetGroup</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">TargetGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TargetGroup</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTargetGroup</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx"><a href="#inputs">TargetGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TargetGroup</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">TargetGroup</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TargetGroupArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">TargetGroup</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TargetGroupArgs</a></span><span class="p">? </span><span class="nx">args = null<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">TargetGroup</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TargetGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">TargetGroup</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TargetGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Clb:TargetGroup</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Clb:TargetGroup</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_clb_target_group&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -190,7 +1734,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -307,11 +1851,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## TargetGroup Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The TargetGroup resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -321,24 +1873,93 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="fulllistenswitch_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fulllistenswitch_csharp" style="color: inherit; text-decoration: inherit;">Full<wbr>Listen<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthcheck_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#targetgrouphealthcheck">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Target<wbr>Group<wbr>Health<wbr>Check</a></span>
+    </dt>
+    <dd>Health check configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipversion_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipversion_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP version type. Common values: IPv4, IPv6, IPv6FullChain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keepaliveenable_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepaliveenable_csharp" style="color: inherit; text-decoration: inherit;">Keepalive<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.</dd><dt class="property-optional"
+            title="Optional">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The default port of target group, add server after can use it.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The default port of target group, add server after can use it.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="protocol_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="schedulealgorithm_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedulealgorithm_csharp" style="color: inherit; text-decoration: inherit;">Schedule<wbr>Algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionexpiretime_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionexpiretime_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Expire<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snatenable_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatenable_csharp" style="color: inherit; text-decoration: inherit;">Snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
+    </dt>
+    <dd>Resource tags for the target group.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="targetgroupinstances_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupinstances_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Group<wbr>Instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#targetgrouptargetgroupinstance">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#targetgrouptargetgroupinstance">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.<p class="property-message">Deprecated: It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="targetgroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupname_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Group<wbr>Name</a>
@@ -346,8 +1967,15 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Target group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Target group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="type_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -355,8 +1983,15 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID, default is based on the network.</p>
-</dd></dl>
+    <dd>VPC ID, default is based on the network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="weight_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -364,14 +1999,85 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="fulllistenswitch_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fulllistenswitch_go" style="color: inherit; text-decoration: inherit;">Full<wbr>Listen<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthcheck_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#targetgrouphealthcheck">Target<wbr>Group<wbr>Health<wbr>Check<wbr>Args</a></span>
+    </dt>
+    <dd>Health check configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipversion_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipversion_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP version type. Common values: IPv4, IPv6, IPv6FullChain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keepaliveenable_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepaliveenable_go" style="color: inherit; text-decoration: inherit;">Keepalive<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.</dd><dt class="property-optional"
+            title="Optional">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The default port of target group, add server after can use it.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The default port of target group, add server after can use it.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="protocol_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="schedulealgorithm_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedulealgorithm_go" style="color: inherit; text-decoration: inherit;">Schedule<wbr>Algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionexpiretime_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionexpiretime_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Expire<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snatenable_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatenable_go" style="color: inherit; text-decoration: inherit;">Snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map[string]string</span>
+    </dt>
+    <dd>Resource tags for the target group.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="targetgroupinstances_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupinstances_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Group<wbr>Instances</a>
@@ -379,9 +2085,7 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#targetgrouptargetgroupinstance">[]Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance<wbr>Args</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.<p class="property-message">Deprecated: It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="targetgroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupname_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Group<wbr>Name</a>
@@ -389,8 +2093,15 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Target group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Target group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="type_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -398,8 +2109,141 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID, default is based on the network.</p>
-</dd></dl>
+    <dd>VPC ID, default is based on the network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="weight_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="full_listen_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#full_listen_switch_hcl" style="color: inherit; text-decoration: inherit;">full_<wbr>listen_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#targetgrouphealthcheck">object</a></span>
+    </dt>
+    <dd>Health check configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_version_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP version type. Common values: IPv4, IPv6, IPv6FullChain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keepalive_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepalive_enable_hcl" style="color: inherit; text-decoration: inherit;">keepalive_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The default port of target group, add server after can use it.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="schedule_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedule_algorithm_hcl" style="color: inherit; text-decoration: inherit;">schedule_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="session_expire_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_expire_time_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>expire_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snat_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_enable_hcl" style="color: inherit; text-decoration: inherit;">snat_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Resource tags for the target group.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="target_group_instances_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_group_instances_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>group_<wbr>instances</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#targetgrouptargetgroupinstance">list(object)</a></span>
+    </dt>
+    <dd>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.<p class="property-message">Deprecated: It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="target_group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_group_name_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Target group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID, default is based on the network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -407,24 +2251,93 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="fulllistenswitch_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fulllistenswitch_java" style="color: inherit; text-decoration: inherit;">full<wbr>Listen<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthcheck_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#targetgrouphealthcheck">Target<wbr>Group<wbr>Health<wbr>Check</a></span>
+    </dt>
+    <dd>Health check configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipversion_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipversion_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>IP version type. Common values: IPv4, IPv6, IPv6FullChain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keepaliveenable_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepaliveenable_java" style="color: inherit; text-decoration: inherit;">keepalive<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.</dd><dt class="property-optional"
+            title="Optional">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The default port of target group, add server after can use it.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The default port of target group, add server after can use it.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="protocol_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="schedulealgorithm_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedulealgorithm_java" style="color: inherit; text-decoration: inherit;">schedule<wbr>Algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionexpiretime_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionexpiretime_java" style="color: inherit; text-decoration: inherit;">session<wbr>Expire<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snatenable_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatenable_java" style="color: inherit; text-decoration: inherit;">snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
+    </dt>
+    <dd>Resource tags for the target group.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="targetgroupinstances_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupinstances_java" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#targetgrouptargetgroupinstance">List&lt;Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#targetgrouptargetgroupinstance">List&lt;Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.<p class="property-message">Deprecated: It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="targetgroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupname_java" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Name</a>
@@ -432,8 +2345,15 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Target group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Target group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="type_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -441,8 +2361,15 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID, default is based on the network.</p>
-</dd></dl>
+    <dd>VPC ID, default is based on the network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="weight_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -450,24 +2377,93 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="fulllistenswitch_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fulllistenswitch_nodejs" style="color: inherit; text-decoration: inherit;">full<wbr>Listen<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthcheck_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#targetgrouphealthcheck">Target<wbr>Group<wbr>Health<wbr>Check</a></span>
+    </dt>
+    <dd>Health check configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipversion_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipversion_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP version type. Common values: IPv4, IPv6, IPv6FullChain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keepaliveenable_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepaliveenable_nodejs" style="color: inherit; text-decoration: inherit;">keepalive<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.</dd><dt class="property-optional"
+            title="Optional">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The default port of target group, add server after can use it.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The default port of target group, add server after can use it.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="protocol_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="schedulealgorithm_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedulealgorithm_nodejs" style="color: inherit; text-decoration: inherit;">schedule<wbr>Algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionexpiretime_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionexpiretime_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Expire<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snatenable_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatenable_nodejs" style="color: inherit; text-decoration: inherit;">snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">{[key: string]: string}</span>
+    </dt>
+    <dd>Resource tags for the target group.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="targetgroupinstances_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupinstances_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#targetgrouptargetgroupinstance">Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#targetgrouptargetgroupinstance">Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance[]</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.<p class="property-message">Deprecated: It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="targetgroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupname_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Name</a>
@@ -475,8 +2471,15 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Target group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Target group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="type_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -484,8 +2487,15 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID, default is based on the network.</p>
-</dd></dl>
+    <dd>VPC ID, default is based on the network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="weight_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -493,24 +2503,93 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="full_listen_switch_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#full_listen_switch_python" style="color: inherit; text-decoration: inherit;">full_<wbr>listen_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#targetgrouphealthcheck">Target<wbr>Group<wbr>Health<wbr>Check<wbr>Args</a></span>
+    </dt>
+    <dd>Health check configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_version_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_version_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>IP version type. Common values: IPv4, IPv6, IPv6FullChain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keepalive_enable_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepalive_enable_python" style="color: inherit; text-decoration: inherit;">keepalive_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.</dd><dt class="property-optional"
+            title="Optional">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The default port of target group, add server after can use it.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The default port of target group, add server after can use it.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="protocol_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="schedule_algorithm_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedule_algorithm_python" style="color: inherit; text-decoration: inherit;">schedule_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="session_expire_time_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#session_expire_time_python" style="color: inherit; text-decoration: inherit;">session_<wbr>expire_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snat_enable_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_enable_python" style="color: inherit; text-decoration: inherit;">snat_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Mapping[str, str]</span>
+    </dt>
+    <dd>Resource tags for the target group.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="target_group_instances_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_group_instances_python" style="color: inherit; text-decoration: inherit;">target_<wbr>group_<wbr>instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#targetgrouptargetgroupinstance">Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance<wbr>Args]</a></span>
+        <span class="property-type"><a href="#targetgrouptargetgroupinstance">Sequence[Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance<wbr>Args]</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.<p class="property-message">Deprecated: It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="target_group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_group_name_python" style="color: inherit; text-decoration: inherit;">target_<wbr>group_<wbr>name</a>
@@ -518,8 +2597,15 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Target group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Target group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -527,8 +2613,15 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID, default is based on the network.</p>
-</dd></dl>
+    <dd>VPC ID, default is based on the network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="weight_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -536,14 +2629,85 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="fulllistenswitch_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fulllistenswitch_yaml" style="color: inherit; text-decoration: inherit;">full<wbr>Listen<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthcheck_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#targetgrouphealthcheck">Property Map</a></span>
+    </dt>
+    <dd>Health check configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ipversion_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipversion_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>IP version type. Common values: IPv4, IPv6, IPv6FullChain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="keepaliveenable_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keepaliveenable_yaml" style="color: inherit; text-decoration: inherit;">keepalive<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.</dd><dt class="property-optional"
+            title="Optional">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The default port of target group, add server after can use it.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The default port of target group, add server after can use it.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="protocol_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="schedulealgorithm_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedulealgorithm_yaml" style="color: inherit; text-decoration: inherit;">schedule<wbr>Algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="sessionexpiretime_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sessionexpiretime_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Expire<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snatenable_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatenable_yaml" style="color: inherit; text-decoration: inherit;">snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String&gt;</span>
+    </dt>
+    <dd>Resource tags for the target group.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="targetgroupinstances_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupinstances_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Instances</a>
@@ -551,9 +2715,7 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#targetgrouptargetgroupinstance">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.<p class="property-message">Deprecated: It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="targetgroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetgroupname_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Name</a>
@@ -561,8 +2723,15 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Target group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Target group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="type_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -570,8 +2739,15 @@ The TargetGroup resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID, default is based on the network.</p>
-</dd></dl>
+    <dd>VPC ID, default is based on the network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="weight_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -592,8 +2768,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -607,8 +2782,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -622,8 +2810,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -637,8 +2824,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -652,8 +2838,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -667,8 +2852,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -678,123 +2862,173 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing TargetGroup resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TargetGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">TargetGroup</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TargetGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">TargetGroup</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+        <span class="nx">full_listen_switch</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">health_check</span><span class="p">:</span> <span class="nx">Optional[TargetGroupHealthCheckArgs]</span> = None<span class="p">,</span>
+        <span class="nx">ip_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">keepalive_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">target_group_instances</span><span class="p">:</span> <span class="nx">Optional[Sequence[_clb.TargetGroupTargetGroupInstanceArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">schedule_algorithm</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">session_expire_time</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">snat_enable</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+        <span class="nx">target_group_instances</span><span class="p">:</span> <span class="nx">Optional[Sequence[TargetGroupTargetGroupInstanceArgs]]</span> = None<span class="p">,</span>
         <span class="nx">target_group_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> TargetGroup</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">weight</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> TargetGroup</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTargetGroup<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TargetGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TargetGroup</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTargetGroup<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TargetGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TargetGroup</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">TargetGroup</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TargetGroupState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">TargetGroup</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TargetGroupState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">TargetGroup</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TargetGroupState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">TargetGroup</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TargetGroupState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingTargetGroup</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Clb:TargetGroup</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_clb_target_group</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TargetGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TargetGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -802,28 +3036,31 @@ Get an existing TargetGroup resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TargetGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -831,28 +3068,31 @@ Get an existing TargetGroup resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TargetGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -866,24 +3106,93 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_fulllistenswitch_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fulllistenswitch_csharp" style="color: inherit; text-decoration: inherit;">Full<wbr>Listen<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthcheck_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheck_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#targetgrouphealthcheck">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Target<wbr>Group<wbr>Health<wbr>Check</a></span>
+    </dt>
+    <dd>Health check configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipversion_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipversion_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP version type. Common values: IPv4, IPv6, IPv6FullChain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_keepaliveenable_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepaliveenable_csharp" style="color: inherit; text-decoration: inherit;">Keepalive<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The default port of target group, add server after can use it.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The default port of target group, add server after can use it.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_protocol_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_schedulealgorithm_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedulealgorithm_csharp" style="color: inherit; text-decoration: inherit;">Schedule<wbr>Algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sessionexpiretime_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionexpiretime_csharp" style="color: inherit; text-decoration: inherit;">Session<wbr>Expire<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snatenable_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatenable_csharp" style="color: inherit; text-decoration: inherit;">Snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
+    </dt>
+    <dd>Resource tags for the target group.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_targetgroupinstances_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetgroupinstances_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Group<wbr>Instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#targetgrouptargetgroupinstance">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#targetgrouptargetgroupinstance">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.<p class="property-message">Deprecated: It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_targetgroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetgroupname_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Group<wbr>Name</a>
@@ -891,8 +3200,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Target group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Target group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_type_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -900,8 +3216,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID, default is based on the network.</p>
-</dd></dl>
+    <dd>VPC ID, default is based on the network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_weight_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -909,14 +3232,85 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_fulllistenswitch_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fulllistenswitch_go" style="color: inherit; text-decoration: inherit;">Full<wbr>Listen<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthcheck_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheck_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#targetgrouphealthcheck">Target<wbr>Group<wbr>Health<wbr>Check<wbr>Args</a></span>
+    </dt>
+    <dd>Health check configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipversion_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipversion_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP version type. Common values: IPv4, IPv6, IPv6FullChain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_keepaliveenable_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepaliveenable_go" style="color: inherit; text-decoration: inherit;">Keepalive<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_go" style="color: inherit; text-decoration: inherit;">Port</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The default port of target group, add server after can use it.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The default port of target group, add server after can use it.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_protocol_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_schedulealgorithm_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedulealgorithm_go" style="color: inherit; text-decoration: inherit;">Schedule<wbr>Algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sessionexpiretime_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionexpiretime_go" style="color: inherit; text-decoration: inherit;">Session<wbr>Expire<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snatenable_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatenable_go" style="color: inherit; text-decoration: inherit;">Snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map[string]string</span>
+    </dt>
+    <dd>Resource tags for the target group.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_targetgroupinstances_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetgroupinstances_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Group<wbr>Instances</a>
@@ -924,9 +3318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#targetgrouptargetgroupinstance">[]Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance<wbr>Args</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.<p class="property-message">Deprecated: It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_targetgroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetgroupname_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Group<wbr>Name</a>
@@ -934,8 +3326,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Target group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Target group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_type_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_go" style="color: inherit; text-decoration: inherit;">Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -943,8 +3342,141 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID, default is based on the network.</p>
-</dd></dl>
+    <dd>VPC ID, default is based on the network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_weight_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_full_listen_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_full_listen_switch_hcl" style="color: inherit; text-decoration: inherit;">full_<wbr>listen_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#targetgrouphealthcheck">object</a></span>
+    </dt>
+    <dd>Health check configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ip_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_version_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP version type. Common values: IPv4, IPv6, IPv6FullChain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_keepalive_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepalive_enable_hcl" style="color: inherit; text-decoration: inherit;">keepalive_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The default port of target group, add server after can use it.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_schedule_algorithm_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedule_algorithm_hcl" style="color: inherit; text-decoration: inherit;">schedule_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_session_expire_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_session_expire_time_hcl" style="color: inherit; text-decoration: inherit;">session_<wbr>expire_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snat_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snat_enable_hcl" style="color: inherit; text-decoration: inherit;">snat_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Resource tags for the target group.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="state_target_group_instances_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_group_instances_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>group_<wbr>instances</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#targetgrouptargetgroupinstance">list(object)</a></span>
+    </dt>
+    <dd>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.<p class="property-message">Deprecated: It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_target_group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_group_name_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Target group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID, default is based on the network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -952,24 +3484,93 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_fulllistenswitch_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fulllistenswitch_java" style="color: inherit; text-decoration: inherit;">full<wbr>Listen<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthcheck_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheck_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#targetgrouphealthcheck">Target<wbr>Group<wbr>Health<wbr>Check</a></span>
+    </dt>
+    <dd>Health check configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipversion_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipversion_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>IP version type. Common values: IPv4, IPv6, IPv6FullChain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_keepaliveenable_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepaliveenable_java" style="color: inherit; text-decoration: inherit;">keepalive<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_java" style="color: inherit; text-decoration: inherit;">port</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The default port of target group, add server after can use it.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The default port of target group, add server after can use it.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_protocol_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_schedulealgorithm_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedulealgorithm_java" style="color: inherit; text-decoration: inherit;">schedule<wbr>Algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sessionexpiretime_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionexpiretime_java" style="color: inherit; text-decoration: inherit;">session<wbr>Expire<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snatenable_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatenable_java" style="color: inherit; text-decoration: inherit;">snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
+    </dt>
+    <dd>Resource tags for the target group.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_targetgroupinstances_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetgroupinstances_java" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#targetgrouptargetgroupinstance">List&lt;Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#targetgrouptargetgroupinstance">List&lt;Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance&gt;</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.<p class="property-message">Deprecated: It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_targetgroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetgroupname_java" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Name</a>
@@ -977,8 +3578,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Target group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Target group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_type_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_java" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -986,8 +3594,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID, default is based on the network.</p>
-</dd></dl>
+    <dd>VPC ID, default is based on the network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_weight_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -995,24 +3610,93 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_fulllistenswitch_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fulllistenswitch_nodejs" style="color: inherit; text-decoration: inherit;">full<wbr>Listen<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthcheck_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheck_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#targetgrouphealthcheck">Target<wbr>Group<wbr>Health<wbr>Check</a></span>
+    </dt>
+    <dd>Health check configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipversion_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipversion_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP version type. Common values: IPv4, IPv6, IPv6FullChain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_keepaliveenable_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepaliveenable_nodejs" style="color: inherit; text-decoration: inherit;">keepalive<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The default port of target group, add server after can use it.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The default port of target group, add server after can use it.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_protocol_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_schedulealgorithm_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedulealgorithm_nodejs" style="color: inherit; text-decoration: inherit;">schedule<wbr>Algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sessionexpiretime_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionexpiretime_nodejs" style="color: inherit; text-decoration: inherit;">session<wbr>Expire<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snatenable_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatenable_nodejs" style="color: inherit; text-decoration: inherit;">snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">{[key: string]: string}</span>
+    </dt>
+    <dd>Resource tags for the target group.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_targetgroupinstances_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetgroupinstances_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#targetgrouptargetgroupinstance">Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#targetgrouptargetgroupinstance">Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance[]</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.<p class="property-message">Deprecated: It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_targetgroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetgroupname_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Name</a>
@@ -1020,8 +3704,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Target group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Target group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_type_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1029,8 +3720,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID, default is based on the network.</p>
-</dd></dl>
+    <dd>VPC ID, default is based on the network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_weight_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1038,24 +3736,93 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_full_listen_switch_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_full_listen_switch_python" style="color: inherit; text-decoration: inherit;">full_<wbr>listen_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#targetgrouphealthcheck">Target<wbr>Group<wbr>Health<wbr>Check<wbr>Args</a></span>
+    </dt>
+    <dd>Health check configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ip_version_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ip_version_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>IP version type. Common values: IPv4, IPv6, IPv6FullChain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_keepalive_enable_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepalive_enable_python" style="color: inherit; text-decoration: inherit;">keepalive_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_python" style="color: inherit; text-decoration: inherit;">port</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The default port of target group, add server after can use it.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The default port of target group, add server after can use it.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_protocol_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_schedule_algorithm_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedule_algorithm_python" style="color: inherit; text-decoration: inherit;">schedule_<wbr>algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_session_expire_time_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_session_expire_time_python" style="color: inherit; text-decoration: inherit;">session_<wbr>expire_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snat_enable_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snat_enable_python" style="color: inherit; text-decoration: inherit;">snat_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Mapping[str, str]</span>
+    </dt>
+    <dd>Resource tags for the target group.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_target_group_instances_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_group_instances_python" style="color: inherit; text-decoration: inherit;">target_<wbr>group_<wbr>instances</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#targetgrouptargetgroupinstance">Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance<wbr>Args]</a></span>
+        <span class="property-type"><a href="#targetgrouptargetgroupinstance">Sequence[Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance<wbr>Args]</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.<p class="property-message">Deprecated: It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_target_group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_target_group_name_python" style="color: inherit; text-decoration: inherit;">target_<wbr>group_<wbr>name</a>
@@ -1063,8 +3830,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Target group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Target group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_python" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1072,8 +3846,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID, default is based on the network.</p>
-</dd></dl>
+    <dd>VPC ID, default is based on the network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_weight_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1081,14 +3862,85 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_fulllistenswitch_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fulllistenswitch_yaml" style="color: inherit; text-decoration: inherit;">full<wbr>Listen<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthcheck_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthcheck_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#targetgrouphealthcheck">Property Map</a></span>
+    </dt>
+    <dd>Health check configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ipversion_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ipversion_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>IP version type. Common values: IPv4, IPv6, IPv6FullChain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_keepaliveenable_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keepaliveenable_yaml" style="color: inherit; text-decoration: inherit;">keepalive<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The default port of target group, add server after can use it.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>The default port of target group, add server after can use it.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_protocol_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_schedulealgorithm_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_schedulealgorithm_yaml" style="color: inherit; text-decoration: inherit;">schedule<wbr>Algorithm</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_sessionexpiretime_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sessionexpiretime_yaml" style="color: inherit; text-decoration: inherit;">session<wbr>Expire<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_snatenable_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_snatenable_yaml" style="color: inherit; text-decoration: inherit;">snat<wbr>Enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Map&lt;String&gt;</span>
+    </dt>
+    <dd>Resource tags for the target group.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="state_targetgroupinstances_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetgroupinstances_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Instances</a>
@@ -1096,9 +3948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#targetgrouptargetgroupinstance">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead. The backend server of target group bind.<p class="property-message">Deprecated: It has been deprecated from version 1.77.3. please use <code>tencentcloud.Clb.TargetGroupInstanceAttachment</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="state_targetgroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_targetgroupname_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Group<wbr>Name</a>
@@ -1106,8 +3956,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Target group name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Target group name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_type_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1115,8 +3972,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID, default is based on the network.</p>
-</dd></dl>
+    <dd>VPC ID, default is based on the network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_weight_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1131,7 +3995,783 @@ The following state arguments are supported:
 
 
 
-<h4 id="targetgrouptargetgroupinstance">Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance</h4>
+<h4 id="targetgrouphealthcheck">
+Target<wbr>Group<wbr>Health<wbr>Check<pulumi-choosable type="language" values="python,go" class="inline">, Target<wbr>Group<wbr>Health<wbr>Check<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="healthswitch_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthswitch_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable health check. true: enable, false: disable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="badlimit_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#badlimit_csharp" style="color: inherit; text-decoration: inherit;">Bad<wbr>Limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Unhealthy threshold. Number of consecutive failed health checks required before marking the backend as unhealthy. Range: [2, 10]. Default: 3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="extendedcode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extendedcode_csharp" style="color: inherit; text-decoration: inherit;">Extended<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Extended status code for health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="gaptime_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaptime_csharp" style="color: inherit; text-decoration: inherit;">Gap<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Health check interval in seconds. Range: [2, 300]. Default: 5.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="goodlimit_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#goodlimit_csharp" style="color: inherit; text-decoration: inherit;">Good<wbr>Limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Healthy threshold. Number of consecutive successful health checks required before marking the backend as healthy. Range: [2, 10]. Default: 3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcheckdomain_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcheckdomain_csharp" style="color: inherit; text-decoration: inherit;">Http<wbr>Check<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check domain. For HTTP/HTTPS protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcheckmethod_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcheckmethod_csharp" style="color: inherit; text-decoration: inherit;">Http<wbr>Check<wbr>Method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check HTTP method. For HTTP/HTTPS protocol. Valid values: HEAD, GET. Default: HEAD.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcheckpath_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcheckpath_csharp" style="color: inherit; text-decoration: inherit;">Http<wbr>Check<wbr>Path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check path. For HTTP/HTTPS protocol. Must start with /. If not specified, / is used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcode_csharp" style="color: inherit; text-decoration: inherit;">Http<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>HTTP status codes indicating health. For HTTP/HTTPS protocol. Example: 1 (1xx), 2 (2xx), 4 (3xx), 8 (4xx), 16 (5xx). Multiple values can be combined, e.g., 7 (1xx, 2xx, 3xx).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpversion_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpversion_csharp" style="color: inherit; text-decoration: inherit;">Http<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTP version for health check. Required when health check protocol is HTTP. Valid values: HTTP/1.0, HTTP/1.1. Only valid for TCP target groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Health check port. If not specified, the backend server port is used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check protocol. Valid values: TCP, HTTP, HTTPS, PING, CUSTOM, GRPC. Valid for v2 target groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timeout_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_csharp" style="color: inherit; text-decoration: inherit;">Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Health check response timeout in seconds. Range: [2, 60]. Default: 2.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="healthswitch_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthswitch_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable health check. true: enable, false: disable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="badlimit_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#badlimit_go" style="color: inherit; text-decoration: inherit;">Bad<wbr>Limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Unhealthy threshold. Number of consecutive failed health checks required before marking the backend as unhealthy. Range: [2, 10]. Default: 3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="extendedcode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extendedcode_go" style="color: inherit; text-decoration: inherit;">Extended<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Extended status code for health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="gaptime_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaptime_go" style="color: inherit; text-decoration: inherit;">Gap<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Health check interval in seconds. Range: [2, 300]. Default: 5.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="goodlimit_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#goodlimit_go" style="color: inherit; text-decoration: inherit;">Good<wbr>Limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Healthy threshold. Number of consecutive successful health checks required before marking the backend as healthy. Range: [2, 10]. Default: 3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcheckdomain_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcheckdomain_go" style="color: inherit; text-decoration: inherit;">Http<wbr>Check<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check domain. For HTTP/HTTPS protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcheckmethod_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcheckmethod_go" style="color: inherit; text-decoration: inherit;">Http<wbr>Check<wbr>Method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check HTTP method. For HTTP/HTTPS protocol. Valid values: HEAD, GET. Default: HEAD.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcheckpath_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcheckpath_go" style="color: inherit; text-decoration: inherit;">Http<wbr>Check<wbr>Path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check path. For HTTP/HTTPS protocol. Must start with /. If not specified, / is used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcode_go" style="color: inherit; text-decoration: inherit;">Http<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>HTTP status codes indicating health. For HTTP/HTTPS protocol. Example: 1 (1xx), 2 (2xx), 4 (3xx), 8 (4xx), 16 (5xx). Multiple values can be combined, e.g., 7 (1xx, 2xx, 3xx).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpversion_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpversion_go" style="color: inherit; text-decoration: inherit;">Http<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTP version for health check. Required when health check protocol is HTTP. Valid values: HTTP/1.0, HTTP/1.1. Only valid for TCP target groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Health check port. If not specified, the backend server port is used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check protocol. Valid values: TCP, HTTP, HTTPS, PING, CUSTOM, GRPC. Valid for v2 target groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timeout_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_go" style="color: inherit; text-decoration: inherit;">Timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Health check response timeout in seconds. Range: [2, 60]. Default: 2.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="health_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_switch_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable health check. true: enable, false: disable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bad_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bad_limit_hcl" style="color: inherit; text-decoration: inherit;">bad_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Unhealthy threshold. Number of consecutive failed health checks required before marking the backend as unhealthy. Range: [2, 10]. Default: 3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="extended_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extended_code_hcl" style="color: inherit; text-decoration: inherit;">extended_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Extended status code for health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="gap_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gap_time_hcl" style="color: inherit; text-decoration: inherit;">gap_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health check interval in seconds. Range: [2, 300]. Default: 5.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="good_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#good_limit_hcl" style="color: inherit; text-decoration: inherit;">good_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Healthy threshold. Number of consecutive successful health checks required before marking the backend as healthy. Range: [2, 10]. Default: 3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="http_check_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_check_domain_hcl" style="color: inherit; text-decoration: inherit;">http_<wbr>check_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check domain. For HTTP/HTTPS protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="http_check_method_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_check_method_hcl" style="color: inherit; text-decoration: inherit;">http_<wbr>check_<wbr>method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check HTTP method. For HTTP/HTTPS protocol. Valid values: HEAD, GET. Default: HEAD.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="http_check_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_check_path_hcl" style="color: inherit; text-decoration: inherit;">http_<wbr>check_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check path. For HTTP/HTTPS protocol. Must start with /. If not specified, / is used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="http_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_code_hcl" style="color: inherit; text-decoration: inherit;">http_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>HTTP status codes indicating health. For HTTP/HTTPS protocol. Example: 1 (1xx), 2 (2xx), 4 (3xx), 8 (4xx), 16 (5xx). Multiple values can be combined, e.g., 7 (1xx, 2xx, 3xx).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="http_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_version_hcl" style="color: inherit; text-decoration: inherit;">http_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTP version for health check. Required when health check protocol is HTTP. Valid values: HTTP/1.0, HTTP/1.1. Only valid for TCP target groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health check port. If not specified, the backend server port is used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check protocol. Valid values: TCP, HTTP, HTTPS, PING, CUSTOM, GRPC. Valid for v2 target groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_hcl" style="color: inherit; text-decoration: inherit;">timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health check response timeout in seconds. Range: [2, 60]. Default: 2.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="healthswitch_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthswitch_java" style="color: inherit; text-decoration: inherit;">health<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable health check. true: enable, false: disable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="badlimit_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#badlimit_java" style="color: inherit; text-decoration: inherit;">bad<wbr>Limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Unhealthy threshold. Number of consecutive failed health checks required before marking the backend as unhealthy. Range: [2, 10]. Default: 3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="extendedcode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extendedcode_java" style="color: inherit; text-decoration: inherit;">extended<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Extended status code for health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="gaptime_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaptime_java" style="color: inherit; text-decoration: inherit;">gap<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Health check interval in seconds. Range: [2, 300]. Default: 5.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="goodlimit_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#goodlimit_java" style="color: inherit; text-decoration: inherit;">good<wbr>Limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Healthy threshold. Number of consecutive successful health checks required before marking the backend as healthy. Range: [2, 10]. Default: 3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcheckdomain_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcheckdomain_java" style="color: inherit; text-decoration: inherit;">http<wbr>Check<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Health check domain. For HTTP/HTTPS protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcheckmethod_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcheckmethod_java" style="color: inherit; text-decoration: inherit;">http<wbr>Check<wbr>Method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Health check HTTP method. For HTTP/HTTPS protocol. Valid values: HEAD, GET. Default: HEAD.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcheckpath_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcheckpath_java" style="color: inherit; text-decoration: inherit;">http<wbr>Check<wbr>Path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Health check path. For HTTP/HTTPS protocol. Must start with /. If not specified, / is used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcode_java" style="color: inherit; text-decoration: inherit;">http<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>HTTP status codes indicating health. For HTTP/HTTPS protocol. Example: 1 (1xx), 2 (2xx), 4 (3xx), 8 (4xx), 16 (5xx). Multiple values can be combined, e.g., 7 (1xx, 2xx, 3xx).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpversion_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpversion_java" style="color: inherit; text-decoration: inherit;">http<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>HTTP version for health check. Required when health check protocol is HTTP. Valid values: HTTP/1.0, HTTP/1.1. Only valid for TCP target groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Health check port. If not specified, the backend server port is used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Health check protocol. Valid values: TCP, HTTP, HTTPS, PING, CUSTOM, GRPC. Valid for v2 target groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timeout_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_java" style="color: inherit; text-decoration: inherit;">timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Health check response timeout in seconds. Range: [2, 60]. Default: 2.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="healthswitch_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthswitch_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable health check. true: enable, false: disable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="badlimit_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#badlimit_nodejs" style="color: inherit; text-decoration: inherit;">bad<wbr>Limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Unhealthy threshold. Number of consecutive failed health checks required before marking the backend as unhealthy. Range: [2, 10]. Default: 3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="extendedcode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extendedcode_nodejs" style="color: inherit; text-decoration: inherit;">extended<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Extended status code for health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="gaptime_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaptime_nodejs" style="color: inherit; text-decoration: inherit;">gap<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health check interval in seconds. Range: [2, 300]. Default: 5.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="goodlimit_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#goodlimit_nodejs" style="color: inherit; text-decoration: inherit;">good<wbr>Limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Healthy threshold. Number of consecutive successful health checks required before marking the backend as healthy. Range: [2, 10]. Default: 3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcheckdomain_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcheckdomain_nodejs" style="color: inherit; text-decoration: inherit;">http<wbr>Check<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check domain. For HTTP/HTTPS protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcheckmethod_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcheckmethod_nodejs" style="color: inherit; text-decoration: inherit;">http<wbr>Check<wbr>Method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check HTTP method. For HTTP/HTTPS protocol. Valid values: HEAD, GET. Default: HEAD.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcheckpath_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcheckpath_nodejs" style="color: inherit; text-decoration: inherit;">http<wbr>Check<wbr>Path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check path. For HTTP/HTTPS protocol. Must start with /. If not specified, / is used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcode_nodejs" style="color: inherit; text-decoration: inherit;">http<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>HTTP status codes indicating health. For HTTP/HTTPS protocol. Example: 1 (1xx), 2 (2xx), 4 (3xx), 8 (4xx), 16 (5xx). Multiple values can be combined, e.g., 7 (1xx, 2xx, 3xx).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpversion_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpversion_nodejs" style="color: inherit; text-decoration: inherit;">http<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTP version for health check. Required when health check protocol is HTTP. Valid values: HTTP/1.0, HTTP/1.1. Only valid for TCP target groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health check port. If not specified, the backend server port is used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check protocol. Valid values: TCP, HTTP, HTTPS, PING, CUSTOM, GRPC. Valid for v2 target groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timeout_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_nodejs" style="color: inherit; text-decoration: inherit;">timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Health check response timeout in seconds. Range: [2, 60]. Default: 2.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="health_switch_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_switch_python" style="color: inherit; text-decoration: inherit;">health_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable health check. true: enable, false: disable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="bad_limit_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bad_limit_python" style="color: inherit; text-decoration: inherit;">bad_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Unhealthy threshold. Number of consecutive failed health checks required before marking the backend as unhealthy. Range: [2, 10]. Default: 3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="extended_code_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extended_code_python" style="color: inherit; text-decoration: inherit;">extended_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Extended status code for health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="gap_time_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gap_time_python" style="color: inherit; text-decoration: inherit;">gap_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Health check interval in seconds. Range: [2, 300]. Default: 5.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="good_limit_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#good_limit_python" style="color: inherit; text-decoration: inherit;">good_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Healthy threshold. Number of consecutive successful health checks required before marking the backend as healthy. Range: [2, 10]. Default: 3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="http_check_domain_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_check_domain_python" style="color: inherit; text-decoration: inherit;">http_<wbr>check_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Health check domain. For HTTP/HTTPS protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="http_check_method_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_check_method_python" style="color: inherit; text-decoration: inherit;">http_<wbr>check_<wbr>method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Health check HTTP method. For HTTP/HTTPS protocol. Valid values: HEAD, GET. Default: HEAD.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="http_check_path_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_check_path_python" style="color: inherit; text-decoration: inherit;">http_<wbr>check_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Health check path. For HTTP/HTTPS protocol. Must start with /. If not specified, / is used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="http_code_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_code_python" style="color: inherit; text-decoration: inherit;">http_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>HTTP status codes indicating health. For HTTP/HTTPS protocol. Example: 1 (1xx), 2 (2xx), 4 (3xx), 8 (4xx), 16 (5xx). Multiple values can be combined, e.g., 7 (1xx, 2xx, 3xx).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="http_version_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#http_version_python" style="color: inherit; text-decoration: inherit;">http_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>HTTP version for health check. Required when health check protocol is HTTP. Valid values: HTTP/1.0, HTTP/1.1. Only valid for TCP target groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Health check port. If not specified, the backend server port is used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Health check protocol. Valid values: TCP, HTTP, HTTPS, PING, CUSTOM, GRPC. Valid for v2 target groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timeout_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_python" style="color: inherit; text-decoration: inherit;">timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Health check response timeout in seconds. Range: [2, 60]. Default: 2.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="healthswitch_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthswitch_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable health check. true: enable, false: disable.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="badlimit_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#badlimit_yaml" style="color: inherit; text-decoration: inherit;">bad<wbr>Limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Unhealthy threshold. Number of consecutive failed health checks required before marking the backend as unhealthy. Range: [2, 10]. Default: 3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="extendedcode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extendedcode_yaml" style="color: inherit; text-decoration: inherit;">extended<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Extended status code for health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="gaptime_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gaptime_yaml" style="color: inherit; text-decoration: inherit;">gap<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Health check interval in seconds. Range: [2, 300]. Default: 5.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="goodlimit_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#goodlimit_yaml" style="color: inherit; text-decoration: inherit;">good<wbr>Limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Healthy threshold. Number of consecutive successful health checks required before marking the backend as healthy. Range: [2, 10]. Default: 3.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcheckdomain_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcheckdomain_yaml" style="color: inherit; text-decoration: inherit;">http<wbr>Check<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Health check domain. For HTTP/HTTPS protocol.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcheckmethod_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcheckmethod_yaml" style="color: inherit; text-decoration: inherit;">http<wbr>Check<wbr>Method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Health check HTTP method. For HTTP/HTTPS protocol. Valid values: HEAD, GET. Default: HEAD.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcheckpath_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcheckpath_yaml" style="color: inherit; text-decoration: inherit;">http<wbr>Check<wbr>Path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Health check path. For HTTP/HTTPS protocol. Must start with /. If not specified, / is used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpcode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpcode_yaml" style="color: inherit; text-decoration: inherit;">http<wbr>Code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>HTTP status codes indicating health. For HTTP/HTTPS protocol. Example: 1 (1xx), 2 (2xx), 4 (3xx), 8 (4xx), 16 (5xx). Multiple values can be combined, e.g., 7 (1xx, 2xx, 3xx).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="httpversion_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#httpversion_yaml" style="color: inherit; text-decoration: inherit;">http<wbr>Version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>HTTP version for health check. Required when health check protocol is HTTP. Valid values: HTTP/1.0, HTTP/1.1. Only valid for TCP target groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="port_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Health check port. If not specified, the backend server port is used by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="protocol_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Health check protocol. Valid values: TCP, HTTP, HTTPS, PING, CUSTOM, GRPC. Valid for v2 target groups.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="timeout_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_yaml" style="color: inherit; text-decoration: inherit;">timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Health check response timeout in seconds. Range: [2, 60]. Default: 2.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="targetgrouptargetgroupinstance">
+Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance<pulumi-choosable type="language" values="python,go" class="inline">, Target<wbr>Group<wbr>Target<wbr>Group<wbr>Instance<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1143,8 +4783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The internal ip of target group instance.</p>
-</dd><dt class="property-required"
+    <dd>The internal ip of target group instance.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1152,8 +4791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port of target group instance.</p>
-</dd><dt class="property-optional"
+    <dd>The port of target group instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="newport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newport_csharp" style="color: inherit; text-decoration: inherit;">New<wbr>Port</a>
@@ -1161,8 +4799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The new port of target group instance.</p>
-</dd><dt class="property-optional"
+    <dd>The new port of target group instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -1170,8 +4807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The weight of target group instance.</p>
-</dd></dl>
+    <dd>The weight of target group instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1185,8 +4821,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The internal ip of target group instance.</p>
-</dd><dt class="property-required"
+    <dd>The internal ip of target group instance.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -1194,8 +4829,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port of target group instance.</p>
-</dd><dt class="property-optional"
+    <dd>The port of target group instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="newport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newport_go" style="color: inherit; text-decoration: inherit;">New<wbr>Port</a>
@@ -1203,8 +4837,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The new port of target group instance.</p>
-</dd><dt class="property-optional"
+    <dd>The new port of target group instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -1212,8 +4845,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The weight of target group instance.</p>
-</dd></dl>
+    <dd>The weight of target group instance.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bind_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bind_ip_hcl" style="color: inherit; text-decoration: inherit;">bind_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The internal ip of target group instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The port of target group instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="new_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_port_hcl" style="color: inherit; text-decoration: inherit;">new_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The new port of target group instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The weight of target group instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1227,8 +4897,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The internal ip of target group instance.</p>
-</dd><dt class="property-required"
+    <dd>The internal ip of target group instance.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1236,8 +4905,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The port of target group instance.</p>
-</dd><dt class="property-optional"
+    <dd>The port of target group instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="newport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newport_java" style="color: inherit; text-decoration: inherit;">new<wbr>Port</a>
@@ -1245,8 +4913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The new port of target group instance.</p>
-</dd><dt class="property-optional"
+    <dd>The new port of target group instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1254,8 +4921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The weight of target group instance.</p>
-</dd></dl>
+    <dd>The weight of target group instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1269,8 +4935,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The internal ip of target group instance.</p>
-</dd><dt class="property-required"
+    <dd>The internal ip of target group instance.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1278,8 +4943,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The port of target group instance.</p>
-</dd><dt class="property-optional"
+    <dd>The port of target group instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="newport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newport_nodejs" style="color: inherit; text-decoration: inherit;">new<wbr>Port</a>
@@ -1287,8 +4951,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The new port of target group instance.</p>
-</dd><dt class="property-optional"
+    <dd>The new port of target group instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1296,8 +4959,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The weight of target group instance.</p>
-</dd></dl>
+    <dd>The weight of target group instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1311,8 +4973,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The internal ip of target group instance.</p>
-</dd><dt class="property-required"
+    <dd>The internal ip of target group instance.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1320,8 +4981,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The port of target group instance.</p>
-</dd><dt class="property-optional"
+    <dd>The port of target group instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="new_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_port_python" style="color: inherit; text-decoration: inherit;">new_<wbr>port</a>
@@ -1329,8 +4989,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The new port of target group instance.</p>
-</dd><dt class="property-optional"
+    <dd>The new port of target group instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1338,8 +4997,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The weight of target group instance.</p>
-</dd></dl>
+    <dd>The weight of target group instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1353,8 +5011,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The internal ip of target group instance.</p>
-</dd><dt class="property-required"
+    <dd>The internal ip of target group instance.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -1362,8 +5019,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The port of target group instance.</p>
-</dd><dt class="property-optional"
+    <dd>The port of target group instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="newport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newport_yaml" style="color: inherit; text-decoration: inherit;">new<wbr>Port</a>
@@ -1371,8 +5027,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The new port of target group instance.</p>
-</dd><dt class="property-optional"
+    <dd>The new port of target group instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="weight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -1380,8 +5035,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The weight of target group instance.</p>
-</dd></dl>
+    <dd>The weight of target group instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1397,6 +5051,9 @@ $ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1406,7 +5063,6 @@ $ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

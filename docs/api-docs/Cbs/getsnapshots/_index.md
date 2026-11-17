@@ -2,9 +2,11 @@
 ---
 title: "getSnapshots"
 title_tag: "tencentcloud.Cbs.getSnapshots"
-meta_desc: "Documentation for the tencentcloud.Cbs.getSnapshots function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of CBS snapshots."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,53 +18,47 @@ Use this data source to query detailed information of CBS snapshots.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+### Query all snapshots
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const snapshots = tencentcloud.Cbs.getSnapshots({
-    resultOutputFile: "mytestpath",
-    snapshotId: "snap-f3io7adt",
-});
+const snapshots = tencentcloud.cbs.getSnapshots({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-snapshots = tencentcloud.Cbs.get_snapshots(result_output_file="mytestpath",
-    snapshot_id="snap-f3io7adt")
+snapshots = tencentcloud.cbs.get_snapshots()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var snapshots = Tencentcloud.Cbs.GetSnapshots.Invoke(new()
-    {
-        ResultOutputFile = "mytestpath",
-        SnapshotId = "snap-f3io7adt",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cbs"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cbs.GetSnapshots(ctx, &cbs.GetSnapshotsArgs{
-			ResultOutputFile: pulumi.StringRef("mytestpath"),
-			SnapshotId:       pulumi.StringRef("snap-f3io7adt"),
-		}, nil)
+		_, err := cbs.GetSnapshots(ctx, &cbs.GetSnapshotsArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -70,6 +66,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var snapshots = Tencentcloud.Cbs.GetSnapshots.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -78,8 +96,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cbs.CbsFunctions;
 import com.pulumi.tencentcloud.Cbs.inputs.GetSnapshotsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,23 +110,43 @@ public class App {
 
     public static void stack(Context ctx) {
         final var snapshots = CbsFunctions.getSnapshots(GetSnapshotsArgs.builder()
-            .resultOutputFile("mytestpath")
-            .snapshotId("snap-f3io7adt")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   snapshots:
     fn::invoke:
-      Function: tencentcloud:Cbs:getSnapshots
-      Arguments:
-        resultOutputFile: mytestpath
-        snapshotId: snap-f3io7adt
+      function: tencentcloud:Cbs:getSnapshots
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cbs_getsnapshots" "snapshots" {
+}
+```
+</pulumi-choosable>
+</div>
+
 
 
 
@@ -121,7 +159,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +167,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getSnapshots<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSnapshotsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSnapshotsResult</a></span>></span
+><span class="k">function </span>getSnapshots<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSnapshotsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSnapshotsResult</a></span>></span
 ><span class="k">
-function </span>getSnapshotsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSnapshotsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSnapshotsResult</a></span>></span
+function </span>getSnapshotsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSnapshotsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSnapshotsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -141,7 +179,7 @@ function </span>getSnapshotsOutput<span class="p">(</span><span class="nx">args<
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
 ><span class="k">def </span>get_snapshots<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                  <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                  <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">snapshot_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">snapshot_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -149,14 +187,14 @@ function </span>getSnapshotsOutput<span class="p">(</span><span class="nx">args<
                   <span class="nx">storage_usage</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetSnapshotsResult</span
 ><span class="k">
-def </span>get_snapshots_output<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">snapshot_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">snapshot_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">storage_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">storage_usage</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSnapshotsResult]</span
+def </span>get_snapshots_output<span class="p">(</span><span class="nx">availability_zone</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">project_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">snapshot_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">snapshot_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">storage_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">storage_usage</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSnapshotsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -181,7 +219,8 @@ func </span>GetSnapshotsOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetSnapshots </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetSnapshotsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetSnapshotsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetSnapshotsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSnapshotsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSnapshotsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSnapshotsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSnapshotsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSnapshotsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -190,7 +229,8 @@ func </span>GetSnapshotsOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetSnapshotsResult</a></span>> </span>getSnapshots<span class="p">(</span><span class="nx">GetSnapshotsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSnapshotsResult</a></span>> </span>getSnapshots<span class="p">(</span><span class="nx">GetSnapshotsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSnapshotsResult</a></span>> </span>getSnapshots<span class="p">(</span><span class="nx">GetSnapshotsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -202,6 +242,15 @@ func </span>GetSnapshotsOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cbs/getSnapshots:getSnapshots
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cbs_get_snapshots&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -220,17 +269,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">int</span>
+        <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -238,8 +285,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_csharp" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -247,8 +293,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the snapshot to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_csharp" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Name</a>
@@ -256,8 +301,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the snapshot to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the snapshot to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Id</a>
@@ -265,8 +309,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Usage</a>
@@ -274,8 +317,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from, and available values include SYSTEM_DISK and DATA_DISK.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from, and available values include <code>SYSTEM_DISK</code> and <code>DATA_DISK</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -289,17 +331,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">int</span>
+        <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -307,8 +347,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_go" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -316,8 +355,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the snapshot to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_go" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Name</a>
@@ -325,8 +363,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the snapshot to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the snapshot to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Id</a>
@@ -334,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Usage</a>
@@ -343,8 +379,69 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from, and available values include SYSTEM_DISK and DATA_DISK.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from, and available values include <code>SYSTEM_DISK</code> and <code>DATA_DISK</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the project within the snapshot.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snapshot_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the snapshot to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="snapshot_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_name_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the snapshot to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_id_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="storage_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_usage_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Types of CBS which this snapshot created from, and available values include <code>SYSTEM_DISK</code> and <code>DATA_DISK</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -358,17 +455,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Integer</span>
+        <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -376,8 +471,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_java" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -385,8 +479,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the snapshot to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_java" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Name</a>
@@ -394,8 +487,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the snapshot to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the snapshot to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -403,8 +495,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -412,8 +503,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from, and available values include SYSTEM_DISK and DATA_DISK.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from, and available values include <code>SYSTEM_DISK</code> and <code>DATA_DISK</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -427,17 +517,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">number</span>
+        <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -445,8 +533,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_nodejs" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -454,8 +541,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the snapshot to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_nodejs" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Name</a>
@@ -463,8 +549,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the snapshot to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the snapshot to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -472,8 +557,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -481,8 +565,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from, and available values include SYSTEM_DISK and DATA_DISK.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from, and available values include <code>SYSTEM_DISK</code> and <code>DATA_DISK</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -496,17 +579,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">int</span>
+        <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -514,8 +595,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshot_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_python" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
@@ -523,8 +603,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the snapshot to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshot_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_name_python" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>name</a>
@@ -532,8 +611,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the snapshot to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the snapshot to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_id_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>id</a>
@@ -541,8 +619,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-optional"
             title="Optional">
         <span id="storage_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_usage_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>usage</a>
@@ -550,8 +627,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from, and available values include SYSTEM_DISK and DATA_DISK.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from, and available values include <code>SYSTEM_DISK</code> and <code>DATA_DISK</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -565,17 +641,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-optional"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Number</span>
+        <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -583,8 +657,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_yaml" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -592,8 +665,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the snapshot to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the snapshot to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="snapshotname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_yaml" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Name</a>
@@ -601,8 +673,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the snapshot to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the snapshot to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -610,8 +681,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-optional"
             title="Optional">
         <span id="storageusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -619,8 +689,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from, and available values include SYSTEM_DISK and DATA_DISK.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from, and available values include <code>SYSTEM_DISK</code> and <code>DATA_DISK</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -643,8 +712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="snapshotlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotlists_csharp" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Lists</a>
@@ -652,8 +720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsnapshotssnapshotlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cbs.<wbr>Outputs.<wbr>Get<wbr>Snapshots<wbr>Snapshot<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of snapshot. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of snapshot. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_csharp" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -661,17 +728,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-"
             title="">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">int</span>
+        <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -687,8 +752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the snapshot.</p>
-</dd><dt class="property-"
+    <dd>ID of the snapshot.</dd><dt class="property-"
             title="">
         <span id="snapshotname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_csharp" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Name</a>
@@ -696,8 +760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the snapshot.</p>
-</dd><dt class="property-"
+    <dd>Name of the snapshot.</dd><dt class="property-"
             title="">
         <span id="storageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Id</a>
@@ -705,8 +768,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-"
             title="">
         <span id="storageusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Usage</a>
@@ -714,8 +776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -729,8 +790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="snapshotlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotlists_go" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Lists</a>
@@ -738,8 +798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsnapshotssnapshotlist">[]Get<wbr>Snapshots<wbr>Snapshot<wbr>List</a></span>
     </dt>
-    <dd><p>A list of snapshot. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of snapshot. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_go" style="color: inherit; text-decoration: inherit;">Availability<wbr>Zone</a>
@@ -747,17 +806,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-"
             title="">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">int</span>
+        <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -773,8 +830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the snapshot.</p>
-</dd><dt class="property-"
+    <dd>ID of the snapshot.</dd><dt class="property-"
             title="">
         <span id="snapshotname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_go" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Name</a>
@@ -782,8 +838,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the snapshot.</p>
-</dd><dt class="property-"
+    <dd>Name of the snapshot.</dd><dt class="property-"
             title="">
         <span id="storageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Id</a>
@@ -791,8 +846,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-"
             title="">
         <span id="storageusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Usage</a>
@@ -800,8 +854,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="snapshot_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_lists_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsnapshotssnapshotlist">list(object)</a></span>
+    </dt>
+    <dd>A list of snapshot. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-"
+            title="">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the project within the snapshot.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="snapshot_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the snapshot.</dd><dt class="property-"
+            title="">
+        <span id="snapshot_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_name_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the snapshot.</dd><dt class="property-"
+            title="">
+        <span id="storage_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_id_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-"
+            title="">
+        <span id="storage_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_usage_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Types of CBS which this snapshot created from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -815,8 +946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="snapshotlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotlists_java" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Lists</a>
@@ -824,8 +954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsnapshotssnapshotlist">List&lt;Get<wbr>Snapshots<wbr>Snapshot<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of snapshot. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of snapshot. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_java" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -833,17 +962,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-"
             title="">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Integer</span>
+        <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -859,8 +986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the snapshot.</p>
-</dd><dt class="property-"
+    <dd>ID of the snapshot.</dd><dt class="property-"
             title="">
         <span id="snapshotname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_java" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Name</a>
@@ -868,8 +994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the snapshot.</p>
-</dd><dt class="property-"
+    <dd>Name of the snapshot.</dd><dt class="property-"
             title="">
         <span id="storageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -877,8 +1002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-"
             title="">
         <span id="storageusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -886,8 +1010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -901,8 +1024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="snapshotlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotlists_nodejs" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Lists</a>
@@ -910,8 +1032,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsnapshotssnapshotlist">Get<wbr>Snapshots<wbr>Snapshot<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of snapshot. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of snapshot. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_nodejs" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -919,17 +1040,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-"
             title="">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">number</span>
+        <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -945,8 +1064,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the snapshot.</p>
-</dd><dt class="property-"
+    <dd>ID of the snapshot.</dd><dt class="property-"
             title="">
         <span id="snapshotname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_nodejs" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Name</a>
@@ -954,8 +1072,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the snapshot.</p>
-</dd><dt class="property-"
+    <dd>Name of the snapshot.</dd><dt class="property-"
             title="">
         <span id="storageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -963,8 +1080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-"
             title="">
         <span id="storageusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -972,8 +1088,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -987,17 +1102,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="snapshot_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_lists_python" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsnapshotssnapshotlist">Get<wbr>Snapshots<wbr>Snapshot<wbr>List]</a></span>
+        <span class="property-type"><a href="#getsnapshotssnapshotlist">Sequence[Get<wbr>Snapshots<wbr>Snapshot<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of snapshot. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of snapshot. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availability_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
@@ -1005,17 +1118,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-"
             title="">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">int</span>
+        <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1031,8 +1142,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the snapshot.</p>
-</dd><dt class="property-"
+    <dd>ID of the snapshot.</dd><dt class="property-"
             title="">
         <span id="snapshot_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_name_python" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>name</a>
@@ -1040,8 +1150,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the snapshot.</p>
-</dd><dt class="property-"
+    <dd>Name of the snapshot.</dd><dt class="property-"
             title="">
         <span id="storage_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_id_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>id</a>
@@ -1049,8 +1158,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-"
             title="">
         <span id="storage_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_usage_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>usage</a>
@@ -1058,8 +1166,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1073,8 +1180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="snapshotlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotlists_yaml" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Lists</a>
@@ -1082,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsnapshotssnapshotlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of snapshot. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of snapshot. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="availabilityzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availabilityzone_yaml" style="color: inherit; text-decoration: inherit;">availability<wbr>Zone</a>
@@ -1091,17 +1196,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-"
             title="">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Number</span>
+        <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1117,8 +1220,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the snapshot.</p>
-</dd><dt class="property-"
+    <dd>ID of the snapshot.</dd><dt class="property-"
             title="">
         <span id="snapshotname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_yaml" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Name</a>
@@ -1126,8 +1228,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the snapshot.</p>
-</dd><dt class="property-"
+    <dd>Name of the snapshot.</dd><dt class="property-"
             title="">
         <span id="storageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -1135,8 +1236,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-"
             title="">
         <span id="storageusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -1144,8 +1244,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1169,8 +1268,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1178,8 +1276,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of snapshot.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="encrypt_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_csharp" style="color: inherit; text-decoration: inherit;">Encrypt</a>
@@ -1187,8 +1284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the snapshot is encrypted.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the snapshot is encrypted.</dd><dt class="property-required"
             title="Required">
         <span id="percent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_csharp" style="color: inherit; text-decoration: inherit;">Percent</a>
@@ -1196,8 +1292,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Snapshot creation progress percentage.</p>
-</dd><dt class="property-required"
+    <dd>Snapshot creation progress percentage.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1205,8 +1300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_csharp" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -1214,8 +1308,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the snapshot to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the snapshot to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_csharp" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Name</a>
@@ -1223,8 +1316,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the snapshot to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the snapshot to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storageid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Id</a>
@@ -1232,8 +1324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-required"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-required"
             title="Required">
         <span id="storagesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagesize_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Size</a>
@@ -1241,8 +1332,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of storage which this snapshot created from.</p>
-</dd><dt class="property-required"
+    <dd>Volume of storage which this snapshot created from.</dd><dt class="property-required"
             title="Required">
         <span id="storageusage_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Usage</a>
@@ -1250,8 +1340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from, and available values include SYSTEM_DISK and DATA_DISK.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from, and available values include <code>SYSTEM_DISK</code> and <code>DATA_DISK</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1265,8 +1354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1274,8 +1362,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of snapshot.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="encrypt_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_go" style="color: inherit; text-decoration: inherit;">Encrypt</a>
@@ -1283,8 +1370,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the snapshot is encrypted.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the snapshot is encrypted.</dd><dt class="property-required"
             title="Required">
         <span id="percent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_go" style="color: inherit; text-decoration: inherit;">Percent</a>
@@ -1292,8 +1378,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Snapshot creation progress percentage.</p>
-</dd><dt class="property-required"
+    <dd>Snapshot creation progress percentage.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1301,8 +1386,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_go" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Id</a>
@@ -1310,8 +1394,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the snapshot to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the snapshot to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_go" style="color: inherit; text-decoration: inherit;">Snapshot<wbr>Name</a>
@@ -1319,8 +1402,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the snapshot to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the snapshot to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storageid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Id</a>
@@ -1328,8 +1410,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-required"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-required"
             title="Required">
         <span id="storagesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagesize_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Size</a>
@@ -1337,8 +1418,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of storage which this snapshot created from.</p>
-</dd><dt class="property-required"
+    <dd>Volume of storage which this snapshot created from.</dd><dt class="property-required"
             title="Required">
         <span id="storageusage_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Usage</a>
@@ -1346,8 +1426,93 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from, and available values include SYSTEM_DISK and DATA_DISK.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from, and available values include <code>SYSTEM_DISK</code> and <code>DATA_DISK</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availability_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_zone_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of snapshot.</dd><dt class="property-required"
+            title="Required">
+        <span id="encrypt_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_hcl" style="color: inherit; text-decoration: inherit;">encrypt</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether the snapshot is encrypted.</dd><dt class="property-required"
+            title="Required">
+        <span id="percent_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_hcl" style="color: inherit; text-decoration: inherit;">percent</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Snapshot creation progress percentage.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project within the snapshot.</dd><dt class="property-required"
+            title="Required">
+        <span id="snapshot_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the snapshot to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="snapshot_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_name_hcl" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the snapshot to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_id_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_size_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Volume of storage which this snapshot created from.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_usage_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_usage_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>usage</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Types of CBS which this snapshot created from, and available values include <code>SYSTEM_DISK</code> and <code>DATA_DISK</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1361,8 +1526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1370,8 +1534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of snapshot.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="encrypt_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_java" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -1379,8 +1542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the snapshot is encrypted.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the snapshot is encrypted.</dd><dt class="property-required"
             title="Required">
         <span id="percent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_java" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -1388,8 +1550,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Snapshot creation progress percentage.</p>
-</dd><dt class="property-required"
+    <dd>Snapshot creation progress percentage.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1397,8 +1558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_java" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -1406,8 +1566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the snapshot to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the snapshot to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_java" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Name</a>
@@ -1415,8 +1574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the snapshot to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the snapshot to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storageid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -1424,8 +1582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-required"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-required"
             title="Required">
         <span id="storagesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagesize_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Size</a>
@@ -1433,8 +1590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Volume of storage which this snapshot created from.</p>
-</dd><dt class="property-required"
+    <dd>Volume of storage which this snapshot created from.</dd><dt class="property-required"
             title="Required">
         <span id="storageusage_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -1442,8 +1598,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from, and available values include SYSTEM_DISK and DATA_DISK.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from, and available values include <code>SYSTEM_DISK</code> and <code>DATA_DISK</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1457,8 +1612,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1466,8 +1620,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of snapshot.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="encrypt_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_nodejs" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -1475,8 +1628,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether the snapshot is encrypted.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the snapshot is encrypted.</dd><dt class="property-required"
             title="Required">
         <span id="percent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_nodejs" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -1484,8 +1636,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Snapshot creation progress percentage.</p>
-</dd><dt class="property-required"
+    <dd>Snapshot creation progress percentage.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1493,8 +1644,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_nodejs" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -1502,8 +1652,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the snapshot to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the snapshot to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_nodejs" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Name</a>
@@ -1511,8 +1660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the snapshot to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the snapshot to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storageid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -1520,8 +1668,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-required"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-required"
             title="Required">
         <span id="storagesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagesize_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Size</a>
@@ -1529,8 +1676,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Volume of storage which this snapshot created from.</p>
-</dd><dt class="property-required"
+    <dd>Volume of storage which this snapshot created from.</dd><dt class="property-required"
             title="Required">
         <span id="storageusage_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -1538,8 +1684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from, and available values include SYSTEM_DISK and DATA_DISK.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from, and available values include <code>SYSTEM_DISK</code> and <code>DATA_DISK</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1553,8 +1698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1562,8 +1706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of snapshot.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="encrypt_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_python" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -1571,8 +1714,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether the snapshot is encrypted.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the snapshot is encrypted.</dd><dt class="property-required"
             title="Required">
         <span id="percent_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_python" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -1580,8 +1722,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Snapshot creation progress percentage.</p>
-</dd><dt class="property-required"
+    <dd>Snapshot creation progress percentage.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1589,8 +1730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="snapshot_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_id_python" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>id</a>
@@ -1598,8 +1738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the snapshot to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the snapshot to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="snapshot_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_name_python" style="color: inherit; text-decoration: inherit;">snapshot_<wbr>name</a>
@@ -1607,8 +1746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the snapshot to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the snapshot to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storage_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_id_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>id</a>
@@ -1616,8 +1754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-required"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-required"
             title="Required">
         <span id="storage_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_size_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>size</a>
@@ -1625,8 +1762,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Volume of storage which this snapshot created from.</p>
-</dd><dt class="property-required"
+    <dd>Volume of storage which this snapshot created from.</dd><dt class="property-required"
             title="Required">
         <span id="storage_usage_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_usage_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>usage</a>
@@ -1634,8 +1770,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from, and available values include SYSTEM_DISK and DATA_DISK.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from, and available values include <code>SYSTEM_DISK</code> and <code>DATA_DISK</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1649,8 +1784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone that the CBS instance locates at.</p>
-</dd><dt class="property-required"
+    <dd>The available zone that the CBS instance locates at.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1658,8 +1792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of snapshot.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="encrypt_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encrypt_yaml" style="color: inherit; text-decoration: inherit;">encrypt</a>
@@ -1667,8 +1800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether the snapshot is encrypted.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether the snapshot is encrypted.</dd><dt class="property-required"
             title="Required">
         <span id="percent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#percent_yaml" style="color: inherit; text-decoration: inherit;">percent</a>
@@ -1676,8 +1808,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Snapshot creation progress percentage.</p>
-</dd><dt class="property-required"
+    <dd>Snapshot creation progress percentage.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1685,8 +1816,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project within the snapshot.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project within the snapshot.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotid_yaml" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Id</a>
@@ -1694,8 +1824,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the snapshot to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the snapshot to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="snapshotname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshotname_yaml" style="color: inherit; text-decoration: inherit;">snapshot<wbr>Name</a>
@@ -1703,8 +1832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the snapshot to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the snapshot to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="storageid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageid_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Id</a>
@@ -1712,8 +1840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the the CBS which this snapshot created from.</p>
-</dd><dt class="property-required"
+    <dd>ID of the the CBS which this snapshot created from.</dd><dt class="property-required"
             title="Required">
         <span id="storagesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagesize_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Size</a>
@@ -1721,8 +1848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Volume of storage which this snapshot created from.</p>
-</dd><dt class="property-required"
+    <dd>Volume of storage which this snapshot created from.</dd><dt class="property-required"
             title="Required">
         <span id="storageusage_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storageusage_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Usage</a>
@@ -1730,8 +1856,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of CBS which this snapshot created from, and available values include SYSTEM_DISK and DATA_DISK.</p>
-</dd></dl>
+    <dd>Types of CBS which this snapshot created from, and available values include <code>SYSTEM_DISK</code> and <code>DATA_DISK</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1746,7 +1871,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

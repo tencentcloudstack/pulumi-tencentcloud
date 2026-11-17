@@ -2,9 +2,11 @@
 ---
 title: "getParameters"
 title_tag: "tencentcloud.Dcdb.getParameters"
-meta_desc: "Documentation for the tencentcloud.Dcdb.getParameters function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of dcdb parameters"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query detailed information of dcdb parameters
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const parameters = tencentcloud.Dcdb.getParameters({
+const parameters = tencentcloud.dcdb.getParameters({
     instanceId: "your_instance_id",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-parameters = tencentcloud.Dcdb.get_parameters(instance_id="your_instance_id")
+parameters = tencentcloud.dcdb.get_parameters(instance_id="your_instance_id")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dcdb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dcdb.GetParameters(ctx, &dcdb.GetParametersArgs{
+			InstanceId: "your_instance_id",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dcdb.GetParameters(ctx, &dcdb.GetParametersArgs{
-			InstanceId: "your_instance_id",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dcdb.DcdbFunctions;
 import com.pulumi.tencentcloud.Dcdb.inputs.GetParametersArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   parameters:
     fn::invoke:
-      Function: tencentcloud:Dcdb:getParameters
-      Arguments:
+      function: tencentcloud:Dcdb:getParameters
+      arguments:
         instanceId: your_instance_id
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dcdb_getparameters" "parameters" {
+  instance_id = "your_instance_id"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDBParameters](https://www.tencentcloud.com/document/api/1042/34444)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getParameters<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetParametersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetParametersResult</a></span>></span
+><span class="k">function </span>getParameters<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetParametersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetParametersResult</a></span>></span
 ><span class="k">
-function </span>getParametersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetParametersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetParametersResult</a></span>></span
+function </span>getParametersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetParametersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetParametersResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -138,9 +195,9 @@ function </span>getParametersOutput<span class="p">(</span><span class="nx">args
                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetParametersResult</span
 ><span class="k">
-def </span>get_parameters_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetParametersResult]</span
+def </span>get_parameters_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetParametersResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,7 +222,8 @@ func </span>GetParametersOutput<span class="p">(</span><span class="nx">ctx</spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetParameters </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetParametersResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetParametersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetParametersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetParametersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetParametersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetParametersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetParametersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetParametersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,7 +232,8 @@ func </span>GetParametersOutput<span class="p">(</span><span class="nx">ctx</spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetParametersResult</a></span>> </span>getParameters<span class="p">(</span><span class="nx">GetParametersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetParametersResult</a></span>> </span>getParameters<span class="p">(</span><span class="nx">GetParametersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetParametersResult</a></span>> </span>getParameters<span class="p">(</span><span class="nx">GetParametersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,6 +245,15 @@ func </span>GetParametersOutput<span class="p">(</span><span class="nx">ctx</spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dcdb/getParameters:getParameters
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dcdb_get_parameters&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -204,8 +272,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -213,8 +280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +294,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -237,8 +302,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -261,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -276,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -285,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -309,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -333,8 +412,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -374,8 +451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getparameterslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dcdb.<wbr>Outputs.<wbr>Get<wbr>Parameters<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-"
+    <dd>parameter list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -397,8 +473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -414,11 +489,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getparameterslist">[]Get<wbr>Parameters<wbr>List</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-"
+    <dd>parameter list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getparameterslist">list(object)</a></span>
+    </dt>
+    <dd>parameter list.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -437,8 +549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -454,8 +565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getparameterslist">List&lt;Get<wbr>Parameters<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-"
+    <dd>parameter list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -477,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -494,8 +603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getparameterslist">Get<wbr>Parameters<wbr>List[]</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-"
+    <dd>parameter list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -517,8 +625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -532,10 +639,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getparameterslist">Get<wbr>Parameters<wbr>List]</a></span>
+        <span class="property-type"><a href="#getparameterslist">Sequence[Get<wbr>Parameters<wbr>List]</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-"
+    <dd>parameter list.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -557,8 +663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -574,8 +679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getparameterslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>parameter list.</p>
-</dd><dt class="property-"
+    <dd>parameter list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -607,8 +711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getparameterslistconstraint">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dcdb.<wbr>Inputs.<wbr>Get<wbr>Parameters<wbr>List<wbr>Constraint&gt;</a></span>
     </dt>
-    <dd><p>params constraint.</p>
-</dd><dt class="property-required"
+    <dd>params constraint.</dd><dt class="property-required"
             title="Required">
         <span id="default_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_csharp" style="color: inherit; text-decoration: inherit;">Default</a>
@@ -616,8 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>default value.</p>
-</dd><dt class="property-required"
+    <dd>default value.</dd><dt class="property-required"
             title="Required">
         <span id="havesetvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#havesetvalue_csharp" style="color: inherit; text-decoration: inherit;">Have<wbr>Set<wbr>Value</a>
@@ -625,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>have set value.</p>
-</dd><dt class="property-required"
+    <dd>have set value.</dd><dt class="property-required"
             title="Required">
         <span id="needrestart_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needrestart_csharp" style="color: inherit; text-decoration: inherit;">Need<wbr>Restart</a>
@@ -634,8 +735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>need restart.</p>
-</dd><dt class="property-required"
+    <dd>need restart.</dd><dt class="property-required"
             title="Required">
         <span id="param_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_csharp" style="color: inherit; text-decoration: inherit;">Param</a>
@@ -643,8 +743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>parameter name.</p>
-</dd><dt class="property-required"
+    <dd>parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -652,8 +751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>parameter value.</p>
-</dd></dl>
+    <dd>parameter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -667,8 +765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getparameterslistconstraint">[]Get<wbr>Parameters<wbr>List<wbr>Constraint</a></span>
     </dt>
-    <dd><p>params constraint.</p>
-</dd><dt class="property-required"
+    <dd>params constraint.</dd><dt class="property-required"
             title="Required">
         <span id="default_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_go" style="color: inherit; text-decoration: inherit;">Default</a>
@@ -676,8 +773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>default value.</p>
-</dd><dt class="property-required"
+    <dd>default value.</dd><dt class="property-required"
             title="Required">
         <span id="havesetvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#havesetvalue_go" style="color: inherit; text-decoration: inherit;">Have<wbr>Set<wbr>Value</a>
@@ -685,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>have set value.</p>
-</dd><dt class="property-required"
+    <dd>have set value.</dd><dt class="property-required"
             title="Required">
         <span id="needrestart_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needrestart_go" style="color: inherit; text-decoration: inherit;">Need<wbr>Restart</a>
@@ -694,8 +789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>need restart.</p>
-</dd><dt class="property-required"
+    <dd>need restart.</dd><dt class="property-required"
             title="Required">
         <span id="param_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_go" style="color: inherit; text-decoration: inherit;">Param</a>
@@ -703,8 +797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>parameter name.</p>
-</dd><dt class="property-required"
+    <dd>parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -712,8 +805,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>parameter value.</p>
-</dd></dl>
+    <dd>parameter value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="constraints_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#constraints_hcl" style="color: inherit; text-decoration: inherit;">constraints</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getparameterslistconstraint">list(object)</a></span>
+    </dt>
+    <dd>params constraint.</dd><dt class="property-required"
+            title="Required">
+        <span id="default_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_hcl" style="color: inherit; text-decoration: inherit;">default</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>default value.</dd><dt class="property-required"
+            title="Required">
+        <span id="have_set_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#have_set_value_hcl" style="color: inherit; text-decoration: inherit;">have_<wbr>set_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>have set value.</dd><dt class="property-required"
+            title="Required">
+        <span id="need_restart_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#need_restart_hcl" style="color: inherit; text-decoration: inherit;">need_<wbr>restart</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>need restart.</dd><dt class="property-required"
+            title="Required">
+        <span id="param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_hcl" style="color: inherit; text-decoration: inherit;">param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>parameter name.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>parameter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -727,8 +873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getparameterslistconstraint">List&lt;Get<wbr>Parameters<wbr>List<wbr>Constraint&gt;</a></span>
     </dt>
-    <dd><p>params constraint.</p>
-</dd><dt class="property-required"
+    <dd>params constraint.</dd><dt class="property-required"
             title="Required">
         <span id="default__java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default__java" style="color: inherit; text-decoration: inherit;">default_</a>
@@ -736,8 +881,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>default value.</p>
-</dd><dt class="property-required"
+    <dd>default value.</dd><dt class="property-required"
             title="Required">
         <span id="havesetvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#havesetvalue_java" style="color: inherit; text-decoration: inherit;">have<wbr>Set<wbr>Value</a>
@@ -745,8 +889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>have set value.</p>
-</dd><dt class="property-required"
+    <dd>have set value.</dd><dt class="property-required"
             title="Required">
         <span id="needrestart_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needrestart_java" style="color: inherit; text-decoration: inherit;">need<wbr>Restart</a>
@@ -754,8 +897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>need restart.</p>
-</dd><dt class="property-required"
+    <dd>need restart.</dd><dt class="property-required"
             title="Required">
         <span id="param_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_java" style="color: inherit; text-decoration: inherit;">param</a>
@@ -763,8 +905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>parameter name.</p>
-</dd><dt class="property-required"
+    <dd>parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -772,8 +913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>parameter value.</p>
-</dd></dl>
+    <dd>parameter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -787,8 +927,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getparameterslistconstraint">Get<wbr>Parameters<wbr>List<wbr>Constraint[]</a></span>
     </dt>
-    <dd><p>params constraint.</p>
-</dd><dt class="property-required"
+    <dd>params constraint.</dd><dt class="property-required"
             title="Required">
         <span id="default_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_nodejs" style="color: inherit; text-decoration: inherit;">default</a>
@@ -796,8 +935,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>default value.</p>
-</dd><dt class="property-required"
+    <dd>default value.</dd><dt class="property-required"
             title="Required">
         <span id="havesetvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#havesetvalue_nodejs" style="color: inherit; text-decoration: inherit;">have<wbr>Set<wbr>Value</a>
@@ -805,8 +943,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>have set value.</p>
-</dd><dt class="property-required"
+    <dd>have set value.</dd><dt class="property-required"
             title="Required">
         <span id="needrestart_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needrestart_nodejs" style="color: inherit; text-decoration: inherit;">need<wbr>Restart</a>
@@ -814,8 +951,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>need restart.</p>
-</dd><dt class="property-required"
+    <dd>need restart.</dd><dt class="property-required"
             title="Required">
         <span id="param_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_nodejs" style="color: inherit; text-decoration: inherit;">param</a>
@@ -823,8 +959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>parameter name.</p>
-</dd><dt class="property-required"
+    <dd>parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -832,8 +967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>parameter value.</p>
-</dd></dl>
+    <dd>parameter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -845,10 +979,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#constraints_python" style="color: inherit; text-decoration: inherit;">constraints</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getparameterslistconstraint">Get<wbr>Parameters<wbr>List<wbr>Constraint]</a></span>
+        <span class="property-type"><a href="#getparameterslistconstraint">Sequence[Get<wbr>Parameters<wbr>List<wbr>Constraint]</a></span>
     </dt>
-    <dd><p>params constraint.</p>
-</dd><dt class="property-required"
+    <dd>params constraint.</dd><dt class="property-required"
             title="Required">
         <span id="default_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_python" style="color: inherit; text-decoration: inherit;">default</a>
@@ -856,8 +989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>default value.</p>
-</dd><dt class="property-required"
+    <dd>default value.</dd><dt class="property-required"
             title="Required">
         <span id="have_set_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#have_set_value_python" style="color: inherit; text-decoration: inherit;">have_<wbr>set_<wbr>value</a>
@@ -865,8 +997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>have set value.</p>
-</dd><dt class="property-required"
+    <dd>have set value.</dd><dt class="property-required"
             title="Required">
         <span id="need_restart_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#need_restart_python" style="color: inherit; text-decoration: inherit;">need_<wbr>restart</a>
@@ -874,8 +1005,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>need restart.</p>
-</dd><dt class="property-required"
+    <dd>need restart.</dd><dt class="property-required"
             title="Required">
         <span id="param_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_python" style="color: inherit; text-decoration: inherit;">param</a>
@@ -883,8 +1013,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>parameter name.</p>
-</dd><dt class="property-required"
+    <dd>parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -892,8 +1021,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>parameter value.</p>
-</dd></dl>
+    <dd>parameter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -907,8 +1035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getparameterslistconstraint">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>params constraint.</p>
-</dd><dt class="property-required"
+    <dd>params constraint.</dd><dt class="property-required"
             title="Required">
         <span id="default_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_yaml" style="color: inherit; text-decoration: inherit;">default</a>
@@ -916,8 +1043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>default value.</p>
-</dd><dt class="property-required"
+    <dd>default value.</dd><dt class="property-required"
             title="Required">
         <span id="havesetvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#havesetvalue_yaml" style="color: inherit; text-decoration: inherit;">have<wbr>Set<wbr>Value</a>
@@ -925,8 +1051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>have set value.</p>
-</dd><dt class="property-required"
+    <dd>have set value.</dd><dt class="property-required"
             title="Required">
         <span id="needrestart_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#needrestart_yaml" style="color: inherit; text-decoration: inherit;">need<wbr>Restart</a>
@@ -934,8 +1059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>need restart.</p>
-</dd><dt class="property-required"
+    <dd>need restart.</dd><dt class="property-required"
             title="Required">
         <span id="param_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_yaml" style="color: inherit; text-decoration: inherit;">param</a>
@@ -943,8 +1067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>parameter name.</p>
-</dd><dt class="property-required"
+    <dd>parameter name.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -952,8 +1075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>parameter value.</p>
-</dd></dl>
+    <dd>parameter value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -971,8 +1093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>a list of optional values of type num.</p>
-</dd><dt class="property-required"
+    <dd>a list of optional values of type num.</dd><dt class="property-required"
             title="Required">
         <span id="ranges_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ranges_csharp" style="color: inherit; text-decoration: inherit;">Ranges</a>
@@ -980,8 +1101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getparameterslistconstraintrange">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dcdb.<wbr>Inputs.<wbr>Get<wbr>Parameters<wbr>List<wbr>Constraint<wbr>Range&gt;</a></span>
     </dt>
-    <dd><p>range constraint.</p>
-</dd><dt class="property-required"
+    <dd>range constraint.</dd><dt class="property-required"
             title="Required">
         <span id="string_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#string_csharp" style="color: inherit; text-decoration: inherit;">String</a>
@@ -989,8 +1109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>constraint type is string.</p>
-</dd><dt class="property-required"
+    <dd>constraint type is string.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -998,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>type.</p>
-</dd></dl>
+    <dd>type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1013,8 +1131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>a list of optional values of type num.</p>
-</dd><dt class="property-required"
+    <dd>a list of optional values of type num.</dd><dt class="property-required"
             title="Required">
         <span id="ranges_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ranges_go" style="color: inherit; text-decoration: inherit;">Ranges</a>
@@ -1022,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getparameterslistconstraintrange">[]Get<wbr>Parameters<wbr>List<wbr>Constraint<wbr>Range</a></span>
     </dt>
-    <dd><p>range constraint.</p>
-</dd><dt class="property-required"
+    <dd>range constraint.</dd><dt class="property-required"
             title="Required">
         <span id="string_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#string_go" style="color: inherit; text-decoration: inherit;">String</a>
@@ -1031,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>constraint type is string.</p>
-</dd><dt class="property-required"
+    <dd>constraint type is string.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1040,8 +1155,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>type.</p>
-</dd></dl>
+    <dd>type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="enum_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enum_hcl" style="color: inherit; text-decoration: inherit;">enum</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>a list of optional values of type num.</dd><dt class="property-required"
+            title="Required">
+        <span id="ranges_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ranges_hcl" style="color: inherit; text-decoration: inherit;">ranges</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getparameterslistconstraintrange">list(object)</a></span>
+    </dt>
+    <dd>range constraint.</dd><dt class="property-required"
+            title="Required">
+        <span id="string_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#string_hcl" style="color: inherit; text-decoration: inherit;">string</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>constraint type is string.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1055,8 +1207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>a list of optional values of type num.</p>
-</dd><dt class="property-required"
+    <dd>a list of optional values of type num.</dd><dt class="property-required"
             title="Required">
         <span id="ranges_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ranges_java" style="color: inherit; text-decoration: inherit;">ranges</a>
@@ -1064,8 +1215,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getparameterslistconstraintrange">List&lt;Get<wbr>Parameters<wbr>List<wbr>Constraint<wbr>Range&gt;</a></span>
     </dt>
-    <dd><p>range constraint.</p>
-</dd><dt class="property-required"
+    <dd>range constraint.</dd><dt class="property-required"
             title="Required">
         <span id="string_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#string_java" style="color: inherit; text-decoration: inherit;">string</a>
@@ -1073,8 +1223,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>constraint type is string.</p>
-</dd><dt class="property-required"
+    <dd>constraint type is string.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1082,8 +1231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>type.</p>
-</dd></dl>
+    <dd>type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1097,8 +1245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>a list of optional values of type num.</p>
-</dd><dt class="property-required"
+    <dd>a list of optional values of type num.</dd><dt class="property-required"
             title="Required">
         <span id="ranges_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ranges_nodejs" style="color: inherit; text-decoration: inherit;">ranges</a>
@@ -1106,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getparameterslistconstraintrange">Get<wbr>Parameters<wbr>List<wbr>Constraint<wbr>Range[]</a></span>
     </dt>
-    <dd><p>range constraint.</p>
-</dd><dt class="property-required"
+    <dd>range constraint.</dd><dt class="property-required"
             title="Required">
         <span id="string_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#string_nodejs" style="color: inherit; text-decoration: inherit;">string</a>
@@ -1115,8 +1261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>constraint type is string.</p>
-</dd><dt class="property-required"
+    <dd>constraint type is string.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1124,8 +1269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>type.</p>
-</dd></dl>
+    <dd>type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1139,17 +1283,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>a list of optional values of type num.</p>
-</dd><dt class="property-required"
+    <dd>a list of optional values of type num.</dd><dt class="property-required"
             title="Required">
         <span id="ranges_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ranges_python" style="color: inherit; text-decoration: inherit;">ranges</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getparameterslistconstraintrange">Get<wbr>Parameters<wbr>List<wbr>Constraint<wbr>Range]</a></span>
+        <span class="property-type"><a href="#getparameterslistconstraintrange">Sequence[Get<wbr>Parameters<wbr>List<wbr>Constraint<wbr>Range]</a></span>
     </dt>
-    <dd><p>range constraint.</p>
-</dd><dt class="property-required"
+    <dd>range constraint.</dd><dt class="property-required"
             title="Required">
         <span id="string_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#string_python" style="color: inherit; text-decoration: inherit;">string</a>
@@ -1157,8 +1299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>constraint type is string.</p>
-</dd><dt class="property-required"
+    <dd>constraint type is string.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1166,8 +1307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>type.</p>
-</dd></dl>
+    <dd>type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1181,8 +1321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>a list of optional values of type num.</p>
-</dd><dt class="property-required"
+    <dd>a list of optional values of type num.</dd><dt class="property-required"
             title="Required">
         <span id="ranges_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ranges_yaml" style="color: inherit; text-decoration: inherit;">ranges</a>
@@ -1190,8 +1329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getparameterslistconstraintrange">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>range constraint.</p>
-</dd><dt class="property-required"
+    <dd>range constraint.</dd><dt class="property-required"
             title="Required">
         <span id="string_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#string_yaml" style="color: inherit; text-decoration: inherit;">string</a>
@@ -1199,8 +1337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>constraint type is string.</p>
-</dd><dt class="property-required"
+    <dd>constraint type is string.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1208,8 +1345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>type.</p>
-</dd></dl>
+    <dd>type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1227,8 +1363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>max value.</p>
-</dd><dt class="property-required"
+    <dd>max value.</dd><dt class="property-required"
             title="Required">
         <span id="min_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_csharp" style="color: inherit; text-decoration: inherit;">Min</a>
@@ -1236,8 +1371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>min value.</p>
-</dd></dl>
+    <dd>min value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1251,8 +1385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>max value.</p>
-</dd><dt class="property-required"
+    <dd>max value.</dd><dt class="property-required"
             title="Required">
         <span id="min_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_go" style="color: inherit; text-decoration: inherit;">Min</a>
@@ -1260,8 +1393,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>min value.</p>
-</dd></dl>
+    <dd>min value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="max_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_hcl" style="color: inherit; text-decoration: inherit;">max</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>max value.</dd><dt class="property-required"
+            title="Required">
+        <span id="min_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_hcl" style="color: inherit; text-decoration: inherit;">min</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>min value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1275,8 +1429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>max value.</p>
-</dd><dt class="property-required"
+    <dd>max value.</dd><dt class="property-required"
             title="Required">
         <span id="min_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_java" style="color: inherit; text-decoration: inherit;">min</a>
@@ -1284,8 +1437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>min value.</p>
-</dd></dl>
+    <dd>min value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1299,8 +1451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>max value.</p>
-</dd><dt class="property-required"
+    <dd>max value.</dd><dt class="property-required"
             title="Required">
         <span id="min_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_nodejs" style="color: inherit; text-decoration: inherit;">min</a>
@@ -1308,8 +1459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>min value.</p>
-</dd></dl>
+    <dd>min value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1323,8 +1473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>max value.</p>
-</dd><dt class="property-required"
+    <dd>max value.</dd><dt class="property-required"
             title="Required">
         <span id="min_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_python" style="color: inherit; text-decoration: inherit;">min</a>
@@ -1332,8 +1481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>min value.</p>
-</dd></dl>
+    <dd>min value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1347,8 +1495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>max value.</p>
-</dd><dt class="property-required"
+    <dd>max value.</dd><dt class="property-required"
             title="Required">
         <span id="min_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_yaml" style="color: inherit; text-decoration: inherit;">min</a>
@@ -1356,8 +1503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>min value.</p>
-</dd></dl>
+    <dd>min value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1372,7 +1518,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

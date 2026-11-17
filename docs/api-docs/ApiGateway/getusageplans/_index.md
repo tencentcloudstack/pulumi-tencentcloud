@@ -2,9 +2,11 @@
 ---
 title: "getUsagePlans"
 title_tag: "tencentcloud.ApiGateway.getUsagePlans"
-meta_desc: "Documentation for the tencentcloud.ApiGateway.getUsagePlans function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query API gateway usage plans."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,10 +18,14 @@ Use this data source to query API gateway usage plans.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const plan = new tencentcloud.apigateway.UsagePlan("plan", {
@@ -28,31 +34,74 @@ const plan = new tencentcloud.apigateway.UsagePlan("plan", {
     maxRequestNum: 100,
     maxRequestNumPreSec: 10,
 });
-const name = tencentcloud.ApiGateway.getUsagePlansOutput({
+const name = tencentcloud.apigateway.getUsagePlansOutput({
     usagePlanName: plan.usagePlanName,
 });
-const id = tencentcloud.ApiGateway.getUsagePlansOutput({
+const id = tencentcloud.apigateway.getUsagePlansOutput({
     usagePlanId: plan.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-plan = tencentcloud.api_gateway.UsagePlan("plan",
+plan = tencentcloud.apigateway.UsagePlan("plan",
     usage_plan_name="my_plan",
     usage_plan_desc="nice plan",
     max_request_num=100,
     max_request_num_pre_sec=10)
-name = tencentcloud.ApiGateway.get_usage_plans_output(usage_plan_name=plan.usage_plan_name)
-id = tencentcloud.ApiGateway.get_usage_plans_output(usage_plan_id=plan.id)
+name = tencentcloud.apigateway.get_usage_plans_output(usage_plan_name=plan.usage_plan_name)
+id = tencentcloud.apigateway.get_usage_plans_output(usage_plan_id=plan.id)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		plan, err := apigateway.NewUsagePlan(ctx, "plan", &apigateway.UsagePlanArgs{
+			UsagePlanName:       pulumi.String("my_plan"),
+			UsagePlanDesc:       pulumi.String("nice plan"),
+			MaxRequestNum:       pulumi.Int(100),
+			MaxRequestNumPreSec: pulumi.Int(10),
+		})
+		if err != nil {
+			return err
+		}
+		_ = apigateway.GetUsagePlansOutput(ctx, apigateway.GetUsagePlansOutputArgs{
+			UsagePlanName: plan.UsagePlanName,
+		}, nil)
+		_ = apigateway.GetUsagePlansOutput(ctx, apigateway.GetUsagePlansOutputArgs{
+			UsagePlanId: plan.ID().ToIDOutput().ToStringOutput(),
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -77,35 +126,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		plan, err := ApiGateway.NewUsagePlan(ctx, "plan", &ApiGateway.UsagePlanArgs{
-			UsagePlanName:       pulumi.String("my_plan"),
-			UsagePlanDesc:       pulumi.String("nice plan"),
-			MaxRequestNum:       pulumi.Int(100),
-			MaxRequestNumPreSec: pulumi.Int(10),
-		})
-		if err != nil {
-			return err
-		}
-		_ = ApiGateway.GetUsagePlansOutput(ctx, apigateway.GetUsagePlansOutputArgs{
-			UsagePlanName: plan.UsagePlanName,
-		}, nil)
-		_ = ApiGateway.GetUsagePlansOutput(ctx, apigateway.GetUsagePlansOutputArgs{
-			UsagePlanId: plan.ID(),
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -116,8 +141,8 @@ import com.pulumi.tencentcloud.ApiGateway.UsagePlan;
 import com.pulumi.tencentcloud.ApiGateway.UsagePlanArgs;
 import com.pulumi.tencentcloud.ApiGateway.ApiGatewayFunctions;
 import com.pulumi.tencentcloud.ApiGateway.inputs.GetUsagePlansArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -129,7 +154,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var plan = new UsagePlan("plan", UsagePlanArgs.builder()        
+        var plan = new UsagePlan("plan", UsagePlanArgs.builder()
             .usagePlanName("my_plan")
             .usagePlanDesc("nice plan")
             .maxRequestNum(100)
@@ -147,6 +172,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   plan:
@@ -159,17 +189,52 @@ resources:
 variables:
   name:
     fn::invoke:
-      Function: tencentcloud:ApiGateway:getUsagePlans
-      Arguments:
+      function: tencentcloud:ApiGateway:getUsagePlans
+      arguments:
         usagePlanName: ${plan.usagePlanName}
   id:
     fn::invoke:
-      Function: tencentcloud:ApiGateway:getUsagePlans
-      Arguments:
+      function: tencentcloud:ApiGateway:getUsagePlans
+      arguments:
         usagePlanId: ${plan.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_apigateway_getusageplans" "name" {
+  usage_plan_name = tencentcloud_apigateway_usageplan.plan.usage_plan_name
+}
+data "tencentcloud_apigateway_getusageplans" "id" {
+  usage_plan_id = tencentcloud_apigateway_usageplan.plan.id
+}
+
+resource "tencentcloud_apigateway_usageplan" "plan" {
+  usage_plan_name         = "my_plan"
+  usage_plan_desc         = "nice plan"
+  max_request_num         = 100
+  max_request_num_pre_sec = 10
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeUsagePlansStatus](https://www.tencentcloud.com/search/?wd=DescribeUsagePlansStatus&type=document&lang=en)
 
 
 
@@ -181,7 +246,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -189,9 +254,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getUsagePlans<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUsagePlansArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetUsagePlansResult</a></span>></span
+><span class="k">function </span>getUsagePlans<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUsagePlansArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetUsagePlansResult</a></span>></span
 ><span class="k">
-function </span>getUsagePlansOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUsagePlansOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetUsagePlansResult</a></span>></span
+function </span>getUsagePlansOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUsagePlansOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetUsagePlansResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -205,10 +270,10 @@ function </span>getUsagePlansOutput<span class="p">(</span><span class="nx">args
                     <span class="nx">usage_plan_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetUsagePlansResult</span
 ><span class="k">
-def </span>get_usage_plans_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">usage_plan_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">usage_plan_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetUsagePlansResult]</span
+def </span>get_usage_plans_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">usage_plan_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">usage_plan_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetUsagePlansResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -233,7 +298,8 @@ func </span>GetUsagePlansOutput<span class="p">(</span><span class="nx">ctx</spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetUsagePlans </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetUsagePlansResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetUsagePlansArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetUsagePlansResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetUsagePlansInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetUsagePlansResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetUsagePlansInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetUsagePlansResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetUsagePlansInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -242,7 +308,8 @@ func </span>GetUsagePlansOutput<span class="p">(</span><span class="nx">ctx</spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetUsagePlansResult</a></span>> </span>getUsagePlans<span class="p">(</span><span class="nx">GetUsagePlansArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetUsagePlansResult</a></span>> </span>getUsagePlans<span class="p">(</span><span class="nx">GetUsagePlansArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetUsagePlansResult</a></span>> </span>getUsagePlans<span class="p">(</span><span class="nx">GetUsagePlansArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -254,6 +321,15 @@ func </span>GetUsagePlansOutput<span class="p">(</span><span class="nx">ctx</spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:ApiGateway/getUsagePlans:getUsagePlans
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_api_gateway_get_usage_plans&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -272,8 +348,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_csharp" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Id</a>
@@ -281,8 +356,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_csharp" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Name</a>
@@ -290,8 +364,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -305,8 +378,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_go" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Id</a>
@@ -314,8 +386,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_go" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Name</a>
@@ -323,8 +394,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="usage_plan_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_id_hcl" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the usage plan.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="usage_plan_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_name_hcl" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -338,8 +438,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_java" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -347,8 +446,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_java" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Name</a>
@@ -356,8 +454,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -371,8 +468,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_nodejs" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -380,8 +476,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_nodejs" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Name</a>
@@ -389,8 +484,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -404,8 +498,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="usage_plan_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_id_python" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>id</a>
@@ -413,8 +506,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan.</dd><dt class="property-optional"
             title="Optional">
         <span id="usage_plan_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_name_python" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>name</a>
@@ -422,8 +514,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -437,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_yaml" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -446,8 +536,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the usage plan.</dd><dt class="property-optional"
             title="Optional">
         <span id="usageplanname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_yaml" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Name</a>
@@ -455,8 +544,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -479,8 +567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -488,8 +575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusageplanslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Api<wbr>Gateway.<wbr>Outputs.<wbr>Get<wbr>Usage<wbr>Plans<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of usage plans.</p>
-</dd><dt class="property-"
+    <dd>A list of usage plans.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -505,8 +591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-"
+    <dd>ID of the usage plan.</dd><dt class="property-"
             title="">
         <span id="usageplanname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_csharp" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Name</a>
@@ -514,8 +599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -529,8 +613,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -538,8 +621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusageplanslist">[]Get<wbr>Usage<wbr>Plans<wbr>List</a></span>
     </dt>
-    <dd><p>A list of usage plans.</p>
-</dd><dt class="property-"
+    <dd>A list of usage plans.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -555,8 +637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-"
+    <dd>ID of the usage plan.</dd><dt class="property-"
             title="">
         <span id="usageplanname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_go" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Name</a>
@@ -564,8 +645,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getusageplanslist">list(object)</a></span>
+    </dt>
+    <dd>A list of usage plans.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="usage_plan_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_id_hcl" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the usage plan.</dd><dt class="property-"
+            title="">
+        <span id="usage_plan_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_name_hcl" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -579,8 +705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -588,8 +713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusageplanslist">List&lt;Get<wbr>Usage<wbr>Plans<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of usage plans.</p>
-</dd><dt class="property-"
+    <dd>A list of usage plans.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -605,8 +729,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-"
+    <dd>ID of the usage plan.</dd><dt class="property-"
             title="">
         <span id="usageplanname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_java" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Name</a>
@@ -614,8 +737,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -629,8 +751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -638,8 +759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusageplanslist">Get<wbr>Usage<wbr>Plans<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of usage plans.</p>
-</dd><dt class="property-"
+    <dd>A list of usage plans.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -655,8 +775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-"
+    <dd>ID of the usage plan.</dd><dt class="property-"
             title="">
         <span id="usageplanname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_nodejs" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Name</a>
@@ -664,8 +783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -679,17 +797,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getusageplanslist">Get<wbr>Usage<wbr>Plans<wbr>List]</a></span>
+        <span class="property-type"><a href="#getusageplanslist">Sequence[Get<wbr>Usage<wbr>Plans<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of usage plans.</p>
-</dd><dt class="property-"
+    <dd>A list of usage plans.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -705,8 +821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-"
+    <dd>ID of the usage plan.</dd><dt class="property-"
             title="">
         <span id="usage_plan_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_name_python" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>name</a>
@@ -714,8 +829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -729,8 +843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -738,8 +851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusageplanslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of usage plans.</p>
-</dd><dt class="property-"
+    <dd>A list of usage plans.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -755,8 +867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-"
+    <dd>ID of the usage plan.</dd><dt class="property-"
             title="">
         <span id="usageplanname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_yaml" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Name</a>
@@ -764,8 +875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -789,8 +899,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="maxrequestnum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestnum_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Request<wbr>Num</a>
@@ -798,8 +907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of requests allowed. Valid value formats: <code>-1</code>, <code>[1,99999999]</code>. The default value is -1, which indicates no limit.</p>
-</dd><dt class="property-required"
+    <dd>Total number of requests allowed. Valid value formats: <code>-1</code>, <code>[1,99999999]</code>. The default value is -1, which indicates no limit.</dd><dt class="property-required"
             title="Required">
         <span id="maxrequestnumpresec_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestnumpresec_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Request<wbr>Num<wbr>Pre<wbr>Sec</a>
@@ -807,8 +915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Limit of requests per second. Valid values formats: <code>-1</code>, <code>[1,2000]</code>. The default value is -1, which indicates no limit.</p>
-</dd><dt class="property-required"
+    <dd>Limit of requests per second. Valid values formats: <code>-1</code>, <code>[1,2000]</code>. The default value is -1, which indicates no limit.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_csharp" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -816,8 +923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="usageplandesc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplandesc_csharp" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Desc</a>
@@ -825,8 +931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom usage plan description.</p>
-</dd><dt class="property-required"
+    <dd>Custom usage plan description.</dd><dt class="property-required"
             title="Required">
         <span id="usageplanid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_csharp" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Id</a>
@@ -834,8 +939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-required"
+    <dd>ID of the usage plan.</dd><dt class="property-required"
             title="Required">
         <span id="usageplanname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_csharp" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Name</a>
@@ -843,8 +947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -858,8 +961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="maxrequestnum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestnum_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Request<wbr>Num</a>
@@ -867,8 +969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of requests allowed. Valid value formats: <code>-1</code>, <code>[1,99999999]</code>. The default value is -1, which indicates no limit.</p>
-</dd><dt class="property-required"
+    <dd>Total number of requests allowed. Valid value formats: <code>-1</code>, <code>[1,99999999]</code>. The default value is -1, which indicates no limit.</dd><dt class="property-required"
             title="Required">
         <span id="maxrequestnumpresec_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestnumpresec_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Request<wbr>Num<wbr>Pre<wbr>Sec</a>
@@ -876,8 +977,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Limit of requests per second. Valid values formats: <code>-1</code>, <code>[1,2000]</code>. The default value is -1, which indicates no limit.</p>
-</dd><dt class="property-required"
+    <dd>Limit of requests per second. Valid values formats: <code>-1</code>, <code>[1,2000]</code>. The default value is -1, which indicates no limit.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_go" style="color: inherit; text-decoration: inherit;">Modify<wbr>Time</a>
@@ -885,8 +985,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="usageplandesc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplandesc_go" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Desc</a>
@@ -894,8 +993,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom usage plan description.</p>
-</dd><dt class="property-required"
+    <dd>Custom usage plan description.</dd><dt class="property-required"
             title="Required">
         <span id="usageplanid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_go" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Id</a>
@@ -903,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-required"
+    <dd>ID of the usage plan.</dd><dt class="property-required"
             title="Required">
         <span id="usageplanname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_go" style="color: inherit; text-decoration: inherit;">Usage<wbr>Plan<wbr>Name</a>
@@ -912,8 +1009,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_request_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_request_num_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>request_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total number of requests allowed. Valid value formats: <code>-1</code>, <code>[1,99999999]</code>. The default value is -1, which indicates no limit.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_request_num_pre_sec_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_request_num_pre_sec_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>request_<wbr>num_<wbr>pre_<wbr>sec</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Limit of requests per second. Valid values formats: <code>-1</code>, <code>[1,2000]</code>. The default value is -1, which indicates no limit.</dd><dt class="property-required"
+            title="Required">
+        <span id="modify_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_hcl" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
+            title="Required">
+        <span id="usage_plan_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_desc_hcl" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom usage plan description.</dd><dt class="property-required"
+            title="Required">
+        <span id="usage_plan_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_id_hcl" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the usage plan.</dd><dt class="property-required"
+            title="Required">
+        <span id="usage_plan_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_name_hcl" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -927,8 +1085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="maxrequestnum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestnum_java" style="color: inherit; text-decoration: inherit;">max<wbr>Request<wbr>Num</a>
@@ -936,8 +1093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total number of requests allowed. Valid value formats: <code>-1</code>, <code>[1,99999999]</code>. The default value is -1, which indicates no limit.</p>
-</dd><dt class="property-required"
+    <dd>Total number of requests allowed. Valid value formats: <code>-1</code>, <code>[1,99999999]</code>. The default value is -1, which indicates no limit.</dd><dt class="property-required"
             title="Required">
         <span id="maxrequestnumpresec_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestnumpresec_java" style="color: inherit; text-decoration: inherit;">max<wbr>Request<wbr>Num<wbr>Pre<wbr>Sec</a>
@@ -945,8 +1101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Limit of requests per second. Valid values formats: <code>-1</code>, <code>[1,2000]</code>. The default value is -1, which indicates no limit.</p>
-</dd><dt class="property-required"
+    <dd>Limit of requests per second. Valid values formats: <code>-1</code>, <code>[1,2000]</code>. The default value is -1, which indicates no limit.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_java" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -954,8 +1109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="usageplandesc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplandesc_java" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Desc</a>
@@ -963,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom usage plan description.</p>
-</dd><dt class="property-required"
+    <dd>Custom usage plan description.</dd><dt class="property-required"
             title="Required">
         <span id="usageplanid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_java" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -972,8 +1125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-required"
+    <dd>ID of the usage plan.</dd><dt class="property-required"
             title="Required">
         <span id="usageplanname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_java" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Name</a>
@@ -981,8 +1133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -996,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="maxrequestnum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestnum_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Request<wbr>Num</a>
@@ -1005,8 +1155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total number of requests allowed. Valid value formats: <code>-1</code>, <code>[1,99999999]</code>. The default value is -1, which indicates no limit.</p>
-</dd><dt class="property-required"
+    <dd>Total number of requests allowed. Valid value formats: <code>-1</code>, <code>[1,99999999]</code>. The default value is -1, which indicates no limit.</dd><dt class="property-required"
             title="Required">
         <span id="maxrequestnumpresec_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestnumpresec_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Request<wbr>Num<wbr>Pre<wbr>Sec</a>
@@ -1014,8 +1163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Limit of requests per second. Valid values formats: <code>-1</code>, <code>[1,2000]</code>. The default value is -1, which indicates no limit.</p>
-</dd><dt class="property-required"
+    <dd>Limit of requests per second. Valid values formats: <code>-1</code>, <code>[1,2000]</code>. The default value is -1, which indicates no limit.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_nodejs" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1023,8 +1171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="usageplandesc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplandesc_nodejs" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Desc</a>
@@ -1032,8 +1179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom usage plan description.</p>
-</dd><dt class="property-required"
+    <dd>Custom usage plan description.</dd><dt class="property-required"
             title="Required">
         <span id="usageplanid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_nodejs" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -1041,8 +1187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-required"
+    <dd>ID of the usage plan.</dd><dt class="property-required"
             title="Required">
         <span id="usageplanname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_nodejs" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Name</a>
@@ -1050,8 +1195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1065,8 +1209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="max_request_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_request_num_python" style="color: inherit; text-decoration: inherit;">max_<wbr>request_<wbr>num</a>
@@ -1074,8 +1217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of requests allowed. Valid value formats: <code>-1</code>, <code>[1,99999999]</code>. The default value is -1, which indicates no limit.</p>
-</dd><dt class="property-required"
+    <dd>Total number of requests allowed. Valid value formats: <code>-1</code>, <code>[1,99999999]</code>. The default value is -1, which indicates no limit.</dd><dt class="property-required"
             title="Required">
         <span id="max_request_num_pre_sec_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_request_num_pre_sec_python" style="color: inherit; text-decoration: inherit;">max_<wbr>request_<wbr>num_<wbr>pre_<wbr>sec</a>
@@ -1083,8 +1225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Limit of requests per second. Valid values formats: <code>-1</code>, <code>[1,2000]</code>. The default value is -1, which indicates no limit.</p>
-</dd><dt class="property-required"
+    <dd>Limit of requests per second. Valid values formats: <code>-1</code>, <code>[1,2000]</code>. The default value is -1, which indicates no limit.</dd><dt class="property-required"
             title="Required">
         <span id="modify_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modify_time_python" style="color: inherit; text-decoration: inherit;">modify_<wbr>time</a>
@@ -1092,8 +1233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="usage_plan_desc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_desc_python" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>desc</a>
@@ -1101,8 +1241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom usage plan description.</p>
-</dd><dt class="property-required"
+    <dd>Custom usage plan description.</dd><dt class="property-required"
             title="Required">
         <span id="usage_plan_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_id_python" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>id</a>
@@ -1110,8 +1249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-required"
+    <dd>ID of the usage plan.</dd><dt class="property-required"
             title="Required">
         <span id="usage_plan_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usage_plan_name_python" style="color: inherit; text-decoration: inherit;">usage_<wbr>plan_<wbr>name</a>
@@ -1119,8 +1257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1134,8 +1271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Creation time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="maxrequestnum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestnum_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Request<wbr>Num</a>
@@ -1143,8 +1279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total number of requests allowed. Valid value formats: <code>-1</code>, <code>[1,99999999]</code>. The default value is -1, which indicates no limit.</p>
-</dd><dt class="property-required"
+    <dd>Total number of requests allowed. Valid value formats: <code>-1</code>, <code>[1,99999999]</code>. The default value is -1, which indicates no limit.</dd><dt class="property-required"
             title="Required">
         <span id="maxrequestnumpresec_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxrequestnumpresec_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Request<wbr>Num<wbr>Pre<wbr>Sec</a>
@@ -1152,8 +1287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Limit of requests per second. Valid values formats: <code>-1</code>, <code>[1,2000]</code>. The default value is -1, which indicates no limit.</p>
-</dd><dt class="property-required"
+    <dd>Limit of requests per second. Valid values formats: <code>-1</code>, <code>[1,2000]</code>. The default value is -1, which indicates no limit.</dd><dt class="property-required"
             title="Required">
         <span id="modifytime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#modifytime_yaml" style="color: inherit; text-decoration: inherit;">modify<wbr>Time</a>
@@ -1161,8 +1295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-required"
+    <dd>Last modified time in the format of <code>YYYY-MM-DDThh:mm:ssZ</code> according to ISO 8601 standard. UTC time is used.</dd><dt class="property-required"
             title="Required">
         <span id="usageplandesc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplandesc_yaml" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Desc</a>
@@ -1170,8 +1303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom usage plan description.</p>
-</dd><dt class="property-required"
+    <dd>Custom usage plan description.</dd><dt class="property-required"
             title="Required">
         <span id="usageplanid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanid_yaml" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Id</a>
@@ -1179,8 +1311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the usage plan.</p>
-</dd><dt class="property-required"
+    <dd>ID of the usage plan.</dd><dt class="property-required"
             title="Required">
         <span id="usageplanname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#usageplanname_yaml" style="color: inherit; text-decoration: inherit;">usage<wbr>Plan<wbr>Name</a>
@@ -1188,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the usage plan.</p>
-</dd></dl>
+    <dd>Name of the usage plan.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1204,7 +1334,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

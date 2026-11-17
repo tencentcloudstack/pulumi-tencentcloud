@@ -2,9 +2,11 @@
 ---
 title: "DomainErrorPage"
 title_tag: "tencentcloud.Gaap.DomainErrorPage"
-meta_desc: "Documentation for the tencentcloud.Gaap.DomainErrorPage resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to custom error page info for a GAAP HTTP domain."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,27 +18,34 @@ Provide a resource to custom error page info for a GAAP HTTP domain.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+const foo = new tencentcloud.gaap.Proxy("foo", {
+    name: "ci-test-gaap-proxy",
     bandwidth: 10,
     concurrent: 2,
     accessRegion: "SouthChina",
     realserverRegion: "NorthChina",
 });
-const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("fooLayer7Listener", {
+const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("foo", {
     protocol: "HTTP",
+    name: "ci-test-gaap-l7-listener",
     port: 80,
-    proxyId: fooProxy.id,
+    proxyId: foo.id,
 });
-const fooHttpDomain = new tencentcloud.gaap.HttpDomain("fooHttpDomain", {
+const fooHttpDomain = new tencentcloud.gaap.HttpDomain("foo", {
     listenerId: fooLayer7Listener.id,
     domain: "www.qq.com",
 });
-const fooDomainErrorPage = new tencentcloud.gaap.DomainErrorPage("fooDomainErrorPage", {
+const fooDomainErrorPage = new tencentcloud.gaap.DomainErrorPage("foo", {
     listenerId: fooLayer7Listener.id,
     domain: fooHttpDomain.domain,
     errorCodes: [
@@ -46,23 +55,30 @@ const fooDomainErrorPage = new tencentcloud.gaap.DomainErrorPage("fooDomainError
     body: "bad request",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+foo = tencentcloud.gaap.Proxy("foo",
+    name="ci-test-gaap-proxy",
     bandwidth=10,
     concurrent=2,
     access_region="SouthChina",
     realserver_region="NorthChina")
-foo_layer7_listener = tencentcloud.gaap.Layer7Listener("fooLayer7Listener",
+foo_layer7_listener = tencentcloud.gaap.Layer7Listener("foo",
     protocol="HTTP",
+    name="ci-test-gaap-l7-listener",
     port=80,
-    proxy_id=foo_proxy.id)
-foo_http_domain = tencentcloud.gaap.HttpDomain("fooHttpDomain",
+    proxy_id=foo.id)
+foo_http_domain = tencentcloud.gaap.HttpDomain("foo",
     listener_id=foo_layer7_listener.id,
     domain="www.qq.com")
-foo_domain_error_page = tencentcloud.gaap.DomainErrorPage("fooDomainErrorPage",
+foo_domain_error_page = tencentcloud.gaap.DomainErrorPage("foo",
     listener_id=foo_layer7_listener.id,
     domain=foo_http_domain.domain,
     error_codes=[
@@ -71,60 +87,23 @@ foo_domain_error_page = tencentcloud.gaap.DomainErrorPage("fooDomainErrorPage",
     ],
     body="bad request")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
-    {
-        Bandwidth = 10,
-        Concurrent = 2,
-        AccessRegion = "SouthChina",
-        RealserverRegion = "NorthChina",
-    });
-
-    var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
-    {
-        Protocol = "HTTP",
-        Port = 80,
-        ProxyId = fooProxy.Id,
-    });
-
-    var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new()
-    {
-        ListenerId = fooLayer7Listener.Id,
-        Domain = "www.qq.com",
-    });
-
-    var fooDomainErrorPage = new Tencentcloud.Gaap.DomainErrorPage("fooDomainErrorPage", new()
-    {
-        ListenerId = fooLayer7Listener.Id,
-        Domain = fooHttpDomain.Domain,
-        ErrorCodes = new[]
-        {
-            404,
-            503,
-        },
-        Body = "bad request",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+		foo, err := gaap.NewProxy(ctx, "foo", &gaap.ProxyArgs{
+			Name:             pulumi.String("ci-test-gaap-proxy"),
 			Bandwidth:        pulumi.Int(10),
 			Concurrent:       pulumi.Int(2),
 			AccessRegion:     pulumi.String("SouthChina"),
@@ -133,23 +112,24 @@ func main() {
 		if err != nil {
 			return err
 		}
-		fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
+		fooLayer7Listener, err := gaap.NewLayer7Listener(ctx, "foo", &gaap.Layer7ListenerArgs{
 			Protocol: pulumi.String("HTTP"),
+			Name:     pulumi.String("ci-test-gaap-l7-listener"),
 			Port:     pulumi.Int(80),
-			ProxyId:  fooProxy.ID(),
+			ProxyId:  foo.ID().ToIDOutput().ToStringOutput(),
 		})
 		if err != nil {
 			return err
 		}
-		fooHttpDomain, err := Gaap.NewHttpDomain(ctx, "fooHttpDomain", &Gaap.HttpDomainArgs{
-			ListenerId: fooLayer7Listener.ID(),
+		fooHttpDomain, err := gaap.NewHttpDomain(ctx, "foo", &gaap.HttpDomainArgs{
+			ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 			Domain:     pulumi.String("www.qq.com"),
 		})
 		if err != nil {
 			return err
 		}
-		_, err = Gaap.NewDomainErrorPage(ctx, "fooDomainErrorPage", &Gaap.DomainErrorPageArgs{
-			ListenerId: fooLayer7Listener.ID(),
+		_, err = gaap.NewDomainErrorPage(ctx, "foo", &gaap.DomainErrorPageArgs{
+			ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 			Domain:     fooHttpDomain.Domain,
 			ErrorCodes: pulumi.IntArray{
 				pulumi.Int(404),
@@ -164,6 +144,61 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = new Tencentcloud.Gaap.Proxy("foo", new()
+    {
+        Name = "ci-test-gaap-proxy",
+        Bandwidth = 10,
+        Concurrent = 2,
+        AccessRegion = "SouthChina",
+        RealserverRegion = "NorthChina",
+    });
+
+    var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("foo", new()
+    {
+        Protocol = "HTTP",
+        Name = "ci-test-gaap-l7-listener",
+        Port = 80,
+        ProxyId = foo.Id,
+    });
+
+    var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("foo", new()
+    {
+        ListenerId = fooLayer7Listener.Id,
+        Domain = "www.qq.com",
+    });
+
+    var fooDomainErrorPage = new Tencentcloud.Gaap.DomainErrorPage("foo", new()
+    {
+        ListenerId = fooLayer7Listener.Id,
+        Domain = fooHttpDomain.Domain,
+        ErrorCodes = new[]
+        {
+            404,
+            503,
+        },
+        Body = "bad request",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -178,8 +213,8 @@ import com.pulumi.tencentcloud.Gaap.HttpDomain;
 import com.pulumi.tencentcloud.Gaap.HttpDomainArgs;
 import com.pulumi.tencentcloud.Gaap.DomainErrorPage;
 import com.pulumi.tencentcloud.Gaap.DomainErrorPageArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -191,25 +226,27 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fooProxy = new Proxy("fooProxy", ProxyArgs.builder()        
+        var foo = new Proxy("foo", ProxyArgs.builder()
+            .name("ci-test-gaap-proxy")
             .bandwidth(10)
             .concurrent(2)
             .accessRegion("SouthChina")
             .realserverRegion("NorthChina")
             .build());
 
-        var fooLayer7Listener = new Layer7Listener("fooLayer7Listener", Layer7ListenerArgs.builder()        
+        var fooLayer7Listener = new Layer7Listener("fooLayer7Listener", Layer7ListenerArgs.builder()
             .protocol("HTTP")
+            .name("ci-test-gaap-l7-listener")
             .port(80)
-            .proxyId(fooProxy.id())
+            .proxyId(foo.id())
             .build());
 
-        var fooHttpDomain = new HttpDomain("fooHttpDomain", HttpDomainArgs.builder()        
+        var fooHttpDomain = new HttpDomain("fooHttpDomain", HttpDomainArgs.builder()
             .listenerId(fooLayer7Listener.id())
             .domain("www.qq.com")
             .build());
 
-        var fooDomainErrorPage = new DomainErrorPage("fooDomainErrorPage", DomainErrorPageArgs.builder()        
+        var fooDomainErrorPage = new DomainErrorPage("fooDomainErrorPage", DomainErrorPageArgs.builder()
             .listenerId(fooLayer7Listener.id())
             .domain(fooHttpDomain.domain())
             .errorCodes(            
@@ -221,28 +258,38 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  fooProxy:
+  foo:
     type: tencentcloud:Gaap:Proxy
     properties:
+      name: ci-test-gaap-proxy
       bandwidth: 10
       concurrent: 2
       accessRegion: SouthChina
       realserverRegion: NorthChina
   fooLayer7Listener:
     type: tencentcloud:Gaap:Layer7Listener
+    name: foo
     properties:
       protocol: HTTP
+      name: ci-test-gaap-l7-listener
       port: 80
-      proxyId: ${fooProxy.id}
+      proxyId: ${foo.id}
   fooHttpDomain:
     type: tencentcloud:Gaap:HttpDomain
+    name: foo
     properties:
       listenerId: ${fooLayer7Listener.id}
       domain: www.qq.com
   fooDomainErrorPage:
     type: tencentcloud:Gaap:DomainErrorPage
+    name: foo
     properties:
       listenerId: ${fooLayer7Listener.id}
       domain: ${fooHttpDomain.domain}
@@ -251,72 +298,138 @@ resources:
         - 503
       body: bad request
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_gaap_proxy" "foo" {
+  name              = "ci-test-gaap-proxy"
+  bandwidth         = 10
+  concurrent        = 2
+  access_region     = "SouthChina"
+  realserver_region = "NorthChina"
+}
+resource "tencentcloud_gaap_layer7listener" "foo" {
+  protocol = "HTTP"
+  name     = "ci-test-gaap-l7-listener"
+  port     = 80
+  proxy_id = tencentcloud_gaap_proxy.foo.id
+}
+resource "tencentcloud_gaap_httpdomain" "foo" {
+  listener_id = tencentcloud_gaap_layer7listener.foo.id
+  domain      = "www.qq.com"
+}
+resource "tencentcloud_gaap_domainerrorpage" "foo" {
+  listener_id = tencentcloud_gaap_layer7listener.foo.id
+  domain      = tencentcloud_gaap_httpdomain.foo.domain
+  error_codes = [404, 503]
+  body        = "bad request"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33137)
+  - [DescribeDomainErrorPageInfoByIds](https://www.tencentcloud.com/document/api/608/37590)
+* Read: [DescribeDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33135)
+* Delete:
+  - [DeleteDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33136)
+  - [DescribeDomainErrorPageInfoByIds](https://www.tencentcloud.com/document/api/608/37590)
 
 
 
 ## Create DomainErrorPage Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">DomainErrorPage</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DomainErrorPageArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">DomainErrorPage</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DomainErrorPageArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">DomainErrorPage</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DomainErrorPageArgs</a></span><span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">DomainErrorPage</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                     <span class="nx">body</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                    <span class="nx">clear_headers</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                     <span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">error_codes</span><span class="p">:</span> <span class="nx">Optional[Sequence[int]]</span> = None<span class="p">,</span>
                     <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                    <span class="nx">clear_headers</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                     <span class="nx">new_error_code</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                    <span class="nx">set_headers</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">DomainErrorPage</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DomainErrorPageArgs</a></span><span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                    <span class="nx">set_headers</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDomainErrorPage</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DomainErrorPageArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DomainErrorPage</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDomainErrorPage</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DomainErrorPageArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DomainErrorPage</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">DomainErrorPage</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DomainErrorPageArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">DomainErrorPage</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DomainErrorPageArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">DomainErrorPage</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DomainErrorPageArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">DomainErrorPage</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DomainErrorPageArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Gaap:DomainErrorPage</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Gaap:DomainErrorPage</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_gaap_domain_error_page&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -337,7 +450,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -454,11 +567,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## DomainErrorPage Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -474,8 +595,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>New response body.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -483,8 +603,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>HTTP domain.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="errorcodes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorcodes_csharp" style="color: inherit; text-decoration: inherit;">Error<wbr>Codes</a>
@@ -492,8 +611,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Original error codes.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -501,8 +619,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="clearheaders_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clearheaders_csharp" style="color: inherit; text-decoration: inherit;">Clear<wbr>Headers</a>
@@ -510,8 +627,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Response headers to be removed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="newerrorcode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newerrorcode_csharp" style="color: inherit; text-decoration: inherit;">New<wbr>Error<wbr>Code</a>
@@ -519,17 +635,15 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New error code.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="setheaders_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setheaders_csharp" style="color: inherit; text-decoration: inherit;">Set<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -543,8 +657,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>New response body.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -552,8 +665,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>HTTP domain.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="errorcodes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorcodes_go" style="color: inherit; text-decoration: inherit;">Error<wbr>Codes</a>
@@ -561,8 +673,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Original error codes.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -570,8 +681,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="clearheaders_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clearheaders_go" style="color: inherit; text-decoration: inherit;">Clear<wbr>Headers</a>
@@ -579,8 +689,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Response headers to be removed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="newerrorcode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newerrorcode_go" style="color: inherit; text-decoration: inherit;">New<wbr>Error<wbr>Code</a>
@@ -588,17 +697,77 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New error code.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="setheaders_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setheaders_go" style="color: inherit; text-decoration: inherit;">Set<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="body_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#body_hcl" style="color: inherit; text-decoration: inherit;">body</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>New response body.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTP domain.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="error_codes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_codes_hcl" style="color: inherit; text-decoration: inherit;">error_<wbr>codes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Original error codes.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the layer7 listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="clear_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clear_headers_hcl" style="color: inherit; text-decoration: inherit;">clear_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Response headers to be removed.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="new_error_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_error_code_hcl" style="color: inherit; text-decoration: inherit;">new_<wbr>error_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>New error code.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="set_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#set_headers_hcl" style="color: inherit; text-decoration: inherit;">set_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -612,8 +781,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>New response body.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -621,8 +789,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>HTTP domain.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="errorcodes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorcodes_java" style="color: inherit; text-decoration: inherit;">error<wbr>Codes</a>
@@ -630,8 +797,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Original error codes.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -639,8 +805,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="clearheaders_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clearheaders_java" style="color: inherit; text-decoration: inherit;">clear<wbr>Headers</a>
@@ -648,8 +813,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Response headers to be removed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="newerrorcode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newerrorcode_java" style="color: inherit; text-decoration: inherit;">new<wbr>Error<wbr>Code</a>
@@ -657,17 +821,15 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New error code.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="setheaders_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setheaders_java" style="color: inherit; text-decoration: inherit;">set<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -681,8 +843,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>New response body.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -690,8 +851,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>HTTP domain.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="errorcodes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorcodes_nodejs" style="color: inherit; text-decoration: inherit;">error<wbr>Codes</a>
@@ -699,8 +859,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Original error codes.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -708,8 +867,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="clearheaders_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clearheaders_nodejs" style="color: inherit; text-decoration: inherit;">clear<wbr>Headers</a>
@@ -717,8 +875,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Response headers to be removed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="newerrorcode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newerrorcode_nodejs" style="color: inherit; text-decoration: inherit;">new<wbr>Error<wbr>Code</a>
@@ -726,17 +883,15 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New error code.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="setheaders_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setheaders_nodejs" style="color: inherit; text-decoration: inherit;">set<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -750,8 +905,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>New response body.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -759,8 +913,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>HTTP domain.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="error_codes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_codes_python" style="color: inherit; text-decoration: inherit;">error_<wbr>codes</a>
@@ -768,8 +921,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Original error codes.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -777,8 +929,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="clear_headers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clear_headers_python" style="color: inherit; text-decoration: inherit;">clear_<wbr>headers</a>
@@ -786,8 +937,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Response headers to be removed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="new_error_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#new_error_code_python" style="color: inherit; text-decoration: inherit;">new_<wbr>error_<wbr>code</a>
@@ -795,17 +945,15 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New error code.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="set_headers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#set_headers_python" style="color: inherit; text-decoration: inherit;">set_<wbr>headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -819,8 +967,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>New response body.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -828,8 +975,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>HTTP domain.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="errorcodes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errorcodes_yaml" style="color: inherit; text-decoration: inherit;">error<wbr>Codes</a>
@@ -837,8 +983,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Original error codes.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -846,8 +991,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="clearheaders_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clearheaders_yaml" style="color: inherit; text-decoration: inherit;">clear<wbr>Headers</a>
@@ -855,8 +999,7 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Response headers to be removed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="newerrorcode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#newerrorcode_yaml" style="color: inherit; text-decoration: inherit;">new<wbr>Error<wbr>Code</a>
@@ -864,17 +1007,15 @@ The DomainErrorPage resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New error code.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="setheaders_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#setheaders_yaml" style="color: inherit; text-decoration: inherit;">set<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -895,8 +1036,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -910,8 +1050,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -925,8 +1078,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -940,8 +1092,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -955,8 +1106,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -970,8 +1120,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -981,18 +1130,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing DomainErrorPage resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DomainErrorPageState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">DomainErrorPage</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DomainErrorPageState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">DomainErrorPage</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1002,105 +1151,144 @@ Get an existing DomainErrorPage resource's state with the given name, ID, and op
         <span class="nx">error_codes</span><span class="p">:</span> <span class="nx">Optional[Sequence[int]]</span> = None<span class="p">,</span>
         <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">new_error_code</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">set_headers</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">) -&gt;</span> DomainErrorPage</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">set_headers</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">) -&gt;</span> DomainErrorPage</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDomainErrorPage<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DomainErrorPageState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DomainErrorPage</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDomainErrorPage<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DomainErrorPageState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">DomainErrorPage</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">DomainErrorPage</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DomainErrorPageState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">DomainErrorPage</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DomainErrorPageState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">DomainErrorPage</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DomainErrorPageState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">DomainErrorPage</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DomainErrorPageState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingDomainErrorPage</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Gaap:DomainErrorPage</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_gaap_domain_error_page</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DomainErrorPageState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DomainErrorPageState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1108,28 +1296,31 @@ Get an existing DomainErrorPage resource's state with the given name, ID, and op
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DomainErrorPageState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1137,28 +1328,31 @@ Get an existing DomainErrorPage resource's state with the given name, ID, and op
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DomainErrorPageState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1178,8 +1372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New response body.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clearheaders_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clearheaders_csharp" style="color: inherit; text-decoration: inherit;">Clear<wbr>Headers</a>
@@ -1187,8 +1380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Response headers to be removed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1196,8 +1388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>HTTP domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_errorcodes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_errorcodes_csharp" style="color: inherit; text-decoration: inherit;">Error<wbr>Codes</a>
@@ -1205,8 +1396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Original error codes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -1214,8 +1404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_newerrorcode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_newerrorcode_csharp" style="color: inherit; text-decoration: inherit;">New<wbr>Error<wbr>Code</a>
@@ -1223,17 +1412,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New error code.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_setheaders_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_setheaders_csharp" style="color: inherit; text-decoration: inherit;">Set<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1247,8 +1434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New response body.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clearheaders_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clearheaders_go" style="color: inherit; text-decoration: inherit;">Clear<wbr>Headers</a>
@@ -1256,8 +1442,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Response headers to be removed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1265,8 +1450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>HTTP domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_errorcodes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_errorcodes_go" style="color: inherit; text-decoration: inherit;">Error<wbr>Codes</a>
@@ -1274,8 +1458,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Original error codes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -1283,8 +1466,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_newerrorcode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_newerrorcode_go" style="color: inherit; text-decoration: inherit;">New<wbr>Error<wbr>Code</a>
@@ -1292,17 +1474,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New error code.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_setheaders_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_setheaders_go" style="color: inherit; text-decoration: inherit;">Set<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_body_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_body_hcl" style="color: inherit; text-decoration: inherit;">body</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>New response body.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_clear_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clear_headers_hcl" style="color: inherit; text-decoration: inherit;">clear_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Response headers to be removed.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>HTTP domain.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_error_codes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_error_codes_hcl" style="color: inherit; text-decoration: inherit;">error_<wbr>codes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Original error codes.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the layer7 listener.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_new_error_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_new_error_code_hcl" style="color: inherit; text-decoration: inherit;">new_<wbr>error_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>New error code.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_set_headers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_set_headers_hcl" style="color: inherit; text-decoration: inherit;">set_<wbr>headers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1316,8 +1558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New response body.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clearheaders_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clearheaders_java" style="color: inherit; text-decoration: inherit;">clear<wbr>Headers</a>
@@ -1325,8 +1566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Response headers to be removed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1334,8 +1574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>HTTP domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_errorcodes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_errorcodes_java" style="color: inherit; text-decoration: inherit;">error<wbr>Codes</a>
@@ -1343,8 +1582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Original error codes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1352,8 +1590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_newerrorcode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_newerrorcode_java" style="color: inherit; text-decoration: inherit;">new<wbr>Error<wbr>Code</a>
@@ -1361,17 +1598,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New error code.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_setheaders_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_setheaders_java" style="color: inherit; text-decoration: inherit;">set<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1385,8 +1620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New response body.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clearheaders_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clearheaders_nodejs" style="color: inherit; text-decoration: inherit;">clear<wbr>Headers</a>
@@ -1394,8 +1628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Response headers to be removed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1403,8 +1636,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>HTTP domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_errorcodes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_errorcodes_nodejs" style="color: inherit; text-decoration: inherit;">error<wbr>Codes</a>
@@ -1412,8 +1644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Original error codes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1421,8 +1652,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_newerrorcode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_newerrorcode_nodejs" style="color: inherit; text-decoration: inherit;">new<wbr>Error<wbr>Code</a>
@@ -1430,17 +1660,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New error code.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_setheaders_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_setheaders_nodejs" style="color: inherit; text-decoration: inherit;">set<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1454,8 +1682,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New response body.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clear_headers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clear_headers_python" style="color: inherit; text-decoration: inherit;">clear_<wbr>headers</a>
@@ -1463,8 +1690,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Response headers to be removed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1472,8 +1698,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>HTTP domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_error_codes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_error_codes_python" style="color: inherit; text-decoration: inherit;">error_<wbr>codes</a>
@@ -1481,8 +1706,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Original error codes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -1490,8 +1714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_new_error_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_new_error_code_python" style="color: inherit; text-decoration: inherit;">new_<wbr>error_<wbr>code</a>
@@ -1499,17 +1722,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New error code.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_set_headers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_set_headers_python" style="color: inherit; text-decoration: inherit;">set_<wbr>headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1523,8 +1744,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>New response body.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New response body.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_clearheaders_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_clearheaders_yaml" style="color: inherit; text-decoration: inherit;">clear<wbr>Headers</a>
@@ -1532,8 +1752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Response headers to be removed.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Response headers to be removed.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1541,8 +1760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>HTTP domain.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>HTTP domain.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_errorcodes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_errorcodes_yaml" style="color: inherit; text-decoration: inherit;">error<wbr>Codes</a>
@@ -1550,8 +1768,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Original error codes.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Original error codes.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1559,8 +1776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the layer7 listener.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_newerrorcode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_newerrorcode_yaml" style="color: inherit; text-decoration: inherit;">new<wbr>Error<wbr>Code</a>
@@ -1568,17 +1784,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>New error code.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>New error code.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_setheaders_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_setheaders_yaml" style="color: inherit; text-decoration: inherit;">set<wbr>Headers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Response headers to be set.</p>
-</dd></dl>
+    <dd>Response headers to be set.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1597,7 +1811,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

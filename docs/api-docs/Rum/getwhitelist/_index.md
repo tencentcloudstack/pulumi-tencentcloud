@@ -2,9 +2,11 @@
 ---
 title: "getWhitelist"
 title_tag: "tencentcloud.Rum.getWhitelist"
-meta_desc: "Documentation for the tencentcloud.Rum.getWhitelist function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of rum whitelist"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query detailed information of rum whitelist
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const whitelist = tencentcloud.Rum.getWhitelist({
+const whitelist = tencentcloud.rum.getWhitelist({
     instanceId: "rum-pasZKEI3RLgakj",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-whitelist = tencentcloud.Rum.get_whitelist(instance_id="rum-pasZKEI3RLgakj")
+whitelist = tencentcloud.rum.get_whitelist(instance_id="rum-pasZKEI3RLgakj")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/rum"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := rum.GetWhitelist(ctx, &rum.GetWhitelistArgs{
+			InstanceId: "rum-pasZKEI3RLgakj",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Rum.GetWhitelist(ctx, &rum.GetWhitelistArgs{
-			InstanceId: "rum-pasZKEI3RLgakj",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Rum.RumFunctions;
 import com.pulumi.tencentcloud.Rum.inputs.GetWhitelistArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   whitelist:
     fn::invoke:
-      Function: tencentcloud:Rum:getWhitelist
-      Arguments:
+      function: tencentcloud:Rum:getWhitelist
+      arguments:
         instanceId: rum-pasZKEI3RLgakj
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_rum_getwhitelist" "whitelist" {
+  instance_id = "rum-pasZKEI3RLgakj"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeWhitelists](https://www.tencentcloud.com/document/api/1131/45300)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getWhitelist<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetWhitelistArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetWhitelistResult</a></span>></span
+><span class="k">function </span>getWhitelist<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetWhitelistArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetWhitelistResult</a></span>></span
 ><span class="k">
-function </span>getWhitelistOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetWhitelistOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetWhitelistResult</a></span>></span
+function </span>getWhitelistOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetWhitelistOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetWhitelistResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -138,9 +195,9 @@ function </span>getWhitelistOutput<span class="p">(</span><span class="nx">args<
                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetWhitelistResult</span
 ><span class="k">
-def </span>get_whitelist_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetWhitelistResult]</span
+def </span>get_whitelist_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetWhitelistResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -149,12 +206,12 @@ def </span>get_whitelist_output<span class="p">(</span><span class="nx">instance
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetWhitelist<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetWhitelistArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetWhitelistResult</a></span>, error)</span
+><span class="k">func </span>LookupWhitelist<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupWhitelistArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupWhitelistResult</a></span>, error)</span
 ><span class="k">
-func </span>GetWhitelistOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetWhitelistOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetWhitelistResultOutput</span
+func </span>LookupWhitelistOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupWhitelistOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupWhitelistResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetWhitelist` in the Go SDK.
+&gt; Note: This function is named `LookupWhitelist` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -165,7 +222,8 @@ func </span>GetWhitelistOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetWhitelist </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetWhitelistResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetWhitelistArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetWhitelistResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetWhitelistInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetWhitelistResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetWhitelistInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetWhitelistResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetWhitelistInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,7 +232,8 @@ func </span>GetWhitelistOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetWhitelistResult</a></span>> </span>getWhitelist<span class="p">(</span><span class="nx">GetWhitelistArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetWhitelistResult</a></span>> </span>getWhitelist<span class="p">(</span><span class="nx">GetWhitelistArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetWhitelistResult</a></span>> </span>getWhitelist<span class="p">(</span><span class="nx">GetWhitelistArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,6 +245,15 @@ func </span>GetWhitelistOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Rum/getWhitelist:getWhitelist
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_rum_get_whitelist&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -204,8 +272,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, such as taw-123.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as taw-123.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -213,8 +280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +294,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, such as taw-123.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as taw-123.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -237,8 +302,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID, such as taw-123.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, such as taw-123.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as taw-123.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -261,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -276,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, such as taw-123.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as taw-123.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -285,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID, such as taw-123.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as taw-123.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -309,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, such as taw-123.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as taw-123.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -333,8 +412,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -374,8 +451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getwhitelistwhitelistset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Rum.<wbr>Outputs.<wbr>Get<wbr>Whitelist<wbr>Whitelist<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>While list.</p>
-</dd><dt class="property-"
+    <dd>While list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -397,8 +473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -414,11 +489,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getwhitelistwhitelistset">[]Get<wbr>Whitelist<wbr>Whitelist<wbr>Set</a></span>
     </dt>
-    <dd><p>While list.</p>
-</dd><dt class="property-"
+    <dd>While list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="whitelist_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whitelist_sets_hcl" style="color: inherit; text-decoration: inherit;">whitelist_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getwhitelistwhitelistset">list(object)</a></span>
+    </dt>
+    <dd>While list.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -437,8 +549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -454,8 +565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getwhitelistwhitelistset">List&lt;Get<wbr>Whitelist<wbr>Whitelist<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>While list.</p>
-</dd><dt class="property-"
+    <dd>While list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -477,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -494,8 +603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getwhitelistwhitelistset">Get<wbr>Whitelist<wbr>Whitelist<wbr>Set[]</a></span>
     </dt>
-    <dd><p>While list.</p>
-</dd><dt class="property-"
+    <dd>While list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -517,8 +625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -532,10 +639,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whitelist_sets_python" style="color: inherit; text-decoration: inherit;">whitelist_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getwhitelistwhitelistset">Get<wbr>Whitelist<wbr>Whitelist<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getwhitelistwhitelistset">Sequence[Get<wbr>Whitelist<wbr>Whitelist<wbr>Set]</a></span>
     </dt>
-    <dd><p>While list.</p>
-</dd><dt class="property-"
+    <dd>While list.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -557,8 +663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -574,8 +679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getwhitelistwhitelistset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>While list.</p>
-</dd><dt class="property-"
+    <dd>While list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -607,8 +711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Business identifier.</p>
-</dd><dt class="property-required"
+    <dd>Business identifier.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -616,8 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="createuser_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuser_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>User</a>
@@ -625,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creator ID.</p>
-</dd><dt class="property-required"
+    <dd>Creator ID.</dd><dt class="property-required"
             title="Required">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -634,8 +735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-required"
+    <dd>Remarks.</dd><dt class="property-required"
             title="Required">
         <span id="ttl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_csharp" style="color: inherit; text-decoration: inherit;">Ttl</a>
@@ -643,8 +743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End time.</p>
-</dd><dt class="property-required"
+    <dd>End time.</dd><dt class="property-required"
             title="Required">
         <span id="whitelistuin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whitelistuin_csharp" style="color: inherit; text-decoration: inherit;">Whitelist<wbr>Uin</a>
@@ -652,8 +751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>uin: business identifier.</p>
-</dd><dt class="property-required"
+    <dd>uin: business identifier.</dd><dt class="property-required"
             title="Required">
         <span id="wid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wid_csharp" style="color: inherit; text-decoration: inherit;">Wid</a>
@@ -661,8 +759,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto-Increment allowlist ID.</p>
-</dd></dl>
+    <dd>Auto-Increment allowlist ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -676,8 +773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Business identifier.</p>
-</dd><dt class="property-required"
+    <dd>Business identifier.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -685,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="createuser_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuser_go" style="color: inherit; text-decoration: inherit;">Create<wbr>User</a>
@@ -694,8 +789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creator ID.</p>
-</dd><dt class="property-required"
+    <dd>Creator ID.</dd><dt class="property-required"
             title="Required">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -703,8 +797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-required"
+    <dd>Remarks.</dd><dt class="property-required"
             title="Required">
         <span id="ttl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_go" style="color: inherit; text-decoration: inherit;">Ttl</a>
@@ -712,8 +805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End time.</p>
-</dd><dt class="property-required"
+    <dd>End time.</dd><dt class="property-required"
             title="Required">
         <span id="whitelistuin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whitelistuin_go" style="color: inherit; text-decoration: inherit;">Whitelist<wbr>Uin</a>
@@ -721,8 +813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>uin: business identifier.</p>
-</dd><dt class="property-required"
+    <dd>uin: business identifier.</dd><dt class="property-required"
             title="Required">
         <span id="wid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wid_go" style="color: inherit; text-decoration: inherit;">Wid</a>
@@ -730,8 +821,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto-Increment allowlist ID.</p>
-</dd></dl>
+    <dd>Auto-Increment allowlist ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="aid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#aid_hcl" style="color: inherit; text-decoration: inherit;">aid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Business identifier.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_user_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_user_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>user</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creator ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remarks.</dd><dt class="property-required"
+            title="Required">
+        <span id="ttl_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_hcl" style="color: inherit; text-decoration: inherit;">ttl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>End time.</dd><dt class="property-required"
+            title="Required">
+        <span id="whitelist_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whitelist_uin_hcl" style="color: inherit; text-decoration: inherit;">whitelist_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>uin: business identifier.</dd><dt class="property-required"
+            title="Required">
+        <span id="wid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wid_hcl" style="color: inherit; text-decoration: inherit;">wid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Auto-Increment allowlist ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -745,8 +897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Business identifier.</p>
-</dd><dt class="property-required"
+    <dd>Business identifier.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -754,8 +905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="createuser_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuser_java" style="color: inherit; text-decoration: inherit;">create<wbr>User</a>
@@ -763,8 +913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creator ID.</p>
-</dd><dt class="property-required"
+    <dd>Creator ID.</dd><dt class="property-required"
             title="Required">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -772,8 +921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-required"
+    <dd>Remarks.</dd><dt class="property-required"
             title="Required">
         <span id="ttl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_java" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -781,8 +929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End time.</p>
-</dd><dt class="property-required"
+    <dd>End time.</dd><dt class="property-required"
             title="Required">
         <span id="whitelistuin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whitelistuin_java" style="color: inherit; text-decoration: inherit;">whitelist<wbr>Uin</a>
@@ -790,8 +937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>uin: business identifier.</p>
-</dd><dt class="property-required"
+    <dd>uin: business identifier.</dd><dt class="property-required"
             title="Required">
         <span id="wid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wid_java" style="color: inherit; text-decoration: inherit;">wid</a>
@@ -799,8 +945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto-Increment allowlist ID.</p>
-</dd></dl>
+    <dd>Auto-Increment allowlist ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -814,8 +959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Business identifier.</p>
-</dd><dt class="property-required"
+    <dd>Business identifier.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -823,8 +967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="createuser_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuser_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>User</a>
@@ -832,8 +975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creator ID.</p>
-</dd><dt class="property-required"
+    <dd>Creator ID.</dd><dt class="property-required"
             title="Required">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -841,8 +983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-required"
+    <dd>Remarks.</dd><dt class="property-required"
             title="Required">
         <span id="ttl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_nodejs" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -850,8 +991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End time.</p>
-</dd><dt class="property-required"
+    <dd>End time.</dd><dt class="property-required"
             title="Required">
         <span id="whitelistuin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whitelistuin_nodejs" style="color: inherit; text-decoration: inherit;">whitelist<wbr>Uin</a>
@@ -859,8 +999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>uin: business identifier.</p>
-</dd><dt class="property-required"
+    <dd>uin: business identifier.</dd><dt class="property-required"
             title="Required">
         <span id="wid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wid_nodejs" style="color: inherit; text-decoration: inherit;">wid</a>
@@ -868,8 +1007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto-Increment allowlist ID.</p>
-</dd></dl>
+    <dd>Auto-Increment allowlist ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -883,8 +1021,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Business identifier.</p>
-</dd><dt class="property-required"
+    <dd>Business identifier.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -892,8 +1029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="create_user_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_user_python" style="color: inherit; text-decoration: inherit;">create_<wbr>user</a>
@@ -901,8 +1037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creator ID.</p>
-</dd><dt class="property-required"
+    <dd>Creator ID.</dd><dt class="property-required"
             title="Required">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -910,8 +1045,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-required"
+    <dd>Remarks.</dd><dt class="property-required"
             title="Required">
         <span id="ttl_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_python" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -919,8 +1053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>End time.</p>
-</dd><dt class="property-required"
+    <dd>End time.</dd><dt class="property-required"
             title="Required">
         <span id="whitelist_uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whitelist_uin_python" style="color: inherit; text-decoration: inherit;">whitelist_<wbr>uin</a>
@@ -928,8 +1061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>uin: business identifier.</p>
-</dd><dt class="property-required"
+    <dd>uin: business identifier.</dd><dt class="property-required"
             title="Required">
         <span id="wid_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wid_python" style="color: inherit; text-decoration: inherit;">wid</a>
@@ -937,8 +1069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Auto-Increment allowlist ID.</p>
-</dd></dl>
+    <dd>Auto-Increment allowlist ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -952,8 +1083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Business identifier.</p>
-</dd><dt class="property-required"
+    <dd>Business identifier.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -961,8 +1091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="createuser_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createuser_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>User</a>
@@ -970,8 +1099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creator ID.</p>
-</dd><dt class="property-required"
+    <dd>Creator ID.</dd><dt class="property-required"
             title="Required">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -979,8 +1107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remarks.</p>
-</dd><dt class="property-required"
+    <dd>Remarks.</dd><dt class="property-required"
             title="Required">
         <span id="ttl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_yaml" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -988,8 +1115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End time.</p>
-</dd><dt class="property-required"
+    <dd>End time.</dd><dt class="property-required"
             title="Required">
         <span id="whitelistuin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whitelistuin_yaml" style="color: inherit; text-decoration: inherit;">whitelist<wbr>Uin</a>
@@ -997,8 +1123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>uin: business identifier.</p>
-</dd><dt class="property-required"
+    <dd>uin: business identifier.</dd><dt class="property-required"
             title="Required">
         <span id="wid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#wid_yaml" style="color: inherit; text-decoration: inherit;">wid</a>
@@ -1006,8 +1131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto-Increment allowlist ID.</p>
-</dd></dl>
+    <dd>Auto-Increment allowlist ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1022,7 +1146,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

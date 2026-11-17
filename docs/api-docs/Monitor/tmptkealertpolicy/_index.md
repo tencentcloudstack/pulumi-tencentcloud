@@ -2,9 +2,11 @@
 ---
 title: "TmpTkeAlertPolicy"
 title_tag: "tencentcloud.Monitor.TmpTkeAlertPolicy"
-meta_desc: "Documentation for the tencentcloud.Monitor.TmpTkeAlertPolicy resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a tke tmpAlertPolicy NOTE: This resource will be deprecated in a future version, please use."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,65 +18,1383 @@ Provides a resource to create a tke tmpAlertPolicy
 
 > **NOTE:** This resource will be deprecated in a future version, please use `tencentcloud.Monitor.TmpAlertGroup`.
 
+## Example Usage
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const config = new pulumi.Config();
+const defaultInstanceType = config.get("defaultInstanceType") || "SA1.MEDIUM2";
+const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
+const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
+const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
+const vpcOne = tencentcloud.vpc.getSubnets({
+    isDefault: true,
+    availabilityZone: availabilityZoneFirst,
+});
+const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.vpcId);
+const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.subnetId);
+const vpcTwo = tencentcloud.vpc.getSubnets({
+    isDefault: true,
+    availabilityZone: availabilityZoneSecond,
+});
+const secondVpcId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?.[0]?.vpcId);
+const secondSubnetId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?.[0]?.subnetId);
+const sg = new tencentcloud.security.Group("sg", {name: "tf-example-sg"});
+const sgId = sg.id;
+const _default = tencentcloud.images.getInstance({
+    imageTypes: ["PUBLIC_IMAGE"],
+    imageNameRegex: "Final",
+});
+const imageId = _default.then(_default => _default.imageId);
+const sgRule = new tencentcloud.index.SecurityGroupLiteRule("sg_rule", {
+    securityGroupId: sg.id,
+    ingresses: [
+        "ACCEPT#10.0.0.0/16#ALL#ALL",
+        "ACCEPT#172.16.0.0/22#ALL#ALL",
+        "DROP#0.0.0.0/0#ALL#ALL",
+    ],
+    egresses: ["ACCEPT#172.16.0.0/22#ALL#ALL"],
+});
+const example = new tencentcloud.kubernetes.Cluster("example", {
+    vpcId: firstVpcId,
+    clusterCidr: exampleClusterCidr,
+    clusterMaxPodNum: 32,
+    clusterName: "tf_example_cluster",
+    clusterDesc: "example for tke cluster",
+    clusterMaxServiceNum: 32,
+    clusterInternet: false,
+    clusterInternetSecurityGroup: sgId,
+    clusterVersion: "1.22.5",
+    clusterDeployType: "MANAGED_CLUSTER",
+    workerConfigs: [
+        {
+            count: 1,
+            availabilityZone: availabilityZoneFirst,
+            instanceType: defaultInstanceType,
+            systemDiskType: "CLOUD_SSD",
+            systemDiskSize: 60,
+            internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+            internetMaxBandwidthOut: 100,
+            publicIpAssigned: true,
+            subnetId: firstSubnetId,
+            imgId: imageId,
+            dataDisks: [{
+                diskType: "CLOUD_PREMIUM",
+                diskSize: 50,
+            }],
+            enhancedSecurityService: false,
+            enhancedMonitorService: false,
+            userData: "dGVzdA==",
+            password: "ZZXXccvv1212",
+        },
+        {
+            count: 1,
+            availabilityZone: availabilityZoneSecond,
+            instanceType: defaultInstanceType,
+            systemDiskType: "CLOUD_SSD",
+            systemDiskSize: 60,
+            internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+            internetMaxBandwidthOut: 100,
+            publicIpAssigned: true,
+            subnetId: secondSubnetId,
+            dataDisks: [{
+                diskType: "CLOUD_PREMIUM",
+                diskSize: 50,
+            }],
+            enhancedSecurityService: false,
+            enhancedMonitorService: false,
+            userData: "dGVzdA==",
+            camRoleName: "CVM_QcsRole",
+            password: "ZZXXccvv1212",
+        },
+    ],
+    labels: {
+        test1: "test1",
+        test2: "test2",
+    },
+});
+const zone = config.get("zone") || "ap-guangzhou";
+const clusterType = config.get("clusterType") || "tke";
+const foo = new tencentcloud.monitor.TmpInstance("foo", {
+    instanceName: "tf-tmp-instance",
+    vpcId: firstVpcId,
+    subnetId: firstSubnetId,
+    dataRetentionTime: 30,
+    zone: availabilityZoneSecond,
+    tags: {
+        createdBy: "terraform",
+    },
+});
+// tmp tke bind
+const fooTmpTkeClusterAgent = new tencentcloud.monitor.TmpTkeClusterAgent("foo", {
+    instanceId: foo.id,
+    agents: {
+        region: zone,
+        clusterType: clusterType,
+        clusterId: example.id,
+        enableExternal: false,
+    },
+});
+// create record rule
+const basic = new tencentcloud.monitor.TmpTkeAlertPolicy("basic", {
+    instanceId: foo.id,
+    alertRule: {
+        name: "alert_rule-test",
+        rules: [{
+            name: "rules-test",
+            rule: "(count(kube_node_status_allocatable_cpu_cores) by (cluster) -1)   / count(kube_node_status_allocatable_cpu_cores) by (cluster)",
+            template: "The CPU requested by the Pod in the cluster {{ $labels.cluster }} is overloaded, and the current CPU application ratio is {{ $value | humanizePercentage }}",
+            "for": "5m",
+            labels: [{
+                name: "severity",
+                value: "warning",
+            }],
+        }],
+        notification: {
+            type: "amp",
+            enabled: true,
+            alertManager: {
+                url: "xxx",
+            },
+        },
+    },
+}, {
+    dependsOn: [fooTmpTkeClusterAgent],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import pulumi_tencentcloud as tencentcloud
+import tencentcloud_iac_pulumi as tencentcloud
+
+config = pulumi.Config()
+default_instance_type = config.get("defaultInstanceType")
+if default_instance_type is None:
+    default_instance_type = "SA1.MEDIUM2"
+availability_zone_first = config.get("availabilityZoneFirst")
+if availability_zone_first is None:
+    availability_zone_first = "ap-guangzhou-3"
+availability_zone_second = config.get("availabilityZoneSecond")
+if availability_zone_second is None:
+    availability_zone_second = "ap-guangzhou-4"
+example_cluster_cidr = config.get("exampleClusterCidr")
+if example_cluster_cidr is None:
+    example_cluster_cidr = "10.31.0.0/16"
+vpc_one = tencentcloud.vpc.get_subnets(is_default=True,
+    availability_zone=availability_zone_first)
+first_vpc_id = vpc_one.instance_lists[0].vpc_id
+first_subnet_id = vpc_one.instance_lists[0].subnet_id
+vpc_two = tencentcloud.vpc.get_subnets(is_default=True,
+    availability_zone=availability_zone_second)
+second_vpc_id = vpc_two.instance_lists[0].vpc_id
+second_subnet_id = vpc_two.instance_lists[0].subnet_id
+sg = tencentcloud.security.Group("sg", name="tf-example-sg")
+sg_id = sg.id
+default = tencentcloud.images.get_instance(image_types=["PUBLIC_IMAGE"],
+    image_name_regex="Final")
+image_id = default.image_id
+sg_rule = tencentcloud.SecurityGroupLiteRule("sg_rule",
+    security_group_id=sg.id,
+    ingresses=[
+        ACCEPT#10.0.0.0/16#ALL#ALL,
+        ACCEPT#172.16.0.0/22#ALL#ALL,
+        DROP#0.0.0.0/0#ALL#ALL,
+    ],
+    egresses=[ACCEPT#172.16.0.0/22#ALL#ALL])
+example = tencentcloud.kubernetes.Cluster("example",
+    vpc_id=first_vpc_id,
+    cluster_cidr=example_cluster_cidr,
+    cluster_max_pod_num=32,
+    cluster_name="tf_example_cluster",
+    cluster_desc="example for tke cluster",
+    cluster_max_service_num=32,
+    cluster_internet=False,
+    cluster_internet_security_group=sg_id,
+    cluster_version="1.22.5",
+    cluster_deploy_type="MANAGED_CLUSTER",
+    worker_configs=[
+        {
+            "count": 1,
+            "availability_zone": availability_zone_first,
+            "instance_type": default_instance_type,
+            "system_disk_type": "CLOUD_SSD",
+            "system_disk_size": 60,
+            "internet_charge_type": "TRAFFIC_POSTPAID_BY_HOUR",
+            "internet_max_bandwidth_out": 100,
+            "public_ip_assigned": True,
+            "subnet_id": first_subnet_id,
+            "img_id": image_id,
+            "data_disks": [{
+                "disk_type": "CLOUD_PREMIUM",
+                "disk_size": 50,
+            }],
+            "enhanced_security_service": False,
+            "enhanced_monitor_service": False,
+            "user_data": "dGVzdA==",
+            "password": "ZZXXccvv1212",
+        },
+        {
+            "count": 1,
+            "availability_zone": availability_zone_second,
+            "instance_type": default_instance_type,
+            "system_disk_type": "CLOUD_SSD",
+            "system_disk_size": 60,
+            "internet_charge_type": "TRAFFIC_POSTPAID_BY_HOUR",
+            "internet_max_bandwidth_out": 100,
+            "public_ip_assigned": True,
+            "subnet_id": second_subnet_id,
+            "data_disks": [{
+                "disk_type": "CLOUD_PREMIUM",
+                "disk_size": 50,
+            }],
+            "enhanced_security_service": False,
+            "enhanced_monitor_service": False,
+            "user_data": "dGVzdA==",
+            "cam_role_name": "CVM_QcsRole",
+            "password": "ZZXXccvv1212",
+        },
+    ],
+    labels={
+        "test1": "test1",
+        "test2": "test2",
+    })
+zone = config.get("zone")
+if zone is None:
+    zone = "ap-guangzhou"
+cluster_type = config.get("clusterType")
+if cluster_type is None:
+    cluster_type = "tke"
+foo = tencentcloud.monitor.TmpInstance("foo",
+    instance_name="tf-tmp-instance",
+    vpc_id=first_vpc_id,
+    subnet_id=first_subnet_id,
+    data_retention_time=30,
+    zone=availability_zone_second,
+    tags={
+        "createdBy": "terraform",
+    })
+# tmp tke bind
+foo_tmp_tke_cluster_agent = tencentcloud.monitor.TmpTkeClusterAgent("foo",
+    instance_id=foo.id,
+    agents={
+        "region": zone,
+        "cluster_type": cluster_type,
+        "cluster_id": example.id,
+        "enable_external": False,
+    })
+# create record rule
+basic = tencentcloud.monitor.TmpTkeAlertPolicy("basic",
+    instance_id=foo.id,
+    alert_rule={
+        "name": "alert_rule-test",
+        "rules": [{
+            "name": "rules-test",
+            "rule": "(count(kube_node_status_allocatable_cpu_cores) by (cluster) -1)   / count(kube_node_status_allocatable_cpu_cores) by (cluster)",
+            "template": "The CPU requested by the Pod in the cluster {{ $labels.cluster }} is overloaded, and the current CPU application ratio is {{ $value | humanizePercentage }}",
+            "for_": "5m",
+            "labels": [{
+                "name": "severity",
+                "value": "warning",
+            }],
+        }],
+        "notification": {
+            "type": "amp",
+            "enabled": True,
+            "alert_manager": {
+                "url": "xxx",
+            },
+        },
+    },
+    opts = pulumi.ResourceOptions(depends_on=[foo_tmp_tke_cluster_agent]))
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		cfg := config.New(ctx, "")
+		defaultInstanceType := "SA1.MEDIUM2"
+		if param := cfg.Get("defaultInstanceType"); param != "" {
+			defaultInstanceType = param
+		}
+		availabilityZoneFirst := "ap-guangzhou-3"
+		if param := cfg.Get("availabilityZoneFirst"); param != "" {
+			availabilityZoneFirst = param
+		}
+		availabilityZoneSecond := "ap-guangzhou-4"
+		if param := cfg.Get("availabilityZoneSecond"); param != "" {
+			availabilityZoneSecond = param
+		}
+		exampleClusterCidr := "10.31.0.0/16"
+		if param := cfg.Get("exampleClusterCidr"); param != "" {
+			exampleClusterCidr = param
+		}
+		vpcOne, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+			IsDefault:        pulumi.BoolRef(true),
+			AvailabilityZone: pulumi.StringRef(availabilityZoneFirst),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		firstVpcId := vpcOne.InstanceLists[0].VpcId
+		firstSubnetId := vpcOne.InstanceLists[0].SubnetId
+		vpcTwo, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+			IsDefault:        pulumi.BoolRef(true),
+			AvailabilityZone: pulumi.StringRef(availabilityZoneSecond),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		_ := vpcTwo.InstanceLists[0].VpcId
+		secondSubnetId := vpcTwo.InstanceLists[0].SubnetId
+		sg, err := security.NewGroup(ctx, "sg", &security.GroupArgs{
+			Name: pulumi.String("tf-example-sg"),
+		})
+		if err != nil {
+			return err
+		}
+		sgId := sg.ID()
+		_default, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			ImageTypes: []string{
+				"PUBLIC_IMAGE",
+			},
+			ImageNameRegex: pulumi.StringRef("Final"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		imageId := _default.ImageId
+		_, err = tencentcloud.NewSecurityGroupLiteRule(ctx, "sg_rule", &tencentcloud.SecurityGroupLiteRuleArgs{
+			SecurityGroupId: sg.ID(),
+			Ingresses: []string{
+				"ACCEPT#10.0.0.0/16#ALL#ALL",
+				"ACCEPT#172.16.0.0/22#ALL#ALL",
+				"DROP#0.0.0.0/0#ALL#ALL",
+			},
+			Egresses: []string{
+				"ACCEPT#172.16.0.0/22#ALL#ALL",
+			},
+		})
+		if err != nil {
+			return err
+		}
+		example, err := kubernetes.NewCluster(ctx, "example", &kubernetes.ClusterArgs{
+			VpcId:                        pulumi.String(firstVpcId),
+			ClusterCidr:                  pulumi.String(exampleClusterCidr),
+			ClusterMaxPodNum:             pulumi.Int(32),
+			ClusterName:                  pulumi.String("tf_example_cluster"),
+			ClusterDesc:                  pulumi.String("example for tke cluster"),
+			ClusterMaxServiceNum:         pulumi.Int(32),
+			ClusterInternet:              pulumi.Bool(false),
+			ClusterInternetSecurityGroup: sgId.ToIDOutput().ToStringOutput(),
+			ClusterVersion:               pulumi.String("1.22.5"),
+			ClusterDeployType:            pulumi.String("MANAGED_CLUSTER"),
+			WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
+				&kubernetes.ClusterWorkerConfigArgs{
+					Count:                   pulumi.Int(1),
+					AvailabilityZone:        pulumi.String(availabilityZoneFirst),
+					InstanceType:            pulumi.String(defaultInstanceType),
+					SystemDiskType:          pulumi.String("CLOUD_SSD"),
+					SystemDiskSize:          pulumi.Int(60),
+					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+					InternetMaxBandwidthOut: pulumi.Int(100),
+					PublicIpAssigned:        pulumi.Bool(true),
+					SubnetId:                pulumi.String(firstSubnetId),
+					ImgId:                   pulumi.String(imageId),
+					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
+						&kubernetes.ClusterWorkerConfigDataDiskArgs{
+							DiskType: pulumi.String("CLOUD_PREMIUM"),
+							DiskSize: pulumi.Int(50),
+						},
+					},
+					EnhancedSecurityService: pulumi.Bool(false),
+					EnhancedMonitorService:  pulumi.Bool(false),
+					UserData:                pulumi.String("dGVzdA=="),
+					Password:                pulumi.String("ZZXXccvv1212"),
+				},
+				&kubernetes.ClusterWorkerConfigArgs{
+					Count:                   pulumi.Int(1),
+					AvailabilityZone:        pulumi.String(availabilityZoneSecond),
+					InstanceType:            pulumi.String(defaultInstanceType),
+					SystemDiskType:          pulumi.String("CLOUD_SSD"),
+					SystemDiskSize:          pulumi.Int(60),
+					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+					InternetMaxBandwidthOut: pulumi.Int(100),
+					PublicIpAssigned:        pulumi.Bool(true),
+					SubnetId:                pulumi.String(secondSubnetId),
+					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
+						&kubernetes.ClusterWorkerConfigDataDiskArgs{
+							DiskType: pulumi.String("CLOUD_PREMIUM"),
+							DiskSize: pulumi.Int(50),
+						},
+					},
+					EnhancedSecurityService: pulumi.Bool(false),
+					EnhancedMonitorService:  pulumi.Bool(false),
+					UserData:                pulumi.String("dGVzdA=="),
+					CamRoleName:             pulumi.String("CVM_QcsRole"),
+					Password:                pulumi.String("ZZXXccvv1212"),
+				},
+			},
+			Labels: pulumi.StringMap{
+				"test1": pulumi.String("test1"),
+				"test2": pulumi.String("test2"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		zone := "ap-guangzhou"
+		if param := cfg.Get("zone"); param != "" {
+			zone = param
+		}
+		clusterType := "tke"
+		if param := cfg.Get("clusterType"); param != "" {
+			clusterType = param
+		}
+		foo, err := monitor.NewTmpInstance(ctx, "foo", &monitor.TmpInstanceArgs{
+			InstanceName:      pulumi.String("tf-tmp-instance"),
+			VpcId:             pulumi.String(firstVpcId),
+			SubnetId:          pulumi.String(firstSubnetId),
+			DataRetentionTime: pulumi.Int(30),
+			Zone:              pulumi.String(availabilityZoneSecond),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		// tmp tke bind
+		fooTmpTkeClusterAgent, err := monitor.NewTmpTkeClusterAgent(ctx, "foo", &monitor.TmpTkeClusterAgentArgs{
+			InstanceId: foo.ID().ToIDOutput().ToStringOutput(),
+			Agents: &monitor.TmpTkeClusterAgentAgentsArgs{
+				Region:         pulumi.String(zone),
+				ClusterType:    pulumi.String(clusterType),
+				ClusterId:      example.ID().ToIDOutput().ToStringOutput(),
+				EnableExternal: pulumi.Bool(false),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		// create record rule
+		_, err = monitor.NewTmpTkeAlertPolicy(ctx, "basic", &monitor.TmpTkeAlertPolicyArgs{
+			InstanceId: foo.ID().ToIDOutput().ToStringOutput(),
+			AlertRule: &monitor.TmpTkeAlertPolicyAlertRuleArgs{
+				Name: pulumi.String("alert_rule-test"),
+				Rules: monitor.TmpTkeAlertPolicyAlertRuleRuleArray{
+					&monitor.TmpTkeAlertPolicyAlertRuleRuleArgs{
+						Name:     pulumi.String("rules-test"),
+						Rule:     pulumi.String("(count(kube_node_status_allocatable_cpu_cores) by (cluster) -1)   / count(kube_node_status_allocatable_cpu_cores) by (cluster)"),
+						Template: pulumi.String("The CPU requested by the Pod in the cluster {{ $labels.cluster }} is overloaded, and the current CPU application ratio is {{ $value | humanizePercentage }}"),
+						For:      pulumi.String("5m"),
+						Labels: monitor.TmpTkeAlertPolicyAlertRuleRuleLabelArray{
+							&monitor.TmpTkeAlertPolicyAlertRuleRuleLabelArgs{
+								Name:  pulumi.String("severity"),
+								Value: pulumi.String("warning"),
+							},
+						},
+					},
+				},
+				Notification: &monitor.TmpTkeAlertPolicyAlertRuleNotificationArgs{
+					Type:    pulumi.String("amp"),
+					Enabled: pulumi.Bool(true),
+					AlertManager: &monitor.TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs{
+						Url: pulumi.String("xxx"),
+					},
+				},
+			},
+		}, pulumi.DependsOn([]pulumi.Resource{
+			fooTmpTkeClusterAgent,
+		}))
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var config = new Config();
+    var defaultInstanceType = config.Get("defaultInstanceType") ?? "SA1.MEDIUM2";
+    var availabilityZoneFirst = config.Get("availabilityZoneFirst") ?? "ap-guangzhou-3";
+    var availabilityZoneSecond = config.Get("availabilityZoneSecond") ?? "ap-guangzhou-4";
+    var exampleClusterCidr = config.Get("exampleClusterCidr") ?? "10.31.0.0/16";
+    var vpcOne = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+    {
+        IsDefault = true,
+        AvailabilityZone = availabilityZoneFirst,
+    });
+
+    var firstVpcId = vpcOne.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId);
+
+    var firstSubnetId = vpcOne.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.SubnetId);
+
+    var vpcTwo = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+    {
+        IsDefault = true,
+        AvailabilityZone = availabilityZoneSecond,
+    });
+
+    var secondVpcId = vpcTwo.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.VpcId);
+
+    var secondSubnetId = vpcTwo.Apply(getSubnetsResult => getSubnetsResult.InstanceLists[0]?.SubnetId);
+
+    var sg = new Tencentcloud.Security.Group("sg", new()
+    {
+        Name = "tf-example-sg",
+    });
+
+    var sgId = sg.Id;
+
+    var @default = Tencentcloud.Images.GetInstance.Invoke(new()
+    {
+        ImageTypes = new[]
+        {
+            "PUBLIC_IMAGE",
+        },
+        ImageNameRegex = "Final",
+    });
+
+    var imageId = @default.Apply(@default => @default.Apply(getInstanceResult => getInstanceResult.ImageId));
+
+    var sgRule = new Tencentcloud.SecurityGroupLiteRule("sg_rule", new()
+    {
+        SecurityGroupId = sg.Id,
+        Ingresses = new[]
+        {
+            "ACCEPT#10.0.0.0/16#ALL#ALL",
+            "ACCEPT#172.16.0.0/22#ALL#ALL",
+            "DROP#0.0.0.0/0#ALL#ALL",
+        },
+        Egresses = new[]
+        {
+            "ACCEPT#172.16.0.0/22#ALL#ALL",
+        },
+    });
+
+    var example = new Tencentcloud.Kubernetes.Cluster("example", new()
+    {
+        VpcId = firstVpcId,
+        ClusterCidr = exampleClusterCidr,
+        ClusterMaxPodNum = 32,
+        ClusterName = "tf_example_cluster",
+        ClusterDesc = "example for tke cluster",
+        ClusterMaxServiceNum = 32,
+        ClusterInternet = false,
+        ClusterInternetSecurityGroup = sgId,
+        ClusterVersion = "1.22.5",
+        ClusterDeployType = "MANAGED_CLUSTER",
+        WorkerConfigs = new[]
+        {
+            new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigArgs
+            {
+                Count = 1,
+                AvailabilityZone = availabilityZoneFirst,
+                InstanceType = defaultInstanceType,
+                SystemDiskType = "CLOUD_SSD",
+                SystemDiskSize = 60,
+                InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+                InternetMaxBandwidthOut = 100,
+                PublicIpAssigned = true,
+                SubnetId = firstSubnetId,
+                ImgId = imageId,
+                DataDisks = new[]
+                {
+                    new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigDataDiskArgs
+                    {
+                        DiskType = "CLOUD_PREMIUM",
+                        DiskSize = 50,
+                    },
+                },
+                EnhancedSecurityService = false,
+                EnhancedMonitorService = false,
+                UserData = "dGVzdA==",
+                Password = "ZZXXccvv1212",
+            },
+            new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigArgs
+            {
+                Count = 1,
+                AvailabilityZone = availabilityZoneSecond,
+                InstanceType = defaultInstanceType,
+                SystemDiskType = "CLOUD_SSD",
+                SystemDiskSize = 60,
+                InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+                InternetMaxBandwidthOut = 100,
+                PublicIpAssigned = true,
+                SubnetId = secondSubnetId,
+                DataDisks = new[]
+                {
+                    new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigDataDiskArgs
+                    {
+                        DiskType = "CLOUD_PREMIUM",
+                        DiskSize = 50,
+                    },
+                },
+                EnhancedSecurityService = false,
+                EnhancedMonitorService = false,
+                UserData = "dGVzdA==",
+                CamRoleName = "CVM_QcsRole",
+                Password = "ZZXXccvv1212",
+            },
+        },
+        Labels = 
+        {
+            { "test1", "test1" },
+            { "test2", "test2" },
+        },
+    });
+
+    var zone = config.Get("zone") ?? "ap-guangzhou";
+    var clusterType = config.Get("clusterType") ?? "tke";
+    var foo = new Tencentcloud.Monitor.TmpInstance("foo", new()
+    {
+        InstanceName = "tf-tmp-instance",
+        VpcId = firstVpcId,
+        SubnetId = firstSubnetId,
+        DataRetentionTime = 30,
+        Zone = availabilityZoneSecond,
+        Tags = 
+        {
+            { "createdBy", "terraform" },
+        },
+    });
+
+    // tmp tke bind
+    var fooTmpTkeClusterAgent = new Tencentcloud.Monitor.TmpTkeClusterAgent("foo", new()
+    {
+        InstanceId = foo.Id,
+        Agents = new Tencentcloud.Monitor.Inputs.TmpTkeClusterAgentAgentsArgs
+        {
+            Region = zone,
+            ClusterType = clusterType,
+            ClusterId = example.Id,
+            EnableExternal = false,
+        },
+    });
+
+    // create record rule
+    var basic = new Tencentcloud.Monitor.TmpTkeAlertPolicy("basic", new()
+    {
+        InstanceId = foo.Id,
+        AlertRule = new Tencentcloud.Monitor.Inputs.TmpTkeAlertPolicyAlertRuleArgs
+        {
+            Name = "alert_rule-test",
+            Rules = new[]
+            {
+                new Tencentcloud.Monitor.Inputs.TmpTkeAlertPolicyAlertRuleRuleArgs
+                {
+                    Name = "rules-test",
+                    Rule = "(count(kube_node_status_allocatable_cpu_cores) by (cluster) -1)   / count(kube_node_status_allocatable_cpu_cores) by (cluster)",
+                    Template = "The CPU requested by the Pod in the cluster {{ $labels.cluster }} is overloaded, and the current CPU application ratio is {{ $value | humanizePercentage }}",
+                    For = "5m",
+                    Labels = new[]
+                    {
+                        new Tencentcloud.Monitor.Inputs.TmpTkeAlertPolicyAlertRuleRuleLabelArgs
+                        {
+                            Name = "severity",
+                            Value = "warning",
+                        },
+                    },
+                },
+            },
+            Notification = new Tencentcloud.Monitor.Inputs.TmpTkeAlertPolicyAlertRuleNotificationArgs
+            {
+                Type = "amp",
+                Enabled = true,
+                AlertManager = new Tencentcloud.Monitor.Inputs.TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs
+                {
+                    Url = "xxx",
+                },
+            },
+        },
+    }, new CustomResourceOptions
+    {
+        DependsOn =
+        {
+            fooTmpTkeClusterAgent,
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Vpc.VpcFunctions;
+import com.pulumi.tencentcloud.Vpc.inputs.GetSubnetsArgs;
+import com.pulumi.tencentcloud.Security.Group;
+import com.pulumi.tencentcloud.Security.GroupArgs;
+import com.pulumi.tencentcloud.Images.ImagesFunctions;
+import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
+import com.pulumi.tencentcloud.SecurityGroupLiteRule;
+import com.pulumi.tencentcloud.SecurityGroupLiteRuleArgs;
+import com.pulumi.tencentcloud.Kubernetes.Cluster;
+import com.pulumi.tencentcloud.Kubernetes.ClusterArgs;
+import com.pulumi.tencentcloud.Kubernetes.inputs.ClusterWorkerConfigArgs;
+import com.pulumi.tencentcloud.Kubernetes.inputs.ClusterWorkerConfigDataDiskArgs;
+import com.pulumi.tencentcloud.Monitor.TmpInstance;
+import com.pulumi.tencentcloud.Monitor.TmpInstanceArgs;
+import com.pulumi.tencentcloud.Monitor.TmpTkeClusterAgent;
+import com.pulumi.tencentcloud.Monitor.TmpTkeClusterAgentArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.TmpTkeClusterAgentAgentsArgs;
+import com.pulumi.tencentcloud.Monitor.TmpTkeAlertPolicy;
+import com.pulumi.tencentcloud.Monitor.TmpTkeAlertPolicyArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.TmpTkeAlertPolicyAlertRuleArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.TmpTkeAlertPolicyAlertRuleRuleArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.TmpTkeAlertPolicyAlertRuleRuleLabelArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.TmpTkeAlertPolicyAlertRuleNotificationArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs;
+import com.pulumi.resources.CustomResourceOptions;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        final var config = ctx.config();
+        final var defaultInstanceType = config.get("defaultInstanceType").orElse("SA1.MEDIUM2");
+        final var availabilityZoneFirst = config.get("availabilityZoneFirst").orElse("ap-guangzhou-3");
+        final var availabilityZoneSecond = config.get("availabilityZoneSecond").orElse("ap-guangzhou-4");
+        final var exampleClusterCidr = config.get("exampleClusterCidr").orElse("10.31.0.0/16");
+        final var vpcOne = VpcFunctions.getSubnets(GetSubnetsArgs.builder()
+            .isDefault(true)
+            .availabilityZone(availabilityZoneFirst)
+            .build());
+
+        final var firstVpcId = vpcOne.instanceLists()[0].vpcId();
+
+        final var firstSubnetId = vpcOne.instanceLists()[0].subnetId();
+
+        final var vpcTwo = VpcFunctions.getSubnets(GetSubnetsArgs.builder()
+            .isDefault(true)
+            .availabilityZone(availabilityZoneSecond)
+            .build());
+
+        final var secondVpcId = vpcTwo.instanceLists()[0].vpcId();
+
+        final var secondSubnetId = vpcTwo.instanceLists()[0].subnetId();
+
+        var sg = new Group("sg", GroupArgs.builder()
+            .name("tf-example-sg")
+            .build());
+
+        final var sgId = sg.id();
+
+        final var default = ImagesFunctions.getInstance(GetInstanceArgs.builder()
+            .imageTypes("PUBLIC_IMAGE")
+            .imageNameRegex("Final")
+            .build());
+
+        final var imageId = default_.imageId();
+
+        var sgRule = new SecurityGroupLiteRule("sgRule", SecurityGroupLiteRuleArgs.builder()
+            .securityGroupId(sg.id())
+            .ingresses(Arrays.asList(            
+                "ACCEPT#10.0.0.0/16#ALL#ALL",
+                "ACCEPT#172.16.0.0/22#ALL#ALL",
+                "DROP#0.0.0.0/0#ALL#ALL"))
+            .egresses(Arrays.asList("ACCEPT#172.16.0.0/22#ALL#ALL"))
+            .build());
+
+        var example = new Cluster("example", ClusterArgs.builder()
+            .vpcId(firstVpcId)
+            .clusterCidr(exampleClusterCidr)
+            .clusterMaxPodNum(32)
+            .clusterName("tf_example_cluster")
+            .clusterDesc("example for tke cluster")
+            .clusterMaxServiceNum(32)
+            .clusterInternet(false)
+            .clusterInternetSecurityGroup(sgId)
+            .clusterVersion("1.22.5")
+            .clusterDeployType("MANAGED_CLUSTER")
+            .workerConfigs(            
+                ClusterWorkerConfigArgs.builder()
+                    .count(1)
+                    .availabilityZone(availabilityZoneFirst)
+                    .instanceType(defaultInstanceType)
+                    .systemDiskType("CLOUD_SSD")
+                    .systemDiskSize(60)
+                    .internetChargeType("TRAFFIC_POSTPAID_BY_HOUR")
+                    .internetMaxBandwidthOut(100)
+                    .publicIpAssigned(true)
+                    .subnetId(firstSubnetId)
+                    .imgId(imageId)
+                    .dataDisks(ClusterWorkerConfigDataDiskArgs.builder()
+                        .diskType("CLOUD_PREMIUM")
+                        .diskSize(50)
+                        .build())
+                    .enhancedSecurityService(false)
+                    .enhancedMonitorService(false)
+                    .userData("dGVzdA==")
+                    .password("ZZXXccvv1212")
+                    .build(),
+                ClusterWorkerConfigArgs.builder()
+                    .count(1)
+                    .availabilityZone(availabilityZoneSecond)
+                    .instanceType(defaultInstanceType)
+                    .systemDiskType("CLOUD_SSD")
+                    .systemDiskSize(60)
+                    .internetChargeType("TRAFFIC_POSTPAID_BY_HOUR")
+                    .internetMaxBandwidthOut(100)
+                    .publicIpAssigned(true)
+                    .subnetId(secondSubnetId)
+                    .dataDisks(ClusterWorkerConfigDataDiskArgs.builder()
+                        .diskType("CLOUD_PREMIUM")
+                        .diskSize(50)
+                        .build())
+                    .enhancedSecurityService(false)
+                    .enhancedMonitorService(false)
+                    .userData("dGVzdA==")
+                    .camRoleName("CVM_QcsRole")
+                    .password("ZZXXccvv1212")
+                    .build())
+            .labels(Map.ofEntries(
+                Map.entry("test1", "test1"),
+                Map.entry("test2", "test2")
+            ))
+            .build());
+
+        final var zone = config.get("zone").orElse("ap-guangzhou");
+        final var clusterType = config.get("clusterType").orElse("tke");
+        var foo = new TmpInstance("foo", TmpInstanceArgs.builder()
+            .instanceName("tf-tmp-instance")
+            .vpcId(firstVpcId)
+            .subnetId(firstSubnetId)
+            .dataRetentionTime(30)
+            .zone(availabilityZoneSecond)
+            .tags(Map.of("createdBy", "terraform"))
+            .build());
+
+        // tmp tke bind
+        var fooTmpTkeClusterAgent = new TmpTkeClusterAgent("fooTmpTkeClusterAgent", TmpTkeClusterAgentArgs.builder()
+            .instanceId(foo.id())
+            .agents(TmpTkeClusterAgentAgentsArgs.builder()
+                .region(zone)
+                .clusterType(clusterType)
+                .clusterId(example.id())
+                .enableExternal(false)
+                .build())
+            .build());
+
+        // create record rule
+        var basic = new TmpTkeAlertPolicy("basic", TmpTkeAlertPolicyArgs.builder()
+            .instanceId(foo.id())
+            .alertRule(TmpTkeAlertPolicyAlertRuleArgs.builder()
+                .name("alert_rule-test")
+                .rules(TmpTkeAlertPolicyAlertRuleRuleArgs.builder()
+                    .name("rules-test")
+                    .rule("(count(kube_node_status_allocatable_cpu_cores) by (cluster) -1)   / count(kube_node_status_allocatable_cpu_cores) by (cluster)")
+                    .template("The CPU requested by the Pod in the cluster {{ $labels.cluster }} is overloaded, and the current CPU application ratio is {{ $value | humanizePercentage }}")
+                    .for_("5m")
+                    .labels(TmpTkeAlertPolicyAlertRuleRuleLabelArgs.builder()
+                        .name("severity")
+                        .value("warning")
+                        .build())
+                    .build())
+                .notification(TmpTkeAlertPolicyAlertRuleNotificationArgs.builder()
+                    .type("amp")
+                    .enabled(true)
+                    .alertManager(TmpTkeAlertPolicyAlertRuleNotificationAlertManagerArgs.builder()
+                        .url("xxx")
+                        .build())
+                    .build())
+                .build())
+            .build(), CustomResourceOptions.builder()
+                .dependsOn(fooTmpTkeClusterAgent)
+                .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+configuration:
+  defaultInstanceType:
+    type: string
+    default: SA1.MEDIUM2
+  availabilityZoneFirst:
+    type: string
+    default: ap-guangzhou-3
+  availabilityZoneSecond:
+    type: string
+    default: ap-guangzhou-4
+  exampleClusterCidr:
+    type: string
+    default: 10.31.0.0/16
+  # create monitor
+  zone:
+    type: string
+    default: ap-guangzhou
+  clusterType:
+    type: string
+    default: tke
+resources:
+  sg:
+    type: tencentcloud:Security:Group
+    properties:
+      name: tf-example-sg
+  sgRule:
+    type: tencentcloud:SecurityGroupLiteRule
+    name: sg_rule
+    properties:
+      securityGroupId: ${sg.id}
+      ingresses:
+        - ACCEPT#10.0.0.0/16#ALL#ALL
+        - ACCEPT#172.16.0.0/22#ALL#ALL
+        - DROP#0.0.0.0/0#ALL#ALL
+      egresses:
+        - ACCEPT#172.16.0.0/22#ALL#ALL
+  example:
+    type: tencentcloud:Kubernetes:Cluster
+    properties:
+      vpcId: ${firstVpcId}
+      clusterCidr: ${exampleClusterCidr}
+      clusterMaxPodNum: 32
+      clusterName: tf_example_cluster
+      clusterDesc: example for tke cluster
+      clusterMaxServiceNum: 32
+      clusterInternet: false
+      clusterInternetSecurityGroup: ${sgId}
+      clusterVersion: 1.22.5
+      clusterDeployType: MANAGED_CLUSTER
+      workerConfigs:
+        - count: 1
+          availabilityZone: ${availabilityZoneFirst}
+          instanceType: ${defaultInstanceType}
+          systemDiskType: CLOUD_SSD
+          systemDiskSize: 60
+          internetChargeType: TRAFFIC_POSTPAID_BY_HOUR
+          internetMaxBandwidthOut: 100
+          publicIpAssigned: true
+          subnetId: ${firstSubnetId}
+          imgId: ${imageId}
+          dataDisks:
+            - diskType: CLOUD_PREMIUM
+              diskSize: 50
+          enhancedSecurityService: false
+          enhancedMonitorService: false
+          userData: dGVzdA==
+          password: ZZXXccvv1212
+        - count: 1
+          availabilityZone: ${availabilityZoneSecond}
+          instanceType: ${defaultInstanceType}
+          systemDiskType: CLOUD_SSD
+          systemDiskSize: 60
+          internetChargeType: TRAFFIC_POSTPAID_BY_HOUR
+          internetMaxBandwidthOut: 100
+          publicIpAssigned: true
+          subnetId: ${secondSubnetId}
+          dataDisks:
+            - diskType: CLOUD_PREMIUM
+              diskSize: 50
+          enhancedSecurityService: false
+          enhancedMonitorService: false
+          userData: dGVzdA==
+          camRoleName: CVM_QcsRole
+          password: ZZXXccvv1212
+      labels:
+        test1: test1
+        test2: test2
+  foo:
+    type: tencentcloud:Monitor:TmpInstance
+    properties:
+      instanceName: tf-tmp-instance
+      vpcId: ${firstVpcId}
+      subnetId: ${firstSubnetId}
+      dataRetentionTime: 30
+      zone: ${availabilityZoneSecond}
+      tags:
+        createdBy: terraform
+  # tmp tke bind
+  fooTmpTkeClusterAgent:
+    type: tencentcloud:Monitor:TmpTkeClusterAgent
+    name: foo
+    properties:
+      instanceId: ${foo.id}
+      agents:
+        region: ${zone}
+        clusterType: ${clusterType}
+        clusterId: ${example.id}
+        enableExternal: false
+  # create record rule
+  basic:
+    type: tencentcloud:Monitor:TmpTkeAlertPolicy
+    properties:
+      instanceId: ${foo.id}
+      alertRule:
+        name: alert_rule-test
+        rules:
+          - name: rules-test
+            rule: (count(kube_node_status_allocatable_cpu_cores) by (cluster) -1)   / count(kube_node_status_allocatable_cpu_cores) by (cluster)
+            template: The CPU requested by the Pod in the cluster {{ $labels.cluster }} is overloaded, and the current CPU application ratio is {{ $value | humanizePercentage }}
+            for: 5m
+            labels:
+              - name: severity
+                value: warning
+        notification:
+          type: amp
+          enabled: true
+          alertManager:
+            url: xxx
+    options:
+      dependsOn:
+        - ${fooTmpTkeClusterAgent}
+variables:
+  firstVpcId: ${vpcOne.instanceLists[0].vpcId}
+  firstSubnetId: ${vpcOne.instanceLists[0].subnetId}
+  secondVpcId: ${vpcTwo.instanceLists[0].vpcId}
+  secondSubnetId: ${vpcTwo.instanceLists[0].subnetId}
+  sgId: ${sg.id}
+  imageId: ${default.imageId}
+  vpcOne:
+    fn::invoke:
+      function: tencentcloud:Vpc:getSubnets
+      arguments:
+        isDefault: true
+        availabilityZone: ${availabilityZoneFirst}
+  vpcTwo:
+    fn::invoke:
+      function: tencentcloud:Vpc:getSubnets
+      arguments:
+        isDefault: true
+        availabilityZone: ${availabilityZoneSecond}
+  default:
+    fn::invoke:
+      function: tencentcloud:Images:getInstance
+      arguments:
+        imageTypes:
+          - PUBLIC_IMAGE
+        imageNameRegex: Final
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_vpc_getsubnets" "vpcOne" {
+  is_default        = true
+  availability_zone = var.availabilityZoneFirst
+}
+data "tencentcloud_vpc_getsubnets" "vpcTwo" {
+  is_default        = true
+  availability_zone = var.availabilityZoneSecond
+}
+data "tencentcloud_images_getinstance" "default" {
+  image_types      = ["PUBLIC_IMAGE"]
+  image_name_regex = "Final"
+}
+
+resource "tencentcloud_security_group" "sg" {
+  name = "tf-example-sg"
+}
+resource "tencentcloud_securitygroupliterule" "sg_rule" {
+  security_group_id = tencentcloud_security_group.sg.id
+  ingresses         = ["ACCEPT#10.0.0.0/16#ALL#ALL", "ACCEPT#172.16.0.0/22#ALL#ALL", "DROP#0.0.0.0/0#ALL#ALL"]
+  egresses          = ["ACCEPT#172.16.0.0/22#ALL#ALL"]
+}
+resource "tencentcloud_kubernetes_cluster" "example" {
+  vpc_id                          = local.firstVpcId
+  cluster_cidr                    = var.exampleClusterCidr
+  cluster_max_pod_num             = 32
+  cluster_name                    = "tf_example_cluster"
+  cluster_desc                    = "example for tke cluster"
+  cluster_max_service_num         = 32
+  cluster_internet                = false
+  cluster_internet_security_group = local.sgId
+  cluster_version                 = "1.22.5"
+  cluster_deploy_type             = "MANAGED_CLUSTER"
+  worker_configs {
+    count                      = 1
+    availability_zone          = var.availabilityZoneFirst
+    instance_type              = var.defaultInstanceType
+    system_disk_type           = "CLOUD_SSD"
+    system_disk_size           = 60
+    internet_charge_type       = "TRAFFIC_POSTPAID_BY_HOUR"
+    internet_max_bandwidth_out = 100
+    public_ip_assigned         = true
+    subnet_id                  = local.firstSubnetId
+    img_id                     = local.imageId
+    data_disks {
+      disk_type = "CLOUD_PREMIUM"
+      disk_size = 50
+    }
+    enhanced_security_service = false
+    enhanced_monitor_service  = false
+    user_data                 = "dGVzdA=="
+    password                  = "ZZXXccvv1212"
+  }
+  worker_configs {
+    count                      = 1
+    availability_zone          = var.availabilityZoneSecond
+    instance_type              = var.defaultInstanceType
+    system_disk_type           = "CLOUD_SSD"
+    system_disk_size           = 60
+    internet_charge_type       = "TRAFFIC_POSTPAID_BY_HOUR"
+    internet_max_bandwidth_out = 100
+    public_ip_assigned         = true
+    subnet_id                  = local.secondSubnetId
+    data_disks {
+      disk_type = "CLOUD_PREMIUM"
+      disk_size = 50
+    }
+    enhanced_security_service = false
+    enhanced_monitor_service  = false
+    user_data                 = "dGVzdA=="
+    cam_role_name             = "CVM_QcsRole"
+    password                  = "ZZXXccvv1212"
+  }
+  # key_ids                   = ["skey-11112222"]
+  # key_ids                   = ["skey-11112222"]
+  labels = {
+    "test1" = "test1"
+    "test2" = "test2"
+  }
+}
+resource "tencentcloud_monitor_tmpinstance" "foo" {
+  instance_name       = "tf-tmp-instance"
+  vpc_id              = local.firstVpcId
+  subnet_id           = local.firstSubnetId
+  data_retention_time = 30
+  zone                = var.availabilityZoneSecond
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+# tmp tke bind
+resource "tencentcloud_monitor_tmptkeclusteragent" "foo" {
+  instance_id = tencentcloud_monitor_tmpinstance.foo.id
+  agents = {
+    region          = var.zone
+    cluster_type    = var.clusterType
+    cluster_id      = tencentcloud_kubernetes_cluster.example.id
+    enable_external = false
+  }
+}
+# create record rule
+resource "tencentcloud_monitor_tmptkealertpolicy" "basic" {
+  depends_on  = [tencentcloud_monitor_tmptkeclusteragent.foo]
+  instance_id = tencentcloud_monitor_tmpinstance.foo.id
+  alert_rule = {
+    name = "alert_rule-test"
+    rules = [{
+      "name"     = "rules-test"
+      "rule"     = "(count(kube_node_status_allocatable_cpu_cores) by (cluster) -1)   / count(kube_node_status_allocatable_cpu_cores) by (cluster)"
+      "template" = "The CPU requested by the Pod in the cluster {{ $labels.cluster }} is overloaded, and the current CPU application ratio is {{ $value | humanizePercentage }}"
+      "for"      = "5m"
+      "labels" = [{
+        "name"  = "severity"
+        "value" = "warning"
+      }]
+    }]
+    notification = {
+      type    = "amp"
+      enabled = true
+      alert_manager = {
+        url = "xxx"
+      }
+    }
+  }
+}
+variable "defaultInstanceType" {
+  type    = string
+  default = "SA1.MEDIUM2"
+}
+variable "availabilityZoneFirst" {
+  type    = string
+  default = "ap-guangzhou-3"
+}
+variable "availabilityZoneSecond" {
+  type    = string
+  default = "ap-guangzhou-4"
+}
+variable "exampleClusterCidr" {
+  type    = string
+  default = "10.31.0.0/16"
+}
+locals {
+  firstVpcId = data.tencentcloud_vpc_getsubnets.vpcOne.instance_lists[0].vpc_id
+}
+locals {
+  firstSubnetId = data.tencentcloud_vpc_getsubnets.vpcOne.instance_lists[0].subnet_id
+}
+locals {
+  secondVpcId = data.tencentcloud_vpc_getsubnets.vpcTwo.instance_lists[0].vpc_id
+}
+locals {
+  secondSubnetId = data.tencentcloud_vpc_getsubnets.vpcTwo.instance_lists[0].subnet_id
+}
+locals {
+  sgId = tencentcloud_security_group.sg.id
+}
+locals {
+  imageId = data.tencentcloud_images_getinstance.default.image_id
+}
+# create monitor
+variable "zone" {
+  type    = string
+  default = "ap-guangzhou"
+}
+variable "clusterType" {
+  type    = string
+  default = "tke"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreatePrometheusAlertPolicy](https://www.tencentcloud.com/document/api/248/53775)
+* Read: [DescribePrometheusAlertPolicy](https://www.tencentcloud.com/document/api/248/53323)
+* Update: [ModifyPrometheusAlertPolicy](https://www.tencentcloud.com/document/api/248/53765)
+* Delete: [DeletePrometheusAlertPolicy](https://www.tencentcloud.com/document/api/248/53772)
 
 
 
 ## Create TmpTkeAlertPolicy Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">TmpTkeAlertPolicy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TmpTkeAlertPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">TmpTkeAlertPolicy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TmpTkeAlertPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">TmpTkeAlertPolicy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                      <span class="nx">alert_rule</span><span class="p">:</span> <span class="nx">Optional[_monitor.TmpTkeAlertPolicyAlertRuleArgs]</span> = None<span class="p">,</span>
-                      <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">TmpTkeAlertPolicy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                       <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TmpTkeAlertPolicyArgs</a></span><span class="p">,</span>
-                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">TmpTkeAlertPolicy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                      <span class="nx">alert_rule</span><span class="p">:</span> <span class="nx">Optional[TmpTkeAlertPolicyAlertRuleArgs]</span> = None<span class="p">,</span>
+                      <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTmpTkeAlertPolicy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TmpTkeAlertPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TmpTkeAlertPolicy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTmpTkeAlertPolicy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TmpTkeAlertPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TmpTkeAlertPolicy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">TmpTkeAlertPolicy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TmpTkeAlertPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">TmpTkeAlertPolicy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TmpTkeAlertPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">TmpTkeAlertPolicy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TmpTkeAlertPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">TmpTkeAlertPolicy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TmpTkeAlertPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Monitor:TmpTkeAlertPolicy</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Monitor:TmpTkeAlertPolicy</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_monitor_tmp_tke_alert_policy&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -95,7 +1415,7 @@ Provides a resource to create a tke tmpAlertPolicy
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -212,11 +1532,19 @@ Provides a resource to create a tke tmpAlertPolicy
 </pulumi-choosable>
 </div>
 
+
+
 ## TmpTkeAlertPolicy Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The TmpTkeAlertPolicy resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -230,10 +1558,9 @@ The TmpTkeAlertPolicy resource accepts the following [input](/docs/intro/concept
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alertrule_csharp" style="color: inherit; text-decoration: inherit;">Alert<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkealertpolicyalertrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#tmptkealertpolicyalertrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule</a></span>
     </dt>
-    <dd><p>Alarm notification channels.</p>
-</dd><dt class="property-required"
+    <dd>Alarm notification channels.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -241,8 +1568,7 @@ The TmpTkeAlertPolicy resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Id.</p>
-</dd></dl>
+    <dd>Instance Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -256,8 +1582,7 @@ The TmpTkeAlertPolicy resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrule">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Alarm notification channels.</p>
-</dd><dt class="property-required"
+    <dd>Alarm notification channels.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -265,8 +1590,29 @@ The TmpTkeAlertPolicy resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Id.</p>
-</dd></dl>
+    <dd>Instance Id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="alert_rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alert_rule_hcl" style="color: inherit; text-decoration: inherit;">alert_<wbr>rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmptkealertpolicyalertrule">object</a></span>
+    </dt>
+    <dd>Alarm notification channels.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,10 +1624,9 @@ The TmpTkeAlertPolicy resource accepts the following [input](/docs/intro/concept
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alertrule_java" style="color: inherit; text-decoration: inherit;">alert<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkealertpolicyalertrule">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#tmptkealertpolicyalertrule">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule</a></span>
     </dt>
-    <dd><p>Alarm notification channels.</p>
-</dd><dt class="property-required"
+    <dd>Alarm notification channels.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -289,8 +1634,7 @@ The TmpTkeAlertPolicy resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance Id.</p>
-</dd></dl>
+    <dd>Instance Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -302,10 +1646,9 @@ The TmpTkeAlertPolicy resource accepts the following [input](/docs/intro/concept
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alertrule_nodejs" style="color: inherit; text-decoration: inherit;">alert<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkealertpolicyalertrule">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#tmptkealertpolicyalertrule">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule</a></span>
     </dt>
-    <dd><p>Alarm notification channels.</p>
-</dd><dt class="property-required"
+    <dd>Alarm notification channels.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -313,8 +1656,7 @@ The TmpTkeAlertPolicy resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Id.</p>
-</dd></dl>
+    <dd>Instance Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -328,8 +1670,7 @@ The TmpTkeAlertPolicy resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrule">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Alarm notification channels.</p>
-</dd><dt class="property-required"
+    <dd>Alarm notification channels.</dd><dt class="property-required"
             title="Required">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -337,8 +1678,7 @@ The TmpTkeAlertPolicy resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance Id.</p>
-</dd></dl>
+    <dd>Instance Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -352,8 +1692,7 @@ The TmpTkeAlertPolicy resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrule">Property Map</a></span>
     </dt>
-    <dd><p>Alarm notification channels.</p>
-</dd><dt class="property-required"
+    <dd>Alarm notification channels.</dd><dt class="property-required"
             title="Required">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -361,8 +1700,7 @@ The TmpTkeAlertPolicy resource accepts the following [input](/docs/intro/concept
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance Id.</p>
-</dd></dl>
+    <dd>Instance Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -383,8 +1721,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -398,8 +1735,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -413,8 +1763,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -428,8 +1777,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -443,8 +1791,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -458,8 +1805,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -469,121 +1815,160 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing TmpTkeAlertPolicy resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TmpTkeAlertPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">TmpTkeAlertPolicy</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TmpTkeAlertPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">TmpTkeAlertPolicy</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">alert_rule</span><span class="p">:</span> <span class="nx">Optional[_monitor.TmpTkeAlertPolicyAlertRuleArgs]</span> = None<span class="p">,</span>
+        <span class="nx">alert_rule</span><span class="p">:</span> <span class="nx">Optional[TmpTkeAlertPolicyAlertRuleArgs]</span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> TmpTkeAlertPolicy</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTmpTkeAlertPolicy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TmpTkeAlertPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TmpTkeAlertPolicy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTmpTkeAlertPolicy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TmpTkeAlertPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">TmpTkeAlertPolicy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">TmpTkeAlertPolicy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TmpTkeAlertPolicyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">TmpTkeAlertPolicy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TmpTkeAlertPolicyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">TmpTkeAlertPolicy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TmpTkeAlertPolicyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">TmpTkeAlertPolicy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TmpTkeAlertPolicyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingTmpTkeAlertPolicy</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Monitor:TmpTkeAlertPolicy</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_monitor_tmp_tke_alert_policy</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TmpTkeAlertPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TmpTkeAlertPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -591,28 +1976,31 @@ Get an existing TmpTkeAlertPolicy resource's state with the given name, ID, and 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TmpTkeAlertPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -620,28 +2008,31 @@ Get an existing TmpTkeAlertPolicy resource's state with the given name, ID, and 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TmpTkeAlertPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -659,10 +2050,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alertrule_csharp" style="color: inherit; text-decoration: inherit;">Alert<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkealertpolicyalertrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#tmptkealertpolicyalertrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule</a></span>
     </dt>
-    <dd><p>Alarm notification channels.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -670,8 +2060,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Id.</p>
-</dd></dl>
+    <dd>Instance Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -685,8 +2074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrule">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Alarm notification channels.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -694,8 +2082,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Id.</p>
-</dd></dl>
+    <dd>Instance Id.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_alert_rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alert_rule_hcl" style="color: inherit; text-decoration: inherit;">alert_<wbr>rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmptkealertpolicyalertrule">object</a></span>
+    </dt>
+    <dd>Alarm notification channels.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -707,10 +2116,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alertrule_java" style="color: inherit; text-decoration: inherit;">alert<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkealertpolicyalertrule">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#tmptkealertpolicyalertrule">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule</a></span>
     </dt>
-    <dd><p>Alarm notification channels.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -718,8 +2126,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance Id.</p>
-</dd></dl>
+    <dd>Instance Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -731,10 +2138,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_alertrule_nodejs" style="color: inherit; text-decoration: inherit;">alert<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkealertpolicyalertrule">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#tmptkealertpolicyalertrule">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule</a></span>
     </dt>
-    <dd><p>Alarm notification channels.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -742,8 +2148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance Id.</p>
-</dd></dl>
+    <dd>Instance Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -757,8 +2162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrule">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>Alarm notification channels.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -766,8 +2170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance Id.</p>
-</dd></dl>
+    <dd>Instance Id.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -781,8 +2184,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrule">Property Map</a></span>
     </dt>
-    <dd><p>Alarm notification channels.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification channels.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -790,8 +2192,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance Id.</p>
-</dd></dl>
+    <dd>Instance Id.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -806,7 +2207,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="tmptkealertpolicyalertrule">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule</h4>
+<h4 id="tmptkealertpolicyalertrule">
+Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<pulumi-choosable type="language" values="python,go" class="inline">, Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -818,8 +2221,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy name.</p>
-</dd><dt class="property-required"
+    <dd>Rule name.</dd><dt class="property-required"
             title="Required">
         <span id="rules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_csharp" style="color: inherit; text-decoration: inherit;">Rules</a>
@@ -827,8 +2229,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulerule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>A list of rules.</p>
-</dd><dt class="property-optional"
+    <dd>A list of rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -836,8 +2237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -845,8 +2245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-optional"
             title="Optional">
         <span id="notification_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_csharp" style="color: inherit; text-decoration: inherit;">Notification</a>
@@ -854,8 +2253,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulenotification">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Notification</a></span>
     </dt>
-    <dd><p>Alarm channels, which may be returned using null in the template.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm channels, which may be returned using null in the template.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_csharp" style="color: inherit; text-decoration: inherit;">Template<wbr>Id</a>
@@ -863,8 +2261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If the alarm is sent from a template, the TemplateId is the template id.</p>
-</dd><dt class="property-optional"
+    <dd>If the alarm is sent from a template, the TemplateId is the template id.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_csharp" style="color: inherit; text-decoration: inherit;">Updated<wbr>At</a>
@@ -872,8 +2269,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time.</p>
-</dd></dl>
+    <dd>Last modified time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -887,8 +2283,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy name.</p>
-</dd><dt class="property-required"
+    <dd>Rule name.</dd><dt class="property-required"
             title="Required">
         <span id="rules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_go" style="color: inherit; text-decoration: inherit;">Rules</a>
@@ -896,8 +2291,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulerule">[]Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule</a></span>
     </dt>
-    <dd><p>A list of rules.</p>
-</dd><dt class="property-optional"
+    <dd>A list of rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -905,8 +2299,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -914,8 +2307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-optional"
             title="Optional">
         <span id="notification_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_go" style="color: inherit; text-decoration: inherit;">Notification</a>
@@ -923,8 +2315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulenotification">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Notification</a></span>
     </dt>
-    <dd><p>Alarm channels, which may be returned using null in the template.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm channels, which may be returned using null in the template.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_go" style="color: inherit; text-decoration: inherit;">Template<wbr>Id</a>
@@ -932,8 +2323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If the alarm is sent from a template, the TemplateId is the template id.</p>
-</dd><dt class="property-optional"
+    <dd>If the alarm is sent from a template, the TemplateId is the template id.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_go" style="color: inherit; text-decoration: inherit;">Updated<wbr>At</a>
@@ -941,8 +2331,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time.</p>
-</dd></dl>
+    <dd>Last modified time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule name.</dd><dt class="property-required"
+            title="Required">
+        <span id="rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_hcl" style="color: inherit; text-decoration: inherit;">rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmptkealertpolicyalertrulerule">list(object)</a></span>
+    </dt>
+    <dd>A list of rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="notification_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_hcl" style="color: inherit; text-decoration: inherit;">notification</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmptkealertpolicyalertrulenotification">object</a></span>
+    </dt>
+    <dd>Alarm channels, which may be returned using null in the template.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_id_hcl" style="color: inherit; text-decoration: inherit;">template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>If the alarm is sent from a template, the TemplateId is the template id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="updated_at_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_at_hcl" style="color: inherit; text-decoration: inherit;">updated_<wbr>at</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Last modified time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -956,8 +2407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy name.</p>
-</dd><dt class="property-required"
+    <dd>Rule name.</dd><dt class="property-required"
             title="Required">
         <span id="rules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_java" style="color: inherit; text-decoration: inherit;">rules</a>
@@ -965,8 +2415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulerule">List&lt;Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>A list of rules.</p>
-</dd><dt class="property-optional"
+    <dd>A list of rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -974,8 +2423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -983,8 +2431,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-optional"
             title="Optional">
         <span id="notification_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_java" style="color: inherit; text-decoration: inherit;">notification</a>
@@ -992,8 +2439,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulenotification">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Notification</a></span>
     </dt>
-    <dd><p>Alarm channels, which may be returned using null in the template.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm channels, which may be returned using null in the template.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_java" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1001,8 +2447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>If the alarm is sent from a template, the TemplateId is the template id.</p>
-</dd><dt class="property-optional"
+    <dd>If the alarm is sent from a template, the TemplateId is the template id.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_java" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -1010,8 +2455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time.</p>
-</dd></dl>
+    <dd>Last modified time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1025,8 +2469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy name.</p>
-</dd><dt class="property-required"
+    <dd>Rule name.</dd><dt class="property-required"
             title="Required">
         <span id="rules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_nodejs" style="color: inherit; text-decoration: inherit;">rules</a>
@@ -1034,8 +2477,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulerule">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>A list of rules.</p>
-</dd><dt class="property-optional"
+    <dd>A list of rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1043,8 +2485,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1052,8 +2493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-optional"
             title="Optional">
         <span id="notification_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_nodejs" style="color: inherit; text-decoration: inherit;">notification</a>
@@ -1061,8 +2501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulenotification">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Notification</a></span>
     </dt>
-    <dd><p>Alarm channels, which may be returned using null in the template.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm channels, which may be returned using null in the template.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_nodejs" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1070,8 +2509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If the alarm is sent from a template, the TemplateId is the template id.</p>
-</dd><dt class="property-optional"
+    <dd>If the alarm is sent from a template, the TemplateId is the template id.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_nodejs" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -1079,8 +2517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Last modified time.</p>
-</dd></dl>
+    <dd>Last modified time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1094,17 +2531,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy name.</p>
-</dd><dt class="property-required"
+    <dd>Rule name.</dd><dt class="property-required"
             title="Required">
         <span id="rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_python" style="color: inherit; text-decoration: inherit;">rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkealertpolicyalertrulerule">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule]</a></span>
+        <span class="property-type"><a href="#tmptkealertpolicyalertrulerule">Sequence[Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule]</a></span>
     </dt>
-    <dd><p>A list of rules.</p>
-</dd><dt class="property-optional"
+    <dd>A list of rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -1112,8 +2547,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1121,8 +2555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-optional"
             title="Optional">
         <span id="notification_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_python" style="color: inherit; text-decoration: inherit;">notification</a>
@@ -1130,8 +2563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulenotification">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Notification</a></span>
     </dt>
-    <dd><p>Alarm channels, which may be returned using null in the template.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm channels, which may be returned using null in the template.</dd><dt class="property-optional"
             title="Optional">
         <span id="template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_id_python" style="color: inherit; text-decoration: inherit;">template_<wbr>id</a>
@@ -1139,8 +2571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>If the alarm is sent from a template, the TemplateId is the template id.</p>
-</dd><dt class="property-optional"
+    <dd>If the alarm is sent from a template, the TemplateId is the template id.</dd><dt class="property-optional"
             title="Optional">
         <span id="updated_at_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updated_at_python" style="color: inherit; text-decoration: inherit;">updated_<wbr>at</a>
@@ -1148,8 +2579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Last modified time.</p>
-</dd></dl>
+    <dd>Last modified time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1163,8 +2593,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy name.</p>
-</dd><dt class="property-required"
+    <dd>Rule name.</dd><dt class="property-required"
             title="Required">
         <span id="rules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_yaml" style="color: inherit; text-decoration: inherit;">rules</a>
@@ -1172,8 +2601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulerule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of rules.</p>
-</dd><dt class="property-optional"
+    <dd>A list of rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1181,8 +2609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1190,8 +2617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm policy ID. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-optional"
             title="Optional">
         <span id="notification_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_yaml" style="color: inherit; text-decoration: inherit;">notification</a>
@@ -1199,8 +2625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulenotification">Property Map</a></span>
     </dt>
-    <dd><p>Alarm channels, which may be returned using null in the template.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm channels, which may be returned using null in the template.</dd><dt class="property-optional"
             title="Optional">
         <span id="templateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#templateid_yaml" style="color: inherit; text-decoration: inherit;">template<wbr>Id</a>
@@ -1208,8 +2633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>If the alarm is sent from a template, the TemplateId is the template id.</p>
-</dd><dt class="property-optional"
+    <dd>If the alarm is sent from a template, the TemplateId is the template id.</dd><dt class="property-optional"
             title="Optional">
         <span id="updatedat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatedat_yaml" style="color: inherit; text-decoration: inherit;">updated<wbr>At</a>
@@ -1217,12 +2641,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Last modified time.</p>
-</dd></dl>
+    <dd>Last modified time.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="tmptkealertpolicyalertrulenotification">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Notification</h4>
+<h4 id="tmptkealertpolicyalertrulenotification">
+Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Notification<pulumi-choosable type="language" values="python,go" class="inline">, Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Notification<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1234,8 +2659,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether it is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1243,8 +2667,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The channel type, which defaults to amp, supports the following <code>amp</code>, <code>webhook</code>, <code>alertmanager</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The channel type, which defaults to amp, supports the following <code>amp</code>, <code>webhook</code>, <code>alertmanager</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="alertmanager_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alertmanager_csharp" style="color: inherit; text-decoration: inherit;">Alert<wbr>Manager</a>
@@ -1252,8 +2675,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulenotificationalertmanager">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Notification<wbr>Alert<wbr>Manager</a></span>
     </dt>
-    <dd><p>If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-optional"
+    <dd>If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-optional"
             title="Optional">
         <span id="notifyways_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifyways_csharp" style="color: inherit; text-decoration: inherit;">Notify<wbr>Ways</a>
@@ -1261,8 +2683,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonearrivenotice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonearrivenotice_csharp" style="color: inherit; text-decoration: inherit;">Phone<wbr>Arrive<wbr>Notice</a>
@@ -1270,8 +2691,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Telephone alerts reach notifications.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alerts reach notifications.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonecircleinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonecircleinterval_csharp" style="color: inherit; text-decoration: inherit;">Phone<wbr>Circle<wbr>Interval</a>
@@ -1279,8 +2699,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Effective end timeTelephone alarm wheel interval. Units: Seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Effective end timeTelephone alarm wheel interval. Units: Seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonecircletimes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonecircletimes_csharp" style="color: inherit; text-decoration: inherit;">Phone<wbr>Circle<wbr>Times</a>
@@ -1288,8 +2707,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>PhoneCircleTimes.</p>
-</dd><dt class="property-optional"
+    <dd>PhoneCircleTimes.</dd><dt class="property-optional"
             title="Optional">
         <span id="phoneinnerinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phoneinnerinterval_csharp" style="color: inherit; text-decoration: inherit;">Phone<wbr>Inner<wbr>Interval</a>
@@ -1297,8 +2715,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Telephone alarm wheel intervals. Units: Seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alarm wheel intervals. Units: Seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonenotifyorders_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenotifyorders_csharp" style="color: inherit; text-decoration: inherit;">Phone<wbr>Notify<wbr>Orders</a>
@@ -1306,8 +2723,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Telephone alarm sequence.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alarm sequence.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivergroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivergroups_csharp" style="color: inherit; text-decoration: inherit;">Receiver<wbr>Groups</a>
@@ -1315,8 +2731,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Alert Receiving Group (User Group).</p>
-</dd><dt class="property-optional"
+    <dd>Alert Receiving Group (User Group).</dd><dt class="property-optional"
             title="Optional">
         <span id="repeatinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeatinterval_csharp" style="color: inherit; text-decoration: inherit;">Repeat<wbr>Interval</a>
@@ -1324,8 +2739,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Convergence time.</p>
-</dd><dt class="property-optional"
+    <dd>Convergence time.</dd><dt class="property-optional"
             title="Optional">
         <span id="timerangeend_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timerangeend_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Range<wbr>End</a>
@@ -1333,8 +2747,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Effective end time.</p>
-</dd><dt class="property-optional"
+    <dd>Effective end time.</dd><dt class="property-optional"
             title="Optional">
         <span id="timerangestart_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timerangestart_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Range<wbr>Start</a>
@@ -1342,8 +2755,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time from which it takes effect.</p>
-</dd><dt class="property-optional"
+    <dd>The time from which it takes effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="webhook_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webhook_csharp" style="color: inherit; text-decoration: inherit;">Web<wbr>Hook</a>
@@ -1351,8 +2763,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1366,8 +2777,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether it is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1375,8 +2785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The channel type, which defaults to amp, supports the following <code>amp</code>, <code>webhook</code>, <code>alertmanager</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The channel type, which defaults to amp, supports the following <code>amp</code>, <code>webhook</code>, <code>alertmanager</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="alertmanager_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alertmanager_go" style="color: inherit; text-decoration: inherit;">Alert<wbr>Manager</a>
@@ -1384,8 +2793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulenotificationalertmanager">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Notification<wbr>Alert<wbr>Manager</a></span>
     </dt>
-    <dd><p>If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-optional"
+    <dd>If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-optional"
             title="Optional">
         <span id="notifyways_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifyways_go" style="color: inherit; text-decoration: inherit;">Notify<wbr>Ways</a>
@@ -1393,8 +2801,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonearrivenotice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonearrivenotice_go" style="color: inherit; text-decoration: inherit;">Phone<wbr>Arrive<wbr>Notice</a>
@@ -1402,8 +2809,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Telephone alerts reach notifications.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alerts reach notifications.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonecircleinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonecircleinterval_go" style="color: inherit; text-decoration: inherit;">Phone<wbr>Circle<wbr>Interval</a>
@@ -1411,8 +2817,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Effective end timeTelephone alarm wheel interval. Units: Seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Effective end timeTelephone alarm wheel interval. Units: Seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonecircletimes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonecircletimes_go" style="color: inherit; text-decoration: inherit;">Phone<wbr>Circle<wbr>Times</a>
@@ -1420,8 +2825,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>PhoneCircleTimes.</p>
-</dd><dt class="property-optional"
+    <dd>PhoneCircleTimes.</dd><dt class="property-optional"
             title="Optional">
         <span id="phoneinnerinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phoneinnerinterval_go" style="color: inherit; text-decoration: inherit;">Phone<wbr>Inner<wbr>Interval</a>
@@ -1429,8 +2833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Telephone alarm wheel intervals. Units: Seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alarm wheel intervals. Units: Seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonenotifyorders_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenotifyorders_go" style="color: inherit; text-decoration: inherit;">Phone<wbr>Notify<wbr>Orders</a>
@@ -1438,8 +2841,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Telephone alarm sequence.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alarm sequence.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivergroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivergroups_go" style="color: inherit; text-decoration: inherit;">Receiver<wbr>Groups</a>
@@ -1447,8 +2849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Alert Receiving Group (User Group).</p>
-</dd><dt class="property-optional"
+    <dd>Alert Receiving Group (User Group).</dd><dt class="property-optional"
             title="Optional">
         <span id="repeatinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeatinterval_go" style="color: inherit; text-decoration: inherit;">Repeat<wbr>Interval</a>
@@ -1456,8 +2857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Convergence time.</p>
-</dd><dt class="property-optional"
+    <dd>Convergence time.</dd><dt class="property-optional"
             title="Optional">
         <span id="timerangeend_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timerangeend_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Range<wbr>End</a>
@@ -1465,8 +2865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Effective end time.</p>
-</dd><dt class="property-optional"
+    <dd>Effective end time.</dd><dt class="property-optional"
             title="Optional">
         <span id="timerangestart_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timerangestart_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Range<wbr>Start</a>
@@ -1474,8 +2873,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time from which it takes effect.</p>
-</dd><dt class="property-optional"
+    <dd>The time from which it takes effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="webhook_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webhook_go" style="color: inherit; text-decoration: inherit;">Web<wbr>Hook</a>
@@ -1483,8 +2881,125 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enabled_hcl" style="color: inherit; text-decoration: inherit;">enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether it is enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The channel type, which defaults to amp, supports the following <code>amp</code>, <code>webhook</code>, <code>alertmanager</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="alert_manager_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alert_manager_hcl" style="color: inherit; text-decoration: inherit;">alert_<wbr>manager</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmptkealertpolicyalertrulenotificationalertmanager">object</a></span>
+    </dt>
+    <dd>If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-optional"
+            title="Optional">
+        <span id="notify_ways_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notify_ways_hcl" style="color: inherit; text-decoration: inherit;">notify_<wbr>ways</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="phone_arrive_notice_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_arrive_notice_hcl" style="color: inherit; text-decoration: inherit;">phone_<wbr>arrive_<wbr>notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Telephone alerts reach notifications.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="phone_circle_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_circle_interval_hcl" style="color: inherit; text-decoration: inherit;">phone_<wbr>circle_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Effective end timeTelephone alarm wheel interval. Units: Seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="phone_circle_times_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_circle_times_hcl" style="color: inherit; text-decoration: inherit;">phone_<wbr>circle_<wbr>times</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>PhoneCircleTimes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="phone_inner_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_inner_interval_hcl" style="color: inherit; text-decoration: inherit;">phone_<wbr>inner_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Telephone alarm wheel intervals. Units: Seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="phone_notify_orders_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_notify_orders_hcl" style="color: inherit; text-decoration: inherit;">phone_<wbr>notify_<wbr>orders</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Telephone alarm sequence.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="receiver_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiver_groups_hcl" style="color: inherit; text-decoration: inherit;">receiver_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Alert Receiving Group (User Group).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="repeat_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeat_interval_hcl" style="color: inherit; text-decoration: inherit;">repeat_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Convergence time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="time_range_end_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_range_end_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>range_<wbr>end</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Effective end time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="time_range_start_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_range_start_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>range_<wbr>start</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time from which it takes effect.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="web_hook_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#web_hook_hcl" style="color: inherit; text-decoration: inherit;">web_<wbr>hook</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1498,8 +3013,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether it is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1507,8 +3021,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The channel type, which defaults to amp, supports the following <code>amp</code>, <code>webhook</code>, <code>alertmanager</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The channel type, which defaults to amp, supports the following <code>amp</code>, <code>webhook</code>, <code>alertmanager</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="alertmanager_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alertmanager_java" style="color: inherit; text-decoration: inherit;">alert<wbr>Manager</a>
@@ -1516,8 +3029,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulenotificationalertmanager">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Notification<wbr>Alert<wbr>Manager</a></span>
     </dt>
-    <dd><p>If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-optional"
+    <dd>If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-optional"
             title="Optional">
         <span id="notifyways_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifyways_java" style="color: inherit; text-decoration: inherit;">notify<wbr>Ways</a>
@@ -1525,8 +3037,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonearrivenotice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonearrivenotice_java" style="color: inherit; text-decoration: inherit;">phone<wbr>Arrive<wbr>Notice</a>
@@ -1534,8 +3045,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Telephone alerts reach notifications.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alerts reach notifications.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonecircleinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonecircleinterval_java" style="color: inherit; text-decoration: inherit;">phone<wbr>Circle<wbr>Interval</a>
@@ -1543,8 +3053,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Effective end timeTelephone alarm wheel interval. Units: Seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Effective end timeTelephone alarm wheel interval. Units: Seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonecircletimes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonecircletimes_java" style="color: inherit; text-decoration: inherit;">phone<wbr>Circle<wbr>Times</a>
@@ -1552,8 +3061,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>PhoneCircleTimes.</p>
-</dd><dt class="property-optional"
+    <dd>PhoneCircleTimes.</dd><dt class="property-optional"
             title="Optional">
         <span id="phoneinnerinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phoneinnerinterval_java" style="color: inherit; text-decoration: inherit;">phone<wbr>Inner<wbr>Interval</a>
@@ -1561,8 +3069,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Telephone alarm wheel intervals. Units: Seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alarm wheel intervals. Units: Seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonenotifyorders_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenotifyorders_java" style="color: inherit; text-decoration: inherit;">phone<wbr>Notify<wbr>Orders</a>
@@ -1570,8 +3077,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Telephone alarm sequence.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alarm sequence.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivergroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivergroups_java" style="color: inherit; text-decoration: inherit;">receiver<wbr>Groups</a>
@@ -1579,8 +3085,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Alert Receiving Group (User Group).</p>
-</dd><dt class="property-optional"
+    <dd>Alert Receiving Group (User Group).</dd><dt class="property-optional"
             title="Optional">
         <span id="repeatinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeatinterval_java" style="color: inherit; text-decoration: inherit;">repeat<wbr>Interval</a>
@@ -1588,8 +3093,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Convergence time.</p>
-</dd><dt class="property-optional"
+    <dd>Convergence time.</dd><dt class="property-optional"
             title="Optional">
         <span id="timerangeend_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timerangeend_java" style="color: inherit; text-decoration: inherit;">time<wbr>Range<wbr>End</a>
@@ -1597,8 +3101,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Effective end time.</p>
-</dd><dt class="property-optional"
+    <dd>Effective end time.</dd><dt class="property-optional"
             title="Optional">
         <span id="timerangestart_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timerangestart_java" style="color: inherit; text-decoration: inherit;">time<wbr>Range<wbr>Start</a>
@@ -1606,8 +3109,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time from which it takes effect.</p>
-</dd><dt class="property-optional"
+    <dd>The time from which it takes effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="webhook_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webhook_java" style="color: inherit; text-decoration: inherit;">web<wbr>Hook</a>
@@ -1615,8 +3117,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1630,8 +3131,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether it is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1639,8 +3139,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The channel type, which defaults to amp, supports the following <code>amp</code>, <code>webhook</code>, <code>alertmanager</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The channel type, which defaults to amp, supports the following <code>amp</code>, <code>webhook</code>, <code>alertmanager</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="alertmanager_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alertmanager_nodejs" style="color: inherit; text-decoration: inherit;">alert<wbr>Manager</a>
@@ -1648,8 +3147,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulenotificationalertmanager">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Notification<wbr>Alert<wbr>Manager</a></span>
     </dt>
-    <dd><p>If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-optional"
+    <dd>If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-optional"
             title="Optional">
         <span id="notifyways_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifyways_nodejs" style="color: inherit; text-decoration: inherit;">notify<wbr>Ways</a>
@@ -1657,8 +3155,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonearrivenotice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonearrivenotice_nodejs" style="color: inherit; text-decoration: inherit;">phone<wbr>Arrive<wbr>Notice</a>
@@ -1666,8 +3163,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Telephone alerts reach notifications.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alerts reach notifications.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonecircleinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonecircleinterval_nodejs" style="color: inherit; text-decoration: inherit;">phone<wbr>Circle<wbr>Interval</a>
@@ -1675,8 +3171,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Effective end timeTelephone alarm wheel interval. Units: Seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Effective end timeTelephone alarm wheel interval. Units: Seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonecircletimes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonecircletimes_nodejs" style="color: inherit; text-decoration: inherit;">phone<wbr>Circle<wbr>Times</a>
@@ -1684,8 +3179,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>PhoneCircleTimes.</p>
-</dd><dt class="property-optional"
+    <dd>PhoneCircleTimes.</dd><dt class="property-optional"
             title="Optional">
         <span id="phoneinnerinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phoneinnerinterval_nodejs" style="color: inherit; text-decoration: inherit;">phone<wbr>Inner<wbr>Interval</a>
@@ -1693,8 +3187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Telephone alarm wheel intervals. Units: Seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alarm wheel intervals. Units: Seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonenotifyorders_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenotifyorders_nodejs" style="color: inherit; text-decoration: inherit;">phone<wbr>Notify<wbr>Orders</a>
@@ -1702,8 +3195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Telephone alarm sequence.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alarm sequence.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivergroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivergroups_nodejs" style="color: inherit; text-decoration: inherit;">receiver<wbr>Groups</a>
@@ -1711,8 +3203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Alert Receiving Group (User Group).</p>
-</dd><dt class="property-optional"
+    <dd>Alert Receiving Group (User Group).</dd><dt class="property-optional"
             title="Optional">
         <span id="repeatinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeatinterval_nodejs" style="color: inherit; text-decoration: inherit;">repeat<wbr>Interval</a>
@@ -1720,8 +3211,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Convergence time.</p>
-</dd><dt class="property-optional"
+    <dd>Convergence time.</dd><dt class="property-optional"
             title="Optional">
         <span id="timerangeend_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timerangeend_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Range<wbr>End</a>
@@ -1729,8 +3219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Effective end time.</p>
-</dd><dt class="property-optional"
+    <dd>Effective end time.</dd><dt class="property-optional"
             title="Optional">
         <span id="timerangestart_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timerangestart_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Range<wbr>Start</a>
@@ -1738,8 +3227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time from which it takes effect.</p>
-</dd><dt class="property-optional"
+    <dd>The time from which it takes effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="webhook_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webhook_nodejs" style="color: inherit; text-decoration: inherit;">web<wbr>Hook</a>
@@ -1747,8 +3235,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1762,8 +3249,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether it is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1771,8 +3257,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The channel type, which defaults to amp, supports the following <code>amp</code>, <code>webhook</code>, <code>alertmanager</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The channel type, which defaults to amp, supports the following <code>amp</code>, <code>webhook</code>, <code>alertmanager</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="alert_manager_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alert_manager_python" style="color: inherit; text-decoration: inherit;">alert_<wbr>manager</a>
@@ -1780,8 +3265,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulenotificationalertmanager">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Notification<wbr>Alert<wbr>Manager</a></span>
     </dt>
-    <dd><p>If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-optional"
+    <dd>If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-optional"
             title="Optional">
         <span id="notify_ways_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notify_ways_python" style="color: inherit; text-decoration: inherit;">notify_<wbr>ways</a>
@@ -1789,8 +3273,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.</dd><dt class="property-optional"
             title="Optional">
         <span id="phone_arrive_notice_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_arrive_notice_python" style="color: inherit; text-decoration: inherit;">phone_<wbr>arrive_<wbr>notice</a>
@@ -1798,8 +3281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Telephone alerts reach notifications.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alerts reach notifications.</dd><dt class="property-optional"
             title="Optional">
         <span id="phone_circle_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_circle_interval_python" style="color: inherit; text-decoration: inherit;">phone_<wbr>circle_<wbr>interval</a>
@@ -1807,8 +3289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Effective end timeTelephone alarm wheel interval. Units: Seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Effective end timeTelephone alarm wheel interval. Units: Seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="phone_circle_times_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_circle_times_python" style="color: inherit; text-decoration: inherit;">phone_<wbr>circle_<wbr>times</a>
@@ -1816,8 +3297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>PhoneCircleTimes.</p>
-</dd><dt class="property-optional"
+    <dd>PhoneCircleTimes.</dd><dt class="property-optional"
             title="Optional">
         <span id="phone_inner_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_inner_interval_python" style="color: inherit; text-decoration: inherit;">phone_<wbr>inner_<wbr>interval</a>
@@ -1825,8 +3305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Telephone alarm wheel intervals. Units: Seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alarm wheel intervals. Units: Seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="phone_notify_orders_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_notify_orders_python" style="color: inherit; text-decoration: inherit;">phone_<wbr>notify_<wbr>orders</a>
@@ -1834,8 +3313,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Telephone alarm sequence.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alarm sequence.</dd><dt class="property-optional"
             title="Optional">
         <span id="receiver_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receiver_groups_python" style="color: inherit; text-decoration: inherit;">receiver_<wbr>groups</a>
@@ -1843,8 +3321,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Alert Receiving Group (User Group).</p>
-</dd><dt class="property-optional"
+    <dd>Alert Receiving Group (User Group).</dd><dt class="property-optional"
             title="Optional">
         <span id="repeat_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeat_interval_python" style="color: inherit; text-decoration: inherit;">repeat_<wbr>interval</a>
@@ -1852,8 +3329,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Convergence time.</p>
-</dd><dt class="property-optional"
+    <dd>Convergence time.</dd><dt class="property-optional"
             title="Optional">
         <span id="time_range_end_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_range_end_python" style="color: inherit; text-decoration: inherit;">time_<wbr>range_<wbr>end</a>
@@ -1861,8 +3337,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Effective end time.</p>
-</dd><dt class="property-optional"
+    <dd>Effective end time.</dd><dt class="property-optional"
             title="Optional">
         <span id="time_range_start_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_range_start_python" style="color: inherit; text-decoration: inherit;">time_<wbr>range_<wbr>start</a>
@@ -1870,8 +3345,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time from which it takes effect.</p>
-</dd><dt class="property-optional"
+    <dd>The time from which it takes effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="web_hook_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#web_hook_python" style="color: inherit; text-decoration: inherit;">web_<wbr>hook</a>
@@ -1879,8 +3353,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1894,8 +3367,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether it is enabled.</p>
-</dd><dt class="property-required"
+    <dd>Whether it is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1903,8 +3375,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The channel type, which defaults to amp, supports the following <code>amp</code>, <code>webhook</code>, <code>alertmanager</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The channel type, which defaults to amp, supports the following <code>amp</code>, <code>webhook</code>, <code>alertmanager</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="alertmanager_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#alertmanager_yaml" style="color: inherit; text-decoration: inherit;">alert<wbr>Manager</a>
@@ -1912,8 +3383,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulenotificationalertmanager">Property Map</a></span>
     </dt>
-    <dd><p>If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..</p>
-</dd><dt class="property-optional"
+    <dd>If Type is alertmanager, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved..</dd><dt class="property-optional"
             title="Optional">
         <span id="notifyways_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifyways_yaml" style="color: inherit; text-decoration: inherit;">notify<wbr>Ways</a>
@@ -1921,8 +3391,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm notification method. At present, there are SMS, EMAIL, CALL, WECHAT methods.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonearrivenotice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonearrivenotice_yaml" style="color: inherit; text-decoration: inherit;">phone<wbr>Arrive<wbr>Notice</a>
@@ -1930,8 +3399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Telephone alerts reach notifications.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alerts reach notifications.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonecircleinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonecircleinterval_yaml" style="color: inherit; text-decoration: inherit;">phone<wbr>Circle<wbr>Interval</a>
@@ -1939,8 +3407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Effective end timeTelephone alarm wheel interval. Units: Seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Effective end timeTelephone alarm wheel interval. Units: Seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonecircletimes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonecircletimes_yaml" style="color: inherit; text-decoration: inherit;">phone<wbr>Circle<wbr>Times</a>
@@ -1948,8 +3415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>PhoneCircleTimes.</p>
-</dd><dt class="property-optional"
+    <dd>PhoneCircleTimes.</dd><dt class="property-optional"
             title="Optional">
         <span id="phoneinnerinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phoneinnerinterval_yaml" style="color: inherit; text-decoration: inherit;">phone<wbr>Inner<wbr>Interval</a>
@@ -1957,8 +3423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Telephone alarm wheel intervals. Units: Seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alarm wheel intervals. Units: Seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonenotifyorders_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenotifyorders_yaml" style="color: inherit; text-decoration: inherit;">phone<wbr>Notify<wbr>Orders</a>
@@ -1966,8 +3431,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Telephone alarm sequence.</p>
-</dd><dt class="property-optional"
+    <dd>Telephone alarm sequence.</dd><dt class="property-optional"
             title="Optional">
         <span id="receivergroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#receivergroups_yaml" style="color: inherit; text-decoration: inherit;">receiver<wbr>Groups</a>
@@ -1975,8 +3439,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Alert Receiving Group (User Group).</p>
-</dd><dt class="property-optional"
+    <dd>Alert Receiving Group (User Group).</dd><dt class="property-optional"
             title="Optional">
         <span id="repeatinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeatinterval_yaml" style="color: inherit; text-decoration: inherit;">repeat<wbr>Interval</a>
@@ -1984,8 +3447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Convergence time.</p>
-</dd><dt class="property-optional"
+    <dd>Convergence time.</dd><dt class="property-optional"
             title="Optional">
         <span id="timerangeend_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timerangeend_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Range<wbr>End</a>
@@ -1993,8 +3455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Effective end time.</p>
-</dd><dt class="property-optional"
+    <dd>Effective end time.</dd><dt class="property-optional"
             title="Optional">
         <span id="timerangestart_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timerangestart_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Range<wbr>Start</a>
@@ -2002,8 +3463,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time from which it takes effect.</p>
-</dd><dt class="property-optional"
+    <dd>The time from which it takes effect.</dd><dt class="property-optional"
             title="Optional">
         <span id="webhook_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#webhook_yaml" style="color: inherit; text-decoration: inherit;">web<wbr>Hook</a>
@@ -2011,12 +3471,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>If Type is webhook, the field is required. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="tmptkealertpolicyalertrulenotificationalertmanager">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Notification<wbr>Alert<wbr>Manager</h4>
+<h4 id="tmptkealertpolicyalertrulenotificationalertmanager">
+Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Notification<wbr>Alert<wbr>Manager<pulumi-choosable type="language" values="python,go" class="inline">, Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Notification<wbr>Alert<wbr>Manager<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2028,8 +3489,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alertmanager url.</p>
-</dd><dt class="property-optional"
+    <dd>Alertmanager url.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -2037,8 +3497,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -2046,8 +3505,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2061,8 +3519,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alertmanager url.</p>
-</dd><dt class="property-optional"
+    <dd>Alertmanager url.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -2070,8 +3527,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Type</a>
@@ -2079,8 +3535,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="url_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#url_hcl" style="color: inherit; text-decoration: inherit;">url</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alertmanager url.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_type_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2094,8 +3579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alertmanager url.</p>
-</dd><dt class="property-optional"
+    <dd>Alertmanager url.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -2103,8 +3587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -2112,8 +3595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2127,8 +3609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alertmanager url.</p>
-</dd><dt class="property-optional"
+    <dd>Alertmanager url.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -2136,8 +3617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -2145,8 +3625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2160,8 +3639,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Alertmanager url.</p>
-</dd><dt class="property-optional"
+    <dd>Alertmanager url.</dd><dt class="property-optional"
             title="Optional">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -2169,8 +3647,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-optional"
             title="Optional">
         <span id="cluster_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_type_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>type</a>
@@ -2178,8 +3655,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2193,8 +3669,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alertmanager url.</p>
-</dd><dt class="property-optional"
+    <dd>Alertmanager url.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -2202,8 +3677,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the cluster where the alertmanager is deployed. Note: This field may return null, indicating that a valid value could not be retrieved.</dd><dt class="property-optional"
             title="Optional">
         <span id="clustertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertype_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Type</a>
@@ -2211,12 +3685,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.</p>
-</dd></dl>
+    <dd>Alertmanager is deployed in the cluster type. Note: This field may return null, indicating that a valid value could not be retrieved.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="tmptkealertpolicyalertrulerule">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule</h4>
+<h4 id="tmptkealertpolicyalertrulerule">
+Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<pulumi-choosable type="language" values="python,go" class="inline">, Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2228,8 +3703,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time of duration.</p>
-</dd><dt class="property-required"
+    <dd>Time of duration.</dd><dt class="property-required"
             title="Required">
         <span id="labels_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_csharp" style="color: inherit; text-decoration: inherit;">Labels</a>
@@ -2237,8 +3711,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulerulelabel">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Label&gt;</a></span>
     </dt>
-    <dd><p>Extra labels.</p>
-</dd><dt class="property-required"
+    <dd>Extra labels.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2246,8 +3719,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-required"
+    <dd>Rule name.</dd><dt class="property-required"
             title="Required">
         <span id="rule_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_csharp" style="color: inherit; text-decoration: inherit;">Rule</a>
@@ -2255,8 +3727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prometheus statement.</p>
-</dd><dt class="property-required"
+    <dd>Prometheus statement.</dd><dt class="property-required"
             title="Required">
         <span id="template_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_csharp" style="color: inherit; text-decoration: inherit;">Template</a>
@@ -2264,8 +3735,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alert sending template.</p>
-</dd><dt class="property-optional"
+    <dd>Alert sending template.</dd><dt class="property-optional"
             title="Optional">
         <span id="annotations_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_csharp" style="color: inherit; text-decoration: inherit;">Annotations</a>
@@ -2273,8 +3743,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertruleruleannotation">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Annotation&gt;</a></span>
     </dt>
-    <dd><p>Refer to annotations in prometheus rule.</p>
-</dd><dt class="property-optional"
+    <dd>Refer to annotations in prometheus rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="describe_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#describe_csharp" style="color: inherit; text-decoration: inherit;">Describe</a>
@@ -2282,8 +3751,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A description of the rule.</p>
-</dd><dt class="property-optional"
+    <dd>A description of the rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="rulestate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulestate_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>State</a>
@@ -2291,8 +3759,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm rule status.</p>
-</dd></dl>
+    <dd>Alarm rule status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2306,8 +3773,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time of duration.</p>
-</dd><dt class="property-required"
+    <dd>Time of duration.</dd><dt class="property-required"
             title="Required">
         <span id="labels_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_go" style="color: inherit; text-decoration: inherit;">Labels</a>
@@ -2315,8 +3781,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulerulelabel">[]Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Label</a></span>
     </dt>
-    <dd><p>Extra labels.</p>
-</dd><dt class="property-required"
+    <dd>Extra labels.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2324,8 +3789,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-required"
+    <dd>Rule name.</dd><dt class="property-required"
             title="Required">
         <span id="rule_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_go" style="color: inherit; text-decoration: inherit;">Rule</a>
@@ -2333,8 +3797,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prometheus statement.</p>
-</dd><dt class="property-required"
+    <dd>Prometheus statement.</dd><dt class="property-required"
             title="Required">
         <span id="template_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_go" style="color: inherit; text-decoration: inherit;">Template</a>
@@ -2342,8 +3805,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alert sending template.</p>
-</dd><dt class="property-optional"
+    <dd>Alert sending template.</dd><dt class="property-optional"
             title="Optional">
         <span id="annotations_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_go" style="color: inherit; text-decoration: inherit;">Annotations</a>
@@ -2351,8 +3813,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertruleruleannotation">[]Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Annotation</a></span>
     </dt>
-    <dd><p>Refer to annotations in prometheus rule.</p>
-</dd><dt class="property-optional"
+    <dd>Refer to annotations in prometheus rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="describe_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#describe_go" style="color: inherit; text-decoration: inherit;">Describe</a>
@@ -2360,8 +3821,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A description of the rule.</p>
-</dd><dt class="property-optional"
+    <dd>A description of the rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="rulestate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulestate_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>State</a>
@@ -2369,8 +3829,77 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm rule status.</p>
-</dd></dl>
+    <dd>Alarm rule status.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="for_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#for_hcl" style="color: inherit; text-decoration: inherit;">for</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Time of duration.</dd><dt class="property-required"
+            title="Required">
+        <span id="labels_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_hcl" style="color: inherit; text-decoration: inherit;">labels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmptkealertpolicyalertrulerulelabel">list(object)</a></span>
+    </dt>
+    <dd>Extra labels.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Rule name.</dd><dt class="property-required"
+            title="Required">
+        <span id="rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_hcl" style="color: inherit; text-decoration: inherit;">rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Prometheus statement.</dd><dt class="property-required"
+            title="Required">
+        <span id="template_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_hcl" style="color: inherit; text-decoration: inherit;">template</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alert sending template.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="annotations_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_hcl" style="color: inherit; text-decoration: inherit;">annotations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tmptkealertpolicyalertruleruleannotation">list(object)</a></span>
+    </dt>
+    <dd>Refer to annotations in prometheus rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="describe_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#describe_hcl" style="color: inherit; text-decoration: inherit;">describe</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>A description of the rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_state_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm rule status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2384,8 +3913,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time of duration.</p>
-</dd><dt class="property-required"
+    <dd>Time of duration.</dd><dt class="property-required"
             title="Required">
         <span id="labels_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_java" style="color: inherit; text-decoration: inherit;">labels</a>
@@ -2393,8 +3921,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulerulelabel">List&lt;Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Label&gt;</a></span>
     </dt>
-    <dd><p>Extra labels.</p>
-</dd><dt class="property-required"
+    <dd>Extra labels.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2402,8 +3929,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-required"
+    <dd>Rule name.</dd><dt class="property-required"
             title="Required">
         <span id="rule_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_java" style="color: inherit; text-decoration: inherit;">rule</a>
@@ -2411,8 +3937,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Prometheus statement.</p>
-</dd><dt class="property-required"
+    <dd>Prometheus statement.</dd><dt class="property-required"
             title="Required">
         <span id="template_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_java" style="color: inherit; text-decoration: inherit;">template</a>
@@ -2420,8 +3945,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alert sending template.</p>
-</dd><dt class="property-optional"
+    <dd>Alert sending template.</dd><dt class="property-optional"
             title="Optional">
         <span id="annotations_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_java" style="color: inherit; text-decoration: inherit;">annotations</a>
@@ -2429,8 +3953,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertruleruleannotation">List&lt;Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Annotation&gt;</a></span>
     </dt>
-    <dd><p>Refer to annotations in prometheus rule.</p>
-</dd><dt class="property-optional"
+    <dd>Refer to annotations in prometheus rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="describe_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#describe_java" style="color: inherit; text-decoration: inherit;">describe</a>
@@ -2438,8 +3961,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A description of the rule.</p>
-</dd><dt class="property-optional"
+    <dd>A description of the rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="rulestate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulestate_java" style="color: inherit; text-decoration: inherit;">rule<wbr>State</a>
@@ -2447,8 +3969,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm rule status.</p>
-</dd></dl>
+    <dd>Alarm rule status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2462,8 +3983,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Time of duration.</p>
-</dd><dt class="property-required"
+    <dd>Time of duration.</dd><dt class="property-required"
             title="Required">
         <span id="labels_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_nodejs" style="color: inherit; text-decoration: inherit;">labels</a>
@@ -2471,8 +3991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulerulelabel">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Label[]</a></span>
     </dt>
-    <dd><p>Extra labels.</p>
-</dd><dt class="property-required"
+    <dd>Extra labels.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2480,8 +3999,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-required"
+    <dd>Rule name.</dd><dt class="property-required"
             title="Required">
         <span id="rule_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_nodejs" style="color: inherit; text-decoration: inherit;">rule</a>
@@ -2489,8 +4007,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prometheus statement.</p>
-</dd><dt class="property-required"
+    <dd>Prometheus statement.</dd><dt class="property-required"
             title="Required">
         <span id="template_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_nodejs" style="color: inherit; text-decoration: inherit;">template</a>
@@ -2498,8 +4015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alert sending template.</p>
-</dd><dt class="property-optional"
+    <dd>Alert sending template.</dd><dt class="property-optional"
             title="Optional">
         <span id="annotations_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_nodejs" style="color: inherit; text-decoration: inherit;">annotations</a>
@@ -2507,8 +4023,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertruleruleannotation">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Annotation[]</a></span>
     </dt>
-    <dd><p>Refer to annotations in prometheus rule.</p>
-</dd><dt class="property-optional"
+    <dd>Refer to annotations in prometheus rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="describe_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#describe_nodejs" style="color: inherit; text-decoration: inherit;">describe</a>
@@ -2516,8 +4031,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>A description of the rule.</p>
-</dd><dt class="property-optional"
+    <dd>A description of the rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="rulestate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulestate_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>State</a>
@@ -2525,8 +4039,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm rule status.</p>
-</dd></dl>
+    <dd>Alarm rule status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2540,17 +4053,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Time of duration.</p>
-</dd><dt class="property-required"
+    <dd>Time of duration.</dd><dt class="property-required"
             title="Required">
         <span id="labels_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_python" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkealertpolicyalertrulerulelabel">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Label]</a></span>
+        <span class="property-type"><a href="#tmptkealertpolicyalertrulerulelabel">Sequence[Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Label]</a></span>
     </dt>
-    <dd><p>Extra labels.</p>
-</dd><dt class="property-required"
+    <dd>Extra labels.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2558,8 +4069,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-required"
+    <dd>Rule name.</dd><dt class="property-required"
             title="Required">
         <span id="rule_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_python" style="color: inherit; text-decoration: inherit;">rule</a>
@@ -2567,8 +4077,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Prometheus statement.</p>
-</dd><dt class="property-required"
+    <dd>Prometheus statement.</dd><dt class="property-required"
             title="Required">
         <span id="template_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_python" style="color: inherit; text-decoration: inherit;">template</a>
@@ -2576,17 +4085,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Alert sending template.</p>
-</dd><dt class="property-optional"
+    <dd>Alert sending template.</dd><dt class="property-optional"
             title="Optional">
         <span id="annotations_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_python" style="color: inherit; text-decoration: inherit;">annotations</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tmptkealertpolicyalertruleruleannotation">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Annotation]</a></span>
+        <span class="property-type"><a href="#tmptkealertpolicyalertruleruleannotation">Sequence[Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Annotation]</a></span>
     </dt>
-    <dd><p>Refer to annotations in prometheus rule.</p>
-</dd><dt class="property-optional"
+    <dd>Refer to annotations in prometheus rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="describe_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#describe_python" style="color: inherit; text-decoration: inherit;">describe</a>
@@ -2594,8 +4101,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>A description of the rule.</p>
-</dd><dt class="property-optional"
+    <dd>A description of the rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="rule_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_state_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>state</a>
@@ -2603,8 +4109,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm rule status.</p>
-</dd></dl>
+    <dd>Alarm rule status.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2618,8 +4123,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Time of duration.</p>
-</dd><dt class="property-required"
+    <dd>Time of duration.</dd><dt class="property-required"
             title="Required">
         <span id="labels_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_yaml" style="color: inherit; text-decoration: inherit;">labels</a>
@@ -2627,8 +4131,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertrulerulelabel">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Extra labels.</p>
-</dd><dt class="property-required"
+    <dd>Extra labels.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2636,8 +4139,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Rule name.</p>
-</dd><dt class="property-required"
+    <dd>Rule name.</dd><dt class="property-required"
             title="Required">
         <span id="rule_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_yaml" style="color: inherit; text-decoration: inherit;">rule</a>
@@ -2645,8 +4147,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Prometheus statement.</p>
-</dd><dt class="property-required"
+    <dd>Prometheus statement.</dd><dt class="property-required"
             title="Required">
         <span id="template_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#template_yaml" style="color: inherit; text-decoration: inherit;">template</a>
@@ -2654,8 +4155,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alert sending template.</p>
-</dd><dt class="property-optional"
+    <dd>Alert sending template.</dd><dt class="property-optional"
             title="Optional">
         <span id="annotations_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#annotations_yaml" style="color: inherit; text-decoration: inherit;">annotations</a>
@@ -2663,8 +4163,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tmptkealertpolicyalertruleruleannotation">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Refer to annotations in prometheus rule.</p>
-</dd><dt class="property-optional"
+    <dd>Refer to annotations in prometheus rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="describe_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#describe_yaml" style="color: inherit; text-decoration: inherit;">describe</a>
@@ -2672,8 +4171,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>A description of the rule.</p>
-</dd><dt class="property-optional"
+    <dd>A description of the rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="rulestate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rulestate_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>State</a>
@@ -2681,12 +4179,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm rule status.</p>
-</dd></dl>
+    <dd>Alarm rule status.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="tmptkealertpolicyalertruleruleannotation">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Annotation</h4>
+<h4 id="tmptkealertpolicyalertruleruleannotation">
+Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Annotation<pulumi-choosable type="language" values="python,go" class="inline">, Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Annotation<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2698,8 +4197,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of map.</p>
-</dd><dt class="property-required"
+    <dd>Name of map.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2707,8 +4205,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of map.</p>
-</dd></dl>
+    <dd>Value of map.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2722,8 +4219,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of map.</p>
-</dd><dt class="property-required"
+    <dd>Name of map.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2731,8 +4227,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of map.</p>
-</dd></dl>
+    <dd>Value of map.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of map.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value of map.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2746,8 +4263,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of map.</p>
-</dd><dt class="property-required"
+    <dd>Name of map.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2755,8 +4271,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of map.</p>
-</dd></dl>
+    <dd>Value of map.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2770,8 +4285,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of map.</p>
-</dd><dt class="property-required"
+    <dd>Name of map.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2779,8 +4293,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of map.</p>
-</dd></dl>
+    <dd>Value of map.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2794,8 +4307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of map.</p>
-</dd><dt class="property-required"
+    <dd>Name of map.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2803,8 +4315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Value of map.</p>
-</dd></dl>
+    <dd>Value of map.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2818,8 +4329,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of map.</p>
-</dd><dt class="property-required"
+    <dd>Name of map.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2827,12 +4337,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of map.</p>
-</dd></dl>
+    <dd>Value of map.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="tmptkealertpolicyalertrulerulelabel">Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Label</h4>
+<h4 id="tmptkealertpolicyalertrulerulelabel">
+Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Label<pulumi-choosable type="language" values="python,go" class="inline">, Tmp<wbr>Tke<wbr>Alert<wbr>Policy<wbr>Alert<wbr>Rule<wbr>Rule<wbr>Label<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -2844,8 +4355,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of map.</p>
-</dd><dt class="property-required"
+    <dd>Name of map.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2853,8 +4363,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of map.</p>
-</dd></dl>
+    <dd>Value of map.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2868,8 +4377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of map.</p>
-</dd><dt class="property-required"
+    <dd>Name of map.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2877,8 +4385,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of map.</p>
-</dd></dl>
+    <dd>Value of map.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of map.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value of map.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2892,8 +4421,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of map.</p>
-</dd><dt class="property-required"
+    <dd>Name of map.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2901,8 +4429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of map.</p>
-</dd></dl>
+    <dd>Value of map.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2916,8 +4443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of map.</p>
-</dd><dt class="property-required"
+    <dd>Name of map.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2925,8 +4451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value of map.</p>
-</dd></dl>
+    <dd>Value of map.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2940,8 +4465,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of map.</p>
-</dd><dt class="property-required"
+    <dd>Name of map.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2949,8 +4473,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Value of map.</p>
-</dd></dl>
+    <dd>Value of map.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2964,8 +4487,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of map.</p>
-</dd><dt class="property-required"
+    <dd>Name of map.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2973,8 +4495,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value of map.</p>
-</dd></dl>
+    <dd>Value of map.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2986,7 +4507,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

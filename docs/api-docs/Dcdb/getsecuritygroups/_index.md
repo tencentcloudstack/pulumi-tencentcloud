@@ -2,9 +2,11 @@
 ---
 title: "getSecurityGroups"
 title_tag: "tencentcloud.Dcdb.getSecurityGroups"
-meta_desc: "Documentation for the tencentcloud.Dcdb.getSecurityGroups function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of dcdb securityGroups"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query detailed information of dcdb securityGroups
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const securityGroups = tencentcloud.Dcdb.getSecurityGroups({
+const securityGroups = tencentcloud.dcdb.getSecurityGroups({
     instanceId: "your_instance_id",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-security_groups = tencentcloud.Dcdb.get_security_groups(instance_id="your_instance_id")
+security_groups = tencentcloud.dcdb.get_security_groups(instance_id="your_instance_id")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dcdb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dcdb.GetSecurityGroups(ctx, &dcdb.GetSecurityGroupsArgs{
+			InstanceId: "your_instance_id",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dcdb.GetSecurityGroups(ctx, &dcdb.GetSecurityGroupsArgs{
-			InstanceId: "your_instance_id",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dcdb.DcdbFunctions;
 import com.pulumi.tencentcloud.Dcdb.inputs.GetSecurityGroupsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   securityGroups:
     fn::invoke:
-      Function: tencentcloud:Dcdb:getSecurityGroups
-      Arguments:
+      function: tencentcloud:Dcdb:getSecurityGroups
+      arguments:
         instanceId: your_instance_id
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dcdb_getsecuritygroups" "securityGroups" {
+  instance_id = "your_instance_id"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/1042/39459)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getSecurityGroups<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecurityGroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSecurityGroupsResult</a></span>></span
+><span class="k">function </span>getSecurityGroups<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecurityGroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetSecurityGroupsResult</a></span>></span
 ><span class="k">
-function </span>getSecurityGroupsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecurityGroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSecurityGroupsResult</a></span>></span
+function </span>getSecurityGroupsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetSecurityGroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetSecurityGroupsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -138,9 +195,9 @@ function </span>getSecurityGroupsOutput<span class="p">(</span><span class="nx">
                         <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetSecurityGroupsResult</span
 ><span class="k">
-def </span>get_security_groups_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSecurityGroupsResult]</span
+def </span>get_security_groups_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetSecurityGroupsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,7 +222,8 @@ func </span>GetSecurityGroupsOutput<span class="p">(</span><span class="nx">ctx<
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetSecurityGroups </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetSecurityGroupsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetSecurityGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetSecurityGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSecurityGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSecurityGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSecurityGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetSecurityGroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetSecurityGroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,7 +232,8 @@ func </span>GetSecurityGroupsOutput<span class="p">(</span><span class="nx">ctx<
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetSecurityGroupsResult</a></span>> </span>getSecurityGroups<span class="p">(</span><span class="nx">GetSecurityGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSecurityGroupsResult</a></span>> </span>getSecurityGroups<span class="p">(</span><span class="nx">GetSecurityGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetSecurityGroupsResult</a></span>> </span>getSecurityGroups<span class="p">(</span><span class="nx">GetSecurityGroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,6 +245,15 @@ func </span>GetSecurityGroupsOutput<span class="p">(</span><span class="nx">ctx<
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dcdb/getSecurityGroups:getSecurityGroups
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dcdb_get_security_groups&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -204,8 +272,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -213,8 +280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +294,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -237,8 +302,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -261,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -276,8 +360,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -285,8 +368,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -309,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +404,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>instance id.</p>
-</dd><dt class="property-optional"
+    <dd>instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -333,8 +412,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -374,8 +451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecuritygroupslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dcdb.<wbr>Outputs.<wbr>Get<wbr>Security<wbr>Groups<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>security group list.</p>
-</dd><dt class="property-"
+    <dd>security group list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -397,8 +473,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -414,11 +489,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecuritygroupslist">[]Get<wbr>Security<wbr>Groups<wbr>List</a></span>
     </dt>
-    <dd><p>security group list.</p>
-</dd><dt class="property-"
+    <dd>security group list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsecuritygroupslist">list(object)</a></span>
+    </dt>
+    <dd>security group list.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -437,8 +549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -454,8 +565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecuritygroupslist">List&lt;Get<wbr>Security<wbr>Groups<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>security group list.</p>
-</dd><dt class="property-"
+    <dd>security group list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -477,8 +587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -494,8 +603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecuritygroupslist">Get<wbr>Security<wbr>Groups<wbr>List[]</a></span>
     </dt>
-    <dd><p>security group list.</p>
-</dd><dt class="property-"
+    <dd>security group list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -517,8 +625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -532,10 +639,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsecuritygroupslist">Get<wbr>Security<wbr>Groups<wbr>List]</a></span>
+        <span class="property-type"><a href="#getsecuritygroupslist">Sequence[Get<wbr>Security<wbr>Groups<wbr>List]</a></span>
     </dt>
-    <dd><p>security group list.</p>
-</dd><dt class="property-"
+    <dd>security group list.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -557,8 +663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -574,8 +679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecuritygroupslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>security group list.</p>
-</dd><dt class="property-"
+    <dd>security group list.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -607,8 +711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="inbounds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inbounds_csharp" style="color: inherit; text-decoration: inherit;">Inbounds</a>
@@ -616,8 +719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecuritygroupslistinbound">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dcdb.<wbr>Inputs.<wbr>Get<wbr>Security<wbr>Groups<wbr>List<wbr>Inbound&gt;</a></span>
     </dt>
-    <dd><p>inbound rules.</p>
-</dd><dt class="property-required"
+    <dd>inbound rules.</dd><dt class="property-required"
             title="Required">
         <span id="outbounds_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outbounds_csharp" style="color: inherit; text-decoration: inherit;">Outbounds</a>
@@ -625,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecuritygroupslistoutbound">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dcdb.<wbr>Inputs.<wbr>Get<wbr>Security<wbr>Groups<wbr>List<wbr>Outbound&gt;</a></span>
     </dt>
-    <dd><p>outbound rules.</p>
-</dd><dt class="property-required"
+    <dd>outbound rules.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -634,8 +735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>project id.</p>
-</dd><dt class="property-required"
+    <dd>project id.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Id</a>
@@ -643,8 +743,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>security group id.</p>
-</dd><dt class="property-required"
+    <dd>security group id.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupname_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Name</a>
@@ -652,8 +751,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>security group name.</p>
-</dd></dl>
+    <dd>security group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -667,8 +765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="inbounds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inbounds_go" style="color: inherit; text-decoration: inherit;">Inbounds</a>
@@ -676,8 +773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecuritygroupslistinbound">[]Get<wbr>Security<wbr>Groups<wbr>List<wbr>Inbound</a></span>
     </dt>
-    <dd><p>inbound rules.</p>
-</dd><dt class="property-required"
+    <dd>inbound rules.</dd><dt class="property-required"
             title="Required">
         <span id="outbounds_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outbounds_go" style="color: inherit; text-decoration: inherit;">Outbounds</a>
@@ -685,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecuritygroupslistoutbound">[]Get<wbr>Security<wbr>Groups<wbr>List<wbr>Outbound</a></span>
     </dt>
-    <dd><p>outbound rules.</p>
-</dd><dt class="property-required"
+    <dd>outbound rules.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -694,8 +789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>project id.</p>
-</dd><dt class="property-required"
+    <dd>project id.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Id</a>
@@ -703,8 +797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>security group id.</p>
-</dd><dt class="property-required"
+    <dd>security group id.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupname_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Name</a>
@@ -712,8 +805,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>security group name.</p>
-</dd></dl>
+    <dd>security group name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="inbounds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inbounds_hcl" style="color: inherit; text-decoration: inherit;">inbounds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsecuritygroupslistinbound">list(object)</a></span>
+    </dt>
+    <dd>inbound rules.</dd><dt class="property-required"
+            title="Required">
+        <span id="outbounds_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outbounds_hcl" style="color: inherit; text-decoration: inherit;">outbounds</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getsecuritygroupslistoutbound">list(object)</a></span>
+    </dt>
+    <dd>outbound rules.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>project id.</dd><dt class="property-required"
+            title="Required">
+        <span id="security_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_id_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>security group id.</dd><dt class="property-required"
+            title="Required">
+        <span id="security_group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_name_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>security group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -727,8 +873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="inbounds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inbounds_java" style="color: inherit; text-decoration: inherit;">inbounds</a>
@@ -736,8 +881,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecuritygroupslistinbound">List&lt;Get<wbr>Security<wbr>Groups<wbr>List<wbr>Inbound&gt;</a></span>
     </dt>
-    <dd><p>inbound rules.</p>
-</dd><dt class="property-required"
+    <dd>inbound rules.</dd><dt class="property-required"
             title="Required">
         <span id="outbounds_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outbounds_java" style="color: inherit; text-decoration: inherit;">outbounds</a>
@@ -745,8 +889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecuritygroupslistoutbound">List&lt;Get<wbr>Security<wbr>Groups<wbr>List<wbr>Outbound&gt;</a></span>
     </dt>
-    <dd><p>outbound rules.</p>
-</dd><dt class="property-required"
+    <dd>outbound rules.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -754,8 +897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>project id.</p>
-</dd><dt class="property-required"
+    <dd>project id.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Id</a>
@@ -763,8 +905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>security group id.</p>
-</dd><dt class="property-required"
+    <dd>security group id.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupname_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Name</a>
@@ -772,8 +913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>security group name.</p>
-</dd></dl>
+    <dd>security group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -787,8 +927,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="inbounds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inbounds_nodejs" style="color: inherit; text-decoration: inherit;">inbounds</a>
@@ -796,8 +935,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecuritygroupslistinbound">Get<wbr>Security<wbr>Groups<wbr>List<wbr>Inbound[]</a></span>
     </dt>
-    <dd><p>inbound rules.</p>
-</dd><dt class="property-required"
+    <dd>inbound rules.</dd><dt class="property-required"
             title="Required">
         <span id="outbounds_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outbounds_nodejs" style="color: inherit; text-decoration: inherit;">outbounds</a>
@@ -805,8 +943,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecuritygroupslistoutbound">Get<wbr>Security<wbr>Groups<wbr>List<wbr>Outbound[]</a></span>
     </dt>
-    <dd><p>outbound rules.</p>
-</dd><dt class="property-required"
+    <dd>outbound rules.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -814,8 +951,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>project id.</p>
-</dd><dt class="property-required"
+    <dd>project id.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Id</a>
@@ -823,8 +959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>security group id.</p>
-</dd><dt class="property-required"
+    <dd>security group id.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupname_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Name</a>
@@ -832,8 +967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>security group name.</p>
-</dd></dl>
+    <dd>security group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -847,26 +981,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="inbounds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inbounds_python" style="color: inherit; text-decoration: inherit;">inbounds</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsecuritygroupslistinbound">Get<wbr>Security<wbr>Groups<wbr>List<wbr>Inbound]</a></span>
+        <span class="property-type"><a href="#getsecuritygroupslistinbound">Sequence[Get<wbr>Security<wbr>Groups<wbr>List<wbr>Inbound]</a></span>
     </dt>
-    <dd><p>inbound rules.</p>
-</dd><dt class="property-required"
+    <dd>inbound rules.</dd><dt class="property-required"
             title="Required">
         <span id="outbounds_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outbounds_python" style="color: inherit; text-decoration: inherit;">outbounds</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getsecuritygroupslistoutbound">Get<wbr>Security<wbr>Groups<wbr>List<wbr>Outbound]</a></span>
+        <span class="property-type"><a href="#getsecuritygroupslistoutbound">Sequence[Get<wbr>Security<wbr>Groups<wbr>List<wbr>Outbound]</a></span>
     </dt>
-    <dd><p>outbound rules.</p>
-</dd><dt class="property-required"
+    <dd>outbound rules.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -874,8 +1005,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>project id.</p>
-</dd><dt class="property-required"
+    <dd>project id.</dd><dt class="property-required"
             title="Required">
         <span id="security_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_id_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>id</a>
@@ -883,8 +1013,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>security group id.</p>
-</dd><dt class="property-required"
+    <dd>security group id.</dd><dt class="property-required"
             title="Required">
         <span id="security_group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_name_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>name</a>
@@ -892,8 +1021,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>security group name.</p>
-</dd></dl>
+    <dd>security group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -907,8 +1035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>create time.</p>
-</dd><dt class="property-required"
+    <dd>create time.</dd><dt class="property-required"
             title="Required">
         <span id="inbounds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inbounds_yaml" style="color: inherit; text-decoration: inherit;">inbounds</a>
@@ -916,8 +1043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecuritygroupslistinbound">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>inbound rules.</p>
-</dd><dt class="property-required"
+    <dd>inbound rules.</dd><dt class="property-required"
             title="Required">
         <span id="outbounds_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#outbounds_yaml" style="color: inherit; text-decoration: inherit;">outbounds</a>
@@ -925,8 +1051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getsecuritygroupslistoutbound">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>outbound rules.</p>
-</dd><dt class="property-required"
+    <dd>outbound rules.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -934,8 +1059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>project id.</p>
-</dd><dt class="property-required"
+    <dd>project id.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Id</a>
@@ -943,8 +1067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>security group id.</p>
-</dd><dt class="property-required"
+    <dd>security group id.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupname_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Name</a>
@@ -952,8 +1075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>security group name.</p>
-</dd></dl>
+    <dd>security group name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -971,8 +1093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>policy action.</p>
-</dd><dt class="property-required"
+    <dd>policy action.</dd><dt class="property-required"
             title="Required">
         <span id="cidrip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_csharp" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Ip</a>
@@ -980,8 +1101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cidr ip.</p>
-</dd><dt class="property-required"
+    <dd>cidr ip.</dd><dt class="property-required"
             title="Required">
         <span id="ipprotocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipprotocol_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Protocol</a>
@@ -989,8 +1109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>internet protocol.</p>
-</dd><dt class="property-required"
+    <dd>internet protocol.</dd><dt class="property-required"
             title="Required">
         <span id="portrange_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portrange_csharp" style="color: inherit; text-decoration: inherit;">Port<wbr>Range</a>
@@ -998,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>port range.</p>
-</dd></dl>
+    <dd>port range.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1013,8 +1131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>policy action.</p>
-</dd><dt class="property-required"
+    <dd>policy action.</dd><dt class="property-required"
             title="Required">
         <span id="cidrip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_go" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Ip</a>
@@ -1022,8 +1139,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cidr ip.</p>
-</dd><dt class="property-required"
+    <dd>cidr ip.</dd><dt class="property-required"
             title="Required">
         <span id="ipprotocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipprotocol_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Protocol</a>
@@ -1031,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>internet protocol.</p>
-</dd><dt class="property-required"
+    <dd>internet protocol.</dd><dt class="property-required"
             title="Required">
         <span id="portrange_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portrange_go" style="color: inherit; text-decoration: inherit;">Port<wbr>Range</a>
@@ -1040,8 +1155,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>port range.</p>
-</dd></dl>
+    <dd>port range.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>policy action.</dd><dt class="property-required"
+            title="Required">
+        <span id="cidr_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_ip_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cidr ip.</dd><dt class="property-required"
+            title="Required">
+        <span id="ip_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_protocol_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>internet protocol.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_range_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_range_hcl" style="color: inherit; text-decoration: inherit;">port_<wbr>range</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>port range.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1055,8 +1207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>policy action.</p>
-</dd><dt class="property-required"
+    <dd>policy action.</dd><dt class="property-required"
             title="Required">
         <span id="cidrip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_java" style="color: inherit; text-decoration: inherit;">cidr<wbr>Ip</a>
@@ -1064,8 +1215,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cidr ip.</p>
-</dd><dt class="property-required"
+    <dd>cidr ip.</dd><dt class="property-required"
             title="Required">
         <span id="ipprotocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipprotocol_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Protocol</a>
@@ -1073,8 +1223,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>internet protocol.</p>
-</dd><dt class="property-required"
+    <dd>internet protocol.</dd><dt class="property-required"
             title="Required">
         <span id="portrange_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portrange_java" style="color: inherit; text-decoration: inherit;">port<wbr>Range</a>
@@ -1082,8 +1231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>port range.</p>
-</dd></dl>
+    <dd>port range.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1097,8 +1245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>policy action.</p>
-</dd><dt class="property-required"
+    <dd>policy action.</dd><dt class="property-required"
             title="Required">
         <span id="cidrip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_nodejs" style="color: inherit; text-decoration: inherit;">cidr<wbr>Ip</a>
@@ -1106,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cidr ip.</p>
-</dd><dt class="property-required"
+    <dd>cidr ip.</dd><dt class="property-required"
             title="Required">
         <span id="ipprotocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipprotocol_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Protocol</a>
@@ -1115,8 +1261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>internet protocol.</p>
-</dd><dt class="property-required"
+    <dd>internet protocol.</dd><dt class="property-required"
             title="Required">
         <span id="portrange_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portrange_nodejs" style="color: inherit; text-decoration: inherit;">port<wbr>Range</a>
@@ -1124,8 +1269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>port range.</p>
-</dd></dl>
+    <dd>port range.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1139,8 +1283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>policy action.</p>
-</dd><dt class="property-required"
+    <dd>policy action.</dd><dt class="property-required"
             title="Required">
         <span id="cidr_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_ip_python" style="color: inherit; text-decoration: inherit;">cidr_<wbr>ip</a>
@@ -1148,8 +1291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cidr ip.</p>
-</dd><dt class="property-required"
+    <dd>cidr ip.</dd><dt class="property-required"
             title="Required">
         <span id="ip_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_protocol_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>protocol</a>
@@ -1157,8 +1299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>internet protocol.</p>
-</dd><dt class="property-required"
+    <dd>internet protocol.</dd><dt class="property-required"
             title="Required">
         <span id="port_range_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_range_python" style="color: inherit; text-decoration: inherit;">port_<wbr>range</a>
@@ -1166,8 +1307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>port range.</p>
-</dd></dl>
+    <dd>port range.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1181,8 +1321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>policy action.</p>
-</dd><dt class="property-required"
+    <dd>policy action.</dd><dt class="property-required"
             title="Required">
         <span id="cidrip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_yaml" style="color: inherit; text-decoration: inherit;">cidr<wbr>Ip</a>
@@ -1190,8 +1329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cidr ip.</p>
-</dd><dt class="property-required"
+    <dd>cidr ip.</dd><dt class="property-required"
             title="Required">
         <span id="ipprotocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipprotocol_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Protocol</a>
@@ -1199,8 +1337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>internet protocol.</p>
-</dd><dt class="property-required"
+    <dd>internet protocol.</dd><dt class="property-required"
             title="Required">
         <span id="portrange_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portrange_yaml" style="color: inherit; text-decoration: inherit;">port<wbr>Range</a>
@@ -1208,8 +1345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>port range.</p>
-</dd></dl>
+    <dd>port range.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1227,8 +1363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>policy action.</p>
-</dd><dt class="property-required"
+    <dd>policy action.</dd><dt class="property-required"
             title="Required">
         <span id="cidrip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_csharp" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Ip</a>
@@ -1236,8 +1371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cidr ip.</p>
-</dd><dt class="property-required"
+    <dd>cidr ip.</dd><dt class="property-required"
             title="Required">
         <span id="ipprotocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipprotocol_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Protocol</a>
@@ -1245,8 +1379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>internet protocol.</p>
-</dd><dt class="property-required"
+    <dd>internet protocol.</dd><dt class="property-required"
             title="Required">
         <span id="portrange_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portrange_csharp" style="color: inherit; text-decoration: inherit;">Port<wbr>Range</a>
@@ -1254,8 +1387,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>port range.</p>
-</dd></dl>
+    <dd>port range.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1269,8 +1401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>policy action.</p>
-</dd><dt class="property-required"
+    <dd>policy action.</dd><dt class="property-required"
             title="Required">
         <span id="cidrip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_go" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Ip</a>
@@ -1278,8 +1409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cidr ip.</p>
-</dd><dt class="property-required"
+    <dd>cidr ip.</dd><dt class="property-required"
             title="Required">
         <span id="ipprotocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipprotocol_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Protocol</a>
@@ -1287,8 +1417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>internet protocol.</p>
-</dd><dt class="property-required"
+    <dd>internet protocol.</dd><dt class="property-required"
             title="Required">
         <span id="portrange_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portrange_go" style="color: inherit; text-decoration: inherit;">Port<wbr>Range</a>
@@ -1296,8 +1425,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>port range.</p>
-</dd></dl>
+    <dd>port range.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>policy action.</dd><dt class="property-required"
+            title="Required">
+        <span id="cidr_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_ip_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>cidr ip.</dd><dt class="property-required"
+            title="Required">
+        <span id="ip_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_protocol_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>internet protocol.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_range_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_range_hcl" style="color: inherit; text-decoration: inherit;">port_<wbr>range</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>port range.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1311,8 +1477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>policy action.</p>
-</dd><dt class="property-required"
+    <dd>policy action.</dd><dt class="property-required"
             title="Required">
         <span id="cidrip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_java" style="color: inherit; text-decoration: inherit;">cidr<wbr>Ip</a>
@@ -1320,8 +1485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cidr ip.</p>
-</dd><dt class="property-required"
+    <dd>cidr ip.</dd><dt class="property-required"
             title="Required">
         <span id="ipprotocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipprotocol_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Protocol</a>
@@ -1329,8 +1493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>internet protocol.</p>
-</dd><dt class="property-required"
+    <dd>internet protocol.</dd><dt class="property-required"
             title="Required">
         <span id="portrange_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portrange_java" style="color: inherit; text-decoration: inherit;">port<wbr>Range</a>
@@ -1338,8 +1501,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>port range.</p>
-</dd></dl>
+    <dd>port range.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1353,8 +1515,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>policy action.</p>
-</dd><dt class="property-required"
+    <dd>policy action.</dd><dt class="property-required"
             title="Required">
         <span id="cidrip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_nodejs" style="color: inherit; text-decoration: inherit;">cidr<wbr>Ip</a>
@@ -1362,8 +1523,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>cidr ip.</p>
-</dd><dt class="property-required"
+    <dd>cidr ip.</dd><dt class="property-required"
             title="Required">
         <span id="ipprotocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipprotocol_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Protocol</a>
@@ -1371,8 +1531,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>internet protocol.</p>
-</dd><dt class="property-required"
+    <dd>internet protocol.</dd><dt class="property-required"
             title="Required">
         <span id="portrange_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portrange_nodejs" style="color: inherit; text-decoration: inherit;">port<wbr>Range</a>
@@ -1380,8 +1539,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>port range.</p>
-</dd></dl>
+    <dd>port range.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1395,8 +1553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>policy action.</p>
-</dd><dt class="property-required"
+    <dd>policy action.</dd><dt class="property-required"
             title="Required">
         <span id="cidr_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_ip_python" style="color: inherit; text-decoration: inherit;">cidr_<wbr>ip</a>
@@ -1404,8 +1561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>cidr ip.</p>
-</dd><dt class="property-required"
+    <dd>cidr ip.</dd><dt class="property-required"
             title="Required">
         <span id="ip_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_protocol_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>protocol</a>
@@ -1413,8 +1569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>internet protocol.</p>
-</dd><dt class="property-required"
+    <dd>internet protocol.</dd><dt class="property-required"
             title="Required">
         <span id="port_range_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_range_python" style="color: inherit; text-decoration: inherit;">port_<wbr>range</a>
@@ -1422,8 +1577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>port range.</p>
-</dd></dl>
+    <dd>port range.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1437,8 +1591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>policy action.</p>
-</dd><dt class="property-required"
+    <dd>policy action.</dd><dt class="property-required"
             title="Required">
         <span id="cidrip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrip_yaml" style="color: inherit; text-decoration: inherit;">cidr<wbr>Ip</a>
@@ -1446,8 +1599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>cidr ip.</p>
-</dd><dt class="property-required"
+    <dd>cidr ip.</dd><dt class="property-required"
             title="Required">
         <span id="ipprotocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipprotocol_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Protocol</a>
@@ -1455,8 +1607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>internet protocol.</p>
-</dd><dt class="property-required"
+    <dd>internet protocol.</dd><dt class="property-required"
             title="Required">
         <span id="portrange_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portrange_yaml" style="color: inherit; text-decoration: inherit;">port<wbr>Range</a>
@@ -1464,8 +1615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>port range.</p>
-</dd></dl>
+    <dd>port range.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1480,7 +1630,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

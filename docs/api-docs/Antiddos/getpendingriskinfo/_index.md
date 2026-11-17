@@ -2,9 +2,11 @@
 ---
 title: "getPendingRiskInfo"
 title_tag: "tencentcloud.Antiddos.getPendingRiskInfo"
-meta_desc: "Documentation for the tencentcloud.Antiddos.getPendingRiskInfo function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of antiddos pending risk info"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,42 +18,45 @@ Use this data source to query detailed information of antiddos pending risk info
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const pendingRiskInfo = tencentcloud.Antiddos.getPendingRiskInfo({});
+const pendingRiskInfo = tencentcloud.antiddos.getPendingRiskInfo({});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-pending_risk_info = tencentcloud.Antiddos.get_pending_risk_info()
+pending_risk_info = tencentcloud.antiddos.get_pending_risk_info()
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var pendingRiskInfo = Tencentcloud.Antiddos.GetPendingRiskInfo.Invoke();
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/antiddos"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Antiddos.GetPendingRiskInfo(ctx, nil, nil)
+		_, err := antiddos.GetPendingRiskInfo(ctx, &antiddos.GetPendingRiskInfoArgs{}, nil)
 		if err != nil {
 			return err
 		}
@@ -59,6 +64,28 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var pendingRiskInfo = Tencentcloud.Antiddos.GetPendingRiskInfo.Invoke();
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -67,8 +94,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Antiddos.AntiddosFunctions;
 import com.pulumi.tencentcloud.Antiddos.inputs.GetPendingRiskInfoArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -80,20 +107,50 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var pendingRiskInfo = AntiddosFunctions.getPendingRiskInfo();
+        final var pendingRiskInfo = AntiddosFunctions.getPendingRiskInfo(GetPendingRiskInfoArgs.builder()
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   pendingRiskInfo:
     fn::invoke:
-      Function: tencentcloud:Antiddos:getPendingRiskInfo
-      Arguments: {}
+      function: tencentcloud:Antiddos:getPendingRiskInfo
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_antiddos_getpendingriskinfo" "pendingRiskInfo" {
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribePendingRiskInfo](https://www.tencentcloud.com/document/api/1213/61337)
 
 
 
@@ -105,7 +162,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -113,9 +170,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getPendingRiskInfo<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPendingRiskInfoArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPendingRiskInfoResult</a></span>></span
+><span class="k">function </span>getPendingRiskInfo<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPendingRiskInfoArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetPendingRiskInfoResult</a></span>></span
 ><span class="k">
-function </span>getPendingRiskInfoOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPendingRiskInfoOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPendingRiskInfoResult</a></span>></span
+function </span>getPendingRiskInfoOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetPendingRiskInfoOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetPendingRiskInfoResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -127,8 +184,8 @@ function </span>getPendingRiskInfoOutput<span class="p">(</span><span class="nx"
 ><span class="k">def </span>get_pending_risk_info<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetPendingRiskInfoResult</span
 ><span class="k">
-def </span>get_pending_risk_info_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPendingRiskInfoResult]</span
+def </span>get_pending_risk_info_output<span class="p">(</span><span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetPendingRiskInfoResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -153,7 +210,8 @@ func </span>GetPendingRiskInfoOutput<span class="p">(</span><span class="nx">ctx
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetPendingRiskInfo </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetPendingRiskInfoResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetPendingRiskInfoArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetPendingRiskInfoResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPendingRiskInfoInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPendingRiskInfoResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPendingRiskInfoInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetPendingRiskInfoResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetPendingRiskInfoInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -162,7 +220,8 @@ func </span>GetPendingRiskInfoOutput<span class="p">(</span><span class="nx">ctx
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetPendingRiskInfoResult</a></span>> </span>getPendingRiskInfo<span class="p">(</span><span class="nx">GetPendingRiskInfoArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPendingRiskInfoResult</a></span>> </span>getPendingRiskInfo<span class="p">(</span><span class="nx">GetPendingRiskInfoArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetPendingRiskInfoResult</a></span>> </span>getPendingRiskInfo<span class="p">(</span><span class="nx">GetPendingRiskInfoArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,6 +233,15 @@ func </span>GetPendingRiskInfoOutput<span class="p">(</span><span class="nx">ctx
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Antiddos/getPendingRiskInfo:getPendingRiskInfo
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_antiddos_get_pending_risk_info&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -192,8 +260,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -207,8 +274,21 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -222,8 +302,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -237,8 +316,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -267,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -291,8 +367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of resources in the attack.</p>
-</dd><dt class="property-"
+    <dd>Number of resources in the attack.</dd><dt class="property-"
             title="">
         <span id="blockingcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blockingcount_csharp" style="color: inherit; text-decoration: inherit;">Blocking<wbr>Count</a>
@@ -300,8 +375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of resources in blockage.</p>
-</dd><dt class="property-"
+    <dd>Number of resources in blockage.</dd><dt class="property-"
             title="">
         <span id="expiredcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredcount_csharp" style="color: inherit; text-decoration: inherit;">Expired<wbr>Count</a>
@@ -309,8 +383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of expired resources.</p>
-</dd><dt class="property-"
+    <dd>Number of expired resources.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -318,8 +391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ispaidusr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispaidusr_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Paid<wbr>Usr</a>
@@ -327,8 +399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is it a paid user? True: paid user, false: regular user.</p>
-</dd><dt class="property-"
+    <dd>Is it a paid user? True: paid user, false: regular user.</dd><dt class="property-"
             title="">
         <span id="total_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_csharp" style="color: inherit; text-decoration: inherit;">Total</a>
@@ -336,8 +407,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of all pending risk events.</p>
-</dd><dt class="property-"
+    <dd>Total number of all pending risk events.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -359,8 +429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of resources in the attack.</p>
-</dd><dt class="property-"
+    <dd>Number of resources in the attack.</dd><dt class="property-"
             title="">
         <span id="blockingcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blockingcount_go" style="color: inherit; text-decoration: inherit;">Blocking<wbr>Count</a>
@@ -368,8 +437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of resources in blockage.</p>
-</dd><dt class="property-"
+    <dd>Number of resources in blockage.</dd><dt class="property-"
             title="">
         <span id="expiredcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredcount_go" style="color: inherit; text-decoration: inherit;">Expired<wbr>Count</a>
@@ -377,8 +445,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of expired resources.</p>
-</dd><dt class="property-"
+    <dd>Number of expired resources.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -386,8 +453,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ispaidusr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispaidusr_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Paid<wbr>Usr</a>
@@ -395,8 +461,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is it a paid user? True: paid user, false: regular user.</p>
-</dd><dt class="property-"
+    <dd>Is it a paid user? True: paid user, false: regular user.</dd><dt class="property-"
             title="">
         <span id="total_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_go" style="color: inherit; text-decoration: inherit;">Total</a>
@@ -404,11 +469,72 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of all pending risk events.</p>
-</dd><dt class="property-"
+    <dd>Total number of all pending risk events.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="attacking_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attacking_count_hcl" style="color: inherit; text-decoration: inherit;">attacking_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of resources in the attack.</dd><dt class="property-"
+            title="">
+        <span id="blocking_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blocking_count_hcl" style="color: inherit; text-decoration: inherit;">blocking_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of resources in blockage.</dd><dt class="property-"
+            title="">
+        <span id="expired_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_count_hcl" style="color: inherit; text-decoration: inherit;">expired_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of expired resources.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="is_paid_usr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_paid_usr_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>paid_<wbr>usr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Is it a paid user? True: paid user, false: regular user.</dd><dt class="property-"
+            title="">
+        <span id="total_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_hcl" style="color: inherit; text-decoration: inherit;">total</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total number of all pending risk events.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -427,8 +553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of resources in the attack.</p>
-</dd><dt class="property-"
+    <dd>Number of resources in the attack.</dd><dt class="property-"
             title="">
         <span id="blockingcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blockingcount_java" style="color: inherit; text-decoration: inherit;">blocking<wbr>Count</a>
@@ -436,8 +561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of resources in blockage.</p>
-</dd><dt class="property-"
+    <dd>Number of resources in blockage.</dd><dt class="property-"
             title="">
         <span id="expiredcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredcount_java" style="color: inherit; text-decoration: inherit;">expired<wbr>Count</a>
@@ -445,8 +569,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of expired resources.</p>
-</dd><dt class="property-"
+    <dd>Number of expired resources.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -454,8 +577,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ispaidusr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispaidusr_java" style="color: inherit; text-decoration: inherit;">is<wbr>Paid<wbr>Usr</a>
@@ -463,8 +585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Is it a paid user? True: paid user, false: regular user.</p>
-</dd><dt class="property-"
+    <dd>Is it a paid user? True: paid user, false: regular user.</dd><dt class="property-"
             title="">
         <span id="total_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_java" style="color: inherit; text-decoration: inherit;">total</a>
@@ -472,8 +593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total number of all pending risk events.</p>
-</dd><dt class="property-"
+    <dd>Total number of all pending risk events.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -495,8 +615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of resources in the attack.</p>
-</dd><dt class="property-"
+    <dd>Number of resources in the attack.</dd><dt class="property-"
             title="">
         <span id="blockingcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blockingcount_nodejs" style="color: inherit; text-decoration: inherit;">blocking<wbr>Count</a>
@@ -504,8 +623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of resources in blockage.</p>
-</dd><dt class="property-"
+    <dd>Number of resources in blockage.</dd><dt class="property-"
             title="">
         <span id="expiredcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredcount_nodejs" style="color: inherit; text-decoration: inherit;">expired<wbr>Count</a>
@@ -513,8 +631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of expired resources.</p>
-</dd><dt class="property-"
+    <dd>Number of expired resources.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -522,8 +639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ispaidusr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispaidusr_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Paid<wbr>Usr</a>
@@ -531,8 +647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Is it a paid user? True: paid user, false: regular user.</p>
-</dd><dt class="property-"
+    <dd>Is it a paid user? True: paid user, false: regular user.</dd><dt class="property-"
             title="">
         <span id="total_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_nodejs" style="color: inherit; text-decoration: inherit;">total</a>
@@ -540,8 +655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total number of all pending risk events.</p>
-</dd><dt class="property-"
+    <dd>Total number of all pending risk events.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -563,8 +677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of resources in the attack.</p>
-</dd><dt class="property-"
+    <dd>Number of resources in the attack.</dd><dt class="property-"
             title="">
         <span id="blocking_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blocking_count_python" style="color: inherit; text-decoration: inherit;">blocking_<wbr>count</a>
@@ -572,8 +685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of resources in blockage.</p>
-</dd><dt class="property-"
+    <dd>Number of resources in blockage.</dd><dt class="property-"
             title="">
         <span id="expired_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expired_count_python" style="color: inherit; text-decoration: inherit;">expired_<wbr>count</a>
@@ -581,8 +693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of expired resources.</p>
-</dd><dt class="property-"
+    <dd>Number of expired resources.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -590,8 +701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="is_paid_usr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_paid_usr_python" style="color: inherit; text-decoration: inherit;">is_<wbr>paid_<wbr>usr</a>
@@ -599,8 +709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Is it a paid user? True: paid user, false: regular user.</p>
-</dd><dt class="property-"
+    <dd>Is it a paid user? True: paid user, false: regular user.</dd><dt class="property-"
             title="">
         <span id="total_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_python" style="color: inherit; text-decoration: inherit;">total</a>
@@ -608,8 +717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total number of all pending risk events.</p>
-</dd><dt class="property-"
+    <dd>Total number of all pending risk events.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -631,8 +739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of resources in the attack.</p>
-</dd><dt class="property-"
+    <dd>Number of resources in the attack.</dd><dt class="property-"
             title="">
         <span id="blockingcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blockingcount_yaml" style="color: inherit; text-decoration: inherit;">blocking<wbr>Count</a>
@@ -640,8 +747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of resources in blockage.</p>
-</dd><dt class="property-"
+    <dd>Number of resources in blockage.</dd><dt class="property-"
             title="">
         <span id="expiredcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiredcount_yaml" style="color: inherit; text-decoration: inherit;">expired<wbr>Count</a>
@@ -649,8 +755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of expired resources.</p>
-</dd><dt class="property-"
+    <dd>Number of expired resources.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -658,8 +763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="ispaidusr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispaidusr_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Paid<wbr>Usr</a>
@@ -667,8 +771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Is it a paid user? True: paid user, false: regular user.</p>
-</dd><dt class="property-"
+    <dd>Is it a paid user? True: paid user, false: regular user.</dd><dt class="property-"
             title="">
         <span id="total_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_yaml" style="color: inherit; text-decoration: inherit;">total</a>
@@ -676,8 +779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total number of all pending risk events.</p>
-</dd><dt class="property-"
+    <dd>Total number of all pending risk events.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -700,7 +802,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

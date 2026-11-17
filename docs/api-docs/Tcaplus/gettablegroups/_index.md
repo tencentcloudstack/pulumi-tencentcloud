@@ -2,9 +2,11 @@
 ---
 title: "getTablegroups"
 title_tag: "tencentcloud.Tcaplus.getTablegroups"
-meta_desc: "Documentation for the tencentcloud.Tcaplus.getTablegroups function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query table groups of the TcaplusDB cluster."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -25,7 +27,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -33,9 +35,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getTablegroups<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTablegroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetTablegroupsResult</a></span>></span
+><span class="k">function </span>getTablegroups<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTablegroupsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetTablegroupsResult</a></span>></span
 ><span class="k">
-function </span>getTablegroupsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTablegroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetTablegroupsResult</a></span>></span
+function </span>getTablegroupsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTablegroupsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetTablegroupsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -50,11 +52,11 @@ function </span>getTablegroupsOutput<span class="p">(</span><span class="nx">arg
                     <span class="nx">tablegroup_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetTablegroupsResult</span
 ><span class="k">
-def </span>get_tablegroups_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">tablegroup_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">tablegroup_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetTablegroupsResult]</span
+def </span>get_tablegroups_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">tablegroup_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">tablegroup_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetTablegroupsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -79,7 +81,8 @@ func </span>GetTablegroupsOutput<span class="p">(</span><span class="nx">ctx</sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetTablegroups </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetTablegroupsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetTablegroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetTablegroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTablegroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetTablegroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTablegroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetTablegroupsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTablegroupsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -88,7 +91,8 @@ func </span>GetTablegroupsOutput<span class="p">(</span><span class="nx">ctx</sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetTablegroupsResult</a></span>> </span>getTablegroups<span class="p">(</span><span class="nx">GetTablegroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetTablegroupsResult</a></span>> </span>getTablegroups<span class="p">(</span><span class="nx">GetTablegroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetTablegroupsResult</a></span>> </span>getTablegroups<span class="p">(</span><span class="nx">GetTablegroupsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -100,6 +104,15 @@ func </span>GetTablegroupsOutput<span class="p">(</span><span class="nx">ctx</sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tcaplus/getTablegroups:getTablegroups
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tcaplus_get_tablegroups&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -118,8 +131,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the TcaplusDB cluster to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the TcaplusDB cluster to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -127,8 +139,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File for saving results.</p>
-</dd><dt class="property-optional"
+    <dd>File for saving results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_csharp" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -136,8 +147,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the table group to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the table group to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_csharp" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Name</a>
@@ -145,8 +155,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the table group to be query.</p>
-</dd></dl>
+    <dd>Name of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -160,8 +169,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the TcaplusDB cluster to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the TcaplusDB cluster to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -169,8 +177,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File for saving results.</p>
-</dd><dt class="property-optional"
+    <dd>File for saving results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_go" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -178,8 +185,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the table group to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the table group to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_go" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Name</a>
@@ -187,8 +193,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the table group to be query.</p>
-</dd></dl>
+    <dd>Name of the table group to be query.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the TcaplusDB cluster to be query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>File for saving results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tablegroup_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_id_hcl" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the table group to be query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tablegroup_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_name_hcl" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -202,8 +245,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the TcaplusDB cluster to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the TcaplusDB cluster to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -211,8 +253,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File for saving results.</p>
-</dd><dt class="property-optional"
+    <dd>File for saving results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_java" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -220,8 +261,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the table group to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the table group to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_java" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Name</a>
@@ -229,8 +269,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the table group to be query.</p>
-</dd></dl>
+    <dd>Name of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -244,8 +283,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the TcaplusDB cluster to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the TcaplusDB cluster to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -253,8 +291,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>File for saving results.</p>
-</dd><dt class="property-optional"
+    <dd>File for saving results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_nodejs" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -262,8 +299,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the table group to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the table group to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_nodejs" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Name</a>
@@ -271,8 +307,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the table group to be query.</p>
-</dd></dl>
+    <dd>Name of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -286,8 +321,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the TcaplusDB cluster to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the TcaplusDB cluster to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -295,8 +329,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>File for saving results.</p>
-</dd><dt class="property-optional"
+    <dd>File for saving results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroup_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_id_python" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
@@ -304,8 +337,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the table group to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the table group to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroup_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_name_python" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>name</a>
@@ -313,8 +345,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the table group to be query.</p>
-</dd></dl>
+    <dd>Name of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -328,8 +359,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the TcaplusDB cluster to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the TcaplusDB cluster to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -337,8 +367,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>File for saving results.</p>
-</dd><dt class="property-optional"
+    <dd>File for saving results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_yaml" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -346,8 +375,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the table group to be query.</p>
-</dd><dt class="property-optional"
+    <dd>Id of the table group to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="tablegroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_yaml" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Name</a>
@@ -355,8 +383,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the table group to be query.</p>
-</dd></dl>
+    <dd>Name of the table group to be query.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -387,8 +414,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -396,8 +422,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettablegroupslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tcaplus.<wbr>Outputs.<wbr>Get<wbr>Tablegroups<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of table group. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>A list of table group. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -413,8 +438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the table group.</p>
-</dd><dt class="property-"
+    <dd>Id of the table group.</dd><dt class="property-"
             title="">
         <span id="tablegroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_csharp" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Name</a>
@@ -422,8 +446,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the table group.</p>
-</dd></dl>
+    <dd>Name of the table group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -445,8 +468,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -454,8 +476,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettablegroupslist">[]Get<wbr>Tablegroups<wbr>List</a></span>
     </dt>
-    <dd><p>A list of table group. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>A list of table group. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -471,8 +492,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the table group.</p>
-</dd><dt class="property-"
+    <dd>Id of the table group.</dd><dt class="property-"
             title="">
         <span id="tablegroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_go" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Name</a>
@@ -480,8 +500,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the table group.</p>
-</dd></dl>
+    <dd>Name of the table group.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettablegroupslist">list(object)</a></span>
+    </dt>
+    <dd>A list of table group. Each element contains the following attributes.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tablegroup_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_id_hcl" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the table group.</dd><dt class="property-"
+            title="">
+        <span id="tablegroup_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_name_hcl" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the table group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -503,8 +576,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -512,8 +584,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettablegroupslist">List&lt;Get<wbr>Tablegroups<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of table group. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>A list of table group. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -529,8 +600,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the table group.</p>
-</dd><dt class="property-"
+    <dd>Id of the table group.</dd><dt class="property-"
             title="">
         <span id="tablegroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_java" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Name</a>
@@ -538,8 +608,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the table group.</p>
-</dd></dl>
+    <dd>Name of the table group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -561,8 +630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -570,8 +638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettablegroupslist">Get<wbr>Tablegroups<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of table group. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>A list of table group. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -587,8 +654,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the table group.</p>
-</dd><dt class="property-"
+    <dd>Id of the table group.</dd><dt class="property-"
             title="">
         <span id="tablegroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_nodejs" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Name</a>
@@ -596,8 +662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the table group.</p>
-</dd></dl>
+    <dd>Name of the table group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -619,17 +684,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gettablegroupslist">Get<wbr>Tablegroups<wbr>List]</a></span>
+        <span class="property-type"><a href="#gettablegroupslist">Sequence[Get<wbr>Tablegroups<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of table group. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>A list of table group. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -645,8 +708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the table group.</p>
-</dd><dt class="property-"
+    <dd>Id of the table group.</dd><dt class="property-"
             title="">
         <span id="tablegroup_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_name_python" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>name</a>
@@ -654,8 +716,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the table group.</p>
-</dd></dl>
+    <dd>Name of the table group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -677,8 +738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -686,8 +746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gettablegroupslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of table group. Each element contains the following attributes.</p>
-</dd><dt class="property-"
+    <dd>A list of table group. Each element contains the following attributes.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -703,8 +762,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the table group.</p>
-</dd><dt class="property-"
+    <dd>Id of the table group.</dd><dt class="property-"
             title="">
         <span id="tablegroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_yaml" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Name</a>
@@ -712,8 +770,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the table group.</p>
-</dd></dl>
+    <dd>Name of the table group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -737,8 +794,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the table group..</p>
-</dd><dt class="property-required"
+    <dd>Create time of the table group..</dd><dt class="property-required"
             title="Required">
         <span id="tablecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablecount_csharp" style="color: inherit; text-decoration: inherit;">Table<wbr>Count</a>
@@ -746,8 +802,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-required"
+    <dd>Number of tables.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_csharp" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -755,8 +810,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the table group to be query.</p>
-</dd><dt class="property-required"
+    <dd>Id of the table group to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_csharp" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Name</a>
@@ -764,8 +818,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the table group to be query.</p>
-</dd><dt class="property-required"
+    <dd>Name of the table group to be query.</dd><dt class="property-required"
             title="Required">
         <span id="totalsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalsize_csharp" style="color: inherit; text-decoration: inherit;">Total<wbr>Size</a>
@@ -773,8 +826,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -788,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the table group..</p>
-</dd><dt class="property-required"
+    <dd>Create time of the table group..</dd><dt class="property-required"
             title="Required">
         <span id="tablecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablecount_go" style="color: inherit; text-decoration: inherit;">Table<wbr>Count</a>
@@ -797,8 +848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-required"
+    <dd>Number of tables.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_go" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Id</a>
@@ -806,8 +856,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the table group to be query.</p>
-</dd><dt class="property-required"
+    <dd>Id of the table group to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_go" style="color: inherit; text-decoration: inherit;">Tablegroup<wbr>Name</a>
@@ -815,8 +864,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the table group to be query.</p>
-</dd><dt class="property-required"
+    <dd>Name of the table group to be query.</dd><dt class="property-required"
             title="Required">
         <span id="totalsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalsize_go" style="color: inherit; text-decoration: inherit;">Total<wbr>Size</a>
@@ -824,8 +872,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the table group..</dd><dt class="property-required"
+            title="Required">
+        <span id="table_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_count_hcl" style="color: inherit; text-decoration: inherit;">table_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of tables.</dd><dt class="property-required"
+            title="Required">
+        <span id="tablegroup_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_id_hcl" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the table group to be query.</dd><dt class="property-required"
+            title="Required">
+        <span id="tablegroup_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_name_hcl" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the table group to be query.</dd><dt class="property-required"
+            title="Required">
+        <span id="total_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_size_hcl" style="color: inherit; text-decoration: inherit;">total_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -839,8 +932,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the table group..</p>
-</dd><dt class="property-required"
+    <dd>Create time of the table group..</dd><dt class="property-required"
             title="Required">
         <span id="tablecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablecount_java" style="color: inherit; text-decoration: inherit;">table<wbr>Count</a>
@@ -848,8 +940,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-required"
+    <dd>Number of tables.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_java" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -857,8 +948,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the table group to be query.</p>
-</dd><dt class="property-required"
+    <dd>Id of the table group to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_java" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Name</a>
@@ -866,8 +956,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the table group to be query.</p>
-</dd><dt class="property-required"
+    <dd>Name of the table group to be query.</dd><dt class="property-required"
             title="Required">
         <span id="totalsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalsize_java" style="color: inherit; text-decoration: inherit;">total<wbr>Size</a>
@@ -875,8 +964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -890,8 +978,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the table group..</p>
-</dd><dt class="property-required"
+    <dd>Create time of the table group..</dd><dt class="property-required"
             title="Required">
         <span id="tablecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablecount_nodejs" style="color: inherit; text-decoration: inherit;">table<wbr>Count</a>
@@ -899,8 +986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-required"
+    <dd>Number of tables.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_nodejs" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -908,8 +994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the table group to be query.</p>
-</dd><dt class="property-required"
+    <dd>Id of the table group to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_nodejs" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Name</a>
@@ -917,8 +1002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the table group to be query.</p>
-</dd><dt class="property-required"
+    <dd>Name of the table group to be query.</dd><dt class="property-required"
             title="Required">
         <span id="totalsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalsize_nodejs" style="color: inherit; text-decoration: inherit;">total<wbr>Size</a>
@@ -926,8 +1010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -941,8 +1024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the table group..</p>
-</dd><dt class="property-required"
+    <dd>Create time of the table group..</dd><dt class="property-required"
             title="Required">
         <span id="table_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#table_count_python" style="color: inherit; text-decoration: inherit;">table_<wbr>count</a>
@@ -950,8 +1032,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-required"
+    <dd>Number of tables.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroup_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_id_python" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>id</a>
@@ -959,8 +1040,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the table group to be query.</p>
-</dd><dt class="property-required"
+    <dd>Id of the table group to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroup_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroup_name_python" style="color: inherit; text-decoration: inherit;">tablegroup_<wbr>name</a>
@@ -968,8 +1048,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the table group to be query.</p>
-</dd><dt class="property-required"
+    <dd>Name of the table group to be query.</dd><dt class="property-required"
             title="Required">
         <span id="total_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#total_size_python" style="color: inherit; text-decoration: inherit;">total_<wbr>size</a>
@@ -977,8 +1056,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -992,8 +1070,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the table group..</p>
-</dd><dt class="property-required"
+    <dd>Create time of the table group..</dd><dt class="property-required"
             title="Required">
         <span id="tablecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablecount_yaml" style="color: inherit; text-decoration: inherit;">table<wbr>Count</a>
@@ -1001,8 +1078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of tables.</p>
-</dd><dt class="property-required"
+    <dd>Number of tables.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupid_yaml" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Id</a>
@@ -1010,8 +1086,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the table group to be query.</p>
-</dd><dt class="property-required"
+    <dd>Id of the table group to be query.</dd><dt class="property-required"
             title="Required">
         <span id="tablegroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tablegroupname_yaml" style="color: inherit; text-decoration: inherit;">tablegroup<wbr>Name</a>
@@ -1019,8 +1094,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the table group to be query.</p>
-</dd><dt class="property-required"
+    <dd>Name of the table group to be query.</dd><dt class="property-required"
             title="Required">
         <span id="totalsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#totalsize_yaml" style="color: inherit; text-decoration: inherit;">total<wbr>Size</a>
@@ -1028,8 +1102,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Total storage size (MB).</p>
-</dd></dl>
+    <dd>Total storage size (MB).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1044,7 +1117,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "Resource"
 title_tag: "tencentcloud.Dasb.Resource"
-meta_desc: "Documentation for the tencentcloud.Dasb.Resource resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a dasb resource"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -18,44 +20,95 @@ Provides a resource to create a dasb resource
 
 ### Create a standard version instance
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.dasb.Resource("example", {
-    autoRenewFlag: 1,
-    cidrBlock: "10.35.20.0/24",
     deployRegion: "ap-guangzhou",
     deployZone: "ap-guangzhou-6",
-    packageBandwidth: 1,
+    vpcId: "vpc-fmz6l9nz",
+    subnetId: "subnet-g7jhwhi2",
+    vpcCidrBlock: "10.35.0.0/16",
+    cidrBlock: "10.35.20.0/24",
     resourceEdition: "standard",
     resourceNode: 50,
-    subnetId: "subnet-g7jhwhi2",
-    timeSpan: 1,
     timeUnit: "m",
-    vpcCidrBlock: "10.35.0.0/16",
-    vpcId: "vpc-fmz6l9nz",
+    timeSpan: 1,
+    autoRenewFlag: 1,
+    packageBandwidth: 1,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.dasb.Resource("example",
-    auto_renew_flag=1,
-    cidr_block="10.35.20.0/24",
     deploy_region="ap-guangzhou",
     deploy_zone="ap-guangzhou-6",
-    package_bandwidth=1,
+    vpc_id="vpc-fmz6l9nz",
+    subnet_id="subnet-g7jhwhi2",
+    vpc_cidr_block="10.35.0.0/16",
+    cidr_block="10.35.20.0/24",
     resource_edition="standard",
     resource_node=50,
-    subnet_id="subnet-g7jhwhi2",
-    time_span=1,
     time_unit="m",
-    vpc_cidr_block="10.35.0.0/16",
-    vpc_id="vpc-fmz6l9nz")
+    time_span=1,
+    auto_renew_flag=1,
+    package_bandwidth=1)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dasb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dasb.NewResource(ctx, "example", &dasb.ResourceArgs{
+			DeployRegion:     pulumi.String("ap-guangzhou"),
+			DeployZone:       pulumi.String("ap-guangzhou-6"),
+			VpcId:            pulumi.String("vpc-fmz6l9nz"),
+			SubnetId:         pulumi.String("subnet-g7jhwhi2"),
+			VpcCidrBlock:     pulumi.String("10.35.0.0/16"),
+			CidrBlock:        pulumi.String("10.35.20.0/24"),
+			ResourceEdition:  pulumi.String("standard"),
+			ResourceNode:     pulumi.Int(50),
+			TimeUnit:         pulumi.String("m"),
+			TimeSpan:         pulumi.Int(1),
+			AutoRenewFlag:    pulumi.Int(1),
+			PackageBandwidth: pulumi.Int(1),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -66,53 +119,27 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Dasb.Resource("example", new()
     {
-        AutoRenewFlag = 1,
-        CidrBlock = "10.35.20.0/24",
         DeployRegion = "ap-guangzhou",
         DeployZone = "ap-guangzhou-6",
-        PackageBandwidth = 1,
+        VpcId = "vpc-fmz6l9nz",
+        SubnetId = "subnet-g7jhwhi2",
+        VpcCidrBlock = "10.35.0.0/16",
+        CidrBlock = "10.35.20.0/24",
         ResourceEdition = "standard",
         ResourceNode = 50,
-        SubnetId = "subnet-g7jhwhi2",
-        TimeSpan = 1,
         TimeUnit = "m",
-        VpcCidrBlock = "10.35.0.0/16",
-        VpcId = "vpc-fmz6l9nz",
+        TimeSpan = 1,
+        AutoRenewFlag = 1,
+        PackageBandwidth = 1,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dasb.NewResource(ctx, "example", &Dasb.ResourceArgs{
-			AutoRenewFlag:    pulumi.Int(1),
-			CidrBlock:        pulumi.String("10.35.20.0/24"),
-			DeployRegion:     pulumi.String("ap-guangzhou"),
-			DeployZone:       pulumi.String("ap-guangzhou-6"),
-			PackageBandwidth: pulumi.Int(1),
-			ResourceEdition:  pulumi.String("standard"),
-			ResourceNode:     pulumi.Int(50),
-			SubnetId:         pulumi.String("subnet-g7jhwhi2"),
-			TimeSpan:         pulumi.Int(1),
-			TimeUnit:         pulumi.String("m"),
-			VpcCidrBlock:     pulumi.String("10.35.0.0/16"),
-			VpcId:            pulumi.String("vpc-fmz6l9nz"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -121,8 +148,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dasb.Resource;
 import com.pulumi.tencentcloud.Dasb.ResourceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -134,84 +161,171 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Resource("example", ResourceArgs.builder()        
-            .autoRenewFlag(1)
-            .cidrBlock("10.35.20.0/24")
+        var example = new Resource("example", ResourceArgs.builder()
             .deployRegion("ap-guangzhou")
             .deployZone("ap-guangzhou-6")
-            .packageBandwidth(1)
+            .vpcId("vpc-fmz6l9nz")
+            .subnetId("subnet-g7jhwhi2")
+            .vpcCidrBlock("10.35.0.0/16")
+            .cidrBlock("10.35.20.0/24")
             .resourceEdition("standard")
             .resourceNode(50)
-            .subnetId("subnet-g7jhwhi2")
-            .timeSpan(1)
             .timeUnit("m")
-            .vpcCidrBlock("10.35.0.0/16")
-            .vpcId("vpc-fmz6l9nz")
+            .timeSpan(1)
+            .autoRenewFlag(1)
+            .packageBandwidth(1)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Dasb:Resource
     properties:
-      autoRenewFlag: 1
-      cidrBlock: 10.35.20.0/24
       deployRegion: ap-guangzhou
       deployZone: ap-guangzhou-6
-      packageBandwidth: 1
+      vpcId: vpc-fmz6l9nz
+      subnetId: subnet-g7jhwhi2
+      vpcCidrBlock: 10.35.0.0/16
+      cidrBlock: 10.35.20.0/24
       resourceEdition: standard
       resourceNode: 50
-      subnetId: subnet-g7jhwhi2
-      timeSpan: 1
       timeUnit: m
-      vpcCidrBlock: 10.35.0.0/16
-      vpcId: vpc-fmz6l9nz
+      timeSpan: 1
+      autoRenewFlag: 1
+      packageBandwidth: 1
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_dasb_resource" "example" {
+  deploy_region     = "ap-guangzhou"
+  deploy_zone       = "ap-guangzhou-6"
+  vpc_id            = "vpc-fmz6l9nz"
+  subnet_id         = "subnet-g7jhwhi2"
+  vpc_cidr_block    = "10.35.0.0/16"
+  cidr_block        = "10.35.20.0/24"
+  resource_edition  = "standard"
+  resource_node     = 50
+  time_unit         = "m"
+  time_span         = 1
+  auto_renew_flag   = 1
+  package_bandwidth = 1
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Create a professional instance
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.dasb.Resource("example", {
-    autoRenewFlag: 1,
-    cidrBlock: "10.35.20.0/24",
     deployRegion: "ap-guangzhou",
     deployZone: "ap-guangzhou-6",
-    packageBandwidth: 1,
+    vpcId: "vpc-fmz6l9nz",
+    subnetId: "subnet-g7jhwhi2",
+    vpcCidrBlock: "10.35.0.0/16",
+    cidrBlock: "10.35.20.0/24",
     resourceEdition: "pro",
     resourceNode: 50,
-    subnetId: "subnet-g7jhwhi2",
-    timeSpan: 1,
     timeUnit: "m",
-    vpcCidrBlock: "10.35.0.0/16",
-    vpcId: "vpc-fmz6l9nz",
+    timeSpan: 1,
+    autoRenewFlag: 1,
+    packageBandwidth: 1,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.dasb.Resource("example",
-    auto_renew_flag=1,
-    cidr_block="10.35.20.0/24",
     deploy_region="ap-guangzhou",
     deploy_zone="ap-guangzhou-6",
-    package_bandwidth=1,
+    vpc_id="vpc-fmz6l9nz",
+    subnet_id="subnet-g7jhwhi2",
+    vpc_cidr_block="10.35.0.0/16",
+    cidr_block="10.35.20.0/24",
     resource_edition="pro",
     resource_node=50,
-    subnet_id="subnet-g7jhwhi2",
-    time_span=1,
     time_unit="m",
-    vpc_cidr_block="10.35.0.0/16",
-    vpc_id="vpc-fmz6l9nz")
+    time_span=1,
+    auto_renew_flag=1,
+    package_bandwidth=1)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dasb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := dasb.NewResource(ctx, "example", &dasb.ResourceArgs{
+			DeployRegion:     pulumi.String("ap-guangzhou"),
+			DeployZone:       pulumi.String("ap-guangzhou-6"),
+			VpcId:            pulumi.String("vpc-fmz6l9nz"),
+			SubnetId:         pulumi.String("subnet-g7jhwhi2"),
+			VpcCidrBlock:     pulumi.String("10.35.0.0/16"),
+			CidrBlock:        pulumi.String("10.35.20.0/24"),
+			ResourceEdition:  pulumi.String("pro"),
+			ResourceNode:     pulumi.Int(50),
+			TimeUnit:         pulumi.String("m"),
+			TimeSpan:         pulumi.Int(1),
+			AutoRenewFlag:    pulumi.Int(1),
+			PackageBandwidth: pulumi.Int(1),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -222,53 +336,27 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Dasb.Resource("example", new()
     {
-        AutoRenewFlag = 1,
-        CidrBlock = "10.35.20.0/24",
         DeployRegion = "ap-guangzhou",
         DeployZone = "ap-guangzhou-6",
-        PackageBandwidth = 1,
+        VpcId = "vpc-fmz6l9nz",
+        SubnetId = "subnet-g7jhwhi2",
+        VpcCidrBlock = "10.35.0.0/16",
+        CidrBlock = "10.35.20.0/24",
         ResourceEdition = "pro",
         ResourceNode = 50,
-        SubnetId = "subnet-g7jhwhi2",
-        TimeSpan = 1,
         TimeUnit = "m",
-        VpcCidrBlock = "10.35.0.0/16",
-        VpcId = "vpc-fmz6l9nz",
+        TimeSpan = 1,
+        AutoRenewFlag = 1,
+        PackageBandwidth = 1,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dasb.NewResource(ctx, "example", &Dasb.ResourceArgs{
-			AutoRenewFlag:    pulumi.Int(1),
-			CidrBlock:        pulumi.String("10.35.20.0/24"),
-			DeployRegion:     pulumi.String("ap-guangzhou"),
-			DeployZone:       pulumi.String("ap-guangzhou-6"),
-			PackageBandwidth: pulumi.Int(1),
-			ResourceEdition:  pulumi.String("pro"),
-			ResourceNode:     pulumi.Int(50),
-			SubnetId:         pulumi.String("subnet-g7jhwhi2"),
-			TimeSpan:         pulumi.Int(1),
-			TimeUnit:         pulumi.String("m"),
-			VpcCidrBlock:     pulumi.String("10.35.0.0/16"),
-			VpcId:            pulumi.String("vpc-fmz6l9nz"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -277,8 +365,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dasb.Resource;
 import com.pulumi.tencentcloud.Dasb.ResourceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -290,112 +378,174 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Resource("example", ResourceArgs.builder()        
-            .autoRenewFlag(1)
-            .cidrBlock("10.35.20.0/24")
+        var example = new Resource("example", ResourceArgs.builder()
             .deployRegion("ap-guangzhou")
             .deployZone("ap-guangzhou-6")
-            .packageBandwidth(1)
+            .vpcId("vpc-fmz6l9nz")
+            .subnetId("subnet-g7jhwhi2")
+            .vpcCidrBlock("10.35.0.0/16")
+            .cidrBlock("10.35.20.0/24")
             .resourceEdition("pro")
             .resourceNode(50)
-            .subnetId("subnet-g7jhwhi2")
-            .timeSpan(1)
             .timeUnit("m")
-            .vpcCidrBlock("10.35.0.0/16")
-            .vpcId("vpc-fmz6l9nz")
+            .timeSpan(1)
+            .autoRenewFlag(1)
+            .packageBandwidth(1)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Dasb:Resource
     properties:
-      autoRenewFlag: 1
-      cidrBlock: 10.35.20.0/24
       deployRegion: ap-guangzhou
       deployZone: ap-guangzhou-6
-      packageBandwidth: 1
+      vpcId: vpc-fmz6l9nz
+      subnetId: subnet-g7jhwhi2
+      vpcCidrBlock: 10.35.0.0/16
+      cidrBlock: 10.35.20.0/24
       resourceEdition: pro
       resourceNode: 50
-      subnetId: subnet-g7jhwhi2
-      timeSpan: 1
       timeUnit: m
-      vpcCidrBlock: 10.35.0.0/16
-      vpcId: vpc-fmz6l9nz
+      timeSpan: 1
+      autoRenewFlag: 1
+      packageBandwidth: 1
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_dasb_resource" "example" {
+  deploy_region     = "ap-guangzhou"
+  deploy_zone       = "ap-guangzhou-6"
+  vpc_id            = "vpc-fmz6l9nz"
+  subnet_id         = "subnet-g7jhwhi2"
+  vpc_cidr_block    = "10.35.0.0/16"
+  cidr_block        = "10.35.20.0/24"
+  resource_edition  = "pro"
+  resource_node     = 50
+  time_unit         = "m"
+  time_span         = 1
+  auto_renew_flag   = 1
+  package_bandwidth = 1
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateResource](https://www.tencentcloud.com/search/?wd=CreateResource&type=document&lang=en)
+  - [DeployResource](https://www.tencentcloud.com/search/?wd=DeployResource&type=document&lang=en)
+  - [DescribeResources](https://www.tencentcloud.com/search/?wd=DescribeResources&type=document&lang=en)
+  - [ModifyResource](https://www.tencentcloud.com/search/?wd=ModifyResource&type=document&lang=en)
+* Read: [DescribeResources](https://www.tencentcloud.com/search/?wd=DescribeResources&type=document&lang=en)
+* Update: [ModifyResource](https://www.tencentcloud.com/search/?wd=ModifyResource&type=document&lang=en)
 
 
 ## Create Resource Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
              <span class="nx">auto_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">cidr_block</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">deploy_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">deploy_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">package_bandwidth</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">resource_edition</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">resource_node</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">time_span</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">time_unit</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">vpc_cidr_block</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+             <span class="nx">package_bandwidth</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">time_span</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+             <span class="nx">time_unit</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewResource</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Resource</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewResource</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Resource</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dasb:Resource</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Dasb:Resource</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_dasb_resource&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -416,7 +566,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -533,11 +683,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Resource Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Resource resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -553,8 +711,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal. 1 is auto renew flag, 0 is not.</p>
-</dd><dt class="property-required"
+    <dd>Automatic renewal. 1 is auto renew flag, 0 is not.</dd><dt class="property-required"
             title="Required">
         <span id="cidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_csharp" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -562,8 +719,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet segments that require service activation.</p>
-</dd><dt class="property-required"
+    <dd>Subnet segments that require service activation.</dd><dt class="property-required"
             title="Required">
         <span id="deployregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployregion_csharp" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Region</a>
@@ -571,8 +727,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy region.</p>
-</dd><dt class="property-required"
+    <dd>Deploy region.</dd><dt class="property-required"
             title="Required">
         <span id="deployzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployzone_csharp" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Zone</a>
@@ -580,8 +735,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy zone.</p>
-</dd><dt class="property-required"
+    <dd>Deploy zone.</dd><dt class="property-required"
             title="Required">
         <span id="resourceedition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceedition_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Edition</a>
@@ -589,8 +743,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type.Value:standard/pro.</p>
-</dd><dt class="property-required"
+    <dd>Resource type.Value:standard/pro.</dd><dt class="property-required"
             title="Required">
         <span id="resourcenode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcenode_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Node</a>
@@ -598,8 +751,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of resource nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of resource nodes.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -607,8 +759,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy resource subnetId.</p>
-</dd><dt class="property-required"
+    <dd>Deploy resource subnetId.</dd><dt class="property-required"
             title="Required">
         <span id="vpccidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpccidrblock_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Cidr<wbr>Block</a>
@@ -616,8 +767,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The network segment corresponding to the VPC that requires service activation.</p>
-</dd><dt class="property-required"
+    <dd>The network segment corresponding to the VPC that requires service activation.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -625,8 +775,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy resource vpcId.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy resource vpcId.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagebandwidth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagebandwidth_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Bandwidth</a>
@@ -634,8 +783,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</dd><dt class="property-optional"
             title="Optional">
         <span id="timespan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Span</a>
@@ -643,8 +791,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Billing time. This field is mandatory, with a minimum value of 1.</p>
-</dd><dt class="property-optional"
+    <dd>Billing time. This field is mandatory, with a minimum value of 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Unit</a>
@@ -652,8 +799,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing cycle, only support m: month. This field is mandatory, fill in m.</p>
-</dd></dl>
+    <dd>Billing cycle, only support m: month. This field is mandatory, fill in m.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -667,8 +813,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal. 1 is auto renew flag, 0 is not.</p>
-</dd><dt class="property-required"
+    <dd>Automatic renewal. 1 is auto renew flag, 0 is not.</dd><dt class="property-required"
             title="Required">
         <span id="cidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_go" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -676,8 +821,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet segments that require service activation.</p>
-</dd><dt class="property-required"
+    <dd>Subnet segments that require service activation.</dd><dt class="property-required"
             title="Required">
         <span id="deployregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployregion_go" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Region</a>
@@ -685,8 +829,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy region.</p>
-</dd><dt class="property-required"
+    <dd>Deploy region.</dd><dt class="property-required"
             title="Required">
         <span id="deployzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployzone_go" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Zone</a>
@@ -694,8 +837,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy zone.</p>
-</dd><dt class="property-required"
+    <dd>Deploy zone.</dd><dt class="property-required"
             title="Required">
         <span id="resourceedition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceedition_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Edition</a>
@@ -703,8 +845,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type.Value:standard/pro.</p>
-</dd><dt class="property-required"
+    <dd>Resource type.Value:standard/pro.</dd><dt class="property-required"
             title="Required">
         <span id="resourcenode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcenode_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Node</a>
@@ -712,8 +853,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of resource nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of resource nodes.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -721,8 +861,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy resource subnetId.</p>
-</dd><dt class="property-required"
+    <dd>Deploy resource subnetId.</dd><dt class="property-required"
             title="Required">
         <span id="vpccidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpccidrblock_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Cidr<wbr>Block</a>
@@ -730,8 +869,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The network segment corresponding to the VPC that requires service activation.</p>
-</dd><dt class="property-required"
+    <dd>The network segment corresponding to the VPC that requires service activation.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -739,8 +877,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy resource vpcId.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy resource vpcId.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagebandwidth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagebandwidth_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Bandwidth</a>
@@ -748,8 +885,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</dd><dt class="property-optional"
             title="Optional">
         <span id="timespan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Span</a>
@@ -757,8 +893,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Billing time. This field is mandatory, with a minimum value of 1.</p>
-</dd><dt class="property-optional"
+    <dd>Billing time. This field is mandatory, with a minimum value of 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Unit</a>
@@ -766,8 +901,109 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing cycle, only support m: month. This field is mandatory, fill in m.</p>
-</dd></dl>
+    <dd>Billing cycle, only support m: month. This field is mandatory, fill in m.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Automatic renewal. 1 is auto renew flag, 0 is not.</dd><dt class="property-required"
+            title="Required">
+        <span id="cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet segments that require service activation.</dd><dt class="property-required"
+            title="Required">
+        <span id="deploy_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_region_hcl" style="color: inherit; text-decoration: inherit;">deploy_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Deploy region.</dd><dt class="property-required"
+            title="Required">
+        <span id="deploy_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_zone_hcl" style="color: inherit; text-decoration: inherit;">deploy_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Deploy zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_edition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_edition_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>edition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource type.Value:standard/pro.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_node_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_node_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>node</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of resource nodes.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Deploy resource subnetId.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_cidr_block_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The network segment corresponding to the VPC that requires service activation.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Deploy resource vpcId.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="package_bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_bandwidth_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="time_span_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_span_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>span</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Billing time. This field is mandatory, with a minimum value of 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="time_unit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_unit_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Billing cycle, only support m: month. This field is mandatory, fill in m.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -781,8 +1017,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Automatic renewal. 1 is auto renew flag, 0 is not.</p>
-</dd><dt class="property-required"
+    <dd>Automatic renewal. 1 is auto renew flag, 0 is not.</dd><dt class="property-required"
             title="Required">
         <span id="cidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_java" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -790,8 +1025,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet segments that require service activation.</p>
-</dd><dt class="property-required"
+    <dd>Subnet segments that require service activation.</dd><dt class="property-required"
             title="Required">
         <span id="deployregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployregion_java" style="color: inherit; text-decoration: inherit;">deploy<wbr>Region</a>
@@ -799,8 +1033,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deploy region.</p>
-</dd><dt class="property-required"
+    <dd>Deploy region.</dd><dt class="property-required"
             title="Required">
         <span id="deployzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployzone_java" style="color: inherit; text-decoration: inherit;">deploy<wbr>Zone</a>
@@ -808,8 +1041,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deploy zone.</p>
-</dd><dt class="property-required"
+    <dd>Deploy zone.</dd><dt class="property-required"
             title="Required">
         <span id="resourceedition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceedition_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Edition</a>
@@ -817,8 +1049,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type.Value:standard/pro.</p>
-</dd><dt class="property-required"
+    <dd>Resource type.Value:standard/pro.</dd><dt class="property-required"
             title="Required">
         <span id="resourcenode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcenode_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Node</a>
@@ -826,8 +1057,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of resource nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of resource nodes.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -835,8 +1065,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deploy resource subnetId.</p>
-</dd><dt class="property-required"
+    <dd>Deploy resource subnetId.</dd><dt class="property-required"
             title="Required">
         <span id="vpccidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpccidrblock_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Cidr<wbr>Block</a>
@@ -844,8 +1073,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The network segment corresponding to the VPC that requires service activation.</p>
-</dd><dt class="property-required"
+    <dd>The network segment corresponding to the VPC that requires service activation.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -853,8 +1081,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deploy resource vpcId.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy resource vpcId.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagebandwidth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagebandwidth_java" style="color: inherit; text-decoration: inherit;">package<wbr>Bandwidth</a>
@@ -862,8 +1089,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</dd><dt class="property-optional"
             title="Optional">
         <span id="timespan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_java" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -871,8 +1097,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Billing time. This field is mandatory, with a minimum value of 1.</p>
-</dd><dt class="property-optional"
+    <dd>Billing time. This field is mandatory, with a minimum value of 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_java" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -880,8 +1105,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing cycle, only support m: month. This field is mandatory, fill in m.</p>
-</dd></dl>
+    <dd>Billing cycle, only support m: month. This field is mandatory, fill in m.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -895,8 +1119,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Automatic renewal. 1 is auto renew flag, 0 is not.</p>
-</dd><dt class="property-required"
+    <dd>Automatic renewal. 1 is auto renew flag, 0 is not.</dd><dt class="property-required"
             title="Required">
         <span id="cidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_nodejs" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -904,8 +1127,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet segments that require service activation.</p>
-</dd><dt class="property-required"
+    <dd>Subnet segments that require service activation.</dd><dt class="property-required"
             title="Required">
         <span id="deployregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployregion_nodejs" style="color: inherit; text-decoration: inherit;">deploy<wbr>Region</a>
@@ -913,8 +1135,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy region.</p>
-</dd><dt class="property-required"
+    <dd>Deploy region.</dd><dt class="property-required"
             title="Required">
         <span id="deployzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployzone_nodejs" style="color: inherit; text-decoration: inherit;">deploy<wbr>Zone</a>
@@ -922,8 +1143,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy zone.</p>
-</dd><dt class="property-required"
+    <dd>Deploy zone.</dd><dt class="property-required"
             title="Required">
         <span id="resourceedition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceedition_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Edition</a>
@@ -931,8 +1151,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type.Value:standard/pro.</p>
-</dd><dt class="property-required"
+    <dd>Resource type.Value:standard/pro.</dd><dt class="property-required"
             title="Required">
         <span id="resourcenode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcenode_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Node</a>
@@ -940,8 +1159,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of resource nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of resource nodes.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -949,8 +1167,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy resource subnetId.</p>
-</dd><dt class="property-required"
+    <dd>Deploy resource subnetId.</dd><dt class="property-required"
             title="Required">
         <span id="vpccidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpccidrblock_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Cidr<wbr>Block</a>
@@ -958,8 +1175,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The network segment corresponding to the VPC that requires service activation.</p>
-</dd><dt class="property-required"
+    <dd>The network segment corresponding to the VPC that requires service activation.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -967,8 +1183,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy resource vpcId.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy resource vpcId.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagebandwidth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagebandwidth_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Bandwidth</a>
@@ -976,8 +1191,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</dd><dt class="property-optional"
             title="Optional">
         <span id="timespan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -985,8 +1199,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Billing time. This field is mandatory, with a minimum value of 1.</p>
-</dd><dt class="property-optional"
+    <dd>Billing time. This field is mandatory, with a minimum value of 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -994,8 +1207,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing cycle, only support m: month. This field is mandatory, fill in m.</p>
-</dd></dl>
+    <dd>Billing cycle, only support m: month. This field is mandatory, fill in m.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1009,8 +1221,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal. 1 is auto renew flag, 0 is not.</p>
-</dd><dt class="property-required"
+    <dd>Automatic renewal. 1 is auto renew flag, 0 is not.</dd><dt class="property-required"
             title="Required">
         <span id="cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidr_block_python" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
@@ -1018,8 +1229,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet segments that require service activation.</p>
-</dd><dt class="property-required"
+    <dd>Subnet segments that require service activation.</dd><dt class="property-required"
             title="Required">
         <span id="deploy_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_region_python" style="color: inherit; text-decoration: inherit;">deploy_<wbr>region</a>
@@ -1027,8 +1237,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Deploy region.</p>
-</dd><dt class="property-required"
+    <dd>Deploy region.</dd><dt class="property-required"
             title="Required">
         <span id="deploy_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deploy_zone_python" style="color: inherit; text-decoration: inherit;">deploy_<wbr>zone</a>
@@ -1036,8 +1245,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Deploy zone.</p>
-</dd><dt class="property-required"
+    <dd>Deploy zone.</dd><dt class="property-required"
             title="Required">
         <span id="resource_edition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_edition_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>edition</a>
@@ -1045,8 +1253,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource type.Value:standard/pro.</p>
-</dd><dt class="property-required"
+    <dd>Resource type.Value:standard/pro.</dd><dt class="property-required"
             title="Required">
         <span id="resource_node_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_node_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>node</a>
@@ -1054,8 +1261,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of resource nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of resource nodes.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1063,8 +1269,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Deploy resource subnetId.</p>
-</dd><dt class="property-required"
+    <dd>Deploy resource subnetId.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_cidr_block_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>cidr_<wbr>block</a>
@@ -1072,8 +1277,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The network segment corresponding to the VPC that requires service activation.</p>
-</dd><dt class="property-required"
+    <dd>The network segment corresponding to the VPC that requires service activation.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1081,8 +1285,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Deploy resource vpcId.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy resource vpcId.</dd><dt class="property-optional"
             title="Optional">
         <span id="package_bandwidth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#package_bandwidth_python" style="color: inherit; text-decoration: inherit;">package_<wbr>bandwidth</a>
@@ -1090,8 +1293,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</dd><dt class="property-optional"
             title="Optional">
         <span id="time_span_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_span_python" style="color: inherit; text-decoration: inherit;">time_<wbr>span</a>
@@ -1099,8 +1301,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Billing time. This field is mandatory, with a minimum value of 1.</p>
-</dd><dt class="property-optional"
+    <dd>Billing time. This field is mandatory, with a minimum value of 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="time_unit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_unit_python" style="color: inherit; text-decoration: inherit;">time_<wbr>unit</a>
@@ -1108,8 +1309,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Billing cycle, only support m: month. This field is mandatory, fill in m.</p>
-</dd></dl>
+    <dd>Billing cycle, only support m: month. This field is mandatory, fill in m.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1123,8 +1323,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Automatic renewal. 1 is auto renew flag, 0 is not.</p>
-</dd><dt class="property-required"
+    <dd>Automatic renewal. 1 is auto renew flag, 0 is not.</dd><dt class="property-required"
             title="Required">
         <span id="cidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cidrblock_yaml" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1132,8 +1331,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet segments that require service activation.</p>
-</dd><dt class="property-required"
+    <dd>Subnet segments that require service activation.</dd><dt class="property-required"
             title="Required">
         <span id="deployregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployregion_yaml" style="color: inherit; text-decoration: inherit;">deploy<wbr>Region</a>
@@ -1141,8 +1339,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deploy region.</p>
-</dd><dt class="property-required"
+    <dd>Deploy region.</dd><dt class="property-required"
             title="Required">
         <span id="deployzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deployzone_yaml" style="color: inherit; text-decoration: inherit;">deploy<wbr>Zone</a>
@@ -1150,8 +1347,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deploy zone.</p>
-</dd><dt class="property-required"
+    <dd>Deploy zone.</dd><dt class="property-required"
             title="Required">
         <span id="resourceedition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceedition_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Edition</a>
@@ -1159,8 +1355,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type.Value:standard/pro.</p>
-</dd><dt class="property-required"
+    <dd>Resource type.Value:standard/pro.</dd><dt class="property-required"
             title="Required">
         <span id="resourcenode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcenode_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Node</a>
@@ -1168,8 +1363,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of resource nodes.</p>
-</dd><dt class="property-required"
+    <dd>Number of resource nodes.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1177,8 +1371,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deploy resource subnetId.</p>
-</dd><dt class="property-required"
+    <dd>Deploy resource subnetId.</dd><dt class="property-required"
             title="Required">
         <span id="vpccidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpccidrblock_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Cidr<wbr>Block</a>
@@ -1186,8 +1379,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The network segment corresponding to the VPC that requires service activation.</p>
-</dd><dt class="property-required"
+    <dd>The network segment corresponding to the VPC that requires service activation.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1195,8 +1387,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deploy resource vpcId.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy resource vpcId.</dd><dt class="property-optional"
             title="Optional">
         <span id="packagebandwidth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packagebandwidth_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Bandwidth</a>
@@ -1204,8 +1395,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</dd><dt class="property-optional"
             title="Optional">
         <span id="timespan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timespan_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -1213,8 +1403,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Billing time. This field is mandatory, with a minimum value of 1.</p>
-</dd><dt class="property-optional"
+    <dd>Billing time. This field is mandatory, with a minimum value of 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeunit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeunit_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -1222,8 +1411,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing cycle, only support m: month. This field is mandatory, fill in m.</p>
-</dd></dl>
+    <dd>Billing cycle, only support m: month. This field is mandatory, fill in m.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1244,8 +1432,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1259,8 +1446,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1274,8 +1474,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1289,8 +1488,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1304,8 +1502,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1319,8 +1516,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1330,18 +1526,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Resource resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ResourceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Resource</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ResourceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Resource</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1357,104 +1553,143 @@ Get an existing Resource resource's state with the given name, ID, and optional 
         <span class="nx">time_unit</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vpc_cidr_block</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Resource</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetResource<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ResourceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Resource</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetResource<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ResourceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Resource</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Resource</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ResourceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Resource</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ResourceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Resource</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ResourceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Resource</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ResourceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingResource</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Dasb:Resource</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_dasb_resource</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ResourceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ResourceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1462,28 +1697,31 @@ Get an existing Resource resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ResourceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1491,28 +1729,31 @@ Get an existing Resource resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ResourceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1532,8 +1773,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal. 1 is auto renew flag, 0 is not.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal. 1 is auto renew flag, 0 is not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cidrblock_csharp" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -1541,8 +1781,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet segments that require service activation.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet segments that require service activation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployregion_csharp" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Region</a>
@@ -1550,8 +1789,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy region.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployzone_csharp" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Zone</a>
@@ -1559,8 +1797,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy zone.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagebandwidth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagebandwidth_csharp" style="color: inherit; text-decoration: inherit;">Package<wbr>Bandwidth</a>
@@ -1568,8 +1805,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceedition_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceedition_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Edition</a>
@@ -1577,8 +1813,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type.Value:standard/pro.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type.Value:standard/pro.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcenode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcenode_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Node</a>
@@ -1586,8 +1821,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of resource nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Number of resource nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1595,8 +1829,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy resource subnetId.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy resource subnetId.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timespan_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timespan_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Span</a>
@@ -1604,8 +1837,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Billing time. This field is mandatory, with a minimum value of 1.</p>
-</dd><dt class="property-optional"
+    <dd>Billing time. This field is mandatory, with a minimum value of 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeunit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeunit_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Unit</a>
@@ -1613,8 +1845,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing cycle, only support m: month. This field is mandatory, fill in m.</p>
-</dd><dt class="property-optional"
+    <dd>Billing cycle, only support m: month. This field is mandatory, fill in m.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpccidrblock_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpccidrblock_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Cidr<wbr>Block</a>
@@ -1622,8 +1853,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The network segment corresponding to the VPC that requires service activation.</p>
-</dd><dt class="property-optional"
+    <dd>The network segment corresponding to the VPC that requires service activation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1631,8 +1861,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy resource vpcId.</p>
-</dd></dl>
+    <dd>Deploy resource vpcId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1646,8 +1875,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal. 1 is auto renew flag, 0 is not.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal. 1 is auto renew flag, 0 is not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cidrblock_go" style="color: inherit; text-decoration: inherit;">Cidr<wbr>Block</a>
@@ -1655,8 +1883,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet segments that require service activation.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet segments that require service activation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployregion_go" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Region</a>
@@ -1664,8 +1891,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy region.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployzone_go" style="color: inherit; text-decoration: inherit;">Deploy<wbr>Zone</a>
@@ -1673,8 +1899,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy zone.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagebandwidth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagebandwidth_go" style="color: inherit; text-decoration: inherit;">Package<wbr>Bandwidth</a>
@@ -1682,8 +1907,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceedition_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceedition_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Edition</a>
@@ -1691,8 +1915,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type.Value:standard/pro.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type.Value:standard/pro.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcenode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcenode_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Node</a>
@@ -1700,8 +1923,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of resource nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Number of resource nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1709,8 +1931,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy resource subnetId.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy resource subnetId.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timespan_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timespan_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Span</a>
@@ -1718,8 +1939,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Billing time. This field is mandatory, with a minimum value of 1.</p>
-</dd><dt class="property-optional"
+    <dd>Billing time. This field is mandatory, with a minimum value of 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeunit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeunit_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Unit</a>
@@ -1727,8 +1947,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing cycle, only support m: month. This field is mandatory, fill in m.</p>
-</dd><dt class="property-optional"
+    <dd>Billing cycle, only support m: month. This field is mandatory, fill in m.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpccidrblock_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpccidrblock_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Cidr<wbr>Block</a>
@@ -1736,8 +1955,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The network segment corresponding to the VPC that requires service activation.</p>
-</dd><dt class="property-optional"
+    <dd>The network segment corresponding to the VPC that requires service activation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1745,8 +1963,109 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy resource vpcId.</p>
-</dd></dl>
+    <dd>Deploy resource vpcId.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Automatic renewal. 1 is auto renew flag, 0 is not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cidr_block_hcl" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet segments that require service activation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deploy_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploy_region_hcl" style="color: inherit; text-decoration: inherit;">deploy_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Deploy region.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_deploy_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploy_zone_hcl" style="color: inherit; text-decoration: inherit;">deploy_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Deploy zone.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_package_bandwidth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_bandwidth_hcl" style="color: inherit; text-decoration: inherit;">package_<wbr>bandwidth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resource_edition_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_edition_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>edition</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource type.Value:standard/pro.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resource_node_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_node_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>node</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of resource nodes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Deploy resource subnetId.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_time_span_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_span_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>span</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Billing time. This field is mandatory, with a minimum value of 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_time_unit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_unit_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Billing cycle, only support m: month. This field is mandatory, fill in m.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_cidr_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_cidr_block_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>cidr_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The network segment corresponding to the VPC that requires service activation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Deploy resource vpcId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1760,8 +2079,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Automatic renewal. 1 is auto renew flag, 0 is not.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal. 1 is auto renew flag, 0 is not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cidrblock_java" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1769,8 +2087,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet segments that require service activation.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet segments that require service activation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployregion_java" style="color: inherit; text-decoration: inherit;">deploy<wbr>Region</a>
@@ -1778,8 +2095,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deploy region.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployzone_java" style="color: inherit; text-decoration: inherit;">deploy<wbr>Zone</a>
@@ -1787,8 +2103,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deploy zone.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagebandwidth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagebandwidth_java" style="color: inherit; text-decoration: inherit;">package<wbr>Bandwidth</a>
@@ -1796,8 +2111,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceedition_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceedition_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Edition</a>
@@ -1805,8 +2119,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type.Value:standard/pro.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type.Value:standard/pro.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcenode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcenode_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Node</a>
@@ -1814,8 +2127,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of resource nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Number of resource nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1823,8 +2135,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deploy resource subnetId.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy resource subnetId.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timespan_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timespan_java" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -1832,8 +2143,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Billing time. This field is mandatory, with a minimum value of 1.</p>
-</dd><dt class="property-optional"
+    <dd>Billing time. This field is mandatory, with a minimum value of 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeunit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeunit_java" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -1841,8 +2151,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing cycle, only support m: month. This field is mandatory, fill in m.</p>
-</dd><dt class="property-optional"
+    <dd>Billing cycle, only support m: month. This field is mandatory, fill in m.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpccidrblock_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpccidrblock_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Cidr<wbr>Block</a>
@@ -1850,8 +2159,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The network segment corresponding to the VPC that requires service activation.</p>
-</dd><dt class="property-optional"
+    <dd>The network segment corresponding to the VPC that requires service activation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1859,8 +2167,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deploy resource vpcId.</p>
-</dd></dl>
+    <dd>Deploy resource vpcId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1874,8 +2181,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Automatic renewal. 1 is auto renew flag, 0 is not.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal. 1 is auto renew flag, 0 is not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cidrblock_nodejs" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -1883,8 +2189,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet segments that require service activation.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet segments that require service activation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployregion_nodejs" style="color: inherit; text-decoration: inherit;">deploy<wbr>Region</a>
@@ -1892,8 +2197,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy region.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployzone_nodejs" style="color: inherit; text-decoration: inherit;">deploy<wbr>Zone</a>
@@ -1901,8 +2205,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy zone.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagebandwidth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagebandwidth_nodejs" style="color: inherit; text-decoration: inherit;">package<wbr>Bandwidth</a>
@@ -1910,8 +2213,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceedition_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceedition_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Edition</a>
@@ -1919,8 +2221,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource type.Value:standard/pro.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type.Value:standard/pro.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcenode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcenode_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Node</a>
@@ -1928,8 +2229,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of resource nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Number of resource nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1937,8 +2237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy resource subnetId.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy resource subnetId.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timespan_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timespan_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -1946,8 +2245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Billing time. This field is mandatory, with a minimum value of 1.</p>
-</dd><dt class="property-optional"
+    <dd>Billing time. This field is mandatory, with a minimum value of 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeunit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeunit_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -1955,8 +2253,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Billing cycle, only support m: month. This field is mandatory, fill in m.</p>
-</dd><dt class="property-optional"
+    <dd>Billing cycle, only support m: month. This field is mandatory, fill in m.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpccidrblock_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpccidrblock_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Cidr<wbr>Block</a>
@@ -1964,8 +2261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The network segment corresponding to the VPC that requires service activation.</p>
-</dd><dt class="property-optional"
+    <dd>The network segment corresponding to the VPC that requires service activation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1973,8 +2269,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Deploy resource vpcId.</p>
-</dd></dl>
+    <dd>Deploy resource vpcId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1988,8 +2283,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Automatic renewal. 1 is auto renew flag, 0 is not.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal. 1 is auto renew flag, 0 is not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cidr_block_python" style="color: inherit; text-decoration: inherit;">cidr_<wbr>block</a>
@@ -1997,8 +2291,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet segments that require service activation.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet segments that require service activation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploy_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploy_region_python" style="color: inherit; text-decoration: inherit;">deploy_<wbr>region</a>
@@ -2006,8 +2299,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Deploy region.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deploy_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deploy_zone_python" style="color: inherit; text-decoration: inherit;">deploy_<wbr>zone</a>
@@ -2015,8 +2307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Deploy zone.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_package_bandwidth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_package_bandwidth_python" style="color: inherit; text-decoration: inherit;">package_<wbr>bandwidth</a>
@@ -2024,8 +2315,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resource_edition_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_edition_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>edition</a>
@@ -2033,8 +2323,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource type.Value:standard/pro.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type.Value:standard/pro.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resource_node_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_node_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>node</a>
@@ -2042,8 +2331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of resource nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Number of resource nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -2051,8 +2339,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Deploy resource subnetId.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy resource subnetId.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_time_span_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_span_python" style="color: inherit; text-decoration: inherit;">time_<wbr>span</a>
@@ -2060,8 +2347,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Billing time. This field is mandatory, with a minimum value of 1.</p>
-</dd><dt class="property-optional"
+    <dd>Billing time. This field is mandatory, with a minimum value of 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_time_unit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_unit_python" style="color: inherit; text-decoration: inherit;">time_<wbr>unit</a>
@@ -2069,8 +2355,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Billing cycle, only support m: month. This field is mandatory, fill in m.</p>
-</dd><dt class="property-optional"
+    <dd>Billing cycle, only support m: month. This field is mandatory, fill in m.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_cidr_block_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_cidr_block_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>cidr_<wbr>block</a>
@@ -2078,8 +2363,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The network segment corresponding to the VPC that requires service activation.</p>
-</dd><dt class="property-optional"
+    <dd>The network segment corresponding to the VPC that requires service activation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2087,8 +2371,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Deploy resource vpcId.</p>
-</dd></dl>
+    <dd>Deploy resource vpcId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2102,8 +2385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Automatic renewal. 1 is auto renew flag, 0 is not.</p>
-</dd><dt class="property-optional"
+    <dd>Automatic renewal. 1 is auto renew flag, 0 is not.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_cidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cidrblock_yaml" style="color: inherit; text-decoration: inherit;">cidr<wbr>Block</a>
@@ -2111,8 +2393,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet segments that require service activation.</p>
-</dd><dt class="property-optional"
+    <dd>Subnet segments that require service activation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployregion_yaml" style="color: inherit; text-decoration: inherit;">deploy<wbr>Region</a>
@@ -2120,8 +2401,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deploy region.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy region.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_deployzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_deployzone_yaml" style="color: inherit; text-decoration: inherit;">deploy<wbr>Zone</a>
@@ -2129,8 +2409,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deploy zone.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy zone.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_packagebandwidth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_packagebandwidth_yaml" style="color: inherit; text-decoration: inherit;">package<wbr>Bandwidth</a>
@@ -2138,8 +2417,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</p>
-</dd><dt class="property-optional"
+    <dd>Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceedition_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceedition_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Edition</a>
@@ -2147,8 +2425,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource type.Value:standard/pro.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type.Value:standard/pro.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcenode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcenode_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Node</a>
@@ -2156,8 +2433,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of resource nodes.</p>
-</dd><dt class="property-optional"
+    <dd>Number of resource nodes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2165,8 +2441,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deploy resource subnetId.</p>
-</dd><dt class="property-optional"
+    <dd>Deploy resource subnetId.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timespan_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timespan_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Span</a>
@@ -2174,8 +2449,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Billing time. This field is mandatory, with a minimum value of 1.</p>
-</dd><dt class="property-optional"
+    <dd>Billing time. This field is mandatory, with a minimum value of 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeunit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeunit_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Unit</a>
@@ -2183,8 +2457,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Billing cycle, only support m: month. This field is mandatory, fill in m.</p>
-</dd><dt class="property-optional"
+    <dd>Billing cycle, only support m: month. This field is mandatory, fill in m.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpccidrblock_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpccidrblock_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Cidr<wbr>Block</a>
@@ -2192,8 +2465,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The network segment corresponding to the VPC that requires service activation.</p>
-</dd><dt class="property-optional"
+    <dd>The network segment corresponding to the VPC that requires service activation.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2201,8 +2473,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Deploy resource vpcId.</p>
-</dd></dl>
+    <dd>Deploy resource vpcId.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2225,6 +2496,9 @@ $ pulumi import tencentcloud:Dasb/resource:Resource example bh-saas-kgckynrt
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -2234,7 +2508,6 @@ $ pulumi import tencentcloud:Dasb/resource:Resource example bh-saas-kgckynrt
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

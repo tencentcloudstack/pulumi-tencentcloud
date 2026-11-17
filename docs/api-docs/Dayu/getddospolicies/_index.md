@@ -2,9 +2,11 @@
 ---
 title: "getDdosPolicies"
 title_tag: "tencentcloud.Dayu.getDdosPolicies"
-meta_desc: "Documentation for the tencentcloud.Dayu.getDdosPolicies function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query dayu DDoS policies"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,52 +18,51 @@ Use this data source to query dayu DDoS policies
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const idTest = tencentcloud.Dayu.getDdosPolicies({
-    resourceType: tencentcloud_dayu_ddos_policy.test_policy.resource_type,
-    policyId: tencentcloud_dayu_ddos_policy.test_policy.policy_id,
+const idTest = tencentcloud.dayu.getDdosPolicies({
+    resourceType: testPolicy.resourceType,
+    policyId: testPolicy.policyId,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-id_test = tencentcloud.Dayu.get_ddos_policies(resource_type=tencentcloud_dayu_ddos_policy["test_policy"]["resource_type"],
-    policy_id=tencentcloud_dayu_ddos_policy["test_policy"]["policy_id"])
+id_test = tencentcloud.dayu.get_ddos_policies(resource_type=test_policy["resourceType"],
+    policy_id=test_policy["policyId"])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var idTest = Tencentcloud.Dayu.GetDdosPolicies.Invoke(new()
-    {
-        ResourceType = tencentcloud_dayu_ddos_policy.Test_policy.Resource_type,
-        PolicyId = tencentcloud_dayu_ddos_policy.Test_policy.Policy_id,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dayu"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Dayu.GetDdosPolicies(ctx, &dayu.GetDdosPoliciesArgs{
-			ResourceType: tencentcloud_dayu_ddos_policy.Test_policy.Resource_type,
-			PolicyId:     pulumi.StringRef(tencentcloud_dayu_ddos_policy.Test_policy.Policy_id),
+		_, err := dayu.GetDdosPolicies(ctx, &dayu.GetDdosPoliciesArgs{
+			ResourceType: testPolicy.ResourceType,
+			PolicyId:     pulumi.StringRef(testPolicy.PolicyId),
 		}, nil)
 		if err != nil {
 			return err
@@ -70,6 +71,32 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var idTest = Tencentcloud.Dayu.GetDdosPolicies.Invoke(new()
+    {
+        ResourceType = testPolicy.ResourceType,
+        PolicyId = testPolicy.PolicyId,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -78,8 +105,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Dayu.DayuFunctions;
 import com.pulumi.tencentcloud.Dayu.inputs.GetDdosPoliciesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -92,24 +119,55 @@ public class App {
 
     public static void stack(Context ctx) {
         final var idTest = DayuFunctions.getDdosPolicies(GetDdosPoliciesArgs.builder()
-            .resourceType(tencentcloud_dayu_ddos_policy.test_policy().resource_type())
-            .policyId(tencentcloud_dayu_ddos_policy.test_policy().policy_id())
+            .resourceType(testPolicy.resourceType())
+            .policyId(testPolicy.policyId())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   idTest:
     fn::invoke:
-      Function: tencentcloud:Dayu:getDdosPolicies
-      Arguments:
-        resourceType: ${tencentcloud_dayu_ddos_policy.test_policy.resource_type}
-        policyId: ${tencentcloud_dayu_ddos_policy.test_policy.policy_id}
+      function: tencentcloud:Dayu:getDdosPolicies
+      arguments:
+        resourceType: ${testPolicy.resourceType}
+        policyId: ${testPolicy.policyId}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_dayu_getddospolicies" "idTest" {
+  resource_type = testPolicy.resourceType
+  policy_id     = testPolicy.policyId
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
 
 
 
@@ -121,7 +179,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +187,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getDdosPolicies<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDdosPoliciesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDdosPoliciesResult</a></span>></span
+><span class="k">function </span>getDdosPolicies<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDdosPoliciesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetDdosPoliciesResult</a></span>></span
 ><span class="k">
-function </span>getDdosPoliciesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDdosPoliciesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDdosPoliciesResult</a></span>></span
+function </span>getDdosPoliciesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetDdosPoliciesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetDdosPoliciesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -145,10 +203,10 @@ function </span>getDdosPoliciesOutput<span class="p">(</span><span class="nx">ar
                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetDdosPoliciesResult</span
 ><span class="k">
-def </span>get_ddos_policies_output<span class="p">(</span><span class="nx">policy_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDdosPoliciesResult]</span
+def </span>get_ddos_policies_output<span class="p">(</span><span class="nx">policy_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                      <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetDdosPoliciesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,7 +231,8 @@ func </span>GetDdosPoliciesOutput<span class="p">(</span><span class="nx">ctx</s
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetDdosPolicies </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetDdosPoliciesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetDdosPoliciesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetDdosPoliciesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDdosPoliciesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDdosPoliciesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDdosPoliciesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetDdosPoliciesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetDdosPoliciesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,7 +241,8 @@ func </span>GetDdosPoliciesOutput<span class="p">(</span><span class="nx">ctx</s
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetDdosPoliciesResult</a></span>> </span>getDdosPolicies<span class="p">(</span><span class="nx">GetDdosPoliciesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDdosPoliciesResult</a></span>> </span>getDdosPolicies<span class="p">(</span><span class="nx">GetDdosPoliciesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetDdosPoliciesResult</a></span>> </span>getDdosPolicies<span class="p">(</span><span class="nx">GetDdosPoliciesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,6 +254,15 @@ func </span>GetDdosPoliciesOutput<span class="p">(</span><span class="nx">ctx</s
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Dayu/getDdosPolicies:getDdosPolicies
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_dayu_get_ddos_policies&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -212,8 +281,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -221,8 +289,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -230,8 +297,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -245,8 +311,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -254,8 +319,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -263,8 +327,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DDoS policy to be query.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -287,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DDoS policy to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -296,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -311,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -320,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -329,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -344,8 +431,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -353,8 +439,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DDoS policy to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -362,8 +447,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -377,8 +461,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the resource that the DDoS policy works for, valid values are <code>bgpip</code>, <code>bgp</code>, <code>bgp-multip</code> and <code>net</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -386,8 +469,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DDoS policy to be query.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the DDoS policy to be query.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -395,8 +477,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -419,8 +500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_csharp" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -428,8 +508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Outputs.<wbr>Get<wbr>Ddos<wbr>Policies<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of DDoS policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of DDoS policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -445,8 +524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of policy.</p>
-</dd><dt class="property-"
+    <dd>Id of policy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -468,8 +546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_go" style="color: inherit; text-decoration: inherit;">Lists</a>
@@ -477,8 +554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslist">[]Get<wbr>Ddos<wbr>Policies<wbr>List</a></span>
     </dt>
-    <dd><p>A list of DDoS policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of DDoS policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -494,11 +570,56 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of policy.</p>
-</dd><dt class="property-"
+    <dd>Id of policy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_hcl" style="color: inherit; text-decoration: inherit;">lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getddospolicieslist">list(object)</a></span>
+    </dt>
+    <dd>A list of DDoS policies. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of policy.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -517,8 +638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_java" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -526,8 +646,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslist">List&lt;Get<wbr>Ddos<wbr>Policies<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of DDoS policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of DDoS policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -543,8 +662,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of policy.</p>
-</dd><dt class="property-"
+    <dd>Id of policy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -566,8 +684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_nodejs" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -575,8 +692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslist">Get<wbr>Ddos<wbr>Policies<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of DDoS policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of DDoS policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -592,8 +708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of policy.</p>
-</dd><dt class="property-"
+    <dd>Id of policy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -615,17 +730,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_python" style="color: inherit; text-decoration: inherit;">lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getddospolicieslist">Get<wbr>Ddos<wbr>Policies<wbr>List]</a></span>
+        <span class="property-type"><a href="#getddospolicieslist">Sequence[Get<wbr>Ddos<wbr>Policies<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of DDoS policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of DDoS policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -641,8 +754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of policy.</p>
-</dd><dt class="property-"
+    <dd>Id of policy.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -664,8 +776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="lists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lists_yaml" style="color: inherit; text-decoration: inherit;">lists</a>
@@ -673,8 +784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of DDoS policies. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of DDoS policies. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -690,8 +800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of policy.</p>
-</dd><dt class="property-"
+    <dd>Id of policy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -723,8 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="dropoptions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropoptions_csharp" style="color: inherit; text-decoration: inherit;">Drop<wbr>Options</a>
@@ -732,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistdropoption">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Drop<wbr>Option&gt;</a></span>
     </dt>
-    <dd><p>Option list of abnormal check of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Option list of abnormal check of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -741,8 +848,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="packetfilters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetfilters_csharp" style="color: inherit; text-decoration: inherit;">Packet<wbr>Filters</a>
@@ -750,8 +856,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistpacketfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Packet<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Message filter options list.</p>
-</dd><dt class="property-required"
+    <dd>Message filter options list.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -759,8 +864,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DDoS policy to be query.</dd><dt class="property-required"
             title="Required">
         <span id="portfilters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portfilters_csharp" style="color: inherit; text-decoration: inherit;">Port<wbr>Filters</a>
@@ -768,8 +872,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistportfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Port<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Port limits of abnormal check of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Port limits of abnormal check of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_csharp" style="color: inherit; text-decoration: inherit;">Scene<wbr>Id</a>
@@ -777,8 +880,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of policy case that the DDoS policy works for.</p>
-</dd><dt class="property-required"
+    <dd>Id of policy case that the DDoS policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkfilters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkfilters_csharp" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Filters</a>
@@ -786,8 +888,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistwatermarkfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Watermark<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Watermark policy options, and only support one watermark policy at most.</p>
-</dd><dt class="property-required"
+    <dd>Watermark policy options, and only support one watermark policy at most.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkkeys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkkeys_csharp" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Keys</a>
@@ -795,8 +896,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistwatermarkkey">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Dayu.<wbr>Inputs.<wbr>Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Watermark<wbr>Key&gt;</a></span>
     </dt>
-    <dd><p>Watermark content.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark content.</dd><dt class="property-optional"
             title="Optional">
         <span id="blackips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blackips_csharp" style="color: inherit; text-decoration: inherit;">Black<wbr>Ips</a>
@@ -804,8 +904,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Black ip list.</p>
-</dd><dt class="property-optional"
+    <dd>Black ip list.</dd><dt class="property-optional"
             title="Optional">
         <span id="whiteips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whiteips_csharp" style="color: inherit; text-decoration: inherit;">White<wbr>Ips</a>
@@ -813,8 +912,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>White ip list.</p>
-</dd></dl>
+    <dd>White ip list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -828,8 +926,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="dropoptions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropoptions_go" style="color: inherit; text-decoration: inherit;">Drop<wbr>Options</a>
@@ -837,8 +934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistdropoption">[]Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Drop<wbr>Option</a></span>
     </dt>
-    <dd><p>Option list of abnormal check of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Option list of abnormal check of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -846,8 +942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="packetfilters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetfilters_go" style="color: inherit; text-decoration: inherit;">Packet<wbr>Filters</a>
@@ -855,8 +950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistpacketfilter">[]Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Packet<wbr>Filter</a></span>
     </dt>
-    <dd><p>Message filter options list.</p>
-</dd><dt class="property-required"
+    <dd>Message filter options list.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -864,8 +958,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DDoS policy to be query.</dd><dt class="property-required"
             title="Required">
         <span id="portfilters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portfilters_go" style="color: inherit; text-decoration: inherit;">Port<wbr>Filters</a>
@@ -873,8 +966,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistportfilter">[]Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Port<wbr>Filter</a></span>
     </dt>
-    <dd><p>Port limits of abnormal check of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Port limits of abnormal check of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_go" style="color: inherit; text-decoration: inherit;">Scene<wbr>Id</a>
@@ -882,8 +974,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of policy case that the DDoS policy works for.</p>
-</dd><dt class="property-required"
+    <dd>Id of policy case that the DDoS policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkfilters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkfilters_go" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Filters</a>
@@ -891,8 +982,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistwatermarkfilter">[]Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Watermark<wbr>Filter</a></span>
     </dt>
-    <dd><p>Watermark policy options, and only support one watermark policy at most.</p>
-</dd><dt class="property-required"
+    <dd>Watermark policy options, and only support one watermark policy at most.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkkeys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkkeys_go" style="color: inherit; text-decoration: inherit;">Watermark<wbr>Keys</a>
@@ -900,8 +990,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistwatermarkkey">[]Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Watermark<wbr>Key</a></span>
     </dt>
-    <dd><p>Watermark content.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark content.</dd><dt class="property-optional"
             title="Optional">
         <span id="blackips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blackips_go" style="color: inherit; text-decoration: inherit;">Black<wbr>Ips</a>
@@ -909,8 +998,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Black ip list.</p>
-</dd><dt class="property-optional"
+    <dd>Black ip list.</dd><dt class="property-optional"
             title="Optional">
         <span id="whiteips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whiteips_go" style="color: inherit; text-decoration: inherit;">White<wbr>Ips</a>
@@ -918,8 +1006,101 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>White ip list.</p>
-</dd></dl>
+    <dd>White ip list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the DDoS policy.</dd><dt class="property-required"
+            title="Required">
+        <span id="drop_options_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_options_hcl" style="color: inherit; text-decoration: inherit;">drop_<wbr>options</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getddospolicieslistdropoption">list(object)</a></span>
+    </dt>
+    <dd>Option list of abnormal check of the DDoS policy.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the DDoS policy.</dd><dt class="property-required"
+            title="Required">
+        <span id="packet_filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packet_filters_hcl" style="color: inherit; text-decoration: inherit;">packet_<wbr>filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getddospolicieslistpacketfilter">list(object)</a></span>
+    </dt>
+    <dd>Message filter options list.</dd><dt class="property-required"
+            title="Required">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the DDoS policy to be query.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_filters_hcl" style="color: inherit; text-decoration: inherit;">port_<wbr>filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getddospolicieslistportfilter">list(object)</a></span>
+    </dt>
+    <dd>Port limits of abnormal check of the DDoS policy.</dd><dt class="property-required"
+            title="Required">
+        <span id="scene_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_id_hcl" style="color: inherit; text-decoration: inherit;">scene_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of policy case that the DDoS policy works for.</dd><dt class="property-required"
+            title="Required">
+        <span id="watermark_filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_filters_hcl" style="color: inherit; text-decoration: inherit;">watermark_<wbr>filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getddospolicieslistwatermarkfilter">list(object)</a></span>
+    </dt>
+    <dd>Watermark policy options, and only support one watermark policy at most.</dd><dt class="property-required"
+            title="Required">
+        <span id="watermark_keys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_keys_hcl" style="color: inherit; text-decoration: inherit;">watermark_<wbr>keys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getddospolicieslistwatermarkkey">list(object)</a></span>
+    </dt>
+    <dd>Watermark content.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="black_ips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#black_ips_hcl" style="color: inherit; text-decoration: inherit;">black_<wbr>ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Black ip list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="white_ips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#white_ips_hcl" style="color: inherit; text-decoration: inherit;">white_<wbr>ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>White ip list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -933,8 +1114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="dropoptions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropoptions_java" style="color: inherit; text-decoration: inherit;">drop<wbr>Options</a>
@@ -942,8 +1122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistdropoption">List&lt;Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Drop<wbr>Option&gt;</a></span>
     </dt>
-    <dd><p>Option list of abnormal check of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Option list of abnormal check of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -951,8 +1130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="packetfilters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetfilters_java" style="color: inherit; text-decoration: inherit;">packet<wbr>Filters</a>
@@ -960,8 +1138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistpacketfilter">List&lt;Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Packet<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Message filter options list.</p>
-</dd><dt class="property-required"
+    <dd>Message filter options list.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -969,8 +1146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DDoS policy to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DDoS policy to be query.</dd><dt class="property-required"
             title="Required">
         <span id="portfilters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portfilters_java" style="color: inherit; text-decoration: inherit;">port<wbr>Filters</a>
@@ -978,8 +1154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistportfilter">List&lt;Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Port<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Port limits of abnormal check of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Port limits of abnormal check of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_java" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -987,8 +1162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of policy case that the DDoS policy works for.</p>
-</dd><dt class="property-required"
+    <dd>Id of policy case that the DDoS policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkfilters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkfilters_java" style="color: inherit; text-decoration: inherit;">watermark<wbr>Filters</a>
@@ -996,8 +1170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistwatermarkfilter">List&lt;Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Watermark<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Watermark policy options, and only support one watermark policy at most.</p>
-</dd><dt class="property-required"
+    <dd>Watermark policy options, and only support one watermark policy at most.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkkeys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkkeys_java" style="color: inherit; text-decoration: inherit;">watermark<wbr>Keys</a>
@@ -1005,8 +1178,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistwatermarkkey">List&lt;Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Watermark<wbr>Key&gt;</a></span>
     </dt>
-    <dd><p>Watermark content.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark content.</dd><dt class="property-optional"
             title="Optional">
         <span id="blackips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blackips_java" style="color: inherit; text-decoration: inherit;">black<wbr>Ips</a>
@@ -1014,8 +1186,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Black ip list.</p>
-</dd><dt class="property-optional"
+    <dd>Black ip list.</dd><dt class="property-optional"
             title="Optional">
         <span id="whiteips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whiteips_java" style="color: inherit; text-decoration: inherit;">white<wbr>Ips</a>
@@ -1023,8 +1194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>White ip list.</p>
-</dd></dl>
+    <dd>White ip list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1038,8 +1208,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="dropoptions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropoptions_nodejs" style="color: inherit; text-decoration: inherit;">drop<wbr>Options</a>
@@ -1047,8 +1216,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistdropoption">Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Drop<wbr>Option[]</a></span>
     </dt>
-    <dd><p>Option list of abnormal check of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Option list of abnormal check of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1056,8 +1224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="packetfilters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetfilters_nodejs" style="color: inherit; text-decoration: inherit;">packet<wbr>Filters</a>
@@ -1065,8 +1232,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistpacketfilter">Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Packet<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>Message filter options list.</p>
-</dd><dt class="property-required"
+    <dd>Message filter options list.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1074,8 +1240,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the DDoS policy to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DDoS policy to be query.</dd><dt class="property-required"
             title="Required">
         <span id="portfilters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portfilters_nodejs" style="color: inherit; text-decoration: inherit;">port<wbr>Filters</a>
@@ -1083,8 +1248,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistportfilter">Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Port<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>Port limits of abnormal check of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Port limits of abnormal check of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_nodejs" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -1092,8 +1256,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of policy case that the DDoS policy works for.</p>
-</dd><dt class="property-required"
+    <dd>Id of policy case that the DDoS policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkfilters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkfilters_nodejs" style="color: inherit; text-decoration: inherit;">watermark<wbr>Filters</a>
@@ -1101,8 +1264,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistwatermarkfilter">Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Watermark<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>Watermark policy options, and only support one watermark policy at most.</p>
-</dd><dt class="property-required"
+    <dd>Watermark policy options, and only support one watermark policy at most.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkkeys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkkeys_nodejs" style="color: inherit; text-decoration: inherit;">watermark<wbr>Keys</a>
@@ -1110,8 +1272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistwatermarkkey">Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Watermark<wbr>Key[]</a></span>
     </dt>
-    <dd><p>Watermark content.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark content.</dd><dt class="property-optional"
             title="Optional">
         <span id="blackips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blackips_nodejs" style="color: inherit; text-decoration: inherit;">black<wbr>Ips</a>
@@ -1119,8 +1280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Black ip list.</p>
-</dd><dt class="property-optional"
+    <dd>Black ip list.</dd><dt class="property-optional"
             title="Optional">
         <span id="whiteips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whiteips_nodejs" style="color: inherit; text-decoration: inherit;">white<wbr>Ips</a>
@@ -1128,8 +1288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>White ip list.</p>
-</dd></dl>
+    <dd>White ip list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1143,17 +1302,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="drop_options_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_options_python" style="color: inherit; text-decoration: inherit;">drop_<wbr>options</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getddospolicieslistdropoption">Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Drop<wbr>Option]</a></span>
+        <span class="property-type"><a href="#getddospolicieslistdropoption">Sequence[Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Drop<wbr>Option]</a></span>
     </dt>
-    <dd><p>Option list of abnormal check of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Option list of abnormal check of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1161,17 +1318,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="packet_filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packet_filters_python" style="color: inherit; text-decoration: inherit;">packet_<wbr>filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getddospolicieslistpacketfilter">Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Packet<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getddospolicieslistpacketfilter">Sequence[Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Packet<wbr>Filter]</a></span>
     </dt>
-    <dd><p>Message filter options list.</p>
-</dd><dt class="property-required"
+    <dd>Message filter options list.</dd><dt class="property-required"
             title="Required">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -1179,17 +1334,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the DDoS policy to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DDoS policy to be query.</dd><dt class="property-required"
             title="Required">
         <span id="port_filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_filters_python" style="color: inherit; text-decoration: inherit;">port_<wbr>filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getddospolicieslistportfilter">Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Port<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getddospolicieslistportfilter">Sequence[Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Port<wbr>Filter]</a></span>
     </dt>
-    <dd><p>Port limits of abnormal check of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Port limits of abnormal check of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="scene_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scene_id_python" style="color: inherit; text-decoration: inherit;">scene_<wbr>id</a>
@@ -1197,26 +1350,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of policy case that the DDoS policy works for.</p>
-</dd><dt class="property-required"
+    <dd>Id of policy case that the DDoS policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="watermark_filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_filters_python" style="color: inherit; text-decoration: inherit;">watermark_<wbr>filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getddospolicieslistwatermarkfilter">Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Watermark<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getddospolicieslistwatermarkfilter">Sequence[Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Watermark<wbr>Filter]</a></span>
     </dt>
-    <dd><p>Watermark policy options, and only support one watermark policy at most.</p>
-</dd><dt class="property-required"
+    <dd>Watermark policy options, and only support one watermark policy at most.</dd><dt class="property-required"
             title="Required">
         <span id="watermark_keys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermark_keys_python" style="color: inherit; text-decoration: inherit;">watermark_<wbr>keys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getddospolicieslistwatermarkkey">Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Watermark<wbr>Key]</a></span>
+        <span class="property-type"><a href="#getddospolicieslistwatermarkkey">Sequence[Get<wbr>Ddos<wbr>Policies<wbr>List<wbr>Watermark<wbr>Key]</a></span>
     </dt>
-    <dd><p>Watermark content.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark content.</dd><dt class="property-optional"
             title="Optional">
         <span id="black_ips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#black_ips_python" style="color: inherit; text-decoration: inherit;">black_<wbr>ips</a>
@@ -1224,8 +1374,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Black ip list.</p>
-</dd><dt class="property-optional"
+    <dd>Black ip list.</dd><dt class="property-optional"
             title="Optional">
         <span id="white_ips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#white_ips_python" style="color: inherit; text-decoration: inherit;">white_<wbr>ips</a>
@@ -1233,8 +1382,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>White ip list.</p>
-</dd></dl>
+    <dd>White ip list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1248,8 +1396,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="dropoptions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropoptions_yaml" style="color: inherit; text-decoration: inherit;">drop<wbr>Options</a>
@@ -1257,8 +1404,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistdropoption">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Option list of abnormal check of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Option list of abnormal check of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1266,8 +1412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Name of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="packetfilters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#packetfilters_yaml" style="color: inherit; text-decoration: inherit;">packet<wbr>Filters</a>
@@ -1275,8 +1420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistpacketfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Message filter options list.</p>
-</dd><dt class="property-required"
+    <dd>Message filter options list.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1284,8 +1428,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the DDoS policy to be query.</p>
-</dd><dt class="property-required"
+    <dd>ID of the DDoS policy to be query.</dd><dt class="property-required"
             title="Required">
         <span id="portfilters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#portfilters_yaml" style="color: inherit; text-decoration: inherit;">port<wbr>Filters</a>
@@ -1293,8 +1436,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistportfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Port limits of abnormal check of the DDoS policy.</p>
-</dd><dt class="property-required"
+    <dd>Port limits of abnormal check of the DDoS policy.</dd><dt class="property-required"
             title="Required">
         <span id="sceneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sceneid_yaml" style="color: inherit; text-decoration: inherit;">scene<wbr>Id</a>
@@ -1302,8 +1444,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of policy case that the DDoS policy works for.</p>
-</dd><dt class="property-required"
+    <dd>Id of policy case that the DDoS policy works for.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkfilters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkfilters_yaml" style="color: inherit; text-decoration: inherit;">watermark<wbr>Filters</a>
@@ -1311,8 +1452,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistwatermarkfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Watermark policy options, and only support one watermark policy at most.</p>
-</dd><dt class="property-required"
+    <dd>Watermark policy options, and only support one watermark policy at most.</dd><dt class="property-required"
             title="Required">
         <span id="watermarkkeys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#watermarkkeys_yaml" style="color: inherit; text-decoration: inherit;">watermark<wbr>Keys</a>
@@ -1320,8 +1460,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getddospolicieslistwatermarkkey">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Watermark content.</p>
-</dd><dt class="property-optional"
+    <dd>Watermark content.</dd><dt class="property-optional"
             title="Optional">
         <span id="blackips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#blackips_yaml" style="color: inherit; text-decoration: inherit;">black<wbr>Ips</a>
@@ -1329,8 +1468,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Black ip list.</p>
-</dd><dt class="property-optional"
+    <dd>Black ip list.</dd><dt class="property-optional"
             title="Optional">
         <span id="whiteips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#whiteips_yaml" style="color: inherit; text-decoration: inherit;">white<wbr>Ips</a>
@@ -1338,8 +1476,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>White ip list.</p>
-</dd></dl>
+    <dd>White ip list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1357,8 +1494,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of new connections based on destination IP that trigger suppression of connections.</p>
-</dd><dt class="property-required"
+    <dd>The number of new connections based on destination IP that trigger suppression of connections.</dd><dt class="property-required"
             title="Required">
         <span id="checksyncconn_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checksyncconn_csharp" style="color: inherit; text-decoration: inherit;">Check<wbr>Sync<wbr>Conn</a>
@@ -1366,8 +1502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to check null connection or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to check null connection or not.</dd><dt class="property-required"
             title="Required">
         <span id="conntimeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conntimeout_csharp" style="color: inherit; text-decoration: inherit;">Conn<wbr>Timeout</a>
@@ -1375,8 +1510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Connection timeout of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>Connection timeout of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="dconnlimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dconnlimit_csharp" style="color: inherit; text-decoration: inherit;">DConn<wbr>Limit</a>
@@ -1384,8 +1518,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of concurrent connections based on destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of concurrent connections based on destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="dnewlimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnewlimit_csharp" style="color: inherit; text-decoration: inherit;">DNew<wbr>Limit</a>
@@ -1393,8 +1526,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of new connections based on destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of new connections based on destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="dropabroad_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropabroad_csharp" style="color: inherit; text-decoration: inherit;">Drop<wbr>Abroad</a>
@@ -1402,8 +1534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to drop abroad traffic or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop abroad traffic or not.</dd><dt class="property-required"
             title="Required">
         <span id="dropicmp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropicmp_csharp" style="color: inherit; text-decoration: inherit;">Drop<wbr>Icmp</a>
@@ -1411,8 +1542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to drop ICMP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop ICMP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="dropother_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropother_csharp" style="color: inherit; text-decoration: inherit;">Drop<wbr>Other</a>
@@ -1420,8 +1550,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.</dd><dt class="property-required"
             title="Required">
         <span id="droptcp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#droptcp_csharp" style="color: inherit; text-decoration: inherit;">Drop<wbr>Tcp</a>
@@ -1429,8 +1558,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to drop TCP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop TCP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="dropudp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropudp_csharp" style="color: inherit; text-decoration: inherit;">Drop<wbr>Udp</a>
@@ -1438,8 +1566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to drop UDP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to drop UDP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="icmpmbpslimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#icmpmbpslimit_csharp" style="color: inherit; text-decoration: inherit;">Icmp<wbr>Mbps<wbr>Limit</a>
@@ -1447,8 +1574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of ICMP traffic rate.</p>
-</dd><dt class="property-required"
+    <dd>The limit of ICMP traffic rate.</dd><dt class="property-required"
             title="Required">
         <span id="nullconnenable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nullconnenable_csharp" style="color: inherit; text-decoration: inherit;">Null<wbr>Conn<wbr>Enable</a>
@@ -1456,8 +1582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to enable null connection or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to enable null connection or not.</dd><dt class="property-required"
             title="Required">
         <span id="othermbpslimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#othermbpslimit_csharp" style="color: inherit; text-decoration: inherit;">Other<wbr>Mbps<wbr>Limit</a>
@@ -1465,8 +1590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.</p>
-</dd><dt class="property-required"
+    <dd>The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.</dd><dt class="property-required"
             title="Required">
         <span id="sconnlimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sconnlimit_csharp" style="color: inherit; text-decoration: inherit;">SConn<wbr>Limit</a>
@@ -1474,8 +1598,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of concurrent connections based on source IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of concurrent connections based on source IP.</dd><dt class="property-required"
             title="Required">
         <span id="snewlimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snewlimit_csharp" style="color: inherit; text-decoration: inherit;">SNew<wbr>Limit</a>
@@ -1483,8 +1606,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of new connections based on source IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of new connections based on source IP.</dd><dt class="property-required"
             title="Required">
         <span id="synlimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synlimit_csharp" style="color: inherit; text-decoration: inherit;">Syn<wbr>Limit</a>
@@ -1492,8 +1614,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of syn of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>The limit of syn of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="synrate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synrate_csharp" style="color: inherit; text-decoration: inherit;">Syn<wbr>Rate</a>
@@ -1501,8 +1622,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The percentage of syn in ack of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>The percentage of syn in ack of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="tcpmbpslimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpmbpslimit_csharp" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Mbps<wbr>Limit</a>
@@ -1510,8 +1630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of TCP traffic.</p>
-</dd><dt class="property-required"
+    <dd>The limit of TCP traffic.</dd><dt class="property-required"
             title="Required">
         <span id="udpmbpslimit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpmbpslimit_csharp" style="color: inherit; text-decoration: inherit;">Udp<wbr>Mbps<wbr>Limit</a>
@@ -1519,8 +1638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of UDP traffic rate.</p>
-</dd></dl>
+    <dd>The limit of UDP traffic rate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1534,8 +1652,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of new connections based on destination IP that trigger suppression of connections.</p>
-</dd><dt class="property-required"
+    <dd>The number of new connections based on destination IP that trigger suppression of connections.</dd><dt class="property-required"
             title="Required">
         <span id="checksyncconn_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checksyncconn_go" style="color: inherit; text-decoration: inherit;">Check<wbr>Sync<wbr>Conn</a>
@@ -1543,8 +1660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to check null connection or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to check null connection or not.</dd><dt class="property-required"
             title="Required">
         <span id="conntimeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conntimeout_go" style="color: inherit; text-decoration: inherit;">Conn<wbr>Timeout</a>
@@ -1552,8 +1668,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Connection timeout of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>Connection timeout of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="dconnlimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dconnlimit_go" style="color: inherit; text-decoration: inherit;">DConn<wbr>Limit</a>
@@ -1561,8 +1676,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of concurrent connections based on destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of concurrent connections based on destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="dnewlimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnewlimit_go" style="color: inherit; text-decoration: inherit;">DNew<wbr>Limit</a>
@@ -1570,8 +1684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of new connections based on destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of new connections based on destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="dropabroad_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropabroad_go" style="color: inherit; text-decoration: inherit;">Drop<wbr>Abroad</a>
@@ -1579,8 +1692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to drop abroad traffic or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop abroad traffic or not.</dd><dt class="property-required"
             title="Required">
         <span id="dropicmp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropicmp_go" style="color: inherit; text-decoration: inherit;">Drop<wbr>Icmp</a>
@@ -1588,8 +1700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to drop ICMP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop ICMP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="dropother_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropother_go" style="color: inherit; text-decoration: inherit;">Drop<wbr>Other</a>
@@ -1597,8 +1708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.</dd><dt class="property-required"
             title="Required">
         <span id="droptcp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#droptcp_go" style="color: inherit; text-decoration: inherit;">Drop<wbr>Tcp</a>
@@ -1606,8 +1716,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to drop TCP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop TCP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="dropudp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropudp_go" style="color: inherit; text-decoration: inherit;">Drop<wbr>Udp</a>
@@ -1615,8 +1724,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to drop UDP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to drop UDP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="icmpmbpslimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#icmpmbpslimit_go" style="color: inherit; text-decoration: inherit;">Icmp<wbr>Mbps<wbr>Limit</a>
@@ -1624,8 +1732,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of ICMP traffic rate.</p>
-</dd><dt class="property-required"
+    <dd>The limit of ICMP traffic rate.</dd><dt class="property-required"
             title="Required">
         <span id="nullconnenable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nullconnenable_go" style="color: inherit; text-decoration: inherit;">Null<wbr>Conn<wbr>Enable</a>
@@ -1633,8 +1740,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to enable null connection or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to enable null connection or not.</dd><dt class="property-required"
             title="Required">
         <span id="othermbpslimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#othermbpslimit_go" style="color: inherit; text-decoration: inherit;">Other<wbr>Mbps<wbr>Limit</a>
@@ -1642,8 +1748,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.</p>
-</dd><dt class="property-required"
+    <dd>The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.</dd><dt class="property-required"
             title="Required">
         <span id="sconnlimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sconnlimit_go" style="color: inherit; text-decoration: inherit;">SConn<wbr>Limit</a>
@@ -1651,8 +1756,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of concurrent connections based on source IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of concurrent connections based on source IP.</dd><dt class="property-required"
             title="Required">
         <span id="snewlimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snewlimit_go" style="color: inherit; text-decoration: inherit;">SNew<wbr>Limit</a>
@@ -1660,8 +1764,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of new connections based on source IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of new connections based on source IP.</dd><dt class="property-required"
             title="Required">
         <span id="synlimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synlimit_go" style="color: inherit; text-decoration: inherit;">Syn<wbr>Limit</a>
@@ -1669,8 +1772,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of syn of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>The limit of syn of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="synrate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synrate_go" style="color: inherit; text-decoration: inherit;">Syn<wbr>Rate</a>
@@ -1678,8 +1780,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The percentage of syn in ack of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>The percentage of syn in ack of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="tcpmbpslimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpmbpslimit_go" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Mbps<wbr>Limit</a>
@@ -1687,8 +1788,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of TCP traffic.</p>
-</dd><dt class="property-required"
+    <dd>The limit of TCP traffic.</dd><dt class="property-required"
             title="Required">
         <span id="udpmbpslimit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpmbpslimit_go" style="color: inherit; text-decoration: inherit;">Udp<wbr>Mbps<wbr>Limit</a>
@@ -1696,8 +1796,165 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of UDP traffic rate.</p>
-</dd></dl>
+    <dd>The limit of UDP traffic rate.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bad_conn_threshold_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bad_conn_threshold_hcl" style="color: inherit; text-decoration: inherit;">bad_<wbr>conn_<wbr>threshold</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of new connections based on destination IP that trigger suppression of connections.</dd><dt class="property-required"
+            title="Required">
+        <span id="check_sync_conn_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#check_sync_conn_hcl" style="color: inherit; text-decoration: inherit;">check_<wbr>sync_<wbr>conn</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to check null connection or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="conn_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conn_timeout_hcl" style="color: inherit; text-decoration: inherit;">conn_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Connection timeout of abnormal connection check.</dd><dt class="property-required"
+            title="Required">
+        <span id="d_conn_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_conn_limit_hcl" style="color: inherit; text-decoration: inherit;">d_<wbr>conn_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The limit of concurrent connections based on destination IP.</dd><dt class="property-required"
+            title="Required">
+        <span id="d_new_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_new_limit_hcl" style="color: inherit; text-decoration: inherit;">d_<wbr>new_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The limit of new connections based on destination IP.</dd><dt class="property-required"
+            title="Required">
+        <span id="drop_abroad_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_abroad_hcl" style="color: inherit; text-decoration: inherit;">drop_<wbr>abroad</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to drop abroad traffic or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="drop_icmp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_icmp_hcl" style="color: inherit; text-decoration: inherit;">drop_<wbr>icmp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to drop ICMP protocol or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="drop_other_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_other_hcl" style="color: inherit; text-decoration: inherit;">drop_<wbr>other</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="drop_tcp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_tcp_hcl" style="color: inherit; text-decoration: inherit;">drop_<wbr>tcp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to drop TCP protocol or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="drop_udp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_udp_hcl" style="color: inherit; text-decoration: inherit;">drop_<wbr>udp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate to drop UDP protocol or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="icmp_mbps_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#icmp_mbps_limit_hcl" style="color: inherit; text-decoration: inherit;">icmp_<wbr>mbps_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The limit of ICMP traffic rate.</dd><dt class="property-required"
+            title="Required">
+        <span id="null_conn_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#null_conn_enable_hcl" style="color: inherit; text-decoration: inherit;">null_<wbr>conn_<wbr>enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate to enable null connection or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="other_mbps_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#other_mbps_limit_hcl" style="color: inherit; text-decoration: inherit;">other_<wbr>mbps_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.</dd><dt class="property-required"
+            title="Required">
+        <span id="s_conn_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_conn_limit_hcl" style="color: inherit; text-decoration: inherit;">s_<wbr>conn_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The limit of concurrent connections based on source IP.</dd><dt class="property-required"
+            title="Required">
+        <span id="s_new_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_new_limit_hcl" style="color: inherit; text-decoration: inherit;">s_<wbr>new_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The limit of new connections based on source IP.</dd><dt class="property-required"
+            title="Required">
+        <span id="syn_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syn_limit_hcl" style="color: inherit; text-decoration: inherit;">syn_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The limit of syn of abnormal connection check.</dd><dt class="property-required"
+            title="Required">
+        <span id="syn_rate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syn_rate_hcl" style="color: inherit; text-decoration: inherit;">syn_<wbr>rate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The percentage of syn in ack of abnormal connection check.</dd><dt class="property-required"
+            title="Required">
+        <span id="tcp_mbps_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_mbps_limit_hcl" style="color: inherit; text-decoration: inherit;">tcp_<wbr>mbps_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The limit of TCP traffic.</dd><dt class="property-required"
+            title="Required">
+        <span id="udp_mbps_limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udp_mbps_limit_hcl" style="color: inherit; text-decoration: inherit;">udp_<wbr>mbps_<wbr>limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The limit of UDP traffic rate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1711,8 +1968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of new connections based on destination IP that trigger suppression of connections.</p>
-</dd><dt class="property-required"
+    <dd>The number of new connections based on destination IP that trigger suppression of connections.</dd><dt class="property-required"
             title="Required">
         <span id="checksyncconn_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checksyncconn_java" style="color: inherit; text-decoration: inherit;">check<wbr>Sync<wbr>Conn</a>
@@ -1720,8 +1976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to check null connection or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to check null connection or not.</dd><dt class="property-required"
             title="Required">
         <span id="conntimeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conntimeout_java" style="color: inherit; text-decoration: inherit;">conn<wbr>Timeout</a>
@@ -1729,8 +1984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Connection timeout of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>Connection timeout of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="dconnlimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dconnlimit_java" style="color: inherit; text-decoration: inherit;">d<wbr>Conn<wbr>Limit</a>
@@ -1738,8 +1992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The limit of concurrent connections based on destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of concurrent connections based on destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="dnewlimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnewlimit_java" style="color: inherit; text-decoration: inherit;">d<wbr>New<wbr>Limit</a>
@@ -1747,8 +2000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The limit of new connections based on destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of new connections based on destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="dropabroad_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropabroad_java" style="color: inherit; text-decoration: inherit;">drop<wbr>Abroad</a>
@@ -1756,8 +2008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to drop abroad traffic or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop abroad traffic or not.</dd><dt class="property-required"
             title="Required">
         <span id="dropicmp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropicmp_java" style="color: inherit; text-decoration: inherit;">drop<wbr>Icmp</a>
@@ -1765,8 +2016,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to drop ICMP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop ICMP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="dropother_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropother_java" style="color: inherit; text-decoration: inherit;">drop<wbr>Other</a>
@@ -1774,8 +2024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.</dd><dt class="property-required"
             title="Required">
         <span id="droptcp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#droptcp_java" style="color: inherit; text-decoration: inherit;">drop<wbr>Tcp</a>
@@ -1783,8 +2032,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to drop TCP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop TCP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="dropudp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropudp_java" style="color: inherit; text-decoration: inherit;">drop<wbr>Udp</a>
@@ -1792,8 +2040,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to drop UDP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to drop UDP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="icmpmbpslimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#icmpmbpslimit_java" style="color: inherit; text-decoration: inherit;">icmp<wbr>Mbps<wbr>Limit</a>
@@ -1801,8 +2048,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The limit of ICMP traffic rate.</p>
-</dd><dt class="property-required"
+    <dd>The limit of ICMP traffic rate.</dd><dt class="property-required"
             title="Required">
         <span id="nullconnenable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nullconnenable_java" style="color: inherit; text-decoration: inherit;">null<wbr>Conn<wbr>Enable</a>
@@ -1810,8 +2056,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to enable null connection or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to enable null connection or not.</dd><dt class="property-required"
             title="Required">
         <span id="othermbpslimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#othermbpslimit_java" style="color: inherit; text-decoration: inherit;">other<wbr>Mbps<wbr>Limit</a>
@@ -1819,8 +2064,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.</p>
-</dd><dt class="property-required"
+    <dd>The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.</dd><dt class="property-required"
             title="Required">
         <span id="sconnlimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sconnlimit_java" style="color: inherit; text-decoration: inherit;">s<wbr>Conn<wbr>Limit</a>
@@ -1828,8 +2072,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The limit of concurrent connections based on source IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of concurrent connections based on source IP.</dd><dt class="property-required"
             title="Required">
         <span id="snewlimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snewlimit_java" style="color: inherit; text-decoration: inherit;">s<wbr>New<wbr>Limit</a>
@@ -1837,8 +2080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The limit of new connections based on source IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of new connections based on source IP.</dd><dt class="property-required"
             title="Required">
         <span id="synlimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synlimit_java" style="color: inherit; text-decoration: inherit;">syn<wbr>Limit</a>
@@ -1846,8 +2088,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The limit of syn of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>The limit of syn of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="synrate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synrate_java" style="color: inherit; text-decoration: inherit;">syn<wbr>Rate</a>
@@ -1855,8 +2096,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The percentage of syn in ack of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>The percentage of syn in ack of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="tcpmbpslimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpmbpslimit_java" style="color: inherit; text-decoration: inherit;">tcp<wbr>Mbps<wbr>Limit</a>
@@ -1864,8 +2104,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The limit of TCP traffic.</p>
-</dd><dt class="property-required"
+    <dd>The limit of TCP traffic.</dd><dt class="property-required"
             title="Required">
         <span id="udpmbpslimit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpmbpslimit_java" style="color: inherit; text-decoration: inherit;">udp<wbr>Mbps<wbr>Limit</a>
@@ -1873,8 +2112,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The limit of UDP traffic rate.</p>
-</dd></dl>
+    <dd>The limit of UDP traffic rate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1888,8 +2126,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of new connections based on destination IP that trigger suppression of connections.</p>
-</dd><dt class="property-required"
+    <dd>The number of new connections based on destination IP that trigger suppression of connections.</dd><dt class="property-required"
             title="Required">
         <span id="checksyncconn_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checksyncconn_nodejs" style="color: inherit; text-decoration: inherit;">check<wbr>Sync<wbr>Conn</a>
@@ -1897,8 +2134,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to check null connection or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to check null connection or not.</dd><dt class="property-required"
             title="Required">
         <span id="conntimeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conntimeout_nodejs" style="color: inherit; text-decoration: inherit;">conn<wbr>Timeout</a>
@@ -1906,8 +2142,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Connection timeout of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>Connection timeout of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="dconnlimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dconnlimit_nodejs" style="color: inherit; text-decoration: inherit;">d<wbr>Conn<wbr>Limit</a>
@@ -1915,8 +2150,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The limit of concurrent connections based on destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of concurrent connections based on destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="dnewlimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnewlimit_nodejs" style="color: inherit; text-decoration: inherit;">d<wbr>New<wbr>Limit</a>
@@ -1924,8 +2158,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The limit of new connections based on destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of new connections based on destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="dropabroad_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropabroad_nodejs" style="color: inherit; text-decoration: inherit;">drop<wbr>Abroad</a>
@@ -1933,8 +2166,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to drop abroad traffic or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop abroad traffic or not.</dd><dt class="property-required"
             title="Required">
         <span id="dropicmp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropicmp_nodejs" style="color: inherit; text-decoration: inherit;">drop<wbr>Icmp</a>
@@ -1942,8 +2174,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to drop ICMP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop ICMP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="dropother_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropother_nodejs" style="color: inherit; text-decoration: inherit;">drop<wbr>Other</a>
@@ -1951,8 +2182,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.</dd><dt class="property-required"
             title="Required">
         <span id="droptcp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#droptcp_nodejs" style="color: inherit; text-decoration: inherit;">drop<wbr>Tcp</a>
@@ -1960,8 +2190,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to drop TCP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop TCP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="dropudp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropudp_nodejs" style="color: inherit; text-decoration: inherit;">drop<wbr>Udp</a>
@@ -1969,8 +2198,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate to drop UDP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to drop UDP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="icmpmbpslimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#icmpmbpslimit_nodejs" style="color: inherit; text-decoration: inherit;">icmp<wbr>Mbps<wbr>Limit</a>
@@ -1978,8 +2206,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The limit of ICMP traffic rate.</p>
-</dd><dt class="property-required"
+    <dd>The limit of ICMP traffic rate.</dd><dt class="property-required"
             title="Required">
         <span id="nullconnenable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nullconnenable_nodejs" style="color: inherit; text-decoration: inherit;">null<wbr>Conn<wbr>Enable</a>
@@ -1987,8 +2214,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate to enable null connection or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to enable null connection or not.</dd><dt class="property-required"
             title="Required">
         <span id="othermbpslimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#othermbpslimit_nodejs" style="color: inherit; text-decoration: inherit;">other<wbr>Mbps<wbr>Limit</a>
@@ -1996,8 +2222,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.</p>
-</dd><dt class="property-required"
+    <dd>The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.</dd><dt class="property-required"
             title="Required">
         <span id="sconnlimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sconnlimit_nodejs" style="color: inherit; text-decoration: inherit;">s<wbr>Conn<wbr>Limit</a>
@@ -2005,8 +2230,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The limit of concurrent connections based on source IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of concurrent connections based on source IP.</dd><dt class="property-required"
             title="Required">
         <span id="snewlimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snewlimit_nodejs" style="color: inherit; text-decoration: inherit;">s<wbr>New<wbr>Limit</a>
@@ -2014,8 +2238,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The limit of new connections based on source IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of new connections based on source IP.</dd><dt class="property-required"
             title="Required">
         <span id="synlimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synlimit_nodejs" style="color: inherit; text-decoration: inherit;">syn<wbr>Limit</a>
@@ -2023,8 +2246,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The limit of syn of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>The limit of syn of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="synrate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synrate_nodejs" style="color: inherit; text-decoration: inherit;">syn<wbr>Rate</a>
@@ -2032,8 +2254,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The percentage of syn in ack of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>The percentage of syn in ack of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="tcpmbpslimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpmbpslimit_nodejs" style="color: inherit; text-decoration: inherit;">tcp<wbr>Mbps<wbr>Limit</a>
@@ -2041,8 +2262,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The limit of TCP traffic.</p>
-</dd><dt class="property-required"
+    <dd>The limit of TCP traffic.</dd><dt class="property-required"
             title="Required">
         <span id="udpmbpslimit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpmbpslimit_nodejs" style="color: inherit; text-decoration: inherit;">udp<wbr>Mbps<wbr>Limit</a>
@@ -2050,8 +2270,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The limit of UDP traffic rate.</p>
-</dd></dl>
+    <dd>The limit of UDP traffic rate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2065,8 +2284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of new connections based on destination IP that trigger suppression of connections.</p>
-</dd><dt class="property-required"
+    <dd>The number of new connections based on destination IP that trigger suppression of connections.</dd><dt class="property-required"
             title="Required">
         <span id="check_sync_conn_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#check_sync_conn_python" style="color: inherit; text-decoration: inherit;">check_<wbr>sync_<wbr>conn</a>
@@ -2074,8 +2292,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to check null connection or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to check null connection or not.</dd><dt class="property-required"
             title="Required">
         <span id="conn_timeout_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conn_timeout_python" style="color: inherit; text-decoration: inherit;">conn_<wbr>timeout</a>
@@ -2083,8 +2300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Connection timeout of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>Connection timeout of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="d_conn_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_conn_limit_python" style="color: inherit; text-decoration: inherit;">d_<wbr>conn_<wbr>limit</a>
@@ -2092,8 +2308,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of concurrent connections based on destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of concurrent connections based on destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="d_new_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_new_limit_python" style="color: inherit; text-decoration: inherit;">d_<wbr>new_<wbr>limit</a>
@@ -2101,8 +2316,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of new connections based on destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of new connections based on destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="drop_abroad_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_abroad_python" style="color: inherit; text-decoration: inherit;">drop_<wbr>abroad</a>
@@ -2110,8 +2324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to drop abroad traffic or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop abroad traffic or not.</dd><dt class="property-required"
             title="Required">
         <span id="drop_icmp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_icmp_python" style="color: inherit; text-decoration: inherit;">drop_<wbr>icmp</a>
@@ -2119,8 +2332,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to drop ICMP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop ICMP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="drop_other_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_other_python" style="color: inherit; text-decoration: inherit;">drop_<wbr>other</a>
@@ -2128,8 +2340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.</dd><dt class="property-required"
             title="Required">
         <span id="drop_tcp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_tcp_python" style="color: inherit; text-decoration: inherit;">drop_<wbr>tcp</a>
@@ -2137,8 +2348,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to drop TCP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop TCP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="drop_udp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drop_udp_python" style="color: inherit; text-decoration: inherit;">drop_<wbr>udp</a>
@@ -2146,8 +2356,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to drop UDP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to drop UDP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="icmp_mbps_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#icmp_mbps_limit_python" style="color: inherit; text-decoration: inherit;">icmp_<wbr>mbps_<wbr>limit</a>
@@ -2155,8 +2364,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of ICMP traffic rate.</p>
-</dd><dt class="property-required"
+    <dd>The limit of ICMP traffic rate.</dd><dt class="property-required"
             title="Required">
         <span id="null_conn_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#null_conn_enable_python" style="color: inherit; text-decoration: inherit;">null_<wbr>conn_<wbr>enable</a>
@@ -2164,8 +2372,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate to enable null connection or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to enable null connection or not.</dd><dt class="property-required"
             title="Required">
         <span id="other_mbps_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#other_mbps_limit_python" style="color: inherit; text-decoration: inherit;">other_<wbr>mbps_<wbr>limit</a>
@@ -2173,8 +2380,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.</p>
-</dd><dt class="property-required"
+    <dd>The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.</dd><dt class="property-required"
             title="Required">
         <span id="s_conn_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_conn_limit_python" style="color: inherit; text-decoration: inherit;">s_<wbr>conn_<wbr>limit</a>
@@ -2182,8 +2388,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of concurrent connections based on source IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of concurrent connections based on source IP.</dd><dt class="property-required"
             title="Required">
         <span id="s_new_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_new_limit_python" style="color: inherit; text-decoration: inherit;">s_<wbr>new_<wbr>limit</a>
@@ -2191,8 +2396,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of new connections based on source IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of new connections based on source IP.</dd><dt class="property-required"
             title="Required">
         <span id="syn_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syn_limit_python" style="color: inherit; text-decoration: inherit;">syn_<wbr>limit</a>
@@ -2200,8 +2404,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of syn of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>The limit of syn of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="syn_rate_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#syn_rate_python" style="color: inherit; text-decoration: inherit;">syn_<wbr>rate</a>
@@ -2209,8 +2412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The percentage of syn in ack of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>The percentage of syn in ack of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="tcp_mbps_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_mbps_limit_python" style="color: inherit; text-decoration: inherit;">tcp_<wbr>mbps_<wbr>limit</a>
@@ -2218,8 +2420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of TCP traffic.</p>
-</dd><dt class="property-required"
+    <dd>The limit of TCP traffic.</dd><dt class="property-required"
             title="Required">
         <span id="udp_mbps_limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udp_mbps_limit_python" style="color: inherit; text-decoration: inherit;">udp_<wbr>mbps_<wbr>limit</a>
@@ -2227,8 +2428,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The limit of UDP traffic rate.</p>
-</dd></dl>
+    <dd>The limit of UDP traffic rate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2242,8 +2442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of new connections based on destination IP that trigger suppression of connections.</p>
-</dd><dt class="property-required"
+    <dd>The number of new connections based on destination IP that trigger suppression of connections.</dd><dt class="property-required"
             title="Required">
         <span id="checksyncconn_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checksyncconn_yaml" style="color: inherit; text-decoration: inherit;">check<wbr>Sync<wbr>Conn</a>
@@ -2251,8 +2450,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to check null connection or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to check null connection or not.</dd><dt class="property-required"
             title="Required">
         <span id="conntimeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conntimeout_yaml" style="color: inherit; text-decoration: inherit;">conn<wbr>Timeout</a>
@@ -2260,8 +2458,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Connection timeout of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>Connection timeout of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="dconnlimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dconnlimit_yaml" style="color: inherit; text-decoration: inherit;">d<wbr>Conn<wbr>Limit</a>
@@ -2269,8 +2466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The limit of concurrent connections based on destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of concurrent connections based on destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="dnewlimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dnewlimit_yaml" style="color: inherit; text-decoration: inherit;">d<wbr>New<wbr>Limit</a>
@@ -2278,8 +2474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The limit of new connections based on destination IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of new connections based on destination IP.</dd><dt class="property-required"
             title="Required">
         <span id="dropabroad_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropabroad_yaml" style="color: inherit; text-decoration: inherit;">drop<wbr>Abroad</a>
@@ -2287,8 +2482,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to drop abroad traffic or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop abroad traffic or not.</dd><dt class="property-required"
             title="Required">
         <span id="dropicmp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropicmp_yaml" style="color: inherit; text-decoration: inherit;">drop<wbr>Icmp</a>
@@ -2296,8 +2490,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to drop ICMP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop ICMP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="dropother_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropother_yaml" style="color: inherit; text-decoration: inherit;">drop<wbr>Other</a>
@@ -2305,8 +2498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop other protocols(exclude TCP/UDP/ICMP) or not.</dd><dt class="property-required"
             title="Required">
         <span id="droptcp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#droptcp_yaml" style="color: inherit; text-decoration: inherit;">drop<wbr>Tcp</a>
@@ -2314,8 +2506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to drop TCP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to drop TCP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="dropudp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dropudp_yaml" style="color: inherit; text-decoration: inherit;">drop<wbr>Udp</a>
@@ -2323,8 +2514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to drop UDP protocol or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to drop UDP protocol or not.</dd><dt class="property-required"
             title="Required">
         <span id="icmpmbpslimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#icmpmbpslimit_yaml" style="color: inherit; text-decoration: inherit;">icmp<wbr>Mbps<wbr>Limit</a>
@@ -2332,8 +2522,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The limit of ICMP traffic rate.</p>
-</dd><dt class="property-required"
+    <dd>The limit of ICMP traffic rate.</dd><dt class="property-required"
             title="Required">
         <span id="nullconnenable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nullconnenable_yaml" style="color: inherit; text-decoration: inherit;">null<wbr>Conn<wbr>Enable</a>
@@ -2341,8 +2530,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate to enable null connection or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate to enable null connection or not.</dd><dt class="property-required"
             title="Required">
         <span id="othermbpslimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#othermbpslimit_yaml" style="color: inherit; text-decoration: inherit;">other<wbr>Mbps<wbr>Limit</a>
@@ -2350,8 +2538,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.</p>
-</dd><dt class="property-required"
+    <dd>The limit of other protocols(exclude TCP/UDP/ICMP) traffic rate.</dd><dt class="property-required"
             title="Required">
         <span id="sconnlimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sconnlimit_yaml" style="color: inherit; text-decoration: inherit;">s<wbr>Conn<wbr>Limit</a>
@@ -2359,8 +2546,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The limit of concurrent connections based on source IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of concurrent connections based on source IP.</dd><dt class="property-required"
             title="Required">
         <span id="snewlimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snewlimit_yaml" style="color: inherit; text-decoration: inherit;">s<wbr>New<wbr>Limit</a>
@@ -2368,8 +2554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The limit of new connections based on source IP.</p>
-</dd><dt class="property-required"
+    <dd>The limit of new connections based on source IP.</dd><dt class="property-required"
             title="Required">
         <span id="synlimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synlimit_yaml" style="color: inherit; text-decoration: inherit;">syn<wbr>Limit</a>
@@ -2377,8 +2562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The limit of syn of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>The limit of syn of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="synrate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#synrate_yaml" style="color: inherit; text-decoration: inherit;">syn<wbr>Rate</a>
@@ -2386,8 +2570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The percentage of syn in ack of abnormal connection check.</p>
-</dd><dt class="property-required"
+    <dd>The percentage of syn in ack of abnormal connection check.</dd><dt class="property-required"
             title="Required">
         <span id="tcpmbpslimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpmbpslimit_yaml" style="color: inherit; text-decoration: inherit;">tcp<wbr>Mbps<wbr>Limit</a>
@@ -2395,8 +2578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The limit of TCP traffic.</p>
-</dd><dt class="property-required"
+    <dd>The limit of TCP traffic.</dd><dt class="property-required"
             title="Required">
         <span id="udpmbpslimit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpmbpslimit_yaml" style="color: inherit; text-decoration: inherit;">udp<wbr>Mbps<wbr>Limit</a>
@@ -2404,8 +2586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The limit of UDP traffic rate.</p>
-</dd></dl>
+    <dd>The limit of UDP traffic rate.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2423,8 +2604,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action of port to take.</p>
-</dd><dt class="property-required"
+    <dd>Action of port to take.</dd><dt class="property-required"
             title="Required">
         <span id="dendport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dendport_csharp" style="color: inherit; text-decoration: inherit;">DEnd<wbr>Port</a>
@@ -2432,8 +2612,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End port of the destination.</p>
-</dd><dt class="property-required"
+    <dd>End port of the destination.</dd><dt class="property-required"
             title="Required">
         <span id="dstartport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstartport_csharp" style="color: inherit; text-decoration: inherit;">DStart<wbr>Port</a>
@@ -2441,8 +2620,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start port of the destination.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the destination.</dd><dt class="property-required"
             title="Required">
         <span id="depth_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_csharp" style="color: inherit; text-decoration: inherit;">Depth</a>
@@ -2450,8 +2628,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The depth of match.</p>
-</dd><dt class="property-required"
+    <dd>The depth of match.</dd><dt class="property-required"
             title="Required">
         <span id="isinclude_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isinclude_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Include</a>
@@ -2459,8 +2636,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to include the key word/regular expression or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to include the key word/regular expression or not.</dd><dt class="property-required"
             title="Required">
         <span id="matchbegin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin_csharp" style="color: inherit; text-decoration: inherit;">Match<wbr>Begin</a>
@@ -2468,8 +2644,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether to check load or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to check load or not.</dd><dt class="property-required"
             title="Required">
         <span id="matchstr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchstr_csharp" style="color: inherit; text-decoration: inherit;">Match<wbr>Str</a>
@@ -2477,8 +2652,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key word or regular expression.</p>
-</dd><dt class="property-required"
+    <dd>The key word or regular expression.</dd><dt class="property-required"
             title="Required">
         <span id="matchtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype_csharp" style="color: inherit; text-decoration: inherit;">Match<wbr>Type</a>
@@ -2486,8 +2660,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Match type.</p>
-</dd><dt class="property-required"
+    <dd>Match type.</dd><dt class="property-required"
             title="Required">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -2495,8 +2668,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The offset of watermark.</p>
-</dd><dt class="property-required"
+    <dd>The offset of watermark.</dd><dt class="property-required"
             title="Required">
         <span id="pktlengthmax_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlengthmax_csharp" style="color: inherit; text-decoration: inherit;">Pkt<wbr>Length<wbr>Max</a>
@@ -2504,8 +2676,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The max length of the packet.</p>
-</dd><dt class="property-required"
+    <dd>The max length of the packet.</dd><dt class="property-required"
             title="Required">
         <span id="pktlengthmin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlengthmin_csharp" style="color: inherit; text-decoration: inherit;">Pkt<wbr>Length<wbr>Min</a>
@@ -2513,8 +2684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum length of the packet.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of the packet.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -2522,8 +2692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="sendport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sendport_csharp" style="color: inherit; text-decoration: inherit;">SEnd<wbr>Port</a>
@@ -2531,8 +2700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End port of the source.</p>
-</dd><dt class="property-required"
+    <dd>End port of the source.</dd><dt class="property-required"
             title="Required">
         <span id="sstartport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sstartport_csharp" style="color: inherit; text-decoration: inherit;">SStart<wbr>Port</a>
@@ -2540,8 +2708,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start port of the source.</p>
-</dd></dl>
+    <dd>Start port of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2555,8 +2722,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action of port to take.</p>
-</dd><dt class="property-required"
+    <dd>Action of port to take.</dd><dt class="property-required"
             title="Required">
         <span id="dendport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dendport_go" style="color: inherit; text-decoration: inherit;">DEnd<wbr>Port</a>
@@ -2564,8 +2730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End port of the destination.</p>
-</dd><dt class="property-required"
+    <dd>End port of the destination.</dd><dt class="property-required"
             title="Required">
         <span id="dstartport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstartport_go" style="color: inherit; text-decoration: inherit;">DStart<wbr>Port</a>
@@ -2573,8 +2738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start port of the destination.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the destination.</dd><dt class="property-required"
             title="Required">
         <span id="depth_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_go" style="color: inherit; text-decoration: inherit;">Depth</a>
@@ -2582,8 +2746,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The depth of match.</p>
-</dd><dt class="property-required"
+    <dd>The depth of match.</dd><dt class="property-required"
             title="Required">
         <span id="isinclude_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isinclude_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Include</a>
@@ -2591,8 +2754,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to include the key word/regular expression or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to include the key word/regular expression or not.</dd><dt class="property-required"
             title="Required">
         <span id="matchbegin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin_go" style="color: inherit; text-decoration: inherit;">Match<wbr>Begin</a>
@@ -2600,8 +2762,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether to check load or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to check load or not.</dd><dt class="property-required"
             title="Required">
         <span id="matchstr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchstr_go" style="color: inherit; text-decoration: inherit;">Match<wbr>Str</a>
@@ -2609,8 +2770,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key word or regular expression.</p>
-</dd><dt class="property-required"
+    <dd>The key word or regular expression.</dd><dt class="property-required"
             title="Required">
         <span id="matchtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype_go" style="color: inherit; text-decoration: inherit;">Match<wbr>Type</a>
@@ -2618,8 +2778,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Match type.</p>
-</dd><dt class="property-required"
+    <dd>Match type.</dd><dt class="property-required"
             title="Required">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -2627,8 +2786,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The offset of watermark.</p>
-</dd><dt class="property-required"
+    <dd>The offset of watermark.</dd><dt class="property-required"
             title="Required">
         <span id="pktlengthmax_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlengthmax_go" style="color: inherit; text-decoration: inherit;">Pkt<wbr>Length<wbr>Max</a>
@@ -2636,8 +2794,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The max length of the packet.</p>
-</dd><dt class="property-required"
+    <dd>The max length of the packet.</dd><dt class="property-required"
             title="Required">
         <span id="pktlengthmin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlengthmin_go" style="color: inherit; text-decoration: inherit;">Pkt<wbr>Length<wbr>Min</a>
@@ -2645,8 +2802,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum length of the packet.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of the packet.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -2654,8 +2810,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="sendport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sendport_go" style="color: inherit; text-decoration: inherit;">SEnd<wbr>Port</a>
@@ -2663,8 +2818,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End port of the source.</p>
-</dd><dt class="property-required"
+    <dd>End port of the source.</dd><dt class="property-required"
             title="Required">
         <span id="sstartport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sstartport_go" style="color: inherit; text-decoration: inherit;">SStart<wbr>Port</a>
@@ -2672,8 +2826,125 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start port of the source.</p>
-</dd></dl>
+    <dd>Start port of the source.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Action of port to take.</dd><dt class="property-required"
+            title="Required">
+        <span id="d_end_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_end_port_hcl" style="color: inherit; text-decoration: inherit;">d_<wbr>end_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End port of the destination.</dd><dt class="property-required"
+            title="Required">
+        <span id="d_start_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_start_port_hcl" style="color: inherit; text-decoration: inherit;">d_<wbr>start_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start port of the destination.</dd><dt class="property-required"
+            title="Required">
+        <span id="depth_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_hcl" style="color: inherit; text-decoration: inherit;">depth</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The depth of match.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_include_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_include_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>include</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to include the key word/regular expression or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="match_begin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_begin_hcl" style="color: inherit; text-decoration: inherit;">match_<wbr>begin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicate whether to check load or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="match_str_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_str_hcl" style="color: inherit; text-decoration: inherit;">match_<wbr>str</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The key word or regular expression.</dd><dt class="property-required"
+            title="Required">
+        <span id="match_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_type_hcl" style="color: inherit; text-decoration: inherit;">match_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Match type.</dd><dt class="property-required"
+            title="Required">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The offset of watermark.</dd><dt class="property-required"
+            title="Required">
+        <span id="pkt_length_max_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pkt_length_max_hcl" style="color: inherit; text-decoration: inherit;">pkt_<wbr>length_<wbr>max</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The max length of the packet.</dd><dt class="property-required"
+            title="Required">
+        <span id="pkt_length_min_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pkt_length_min_hcl" style="color: inherit; text-decoration: inherit;">pkt_<wbr>length_<wbr>min</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The minimum length of the packet.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol.</dd><dt class="property-required"
+            title="Required">
+        <span id="s_end_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_end_port_hcl" style="color: inherit; text-decoration: inherit;">s_<wbr>end_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End port of the source.</dd><dt class="property-required"
+            title="Required">
+        <span id="s_start_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_start_port_hcl" style="color: inherit; text-decoration: inherit;">s_<wbr>start_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start port of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2687,8 +2958,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action of port to take.</p>
-</dd><dt class="property-required"
+    <dd>Action of port to take.</dd><dt class="property-required"
             title="Required">
         <span id="dendport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dendport_java" style="color: inherit; text-decoration: inherit;">d<wbr>End<wbr>Port</a>
@@ -2696,8 +2966,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>End port of the destination.</p>
-</dd><dt class="property-required"
+    <dd>End port of the destination.</dd><dt class="property-required"
             title="Required">
         <span id="dstartport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstartport_java" style="color: inherit; text-decoration: inherit;">d<wbr>Start<wbr>Port</a>
@@ -2705,8 +2974,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Start port of the destination.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the destination.</dd><dt class="property-required"
             title="Required">
         <span id="depth_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_java" style="color: inherit; text-decoration: inherit;">depth</a>
@@ -2714,8 +2982,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The depth of match.</p>
-</dd><dt class="property-required"
+    <dd>The depth of match.</dd><dt class="property-required"
             title="Required">
         <span id="isinclude_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isinclude_java" style="color: inherit; text-decoration: inherit;">is<wbr>Include</a>
@@ -2723,8 +2990,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to include the key word/regular expression or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to include the key word/regular expression or not.</dd><dt class="property-required"
             title="Required">
         <span id="matchbegin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin_java" style="color: inherit; text-decoration: inherit;">match<wbr>Begin</a>
@@ -2732,8 +2998,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether to check load or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to check load or not.</dd><dt class="property-required"
             title="Required">
         <span id="matchstr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchstr_java" style="color: inherit; text-decoration: inherit;">match<wbr>Str</a>
@@ -2741,8 +3006,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The key word or regular expression.</p>
-</dd><dt class="property-required"
+    <dd>The key word or regular expression.</dd><dt class="property-required"
             title="Required">
         <span id="matchtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype_java" style="color: inherit; text-decoration: inherit;">match<wbr>Type</a>
@@ -2750,8 +3014,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Match type.</p>
-</dd><dt class="property-required"
+    <dd>Match type.</dd><dt class="property-required"
             title="Required">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -2759,8 +3022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The offset of watermark.</p>
-</dd><dt class="property-required"
+    <dd>The offset of watermark.</dd><dt class="property-required"
             title="Required">
         <span id="pktlengthmax_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlengthmax_java" style="color: inherit; text-decoration: inherit;">pkt<wbr>Length<wbr>Max</a>
@@ -2768,8 +3030,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The max length of the packet.</p>
-</dd><dt class="property-required"
+    <dd>The max length of the packet.</dd><dt class="property-required"
             title="Required">
         <span id="pktlengthmin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlengthmin_java" style="color: inherit; text-decoration: inherit;">pkt<wbr>Length<wbr>Min</a>
@@ -2777,8 +3038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The minimum length of the packet.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of the packet.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2786,8 +3046,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="sendport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sendport_java" style="color: inherit; text-decoration: inherit;">s<wbr>End<wbr>Port</a>
@@ -2795,8 +3054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>End port of the source.</p>
-</dd><dt class="property-required"
+    <dd>End port of the source.</dd><dt class="property-required"
             title="Required">
         <span id="sstartport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sstartport_java" style="color: inherit; text-decoration: inherit;">s<wbr>Start<wbr>Port</a>
@@ -2804,8 +3062,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Start port of the source.</p>
-</dd></dl>
+    <dd>Start port of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2819,8 +3076,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action of port to take.</p>
-</dd><dt class="property-required"
+    <dd>Action of port to take.</dd><dt class="property-required"
             title="Required">
         <span id="dendport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dendport_nodejs" style="color: inherit; text-decoration: inherit;">d<wbr>End<wbr>Port</a>
@@ -2828,8 +3084,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End port of the destination.</p>
-</dd><dt class="property-required"
+    <dd>End port of the destination.</dd><dt class="property-required"
             title="Required">
         <span id="dstartport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstartport_nodejs" style="color: inherit; text-decoration: inherit;">d<wbr>Start<wbr>Port</a>
@@ -2837,8 +3092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Start port of the destination.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the destination.</dd><dt class="property-required"
             title="Required">
         <span id="depth_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_nodejs" style="color: inherit; text-decoration: inherit;">depth</a>
@@ -2846,8 +3100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The depth of match.</p>
-</dd><dt class="property-required"
+    <dd>The depth of match.</dd><dt class="property-required"
             title="Required">
         <span id="isinclude_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isinclude_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Include</a>
@@ -2855,8 +3108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to include the key word/regular expression or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to include the key word/regular expression or not.</dd><dt class="property-required"
             title="Required">
         <span id="matchbegin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin_nodejs" style="color: inherit; text-decoration: inherit;">match<wbr>Begin</a>
@@ -2864,8 +3116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicate whether to check load or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to check load or not.</dd><dt class="property-required"
             title="Required">
         <span id="matchstr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchstr_nodejs" style="color: inherit; text-decoration: inherit;">match<wbr>Str</a>
@@ -2873,8 +3124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The key word or regular expression.</p>
-</dd><dt class="property-required"
+    <dd>The key word or regular expression.</dd><dt class="property-required"
             title="Required">
         <span id="matchtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype_nodejs" style="color: inherit; text-decoration: inherit;">match<wbr>Type</a>
@@ -2882,8 +3132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Match type.</p>
-</dd><dt class="property-required"
+    <dd>Match type.</dd><dt class="property-required"
             title="Required">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -2891,8 +3140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The offset of watermark.</p>
-</dd><dt class="property-required"
+    <dd>The offset of watermark.</dd><dt class="property-required"
             title="Required">
         <span id="pktlengthmax_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlengthmax_nodejs" style="color: inherit; text-decoration: inherit;">pkt<wbr>Length<wbr>Max</a>
@@ -2900,8 +3148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The max length of the packet.</p>
-</dd><dt class="property-required"
+    <dd>The max length of the packet.</dd><dt class="property-required"
             title="Required">
         <span id="pktlengthmin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlengthmin_nodejs" style="color: inherit; text-decoration: inherit;">pkt<wbr>Length<wbr>Min</a>
@@ -2909,8 +3156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The minimum length of the packet.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of the packet.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -2918,8 +3164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="sendport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sendport_nodejs" style="color: inherit; text-decoration: inherit;">s<wbr>End<wbr>Port</a>
@@ -2927,8 +3172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End port of the source.</p>
-</dd><dt class="property-required"
+    <dd>End port of the source.</dd><dt class="property-required"
             title="Required">
         <span id="sstartport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sstartport_nodejs" style="color: inherit; text-decoration: inherit;">s<wbr>Start<wbr>Port</a>
@@ -2936,8 +3180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Start port of the source.</p>
-</dd></dl>
+    <dd>Start port of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2951,8 +3194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Action of port to take.</p>
-</dd><dt class="property-required"
+    <dd>Action of port to take.</dd><dt class="property-required"
             title="Required">
         <span id="d_end_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_end_port_python" style="color: inherit; text-decoration: inherit;">d_<wbr>end_<wbr>port</a>
@@ -2960,8 +3202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End port of the destination.</p>
-</dd><dt class="property-required"
+    <dd>End port of the destination.</dd><dt class="property-required"
             title="Required">
         <span id="d_start_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#d_start_port_python" style="color: inherit; text-decoration: inherit;">d_<wbr>start_<wbr>port</a>
@@ -2969,8 +3210,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start port of the destination.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the destination.</dd><dt class="property-required"
             title="Required">
         <span id="depth_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_python" style="color: inherit; text-decoration: inherit;">depth</a>
@@ -2978,8 +3218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The depth of match.</p>
-</dd><dt class="property-required"
+    <dd>The depth of match.</dd><dt class="property-required"
             title="Required">
         <span id="is_include_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_include_python" style="color: inherit; text-decoration: inherit;">is_<wbr>include</a>
@@ -2987,8 +3226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to include the key word/regular expression or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to include the key word/regular expression or not.</dd><dt class="property-required"
             title="Required">
         <span id="match_begin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_begin_python" style="color: inherit; text-decoration: inherit;">match_<wbr>begin</a>
@@ -2996,8 +3234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicate whether to check load or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to check load or not.</dd><dt class="property-required"
             title="Required">
         <span id="match_str_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_str_python" style="color: inherit; text-decoration: inherit;">match_<wbr>str</a>
@@ -3005,8 +3242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The key word or regular expression.</p>
-</dd><dt class="property-required"
+    <dd>The key word or regular expression.</dd><dt class="property-required"
             title="Required">
         <span id="match_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#match_type_python" style="color: inherit; text-decoration: inherit;">match_<wbr>type</a>
@@ -3014,8 +3250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Match type.</p>
-</dd><dt class="property-required"
+    <dd>Match type.</dd><dt class="property-required"
             title="Required">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -3023,8 +3258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The offset of watermark.</p>
-</dd><dt class="property-required"
+    <dd>The offset of watermark.</dd><dt class="property-required"
             title="Required">
         <span id="pkt_length_max_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pkt_length_max_python" style="color: inherit; text-decoration: inherit;">pkt_<wbr>length_<wbr>max</a>
@@ -3032,8 +3266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The max length of the packet.</p>
-</dd><dt class="property-required"
+    <dd>The max length of the packet.</dd><dt class="property-required"
             title="Required">
         <span id="pkt_length_min_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pkt_length_min_python" style="color: inherit; text-decoration: inherit;">pkt_<wbr>length_<wbr>min</a>
@@ -3041,8 +3274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The minimum length of the packet.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of the packet.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3050,8 +3282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="s_end_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_end_port_python" style="color: inherit; text-decoration: inherit;">s_<wbr>end_<wbr>port</a>
@@ -3059,8 +3290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End port of the source.</p>
-</dd><dt class="property-required"
+    <dd>End port of the source.</dd><dt class="property-required"
             title="Required">
         <span id="s_start_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#s_start_port_python" style="color: inherit; text-decoration: inherit;">s_<wbr>start_<wbr>port</a>
@@ -3068,8 +3298,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start port of the source.</p>
-</dd></dl>
+    <dd>Start port of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3083,8 +3312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action of port to take.</p>
-</dd><dt class="property-required"
+    <dd>Action of port to take.</dd><dt class="property-required"
             title="Required">
         <span id="dendport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dendport_yaml" style="color: inherit; text-decoration: inherit;">d<wbr>End<wbr>Port</a>
@@ -3092,8 +3320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End port of the destination.</p>
-</dd><dt class="property-required"
+    <dd>End port of the destination.</dd><dt class="property-required"
             title="Required">
         <span id="dstartport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dstartport_yaml" style="color: inherit; text-decoration: inherit;">d<wbr>Start<wbr>Port</a>
@@ -3101,8 +3328,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Start port of the destination.</p>
-</dd><dt class="property-required"
+    <dd>Start port of the destination.</dd><dt class="property-required"
             title="Required">
         <span id="depth_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#depth_yaml" style="color: inherit; text-decoration: inherit;">depth</a>
@@ -3110,8 +3336,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The depth of match.</p>
-</dd><dt class="property-required"
+    <dd>The depth of match.</dd><dt class="property-required"
             title="Required">
         <span id="isinclude_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isinclude_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Include</a>
@@ -3119,8 +3344,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to include the key word/regular expression or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to include the key word/regular expression or not.</dd><dt class="property-required"
             title="Required">
         <span id="matchbegin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchbegin_yaml" style="color: inherit; text-decoration: inherit;">match<wbr>Begin</a>
@@ -3128,8 +3352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicate whether to check load or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to check load or not.</dd><dt class="property-required"
             title="Required">
         <span id="matchstr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchstr_yaml" style="color: inherit; text-decoration: inherit;">match<wbr>Str</a>
@@ -3137,8 +3360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The key word or regular expression.</p>
-</dd><dt class="property-required"
+    <dd>The key word or regular expression.</dd><dt class="property-required"
             title="Required">
         <span id="matchtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#matchtype_yaml" style="color: inherit; text-decoration: inherit;">match<wbr>Type</a>
@@ -3146,8 +3368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Match type.</p>
-</dd><dt class="property-required"
+    <dd>Match type.</dd><dt class="property-required"
             title="Required">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -3155,8 +3376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The offset of watermark.</p>
-</dd><dt class="property-required"
+    <dd>The offset of watermark.</dd><dt class="property-required"
             title="Required">
         <span id="pktlengthmax_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlengthmax_yaml" style="color: inherit; text-decoration: inherit;">pkt<wbr>Length<wbr>Max</a>
@@ -3164,8 +3384,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The max length of the packet.</p>
-</dd><dt class="property-required"
+    <dd>The max length of the packet.</dd><dt class="property-required"
             title="Required">
         <span id="pktlengthmin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pktlengthmin_yaml" style="color: inherit; text-decoration: inherit;">pkt<wbr>Length<wbr>Min</a>
@@ -3173,8 +3392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The minimum length of the packet.</p>
-</dd><dt class="property-required"
+    <dd>The minimum length of the packet.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3182,8 +3400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="sendport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sendport_yaml" style="color: inherit; text-decoration: inherit;">s<wbr>End<wbr>Port</a>
@@ -3191,8 +3408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End port of the source.</p>
-</dd><dt class="property-required"
+    <dd>End port of the source.</dd><dt class="property-required"
             title="Required">
         <span id="sstartport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sstartport_yaml" style="color: inherit; text-decoration: inherit;">s<wbr>Start<wbr>Port</a>
@@ -3200,8 +3416,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Start port of the source.</p>
-</dd></dl>
+    <dd>Start port of the source.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3219,8 +3434,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action of port to take.</p>
-</dd><dt class="property-required"
+    <dd>Action of port to take.</dd><dt class="property-required"
             title="Required">
         <span id="endport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endport_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Port</a>
@@ -3228,8 +3442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End port.</p>
-</dd><dt class="property-required"
+    <dd>End port.</dd><dt class="property-required"
             title="Required">
         <span id="kind_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_csharp" style="color: inherit; text-decoration: inherit;">Kind</a>
@@ -3237,8 +3450,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.</p>
-</dd><dt class="property-required"
+    <dd>The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -3246,8 +3458,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="startport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startport_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Port</a>
@@ -3255,8 +3466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start port.</p>
-</dd></dl>
+    <dd>Start port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3270,8 +3480,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action of port to take.</p>
-</dd><dt class="property-required"
+    <dd>Action of port to take.</dd><dt class="property-required"
             title="Required">
         <span id="endport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endport_go" style="color: inherit; text-decoration: inherit;">End<wbr>Port</a>
@@ -3279,8 +3488,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End port.</p>
-</dd><dt class="property-required"
+    <dd>End port.</dd><dt class="property-required"
             title="Required">
         <span id="kind_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_go" style="color: inherit; text-decoration: inherit;">Kind</a>
@@ -3288,8 +3496,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.</p>
-</dd><dt class="property-required"
+    <dd>The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -3297,8 +3504,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="startport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startport_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Port</a>
@@ -3306,8 +3512,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start port.</p>
-</dd></dl>
+    <dd>Start port.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="action_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#action_hcl" style="color: inherit; text-decoration: inherit;">action</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Action of port to take.</dd><dt class="property-required"
+            title="Required">
+        <span id="end_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_port_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End port.</dd><dt class="property-required"
+            title="Required">
+        <span id="kind_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_hcl" style="color: inherit; text-decoration: inherit;">kind</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Protocol.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_port_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3321,8 +3572,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action of port to take.</p>
-</dd><dt class="property-required"
+    <dd>Action of port to take.</dd><dt class="property-required"
             title="Required">
         <span id="endport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endport_java" style="color: inherit; text-decoration: inherit;">end<wbr>Port</a>
@@ -3330,8 +3580,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>End port.</p>
-</dd><dt class="property-required"
+    <dd>End port.</dd><dt class="property-required"
             title="Required">
         <span id="kind_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_java" style="color: inherit; text-decoration: inherit;">kind</a>
@@ -3339,8 +3588,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.</p>
-</dd><dt class="property-required"
+    <dd>The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3348,8 +3596,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="startport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startport_java" style="color: inherit; text-decoration: inherit;">start<wbr>Port</a>
@@ -3357,8 +3604,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Start port.</p>
-</dd></dl>
+    <dd>Start port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3372,8 +3618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Action of port to take.</p>
-</dd><dt class="property-required"
+    <dd>Action of port to take.</dd><dt class="property-required"
             title="Required">
         <span id="endport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endport_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Port</a>
@@ -3381,8 +3626,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End port.</p>
-</dd><dt class="property-required"
+    <dd>End port.</dd><dt class="property-required"
             title="Required">
         <span id="kind_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_nodejs" style="color: inherit; text-decoration: inherit;">kind</a>
@@ -3390,8 +3634,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.</p>
-</dd><dt class="property-required"
+    <dd>The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3399,8 +3642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="startport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startport_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Port</a>
@@ -3408,8 +3650,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Start port.</p>
-</dd></dl>
+    <dd>Start port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3423,8 +3664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Action of port to take.</p>
-</dd><dt class="property-required"
+    <dd>Action of port to take.</dd><dt class="property-required"
             title="Required">
         <span id="end_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_port_python" style="color: inherit; text-decoration: inherit;">end_<wbr>port</a>
@@ -3432,8 +3672,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End port.</p>
-</dd><dt class="property-required"
+    <dd>End port.</dd><dt class="property-required"
             title="Required">
         <span id="kind_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_python" style="color: inherit; text-decoration: inherit;">kind</a>
@@ -3441,8 +3680,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.</p>
-</dd><dt class="property-required"
+    <dd>The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3450,8 +3688,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="start_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_port_python" style="color: inherit; text-decoration: inherit;">start_<wbr>port</a>
@@ -3459,8 +3696,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start port.</p>
-</dd></dl>
+    <dd>Start port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3474,8 +3710,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Action of port to take.</p>
-</dd><dt class="property-required"
+    <dd>Action of port to take.</dd><dt class="property-required"
             title="Required">
         <span id="endport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endport_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Port</a>
@@ -3483,8 +3718,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End port.</p>
-</dd><dt class="property-required"
+    <dd>End port.</dd><dt class="property-required"
             title="Required">
         <span id="kind_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kind_yaml" style="color: inherit; text-decoration: inherit;">kind</a>
@@ -3492,8 +3726,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.</p>
-</dd><dt class="property-required"
+    <dd>The type of forbidden port, and valid values are 0, 1, 2. 0 for destination port, 1 for source port and 2 for both destination and source posts.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -3501,8 +3734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Protocol.</p>
-</dd><dt class="property-required"
+    <dd>Protocol.</dd><dt class="property-required"
             title="Required">
         <span id="startport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#startport_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Port</a>
@@ -3510,8 +3742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Start port.</p>
-</dd></dl>
+    <dd>Start port.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3529,8 +3760,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-required"
             title="Required">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -3538,8 +3768,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The offset of watermark.</p>
-</dd><dt class="property-required"
+    <dd>The offset of watermark.</dd><dt class="property-required"
             title="Required">
         <span id="openswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openswitch_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Switch</a>
@@ -3547,8 +3776,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-required"
             title="Required">
         <span id="tcpportlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpportlists_csharp" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Port<wbr>Lists</a>
@@ -3556,8 +3784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Port range of TCP.</p>
-</dd><dt class="property-required"
+    <dd>Port range of TCP.</dd><dt class="property-required"
             title="Required">
         <span id="udpportlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpportlists_csharp" style="color: inherit; text-decoration: inherit;">Udp<wbr>Port<wbr>Lists</a>
@@ -3565,8 +3792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Port range of TCP.</p>
-</dd></dl>
+    <dd>Port range of TCP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3580,8 +3806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-required"
             title="Required">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -3589,8 +3814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The offset of watermark.</p>
-</dd><dt class="property-required"
+    <dd>The offset of watermark.</dd><dt class="property-required"
             title="Required">
         <span id="openswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openswitch_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Switch</a>
@@ -3598,8 +3822,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-required"
             title="Required">
         <span id="tcpportlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpportlists_go" style="color: inherit; text-decoration: inherit;">Tcp<wbr>Port<wbr>Lists</a>
@@ -3607,8 +3830,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Port range of TCP.</p>
-</dd><dt class="property-required"
+    <dd>Port range of TCP.</dd><dt class="property-required"
             title="Required">
         <span id="udpportlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpportlists_go" style="color: inherit; text-decoration: inherit;">Udp<wbr>Port<wbr>Lists</a>
@@ -3616,8 +3838,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Port range of TCP.</p>
-</dd></dl>
+    <dd>Port range of TCP.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="auto_remove_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_remove_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>remove</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The offset of watermark.</dd><dt class="property-required"
+            title="Required">
+        <span id="open_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_switch_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-required"
+            title="Required">
+        <span id="tcp_port_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_port_lists_hcl" style="color: inherit; text-decoration: inherit;">tcp_<wbr>port_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Port range of TCP.</dd><dt class="property-required"
+            title="Required">
+        <span id="udp_port_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udp_port_lists_hcl" style="color: inherit; text-decoration: inherit;">udp_<wbr>port_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Port range of TCP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3631,8 +3898,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-required"
             title="Required">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -3640,8 +3906,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The offset of watermark.</p>
-</dd><dt class="property-required"
+    <dd>The offset of watermark.</dd><dt class="property-required"
             title="Required">
         <span id="openswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openswitch_java" style="color: inherit; text-decoration: inherit;">open<wbr>Switch</a>
@@ -3649,8 +3914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-required"
             title="Required">
         <span id="tcpportlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpportlists_java" style="color: inherit; text-decoration: inherit;">tcp<wbr>Port<wbr>Lists</a>
@@ -3658,8 +3922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Port range of TCP.</p>
-</dd><dt class="property-required"
+    <dd>Port range of TCP.</dd><dt class="property-required"
             title="Required">
         <span id="udpportlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpportlists_java" style="color: inherit; text-decoration: inherit;">udp<wbr>Port<wbr>Lists</a>
@@ -3667,8 +3930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Port range of TCP.</p>
-</dd></dl>
+    <dd>Port range of TCP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3682,8 +3944,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-required"
             title="Required">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -3691,8 +3952,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The offset of watermark.</p>
-</dd><dt class="property-required"
+    <dd>The offset of watermark.</dd><dt class="property-required"
             title="Required">
         <span id="openswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openswitch_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Switch</a>
@@ -3700,8 +3960,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-required"
             title="Required">
         <span id="tcpportlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpportlists_nodejs" style="color: inherit; text-decoration: inherit;">tcp<wbr>Port<wbr>Lists</a>
@@ -3709,8 +3968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Port range of TCP.</p>
-</dd><dt class="property-required"
+    <dd>Port range of TCP.</dd><dt class="property-required"
             title="Required">
         <span id="udpportlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpportlists_nodejs" style="color: inherit; text-decoration: inherit;">udp<wbr>Port<wbr>Lists</a>
@@ -3718,8 +3976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Port range of TCP.</p>
-</dd></dl>
+    <dd>Port range of TCP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3733,8 +3990,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-required"
             title="Required">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -3742,8 +3998,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The offset of watermark.</p>
-</dd><dt class="property-required"
+    <dd>The offset of watermark.</dd><dt class="property-required"
             title="Required">
         <span id="open_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_switch_python" style="color: inherit; text-decoration: inherit;">open_<wbr>switch</a>
@@ -3751,8 +4006,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-required"
             title="Required">
         <span id="tcp_port_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcp_port_lists_python" style="color: inherit; text-decoration: inherit;">tcp_<wbr>port_<wbr>lists</a>
@@ -3760,8 +4014,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Port range of TCP.</p>
-</dd><dt class="property-required"
+    <dd>Port range of TCP.</dd><dt class="property-required"
             title="Required">
         <span id="udp_port_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udp_port_lists_python" style="color: inherit; text-decoration: inherit;">udp_<wbr>port_<wbr>lists</a>
@@ -3769,8 +4022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Port range of TCP.</p>
-</dd></dl>
+    <dd>Port range of TCP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3784,8 +4036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-required"
             title="Required">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -3793,8 +4044,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The offset of watermark.</p>
-</dd><dt class="property-required"
+    <dd>The offset of watermark.</dd><dt class="property-required"
             title="Required">
         <span id="openswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openswitch_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Switch</a>
@@ -3802,8 +4052,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-required"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-required"
             title="Required">
         <span id="tcpportlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tcpportlists_yaml" style="color: inherit; text-decoration: inherit;">tcp<wbr>Port<wbr>Lists</a>
@@ -3811,8 +4060,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Port range of TCP.</p>
-</dd><dt class="property-required"
+    <dd>Port range of TCP.</dd><dt class="property-required"
             title="Required">
         <span id="udpportlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#udpportlists_yaml" style="color: inherit; text-decoration: inherit;">udp<wbr>Port<wbr>Lists</a>
@@ -3820,8 +4068,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Port range of TCP.</p>
-</dd></dl>
+    <dd>Port range of TCP.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3839,8 +4086,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of the watermark.</p>
-</dd><dt class="property-required"
+    <dd>Content of the watermark.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -3848,8 +4094,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the watermark.</p>
-</dd><dt class="property-required"
+    <dd>Id of the watermark.</dd><dt class="property-required"
             title="Required">
         <span id="openswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openswitch_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Switch</a>
@@ -3857,8 +4102,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -3866,8 +4110,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the DDoS policy.</p>
-</dd></dl>
+    <dd>Create time of the DDoS policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3881,8 +4124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of the watermark.</p>
-</dd><dt class="property-required"
+    <dd>Content of the watermark.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -3890,8 +4132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the watermark.</p>
-</dd><dt class="property-required"
+    <dd>Id of the watermark.</dd><dt class="property-required"
             title="Required">
         <span id="openswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openswitch_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Switch</a>
@@ -3899,8 +4140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -3908,8 +4148,45 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the DDoS policy.</p>
-</dd></dl>
+    <dd>Create time of the DDoS policy.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_hcl" style="color: inherit; text-decoration: inherit;">content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Content of the watermark.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Id of the watermark.</dd><dt class="property-required"
+            title="Required">
+        <span id="open_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_switch_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the DDoS policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3923,8 +4200,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Content of the watermark.</p>
-</dd><dt class="property-required"
+    <dd>Content of the watermark.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -3932,8 +4208,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the watermark.</p>
-</dd><dt class="property-required"
+    <dd>Id of the watermark.</dd><dt class="property-required"
             title="Required">
         <span id="openswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openswitch_java" style="color: inherit; text-decoration: inherit;">open<wbr>Switch</a>
@@ -3941,8 +4216,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3950,8 +4224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the DDoS policy.</p>
-</dd></dl>
+    <dd>Create time of the DDoS policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3965,8 +4238,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Content of the watermark.</p>
-</dd><dt class="property-required"
+    <dd>Content of the watermark.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -3974,8 +4246,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Id of the watermark.</p>
-</dd><dt class="property-required"
+    <dd>Id of the watermark.</dd><dt class="property-required"
             title="Required">
         <span id="openswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openswitch_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Switch</a>
@@ -3983,8 +4254,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3992,8 +4262,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the DDoS policy.</p>
-</dd></dl>
+    <dd>Create time of the DDoS policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4007,8 +4276,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Content of the watermark.</p>
-</dd><dt class="property-required"
+    <dd>Content of the watermark.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -4016,8 +4284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Id of the watermark.</p>
-</dd><dt class="property-required"
+    <dd>Id of the watermark.</dd><dt class="property-required"
             title="Required">
         <span id="open_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_switch_python" style="color: inherit; text-decoration: inherit;">open_<wbr>switch</a>
@@ -4025,8 +4292,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -4034,8 +4300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the DDoS policy.</p>
-</dd></dl>
+    <dd>Create time of the DDoS policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4049,8 +4314,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Content of the watermark.</p>
-</dd><dt class="property-required"
+    <dd>Content of the watermark.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -4058,8 +4322,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Id of the watermark.</p>
-</dd><dt class="property-required"
+    <dd>Id of the watermark.</dd><dt class="property-required"
             title="Required">
         <span id="openswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openswitch_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Switch</a>
@@ -4067,8 +4330,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether to auto-remove the watermark or not.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether to auto-remove the watermark or not.</dd><dt class="property-optional"
             title="Optional">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -4076,8 +4338,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the DDoS policy.</p>
-</dd></dl>
+    <dd>Create time of the DDoS policy.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4092,7 +4353,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

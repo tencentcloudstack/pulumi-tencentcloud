@@ -2,9 +2,11 @@
 ---
 title: "StandbyInstance"
 title_tag: "tencentcloud.Mongodb.StandbyInstance"
-meta_desc: "Documentation for the tencentcloud.Mongodb.StandbyInstance resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a Mongodb standby instance."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,70 +18,163 @@ Provide a resource to create a Mongodb standby instance.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const shanghai = new tencentcloud.Provider("shanghai", {region: "ap-shanghai"});
-const mongodbInstance = new tencentcloud.mongodb.Instance("mongodbInstance", {
-    instanceName: "tf-mongodb-test",
+const example = new tencentcloud.mongodb.Instance("example", {
+    instanceName: "tf-example",
+    cpu: 2,
     memory: 4,
     volume: 100,
-    engineVersion: "MONGO_40_WT",
-    machineType: "HIO10G",
-    availableZone: _var.availability_zone,
+    engineVersion: "MONGO_80_WT",
+    machineType: "GE.LD.T1",
+    availableZone: "ap-guangzhou-6",
+    vpcId: "vpc-i5yyodl9",
+    subnetId: "subnet-hhi88a58",
     projectId: 0,
-    password: "test1234",
-    tags: {
-        test: "test",
-    },
+    password: "Password@2026",
+    dataEncryption: "TDE",
+    encryptionKeySource: "manual",
+    keyId: "KMS-MONGODB",
+    kmsRegion: "ap-guangzhou",
 });
-const mongodbStandbyInstance = new tencentcloud.mongodb.StandbyInstance("mongodbStandbyInstance", {
-    instanceName: "tf-mongodb-standby-test",
+const exampleStandbyInstance = new tencentcloud.mongodb.StandbyInstance("example", {
+    instanceName: "tf-example",
+    cpu: 2,
     memory: 4,
     volume: 100,
-    availableZone: "ap-shanghai-2",
+    availableZone: "ap-guangzhou-7",
+    vpcId: "vpc-i5yyodl9",
+    subnetId: "subnet-d4umunpy",
     projectId: 0,
-    fatherInstanceId: mongodbInstance.id,
+    fatherInstanceId: example.id,
     fatherInstanceRegion: "ap-guangzhou",
+    dataEncryption: "TDE",
+    encryptionKeySource: "manual",
+    keyId: "KMS-MONGODB",
+    kmsRegion: "ap-guangzhou",
     tags: {
-        test: "test",
+        createBy: "Terraform",
     },
-}, {
-    provider: tencentcloud.shanghai,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-shanghai = tencentcloud.Provider("shanghai", region="ap-shanghai")
-mongodb_instance = tencentcloud.mongodb.Instance("mongodbInstance",
-    instance_name="tf-mongodb-test",
+example = tencentcloud.mongodb.Instance("example",
+    instance_name="tf-example",
+    cpu=2,
     memory=4,
     volume=100,
-    engine_version="MONGO_40_WT",
-    machine_type="HIO10G",
-    available_zone=var["availability_zone"],
+    engine_version="MONGO_80_WT",
+    machine_type="GE.LD.T1",
+    available_zone="ap-guangzhou-6",
+    vpc_id="vpc-i5yyodl9",
+    subnet_id="subnet-hhi88a58",
     project_id=0,
-    password="test1234",
-    tags={
-        "test": "test",
-    })
-mongodb_standby_instance = tencentcloud.mongodb.StandbyInstance("mongodbStandbyInstance",
-    instance_name="tf-mongodb-standby-test",
+    password="Password@2026",
+    data_encryption="TDE",
+    encryption_key_source="manual",
+    key_id="KMS-MONGODB",
+    kms_region="ap-guangzhou")
+example_standby_instance = tencentcloud.mongodb.StandbyInstance("example",
+    instance_name="tf-example",
+    cpu=2,
     memory=4,
     volume=100,
-    available_zone="ap-shanghai-2",
+    available_zone="ap-guangzhou-7",
+    vpc_id="vpc-i5yyodl9",
+    subnet_id="subnet-d4umunpy",
     project_id=0,
-    father_instance_id=mongodb_instance.id,
+    father_instance_id=example.id,
     father_instance_region="ap-guangzhou",
+    data_encryption="TDE",
+    encryption_key_source="manual",
+    key_id="KMS-MONGODB",
+    kms_region="ap-guangzhou",
     tags={
-        "test": "test",
-    },
-    opts=pulumi.ResourceOptions(provider=tencentcloud["shanghai"]))
+        "createBy": "Terraform",
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mongodb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example, err := mongodb.NewInstance(ctx, "example", &mongodb.InstanceArgs{
+			InstanceName:        pulumi.String("tf-example"),
+			Cpu:                 pulumi.Int(2),
+			Memory:              pulumi.Int(4),
+			Volume:              pulumi.Int(100),
+			EngineVersion:       pulumi.String("MONGO_80_WT"),
+			MachineType:         pulumi.String("GE.LD.T1"),
+			AvailableZone:       pulumi.String("ap-guangzhou-6"),
+			VpcId:               pulumi.String("vpc-i5yyodl9"),
+			SubnetId:            pulumi.String("subnet-hhi88a58"),
+			ProjectId:           pulumi.Int(0),
+			Password:            pulumi.String("Password@2026"),
+			DataEncryption:      pulumi.String("TDE"),
+			EncryptionKeySource: pulumi.String("manual"),
+			KeyId:               pulumi.String("KMS-MONGODB"),
+			KmsRegion:           pulumi.String("ap-guangzhou"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = mongodb.NewStandbyInstance(ctx, "example", &mongodb.StandbyInstanceArgs{
+			InstanceName:         pulumi.String("tf-example"),
+			Cpu:                  pulumi.Int(2),
+			Memory:               pulumi.Int(4),
+			Volume:               pulumi.Int(100),
+			AvailableZone:        pulumi.String("ap-guangzhou-7"),
+			VpcId:                pulumi.String("vpc-i5yyodl9"),
+			SubnetId:             pulumi.String("subnet-d4umunpy"),
+			ProjectId:            pulumi.Int(0),
+			FatherInstanceId:     example.ID().ToIDOutput().ToStringOutput(),
+			FatherInstanceRegion: pulumi.String("ap-guangzhou"),
+			DataEncryption:       pulumi.String("TDE"),
+			EncryptionKeySource:  pulumi.String("manual"),
+			KeyId:                pulumi.String("KMS-MONGODB"),
+			KmsRegion:            pulumi.String("ap-guangzhou"),
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("Terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -88,114 +183,66 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var shanghai = new Tencentcloud.Provider("shanghai", new()
+    var example = new Tencentcloud.Mongodb.Instance("example", new()
     {
-        Region = "ap-shanghai",
-    });
-
-    var mongodbInstance = new Tencentcloud.Mongodb.Instance("mongodbInstance", new()
-    {
-        InstanceName = "tf-mongodb-test",
+        InstanceName = "tf-example",
+        Cpu = 2,
         Memory = 4,
         Volume = 100,
-        EngineVersion = "MONGO_40_WT",
-        MachineType = "HIO10G",
-        AvailableZone = @var.Availability_zone,
+        EngineVersion = "MONGO_80_WT",
+        MachineType = "GE.LD.T1",
+        AvailableZone = "ap-guangzhou-6",
+        VpcId = "vpc-i5yyodl9",
+        SubnetId = "subnet-hhi88a58",
         ProjectId = 0,
-        Password = "test1234",
-        Tags = 
-        {
-            { "test", "test" },
-        },
+        Password = "Password@2026",
+        DataEncryption = "TDE",
+        EncryptionKeySource = "manual",
+        KeyId = "KMS-MONGODB",
+        KmsRegion = "ap-guangzhou",
     });
 
-    var mongodbStandbyInstance = new Tencentcloud.Mongodb.StandbyInstance("mongodbStandbyInstance", new()
+    var exampleStandbyInstance = new Tencentcloud.Mongodb.StandbyInstance("example", new()
     {
-        InstanceName = "tf-mongodb-standby-test",
+        InstanceName = "tf-example",
+        Cpu = 2,
         Memory = 4,
         Volume = 100,
-        AvailableZone = "ap-shanghai-2",
+        AvailableZone = "ap-guangzhou-7",
+        VpcId = "vpc-i5yyodl9",
+        SubnetId = "subnet-d4umunpy",
         ProjectId = 0,
-        FatherInstanceId = mongodbInstance.Id,
+        FatherInstanceId = example.Id,
         FatherInstanceRegion = "ap-guangzhou",
+        DataEncryption = "TDE",
+        EncryptionKeySource = "manual",
+        KeyId = "KMS-MONGODB",
+        KmsRegion = "ap-guangzhou",
         Tags = 
         {
-            { "test", "test" },
+            { "createBy", "Terraform" },
         },
-    }, new CustomResourceOptions
-    {
-        Provider = tencentcloud.Shanghai,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := tencentcloud.NewProvider(ctx, "shanghai", &tencentcloud.ProviderArgs{
-			Region: pulumi.String("ap-shanghai"),
-		})
-		if err != nil {
-			return err
-		}
-		mongodbInstance, err := Mongodb.NewInstance(ctx, "mongodbInstance", &Mongodb.InstanceArgs{
-			InstanceName:  pulumi.String("tf-mongodb-test"),
-			Memory:        pulumi.Int(4),
-			Volume:        pulumi.Int(100),
-			EngineVersion: pulumi.String("MONGO_40_WT"),
-			MachineType:   pulumi.String("HIO10G"),
-			AvailableZone: pulumi.Any(_var.Availability_zone),
-			ProjectId:     pulumi.Int(0),
-			Password:      pulumi.String("test1234"),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Mongodb.NewStandbyInstance(ctx, "mongodbStandbyInstance", &Mongodb.StandbyInstanceArgs{
-			InstanceName:         pulumi.String("tf-mongodb-standby-test"),
-			Memory:               pulumi.Int(4),
-			Volume:               pulumi.Int(100),
-			AvailableZone:        pulumi.String("ap-shanghai-2"),
-			ProjectId:            pulumi.Int(0),
-			FatherInstanceId:     mongodbInstance.ID(),
-			FatherInstanceRegion: pulumi.String("ap-guangzhou"),
-			Tags: pulumi.Map{
-				"test": pulumi.Any("test"),
-			},
-		}, pulumi.Provider(tencentcloud.Shanghai))
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
 import com.pulumi.Context;
 import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
-import com.pulumi.tencentcloud.Provider;
-import com.pulumi.tencentcloud.ProviderArgs;
 import com.pulumi.tencentcloud.Mongodb.Instance;
 import com.pulumi.tencentcloud.Mongodb.InstanceArgs;
 import com.pulumi.tencentcloud.Mongodb.StandbyInstance;
 import com.pulumi.tencentcloud.Mongodb.StandbyInstanceArgs;
-import com.pulumi.resources.CustomResourceOptions;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -207,144 +254,263 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var shanghai = new Provider("shanghai", ProviderArgs.builder()        
-            .region("ap-shanghai")
-            .build());
-
-        var mongodbInstance = new Instance("mongodbInstance", InstanceArgs.builder()        
-            .instanceName("tf-mongodb-test")
+        var example = new Instance("example", InstanceArgs.builder()
+            .instanceName("tf-example")
+            .cpu(2)
             .memory(4)
             .volume(100)
-            .engineVersion("MONGO_40_WT")
-            .machineType("HIO10G")
-            .availableZone(var_.availability_zone())
+            .engineVersion("MONGO_80_WT")
+            .machineType("GE.LD.T1")
+            .availableZone("ap-guangzhou-6")
+            .vpcId("vpc-i5yyodl9")
+            .subnetId("subnet-hhi88a58")
             .projectId(0)
-            .password("test1234")
-            .tags(Map.of("test", "test"))
+            .password("Password@2026")
+            .dataEncryption("TDE")
+            .encryptionKeySource("manual")
+            .keyId("KMS-MONGODB")
+            .kmsRegion("ap-guangzhou")
             .build());
 
-        var mongodbStandbyInstance = new StandbyInstance("mongodbStandbyInstance", StandbyInstanceArgs.builder()        
-            .instanceName("tf-mongodb-standby-test")
+        var exampleStandbyInstance = new StandbyInstance("exampleStandbyInstance", StandbyInstanceArgs.builder()
+            .instanceName("tf-example")
+            .cpu(2)
             .memory(4)
             .volume(100)
-            .availableZone("ap-shanghai-2")
+            .availableZone("ap-guangzhou-7")
+            .vpcId("vpc-i5yyodl9")
+            .subnetId("subnet-d4umunpy")
             .projectId(0)
-            .fatherInstanceId(mongodbInstance.id())
+            .fatherInstanceId(example.id())
             .fatherInstanceRegion("ap-guangzhou")
-            .tags(Map.of("test", "test"))
-            .build(), CustomResourceOptions.builder()
-                .provider(tencentcloud.shanghai())
-                .build());
+            .dataEncryption("TDE")
+            .encryptionKeySource("manual")
+            .keyId("KMS-MONGODB")
+            .kmsRegion("ap-guangzhou")
+            .tags(Map.of("createBy", "Terraform"))
+            .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  shanghai:
-    type: pulumi:providers:tencentcloud
-    properties:
-      region: ap-shanghai
-  mongodbInstance:
+  example:
     type: tencentcloud:Mongodb:Instance
     properties:
-      instanceName: tf-mongodb-test
+      instanceName: tf-example
+      cpu: 2
       memory: 4
       volume: 100
-      engineVersion: MONGO_40_WT
-      machineType: HIO10G
-      availableZone: ${var.availability_zone}
+      engineVersion: MONGO_80_WT
+      machineType: GE.LD.T1
+      availableZone: ap-guangzhou-6
+      vpcId: vpc-i5yyodl9
+      subnetId: subnet-hhi88a58
       projectId: 0
-      password: test1234
-      tags:
-        test: test
-  mongodbStandbyInstance:
+      password: Password@2026
+      dataEncryption: TDE
+      encryptionKeySource: manual
+      keyId: KMS-MONGODB
+      kmsRegion: ap-guangzhou
+  exampleStandbyInstance:
     type: tencentcloud:Mongodb:StandbyInstance
+    name: example
     properties:
-      instanceName: tf-mongodb-standby-test
+      instanceName: tf-example
+      cpu: 2
       memory: 4
       volume: 100
-      availableZone: ap-shanghai-2
+      availableZone: ap-guangzhou-7
+      vpcId: vpc-i5yyodl9
+      subnetId: subnet-d4umunpy
       projectId: 0
-      fatherInstanceId: ${mongodbInstance.id}
+      fatherInstanceId: ${example.id}
       fatherInstanceRegion: ap-guangzhou
+      dataEncryption: TDE
+      encryptionKeySource: manual
+      keyId: KMS-MONGODB
+      kmsRegion: ap-guangzhou
       tags:
-        test: test
-    options:
-      provider: ${tencentcloud.shanghai}
+        createBy: Terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_mongodb_instance" "example" {
+  instance_name         = "tf-example"
+  cpu                   = 2
+  memory                = 4
+  volume                = 100
+  engine_version        = "MONGO_80_WT"
+  machine_type          = "GE.LD.T1"
+  available_zone        = "ap-guangzhou-6"
+  vpc_id                = "vpc-i5yyodl9"
+  subnet_id             = "subnet-hhi88a58"
+  project_id            = 0
+  password              = "Password@2026"
+  data_encryption       = "TDE"
+  encryption_key_source = "manual"
+  key_id                = "KMS-MONGODB"
+  kms_region            = "ap-guangzhou"
+}
+resource "tencentcloud_mongodb_standbyinstance" "example" {
+  instance_name          = "tf-example"
+  cpu                    = 2
+  memory                 = 4
+  volume                 = 100
+  available_zone         = "ap-guangzhou-7"
+  vpc_id                 = "vpc-i5yyodl9"
+  subnet_id              = "subnet-d4umunpy"
+  project_id             = 0
+  father_instance_id     = tencentcloud_mongodb_instance.example.id
+  father_instance_region = "ap-guangzhou"
+  data_encryption        = "TDE"
+  encryption_key_source  = "manual"
+  key_id                 = "KMS-MONGODB"
+  kms_region             = "ap-guangzhou"
+  tags = {
+    "createBy" = "Terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateDBInstance](https://www.tencentcloud.com/search/?wd=CreateDBInstance&type=document&lang=en)
+  - [CreateDBInstanceHour](https://www.tencentcloud.com/document/api/240/34704)
+  - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+* Read:
+  - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+  - [DescribeSecurityGroup](https://www.tencentcloud.com/document/api/240/40341)
+  - [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&type=document&lang=en)
+* Update:
+  - [AssignProject](https://www.tencentcloud.com/document/api/240/34705)
+  - [DescribeDBInstanceDeal](https://www.tencentcloud.com/document/api/240/37330)
+  - [ModifyDBInstanceSecurityGroup](https://www.tencentcloud.com/document/api/240/45894)
+  - [ModifyDBInstanceSpec](https://www.tencentcloud.com/document/api/240/34699)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+  - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+  - [RenewDBInstances](https://www.tencentcloud.com/document/api/240/37326)
+* Delete:
+  - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+  - [IsolateDBInstance](https://www.tencentcloud.com/document/api/240/34700)
+  - [OfflineIsolatedDBInstance](https://www.tencentcloud.com/document/api/240/34698)
 
 
 ## Create StandbyInstance Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">StandbyInstance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">StandbyInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">StandbyInstance</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">StandbyInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">StandbyInstance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">StandbyInstanceArgs</a></span><span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">StandbyInstance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                    <span class="nx">auto_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                    <span class="nx">available_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                    <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">father_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                    <span class="nx">father_instance_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                    <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                    <span class="nx">available_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                    <span class="nx">volume</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                     <span class="nx">memory</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                    <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                    <span class="nx">father_instance_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                    <span class="nx">key_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                    <span class="nx">in_maintenance</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                    <span class="nx">data_encryption</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                    <span class="nx">auto_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                    <span class="nx">kms_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                    <span class="nx">cpu</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                    <span class="nx">encryption_key_source</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                     <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                     <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                    <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-                    <span class="nx">volume</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                    <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">StandbyInstance</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                    <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">StandbyInstanceArgs</a></span><span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                    <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+                    <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                    <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewStandbyInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">StandbyInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">StandbyInstance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewStandbyInstance</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">StandbyInstanceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">StandbyInstance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">StandbyInstance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">StandbyInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">StandbyInstance</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">StandbyInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">StandbyInstance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">StandbyInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">StandbyInstance</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">StandbyInstanceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mongodb:StandbyInstance</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Mongodb:StandbyInstance</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_mongodb_standby_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -365,7 +531,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -482,11 +648,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## StandbyInstance Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The StandbyInstance resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -502,8 +676,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="fatherinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fatherinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Father<wbr>Instance<wbr>Id</a>
@@ -511,8 +684,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the main instance ID of standby instances.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Indicates the main instance ID of standby instances.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="fatherinstanceregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fatherinstanceregion_csharp" style="color: inherit; text-decoration: inherit;">Father<wbr>Instance<wbr>Region</a>
@@ -520,8 +692,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the region of main instance.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the region of main instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -529,8 +700,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the Mongodb instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Mongodb instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -538,8 +708,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-required"
+    <dd>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-required"
             title="Required">
         <span id="volume_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volume_csharp" style="color: inherit; text-decoration: inherit;">Volume</a>
@@ -547,8 +716,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -556,8 +724,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -565,8 +732,60 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cpu_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_csharp" style="color: inherit; text-decoration: inherit;">Cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dataencryption_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataencryption_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database storage encryption setting. <code>No_Encryption</code>: Storage encryption is not used. <code>TDE</code>: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encryptionkeysource_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptionkeysource_csharp" style="color: inherit; text-decoration: inherit;">Encryption<wbr>Key<wbr>Source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>If TDE storage encryption is selected, the key source must be specified. <code>auto</code>: Automatically generate the key. <code>manual</code>: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="inmaintenance_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inmaintenance_csharp" style="color: inherit; text-decoration: inherit;">In<wbr>Maintenance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Switch time for instance configuration changes.</p>
+<ul>
+<li>0: When the adjustment is completed, perform the configuration task immediately. Default is 0.</li>
+<li>1: Perform reconfiguration tasks within the maintenance time window.
+Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="keyid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Please note that this field is the CMK name, corresponding to the <code>alias</code> field in KMS. Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kmsregion_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -574,8 +793,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -583,8 +801,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -592,8 +809,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the security group.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -601,17 +817,15 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC. The value is required if <code>vpc_id</code> is set.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC. The value is required if <code>vpcId</code> is set.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -619,8 +833,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -634,8 +847,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="fatherinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fatherinstanceid_go" style="color: inherit; text-decoration: inherit;">Father<wbr>Instance<wbr>Id</a>
@@ -643,8 +855,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the main instance ID of standby instances.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Indicates the main instance ID of standby instances.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="fatherinstanceregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fatherinstanceregion_go" style="color: inherit; text-decoration: inherit;">Father<wbr>Instance<wbr>Region</a>
@@ -652,8 +863,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the region of main instance.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the region of main instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -661,8 +871,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the Mongodb instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Mongodb instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -670,8 +879,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-required"
+    <dd>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-required"
             title="Required">
         <span id="volume_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volume_go" style="color: inherit; text-decoration: inherit;">Volume</a>
@@ -679,8 +887,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Renew<wbr>Flag</a>
@@ -688,8 +895,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -697,8 +903,60 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cpu_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_go" style="color: inherit; text-decoration: inherit;">Cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dataencryption_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataencryption_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database storage encryption setting. <code>No_Encryption</code>: Storage encryption is not used. <code>TDE</code>: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encryptionkeysource_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptionkeysource_go" style="color: inherit; text-decoration: inherit;">Encryption<wbr>Key<wbr>Source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>If TDE storage encryption is selected, the key source must be specified. <code>auto</code>: Automatically generate the key. <code>manual</code>: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="inmaintenance_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inmaintenance_go" style="color: inherit; text-decoration: inherit;">In<wbr>Maintenance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Switch time for instance configuration changes.</p>
+<ul>
+<li>0: When the adjustment is completed, perform the configuration task immediately. Default is 0.</li>
+<li>1: Perform reconfiguration tasks within the maintenance time window.
+Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="keyid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Please note that this field is the CMK name, corresponding to the <code>alias</code> field in KMS. Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kmsregion_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -706,8 +964,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -715,8 +972,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -724,8 +980,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the security group.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -733,17 +988,15 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC. The value is required if <code>vpc_id</code> is set.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC. The value is required if <code>vpcId</code> is set.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -751,8 +1004,178 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="available_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_zone_hcl" style="color: inherit; text-decoration: inherit;">available_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="father_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#father_instance_id_hcl" style="color: inherit; text-decoration: inherit;">father_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates the main instance ID of standby instances.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="father_instance_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#father_instance_region_hcl" style="color: inherit; text-decoration: inherit;">father_<wbr>instance_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates the region of main instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the Mongodb instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-required"
+            title="Required">
+        <span id="volume_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volume_hcl" style="color: inherit; text-decoration: inherit;">volume</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="data_encryption_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_encryption_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database storage encryption setting. <code>No_Encryption</code>: Storage encryption is not used. <code>TDE</code>: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encryption_key_source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryption_key_source_hcl" style="color: inherit; text-decoration: inherit;">encryption_<wbr>key_<wbr>source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>If TDE storage encryption is selected, the key source must be specified. <code>auto</code>: Automatically generate the key. <code>manual</code>: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="in_maintenance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#in_maintenance_hcl" style="color: inherit; text-decoration: inherit;">in_<wbr>maintenance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Switch time for instance configuration changes.</p>
+<ul>
+<li>0: When the adjustment is completed, perform the configuration task immediately. Default is 0.</li>
+<li>1: Perform reconfiguration tasks within the maintenance time window.
+Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_id_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Please note that this field is the CMK name, corresponding to the <code>alias</code> field in KMS. Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kms_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_region_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project which the instance belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID of the security group.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the subnet within this VPC. The value is required if <code>vpcId</code> is set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -766,8 +1189,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="fatherinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fatherinstanceid_java" style="color: inherit; text-decoration: inherit;">father<wbr>Instance<wbr>Id</a>
@@ -775,8 +1197,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the main instance ID of standby instances.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Indicates the main instance ID of standby instances.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="fatherinstanceregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fatherinstanceregion_java" style="color: inherit; text-decoration: inherit;">father<wbr>Instance<wbr>Region</a>
@@ -784,8 +1205,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the region of main instance.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the region of main instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -793,8 +1213,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the Mongodb instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Mongodb instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -802,8 +1221,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-required"
+    <dd>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-required"
             title="Required">
         <span id="volume_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volume_java" style="color: inherit; text-decoration: inherit;">volume</a>
@@ -811,8 +1229,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -820,8 +1237,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -829,8 +1245,60 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cpu_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_java" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dataencryption_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataencryption_java" style="color: inherit; text-decoration: inherit;">data<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Database storage encryption setting. <code>No_Encryption</code>: Storage encryption is not used. <code>TDE</code>: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encryptionkeysource_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptionkeysource_java" style="color: inherit; text-decoration: inherit;">encryption<wbr>Key<wbr>Source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>If TDE storage encryption is selected, the key source must be specified. <code>auto</code>: Automatically generate the key. <code>manual</code>: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="inmaintenance_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inmaintenance_java" style="color: inherit; text-decoration: inherit;">in<wbr>Maintenance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Switch time for instance configuration changes.</p>
+<ul>
+<li>0: When the adjustment is completed, perform the configuration task immediately. Default is 0.</li>
+<li>1: Perform reconfiguration tasks within the maintenance time window.
+Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="keyid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_java" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Please note that this field is the CMK name, corresponding to the <code>alias</code> field in KMS. Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kmsregion_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -838,8 +1306,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -847,8 +1314,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -856,8 +1322,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the security group.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -865,17 +1330,15 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC. The value is required if <code>vpc_id</code> is set.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC. The value is required if <code>vpcId</code> is set.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -883,8 +1346,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -898,8 +1360,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="fatherinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fatherinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">father<wbr>Instance<wbr>Id</a>
@@ -907,8 +1368,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the main instance ID of standby instances.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Indicates the main instance ID of standby instances.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="fatherinstanceregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fatherinstanceregion_nodejs" style="color: inherit; text-decoration: inherit;">father<wbr>Instance<wbr>Region</a>
@@ -916,8 +1376,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the region of main instance.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the region of main instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -925,8 +1384,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the Mongodb instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Mongodb instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -934,8 +1392,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-required"
+    <dd>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-required"
             title="Required">
         <span id="volume_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volume_nodejs" style="color: inherit; text-decoration: inherit;">volume</a>
@@ -943,8 +1400,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -952,8 +1408,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -961,8 +1416,60 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cpu_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_nodejs" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dataencryption_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataencryption_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database storage encryption setting. <code>No_Encryption</code>: Storage encryption is not used. <code>TDE</code>: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encryptionkeysource_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptionkeysource_nodejs" style="color: inherit; text-decoration: inherit;">encryption<wbr>Key<wbr>Source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>If TDE storage encryption is selected, the key source must be specified. <code>auto</code>: Automatically generate the key. <code>manual</code>: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="inmaintenance_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inmaintenance_nodejs" style="color: inherit; text-decoration: inherit;">in<wbr>Maintenance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Switch time for instance configuration changes.</p>
+<ul>
+<li>0: When the adjustment is completed, perform the configuration task immediately. Default is 0.</li>
+<li>1: Perform reconfiguration tasks within the maintenance time window.
+Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="keyid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Please note that this field is the CMK name, corresponding to the <code>alias</code> field in KMS. Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kmsregion_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -970,8 +1477,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -979,8 +1485,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -988,8 +1493,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the security group.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -997,17 +1501,15 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC. The value is required if <code>vpc_id</code> is set.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC. The value is required if <code>vpcId</code> is set.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1015,8 +1517,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1030,8 +1531,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="father_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#father_instance_id_python" style="color: inherit; text-decoration: inherit;">father_<wbr>instance_<wbr>id</a>
@@ -1039,8 +1539,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates the main instance ID of standby instances.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Indicates the main instance ID of standby instances.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="father_instance_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#father_instance_region_python" style="color: inherit; text-decoration: inherit;">father_<wbr>instance_<wbr>region</a>
@@ -1048,8 +1547,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates the region of main instance.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the region of main instance.</dd><dt class="property-required"
             title="Required">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -1057,8 +1555,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the Mongodb instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Mongodb instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1066,8 +1563,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-required"
+    <dd>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-required"
             title="Required">
         <span id="volume_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volume_python" style="color: inherit; text-decoration: inherit;">volume</a>
@@ -1075,8 +1571,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional"
             title="Optional">
         <span id="auto_renew_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
@@ -1084,8 +1579,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -1093,8 +1587,60 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cpu_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_python" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="data_encryption_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_encryption_python" style="color: inherit; text-decoration: inherit;">data_<wbr>encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Database storage encryption setting. <code>No_Encryption</code>: Storage encryption is not used. <code>TDE</code>: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encryption_key_source_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryption_key_source_python" style="color: inherit; text-decoration: inherit;">encryption_<wbr>key_<wbr>source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>If TDE storage encryption is selected, the key source must be specified. <code>auto</code>: Automatically generate the key. <code>manual</code>: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="in_maintenance_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#in_maintenance_python" style="color: inherit; text-decoration: inherit;">in_<wbr>maintenance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Switch time for instance configuration changes.</p>
+<ul>
+<li>0: When the adjustment is completed, perform the configuration task immediately. Default is 0.</li>
+<li>1: Perform reconfiguration tasks within the maintenance time window.
+Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="key_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_id_python" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Please note that this field is the CMK name, corresponding to the <code>alias</code> field in KMS. Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kms_region_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kms_region_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_period_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
@@ -1102,8 +1648,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1111,8 +1656,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -1120,8 +1664,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the security group.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1129,17 +1672,15 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC. The value is required if <code>vpc_id</code> is set.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC. The value is required if <code>vpcId</code> is set.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1147,8 +1688,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1162,8 +1702,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="fatherinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fatherinstanceid_yaml" style="color: inherit; text-decoration: inherit;">father<wbr>Instance<wbr>Id</a>
@@ -1171,8 +1710,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the main instance ID of standby instances.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Indicates the main instance ID of standby instances.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="fatherinstanceregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fatherinstanceregion_yaml" style="color: inherit; text-decoration: inherit;">father<wbr>Instance<wbr>Region</a>
@@ -1180,8 +1718,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the region of main instance.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the region of main instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1189,8 +1726,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the Mongodb instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Mongodb instance.</dd><dt class="property-required"
             title="Required">
         <span id="memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1198,8 +1734,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-required"
+    <dd>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-required"
             title="Required">
         <span id="volume_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volume_yaml" style="color: inherit; text-decoration: inherit;">volume</a>
@@ -1207,8 +1742,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional"
+    <dd>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional"
             title="Optional">
         <span id="autorenewflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autorenewflag_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Renew<wbr>Flag</a>
@@ -1216,8 +1750,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1225,8 +1758,60 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cpu_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_yaml" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dataencryption_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataencryption_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Database storage encryption setting. <code>No_Encryption</code>: Storage encryption is not used. <code>TDE</code>: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="encryptionkeysource_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptionkeysource_yaml" style="color: inherit; text-decoration: inherit;">encryption<wbr>Key<wbr>Source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>If TDE storage encryption is selected, the key source must be specified. <code>auto</code>: Automatically generate the key. <code>manual</code>: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="inmaintenance_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inmaintenance_yaml" style="color: inherit; text-decoration: inherit;">in<wbr>Maintenance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Switch time for instance configuration changes.</p>
+<ul>
+<li>0: When the adjustment is completed, perform the configuration task immediately. Default is 0.</li>
+<li>1: Perform reconfiguration tasks within the maintenance time window.
+Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="keyid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyid_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Please note that this field is the CMK name, corresponding to the <code>alias</code> field in KMS. Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="kmsregion_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#kmsregion_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="prepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -1234,8 +1819,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1243,8 +1827,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1252,8 +1835,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>ID of the security group.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1261,17 +1843,15 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC. The value is required if <code>vpc_id</code> is set.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC. The value is required if <code>vpcId</code> is set.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1279,8 +1859,7 @@ The StandbyInstance resource accepts the following [input](/docs/intro/concepts/
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd></dl>
+    <dd>ID of the VPC.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1301,8 +1880,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the Mongodb instance.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the Mongodb instance.</dd><dt class="property-"
             title="">
         <span id="engineversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -1310,8 +1888,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the standby Mongodb instance and must be same as the version of main instance.</p>
-</dd><dt class="property-"
+    <dd>Version of the standby Mongodb instance and must be same as the version of main instance.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1319,8 +1896,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="machinetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_csharp" style="color: inherit; text-decoration: inherit;">Machine<wbr>Type</a>
@@ -1328,8 +1904,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of standby Mongodb instance and must be same as the type of main instance.</p>
-</dd><dt class="property-"
+    <dd>Type of standby Mongodb instance and must be same as the type of main instance.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1337,8 +1912,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</p>
-</dd><dt class="property-"
+    <dd>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</dd><dt class="property-"
             title="">
         <span id="vip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_csharp" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -1346,8 +1920,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the Mongodb instance.</p>
-</dd><dt class="property-"
+    <dd>IP of the Mongodb instance.</dd><dt class="property-"
             title="">
         <span id="vport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_csharp" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -1355,8 +1928,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>IP port of the Mongodb instance.</p>
-</dd></dl>
+    <dd>IP port of the Mongodb instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1370,8 +1942,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the Mongodb instance.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the Mongodb instance.</dd><dt class="property-"
             title="">
         <span id="engineversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -1379,8 +1950,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the standby Mongodb instance and must be same as the version of main instance.</p>
-</dd><dt class="property-"
+    <dd>Version of the standby Mongodb instance and must be same as the version of main instance.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1388,8 +1958,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="machinetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_go" style="color: inherit; text-decoration: inherit;">Machine<wbr>Type</a>
@@ -1397,8 +1966,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of standby Mongodb instance and must be same as the type of main instance.</p>
-</dd><dt class="property-"
+    <dd>Type of standby Mongodb instance and must be same as the type of main instance.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1406,8 +1974,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</p>
-</dd><dt class="property-"
+    <dd>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</dd><dt class="property-"
             title="">
         <span id="vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -1415,8 +1982,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the Mongodb instance.</p>
-</dd><dt class="property-"
+    <dd>IP of the Mongodb instance.</dd><dt class="property-"
             title="">
         <span id="vport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_go" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -1424,8 +1990,69 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>IP port of the Mongodb instance.</p>
-</dd></dl>
+    <dd>IP port of the Mongodb instance.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the Mongodb instance.</dd><dt class="property-"
+            title="">
+        <span id="engine_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of the standby Mongodb instance and must be same as the version of main instance.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="machine_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machine_type_hcl" style="color: inherit; text-decoration: inherit;">machine_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of standby Mongodb instance and must be same as the type of main instance.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</dd><dt class="property-"
+            title="">
+        <span id="vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP of the Mongodb instance.</dd><dt class="property-"
+            title="">
+        <span id="vport_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_hcl" style="color: inherit; text-decoration: inherit;">vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>IP port of the Mongodb instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1439,8 +2066,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the Mongodb instance.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the Mongodb instance.</dd><dt class="property-"
             title="">
         <span id="engineversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1448,8 +2074,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the standby Mongodb instance and must be same as the version of main instance.</p>
-</dd><dt class="property-"
+    <dd>Version of the standby Mongodb instance and must be same as the version of main instance.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1457,8 +2082,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="machinetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_java" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -1466,8 +2090,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of standby Mongodb instance and must be same as the type of main instance.</p>
-</dd><dt class="property-"
+    <dd>Type of standby Mongodb instance and must be same as the type of main instance.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1475,8 +2098,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</p>
-</dd><dt class="property-"
+    <dd>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</dd><dt class="property-"
             title="">
         <span id="vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1484,8 +2106,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the Mongodb instance.</p>
-</dd><dt class="property-"
+    <dd>IP of the Mongodb instance.</dd><dt class="property-"
             title="">
         <span id="vport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_java" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -1493,8 +2114,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>IP port of the Mongodb instance.</p>
-</dd></dl>
+    <dd>IP port of the Mongodb instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1508,8 +2128,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the Mongodb instance.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the Mongodb instance.</dd><dt class="property-"
             title="">
         <span id="engineversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1517,8 +2136,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the standby Mongodb instance and must be same as the version of main instance.</p>
-</dd><dt class="property-"
+    <dd>Version of the standby Mongodb instance and must be same as the version of main instance.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1526,8 +2144,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="machinetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_nodejs" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -1535,8 +2152,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of standby Mongodb instance and must be same as the type of main instance.</p>
-</dd><dt class="property-"
+    <dd>Type of standby Mongodb instance and must be same as the type of main instance.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1544,8 +2160,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</p>
-</dd><dt class="property-"
+    <dd>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</dd><dt class="property-"
             title="">
         <span id="vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1553,8 +2168,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the Mongodb instance.</p>
-</dd><dt class="property-"
+    <dd>IP of the Mongodb instance.</dd><dt class="property-"
             title="">
         <span id="vport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_nodejs" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -1562,8 +2176,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>IP port of the Mongodb instance.</p>
-</dd></dl>
+    <dd>IP port of the Mongodb instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1577,8 +2190,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the Mongodb instance.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the Mongodb instance.</dd><dt class="property-"
             title="">
         <span id="engine_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
@@ -1586,8 +2198,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of the standby Mongodb instance and must be same as the version of main instance.</p>
-</dd><dt class="property-"
+    <dd>Version of the standby Mongodb instance and must be same as the version of main instance.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1595,8 +2206,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="machine_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machine_type_python" style="color: inherit; text-decoration: inherit;">machine_<wbr>type</a>
@@ -1604,8 +2214,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of standby Mongodb instance and must be same as the type of main instance.</p>
-</dd><dt class="property-"
+    <dd>Type of standby Mongodb instance and must be same as the type of main instance.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1613,8 +2222,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</p>
-</dd><dt class="property-"
+    <dd>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</dd><dt class="property-"
             title="">
         <span id="vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1622,8 +2230,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP of the Mongodb instance.</p>
-</dd><dt class="property-"
+    <dd>IP of the Mongodb instance.</dd><dt class="property-"
             title="">
         <span id="vport_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_python" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -1631,8 +2238,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>IP port of the Mongodb instance.</p>
-</dd></dl>
+    <dd>IP port of the Mongodb instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1646,8 +2252,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the Mongodb instance.</p>
-</dd><dt class="property-"
+    <dd>Creation time of the Mongodb instance.</dd><dt class="property-"
             title="">
         <span id="engineversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1655,8 +2260,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the standby Mongodb instance and must be same as the version of main instance.</p>
-</dd><dt class="property-"
+    <dd>Version of the standby Mongodb instance and must be same as the version of main instance.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1664,8 +2268,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="machinetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#machinetype_yaml" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -1673,8 +2276,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of standby Mongodb instance and must be same as the type of main instance.</p>
-</dd><dt class="property-"
+    <dd>Type of standby Mongodb instance and must be same as the type of main instance.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1682,8 +2284,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</p>
-</dd><dt class="property-"
+    <dd>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</dd><dt class="property-"
             title="">
         <span id="vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1691,8 +2292,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the Mongodb instance.</p>
-</dd><dt class="property-"
+    <dd>IP of the Mongodb instance.</dd><dt class="property-"
             title="">
         <span id="vport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vport_yaml" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -1700,8 +2300,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>IP port of the Mongodb instance.</p>
-</dd></dl>
+    <dd>IP port of the Mongodb instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1711,29 +2310,35 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing StandbyInstance resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">StandbyInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">StandbyInstance</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">StandbyInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">StandbyInstance</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">auto_renew_flag</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">available_zone</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">cpu</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">data_encryption</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">encryption_key_source</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">engine_version</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">father_instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">father_instance_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">in_maintenance</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">key_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">kms_region</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">machine_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">memory</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">prepaid_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
@@ -1741,109 +2346,148 @@ Get an existing StandbyInstance resource's state with the given name, ID, and op
         <span class="nx">security_groups</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">vip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">volume</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vport</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">) -&gt;</span> StandbyInstance</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetStandbyInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">StandbyInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">StandbyInstance</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetStandbyInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">StandbyInstanceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">StandbyInstance</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">StandbyInstance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">StandbyInstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">StandbyInstance</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">StandbyInstanceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">StandbyInstance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">StandbyInstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">StandbyInstance</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">StandbyInstanceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingStandbyInstance</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Mongodb:StandbyInstance</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_mongodb_standby_instance</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">StandbyInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">StandbyInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1851,28 +2495,31 @@ Get an existing StandbyInstance resource's state with the given name, ID, and op
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">StandbyInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1880,28 +2527,31 @@ Get an existing StandbyInstance resource's state with the given name, ID, and op
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">StandbyInstanceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1921,8 +2571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availablezone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availablezone_csharp" style="color: inherit; text-decoration: inherit;">Available<wbr>Zone</a>
@@ -1930,8 +2579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1939,8 +2587,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cpu_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_csharp" style="color: inherit; text-decoration: inherit;">Cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1948,8 +2603,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the Mongodb instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dataencryption_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataencryption_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database storage encryption setting. <code>No_Encryption</code>: Storage encryption is not used. <code>TDE</code>: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encryptionkeysource_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptionkeysource_csharp" style="color: inherit; text-decoration: inherit;">Encryption<wbr>Key<wbr>Source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>If TDE storage encryption is selected, the key source must be specified. <code>auto</code>: Automatically generate the key. <code>manual</code>: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -1957,8 +2627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the standby Mongodb instance and must be same as the version of main instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of the standby Mongodb instance and must be same as the version of main instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_fatherinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fatherinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Father<wbr>Instance<wbr>Id</a>
@@ -1966,8 +2635,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the main instance ID of standby instances.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the main instance ID of standby instances.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_fatherinstanceregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fatherinstanceregion_csharp" style="color: inherit; text-decoration: inherit;">Father<wbr>Instance<wbr>Region</a>
@@ -1975,8 +2643,20 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the region of main instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the region of main instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_inmaintenance_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_inmaintenance_csharp" style="color: inherit; text-decoration: inherit;">In<wbr>Maintenance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Switch time for instance configuration changes.</p>
+<ul>
+<li>0: When the adjustment is completed, perform the configuration task immediately. Default is 0.</li>
+<li>1: Perform reconfiguration tasks within the maintenance time window.
+Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1984,8 +2664,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the Mongodb instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_keyid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyid_csharp" style="color: inherit; text-decoration: inherit;">Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Please note that this field is the CMK name, corresponding to the <code>alias</code> field in KMS. Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kmsregion_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsregion_csharp" style="color: inherit; text-decoration: inherit;">Kms<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_machinetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_machinetype_csharp" style="color: inherit; text-decoration: inherit;">Machine<wbr>Type</a>
@@ -1993,8 +2688,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of standby Mongodb instance and must be same as the type of main instance.</p>
-</dd><dt class="property-optional"
+    <dd>Type of standby Mongodb instance and must be same as the type of main instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -2002,8 +2696,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -2011,8 +2704,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2020,8 +2712,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -2029,8 +2720,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2038,8 +2728,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2047,17 +2736,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC. The value is required if <code>vpc_id</code> is set.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC. The value is required if <code>vpcId</code> is set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_csharp" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -2065,8 +2752,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>IP of the Mongodb instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_volume_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_volume_csharp" style="color: inherit; text-decoration: inherit;">Volume</a>
@@ -2074,8 +2760,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2083,8 +2768,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_csharp" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -2092,8 +2776,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>IP port of the Mongodb instance.</p>
-</dd></dl>
+    <dd>IP port of the Mongodb instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2107,8 +2790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availablezone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availablezone_go" style="color: inherit; text-decoration: inherit;">Available<wbr>Zone</a>
@@ -2116,8 +2798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -2125,8 +2806,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cpu_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_go" style="color: inherit; text-decoration: inherit;">Cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2134,8 +2822,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the Mongodb instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dataencryption_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataencryption_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database storage encryption setting. <code>No_Encryption</code>: Storage encryption is not used. <code>TDE</code>: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encryptionkeysource_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptionkeysource_go" style="color: inherit; text-decoration: inherit;">Encryption<wbr>Key<wbr>Source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>If TDE storage encryption is selected, the key source must be specified. <code>auto</code>: Automatically generate the key. <code>manual</code>: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -2143,8 +2846,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the standby Mongodb instance and must be same as the version of main instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of the standby Mongodb instance and must be same as the version of main instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_fatherinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fatherinstanceid_go" style="color: inherit; text-decoration: inherit;">Father<wbr>Instance<wbr>Id</a>
@@ -2152,8 +2854,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the main instance ID of standby instances.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the main instance ID of standby instances.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_fatherinstanceregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fatherinstanceregion_go" style="color: inherit; text-decoration: inherit;">Father<wbr>Instance<wbr>Region</a>
@@ -2161,8 +2862,20 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the region of main instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the region of main instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_inmaintenance_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_inmaintenance_go" style="color: inherit; text-decoration: inherit;">In<wbr>Maintenance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Switch time for instance configuration changes.</p>
+<ul>
+<li>0: When the adjustment is completed, perform the configuration task immediately. Default is 0.</li>
+<li>1: Perform reconfiguration tasks within the maintenance time window.
+Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -2170,8 +2883,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the Mongodb instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_keyid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyid_go" style="color: inherit; text-decoration: inherit;">Key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Please note that this field is the CMK name, corresponding to the <code>alias</code> field in KMS. Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kmsregion_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsregion_go" style="color: inherit; text-decoration: inherit;">Kms<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_machinetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_machinetype_go" style="color: inherit; text-decoration: inherit;">Machine<wbr>Type</a>
@@ -2179,8 +2907,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of standby Mongodb instance and must be same as the type of main instance.</p>
-</dd><dt class="property-optional"
+    <dd>Type of standby Mongodb instance and must be same as the type of main instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -2188,8 +2915,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
@@ -2197,8 +2923,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2206,8 +2931,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -2215,8 +2939,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2224,8 +2947,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2233,17 +2955,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC. The value is required if <code>vpc_id</code> is set.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC. The value is required if <code>vpcId</code> is set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -2251,8 +2971,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>IP of the Mongodb instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_volume_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_volume_go" style="color: inherit; text-decoration: inherit;">Volume</a>
@@ -2260,8 +2979,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2269,8 +2987,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_go" style="color: inherit; text-decoration: inherit;">Vport</a>
@@ -2278,8 +2995,226 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>IP port of the Mongodb instance.</p>
-</dd></dl>
+    <dd>IP port of the Mongodb instance.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_available_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_available_zone_hcl" style="color: inherit; text-decoration: inherit;">available_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the Mongodb instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_data_encryption_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_data_encryption_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database storage encryption setting. <code>No_Encryption</code>: Storage encryption is not used. <code>TDE</code>: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encryption_key_source_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryption_key_source_hcl" style="color: inherit; text-decoration: inherit;">encryption_<wbr>key_<wbr>source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>If TDE storage encryption is selected, the key source must be specified. <code>auto</code>: Automatically generate the key. <code>manual</code>: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_engine_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Version of the standby Mongodb instance and must be same as the version of main instance.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_father_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_father_instance_id_hcl" style="color: inherit; text-decoration: inherit;">father_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates the main instance ID of standby instances.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_father_instance_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_father_instance_region_hcl" style="color: inherit; text-decoration: inherit;">father_<wbr>instance_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates the region of main instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_in_maintenance_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_in_maintenance_hcl" style="color: inherit; text-decoration: inherit;">in_<wbr>maintenance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Switch time for instance configuration changes.</p>
+<ul>
+<li>0: When the adjustment is completed, perform the configuration task immediately. Default is 0.</li>
+<li>1: Perform reconfiguration tasks within the maintenance time window.
+Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the Mongodb instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_key_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_id_hcl" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Please note that this field is the CMK name, corresponding to the <code>alias</code> field in KMS. Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kms_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_region_hcl" style="color: inherit; text-decoration: inherit;">kms_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_machine_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_machine_type_hcl" style="color: inherit; text-decoration: inherit;">machine_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of standby Mongodb instance and must be same as the type of main instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project which the instance belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID of the security group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the subnet within this VPC. The value is required if <code>vpcId</code> is set.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP of the Mongodb instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_volume_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_volume_hcl" style="color: inherit; text-decoration: inherit;">volume</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vport_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_hcl" style="color: inherit; text-decoration: inherit;">vport</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>IP port of the Mongodb instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2293,8 +3228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availablezone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availablezone_java" style="color: inherit; text-decoration: inherit;">available<wbr>Zone</a>
@@ -2302,8 +3236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2311,8 +3244,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cpu_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_java" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2320,8 +3260,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the Mongodb instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dataencryption_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataencryption_java" style="color: inherit; text-decoration: inherit;">data<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Database storage encryption setting. <code>No_Encryption</code>: Storage encryption is not used. <code>TDE</code>: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encryptionkeysource_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptionkeysource_java" style="color: inherit; text-decoration: inherit;">encryption<wbr>Key<wbr>Source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>If TDE storage encryption is selected, the key source must be specified. <code>auto</code>: Automatically generate the key. <code>manual</code>: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -2329,8 +3284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the standby Mongodb instance and must be same as the version of main instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of the standby Mongodb instance and must be same as the version of main instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_fatherinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fatherinstanceid_java" style="color: inherit; text-decoration: inherit;">father<wbr>Instance<wbr>Id</a>
@@ -2338,8 +3292,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the main instance ID of standby instances.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the main instance ID of standby instances.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_fatherinstanceregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fatherinstanceregion_java" style="color: inherit; text-decoration: inherit;">father<wbr>Instance<wbr>Region</a>
@@ -2347,8 +3300,20 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the region of main instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the region of main instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_inmaintenance_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_inmaintenance_java" style="color: inherit; text-decoration: inherit;">in<wbr>Maintenance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Switch time for instance configuration changes.</p>
+<ul>
+<li>0: When the adjustment is completed, perform the configuration task immediately. Default is 0.</li>
+<li>1: Perform reconfiguration tasks within the maintenance time window.
+Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2356,8 +3321,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the Mongodb instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_keyid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyid_java" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Please note that this field is the CMK name, corresponding to the <code>alias</code> field in KMS. Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kmsregion_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsregion_java" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_machinetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_machinetype_java" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -2365,8 +3345,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of standby Mongodb instance and must be same as the type of main instance.</p>
-</dd><dt class="property-optional"
+    <dd>Type of standby Mongodb instance and must be same as the type of main instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -2374,8 +3353,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -2383,8 +3361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2392,8 +3369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -2401,8 +3377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2410,8 +3385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2419,17 +3393,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC. The value is required if <code>vpc_id</code> is set.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC. The value is required if <code>vpcId</code> is set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2437,8 +3409,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>IP of the Mongodb instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_volume_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_volume_java" style="color: inherit; text-decoration: inherit;">volume</a>
@@ -2446,8 +3417,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2455,8 +3425,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_java" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2464,8 +3433,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>IP port of the Mongodb instance.</p>
-</dd></dl>
+    <dd>IP port of the Mongodb instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2479,8 +3447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availablezone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availablezone_nodejs" style="color: inherit; text-decoration: inherit;">available<wbr>Zone</a>
@@ -2488,8 +3455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2497,8 +3463,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cpu_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_nodejs" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2506,8 +3479,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the Mongodb instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dataencryption_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataencryption_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database storage encryption setting. <code>No_Encryption</code>: Storage encryption is not used. <code>TDE</code>: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encryptionkeysource_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptionkeysource_nodejs" style="color: inherit; text-decoration: inherit;">encryption<wbr>Key<wbr>Source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>If TDE storage encryption is selected, the key source must be specified. <code>auto</code>: Automatically generate the key. <code>manual</code>: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -2515,8 +3503,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Version of the standby Mongodb instance and must be same as the version of main instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of the standby Mongodb instance and must be same as the version of main instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_fatherinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fatherinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">father<wbr>Instance<wbr>Id</a>
@@ -2524,8 +3511,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the main instance ID of standby instances.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the main instance ID of standby instances.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_fatherinstanceregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fatherinstanceregion_nodejs" style="color: inherit; text-decoration: inherit;">father<wbr>Instance<wbr>Region</a>
@@ -2533,8 +3519,20 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the region of main instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the region of main instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_inmaintenance_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_inmaintenance_nodejs" style="color: inherit; text-decoration: inherit;">in<wbr>Maintenance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Switch time for instance configuration changes.</p>
+<ul>
+<li>0: When the adjustment is completed, perform the configuration task immediately. Default is 0.</li>
+<li>1: Perform reconfiguration tasks within the maintenance time window.
+Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2542,8 +3540,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the Mongodb instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_keyid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyid_nodejs" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Please note that this field is the CMK name, corresponding to the <code>alias</code> field in KMS. Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kmsregion_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsregion_nodejs" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_machinetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_machinetype_nodejs" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -2551,8 +3564,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of standby Mongodb instance and must be same as the type of main instance.</p>
-</dd><dt class="property-optional"
+    <dd>Type of standby Mongodb instance and must be same as the type of main instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -2560,8 +3572,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -2569,8 +3580,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2578,8 +3588,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -2587,8 +3596,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2596,8 +3604,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2605,17 +3612,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC. The value is required if <code>vpc_id</code> is set.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC. The value is required if <code>vpcId</code> is set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2623,8 +3628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>IP of the Mongodb instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_volume_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_volume_nodejs" style="color: inherit; text-decoration: inherit;">volume</a>
@@ -2632,8 +3636,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2641,8 +3644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_nodejs" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2650,8 +3652,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>IP port of the Mongodb instance.</p>
-</dd></dl>
+    <dd>IP port of the Mongodb instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2665,8 +3666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_available_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_available_zone_python" style="color: inherit; text-decoration: inherit;">available_<wbr>zone</a>
@@ -2674,8 +3674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -2683,8 +3682,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cpu_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_python" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -2692,8 +3698,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the Mongodb instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_data_encryption_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_data_encryption_python" style="color: inherit; text-decoration: inherit;">data_<wbr>encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Database storage encryption setting. <code>No_Encryption</code>: Storage encryption is not used. <code>TDE</code>: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encryption_key_source_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryption_key_source_python" style="color: inherit; text-decoration: inherit;">encryption_<wbr>key_<wbr>source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>If TDE storage encryption is selected, the key source must be specified. <code>auto</code>: Automatically generate the key. <code>manual</code>: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engine_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engine_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
@@ -2701,8 +3722,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Version of the standby Mongodb instance and must be same as the version of main instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of the standby Mongodb instance and must be same as the version of main instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_father_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_father_instance_id_python" style="color: inherit; text-decoration: inherit;">father_<wbr>instance_<wbr>id</a>
@@ -2710,8 +3730,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates the main instance ID of standby instances.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the main instance ID of standby instances.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_father_instance_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_father_instance_region_python" style="color: inherit; text-decoration: inherit;">father_<wbr>instance_<wbr>region</a>
@@ -2719,8 +3738,20 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates the region of main instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the region of main instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_in_maintenance_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_in_maintenance_python" style="color: inherit; text-decoration: inherit;">in_<wbr>maintenance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Switch time for instance configuration changes.</p>
+<ul>
+<li>0: When the adjustment is completed, perform the configuration task immediately. Default is 0.</li>
+<li>1: Perform reconfiguration tasks within the maintenance time window.
+Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -2728,8 +3759,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the Mongodb instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_key_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_key_id_python" style="color: inherit; text-decoration: inherit;">key_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Please note that this field is the CMK name, corresponding to the <code>alias</code> field in KMS. Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kms_region_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kms_region_python" style="color: inherit; text-decoration: inherit;">kms_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_machine_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_machine_type_python" style="color: inherit; text-decoration: inherit;">machine_<wbr>type</a>
@@ -2737,8 +3783,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of standby Mongodb instance and must be same as the type of main instance.</p>
-</dd><dt class="property-optional"
+    <dd>Type of standby Mongodb instance and must be same as the type of main instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -2746,8 +3791,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaid_period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaid_period_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
@@ -2755,8 +3799,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -2764,8 +3807,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -2773,8 +3815,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2782,8 +3823,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -2791,17 +3831,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC. The value is required if <code>vpc_id</code> is set.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC. The value is required if <code>vpcId</code> is set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2809,8 +3847,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>IP of the Mongodb instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_volume_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_volume_python" style="color: inherit; text-decoration: inherit;">volume</a>
@@ -2818,8 +3855,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2827,8 +3863,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_python" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -2836,8 +3871,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>IP port of the Mongodb instance.</p>
-</dd></dl>
+    <dd>IP port of the Mongodb instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2851,8 +3885,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Auto renew flag. Valid values are <code>0</code>(NOTIFY_AND_MANUAL_RENEW), <code>1</code>(NOTIFY_AND_AUTO_RENEW) and <code>2</code>(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is <code>0</code>. Note: only works for PREPAID instance. Only supports<code>0</code> and <code>1</code> for creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_availablezone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_availablezone_yaml" style="color: inherit; text-decoration: inherit;">available<wbr>Zone</a>
@@ -2860,8 +3893,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The available zone of the Mongodb standby instance. NOTE: must not be same with father instance's.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2869,8 +3901,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</p>
-</dd><dt class="property-optional"
+    <dd>The charge type of instance. Valid values are <code>PREPAID</code> and <code>POSTPAID_BY_HOUR</code>. Default value is <code>POSTPAID_BY_HOUR</code>. Note: TencentCloud International only supports <code>POSTPAID_BY_HOUR</code>. Caution that update operation on this field will delete old instances and create new one with new charge type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_cpu_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cpu_yaml" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2878,8 +3917,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of the Mongodb instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_dataencryption_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataencryption_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Encryption</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Database storage encryption setting. <code>No_Encryption</code>: Storage encryption is not used. <code>TDE</code>: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_encryptionkeysource_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_encryptionkeysource_yaml" style="color: inherit; text-decoration: inherit;">encryption<wbr>Key<wbr>Source</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>If TDE storage encryption is selected, the key source must be specified. <code>auto</code>: Automatically generate the key. <code>manual</code>: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_engineversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_engineversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -2887,8 +3941,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Version of the standby Mongodb instance and must be same as the version of main instance.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Version of the standby Mongodb instance and must be same as the version of main instance.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_fatherinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fatherinstanceid_yaml" style="color: inherit; text-decoration: inherit;">father<wbr>Instance<wbr>Id</a>
@@ -2896,8 +3949,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the main instance ID of standby instances.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Indicates the main instance ID of standby instances.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_fatherinstanceregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_fatherinstanceregion_yaml" style="color: inherit; text-decoration: inherit;">father<wbr>Instance<wbr>Region</a>
@@ -2905,8 +3957,20 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the region of main instance.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates the region of main instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_inmaintenance_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_inmaintenance_yaml" style="color: inherit; text-decoration: inherit;">in<wbr>Maintenance</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Switch time for instance configuration changes.</p>
+<ul>
+<li>0: When the adjustment is completed, perform the configuration task immediately. Default is 0.</li>
+<li>1: Perform reconfiguration tasks within the maintenance time window.
+Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.</li>
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2914,8 +3978,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the Mongodb instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_keyid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_keyid_yaml" style="color: inherit; text-decoration: inherit;">key<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Please note that this field is the CMK name, corresponding to the <code>alias</code> field in KMS. Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_kmsregion_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_kmsregion_yaml" style="color: inherit; text-decoration: inherit;">kms<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Key ID. If <code>manual</code> is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_machinetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_machinetype_yaml" style="color: inherit; text-decoration: inherit;">machine<wbr>Type</a>
@@ -2923,8 +4002,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of standby Mongodb instance and must be same as the type of main instance.</p>
-</dd><dt class="property-optional"
+    <dd>Type of standby Mongodb instance and must be same as the type of main instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -2932,8 +4010,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional"
+    <dd>Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_prepaidperiod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_prepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
@@ -2941,8 +4018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to <code>PREPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to <code>PREPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2950,8 +4026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project which the instance belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project which the instance belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -2959,8 +4034,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of the security group.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the security group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2968,8 +4042,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2977,17 +4050,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet within this VPC. The value is required if <code>vpc_id</code> is set.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the subnet within this VPC. The value is required if <code>vpcId</code> is set.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</p>
-</dd><dt class="property-optional"
+    <dd>The tags of the Mongodb. Key name <code>project</code> is system reserved and can't be used.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -2995,8 +4066,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the Mongodb instance.</p>
-</dd><dt class="property-optional"
+    <dd>IP of the Mongodb instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_volume_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_volume_yaml" style="color: inherit; text-decoration: inherit;">volume</a>
@@ -3004,8 +4074,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3013,8 +4082,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vport_yaml" style="color: inherit; text-decoration: inherit;">vport</a>
@@ -3022,8 +4090,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>IP port of the Mongodb instance.</p>
-</dd></dl>
+    <dd>IP port of the Mongodb instance.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -3038,12 +4105,15 @@ The following state arguments are supported:
 
 
 
-Mongodb instance can be imported using the id, e.g.
+Mongodb standby instance can be imported using the id, e.g.
 
 ```sh
 $ pulumi import tencentcloud:Mongodb/standbyInstance:StandbyInstance mongodb cmgo-41s6jwy4
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -3055,7 +4125,6 @@ $ pulumi import tencentcloud:Mongodb/standbyInstance:StandbyInstance mongodb cmg
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

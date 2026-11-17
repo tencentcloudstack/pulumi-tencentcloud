@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Ha.Vip"
 meta_desc: "Documentation for the tencentcloud.Ha.Vip resource with examples, input properties, output properties, lookup functions, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,71 @@ Provides a resource to create a HA VIP.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const foo = new tencentcloud.ha.Vip("foo", {
+    name: "terraform_test",
+    vpcId: "vpc-gzea3dd7",
     subnetId: "subnet-4d4m4cd4s",
     vip: "10.0.4.16",
-    vpcId: "vpc-gzea3dd7",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 foo = tencentcloud.ha.Vip("foo",
+    name="terraform_test",
+    vpc_id="vpc-gzea3dd7",
     subnet_id="subnet-4d4m4cd4s",
-    vip="10.0.4.16",
-    vpc_id="vpc-gzea3dd7")
+    vip="10.0.4.16")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ha"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := ha.NewVip(ctx, "foo", &ha.VipArgs{
+			Name:     pulumi.String("terraform_test"),
+			VpcId:    pulumi.String("vpc-gzea3dd7"),
+			SubnetId: pulumi.String("subnet-4d4m4cd4s"),
+			Vip:      pulumi.String("10.0.4.16"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -46,35 +93,19 @@ return await Deployment.RunAsync(() =>
 {
     var foo = new Tencentcloud.Ha.Vip("foo", new()
     {
+        Name = "terraform_test",
+        VpcId = "vpc-gzea3dd7",
         SubnetId = "subnet-4d4m4cd4s",
         HaVip = "10.0.4.16",
-        VpcId = "vpc-gzea3dd7",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Ha.NewVip(ctx, "foo", &Ha.VipArgs{
-			SubnetId: pulumi.String("subnet-4d4m4cd4s"),
-			Vip:      pulumi.String("10.0.4.16"),
-			VpcId:    pulumi.String("vpc-gzea3dd7"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -83,8 +114,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Ha.Vip;
 import com.pulumi.tencentcloud.Ha.VipArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -96,86 +127,146 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var foo = new Vip("foo", VipArgs.builder()        
+        var foo = new Vip("foo", VipArgs.builder()
+            .name("terraform_test")
+            .vpcId("vpc-gzea3dd7")
             .subnetId("subnet-4d4m4cd4s")
             .vip("10.0.4.16")
-            .vpcId("vpc-gzea3dd7")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   foo:
     type: tencentcloud:Ha:Vip
     properties:
+      name: terraform_test
+      vpcId: vpc-gzea3dd7
       subnetId: subnet-4d4m4cd4s
       vip: 10.0.4.16
-      vpcId: vpc-gzea3dd7
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_ha_vip" "foo" {
+  name      = "terraform_test"
+  vpc_id    = "vpc-gzea3dd7"
+  subnet_id = "subnet-4d4m4cd4s"
+  vip       = "10.0.4.16"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateHaVip](https://www.tencentcloud.com/document/api/215/34764)
+  - [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+* Read: [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+* Update:
+  - [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+  - [ModifyHaVipAttribute](https://www.tencentcloud.com/document/api/215/34759)
+* Delete:
+  - [DeleteHaVip](https://www.tencentcloud.com/document/api/215/34763)
+  - [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
 
 
 ## Create Vip Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Vip</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">VipArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Vip</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">VipArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Vip</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">vip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Vip</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">VipArgs</a></span><span class="p">,</span>
-        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Vip</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+        <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">check_associate</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">vip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewVip</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">VipArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Vip</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewVip</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">VipArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Vip</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Vip</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">VipArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Vip</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">VipArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Vip</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">VipArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Vip</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">VipArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ha:Vip</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Ha:Vip</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_ha_vip&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -196,7 +287,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -313,11 +404,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Vip Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -333,8 +432,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Subnet ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -342,8 +440,15 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>VPC ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="checkassociate_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checkassociate_csharp" style="color: inherit; text-decoration: inherit;">Check<wbr>Associate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable verification of the submachine or network card range during HAVIP drift. Not enabled by default.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="havip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#havip_csharp" style="color: inherit; text-decoration: inherit;">Ha<wbr>Vip</a>
@@ -351,8 +456,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -360,8 +464,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd></dl>
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -375,8 +478,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Subnet ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -384,8 +486,15 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="checkassociate_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checkassociate_go" style="color: inherit; text-decoration: inherit;">Check<wbr>Associate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable verification of the submachine or network card range during HAVIP drift. Not enabled by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -393,8 +502,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -402,8 +510,53 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd></dl>
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet ID.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="check_associate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#check_associate_hcl" style="color: inherit; text-decoration: inherit;">check_<wbr>associate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable verification of the submachine or network card range during HAVIP drift. Not enabled by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -417,8 +570,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Subnet ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -426,8 +578,15 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="checkassociate_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checkassociate_java" style="color: inherit; text-decoration: inherit;">check<wbr>Associate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable verification of the submachine or network card range during HAVIP drift. Not enabled by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -435,8 +594,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -444,8 +602,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd></dl>
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -459,8 +616,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Subnet ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -468,8 +624,15 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="checkassociate_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checkassociate_nodejs" style="color: inherit; text-decoration: inherit;">check<wbr>Associate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable verification of the submachine or network card range during HAVIP drift. Not enabled by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -477,8 +640,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -486,8 +648,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd></dl>
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -501,8 +662,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Subnet ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -510,8 +670,15 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="check_associate_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#check_associate_python" style="color: inherit; text-decoration: inherit;">check_<wbr>associate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable verification of the submachine or network card range during HAVIP drift. Not enabled by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -519,8 +686,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -528,8 +694,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd></dl>
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -543,8 +708,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>Subnet ID.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -552,8 +716,15 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd><dt class="property-optional"
+    <dd>VPC ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="checkassociate_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#checkassociate_yaml" style="color: inherit; text-decoration: inherit;">check<wbr>Associate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable verification of the submachine or network card range during HAVIP drift. Not enabled by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -561,8 +732,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -570,8 +740,7 @@ The Vip resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd></dl>
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -592,8 +761,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-"
+    <dd>EIP that is associated.</dd><dt class="property-"
             title="">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -601,8 +769,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>Create time of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -610,8 +777,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -619,8 +785,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID that is associated.</p>
-</dd><dt class="property-"
+    <dd>Instance ID that is associated.</dd><dt class="property-"
             title="">
         <span id="networkinterfaceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinterfaceid_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Interface<wbr>Id</a>
@@ -628,8 +793,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network interface ID that is associated.</p>
-</dd><dt class="property-"
+    <dd>Network interface ID that is associated.</dd><dt class="property-"
             title="">
         <span id="state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -637,8 +801,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd></dl>
+    <dd>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -652,8 +815,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-"
+    <dd>EIP that is associated.</dd><dt class="property-"
             title="">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -661,8 +823,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>Create time of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -670,8 +831,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -679,8 +839,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID that is associated.</p>
-</dd><dt class="property-"
+    <dd>Instance ID that is associated.</dd><dt class="property-"
             title="">
         <span id="networkinterfaceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinterfaceid_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Interface<wbr>Id</a>
@@ -688,8 +847,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network interface ID that is associated.</p>
-</dd><dt class="property-"
+    <dd>Network interface ID that is associated.</dd><dt class="property-"
             title="">
         <span id="state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -697,8 +855,61 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd></dl>
+    <dd>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="address_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_ip_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>EIP that is associated.</dd><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the HA VIP.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID that is associated.</dd><dt class="property-"
+            title="">
+        <span id="network_interface_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_interface_id_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>interface_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network interface ID that is associated.</dd><dt class="property-"
+            title="">
+        <span id="state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -712,8 +923,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-"
+    <dd>EIP that is associated.</dd><dt class="property-"
             title="">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -721,8 +931,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>Create time of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -730,8 +939,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -739,8 +947,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID that is associated.</p>
-</dd><dt class="property-"
+    <dd>Instance ID that is associated.</dd><dt class="property-"
             title="">
         <span id="networkinterfaceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinterfaceid_java" style="color: inherit; text-decoration: inherit;">network<wbr>Interface<wbr>Id</a>
@@ -748,8 +955,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network interface ID that is associated.</p>
-</dd><dt class="property-"
+    <dd>Network interface ID that is associated.</dd><dt class="property-"
             title="">
         <span id="state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -757,8 +963,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd></dl>
+    <dd>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -772,8 +977,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-"
+    <dd>EIP that is associated.</dd><dt class="property-"
             title="">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -781,8 +985,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>Create time of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -790,8 +993,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -799,8 +1001,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID that is associated.</p>
-</dd><dt class="property-"
+    <dd>Instance ID that is associated.</dd><dt class="property-"
             title="">
         <span id="networkinterfaceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinterfaceid_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Interface<wbr>Id</a>
@@ -808,8 +1009,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network interface ID that is associated.</p>
-</dd><dt class="property-"
+    <dd>Network interface ID that is associated.</dd><dt class="property-"
             title="">
         <span id="state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -817,8 +1017,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd></dl>
+    <dd>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -832,8 +1031,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-"
+    <dd>EIP that is associated.</dd><dt class="property-"
             title="">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -841,8 +1039,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>Create time of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -850,8 +1047,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -859,8 +1055,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID that is associated.</p>
-</dd><dt class="property-"
+    <dd>Instance ID that is associated.</dd><dt class="property-"
             title="">
         <span id="network_interface_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_interface_id_python" style="color: inherit; text-decoration: inherit;">network_<wbr>interface_<wbr>id</a>
@@ -868,8 +1063,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network interface ID that is associated.</p>
-</dd><dt class="property-"
+    <dd>Network interface ID that is associated.</dd><dt class="property-"
             title="">
         <span id="state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -877,8 +1071,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd></dl>
+    <dd>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -892,8 +1085,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-"
+    <dd>EIP that is associated.</dd><dt class="property-"
             title="">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -901,8 +1093,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-"
+    <dd>Create time of the HA VIP.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -910,8 +1101,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -919,8 +1109,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID that is associated.</p>
-</dd><dt class="property-"
+    <dd>Instance ID that is associated.</dd><dt class="property-"
             title="">
         <span id="networkinterfaceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networkinterfaceid_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Interface<wbr>Id</a>
@@ -928,8 +1117,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network interface ID that is associated.</p>
-</dd><dt class="property-"
+    <dd>Network interface ID that is associated.</dd><dt class="property-"
             title="">
         <span id="state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -937,8 +1125,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd></dl>
+    <dd>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -948,22 +1135,23 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Vip resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">VipState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Vip</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">VipState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Vip</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">address_ip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">check_associate</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -972,104 +1160,143 @@ Get an existing Vip resource's state with the given name, ID, and optional extra
         <span class="nx">subnet_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vip</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Vip</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetVip<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">VipState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Vip</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetVip<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">VipState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Vip</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Vip</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">VipState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Vip</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">VipState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Vip</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">VipState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Vip</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">VipState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingVip</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Ha:Vip</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_ha_vip</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">VipState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">VipState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1077,28 +1304,31 @@ Get an existing Vip resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">VipState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1106,28 +1336,31 @@ Get an existing Vip resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">VipState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1147,8 +1380,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>EIP that is associated.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_checkassociate_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_checkassociate_csharp" style="color: inherit; text-decoration: inherit;">Check<wbr>Associate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable verification of the submachine or network card range during HAVIP drift. Not enabled by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1156,8 +1396,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Create time of the HA VIP.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_havip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_havip_csharp" style="color: inherit; text-decoration: inherit;">Ha<wbr>Vip</a>
@@ -1165,8 +1404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd><dt class="property-optional"
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1174,8 +1412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID that is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1183,8 +1420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_networkinterfaceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkinterfaceid_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Interface<wbr>Id</a>
@@ -1192,8 +1428,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network interface ID that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>Network interface ID that is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_csharp" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1201,8 +1436,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1210,8 +1444,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Subnet ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1219,8 +1452,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1234,8 +1466,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>EIP that is associated.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_checkassociate_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_checkassociate_go" style="color: inherit; text-decoration: inherit;">Check<wbr>Associate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable verification of the submachine or network card range during HAVIP drift. Not enabled by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1243,8 +1482,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the HA VIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1252,8 +1490,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID that is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1261,8 +1498,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_networkinterfaceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkinterfaceid_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Interface<wbr>Id</a>
@@ -1270,8 +1506,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network interface ID that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>Network interface ID that is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_go" style="color: inherit; text-decoration: inherit;">State</a>
@@ -1279,8 +1514,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1288,8 +1522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Subnet ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_go" style="color: inherit; text-decoration: inherit;">Vip</a>
@@ -1297,8 +1530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1306,8 +1538,93 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_address_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_address_ip_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>EIP that is associated.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_check_associate_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_check_associate_hcl" style="color: inherit; text-decoration: inherit;">check_<wbr>associate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable verification of the submachine or network card range during HAVIP drift. Not enabled by default.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the HA VIP.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID that is associated.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_network_interface_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_interface_id_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>interface_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network interface ID that is associated.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_hcl" style="color: inherit; text-decoration: inherit;">state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subnet ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_hcl" style="color: inherit; text-decoration: inherit;">vip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1321,8 +1638,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>EIP that is associated.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_checkassociate_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_checkassociate_java" style="color: inherit; text-decoration: inherit;">check<wbr>Associate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable verification of the submachine or network card range during HAVIP drift. Not enabled by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1330,8 +1654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the HA VIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1339,8 +1662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID that is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1348,8 +1670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_networkinterfaceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkinterfaceid_java" style="color: inherit; text-decoration: inherit;">network<wbr>Interface<wbr>Id</a>
@@ -1357,8 +1678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network interface ID that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>Network interface ID that is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_java" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1366,8 +1686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1375,8 +1694,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Subnet ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_java" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1384,8 +1702,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1393,8 +1710,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1408,8 +1724,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>EIP that is associated.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_checkassociate_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_checkassociate_nodejs" style="color: inherit; text-decoration: inherit;">check<wbr>Associate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable verification of the submachine or network card range during HAVIP drift. Not enabled by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1417,8 +1740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the HA VIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1426,8 +1748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID that is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1435,8 +1756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_networkinterfaceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkinterfaceid_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Interface<wbr>Id</a>
@@ -1444,8 +1764,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network interface ID that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>Network interface ID that is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_nodejs" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1453,8 +1772,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1462,8 +1780,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Subnet ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_nodejs" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1471,8 +1788,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1480,8 +1796,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1495,8 +1810,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>EIP that is associated.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_check_associate_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_check_associate_python" style="color: inherit; text-decoration: inherit;">check_<wbr>associate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable verification of the submachine or network card range during HAVIP drift. Not enabled by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1504,8 +1826,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the HA VIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1513,8 +1834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID that is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1522,8 +1842,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_network_interface_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_network_interface_id_python" style="color: inherit; text-decoration: inherit;">network_<wbr>interface_<wbr>id</a>
@@ -1531,8 +1850,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network interface ID that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>Network interface ID that is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_python" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1540,8 +1858,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -1549,8 +1866,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Subnet ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_python" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1558,8 +1874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1567,8 +1882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1582,8 +1896,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>EIP that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>EIP that is associated.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_checkassociate_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_checkassociate_yaml" style="color: inherit; text-decoration: inherit;">check<wbr>Associate</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable verification of the submachine or network card range during HAVIP drift. Not enabled by default.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1591,8 +1912,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the HA VIP.</p>
-</dd><dt class="property-optional"
+    <dd>Create time of the HA VIP.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1600,8 +1920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID that is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1609,8 +1928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the HA VIP. The length of character is limited to 1-60.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the HA VIP. The length of character is limited to 1-60.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_networkinterfaceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_networkinterfaceid_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Interface<wbr>Id</a>
@@ -1618,8 +1936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network interface ID that is associated.</p>
-</dd><dt class="property-optional"
+    <dd>Network interface ID that is associated.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_state_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_state_yaml" style="color: inherit; text-decoration: inherit;">state</a>
@@ -1627,8 +1944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>State of the HA VIP. Valid value: <code>AVAILABLE</code>, <code>UNBIND</code>.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1636,8 +1952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subnet ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Subnet ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vip_yaml" style="color: inherit; text-decoration: inherit;">vip</a>
@@ -1645,8 +1960,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1654,8 +1968,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC ID.</p>
-</dd></dl>
+    <dd>VPC ID.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1678,6 +1991,9 @@ $ pulumi import tencentcloud:Ha/vip:Vip foo havip-kjqwe4ba
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1687,7 +2003,6 @@ $ pulumi import tencentcloud:Ha/vip:Vip foo havip-kjqwe4ba
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

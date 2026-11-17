@@ -2,9 +2,11 @@
 ---
 title: "getInstancePluginList"
 title_tag: "tencentcloud.Elasticsearch.getInstancePluginList"
-meta_desc: "Documentation for the tencentcloud.Elasticsearch.getInstancePluginList function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of elasticsearch instance plugin list"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query detailed information of elasticsearch instance plu
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const instancePluginList = tencentcloud.Elasticsearch.getInstancePluginList({
+const instancePluginList = tencentcloud.elasticsearch.getInstancePluginList({
     instanceId: "es-xxxxxx",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-instance_plugin_list = tencentcloud.Elasticsearch.get_instance_plugin_list(instance_id="es-xxxxxx")
+instance_plugin_list = tencentcloud.elasticsearch.get_instance_plugin_list(instance_id="es-xxxxxx")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/elasticsearch"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := elasticsearch.GetInstancePluginList(ctx, &elasticsearch.GetInstancePluginListArgs{
+			InstanceId: "es-xxxxxx",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Elasticsearch.GetInstancePluginList(ctx, &elasticsearch.GetInstancePluginListArgs{
-			InstanceId: "es-xxxxxx",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Elasticsearch.ElasticsearchFunctions;
 import com.pulumi.tencentcloud.Elasticsearch.inputs.GetInstancePluginListArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   instancePluginList:
     fn::invoke:
-      Function: tencentcloud:Elasticsearch:getInstancePluginList
-      Arguments:
+      function: tencentcloud:Elasticsearch:getInstancePluginList
+      arguments:
         instanceId: es-xxxxxx
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_elasticsearch_getinstancepluginlist" "instancePluginList" {
+  instance_id = "es-xxxxxx"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeInstancePluginList](https://www.tencentcloud.com/search/?wd=DescribeInstancePluginList&type=document&lang=en)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstancePluginList<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancePluginListArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancePluginListResult</a></span>></span
+><span class="k">function </span>getInstancePluginList<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancePluginListArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancePluginListResult</a></span>></span
 ><span class="k">
-function </span>getInstancePluginListOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancePluginListOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancePluginListResult</a></span>></span
+function </span>getInstancePluginListOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancePluginListOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancePluginListResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -141,12 +198,12 @@ function </span>getInstancePluginListOutput<span class="p">(</span><span class="
                              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstancePluginListResult</span
 ><span class="k">
-def </span>get_instance_plugin_list_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                             <span class="nx">order_by</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                             <span class="nx">order_by_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                             <span class="nx">plugin_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancePluginListResult]</span
+def </span>get_instance_plugin_list_output<span class="p">(</span><span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                             <span class="nx">order_by</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                             <span class="nx">order_by_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                             <span class="nx">plugin_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                             <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancePluginListResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -171,7 +228,8 @@ func </span>GetInstancePluginListOutput<span class="p">(</span><span class="nx">
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstancePluginList </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstancePluginListResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstancePluginListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancePluginListResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancePluginListInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancePluginListResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancePluginListInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancePluginListResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancePluginListInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -180,7 +238,8 @@ func </span>GetInstancePluginListOutput<span class="p">(</span><span class="nx">
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstancePluginListResult</a></span>> </span>getInstancePluginList<span class="p">(</span><span class="nx">GetInstancePluginListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancePluginListResult</a></span>> </span>getInstancePluginList<span class="p">(</span><span class="nx">GetInstancePluginListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancePluginListResult</a></span>> </span>getInstancePluginList<span class="p">(</span><span class="nx">GetInstancePluginListArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -192,6 +251,15 @@ func </span>GetInstancePluginListOutput<span class="p">(</span><span class="nx">
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Elasticsearch/getInstancePluginList:getInstancePluginList
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_elasticsearch_get_instance_plugin_list&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -210,8 +278,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>By</a>
@@ -219,8 +286,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>order field. Valid values: <code>pluginName</code>.</p>
-</dd><dt class="property-optional"
+    <dd>order field. Valid values: <code>pluginName</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderbytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderbytype_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>By<wbr>Type</a>
@@ -228,12 +294,11 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Order type. Valid values:</p>
+    <dd>Order type. Valid values:</p>
 <ul>
 <li>asc: Ascending asc</li>
 <li>desc: Descending Desc.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="plugintype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugintype_csharp" style="color: inherit; text-decoration: inherit;">Plugin<wbr>Type</a>
@@ -241,8 +306,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-optional"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -250,8 +314,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -265,8 +328,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_go" style="color: inherit; text-decoration: inherit;">Order<wbr>By</a>
@@ -274,8 +336,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>order field. Valid values: <code>pluginName</code>.</p>
-</dd><dt class="property-optional"
+    <dd>order field. Valid values: <code>pluginName</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderbytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderbytype_go" style="color: inherit; text-decoration: inherit;">Order<wbr>By<wbr>Type</a>
@@ -283,12 +344,11 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Order type. Valid values:</p>
+    <dd>Order type. Valid values:</p>
 <ul>
 <li>asc: Ascending asc</li>
 <li>desc: Descending Desc.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="plugintype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugintype_go" style="color: inherit; text-decoration: inherit;">Plugin<wbr>Type</a>
@@ -296,8 +356,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-optional"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -305,8 +364,57 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>order field. Valid values: <code>pluginName</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="order_by_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_type_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>by_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Order type. Valid values:</p>
+<ul>
+<li>asc: Ascending asc</li>
+<li>desc: Descending Desc.</li>
+</ul></dd><dt class="property-optional"
+            title="Optional">
+        <span id="plugin_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_type_hcl" style="color: inherit; text-decoration: inherit;">plugin_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -320,8 +428,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_java" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -329,8 +436,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>order field. Valid values: <code>pluginName</code>.</p>
-</dd><dt class="property-optional"
+    <dd>order field. Valid values: <code>pluginName</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderbytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderbytype_java" style="color: inherit; text-decoration: inherit;">order<wbr>By<wbr>Type</a>
@@ -338,12 +444,11 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Order type. Valid values:</p>
+    <dd>Order type. Valid values:</p>
 <ul>
 <li>asc: Ascending asc</li>
 <li>desc: Descending Desc.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="plugintype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugintype_java" style="color: inherit; text-decoration: inherit;">plugin<wbr>Type</a>
@@ -351,8 +456,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-optional"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -360,8 +464,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -375,8 +478,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -384,8 +486,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>order field. Valid values: <code>pluginName</code>.</p>
-</dd><dt class="property-optional"
+    <dd>order field. Valid values: <code>pluginName</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderbytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderbytype_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>By<wbr>Type</a>
@@ -393,12 +494,11 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Order type. Valid values:</p>
+    <dd>Order type. Valid values:</p>
 <ul>
 <li>asc: Ascending asc</li>
 <li>desc: Descending Desc.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="plugintype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugintype_nodejs" style="color: inherit; text-decoration: inherit;">plugin<wbr>Type</a>
@@ -406,8 +506,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-optional"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -415,8 +514,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -430,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_by_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_python" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
@@ -439,8 +536,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>order field. Valid values: <code>pluginName</code>.</p>
-</dd><dt class="property-optional"
+    <dd>order field. Valid values: <code>pluginName</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="order_by_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_type_python" style="color: inherit; text-decoration: inherit;">order_<wbr>by_<wbr>type</a>
@@ -448,12 +544,11 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Order type. Valid values:</p>
+    <dd>Order type. Valid values:</p>
 <ul>
 <li>asc: Ascending asc</li>
 <li>desc: Descending Desc.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="plugin_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_type_python" style="color: inherit; text-decoration: inherit;">plugin_<wbr>type</a>
@@ -461,8 +556,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-optional"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -470,8 +564,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -485,8 +578,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderby_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -494,8 +586,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>order field. Valid values: <code>pluginName</code>.</p>
-</dd><dt class="property-optional"
+    <dd>order field. Valid values: <code>pluginName</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="orderbytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderbytype_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>By<wbr>Type</a>
@@ -503,12 +594,11 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Order type. Valid values:</p>
+    <dd>Order type. Valid values:</p>
 <ul>
 <li>asc: Ascending asc</li>
 <li>desc: Descending Desc.</li>
-</ul>
-</dd><dt class="property-optional"
+</ul></dd><dt class="property-optional"
             title="Optional">
         <span id="plugintype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugintype_yaml" style="color: inherit; text-decoration: inherit;">plugin<wbr>Type</a>
@@ -516,8 +606,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-optional"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -525,8 +614,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -549,8 +637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -566,8 +653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancepluginlistpluginlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Elasticsearch.<wbr>Outputs.<wbr>Get<wbr>Instance<wbr>Plugin<wbr>List<wbr>Plugin<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Plugin information list.</p>
-</dd><dt class="property-"
+    <dd>Plugin information list.</dd><dt class="property-"
             title="">
         <span id="orderby_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_csharp" style="color: inherit; text-decoration: inherit;">Order<wbr>By</a>
@@ -591,8 +677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -614,8 +699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -631,8 +715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancepluginlistpluginlist">[]Get<wbr>Instance<wbr>Plugin<wbr>List<wbr>Plugin<wbr>List</a></span>
     </dt>
-    <dd><p>Plugin information list.</p>
-</dd><dt class="property-"
+    <dd>Plugin information list.</dd><dt class="property-"
             title="">
         <span id="orderby_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_go" style="color: inherit; text-decoration: inherit;">Order<wbr>By</a>
@@ -656,11 +739,72 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="plugin_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_lists_hcl" style="color: inherit; text-decoration: inherit;">plugin_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancepluginlistpluginlist">list(object)</a></span>
+    </dt>
+    <dd>Plugin information list.</dd><dt class="property-"
+            title="">
+        <span id="order_by_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="order_by_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_type_hcl" style="color: inherit; text-decoration: inherit;">order_<wbr>by_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="plugin_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_type_hcl" style="color: inherit; text-decoration: inherit;">plugin_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -679,8 +823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -696,8 +839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancepluginlistpluginlist">List&lt;Get<wbr>Instance<wbr>Plugin<wbr>List<wbr>Plugin<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>Plugin information list.</p>
-</dd><dt class="property-"
+    <dd>Plugin information list.</dd><dt class="property-"
             title="">
         <span id="orderby_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_java" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -721,8 +863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -744,8 +885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -761,8 +901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancepluginlistpluginlist">Get<wbr>Instance<wbr>Plugin<wbr>List<wbr>Plugin<wbr>List[]</a></span>
     </dt>
-    <dd><p>Plugin information list.</p>
-</dd><dt class="property-"
+    <dd>Plugin information list.</dd><dt class="property-"
             title="">
         <span id="orderby_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_nodejs" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -786,8 +925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -809,8 +947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -824,10 +961,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_lists_python" style="color: inherit; text-decoration: inherit;">plugin_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancepluginlistpluginlist">Get<wbr>Instance<wbr>Plugin<wbr>List<wbr>Plugin<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstancepluginlistpluginlist">Sequence[Get<wbr>Instance<wbr>Plugin<wbr>List<wbr>Plugin<wbr>List]</a></span>
     </dt>
-    <dd><p>Plugin information list.</p>
-</dd><dt class="property-"
+    <dd>Plugin information list.</dd><dt class="property-"
             title="">
         <span id="order_by_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#order_by_python" style="color: inherit; text-decoration: inherit;">order_<wbr>by</a>
@@ -851,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -874,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -891,8 +1025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancepluginlistpluginlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Plugin information list.</p>
-</dd><dt class="property-"
+    <dd>Plugin information list.</dd><dt class="property-"
             title="">
         <span id="orderby_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#orderby_yaml" style="color: inherit; text-decoration: inherit;">order<wbr>By</a>
@@ -916,8 +1049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -949,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Plugin description.</p>
-</dd><dt class="property-required"
+    <dd>Plugin description.</dd><dt class="property-required"
             title="Required">
         <span id="pluginname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginname_csharp" style="color: inherit; text-decoration: inherit;">Plugin<wbr>Name</a>
@@ -958,8 +1089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Plugin name.</p>
-</dd><dt class="property-required"
+    <dd>Plugin name.</dd><dt class="property-required"
             title="Required">
         <span id="plugintype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugintype_csharp" style="color: inherit; text-decoration: inherit;">Plugin<wbr>Type</a>
@@ -967,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-required"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-required"
             title="Required">
         <span id="pluginupdatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginupdatetime_csharp" style="color: inherit; text-decoration: inherit;">Plugin<wbr>Update<wbr>Time</a>
@@ -976,8 +1105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Plugin update time.</p>
-</dd><dt class="property-required"
+    <dd>Plugin update time.</dd><dt class="property-required"
             title="Required">
         <span id="pluginversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginversion_csharp" style="color: inherit; text-decoration: inherit;">Plugin<wbr>Version</a>
@@ -985,8 +1113,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Plugin version.</p>
-</dd><dt class="property-required"
+    <dd>Plugin version.</dd><dt class="property-required"
             title="Required">
         <span id="removable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removable_csharp" style="color: inherit; text-decoration: inherit;">Removable</a>
@@ -994,8 +1121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the plug-in can be uninstalled.</p>
-</dd><dt class="property-required"
+    <dd>Whether the plug-in can be uninstalled.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1003,12 +1129,11 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Plugin status. Valid values:</p>
+    <dd>Plugin status. Valid values:</p>
 <ul>
 <li><code>-2</code> has been uninstalled</li>
 <li><code>-1</code> has been installed in</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1022,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Plugin description.</p>
-</dd><dt class="property-required"
+    <dd>Plugin description.</dd><dt class="property-required"
             title="Required">
         <span id="pluginname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginname_go" style="color: inherit; text-decoration: inherit;">Plugin<wbr>Name</a>
@@ -1031,8 +1155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Plugin name.</p>
-</dd><dt class="property-required"
+    <dd>Plugin name.</dd><dt class="property-required"
             title="Required">
         <span id="plugintype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugintype_go" style="color: inherit; text-decoration: inherit;">Plugin<wbr>Type</a>
@@ -1040,8 +1163,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-required"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-required"
             title="Required">
         <span id="pluginupdatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginupdatetime_go" style="color: inherit; text-decoration: inherit;">Plugin<wbr>Update<wbr>Time</a>
@@ -1049,8 +1171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Plugin update time.</p>
-</dd><dt class="property-required"
+    <dd>Plugin update time.</dd><dt class="property-required"
             title="Required">
         <span id="pluginversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginversion_go" style="color: inherit; text-decoration: inherit;">Plugin<wbr>Version</a>
@@ -1058,8 +1179,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Plugin version.</p>
-</dd><dt class="property-required"
+    <dd>Plugin version.</dd><dt class="property-required"
             title="Required">
         <span id="removable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removable_go" style="color: inherit; text-decoration: inherit;">Removable</a>
@@ -1067,8 +1187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the plug-in can be uninstalled.</p>
-</dd><dt class="property-required"
+    <dd>Whether the plug-in can be uninstalled.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1076,12 +1195,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Plugin status. Valid values:</p>
+    <dd>Plugin status. Valid values:</p>
 <ul>
 <li><code>-2</code> has been uninstalled</li>
 <li><code>-1</code> has been installed in</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="plugin_desc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_desc_hcl" style="color: inherit; text-decoration: inherit;">plugin_<wbr>desc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Plugin description.</dd><dt class="property-required"
+            title="Required">
+        <span id="plugin_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_name_hcl" style="color: inherit; text-decoration: inherit;">plugin_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Plugin name.</dd><dt class="property-required"
+            title="Required">
+        <span id="plugin_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_type_hcl" style="color: inherit; text-decoration: inherit;">plugin_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-required"
+            title="Required">
+        <span id="plugin_update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_update_time_hcl" style="color: inherit; text-decoration: inherit;">plugin_<wbr>update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Plugin update time.</dd><dt class="property-required"
+            title="Required">
+        <span id="plugin_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_version_hcl" style="color: inherit; text-decoration: inherit;">plugin_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Plugin version.</dd><dt class="property-required"
+            title="Required">
+        <span id="removable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removable_hcl" style="color: inherit; text-decoration: inherit;">removable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the plug-in can be uninstalled.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Plugin status. Valid values:</p>
+<ul>
+<li><code>-2</code> has been uninstalled</li>
+<li><code>-1</code> has been installed in</li>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1095,8 +1279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Plugin description.</p>
-</dd><dt class="property-required"
+    <dd>Plugin description.</dd><dt class="property-required"
             title="Required">
         <span id="pluginname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginname_java" style="color: inherit; text-decoration: inherit;">plugin<wbr>Name</a>
@@ -1104,8 +1287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Plugin name.</p>
-</dd><dt class="property-required"
+    <dd>Plugin name.</dd><dt class="property-required"
             title="Required">
         <span id="plugintype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugintype_java" style="color: inherit; text-decoration: inherit;">plugin<wbr>Type</a>
@@ -1113,8 +1295,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-required"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-required"
             title="Required">
         <span id="pluginupdatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginupdatetime_java" style="color: inherit; text-decoration: inherit;">plugin<wbr>Update<wbr>Time</a>
@@ -1122,8 +1303,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Plugin update time.</p>
-</dd><dt class="property-required"
+    <dd>Plugin update time.</dd><dt class="property-required"
             title="Required">
         <span id="pluginversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginversion_java" style="color: inherit; text-decoration: inherit;">plugin<wbr>Version</a>
@@ -1131,8 +1311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Plugin version.</p>
-</dd><dt class="property-required"
+    <dd>Plugin version.</dd><dt class="property-required"
             title="Required">
         <span id="removable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removable_java" style="color: inherit; text-decoration: inherit;">removable</a>
@@ -1140,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the plug-in can be uninstalled.</p>
-</dd><dt class="property-required"
+    <dd>Whether the plug-in can be uninstalled.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1149,12 +1327,11 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Plugin status. Valid values:</p>
+    <dd>Plugin status. Valid values:</p>
 <ul>
 <li><code>-2</code> has been uninstalled</li>
 <li><code>-1</code> has been installed in</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1168,8 +1345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Plugin description.</p>
-</dd><dt class="property-required"
+    <dd>Plugin description.</dd><dt class="property-required"
             title="Required">
         <span id="pluginname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginname_nodejs" style="color: inherit; text-decoration: inherit;">plugin<wbr>Name</a>
@@ -1177,8 +1353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Plugin name.</p>
-</dd><dt class="property-required"
+    <dd>Plugin name.</dd><dt class="property-required"
             title="Required">
         <span id="plugintype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugintype_nodejs" style="color: inherit; text-decoration: inherit;">plugin<wbr>Type</a>
@@ -1186,8 +1361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-required"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-required"
             title="Required">
         <span id="pluginupdatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginupdatetime_nodejs" style="color: inherit; text-decoration: inherit;">plugin<wbr>Update<wbr>Time</a>
@@ -1195,8 +1369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Plugin update time.</p>
-</dd><dt class="property-required"
+    <dd>Plugin update time.</dd><dt class="property-required"
             title="Required">
         <span id="pluginversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginversion_nodejs" style="color: inherit; text-decoration: inherit;">plugin<wbr>Version</a>
@@ -1204,8 +1377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Plugin version.</p>
-</dd><dt class="property-required"
+    <dd>Plugin version.</dd><dt class="property-required"
             title="Required">
         <span id="removable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removable_nodejs" style="color: inherit; text-decoration: inherit;">removable</a>
@@ -1213,8 +1385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the plug-in can be uninstalled.</p>
-</dd><dt class="property-required"
+    <dd>Whether the plug-in can be uninstalled.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1222,12 +1393,11 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Plugin status. Valid values:</p>
+    <dd>Plugin status. Valid values:</p>
 <ul>
 <li><code>-2</code> has been uninstalled</li>
 <li><code>-1</code> has been installed in</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1241,8 +1411,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Plugin description.</p>
-</dd><dt class="property-required"
+    <dd>Plugin description.</dd><dt class="property-required"
             title="Required">
         <span id="plugin_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_name_python" style="color: inherit; text-decoration: inherit;">plugin_<wbr>name</a>
@@ -1250,8 +1419,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Plugin name.</p>
-</dd><dt class="property-required"
+    <dd>Plugin name.</dd><dt class="property-required"
             title="Required">
         <span id="plugin_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_type_python" style="color: inherit; text-decoration: inherit;">plugin_<wbr>type</a>
@@ -1259,8 +1427,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-required"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-required"
             title="Required">
         <span id="plugin_update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_update_time_python" style="color: inherit; text-decoration: inherit;">plugin_<wbr>update_<wbr>time</a>
@@ -1268,8 +1435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Plugin update time.</p>
-</dd><dt class="property-required"
+    <dd>Plugin update time.</dd><dt class="property-required"
             title="Required">
         <span id="plugin_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugin_version_python" style="color: inherit; text-decoration: inherit;">plugin_<wbr>version</a>
@@ -1277,8 +1443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Plugin version.</p>
-</dd><dt class="property-required"
+    <dd>Plugin version.</dd><dt class="property-required"
             title="Required">
         <span id="removable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removable_python" style="color: inherit; text-decoration: inherit;">removable</a>
@@ -1286,8 +1451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the plug-in can be uninstalled.</p>
-</dd><dt class="property-required"
+    <dd>Whether the plug-in can be uninstalled.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1295,12 +1459,11 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Plugin status. Valid values:</p>
+    <dd>Plugin status. Valid values:</p>
 <ul>
 <li><code>-2</code> has been uninstalled</li>
 <li><code>-1</code> has been installed in</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1314,8 +1477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Plugin description.</p>
-</dd><dt class="property-required"
+    <dd>Plugin description.</dd><dt class="property-required"
             title="Required">
         <span id="pluginname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginname_yaml" style="color: inherit; text-decoration: inherit;">plugin<wbr>Name</a>
@@ -1323,8 +1485,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Plugin name.</p>
-</dd><dt class="property-required"
+    <dd>Plugin name.</dd><dt class="property-required"
             title="Required">
         <span id="plugintype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#plugintype_yaml" style="color: inherit; text-decoration: inherit;">plugin<wbr>Type</a>
@@ -1332,8 +1493,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Plugin type. Valid values: <code>0</code>: System plugin.</p>
-</dd><dt class="property-required"
+    <dd>Plugin type. Valid values: <code>0</code>: System plugin.</dd><dt class="property-required"
             title="Required">
         <span id="pluginupdatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginupdatetime_yaml" style="color: inherit; text-decoration: inherit;">plugin<wbr>Update<wbr>Time</a>
@@ -1341,8 +1501,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Plugin update time.</p>
-</dd><dt class="property-required"
+    <dd>Plugin update time.</dd><dt class="property-required"
             title="Required">
         <span id="pluginversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pluginversion_yaml" style="color: inherit; text-decoration: inherit;">plugin<wbr>Version</a>
@@ -1350,8 +1509,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Plugin version.</p>
-</dd><dt class="property-required"
+    <dd>Plugin version.</dd><dt class="property-required"
             title="Required">
         <span id="removable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#removable_yaml" style="color: inherit; text-decoration: inherit;">removable</a>
@@ -1359,8 +1517,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the plug-in can be uninstalled.</p>
-</dd><dt class="property-required"
+    <dd>Whether the plug-in can be uninstalled.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1368,12 +1525,11 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Plugin status. Valid values:</p>
+    <dd>Plugin status. Valid values:</p>
 <ul>
 <li><code>-2</code> has been uninstalled</li>
 <li><code>-1</code> has been installed in</li>
-</ul>
-</dd></dl>
+</ul></dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1388,7 +1544,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

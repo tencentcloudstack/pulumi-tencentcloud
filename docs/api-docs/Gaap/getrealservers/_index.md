@@ -2,9 +2,11 @@
 ---
 title: "getRealservers"
 title_tag: "tencentcloud.Gaap.getRealservers"
-meta_desc: "Documentation for the tencentcloud.Gaap.getRealservers function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query gaap realservers."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,71 +18,99 @@ Use this data source to query gaap realservers.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooRealserver = new tencentcloud.gaap.Realserver("fooRealserver", {ip: "1.1.1.1"});
-const fooRealservers = fooRealserver.ip.apply(ip => tencentcloud.Gaap.getRealserversOutput({
-    ip: ip,
-}));
+const fooRealserver = new tencentcloud.gaap.Realserver("foo", {
+    ip: "1.1.1.1",
+    name: "ci-test-gaap-realserver",
+});
+const foo = tencentcloud.gaap.getRealserversOutput({
+    ip: fooRealserver.ip,
+});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo_realserver = tencentcloud.gaap.Realserver("fooRealserver", ip="1.1.1.1")
-foo_realservers = foo_realserver.ip.apply(lambda ip: tencentcloud.Gaap.get_realservers_output(ip=ip))
+foo_realserver = tencentcloud.gaap.Realserver("foo",
+    ip="1.1.1.1",
+    name="ci-test-gaap-realserver")
+foo = tencentcloud.gaap.get_realservers_output(ip=foo_realserver.ip)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		fooRealserver, err := gaap.NewRealserver(ctx, "foo", &gaap.RealserverArgs{
+			Ip:   pulumi.String("1.1.1.1"),
+			Name: pulumi.String("ci-test-gaap-realserver"),
+		})
+		if err != nil {
+			return err
+		}
+		_ = gaap.GetRealserversOutput(ctx, gaap.GetRealserversOutputArgs{
+			Ip: fooRealserver.Ip,
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new()
+    var fooRealserver = new Tencentcloud.Gaap.Realserver("foo", new()
     {
         Ip = "1.1.1.1",
+        Name = "ci-test-gaap-realserver",
     });
 
-    var fooRealservers = Tencentcloud.Gaap.GetRealservers.Invoke(new()
+    var foo = Tencentcloud.Gaap.GetRealservers.Invoke(new()
     {
         Ip = fooRealserver.Ip,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooRealserver, err := Gaap.NewRealserver(ctx, "fooRealserver", &Gaap.RealserverArgs{
-			Ip: pulumi.String("1.1.1.1"),
-		})
-		if err != nil {
-			return err
-		}
-		_ = fooRealserver.Ip.ApplyT(func(ip *string) (gaap.GetRealserversResult, error) {
-			return Gaap.GetRealserversOutput(ctx, gaap.GetRealserversOutputArgs{
-				Ip: ip,
-			}, nil), nil
-		}).(gaap.GetRealserversResultOutput)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -91,8 +121,8 @@ import com.pulumi.tencentcloud.Gaap.Realserver;
 import com.pulumi.tencentcloud.Gaap.RealserverArgs;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetRealserversArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -104,32 +134,70 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fooRealserver = new Realserver("fooRealserver", RealserverArgs.builder()        
+        var fooRealserver = new Realserver("fooRealserver", RealserverArgs.builder()
             .ip("1.1.1.1")
+            .name("ci-test-gaap-realserver")
             .build());
 
-        final var fooRealservers = GaapFunctions.getRealservers(GetRealserversArgs.builder()
+        final var foo = GaapFunctions.getRealservers(GetRealserversArgs.builder()
             .ip(fooRealserver.ip())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   fooRealserver:
     type: tencentcloud:Gaap:Realserver
+    name: foo
     properties:
       ip: 1.1.1.1
+      name: ci-test-gaap-realserver
 variables:
-  fooRealservers:
+  foo:
     fn::invoke:
-      Function: tencentcloud:Gaap:getRealservers
-      Arguments:
+      function: tencentcloud:Gaap:getRealservers
+      arguments:
         ip: ${fooRealserver.ip}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_getrealservers" "foo" {
+  ip = tencentcloud_gaap_realserver.foo.ip
+}
+
+resource "tencentcloud_gaap_realserver" "foo" {
+  ip   = "1.1.1.1"
+  name = "ci-test-gaap-realserver"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeRealServers](https://www.tencentcloud.com/document/api/608/33060)
 
 
 
@@ -141,7 +209,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -149,9 +217,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getRealservers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRealserversArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRealserversResult</a></span>></span
+><span class="k">function </span>getRealservers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRealserversArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRealserversResult</a></span>></span
 ><span class="k">
-function </span>getRealserversOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRealserversOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRealserversResult</a></span>></span
+function </span>getRealserversOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRealserversOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRealserversResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,16 +233,16 @@ function </span>getRealserversOutput<span class="p">(</span><span class="nx">arg
                     <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                    <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+                    <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetRealserversResult</span
 ><span class="k">
-def </span>get_realservers_output<span class="p">(</span><span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">ip</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Mapping[str, Any]]]</span> = None<span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRealserversResult]</span
+def </span>get_realservers_output<span class="p">(</span><span class="nx">domain</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">ip</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">project_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">tags</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Mapping[str, pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRealserversResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -199,7 +267,8 @@ func </span>GetRealserversOutput<span class="p">(</span><span class="nx">ctx</sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetRealservers </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetRealserversResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetRealserversArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetRealserversResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRealserversInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRealserversResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRealserversInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRealserversResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRealserversInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -208,7 +277,8 @@ func </span>GetRealserversOutput<span class="p">(</span><span class="nx">ctx</sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetRealserversResult</a></span>> </span>getRealservers<span class="p">(</span><span class="nx">GetRealserversArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRealserversResult</a></span>> </span>getRealservers<span class="p">(</span><span class="nx">GetRealserversArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRealserversResult</a></span>> </span>getRealservers<span class="p">(</span><span class="nx">GetRealserversArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -220,6 +290,15 @@ func </span>GetRealserversOutput<span class="p">(</span><span class="nx">ctx</sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getRealservers:getRealservers
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_realservers&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -238,8 +317,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -247,8 +325,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -256,8 +333,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP realserver to be queried, the maximum length is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the GAAP realserver to be queried, the maximum length is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -265,8 +341,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -274,17 +349,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -298,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -307,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -316,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP realserver to be queried, the maximum length is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the GAAP realserver to be queried, the maximum length is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -325,8 +395,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -334,17 +403,69 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the GAAP realserver to be queried, the maximum length is 30.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -358,8 +479,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -367,8 +487,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -376,8 +495,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the GAAP realserver to be queried, the maximum length is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the GAAP realserver to be queried, the maximum length is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -385,8 +503,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -394,17 +511,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -418,8 +533,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -427,8 +541,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -436,8 +549,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP realserver to be queried, the maximum length is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the GAAP realserver to be queried, the maximum length is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -445,8 +557,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -454,17 +565,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -478,8 +587,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -487,8 +595,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -496,8 +603,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the GAAP realserver to be queried, the maximum length is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the GAAP realserver to be queried, the maximum length is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -505,8 +611,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -514,17 +619,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -538,8 +641,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -547,8 +649,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</p>
-</dd><dt class="property-optional"
+    <dd>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -556,8 +657,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the GAAP realserver to be queried, the maximum length is 30.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the GAAP realserver to be queried, the maximum length is 30.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -565,8 +665,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -574,17 +673,15 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -607,8 +704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrealserversrealserver">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Realservers<wbr>Realserver&gt;</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of GAAP realserver. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -616,8 +712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -625,8 +720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Domain of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -634,8 +728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -643,8 +736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Name of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -652,8 +744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -667,10 +758,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP realserver.</p>
-</dd></dl>
+    <dd>Tags of the GAAP realserver.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -684,8 +774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realservers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservers_go" style="color: inherit; text-decoration: inherit;">Realservers</a>
@@ -693,8 +782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrealserversrealserver">[]Get<wbr>Realservers<wbr>Realserver</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of GAAP realserver. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -702,8 +790,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Domain of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -711,8 +798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -720,8 +806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Name of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -729,8 +814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -744,10 +828,79 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the GAAP realserver.</p>
-</dd></dl>
+    <dd>Tags of the GAAP realserver.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="realservers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservers_hcl" style="color: inherit; text-decoration: inherit;">realservers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getrealserversrealserver">list(object)</a></span>
+    </dt>
+    <dd>An information list of GAAP realserver. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the GAAP realserver.</dd><dt class="property-"
+            title="">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP of the GAAP realserver.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the GAAP realserver.</dd><dt class="property-"
+            title="">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project within the GAAP realserver.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the GAAP realserver.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -761,8 +914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realservers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservers_java" style="color: inherit; text-decoration: inherit;">realservers</a>
@@ -770,8 +922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrealserversrealserver">List&lt;Get<wbr>Realservers<wbr>Realserver&gt;</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of GAAP realserver. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -779,8 +930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Domain of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -788,8 +938,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -797,8 +946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Name of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -806,8 +954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -821,10 +968,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP realserver.</p>
-</dd></dl>
+    <dd>Tags of the GAAP realserver.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -838,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realservers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservers_nodejs" style="color: inherit; text-decoration: inherit;">realservers</a>
@@ -847,8 +992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrealserversrealserver">Get<wbr>Realservers<wbr>Realserver[]</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of GAAP realserver. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -856,8 +1000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Domain of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -865,8 +1008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -874,8 +1016,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Name of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -883,8 +1024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -898,10 +1038,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the GAAP realserver.</p>
-</dd></dl>
+    <dd>Tags of the GAAP realserver.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -915,17 +1054,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realservers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservers_python" style="color: inherit; text-decoration: inherit;">realservers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getrealserversrealserver">Get<wbr>Realservers<wbr>Realserver]</a></span>
+        <span class="property-type"><a href="#getrealserversrealserver">Sequence[Get<wbr>Realservers<wbr>Realserver]</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of GAAP realserver. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -933,8 +1070,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Domain of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -942,8 +1078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -951,8 +1086,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Name of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -960,8 +1094,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -975,10 +1108,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the GAAP realserver.</p>
-</dd></dl>
+    <dd>Tags of the GAAP realserver.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -992,8 +1124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="realservers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservers_yaml" style="color: inherit; text-decoration: inherit;">realservers</a>
@@ -1001,8 +1132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrealserversrealserver">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of GAAP realserver. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1010,8 +1140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Domain of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1019,8 +1148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1028,8 +1156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Name of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1037,8 +1164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>ID of the project within the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1052,10 +1178,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP realserver.</p>
-</dd></dl>
+    <dd>Tags of the GAAP realserver.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1079,8 +1204,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1088,8 +1212,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -1097,8 +1220,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1106,8 +1228,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP realserver to be queried, the maximum length is 30.</p>
-</dd><dt class="property-required"
+    <dd>Name of the GAAP realserver to be queried, the maximum length is 30.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1115,17 +1236,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1139,8 +1258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1148,8 +1266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -1157,8 +1274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1166,8 +1282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP realserver to be queried, the maximum length is 30.</p>
-</dd><dt class="property-required"
+    <dd>Name of the GAAP realserver to be queried, the maximum length is 30.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1175,17 +1290,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
+            title="Required">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the GAAP realserver to be queried, the maximum length is 30.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1199,8 +1366,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1208,8 +1374,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1217,8 +1382,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1226,8 +1390,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the GAAP realserver to be queried, the maximum length is 30.</p>
-</dd><dt class="property-required"
+    <dd>Name of the GAAP realserver to be queried, the maximum length is 30.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1235,17 +1398,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1259,8 +1420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1268,8 +1428,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1277,8 +1436,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1286,8 +1444,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the GAAP realserver to be queried, the maximum length is 30.</p>
-</dd><dt class="property-required"
+    <dd>Name of the GAAP realserver to be queried, the maximum length is 30.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1295,17 +1452,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1319,8 +1474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1328,8 +1482,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1337,8 +1490,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1346,8 +1498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the GAAP realserver to be queried, the maximum length is 30.</p>
-</dd><dt class="property-required"
+    <dd>Name of the GAAP realserver to be queried, the maximum length is 30.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1355,17 +1506,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1379,8 +1528,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</p>
-</dd><dt class="property-required"
+    <dd>Domain of the GAAP realserver to be queried, conflict with <code>ip</code>.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1388,8 +1536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -1397,8 +1544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver to be queried, conflict with <code>domain</code>.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1406,8 +1552,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the GAAP realserver to be queried, the maximum length is 30.</p>
-</dd><dt class="property-required"
+    <dd>Name of the GAAP realserver to be queried, the maximum length is 30.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1415,17 +1560,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</p>
-</dd><dt class="property-required"
+    <dd>ID of the project within the GAAP realserver to be queried, default value is <code>-1</code>, no set means all projects.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</p>
-</dd></dl>
+    <dd>Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1440,7 +1583,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

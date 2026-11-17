@@ -2,9 +2,11 @@
 ---
 title: "getAccounts"
 title_tag: "tencentcloud.Cynosdb.getAccounts"
-meta_desc: "Documentation for the tencentcloud.Cynosdb.getAccounts function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of cynosdb accounts"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,57 +18,53 @@ Use this data source to query detailed information of cynosdb accounts
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const accounts = tencentcloud.Cynosdb.getAccounts({
-    accountNames: ["root"],
+const accounts = tencentcloud.cynosdb.getAccounts({
     clusterId: "cynosdbmysql-bws8h88b",
+    accountNames: ["root"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-accounts = tencentcloud.Cynosdb.get_accounts(account_names=["root"],
-    cluster_id="cynosdbmysql-bws8h88b")
+accounts = tencentcloud.cynosdb.get_accounts(cluster_id="cynosdbmysql-bws8h88b",
+    account_names=["root"])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var accounts = Tencentcloud.Cynosdb.GetAccounts.Invoke(new()
-    {
-        AccountNames = new[]
-        {
-            "root",
-        },
-        ClusterId = "cynosdbmysql-bws8h88b",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cynosdb.GetAccounts(ctx, &cynosdb.GetAccountsArgs{
+		_, err := cynosdb.GetAccounts(ctx, &cynosdb.GetAccountsArgs{
+			ClusterId: "cynosdbmysql-bws8h88b",
 			AccountNames: []string{
 				"root",
 			},
-			ClusterId: "cynosdbmysql-bws8h88b",
 		}, nil)
 		if err != nil {
 			return err
@@ -75,6 +73,35 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var accounts = Tencentcloud.Cynosdb.GetAccounts.Invoke(new()
+    {
+        ClusterId = "cynosdbmysql-bws8h88b",
+        AccountNames = new[]
+        {
+            "root",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -83,8 +110,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cynosdb.CynosdbFunctions;
 import com.pulumi.tencentcloud.Cynosdb.inputs.GetAccountsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -97,25 +124,56 @@ public class App {
 
     public static void stack(Context ctx) {
         final var accounts = CynosdbFunctions.getAccounts(GetAccountsArgs.builder()
-            .accountNames("root")
             .clusterId("cynosdbmysql-bws8h88b")
+            .accountNames("root")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   accounts:
     fn::invoke:
-      Function: tencentcloud:Cynosdb:getAccounts
-      Arguments:
+      function: tencentcloud:Cynosdb:getAccounts
+      arguments:
+        clusterId: cynosdbmysql-bws8h88b
         accountNames:
           - root
-        clusterId: cynosdbmysql-bws8h88b
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cynosdb_getaccounts" "accounts" {
+  cluster_id    = "cynosdbmysql-bws8h88b"
+  account_names = ["root"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/1098/40762)
 
 
 
@@ -127,7 +185,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -135,9 +193,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getAccounts<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccountsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>></span
+><span class="k">function </span>getAccounts<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccountsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>></span
 ><span class="k">
-function </span>getAccountsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccountsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>></span
+function </span>getAccountsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAccountsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -152,11 +210,11 @@ function </span>getAccountsOutput<span class="p">(</span><span class="nx">args</
                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetAccountsResult</span
 ><span class="k">
-def </span>get_accounts_output<span class="p">(</span><span class="nx">account_names</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                 <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">hosts</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAccountsResult]</span
+def </span>get_accounts_output<span class="p">(</span><span class="nx">account_names</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">hosts</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAccountsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -181,7 +239,8 @@ func </span>GetAccountsOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetAccounts </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetAccountsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAccountsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAccountsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAccountsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -190,7 +249,8 @@ func </span>GetAccountsOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>> </span>getAccounts<span class="p">(</span><span class="nx">GetAccountsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>> </span>getAccounts<span class="p">(</span><span class="nx">GetAccountsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAccountsResult</a></span>> </span>getAccounts<span class="p">(</span><span class="nx">GetAccountsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -202,6 +262,15 @@ func </span>GetAccountsOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cynosdb/getAccounts:getAccounts
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cynosdb_get_accounts&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -220,8 +289,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountnames_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Names</a>
@@ -229,8 +297,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of accounts to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>List of accounts to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="hosts_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosts_csharp" style="color: inherit; text-decoration: inherit;">Hosts</a>
@@ -238,8 +305,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of hosts to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>List of hosts to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -247,8 +313,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -262,8 +327,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountnames_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Names</a>
@@ -271,8 +335,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of accounts to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>List of accounts to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="hosts_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosts_go" style="color: inherit; text-decoration: inherit;">Hosts</a>
@@ -280,8 +343,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of hosts to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>List of hosts to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -289,8 +351,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="account_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_names_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of accounts to be filtered.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hosts_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosts_hcl" style="color: inherit; text-decoration: inherit;">hosts</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of hosts to be filtered.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -304,8 +403,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountnames_java" style="color: inherit; text-decoration: inherit;">account<wbr>Names</a>
@@ -313,8 +411,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of accounts to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>List of accounts to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="hosts_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosts_java" style="color: inherit; text-decoration: inherit;">hosts</a>
@@ -322,8 +419,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of hosts to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>List of hosts to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -331,8 +427,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -346,8 +441,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountnames_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Names</a>
@@ -355,8 +449,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of accounts to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>List of accounts to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="hosts_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosts_nodejs" style="color: inherit; text-decoration: inherit;">hosts</a>
@@ -364,8 +457,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of hosts to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>List of hosts to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -373,8 +465,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -388,8 +479,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="account_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_names_python" style="color: inherit; text-decoration: inherit;">account_<wbr>names</a>
@@ -397,8 +487,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of accounts to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>List of accounts to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="hosts_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosts_python" style="color: inherit; text-decoration: inherit;">hosts</a>
@@ -406,8 +495,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of hosts to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>List of hosts to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -415,8 +503,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -430,8 +517,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of cluster.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="accountnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountnames_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Names</a>
@@ -439,8 +525,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of accounts to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>List of accounts to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="hosts_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosts_yaml" style="color: inherit; text-decoration: inherit;">hosts</a>
@@ -448,8 +533,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of hosts to be filtered.</p>
-</dd><dt class="property-optional"
+    <dd>List of hosts to be filtered.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -457,8 +541,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -481,8 +564,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccountsaccountset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Outputs.<wbr>Get<wbr>Accounts<wbr>Account<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Database account list.&amp;quot;&amp;quot;Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Database account list.&amp;quot;&amp;quot;Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -498,8 +580,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="accountnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountnames_csharp" style="color: inherit; text-decoration: inherit;">Account<wbr>Names</a>
@@ -537,8 +618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccountsaccountset">[]Get<wbr>Accounts<wbr>Account<wbr>Set</a></span>
     </dt>
-    <dd><p>Database account list.&amp;quot;&amp;quot;Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Database account list.&amp;quot;&amp;quot;Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -554,8 +634,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="accountnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountnames_go" style="color: inherit; text-decoration: inherit;">Account<wbr>Names</a>
@@ -584,6 +663,60 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="account_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_sets_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getaccountsaccountset">list(object)</a></span>
+    </dt>
+    <dd>Database account list.&amp;quot;&amp;quot;Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
+            title="">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="account_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_names_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="hosts_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hosts_hcl" style="color: inherit; text-decoration: inherit;">hosts</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -593,8 +726,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccountsaccountset">List&lt;Get<wbr>Accounts<wbr>Account<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Database account list.&amp;quot;&amp;quot;Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Database account list.&amp;quot;&amp;quot;Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -610,8 +742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="accountnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountnames_java" style="color: inherit; text-decoration: inherit;">account<wbr>Names</a>
@@ -649,8 +780,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccountsaccountset">Get<wbr>Accounts<wbr>Account<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Database account list.&amp;quot;&amp;quot;Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Database account list.&amp;quot;&amp;quot;Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -666,8 +796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="accountnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountnames_nodejs" style="color: inherit; text-decoration: inherit;">account<wbr>Names</a>
@@ -703,10 +832,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_sets_python" style="color: inherit; text-decoration: inherit;">account_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getaccountsaccountset">Get<wbr>Accounts<wbr>Account<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getaccountsaccountset">Sequence[Get<wbr>Accounts<wbr>Account<wbr>Set]</a></span>
     </dt>
-    <dd><p>Database account list.&amp;quot;&amp;quot;Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Database account list.&amp;quot;&amp;quot;Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -722,8 +850,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="account_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_names_python" style="color: inherit; text-decoration: inherit;">account_<wbr>names</a>
@@ -761,8 +888,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getaccountsaccountset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Database account list.&amp;quot;&amp;quot;Note: This field may return null, indicating that no valid value can be obtained.</p>
-</dd><dt class="property-"
+    <dd>Database account list.&amp;quot;&amp;quot;Note: This field may return null, indicating that no valid value can be obtained.</dd><dt class="property-"
             title="">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -778,8 +904,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="accountnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#accountnames_yaml" style="color: inherit; text-decoration: inherit;">account<wbr>Names</a>
@@ -827,8 +952,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name of database.</p>
-</dd><dt class="property-required"
+    <dd>Account name of database.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -836,8 +960,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -845,8 +968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The account description of database.</p>
-</dd><dt class="property-required"
+    <dd>The account description of database.</dd><dt class="property-required"
             title="Required">
         <span id="host_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_csharp" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -854,8 +976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-required"
+    <dd>Host.</dd><dt class="property-required"
             title="Required">
         <span id="maxuserconnections_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxuserconnections_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>User<wbr>Connections</a>
@@ -863,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of user connections.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of user connections.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -872,8 +992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -887,8 +1006,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name of database.</p>
-</dd><dt class="property-required"
+    <dd>Account name of database.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -896,8 +1014,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -905,8 +1022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The account description of database.</p>
-</dd><dt class="property-required"
+    <dd>The account description of database.</dd><dt class="property-required"
             title="Required">
         <span id="host_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_go" style="color: inherit; text-decoration: inherit;">Host</a>
@@ -914,8 +1030,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-required"
+    <dd>Host.</dd><dt class="property-required"
             title="Required">
         <span id="maxuserconnections_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxuserconnections_go" style="color: inherit; text-decoration: inherit;">Max<wbr>User<wbr>Connections</a>
@@ -923,8 +1038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of user connections.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of user connections.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -932,8 +1046,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="account_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_name_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Account name of database.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The account description of database.</dd><dt class="property-required"
+            title="Required">
+        <span id="host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_hcl" style="color: inherit; text-decoration: inherit;">host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Host.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_user_connections_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_user_connections_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>user_<wbr>connections</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of user connections.</dd><dt class="property-required"
+            title="Required">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -947,8 +1114,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account name of database.</p>
-</dd><dt class="property-required"
+    <dd>Account name of database.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -956,8 +1122,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -965,8 +1130,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The account description of database.</p>
-</dd><dt class="property-required"
+    <dd>The account description of database.</dd><dt class="property-required"
             title="Required">
         <span id="host_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_java" style="color: inherit; text-decoration: inherit;">host</a>
@@ -974,8 +1138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-required"
+    <dd>Host.</dd><dt class="property-required"
             title="Required">
         <span id="maxuserconnections_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxuserconnections_java" style="color: inherit; text-decoration: inherit;">max<wbr>User<wbr>Connections</a>
@@ -983,8 +1146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of user connections.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of user connections.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -992,8 +1154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1007,8 +1168,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Account name of database.</p>
-</dd><dt class="property-required"
+    <dd>Account name of database.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1016,8 +1176,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1025,8 +1184,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The account description of database.</p>
-</dd><dt class="property-required"
+    <dd>The account description of database.</dd><dt class="property-required"
             title="Required">
         <span id="host_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_nodejs" style="color: inherit; text-decoration: inherit;">host</a>
@@ -1034,8 +1192,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-required"
+    <dd>Host.</dd><dt class="property-required"
             title="Required">
         <span id="maxuserconnections_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxuserconnections_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>User<wbr>Connections</a>
@@ -1043,8 +1200,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of user connections.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of user connections.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1052,8 +1208,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1067,8 +1222,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Account name of database.</p>
-</dd><dt class="property-required"
+    <dd>Account name of database.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1076,8 +1230,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1085,8 +1238,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The account description of database.</p>
-</dd><dt class="property-required"
+    <dd>The account description of database.</dd><dt class="property-required"
             title="Required">
         <span id="host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_python" style="color: inherit; text-decoration: inherit;">host</a>
@@ -1094,8 +1246,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-required"
+    <dd>Host.</dd><dt class="property-required"
             title="Required">
         <span id="max_user_connections_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_user_connections_python" style="color: inherit; text-decoration: inherit;">max_<wbr>user_<wbr>connections</a>
@@ -1103,8 +1254,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of user connections.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of user connections.</dd><dt class="property-required"
             title="Required">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -1112,8 +1262,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1127,8 +1276,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Account name of database.</p>
-</dd><dt class="property-required"
+    <dd>Account name of database.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1136,8 +1284,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time.</p>
-</dd><dt class="property-required"
+    <dd>Create time.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1145,8 +1292,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The account description of database.</p>
-</dd><dt class="property-required"
+    <dd>The account description of database.</dd><dt class="property-required"
             title="Required">
         <span id="host_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#host_yaml" style="color: inherit; text-decoration: inherit;">host</a>
@@ -1154,8 +1300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-required"
+    <dd>Host.</dd><dt class="property-required"
             title="Required">
         <span id="maxuserconnections_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxuserconnections_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>User<wbr>Connections</a>
@@ -1163,8 +1308,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of user connections.</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of user connections.</dd><dt class="property-required"
             title="Required">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -1172,8 +1316,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Update time.</p>
-</dd></dl>
+    <dd>Update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1188,7 +1331,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

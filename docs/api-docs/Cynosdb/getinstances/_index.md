@@ -2,9 +2,11 @@
 ---
 title: "getInstances"
 title_tag: "tencentcloud.Cynosdb.getInstances"
-meta_desc: "Documentation for the tencentcloud.Cynosdb.getInstances function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of Cynosdb instances."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,60 +18,57 @@ Use this data source to query detailed information of Cynosdb instances.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Cynosdb.getInstances({
-    dbType: "MYSQL",
+const foo = tencentcloud.cynosdb.getInstances({
     instanceId: "cynosdbmysql-ins-0wln9u6w",
-    instanceName: "test",
     projectId: 0,
+    dbType: "MYSQL",
+    instanceName: "test",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Cynosdb.get_instances(db_type="MYSQL",
-    instance_id="cynosdbmysql-ins-0wln9u6w",
-    instance_name="test",
-    project_id=0)
+foo = tencentcloud.cynosdb.get_instances(instance_id="cynosdbmysql-ins-0wln9u6w",
+    project_id=0,
+    db_type="MYSQL",
+    instance_name="test")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Cynosdb.GetInstances.Invoke(new()
-    {
-        DbType = "MYSQL",
-        InstanceId = "cynosdbmysql-ins-0wln9u6w",
-        InstanceName = "test",
-        ProjectId = 0,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cynosdb.GetInstances(ctx, &cynosdb.GetInstancesArgs{
-			DbType:       pulumi.StringRef("MYSQL"),
+		_, err := cynosdb.GetInstances(ctx, &cynosdb.GetInstancesArgs{
 			InstanceId:   pulumi.StringRef("cynosdbmysql-ins-0wln9u6w"),
-			InstanceName: pulumi.StringRef("test"),
 			ProjectId:    pulumi.IntRef(0),
+			DbType:       pulumi.StringRef("MYSQL"),
+			InstanceName: pulumi.StringRef("test"),
 		}, nil)
 		if err != nil {
 			return err
@@ -78,6 +77,34 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = Tencentcloud.Cynosdb.GetInstances.Invoke(new()
+    {
+        InstanceId = "cynosdbmysql-ins-0wln9u6w",
+        ProjectId = 0,
+        DbType = "MYSQL",
+        InstanceName = "test",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -86,8 +113,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cynosdb.CynosdbFunctions;
 import com.pulumi.tencentcloud.Cynosdb.inputs.GetInstancesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -100,28 +127,61 @@ public class App {
 
     public static void stack(Context ctx) {
         final var foo = CynosdbFunctions.getInstances(GetInstancesArgs.builder()
-            .dbType("MYSQL")
             .instanceId("cynosdbmysql-ins-0wln9u6w")
-            .instanceName("test")
             .projectId(0)
+            .dbType("MYSQL")
+            .instanceName("test")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   foo:
     fn::invoke:
-      Function: tencentcloud:Cynosdb:getInstances
-      Arguments:
-        dbType: MYSQL
+      function: tencentcloud:Cynosdb:getInstances
+      arguments:
         instanceId: cynosdbmysql-ins-0wln9u6w
-        instanceName: test
         projectId: 0
+        dbType: MYSQL
+        instanceName: test
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cynosdb_getinstances" "foo" {
+  instance_id   = "cynosdbmysql-ins-0wln9u6w"
+  project_id    = 0
+  db_type       = "MYSQL"
+  instance_name = "test"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeInstances](https://www.tencentcloud.com/document/api/1098/40747)
 
 
 
@@ -133,7 +193,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -141,9 +201,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ><span class="k">
-function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -160,13 +220,13 @@ function </span>getInstancesOutput<span class="p">(</span><span class="nx">args<
                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstancesResult</span
 ><span class="k">
-def </span>get_instances_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">db_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
+def </span>get_instances_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">db_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">project_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -191,7 +251,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstances </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -200,7 +261,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -212,6 +274,15 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cynosdb/getInstances:getInstances
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cynosdb_get_instances&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -230,8 +301,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Type</a>
@@ -239,8 +309,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -248,8 +317,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Cynosdb instance to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -257,8 +325,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the Cynosdb instance to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -266,8 +333,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -275,8 +341,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -290,8 +355,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Type</a>
@@ -299,8 +363,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -308,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Cynosdb instance to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -317,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the Cynosdb instance to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -326,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -335,8 +395,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="db_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_type_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the Cynosdb instance to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the Cynosdb instance to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -350,8 +463,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_java" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -359,8 +471,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -368,8 +479,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Cynosdb instance to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -377,8 +487,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the Cynosdb instance to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -386,8 +495,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -395,8 +503,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -410,8 +517,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -419,8 +525,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -428,8 +533,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Cynosdb instance to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -437,8 +541,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the Cynosdb instance to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -446,8 +549,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -455,8 +557,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -470,8 +571,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="db_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_type_python" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
@@ -479,8 +579,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -488,8 +587,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Cynosdb instance to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -497,8 +595,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the Cynosdb instance to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -506,8 +603,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -515,8 +611,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -530,8 +625,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="dbtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -539,8 +633,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CynosDB, and available values include <code>MYSQL</code>, <code>POSTGRESQL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -548,8 +641,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the Cynosdb instance to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -557,8 +649,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the Cynosdb instance to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -566,8 +657,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the project to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -575,8 +665,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -599,8 +688,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -608,8 +696,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cynosdb.<wbr>Outputs.<wbr>Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of instances. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of instances. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -641,8 +728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CynosDB instance.</p>
-</dd><dt class="property-"
+    <dd>Name of CynosDB instance.</dd><dt class="property-"
             title="">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -672,8 +758,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -681,8 +766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">[]Get<wbr>Instances<wbr>Instance<wbr>List</a></span>
     </dt>
-    <dd><p>A list of instances. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of instances. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -714,8 +798,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CynosDB instance.</p>
-</dd><dt class="property-"
+    <dd>Name of CynosDB instance.</dd><dt class="property-"
             title="">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -736,6 +819,76 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesinstancelist">list(object)</a></span>
+    </dt>
+    <dd>A list of instances. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="db_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_type_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CynosDB instance.</dd><dt class="property-"
+            title="">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -745,8 +898,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -754,8 +906,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Get<wbr>Instances<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of instances. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of instances. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -787,8 +938,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CynosDB instance.</p>
-</dd><dt class="property-"
+    <dd>Name of CynosDB instance.</dd><dt class="property-"
             title="">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -818,8 +968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -827,8 +976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">Get<wbr>Instances<wbr>Instance<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of instances. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of instances. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -860,8 +1008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CynosDB instance.</p>
-</dd><dt class="property-"
+    <dd>Name of CynosDB instance.</dd><dt class="property-"
             title="">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -891,17 +1038,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesinstancelist">Get<wbr>Instances<wbr>Instance<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstancesinstancelist">Sequence[Get<wbr>Instances<wbr>Instance<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of instances. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of instances. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -933,8 +1078,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CynosDB instance.</p>
-</dd><dt class="property-"
+    <dd>Name of CynosDB instance.</dd><dt class="property-"
             title="">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -964,8 +1108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -973,8 +1116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesinstancelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of instances. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of instances. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1006,8 +1148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CynosDB instance.</p>
-</dd><dt class="property-"
+    <dd>Name of CynosDB instance.</dd><dt class="property-"
             title="">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1047,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the CynosDB instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CynosDB instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancecpucore_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecpucore_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Cpu<wbr>Core</a>
@@ -1056,8 +1196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of the Cynosdb instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the Cynosdb instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancememorysize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancememorysize_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Memory<wbr>Size</a>
@@ -1065,8 +1204,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity of the Cynosdb instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory capacity of the Cynosdb instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1074,8 +1212,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Cynosdb instance to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instancestatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Status</a>
@@ -1083,8 +1220,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the Cynosdb instance.</p>
-</dd><dt class="property-required"
+    <dd>Status of the Cynosdb instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancestoragesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestoragesize_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Storage<wbr>Size</a>
@@ -1092,8 +1228,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage size of the Cynosdb instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Storage size of the Cynosdb instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1101,8 +1236,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type. <code>ro</code> for readonly instance, <code>rw</code> for read and write instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. <code>ro</code> for readonly instance, <code>rw</code> for read and write instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1110,8 +1244,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1119,8 +1252,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Cynosdb instance to be queried.</p>
-</dd></dl>
+    <dd>ID of the Cynosdb instance to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1134,8 +1266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the CynosDB instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CynosDB instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancecpucore_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecpucore_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Cpu<wbr>Core</a>
@@ -1143,8 +1274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of the Cynosdb instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the Cynosdb instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancememorysize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancememorysize_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Memory<wbr>Size</a>
@@ -1152,8 +1282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity of the Cynosdb instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory capacity of the Cynosdb instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1161,8 +1290,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Cynosdb instance to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instancestatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Status</a>
@@ -1170,8 +1298,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the Cynosdb instance.</p>
-</dd><dt class="property-required"
+    <dd>Status of the Cynosdb instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancestoragesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestoragesize_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Storage<wbr>Size</a>
@@ -1179,8 +1306,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage size of the Cynosdb instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Storage size of the Cynosdb instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1188,8 +1314,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type. <code>ro</code> for readonly instance, <code>rw</code> for read and write instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. <code>ro</code> for readonly instance, <code>rw</code> for read and write instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
@@ -1197,8 +1322,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -1206,8 +1330,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Cynosdb instance to be queried.</p>
-</dd></dl>
+    <dd>ID of the Cynosdb instance to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of the CynosDB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_cpu_core_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_cpu_core_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>cpu_<wbr>core</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of CPU cores of the Cynosdb instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_memory_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_memory_size_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>memory_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory capacity of the Cynosdb instance, unit in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the Cynosdb instance to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_status_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status of the Cynosdb instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_storage_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_storage_size_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>storage_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Storage size of the Cynosdb instance, unit in GB.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance type. <code>ro</code> for readonly instance, <code>rw</code> for read and write instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the cluster.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the Cynosdb instance to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1221,8 +1422,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the CynosDB instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CynosDB instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancecpucore_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecpucore_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Cpu<wbr>Core</a>
@@ -1230,8 +1430,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of CPU cores of the Cynosdb instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the Cynosdb instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancememorysize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancememorysize_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Memory<wbr>Size</a>
@@ -1239,8 +1438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory capacity of the Cynosdb instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory capacity of the Cynosdb instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1248,8 +1446,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Cynosdb instance to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instancestatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -1257,8 +1454,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the Cynosdb instance.</p>
-</dd><dt class="property-required"
+    <dd>Status of the Cynosdb instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancestoragesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestoragesize_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Storage<wbr>Size</a>
@@ -1266,8 +1462,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Storage size of the Cynosdb instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Storage size of the Cynosdb instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1275,8 +1470,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance type. <code>ro</code> for readonly instance, <code>rw</code> for read and write instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. <code>ro</code> for readonly instance, <code>rw</code> for read and write instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1284,8 +1478,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1293,8 +1486,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the Cynosdb instance to be queried.</p>
-</dd></dl>
+    <dd>ID of the Cynosdb instance to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1308,8 +1500,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of the CynosDB instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CynosDB instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancecpucore_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecpucore_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Cpu<wbr>Core</a>
@@ -1317,8 +1508,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of CPU cores of the Cynosdb instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the Cynosdb instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancememorysize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancememorysize_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Memory<wbr>Size</a>
@@ -1326,8 +1516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory capacity of the Cynosdb instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory capacity of the Cynosdb instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1335,8 +1524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Cynosdb instance to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instancestatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -1344,8 +1532,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status of the Cynosdb instance.</p>
-</dd><dt class="property-required"
+    <dd>Status of the Cynosdb instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancestoragesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestoragesize_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Storage<wbr>Size</a>
@@ -1353,8 +1540,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Storage size of the Cynosdb instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Storage size of the Cynosdb instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1362,8 +1548,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type. <code>ro</code> for readonly instance, <code>rw</code> for read and write instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. <code>ro</code> for readonly instance, <code>rw</code> for read and write instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1371,8 +1556,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1380,8 +1564,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the Cynosdb instance to be queried.</p>
-</dd></dl>
+    <dd>ID of the Cynosdb instance to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1395,8 +1578,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of the CynosDB instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CynosDB instance.</dd><dt class="property-required"
             title="Required">
         <span id="instance_cpu_core_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_cpu_core_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>cpu_<wbr>core</a>
@@ -1404,8 +1586,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU cores of the Cynosdb instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the Cynosdb instance.</dd><dt class="property-required"
             title="Required">
         <span id="instance_memory_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_memory_size_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>memory_<wbr>size</a>
@@ -1413,8 +1594,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity of the Cynosdb instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory capacity of the Cynosdb instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -1422,8 +1602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Cynosdb instance to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instance_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_status_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>status</a>
@@ -1431,8 +1610,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status of the Cynosdb instance.</p>
-</dd><dt class="property-required"
+    <dd>Status of the Cynosdb instance.</dd><dt class="property-required"
             title="Required">
         <span id="instance_storage_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_storage_size_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>storage_<wbr>size</a>
@@ -1440,8 +1618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Storage size of the Cynosdb instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Storage size of the Cynosdb instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -1449,8 +1626,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance type. <code>ro</code> for readonly instance, <code>rw</code> for read and write instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. <code>ro</code> for readonly instance, <code>rw</code> for read and write instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="cluster_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
@@ -1458,8 +1634,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -1467,8 +1642,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the Cynosdb instance to be queried.</p>
-</dd></dl>
+    <dd>ID of the Cynosdb instance to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1482,8 +1656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of the CynosDB instance.</p>
-</dd><dt class="property-required"
+    <dd>Creation time of the CynosDB instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancecpucore_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecpucore_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Cpu<wbr>Core</a>
@@ -1491,8 +1664,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of CPU cores of the Cynosdb instance.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU cores of the Cynosdb instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancememorysize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancememorysize_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Memory<wbr>Size</a>
@@ -1500,8 +1672,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory capacity of the Cynosdb instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Memory capacity of the Cynosdb instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1509,8 +1680,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the Cynosdb instance to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the Cynosdb instance to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="instancestatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestatus_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Status</a>
@@ -1518,8 +1688,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status of the Cynosdb instance.</p>
-</dd><dt class="property-required"
+    <dd>Status of the Cynosdb instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancestoragesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancestoragesize_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Storage<wbr>Size</a>
@@ -1527,8 +1696,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Storage size of the Cynosdb instance, unit in GB.</p>
-</dd><dt class="property-required"
+    <dd>Storage size of the Cynosdb instance, unit in GB.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1536,8 +1704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance type. <code>ro</code> for readonly instance, <code>rw</code> for read and write instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. <code>ro</code> for readonly instance, <code>rw</code> for read and write instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="clusterid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
@@ -1545,8 +1712,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the cluster.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the cluster.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -1554,8 +1720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the Cynosdb instance to be queried.</p>
-</dd></dl>
+    <dd>ID of the Cynosdb instance to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1570,7 +1735,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

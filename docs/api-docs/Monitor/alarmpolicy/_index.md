@@ -2,9 +2,11 @@
 ---
 title: "AlarmPolicy"
 title_tag: "tencentcloud.Monitor.AlarmPolicy"
-meta_desc: "Documentation for the tencentcloud.Monitor.AlarmPolicy resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a alarm policy resource for monitor."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,14 +18,20 @@ Provides a alarm policy resource for monitor.
 
 ## Example Usage
 
-### cvm_device alarm policy
+### cvmDevice alarm policy
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooAlarmNotice = new tencentcloud.monitor.AlarmNotice("fooAlarmNotice", {
+const foo = new tencentcloud.monitor.AlarmNotice("foo", {
+    name: "tf-alarm_notice",
     noticeType: "ALL",
     noticeLanguage: "zh-CN",
     userNotices: [{
@@ -67,7 +75,7 @@ const fooAlarmNotice = new tencentcloud.monitor.AlarmNotice("fooAlarmNotice", {
         ],
     }],
 });
-const fooAlarmPolicy = new tencentcloud.monitor.AlarmPolicy("fooAlarmPolicy", {
+const fooAlarmPolicy = new tencentcloud.monitor.AlarmPolicy("foo", {
     policyName: "tf-policy",
     monitorType: "MT_QCE",
     enable: 1,
@@ -93,37 +101,43 @@ const fooAlarmPolicy = new tencentcloud.monitor.AlarmPolicy("fooAlarmPolicy", {
             metricName: "guest_reboot",
         },
     ],
-    noticeIds: [fooAlarmNotice.id],
+    noticeIds: [foo.id],
     triggerTasks: [{
         type: "AS",
         taskConfig: "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo_alarm_notice = tencentcloud.monitor.AlarmNotice("fooAlarmNotice",
+foo = tencentcloud.monitor.AlarmNotice("foo",
+    name="tf-alarm_notice",
     notice_type="ALL",
     notice_language="zh-CN",
-    user_notices=[tencentcloud.monitor.AlarmNoticeUserNoticeArgs(
-        receiver_type="USER",
-        start_time=0,
-        end_time=1,
-        notice_ways=[
+    user_notices=[{
+        "receiver_type": "USER",
+        "start_time": 0,
+        "end_time": 1,
+        "notice_ways": [
             "SMS",
             "EMAIL",
         ],
-        user_ids=[10001],
-        group_ids=[],
-        phone_orders=[10001],
-        phone_circle_times=2,
-        phone_circle_interval=50,
-        phone_inner_interval=60,
-        need_phone_arrive_notice=1,
-        phone_call_type="CIRCLE",
-        weekdays=[
+        "user_ids": [10001],
+        "group_ids": [],
+        "phone_orders": [10001],
+        "phone_circle_times": 2,
+        "phone_circle_interval": 50,
+        "phone_inner_interval": 60,
+        "need_phone_arrive_notice": 1,
+        "phone_call_type": "CIRCLE",
+        "weekdays": [
             1,
             2,
             3,
@@ -132,12 +146,12 @@ foo_alarm_notice = tencentcloud.monitor.AlarmNotice("fooAlarmNotice",
             6,
             7,
         ],
-    )],
-    url_notices=[tencentcloud.monitor.AlarmNoticeUrlNoticeArgs(
-        url="https://www.mytest.com/validate",
-        end_time=0,
-        start_time=1,
-        weekdays=[
+    }],
+    url_notices=[{
+        "url": "https://www.mytest.com/validate",
+        "end_time": 0,
+        "start_time": 1,
+        "weekdays": [
             1,
             2,
             3,
@@ -146,39 +160,160 @@ foo_alarm_notice = tencentcloud.monitor.AlarmNotice("fooAlarmNotice",
             6,
             7,
         ],
-    )])
-foo_alarm_policy = tencentcloud.monitor.AlarmPolicy("fooAlarmPolicy",
+    }])
+foo_alarm_policy = tencentcloud.monitor.AlarmPolicy("foo",
     policy_name="tf-policy",
     monitor_type="MT_QCE",
     enable=1,
     project_id=0,
     namespace="cvm_device",
-    conditions=tencentcloud.monitor.AlarmPolicyConditionsArgs(
-        is_union_rule=1,
-        rules=[tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
-            metric_name="CpuUsage",
-            period=60,
-            operator="ge",
-            value="89.9",
-            continue_period=1,
-            notice_frequency=3600,
-            is_power_notice=0,
-        )],
-    ),
+    conditions={
+        "is_union_rule": 1,
+        "rules": [{
+            "metric_name": "CpuUsage",
+            "period": 60,
+            "operator": "ge",
+            "value": "89.9",
+            "continue_period": 1,
+            "notice_frequency": 3600,
+            "is_power_notice": 0,
+        }],
+    },
     event_conditions=[
-        tencentcloud.monitor.AlarmPolicyEventConditionArgs(
-            metric_name="ping_unreachable",
-        ),
-        tencentcloud.monitor.AlarmPolicyEventConditionArgs(
-            metric_name="guest_reboot",
-        ),
+        {
+            "metric_name": "ping_unreachable",
+        },
+        {
+            "metric_name": "guest_reboot",
+        },
     ],
-    notice_ids=[foo_alarm_notice.id],
-    trigger_tasks=[tencentcloud.monitor.AlarmPolicyTriggerTaskArgs(
-        type="AS",
-        task_config="{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
-    )])
+    notice_ids=[foo.id],
+    trigger_tasks=[{
+        "type": "AS",
+        "task_config": "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
+    }])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		foo, err := monitor.NewAlarmNotice(ctx, "foo", &monitor.AlarmNoticeArgs{
+			Name:           pulumi.String("tf-alarm_notice"),
+			NoticeType:     pulumi.String("ALL"),
+			NoticeLanguage: pulumi.String("zh-CN"),
+			UserNotices: monitor.AlarmNoticeUserNoticeArray{
+				&monitor.AlarmNoticeUserNoticeArgs{
+					ReceiverType: pulumi.String("USER"),
+					StartTime:    pulumi.Int(0),
+					EndTime:      pulumi.Int(1),
+					NoticeWays: pulumi.StringArray{
+						pulumi.String("SMS"),
+						pulumi.String("EMAIL"),
+					},
+					UserIds: pulumi.IntArray{
+						pulumi.Int(10001),
+					},
+					GroupIds: pulumi.IntArray{},
+					PhoneOrders: pulumi.IntArray{
+						pulumi.Int(10001),
+					},
+					PhoneCircleTimes:      pulumi.Int(2),
+					PhoneCircleInterval:   pulumi.Int(50),
+					PhoneInnerInterval:    pulumi.Int(60),
+					NeedPhoneArriveNotice: pulumi.Int(1),
+					PhoneCallType:         pulumi.String("CIRCLE"),
+					Weekdays: pulumi.IntArray{
+						pulumi.Int(1),
+						pulumi.Int(2),
+						pulumi.Int(3),
+						pulumi.Int(4),
+						pulumi.Int(5),
+						pulumi.Int(6),
+						pulumi.Int(7),
+					},
+				},
+			},
+			UrlNotices: monitor.AlarmNoticeUrlNoticeArray{
+				&monitor.AlarmNoticeUrlNoticeArgs{
+					Url:       pulumi.String("https://www.mytest.com/validate"),
+					EndTime:   pulumi.Int(0),
+					StartTime: pulumi.Int(1),
+					Weekdays: pulumi.IntArray{
+						pulumi.Int(1),
+						pulumi.Int(2),
+						pulumi.Int(3),
+						pulumi.Int(4),
+						pulumi.Int(5),
+						pulumi.Int(6),
+						pulumi.Int(7),
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = monitor.NewAlarmPolicy(ctx, "foo", &monitor.AlarmPolicyArgs{
+			PolicyName:  pulumi.String("tf-policy"),
+			MonitorType: pulumi.String("MT_QCE"),
+			Enable:      pulumi.Int(1),
+			ProjectId:   pulumi.Int(0),
+			Namespace:   pulumi.String("cvm_device"),
+			Conditions: &monitor.AlarmPolicyConditionsArgs{
+				IsUnionRule: pulumi.Int(1),
+				Rules: monitor.AlarmPolicyConditionsRuleArray{
+					&monitor.AlarmPolicyConditionsRuleArgs{
+						MetricName:      pulumi.String("CpuUsage"),
+						Period:          pulumi.Int(60),
+						Operator:        pulumi.String("ge"),
+						Value:           pulumi.String("89.9"),
+						ContinuePeriod:  pulumi.Int(1),
+						NoticeFrequency: pulumi.Int(3600),
+						IsPowerNotice:   pulumi.Int(0),
+					},
+				},
+			},
+			EventConditions: monitor.AlarmPolicyEventConditionArray{
+				&monitor.AlarmPolicyEventConditionArgs{
+					MetricName: pulumi.String("ping_unreachable"),
+				},
+				&monitor.AlarmPolicyEventConditionArgs{
+					MetricName: pulumi.String("guest_reboot"),
+				},
+			},
+			NoticeIds: pulumi.StringArray{
+				foo.ID().ToIDOutput().ToStringOutput(),
+			},
+			TriggerTasks: monitor.AlarmPolicyTriggerTaskArray{
+				&monitor.AlarmPolicyTriggerTaskArgs{
+					Type:       pulumi.String("AS"),
+					TaskConfig: pulumi.String("{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -187,8 +322,9 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var fooAlarmNotice = new Tencentcloud.Monitor.AlarmNotice("fooAlarmNotice", new()
+    var foo = new Tencentcloud.Monitor.AlarmNotice("foo", new()
     {
+        Name = "tf-alarm_notice",
         NoticeType = "ALL",
         NoticeLanguage = "zh-CN",
         UserNotices = new[]
@@ -250,7 +386,7 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var fooAlarmPolicy = new Tencentcloud.Monitor.AlarmPolicy("fooAlarmPolicy", new()
+    var fooAlarmPolicy = new Tencentcloud.Monitor.AlarmPolicy("foo", new()
     {
         PolicyName = "tf-policy",
         MonitorType = "MT_QCE",
@@ -287,7 +423,7 @@ return await Deployment.RunAsync(() =>
         },
         NoticeIds = new[]
         {
-            fooAlarmNotice.Id,
+            foo.Id,
         },
         TriggerTasks = new[]
         {
@@ -301,116 +437,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooAlarmNotice, err := Monitor.NewAlarmNotice(ctx, "fooAlarmNotice", &Monitor.AlarmNoticeArgs{
-			NoticeType:     pulumi.String("ALL"),
-			NoticeLanguage: pulumi.String("zh-CN"),
-			UserNotices: monitor.AlarmNoticeUserNoticeArray{
-				&monitor.AlarmNoticeUserNoticeArgs{
-					ReceiverType: pulumi.String("USER"),
-					StartTime:    pulumi.Int(0),
-					EndTime:      pulumi.Int(1),
-					NoticeWays: pulumi.StringArray{
-						pulumi.String("SMS"),
-						pulumi.String("EMAIL"),
-					},
-					UserIds: pulumi.IntArray{
-						pulumi.Int(10001),
-					},
-					GroupIds: pulumi.IntArray{},
-					PhoneOrders: pulumi.IntArray{
-						pulumi.Int(10001),
-					},
-					PhoneCircleTimes:      pulumi.Int(2),
-					PhoneCircleInterval:   pulumi.Int(50),
-					PhoneInnerInterval:    pulumi.Int(60),
-					NeedPhoneArriveNotice: pulumi.Int(1),
-					PhoneCallType:         pulumi.String("CIRCLE"),
-					Weekdays: pulumi.IntArray{
-						pulumi.Int(1),
-						pulumi.Int(2),
-						pulumi.Int(3),
-						pulumi.Int(4),
-						pulumi.Int(5),
-						pulumi.Int(6),
-						pulumi.Int(7),
-					},
-				},
-			},
-			UrlNotices: monitor.AlarmNoticeUrlNoticeArray{
-				&monitor.AlarmNoticeUrlNoticeArgs{
-					Url:       pulumi.String("https://www.mytest.com/validate"),
-					EndTime:   pulumi.Int(0),
-					StartTime: pulumi.Int(1),
-					Weekdays: pulumi.IntArray{
-						pulumi.Int(1),
-						pulumi.Int(2),
-						pulumi.Int(3),
-						pulumi.Int(4),
-						pulumi.Int(5),
-						pulumi.Int(6),
-						pulumi.Int(7),
-					},
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Monitor.NewAlarmPolicy(ctx, "fooAlarmPolicy", &Monitor.AlarmPolicyArgs{
-			PolicyName:  pulumi.String("tf-policy"),
-			MonitorType: pulumi.String("MT_QCE"),
-			Enable:      pulumi.Int(1),
-			ProjectId:   pulumi.Int(0),
-			Namespace:   pulumi.String("cvm_device"),
-			Conditions: &monitor.AlarmPolicyConditionsArgs{
-				IsUnionRule: pulumi.Int(1),
-				Rules: monitor.AlarmPolicyConditionsRuleArray{
-					&monitor.AlarmPolicyConditionsRuleArgs{
-						MetricName:      pulumi.String("CpuUsage"),
-						Period:          pulumi.Int(60),
-						Operator:        pulumi.String("ge"),
-						Value:           pulumi.String("89.9"),
-						ContinuePeriod:  pulumi.Int(1),
-						NoticeFrequency: pulumi.Int(3600),
-						IsPowerNotice:   pulumi.Int(0),
-					},
-				},
-			},
-			EventConditions: monitor.AlarmPolicyEventConditionArray{
-				&monitor.AlarmPolicyEventConditionArgs{
-					MetricName: pulumi.String("ping_unreachable"),
-				},
-				&monitor.AlarmPolicyEventConditionArgs{
-					MetricName: pulumi.String("guest_reboot"),
-				},
-			},
-			NoticeIds: pulumi.StringArray{
-				fooAlarmNotice.ID(),
-			},
-			TriggerTasks: monitor.AlarmPolicyTriggerTaskArray{
-				&monitor.AlarmPolicyTriggerTaskArgs{
-					Type:       pulumi.String("AS"),
-					TaskConfig: pulumi.String("{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}"),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -424,10 +455,11 @@ import com.pulumi.tencentcloud.Monitor.inputs.AlarmNoticeUrlNoticeArgs;
 import com.pulumi.tencentcloud.Monitor.AlarmPolicy;
 import com.pulumi.tencentcloud.Monitor.AlarmPolicyArgs;
 import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyConditionsArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyConditionsRuleArgs;
 import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyEventConditionArgs;
 import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyTriggerTaskArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -439,7 +471,8 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fooAlarmNotice = new AlarmNotice("fooAlarmNotice", AlarmNoticeArgs.builder()        
+        var foo = new AlarmNotice("foo", AlarmNoticeArgs.builder()
+            .name("tf-alarm_notice")
             .noticeType("ALL")
             .noticeLanguage("zh-CN")
             .userNotices(AlarmNoticeUserNoticeArgs.builder()
@@ -481,7 +514,7 @@ public class App {
                 .build())
             .build());
 
-        var fooAlarmPolicy = new AlarmPolicy("fooAlarmPolicy", AlarmPolicyArgs.builder()        
+        var fooAlarmPolicy = new AlarmPolicy("fooAlarmPolicy", AlarmPolicyArgs.builder()
             .policyName("tf-policy")
             .monitorType("MT_QCE")
             .enable(1)
@@ -506,7 +539,7 @@ public class App {
                 AlarmPolicyEventConditionArgs.builder()
                     .metricName("guest_reboot")
                     .build())
-            .noticeIds(fooAlarmNotice.id())
+            .noticeIds(foo.id())
             .triggerTasks(AlarmPolicyTriggerTaskArgs.builder()
                 .type("AS")
                 .taskConfig("{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}")
@@ -516,11 +549,17 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  fooAlarmNotice:
+  foo:
     type: tencentcloud:Monitor:AlarmNotice
     properties:
+      name: tf-alarm_notice
       noticeType: ALL
       noticeLanguage: zh-CN
       userNotices:
@@ -562,6 +601,7 @@ resources:
             - 7
   fooAlarmPolicy:
     type: tencentcloud:Monitor:AlarmPolicy
+    name: foo
     properties:
       policyName: tf-policy
       monitorType: MT_QCE
@@ -582,16 +622,94 @@ resources:
         - metricName: ping_unreachable
         - metricName: guest_reboot
       noticeIds:
-        - ${fooAlarmNotice.id}
+        - ${foo.id}
       triggerTasks:
         - type: AS
           taskConfig: '{"Region":"ap-guangzhou","Group":"asg-0z312312x","Policy":"asp-ganig28"}'
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### k8s_cluster alarm policy
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+resource "tencentcloud_monitor_alarmnotice" "foo" {
+  name            = "tf-alarm_notice"
+  notice_type     = "ALL"
+  notice_language = "zh-CN"
+  user_notices {
+    receiver_type            = "USER"
+    start_time               = 0
+    end_time                 = 1
+    notice_ways              = ["SMS", "EMAIL"]
+    user_ids                 = [10001]
+    group_ids                = []
+    phone_orders             = [10001]
+    phone_circle_times       = 2
+    phone_circle_interval    = 50
+    phone_inner_interval     = 60
+    need_phone_arrive_notice = 1
+    phone_call_type          = "CIRCLE"
+    weekdays                 = [1, 2, 3, 4, 5, 6, 7]
+  }
+  url_notices {
+    url        = "https://www.mytest.com/validate"
+    end_time   = 0
+    start_time = 1
+    weekdays   = [1, 2, 3, 4, 5, 6, 7]
+  }
+}
+resource "tencentcloud_monitor_alarmpolicy" "foo" {
+  policy_name  = "tf-policy"
+  monitor_type = "MT_QCE"
+  enable       = 1
+  project_id   = 0
+  namespace    = "cvm_device"
+  conditions = {
+    is_union_rule = 1
+    rules = [{
+      "metricName"      = "CpuUsage"
+      "period"          = 60
+      "operator"        = "ge"
+      "value"           = "89.9"
+      "continuePeriod"  = 1
+      "noticeFrequency" = 3600
+      "isPowerNotice"   = 0
+    }]
+  }
+  event_conditions {
+    metric_name = "ping_unreachable"
+  }
+  event_conditions {
+    metric_name = "guest_reboot"
+  }
+  notice_ids = [tencentcloud_monitor_alarmnotice.foo.id]
+  trigger_tasks {
+    type        = "AS"
+    task_config = "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### k8sCluster alarm policy
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -664,6 +782,11 @@ const policy = new tencentcloud.monitor.AlarmPolicy("policy", {
     },
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import json
@@ -676,22 +799,22 @@ policy = tencentcloud.monitor.AlarmPolicy("policy",
     notice_ids=["notice-l9ziyxw6"],
     policy_name="TkeClusterNew",
     project_id=1244035,
-    conditions=tencentcloud.monitor.AlarmPolicyConditionsArgs(
-        is_union_rule=0,
-        rules=[
-            tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
-                continue_period=3,
-                description="Allocatable Pods",
-                is_power_notice=0,
-                metric_name="K8sClusterAllocatablePodsTotal",
-                notice_frequency=3600,
-                operator="gt",
-                period=60,
-                rule_type="STATIC",
-                unit="Count",
-                value="10",
-                filter=tencentcloud.monitor.AlarmPolicyConditionsRuleFilterArgs(
-                    dimensions=json.dumps([[
+    conditions={
+        "is_union_rule": 0,
+        "rules": [
+            {
+                "continue_period": 3,
+                "description": "Allocatable Pods",
+                "is_power_notice": 0,
+                "metric_name": "K8sClusterAllocatablePodsTotal",
+                "notice_frequency": 3600,
+                "operator": "gt",
+                "period": 60,
+                "rule_type": "STATIC",
+                "unit": "Count",
+                "value": "10",
+                "filter": {
+                    "dimensions": json.dumps([[
                         {
                             "Key": "region",
                             "Operator": "eq",
@@ -703,22 +826,22 @@ policy = tencentcloud.monitor.AlarmPolicy("policy",
                             "Value": ["cls-czhtobea"],
                         },
                     ]]),
-                    type="DIMENSION",
-                ),
-            ),
-            tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
-                continue_period=3,
-                description="Total CPU Cores",
-                is_power_notice=0,
-                metric_name="K8sClusterCpuCoreTotal",
-                notice_frequency=3600,
-                operator="gt",
-                period=60,
-                rule_type="STATIC",
-                unit="Core",
-                value="2",
-                filter=tencentcloud.monitor.AlarmPolicyConditionsRuleFilterArgs(
-                    dimensions=json.dumps([[
+                    "type": "DIMENSION",
+                },
+            },
+            {
+                "continue_period": 3,
+                "description": "Total CPU Cores",
+                "is_power_notice": 0,
+                "metric_name": "K8sClusterCpuCoreTotal",
+                "notice_frequency": 3600,
+                "operator": "gt",
+                "period": 60,
+                "rule_type": "STATIC",
+                "unit": "Core",
+                "value": "2",
+                "filter": {
+                    "dimensions": json.dumps([[
                         {
                             "Key": "region",
                             "Operator": "eq",
@@ -730,12 +853,132 @@ policy = tencentcloud.monitor.AlarmPolicy("policy",
                             "Value": ["cls-czhtobea"],
                         },
                     ]]),
-                    type="DIMENSION",
-                ),
-            ),
+                    "type": "DIMENSION",
+                },
+            },
         ],
-    ))
+    })
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"encoding/json"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		tmpJSON0, err := json.Marshal([][]map[string]interface{}{
+			[]map[string]interface{}{
+				map[string]interface{}{
+					"Key":      "region",
+					"Operator": "eq",
+					"Value": []string{
+						"ap-guangzhou",
+					},
+				},
+				map[string]interface{}{
+					"Key":      "tke_cluster_instance_id",
+					"Operator": "in",
+					"Value": []string{
+						"cls-czhtobea",
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		json0 := string(tmpJSON0)
+		tmpJSON1, err := json.Marshal([][]map[string]interface{}{
+			[]map[string]interface{}{
+				map[string]interface{}{
+					"Key":      "region",
+					"Operator": "eq",
+					"Value": []string{
+						"ap-guangzhou",
+					},
+				},
+				map[string]interface{}{
+					"Key":      "tke_cluster_instance_id",
+					"Operator": "in",
+					"Value": []string{
+						"cls-czhtobea",
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		json1 := string(tmpJSON1)
+		_, err = monitor.NewAlarmPolicy(ctx, "policy", &monitor.AlarmPolicyArgs{
+			Enable:      pulumi.Int(1),
+			MonitorType: pulumi.String("MT_QCE"),
+			Namespace:   pulumi.String("k8s_cluster"),
+			NoticeIds: pulumi.StringArray{
+				pulumi.String("notice-l9ziyxw6"),
+			},
+			PolicyName: pulumi.String("TkeClusterNew"),
+			ProjectId:  pulumi.Int(1244035),
+			Conditions: &monitor.AlarmPolicyConditionsArgs{
+				IsUnionRule: pulumi.Int(0),
+				Rules: monitor.AlarmPolicyConditionsRuleArray{
+					&monitor.AlarmPolicyConditionsRuleArgs{
+						ContinuePeriod:  pulumi.Int(3),
+						Description:     pulumi.String("Allocatable Pods"),
+						IsPowerNotice:   pulumi.Int(0),
+						MetricName:      pulumi.String("K8sClusterAllocatablePodsTotal"),
+						NoticeFrequency: pulumi.Int(3600),
+						Operator:        pulumi.String("gt"),
+						Period:          pulumi.Int(60),
+						RuleType:        pulumi.String("STATIC"),
+						Unit:            pulumi.String("Count"),
+						Value:           pulumi.String("10"),
+						Filter: &monitor.AlarmPolicyConditionsRuleFilterArgs{
+							Dimensions: pulumi.String(json0),
+							Type:       pulumi.String("DIMENSION"),
+						},
+					},
+					&monitor.AlarmPolicyConditionsRuleArgs{
+						ContinuePeriod:  pulumi.Int(3),
+						Description:     pulumi.String("Total CPU Cores"),
+						IsPowerNotice:   pulumi.Int(0),
+						MetricName:      pulumi.String("K8sClusterCpuCoreTotal"),
+						NoticeFrequency: pulumi.Int(3600),
+						Operator:        pulumi.String("gt"),
+						Period:          pulumi.Int(60),
+						RuleType:        pulumi.String("STATIC"),
+						Unit:            pulumi.String("Core"),
+						Value:           pulumi.String("2"),
+						Filter: &monitor.AlarmPolicyConditionsRuleFilterArgs{
+							Dimensions: pulumi.String(json1),
+							Type:       pulumi.String("DIMENSION"),
+						},
+					},
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -849,116 +1092,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"encoding/json"
-
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		tmpJSON0, err := json.Marshal([][]map[string]interface{}{
-			[]map[string]interface{}{
-				map[string]interface{}{
-					"Key":      "region",
-					"Operator": "eq",
-					"Value": []string{
-						"ap-guangzhou",
-					},
-				},
-				map[string]interface{}{
-					"Key":      "tke_cluster_instance_id",
-					"Operator": "in",
-					"Value": []string{
-						"cls-czhtobea",
-					},
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		json0 := string(tmpJSON0)
-		tmpJSON1, err := json.Marshal([][]map[string]interface{}{
-			[]map[string]interface{}{
-				map[string]interface{}{
-					"Key":      "region",
-					"Operator": "eq",
-					"Value": []string{
-						"ap-guangzhou",
-					},
-				},
-				map[string]interface{}{
-					"Key":      "tke_cluster_instance_id",
-					"Operator": "in",
-					"Value": []string{
-						"cls-czhtobea",
-					},
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		json1 := string(tmpJSON1)
-		_, err = Monitor.NewAlarmPolicy(ctx, "policy", &Monitor.AlarmPolicyArgs{
-			Enable:      pulumi.Int(1),
-			MonitorType: pulumi.String("MT_QCE"),
-			Namespace:   pulumi.String("k8s_cluster"),
-			NoticeIds: pulumi.StringArray{
-				pulumi.String("notice-l9ziyxw6"),
-			},
-			PolicyName: pulumi.String("TkeClusterNew"),
-			ProjectId:  pulumi.Int(1244035),
-			Conditions: &monitor.AlarmPolicyConditionsArgs{
-				IsUnionRule: pulumi.Int(0),
-				Rules: monitor.AlarmPolicyConditionsRuleArray{
-					&monitor.AlarmPolicyConditionsRuleArgs{
-						ContinuePeriod:  pulumi.Int(3),
-						Description:     pulumi.String("Allocatable Pods"),
-						IsPowerNotice:   pulumi.Int(0),
-						MetricName:      pulumi.String("K8sClusterAllocatablePodsTotal"),
-						NoticeFrequency: pulumi.Int(3600),
-						Operator:        pulumi.String("gt"),
-						Period:          pulumi.Int(60),
-						RuleType:        pulumi.String("STATIC"),
-						Unit:            pulumi.String("Count"),
-						Value:           pulumi.String("10"),
-						Filter: &monitor.AlarmPolicyConditionsRuleFilterArgs{
-							Dimensions: pulumi.String(json0),
-							Type:       pulumi.String("DIMENSION"),
-						},
-					},
-					&monitor.AlarmPolicyConditionsRuleArgs{
-						ContinuePeriod:  pulumi.Int(3),
-						Description:     pulumi.String("Total CPU Cores"),
-						IsPowerNotice:   pulumi.Int(0),
-						MetricName:      pulumi.String("K8sClusterCpuCoreTotal"),
-						NoticeFrequency: pulumi.Int(3600),
-						Operator:        pulumi.String("gt"),
-						Period:          pulumi.Int(60),
-						RuleType:        pulumi.String("STATIC"),
-						Unit:            pulumi.String("Core"),
-						Value:           pulumi.String("2"),
-						Filter: &monitor.AlarmPolicyConditionsRuleFilterArgs{
-							Dimensions: pulumi.String(json1),
-							Type:       pulumi.String("DIMENSION"),
-						},
-					},
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -968,9 +1106,11 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Monitor.AlarmPolicy;
 import com.pulumi.tencentcloud.Monitor.AlarmPolicyArgs;
 import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyConditionsArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyConditionsRuleArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyConditionsRuleFilterArgs;
 import static com.pulumi.codegen.internal.Serialization.*;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -982,7 +1122,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var policy = new AlarmPolicy("policy", AlarmPolicyArgs.builder()        
+        var policy = new AlarmPolicy("policy", AlarmPolicyArgs.builder()
             .enable(1)
             .monitorType("MT_QCE")
             .namespace("k8s_cluster")
@@ -1054,6 +1194,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   policy:
@@ -1114,16 +1259,102 @@ resources:
                         - cls-czhtobea
               type: DIMENSION
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
-### cvm_device alarm policy binding cvm by tag
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
 
-<!--Start PulumiCodeChooser -->
+resource "tencentcloud_monitor_alarmpolicy" "policy" {
+  enable       = 1
+  monitor_type = "MT_QCE"
+  namespace    = "k8s_cluster"
+  notice_ids   = ["notice-l9ziyxw6"]
+  policy_name  = "TkeClusterNew"
+  project_id   = 1244035
+  conditions = {
+    is_union_rule = 0
+    rules = [{
+      "continuePeriod"  = 3
+      "description"     = "Allocatable Pods"
+      "isPowerNotice"   = 0
+      "metricName"      = "K8sClusterAllocatablePodsTotal"
+      "noticeFrequency" = 3600
+      "operator"        = "gt"
+      "period"          = 60
+      "ruleType"        = "STATIC"
+      "unit"            = "Count"
+      "value"           = "10"
+      "filter" = {
+        "dimensions" = jsonencode([[{
+          "Key"      = "region"
+          "Operator" = "eq"
+          "Value"    = ["ap-guangzhou"]
+          }, {
+          "Key"      = "tke_cluster_instance_id"
+          "Operator" = "in"
+          "Value"    = ["cls-czhtobea"]
+        }]])
+        "type" = "DIMENSION"
+      }
+      }, {
+      "continuePeriod"  = 3
+      "description"     = "Total CPU Cores"
+      "isPowerNotice"   = 0
+      "metricName"      = "K8sClusterCpuCoreTotal"
+      "noticeFrequency" = 3600
+      "operator"        = "gt"
+      "period"          = 60
+      "ruleType"        = "STATIC"
+      "unit"            = "Core"
+      "value"           = "2"
+      "filter" = {
+        "dimensions" = jsonencode([[{
+          "Key"      = "region"
+          "Operator" = "eq"
+          "Value"    = ["ap-guangzhou"]
+          }, {
+          "Key"      = "tke_cluster_instance_id"
+          "Operator" = "in"
+          "Value"    = ["cls-czhtobea"]
+        }]])
+        "type" = "DIMENSION"
+      }
+    }]
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### cvmDevice alarm policy binding cvm by tag
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const policy = new tencentcloud.monitor.AlarmPolicy("policy", {
+    enable: 1,
+    monitorType: "MT_QCE",
+    namespace: "cvm_device",
+    noticeIds: ["notice-l9ziyxw6"],
+    policyName: "policy",
+    projectId: 0,
     conditions: {
         isUnionRule: 0,
         rules: [
@@ -1177,7 +1408,6 @@ const policy = new tencentcloud.monitor.AlarmPolicy("policy", {
             },
         ],
     },
-    enable: 1,
     eventConditions: [{
         continuePeriod: 0,
         description: "DiskReadonly",
@@ -1186,94 +1416,200 @@ const policy = new tencentcloud.monitor.AlarmPolicy("policy", {
         noticeFrequency: 0,
         period: 0,
     }],
-    monitorType: "MT_QCE",
-    namespace: "cvm_device",
-    noticeIds: ["notice-l9ziyxw6"],
-    policyName: "policy",
     policyTags: [{
         key: "test-tag",
         value: "unit-test",
     }],
-    projectId: 0,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 policy = tencentcloud.monitor.AlarmPolicy("policy",
-    conditions=tencentcloud.monitor.AlarmPolicyConditionsArgs(
-        is_union_rule=0,
-        rules=[
-            tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
-                continue_period=5,
-                description="CPUUtilization",
-                is_power_notice=0,
-                metric_name="CpuUsage",
-                notice_frequency=7200,
-                operator="gt",
-                period=60,
-                rule_type="STATIC",
-                unit="%",
-                value="95",
-            ),
-            tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
-                continue_period=5,
-                description="PublicBandwidthUtilization",
-                is_power_notice=0,
-                metric_name="Outratio",
-                notice_frequency=7200,
-                operator="gt",
-                period=60,
-                rule_type="STATIC",
-                unit="%",
-                value="95",
-            ),
-            tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
-                continue_period=5,
-                description="MemoryUtilization",
-                is_power_notice=0,
-                metric_name="MemUsage",
-                notice_frequency=7200,
-                operator="gt",
-                period=60,
-                rule_type="STATIC",
-                unit="%",
-                value="95",
-            ),
-            tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
-                continue_period=5,
-                description="DiskUtilization",
-                is_power_notice=0,
-                metric_name="CvmDiskUsage",
-                notice_frequency=7200,
-                operator="gt",
-                period=60,
-                rule_type="STATIC",
-                unit="%",
-                value="95",
-            ),
-        ],
-    ),
     enable=1,
-    event_conditions=[tencentcloud.monitor.AlarmPolicyEventConditionArgs(
-        continue_period=0,
-        description="DiskReadonly",
-        is_power_notice=0,
-        metric_name="disk_readonly",
-        notice_frequency=0,
-        period=0,
-    )],
     monitor_type="MT_QCE",
     namespace="cvm_device",
     notice_ids=["notice-l9ziyxw6"],
     policy_name="policy",
-    policy_tags=[tencentcloud.monitor.AlarmPolicyPolicyTagArgs(
-        key="test-tag",
-        value="unit-test",
-    )],
-    project_id=0)
+    project_id=0,
+    conditions={
+        "is_union_rule": 0,
+        "rules": [
+            {
+                "continue_period": 5,
+                "description": "CPUUtilization",
+                "is_power_notice": 0,
+                "metric_name": "CpuUsage",
+                "notice_frequency": 7200,
+                "operator": "gt",
+                "period": 60,
+                "rule_type": "STATIC",
+                "unit": "%",
+                "value": "95",
+            },
+            {
+                "continue_period": 5,
+                "description": "PublicBandwidthUtilization",
+                "is_power_notice": 0,
+                "metric_name": "Outratio",
+                "notice_frequency": 7200,
+                "operator": "gt",
+                "period": 60,
+                "rule_type": "STATIC",
+                "unit": "%",
+                "value": "95",
+            },
+            {
+                "continue_period": 5,
+                "description": "MemoryUtilization",
+                "is_power_notice": 0,
+                "metric_name": "MemUsage",
+                "notice_frequency": 7200,
+                "operator": "gt",
+                "period": 60,
+                "rule_type": "STATIC",
+                "unit": "%",
+                "value": "95",
+            },
+            {
+                "continue_period": 5,
+                "description": "DiskUtilization",
+                "is_power_notice": 0,
+                "metric_name": "CvmDiskUsage",
+                "notice_frequency": 7200,
+                "operator": "gt",
+                "period": 60,
+                "rule_type": "STATIC",
+                "unit": "%",
+                "value": "95",
+            },
+        ],
+    },
+    event_conditions=[{
+        "continue_period": 0,
+        "description": "DiskReadonly",
+        "is_power_notice": 0,
+        "metric_name": "disk_readonly",
+        "notice_frequency": 0,
+        "period": 0,
+    }],
+    policy_tags=[{
+        "key": "test-tag",
+        "value": "unit-test",
+    }])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := monitor.NewAlarmPolicy(ctx, "policy", &monitor.AlarmPolicyArgs{
+			Enable:      pulumi.Int(1),
+			MonitorType: pulumi.String("MT_QCE"),
+			Namespace:   pulumi.String("cvm_device"),
+			NoticeIds: pulumi.StringArray{
+				pulumi.String("notice-l9ziyxw6"),
+			},
+			PolicyName: pulumi.String("policy"),
+			ProjectId:  pulumi.Int(0),
+			Conditions: &monitor.AlarmPolicyConditionsArgs{
+				IsUnionRule: pulumi.Int(0),
+				Rules: monitor.AlarmPolicyConditionsRuleArray{
+					&monitor.AlarmPolicyConditionsRuleArgs{
+						ContinuePeriod:  pulumi.Int(5),
+						Description:     pulumi.String("CPUUtilization"),
+						IsPowerNotice:   pulumi.Int(0),
+						MetricName:      pulumi.String("CpuUsage"),
+						NoticeFrequency: pulumi.Int(7200),
+						Operator:        pulumi.String("gt"),
+						Period:          pulumi.Int(60),
+						RuleType:        pulumi.String("STATIC"),
+						Unit:            pulumi.String("%"),
+						Value:           pulumi.String("95"),
+					},
+					&monitor.AlarmPolicyConditionsRuleArgs{
+						ContinuePeriod:  pulumi.Int(5),
+						Description:     pulumi.String("PublicBandwidthUtilization"),
+						IsPowerNotice:   pulumi.Int(0),
+						MetricName:      pulumi.String("Outratio"),
+						NoticeFrequency: pulumi.Int(7200),
+						Operator:        pulumi.String("gt"),
+						Period:          pulumi.Int(60),
+						RuleType:        pulumi.String("STATIC"),
+						Unit:            pulumi.String("%"),
+						Value:           pulumi.String("95"),
+					},
+					&monitor.AlarmPolicyConditionsRuleArgs{
+						ContinuePeriod:  pulumi.Int(5),
+						Description:     pulumi.String("MemoryUtilization"),
+						IsPowerNotice:   pulumi.Int(0),
+						MetricName:      pulumi.String("MemUsage"),
+						NoticeFrequency: pulumi.Int(7200),
+						Operator:        pulumi.String("gt"),
+						Period:          pulumi.Int(60),
+						RuleType:        pulumi.String("STATIC"),
+						Unit:            pulumi.String("%"),
+						Value:           pulumi.String("95"),
+					},
+					&monitor.AlarmPolicyConditionsRuleArgs{
+						ContinuePeriod:  pulumi.Int(5),
+						Description:     pulumi.String("DiskUtilization"),
+						IsPowerNotice:   pulumi.Int(0),
+						MetricName:      pulumi.String("CvmDiskUsage"),
+						NoticeFrequency: pulumi.Int(7200),
+						Operator:        pulumi.String("gt"),
+						Period:          pulumi.Int(60),
+						RuleType:        pulumi.String("STATIC"),
+						Unit:            pulumi.String("%"),
+						Value:           pulumi.String("95"),
+					},
+				},
+			},
+			EventConditions: monitor.AlarmPolicyEventConditionArray{
+				&monitor.AlarmPolicyEventConditionArgs{
+					ContinuePeriod:  pulumi.Int(0),
+					Description:     pulumi.String("DiskReadonly"),
+					IsPowerNotice:   pulumi.Int(0),
+					MetricName:      pulumi.String("disk_readonly"),
+					NoticeFrequency: pulumi.Int(0),
+					Period:          pulumi.Int(0),
+				},
+			},
+			PolicyTags: monitor.AlarmPolicyPolicyTagArray{
+				&monitor.AlarmPolicyPolicyTagArgs{
+					Key:   pulumi.String("test-tag"),
+					Value: pulumi.String("unit-test"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -1284,6 +1620,15 @@ return await Deployment.RunAsync(() =>
 {
     var policy = new Tencentcloud.Monitor.AlarmPolicy("policy", new()
     {
+        Enable = 1,
+        MonitorType = "MT_QCE",
+        Namespace = "cvm_device",
+        NoticeIds = new[]
+        {
+            "notice-l9ziyxw6",
+        },
+        PolicyName = "policy",
+        ProjectId = 0,
         Conditions = new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsArgs
         {
             IsUnionRule = 0,
@@ -1343,7 +1688,6 @@ return await Deployment.RunAsync(() =>
                 },
             },
         },
-        Enable = 1,
         EventConditions = new[]
         {
             new Tencentcloud.Monitor.Inputs.AlarmPolicyEventConditionArgs
@@ -1356,13 +1700,6 @@ return await Deployment.RunAsync(() =>
                 Period = 0,
             },
         },
-        MonitorType = "MT_QCE",
-        Namespace = "cvm_device",
-        NoticeIds = new[]
-        {
-            "notice-l9ziyxw6",
-        },
-        PolicyName = "policy",
         PolicyTags = new[]
         {
             new Tencentcloud.Monitor.Inputs.AlarmPolicyPolicyTagArgs
@@ -1371,107 +1708,15 @@ return await Deployment.RunAsync(() =>
                 Value = "unit-test",
             },
         },
-        ProjectId = 0,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Monitor.NewAlarmPolicy(ctx, "policy", &Monitor.AlarmPolicyArgs{
-			Conditions: &monitor.AlarmPolicyConditionsArgs{
-				IsUnionRule: pulumi.Int(0),
-				Rules: monitor.AlarmPolicyConditionsRuleArray{
-					&monitor.AlarmPolicyConditionsRuleArgs{
-						ContinuePeriod:  pulumi.Int(5),
-						Description:     pulumi.String("CPUUtilization"),
-						IsPowerNotice:   pulumi.Int(0),
-						MetricName:      pulumi.String("CpuUsage"),
-						NoticeFrequency: pulumi.Int(7200),
-						Operator:        pulumi.String("gt"),
-						Period:          pulumi.Int(60),
-						RuleType:        pulumi.String("STATIC"),
-						Unit:            pulumi.String("%"),
-						Value:           pulumi.String("95"),
-					},
-					&monitor.AlarmPolicyConditionsRuleArgs{
-						ContinuePeriod:  pulumi.Int(5),
-						Description:     pulumi.String("PublicBandwidthUtilization"),
-						IsPowerNotice:   pulumi.Int(0),
-						MetricName:      pulumi.String("Outratio"),
-						NoticeFrequency: pulumi.Int(7200),
-						Operator:        pulumi.String("gt"),
-						Period:          pulumi.Int(60),
-						RuleType:        pulumi.String("STATIC"),
-						Unit:            pulumi.String("%"),
-						Value:           pulumi.String("95"),
-					},
-					&monitor.AlarmPolicyConditionsRuleArgs{
-						ContinuePeriod:  pulumi.Int(5),
-						Description:     pulumi.String("MemoryUtilization"),
-						IsPowerNotice:   pulumi.Int(0),
-						MetricName:      pulumi.String("MemUsage"),
-						NoticeFrequency: pulumi.Int(7200),
-						Operator:        pulumi.String("gt"),
-						Period:          pulumi.Int(60),
-						RuleType:        pulumi.String("STATIC"),
-						Unit:            pulumi.String("%"),
-						Value:           pulumi.String("95"),
-					},
-					&monitor.AlarmPolicyConditionsRuleArgs{
-						ContinuePeriod:  pulumi.Int(5),
-						Description:     pulumi.String("DiskUtilization"),
-						IsPowerNotice:   pulumi.Int(0),
-						MetricName:      pulumi.String("CvmDiskUsage"),
-						NoticeFrequency: pulumi.Int(7200),
-						Operator:        pulumi.String("gt"),
-						Period:          pulumi.Int(60),
-						RuleType:        pulumi.String("STATIC"),
-						Unit:            pulumi.String("%"),
-						Value:           pulumi.String("95"),
-					},
-				},
-			},
-			Enable: pulumi.Int(1),
-			EventConditions: monitor.AlarmPolicyEventConditionArray{
-				&monitor.AlarmPolicyEventConditionArgs{
-					ContinuePeriod:  pulumi.Int(0),
-					Description:     pulumi.String("DiskReadonly"),
-					IsPowerNotice:   pulumi.Int(0),
-					MetricName:      pulumi.String("disk_readonly"),
-					NoticeFrequency: pulumi.Int(0),
-					Period:          pulumi.Int(0),
-				},
-			},
-			MonitorType: pulumi.String("MT_QCE"),
-			Namespace:   pulumi.String("cvm_device"),
-			NoticeIds: pulumi.StringArray{
-				pulumi.String("notice-l9ziyxw6"),
-			},
-			PolicyName: pulumi.String("policy"),
-			PolicyTags: monitor.AlarmPolicyPolicyTagArray{
-				&monitor.AlarmPolicyPolicyTagArgs{
-					Key:   pulumi.String("test-tag"),
-					Value: pulumi.String("unit-test"),
-				},
-			},
-			ProjectId: pulumi.Int(0),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -1481,10 +1726,11 @@ import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Monitor.AlarmPolicy;
 import com.pulumi.tencentcloud.Monitor.AlarmPolicyArgs;
 import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyConditionsArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyConditionsRuleArgs;
 import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyEventConditionArgs;
 import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyPolicyTagArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -1496,7 +1742,13 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var policy = new AlarmPolicy("policy", AlarmPolicyArgs.builder()        
+        var policy = new AlarmPolicy("policy", AlarmPolicyArgs.builder()
+            .enable(1)
+            .monitorType("MT_QCE")
+            .namespace("cvm_device")
+            .noticeIds("notice-l9ziyxw6")
+            .policyName("policy")
+            .projectId(0)
             .conditions(AlarmPolicyConditionsArgs.builder()
                 .isUnionRule(0)
                 .rules(                
@@ -1549,7 +1801,6 @@ public class App {
                         .value("95")
                         .build())
                 .build())
-            .enable(1)
             .eventConditions(AlarmPolicyEventConditionArgs.builder()
                 .continuePeriod(0)
                 .description("DiskReadonly")
@@ -1558,25 +1809,32 @@ public class App {
                 .noticeFrequency(0)
                 .period(0)
                 .build())
-            .monitorType("MT_QCE")
-            .namespace("cvm_device")
-            .noticeIds("notice-l9ziyxw6")
-            .policyName("policy")
             .policyTags(AlarmPolicyPolicyTagArgs.builder()
                 .key("test-tag")
                 .value("unit-test")
                 .build())
-            .projectId(0)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   policy:
     type: tencentcloud:Monitor:AlarmPolicy
     properties:
+      enable: 1
+      monitorType: MT_QCE
+      namespace: cvm_device
+      noticeIds:
+        - notice-l9ziyxw6
+      policyName: policy
+      projectId: 0
       conditions:
         isUnionRule: 0
         rules:
@@ -1620,7 +1878,6 @@ resources:
             ruleType: STATIC
             unit: '%'
             value: '95'
-      enable: 1
       eventConditions:
         - continuePeriod: 0
           description: DiskReadonly
@@ -1628,88 +1885,892 @@ resources:
           metricName: disk_readonly
           noticeFrequency: 0
           period: 0
-      monitorType: MT_QCE
-      namespace: cvm_device
-      noticeIds:
-        - notice-l9ziyxw6
-      policyName: policy
       policyTags:
         - key: test-tag
           value: unit-test
-      projectId: 0
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_monitor_alarmpolicy" "policy" {
+  enable       = 1
+  monitor_type = "MT_QCE"
+  namespace    = "cvm_device"
+  notice_ids   = ["notice-l9ziyxw6"]
+  policy_name  = "policy"
+  project_id   = 0
+  conditions = {
+    is_union_rule = 0
+    rules = [{
+      "continuePeriod"  = 5
+      "description"     = "CPUUtilization"
+      "isPowerNotice"   = 0
+      "metricName"      = "CpuUsage"
+      "noticeFrequency" = 7200
+      "operator"        = "gt"
+      "period"          = 60
+      "ruleType"        = "STATIC"
+      "unit"            = "%"
+      "value"           = "95"
+      }, {
+      "continuePeriod"  = 5
+      "description"     = "PublicBandwidthUtilization"
+      "isPowerNotice"   = 0
+      "metricName"      = "Outratio"
+      "noticeFrequency" = 7200
+      "operator"        = "gt"
+      "period"          = 60
+      "ruleType"        = "STATIC"
+      "unit"            = "%"
+      "value"           = "95"
+      }, {
+      "continuePeriod"  = 5
+      "description"     = "MemoryUtilization"
+      "isPowerNotice"   = 0
+      "metricName"      = "MemUsage"
+      "noticeFrequency" = 7200
+      "operator"        = "gt"
+      "period"          = 60
+      "ruleType"        = "STATIC"
+      "unit"            = "%"
+      "value"           = "95"
+      }, {
+      "continuePeriod"  = 5
+      "description"     = "DiskUtilization"
+      "isPowerNotice"   = 0
+      "metricName"      = "CvmDiskUsage"
+      "noticeFrequency" = 7200
+      "operator"        = "gt"
+      "period"          = 60
+      "ruleType"        = "STATIC"
+      "unit"            = "%"
+      "value"           = "95"
+    }]
+  }
+  event_conditions {
+    continue_period  = 0
+    description      = "DiskReadonly"
+    is_power_notice  = 0
+    metric_name      = "disk_readonly"
+    notice_frequency = 0
+    period           = 0
+  }
+  policy_tags {
+    key   = "test-tag"
+    value = "unit-test"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### alarm policy with hierarchical notices
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const foo = new tencentcloud.monitor.AlarmPolicy("foo", {
+    policyName: "tf-policy",
+    monitorType: "MT_QCE",
+    enable: 1,
+    projectId: 0,
+    namespace: "cvm_device",
+    conditions: {
+        isUnionRule: 1,
+        rules: [{
+            metricName: "CpuUsage",
+            period: 60,
+            operator: "ge",
+            value: "89.9",
+            continuePeriod: 1,
+            noticeFrequency: 3600,
+            isPowerNotice: 0,
+        }],
+    },
+    eventConditions: [{
+        metricName: "ping_unreachable",
+    }],
+    noticeIds: [fooTencentcloudMonitorAlarmNotice.id],
+    hierarchicalNotices: [{
+        noticeId: fooTencentcloudMonitorAlarmNotice.id,
+        classifications: [
+            "Remind",
+            "Serious",
+        ],
+    }],
+    noticeContentTmplBindInfos: [{
+        contentTmplId: "tmpl-xxxx",
+        noticeId: fooTencentcloudMonitorAlarmNotice.id,
+    }],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+foo = tencentcloud.monitor.AlarmPolicy("foo",
+    policy_name="tf-policy",
+    monitor_type="MT_QCE",
+    enable=1,
+    project_id=0,
+    namespace="cvm_device",
+    conditions={
+        "is_union_rule": 1,
+        "rules": [{
+            "metric_name": "CpuUsage",
+            "period": 60,
+            "operator": "ge",
+            "value": "89.9",
+            "continue_period": 1,
+            "notice_frequency": 3600,
+            "is_power_notice": 0,
+        }],
+    },
+    event_conditions=[{
+        "metric_name": "ping_unreachable",
+    }],
+    notice_ids=[foo_tencentcloud_monitor_alarm_notice["id"]],
+    hierarchical_notices=[{
+        "notice_id": foo_tencentcloud_monitor_alarm_notice["id"],
+        "classifications": [
+            "Remind",
+            "Serious",
+        ],
+    }],
+    notice_content_tmpl_bind_infos=[{
+        "content_tmpl_id": "tmpl-xxxx",
+        "notice_id": foo_tencentcloud_monitor_alarm_notice["id"],
+    }])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := monitor.NewAlarmPolicy(ctx, "foo", &monitor.AlarmPolicyArgs{
+			PolicyName:  pulumi.String("tf-policy"),
+			MonitorType: pulumi.String("MT_QCE"),
+			Enable:      pulumi.Int(1),
+			ProjectId:   pulumi.Int(0),
+			Namespace:   pulumi.String("cvm_device"),
+			Conditions: &monitor.AlarmPolicyConditionsArgs{
+				IsUnionRule: pulumi.Int(1),
+				Rules: monitor.AlarmPolicyConditionsRuleArray{
+					&monitor.AlarmPolicyConditionsRuleArgs{
+						MetricName:      pulumi.String("CpuUsage"),
+						Period:          pulumi.Int(60),
+						Operator:        pulumi.String("ge"),
+						Value:           pulumi.String("89.9"),
+						ContinuePeriod:  pulumi.Int(1),
+						NoticeFrequency: pulumi.Int(3600),
+						IsPowerNotice:   pulumi.Int(0),
+					},
+				},
+			},
+			EventConditions: monitor.AlarmPolicyEventConditionArray{
+				&monitor.AlarmPolicyEventConditionArgs{
+					MetricName: pulumi.String("ping_unreachable"),
+				},
+			},
+			NoticeIds: pulumi.StringArray{
+				fooTencentcloudMonitorAlarmNotice.Id,
+			},
+			HierarchicalNotices: monitor.AlarmPolicyHierarchicalNoticeArray{
+				&monitor.AlarmPolicyHierarchicalNoticeArgs{
+					NoticeId: pulumi.Any(fooTencentcloudMonitorAlarmNotice.Id),
+					Classifications: pulumi.StringArray{
+						pulumi.String("Remind"),
+						pulumi.String("Serious"),
+					},
+				},
+			},
+			NoticeContentTmplBindInfos: monitor.AlarmPolicyNoticeContentTmplBindInfoArray{
+				&monitor.AlarmPolicyNoticeContentTmplBindInfoArgs{
+					ContentTmplId: pulumi.String("tmpl-xxxx"),
+					NoticeId:      pulumi.Any(fooTencentcloudMonitorAlarmNotice.Id),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = new Tencentcloud.Monitor.AlarmPolicy("foo", new()
+    {
+        PolicyName = "tf-policy",
+        MonitorType = "MT_QCE",
+        Enable = 1,
+        ProjectId = 0,
+        Namespace = "cvm_device",
+        Conditions = new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsArgs
+        {
+            IsUnionRule = 1,
+            Rules = new[]
+            {
+                new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleArgs
+                {
+                    MetricName = "CpuUsage",
+                    Period = 60,
+                    Operator = "ge",
+                    Value = "89.9",
+                    ContinuePeriod = 1,
+                    NoticeFrequency = 3600,
+                    IsPowerNotice = 0,
+                },
+            },
+        },
+        EventConditions = new[]
+        {
+            new Tencentcloud.Monitor.Inputs.AlarmPolicyEventConditionArgs
+            {
+                MetricName = "ping_unreachable",
+            },
+        },
+        NoticeIds = new[]
+        {
+            fooTencentcloudMonitorAlarmNotice.Id,
+        },
+        HierarchicalNotices = new[]
+        {
+            new Tencentcloud.Monitor.Inputs.AlarmPolicyHierarchicalNoticeArgs
+            {
+                NoticeId = fooTencentcloudMonitorAlarmNotice.Id,
+                Classifications = new[]
+                {
+                    "Remind",
+                    "Serious",
+                },
+            },
+        },
+        NoticeContentTmplBindInfos = new[]
+        {
+            new Tencentcloud.Monitor.Inputs.AlarmPolicyNoticeContentTmplBindInfoArgs
+            {
+                ContentTmplId = "tmpl-xxxx",
+                NoticeId = fooTencentcloudMonitorAlarmNotice.Id,
+            },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Monitor.AlarmPolicy;
+import com.pulumi.tencentcloud.Monitor.AlarmPolicyArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyConditionsArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyConditionsRuleArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyEventConditionArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyHierarchicalNoticeArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyNoticeContentTmplBindInfoArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var foo = new AlarmPolicy("foo", AlarmPolicyArgs.builder()
+            .policyName("tf-policy")
+            .monitorType("MT_QCE")
+            .enable(1)
+            .projectId(0)
+            .namespace("cvm_device")
+            .conditions(AlarmPolicyConditionsArgs.builder()
+                .isUnionRule(1)
+                .rules(AlarmPolicyConditionsRuleArgs.builder()
+                    .metricName("CpuUsage")
+                    .period(60)
+                    .operator("ge")
+                    .value("89.9")
+                    .continuePeriod(1)
+                    .noticeFrequency(3600)
+                    .isPowerNotice(0)
+                    .build())
+                .build())
+            .eventConditions(AlarmPolicyEventConditionArgs.builder()
+                .metricName("ping_unreachable")
+                .build())
+            .noticeIds(fooTencentcloudMonitorAlarmNotice.id())
+            .hierarchicalNotices(AlarmPolicyHierarchicalNoticeArgs.builder()
+                .noticeId(fooTencentcloudMonitorAlarmNotice.id())
+                .classifications(                
+                    "Remind",
+                    "Serious")
+                .build())
+            .noticeContentTmplBindInfos(AlarmPolicyNoticeContentTmplBindInfoArgs.builder()
+                .contentTmplId("tmpl-xxxx")
+                .noticeId(fooTencentcloudMonitorAlarmNotice.id())
+                .build())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  foo:
+    type: tencentcloud:Monitor:AlarmPolicy
+    properties:
+      policyName: tf-policy
+      monitorType: MT_QCE
+      enable: 1
+      projectId: 0
+      namespace: cvm_device
+      conditions:
+        isUnionRule: 1
+        rules:
+          - metricName: CpuUsage
+            period: 60
+            operator: ge
+            value: '89.9'
+            continuePeriod: 1
+            noticeFrequency: 3600
+            isPowerNotice: 0
+      eventConditions:
+        - metricName: ping_unreachable
+      noticeIds:
+        - ${fooTencentcloudMonitorAlarmNotice.id}
+      hierarchicalNotices:
+        - noticeId: ${fooTencentcloudMonitorAlarmNotice.id}
+          classifications:
+            - Remind
+            - Serious
+      noticeContentTmplBindInfos:
+        - contentTmplId: tmpl-xxxx
+          noticeId: ${fooTencentcloudMonitorAlarmNotice.id}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_monitor_alarmpolicy" "foo" {
+  policy_name  = "tf-policy"
+  monitor_type = "MT_QCE"
+  enable       = 1
+  project_id   = 0
+  namespace    = "cvm_device"
+  conditions = {
+    is_union_rule = 1
+    rules = [{
+      "metricName"      = "CpuUsage"
+      "period"          = 60
+      "operator"        = "ge"
+      "value"           = "89.9"
+      "continuePeriod"  = 1
+      "noticeFrequency" = 3600
+      "isPowerNotice"   = 0
+    }]
+  }
+  event_conditions {
+    metric_name = "ping_unreachable"
+  }
+  notice_ids = [fooTencentcloudMonitorAlarmNotice.id]
+  hierarchical_notices {
+    notice_id       = fooTencentcloudMonitorAlarmNotice.id
+    classifications = ["Remind", "Serious"]
+  }
+  notice_content_tmpl_bind_infos {
+    content_tmpl_id = "tmpl-xxxx"
+    notice_id       = fooTencentcloudMonitorAlarmNotice.id
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+### alarm policy binding all objects
+
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const foo = new tencentcloud.monitor.AlarmPolicy("foo", {
+    policyName: "tf-policy-bind-all",
+    monitorType: "MT_QCE",
+    enable: 1,
+    projectId: 0,
+    namespace: "cvm_device",
+    isBindAll: 1,
+    conditions: {
+        isUnionRule: 1,
+        rules: [{
+            metricName: "CpuUsage",
+            period: 60,
+            operator: "ge",
+            value: "89.9",
+            continuePeriod: 1,
+            noticeFrequency: 3600,
+            isPowerNotice: 0,
+        }],
+    },
+    eventConditions: [{
+        metricName: "ping_unreachable",
+    }],
+    noticeIds: [fooTencentcloudMonitorAlarmNotice.id],
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+foo = tencentcloud.monitor.AlarmPolicy("foo",
+    policy_name="tf-policy-bind-all",
+    monitor_type="MT_QCE",
+    enable=1,
+    project_id=0,
+    namespace="cvm_device",
+    is_bind_all=1,
+    conditions={
+        "is_union_rule": 1,
+        "rules": [{
+            "metric_name": "CpuUsage",
+            "period": 60,
+            "operator": "ge",
+            "value": "89.9",
+            "continue_period": 1,
+            "notice_frequency": 3600,
+            "is_power_notice": 0,
+        }],
+    },
+    event_conditions=[{
+        "metric_name": "ping_unreachable",
+    }],
+    notice_ids=[foo_tencentcloud_monitor_alarm_notice["id"]])
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := monitor.NewAlarmPolicy(ctx, "foo", &monitor.AlarmPolicyArgs{
+			PolicyName:  pulumi.String("tf-policy-bind-all"),
+			MonitorType: pulumi.String("MT_QCE"),
+			Enable:      pulumi.Int(1),
+			ProjectId:   pulumi.Int(0),
+			Namespace:   pulumi.String("cvm_device"),
+			IsBindAll:   pulumi.Int(1),
+			Conditions: &monitor.AlarmPolicyConditionsArgs{
+				IsUnionRule: pulumi.Int(1),
+				Rules: monitor.AlarmPolicyConditionsRuleArray{
+					&monitor.AlarmPolicyConditionsRuleArgs{
+						MetricName:      pulumi.String("CpuUsage"),
+						Period:          pulumi.Int(60),
+						Operator:        pulumi.String("ge"),
+						Value:           pulumi.String("89.9"),
+						ContinuePeriod:  pulumi.Int(1),
+						NoticeFrequency: pulumi.Int(3600),
+						IsPowerNotice:   pulumi.Int(0),
+					},
+				},
+			},
+			EventConditions: monitor.AlarmPolicyEventConditionArray{
+				&monitor.AlarmPolicyEventConditionArgs{
+					MetricName: pulumi.String("ping_unreachable"),
+				},
+			},
+			NoticeIds: pulumi.StringArray{
+				fooTencentcloudMonitorAlarmNotice.Id,
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var foo = new Tencentcloud.Monitor.AlarmPolicy("foo", new()
+    {
+        PolicyName = "tf-policy-bind-all",
+        MonitorType = "MT_QCE",
+        Enable = 1,
+        ProjectId = 0,
+        Namespace = "cvm_device",
+        IsBindAll = 1,
+        Conditions = new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsArgs
+        {
+            IsUnionRule = 1,
+            Rules = new[]
+            {
+                new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleArgs
+                {
+                    MetricName = "CpuUsage",
+                    Period = 60,
+                    Operator = "ge",
+                    Value = "89.9",
+                    ContinuePeriod = 1,
+                    NoticeFrequency = 3600,
+                    IsPowerNotice = 0,
+                },
+            },
+        },
+        EventConditions = new[]
+        {
+            new Tencentcloud.Monitor.Inputs.AlarmPolicyEventConditionArgs
+            {
+                MetricName = "ping_unreachable",
+            },
+        },
+        NoticeIds = new[]
+        {
+            fooTencentcloudMonitorAlarmNotice.Id,
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
+```java
+package generated_program;
+
+import com.pulumi.Context;
+import com.pulumi.Pulumi;
+import com.pulumi.core.Output;
+import com.pulumi.tencentcloud.Monitor.AlarmPolicy;
+import com.pulumi.tencentcloud.Monitor.AlarmPolicyArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyConditionsArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyConditionsRuleArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyEventConditionArgs;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        Pulumi.run(App::stack);
+    }
+
+    public static void stack(Context ctx) {
+        var foo = new AlarmPolicy("foo", AlarmPolicyArgs.builder()
+            .policyName("tf-policy-bind-all")
+            .monitorType("MT_QCE")
+            .enable(1)
+            .projectId(0)
+            .namespace("cvm_device")
+            .isBindAll(1)
+            .conditions(AlarmPolicyConditionsArgs.builder()
+                .isUnionRule(1)
+                .rules(AlarmPolicyConditionsRuleArgs.builder()
+                    .metricName("CpuUsage")
+                    .period(60)
+                    .operator("ge")
+                    .value("89.9")
+                    .continuePeriod(1)
+                    .noticeFrequency(3600)
+                    .isPowerNotice(0)
+                    .build())
+                .build())
+            .eventConditions(AlarmPolicyEventConditionArgs.builder()
+                .metricName("ping_unreachable")
+                .build())
+            .noticeIds(fooTencentcloudMonitorAlarmNotice.id())
+            .build());
+
+    }
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
+```yaml
+resources:
+  foo:
+    type: tencentcloud:Monitor:AlarmPolicy
+    properties:
+      policyName: tf-policy-bind-all
+      monitorType: MT_QCE
+      enable: 1
+      projectId: 0
+      namespace: cvm_device
+      isBindAll: 1
+      conditions:
+        isUnionRule: 1
+        rules:
+          - metricName: CpuUsage
+            period: 60
+            operator: ge
+            value: '89.9'
+            continuePeriod: 1
+            noticeFrequency: 3600
+            isPowerNotice: 0
+      eventConditions:
+        - metricName: ping_unreachable
+      noticeIds:
+        - ${fooTencentcloudMonitorAlarmNotice.id}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_monitor_alarmpolicy" "foo" {
+  policy_name  = "tf-policy-bind-all"
+  monitor_type = "MT_QCE"
+  enable       = 1
+  project_id   = 0
+  namespace    = "cvm_device"
+  is_bind_all  = 1
+  conditions = {
+    is_union_rule = 1
+    rules = [{
+      "metricName"      = "CpuUsage"
+      "period"          = 60
+      "operator"        = "ge"
+      "value"           = "89.9"
+      "continuePeriod"  = 1
+      "noticeFrequency" = 3600
+      "isPowerNotice"   = 0
+    }]
+  }
+  event_conditions {
+    metric_name = "ping_unreachable"
+  }
+  notice_ids = [fooTencentcloudMonitorAlarmNotice.id]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [BindingPolicyTag](https://www.tencentcloud.com/search/?wd=BindingPolicyTag&type=document&lang=en)
+  - [CreateAlarmPolicy](https://www.tencentcloud.com/document/api/248/39326)
+  - [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+* Read: [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+* Update:
+  - [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+  - [ModifyAlarmPolicyCondition](https://www.tencentcloud.com/document/api/248/39317)
+  - [ModifyAlarmPolicyInfo](https://www.tencentcloud.com/document/api/248/39316)
+  - [ModifyAlarmPolicyNotice](https://www.tencentcloud.com/document/api/248/39315)
+  - [ModifyAlarmPolicyStatus](https://www.tencentcloud.com/document/api/248/39314)
+  - [ModifyAlarmPolicyTasks](https://www.tencentcloud.com/document/api/248/39313)
+* Delete: [DeleteAlarmPolicy](https://www.tencentcloud.com/document/api/248/39325)
 
 
 ## Create AlarmPolicy Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">AlarmPolicy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AlarmPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">AlarmPolicy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AlarmPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">AlarmPolicy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                <span class="nx">conditions</span><span class="p">:</span> <span class="nx">Optional[_monitor.AlarmPolicyConditionsArgs]</span> = None<span class="p">,</span>
-                <span class="nx">conditon_template_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                <span class="nx">enable</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                <span class="nx">event_conditions</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.AlarmPolicyEventConditionArgs]]</span> = None<span class="p">,</span>
-                <span class="nx">filter</span><span class="p">:</span> <span class="nx">Optional[_monitor.AlarmPolicyFilterArgs]</span> = None<span class="p">,</span>
-                <span class="nx">group_bies</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                <span class="nx">monitor_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">namespace</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">notice_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                <span class="nx">policy_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">policy_tags</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.AlarmPolicyPolicyTagArgs]]</span> = None<span class="p">,</span>
-                <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                <span class="nx">trigger_tasks</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.AlarmPolicyTriggerTaskArgs]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">AlarmPolicy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                 <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AlarmPolicyArgs</a></span><span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">AlarmPolicy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                <span class="nx">policy_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">namespace</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">monitor_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">group_bies</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+                <span class="nx">enable</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                <span class="nx">notice_content_tmpl_bind_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[AlarmPolicyNoticeContentTmplBindInfoArgs]]</span> = None<span class="p">,</span>
+                <span class="nx">hierarchical_notices</span><span class="p">:</span> <span class="nx">Optional[Sequence[AlarmPolicyHierarchicalNoticeArgs]]</span> = None<span class="p">,</span>
+                <span class="nx">is_bind_all</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                <span class="nx">conditon_template_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                <span class="nx">event_conditions</span><span class="p">:</span> <span class="nx">Optional[Sequence[AlarmPolicyEventConditionArgs]]</span> = None<span class="p">,</span>
+                <span class="nx">filter</span><span class="p">:</span> <span class="nx">Optional[AlarmPolicyFilterArgs]</span> = None<span class="p">,</span>
+                <span class="nx">notice_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+                <span class="nx">conditions</span><span class="p">:</span> <span class="nx">Optional[AlarmPolicyConditionsArgs]</span> = None<span class="p">,</span>
+                <span class="nx">policy_tags</span><span class="p">:</span> <span class="nx">Optional[Sequence[AlarmPolicyPolicyTagArgs]]</span> = None<span class="p">,</span>
+                <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                <span class="nx">trigger_tasks</span><span class="p">:</span> <span class="nx">Optional[Sequence[AlarmPolicyTriggerTaskArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAlarmPolicy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AlarmPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">AlarmPolicy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAlarmPolicy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AlarmPolicyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">AlarmPolicy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">AlarmPolicy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AlarmPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">AlarmPolicy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AlarmPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">AlarmPolicy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AlarmPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">AlarmPolicy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AlarmPolicyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Monitor:AlarmPolicy</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Monitor:AlarmPolicy</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_monitor_alarm_policy&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -1730,7 +2791,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -1847,11 +2908,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## AlarmPolicy Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -1867,8 +2936,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of monitor.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The type of monitor.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -1876,8 +2944,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of alarm.</p>
-</dd><dt class="property-required"
+    <dd>The type of alarm.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Name</a>
@@ -1885,17 +2952,15 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of policy.</p>
-</dd><dt class="property-optional"
+    <dd>The name of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="conditions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_csharp" style="color: inherit; text-decoration: inherit;">Conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyconditions">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Conditions<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmpolicyconditions">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Conditions</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of metric trigger condition.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="conditontemplateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditontemplateid_csharp" style="color: inherit; text-decoration: inherit;">Conditon<wbr>Template<wbr>Id</a>
@@ -1903,8 +2968,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of trigger condition template.</p>
-</dd><dt class="property-optional"
+    <dd>ID of trigger condition template.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -1912,26 +2976,23 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable, default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable, default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="eventconditions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventconditions_csharp" style="color: inherit; text-decoration: inherit;">Event<wbr>Conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyeventcondition">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmpolicyeventcondition">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Event<wbr>Condition&gt;</a></span>
     </dt>
-    <dd><p>A list of event trigger condition.</p>
-</dd><dt class="property-optional"
+    <dd>A list of event trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_csharp" style="color: inherit; text-decoration: inherit;">Filter</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyfilter">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Filter<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmpolicyfilter">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Filter</a></span>
     </dt>
-    <dd><p>Global filters.</p>
-</dd><dt class="property-optional"
+    <dd>Global filters.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupbies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupbies_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Bies</a>
@@ -1939,8 +3000,31 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Aggregate dimension list, specify which dimension keys to use for group by.</p>
-</dd><dt class="property-optional"
+    <dd>Aggregate dimension list, specify which dimension keys to use for group by.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hierarchicalnotices_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hierarchicalnotices_csharp" style="color: inherit; text-decoration: inherit;">Hierarchical<wbr>Notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyhierarchicalnotice">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Hierarchical<wbr>Notice&gt;</a></span>
+    </dt>
+    <dd>Alarm hierarchical notice rules configuration.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="isbindall_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isbindall_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Bind<wbr>All</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Whether to bind all objects. If yes, no need to pass <code>filter</code> or call <code>BindPolicyObject</code>. Valid values: <code>0</code> (no, default), <code>1</code> (yes). Not all policy types support binding all objects. Immutable after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="noticecontenttmplbindinfos_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticecontenttmplbindinfos_csharp" style="color: inherit; text-decoration: inherit;">Notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicynoticecontenttmplbindinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Notice content template binding info.</dd><dt class="property-optional"
             title="Optional">
         <span id="noticeids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeids_csharp" style="color: inherit; text-decoration: inherit;">Notice<wbr>Ids</a>
@@ -1948,17 +3032,15 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of notification rule IDs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of notification rule IDs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="policytags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytags_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicypolicytag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Policy<wbr>Tag<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmpolicypolicytag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Policy<wbr>Tag&gt;</a></span>
     </dt>
-    <dd><p>Policy tag to bind object.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy tag to bind object.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1966,8 +3048,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID. For products with different projects, a value other than -1 must be passed in.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. For products with different projects, a value other than -1 must be passed in.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1975,17 +3056,15 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The remark of policy group.</p>
-</dd><dt class="property-optional"
+    <dd>The remark of policy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="triggertasks_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggertasks_csharp" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Tasks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicytriggertask">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Trigger<wbr>Task<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmpolicytriggertask">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Trigger<wbr>Task&gt;</a></span>
     </dt>
-    <dd><p>Triggered task list.</p>
-</dd></dl>
+    <dd>Triggered task list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1999,8 +3078,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of monitor.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The type of monitor.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -2008,8 +3086,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of alarm.</p>
-</dd><dt class="property-required"
+    <dd>The type of alarm.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Name</a>
@@ -2017,8 +3094,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of policy.</p>
-</dd><dt class="property-optional"
+    <dd>The name of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="conditions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_go" style="color: inherit; text-decoration: inherit;">Conditions</a>
@@ -2026,8 +3102,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditions">Alarm<wbr>Policy<wbr>Conditions<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of metric trigger condition.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="conditontemplateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditontemplateid_go" style="color: inherit; text-decoration: inherit;">Conditon<wbr>Template<wbr>Id</a>
@@ -2035,8 +3110,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of trigger condition template.</p>
-</dd><dt class="property-optional"
+    <dd>ID of trigger condition template.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -2044,8 +3118,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable, default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable, default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="eventconditions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventconditions_go" style="color: inherit; text-decoration: inherit;">Event<wbr>Conditions</a>
@@ -2053,8 +3126,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyeventcondition">[]Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of event trigger condition.</p>
-</dd><dt class="property-optional"
+    <dd>A list of event trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_go" style="color: inherit; text-decoration: inherit;">Filter</a>
@@ -2062,8 +3134,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyfilter">Alarm<wbr>Policy<wbr>Filter<wbr>Args</a></span>
     </dt>
-    <dd><p>Global filters.</p>
-</dd><dt class="property-optional"
+    <dd>Global filters.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupbies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupbies_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Bies</a>
@@ -2071,8 +3142,31 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Aggregate dimension list, specify which dimension keys to use for group by.</p>
-</dd><dt class="property-optional"
+    <dd>Aggregate dimension list, specify which dimension keys to use for group by.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hierarchicalnotices_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hierarchicalnotices_go" style="color: inherit; text-decoration: inherit;">Hierarchical<wbr>Notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyhierarchicalnotice">[]Alarm<wbr>Policy<wbr>Hierarchical<wbr>Notice<wbr>Args</a></span>
+    </dt>
+    <dd>Alarm hierarchical notice rules configuration.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="isbindall_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isbindall_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Bind<wbr>All</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Whether to bind all objects. If yes, no need to pass <code>filter</code> or call <code>BindPolicyObject</code>. Valid values: <code>0</code> (no, default), <code>1</code> (yes). Not all policy types support binding all objects. Immutable after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="noticecontenttmplbindinfos_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticecontenttmplbindinfos_go" style="color: inherit; text-decoration: inherit;">Notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicynoticecontenttmplbindinfo">[]Alarm<wbr>Policy<wbr>Notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Info<wbr>Args</a></span>
+    </dt>
+    <dd>Notice content template binding info.</dd><dt class="property-optional"
             title="Optional">
         <span id="noticeids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeids_go" style="color: inherit; text-decoration: inherit;">Notice<wbr>Ids</a>
@@ -2080,8 +3174,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of notification rule IDs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of notification rule IDs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="policytags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytags_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Tags</a>
@@ -2089,8 +3182,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicypolicytag">[]Alarm<wbr>Policy<wbr>Policy<wbr>Tag<wbr>Args</a></span>
     </dt>
-    <dd><p>Policy tag to bind object.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy tag to bind object.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2098,8 +3190,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID. For products with different projects, a value other than -1 must be passed in.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. For products with different projects, a value other than -1 must be passed in.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -2107,8 +3198,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The remark of policy group.</p>
-</dd><dt class="property-optional"
+    <dd>The remark of policy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="triggertasks_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggertasks_go" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Tasks</a>
@@ -2116,8 +3206,149 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicytriggertask">[]Alarm<wbr>Policy<wbr>Trigger<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Triggered task list.</p>
-</dd></dl>
+    <dd>Triggered task list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="monitor_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#monitor_type_hcl" style="color: inherit; text-decoration: inherit;">monitor_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of monitor.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of alarm.</dd><dt class="property-required"
+            title="Required">
+        <span id="policy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_name_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of policy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="conditions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_hcl" style="color: inherit; text-decoration: inherit;">conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyconditions">object</a></span>
+    </dt>
+    <dd>A list of metric trigger condition.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="conditon_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditon_template_id_hcl" style="color: inherit; text-decoration: inherit;">conditon_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of trigger condition template.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable, default is <code>1</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="event_conditions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_conditions_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyeventcondition">list(object)</a></span>
+    </dt>
+    <dd>A list of event trigger condition.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_hcl" style="color: inherit; text-decoration: inherit;">filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyfilter">object</a></span>
+    </dt>
+    <dd>Global filters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="group_bies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_bies_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>bies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Aggregate dimension list, specify which dimension keys to use for group by.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hierarchical_notices_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hierarchical_notices_hcl" style="color: inherit; text-decoration: inherit;">hierarchical_<wbr>notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyhierarchicalnotice">list(object)</a></span>
+    </dt>
+    <dd>Alarm hierarchical notice rules configuration.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="is_bind_all_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_bind_all_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>bind_<wbr>all</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to bind all objects. If yes, no need to pass <code>filter</code> or call <code>BindPolicyObject</code>. Valid values: <code>0</code> (no, default), <code>1</code> (yes). Not all policy types support binding all objects. Immutable after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="notice_content_tmpl_bind_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notice_content_tmpl_bind_infos_hcl" style="color: inherit; text-decoration: inherit;">notice_<wbr>content_<wbr>tmpl_<wbr>bind_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicynoticecontenttmplbindinfo">list(object)</a></span>
+    </dt>
+    <dd>Notice content template binding info.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="notice_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notice_ids_hcl" style="color: inherit; text-decoration: inherit;">notice_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of notification rule IDs.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="policy_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_tags_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicypolicytag">list(object)</a></span>
+    </dt>
+    <dd>Policy tag to bind object.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID. For products with different projects, a value other than -1 must be passed in.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The remark of policy group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="trigger_tasks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_tasks_hcl" style="color: inherit; text-decoration: inherit;">trigger_<wbr>tasks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicytriggertask">list(object)</a></span>
+    </dt>
+    <dd>Triggered task list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2131,8 +3362,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of monitor.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The type of monitor.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -2140,8 +3370,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of alarm.</p>
-</dd><dt class="property-required"
+    <dd>The type of alarm.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -2149,17 +3378,15 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of policy.</p>
-</dd><dt class="property-optional"
+    <dd>The name of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="conditions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_java" style="color: inherit; text-decoration: inherit;">conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyconditions">Alarm<wbr>Policy<wbr>Conditions<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmpolicyconditions">Alarm<wbr>Policy<wbr>Conditions</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of metric trigger condition.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="conditontemplateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditontemplateid_java" style="color: inherit; text-decoration: inherit;">conditon<wbr>Template<wbr>Id</a>
@@ -2167,8 +3394,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of trigger condition template.</p>
-</dd><dt class="property-optional"
+    <dd>ID of trigger condition template.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2176,26 +3402,23 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable, default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable, default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="eventconditions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventconditions_java" style="color: inherit; text-decoration: inherit;">event<wbr>Conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyeventcondition">List&lt;Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmpolicyeventcondition">List&lt;Alarm<wbr>Policy<wbr>Event<wbr>Condition&gt;</a></span>
     </dt>
-    <dd><p>A list of event trigger condition.</p>
-</dd><dt class="property-optional"
+    <dd>A list of event trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_java" style="color: inherit; text-decoration: inherit;">filter</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyfilter">Alarm<wbr>Policy<wbr>Filter<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmpolicyfilter">Alarm<wbr>Policy<wbr>Filter</a></span>
     </dt>
-    <dd><p>Global filters.</p>
-</dd><dt class="property-optional"
+    <dd>Global filters.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupbies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupbies_java" style="color: inherit; text-decoration: inherit;">group<wbr>Bies</a>
@@ -2203,8 +3426,31 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Aggregate dimension list, specify which dimension keys to use for group by.</p>
-</dd><dt class="property-optional"
+    <dd>Aggregate dimension list, specify which dimension keys to use for group by.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hierarchicalnotices_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hierarchicalnotices_java" style="color: inherit; text-decoration: inherit;">hierarchical<wbr>Notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyhierarchicalnotice">List&lt;Alarm<wbr>Policy<wbr>Hierarchical<wbr>Notice&gt;</a></span>
+    </dt>
+    <dd>Alarm hierarchical notice rules configuration.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="isbindall_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isbindall_java" style="color: inherit; text-decoration: inherit;">is<wbr>Bind<wbr>All</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Whether to bind all objects. If yes, no need to pass <code>filter</code> or call <code>BindPolicyObject</code>. Valid values: <code>0</code> (no, default), <code>1</code> (yes). Not all policy types support binding all objects. Immutable after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="noticecontenttmplbindinfos_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticecontenttmplbindinfos_java" style="color: inherit; text-decoration: inherit;">notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicynoticecontenttmplbindinfo">List&lt;Alarm<wbr>Policy<wbr>Notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Notice content template binding info.</dd><dt class="property-optional"
             title="Optional">
         <span id="noticeids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeids_java" style="color: inherit; text-decoration: inherit;">notice<wbr>Ids</a>
@@ -2212,17 +3458,15 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of notification rule IDs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of notification rule IDs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="policytags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytags_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicypolicytag">List&lt;Alarm<wbr>Policy<wbr>Policy<wbr>Tag<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmpolicypolicytag">List&lt;Alarm<wbr>Policy<wbr>Policy<wbr>Tag&gt;</a></span>
     </dt>
-    <dd><p>Policy tag to bind object.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy tag to bind object.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2230,8 +3474,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID. For products with different projects, a value other than -1 must be passed in.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. For products with different projects, a value other than -1 must be passed in.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -2239,17 +3482,15 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The remark of policy group.</p>
-</dd><dt class="property-optional"
+    <dd>The remark of policy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="triggertasks_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggertasks_java" style="color: inherit; text-decoration: inherit;">trigger<wbr>Tasks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicytriggertask">List&lt;Alarm<wbr>Policy<wbr>Trigger<wbr>Task<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmpolicytriggertask">List&lt;Alarm<wbr>Policy<wbr>Trigger<wbr>Task&gt;</a></span>
     </dt>
-    <dd><p>Triggered task list.</p>
-</dd></dl>
+    <dd>Triggered task list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2263,8 +3504,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of monitor.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The type of monitor.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -2272,8 +3512,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of alarm.</p>
-</dd><dt class="property-required"
+    <dd>The type of alarm.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -2281,17 +3520,15 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of policy.</p>
-</dd><dt class="property-optional"
+    <dd>The name of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="conditions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_nodejs" style="color: inherit; text-decoration: inherit;">conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyconditions">Alarm<wbr>Policy<wbr>Conditions<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmpolicyconditions">Alarm<wbr>Policy<wbr>Conditions</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of metric trigger condition.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="conditontemplateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditontemplateid_nodejs" style="color: inherit; text-decoration: inherit;">conditon<wbr>Template<wbr>Id</a>
@@ -2299,8 +3536,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of trigger condition template.</p>
-</dd><dt class="property-optional"
+    <dd>ID of trigger condition template.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2308,26 +3544,23 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable, default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable, default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="eventconditions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventconditions_nodejs" style="color: inherit; text-decoration: inherit;">event<wbr>Conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyeventcondition">Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#alarmpolicyeventcondition">Alarm<wbr>Policy<wbr>Event<wbr>Condition[]</a></span>
     </dt>
-    <dd><p>A list of event trigger condition.</p>
-</dd><dt class="property-optional"
+    <dd>A list of event trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_nodejs" style="color: inherit; text-decoration: inherit;">filter</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyfilter">Alarm<wbr>Policy<wbr>Filter<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmpolicyfilter">Alarm<wbr>Policy<wbr>Filter</a></span>
     </dt>
-    <dd><p>Global filters.</p>
-</dd><dt class="property-optional"
+    <dd>Global filters.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupbies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupbies_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Bies</a>
@@ -2335,8 +3568,31 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Aggregate dimension list, specify which dimension keys to use for group by.</p>
-</dd><dt class="property-optional"
+    <dd>Aggregate dimension list, specify which dimension keys to use for group by.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hierarchicalnotices_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hierarchicalnotices_nodejs" style="color: inherit; text-decoration: inherit;">hierarchical<wbr>Notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyhierarchicalnotice">Alarm<wbr>Policy<wbr>Hierarchical<wbr>Notice[]</a></span>
+    </dt>
+    <dd>Alarm hierarchical notice rules configuration.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="isbindall_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isbindall_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Bind<wbr>All</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to bind all objects. If yes, no need to pass <code>filter</code> or call <code>BindPolicyObject</code>. Valid values: <code>0</code> (no, default), <code>1</code> (yes). Not all policy types support binding all objects. Immutable after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="noticecontenttmplbindinfos_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticecontenttmplbindinfos_nodejs" style="color: inherit; text-decoration: inherit;">notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicynoticecontenttmplbindinfo">Alarm<wbr>Policy<wbr>Notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Info[]</a></span>
+    </dt>
+    <dd>Notice content template binding info.</dd><dt class="property-optional"
             title="Optional">
         <span id="noticeids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeids_nodejs" style="color: inherit; text-decoration: inherit;">notice<wbr>Ids</a>
@@ -2344,17 +3600,15 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of notification rule IDs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of notification rule IDs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="policytags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytags_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicypolicytag">Alarm<wbr>Policy<wbr>Policy<wbr>Tag<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#alarmpolicypolicytag">Alarm<wbr>Policy<wbr>Policy<wbr>Tag[]</a></span>
     </dt>
-    <dd><p>Policy tag to bind object.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy tag to bind object.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2362,8 +3616,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID. For products with different projects, a value other than -1 must be passed in.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. For products with different projects, a value other than -1 must be passed in.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -2371,17 +3624,15 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The remark of policy group.</p>
-</dd><dt class="property-optional"
+    <dd>The remark of policy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="triggertasks_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggertasks_nodejs" style="color: inherit; text-decoration: inherit;">trigger<wbr>Tasks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicytriggertask">Alarm<wbr>Policy<wbr>Trigger<wbr>Task<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#alarmpolicytriggertask">Alarm<wbr>Policy<wbr>Trigger<wbr>Task[]</a></span>
     </dt>
-    <dd><p>Triggered task list.</p>
-</dd></dl>
+    <dd>Triggered task list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2395,8 +3646,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of monitor.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The type of monitor.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -2404,8 +3654,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of alarm.</p>
-</dd><dt class="property-required"
+    <dd>The type of alarm.</dd><dt class="property-required"
             title="Required">
         <span id="policy_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_name_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
@@ -2413,8 +3662,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of policy.</p>
-</dd><dt class="property-optional"
+    <dd>The name of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="conditions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_python" style="color: inherit; text-decoration: inherit;">conditions</a>
@@ -2422,8 +3670,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditions">Alarm<wbr>Policy<wbr>Conditions<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of metric trigger condition.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="conditon_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditon_template_id_python" style="color: inherit; text-decoration: inherit;">conditon_<wbr>template_<wbr>id</a>
@@ -2431,8 +3678,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of trigger condition template.</p>
-</dd><dt class="property-optional"
+    <dd>ID of trigger condition template.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2440,17 +3686,15 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable, default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable, default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="event_conditions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#event_conditions_python" style="color: inherit; text-decoration: inherit;">event_<wbr>conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyeventcondition">Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Args]</a></span>
+        <span class="property-type"><a href="#alarmpolicyeventcondition">Sequence[Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Args]</a></span>
     </dt>
-    <dd><p>A list of event trigger condition.</p>
-</dd><dt class="property-optional"
+    <dd>A list of event trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_python" style="color: inherit; text-decoration: inherit;">filter</a>
@@ -2458,8 +3702,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyfilter">Alarm<wbr>Policy<wbr>Filter<wbr>Args</a></span>
     </dt>
-    <dd><p>Global filters.</p>
-</dd><dt class="property-optional"
+    <dd>Global filters.</dd><dt class="property-optional"
             title="Optional">
         <span id="group_bies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_bies_python" style="color: inherit; text-decoration: inherit;">group_<wbr>bies</a>
@@ -2467,8 +3710,31 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Aggregate dimension list, specify which dimension keys to use for group by.</p>
-</dd><dt class="property-optional"
+    <dd>Aggregate dimension list, specify which dimension keys to use for group by.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hierarchical_notices_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hierarchical_notices_python" style="color: inherit; text-decoration: inherit;">hierarchical_<wbr>notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyhierarchicalnotice">Sequence[Alarm<wbr>Policy<wbr>Hierarchical<wbr>Notice<wbr>Args]</a></span>
+    </dt>
+    <dd>Alarm hierarchical notice rules configuration.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="is_bind_all_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_bind_all_python" style="color: inherit; text-decoration: inherit;">is_<wbr>bind_<wbr>all</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Whether to bind all objects. If yes, no need to pass <code>filter</code> or call <code>BindPolicyObject</code>. Valid values: <code>0</code> (no, default), <code>1</code> (yes). Not all policy types support binding all objects. Immutable after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="notice_content_tmpl_bind_infos_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notice_content_tmpl_bind_infos_python" style="color: inherit; text-decoration: inherit;">notice_<wbr>content_<wbr>tmpl_<wbr>bind_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicynoticecontenttmplbindinfo">Sequence[Alarm<wbr>Policy<wbr>Notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Info<wbr>Args]</a></span>
+    </dt>
+    <dd>Notice content template binding info.</dd><dt class="property-optional"
             title="Optional">
         <span id="notice_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notice_ids_python" style="color: inherit; text-decoration: inherit;">notice_<wbr>ids</a>
@@ -2476,17 +3742,15 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of notification rule IDs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of notification rule IDs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="policy_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_tags_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicypolicytag">Alarm<wbr>Policy<wbr>Policy<wbr>Tag<wbr>Args]</a></span>
+        <span class="property-type"><a href="#alarmpolicypolicytag">Sequence[Alarm<wbr>Policy<wbr>Policy<wbr>Tag<wbr>Args]</a></span>
     </dt>
-    <dd><p>Policy tag to bind object.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy tag to bind object.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -2494,8 +3758,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID. For products with different projects, a value other than -1 must be passed in.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. For products with different projects, a value other than -1 must be passed in.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -2503,17 +3766,15 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The remark of policy group.</p>
-</dd><dt class="property-optional"
+    <dd>The remark of policy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="trigger_tasks_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_tasks_python" style="color: inherit; text-decoration: inherit;">trigger_<wbr>tasks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicytriggertask">Alarm<wbr>Policy<wbr>Trigger<wbr>Task<wbr>Args]</a></span>
+        <span class="property-type"><a href="#alarmpolicytriggertask">Sequence[Alarm<wbr>Policy<wbr>Trigger<wbr>Task<wbr>Args]</a></span>
     </dt>
-    <dd><p>Triggered task list.</p>
-</dd></dl>
+    <dd>Triggered task list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2527,8 +3788,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of monitor.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>The type of monitor.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -2536,8 +3796,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of alarm.</p>
-</dd><dt class="property-required"
+    <dd>The type of alarm.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -2545,8 +3804,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of policy.</p>
-</dd><dt class="property-optional"
+    <dd>The name of policy.</dd><dt class="property-optional"
             title="Optional">
         <span id="conditions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_yaml" style="color: inherit; text-decoration: inherit;">conditions</a>
@@ -2554,8 +3812,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditions">Property Map</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of metric trigger condition.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="conditontemplateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditontemplateid_yaml" style="color: inherit; text-decoration: inherit;">conditon<wbr>Template<wbr>Id</a>
@@ -2563,8 +3820,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of trigger condition template.</p>
-</dd><dt class="property-optional"
+    <dd>ID of trigger condition template.</dd><dt class="property-optional"
             title="Optional">
         <span id="enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -2572,8 +3828,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable, default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable, default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="eventconditions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#eventconditions_yaml" style="color: inherit; text-decoration: inherit;">event<wbr>Conditions</a>
@@ -2581,8 +3836,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyeventcondition">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of event trigger condition.</p>
-</dd><dt class="property-optional"
+    <dd>A list of event trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_yaml" style="color: inherit; text-decoration: inherit;">filter</a>
@@ -2590,8 +3844,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyfilter">Property Map</a></span>
     </dt>
-    <dd><p>Global filters.</p>
-</dd><dt class="property-optional"
+    <dd>Global filters.</dd><dt class="property-optional"
             title="Optional">
         <span id="groupbies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupbies_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Bies</a>
@@ -2599,8 +3852,31 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Aggregate dimension list, specify which dimension keys to use for group by.</p>
-</dd><dt class="property-optional"
+    <dd>Aggregate dimension list, specify which dimension keys to use for group by.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="hierarchicalnotices_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#hierarchicalnotices_yaml" style="color: inherit; text-decoration: inherit;">hierarchical<wbr>Notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyhierarchicalnotice">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Alarm hierarchical notice rules configuration.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="isbindall_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isbindall_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Bind<wbr>All</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Whether to bind all objects. If yes, no need to pass <code>filter</code> or call <code>BindPolicyObject</code>. Valid values: <code>0</code> (no, default), <code>1</code> (yes). Not all policy types support binding all objects. Immutable after creation.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="noticecontenttmplbindinfos_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticecontenttmplbindinfos_yaml" style="color: inherit; text-decoration: inherit;">notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicynoticecontenttmplbindinfo">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Notice content template binding info.</dd><dt class="property-optional"
             title="Optional">
         <span id="noticeids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeids_yaml" style="color: inherit; text-decoration: inherit;">notice<wbr>Ids</a>
@@ -2608,8 +3884,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of notification rule IDs.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>List of notification rule IDs.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="policytags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytags_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Tags</a>
@@ -2617,8 +3892,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicypolicytag">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Policy tag to bind object.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy tag to bind object.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2626,8 +3900,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID. For products with different projects, a value other than -1 must be passed in.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. For products with different projects, a value other than -1 must be passed in.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -2635,8 +3908,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The remark of policy group.</p>
-</dd><dt class="property-optional"
+    <dd>The remark of policy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="triggertasks_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggertasks_yaml" style="color: inherit; text-decoration: inherit;">trigger<wbr>Tasks</a>
@@ -2644,8 +3916,7 @@ The AlarmPolicy resource accepts the following [input](/docs/intro/concepts/inpu
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicytriggertask">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Triggered task list.</p>
-</dd></dl>
+    <dd>Triggered task list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2666,8 +3937,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The alarm policy create time.</p>
-</dd><dt class="property-"
+    <dd>The alarm policy create time.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2675,8 +3945,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -2684,8 +3953,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The alarm policy update time.</p>
-</dd></dl>
+    <dd>The alarm policy update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2699,8 +3967,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The alarm policy create time.</p>
-</dd><dt class="property-"
+    <dd>The alarm policy create time.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2708,8 +3975,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -2717,8 +3983,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The alarm policy update time.</p>
-</dd></dl>
+    <dd>The alarm policy update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The alarm policy create time.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The alarm policy update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2732,8 +4027,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The alarm policy create time.</p>
-</dd><dt class="property-"
+    <dd>The alarm policy create time.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2741,8 +4035,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2750,8 +4043,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The alarm policy update time.</p>
-</dd></dl>
+    <dd>The alarm policy update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2765,8 +4057,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The alarm policy create time.</p>
-</dd><dt class="property-"
+    <dd>The alarm policy create time.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2774,8 +4065,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2783,8 +4073,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The alarm policy update time.</p>
-</dd></dl>
+    <dd>The alarm policy update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2798,8 +4087,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The alarm policy create time.</p>
-</dd><dt class="property-"
+    <dd>The alarm policy create time.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2807,8 +4095,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -2816,8 +4103,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The alarm policy update time.</p>
-</dd></dl>
+    <dd>The alarm policy update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2831,8 +4117,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The alarm policy create time.</p>
-</dd><dt class="property-"
+    <dd>The alarm policy create time.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2840,8 +4125,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -2849,8 +4133,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The alarm policy update time.</p>
-</dd></dl>
+    <dd>The alarm policy update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2860,135 +4143,177 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing AlarmPolicy resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AlarmPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">AlarmPolicy</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AlarmPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">AlarmPolicy</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">conditions</span><span class="p">:</span> <span class="nx">Optional[_monitor.AlarmPolicyConditionsArgs]</span> = None<span class="p">,</span>
+        <span class="nx">conditions</span><span class="p">:</span> <span class="nx">Optional[AlarmPolicyConditionsArgs]</span> = None<span class="p">,</span>
         <span class="nx">conditon_template_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">enable</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">event_conditions</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.AlarmPolicyEventConditionArgs]]</span> = None<span class="p">,</span>
-        <span class="nx">filter</span><span class="p">:</span> <span class="nx">Optional[_monitor.AlarmPolicyFilterArgs]</span> = None<span class="p">,</span>
+        <span class="nx">event_conditions</span><span class="p">:</span> <span class="nx">Optional[Sequence[AlarmPolicyEventConditionArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">filter</span><span class="p">:</span> <span class="nx">Optional[AlarmPolicyFilterArgs]</span> = None<span class="p">,</span>
         <span class="nx">group_bies</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+        <span class="nx">hierarchical_notices</span><span class="p">:</span> <span class="nx">Optional[Sequence[AlarmPolicyHierarchicalNoticeArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">is_bind_all</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">monitor_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">namespace</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">notice_content_tmpl_bind_infos</span><span class="p">:</span> <span class="nx">Optional[Sequence[AlarmPolicyNoticeContentTmplBindInfoArgs]]</span> = None<span class="p">,</span>
         <span class="nx">notice_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">policy_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">policy_tags</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.AlarmPolicyPolicyTagArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">policy_tags</span><span class="p">:</span> <span class="nx">Optional[Sequence[AlarmPolicyPolicyTagArgs]]</span> = None<span class="p">,</span>
         <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">trigger_tasks</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.AlarmPolicyTriggerTaskArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">trigger_tasks</span><span class="p">:</span> <span class="nx">Optional[Sequence[AlarmPolicyTriggerTaskArgs]]</span> = None<span class="p">,</span>
         <span class="nx">update_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> AlarmPolicy</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAlarmPolicy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AlarmPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">AlarmPolicy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAlarmPolicy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AlarmPolicyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">AlarmPolicy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">AlarmPolicy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AlarmPolicyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">AlarmPolicy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AlarmPolicyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">AlarmPolicy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AlarmPolicyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">AlarmPolicy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AlarmPolicyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingAlarmPolicy</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Monitor:AlarmPolicy</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_monitor_alarm_policy</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AlarmPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AlarmPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2996,28 +4321,31 @@ Get an existing AlarmPolicy resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AlarmPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3025,28 +4353,31 @@ Get an existing AlarmPolicy resource's state with the given name, ID, and option
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AlarmPolicyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -3064,10 +4395,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_conditions_csharp" style="color: inherit; text-decoration: inherit;">Conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyconditions">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Conditions<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmpolicyconditions">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Conditions</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of metric trigger condition.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_conditontemplateid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_conditontemplateid_csharp" style="color: inherit; text-decoration: inherit;">Conditon<wbr>Template<wbr>Id</a>
@@ -3075,8 +4405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of trigger condition template.</p>
-</dd><dt class="property-optional"
+    <dd>ID of trigger condition template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -3084,8 +4413,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The alarm policy create time.</p>
-</dd><dt class="property-optional"
+    <dd>The alarm policy create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_csharp" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -3093,26 +4421,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable, default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable, default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eventconditions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eventconditions_csharp" style="color: inherit; text-decoration: inherit;">Event<wbr>Conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyeventcondition">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmpolicyeventcondition">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Event<wbr>Condition&gt;</a></span>
     </dt>
-    <dd><p>A list of event trigger condition.</p>
-</dd><dt class="property-optional"
+    <dd>A list of event trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filter_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filter_csharp" style="color: inherit; text-decoration: inherit;">Filter</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyfilter">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Filter<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmpolicyfilter">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Filter</a></span>
     </dt>
-    <dd><p>Global filters.</p>
-</dd><dt class="property-optional"
+    <dd>Global filters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupbies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupbies_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Bies</a>
@@ -3120,8 +4445,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Aggregate dimension list, specify which dimension keys to use for group by.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Aggregate dimension list, specify which dimension keys to use for group by.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hierarchicalnotices_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hierarchicalnotices_csharp" style="color: inherit; text-decoration: inherit;">Hierarchical<wbr>Notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyhierarchicalnotice">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Hierarchical<wbr>Notice&gt;</a></span>
+    </dt>
+    <dd>Alarm hierarchical notice rules configuration.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_isbindall_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isbindall_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Bind<wbr>All</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Whether to bind all objects. If yes, no need to pass <code>filter</code> or call <code>BindPolicyObject</code>. Valid values: <code>0</code> (no, default), <code>1</code> (yes). Not all policy types support binding all objects. Immutable after creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_monitortype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitortype_csharp" style="color: inherit; text-decoration: inherit;">Monitor<wbr>Type</a>
@@ -3129,8 +4469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of monitor.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of monitor.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespace_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_csharp" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -3138,8 +4477,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of alarm.</p>
-</dd><dt class="property-optional"
+    <dd>The type of alarm.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_noticecontenttmplbindinfos_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_noticecontenttmplbindinfos_csharp" style="color: inherit; text-decoration: inherit;">Notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicynoticecontenttmplbindinfo">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Notice content template binding info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_noticeids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_noticeids_csharp" style="color: inherit; text-decoration: inherit;">Notice<wbr>Ids</a>
@@ -3147,8 +4493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of notification rule IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of notification rule IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyname_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Name</a>
@@ -3156,17 +4501,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_policytags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policytags_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicypolicytag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Policy<wbr>Tag<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmpolicypolicytag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Policy<wbr>Tag&gt;</a></span>
     </dt>
-    <dd><p>Policy tag to bind object.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy tag to bind object.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -3174,8 +4517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID. For products with different projects, a value other than -1 must be passed in.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. For products with different projects, a value other than -1 must be passed in.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -3183,17 +4525,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The remark of policy group.</p>
-</dd><dt class="property-optional"
+    <dd>The remark of policy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggertasks_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggertasks_csharp" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Tasks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicytriggertask">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Trigger<wbr>Task<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmpolicytriggertask">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Trigger<wbr>Task&gt;</a></span>
     </dt>
-    <dd><p>Triggered task list.</p>
-</dd><dt class="property-optional"
+    <dd>Triggered task list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_csharp" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -3201,8 +4541,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The alarm policy update time.</p>
-</dd></dl>
+    <dd>The alarm policy update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3216,8 +4555,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditions">Alarm<wbr>Policy<wbr>Conditions<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of metric trigger condition.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_conditontemplateid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_conditontemplateid_go" style="color: inherit; text-decoration: inherit;">Conditon<wbr>Template<wbr>Id</a>
@@ -3225,8 +4563,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of trigger condition template.</p>
-</dd><dt class="property-optional"
+    <dd>ID of trigger condition template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -3234,8 +4571,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The alarm policy create time.</p>
-</dd><dt class="property-optional"
+    <dd>The alarm policy create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_go" style="color: inherit; text-decoration: inherit;">Enable</a>
@@ -3243,8 +4579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable, default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable, default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eventconditions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eventconditions_go" style="color: inherit; text-decoration: inherit;">Event<wbr>Conditions</a>
@@ -3252,8 +4587,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyeventcondition">[]Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of event trigger condition.</p>
-</dd><dt class="property-optional"
+    <dd>A list of event trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filter_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filter_go" style="color: inherit; text-decoration: inherit;">Filter</a>
@@ -3261,8 +4595,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyfilter">Alarm<wbr>Policy<wbr>Filter<wbr>Args</a></span>
     </dt>
-    <dd><p>Global filters.</p>
-</dd><dt class="property-optional"
+    <dd>Global filters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupbies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupbies_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Bies</a>
@@ -3270,8 +4603,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Aggregate dimension list, specify which dimension keys to use for group by.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Aggregate dimension list, specify which dimension keys to use for group by.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hierarchicalnotices_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hierarchicalnotices_go" style="color: inherit; text-decoration: inherit;">Hierarchical<wbr>Notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyhierarchicalnotice">[]Alarm<wbr>Policy<wbr>Hierarchical<wbr>Notice<wbr>Args</a></span>
+    </dt>
+    <dd>Alarm hierarchical notice rules configuration.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_isbindall_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isbindall_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Bind<wbr>All</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Whether to bind all objects. If yes, no need to pass <code>filter</code> or call <code>BindPolicyObject</code>. Valid values: <code>0</code> (no, default), <code>1</code> (yes). Not all policy types support binding all objects. Immutable after creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_monitortype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitortype_go" style="color: inherit; text-decoration: inherit;">Monitor<wbr>Type</a>
@@ -3279,8 +4627,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of monitor.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of monitor.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespace_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_go" style="color: inherit; text-decoration: inherit;">Namespace</a>
@@ -3288,8 +4635,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of alarm.</p>
-</dd><dt class="property-optional"
+    <dd>The type of alarm.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_noticecontenttmplbindinfos_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_noticecontenttmplbindinfos_go" style="color: inherit; text-decoration: inherit;">Notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicynoticecontenttmplbindinfo">[]Alarm<wbr>Policy<wbr>Notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Info<wbr>Args</a></span>
+    </dt>
+    <dd>Notice content template binding info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_noticeids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_noticeids_go" style="color: inherit; text-decoration: inherit;">Notice<wbr>Ids</a>
@@ -3297,8 +4651,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of notification rule IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of notification rule IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyname_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Name</a>
@@ -3306,8 +4659,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_policytags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policytags_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Tags</a>
@@ -3315,8 +4667,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicypolicytag">[]Alarm<wbr>Policy<wbr>Policy<wbr>Tag<wbr>Args</a></span>
     </dt>
-    <dd><p>Policy tag to bind object.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy tag to bind object.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -3324,8 +4675,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID. For products with different projects, a value other than -1 must be passed in.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. For products with different projects, a value other than -1 must be passed in.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -3333,8 +4683,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The remark of policy group.</p>
-</dd><dt class="property-optional"
+    <dd>The remark of policy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggertasks_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggertasks_go" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Tasks</a>
@@ -3342,8 +4691,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicytriggertask">[]Alarm<wbr>Policy<wbr>Trigger<wbr>Task<wbr>Args</a></span>
     </dt>
-    <dd><p>Triggered task list.</p>
-</dd><dt class="property-optional"
+    <dd>Triggered task list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_go" style="color: inherit; text-decoration: inherit;">Update<wbr>Time</a>
@@ -3351,8 +4699,165 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The alarm policy update time.</p>
-</dd></dl>
+    <dd>The alarm policy update time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_conditions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_conditions_hcl" style="color: inherit; text-decoration: inherit;">conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyconditions">object</a></span>
+    </dt>
+    <dd>A list of metric trigger condition.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_conditon_template_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_conditon_template_id_hcl" style="color: inherit; text-decoration: inherit;">conditon_<wbr>template_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of trigger condition template.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The alarm policy create time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_enable_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_hcl" style="color: inherit; text-decoration: inherit;">enable</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to enable, default is <code>1</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_event_conditions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_event_conditions_hcl" style="color: inherit; text-decoration: inherit;">event_<wbr>conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyeventcondition">list(object)</a></span>
+    </dt>
+    <dd>A list of event trigger condition.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_filter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filter_hcl" style="color: inherit; text-decoration: inherit;">filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyfilter">object</a></span>
+    </dt>
+    <dd>Global filters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_group_bies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_group_bies_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>bies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Aggregate dimension list, specify which dimension keys to use for group by.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hierarchical_notices_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hierarchical_notices_hcl" style="color: inherit; text-decoration: inherit;">hierarchical_<wbr>notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyhierarchicalnotice">list(object)</a></span>
+    </dt>
+    <dd>Alarm hierarchical notice rules configuration.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_is_bind_all_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_bind_all_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>bind_<wbr>all</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to bind all objects. If yes, no need to pass <code>filter</code> or call <code>BindPolicyObject</code>. Valid values: <code>0</code> (no, default), <code>1</code> (yes). Not all policy types support binding all objects. Immutable after creation.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_monitor_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitor_type_hcl" style="color: inherit; text-decoration: inherit;">monitor_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of monitor.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The type of alarm.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_notice_content_tmpl_bind_infos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notice_content_tmpl_bind_infos_hcl" style="color: inherit; text-decoration: inherit;">notice_<wbr>content_<wbr>tmpl_<wbr>bind_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicynoticecontenttmplbindinfo">list(object)</a></span>
+    </dt>
+    <dd>Notice content template binding info.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_notice_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notice_ids_hcl" style="color: inherit; text-decoration: inherit;">notice_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of notification rule IDs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_policy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_name_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of policy.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_policy_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_tags_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicypolicytag">list(object)</a></span>
+    </dt>
+    <dd>Policy tag to bind object.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID. For products with different projects, a value other than -1 must be passed in.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The remark of policy group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_trigger_tasks_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trigger_tasks_hcl" style="color: inherit; text-decoration: inherit;">trigger_<wbr>tasks</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicytriggertask">list(object)</a></span>
+    </dt>
+    <dd>Triggered task list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_update_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_update_time_hcl" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The alarm policy update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3364,10 +4869,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_conditions_java" style="color: inherit; text-decoration: inherit;">conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyconditions">Alarm<wbr>Policy<wbr>Conditions<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmpolicyconditions">Alarm<wbr>Policy<wbr>Conditions</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of metric trigger condition.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_conditontemplateid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_conditontemplateid_java" style="color: inherit; text-decoration: inherit;">conditon<wbr>Template<wbr>Id</a>
@@ -3375,8 +4879,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of trigger condition template.</p>
-</dd><dt class="property-optional"
+    <dd>ID of trigger condition template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3384,8 +4887,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The alarm policy create time.</p>
-</dd><dt class="property-optional"
+    <dd>The alarm policy create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_java" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -3393,26 +4895,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether to enable, default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable, default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eventconditions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eventconditions_java" style="color: inherit; text-decoration: inherit;">event<wbr>Conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyeventcondition">List&lt;Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmpolicyeventcondition">List&lt;Alarm<wbr>Policy<wbr>Event<wbr>Condition&gt;</a></span>
     </dt>
-    <dd><p>A list of event trigger condition.</p>
-</dd><dt class="property-optional"
+    <dd>A list of event trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filter_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filter_java" style="color: inherit; text-decoration: inherit;">filter</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyfilter">Alarm<wbr>Policy<wbr>Filter<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmpolicyfilter">Alarm<wbr>Policy<wbr>Filter</a></span>
     </dt>
-    <dd><p>Global filters.</p>
-</dd><dt class="property-optional"
+    <dd>Global filters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupbies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupbies_java" style="color: inherit; text-decoration: inherit;">group<wbr>Bies</a>
@@ -3420,8 +4919,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Aggregate dimension list, specify which dimension keys to use for group by.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Aggregate dimension list, specify which dimension keys to use for group by.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hierarchicalnotices_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hierarchicalnotices_java" style="color: inherit; text-decoration: inherit;">hierarchical<wbr>Notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyhierarchicalnotice">List&lt;Alarm<wbr>Policy<wbr>Hierarchical<wbr>Notice&gt;</a></span>
+    </dt>
+    <dd>Alarm hierarchical notice rules configuration.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_isbindall_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isbindall_java" style="color: inherit; text-decoration: inherit;">is<wbr>Bind<wbr>All</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Whether to bind all objects. If yes, no need to pass <code>filter</code> or call <code>BindPolicyObject</code>. Valid values: <code>0</code> (no, default), <code>1</code> (yes). Not all policy types support binding all objects. Immutable after creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_monitortype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitortype_java" style="color: inherit; text-decoration: inherit;">monitor<wbr>Type</a>
@@ -3429,8 +4943,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of monitor.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of monitor.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespace_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_java" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3438,8 +4951,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of alarm.</p>
-</dd><dt class="property-optional"
+    <dd>The type of alarm.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_noticecontenttmplbindinfos_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_noticecontenttmplbindinfos_java" style="color: inherit; text-decoration: inherit;">notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicynoticecontenttmplbindinfo">List&lt;Alarm<wbr>Policy<wbr>Notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Info&gt;</a></span>
+    </dt>
+    <dd>Notice content template binding info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_noticeids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_noticeids_java" style="color: inherit; text-decoration: inherit;">notice<wbr>Ids</a>
@@ -3447,8 +4967,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of notification rule IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of notification rule IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyname_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -3456,17 +4975,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_policytags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policytags_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicypolicytag">List&lt;Alarm<wbr>Policy<wbr>Policy<wbr>Tag<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmpolicypolicytag">List&lt;Alarm<wbr>Policy<wbr>Policy<wbr>Tag&gt;</a></span>
     </dt>
-    <dd><p>Policy tag to bind object.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy tag to bind object.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3474,8 +4991,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID. For products with different projects, a value other than -1 must be passed in.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. For products with different projects, a value other than -1 must be passed in.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -3483,17 +4999,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The remark of policy group.</p>
-</dd><dt class="property-optional"
+    <dd>The remark of policy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggertasks_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggertasks_java" style="color: inherit; text-decoration: inherit;">trigger<wbr>Tasks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicytriggertask">List&lt;Alarm<wbr>Policy<wbr>Trigger<wbr>Task<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#alarmpolicytriggertask">List&lt;Alarm<wbr>Policy<wbr>Trigger<wbr>Task&gt;</a></span>
     </dt>
-    <dd><p>Triggered task list.</p>
-</dd><dt class="property-optional"
+    <dd>Triggered task list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_java" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -3501,8 +5015,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The alarm policy update time.</p>
-</dd></dl>
+    <dd>The alarm policy update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3514,10 +5027,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_conditions_nodejs" style="color: inherit; text-decoration: inherit;">conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyconditions">Alarm<wbr>Policy<wbr>Conditions<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmpolicyconditions">Alarm<wbr>Policy<wbr>Conditions</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of metric trigger condition.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_conditontemplateid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_conditontemplateid_nodejs" style="color: inherit; text-decoration: inherit;">conditon<wbr>Template<wbr>Id</a>
@@ -3525,8 +5037,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of trigger condition template.</p>
-</dd><dt class="property-optional"
+    <dd>ID of trigger condition template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3534,8 +5045,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The alarm policy create time.</p>
-</dd><dt class="property-optional"
+    <dd>The alarm policy create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_nodejs" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -3543,26 +5053,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether to enable, default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable, default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eventconditions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eventconditions_nodejs" style="color: inherit; text-decoration: inherit;">event<wbr>Conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyeventcondition">Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#alarmpolicyeventcondition">Alarm<wbr>Policy<wbr>Event<wbr>Condition[]</a></span>
     </dt>
-    <dd><p>A list of event trigger condition.</p>
-</dd><dt class="property-optional"
+    <dd>A list of event trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filter_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filter_nodejs" style="color: inherit; text-decoration: inherit;">filter</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyfilter">Alarm<wbr>Policy<wbr>Filter<wbr>Args</a></span>
+        <span class="property-type"><a href="#alarmpolicyfilter">Alarm<wbr>Policy<wbr>Filter</a></span>
     </dt>
-    <dd><p>Global filters.</p>
-</dd><dt class="property-optional"
+    <dd>Global filters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupbies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupbies_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Bies</a>
@@ -3570,8 +5077,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Aggregate dimension list, specify which dimension keys to use for group by.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Aggregate dimension list, specify which dimension keys to use for group by.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hierarchicalnotices_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hierarchicalnotices_nodejs" style="color: inherit; text-decoration: inherit;">hierarchical<wbr>Notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyhierarchicalnotice">Alarm<wbr>Policy<wbr>Hierarchical<wbr>Notice[]</a></span>
+    </dt>
+    <dd>Alarm hierarchical notice rules configuration.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_isbindall_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isbindall_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Bind<wbr>All</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether to bind all objects. If yes, no need to pass <code>filter</code> or call <code>BindPolicyObject</code>. Valid values: <code>0</code> (no, default), <code>1</code> (yes). Not all policy types support binding all objects. Immutable after creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_monitortype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitortype_nodejs" style="color: inherit; text-decoration: inherit;">monitor<wbr>Type</a>
@@ -3579,8 +5101,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of monitor.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of monitor.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespace_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_nodejs" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3588,8 +5109,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The type of alarm.</p>
-</dd><dt class="property-optional"
+    <dd>The type of alarm.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_noticecontenttmplbindinfos_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_noticecontenttmplbindinfos_nodejs" style="color: inherit; text-decoration: inherit;">notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicynoticecontenttmplbindinfo">Alarm<wbr>Policy<wbr>Notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Info[]</a></span>
+    </dt>
+    <dd>Notice content template binding info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_noticeids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_noticeids_nodejs" style="color: inherit; text-decoration: inherit;">notice<wbr>Ids</a>
@@ -3597,8 +5125,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of notification rule IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of notification rule IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyname_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -3606,17 +5133,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_policytags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policytags_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicypolicytag">Alarm<wbr>Policy<wbr>Policy<wbr>Tag<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#alarmpolicypolicytag">Alarm<wbr>Policy<wbr>Policy<wbr>Tag[]</a></span>
     </dt>
-    <dd><p>Policy tag to bind object.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy tag to bind object.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3624,8 +5149,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID. For products with different projects, a value other than -1 must be passed in.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. For products with different projects, a value other than -1 must be passed in.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -3633,17 +5157,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The remark of policy group.</p>
-</dd><dt class="property-optional"
+    <dd>The remark of policy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggertasks_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggertasks_nodejs" style="color: inherit; text-decoration: inherit;">trigger<wbr>Tasks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicytriggertask">Alarm<wbr>Policy<wbr>Trigger<wbr>Task<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#alarmpolicytriggertask">Alarm<wbr>Policy<wbr>Trigger<wbr>Task[]</a></span>
     </dt>
-    <dd><p>Triggered task list.</p>
-</dd><dt class="property-optional"
+    <dd>Triggered task list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_nodejs" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -3651,8 +5173,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The alarm policy update time.</p>
-</dd></dl>
+    <dd>The alarm policy update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3666,8 +5187,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditions">Alarm<wbr>Policy<wbr>Conditions<wbr>Args</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of metric trigger condition.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_conditon_template_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_conditon_template_id_python" style="color: inherit; text-decoration: inherit;">conditon_<wbr>template_<wbr>id</a>
@@ -3675,8 +5195,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of trigger condition template.</p>
-</dd><dt class="property-optional"
+    <dd>ID of trigger condition template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -3684,8 +5203,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The alarm policy create time.</p>
-</dd><dt class="property-optional"
+    <dd>The alarm policy create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_python" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -3693,17 +5211,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether to enable, default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable, default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_event_conditions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_event_conditions_python" style="color: inherit; text-decoration: inherit;">event_<wbr>conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyeventcondition">Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Args]</a></span>
+        <span class="property-type"><a href="#alarmpolicyeventcondition">Sequence[Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Args]</a></span>
     </dt>
-    <dd><p>A list of event trigger condition.</p>
-</dd><dt class="property-optional"
+    <dd>A list of event trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filter_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filter_python" style="color: inherit; text-decoration: inherit;">filter</a>
@@ -3711,8 +5227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyfilter">Alarm<wbr>Policy<wbr>Filter<wbr>Args</a></span>
     </dt>
-    <dd><p>Global filters.</p>
-</dd><dt class="property-optional"
+    <dd>Global filters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_group_bies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_group_bies_python" style="color: inherit; text-decoration: inherit;">group_<wbr>bies</a>
@@ -3720,8 +5235,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Aggregate dimension list, specify which dimension keys to use for group by.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Aggregate dimension list, specify which dimension keys to use for group by.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hierarchical_notices_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hierarchical_notices_python" style="color: inherit; text-decoration: inherit;">hierarchical_<wbr>notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyhierarchicalnotice">Sequence[Alarm<wbr>Policy<wbr>Hierarchical<wbr>Notice<wbr>Args]</a></span>
+    </dt>
+    <dd>Alarm hierarchical notice rules configuration.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_is_bind_all_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_is_bind_all_python" style="color: inherit; text-decoration: inherit;">is_<wbr>bind_<wbr>all</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Whether to bind all objects. If yes, no need to pass <code>filter</code> or call <code>BindPolicyObject</code>. Valid values: <code>0</code> (no, default), <code>1</code> (yes). Not all policy types support binding all objects. Immutable after creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_monitor_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitor_type_python" style="color: inherit; text-decoration: inherit;">monitor_<wbr>type</a>
@@ -3729,8 +5259,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of monitor.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of monitor.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespace_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_python" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3738,8 +5267,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The type of alarm.</p>
-</dd><dt class="property-optional"
+    <dd>The type of alarm.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_notice_content_tmpl_bind_infos_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notice_content_tmpl_bind_infos_python" style="color: inherit; text-decoration: inherit;">notice_<wbr>content_<wbr>tmpl_<wbr>bind_<wbr>infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicynoticecontenttmplbindinfo">Sequence[Alarm<wbr>Policy<wbr>Notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Info<wbr>Args]</a></span>
+    </dt>
+    <dd>Notice content template binding info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notice_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notice_ids_python" style="color: inherit; text-decoration: inherit;">notice_<wbr>ids</a>
@@ -3747,8 +5283,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of notification rule IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of notification rule IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policy_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_name_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
@@ -3756,17 +5291,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_policy_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_tags_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicypolicytag">Alarm<wbr>Policy<wbr>Policy<wbr>Tag<wbr>Args]</a></span>
+        <span class="property-type"><a href="#alarmpolicypolicytag">Sequence[Alarm<wbr>Policy<wbr>Policy<wbr>Tag<wbr>Args]</a></span>
     </dt>
-    <dd><p>Policy tag to bind object.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy tag to bind object.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -3774,8 +5307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID. For products with different projects, a value other than -1 must be passed in.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. For products with different projects, a value other than -1 must be passed in.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -3783,17 +5315,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The remark of policy group.</p>
-</dd><dt class="property-optional"
+    <dd>The remark of policy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_trigger_tasks_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trigger_tasks_python" style="color: inherit; text-decoration: inherit;">trigger_<wbr>tasks</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicytriggertask">Alarm<wbr>Policy<wbr>Trigger<wbr>Task<wbr>Args]</a></span>
+        <span class="property-type"><a href="#alarmpolicytriggertask">Sequence[Alarm<wbr>Policy<wbr>Trigger<wbr>Task<wbr>Args]</a></span>
     </dt>
-    <dd><p>Triggered task list.</p>
-</dd><dt class="property-optional"
+    <dd>Triggered task list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_update_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_update_time_python" style="color: inherit; text-decoration: inherit;">update_<wbr>time</a>
@@ -3801,8 +5331,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The alarm policy update time.</p>
-</dd></dl>
+    <dd>The alarm policy update time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3816,8 +5345,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditions">Property Map</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list of metric trigger condition.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_conditontemplateid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_conditontemplateid_yaml" style="color: inherit; text-decoration: inherit;">conditon<wbr>Template<wbr>Id</a>
@@ -3825,8 +5353,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of trigger condition template.</p>
-</dd><dt class="property-optional"
+    <dd>ID of trigger condition template.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3834,8 +5361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The alarm policy create time.</p>
-</dd><dt class="property-optional"
+    <dd>The alarm policy create time.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_enable_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_enable_yaml" style="color: inherit; text-decoration: inherit;">enable</a>
@@ -3843,8 +5369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether to enable, default is <code>1</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable, default is <code>1</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_eventconditions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_eventconditions_yaml" style="color: inherit; text-decoration: inherit;">event<wbr>Conditions</a>
@@ -3852,8 +5377,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyeventcondition">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of event trigger condition.</p>
-</dd><dt class="property-optional"
+    <dd>A list of event trigger condition.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filter_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filter_yaml" style="color: inherit; text-decoration: inherit;">filter</a>
@@ -3861,8 +5385,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyfilter">Property Map</a></span>
     </dt>
-    <dd><p>Global filters.</p>
-</dd><dt class="property-optional"
+    <dd>Global filters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupbies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupbies_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Bies</a>
@@ -3870,8 +5393,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Aggregate dimension list, specify which dimension keys to use for group by.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Aggregate dimension list, specify which dimension keys to use for group by.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_hierarchicalnotices_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_hierarchicalnotices_yaml" style="color: inherit; text-decoration: inherit;">hierarchical<wbr>Notices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyhierarchicalnotice">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Alarm hierarchical notice rules configuration.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_isbindall_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_isbindall_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Bind<wbr>All</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Whether to bind all objects. If yes, no need to pass <code>filter</code> or call <code>BindPolicyObject</code>. Valid values: <code>0</code> (no, default), <code>1</code> (yes). Not all policy types support binding all objects. Immutable after creation.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_monitortype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_monitortype_yaml" style="color: inherit; text-decoration: inherit;">monitor<wbr>Type</a>
@@ -3879,8 +5417,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of monitor.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The type of monitor.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_namespace_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_namespace_yaml" style="color: inherit; text-decoration: inherit;">namespace</a>
@@ -3888,8 +5425,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The type of alarm.</p>
-</dd><dt class="property-optional"
+    <dd>The type of alarm.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_noticecontenttmplbindinfos_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_noticecontenttmplbindinfos_yaml" style="color: inherit; text-decoration: inherit;">notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Infos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicynoticecontenttmplbindinfo">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Notice content template binding info.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_noticeids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_noticeids_yaml" style="color: inherit; text-decoration: inherit;">notice<wbr>Ids</a>
@@ -3897,8 +5441,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of notification rule IDs.</p>
-</dd><dt class="property-optional"
+    <dd>List of notification rule IDs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_policyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyname_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -3906,8 +5449,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of policy.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>The name of policy.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_policytags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policytags_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Tags</a>
@@ -3915,8 +5457,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicypolicytag">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Policy tag to bind object.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Policy tag to bind object.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3924,8 +5465,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID. For products with different projects, a value other than -1 must be passed in.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID. For products with different projects, a value other than -1 must be passed in.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -3933,8 +5473,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The remark of policy group.</p>
-</dd><dt class="property-optional"
+    <dd>The remark of policy group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggertasks_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggertasks_yaml" style="color: inherit; text-decoration: inherit;">trigger<wbr>Tasks</a>
@@ -3942,8 +5481,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicytriggertask">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Triggered task list.</p>
-</dd><dt class="property-optional"
+    <dd>Triggered task list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_updatetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_updatetime_yaml" style="color: inherit; text-decoration: inherit;">update<wbr>Time</a>
@@ -3951,8 +5489,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The alarm policy update time.</p>
-</dd></dl>
+    <dd>The alarm policy update time.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -3967,7 +5504,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="alarmpolicyconditions">Alarm<wbr>Policy<wbr>Conditions</h4>
+<h4 id="alarmpolicyconditions">
+Alarm<wbr>Policy<wbr>Conditions<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Policy<wbr>Conditions<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3979,8 +5518,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The and or relation of indicator alarm rule.</p>
-</dd><dt class="property-optional"
+    <dd>The and or relation of indicator alarm rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="rules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_csharp" style="color: inherit; text-decoration: inherit;">Rules</a>
@@ -3988,8 +5526,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditionsrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Conditions<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd></dl>
+    <dd>A list of metric trigger condition.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4003,8 +5540,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The and or relation of indicator alarm rule.</p>
-</dd><dt class="property-optional"
+    <dd>The and or relation of indicator alarm rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="rules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_go" style="color: inherit; text-decoration: inherit;">Rules</a>
@@ -4012,8 +5548,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditionsrule">[]Alarm<wbr>Policy<wbr>Conditions<wbr>Rule</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd></dl>
+    <dd>A list of metric trigger condition.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="is_union_rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_union_rule_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>union_<wbr>rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The and or relation of indicator alarm rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_hcl" style="color: inherit; text-decoration: inherit;">rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyconditionsrule">list(object)</a></span>
+    </dt>
+    <dd>A list of metric trigger condition.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4027,8 +5584,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The and or relation of indicator alarm rule.</p>
-</dd><dt class="property-optional"
+    <dd>The and or relation of indicator alarm rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="rules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_java" style="color: inherit; text-decoration: inherit;">rules</a>
@@ -4036,8 +5592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditionsrule">List&lt;Alarm<wbr>Policy<wbr>Conditions<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd></dl>
+    <dd>A list of metric trigger condition.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4051,8 +5606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The and or relation of indicator alarm rule.</p>
-</dd><dt class="property-optional"
+    <dd>The and or relation of indicator alarm rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="rules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_nodejs" style="color: inherit; text-decoration: inherit;">rules</a>
@@ -4060,8 +5614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditionsrule">Alarm<wbr>Policy<wbr>Conditions<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd></dl>
+    <dd>A list of metric trigger condition.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4075,17 +5628,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The and or relation of indicator alarm rule.</p>
-</dd><dt class="property-optional"
+    <dd>The and or relation of indicator alarm rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_python" style="color: inherit; text-decoration: inherit;">rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#alarmpolicyconditionsrule">Alarm<wbr>Policy<wbr>Conditions<wbr>Rule]</a></span>
+        <span class="property-type"><a href="#alarmpolicyconditionsrule">Sequence[Alarm<wbr>Policy<wbr>Conditions<wbr>Rule]</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd></dl>
+    <dd>A list of metric trigger condition.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4099,8 +5650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The and or relation of indicator alarm rule.</p>
-</dd><dt class="property-optional"
+    <dd>The and or relation of indicator alarm rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="rules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_yaml" style="color: inherit; text-decoration: inherit;">rules</a>
@@ -4108,12 +5658,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditionsrule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of metric trigger condition.</p>
-</dd></dl>
+    <dd>A list of metric trigger condition.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="alarmpolicyconditionsrule">Alarm<wbr>Policy<wbr>Conditions<wbr>Rule</h4>
+<h4 id="alarmpolicyconditionsrule">
+Alarm<wbr>Policy<wbr>Conditions<wbr>Rule<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Policy<wbr>Conditions<wbr>Rule<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4125,8 +5676,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of periods.</p>
-</dd><dt class="property-optional"
+    <dd>Number of periods.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -4134,8 +5684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric display name, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Metric display name, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_csharp" style="color: inherit; text-decoration: inherit;">Filter</a>
@@ -4143,8 +5692,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditionsrulefilter">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Conditions<wbr>Rule<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispowernotice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispowernotice_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Power<wbr>Notice</a>
@@ -4152,8 +5700,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the alarm frequency increases exponentially.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the alarm frequency increases exponentially.</dd><dt class="property-optional"
             title="Optional">
         <span id="metricname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Name</a>
@@ -4161,8 +5708,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric name or event name.</p>
-</dd><dt class="property-optional"
+    <dd>Metric name or event name.</dd><dt class="property-optional"
             title="Optional">
         <span id="noticefrequency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticefrequency_csharp" style="color: inherit; text-decoration: inherit;">Notice<wbr>Frequency</a>
@@ -4170,8 +5716,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_csharp" style="color: inherit; text-decoration: inherit;">Operator</a>
@@ -4179,8 +5724,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator.</p>
-</dd><dt class="property-optional"
+    <dd>Operator.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -4188,8 +5732,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Statistical period in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Statistical period in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruletype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Type</a>
@@ -4197,8 +5740,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger condition type.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition type.</dd><dt class="property-optional"
             title="Optional">
         <span id="unit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_csharp" style="color: inherit; text-decoration: inherit;">Unit</a>
@@ -4206,8 +5748,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unit, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Unit, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -4215,8 +5756,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Threshold.</p>
-</dd></dl>
+    <dd>Threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4230,8 +5770,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of periods.</p>
-</dd><dt class="property-optional"
+    <dd>Number of periods.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -4239,8 +5778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric display name, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Metric display name, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_go" style="color: inherit; text-decoration: inherit;">Filter</a>
@@ -4248,8 +5786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditionsrulefilter">Alarm<wbr>Policy<wbr>Conditions<wbr>Rule<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispowernotice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispowernotice_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Power<wbr>Notice</a>
@@ -4257,8 +5794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the alarm frequency increases exponentially.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the alarm frequency increases exponentially.</dd><dt class="property-optional"
             title="Optional">
         <span id="metricname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Name</a>
@@ -4266,8 +5802,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric name or event name.</p>
-</dd><dt class="property-optional"
+    <dd>Metric name or event name.</dd><dt class="property-optional"
             title="Optional">
         <span id="noticefrequency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticefrequency_go" style="color: inherit; text-decoration: inherit;">Notice<wbr>Frequency</a>
@@ -4275,8 +5810,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_go" style="color: inherit; text-decoration: inherit;">Operator</a>
@@ -4284,8 +5818,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator.</p>
-</dd><dt class="property-optional"
+    <dd>Operator.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -4293,8 +5826,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Statistical period in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Statistical period in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruletype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Type</a>
@@ -4302,8 +5834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger condition type.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition type.</dd><dt class="property-optional"
             title="Optional">
         <span id="unit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_go" style="color: inherit; text-decoration: inherit;">Unit</a>
@@ -4311,8 +5842,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unit, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Unit, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -4320,8 +5850,101 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Threshold.</p>
-</dd></dl>
+    <dd>Threshold.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="continue_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continue_period_hcl" style="color: inherit; text-decoration: inherit;">continue_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of periods.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Metric display name, which is used in the output parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_hcl" style="color: inherit; text-decoration: inherit;">filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyconditionsrulefilter">object</a></span>
+    </dt>
+    <dd>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_power_notice_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_power_notice_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>power_<wbr>notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether the alarm frequency increases exponentially.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="metric_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_name_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Metric name or event name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="notice_frequency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notice_frequency_hcl" style="color: inherit; text-decoration: inherit;">notice_<wbr>frequency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm interval in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="operator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_hcl" style="color: inherit; text-decoration: inherit;">operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Operator.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Statistical period in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_type_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger condition type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="unit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_hcl" style="color: inherit; text-decoration: inherit;">unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unit, which is used in the output parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4335,8 +5958,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of periods.</p>
-</dd><dt class="property-optional"
+    <dd>Number of periods.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -4344,8 +5966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Metric display name, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Metric display name, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_java" style="color: inherit; text-decoration: inherit;">filter</a>
@@ -4353,8 +5974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditionsrulefilter">Alarm<wbr>Policy<wbr>Conditions<wbr>Rule<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispowernotice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispowernotice_java" style="color: inherit; text-decoration: inherit;">is<wbr>Power<wbr>Notice</a>
@@ -4362,8 +5982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether the alarm frequency increases exponentially.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the alarm frequency increases exponentially.</dd><dt class="property-optional"
             title="Optional">
         <span id="metricname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
@@ -4371,8 +5990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Metric name or event name.</p>
-</dd><dt class="property-optional"
+    <dd>Metric name or event name.</dd><dt class="property-optional"
             title="Optional">
         <span id="noticefrequency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticefrequency_java" style="color: inherit; text-decoration: inherit;">notice<wbr>Frequency</a>
@@ -4380,8 +5998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_java" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -4389,8 +6006,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator.</p>
-</dd><dt class="property-optional"
+    <dd>Operator.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -4398,8 +6014,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Statistical period in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Statistical period in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruletype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Type</a>
@@ -4407,8 +6022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger condition type.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition type.</dd><dt class="property-optional"
             title="Optional">
         <span id="unit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_java" style="color: inherit; text-decoration: inherit;">unit</a>
@@ -4416,8 +6030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unit, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Unit, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4425,8 +6038,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Threshold.</p>
-</dd></dl>
+    <dd>Threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4440,8 +6052,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of periods.</p>
-</dd><dt class="property-optional"
+    <dd>Number of periods.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -4449,8 +6060,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric display name, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Metric display name, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_nodejs" style="color: inherit; text-decoration: inherit;">filter</a>
@@ -4458,8 +6068,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditionsrulefilter">Alarm<wbr>Policy<wbr>Conditions<wbr>Rule<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispowernotice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispowernotice_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Power<wbr>Notice</a>
@@ -4467,8 +6076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether the alarm frequency increases exponentially.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the alarm frequency increases exponentially.</dd><dt class="property-optional"
             title="Optional">
         <span id="metricname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
@@ -4476,8 +6084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric name or event name.</p>
-</dd><dt class="property-optional"
+    <dd>Metric name or event name.</dd><dt class="property-optional"
             title="Optional">
         <span id="noticefrequency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticefrequency_nodejs" style="color: inherit; text-decoration: inherit;">notice<wbr>Frequency</a>
@@ -4485,8 +6092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_nodejs" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -4494,8 +6100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator.</p>
-</dd><dt class="property-optional"
+    <dd>Operator.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -4503,8 +6108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Statistical period in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Statistical period in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruletype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Type</a>
@@ -4512,8 +6116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger condition type.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition type.</dd><dt class="property-optional"
             title="Optional">
         <span id="unit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_nodejs" style="color: inherit; text-decoration: inherit;">unit</a>
@@ -4521,8 +6124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unit, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Unit, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4530,8 +6132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Threshold.</p>
-</dd></dl>
+    <dd>Threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4545,8 +6146,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of periods.</p>
-</dd><dt class="property-optional"
+    <dd>Number of periods.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -4554,8 +6154,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Metric display name, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Metric display name, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_python" style="color: inherit; text-decoration: inherit;">filter</a>
@@ -4563,8 +6162,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditionsrulefilter">Alarm<wbr>Policy<wbr>Conditions<wbr>Rule<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_power_notice_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_power_notice_python" style="color: inherit; text-decoration: inherit;">is_<wbr>power_<wbr>notice</a>
@@ -4572,8 +6170,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the alarm frequency increases exponentially.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the alarm frequency increases exponentially.</dd><dt class="property-optional"
             title="Optional">
         <span id="metric_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_name_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>name</a>
@@ -4581,8 +6178,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Metric name or event name.</p>
-</dd><dt class="property-optional"
+    <dd>Metric name or event name.</dd><dt class="property-optional"
             title="Optional">
         <span id="notice_frequency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notice_frequency_python" style="color: inherit; text-decoration: inherit;">notice_<wbr>frequency</a>
@@ -4590,8 +6186,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_python" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -4599,8 +6194,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Operator.</p>
-</dd><dt class="property-optional"
+    <dd>Operator.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -4608,8 +6202,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Statistical period in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Statistical period in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="rule_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_type_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>type</a>
@@ -4617,8 +6210,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Trigger condition type.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition type.</dd><dt class="property-optional"
             title="Optional">
         <span id="unit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_python" style="color: inherit; text-decoration: inherit;">unit</a>
@@ -4626,8 +6218,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unit, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Unit, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4635,8 +6226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Threshold.</p>
-</dd></dl>
+    <dd>Threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4650,8 +6240,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of periods.</p>
-</dd><dt class="property-optional"
+    <dd>Number of periods.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -4659,8 +6248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Metric display name, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Metric display name, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_yaml" style="color: inherit; text-decoration: inherit;">filter</a>
@@ -4668,8 +6256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyconditionsrulefilter">Property Map</a></span>
     </dt>
-    <dd><p>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispowernotice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispowernotice_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Power<wbr>Notice</a>
@@ -4677,8 +6264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether the alarm frequency increases exponentially.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the alarm frequency increases exponentially.</dd><dt class="property-optional"
             title="Optional">
         <span id="metricname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
@@ -4686,8 +6272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Metric name or event name.</p>
-</dd><dt class="property-optional"
+    <dd>Metric name or event name.</dd><dt class="property-optional"
             title="Optional">
         <span id="noticefrequency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticefrequency_yaml" style="color: inherit; text-decoration: inherit;">notice<wbr>Frequency</a>
@@ -4695,8 +6280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_yaml" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -4704,8 +6288,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator.</p>
-</dd><dt class="property-optional"
+    <dd>Operator.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -4713,8 +6296,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Statistical period in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Statistical period in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruletype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Type</a>
@@ -4722,8 +6304,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger condition type.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition type.</dd><dt class="property-optional"
             title="Optional">
         <span id="unit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_yaml" style="color: inherit; text-decoration: inherit;">unit</a>
@@ -4731,8 +6312,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unit, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Unit, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -4740,12 +6320,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Threshold.</p>
-</dd></dl>
+    <dd>Threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="alarmpolicyconditionsrulefilter">Alarm<wbr>Policy<wbr>Conditions<wbr>Rule<wbr>Filter</h4>
+<h4 id="alarmpolicyconditionsrulefilter">
+Alarm<wbr>Policy<wbr>Conditions<wbr>Rule<wbr>Filter<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Policy<wbr>Conditions<wbr>Rule<wbr>Filter<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4757,8 +6338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd><dt class="property-optional"
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -4766,8 +6346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd></dl>
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4781,8 +6360,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd><dt class="property-optional"
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -4790,8 +6368,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd></dl>
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dimensions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_hcl" style="color: inherit; text-decoration: inherit;">dimensions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4805,8 +6404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd><dt class="property-optional"
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -4814,8 +6412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd></dl>
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4829,8 +6426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd><dt class="property-optional"
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -4838,8 +6434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd></dl>
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4853,8 +6448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd><dt class="property-optional"
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -4862,8 +6456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd></dl>
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -4877,8 +6470,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd><dt class="property-optional"
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -4886,12 +6478,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd></dl>
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="alarmpolicyeventcondition">Alarm<wbr>Policy<wbr>Event<wbr>Condition</h4>
+<h4 id="alarmpolicyeventcondition">
+Alarm<wbr>Policy<wbr>Event<wbr>Condition<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -4903,8 +6496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of periods.</p>
-</dd><dt class="property-optional"
+    <dd>Number of periods.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -4912,8 +6504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric display name, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Metric display name, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_csharp" style="color: inherit; text-decoration: inherit;">Filter</a>
@@ -4921,8 +6512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyeventconditionfilter">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispowernotice_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispowernotice_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Power<wbr>Notice</a>
@@ -4930,8 +6520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the alarm frequency increases exponentially.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the alarm frequency increases exponentially.</dd><dt class="property-optional"
             title="Optional">
         <span id="metricname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Name</a>
@@ -4939,8 +6528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric name or event name.</p>
-</dd><dt class="property-optional"
+    <dd>Metric name or event name.</dd><dt class="property-optional"
             title="Optional">
         <span id="noticefrequency_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticefrequency_csharp" style="color: inherit; text-decoration: inherit;">Notice<wbr>Frequency</a>
@@ -4948,8 +6536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_csharp" style="color: inherit; text-decoration: inherit;">Operator</a>
@@ -4957,8 +6544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator.</p>
-</dd><dt class="property-optional"
+    <dd>Operator.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_csharp" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -4966,8 +6552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Statistical period in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Statistical period in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruletype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Type</a>
@@ -4975,8 +6560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger condition type.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition type.</dd><dt class="property-optional"
             title="Optional">
         <span id="unit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_csharp" style="color: inherit; text-decoration: inherit;">Unit</a>
@@ -4984,8 +6568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unit, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Unit, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -4993,8 +6576,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Threshold.</p>
-</dd></dl>
+    <dd>Threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5008,8 +6590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of periods.</p>
-</dd><dt class="property-optional"
+    <dd>Number of periods.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -5017,8 +6598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric display name, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Metric display name, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_go" style="color: inherit; text-decoration: inherit;">Filter</a>
@@ -5026,8 +6606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyeventconditionfilter">Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispowernotice_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispowernotice_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Power<wbr>Notice</a>
@@ -5035,8 +6614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the alarm frequency increases exponentially.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the alarm frequency increases exponentially.</dd><dt class="property-optional"
             title="Optional">
         <span id="metricname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Name</a>
@@ -5044,8 +6622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric name or event name.</p>
-</dd><dt class="property-optional"
+    <dd>Metric name or event name.</dd><dt class="property-optional"
             title="Optional">
         <span id="noticefrequency_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticefrequency_go" style="color: inherit; text-decoration: inherit;">Notice<wbr>Frequency</a>
@@ -5053,8 +6630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_go" style="color: inherit; text-decoration: inherit;">Operator</a>
@@ -5062,8 +6638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator.</p>
-</dd><dt class="property-optional"
+    <dd>Operator.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_go" style="color: inherit; text-decoration: inherit;">Period</a>
@@ -5071,8 +6646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Statistical period in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Statistical period in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruletype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Type</a>
@@ -5080,8 +6654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger condition type.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition type.</dd><dt class="property-optional"
             title="Optional">
         <span id="unit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_go" style="color: inherit; text-decoration: inherit;">Unit</a>
@@ -5089,8 +6662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unit, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Unit, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -5098,8 +6670,101 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Threshold.</p>
-</dd></dl>
+    <dd>Threshold.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="continue_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#continue_period_hcl" style="color: inherit; text-decoration: inherit;">continue_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of periods.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Metric display name, which is used in the output parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_hcl" style="color: inherit; text-decoration: inherit;">filter</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#alarmpolicyeventconditionfilter">object</a></span>
+    </dt>
+    <dd>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="is_power_notice_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_power_notice_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>power_<wbr>notice</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether the alarm frequency increases exponentially.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="metric_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_name_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Metric name or event name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="notice_frequency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notice_frequency_hcl" style="color: inherit; text-decoration: inherit;">notice_<wbr>frequency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Alarm interval in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="operator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_hcl" style="color: inherit; text-decoration: inherit;">operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Operator.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Statistical period in seconds.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_type_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Trigger condition type.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="unit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_hcl" style="color: inherit; text-decoration: inherit;">unit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Unit, which is used in the output parameter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5113,8 +6778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of periods.</p>
-</dd><dt class="property-optional"
+    <dd>Number of periods.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -5122,8 +6786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Metric display name, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Metric display name, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_java" style="color: inherit; text-decoration: inherit;">filter</a>
@@ -5131,8 +6794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyeventconditionfilter">Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispowernotice_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispowernotice_java" style="color: inherit; text-decoration: inherit;">is<wbr>Power<wbr>Notice</a>
@@ -5140,8 +6802,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Whether the alarm frequency increases exponentially.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the alarm frequency increases exponentially.</dd><dt class="property-optional"
             title="Optional">
         <span id="metricname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
@@ -5149,8 +6810,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Metric name or event name.</p>
-</dd><dt class="property-optional"
+    <dd>Metric name or event name.</dd><dt class="property-optional"
             title="Optional">
         <span id="noticefrequency_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticefrequency_java" style="color: inherit; text-decoration: inherit;">notice<wbr>Frequency</a>
@@ -5158,8 +6818,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Alarm interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_java" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -5167,8 +6826,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator.</p>
-</dd><dt class="property-optional"
+    <dd>Operator.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_java" style="color: inherit; text-decoration: inherit;">period</a>
@@ -5176,8 +6834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Statistical period in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Statistical period in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruletype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Type</a>
@@ -5185,8 +6842,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger condition type.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition type.</dd><dt class="property-optional"
             title="Optional">
         <span id="unit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_java" style="color: inherit; text-decoration: inherit;">unit</a>
@@ -5194,8 +6850,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unit, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Unit, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -5203,8 +6858,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Threshold.</p>
-</dd></dl>
+    <dd>Threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5218,8 +6872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of periods.</p>
-</dd><dt class="property-optional"
+    <dd>Number of periods.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -5227,8 +6880,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric display name, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Metric display name, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_nodejs" style="color: inherit; text-decoration: inherit;">filter</a>
@@ -5236,8 +6888,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyeventconditionfilter">Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispowernotice_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispowernotice_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Power<wbr>Notice</a>
@@ -5245,8 +6896,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Whether the alarm frequency increases exponentially.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the alarm frequency increases exponentially.</dd><dt class="property-optional"
             title="Optional">
         <span id="metricname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
@@ -5254,8 +6904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric name or event name.</p>
-</dd><dt class="property-optional"
+    <dd>Metric name or event name.</dd><dt class="property-optional"
             title="Optional">
         <span id="noticefrequency_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticefrequency_nodejs" style="color: inherit; text-decoration: inherit;">notice<wbr>Frequency</a>
@@ -5263,8 +6912,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Alarm interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_nodejs" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -5272,8 +6920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator.</p>
-</dd><dt class="property-optional"
+    <dd>Operator.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_nodejs" style="color: inherit; text-decoration: inherit;">period</a>
@@ -5281,8 +6928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Statistical period in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Statistical period in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruletype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Type</a>
@@ -5290,8 +6936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Trigger condition type.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition type.</dd><dt class="property-optional"
             title="Optional">
         <span id="unit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_nodejs" style="color: inherit; text-decoration: inherit;">unit</a>
@@ -5299,8 +6944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Unit, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Unit, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -5308,8 +6952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Threshold.</p>
-</dd></dl>
+    <dd>Threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5323,8 +6966,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of periods.</p>
-</dd><dt class="property-optional"
+    <dd>Number of periods.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -5332,8 +6974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Metric display name, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Metric display name, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_python" style="color: inherit; text-decoration: inherit;">filter</a>
@@ -5341,8 +6982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyeventconditionfilter">Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="is_power_notice_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_power_notice_python" style="color: inherit; text-decoration: inherit;">is_<wbr>power_<wbr>notice</a>
@@ -5350,8 +6990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Whether the alarm frequency increases exponentially.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the alarm frequency increases exponentially.</dd><dt class="property-optional"
             title="Optional">
         <span id="metric_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_name_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>name</a>
@@ -5359,8 +6998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Metric name or event name.</p>
-</dd><dt class="property-optional"
+    <dd>Metric name or event name.</dd><dt class="property-optional"
             title="Optional">
         <span id="notice_frequency_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notice_frequency_python" style="color: inherit; text-decoration: inherit;">notice_<wbr>frequency</a>
@@ -5368,8 +7006,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Alarm interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_python" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -5377,8 +7014,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Operator.</p>
-</dd><dt class="property-optional"
+    <dd>Operator.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_python" style="color: inherit; text-decoration: inherit;">period</a>
@@ -5386,8 +7022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Statistical period in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Statistical period in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="rule_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_type_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>type</a>
@@ -5395,8 +7030,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Trigger condition type.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition type.</dd><dt class="property-optional"
             title="Optional">
         <span id="unit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_python" style="color: inherit; text-decoration: inherit;">unit</a>
@@ -5404,8 +7038,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Unit, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Unit, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -5413,8 +7046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Threshold.</p>
-</dd></dl>
+    <dd>Threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5428,8 +7060,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of periods.</p>
-</dd><dt class="property-optional"
+    <dd>Number of periods.</dd><dt class="property-optional"
             title="Optional">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -5437,8 +7068,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Metric display name, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Metric display name, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_yaml" style="color: inherit; text-decoration: inherit;">filter</a>
@@ -5446,8 +7076,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#alarmpolicyeventconditionfilter">Property Map</a></span>
     </dt>
-    <dd><p>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition for one single trigger rule. Must set it when create tke-xxx rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="ispowernotice_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ispowernotice_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Power<wbr>Notice</a>
@@ -5455,8 +7084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Whether the alarm frequency increases exponentially.</p>
-</dd><dt class="property-optional"
+    <dd>Whether the alarm frequency increases exponentially.</dd><dt class="property-optional"
             title="Optional">
         <span id="metricname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricname_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Name</a>
@@ -5464,8 +7092,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Metric name or event name.</p>
-</dd><dt class="property-optional"
+    <dd>Metric name or event name.</dd><dt class="property-optional"
             title="Optional">
         <span id="noticefrequency_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticefrequency_yaml" style="color: inherit; text-decoration: inherit;">notice<wbr>Frequency</a>
@@ -5473,8 +7100,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Alarm interval in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Alarm interval in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="operator_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_yaml" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -5482,8 +7108,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator.</p>
-</dd><dt class="property-optional"
+    <dd>Operator.</dd><dt class="property-optional"
             title="Optional">
         <span id="period_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_yaml" style="color: inherit; text-decoration: inherit;">period</a>
@@ -5491,8 +7116,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Statistical period in seconds.</p>
-</dd><dt class="property-optional"
+    <dd>Statistical period in seconds.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruletype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruletype_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Type</a>
@@ -5500,8 +7124,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Trigger condition type.</p>
-</dd><dt class="property-optional"
+    <dd>Trigger condition type.</dd><dt class="property-optional"
             title="Optional">
         <span id="unit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unit_yaml" style="color: inherit; text-decoration: inherit;">unit</a>
@@ -5509,8 +7132,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Unit, which is used in the output parameter.</p>
-</dd><dt class="property-optional"
+    <dd>Unit, which is used in the output parameter.</dd><dt class="property-optional"
             title="Optional">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -5518,12 +7140,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Threshold.</p>
-</dd></dl>
+    <dd>Threshold.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="alarmpolicyeventconditionfilter">Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Filter</h4>
+<h4 id="alarmpolicyeventconditionfilter">
+Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Filter<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Policy<wbr>Event<wbr>Condition<wbr>Filter<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5535,8 +7158,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd><dt class="property-optional"
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -5544,8 +7166,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd></dl>
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5559,8 +7180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd><dt class="property-optional"
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -5568,8 +7188,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd></dl>
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="dimensions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_hcl" style="color: inherit; text-decoration: inherit;">dimensions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5583,8 +7224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd><dt class="property-optional"
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -5592,8 +7232,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd></dl>
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5607,8 +7246,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd><dt class="property-optional"
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -5616,8 +7254,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd></dl>
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5631,8 +7268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd><dt class="property-optional"
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -5640,8 +7276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd></dl>
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5655,8 +7290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd><dt class="property-optional"
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd><dt class="property-optional"
             title="Optional">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -5664,12 +7298,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd></dl>
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="alarmpolicyfilter">Alarm<wbr>Policy<wbr>Filter</h4>
+<h4 id="alarmpolicyfilter">
+Alarm<wbr>Policy<wbr>Filter<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Policy<wbr>Filter<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5681,8 +7316,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd><dt class="property-optional"
             title="Optional">
         <span id="dimensions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_csharp" style="color: inherit; text-decoration: inherit;">Dimensions</a>
@@ -5690,8 +7324,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd></dl>
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5705,8 +7338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd><dt class="property-optional"
             title="Optional">
         <span id="dimensions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_go" style="color: inherit; text-decoration: inherit;">Dimensions</a>
@@ -5714,8 +7346,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd></dl>
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="dimensions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_hcl" style="color: inherit; text-decoration: inherit;">dimensions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5729,8 +7382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd><dt class="property-optional"
             title="Optional">
         <span id="dimensions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_java" style="color: inherit; text-decoration: inherit;">dimensions</a>
@@ -5738,8 +7390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd></dl>
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5753,8 +7404,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd><dt class="property-optional"
             title="Optional">
         <span id="dimensions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_nodejs" style="color: inherit; text-decoration: inherit;">dimensions</a>
@@ -5762,8 +7412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd></dl>
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5777,8 +7426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd><dt class="property-optional"
             title="Optional">
         <span id="dimensions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_python" style="color: inherit; text-decoration: inherit;">dimensions</a>
@@ -5786,8 +7434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd></dl>
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5801,8 +7448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</p>
-</dd><dt class="property-optional"
+    <dd>Filter condition type. Valid values: DIMENSION (uses dimensions for filtering).</dd><dt class="property-optional"
             title="Optional">
         <span id="dimensions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_yaml" style="color: inherit; text-decoration: inherit;">dimensions</a>
@@ -5810,12 +7456,329 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</p>
-</dd></dl>
+    <dd>JSON string generated by serializing the AlarmPolicyDimension two-dimensional array.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="alarmpolicypolicytag">Alarm<wbr>Policy<wbr>Policy<wbr>Tag</h4>
+<h4 id="alarmpolicyhierarchicalnotice">
+Alarm<wbr>Policy<wbr>Hierarchical<wbr>Notice<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Policy<wbr>Hierarchical<wbr>Notice<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="noticeid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeid_csharp" style="color: inherit; text-decoration: inherit;">Notice<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Notification template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="classifications_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classifications_csharp" style="color: inherit; text-decoration: inherit;">Classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>Notification level list, e.g. [&quot;Remind&quot;, &quot;Serious&quot;].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="noticeid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeid_go" style="color: inherit; text-decoration: inherit;">Notice<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Notification template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="classifications_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classifications_go" style="color: inherit; text-decoration: inherit;">Classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>Notification level list, e.g. [&quot;Remind&quot;, &quot;Serious&quot;].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="notice_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notice_id_hcl" style="color: inherit; text-decoration: inherit;">notice_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Notification template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="classifications_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classifications_hcl" style="color: inherit; text-decoration: inherit;">classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Notification level list, e.g. [&quot;Remind&quot;, &quot;Serious&quot;].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="noticeid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeid_java" style="color: inherit; text-decoration: inherit;">notice<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Notification template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="classifications_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classifications_java" style="color: inherit; text-decoration: inherit;">classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Notification level list, e.g. [&quot;Remind&quot;, &quot;Serious&quot;].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="noticeid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeid_nodejs" style="color: inherit; text-decoration: inherit;">notice<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Notification template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="classifications_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classifications_nodejs" style="color: inherit; text-decoration: inherit;">classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>Notification level list, e.g. [&quot;Remind&quot;, &quot;Serious&quot;].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="notice_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notice_id_python" style="color: inherit; text-decoration: inherit;">notice_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Notification template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="classifications_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classifications_python" style="color: inherit; text-decoration: inherit;">classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>Notification level list, e.g. [&quot;Remind&quot;, &quot;Serious&quot;].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="noticeid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeid_yaml" style="color: inherit; text-decoration: inherit;">notice<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Notification template ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="classifications_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#classifications_yaml" style="color: inherit; text-decoration: inherit;">classifications</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Notification level list, e.g. [&quot;Remind&quot;, &quot;Serious&quot;].</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="alarmpolicynoticecontenttmplbindinfo">
+Alarm<wbr>Policy<wbr>Notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Info<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Policy<wbr>Notice<wbr>Content<wbr>Tmpl<wbr>Bind<wbr>Info<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="contenttmplid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttmplid_csharp" style="color: inherit; text-decoration: inherit;">Content<wbr>Tmpl<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Notification content template ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="noticeid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeid_csharp" style="color: inherit; text-decoration: inherit;">Notice<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Notification template ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="contenttmplid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttmplid_go" style="color: inherit; text-decoration: inherit;">Content<wbr>Tmpl<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Notification content template ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="noticeid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeid_go" style="color: inherit; text-decoration: inherit;">Notice<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Notification template ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="content_tmpl_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_tmpl_id_hcl" style="color: inherit; text-decoration: inherit;">content_<wbr>tmpl_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Notification content template ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="notice_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notice_id_hcl" style="color: inherit; text-decoration: inherit;">notice_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Notification template ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="contenttmplid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttmplid_java" style="color: inherit; text-decoration: inherit;">content<wbr>Tmpl<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Notification content template ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="noticeid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeid_java" style="color: inherit; text-decoration: inherit;">notice<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Notification template ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="contenttmplid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttmplid_nodejs" style="color: inherit; text-decoration: inherit;">content<wbr>Tmpl<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Notification content template ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="noticeid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeid_nodejs" style="color: inherit; text-decoration: inherit;">notice<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Notification template ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="content_tmpl_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#content_tmpl_id_python" style="color: inherit; text-decoration: inherit;">content_<wbr>tmpl_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Notification content template ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="notice_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notice_id_python" style="color: inherit; text-decoration: inherit;">notice_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Notification template ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="contenttmplid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#contenttmplid_yaml" style="color: inherit; text-decoration: inherit;">content<wbr>Tmpl<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Notification content template ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="noticeid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#noticeid_yaml" style="color: inherit; text-decoration: inherit;">notice<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Notification template ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="alarmpolicypolicytag">
+Alarm<wbr>Policy<wbr>Policy<wbr>Tag<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Policy<wbr>Policy<wbr>Tag<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5827,8 +7790,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -5836,8 +7798,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5851,8 +7812,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -5860,8 +7820,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5875,8 +7856,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -5884,8 +7864,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5899,8 +7878,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -5908,8 +7886,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5923,8 +7900,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -5932,8 +7908,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5947,8 +7922,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag key.</p>
-</dd><dt class="property-required"
+    <dd>Tag key.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -5956,12 +7930,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tag value.</p>
-</dd></dl>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="alarmpolicytriggertask">Alarm<wbr>Policy<wbr>Trigger<wbr>Task</h4>
+<h4 id="alarmpolicytriggertask">
+Alarm<wbr>Policy<wbr>Trigger<wbr>Task<pulumi-choosable type="language" values="python,go" class="inline">, Alarm<wbr>Policy<wbr>Trigger<wbr>Task<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -5973,8 +7948,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration information in JSON format.</p>
-</dd><dt class="property-required"
+    <dd>Configuration information in JSON format.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -5982,8 +7956,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Triggered task type.</p>
-</dd></dl>
+    <dd>Triggered task type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -5997,8 +7970,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration information in JSON format.</p>
-</dd><dt class="property-required"
+    <dd>Configuration information in JSON format.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -6006,8 +7978,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Triggered task type.</p>
-</dd></dl>
+    <dd>Triggered task type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="task_config_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_config_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>config</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Configuration information in JSON format.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Triggered task type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6021,8 +8014,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configuration information in JSON format.</p>
-</dd><dt class="property-required"
+    <dd>Configuration information in JSON format.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -6030,8 +8022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Triggered task type.</p>
-</dd></dl>
+    <dd>Triggered task type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6045,8 +8036,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Configuration information in JSON format.</p>
-</dd><dt class="property-required"
+    <dd>Configuration information in JSON format.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -6054,8 +8044,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Triggered task type.</p>
-</dd></dl>
+    <dd>Triggered task type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6069,8 +8058,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Configuration information in JSON format.</p>
-</dd><dt class="property-required"
+    <dd>Configuration information in JSON format.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -6078,8 +8066,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Triggered task type.</p>
-</dd></dl>
+    <dd>Triggered task type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6093,8 +8080,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Configuration information in JSON format.</p>
-</dd><dt class="property-required"
+    <dd>Configuration information in JSON format.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -6102,8 +8088,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Triggered task type.</p>
-</dd></dl>
+    <dd>Triggered task type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -6119,6 +8104,9 @@ $ pulumi import tencentcloud:Monitor/alarmPolicy:AlarmPolicy policy policy-id
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -6128,7 +8116,6 @@ $ pulumi import tencentcloud:Monitor/alarmPolicy:AlarmPolicy policy policy-id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

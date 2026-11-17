@@ -2,9 +2,11 @@
 ---
 title: "Resource"
 title_tag: "tencentcloud.Oceanus.Resource"
-meta_desc: "Documentation for the tencentcloud.Oceanus.Resource resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a oceanus resource"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,46 +18,101 @@ Provides a resource to create a oceanus resource
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const example = new tencentcloud.oceanus.Resource("example", {
-    folderId: "folder-7ctl246z",
-    remark: "remark.",
-    resourceConfigRemark: "config remark.",
     resourceLoc: {
+        storageType: 1,
         param: {
             bucket: "keep-terraform-1257058945",
             path: "OceanusResource/junit-4.13.2.jar",
             region: "ap-guangzhou",
         },
-        storageType: 1,
     },
     resourceType: 1,
+    remark: "remark.",
+    name: "tf_example",
+    resourceConfigRemark: "config remark.",
+    folderId: "folder-7ctl246z",
     workSpaceId: "space-2idq8wbr",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 example = tencentcloud.oceanus.Resource("example",
-    folder_id="folder-7ctl246z",
-    remark="remark.",
-    resource_config_remark="config remark.",
-    resource_loc=tencentcloud.oceanus.ResourceResourceLocArgs(
-        param=tencentcloud.oceanus.ResourceResourceLocParamArgs(
-            bucket="keep-terraform-1257058945",
-            path="OceanusResource/junit-4.13.2.jar",
-            region="ap-guangzhou",
-        ),
-        storage_type=1,
-    ),
+    resource_loc={
+        "storage_type": 1,
+        "param": {
+            "bucket": "keep-terraform-1257058945",
+            "path": "OceanusResource/junit-4.13.2.jar",
+            "region": "ap-guangzhou",
+        },
+    },
     resource_type=1,
+    remark="remark.",
+    name="tf_example",
+    resource_config_remark="config remark.",
+    folder_id="folder-7ctl246z",
     work_space_id="space-2idq8wbr")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/oceanus"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := oceanus.NewResource(ctx, "example", &oceanus.ResourceArgs{
+			ResourceLoc: &oceanus.ResourceResourceLocArgs{
+				StorageType: pulumi.Int(1),
+				Param: &oceanus.ResourceResourceLocParamArgs{
+					Bucket: pulumi.String("keep-terraform-1257058945"),
+					Path:   pulumi.String("OceanusResource/junit-4.13.2.jar"),
+					Region: pulumi.String("ap-guangzhou"),
+				},
+			},
+			ResourceType:         pulumi.Int(1),
+			Remark:               pulumi.String("remark."),
+			Name:                 pulumi.String("tf_example"),
+			ResourceConfigRemark: pulumi.String("config remark."),
+			FolderId:             pulumi.String("folder-7ctl246z"),
+			WorkSpaceId:          pulumi.String("space-2idq8wbr"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -66,57 +123,31 @@ return await Deployment.RunAsync(() =>
 {
     var example = new Tencentcloud.Oceanus.Resource("example", new()
     {
-        FolderId = "folder-7ctl246z",
-        Remark = "remark.",
-        ResourceConfigRemark = "config remark.",
         ResourceLoc = new Tencentcloud.Oceanus.Inputs.ResourceResourceLocArgs
         {
+            StorageType = 1,
             Param = new Tencentcloud.Oceanus.Inputs.ResourceResourceLocParamArgs
             {
                 Bucket = "keep-terraform-1257058945",
                 Path = "OceanusResource/junit-4.13.2.jar",
                 Region = "ap-guangzhou",
             },
-            StorageType = 1,
         },
         ResourceType = 1,
+        Remark = "remark.",
+        Name = "tf_example",
+        ResourceConfigRemark = "config remark.",
+        FolderId = "folder-7ctl246z",
         WorkSpaceId = "space-2idq8wbr",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Oceanus.NewResource(ctx, "example", &Oceanus.ResourceArgs{
-			FolderId:             pulumi.String("folder-7ctl246z"),
-			Remark:               pulumi.String("remark."),
-			ResourceConfigRemark: pulumi.String("config remark."),
-			ResourceLoc: &oceanus.ResourceResourceLocArgs{
-				Param: &oceanus.ResourceResourceLocParamArgs{
-					Bucket: pulumi.String("keep-terraform-1257058945"),
-					Path:   pulumi.String("OceanusResource/junit-4.13.2.jar"),
-					Region: pulumi.String("ap-guangzhou"),
-				},
-				StorageType: pulumi.Int(1),
-			},
-			ResourceType: pulumi.Int(1),
-			WorkSpaceId:  pulumi.String("space-2idq8wbr"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -127,8 +158,8 @@ import com.pulumi.tencentcloud.Oceanus.Resource;
 import com.pulumi.tencentcloud.Oceanus.ResourceArgs;
 import com.pulumi.tencentcloud.Oceanus.inputs.ResourceResourceLocArgs;
 import com.pulumi.tencentcloud.Oceanus.inputs.ResourceResourceLocParamArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -140,108 +171,170 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var example = new Resource("example", ResourceArgs.builder()        
-            .folderId("folder-7ctl246z")
-            .remark("remark.")
-            .resourceConfigRemark("config remark.")
+        var example = new Resource("example", ResourceArgs.builder()
             .resourceLoc(ResourceResourceLocArgs.builder()
+                .storageType(1)
                 .param(ResourceResourceLocParamArgs.builder()
                     .bucket("keep-terraform-1257058945")
                     .path("OceanusResource/junit-4.13.2.jar")
                     .region("ap-guangzhou")
                     .build())
-                .storageType(1)
                 .build())
             .resourceType(1)
+            .remark("remark.")
+            .name("tf_example")
+            .resourceConfigRemark("config remark.")
+            .folderId("folder-7ctl246z")
             .workSpaceId("space-2idq8wbr")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   example:
     type: tencentcloud:Oceanus:Resource
     properties:
-      folderId: folder-7ctl246z
-      remark: remark.
-      resourceConfigRemark: config remark.
       resourceLoc:
+        storageType: 1
         param:
           bucket: keep-terraform-1257058945
           path: OceanusResource/junit-4.13.2.jar
           region: ap-guangzhou
-        storageType: 1
       resourceType: 1
+      remark: remark.
+      name: tf_example
+      resourceConfigRemark: config remark.
+      folderId: folder-7ctl246z
       workSpaceId: space-2idq8wbr
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_oceanus_resource" "example" {
+  resource_loc = {
+    storage_type = 1
+    param = {
+      bucket = "keep-terraform-1257058945"
+      path   = "OceanusResource/junit-4.13.2.jar"
+      region = "ap-guangzhou"
+    }
+  }
+  resource_type          = 1
+  remark                 = "remark."
+  name                   = "tf_example"
+  resource_config_remark = "config remark."
+  folder_id              = "folder-7ctl246z"
+  work_space_id          = "space-2idq8wbr"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateResource](https://www.tencentcloud.com/search/?wd=CreateResource&type=document&lang=en)
+* Read: [DescribeResourceConfigs](https://www.tencentcloud.com/search/?wd=DescribeResourceConfigs&type=document&lang=en)
+* Delete: [DeleteResources](https://www.tencentcloud.com/search/?wd=DeleteResources&type=document&lang=en)
 
 
 
 ## Create Resource Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p">,</span>
+             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+             <span class="nx">resource_loc</span><span class="p">:</span> <span class="nx">Optional[ResourceResourceLocArgs]</span> = None<span class="p">,</span>
+             <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
              <span class="nx">folder_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
              <span class="nx">resource_config_remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-             <span class="nx">resource_loc</span><span class="p">:</span> <span class="nx">Optional[_oceanus.ResourceResourceLocArgs]</span> = None<span class="p">,</span>
-             <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-             <span class="nx">work_space_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-             <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p">,</span>
-             <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+             <span class="nx">work_space_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewResource</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Resource</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewResource</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Resource</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Resource</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ResourceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Oceanus:Resource</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Oceanus:Resource</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_oceanus_resource&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -262,7 +355,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -379,11 +472,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Resource Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Resource resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -397,10 +498,9 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceloc_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Loc</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#resourceresourceloc">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Oceanus.<wbr>Inputs.<wbr>Resource<wbr>Resource<wbr>Loc<wbr>Args</a></span>
+        <span class="property-type"><a href="#resourceresourceloc">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Oceanus.<wbr>Inputs.<wbr>Resource<wbr>Resource<wbr>Loc</a></span>
     </dt>
-    <dd><p>Resource location.</p>
-</dd><dt class="property-required"
+    <dd>Resource location.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -408,8 +508,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Resource type, only support JAR now, value is 1.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, only support JAR now, value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="folderid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#folderid_csharp" style="color: inherit; text-decoration: inherit;">Folder<wbr>Id</a>
@@ -417,8 +516,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Folder id.</p>
-</dd><dt class="property-optional"
+    <dd>Folder id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -426,8 +524,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource name.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -435,8 +532,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource description.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourceconfigremark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceconfigremark_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Config<wbr>Remark</a>
@@ -444,8 +540,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource version description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource version description.</dd><dt class="property-optional"
             title="Optional">
         <span id="workspaceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workspaceid_csharp" style="color: inherit; text-decoration: inherit;">Work<wbr>Space<wbr>Id</a>
@@ -453,8 +548,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Workspace serialId.</p>
-</dd></dl>
+    <dd>Workspace serialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -468,8 +562,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#resourceresourceloc">Resource<wbr>Resource<wbr>Loc<wbr>Args</a></span>
     </dt>
-    <dd><p>Resource location.</p>
-</dd><dt class="property-required"
+    <dd>Resource location.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -477,8 +570,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Resource type, only support JAR now, value is 1.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, only support JAR now, value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="folderid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#folderid_go" style="color: inherit; text-decoration: inherit;">Folder<wbr>Id</a>
@@ -486,8 +578,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Folder id.</p>
-</dd><dt class="property-optional"
+    <dd>Folder id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -495,8 +586,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource name.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -504,8 +594,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource description.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourceconfigremark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceconfigremark_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Config<wbr>Remark</a>
@@ -513,8 +602,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource version description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource version description.</dd><dt class="property-optional"
             title="Optional">
         <span id="workspaceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workspaceid_go" style="color: inherit; text-decoration: inherit;">Work<wbr>Space<wbr>Id</a>
@@ -522,8 +610,69 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Workspace serialId.</p>
-</dd></dl>
+    <dd>Workspace serialId.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="resource_loc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_loc_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>loc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#resourceresourceloc">object</a></span>
+    </dt>
+    <dd>Resource location.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Resource type, only support JAR now, value is 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="folder_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#folder_id_hcl" style="color: inherit; text-decoration: inherit;">folder_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Folder id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="resource_config_remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_config_remark_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>config_<wbr>remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource version description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="work_space_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#work_space_id_hcl" style="color: inherit; text-decoration: inherit;">work_<wbr>space_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Workspace serialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -535,10 +684,9 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceloc_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Loc</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#resourceresourceloc">Resource<wbr>Resource<wbr>Loc<wbr>Args</a></span>
+        <span class="property-type"><a href="#resourceresourceloc">Resource<wbr>Resource<wbr>Loc</a></span>
     </dt>
-    <dd><p>Resource location.</p>
-</dd><dt class="property-required"
+    <dd>Resource location.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -546,8 +694,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Resource type, only support JAR now, value is 1.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, only support JAR now, value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="folderid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#folderid_java" style="color: inherit; text-decoration: inherit;">folder<wbr>Id</a>
@@ -555,8 +702,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Folder id.</p>
-</dd><dt class="property-optional"
+    <dd>Folder id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -564,8 +710,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource name.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -573,8 +718,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource description.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourceconfigremark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceconfigremark_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Config<wbr>Remark</a>
@@ -582,8 +726,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource version description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource version description.</dd><dt class="property-optional"
             title="Optional">
         <span id="workspaceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workspaceid_java" style="color: inherit; text-decoration: inherit;">work<wbr>Space<wbr>Id</a>
@@ -591,8 +734,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Workspace serialId.</p>
-</dd></dl>
+    <dd>Workspace serialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -604,10 +746,9 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceloc_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Loc</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#resourceresourceloc">Resource<wbr>Resource<wbr>Loc<wbr>Args</a></span>
+        <span class="property-type"><a href="#resourceresourceloc">Resource<wbr>Resource<wbr>Loc</a></span>
     </dt>
-    <dd><p>Resource location.</p>
-</dd><dt class="property-required"
+    <dd>Resource location.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -615,8 +756,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Resource type, only support JAR now, value is 1.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, only support JAR now, value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="folderid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#folderid_nodejs" style="color: inherit; text-decoration: inherit;">folder<wbr>Id</a>
@@ -624,8 +764,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Folder id.</p>
-</dd><dt class="property-optional"
+    <dd>Folder id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -633,8 +772,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource name.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -642,8 +780,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource description.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourceconfigremark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceconfigremark_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Config<wbr>Remark</a>
@@ -651,8 +788,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource version description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource version description.</dd><dt class="property-optional"
             title="Optional">
         <span id="workspaceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workspaceid_nodejs" style="color: inherit; text-decoration: inherit;">work<wbr>Space<wbr>Id</a>
@@ -660,8 +796,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Workspace serialId.</p>
-</dd></dl>
+    <dd>Workspace serialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -675,8 +810,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#resourceresourceloc">Resource<wbr>Resource<wbr>Loc<wbr>Args</a></span>
     </dt>
-    <dd><p>Resource location.</p>
-</dd><dt class="property-required"
+    <dd>Resource location.</dd><dt class="property-required"
             title="Required">
         <span id="resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -684,8 +818,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Resource type, only support JAR now, value is 1.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, only support JAR now, value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="folder_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#folder_id_python" style="color: inherit; text-decoration: inherit;">folder_<wbr>id</a>
@@ -693,8 +826,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Folder id.</p>
-</dd><dt class="property-optional"
+    <dd>Folder id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -702,8 +834,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource name.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -711,8 +842,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource description.</dd><dt class="property-optional"
             title="Optional">
         <span id="resource_config_remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_config_remark_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>config_<wbr>remark</a>
@@ -720,8 +850,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource version description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource version description.</dd><dt class="property-optional"
             title="Optional">
         <span id="work_space_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#work_space_id_python" style="color: inherit; text-decoration: inherit;">work_<wbr>space_<wbr>id</a>
@@ -729,8 +858,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Workspace serialId.</p>
-</dd></dl>
+    <dd>Workspace serialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -744,8 +872,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#resourceresourceloc">Property Map</a></span>
     </dt>
-    <dd><p>Resource location.</p>
-</dd><dt class="property-required"
+    <dd>Resource location.</dd><dt class="property-required"
             title="Required">
         <span id="resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -753,8 +880,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Resource type, only support JAR now, value is 1.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, only support JAR now, value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="folderid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#folderid_yaml" style="color: inherit; text-decoration: inherit;">folder<wbr>Id</a>
@@ -762,8 +888,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Folder id.</p>
-</dd><dt class="property-optional"
+    <dd>Folder id.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -771,8 +896,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource name.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -780,8 +904,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource description.</dd><dt class="property-optional"
             title="Optional">
         <span id="resourceconfigremark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceconfigremark_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Config<wbr>Remark</a>
@@ -789,8 +912,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource version description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource version description.</dd><dt class="property-optional"
             title="Optional">
         <span id="workspaceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#workspaceid_yaml" style="color: inherit; text-decoration: inherit;">work<wbr>Space<wbr>Id</a>
@@ -798,8 +920,7 @@ The Resource resource accepts the following [input](/docs/intro/concepts/inputs-
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Workspace serialId.</p>
-</dd></dl>
+    <dd>Workspace serialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -820,8 +941,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -829,8 +949,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-"
+    <dd>Resource ID.</dd><dt class="property-"
             title="">
         <span id="version_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_csharp" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -838,8 +957,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Resource Version.</p>
-</dd></dl>
+    <dd>Resource Version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -853,8 +971,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -862,8 +979,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-"
+    <dd>Resource ID.</dd><dt class="property-"
             title="">
         <span id="version_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_go" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -871,8 +987,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Resource Version.</p>
-</dd></dl>
+    <dd>Resource Version.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource ID.</dd><dt class="property-"
+            title="">
+        <span id="version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_hcl" style="color: inherit; text-decoration: inherit;">version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Resource Version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -886,8 +1031,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -895,8 +1039,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-"
+    <dd>Resource ID.</dd><dt class="property-"
             title="">
         <span id="version_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_java" style="color: inherit; text-decoration: inherit;">version</a>
@@ -904,8 +1047,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Resource Version.</p>
-</dd></dl>
+    <dd>Resource Version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -919,8 +1061,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -928,8 +1069,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-"
+    <dd>Resource ID.</dd><dt class="property-"
             title="">
         <span id="version_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_nodejs" style="color: inherit; text-decoration: inherit;">version</a>
@@ -937,8 +1077,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Resource Version.</p>
-</dd></dl>
+    <dd>Resource Version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -952,8 +1091,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -961,8 +1099,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-"
+    <dd>Resource ID.</dd><dt class="property-"
             title="">
         <span id="version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_python" style="color: inherit; text-decoration: inherit;">version</a>
@@ -970,8 +1107,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Resource Version.</p>
-</dd></dl>
+    <dd>Resource Version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -985,8 +1121,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -994,8 +1129,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-"
+    <dd>Resource ID.</dd><dt class="property-"
             title="">
         <span id="version_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#version_yaml" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1003,8 +1137,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Resource Version.</p>
-</dd></dl>
+    <dd>Resource Version.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1014,18 +1147,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Resource resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ResourceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Resource</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ResourceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Resource</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1034,108 +1167,147 @@ Get an existing Resource resource's state with the given name, ID, and optional 
         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">resource_config_remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">resource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">resource_loc</span><span class="p">:</span> <span class="nx">Optional[_oceanus.ResourceResourceLocArgs]</span> = None<span class="p">,</span>
+        <span class="nx">resource_loc</span><span class="p">:</span> <span class="nx">Optional[ResourceResourceLocArgs]</span> = None<span class="p">,</span>
         <span class="nx">resource_type</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">version</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">work_space_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Resource</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetResource<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ResourceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Resource</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetResource<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ResourceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Resource</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Resource</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ResourceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Resource</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ResourceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Resource</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ResourceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Resource</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ResourceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingResource</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Oceanus:Resource</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_oceanus_resource</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ResourceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ResourceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1143,28 +1315,31 @@ Get an existing Resource resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ResourceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1172,28 +1347,31 @@ Get an existing Resource resource's state with the given name, ID, and optional 
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ResourceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1213,8 +1391,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Folder id.</p>
-</dd><dt class="property-optional"
+    <dd>Folder id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1222,8 +1399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1231,8 +1407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceconfigremark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceconfigremark_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Config<wbr>Remark</a>
@@ -1240,8 +1415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource version description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource version description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1249,17 +1423,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-optional"
+    <dd>Resource ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceloc_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceloc_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Loc</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#resourceresourceloc">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Oceanus.<wbr>Inputs.<wbr>Resource<wbr>Resource<wbr>Loc<wbr>Args</a></span>
+        <span class="property-type"><a href="#resourceresourceloc">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Oceanus.<wbr>Inputs.<wbr>Resource<wbr>Resource<wbr>Loc</a></span>
     </dt>
-    <dd><p>Resource location.</p>
-</dd><dt class="property-optional"
+    <dd>Resource location.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1267,8 +1439,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Resource type, only support JAR now, value is 1.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, only support JAR now, value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_csharp" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -1276,8 +1447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Resource Version.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_workspaceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workspaceid_csharp" style="color: inherit; text-decoration: inherit;">Work<wbr>Space<wbr>Id</a>
@@ -1285,8 +1455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Workspace serialId.</p>
-</dd></dl>
+    <dd>Workspace serialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1300,8 +1469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Folder id.</p>
-</dd><dt class="property-optional"
+    <dd>Folder id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1309,8 +1477,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1318,8 +1485,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceconfigremark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceconfigremark_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Config<wbr>Remark</a>
@@ -1327,8 +1493,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource version description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource version description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Id</a>
@@ -1336,8 +1501,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-optional"
+    <dd>Resource ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceloc_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceloc_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Loc</a>
@@ -1345,8 +1509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#resourceresourceloc">Resource<wbr>Resource<wbr>Loc<wbr>Args</a></span>
     </dt>
-    <dd><p>Resource location.</p>
-</dd><dt class="property-optional"
+    <dd>Resource location.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Type</a>
@@ -1354,8 +1517,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Resource type, only support JAR now, value is 1.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, only support JAR now, value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_go" style="color: inherit; text-decoration: inherit;">Version</a>
@@ -1363,8 +1525,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Resource Version.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_workspaceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workspaceid_go" style="color: inherit; text-decoration: inherit;">Work<wbr>Space<wbr>Id</a>
@@ -1372,8 +1533,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Workspace serialId.</p>
-</dd></dl>
+    <dd>Workspace serialId.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_folder_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_folder_id_hcl" style="color: inherit; text-decoration: inherit;">folder_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Folder id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resource_config_remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_config_remark_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>config_<wbr>remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource version description.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resource_loc_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_loc_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>loc</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#resourceresourceloc">object</a></span>
+    </dt>
+    <dd>Resource location.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Resource type, only support JAR now, value is 1.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_hcl" style="color: inherit; text-decoration: inherit;">version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Resource Version.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_work_space_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_work_space_id_hcl" style="color: inherit; text-decoration: inherit;">work_<wbr>space_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Workspace serialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1387,8 +1625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Folder id.</p>
-</dd><dt class="property-optional"
+    <dd>Folder id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1396,8 +1633,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1405,8 +1641,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceconfigremark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceconfigremark_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Config<wbr>Remark</a>
@@ -1414,8 +1649,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource version description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource version description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1423,17 +1657,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-optional"
+    <dd>Resource ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceloc_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceloc_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Loc</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#resourceresourceloc">Resource<wbr>Resource<wbr>Loc<wbr>Args</a></span>
+        <span class="property-type"><a href="#resourceresourceloc">Resource<wbr>Resource<wbr>Loc</a></span>
     </dt>
-    <dd><p>Resource location.</p>
-</dd><dt class="property-optional"
+    <dd>Resource location.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1441,8 +1673,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Resource type, only support JAR now, value is 1.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, only support JAR now, value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_java" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1450,8 +1681,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Resource Version.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_workspaceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workspaceid_java" style="color: inherit; text-decoration: inherit;">work<wbr>Space<wbr>Id</a>
@@ -1459,8 +1689,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Workspace serialId.</p>
-</dd></dl>
+    <dd>Workspace serialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1474,8 +1703,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Folder id.</p>
-</dd><dt class="property-optional"
+    <dd>Folder id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1483,8 +1711,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1492,8 +1719,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceconfigremark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceconfigremark_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Config<wbr>Remark</a>
@@ -1501,8 +1727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource version description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource version description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1510,17 +1735,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-optional"
+    <dd>Resource ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceloc_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceloc_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Loc</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#resourceresourceloc">Resource<wbr>Resource<wbr>Loc<wbr>Args</a></span>
+        <span class="property-type"><a href="#resourceresourceloc">Resource<wbr>Resource<wbr>Loc</a></span>
     </dt>
-    <dd><p>Resource location.</p>
-</dd><dt class="property-optional"
+    <dd>Resource location.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1528,8 +1751,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Resource type, only support JAR now, value is 1.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, only support JAR now, value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_nodejs" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1537,8 +1759,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Resource Version.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_workspaceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workspaceid_nodejs" style="color: inherit; text-decoration: inherit;">work<wbr>Space<wbr>Id</a>
@@ -1546,8 +1767,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Workspace serialId.</p>
-</dd></dl>
+    <dd>Workspace serialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1561,8 +1781,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Folder id.</p>
-</dd><dt class="property-optional"
+    <dd>Folder id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1570,8 +1789,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1579,8 +1797,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resource_config_remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_config_remark_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>config_<wbr>remark</a>
@@ -1588,8 +1805,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource version description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource version description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_id_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>id</a>
@@ -1597,8 +1813,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-optional"
+    <dd>Resource ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resource_loc_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_loc_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>loc</a>
@@ -1606,8 +1821,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#resourceresourceloc">Resource<wbr>Resource<wbr>Loc<wbr>Args</a></span>
     </dt>
-    <dd><p>Resource location.</p>
-</dd><dt class="property-optional"
+    <dd>Resource location.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resource_type_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>type</a>
@@ -1615,8 +1829,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Resource type, only support JAR now, value is 1.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, only support JAR now, value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_python" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1624,8 +1837,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Resource Version.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_work_space_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_work_space_id_python" style="color: inherit; text-decoration: inherit;">work_<wbr>space_<wbr>id</a>
@@ -1633,8 +1845,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Workspace serialId.</p>
-</dd></dl>
+    <dd>Workspace serialId.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1648,8 +1859,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Folder id.</p>
-</dd><dt class="property-optional"
+    <dd>Folder id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1657,8 +1867,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource name.</p>
-</dd><dt class="property-optional"
+    <dd>Resource name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1666,8 +1875,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceconfigremark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceconfigremark_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Config<wbr>Remark</a>
@@ -1675,8 +1883,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource version description.</p>
-</dd><dt class="property-optional"
+    <dd>Resource version description.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceid_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Id</a>
@@ -1684,8 +1891,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource ID.</p>
-</dd><dt class="property-optional"
+    <dd>Resource ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourceloc_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourceloc_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Loc</a>
@@ -1693,8 +1899,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#resourceresourceloc">Property Map</a></span>
     </dt>
-    <dd><p>Resource location.</p>
-</dd><dt class="property-optional"
+    <dd>Resource location.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_resourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_resourcetype_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Type</a>
@@ -1702,8 +1907,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Resource type, only support JAR now, value is 1.</p>
-</dd><dt class="property-optional"
+    <dd>Resource type, only support JAR now, value is 1.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_version_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_version_yaml" style="color: inherit; text-decoration: inherit;">version</a>
@@ -1711,8 +1915,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Resource Version.</p>
-</dd><dt class="property-optional"
+    <dd>Resource Version.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_workspaceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_workspaceid_yaml" style="color: inherit; text-decoration: inherit;">work<wbr>Space<wbr>Id</a>
@@ -1720,8 +1923,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Workspace serialId.</p>
-</dd></dl>
+    <dd>Workspace serialId.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1736,7 +1938,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="resourceresourceloc">Resource<wbr>Resource<wbr>Loc</h4>
+<h4 id="resourceresourceloc">
+Resource<wbr>Resource<wbr>Loc<pulumi-choosable type="language" values="python,go" class="inline">, Resource<wbr>Resource<wbr>Loc<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1748,8 +1952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#resourceresourcelocparam">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Oceanus.<wbr>Inputs.<wbr>Resource<wbr>Resource<wbr>Loc<wbr>Param</a></span>
     </dt>
-    <dd><p>Json to describe resource location.</p>
-</dd><dt class="property-required"
+    <dd>Json to describe resource location.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_csharp" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -1757,8 +1960,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The available storage types for resource location are currently limited to 1:COS.</p>
-</dd></dl>
+    <dd>The available storage types for resource location are currently limited to 1:COS.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1772,8 +1974,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#resourceresourcelocparam">Resource<wbr>Resource<wbr>Loc<wbr>Param</a></span>
     </dt>
-    <dd><p>Json to describe resource location.</p>
-</dd><dt class="property-required"
+    <dd>Json to describe resource location.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_go" style="color: inherit; text-decoration: inherit;">Storage<wbr>Type</a>
@@ -1781,8 +1982,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The available storage types for resource location are currently limited to 1:COS.</p>
-</dd></dl>
+    <dd>The available storage types for resource location are currently limited to 1:COS.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="param_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#param_hcl" style="color: inherit; text-decoration: inherit;">param</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#resourceresourcelocparam">object</a></span>
+    </dt>
+    <dd>Json to describe resource location.</dd><dt class="property-required"
+            title="Required">
+        <span id="storage_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_hcl" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The available storage types for resource location are currently limited to 1:COS.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1796,8 +2018,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#resourceresourcelocparam">Resource<wbr>Resource<wbr>Loc<wbr>Param</a></span>
     </dt>
-    <dd><p>Json to describe resource location.</p>
-</dd><dt class="property-required"
+    <dd>Json to describe resource location.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_java" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -1805,8 +2026,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The available storage types for resource location are currently limited to 1:COS.</p>
-</dd></dl>
+    <dd>The available storage types for resource location are currently limited to 1:COS.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1820,8 +2040,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#resourceresourcelocparam">Resource<wbr>Resource<wbr>Loc<wbr>Param</a></span>
     </dt>
-    <dd><p>Json to describe resource location.</p>
-</dd><dt class="property-required"
+    <dd>Json to describe resource location.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_nodejs" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -1829,8 +2048,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The available storage types for resource location are currently limited to 1:COS.</p>
-</dd></dl>
+    <dd>The available storage types for resource location are currently limited to 1:COS.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1844,8 +2062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#resourceresourcelocparam">Resource<wbr>Resource<wbr>Loc<wbr>Param</a></span>
     </dt>
-    <dd><p>Json to describe resource location.</p>
-</dd><dt class="property-required"
+    <dd>Json to describe resource location.</dd><dt class="property-required"
             title="Required">
         <span id="storage_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storage_type_python" style="color: inherit; text-decoration: inherit;">storage_<wbr>type</a>
@@ -1853,8 +2070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The available storage types for resource location are currently limited to 1:COS.</p>
-</dd></dl>
+    <dd>The available storage types for resource location are currently limited to 1:COS.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1868,8 +2084,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#resourceresourcelocparam">Property Map</a></span>
     </dt>
-    <dd><p>Json to describe resource location.</p>
-</dd><dt class="property-required"
+    <dd>Json to describe resource location.</dd><dt class="property-required"
             title="Required">
         <span id="storagetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#storagetype_yaml" style="color: inherit; text-decoration: inherit;">storage<wbr>Type</a>
@@ -1877,12 +2092,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The available storage types for resource location are currently limited to 1:COS.</p>
-</dd></dl>
+    <dd>The available storage types for resource location are currently limited to 1:COS.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="resourceresourcelocparam">Resource<wbr>Resource<wbr>Loc<wbr>Param</h4>
+<h4 id="resourceresourcelocparam">
+Resource<wbr>Resource<wbr>Loc<wbr>Param<pulumi-choosable type="language" values="python,go" class="inline">, Resource<wbr>Resource<wbr>Loc<wbr>Param<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1894,8 +2110,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource bucket.</p>
-</dd><dt class="property-required"
+    <dd>Resource bucket.</dd><dt class="property-required"
             title="Required">
         <span id="path_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_csharp" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -1903,8 +2118,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource path.</p>
-</dd><dt class="property-optional"
+    <dd>Resource path.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -1912,8 +2126,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource region, if not set, use resource region, note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Resource region, if not set, use resource region, note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1927,8 +2140,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource bucket.</p>
-</dd><dt class="property-required"
+    <dd>Resource bucket.</dd><dt class="property-required"
             title="Required">
         <span id="path_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_go" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -1936,8 +2148,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource path.</p>
-</dd><dt class="property-optional"
+    <dd>Resource path.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
@@ -1945,8 +2156,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource region, if not set, use resource region, note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Resource region, if not set, use resource region, note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource bucket.</dd><dt class="property-required"
+            title="Required">
+        <span id="path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_hcl" style="color: inherit; text-decoration: inherit;">path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource path.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Resource region, if not set, use resource region, note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1960,8 +2200,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource bucket.</p>
-</dd><dt class="property-required"
+    <dd>Resource bucket.</dd><dt class="property-required"
             title="Required">
         <span id="path_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_java" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1969,8 +2208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource path.</p>
-</dd><dt class="property-optional"
+    <dd>Resource path.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
@@ -1978,8 +2216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource region, if not set, use resource region, note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Resource region, if not set, use resource region, note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1993,8 +2230,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource bucket.</p>
-</dd><dt class="property-required"
+    <dd>Resource bucket.</dd><dt class="property-required"
             title="Required">
         <span id="path_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_nodejs" style="color: inherit; text-decoration: inherit;">path</a>
@@ -2002,8 +2238,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource path.</p>
-</dd><dt class="property-optional"
+    <dd>Resource path.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2011,8 +2246,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Resource region, if not set, use resource region, note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Resource region, if not set, use resource region, note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2026,8 +2260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource bucket.</p>
-</dd><dt class="property-required"
+    <dd>Resource bucket.</dd><dt class="property-required"
             title="Required">
         <span id="path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_python" style="color: inherit; text-decoration: inherit;">path</a>
@@ -2035,8 +2268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource path.</p>
-</dd><dt class="property-optional"
+    <dd>Resource path.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2044,8 +2276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Resource region, if not set, use resource region, note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Resource region, if not set, use resource region, note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2059,8 +2290,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource bucket.</p>
-</dd><dt class="property-required"
+    <dd>Resource bucket.</dd><dt class="property-required"
             title="Required">
         <span id="path_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_yaml" style="color: inherit; text-decoration: inherit;">path</a>
@@ -2068,8 +2298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource path.</p>
-</dd><dt class="property-optional"
+    <dd>Resource path.</dd><dt class="property-optional"
             title="Optional">
         <span id="region_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
@@ -2077,8 +2306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Resource region, if not set, use resource region, note: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Resource region, if not set, use resource region, note: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2090,7 +2318,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

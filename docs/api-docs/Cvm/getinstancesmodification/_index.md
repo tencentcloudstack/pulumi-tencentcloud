@@ -2,9 +2,11 @@
 ---
 title: "getInstancesModification"
 title_tag: "tencentcloud.Cvm.getInstancesModification"
-meta_desc: "Documentation for the tencentcloud.Cvm.getInstancesModification function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query cvm instances modification."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,68 @@ Use this data source to query cvm instances modification.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Cvm.getInstancesModification({
+const foo = tencentcloud.cvm.getInstancesModification({
     instanceIds: ["ins-xxxxxxx"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Cvm.get_instances_modification(instance_ids=["ins-xxxxxxx"])
+foo = tencentcloud.cvm.get_instances_modification(instance_ids=["ins-xxxxxxx"])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cvm"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cvm.GetInstancesModification(ctx, &cvm.GetInstancesModificationArgs{
+			InstanceIds: []string{
+				"ins-xxxxxxx",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,28 +93,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cvm.GetInstancesModification(ctx, &cvm.GetInstancesModificationArgs{
-			InstanceIds: []string{
-				"ins-xxxxxxx",
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -79,8 +106,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cvm.CvmFunctions;
 import com.pulumi.tencentcloud.Cvm.inputs.GetInstancesModificationArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,47 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   foo:
     fn::invoke:
-      Function: tencentcloud:Cvm:getInstancesModification
-      Arguments:
+      function: tencentcloud:Cvm:getInstancesModification
+      arguments:
         instanceIds:
           - ins-xxxxxxx
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cvm_getinstancesmodification" "foo" {
+  instance_ids = ["ins-xxxxxxx"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeInstancesModification](https://www.tencentcloud.com/search/?wd=DescribeInstancesModification&type=document&lang=en)
 
 
 
@@ -121,7 +178,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +186,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstancesModification<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesModificationArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesModificationResult</a></span>></span
+><span class="k">function </span>getInstancesModification<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesModificationArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesModificationResult</a></span>></span
 ><span class="k">
-function </span>getInstancesModificationOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesModificationOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesModificationResult</a></span>></span
+function </span>getInstancesModificationOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesModificationOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesModificationResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -140,15 +197,15 @@ function </span>getInstancesModificationOutput<span class="p">(</span><span clas
 <div>
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
-><span class="k">def </span>get_instances_modification<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_cvm.GetInstancesModificationFilter]]</span> = None<span class="p">,</span>
+><span class="k">def </span>get_instances_modification<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetInstancesModificationFilter]]</span> = None<span class="p">,</span>
                                <span class="nx">instance_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstancesModificationResult</span
 ><span class="k">
-def </span>get_instances_modification_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_cvm.GetInstancesModificationFilterArgs]]]]</span> = None<span class="p">,</span>
-                               <span class="nx">instance_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesModificationResult]</span
+def </span>get_instances_modification_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetInstancesModificationFilterArgs]]]]</span> = None<span class="p">,</span>
+                               <span class="nx">instance_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                               <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesModificationResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -173,7 +230,8 @@ func </span>GetInstancesModificationOutput<span class="p">(</span><span class="n
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstancesModification </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstancesModificationResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstancesModificationArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesModificationResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesModificationInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesModificationResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesModificationInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesModificationResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesModificationInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -182,7 +240,8 @@ func </span>GetInstancesModificationOutput<span class="p">(</span><span class="n
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstancesModificationResult</a></span>> </span>getInstancesModification<span class="p">(</span><span class="nx">GetInstancesModificationArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesModificationResult</a></span>> </span>getInstancesModification<span class="p">(</span><span class="nx">GetInstancesModificationArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesModificationResult</a></span>> </span>getInstancesModification<span class="p">(</span><span class="nx">GetInstancesModificationArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,6 +253,15 @@ func </span>GetInstancesModificationOutput<span class="p">(</span><span class="n
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cvm/getInstancesModification:getInstancesModification
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cvm_get_instances_modification&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -212,8 +280,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesmodificationfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cvm.<wbr>Inputs.<wbr>Get<wbr>Instances<wbr>Modification<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>The upper limit of Filters for each request is 10 and the upper limit for Filter.Values is 2.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of Filters for each request is 10 and the upper limit for Filter.Values is 2.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -221,8 +288,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>One or more instance ID to be queried. It can be obtained from the InstanceId in the returned value of API DescribeInstances. The maximum number of instances in batch for each request is 20.</p>
-</dd><dt class="property-optional"
+    <dd>One or more instance ID to be queried. It can be obtained from the InstanceId in the returned value of API DescribeInstances. The maximum number of instances in batch for each request is 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -230,8 +296,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -245,8 +310,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesmodificationfilter">[]Get<wbr>Instances<wbr>Modification<wbr>Filter</a></span>
     </dt>
-    <dd><p>The upper limit of Filters for each request is 10 and the upper limit for Filter.Values is 2.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of Filters for each request is 10 and the upper limit for Filter.Values is 2.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -254,8 +318,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>One or more instance ID to be queried. It can be obtained from the InstanceId in the returned value of API DescribeInstances. The maximum number of instances in batch for each request is 20.</p>
-</dd><dt class="property-optional"
+    <dd>One or more instance ID to be queried. It can be obtained from the InstanceId in the returned value of API DescribeInstances. The maximum number of instances in batch for each request is 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -263,8 +326,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesmodificationfilter">list(object)</a></span>
+    </dt>
+    <dd>The upper limit of Filters for each request is 10 and the upper limit for Filter.Values is 2.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>One or more instance ID to be queried. It can be obtained from the InstanceId in the returned value of API DescribeInstances. The maximum number of instances in batch for each request is 20.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -278,8 +370,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesmodificationfilter">List&lt;Get<wbr>Instances<wbr>Modification<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>The upper limit of Filters for each request is 10 and the upper limit for Filter.Values is 2.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of Filters for each request is 10 and the upper limit for Filter.Values is 2.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -287,8 +378,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>One or more instance ID to be queried. It can be obtained from the InstanceId in the returned value of API DescribeInstances. The maximum number of instances in batch for each request is 20.</p>
-</dd><dt class="property-optional"
+    <dd>One or more instance ID to be queried. It can be obtained from the InstanceId in the returned value of API DescribeInstances. The maximum number of instances in batch for each request is 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -296,8 +386,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -311,8 +400,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesmodificationfilter">Get<wbr>Instances<wbr>Modification<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>The upper limit of Filters for each request is 10 and the upper limit for Filter.Values is 2.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of Filters for each request is 10 and the upper limit for Filter.Values is 2.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -320,8 +408,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>One or more instance ID to be queried. It can be obtained from the InstanceId in the returned value of API DescribeInstances. The maximum number of instances in batch for each request is 20.</p>
-</dd><dt class="property-optional"
+    <dd>One or more instance ID to be queried. It can be obtained from the InstanceId in the returned value of API DescribeInstances. The maximum number of instances in batch for each request is 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -329,8 +416,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -342,10 +428,9 @@ The following arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesmodificationfilter">Get<wbr>Instances<wbr>Modification<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getinstancesmodificationfilter">Sequence[Get<wbr>Instances<wbr>Modification<wbr>Filter]</a></span>
     </dt>
-    <dd><p>The upper limit of Filters for each request is 10 and the upper limit for Filter.Values is 2.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of Filters for each request is 10 and the upper limit for Filter.Values is 2.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
@@ -353,8 +438,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>One or more instance ID to be queried. It can be obtained from the InstanceId in the returned value of API DescribeInstances. The maximum number of instances in batch for each request is 20.</p>
-</dd><dt class="property-optional"
+    <dd>One or more instance ID to be queried. It can be obtained from the InstanceId in the returned value of API DescribeInstances. The maximum number of instances in batch for each request is 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -362,8 +446,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -377,8 +460,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesmodificationfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The upper limit of Filters for each request is 10 and the upper limit for Filter.Values is 2.</p>
-</dd><dt class="property-optional"
+    <dd>The upper limit of Filters for each request is 10 and the upper limit for Filter.Values is 2.</dd><dt class="property-optional"
             title="Optional">
         <span id="instanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -386,8 +468,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>One or more instance ID to be queried. It can be obtained from the InstanceId in the returned value of API DescribeInstances. The maximum number of instances in batch for each request is 20.</p>
-</dd><dt class="property-optional"
+    <dd>One or more instance ID to be queried. It can be obtained from the InstanceId in the returned value of API DescribeInstances. The maximum number of instances in batch for each request is 20.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -395,8 +476,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -419,8 +499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancetypeconfigstatuslists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypeconfigstatuslists_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type<wbr>Config<wbr>Status<wbr>Lists</a>
@@ -428,8 +507,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesmodificationinstancetypeconfigstatuslist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cvm.<wbr>Outputs.<wbr>Get<wbr>Instances<wbr>Modification<wbr>Instance<wbr>Type<wbr>Config<wbr>Status<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>The list of model configurations that can be adjusted by the instance.</p>
-</dd><dt class="property-"
+    <dd>The list of model configurations that can be adjusted by the instance.</dd><dt class="property-"
             title="">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -467,8 +545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancetypeconfigstatuslists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypeconfigstatuslists_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type<wbr>Config<wbr>Status<wbr>Lists</a>
@@ -476,8 +553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesmodificationinstancetypeconfigstatuslist">[]Get<wbr>Instances<wbr>Modification<wbr>Instance<wbr>Type<wbr>Config<wbr>Status<wbr>List</a></span>
     </dt>
-    <dd><p>The list of model configurations that can be adjusted by the instance.</p>
-</dd><dt class="property-"
+    <dd>The list of model configurations that can be adjusted by the instance.</dd><dt class="property-"
             title="">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -506,6 +582,52 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_type_config_status_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_config_status_lists_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type_<wbr>config_<wbr>status_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesmodificationinstancetypeconfigstatuslist">list(object)</a></span>
+    </dt>
+    <dd>The list of model configurations that can be adjusted by the instance.</dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesmodificationfilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -515,8 +637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancetypeconfigstatuslists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypeconfigstatuslists_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type<wbr>Config<wbr>Status<wbr>Lists</a>
@@ -524,8 +645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesmodificationinstancetypeconfigstatuslist">List&lt;Get<wbr>Instances<wbr>Modification<wbr>Instance<wbr>Type<wbr>Config<wbr>Status<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>The list of model configurations that can be adjusted by the instance.</p>
-</dd><dt class="property-"
+    <dd>The list of model configurations that can be adjusted by the instance.</dd><dt class="property-"
             title="">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -563,8 +683,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancetypeconfigstatuslists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypeconfigstatuslists_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type<wbr>Config<wbr>Status<wbr>Lists</a>
@@ -572,8 +691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesmodificationinstancetypeconfigstatuslist">Get<wbr>Instances<wbr>Modification<wbr>Instance<wbr>Type<wbr>Config<wbr>Status<wbr>List[]</a></span>
     </dt>
-    <dd><p>The list of model configurations that can be adjusted by the instance.</p>
-</dd><dt class="property-"
+    <dd>The list of model configurations that can be adjusted by the instance.</dd><dt class="property-"
             title="">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -611,23 +729,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_type_config_status_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_config_status_lists_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type_<wbr>config_<wbr>status_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesmodificationinstancetypeconfigstatuslist">Get<wbr>Instances<wbr>Modification<wbr>Instance<wbr>Type<wbr>Config<wbr>Status<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstancesmodificationinstancetypeconfigstatuslist">Sequence[Get<wbr>Instances<wbr>Modification<wbr>Instance<wbr>Type<wbr>Config<wbr>Status<wbr>List]</a></span>
     </dt>
-    <dd><p>The list of model configurations that can be adjusted by the instance.</p>
-</dd><dt class="property-"
+    <dd>The list of model configurations that can be adjusted by the instance.</dd><dt class="property-"
             title="">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesmodificationfilter">Get<wbr>Instances<wbr>Modification<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getinstancesmodificationfilter">Sequence[Get<wbr>Instances<wbr>Modification<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -659,8 +775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancetypeconfigstatuslists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetypeconfigstatuslists_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type<wbr>Config<wbr>Status<wbr>Lists</a>
@@ -668,8 +783,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesmodificationinstancetypeconfigstatuslist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>The list of model configurations that can be adjusted by the instance.</p>
-</dd><dt class="property-"
+    <dd>The list of model configurations that can be adjusted by the instance.</dd><dt class="property-"
             title="">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -717,8 +831,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fields to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -726,8 +839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -741,8 +853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fields to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -750,8 +861,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Fields to be filtered.</dd><dt class="property-required"
+            title="Required">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -765,8 +897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fields to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -774,8 +905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -789,8 +919,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fields to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -798,8 +927,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -813,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Fields to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -822,8 +949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -837,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fields to be filtered.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be filtered.</dd><dt class="property-required"
             title="Required">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -846,8 +971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Value of the field.</p>
-</dd></dl>
+    <dd>Value of the field.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -865,8 +989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesmodificationinstancetypeconfigstatuslistinstancetypeconfig">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cvm.<wbr>Inputs.<wbr>Get<wbr>Instances<wbr>Modification<wbr>Instance<wbr>Type<wbr>Config<wbr>Status<wbr>List<wbr>Instance<wbr>Type<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Configuration information.</p>
-</dd><dt class="property-required"
+    <dd>Configuration information.</dd><dt class="property-required"
             title="Required">
         <span id="message_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_csharp" style="color: inherit; text-decoration: inherit;">Message</a>
@@ -874,8 +997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status description information.</p>
-</dd><dt class="property-required"
+    <dd>Status description information.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -883,8 +1005,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State description.</p>
-</dd></dl>
+    <dd>State description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -898,8 +1019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesmodificationinstancetypeconfigstatuslistinstancetypeconfig">[]Get<wbr>Instances<wbr>Modification<wbr>Instance<wbr>Type<wbr>Config<wbr>Status<wbr>List<wbr>Instance<wbr>Type<wbr>Config</a></span>
     </dt>
-    <dd><p>Configuration information.</p>
-</dd><dt class="property-required"
+    <dd>Configuration information.</dd><dt class="property-required"
             title="Required">
         <span id="message_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_go" style="color: inherit; text-decoration: inherit;">Message</a>
@@ -907,8 +1027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status description information.</p>
-</dd><dt class="property-required"
+    <dd>Status description information.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -916,8 +1035,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State description.</p>
-</dd></dl>
+    <dd>State description.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_type_configs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_configs_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type_<wbr>configs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesmodificationinstancetypeconfigstatuslistinstancetypeconfig">list(object)</a></span>
+    </dt>
+    <dd>Configuration information.</dd><dt class="property-required"
+            title="Required">
+        <span id="message_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_hcl" style="color: inherit; text-decoration: inherit;">message</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Status description information.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>State description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -931,8 +1079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesmodificationinstancetypeconfigstatuslistinstancetypeconfig">List&lt;Get<wbr>Instances<wbr>Modification<wbr>Instance<wbr>Type<wbr>Config<wbr>Status<wbr>List<wbr>Instance<wbr>Type<wbr>Config&gt;</a></span>
     </dt>
-    <dd><p>Configuration information.</p>
-</dd><dt class="property-required"
+    <dd>Configuration information.</dd><dt class="property-required"
             title="Required">
         <span id="message_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_java" style="color: inherit; text-decoration: inherit;">message</a>
@@ -940,8 +1087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status description information.</p>
-</dd><dt class="property-required"
+    <dd>Status description information.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -949,8 +1095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State description.</p>
-</dd></dl>
+    <dd>State description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -964,8 +1109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesmodificationinstancetypeconfigstatuslistinstancetypeconfig">Get<wbr>Instances<wbr>Modification<wbr>Instance<wbr>Type<wbr>Config<wbr>Status<wbr>List<wbr>Instance<wbr>Type<wbr>Config[]</a></span>
     </dt>
-    <dd><p>Configuration information.</p>
-</dd><dt class="property-required"
+    <dd>Configuration information.</dd><dt class="property-required"
             title="Required">
         <span id="message_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_nodejs" style="color: inherit; text-decoration: inherit;">message</a>
@@ -973,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Status description information.</p>
-</dd><dt class="property-required"
+    <dd>Status description information.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -982,8 +1125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>State description.</p>
-</dd></dl>
+    <dd>State description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -995,10 +1137,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_configs_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type_<wbr>configs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesmodificationinstancetypeconfigstatuslistinstancetypeconfig">Get<wbr>Instances<wbr>Modification<wbr>Instance<wbr>Type<wbr>Config<wbr>Status<wbr>List<wbr>Instance<wbr>Type<wbr>Config]</a></span>
+        <span class="property-type"><a href="#getinstancesmodificationinstancetypeconfigstatuslistinstancetypeconfig">Sequence[Get<wbr>Instances<wbr>Modification<wbr>Instance<wbr>Type<wbr>Config<wbr>Status<wbr>List<wbr>Instance<wbr>Type<wbr>Config]</a></span>
     </dt>
-    <dd><p>Configuration information.</p>
-</dd><dt class="property-required"
+    <dd>Configuration information.</dd><dt class="property-required"
             title="Required">
         <span id="message_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_python" style="color: inherit; text-decoration: inherit;">message</a>
@@ -1006,8 +1147,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Status description information.</p>
-</dd><dt class="property-required"
+    <dd>Status description information.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1015,8 +1155,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>State description.</p>
-</dd></dl>
+    <dd>State description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1030,8 +1169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesmodificationinstancetypeconfigstatuslistinstancetypeconfig">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Configuration information.</p>
-</dd><dt class="property-required"
+    <dd>Configuration information.</dd><dt class="property-required"
             title="Required">
         <span id="message_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#message_yaml" style="color: inherit; text-decoration: inherit;">message</a>
@@ -1039,8 +1177,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Status description information.</p>
-</dd><dt class="property-required"
+    <dd>Status description information.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1048,8 +1185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>State description.</p>
-</dd></dl>
+    <dd>State description.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1067,8 +1203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="fpga_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fpga_csharp" style="color: inherit; text-decoration: inherit;">Fpga</a>
@@ -1076,8 +1211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of FPGA kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of FPGA kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="gpu_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpu_csharp" style="color: inherit; text-decoration: inherit;">Gpu</a>
@@ -1085,8 +1219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of GPU kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of GPU kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="instancefamily_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancefamily_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Family</a>
@@ -1094,8 +1227,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance family.</p>
-</dd><dt class="property-required"
+    <dd>Instance family.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1103,8 +1235,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type.</p>
-</dd><dt class="property-required"
+    <dd>Instance type.</dd><dt class="property-required"
             title="Required">
         <span id="memory_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_csharp" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -1112,8 +1243,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity (in GB).</p>
-</dd><dt class="property-required"
+    <dd>Memory capacity (in GB).</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1121,8 +1251,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1136,8 +1265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="fpga_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fpga_go" style="color: inherit; text-decoration: inherit;">Fpga</a>
@@ -1145,8 +1273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of FPGA kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of FPGA kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="gpu_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpu_go" style="color: inherit; text-decoration: inherit;">Gpu</a>
@@ -1154,8 +1281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of GPU kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of GPU kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="instancefamily_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancefamily_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Family</a>
@@ -1163,8 +1289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance family.</p>
-</dd><dt class="property-required"
+    <dd>Instance family.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Type</a>
@@ -1172,8 +1297,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type.</p>
-</dd><dt class="property-required"
+    <dd>Instance type.</dd><dt class="property-required"
             title="Required">
         <span id="memory_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_go" style="color: inherit; text-decoration: inherit;">Memory</a>
@@ -1181,8 +1305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity (in GB).</p>
-</dd><dt class="property-required"
+    <dd>Memory capacity (in GB).</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1190,8 +1313,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_hcl" style="color: inherit; text-decoration: inherit;">cpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of CPU kernels, in cores.</dd><dt class="property-required"
+            title="Required">
+        <span id="fpga_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fpga_hcl" style="color: inherit; text-decoration: inherit;">fpga</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of FPGA kernels, in cores.</dd><dt class="property-required"
+            title="Required">
+        <span id="gpu_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpu_hcl" style="color: inherit; text-decoration: inherit;">gpu</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The number of GPU kernels, in cores.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_family_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_family_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>family</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance family.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance type.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_hcl" style="color: inherit; text-decoration: inherit;">memory</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory capacity (in GB).</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1205,8 +1389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of CPU kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="fpga_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fpga_java" style="color: inherit; text-decoration: inherit;">fpga</a>
@@ -1214,8 +1397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of FPGA kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of FPGA kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="gpu_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpu_java" style="color: inherit; text-decoration: inherit;">gpu</a>
@@ -1223,8 +1405,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The number of GPU kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of GPU kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="instancefamily_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancefamily_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Family</a>
@@ -1232,8 +1413,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance family.</p>
-</dd><dt class="property-required"
+    <dd>Instance family.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1241,8 +1421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance type.</p>
-</dd><dt class="property-required"
+    <dd>Instance type.</dd><dt class="property-required"
             title="Required">
         <span id="memory_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_java" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1250,8 +1429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory capacity (in GB).</p>
-</dd><dt class="property-required"
+    <dd>Memory capacity (in GB).</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1259,8 +1437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1274,8 +1451,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of CPU kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="fpga_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fpga_nodejs" style="color: inherit; text-decoration: inherit;">fpga</a>
@@ -1283,8 +1459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of FPGA kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of FPGA kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="gpu_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpu_nodejs" style="color: inherit; text-decoration: inherit;">gpu</a>
@@ -1292,8 +1467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The number of GPU kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of GPU kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="instancefamily_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancefamily_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Family</a>
@@ -1301,8 +1475,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance family.</p>
-</dd><dt class="property-required"
+    <dd>Instance family.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1310,8 +1483,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type.</p>
-</dd><dt class="property-required"
+    <dd>Instance type.</dd><dt class="property-required"
             title="Required">
         <span id="memory_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_nodejs" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1319,8 +1491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory capacity (in GB).</p>
-</dd><dt class="property-required"
+    <dd>Memory capacity (in GB).</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1328,8 +1499,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1343,8 +1513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of CPU kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="fpga_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fpga_python" style="color: inherit; text-decoration: inherit;">fpga</a>
@@ -1352,8 +1521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of FPGA kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of FPGA kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="gpu_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpu_python" style="color: inherit; text-decoration: inherit;">gpu</a>
@@ -1361,8 +1529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The number of GPU kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of GPU kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="instance_family_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_family_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>family</a>
@@ -1370,8 +1537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance family.</p>
-</dd><dt class="property-required"
+    <dd>Instance family.</dd><dt class="property-required"
             title="Required">
         <span id="instance_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_type_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>type</a>
@@ -1379,8 +1545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance type.</p>
-</dd><dt class="property-required"
+    <dd>Instance type.</dd><dt class="property-required"
             title="Required">
         <span id="memory_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_python" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1388,8 +1553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory capacity (in GB).</p>
-</dd><dt class="property-required"
+    <dd>Memory capacity (in GB).</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1397,8 +1561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1412,8 +1575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of CPU kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of CPU kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="fpga_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fpga_yaml" style="color: inherit; text-decoration: inherit;">fpga</a>
@@ -1421,8 +1583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of FPGA kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of FPGA kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="gpu_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#gpu_yaml" style="color: inherit; text-decoration: inherit;">gpu</a>
@@ -1430,8 +1591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The number of GPU kernels, in cores.</p>
-</dd><dt class="property-required"
+    <dd>The number of GPU kernels, in cores.</dd><dt class="property-required"
             title="Required">
         <span id="instancefamily_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancefamily_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Family</a>
@@ -1439,8 +1599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance family.</p>
-</dd><dt class="property-required"
+    <dd>Instance family.</dd><dt class="property-required"
             title="Required">
         <span id="instancetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancetype_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Type</a>
@@ -1448,8 +1607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance type.</p>
-</dd><dt class="property-required"
+    <dd>Instance type.</dd><dt class="property-required"
             title="Required">
         <span id="memory_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_yaml" style="color: inherit; text-decoration: inherit;">memory</a>
@@ -1457,8 +1615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory capacity (in GB).</p>
-</dd><dt class="property-required"
+    <dd>Memory capacity (in GB).</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1466,8 +1623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Availability zone.</p>
-</dd></dl>
+    <dd>Availability zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1482,7 +1638,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

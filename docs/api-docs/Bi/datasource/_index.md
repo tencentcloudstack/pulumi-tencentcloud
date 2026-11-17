@@ -2,9 +2,11 @@
 ---
 title: "Datasource"
 title_tag: "tencentcloud.Bi.Datasource"
-meta_desc: "Documentation for the tencentcloud.Bi.Datasource resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a bi datasource"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,7 +18,12 @@ Provides a resource to create a bi datasource
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -26,13 +33,18 @@ const datasource = new tencentcloud.bi.Datasource("datasource", {
     dbHost: "bj-cdb-1lxqg5r6.sql.tencentcdb.com",
     dbName: "tf-test",
     dbPort: 63694,
-    dbPwd: "ABc123,,,",
     dbType: "MYSQL",
+    dbPwd: "ABc123,,,",
     dbUser: "root",
     projectId: 11015030,
     sourceName: "tf-source-name",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
@@ -42,12 +54,50 @@ datasource = tencentcloud.bi.Datasource("datasource",
     db_host="bj-cdb-1lxqg5r6.sql.tencentcdb.com",
     db_name="tf-test",
     db_port=63694,
-    db_pwd="ABc123,,,",
     db_type="MYSQL",
+    db_pwd="ABc123,,,",
     db_user="root",
     project_id=11015030,
     source_name="tf-source-name")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/bi"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := bi.NewDatasource(ctx, "datasource", &bi.DatasourceArgs{
+			Charset:    pulumi.String("utf8"),
+			DbHost:     pulumi.String("bj-cdb-1lxqg5r6.sql.tencentcdb.com"),
+			DbName:     pulumi.String("tf-test"),
+			DbPort:     pulumi.Int(63694),
+			DbType:     pulumi.String("MYSQL"),
+			DbPwd:      pulumi.String("ABc123,,,"),
+			DbUser:     pulumi.String("root"),
+			ProjectId:  pulumi.Int(11015030),
+			SourceName: pulumi.String("tf-source-name"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -62,8 +112,8 @@ return await Deployment.RunAsync(() =>
         DbHost = "bj-cdb-1lxqg5r6.sql.tencentcdb.com",
         DbName = "tf-test",
         DbPort = 63694,
-        DbPwd = "ABc123,,,",
         DbType = "MYSQL",
+        DbPwd = "ABc123,,,",
         DbUser = "root",
         ProjectId = 11015030,
         SourceName = "tf-source-name",
@@ -71,34 +121,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Bi.NewDatasource(ctx, "datasource", &Bi.DatasourceArgs{
-			Charset:    pulumi.String("utf8"),
-			DbHost:     pulumi.String("bj-cdb-1lxqg5r6.sql.tencentcdb.com"),
-			DbName:     pulumi.String("tf-test"),
-			DbPort:     pulumi.Int(63694),
-			DbPwd:      pulumi.String("ABc123,,,"),
-			DbType:     pulumi.String("MYSQL"),
-			DbUser:     pulumi.String("root"),
-			ProjectId:  pulumi.Int(11015030),
-			SourceName: pulumi.String("tf-source-name"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -107,8 +134,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Bi.Datasource;
 import com.pulumi.tencentcloud.Bi.DatasourceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -120,13 +147,13 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var datasource = new Datasource("datasource", DatasourceArgs.builder()        
+        var datasource = new Datasource("datasource", DatasourceArgs.builder()
             .charset("utf8")
             .dbHost("bj-cdb-1lxqg5r6.sql.tencentcdb.com")
             .dbName("tf-test")
             .dbPort(63694)
-            .dbPwd("ABc123,,,")
             .dbType("MYSQL")
+            .dbPwd("ABc123,,,")
             .dbUser("root")
             .projectId(11015030)
             .sourceName("tf-source-name")
@@ -135,6 +162,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   datasource:
@@ -144,86 +176,137 @@ resources:
       dbHost: bj-cdb-1lxqg5r6.sql.tencentcdb.com
       dbName: tf-test
       dbPort: 63694
-      dbPwd: ABc123,,,
       dbType: MYSQL
+      dbPwd: ABc123,,,
       dbUser: root
       projectId: 1.101503e+07
       sourceName: tf-source-name
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_bi_datasource" "datasource" {
+  charset     = "utf8"
+  db_host     = "bj-cdb-1lxqg5r6.sql.tencentcdb.com"
+  db_name     = "tf-test"
+  db_port     = 63694
+  db_type     = "MYSQL"
+  db_pwd      = "ABc123,,,"
+  db_user     = "root"
+  project_id  = 11015030
+  source_name = "tf-source-name"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateDatasource](https://www.tencentcloud.com/document/api/1270/72255)
+* Read: [DescribeDatasourceList](https://www.tencentcloud.com/document/api/1270/72631)
+* Update: [ModifyDatasource](https://www.tencentcloud.com/document/api/1270/72633)
+* Delete: [DeleteDatasource](https://www.tencentcloud.com/document/api/1270/72634)
 
 
 ## Create Datasource Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Datasource</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DatasourceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Datasource</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DatasourceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Datasource</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DatasourceArgs</a></span><span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Datasource</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-               <span class="nx">catalog</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">db_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">charset</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">data_origin</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">data_origin_datasource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">data_origin_project_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">source_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+               <span class="nx">db_user</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">db_host</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">db_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">db_port</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                <span class="nx">db_pwd</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">db_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">db_user</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+               <span class="nx">data_origin_project_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">catalog</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">data_origin_datasource_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">service_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">source_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+               <span class="nx">data_origin</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">uniq_vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Datasource</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">DatasourceArgs</a></span><span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+               <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDatasource</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DatasourceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Datasource</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewDatasource</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">DatasourceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Datasource</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Datasource</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DatasourceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Datasource</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DatasourceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Datasource</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DatasourceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Datasource</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">DatasourceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Bi:Datasource</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Bi:Datasource</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_bi_datasource&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -244,7 +327,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -361,11 +444,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Datasource Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Datasource resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -381,8 +472,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset.</p>
-</dd><dt class="property-required"
+    <dd>Charset.</dd><dt class="property-required"
             title="Required">
         <span id="dbhost_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbhost_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Host</a>
@@ -390,8 +480,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-required"
+    <dd>Host.</dd><dt class="property-required"
             title="Required">
         <span id="dbname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -399,8 +488,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="dbport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbport_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Port</a>
@@ -408,8 +496,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port.</p>
-</dd><dt class="property-required"
+    <dd>Port.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="dbpwd_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbpwd_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Pwd</a>
@@ -417,8 +504,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password.</p>
-</dd><dt class="property-required"
+    <dd>Password.</dd><dt class="property-required"
             title="Required">
         <span id="dbtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Type</a>
@@ -426,8 +512,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</p>
-</dd><dt class="property-required"
+    <dd><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</dd><dt class="property-required"
             title="Required">
         <span id="dbuser_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbuser_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>User</a>
@@ -435,8 +520,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name.</p>
-</dd><dt class="property-required"
+    <dd>User name.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -444,8 +528,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-required"
+    <dd>Project id.</dd><dt class="property-required"
             title="Required">
         <span id="sourcename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcename_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Name</a>
@@ -453,8 +536,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Datasource name in BI.</p>
-</dd><dt class="property-optional"
+    <dd>Datasource name in BI.</dd><dt class="property-optional"
             title="Optional">
         <span id="catalog_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#catalog_csharp" style="color: inherit; text-decoration: inherit;">Catalog</a>
@@ -462,8 +544,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Catalog.</p>
-</dd><dt class="property-optional"
+    <dd>Catalog.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataorigin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataorigin_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Origin</a>
@@ -471,8 +552,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource identification, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource identification, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataorigindatasourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataorigindatasourceid_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Origin<wbr>Datasource<wbr>Id</a>
@@ -480,8 +560,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataoriginprojectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataoriginprojectid_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Origin<wbr>Project<wbr>Id</a>
@@ -489,8 +568,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Type</a>
@@ -498,8 +576,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Own or Cloud, default: <code>Own</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Own or Cloud, default: <code>Own</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqvpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_csharp" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -507,8 +584,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud private network unified identity.</p>
-</dd><dt class="property-optional"
+    <dd>Tencent cloud private network unified identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -516,8 +592,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud private network identity.</p>
-</dd></dl>
+    <dd>Tencent cloud private network identity.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -531,8 +606,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset.</p>
-</dd><dt class="property-required"
+    <dd>Charset.</dd><dt class="property-required"
             title="Required">
         <span id="dbhost_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbhost_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Host</a>
@@ -540,8 +614,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-required"
+    <dd>Host.</dd><dt class="property-required"
             title="Required">
         <span id="dbname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -549,8 +622,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="dbport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbport_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Port</a>
@@ -558,8 +630,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port.</p>
-</dd><dt class="property-required"
+    <dd>Port.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="dbpwd_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbpwd_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Pwd</a>
@@ -567,8 +638,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password.</p>
-</dd><dt class="property-required"
+    <dd>Password.</dd><dt class="property-required"
             title="Required">
         <span id="dbtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Type</a>
@@ -576,8 +646,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</p>
-</dd><dt class="property-required"
+    <dd><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</dd><dt class="property-required"
             title="Required">
         <span id="dbuser_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbuser_go" style="color: inherit; text-decoration: inherit;">Db<wbr>User</a>
@@ -585,8 +654,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name.</p>
-</dd><dt class="property-required"
+    <dd>User name.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -594,8 +662,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-required"
+    <dd>Project id.</dd><dt class="property-required"
             title="Required">
         <span id="sourcename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcename_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Name</a>
@@ -603,8 +670,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Datasource name in BI.</p>
-</dd><dt class="property-optional"
+    <dd>Datasource name in BI.</dd><dt class="property-optional"
             title="Optional">
         <span id="catalog_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#catalog_go" style="color: inherit; text-decoration: inherit;">Catalog</a>
@@ -612,8 +678,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Catalog.</p>
-</dd><dt class="property-optional"
+    <dd>Catalog.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataorigin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataorigin_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Origin</a>
@@ -621,8 +686,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource identification, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource identification, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataorigindatasourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataorigindatasourceid_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Origin<wbr>Datasource<wbr>Id</a>
@@ -630,8 +694,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataoriginprojectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataoriginprojectid_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Origin<wbr>Project<wbr>Id</a>
@@ -639,8 +702,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Type</a>
@@ -648,8 +710,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Own or Cloud, default: <code>Own</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Own or Cloud, default: <code>Own</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqvpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_go" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -657,8 +718,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud private network unified identity.</p>
-</dd><dt class="property-optional"
+    <dd>Tencent cloud private network unified identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -666,8 +726,141 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud private network identity.</p>
-</dd></dl>
+    <dd>Tencent cloud private network identity.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="charset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charset_hcl" style="color: inherit; text-decoration: inherit;">charset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charset.</dd><dt class="property-required"
+            title="Required">
+        <span id="db_host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_host_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Host.</dd><dt class="property-required"
+            title="Required">
+        <span id="db_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_name_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database name.</dd><dt class="property-required"
+            title="Required">
+        <span id="db_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_port_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port.</dd><dt class="property-required property-secret"
+            title="Required">
+        <span id="db_pwd_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_pwd_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>pwd</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password.</dd><dt class="property-required"
+            title="Required">
+        <span id="db_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_type_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="db_user_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_user_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>user</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User name.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project id.</dd><dt class="property-required"
+            title="Required">
+        <span id="source_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_name_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Datasource name in BI.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="catalog_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#catalog_hcl" style="color: inherit; text-decoration: inherit;">catalog</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Catalog.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="data_origin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_origin_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>origin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Third-party datasource identification, this parameter can be ignored.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="data_origin_datasource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_origin_datasource_id_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>origin_<wbr>datasource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="data_origin_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_origin_project_id_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>origin_<wbr>project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="service_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_type_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Own or Cloud, default: <code>Own</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="uniq_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tencent cloud private network unified identity.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tencent cloud private network identity.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -681,8 +874,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charset.</p>
-</dd><dt class="property-required"
+    <dd>Charset.</dd><dt class="property-required"
             title="Required">
         <span id="dbhost_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbhost_java" style="color: inherit; text-decoration: inherit;">db<wbr>Host</a>
@@ -690,8 +882,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-required"
+    <dd>Host.</dd><dt class="property-required"
             title="Required">
         <span id="dbname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_java" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -699,8 +890,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="dbport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbport_java" style="color: inherit; text-decoration: inherit;">db<wbr>Port</a>
@@ -708,8 +898,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port.</p>
-</dd><dt class="property-required"
+    <dd>Port.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="dbpwd_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbpwd_java" style="color: inherit; text-decoration: inherit;">db<wbr>Pwd</a>
@@ -717,8 +906,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password.</p>
-</dd><dt class="property-required"
+    <dd>Password.</dd><dt class="property-required"
             title="Required">
         <span id="dbtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_java" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -726,8 +914,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</p>
-</dd><dt class="property-required"
+    <dd><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</dd><dt class="property-required"
             title="Required">
         <span id="dbuser_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbuser_java" style="color: inherit; text-decoration: inherit;">db<wbr>User</a>
@@ -735,8 +922,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User name.</p>
-</dd><dt class="property-required"
+    <dd>User name.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -744,8 +930,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-required"
+    <dd>Project id.</dd><dt class="property-required"
             title="Required">
         <span id="sourcename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcename_java" style="color: inherit; text-decoration: inherit;">source<wbr>Name</a>
@@ -753,8 +938,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Datasource name in BI.</p>
-</dd><dt class="property-optional"
+    <dd>Datasource name in BI.</dd><dt class="property-optional"
             title="Optional">
         <span id="catalog_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#catalog_java" style="color: inherit; text-decoration: inherit;">catalog</a>
@@ -762,8 +946,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Catalog.</p>
-</dd><dt class="property-optional"
+    <dd>Catalog.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataorigin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataorigin_java" style="color: inherit; text-decoration: inherit;">data<wbr>Origin</a>
@@ -771,8 +954,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Third-party datasource identification, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource identification, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataorigindatasourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataorigindatasourceid_java" style="color: inherit; text-decoration: inherit;">data<wbr>Origin<wbr>Datasource<wbr>Id</a>
@@ -780,8 +962,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataoriginprojectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataoriginprojectid_java" style="color: inherit; text-decoration: inherit;">data<wbr>Origin<wbr>Project<wbr>Id</a>
@@ -789,8 +970,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_java" style="color: inherit; text-decoration: inherit;">service<wbr>Type</a>
@@ -798,8 +978,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Own or Cloud, default: <code>Own</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Own or Cloud, default: <code>Own</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqvpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_java" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -807,8 +986,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tencent cloud private network unified identity.</p>
-</dd><dt class="property-optional"
+    <dd>Tencent cloud private network unified identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -816,8 +994,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tencent cloud private network identity.</p>
-</dd></dl>
+    <dd>Tencent cloud private network identity.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -831,8 +1008,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset.</p>
-</dd><dt class="property-required"
+    <dd>Charset.</dd><dt class="property-required"
             title="Required">
         <span id="dbhost_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbhost_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Host</a>
@@ -840,8 +1016,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-required"
+    <dd>Host.</dd><dt class="property-required"
             title="Required">
         <span id="dbname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -849,8 +1024,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="dbport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbport_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Port</a>
@@ -858,8 +1032,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port.</p>
-</dd><dt class="property-required"
+    <dd>Port.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="dbpwd_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbpwd_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Pwd</a>
@@ -867,8 +1040,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password.</p>
-</dd><dt class="property-required"
+    <dd>Password.</dd><dt class="property-required"
             title="Required">
         <span id="dbtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -876,8 +1048,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</p>
-</dd><dt class="property-required"
+    <dd><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</dd><dt class="property-required"
             title="Required">
         <span id="dbuser_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbuser_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>User</a>
@@ -885,8 +1056,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name.</p>
-</dd><dt class="property-required"
+    <dd>User name.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -894,8 +1064,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-required"
+    <dd>Project id.</dd><dt class="property-required"
             title="Required">
         <span id="sourcename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcename_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Name</a>
@@ -903,8 +1072,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Datasource name in BI.</p>
-</dd><dt class="property-optional"
+    <dd>Datasource name in BI.</dd><dt class="property-optional"
             title="Optional">
         <span id="catalog_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#catalog_nodejs" style="color: inherit; text-decoration: inherit;">catalog</a>
@@ -912,8 +1080,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Catalog.</p>
-</dd><dt class="property-optional"
+    <dd>Catalog.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataorigin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataorigin_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Origin</a>
@@ -921,8 +1088,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource identification, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource identification, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataorigindatasourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataorigindatasourceid_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Origin<wbr>Datasource<wbr>Id</a>
@@ -930,8 +1096,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataoriginprojectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataoriginprojectid_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Origin<wbr>Project<wbr>Id</a>
@@ -939,8 +1104,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Type</a>
@@ -948,8 +1112,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Own or Cloud, default: <code>Own</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Own or Cloud, default: <code>Own</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqvpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_nodejs" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -957,8 +1120,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud private network unified identity.</p>
-</dd><dt class="property-optional"
+    <dd>Tencent cloud private network unified identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -966,8 +1128,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud private network identity.</p>
-</dd></dl>
+    <dd>Tencent cloud private network identity.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -981,8 +1142,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charset.</p>
-</dd><dt class="property-required"
+    <dd>Charset.</dd><dt class="property-required"
             title="Required">
         <span id="db_host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_host_python" style="color: inherit; text-decoration: inherit;">db_<wbr>host</a>
@@ -990,8 +1150,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-required"
+    <dd>Host.</dd><dt class="property-required"
             title="Required">
         <span id="db_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_name_python" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
@@ -999,8 +1158,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="db_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_port_python" style="color: inherit; text-decoration: inherit;">db_<wbr>port</a>
@@ -1008,8 +1166,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port.</p>
-</dd><dt class="property-required"
+    <dd>Port.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="db_pwd_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_pwd_python" style="color: inherit; text-decoration: inherit;">db_<wbr>pwd</a>
@@ -1017,8 +1174,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password.</p>
-</dd><dt class="property-required"
+    <dd>Password.</dd><dt class="property-required"
             title="Required">
         <span id="db_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_type_python" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
@@ -1026,8 +1182,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</p>
-</dd><dt class="property-required"
+    <dd><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</dd><dt class="property-required"
             title="Required">
         <span id="db_user_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#db_user_python" style="color: inherit; text-decoration: inherit;">db_<wbr>user</a>
@@ -1035,8 +1190,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User name.</p>
-</dd><dt class="property-required"
+    <dd>User name.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1044,8 +1198,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-required"
+    <dd>Project id.</dd><dt class="property-required"
             title="Required">
         <span id="source_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#source_name_python" style="color: inherit; text-decoration: inherit;">source_<wbr>name</a>
@@ -1053,8 +1206,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Datasource name in BI.</p>
-</dd><dt class="property-optional"
+    <dd>Datasource name in BI.</dd><dt class="property-optional"
             title="Optional">
         <span id="catalog_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#catalog_python" style="color: inherit; text-decoration: inherit;">catalog</a>
@@ -1062,8 +1214,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Catalog.</p>
-</dd><dt class="property-optional"
+    <dd>Catalog.</dd><dt class="property-optional"
             title="Optional">
         <span id="data_origin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_origin_python" style="color: inherit; text-decoration: inherit;">data_<wbr>origin</a>
@@ -1071,8 +1222,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Third-party datasource identification, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource identification, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="data_origin_datasource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_origin_datasource_id_python" style="color: inherit; text-decoration: inherit;">data_<wbr>origin_<wbr>datasource_<wbr>id</a>
@@ -1080,8 +1230,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="data_origin_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#data_origin_project_id_python" style="color: inherit; text-decoration: inherit;">data_<wbr>origin_<wbr>project_<wbr>id</a>
@@ -1089,8 +1238,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="service_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_type_python" style="color: inherit; text-decoration: inherit;">service_<wbr>type</a>
@@ -1098,8 +1246,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Own or Cloud, default: <code>Own</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Own or Cloud, default: <code>Own</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniq_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniq_vpc_id_python" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
@@ -1107,8 +1254,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tencent cloud private network unified identity.</p>
-</dd><dt class="property-optional"
+    <dd>Tencent cloud private network unified identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1116,8 +1262,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tencent cloud private network identity.</p>
-</dd></dl>
+    <dd>Tencent cloud private network identity.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1131,8 +1276,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charset.</p>
-</dd><dt class="property-required"
+    <dd>Charset.</dd><dt class="property-required"
             title="Required">
         <span id="dbhost_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbhost_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Host</a>
@@ -1140,8 +1284,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-required"
+    <dd>Host.</dd><dt class="property-required"
             title="Required">
         <span id="dbname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbname_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -1149,8 +1292,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-required"
+    <dd>Database name.</dd><dt class="property-required"
             title="Required">
         <span id="dbport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbport_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Port</a>
@@ -1158,8 +1300,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port.</p>
-</dd><dt class="property-required"
+    <dd>Port.</dd><dt class="property-required property-secret"
             title="Required">
         <span id="dbpwd_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbpwd_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Pwd</a>
@@ -1167,8 +1308,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password.</p>
-</dd><dt class="property-required"
+    <dd>Password.</dd><dt class="property-required"
             title="Required">
         <span id="dbtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbtype_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -1176,8 +1316,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</p>
-</dd><dt class="property-required"
+    <dd><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</dd><dt class="property-required"
             title="Required">
         <span id="dbuser_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dbuser_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>User</a>
@@ -1185,8 +1324,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User name.</p>
-</dd><dt class="property-required"
+    <dd>User name.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1194,8 +1332,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-required"
+    <dd>Project id.</dd><dt class="property-required"
             title="Required">
         <span id="sourcename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sourcename_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Name</a>
@@ -1203,8 +1340,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Datasource name in BI.</p>
-</dd><dt class="property-optional"
+    <dd>Datasource name in BI.</dd><dt class="property-optional"
             title="Optional">
         <span id="catalog_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#catalog_yaml" style="color: inherit; text-decoration: inherit;">catalog</a>
@@ -1212,8 +1348,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Catalog.</p>
-</dd><dt class="property-optional"
+    <dd>Catalog.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataorigin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataorigin_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Origin</a>
@@ -1221,8 +1356,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Third-party datasource identification, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource identification, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataorigindatasourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataorigindatasourceid_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Origin<wbr>Datasource<wbr>Id</a>
@@ -1230,8 +1364,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="dataoriginprojectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dataoriginprojectid_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Origin<wbr>Project<wbr>Id</a>
@@ -1239,8 +1372,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="servicetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#servicetype_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Type</a>
@@ -1248,8 +1380,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Own or Cloud, default: <code>Own</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Own or Cloud, default: <code>Own</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqvpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqvpcid_yaml" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -1257,8 +1388,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tencent cloud private network unified identity.</p>
-</dd><dt class="property-optional"
+    <dd>Tencent cloud private network unified identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1266,8 +1396,7 @@ The Datasource resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tencent cloud private network identity.</p>
-</dd></dl>
+    <dd>Tencent cloud private network identity.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1288,8 +1417,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1303,8 +1431,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1318,8 +1459,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1333,8 +1473,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1348,8 +1487,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1363,8 +1501,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1374,18 +1511,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Datasource resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DatasourceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Datasource</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">DatasourceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Datasource</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -1405,104 +1542,143 @@ Get an existing Datasource resource's state with the given name, ID, and optiona
         <span class="nx">source_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">uniq_vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Datasource</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDatasource<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DatasourceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Datasource</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetDatasource<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">DatasourceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Datasource</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Datasource</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DatasourceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Datasource</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DatasourceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Datasource</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DatasourceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Datasource</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">DatasourceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingDatasource</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Bi:Datasource</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_bi_datasource</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DatasourceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DatasourceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1510,28 +1686,31 @@ Get an existing Datasource resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DatasourceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1539,28 +1718,31 @@ Get an existing Datasource resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">DatasourceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1580,8 +1762,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Catalog.</p>
-</dd><dt class="property-optional"
+    <dd>Catalog.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_csharp" style="color: inherit; text-decoration: inherit;">Charset</a>
@@ -1589,8 +1770,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset.</p>
-</dd><dt class="property-optional"
+    <dd>Charset.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dataorigin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataorigin_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Origin</a>
@@ -1598,8 +1778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource identification, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource identification, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dataorigindatasourceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataorigindatasourceid_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Origin<wbr>Datasource<wbr>Id</a>
@@ -1607,8 +1786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dataoriginprojectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataoriginprojectid_csharp" style="color: inherit; text-decoration: inherit;">Data<wbr>Origin<wbr>Project<wbr>Id</a>
@@ -1616,8 +1794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbhost_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbhost_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Host</a>
@@ -1625,8 +1802,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-optional"
+    <dd>Host.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbname_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -1634,8 +1810,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbport_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Port</a>
@@ -1643,8 +1818,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port.</p>
-</dd><dt class="property-optional"
+    <dd>Port.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_dbpwd_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbpwd_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Pwd</a>
@@ -1652,8 +1826,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password.</p>
-</dd><dt class="property-optional"
+    <dd>Password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbtype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbtype_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>Type</a>
@@ -1661,8 +1834,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</p>
-</dd><dt class="property-optional"
+    <dd><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbuser_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbuser_csharp" style="color: inherit; text-decoration: inherit;">Db<wbr>User</a>
@@ -1670,8 +1842,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name.</p>
-</dd><dt class="property-optional"
+    <dd>User name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1679,8 +1850,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicetype_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Type</a>
@@ -1688,8 +1858,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Own or Cloud, default: <code>Own</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Own or Cloud, default: <code>Own</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sourcename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcename_csharp" style="color: inherit; text-decoration: inherit;">Source<wbr>Name</a>
@@ -1697,8 +1866,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Datasource name in BI.</p>
-</dd><dt class="property-optional"
+    <dd>Datasource name in BI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_csharp" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -1706,8 +1874,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud private network unified identity.</p>
-</dd><dt class="property-optional"
+    <dd>Tencent cloud private network unified identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1715,8 +1882,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud private network identity.</p>
-</dd></dl>
+    <dd>Tencent cloud private network identity.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1730,8 +1896,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Catalog.</p>
-</dd><dt class="property-optional"
+    <dd>Catalog.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_go" style="color: inherit; text-decoration: inherit;">Charset</a>
@@ -1739,8 +1904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset.</p>
-</dd><dt class="property-optional"
+    <dd>Charset.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dataorigin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataorigin_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Origin</a>
@@ -1748,8 +1912,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource identification, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource identification, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dataorigindatasourceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataorigindatasourceid_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Origin<wbr>Datasource<wbr>Id</a>
@@ -1757,8 +1920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dataoriginprojectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataoriginprojectid_go" style="color: inherit; text-decoration: inherit;">Data<wbr>Origin<wbr>Project<wbr>Id</a>
@@ -1766,8 +1928,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbhost_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbhost_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Host</a>
@@ -1775,8 +1936,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-optional"
+    <dd>Host.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbname_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Name</a>
@@ -1784,8 +1944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbport_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Port</a>
@@ -1793,8 +1952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port.</p>
-</dd><dt class="property-optional"
+    <dd>Port.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_dbpwd_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbpwd_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Pwd</a>
@@ -1802,8 +1960,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password.</p>
-</dd><dt class="property-optional"
+    <dd>Password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbtype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbtype_go" style="color: inherit; text-decoration: inherit;">Db<wbr>Type</a>
@@ -1811,8 +1968,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</p>
-</dd><dt class="property-optional"
+    <dd><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbuser_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbuser_go" style="color: inherit; text-decoration: inherit;">Db<wbr>User</a>
@@ -1820,8 +1976,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name.</p>
-</dd><dt class="property-optional"
+    <dd>User name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1829,8 +1984,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicetype_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Type</a>
@@ -1838,8 +1992,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Own or Cloud, default: <code>Own</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Own or Cloud, default: <code>Own</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sourcename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcename_go" style="color: inherit; text-decoration: inherit;">Source<wbr>Name</a>
@@ -1847,8 +2000,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Datasource name in BI.</p>
-</dd><dt class="property-optional"
+    <dd>Datasource name in BI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_go" style="color: inherit; text-decoration: inherit;">Uniq<wbr>Vpc<wbr>Id</a>
@@ -1856,8 +2008,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud private network unified identity.</p>
-</dd><dt class="property-optional"
+    <dd>Tencent cloud private network unified identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1865,8 +2016,141 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud private network identity.</p>
-</dd></dl>
+    <dd>Tencent cloud private network identity.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_catalog_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_catalog_hcl" style="color: inherit; text-decoration: inherit;">catalog</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Catalog.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_charset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_hcl" style="color: inherit; text-decoration: inherit;">charset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Charset.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_data_origin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_data_origin_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>origin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Third-party datasource identification, this parameter can be ignored.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_data_origin_datasource_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_data_origin_datasource_id_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>origin_<wbr>datasource_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_data_origin_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_data_origin_project_id_hcl" style="color: inherit; text-decoration: inherit;">data_<wbr>origin_<wbr>project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_db_host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_host_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Host.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_db_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_name_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Database name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_db_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_port_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port.</dd><dt class="property-optional property-secret"
+            title="Optional">
+        <span id="state_db_pwd_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_pwd_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>pwd</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Password.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_db_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_type_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_db_user_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_user_hcl" style="color: inherit; text-decoration: inherit;">db_<wbr>user</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_service_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_type_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Own or Cloud, default: <code>Own</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_source_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_name_hcl" style="color: inherit; text-decoration: inherit;">source_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Datasource name in BI.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_uniq_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniq_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tencent cloud private network unified identity.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tencent cloud private network identity.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1880,8 +2164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Catalog.</p>
-</dd><dt class="property-optional"
+    <dd>Catalog.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_java" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -1889,8 +2172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charset.</p>
-</dd><dt class="property-optional"
+    <dd>Charset.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dataorigin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataorigin_java" style="color: inherit; text-decoration: inherit;">data<wbr>Origin</a>
@@ -1898,8 +2180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Third-party datasource identification, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource identification, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dataorigindatasourceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataorigindatasourceid_java" style="color: inherit; text-decoration: inherit;">data<wbr>Origin<wbr>Datasource<wbr>Id</a>
@@ -1907,8 +2188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dataoriginprojectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataoriginprojectid_java" style="color: inherit; text-decoration: inherit;">data<wbr>Origin<wbr>Project<wbr>Id</a>
@@ -1916,8 +2196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbhost_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbhost_java" style="color: inherit; text-decoration: inherit;">db<wbr>Host</a>
@@ -1925,8 +2204,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-optional"
+    <dd>Host.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbname_java" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -1934,8 +2212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbport_java" style="color: inherit; text-decoration: inherit;">db<wbr>Port</a>
@@ -1943,8 +2220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port.</p>
-</dd><dt class="property-optional"
+    <dd>Port.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_dbpwd_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbpwd_java" style="color: inherit; text-decoration: inherit;">db<wbr>Pwd</a>
@@ -1952,8 +2228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password.</p>
-</dd><dt class="property-optional"
+    <dd>Password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbtype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbtype_java" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -1961,8 +2236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</p>
-</dd><dt class="property-optional"
+    <dd><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbuser_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbuser_java" style="color: inherit; text-decoration: inherit;">db<wbr>User</a>
@@ -1970,8 +2244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User name.</p>
-</dd><dt class="property-optional"
+    <dd>User name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1979,8 +2252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicetype_java" style="color: inherit; text-decoration: inherit;">service<wbr>Type</a>
@@ -1988,8 +2260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Own or Cloud, default: <code>Own</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Own or Cloud, default: <code>Own</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sourcename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcename_java" style="color: inherit; text-decoration: inherit;">source<wbr>Name</a>
@@ -1997,8 +2268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Datasource name in BI.</p>
-</dd><dt class="property-optional"
+    <dd>Datasource name in BI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_java" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -2006,8 +2276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tencent cloud private network unified identity.</p>
-</dd><dt class="property-optional"
+    <dd>Tencent cloud private network unified identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2015,8 +2284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tencent cloud private network identity.</p>
-</dd></dl>
+    <dd>Tencent cloud private network identity.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2030,8 +2298,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Catalog.</p>
-</dd><dt class="property-optional"
+    <dd>Catalog.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_nodejs" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -2039,8 +2306,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Charset.</p>
-</dd><dt class="property-optional"
+    <dd>Charset.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dataorigin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataorigin_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Origin</a>
@@ -2048,8 +2314,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource identification, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource identification, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dataorigindatasourceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataorigindatasourceid_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Origin<wbr>Datasource<wbr>Id</a>
@@ -2057,8 +2322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dataoriginprojectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataoriginprojectid_nodejs" style="color: inherit; text-decoration: inherit;">data<wbr>Origin<wbr>Project<wbr>Id</a>
@@ -2066,8 +2330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbhost_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbhost_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Host</a>
@@ -2075,8 +2338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-optional"
+    <dd>Host.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbname_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -2084,8 +2346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbport_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Port</a>
@@ -2093,8 +2354,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port.</p>
-</dd><dt class="property-optional"
+    <dd>Port.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_dbpwd_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbpwd_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Pwd</a>
@@ -2102,8 +2362,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Password.</p>
-</dd><dt class="property-optional"
+    <dd>Password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbtype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbtype_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -2111,8 +2370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</p>
-</dd><dt class="property-optional"
+    <dd><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbuser_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbuser_nodejs" style="color: inherit; text-decoration: inherit;">db<wbr>User</a>
@@ -2120,8 +2378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User name.</p>
-</dd><dt class="property-optional"
+    <dd>User name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2129,8 +2386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicetype_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Type</a>
@@ -2138,8 +2394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Own or Cloud, default: <code>Own</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Own or Cloud, default: <code>Own</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sourcename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcename_nodejs" style="color: inherit; text-decoration: inherit;">source<wbr>Name</a>
@@ -2147,8 +2402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Datasource name in BI.</p>
-</dd><dt class="property-optional"
+    <dd>Datasource name in BI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_nodejs" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -2156,8 +2410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud private network unified identity.</p>
-</dd><dt class="property-optional"
+    <dd>Tencent cloud private network unified identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2165,8 +2418,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Tencent cloud private network identity.</p>
-</dd></dl>
+    <dd>Tencent cloud private network identity.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2180,8 +2432,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Catalog.</p>
-</dd><dt class="property-optional"
+    <dd>Catalog.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_python" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -2189,8 +2440,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Charset.</p>
-</dd><dt class="property-optional"
+    <dd>Charset.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_data_origin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_data_origin_python" style="color: inherit; text-decoration: inherit;">data_<wbr>origin</a>
@@ -2198,8 +2448,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Third-party datasource identification, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource identification, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_data_origin_datasource_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_data_origin_datasource_id_python" style="color: inherit; text-decoration: inherit;">data_<wbr>origin_<wbr>datasource_<wbr>id</a>
@@ -2207,8 +2456,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_data_origin_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_data_origin_project_id_python" style="color: inherit; text-decoration: inherit;">data_<wbr>origin_<wbr>project_<wbr>id</a>
@@ -2216,8 +2464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_db_host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_host_python" style="color: inherit; text-decoration: inherit;">db_<wbr>host</a>
@@ -2225,8 +2472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-optional"
+    <dd>Host.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_db_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_name_python" style="color: inherit; text-decoration: inherit;">db_<wbr>name</a>
@@ -2234,8 +2480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_db_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_port_python" style="color: inherit; text-decoration: inherit;">db_<wbr>port</a>
@@ -2243,8 +2488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port.</p>
-</dd><dt class="property-optional"
+    <dd>Port.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_db_pwd_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_pwd_python" style="color: inherit; text-decoration: inherit;">db_<wbr>pwd</a>
@@ -2252,8 +2496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Password.</p>
-</dd><dt class="property-optional"
+    <dd>Password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_db_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_type_python" style="color: inherit; text-decoration: inherit;">db_<wbr>type</a>
@@ -2261,8 +2504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</p>
-</dd><dt class="property-optional"
+    <dd><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_db_user_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_db_user_python" style="color: inherit; text-decoration: inherit;">db_<wbr>user</a>
@@ -2270,8 +2512,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User name.</p>
-</dd><dt class="property-optional"
+    <dd>User name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -2279,8 +2520,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_service_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_type_python" style="color: inherit; text-decoration: inherit;">service_<wbr>type</a>
@@ -2288,8 +2528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Own or Cloud, default: <code>Own</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Own or Cloud, default: <code>Own</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_source_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_source_name_python" style="color: inherit; text-decoration: inherit;">source_<wbr>name</a>
@@ -2297,8 +2536,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Datasource name in BI.</p>
-</dd><dt class="property-optional"
+    <dd>Datasource name in BI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniq_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniq_vpc_id_python" style="color: inherit; text-decoration: inherit;">uniq_<wbr>vpc_<wbr>id</a>
@@ -2306,8 +2544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tencent cloud private network unified identity.</p>
-</dd><dt class="property-optional"
+    <dd>Tencent cloud private network unified identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2315,8 +2552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Tencent cloud private network identity.</p>
-</dd></dl>
+    <dd>Tencent cloud private network identity.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2330,8 +2566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Catalog.</p>
-</dd><dt class="property-optional"
+    <dd>Catalog.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_charset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_charset_yaml" style="color: inherit; text-decoration: inherit;">charset</a>
@@ -2339,8 +2574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Charset.</p>
-</dd><dt class="property-optional"
+    <dd>Charset.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dataorigin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataorigin_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Origin</a>
@@ -2348,8 +2582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Third-party datasource identification, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource identification, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dataorigindatasourceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataorigindatasourceid_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Origin<wbr>Datasource<wbr>Id</a>
@@ -2357,8 +2590,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dataoriginprojectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dataoriginprojectid_yaml" style="color: inherit; text-decoration: inherit;">data<wbr>Origin<wbr>Project<wbr>Id</a>
@@ -2366,8 +2598,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Third-party datasource project id, this parameter can be ignored.</p>
-</dd><dt class="property-optional"
+    <dd>Third-party datasource project id, this parameter can be ignored.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbhost_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbhost_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Host</a>
@@ -2375,8 +2606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Host.</p>
-</dd><dt class="property-optional"
+    <dd>Host.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbname_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Name</a>
@@ -2384,8 +2614,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Database name.</p>
-</dd><dt class="property-optional"
+    <dd>Database name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbport_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Port</a>
@@ -2393,8 +2622,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port.</p>
-</dd><dt class="property-optional"
+    <dd>Port.</dd><dt class="property-optional property-secret"
             title="Optional">
         <span id="state_dbpwd_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbpwd_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Pwd</a>
@@ -2402,8 +2630,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Password.</p>
-</dd><dt class="property-optional"
+    <dd>Password.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbtype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbtype_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>Type</a>
@@ -2411,8 +2638,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</p>
-</dd><dt class="property-optional"
+    <dd><code>MYSQL</code>, <code>MSSQL</code>, <code>POSTGRE</code>, <code>ORACLE</code>, <code>CLICKHOUSE</code>, <code>TIDB</code>, <code>HIVE</code>, <code>PRESTO</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_dbuser_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dbuser_yaml" style="color: inherit; text-decoration: inherit;">db<wbr>User</a>
@@ -2420,8 +2646,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User name.</p>
-</dd><dt class="property-optional"
+    <dd>User name.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2429,8 +2654,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project id.</p>
-</dd><dt class="property-optional"
+    <dd>Project id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_servicetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_servicetype_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Type</a>
@@ -2438,8 +2662,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Own or Cloud, default: <code>Own</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Own or Cloud, default: <code>Own</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_sourcename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_sourcename_yaml" style="color: inherit; text-decoration: inherit;">source<wbr>Name</a>
@@ -2447,8 +2670,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Datasource name in BI.</p>
-</dd><dt class="property-optional"
+    <dd>Datasource name in BI.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_uniqvpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_uniqvpcid_yaml" style="color: inherit; text-decoration: inherit;">uniq<wbr>Vpc<wbr>Id</a>
@@ -2456,8 +2678,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tencent cloud private network unified identity.</p>
-</dd><dt class="property-optional"
+    <dd>Tencent cloud private network unified identity.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2465,8 +2686,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Tencent cloud private network identity.</p>
-</dd></dl>
+    <dd>Tencent cloud private network identity.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -2489,6 +2709,9 @@ $ pulumi import tencentcloud:Bi/datasource:Datasource datasource datasource_id
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -2498,7 +2721,6 @@ $ pulumi import tencentcloud:Bi/datasource:Datasource datasource datasource_id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Monitor.getStatisticData"
 meta_desc: "Documentation for the tencentcloud.Monitor.getStatisticData function with examples, input properties, output properties, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -23,7 +25,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -31,9 +33,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getStatisticData<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetStatisticDataArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetStatisticDataResult</a></span>></span
+><span class="k">function </span>getStatisticData<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetStatisticDataArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetStatisticDataResult</a></span>></span
 ><span class="k">
-function </span>getStatisticDataOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetStatisticDataOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetStatisticDataResult</a></span>></span
+function </span>getStatisticDataOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetStatisticDataOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetStatisticDataResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -42,7 +44,7 @@ function </span>getStatisticDataOutput<span class="p">(</span><span class="nx">a
 <div>
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
-><span class="k">def </span>get_statistic_data<span class="p">(</span><span class="nx">conditions</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.GetStatisticDataCondition]]</span> = None<span class="p">,</span>
+><span class="k">def </span>get_statistic_data<span class="p">(</span><span class="nx">conditions</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetStatisticDataCondition]]</span> = None<span class="p">,</span>
                        <span class="nx">group_bys</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                        <span class="nx">metric_names</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                        <span class="nx">module</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -50,13 +52,13 @@ function </span>getStatisticDataOutput<span class="p">(</span><span class="nx">a
                        <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetStatisticDataResult</span
 ><span class="k">
-def </span>get_statistic_data_output<span class="p">(</span><span class="nx">conditions</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_monitor.GetStatisticDataConditionArgs]]]]</span> = None<span class="p">,</span>
-                       <span class="nx">group_bys</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                       <span class="nx">metric_names</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                       <span class="nx">module</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">namespace</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetStatisticDataResult]</span
+def </span>get_statistic_data_output<span class="p">(</span><span class="nx">conditions</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetStatisticDataConditionArgs]]]]</span> = None<span class="p">,</span>
+                       <span class="nx">group_bys</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                       <span class="nx">metric_names</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                       <span class="nx">module</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">namespace</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                       <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetStatisticDataResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -81,7 +83,8 @@ func </span>GetStatisticDataOutput<span class="p">(</span><span class="nx">ctx</
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetStatisticData </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetStatisticDataResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetStatisticDataArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetStatisticDataResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetStatisticDataInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetStatisticDataResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetStatisticDataInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetStatisticDataResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetStatisticDataInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -90,7 +93,8 @@ func </span>GetStatisticDataOutput<span class="p">(</span><span class="nx">ctx</
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetStatisticDataResult</a></span>> </span>getStatisticData<span class="p">(</span><span class="nx">GetStatisticDataArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetStatisticDataResult</a></span>> </span>getStatisticData<span class="p">(</span><span class="nx">GetStatisticDataArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetStatisticDataResult</a></span>> </span>getStatisticData<span class="p">(</span><span class="nx">GetStatisticDataArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -102,6 +106,15 @@ func </span>GetStatisticDataOutput<span class="p">(</span><span class="nx">ctx</
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Monitor/getStatisticData:getStatisticData
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_monitor_get_statistic_data&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -219,6 +232,60 @@ The following arguments are supported:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="metric_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_names_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-required"
+            title="Required">
+        <span id="module_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#module_hcl" style="color: inherit; text-decoration: inherit;">module</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-required"
+            title="Required">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="conditions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_hcl" style="color: inherit; text-decoration: inherit;">conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getstatisticdatacondition">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="group_bys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_bys_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>bys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-required"
             title="Required">
@@ -358,7 +425,7 @@ The following arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_python" style="color: inherit; text-decoration: inherit;">conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getstatisticdatacondition">Get<wbr>Statistic<wbr>Data<wbr>Condition]</a></span>
+        <span class="property-type"><a href="#getstatisticdatacondition">Sequence[Get<wbr>Statistic<wbr>Data<wbr>Condition]</a></span>
     </dt>
     <dd></dd><dt class="property-optional"
             title="Optional">
@@ -469,8 +536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="metricnames_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricnames_csharp" style="color: inherit; text-decoration: inherit;">Metric<wbr>Names</a>
@@ -564,8 +630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="metricnames_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricnames_go" style="color: inherit; text-decoration: inherit;">Metric<wbr>Names</a>
@@ -634,6 +699,100 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="datas_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datas_hcl" style="color: inherit; text-decoration: inherit;">datas</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getstatisticdatadata">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="metric_names_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_names_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>names</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="module_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#module_hcl" style="color: inherit; text-decoration: inherit;">module</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="namespace_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_hcl" style="color: inherit; text-decoration: inherit;">namespace</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#period_hcl" style="color: inherit; text-decoration: inherit;">period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="conditions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_hcl" style="color: inherit; text-decoration: inherit;">conditions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getstatisticdatacondition">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="group_bys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_bys_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>bys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -659,8 +818,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="metricnames_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricnames_java" style="color: inherit; text-decoration: inherit;">metric<wbr>Names</a>
@@ -754,8 +912,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="metricnames_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricnames_nodejs" style="color: inherit; text-decoration: inherit;">metric<wbr>Names</a>
@@ -831,7 +988,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#datas_python" style="color: inherit; text-decoration: inherit;">datas</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getstatisticdatadata">Get<wbr>Statistic<wbr>Data<wbr>Data]</a></span>
+        <span class="property-type"><a href="#getstatisticdatadata">Sequence[Get<wbr>Statistic<wbr>Data<wbr>Data]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -849,8 +1006,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="metric_names_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_names_python" style="color: inherit; text-decoration: inherit;">metric_<wbr>names</a>
@@ -896,7 +1052,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#conditions_python" style="color: inherit; text-decoration: inherit;">conditions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getstatisticdatacondition">Get<wbr>Statistic<wbr>Data<wbr>Condition]</a></span>
+        <span class="property-type"><a href="#getstatisticdatacondition">Sequence[Get<wbr>Statistic<wbr>Data<wbr>Condition]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -944,8 +1100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="metricnames_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metricnames_yaml" style="color: inherit; text-decoration: inherit;">metric<wbr>Names</a>
@@ -1033,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Dimension.</p>
-</dd><dt class="property-required"
+    <dd>Dimension.</dd><dt class="property-required"
             title="Required">
         <span id="operator_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_csharp" style="color: inherit; text-decoration: inherit;">Operator</a>
@@ -1042,8 +1196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator. Valid values: eq (equal to), ne (not equal to), in.</p>
-</dd><dt class="property-required"
+    <dd>Operator. Valid values: eq (equal to), ne (not equal to), in.</dd><dt class="property-required"
             title="Required">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1051,8 +1204,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Dimension value. If Operator is eq or ne, only the first element will be used.</p>
-</dd></dl>
+    <dd>Dimension value. If Operator is eq or ne, only the first element will be used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1066,8 +1218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Dimension.</p>
-</dd><dt class="property-required"
+    <dd>Dimension.</dd><dt class="property-required"
             title="Required">
         <span id="operator_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_go" style="color: inherit; text-decoration: inherit;">Operator</a>
@@ -1075,8 +1226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator. Valid values: eq (equal to), ne (not equal to), in.</p>
-</dd><dt class="property-required"
+    <dd>Operator. Valid values: eq (equal to), ne (not equal to), in.</dd><dt class="property-required"
             title="Required">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1084,8 +1234,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Dimension value. If Operator is eq or ne, only the first element will be used.</p>
-</dd></dl>
+    <dd>Dimension value. If Operator is eq or ne, only the first element will be used.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#key_hcl" style="color: inherit; text-decoration: inherit;">key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Dimension.</dd><dt class="property-required"
+            title="Required">
+        <span id="operator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_hcl" style="color: inherit; text-decoration: inherit;">operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Operator. Valid values: eq (equal to), ne (not equal to), in.</dd><dt class="property-required"
+            title="Required">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Dimension value. If Operator is eq or ne, only the first element will be used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1099,8 +1278,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Dimension.</p>
-</dd><dt class="property-required"
+    <dd>Dimension.</dd><dt class="property-required"
             title="Required">
         <span id="operator_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_java" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -1108,8 +1286,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator. Valid values: eq (equal to), ne (not equal to), in.</p>
-</dd><dt class="property-required"
+    <dd>Operator. Valid values: eq (equal to), ne (not equal to), in.</dd><dt class="property-required"
             title="Required">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1117,8 +1294,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Dimension value. If Operator is eq or ne, only the first element will be used.</p>
-</dd></dl>
+    <dd>Dimension value. If Operator is eq or ne, only the first element will be used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1132,8 +1308,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Dimension.</p>
-</dd><dt class="property-required"
+    <dd>Dimension.</dd><dt class="property-required"
             title="Required">
         <span id="operator_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_nodejs" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -1141,8 +1316,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Operator. Valid values: eq (equal to), ne (not equal to), in.</p>
-</dd><dt class="property-required"
+    <dd>Operator. Valid values: eq (equal to), ne (not equal to), in.</dd><dt class="property-required"
             title="Required">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1150,8 +1324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Dimension value. If Operator is eq or ne, only the first element will be used.</p>
-</dd></dl>
+    <dd>Dimension value. If Operator is eq or ne, only the first element will be used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1165,8 +1338,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Dimension.</p>
-</dd><dt class="property-required"
+    <dd>Dimension.</dd><dt class="property-required"
             title="Required">
         <span id="operator_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_python" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -1174,8 +1346,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Operator. Valid values: eq (equal to), ne (not equal to), in.</p>
-</dd><dt class="property-required"
+    <dd>Operator. Valid values: eq (equal to), ne (not equal to), in.</dd><dt class="property-required"
             title="Required">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1183,8 +1354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Dimension value. If Operator is eq or ne, only the first element will be used.</p>
-</dd></dl>
+    <dd>Dimension value. If Operator is eq or ne, only the first element will be used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1198,8 +1368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Dimension.</p>
-</dd><dt class="property-required"
+    <dd>Dimension.</dd><dt class="property-required"
             title="Required">
         <span id="operator_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operator_yaml" style="color: inherit; text-decoration: inherit;">operator</a>
@@ -1207,8 +1376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Operator. Valid values: eq (equal to), ne (not equal to), in.</p>
-</dd><dt class="property-required"
+    <dd>Operator. Valid values: eq (equal to), ne (not equal to), in.</dd><dt class="property-required"
             title="Required">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1216,8 +1384,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Dimension value. If Operator is eq or ne, only the first element will be used.</p>
-</dd></dl>
+    <dd>Dimension value. If Operator is eq or ne, only the first element will be used.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1235,8 +1402,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric name.</p>
-</dd><dt class="property-required"
+    <dd>Metric name.</dd><dt class="property-required"
             title="Required">
         <span id="points_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#points_csharp" style="color: inherit; text-decoration: inherit;">Points</a>
@@ -1244,8 +1410,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstatisticdatadatapoint">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point&gt;</a></span>
     </dt>
-    <dd><p>Monitoring data point.</p>
-</dd></dl>
+    <dd>Monitoring data point.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1259,8 +1424,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric name.</p>
-</dd><dt class="property-required"
+    <dd>Metric name.</dd><dt class="property-required"
             title="Required">
         <span id="points_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#points_go" style="color: inherit; text-decoration: inherit;">Points</a>
@@ -1268,8 +1432,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstatisticdatadatapoint">[]Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point</a></span>
     </dt>
-    <dd><p>Monitoring data point.</p>
-</dd></dl>
+    <dd>Monitoring data point.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="metric_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#metric_name_hcl" style="color: inherit; text-decoration: inherit;">metric_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Metric name.</dd><dt class="property-required"
+            title="Required">
+        <span id="points_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#points_hcl" style="color: inherit; text-decoration: inherit;">points</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getstatisticdatadatapoint">list(object)</a></span>
+    </dt>
+    <dd>Monitoring data point.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1283,8 +1468,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Metric name.</p>
-</dd><dt class="property-required"
+    <dd>Metric name.</dd><dt class="property-required"
             title="Required">
         <span id="points_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#points_java" style="color: inherit; text-decoration: inherit;">points</a>
@@ -1292,8 +1476,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstatisticdatadatapoint">List&lt;Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point&gt;</a></span>
     </dt>
-    <dd><p>Monitoring data point.</p>
-</dd></dl>
+    <dd>Monitoring data point.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1307,8 +1490,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Metric name.</p>
-</dd><dt class="property-required"
+    <dd>Metric name.</dd><dt class="property-required"
             title="Required">
         <span id="points_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#points_nodejs" style="color: inherit; text-decoration: inherit;">points</a>
@@ -1316,8 +1498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstatisticdatadatapoint">Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point[]</a></span>
     </dt>
-    <dd><p>Monitoring data point.</p>
-</dd></dl>
+    <dd>Monitoring data point.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1331,17 +1512,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Metric name.</p>
-</dd><dt class="property-required"
+    <dd>Metric name.</dd><dt class="property-required"
             title="Required">
         <span id="points_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#points_python" style="color: inherit; text-decoration: inherit;">points</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getstatisticdatadatapoint">Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point]</a></span>
+        <span class="property-type"><a href="#getstatisticdatadatapoint">Sequence[Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point]</a></span>
     </dt>
-    <dd><p>Monitoring data point.</p>
-</dd></dl>
+    <dd>Monitoring data point.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1355,8 +1534,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Metric name.</p>
-</dd><dt class="property-required"
+    <dd>Metric name.</dd><dt class="property-required"
             title="Required">
         <span id="points_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#points_yaml" style="color: inherit; text-decoration: inherit;">points</a>
@@ -1364,8 +1542,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstatisticdatadatapoint">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Monitoring data point.</p>
-</dd></dl>
+    <dd>Monitoring data point.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1383,8 +1560,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstatisticdatadatapointdimension">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point<wbr>Dimension&gt;</a></span>
     </dt>
-    <dd><p>Combination of instance object dimensions.</p>
-</dd><dt class="property-required"
+    <dd>Combination of instance object dimensions.</dd><dt class="property-required"
             title="Required">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1392,8 +1568,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstatisticdatadatapointvalue">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point<wbr>Value&gt;</a></span>
     </dt>
-    <dd><p>Data point list.</p>
-</dd></dl>
+    <dd>Data point list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1407,8 +1582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstatisticdatadatapointdimension">[]Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point<wbr>Dimension</a></span>
     </dt>
-    <dd><p>Combination of instance object dimensions.</p>
-</dd><dt class="property-required"
+    <dd>Combination of instance object dimensions.</dd><dt class="property-required"
             title="Required">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -1416,8 +1590,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstatisticdatadatapointvalue">[]Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point<wbr>Value</a></span>
     </dt>
-    <dd><p>Data point list.</p>
-</dd></dl>
+    <dd>Data point list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="dimensions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_hcl" style="color: inherit; text-decoration: inherit;">dimensions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getstatisticdatadatapointdimension">list(object)</a></span>
+    </dt>
+    <dd>Combination of instance object dimensions.</dd><dt class="property-required"
+            title="Required">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getstatisticdatadatapointvalue">list(object)</a></span>
+    </dt>
+    <dd>Data point list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1431,8 +1626,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstatisticdatadatapointdimension">List&lt;Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point<wbr>Dimension&gt;</a></span>
     </dt>
-    <dd><p>Combination of instance object dimensions.</p>
-</dd><dt class="property-required"
+    <dd>Combination of instance object dimensions.</dd><dt class="property-required"
             title="Required">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1440,8 +1634,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstatisticdatadatapointvalue">List&lt;Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point<wbr>Value&gt;</a></span>
     </dt>
-    <dd><p>Data point list.</p>
-</dd></dl>
+    <dd>Data point list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1455,8 +1648,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstatisticdatadatapointdimension">Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point<wbr>Dimension[]</a></span>
     </dt>
-    <dd><p>Combination of instance object dimensions.</p>
-</dd><dt class="property-required"
+    <dd>Combination of instance object dimensions.</dd><dt class="property-required"
             title="Required">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1464,8 +1656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstatisticdatadatapointvalue">Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point<wbr>Value[]</a></span>
     </dt>
-    <dd><p>Data point list.</p>
-</dd></dl>
+    <dd>Data point list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1477,19 +1668,17 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_python" style="color: inherit; text-decoration: inherit;">dimensions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getstatisticdatadatapointdimension">Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point<wbr>Dimension]</a></span>
+        <span class="property-type"><a href="#getstatisticdatadatapointdimension">Sequence[Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point<wbr>Dimension]</a></span>
     </dt>
-    <dd><p>Combination of instance object dimensions.</p>
-</dd><dt class="property-required"
+    <dd>Combination of instance object dimensions.</dd><dt class="property-required"
             title="Required">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getstatisticdatadatapointvalue">Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point<wbr>Value]</a></span>
+        <span class="property-type"><a href="#getstatisticdatadatapointvalue">Sequence[Get<wbr>Statistic<wbr>Data<wbr>Data<wbr>Point<wbr>Value]</a></span>
     </dt>
-    <dd><p>Data point list.</p>
-</dd></dl>
+    <dd>Data point list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1503,8 +1692,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstatisticdatadatapointdimension">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Combination of instance object dimensions.</p>
-</dd><dt class="property-required"
+    <dd>Combination of instance object dimensions.</dd><dt class="property-required"
             title="Required">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -1512,8 +1700,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getstatisticdatadatapointvalue">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Data point list.</p>
-</dd></dl>
+    <dd>Data point list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1531,8 +1718,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension name.</p>
-</dd><dt class="property-required"
+    <dd>Instance dimension name.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1540,8 +1726,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension value.</p>
-</dd></dl>
+    <dd>Instance dimension value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1555,8 +1740,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension name.</p>
-</dd><dt class="property-required"
+    <dd>Instance dimension name.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1564,8 +1748,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension value.</p>
-</dd></dl>
+    <dd>Instance dimension value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance dimension name.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance dimension value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1579,8 +1784,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance dimension name.</p>
-</dd><dt class="property-required"
+    <dd>Instance dimension name.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1588,8 +1792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance dimension value.</p>
-</dd></dl>
+    <dd>Instance dimension value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1603,8 +1806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension name.</p>
-</dd><dt class="property-required"
+    <dd>Instance dimension name.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1612,8 +1814,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance dimension value.</p>
-</dd></dl>
+    <dd>Instance dimension value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1627,8 +1828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance dimension name.</p>
-</dd><dt class="property-required"
+    <dd>Instance dimension name.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1636,8 +1836,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance dimension value.</p>
-</dd></dl>
+    <dd>Instance dimension value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1651,8 +1850,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance dimension name.</p>
-</dd><dt class="property-required"
+    <dd>Instance dimension name.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1660,8 +1858,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance dimension value.</p>
-</dd></dl>
+    <dd>Instance dimension value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1679,8 +1876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time point when this monitoring data point is generated.</p>
-</dd><dt class="property-required"
+    <dd>Time point when this monitoring data point is generated.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1688,8 +1884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1703,8 +1898,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time point when this monitoring data point is generated.</p>
-</dd><dt class="property-required"
+    <dd>Time point when this monitoring data point is generated.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -1712,8 +1906,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="timestamp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timestamp_hcl" style="color: inherit; text-decoration: inherit;">timestamp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Time point when this monitoring data point is generated.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1727,8 +1942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Time point when this monitoring data point is generated.</p>
-</dd><dt class="property-required"
+    <dd>Time point when this monitoring data point is generated.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1736,8 +1950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1751,8 +1964,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Time point when this monitoring data point is generated.</p>
-</dd><dt class="property-required"
+    <dd>Time point when this monitoring data point is generated.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1760,8 +1972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1775,8 +1986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Time point when this monitoring data point is generated.</p>
-</dd><dt class="property-required"
+    <dd>Time point when this monitoring data point is generated.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1784,8 +1994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1799,8 +2008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Time point when this monitoring data point is generated.</p>
-</dd><dt class="property-required"
+    <dd>Time point when this monitoring data point is generated.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -1808,8 +2016,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.</p>
-</dd></dl>
+    <dd>Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1824,7 +2031,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

@@ -2,9 +2,11 @@
 ---
 title: "getResources"
 title_tag: "tencentcloud.Clb.getResources"
-meta_desc: "Documentation for the tencentcloud.Clb.getResources function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of clb resources"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,32 +18,79 @@ Use this data source to query detailed information of clb resources
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const resources = tencentcloud.Clb.getResources({
+const resources = tencentcloud.clb.getResources({
     filters: [{
         name: "isp",
         values: ["BGP"],
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-resources = tencentcloud.Clb.get_resources(filters=[tencentcloud.clb.GetResourcesFilterArgs(
-    name="isp",
-    values=["BGP"],
-)])
+resources = tencentcloud.clb.get_resources(filters=[{
+    "name": "isp",
+    "values": ["BGP"],
+}])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clb.GetResources(ctx, &clb.GetResourcesArgs{
+			Filters: []clb.GetResourcesFilter{
+				{
+					Name: "isp",
+					Values: []string{
+						"BGP",
+					},
+				},
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -62,33 +111,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.GetResources(ctx, &clb.GetResourcesArgs{
-			Filters: []clb.GetResourcesFilter{
-				{
-					Name: "isp",
-					Values: []string{
-						"BGP",
-					},
-				},
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -97,8 +124,9 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clb.ClbFunctions;
 import com.pulumi.tencentcloud.Clb.inputs.GetResourcesArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Clb.inputs.GetResourcesFilterArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -120,19 +148,52 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   resources:
     fn::invoke:
-      Function: tencentcloud:Clb:getResources
-      Arguments:
+      function: tencentcloud:Clb:getResources
+      arguments:
         filters:
           - name: isp
             values:
               - BGP
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_clb_getresources" "resources" {
+  filters {
+    name   = "isp"
+    values = ["BGP"]
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeResources](https://www.tencentcloud.com/document/api/214/51214)
 
 
 
@@ -144,7 +205,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -152,9 +213,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getResources<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetResourcesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetResourcesResult</a></span>></span
+><span class="k">function </span>getResources<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetResourcesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetResourcesResult</a></span>></span
 ><span class="k">
-function </span>getResourcesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetResourcesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetResourcesResult</a></span>></span
+function </span>getResourcesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetResourcesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetResourcesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -163,13 +224,13 @@ function </span>getResourcesOutput<span class="p">(</span><span class="nx">args<
 <div>
 <pulumi-choosable type="language" values="python">
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"
-><span class="k">def </span>get_resources<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[_clb.GetResourcesFilter]]</span> = None<span class="p">,</span>
+><span class="k">def </span>get_resources<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[Sequence[GetResourcesFilter]]</span> = None<span class="p">,</span>
                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetResourcesResult</span
 ><span class="k">
-def </span>get_resources_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[_clb.GetResourcesFilterArgs]]]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetResourcesResult]</span
+def </span>get_resources_output<span class="p">(</span><span class="nx">filters</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[GetResourcesFilterArgs]]]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetResourcesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -194,7 +255,8 @@ func </span>GetResourcesOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetResources </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetResourcesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetResourcesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetResourcesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetResourcesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetResourcesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetResourcesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetResourcesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetResourcesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -203,7 +265,8 @@ func </span>GetResourcesOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetResourcesResult</a></span>> </span>getResources<span class="p">(</span><span class="nx">GetResourcesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetResourcesResult</a></span>> </span>getResources<span class="p">(</span><span class="nx">GetResourcesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetResourcesResult</a></span>> </span>getResources<span class="p">(</span><span class="nx">GetResourcesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -215,6 +278,15 @@ func </span>GetResourcesOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Clb/getResources:getResources
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_clb_get_resources&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -233,8 +305,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourcesfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Get<wbr>Resources<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter to query the list of AZ resources as detailed below: zone - String - Optional - Filter by AZ, such as ap-guangzhou-1. isp -- String - Optional - Filter by the ISP. Values: BGP, CMCC, CUCC and CTCC.</p>
-</dd><dt class="property-optional"
+    <dd>Filter to query the list of AZ resources as detailed below: zone - String - Optional - Filter by AZ, such as ap-guangzhou-1. isp -- String - Optional - Filter by the ISP. Values: BGP, CMCC, CUCC and CTCC.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -242,8 +313,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -257,8 +327,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourcesfilter">[]Get<wbr>Resources<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filter to query the list of AZ resources as detailed below: zone - String - Optional - Filter by AZ, such as ap-guangzhou-1. isp -- String - Optional - Filter by the ISP. Values: BGP, CMCC, CUCC and CTCC.</p>
-</dd><dt class="property-optional"
+    <dd>Filter to query the list of AZ resources as detailed below: zone - String - Optional - Filter by AZ, such as ap-guangzhou-1. isp -- String - Optional - Filter by the ISP. Values: BGP, CMCC, CUCC and CTCC.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -266,8 +335,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getresourcesfilter">list(object)</a></span>
+    </dt>
+    <dd>Filter to query the list of AZ resources as detailed below: zone - String - Optional - Filter by AZ, such as ap-guangzhou-1. isp -- String - Optional - Filter by the ISP. Values: BGP, CMCC, CUCC and CTCC.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -281,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourcesfilter">List&lt;Get<wbr>Resources<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filter to query the list of AZ resources as detailed below: zone - String - Optional - Filter by AZ, such as ap-guangzhou-1. isp -- String - Optional - Filter by the ISP. Values: BGP, CMCC, CUCC and CTCC.</p>
-</dd><dt class="property-optional"
+    <dd>Filter to query the list of AZ resources as detailed below: zone - String - Optional - Filter by AZ, such as ap-guangzhou-1. isp -- String - Optional - Filter by the ISP. Values: BGP, CMCC, CUCC and CTCC.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -290,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -305,8 +393,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourcesfilter">Get<wbr>Resources<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>Filter to query the list of AZ resources as detailed below: zone - String - Optional - Filter by AZ, such as ap-guangzhou-1. isp -- String - Optional - Filter by the ISP. Values: BGP, CMCC, CUCC and CTCC.</p>
-</dd><dt class="property-optional"
+    <dd>Filter to query the list of AZ resources as detailed below: zone - String - Optional - Filter by AZ, such as ap-guangzhou-1. isp -- String - Optional - Filter by the ISP. Values: BGP, CMCC, CUCC and CTCC.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -314,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -327,10 +413,9 @@ The following arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getresourcesfilter">Get<wbr>Resources<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getresourcesfilter">Sequence[Get<wbr>Resources<wbr>Filter]</a></span>
     </dt>
-    <dd><p>Filter to query the list of AZ resources as detailed below: zone - String - Optional - Filter by AZ, such as ap-guangzhou-1. isp -- String - Optional - Filter by the ISP. Values: BGP, CMCC, CUCC and CTCC.</p>
-</dd><dt class="property-optional"
+    <dd>Filter to query the list of AZ resources as detailed below: zone - String - Optional - Filter by AZ, such as ap-guangzhou-1. isp -- String - Optional - Filter by the ISP. Values: BGP, CMCC, CUCC and CTCC.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -338,8 +423,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -353,8 +437,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourcesfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Filter to query the list of AZ resources as detailed below: zone - String - Optional - Filter by AZ, such as ap-guangzhou-1. isp -- String - Optional - Filter by the ISP. Values: BGP, CMCC, CUCC and CTCC.</p>
-</dd><dt class="property-optional"
+    <dd>Filter to query the list of AZ resources as detailed below: zone - String - Optional - Filter by AZ, such as ap-guangzhou-1. isp -- String - Optional - Filter by the ISP. Values: BGP, CMCC, CUCC and CTCC.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -362,8 +445,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -386,8 +468,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zoneresourcesets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneresourcesets_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Resource<wbr>Sets</a>
@@ -395,8 +476,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourceszoneresourceset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Outputs.<wbr>Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of resources supported by the AZ.</p>
-</dd><dt class="property-"
+    <dd>List of resources supported by the AZ.</dd><dt class="property-"
             title="">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -426,8 +506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zoneresourcesets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneresourcesets_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Resource<wbr>Sets</a>
@@ -435,8 +514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourceszoneresourceset">[]Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set</a></span>
     </dt>
-    <dd><p>List of resources supported by the AZ.</p>
-</dd><dt class="property-"
+    <dd>List of resources supported by the AZ.</dd><dt class="property-"
             title="">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -457,6 +535,44 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="zone_resource_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_resource_sets_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>resource_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getresourceszoneresourceset">list(object)</a></span>
+    </dt>
+    <dd>List of resources supported by the AZ.</dd><dt class="property-"
+            title="">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getresourcesfilter">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -466,8 +582,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zoneresourcesets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneresourcesets_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Resource<wbr>Sets</a>
@@ -475,8 +590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourceszoneresourceset">List&lt;Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of resources supported by the AZ.</p>
-</dd><dt class="property-"
+    <dd>List of resources supported by the AZ.</dd><dt class="property-"
             title="">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -506,8 +620,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zoneresourcesets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneresourcesets_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Resource<wbr>Sets</a>
@@ -515,8 +628,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourceszoneresourceset">Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set[]</a></span>
     </dt>
-    <dd><p>List of resources supported by the AZ.</p>
-</dd><dt class="property-"
+    <dd>List of resources supported by the AZ.</dd><dt class="property-"
             title="">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -546,23 +658,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zone_resource_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_resource_sets_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>resource_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getresourceszoneresourceset">Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getresourceszoneresourceset">Sequence[Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set]</a></span>
     </dt>
-    <dd><p>List of resources supported by the AZ.</p>
-</dd><dt class="property-"
+    <dd>List of resources supported by the AZ.</dd><dt class="property-"
             title="">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getresourcesfilter">Get<wbr>Resources<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getresourcesfilter">Sequence[Get<wbr>Resources<wbr>Filter]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -586,8 +696,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="zoneresourcesets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneresourcesets_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Resource<wbr>Sets</a>
@@ -595,8 +704,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourceszoneresourceset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of resources supported by the AZ.</p>
-</dd><dt class="property-"
+    <dd>List of resources supported by the AZ.</dd><dt class="property-"
             title="">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -636,8 +744,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter name.</p>
-</dd><dt class="property-required"
+    <dd>Filter name.</dd><dt class="property-required"
             title="Required">
         <span id="values_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_csharp" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -645,8 +752,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Filter value array.</p>
-</dd></dl>
+    <dd>Filter value array.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -660,8 +766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter name.</p>
-</dd><dt class="property-required"
+    <dd>Filter name.</dd><dt class="property-required"
             title="Required">
         <span id="values_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_go" style="color: inherit; text-decoration: inherit;">Values</a>
@@ -669,8 +774,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Filter value array.</p>
-</dd></dl>
+    <dd>Filter value array.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Filter name.</dd><dt class="property-required"
+            title="Required">
+        <span id="values_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_hcl" style="color: inherit; text-decoration: inherit;">values</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Filter value array.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -684,8 +810,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter name.</p>
-</dd><dt class="property-required"
+    <dd>Filter name.</dd><dt class="property-required"
             title="Required">
         <span id="values_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_java" style="color: inherit; text-decoration: inherit;">values</a>
@@ -693,8 +818,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Filter value array.</p>
-</dd></dl>
+    <dd>Filter value array.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -708,8 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Filter name.</p>
-</dd><dt class="property-required"
+    <dd>Filter name.</dd><dt class="property-required"
             title="Required">
         <span id="values_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_nodejs" style="color: inherit; text-decoration: inherit;">values</a>
@@ -717,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Filter value array.</p>
-</dd></dl>
+    <dd>Filter value array.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -732,8 +854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Filter name.</p>
-</dd><dt class="property-required"
+    <dd>Filter name.</dd><dt class="property-required"
             title="Required">
         <span id="values_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_python" style="color: inherit; text-decoration: inherit;">values</a>
@@ -741,8 +862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Filter value array.</p>
-</dd></dl>
+    <dd>Filter value array.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -756,8 +876,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Filter name.</p>
-</dd><dt class="property-required"
+    <dd>Filter name.</dd><dt class="property-required"
             title="Required">
         <span id="values_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#values_yaml" style="color: inherit; text-decoration: inherit;">values</a>
@@ -765,8 +884,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Filter value array.</p>
-</dd></dl>
+    <dd>Filter value array.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -784,8 +902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the AZ is an edge zone. Values: true, false.</p>
-</dd><dt class="property-required"
+    <dd>Whether the AZ is an edge zone. Values: true, false.</dd><dt class="property-required"
             title="Required">
         <span id="ipversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipversion_csharp" style="color: inherit; text-decoration: inherit;">Ip<wbr>Version</a>
@@ -793,8 +910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version. Values: IPv4, IPv6, and IPv6_Nat.</p>
-</dd><dt class="property-required"
+    <dd>IP version. Values: IPv4, IPv6, and IPv6_Nat.</dd><dt class="property-required"
             title="Required">
         <span id="localzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localzone_csharp" style="color: inherit; text-decoration: inherit;">Local<wbr>Zone</a>
@@ -802,8 +918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the AZ is a LocalZone. Values: true, false.</p>
-</dd><dt class="property-required"
+    <dd>Whether the AZ is a LocalZone. Values: true, false.</dd><dt class="property-required"
             title="Required">
         <span id="masterzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzone_csharp" style="color: inherit; text-decoration: inherit;">Master<wbr>Zone</a>
@@ -811,8 +926,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary AZ, such as ap-guangzhou-1.</p>
-</dd><dt class="property-required"
+    <dd>Primary AZ, such as ap-guangzhou-1.</dd><dt class="property-required"
             title="Required">
         <span id="resourcesets_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcesets_csharp" style="color: inherit; text-decoration: inherit;">Resource<wbr>Sets</a>
@@ -820,8 +934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourceszoneresourcesetresourceset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set<wbr>Resource<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of resources. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>List of resources. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="slavezone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavezone_csharp" style="color: inherit; text-decoration: inherit;">Slave<wbr>Zone</a>
@@ -829,8 +942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="zoneregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneregion_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Region</a>
@@ -838,8 +950,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the AZ, such as ap-guangzhou.</p>
-</dd><dt class="property-required"
+    <dd>Region of the AZ, such as ap-guangzhou.</dd><dt class="property-required"
             title="Required">
         <span id="zoneresourcetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneresourcetype_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Resource<wbr>Type</a>
@@ -847,8 +958,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of resources in the zone. Values: SHARED, EXCLUSIVE.</p>
-</dd></dl>
+    <dd>Type of resources in the zone. Values: SHARED, EXCLUSIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -862,8 +972,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the AZ is an edge zone. Values: true, false.</p>
-</dd><dt class="property-required"
+    <dd>Whether the AZ is an edge zone. Values: true, false.</dd><dt class="property-required"
             title="Required">
         <span id="ipversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipversion_go" style="color: inherit; text-decoration: inherit;">Ip<wbr>Version</a>
@@ -871,8 +980,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version. Values: IPv4, IPv6, and IPv6_Nat.</p>
-</dd><dt class="property-required"
+    <dd>IP version. Values: IPv4, IPv6, and IPv6_Nat.</dd><dt class="property-required"
             title="Required">
         <span id="localzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localzone_go" style="color: inherit; text-decoration: inherit;">Local<wbr>Zone</a>
@@ -880,8 +988,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the AZ is a LocalZone. Values: true, false.</p>
-</dd><dt class="property-required"
+    <dd>Whether the AZ is a LocalZone. Values: true, false.</dd><dt class="property-required"
             title="Required">
         <span id="masterzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzone_go" style="color: inherit; text-decoration: inherit;">Master<wbr>Zone</a>
@@ -889,8 +996,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary AZ, such as ap-guangzhou-1.</p>
-</dd><dt class="property-required"
+    <dd>Primary AZ, such as ap-guangzhou-1.</dd><dt class="property-required"
             title="Required">
         <span id="resourcesets_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcesets_go" style="color: inherit; text-decoration: inherit;">Resource<wbr>Sets</a>
@@ -898,8 +1004,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourceszoneresourcesetresourceset">[]Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set<wbr>Resource<wbr>Set</a></span>
     </dt>
-    <dd><p>List of resources. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>List of resources. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="slavezone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavezone_go" style="color: inherit; text-decoration: inherit;">Slave<wbr>Zone</a>
@@ -907,8 +1012,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="zoneregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneregion_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Region</a>
@@ -916,8 +1020,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the AZ, such as ap-guangzhou.</p>
-</dd><dt class="property-required"
+    <dd>Region of the AZ, such as ap-guangzhou.</dd><dt class="property-required"
             title="Required">
         <span id="zoneresourcetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneresourcetype_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Resource<wbr>Type</a>
@@ -925,8 +1028,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of resources in the zone. Values: SHARED, EXCLUSIVE.</p>
-</dd></dl>
+    <dd>Type of resources in the zone. Values: SHARED, EXCLUSIVE.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="edge_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#edge_zone_hcl" style="color: inherit; text-decoration: inherit;">edge_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the AZ is an edge zone. Values: true, false.</dd><dt class="property-required"
+            title="Required">
+        <span id="ip_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_version_hcl" style="color: inherit; text-decoration: inherit;">ip_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP version. Values: IPv4, IPv6, and IPv6_Nat.</dd><dt class="property-required"
+            title="Required">
+        <span id="local_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_zone_hcl" style="color: inherit; text-decoration: inherit;">local_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the AZ is a LocalZone. Values: true, false.</dd><dt class="property-required"
+            title="Required">
+        <span id="master_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_zone_hcl" style="color: inherit; text-decoration: inherit;">master_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Primary AZ, such as ap-guangzhou-1.</dd><dt class="property-required"
+            title="Required">
+        <span id="resource_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_sets_hcl" style="color: inherit; text-decoration: inherit;">resource_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getresourceszoneresourcesetresourceset">list(object)</a></span>
+    </dt>
+    <dd>List of resources. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="slave_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slave_zone_hcl" style="color: inherit; text-decoration: inherit;">slave_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_region_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region of the AZ, such as ap-guangzhou.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_resource_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_resource_type_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>resource_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of resources in the zone. Values: SHARED, EXCLUSIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -940,8 +1112,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the AZ is an edge zone. Values: true, false.</p>
-</dd><dt class="property-required"
+    <dd>Whether the AZ is an edge zone. Values: true, false.</dd><dt class="property-required"
             title="Required">
         <span id="ipversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipversion_java" style="color: inherit; text-decoration: inherit;">ip<wbr>Version</a>
@@ -949,8 +1120,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version. Values: IPv4, IPv6, and IPv6_Nat.</p>
-</dd><dt class="property-required"
+    <dd>IP version. Values: IPv4, IPv6, and IPv6_Nat.</dd><dt class="property-required"
             title="Required">
         <span id="localzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localzone_java" style="color: inherit; text-decoration: inherit;">local<wbr>Zone</a>
@@ -958,8 +1128,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the AZ is a LocalZone. Values: true, false.</p>
-</dd><dt class="property-required"
+    <dd>Whether the AZ is a LocalZone. Values: true, false.</dd><dt class="property-required"
             title="Required">
         <span id="masterzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzone_java" style="color: inherit; text-decoration: inherit;">master<wbr>Zone</a>
@@ -967,8 +1136,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Primary AZ, such as ap-guangzhou-1.</p>
-</dd><dt class="property-required"
+    <dd>Primary AZ, such as ap-guangzhou-1.</dd><dt class="property-required"
             title="Required">
         <span id="resourcesets_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcesets_java" style="color: inherit; text-decoration: inherit;">resource<wbr>Sets</a>
@@ -976,8 +1144,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourceszoneresourcesetresourceset">List&lt;Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set<wbr>Resource<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>List of resources. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>List of resources. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="slavezone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavezone_java" style="color: inherit; text-decoration: inherit;">slave<wbr>Zone</a>
@@ -985,8 +1152,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="zoneregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneregion_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Region</a>
@@ -994,8 +1160,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the AZ, such as ap-guangzhou.</p>
-</dd><dt class="property-required"
+    <dd>Region of the AZ, such as ap-guangzhou.</dd><dt class="property-required"
             title="Required">
         <span id="zoneresourcetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneresourcetype_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Resource<wbr>Type</a>
@@ -1003,8 +1168,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of resources in the zone. Values: SHARED, EXCLUSIVE.</p>
-</dd></dl>
+    <dd>Type of resources in the zone. Values: SHARED, EXCLUSIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1018,8 +1182,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the AZ is an edge zone. Values: true, false.</p>
-</dd><dt class="property-required"
+    <dd>Whether the AZ is an edge zone. Values: true, false.</dd><dt class="property-required"
             title="Required">
         <span id="ipversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipversion_nodejs" style="color: inherit; text-decoration: inherit;">ip<wbr>Version</a>
@@ -1027,8 +1190,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version. Values: IPv4, IPv6, and IPv6_Nat.</p>
-</dd><dt class="property-required"
+    <dd>IP version. Values: IPv4, IPv6, and IPv6_Nat.</dd><dt class="property-required"
             title="Required">
         <span id="localzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localzone_nodejs" style="color: inherit; text-decoration: inherit;">local<wbr>Zone</a>
@@ -1036,8 +1198,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether the AZ is a LocalZone. Values: true, false.</p>
-</dd><dt class="property-required"
+    <dd>Whether the AZ is a LocalZone. Values: true, false.</dd><dt class="property-required"
             title="Required">
         <span id="masterzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzone_nodejs" style="color: inherit; text-decoration: inherit;">master<wbr>Zone</a>
@@ -1045,8 +1206,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Primary AZ, such as ap-guangzhou-1.</p>
-</dd><dt class="property-required"
+    <dd>Primary AZ, such as ap-guangzhou-1.</dd><dt class="property-required"
             title="Required">
         <span id="resourcesets_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcesets_nodejs" style="color: inherit; text-decoration: inherit;">resource<wbr>Sets</a>
@@ -1054,8 +1214,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourceszoneresourcesetresourceset">Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set<wbr>Resource<wbr>Set[]</a></span>
     </dt>
-    <dd><p>List of resources. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>List of resources. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="slavezone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavezone_nodejs" style="color: inherit; text-decoration: inherit;">slave<wbr>Zone</a>
@@ -1063,8 +1222,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="zoneregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneregion_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Region</a>
@@ -1072,8 +1230,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region of the AZ, such as ap-guangzhou.</p>
-</dd><dt class="property-required"
+    <dd>Region of the AZ, such as ap-guangzhou.</dd><dt class="property-required"
             title="Required">
         <span id="zoneresourcetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneresourcetype_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Resource<wbr>Type</a>
@@ -1081,8 +1238,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of resources in the zone. Values: SHARED, EXCLUSIVE.</p>
-</dd></dl>
+    <dd>Type of resources in the zone. Values: SHARED, EXCLUSIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1096,8 +1252,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the AZ is an edge zone. Values: true, false.</p>
-</dd><dt class="property-required"
+    <dd>Whether the AZ is an edge zone. Values: true, false.</dd><dt class="property-required"
             title="Required">
         <span id="ip_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_version_python" style="color: inherit; text-decoration: inherit;">ip_<wbr>version</a>
@@ -1105,8 +1260,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP version. Values: IPv4, IPv6, and IPv6_Nat.</p>
-</dd><dt class="property-required"
+    <dd>IP version. Values: IPv4, IPv6, and IPv6_Nat.</dd><dt class="property-required"
             title="Required">
         <span id="local_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_zone_python" style="color: inherit; text-decoration: inherit;">local_<wbr>zone</a>
@@ -1114,8 +1268,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether the AZ is a LocalZone. Values: true, false.</p>
-</dd><dt class="property-required"
+    <dd>Whether the AZ is a LocalZone. Values: true, false.</dd><dt class="property-required"
             title="Required">
         <span id="master_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_zone_python" style="color: inherit; text-decoration: inherit;">master_<wbr>zone</a>
@@ -1123,17 +1276,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Primary AZ, such as ap-guangzhou-1.</p>
-</dd><dt class="property-required"
+    <dd>Primary AZ, such as ap-guangzhou-1.</dd><dt class="property-required"
             title="Required">
         <span id="resource_sets_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resource_sets_python" style="color: inherit; text-decoration: inherit;">resource_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getresourceszoneresourcesetresourceset">Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set<wbr>Resource<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getresourceszoneresourcesetresourceset">Sequence[Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set<wbr>Resource<wbr>Set]</a></span>
     </dt>
-    <dd><p>List of resources. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>List of resources. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="slave_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slave_zone_python" style="color: inherit; text-decoration: inherit;">slave_<wbr>zone</a>
@@ -1141,8 +1292,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="zone_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_region_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>region</a>
@@ -1150,8 +1300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region of the AZ, such as ap-guangzhou.</p>
-</dd><dt class="property-required"
+    <dd>Region of the AZ, such as ap-guangzhou.</dd><dt class="property-required"
             title="Required">
         <span id="zone_resource_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_resource_type_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>resource_<wbr>type</a>
@@ -1159,8 +1308,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of resources in the zone. Values: SHARED, EXCLUSIVE.</p>
-</dd></dl>
+    <dd>Type of resources in the zone. Values: SHARED, EXCLUSIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1174,8 +1322,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the AZ is an edge zone. Values: true, false.</p>
-</dd><dt class="property-required"
+    <dd>Whether the AZ is an edge zone. Values: true, false.</dd><dt class="property-required"
             title="Required">
         <span id="ipversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipversion_yaml" style="color: inherit; text-decoration: inherit;">ip<wbr>Version</a>
@@ -1183,8 +1330,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version. Values: IPv4, IPv6, and IPv6_Nat.</p>
-</dd><dt class="property-required"
+    <dd>IP version. Values: IPv4, IPv6, and IPv6_Nat.</dd><dt class="property-required"
             title="Required">
         <span id="localzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localzone_yaml" style="color: inherit; text-decoration: inherit;">local<wbr>Zone</a>
@@ -1192,8 +1338,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether the AZ is a LocalZone. Values: true, false.</p>
-</dd><dt class="property-required"
+    <dd>Whether the AZ is a LocalZone. Values: true, false.</dd><dt class="property-required"
             title="Required">
         <span id="masterzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzone_yaml" style="color: inherit; text-decoration: inherit;">master<wbr>Zone</a>
@@ -1201,8 +1346,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Primary AZ, such as ap-guangzhou-1.</p>
-</dd><dt class="property-required"
+    <dd>Primary AZ, such as ap-guangzhou-1.</dd><dt class="property-required"
             title="Required">
         <span id="resourcesets_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resourcesets_yaml" style="color: inherit; text-decoration: inherit;">resource<wbr>Sets</a>
@@ -1210,8 +1354,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourceszoneresourcesetresourceset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of resources. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>List of resources. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="slavezone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavezone_yaml" style="color: inherit; text-decoration: inherit;">slave<wbr>Zone</a>
@@ -1219,8 +1362,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Secondary AZ, such as ap-guangzhou-2. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="zoneregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneregion_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Region</a>
@@ -1228,8 +1370,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region of the AZ, such as ap-guangzhou.</p>
-</dd><dt class="property-required"
+    <dd>Region of the AZ, such as ap-guangzhou.</dd><dt class="property-required"
             title="Required">
         <span id="zoneresourcetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneresourcetype_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Resource<wbr>Type</a>
@@ -1237,8 +1378,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of resources in the zone. Values: SHARED, EXCLUSIVE.</p>
-</dd></dl>
+    <dd>Type of resources in the zone. Values: SHARED, EXCLUSIVE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1256,8 +1396,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourceszoneresourcesetresourcesetavailabilityset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set<wbr>Resource<wbr>Set<wbr>Availability<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Available resources. Note: This field may return null, indicating that no valid values can be obtaine.</p>
-</dd><dt class="property-required"
+    <dd>Available resources. Note: This field may return null, indicating that no valid values can be obtaine.</dd><dt class="property-required"
             title="Required">
         <span id="isp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_csharp" style="color: inherit; text-decoration: inherit;">Isp</a>
@@ -1265,8 +1404,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd><dt class="property-required"
+    <dd>ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd><dt class="property-required"
             title="Required">
         <span id="types_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_csharp" style="color: inherit; text-decoration: inherit;">Types</a>
@@ -1274,8 +1412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd></dl>
+    <dd>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1289,8 +1426,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourceszoneresourcesetresourcesetavailabilityset">[]Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set<wbr>Resource<wbr>Set<wbr>Availability<wbr>Set</a></span>
     </dt>
-    <dd><p>Available resources. Note: This field may return null, indicating that no valid values can be obtaine.</p>
-</dd><dt class="property-required"
+    <dd>Available resources. Note: This field may return null, indicating that no valid values can be obtaine.</dd><dt class="property-required"
             title="Required">
         <span id="isp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_go" style="color: inherit; text-decoration: inherit;">Isp</a>
@@ -1298,8 +1434,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd><dt class="property-required"
+    <dd>ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd><dt class="property-required"
             title="Required">
         <span id="types_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_go" style="color: inherit; text-decoration: inherit;">Types</a>
@@ -1307,8 +1442,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd></dl>
+    <dd>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availability_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_sets_hcl" style="color: inherit; text-decoration: inherit;">availability_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getresourceszoneresourcesetresourcesetavailabilityset">list(object)</a></span>
+    </dt>
+    <dd>Available resources. Note: This field may return null, indicating that no valid values can be obtaine.</dd><dt class="property-required"
+            title="Required">
+        <span id="isp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_hcl" style="color: inherit; text-decoration: inherit;">isp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd><dt class="property-required"
+            title="Required">
+        <span id="types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_hcl" style="color: inherit; text-decoration: inherit;">types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1322,8 +1486,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourceszoneresourcesetresourcesetavailabilityset">List&lt;Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set<wbr>Resource<wbr>Set<wbr>Availability<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>Available resources. Note: This field may return null, indicating that no valid values can be obtaine.</p>
-</dd><dt class="property-required"
+    <dd>Available resources. Note: This field may return null, indicating that no valid values can be obtaine.</dd><dt class="property-required"
             title="Required">
         <span id="isp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_java" style="color: inherit; text-decoration: inherit;">isp</a>
@@ -1331,8 +1494,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd><dt class="property-required"
+    <dd>ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd><dt class="property-required"
             title="Required">
         <span id="types_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_java" style="color: inherit; text-decoration: inherit;">types</a>
@@ -1340,8 +1502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd></dl>
+    <dd>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1355,8 +1516,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourceszoneresourcesetresourcesetavailabilityset">Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set<wbr>Resource<wbr>Set<wbr>Availability<wbr>Set[]</a></span>
     </dt>
-    <dd><p>Available resources. Note: This field may return null, indicating that no valid values can be obtaine.</p>
-</dd><dt class="property-required"
+    <dd>Available resources. Note: This field may return null, indicating that no valid values can be obtaine.</dd><dt class="property-required"
             title="Required">
         <span id="isp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_nodejs" style="color: inherit; text-decoration: inherit;">isp</a>
@@ -1364,8 +1524,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd><dt class="property-required"
+    <dd>ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd><dt class="property-required"
             title="Required">
         <span id="types_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_nodejs" style="color: inherit; text-decoration: inherit;">types</a>
@@ -1373,8 +1532,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd></dl>
+    <dd>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1386,10 +1544,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_sets_python" style="color: inherit; text-decoration: inherit;">availability_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getresourceszoneresourcesetresourcesetavailabilityset">Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set<wbr>Resource<wbr>Set<wbr>Availability<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getresourceszoneresourcesetresourcesetavailabilityset">Sequence[Get<wbr>Resources<wbr>Zone<wbr>Resource<wbr>Set<wbr>Resource<wbr>Set<wbr>Availability<wbr>Set]</a></span>
     </dt>
-    <dd><p>Available resources. Note: This field may return null, indicating that no valid values can be obtaine.</p>
-</dd><dt class="property-required"
+    <dd>Available resources. Note: This field may return null, indicating that no valid values can be obtaine.</dd><dt class="property-required"
             title="Required">
         <span id="isp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_python" style="color: inherit; text-decoration: inherit;">isp</a>
@@ -1397,8 +1554,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd><dt class="property-required"
+    <dd>ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd><dt class="property-required"
             title="Required">
         <span id="types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_python" style="color: inherit; text-decoration: inherit;">types</a>
@@ -1406,8 +1562,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd></dl>
+    <dd>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1421,8 +1576,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getresourceszoneresourcesetresourcesetavailabilityset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Available resources. Note: This field may return null, indicating that no valid values can be obtaine.</p>
-</dd><dt class="property-required"
+    <dd>Available resources. Note: This field may return null, indicating that no valid values can be obtaine.</dd><dt class="property-required"
             title="Required">
         <span id="isp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isp_yaml" style="color: inherit; text-decoration: inherit;">isp</a>
@@ -1430,8 +1584,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd><dt class="property-required"
+    <dd>ISP information, such as CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd><dt class="property-required"
             title="Required">
         <span id="types_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#types_yaml" style="color: inherit; text-decoration: inherit;">types</a>
@@ -1439,8 +1592,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd></dl>
+    <dd>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1458,8 +1610,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether the resource is available. Values: Available, Unavailable.</p>
-</dd><dt class="property-required"
+    <dd>Whether the resource is available. Values: Available, Unavailable.</dd><dt class="property-required"
             title="Required">
         <span id="type_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_csharp" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1467,8 +1618,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd></dl>
+    <dd>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1482,8 +1632,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether the resource is available. Values: Available, Unavailable.</p>
-</dd><dt class="property-required"
+    <dd>Whether the resource is available. Values: Available, Unavailable.</dd><dt class="property-required"
             title="Required">
         <span id="type_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_go" style="color: inherit; text-decoration: inherit;">Type</a>
@@ -1491,8 +1640,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd></dl>
+    <dd>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="availability_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availability_hcl" style="color: inherit; text-decoration: inherit;">availability</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether the resource is available. Values: Available, Unavailable.</dd><dt class="property-required"
+            title="Required">
+        <span id="type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_hcl" style="color: inherit; text-decoration: inherit;">type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1506,8 +1676,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether the resource is available. Values: Available, Unavailable.</p>
-</dd><dt class="property-required"
+    <dd>Whether the resource is available. Values: Available, Unavailable.</dd><dt class="property-required"
             title="Required">
         <span id="type_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_java" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1515,8 +1684,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd></dl>
+    <dd>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1530,8 +1698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether the resource is available. Values: Available, Unavailable.</p>
-</dd><dt class="property-required"
+    <dd>Whether the resource is available. Values: Available, Unavailable.</dd><dt class="property-required"
             title="Required">
         <span id="type_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_nodejs" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1539,8 +1706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd></dl>
+    <dd>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1554,8 +1720,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether the resource is available. Values: Available, Unavailable.</p>
-</dd><dt class="property-required"
+    <dd>Whether the resource is available. Values: Available, Unavailable.</dd><dt class="property-required"
             title="Required">
         <span id="type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_python" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1563,8 +1728,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd></dl>
+    <dd>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1578,8 +1742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether the resource is available. Values: Available, Unavailable.</p>
-</dd><dt class="property-required"
+    <dd>Whether the resource is available. Values: Available, Unavailable.</dd><dt class="property-required"
             title="Required">
         <span id="type_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#type_yaml" style="color: inherit; text-decoration: inherit;">type</a>
@@ -1587,8 +1750,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</p>
-</dd></dl>
+    <dd>Specific ISP resource information, Vaules: CMCC, CUCC, CTCC, BGP, and INTERNAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1603,7 +1765,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

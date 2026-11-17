@@ -2,9 +2,11 @@
 ---
 title: "getBackupJobs"
 title_tag: "tencentcloud.Clickhouse.getBackupJobs"
-meta_desc: "Documentation for the tencentcloud.Clickhouse.getBackupJobs function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of clickhouse backup jobs"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to query detailed information of clickhouse backup jobs
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const backupJobs = tencentcloud.Clickhouse.getBackupJobs({
+const backupJobs = tencentcloud.clickhouse.getBackupJobs({
     instanceId: "cdwch-xxxxxx",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-backup_jobs = tencentcloud.Clickhouse.get_backup_jobs(instance_id="cdwch-xxxxxx")
+backup_jobs = tencentcloud.clickhouse.get_backup_jobs(instance_id="cdwch-xxxxxx")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clickhouse"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := clickhouse.GetBackupJobs(ctx, &clickhouse.GetBackupJobsArgs{
+			InstanceId: "cdwch-xxxxxx",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clickhouse.GetBackupJobs(ctx, &clickhouse.GetBackupJobsArgs{
-			InstanceId: "cdwch-xxxxxx",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clickhouse.ClickhouseFunctions;
 import com.pulumi.tencentcloud.Clickhouse.inputs.GetBackupJobsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   backupJobs:
     fn::invoke:
-      Function: tencentcloud:Clickhouse:getBackupJobs
-      Arguments:
+      function: tencentcloud:Clickhouse:getBackupJobs
+      arguments:
         instanceId: cdwch-xxxxxx
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_clickhouse_getbackupjobs" "backupJobs" {
+  instance_id = "cdwch-xxxxxx"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeBackUpJob](https://www.tencentcloud.com/search/?wd=DescribeBackUpJob&type=document&lang=en)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getBackupJobs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBackupJobsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBackupJobsResult</a></span>></span
+><span class="k">function </span>getBackupJobs<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBackupJobsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBackupJobsResult</a></span>></span
 ><span class="k">
-function </span>getBackupJobsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBackupJobsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBackupJobsResult</a></span>></span
+function </span>getBackupJobsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBackupJobsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBackupJobsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -140,11 +197,11 @@ function </span>getBackupJobsOutput<span class="p">(</span><span class="nx">args
                     <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                     <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetBackupJobsResult</span
 ><span class="k">
-def </span>get_backup_jobs_output<span class="p">(</span><span class="nx">begin_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBackupJobsResult]</span
+def </span>get_backup_jobs_output<span class="p">(</span><span class="nx">begin_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">end_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">instance_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBackupJobsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -169,7 +226,8 @@ func </span>GetBackupJobsOutput<span class="p">(</span><span class="nx">ctx</spa
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetBackupJobs </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetBackupJobsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetBackupJobsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetBackupJobsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBackupJobsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBackupJobsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBackupJobsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBackupJobsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBackupJobsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -178,7 +236,8 @@ func </span>GetBackupJobsOutput<span class="p">(</span><span class="nx">ctx</spa
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetBackupJobsResult</a></span>> </span>getBackupJobs<span class="p">(</span><span class="nx">GetBackupJobsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBackupJobsResult</a></span>> </span>getBackupJobs<span class="p">(</span><span class="nx">GetBackupJobsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBackupJobsResult</a></span>> </span>getBackupJobs<span class="p">(</span><span class="nx">GetBackupJobsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -190,6 +249,15 @@ func </span>GetBackupJobsOutput<span class="p">(</span><span class="nx">ctx</spa
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Clickhouse/getBackupJobs:getBackupJobs
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_clickhouse_get_backup_jobs&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -208,8 +276,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="begintime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begintime_csharp" style="color: inherit; text-decoration: inherit;">Begin<wbr>Time</a>
@@ -217,8 +284,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Begin time.</p>
-</dd><dt class="property-optional"
+    <dd>Begin time.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -226,8 +292,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End time.</p>
-</dd><dt class="property-optional"
+    <dd>End time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -235,8 +300,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -250,8 +314,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="begintime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begintime_go" style="color: inherit; text-decoration: inherit;">Begin<wbr>Time</a>
@@ -259,8 +322,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Begin time.</p>
-</dd><dt class="property-optional"
+    <dd>Begin time.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -268,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End time.</p>
-</dd><dt class="property-optional"
+    <dd>End time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -277,8 +338,45 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="begin_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begin_time_hcl" style="color: inherit; text-decoration: inherit;">begin_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Begin time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>End time.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -292,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="begintime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begintime_java" style="color: inherit; text-decoration: inherit;">begin<wbr>Time</a>
@@ -301,8 +398,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Begin time.</p>
-</dd><dt class="property-optional"
+    <dd>Begin time.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -310,8 +406,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End time.</p>
-</dd><dt class="property-optional"
+    <dd>End time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -319,8 +414,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -334,8 +428,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="begintime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begintime_nodejs" style="color: inherit; text-decoration: inherit;">begin<wbr>Time</a>
@@ -343,8 +436,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Begin time.</p>
-</dd><dt class="property-optional"
+    <dd>Begin time.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -352,8 +444,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>End time.</p>
-</dd><dt class="property-optional"
+    <dd>End time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -361,8 +452,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -376,8 +466,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="begin_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begin_time_python" style="color: inherit; text-decoration: inherit;">begin_<wbr>time</a>
@@ -385,8 +474,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Begin time.</p>
-</dd><dt class="property-optional"
+    <dd>Begin time.</dd><dt class="property-optional"
             title="Optional">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -394,8 +482,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>End time.</p>
-</dd><dt class="property-optional"
+    <dd>End time.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -403,8 +490,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -418,8 +504,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance id.</p>
-</dd><dt class="property-optional"
+    <dd>Instance id.</dd><dt class="property-optional"
             title="Optional">
         <span id="begintime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begintime_yaml" style="color: inherit; text-decoration: inherit;">begin<wbr>Time</a>
@@ -427,8 +512,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Begin time.</p>
-</dd><dt class="property-optional"
+    <dd>Begin time.</dd><dt class="property-optional"
             title="Optional">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -436,8 +520,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>End time.</p>
-</dd><dt class="property-optional"
+    <dd>End time.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -445,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -469,8 +551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbackupjobsbackupjob">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clickhouse.<wbr>Outputs.<wbr>Get<wbr>Backup<wbr>Jobs<wbr>Back<wbr>Up<wbr>Job&gt;</a></span>
     </dt>
-    <dd><p>Back up jobs.</p>
-</dd><dt class="property-"
+    <dd>Back up jobs.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -478,8 +559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -525,8 +605,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbackupjobsbackupjob">[]Get<wbr>Backup<wbr>Jobs<wbr>Back<wbr>Up<wbr>Job</a></span>
     </dt>
-    <dd><p>Back up jobs.</p>
-</dd><dt class="property-"
+    <dd>Back up jobs.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -534,8 +613,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Id</a>
@@ -572,6 +650,60 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="back_up_jobs_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#back_up_jobs_hcl" style="color: inherit; text-decoration: inherit;">back_<wbr>up_<wbr>jobs</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbackupjobsbackupjob">list(object)</a></span>
+    </dt>
+    <dd>Back up jobs.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="begin_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begin_time_hcl" style="color: inherit; text-decoration: inherit;">begin_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -581,8 +713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbackupjobsbackupjob">List&lt;Get<wbr>Backup<wbr>Jobs<wbr>Back<wbr>Up<wbr>Job&gt;</a></span>
     </dt>
-    <dd><p>Back up jobs.</p>
-</dd><dt class="property-"
+    <dd>Back up jobs.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -590,8 +721,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -637,8 +767,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbackupjobsbackupjob">Get<wbr>Backup<wbr>Jobs<wbr>Back<wbr>Up<wbr>Job[]</a></span>
     </dt>
-    <dd><p>Back up jobs.</p>
-</dd><dt class="property-"
+    <dd>Back up jobs.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -646,8 +775,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -691,10 +819,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#back_up_jobs_python" style="color: inherit; text-decoration: inherit;">back_<wbr>up_<wbr>jobs</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbackupjobsbackupjob">Get<wbr>Backup<wbr>Jobs<wbr>Back<wbr>Up<wbr>Job]</a></span>
+        <span class="property-type"><a href="#getbackupjobsbackupjob">Sequence[Get<wbr>Backup<wbr>Jobs<wbr>Back<wbr>Up<wbr>Job]</a></span>
     </dt>
-    <dd><p>Back up jobs.</p>
-</dd><dt class="property-"
+    <dd>Back up jobs.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -702,8 +829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_id_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>id</a>
@@ -749,8 +875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbackupjobsbackupjob">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Back up jobs.</p>
-</dd><dt class="property-"
+    <dd>Back up jobs.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -758,8 +883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceid_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Id</a>
@@ -815,8 +939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Back up size.</p>
-</dd><dt class="property-required"
+    <dd>Back up size.</dd><dt class="property-required"
             title="Required">
         <span id="backuptime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuptime_csharp" style="color: inherit; text-decoration: inherit;">Back<wbr>Up<wbr>Time</a>
@@ -824,8 +947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Back up create time.</p>
-</dd><dt class="property-required"
+    <dd>Back up create time.</dd><dt class="property-required"
             title="Required">
         <span id="backuptype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuptype_csharp" style="color: inherit; text-decoration: inherit;">Back<wbr>Up<wbr>Type</a>
@@ -833,8 +955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Back up type.</p>
-</dd><dt class="property-required"
+    <dd>Back up type.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_csharp" style="color: inherit; text-decoration: inherit;">Expire<wbr>Time</a>
@@ -842,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Back up expire time.</p>
-</dd><dt class="property-required"
+    <dd>Back up expire time.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -851,8 +971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Back up job id.</p>
-</dd><dt class="property-required"
+    <dd>Back up job id.</dd><dt class="property-required"
             title="Required">
         <span id="jobstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobstatus_csharp" style="color: inherit; text-decoration: inherit;">Job<wbr>Status</a>
@@ -860,8 +979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job status.</p>
-</dd><dt class="property-required"
+    <dd>Job status.</dd><dt class="property-required"
             title="Required">
         <span id="snapshot_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_csharp" style="color: inherit; text-decoration: inherit;">Snapshot</a>
@@ -869,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Back up job name.</p>
-</dd></dl>
+    <dd>Back up job name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -884,8 +1001,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Back up size.</p>
-</dd><dt class="property-required"
+    <dd>Back up size.</dd><dt class="property-required"
             title="Required">
         <span id="backuptime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuptime_go" style="color: inherit; text-decoration: inherit;">Back<wbr>Up<wbr>Time</a>
@@ -893,8 +1009,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Back up create time.</p>
-</dd><dt class="property-required"
+    <dd>Back up create time.</dd><dt class="property-required"
             title="Required">
         <span id="backuptype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuptype_go" style="color: inherit; text-decoration: inherit;">Back<wbr>Up<wbr>Type</a>
@@ -902,8 +1017,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Back up type.</p>
-</dd><dt class="property-required"
+    <dd>Back up type.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_go" style="color: inherit; text-decoration: inherit;">Expire<wbr>Time</a>
@@ -911,8 +1025,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Back up expire time.</p>
-</dd><dt class="property-required"
+    <dd>Back up expire time.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Id</a>
@@ -920,8 +1033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Back up job id.</p>
-</dd><dt class="property-required"
+    <dd>Back up job id.</dd><dt class="property-required"
             title="Required">
         <span id="jobstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobstatus_go" style="color: inherit; text-decoration: inherit;">Job<wbr>Status</a>
@@ -929,8 +1041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job status.</p>
-</dd><dt class="property-required"
+    <dd>Job status.</dd><dt class="property-required"
             title="Required">
         <span id="snapshot_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_go" style="color: inherit; text-decoration: inherit;">Snapshot</a>
@@ -938,8 +1049,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Back up job name.</p>
-</dd></dl>
+    <dd>Back up job name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="back_up_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#back_up_size_hcl" style="color: inherit; text-decoration: inherit;">back_<wbr>up_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Back up size.</dd><dt class="property-required"
+            title="Required">
+        <span id="back_up_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#back_up_time_hcl" style="color: inherit; text-decoration: inherit;">back_<wbr>up_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Back up create time.</dd><dt class="property-required"
+            title="Required">
+        <span id="back_up_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#back_up_type_hcl" style="color: inherit; text-decoration: inherit;">back_<wbr>up_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Back up type.</dd><dt class="property-required"
+            title="Required">
+        <span id="expire_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expire_time_hcl" style="color: inherit; text-decoration: inherit;">expire_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Back up expire time.</dd><dt class="property-required"
+            title="Required">
+        <span id="job_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Back up job id.</dd><dt class="property-required"
+            title="Required">
+        <span id="job_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_status_hcl" style="color: inherit; text-decoration: inherit;">job_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Job status.</dd><dt class="property-required"
+            title="Required">
+        <span id="snapshot_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_hcl" style="color: inherit; text-decoration: inherit;">snapshot</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Back up job name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -953,8 +1125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Back up size.</p>
-</dd><dt class="property-required"
+    <dd>Back up size.</dd><dt class="property-required"
             title="Required">
         <span id="backuptime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuptime_java" style="color: inherit; text-decoration: inherit;">back<wbr>Up<wbr>Time</a>
@@ -962,8 +1133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Back up create time.</p>
-</dd><dt class="property-required"
+    <dd>Back up create time.</dd><dt class="property-required"
             title="Required">
         <span id="backuptype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuptype_java" style="color: inherit; text-decoration: inherit;">back<wbr>Up<wbr>Type</a>
@@ -971,8 +1141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Back up type.</p>
-</dd><dt class="property-required"
+    <dd>Back up type.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_java" style="color: inherit; text-decoration: inherit;">expire<wbr>Time</a>
@@ -980,8 +1149,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Back up expire time.</p>
-</dd><dt class="property-required"
+    <dd>Back up expire time.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_java" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -989,8 +1157,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Back up job id.</p>
-</dd><dt class="property-required"
+    <dd>Back up job id.</dd><dt class="property-required"
             title="Required">
         <span id="jobstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobstatus_java" style="color: inherit; text-decoration: inherit;">job<wbr>Status</a>
@@ -998,8 +1165,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job status.</p>
-</dd><dt class="property-required"
+    <dd>Job status.</dd><dt class="property-required"
             title="Required">
         <span id="snapshot_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_java" style="color: inherit; text-decoration: inherit;">snapshot</a>
@@ -1007,8 +1173,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Back up job name.</p>
-</dd></dl>
+    <dd>Back up job name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1022,8 +1187,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Back up size.</p>
-</dd><dt class="property-required"
+    <dd>Back up size.</dd><dt class="property-required"
             title="Required">
         <span id="backuptime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuptime_nodejs" style="color: inherit; text-decoration: inherit;">back<wbr>Up<wbr>Time</a>
@@ -1031,8 +1195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Back up create time.</p>
-</dd><dt class="property-required"
+    <dd>Back up create time.</dd><dt class="property-required"
             title="Required">
         <span id="backuptype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuptype_nodejs" style="color: inherit; text-decoration: inherit;">back<wbr>Up<wbr>Type</a>
@@ -1040,8 +1203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Back up type.</p>
-</dd><dt class="property-required"
+    <dd>Back up type.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_nodejs" style="color: inherit; text-decoration: inherit;">expire<wbr>Time</a>
@@ -1049,8 +1211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Back up expire time.</p>
-</dd><dt class="property-required"
+    <dd>Back up expire time.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -1058,8 +1219,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Back up job id.</p>
-</dd><dt class="property-required"
+    <dd>Back up job id.</dd><dt class="property-required"
             title="Required">
         <span id="jobstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobstatus_nodejs" style="color: inherit; text-decoration: inherit;">job<wbr>Status</a>
@@ -1067,8 +1227,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Job status.</p>
-</dd><dt class="property-required"
+    <dd>Job status.</dd><dt class="property-required"
             title="Required">
         <span id="snapshot_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_nodejs" style="color: inherit; text-decoration: inherit;">snapshot</a>
@@ -1076,8 +1235,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Back up job name.</p>
-</dd></dl>
+    <dd>Back up job name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1091,8 +1249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Back up size.</p>
-</dd><dt class="property-required"
+    <dd>Back up size.</dd><dt class="property-required"
             title="Required">
         <span id="back_up_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#back_up_time_python" style="color: inherit; text-decoration: inherit;">back_<wbr>up_<wbr>time</a>
@@ -1100,8 +1257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Back up create time.</p>
-</dd><dt class="property-required"
+    <dd>Back up create time.</dd><dt class="property-required"
             title="Required">
         <span id="back_up_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#back_up_type_python" style="color: inherit; text-decoration: inherit;">back_<wbr>up_<wbr>type</a>
@@ -1109,8 +1265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Back up type.</p>
-</dd><dt class="property-required"
+    <dd>Back up type.</dd><dt class="property-required"
             title="Required">
         <span id="expire_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expire_time_python" style="color: inherit; text-decoration: inherit;">expire_<wbr>time</a>
@@ -1118,8 +1273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Back up expire time.</p>
-</dd><dt class="property-required"
+    <dd>Back up expire time.</dd><dt class="property-required"
             title="Required">
         <span id="job_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_id_python" style="color: inherit; text-decoration: inherit;">job_<wbr>id</a>
@@ -1127,8 +1281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Back up job id.</p>
-</dd><dt class="property-required"
+    <dd>Back up job id.</dd><dt class="property-required"
             title="Required">
         <span id="job_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#job_status_python" style="color: inherit; text-decoration: inherit;">job_<wbr>status</a>
@@ -1136,8 +1289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Job status.</p>
-</dd><dt class="property-required"
+    <dd>Job status.</dd><dt class="property-required"
             title="Required">
         <span id="snapshot_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_python" style="color: inherit; text-decoration: inherit;">snapshot</a>
@@ -1145,8 +1297,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Back up job name.</p>
-</dd></dl>
+    <dd>Back up job name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1160,8 +1311,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Back up size.</p>
-</dd><dt class="property-required"
+    <dd>Back up size.</dd><dt class="property-required"
             title="Required">
         <span id="backuptime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuptime_yaml" style="color: inherit; text-decoration: inherit;">back<wbr>Up<wbr>Time</a>
@@ -1169,8 +1319,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Back up create time.</p>
-</dd><dt class="property-required"
+    <dd>Back up create time.</dd><dt class="property-required"
             title="Required">
         <span id="backuptype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backuptype_yaml" style="color: inherit; text-decoration: inherit;">back<wbr>Up<wbr>Type</a>
@@ -1178,8 +1327,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Back up type.</p>
-</dd><dt class="property-required"
+    <dd>Back up type.</dd><dt class="property-required"
             title="Required">
         <span id="expiretime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_yaml" style="color: inherit; text-decoration: inherit;">expire<wbr>Time</a>
@@ -1187,8 +1335,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Back up expire time.</p>
-</dd><dt class="property-required"
+    <dd>Back up expire time.</dd><dt class="property-required"
             title="Required">
         <span id="jobid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobid_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Id</a>
@@ -1196,8 +1343,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Back up job id.</p>
-</dd><dt class="property-required"
+    <dd>Back up job id.</dd><dt class="property-required"
             title="Required">
         <span id="jobstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#jobstatus_yaml" style="color: inherit; text-decoration: inherit;">job<wbr>Status</a>
@@ -1205,8 +1351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Job status.</p>
-</dd><dt class="property-required"
+    <dd>Job status.</dd><dt class="property-required"
             title="Required">
         <span id="snapshot_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snapshot_yaml" style="color: inherit; text-decoration: inherit;">snapshot</a>
@@ -1214,8 +1359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Back up job name.</p>
-</dd></dl>
+    <dd>Back up job name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1230,7 +1374,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

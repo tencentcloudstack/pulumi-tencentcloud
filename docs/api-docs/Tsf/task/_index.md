@@ -2,9 +2,11 @@
 ---
 title: "Task"
 title_tag: "tencentcloud.Tsf.Task"
-meta_desc: "Documentation for the tencentcloud.Tsf.Task resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a tsf task"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,56 +18,113 @@ Provides a resource to create a tsf task
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
 const task = new tencentcloud.tsf.Task("task", {
-    advanceSettings: {
-        subTaskConcurrency: 2,
-    },
+    taskName: "terraform-test",
+    taskContent: "/test",
     executeType: "unicast",
+    taskType: "java",
+    timeOut: 60000,
     groupId: "group-y8pnmoga",
+    taskRule: {
+        ruleType: "Cron",
+        expression: "0 * 1 * * ? ",
+    },
     retryCount: 0,
     retryInterval: 0,
     successOperator: "GTE",
     successRatio: "100",
-    taskArgument: "a=c",
-    taskContent: "/test",
-    taskName: "terraform-test",
-    taskRule: {
-        expression: "0 * 1 * * ? ",
-        ruleType: "Cron",
+    advanceSettings: {
+        subTaskConcurrency: 2,
     },
-    taskType: "java",
-    timeOut: 60000,
+    taskArgument: "a=c",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
 task = tencentcloud.tsf.Task("task",
-    advance_settings=tencentcloud.tsf.TaskAdvanceSettingsArgs(
-        sub_task_concurrency=2,
-    ),
+    task_name="terraform-test",
+    task_content="/test",
     execute_type="unicast",
+    task_type="java",
+    time_out=60000,
     group_id="group-y8pnmoga",
+    task_rule={
+        "rule_type": "Cron",
+        "expression": "0 * 1 * * ? ",
+    },
     retry_count=0,
     retry_interval=0,
     success_operator="GTE",
     success_ratio="100",
-    task_argument="a=c",
-    task_content="/test",
-    task_name="terraform-test",
-    task_rule=tencentcloud.tsf.TaskTaskRuleArgs(
-        expression="0 * 1 * * ? ",
-        rule_type="Cron",
-    ),
-    task_type="java",
-    time_out=60000)
+    advance_settings={
+        "sub_task_concurrency": 2,
+    },
+    task_argument="a=c")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tsf"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := tsf.NewTask(ctx, "task", &tsf.TaskArgs{
+			TaskName:    pulumi.String("terraform-test"),
+			TaskContent: pulumi.String("/test"),
+			ExecuteType: pulumi.String("unicast"),
+			TaskType:    pulumi.String("java"),
+			TimeOut:     pulumi.Int(60000),
+			GroupId:     pulumi.String("group-y8pnmoga"),
+			TaskRule: &tsf.TaskTaskRuleArgs{
+				RuleType:   pulumi.String("Cron"),
+				Expression: pulumi.String("0 * 1 * * ? "),
+			},
+			RetryCount:      pulumi.Int(0),
+			RetryInterval:   pulumi.Int(0),
+			SuccessOperator: pulumi.String("GTE"),
+			SuccessRatio:    pulumi.String("100"),
+			AdvanceSettings: &tsf.TaskAdvanceSettingsArgs{
+				SubTaskConcurrency: pulumi.Int(2),
+			},
+			TaskArgument: pulumi.String("a=c"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -76,67 +135,35 @@ return await Deployment.RunAsync(() =>
 {
     var task = new Tencentcloud.Tsf.Task("task", new()
     {
-        AdvanceSettings = new Tencentcloud.Tsf.Inputs.TaskAdvanceSettingsArgs
-        {
-            SubTaskConcurrency = 2,
-        },
+        TaskName = "terraform-test",
+        TaskContent = "/test",
         ExecuteType = "unicast",
+        TaskType = "java",
+        TimeOut = 60000,
         GroupId = "group-y8pnmoga",
+        TaskRule = new Tencentcloud.Tsf.Inputs.TaskTaskRuleArgs
+        {
+            RuleType = "Cron",
+            Expression = "0 * 1 * * ? ",
+        },
         RetryCount = 0,
         RetryInterval = 0,
         SuccessOperator = "GTE",
         SuccessRatio = "100",
-        TaskArgument = "a=c",
-        TaskContent = "/test",
-        TaskName = "terraform-test",
-        TaskRule = new Tencentcloud.Tsf.Inputs.TaskTaskRuleArgs
+        AdvanceSettings = new Tencentcloud.Tsf.Inputs.TaskAdvanceSettingsArgs
         {
-            Expression = "0 * 1 * * ? ",
-            RuleType = "Cron",
+            SubTaskConcurrency = 2,
         },
-        TaskType = "java",
-        TimeOut = 60000,
+        TaskArgument = "a=c",
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Tsf.NewTask(ctx, "task", &Tsf.TaskArgs{
-			AdvanceSettings: &tsf.TaskAdvanceSettingsArgs{
-				SubTaskConcurrency: pulumi.Int(2),
-			},
-			ExecuteType:     pulumi.String("unicast"),
-			GroupId:         pulumi.String("group-y8pnmoga"),
-			RetryCount:      pulumi.Int(0),
-			RetryInterval:   pulumi.Int(0),
-			SuccessOperator: pulumi.String("GTE"),
-			SuccessRatio:    pulumi.String("100"),
-			TaskArgument:    pulumi.String("a=c"),
-			TaskContent:     pulumi.String("/test"),
-			TaskName:        pulumi.String("terraform-test"),
-			TaskRule: &tsf.TaskTaskRuleArgs{
-				Expression: pulumi.String("0 * 1 * * ? "),
-				RuleType:   pulumi.String("Cron"),
-			},
-			TaskType: pulumi.String("java"),
-			TimeOut:  pulumi.Int(60000),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -145,10 +172,10 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tsf.Task;
 import com.pulumi.tencentcloud.Tsf.TaskArgs;
-import com.pulumi.tencentcloud.Tsf.inputs.TaskAdvanceSettingsArgs;
 import com.pulumi.tencentcloud.Tsf.inputs.TaskTaskRuleArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Tsf.inputs.TaskAdvanceSettingsArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -160,126 +187,191 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var task = new Task("task", TaskArgs.builder()        
-            .advanceSettings(TaskAdvanceSettingsArgs.builder()
-                .subTaskConcurrency(2)
-                .build())
+        var task = new Task("task", TaskArgs.builder()
+            .taskName("terraform-test")
+            .taskContent("/test")
             .executeType("unicast")
+            .taskType("java")
+            .timeOut(60000)
             .groupId("group-y8pnmoga")
+            .taskRule(TaskTaskRuleArgs.builder()
+                .ruleType("Cron")
+                .expression("0 * 1 * * ? ")
+                .build())
             .retryCount(0)
             .retryInterval(0)
             .successOperator("GTE")
             .successRatio("100")
-            .taskArgument("a=c")
-            .taskContent("/test")
-            .taskName("terraform-test")
-            .taskRule(TaskTaskRuleArgs.builder()
-                .expression("0 * 1 * * ? ")
-                .ruleType("Cron")
+            .advanceSettings(TaskAdvanceSettingsArgs.builder()
+                .subTaskConcurrency(2)
                 .build())
-            .taskType("java")
-            .timeOut(60000)
+            .taskArgument("a=c")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   task:
     type: tencentcloud:Tsf:Task
     properties:
-      advanceSettings:
-        subTaskConcurrency: 2
+      taskName: terraform-test
+      taskContent: /test
       executeType: unicast
+      taskType: java
+      timeOut: 60000
       groupId: group-y8pnmoga
+      taskRule:
+        ruleType: Cron
+        expression: '0 * 1 * * ? '
       retryCount: 0
       retryInterval: 0
       successOperator: GTE
       successRatio: '100'
+      advanceSettings:
+        subTaskConcurrency: 2
       taskArgument: a=c
-      taskContent: /test
-      taskName: terraform-test
-      taskRule:
-        expression: '0 * 1 * * ? '
-        ruleType: Cron
-      taskType: java
-      timeOut: 60000
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tsf_task" "task" {
+  task_name    = "terraform-test"
+  task_content = "/test"
+  execute_type = "unicast"
+  task_type    = "java"
+  time_out     = 60000
+  group_id     = "group-y8pnmoga"
+  task_rule = {
+    rule_type  = "Cron"
+    expression = "0 * 1 * * ? "
+  }
+  retry_count      = 0
+  retry_interval   = 0
+  success_operator = "GTE"
+  success_ratio    = "100"
+  advance_settings = {
+    sub_task_concurrency = 2
+  }
+  task_argument = "a=c"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateTask](https://www.tencentcloud.com/search/?wd=CreateTask&type=document&lang=en)
+* Read: [DescribeTaskDetail](https://www.tencentcloud.com/search/?wd=DescribeTaskDetail&type=document&lang=en)
+* Update: [ModifyTask](https://www.tencentcloud.com/search/?wd=ModifyTask&type=document&lang=en)
+* Delete: [DeleteTask](https://www.tencentcloud.com/search/?wd=DeleteTask&type=document&lang=en)
 
 
 ## Create Task Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Task</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TaskArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Task</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TaskArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Task</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TaskArgs</a></span><span class="p">,</span>
+         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Task</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-         <span class="nx">advance_settings</span><span class="p">:</span> <span class="nx">Optional[_tsf.TaskAdvanceSettingsArgs]</span> = None<span class="p">,</span>
+         <span class="nx">task_content</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
          <span class="nx">execute_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
          <span class="nx">group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">program_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+         <span class="nx">time_out</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+         <span class="nx">task_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+         <span class="nx">task_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
          <span class="nx">retry_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-         <span class="nx">retry_interval</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-         <span class="nx">shard_arguments</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tsf.TaskShardArgumentArgs]]</span> = None<span class="p">,</span>
          <span class="nx">shard_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
          <span class="nx">success_operator</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
          <span class="nx">success_ratio</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
          <span class="nx">task_argument</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">task_content</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">task_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">task_rule</span><span class="p">:</span> <span class="nx">Optional[_tsf.TaskTaskRuleArgs]</span> = None<span class="p">,</span>
-         <span class="nx">task_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-         <span class="nx">time_out</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Task</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">TaskArgs</a></span><span class="p">,</span>
-         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+         <span class="nx">shard_arguments</span><span class="p">:</span> <span class="nx">Optional[Sequence[TaskShardArgumentArgs]]</span> = None<span class="p">,</span>
+         <span class="nx">retry_interval</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+         <span class="nx">task_rule</span><span class="p">:</span> <span class="nx">Optional[TaskTaskRuleArgs]</span> = None<span class="p">,</span>
+         <span class="nx">advance_settings</span><span class="p">:</span> <span class="nx">Optional[TaskAdvanceSettingsArgs]</span> = None<span class="p">,</span>
+         <span class="nx">program_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTask</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TaskArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Task</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewTask</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">TaskArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Task</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Task</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TaskArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Task</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TaskArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Task</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TaskArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Task</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">TaskArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tsf:Task</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tsf:Task</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tsf_task&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -300,7 +392,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -417,11 +509,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Task Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Task resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -437,8 +537,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>execution type, unicast/broadcast.</p>
-</dd><dt class="property-required"
+    <dd>execution type, unicast/broadcast.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -446,8 +545,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deployment group ID.</p>
-</dd><dt class="property-required"
+    <dd>deployment group ID.</dd><dt class="property-required"
             title="Required">
         <span id="taskcontent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskcontent_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Content</a>
@@ -455,8 +553,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task content, length limit 65536 bytes.</p>
-</dd><dt class="property-required"
+    <dd>task content, length limit 65536 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="taskname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskname_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Name</a>
@@ -464,8 +561,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task name, task length 64 characters.</p>
-</dd><dt class="property-required"
+    <dd>task name, task length 64 characters.</dd><dt class="property-required"
             title="Required">
         <span id="tasktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktype_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Type</a>
@@ -473,8 +569,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task type, java.</p>
-</dd><dt class="property-required"
+    <dd>task type, java.</dd><dt class="property-required"
             title="Required">
         <span id="timeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Out</a>
@@ -482,17 +577,15 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>task timeout, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>task timeout, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="advancesettings_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#advancesettings_csharp" style="color: inherit; text-decoration: inherit;">Advance<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#taskadvancesettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Task<wbr>Advance<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#taskadvancesettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Task<wbr>Advance<wbr>Settings</a></span>
     </dt>
-    <dd><p>advanced settings.</p>
-</dd><dt class="property-optional"
+    <dd>advanced settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_csharp" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -500,8 +593,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="retrycount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrycount_csharp" style="color: inherit; text-decoration: inherit;">Retry<wbr>Count</a>
@@ -509,8 +601,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</p>
-</dd><dt class="property-optional"
+    <dd>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="retryinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retryinterval_csharp" style="color: inherit; text-decoration: inherit;">Retry<wbr>Interval</a>
@@ -518,17 +609,15 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="shardarguments_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardarguments_csharp" style="color: inherit; text-decoration: inherit;">Shard<wbr>Arguments</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#taskshardargument">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Task<wbr>Shard<wbr>Argument<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#taskshardargument">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Task<wbr>Shard<wbr>Argument&gt;</a></span>
     </dt>
-    <dd><p>Fragmentation parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Fragmentation parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="shardcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardcount_csharp" style="color: inherit; text-decoration: inherit;">Shard<wbr>Count</a>
@@ -536,8 +625,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of shards.</p>
-</dd><dt class="property-optional"
+    <dd>number of shards.</dd><dt class="property-optional"
             title="Optional">
         <span id="successoperator_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#successoperator_csharp" style="color: inherit; text-decoration: inherit;">Success<wbr>Operator</a>
@@ -545,8 +633,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the operator to judge the success of the task.</p>
-</dd><dt class="property-optional"
+    <dd>the operator to judge the success of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="successratio_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#successratio_csharp" style="color: inherit; text-decoration: inherit;">Success<wbr>Ratio</a>
@@ -554,8 +641,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The threshold for judging the success rate of the task, such as 100.</p>
-</dd><dt class="property-optional"
+    <dd>The threshold for judging the success rate of the task, such as 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskargument_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskargument_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Argument</a>
@@ -563,17 +649,15 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task parameters, the length limit is 10000 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task parameters, the length limit is 10000 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskrule_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskrule_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tasktaskrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Task<wbr>Task<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#tasktaskrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Task<wbr>Task<wbr>Rule</a></span>
     </dt>
-    <dd><p>trigger rule.</p>
-</dd></dl>
+    <dd>trigger rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -587,8 +671,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>execution type, unicast/broadcast.</p>
-</dd><dt class="property-required"
+    <dd>execution type, unicast/broadcast.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -596,8 +679,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deployment group ID.</p>
-</dd><dt class="property-required"
+    <dd>deployment group ID.</dd><dt class="property-required"
             title="Required">
         <span id="taskcontent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskcontent_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Content</a>
@@ -605,8 +687,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task content, length limit 65536 bytes.</p>
-</dd><dt class="property-required"
+    <dd>task content, length limit 65536 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="taskname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskname_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Name</a>
@@ -614,8 +695,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task name, task length 64 characters.</p>
-</dd><dt class="property-required"
+    <dd>task name, task length 64 characters.</dd><dt class="property-required"
             title="Required">
         <span id="tasktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktype_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Type</a>
@@ -623,8 +703,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task type, java.</p>
-</dd><dt class="property-required"
+    <dd>task type, java.</dd><dt class="property-required"
             title="Required">
         <span id="timeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Out</a>
@@ -632,8 +711,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>task timeout, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>task timeout, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="advancesettings_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#advancesettings_go" style="color: inherit; text-decoration: inherit;">Advance<wbr>Settings</a>
@@ -641,8 +719,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#taskadvancesettings">Task<wbr>Advance<wbr>Settings<wbr>Args</a></span>
     </dt>
-    <dd><p>advanced settings.</p>
-</dd><dt class="property-optional"
+    <dd>advanced settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_go" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -650,8 +727,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="retrycount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrycount_go" style="color: inherit; text-decoration: inherit;">Retry<wbr>Count</a>
@@ -659,8 +735,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</p>
-</dd><dt class="property-optional"
+    <dd>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="retryinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retryinterval_go" style="color: inherit; text-decoration: inherit;">Retry<wbr>Interval</a>
@@ -668,8 +743,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="shardarguments_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardarguments_go" style="color: inherit; text-decoration: inherit;">Shard<wbr>Arguments</a>
@@ -677,8 +751,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#taskshardargument">[]Task<wbr>Shard<wbr>Argument<wbr>Args</a></span>
     </dt>
-    <dd><p>Fragmentation parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Fragmentation parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="shardcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardcount_go" style="color: inherit; text-decoration: inherit;">Shard<wbr>Count</a>
@@ -686,8 +759,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of shards.</p>
-</dd><dt class="property-optional"
+    <dd>number of shards.</dd><dt class="property-optional"
             title="Optional">
         <span id="successoperator_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#successoperator_go" style="color: inherit; text-decoration: inherit;">Success<wbr>Operator</a>
@@ -695,8 +767,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the operator to judge the success of the task.</p>
-</dd><dt class="property-optional"
+    <dd>the operator to judge the success of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="successratio_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#successratio_go" style="color: inherit; text-decoration: inherit;">Success<wbr>Ratio</a>
@@ -704,8 +775,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The threshold for judging the success rate of the task, such as 100.</p>
-</dd><dt class="property-optional"
+    <dd>The threshold for judging the success rate of the task, such as 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskargument_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskargument_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Argument</a>
@@ -713,8 +783,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task parameters, the length limit is 10000 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task parameters, the length limit is 10000 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskrule_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskrule_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Rule</a>
@@ -722,8 +791,141 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tasktaskrule">Task<wbr>Task<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>trigger rule.</p>
-</dd></dl>
+    <dd>trigger rule.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="execute_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#execute_type_hcl" style="color: inherit; text-decoration: inherit;">execute_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>execution type, unicast/broadcast.</dd><dt class="property-required"
+            title="Required">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>deployment group ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="task_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_content_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>task content, length limit 65536 bytes.</dd><dt class="property-required"
+            title="Required">
+        <span id="task_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_name_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>task name, task length 64 characters.</dd><dt class="property-required"
+            title="Required">
+        <span id="task_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_type_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>task type, java.</dd><dt class="property-required"
+            title="Required">
+        <span id="time_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_out_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>task timeout, time unit ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="advance_settings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#advance_settings_hcl" style="color: inherit; text-decoration: inherit;">advance_<wbr>settings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#taskadvancesettings">object</a></span>
+    </dt>
+    <dd>advanced settings.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="program_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#program_id_lists_hcl" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Program id list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="retry_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retry_count_hcl" style="color: inherit; text-decoration: inherit;">retry_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="retry_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retry_interval_hcl" style="color: inherit; text-decoration: inherit;">retry_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="shard_arguments_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_arguments_hcl" style="color: inherit; text-decoration: inherit;">shard_<wbr>arguments</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#taskshardargument">list(object)</a></span>
+    </dt>
+    <dd>Fragmentation parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="shard_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_count_hcl" style="color: inherit; text-decoration: inherit;">shard_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>number of shards.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="success_operator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#success_operator_hcl" style="color: inherit; text-decoration: inherit;">success_<wbr>operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>the operator to judge the success of the task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="success_ratio_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#success_ratio_hcl" style="color: inherit; text-decoration: inherit;">success_<wbr>ratio</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The threshold for judging the success rate of the task, such as 100.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="task_argument_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_argument_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>argument</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>task parameters, the length limit is 10000 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="task_rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_rule_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tasktaskrule">object</a></span>
+    </dt>
+    <dd>trigger rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -737,8 +939,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>execution type, unicast/broadcast.</p>
-</dd><dt class="property-required"
+    <dd>execution type, unicast/broadcast.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -746,8 +947,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>deployment group ID.</p>
-</dd><dt class="property-required"
+    <dd>deployment group ID.</dd><dt class="property-required"
             title="Required">
         <span id="taskcontent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskcontent_java" style="color: inherit; text-decoration: inherit;">task<wbr>Content</a>
@@ -755,8 +955,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task content, length limit 65536 bytes.</p>
-</dd><dt class="property-required"
+    <dd>task content, length limit 65536 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="taskname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskname_java" style="color: inherit; text-decoration: inherit;">task<wbr>Name</a>
@@ -764,8 +963,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task name, task length 64 characters.</p>
-</dd><dt class="property-required"
+    <dd>task name, task length 64 characters.</dd><dt class="property-required"
             title="Required">
         <span id="tasktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktype_java" style="color: inherit; text-decoration: inherit;">task<wbr>Type</a>
@@ -773,8 +971,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task type, java.</p>
-</dd><dt class="property-required"
+    <dd>task type, java.</dd><dt class="property-required"
             title="Required">
         <span id="timeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_java" style="color: inherit; text-decoration: inherit;">time<wbr>Out</a>
@@ -782,17 +979,15 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>task timeout, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>task timeout, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="advancesettings_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#advancesettings_java" style="color: inherit; text-decoration: inherit;">advance<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#taskadvancesettings">Task<wbr>Advance<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#taskadvancesettings">Task<wbr>Advance<wbr>Settings</a></span>
     </dt>
-    <dd><p>advanced settings.</p>
-</dd><dt class="property-optional"
+    <dd>advanced settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_java" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -800,8 +995,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="retrycount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrycount_java" style="color: inherit; text-decoration: inherit;">retry<wbr>Count</a>
@@ -809,8 +1003,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</p>
-</dd><dt class="property-optional"
+    <dd>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="retryinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retryinterval_java" style="color: inherit; text-decoration: inherit;">retry<wbr>Interval</a>
@@ -818,17 +1011,15 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="shardarguments_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardarguments_java" style="color: inherit; text-decoration: inherit;">shard<wbr>Arguments</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#taskshardargument">List&lt;Task<wbr>Shard<wbr>Argument<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#taskshardargument">List&lt;Task<wbr>Shard<wbr>Argument&gt;</a></span>
     </dt>
-    <dd><p>Fragmentation parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Fragmentation parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="shardcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardcount_java" style="color: inherit; text-decoration: inherit;">shard<wbr>Count</a>
@@ -836,8 +1027,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>number of shards.</p>
-</dd><dt class="property-optional"
+    <dd>number of shards.</dd><dt class="property-optional"
             title="Optional">
         <span id="successoperator_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#successoperator_java" style="color: inherit; text-decoration: inherit;">success<wbr>Operator</a>
@@ -845,8 +1035,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>the operator to judge the success of the task.</p>
-</dd><dt class="property-optional"
+    <dd>the operator to judge the success of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="successratio_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#successratio_java" style="color: inherit; text-decoration: inherit;">success<wbr>Ratio</a>
@@ -854,8 +1043,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The threshold for judging the success rate of the task, such as 100.</p>
-</dd><dt class="property-optional"
+    <dd>The threshold for judging the success rate of the task, such as 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskargument_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskargument_java" style="color: inherit; text-decoration: inherit;">task<wbr>Argument</a>
@@ -863,17 +1051,15 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task parameters, the length limit is 10000 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task parameters, the length limit is 10000 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskrule_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskrule_java" style="color: inherit; text-decoration: inherit;">task<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tasktaskrule">Task<wbr>Task<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#tasktaskrule">Task<wbr>Task<wbr>Rule</a></span>
     </dt>
-    <dd><p>trigger rule.</p>
-</dd></dl>
+    <dd>trigger rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -887,8 +1073,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>execution type, unicast/broadcast.</p>
-</dd><dt class="property-required"
+    <dd>execution type, unicast/broadcast.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -896,8 +1081,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deployment group ID.</p>
-</dd><dt class="property-required"
+    <dd>deployment group ID.</dd><dt class="property-required"
             title="Required">
         <span id="taskcontent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskcontent_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Content</a>
@@ -905,8 +1089,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task content, length limit 65536 bytes.</p>
-</dd><dt class="property-required"
+    <dd>task content, length limit 65536 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="taskname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskname_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Name</a>
@@ -914,8 +1097,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task name, task length 64 characters.</p>
-</dd><dt class="property-required"
+    <dd>task name, task length 64 characters.</dd><dt class="property-required"
             title="Required">
         <span id="tasktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktype_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Type</a>
@@ -923,8 +1105,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task type, java.</p>
-</dd><dt class="property-required"
+    <dd>task type, java.</dd><dt class="property-required"
             title="Required">
         <span id="timeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Out</a>
@@ -932,17 +1113,15 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>task timeout, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>task timeout, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="advancesettings_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#advancesettings_nodejs" style="color: inherit; text-decoration: inherit;">advance<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#taskadvancesettings">Task<wbr>Advance<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#taskadvancesettings">Task<wbr>Advance<wbr>Settings</a></span>
     </dt>
-    <dd><p>advanced settings.</p>
-</dd><dt class="property-optional"
+    <dd>advanced settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_nodejs" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -950,8 +1129,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="retrycount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrycount_nodejs" style="color: inherit; text-decoration: inherit;">retry<wbr>Count</a>
@@ -959,8 +1137,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</p>
-</dd><dt class="property-optional"
+    <dd>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="retryinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retryinterval_nodejs" style="color: inherit; text-decoration: inherit;">retry<wbr>Interval</a>
@@ -968,17 +1145,15 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="shardarguments_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardarguments_nodejs" style="color: inherit; text-decoration: inherit;">shard<wbr>Arguments</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#taskshardargument">Task<wbr>Shard<wbr>Argument<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#taskshardargument">Task<wbr>Shard<wbr>Argument[]</a></span>
     </dt>
-    <dd><p>Fragmentation parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Fragmentation parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="shardcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardcount_nodejs" style="color: inherit; text-decoration: inherit;">shard<wbr>Count</a>
@@ -986,8 +1161,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>number of shards.</p>
-</dd><dt class="property-optional"
+    <dd>number of shards.</dd><dt class="property-optional"
             title="Optional">
         <span id="successoperator_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#successoperator_nodejs" style="color: inherit; text-decoration: inherit;">success<wbr>Operator</a>
@@ -995,8 +1169,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the operator to judge the success of the task.</p>
-</dd><dt class="property-optional"
+    <dd>the operator to judge the success of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="successratio_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#successratio_nodejs" style="color: inherit; text-decoration: inherit;">success<wbr>Ratio</a>
@@ -1004,8 +1177,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The threshold for judging the success rate of the task, such as 100.</p>
-</dd><dt class="property-optional"
+    <dd>The threshold for judging the success rate of the task, such as 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskargument_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskargument_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Argument</a>
@@ -1013,17 +1185,15 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task parameters, the length limit is 10000 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task parameters, the length limit is 10000 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskrule_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskrule_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tasktaskrule">Task<wbr>Task<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#tasktaskrule">Task<wbr>Task<wbr>Rule</a></span>
     </dt>
-    <dd><p>trigger rule.</p>
-</dd></dl>
+    <dd>trigger rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1037,8 +1207,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>execution type, unicast/broadcast.</p>
-</dd><dt class="property-required"
+    <dd>execution type, unicast/broadcast.</dd><dt class="property-required"
             title="Required">
         <span id="group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
@@ -1046,8 +1215,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>deployment group ID.</p>
-</dd><dt class="property-required"
+    <dd>deployment group ID.</dd><dt class="property-required"
             title="Required">
         <span id="task_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_content_python" style="color: inherit; text-decoration: inherit;">task_<wbr>content</a>
@@ -1055,8 +1223,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>task content, length limit 65536 bytes.</p>
-</dd><dt class="property-required"
+    <dd>task content, length limit 65536 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="task_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_name_python" style="color: inherit; text-decoration: inherit;">task_<wbr>name</a>
@@ -1064,8 +1231,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>task name, task length 64 characters.</p>
-</dd><dt class="property-required"
+    <dd>task name, task length 64 characters.</dd><dt class="property-required"
             title="Required">
         <span id="task_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_type_python" style="color: inherit; text-decoration: inherit;">task_<wbr>type</a>
@@ -1073,8 +1239,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>task type, java.</p>
-</dd><dt class="property-required"
+    <dd>task type, java.</dd><dt class="property-required"
             title="Required">
         <span id="time_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_out_python" style="color: inherit; text-decoration: inherit;">time_<wbr>out</a>
@@ -1082,8 +1247,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>task timeout, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>task timeout, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="advance_settings_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#advance_settings_python" style="color: inherit; text-decoration: inherit;">advance_<wbr>settings</a>
@@ -1091,8 +1255,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#taskadvancesettings">Task<wbr>Advance<wbr>Settings<wbr>Args</a></span>
     </dt>
-    <dd><p>advanced settings.</p>
-</dd><dt class="property-optional"
+    <dd>advanced settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="program_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#program_id_lists_python" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
@@ -1100,8 +1263,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="retry_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retry_count_python" style="color: inherit; text-decoration: inherit;">retry_<wbr>count</a>
@@ -1109,8 +1271,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</p>
-</dd><dt class="property-optional"
+    <dd>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="retry_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retry_interval_python" style="color: inherit; text-decoration: inherit;">retry_<wbr>interval</a>
@@ -1118,17 +1279,15 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="shard_arguments_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_arguments_python" style="color: inherit; text-decoration: inherit;">shard_<wbr>arguments</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#taskshardargument">Task<wbr>Shard<wbr>Argument<wbr>Args]</a></span>
+        <span class="property-type"><a href="#taskshardargument">Sequence[Task<wbr>Shard<wbr>Argument<wbr>Args]</a></span>
     </dt>
-    <dd><p>Fragmentation parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Fragmentation parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="shard_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_count_python" style="color: inherit; text-decoration: inherit;">shard_<wbr>count</a>
@@ -1136,8 +1295,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of shards.</p>
-</dd><dt class="property-optional"
+    <dd>number of shards.</dd><dt class="property-optional"
             title="Optional">
         <span id="success_operator_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#success_operator_python" style="color: inherit; text-decoration: inherit;">success_<wbr>operator</a>
@@ -1145,8 +1303,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>the operator to judge the success of the task.</p>
-</dd><dt class="property-optional"
+    <dd>the operator to judge the success of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="success_ratio_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#success_ratio_python" style="color: inherit; text-decoration: inherit;">success_<wbr>ratio</a>
@@ -1154,8 +1311,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The threshold for judging the success rate of the task, such as 100.</p>
-</dd><dt class="property-optional"
+    <dd>The threshold for judging the success rate of the task, such as 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="task_argument_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_argument_python" style="color: inherit; text-decoration: inherit;">task_<wbr>argument</a>
@@ -1163,8 +1319,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>task parameters, the length limit is 10000 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task parameters, the length limit is 10000 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="task_rule_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_rule_python" style="color: inherit; text-decoration: inherit;">task_<wbr>rule</a>
@@ -1172,8 +1327,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tasktaskrule">Task<wbr>Task<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>trigger rule.</p>
-</dd></dl>
+    <dd>trigger rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1187,8 +1341,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>execution type, unicast/broadcast.</p>
-</dd><dt class="property-required"
+    <dd>execution type, unicast/broadcast.</dd><dt class="property-required"
             title="Required">
         <span id="groupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupid_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -1196,8 +1349,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>deployment group ID.</p>
-</dd><dt class="property-required"
+    <dd>deployment group ID.</dd><dt class="property-required"
             title="Required">
         <span id="taskcontent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskcontent_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Content</a>
@@ -1205,8 +1357,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task content, length limit 65536 bytes.</p>
-</dd><dt class="property-required"
+    <dd>task content, length limit 65536 bytes.</dd><dt class="property-required"
             title="Required">
         <span id="taskname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskname_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Name</a>
@@ -1214,8 +1365,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task name, task length 64 characters.</p>
-</dd><dt class="property-required"
+    <dd>task name, task length 64 characters.</dd><dt class="property-required"
             title="Required">
         <span id="tasktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktype_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Type</a>
@@ -1223,8 +1373,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task type, java.</p>
-</dd><dt class="property-required"
+    <dd>task type, java.</dd><dt class="property-required"
             title="Required">
         <span id="timeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeout_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Out</a>
@@ -1232,8 +1381,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>task timeout, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>task timeout, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="advancesettings_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#advancesettings_yaml" style="color: inherit; text-decoration: inherit;">advance<wbr>Settings</a>
@@ -1241,8 +1389,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#taskadvancesettings">Property Map</a></span>
     </dt>
-    <dd><p>advanced settings.</p>
-</dd><dt class="property-optional"
+    <dd>advanced settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="programidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#programidlists_yaml" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -1250,8 +1397,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="retrycount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrycount_yaml" style="color: inherit; text-decoration: inherit;">retry<wbr>Count</a>
@@ -1259,8 +1405,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</p>
-</dd><dt class="property-optional"
+    <dd>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="retryinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retryinterval_yaml" style="color: inherit; text-decoration: inherit;">retry<wbr>Interval</a>
@@ -1268,8 +1413,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="shardarguments_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardarguments_yaml" style="color: inherit; text-decoration: inherit;">shard<wbr>Arguments</a>
@@ -1277,8 +1421,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#taskshardargument">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Fragmentation parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Fragmentation parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="shardcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardcount_yaml" style="color: inherit; text-decoration: inherit;">shard<wbr>Count</a>
@@ -1286,8 +1429,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>number of shards.</p>
-</dd><dt class="property-optional"
+    <dd>number of shards.</dd><dt class="property-optional"
             title="Optional">
         <span id="successoperator_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#successoperator_yaml" style="color: inherit; text-decoration: inherit;">success<wbr>Operator</a>
@@ -1295,8 +1437,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>the operator to judge the success of the task.</p>
-</dd><dt class="property-optional"
+    <dd>the operator to judge the success of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="successratio_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#successratio_yaml" style="color: inherit; text-decoration: inherit;">success<wbr>Ratio</a>
@@ -1304,8 +1445,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The threshold for judging the success rate of the task, such as 100.</p>
-</dd><dt class="property-optional"
+    <dd>The threshold for judging the success rate of the task, such as 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskargument_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskargument_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Argument</a>
@@ -1313,8 +1453,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task parameters, the length limit is 10000 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task parameters, the length limit is 10000 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskrule_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskrule_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Rule</a>
@@ -1322,8 +1461,7 @@ The Task resource accepts the following [input](/docs/intro/concepts/inputs-outp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tasktaskrule">Property Map</a></span>
     </dt>
-    <dd><p>trigger rule.</p>
-</dd></dl>
+    <dd>trigger rule.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1344,8 +1482,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID of the workflow to which it belongs.</p>
-</dd><dt class="property-"
+    <dd>ID of the workflow to which it belongs.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1353,8 +1490,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="taskid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -1362,8 +1498,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task ID.</p>
-</dd><dt class="property-"
+    <dd>task ID.</dd><dt class="property-"
             title="">
         <span id="tasklogid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasklogid_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Log<wbr>Id</a>
@@ -1371,8 +1506,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task history ID.</p>
-</dd><dt class="property-"
+    <dd>task history ID.</dd><dt class="property-"
             title="">
         <span id="triggertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggertype_csharp" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Type</a>
@@ -1380,8 +1514,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>trigger type.</p>
-</dd><dt class="property-"
+    <dd>trigger type.</dd><dt class="property-"
             title="">
         <span id="tsftaskstate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tsftaskstate_csharp" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Task<wbr>State</a>
@@ -1389,8 +1522,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable the task, ENABLED/DISABLED.</p>
-</dd></dl>
+    <dd>Whether to enable the task, ENABLED/DISABLED.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1404,8 +1536,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID of the workflow to which it belongs.</p>
-</dd><dt class="property-"
+    <dd>ID of the workflow to which it belongs.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1413,8 +1544,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="taskid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -1422,8 +1552,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task ID.</p>
-</dd><dt class="property-"
+    <dd>task ID.</dd><dt class="property-"
             title="">
         <span id="tasklogid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasklogid_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Log<wbr>Id</a>
@@ -1431,8 +1560,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task history ID.</p>
-</dd><dt class="property-"
+    <dd>task history ID.</dd><dt class="property-"
             title="">
         <span id="taskstate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskstate_go" style="color: inherit; text-decoration: inherit;">Task<wbr>State</a>
@@ -1440,8 +1568,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable the task, ENABLED/DISABLED.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable the task, ENABLED/DISABLED.</dd><dt class="property-"
             title="">
         <span id="triggertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggertype_go" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Type</a>
@@ -1449,8 +1576,61 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>trigger type.</p>
-</dd></dl>
+    <dd>trigger type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="belong_flow_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#belong_flow_ids_hcl" style="color: inherit; text-decoration: inherit;">belong_<wbr>flow_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID of the workflow to which it belongs.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="task_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_id_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>task ID.</dd><dt class="property-"
+            title="">
+        <span id="task_log_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_log_id_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>log_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>task history ID.</dd><dt class="property-"
+            title="">
+        <span id="task_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_state_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable the task, ENABLED/DISABLED.</dd><dt class="property-"
+            title="">
+        <span id="trigger_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_type_hcl" style="color: inherit; text-decoration: inherit;">trigger_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>trigger type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1464,8 +1644,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of the workflow to which it belongs.</p>
-</dd><dt class="property-"
+    <dd>ID of the workflow to which it belongs.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1473,8 +1652,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="taskid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_java" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -1482,8 +1660,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task ID.</p>
-</dd><dt class="property-"
+    <dd>task ID.</dd><dt class="property-"
             title="">
         <span id="tasklogid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasklogid_java" style="color: inherit; text-decoration: inherit;">task<wbr>Log<wbr>Id</a>
@@ -1491,8 +1668,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task history ID.</p>
-</dd><dt class="property-"
+    <dd>task history ID.</dd><dt class="property-"
             title="">
         <span id="taskstate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskstate_java" style="color: inherit; text-decoration: inherit;">task<wbr>State</a>
@@ -1500,8 +1676,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable the task, ENABLED/DISABLED.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable the task, ENABLED/DISABLED.</dd><dt class="property-"
             title="">
         <span id="triggertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggertype_java" style="color: inherit; text-decoration: inherit;">trigger<wbr>Type</a>
@@ -1509,8 +1684,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>trigger type.</p>
-</dd></dl>
+    <dd>trigger type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1524,8 +1698,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID of the workflow to which it belongs.</p>
-</dd><dt class="property-"
+    <dd>ID of the workflow to which it belongs.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1533,8 +1706,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="taskid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -1542,8 +1714,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task ID.</p>
-</dd><dt class="property-"
+    <dd>task ID.</dd><dt class="property-"
             title="">
         <span id="tasklogid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasklogid_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Log<wbr>Id</a>
@@ -1551,8 +1722,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task history ID.</p>
-</dd><dt class="property-"
+    <dd>task history ID.</dd><dt class="property-"
             title="">
         <span id="taskstate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskstate_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>State</a>
@@ -1560,8 +1730,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable the task, ENABLED/DISABLED.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable the task, ENABLED/DISABLED.</dd><dt class="property-"
             title="">
         <span id="triggertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggertype_nodejs" style="color: inherit; text-decoration: inherit;">trigger<wbr>Type</a>
@@ -1569,8 +1738,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>trigger type.</p>
-</dd></dl>
+    <dd>trigger type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1584,8 +1752,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID of the workflow to which it belongs.</p>
-</dd><dt class="property-"
+    <dd>ID of the workflow to which it belongs.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1593,8 +1760,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="task_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_id_python" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
@@ -1602,8 +1768,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>task ID.</p>
-</dd><dt class="property-"
+    <dd>task ID.</dd><dt class="property-"
             title="">
         <span id="task_log_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_log_id_python" style="color: inherit; text-decoration: inherit;">task_<wbr>log_<wbr>id</a>
@@ -1611,8 +1776,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>task history ID.</p>
-</dd><dt class="property-"
+    <dd>task history ID.</dd><dt class="property-"
             title="">
         <span id="task_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_state_python" style="color: inherit; text-decoration: inherit;">task_<wbr>state</a>
@@ -1620,8 +1784,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to enable the task, ENABLED/DISABLED.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable the task, ENABLED/DISABLED.</dd><dt class="property-"
             title="">
         <span id="trigger_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#trigger_type_python" style="color: inherit; text-decoration: inherit;">trigger_<wbr>type</a>
@@ -1629,8 +1792,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>trigger type.</p>
-</dd></dl>
+    <dd>trigger type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1644,8 +1806,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of the workflow to which it belongs.</p>
-</dd><dt class="property-"
+    <dd>ID of the workflow to which it belongs.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1653,8 +1814,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="taskid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskid_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -1662,8 +1822,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task ID.</p>
-</dd><dt class="property-"
+    <dd>task ID.</dd><dt class="property-"
             title="">
         <span id="tasklogid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasklogid_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Log<wbr>Id</a>
@@ -1671,8 +1830,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task history ID.</p>
-</dd><dt class="property-"
+    <dd>task history ID.</dd><dt class="property-"
             title="">
         <span id="taskstate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskstate_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>State</a>
@@ -1680,8 +1838,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable the task, ENABLED/DISABLED.</p>
-</dd><dt class="property-"
+    <dd>Whether to enable the task, ENABLED/DISABLED.</dd><dt class="property-"
             title="">
         <span id="triggertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#triggertype_yaml" style="color: inherit; text-decoration: inherit;">trigger<wbr>Type</a>
@@ -1689,8 +1846,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>trigger type.</p>
-</dd></dl>
+    <dd>trigger type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1700,29 +1856,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Task resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TaskState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Task</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">TaskState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Task</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">advance_settings</span><span class="p">:</span> <span class="nx">Optional[_tsf.TaskAdvanceSettingsArgs]</span> = None<span class="p">,</span>
+        <span class="nx">advance_settings</span><span class="p">:</span> <span class="nx">Optional[TaskAdvanceSettingsArgs]</span> = None<span class="p">,</span>
         <span class="nx">belong_flow_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">execute_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">program_id_lists</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">retry_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">retry_interval</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">shard_arguments</span><span class="p">:</span> <span class="nx">Optional[Sequence[_tsf.TaskShardArgumentArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">shard_arguments</span><span class="p">:</span> <span class="nx">Optional[Sequence[TaskShardArgumentArgs]]</span> = None<span class="p">,</span>
         <span class="nx">shard_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">success_operator</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">success_ratio</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
@@ -1731,109 +1887,148 @@ Get an existing Task resource's state with the given name, ID, and optional extr
         <span class="nx">task_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">task_log_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">task_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">task_rule</span><span class="p">:</span> <span class="nx">Optional[_tsf.TaskTaskRuleArgs]</span> = None<span class="p">,</span>
+        <span class="nx">task_rule</span><span class="p">:</span> <span class="nx">Optional[TaskTaskRuleArgs]</span> = None<span class="p">,</span>
         <span class="nx">task_state</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">task_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">time_out</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">trigger_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Task</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTask<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TaskState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Task</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetTask<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">TaskState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Task</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Task</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TaskState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Task</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TaskState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Task</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TaskState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Task</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">TaskState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingTask</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tsf:Task</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tsf_task</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TaskState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TaskState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1841,28 +2036,31 @@ Get an existing Task resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TaskState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1870,28 +2068,31 @@ Get an existing Task resource's state with the given name, ID, and optional extr
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">TaskState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1909,10 +2110,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_advancesettings_csharp" style="color: inherit; text-decoration: inherit;">Advance<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#taskadvancesettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Task<wbr>Advance<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#taskadvancesettings">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Task<wbr>Advance<wbr>Settings</a></span>
     </dt>
-    <dd><p>advanced settings.</p>
-</dd><dt class="property-optional"
+    <dd>advanced settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_belongflowids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_belongflowids_csharp" style="color: inherit; text-decoration: inherit;">Belong<wbr>Flow<wbr>Ids</a>
@@ -1920,8 +2120,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID of the workflow to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the workflow to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_executetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_executetype_csharp" style="color: inherit; text-decoration: inherit;">Execute<wbr>Type</a>
@@ -1929,8 +2128,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>execution type, unicast/broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>execution type, unicast/broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupid_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -1938,8 +2136,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_csharp" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -1947,8 +2144,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retrycount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retrycount_csharp" style="color: inherit; text-decoration: inherit;">Retry<wbr>Count</a>
@@ -1956,8 +2152,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</p>
-</dd><dt class="property-optional"
+    <dd>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retryinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retryinterval_csharp" style="color: inherit; text-decoration: inherit;">Retry<wbr>Interval</a>
@@ -1965,17 +2160,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shardarguments_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shardarguments_csharp" style="color: inherit; text-decoration: inherit;">Shard<wbr>Arguments</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#taskshardargument">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Task<wbr>Shard<wbr>Argument<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#taskshardargument">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Task<wbr>Shard<wbr>Argument&gt;</a></span>
     </dt>
-    <dd><p>Fragmentation parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Fragmentation parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shardcount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shardcount_csharp" style="color: inherit; text-decoration: inherit;">Shard<wbr>Count</a>
@@ -1983,8 +2176,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of shards.</p>
-</dd><dt class="property-optional"
+    <dd>number of shards.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_successoperator_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_successoperator_csharp" style="color: inherit; text-decoration: inherit;">Success<wbr>Operator</a>
@@ -1992,8 +2184,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the operator to judge the success of the task.</p>
-</dd><dt class="property-optional"
+    <dd>the operator to judge the success of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_successratio_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_successratio_csharp" style="color: inherit; text-decoration: inherit;">Success<wbr>Ratio</a>
@@ -2001,8 +2192,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The threshold for judging the success rate of the task, such as 100.</p>
-</dd><dt class="property-optional"
+    <dd>The threshold for judging the success rate of the task, such as 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskargument_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskargument_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Argument</a>
@@ -2010,8 +2200,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task parameters, the length limit is 10000 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task parameters, the length limit is 10000 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskcontent_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskcontent_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Content</a>
@@ -2019,8 +2208,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task content, length limit 65536 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>task content, length limit 65536 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskid_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -2028,8 +2216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task ID.</p>
-</dd><dt class="property-optional"
+    <dd>task ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tasklogid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tasklogid_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Log<wbr>Id</a>
@@ -2037,8 +2224,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task history ID.</p>
-</dd><dt class="property-optional"
+    <dd>task history ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskname_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Name</a>
@@ -2046,17 +2232,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task name, task length 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task name, task length 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskrule_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskrule_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tasktaskrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Task<wbr>Task<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#tasktaskrule">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tsf.<wbr>Inputs.<wbr>Task<wbr>Task<wbr>Rule</a></span>
     </dt>
-    <dd><p>trigger rule.</p>
-</dd><dt class="property-optional"
+    <dd>trigger rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tasktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tasktype_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Type</a>
@@ -2064,8 +2248,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task type, java.</p>
-</dd><dt class="property-optional"
+    <dd>task type, java.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeout_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>Out</a>
@@ -2073,8 +2256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>task timeout, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>task timeout, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggertype_csharp" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Type</a>
@@ -2082,8 +2264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>trigger type.</p>
-</dd><dt class="property-optional"
+    <dd>trigger type.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tsftaskstate_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tsftaskstate_csharp" style="color: inherit; text-decoration: inherit;">Tsf<wbr>Task<wbr>State</a>
@@ -2091,8 +2272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable the task, ENABLED/DISABLED.</p>
-</dd></dl>
+    <dd>Whether to enable the task, ENABLED/DISABLED.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2106,8 +2286,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#taskadvancesettings">Task<wbr>Advance<wbr>Settings<wbr>Args</a></span>
     </dt>
-    <dd><p>advanced settings.</p>
-</dd><dt class="property-optional"
+    <dd>advanced settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_belongflowids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_belongflowids_go" style="color: inherit; text-decoration: inherit;">Belong<wbr>Flow<wbr>Ids</a>
@@ -2115,8 +2294,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID of the workflow to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the workflow to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_executetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_executetype_go" style="color: inherit; text-decoration: inherit;">Execute<wbr>Type</a>
@@ -2124,8 +2302,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>execution type, unicast/broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>execution type, unicast/broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupid_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Id</a>
@@ -2133,8 +2310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_go" style="color: inherit; text-decoration: inherit;">Program<wbr>Id<wbr>Lists</a>
@@ -2142,8 +2318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retrycount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retrycount_go" style="color: inherit; text-decoration: inherit;">Retry<wbr>Count</a>
@@ -2151,8 +2326,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</p>
-</dd><dt class="property-optional"
+    <dd>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retryinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retryinterval_go" style="color: inherit; text-decoration: inherit;">Retry<wbr>Interval</a>
@@ -2160,8 +2334,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shardarguments_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shardarguments_go" style="color: inherit; text-decoration: inherit;">Shard<wbr>Arguments</a>
@@ -2169,8 +2342,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#taskshardargument">[]Task<wbr>Shard<wbr>Argument<wbr>Args</a></span>
     </dt>
-    <dd><p>Fragmentation parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Fragmentation parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shardcount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shardcount_go" style="color: inherit; text-decoration: inherit;">Shard<wbr>Count</a>
@@ -2178,8 +2350,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of shards.</p>
-</dd><dt class="property-optional"
+    <dd>number of shards.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_successoperator_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_successoperator_go" style="color: inherit; text-decoration: inherit;">Success<wbr>Operator</a>
@@ -2187,8 +2358,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the operator to judge the success of the task.</p>
-</dd><dt class="property-optional"
+    <dd>the operator to judge the success of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_successratio_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_successratio_go" style="color: inherit; text-decoration: inherit;">Success<wbr>Ratio</a>
@@ -2196,8 +2366,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The threshold for judging the success rate of the task, such as 100.</p>
-</dd><dt class="property-optional"
+    <dd>The threshold for judging the success rate of the task, such as 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskargument_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskargument_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Argument</a>
@@ -2205,8 +2374,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task parameters, the length limit is 10000 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task parameters, the length limit is 10000 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskcontent_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskcontent_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Content</a>
@@ -2214,8 +2382,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task content, length limit 65536 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>task content, length limit 65536 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskid_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Id</a>
@@ -2223,8 +2390,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task ID.</p>
-</dd><dt class="property-optional"
+    <dd>task ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tasklogid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tasklogid_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Log<wbr>Id</a>
@@ -2232,8 +2398,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task history ID.</p>
-</dd><dt class="property-optional"
+    <dd>task history ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskname_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Name</a>
@@ -2241,8 +2406,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task name, task length 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task name, task length 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskrule_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskrule_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Rule</a>
@@ -2250,8 +2414,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tasktaskrule">Task<wbr>Task<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>trigger rule.</p>
-</dd><dt class="property-optional"
+    <dd>trigger rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskstate_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskstate_go" style="color: inherit; text-decoration: inherit;">Task<wbr>State</a>
@@ -2259,8 +2422,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable the task, ENABLED/DISABLED.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the task, ENABLED/DISABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tasktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tasktype_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Type</a>
@@ -2268,8 +2430,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task type, java.</p>
-</dd><dt class="property-optional"
+    <dd>task type, java.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeout_go" style="color: inherit; text-decoration: inherit;">Time<wbr>Out</a>
@@ -2277,8 +2438,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>task timeout, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>task timeout, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggertype_go" style="color: inherit; text-decoration: inherit;">Trigger<wbr>Type</a>
@@ -2286,8 +2446,181 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>trigger type.</p>
-</dd></dl>
+    <dd>trigger type.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_advance_settings_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_advance_settings_hcl" style="color: inherit; text-decoration: inherit;">advance_<wbr>settings</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#taskadvancesettings">object</a></span>
+    </dt>
+    <dd>advanced settings.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_belong_flow_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_belong_flow_ids_hcl" style="color: inherit; text-decoration: inherit;">belong_<wbr>flow_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID of the workflow to which it belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_execute_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_execute_type_hcl" style="color: inherit; text-decoration: inherit;">execute_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>execution type, unicast/broadcast.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>deployment group ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_program_id_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_program_id_lists_hcl" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Program id list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_retry_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retry_count_hcl" style="color: inherit; text-decoration: inherit;">retry_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_retry_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retry_interval_hcl" style="color: inherit; text-decoration: inherit;">retry_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_shard_arguments_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shard_arguments_hcl" style="color: inherit; text-decoration: inherit;">shard_<wbr>arguments</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#taskshardargument">list(object)</a></span>
+    </dt>
+    <dd>Fragmentation parameters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_shard_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shard_count_hcl" style="color: inherit; text-decoration: inherit;">shard_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>number of shards.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_success_operator_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_success_operator_hcl" style="color: inherit; text-decoration: inherit;">success_<wbr>operator</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>the operator to judge the success of the task.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_success_ratio_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_success_ratio_hcl" style="color: inherit; text-decoration: inherit;">success_<wbr>ratio</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The threshold for judging the success rate of the task, such as 100.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_task_argument_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_argument_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>argument</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>task parameters, the length limit is 10000 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_task_content_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_content_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>content</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>task content, length limit 65536 bytes.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_task_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_id_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>task ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_task_log_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_log_id_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>log_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>task history ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_task_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_name_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>task name, task length 64 characters.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_task_rule_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_rule_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>rule</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#tasktaskrule">object</a></span>
+    </dt>
+    <dd>trigger rule.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_task_state_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_state_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>state</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable the task, ENABLED/DISABLED.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_task_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_type_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>task type, java.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_time_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_out_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>task timeout, time unit ms.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_trigger_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trigger_type_hcl" style="color: inherit; text-decoration: inherit;">trigger_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>trigger type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2299,10 +2632,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_advancesettings_java" style="color: inherit; text-decoration: inherit;">advance<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#taskadvancesettings">Task<wbr>Advance<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#taskadvancesettings">Task<wbr>Advance<wbr>Settings</a></span>
     </dt>
-    <dd><p>advanced settings.</p>
-</dd><dt class="property-optional"
+    <dd>advanced settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_belongflowids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_belongflowids_java" style="color: inherit; text-decoration: inherit;">belong<wbr>Flow<wbr>Ids</a>
@@ -2310,8 +2642,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of the workflow to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the workflow to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_executetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_executetype_java" style="color: inherit; text-decoration: inherit;">execute<wbr>Type</a>
@@ -2319,8 +2650,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>execution type, unicast/broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>execution type, unicast/broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupid_java" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -2328,8 +2658,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_java" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -2337,8 +2666,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retrycount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retrycount_java" style="color: inherit; text-decoration: inherit;">retry<wbr>Count</a>
@@ -2346,8 +2674,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</p>
-</dd><dt class="property-optional"
+    <dd>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retryinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retryinterval_java" style="color: inherit; text-decoration: inherit;">retry<wbr>Interval</a>
@@ -2355,17 +2682,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shardarguments_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shardarguments_java" style="color: inherit; text-decoration: inherit;">shard<wbr>Arguments</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#taskshardargument">List&lt;Task<wbr>Shard<wbr>Argument<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#taskshardargument">List&lt;Task<wbr>Shard<wbr>Argument&gt;</a></span>
     </dt>
-    <dd><p>Fragmentation parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Fragmentation parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shardcount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shardcount_java" style="color: inherit; text-decoration: inherit;">shard<wbr>Count</a>
@@ -2373,8 +2698,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>number of shards.</p>
-</dd><dt class="property-optional"
+    <dd>number of shards.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_successoperator_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_successoperator_java" style="color: inherit; text-decoration: inherit;">success<wbr>Operator</a>
@@ -2382,8 +2706,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>the operator to judge the success of the task.</p>
-</dd><dt class="property-optional"
+    <dd>the operator to judge the success of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_successratio_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_successratio_java" style="color: inherit; text-decoration: inherit;">success<wbr>Ratio</a>
@@ -2391,8 +2714,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The threshold for judging the success rate of the task, such as 100.</p>
-</dd><dt class="property-optional"
+    <dd>The threshold for judging the success rate of the task, such as 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskargument_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskargument_java" style="color: inherit; text-decoration: inherit;">task<wbr>Argument</a>
@@ -2400,8 +2722,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task parameters, the length limit is 10000 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task parameters, the length limit is 10000 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskcontent_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskcontent_java" style="color: inherit; text-decoration: inherit;">task<wbr>Content</a>
@@ -2409,8 +2730,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task content, length limit 65536 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>task content, length limit 65536 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskid_java" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -2418,8 +2738,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task ID.</p>
-</dd><dt class="property-optional"
+    <dd>task ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tasklogid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tasklogid_java" style="color: inherit; text-decoration: inherit;">task<wbr>Log<wbr>Id</a>
@@ -2427,8 +2746,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task history ID.</p>
-</dd><dt class="property-optional"
+    <dd>task history ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskname_java" style="color: inherit; text-decoration: inherit;">task<wbr>Name</a>
@@ -2436,17 +2754,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task name, task length 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task name, task length 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskrule_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskrule_java" style="color: inherit; text-decoration: inherit;">task<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tasktaskrule">Task<wbr>Task<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#tasktaskrule">Task<wbr>Task<wbr>Rule</a></span>
     </dt>
-    <dd><p>trigger rule.</p>
-</dd><dt class="property-optional"
+    <dd>trigger rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskstate_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskstate_java" style="color: inherit; text-decoration: inherit;">task<wbr>State</a>
@@ -2454,8 +2770,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable the task, ENABLED/DISABLED.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the task, ENABLED/DISABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tasktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tasktype_java" style="color: inherit; text-decoration: inherit;">task<wbr>Type</a>
@@ -2463,8 +2778,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task type, java.</p>
-</dd><dt class="property-optional"
+    <dd>task type, java.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeout_java" style="color: inherit; text-decoration: inherit;">time<wbr>Out</a>
@@ -2472,8 +2786,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>task timeout, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>task timeout, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggertype_java" style="color: inherit; text-decoration: inherit;">trigger<wbr>Type</a>
@@ -2481,8 +2794,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>trigger type.</p>
-</dd></dl>
+    <dd>trigger type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2494,10 +2806,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_advancesettings_nodejs" style="color: inherit; text-decoration: inherit;">advance<wbr>Settings</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#taskadvancesettings">Task<wbr>Advance<wbr>Settings<wbr>Args</a></span>
+        <span class="property-type"><a href="#taskadvancesettings">Task<wbr>Advance<wbr>Settings</a></span>
     </dt>
-    <dd><p>advanced settings.</p>
-</dd><dt class="property-optional"
+    <dd>advanced settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_belongflowids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_belongflowids_nodejs" style="color: inherit; text-decoration: inherit;">belong<wbr>Flow<wbr>Ids</a>
@@ -2505,8 +2816,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID of the workflow to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the workflow to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_executetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_executetype_nodejs" style="color: inherit; text-decoration: inherit;">execute<wbr>Type</a>
@@ -2514,8 +2824,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>execution type, unicast/broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>execution type, unicast/broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupid_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -2523,8 +2832,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_nodejs" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -2532,8 +2840,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retrycount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retrycount_nodejs" style="color: inherit; text-decoration: inherit;">retry<wbr>Count</a>
@@ -2541,8 +2848,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</p>
-</dd><dt class="property-optional"
+    <dd>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retryinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retryinterval_nodejs" style="color: inherit; text-decoration: inherit;">retry<wbr>Interval</a>
@@ -2550,17 +2856,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shardarguments_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shardarguments_nodejs" style="color: inherit; text-decoration: inherit;">shard<wbr>Arguments</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#taskshardargument">Task<wbr>Shard<wbr>Argument<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#taskshardargument">Task<wbr>Shard<wbr>Argument[]</a></span>
     </dt>
-    <dd><p>Fragmentation parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Fragmentation parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shardcount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shardcount_nodejs" style="color: inherit; text-decoration: inherit;">shard<wbr>Count</a>
@@ -2568,8 +2872,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>number of shards.</p>
-</dd><dt class="property-optional"
+    <dd>number of shards.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_successoperator_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_successoperator_nodejs" style="color: inherit; text-decoration: inherit;">success<wbr>Operator</a>
@@ -2577,8 +2880,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>the operator to judge the success of the task.</p>
-</dd><dt class="property-optional"
+    <dd>the operator to judge the success of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_successratio_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_successratio_nodejs" style="color: inherit; text-decoration: inherit;">success<wbr>Ratio</a>
@@ -2586,8 +2888,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The threshold for judging the success rate of the task, such as 100.</p>
-</dd><dt class="property-optional"
+    <dd>The threshold for judging the success rate of the task, such as 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskargument_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskargument_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Argument</a>
@@ -2595,8 +2896,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task parameters, the length limit is 10000 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task parameters, the length limit is 10000 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskcontent_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskcontent_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Content</a>
@@ -2604,8 +2904,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task content, length limit 65536 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>task content, length limit 65536 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskid_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -2613,8 +2912,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task ID.</p>
-</dd><dt class="property-optional"
+    <dd>task ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tasklogid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tasklogid_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Log<wbr>Id</a>
@@ -2622,8 +2920,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task history ID.</p>
-</dd><dt class="property-optional"
+    <dd>task history ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskname_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Name</a>
@@ -2631,17 +2928,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task name, task length 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task name, task length 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskrule_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskrule_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Rule</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#tasktaskrule">Task<wbr>Task<wbr>Rule<wbr>Args</a></span>
+        <span class="property-type"><a href="#tasktaskrule">Task<wbr>Task<wbr>Rule</a></span>
     </dt>
-    <dd><p>trigger rule.</p>
-</dd><dt class="property-optional"
+    <dd>trigger rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskstate_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskstate_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>State</a>
@@ -2649,8 +2944,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable the task, ENABLED/DISABLED.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the task, ENABLED/DISABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tasktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tasktype_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Type</a>
@@ -2658,8 +2952,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>task type, java.</p>
-</dd><dt class="property-optional"
+    <dd>task type, java.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeout_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>Out</a>
@@ -2667,8 +2960,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>task timeout, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>task timeout, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggertype_nodejs" style="color: inherit; text-decoration: inherit;">trigger<wbr>Type</a>
@@ -2676,8 +2968,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>trigger type.</p>
-</dd></dl>
+    <dd>trigger type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2691,8 +2982,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#taskadvancesettings">Task<wbr>Advance<wbr>Settings<wbr>Args</a></span>
     </dt>
-    <dd><p>advanced settings.</p>
-</dd><dt class="property-optional"
+    <dd>advanced settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_belong_flow_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_belong_flow_ids_python" style="color: inherit; text-decoration: inherit;">belong_<wbr>flow_<wbr>ids</a>
@@ -2700,8 +2990,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID of the workflow to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the workflow to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_execute_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_execute_type_python" style="color: inherit; text-decoration: inherit;">execute_<wbr>type</a>
@@ -2709,8 +2998,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>execution type, unicast/broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>execution type, unicast/broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_group_id_python" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
@@ -2718,8 +3006,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_program_id_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_program_id_lists_python" style="color: inherit; text-decoration: inherit;">program_<wbr>id_<wbr>lists</a>
@@ -2727,8 +3014,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retry_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retry_count_python" style="color: inherit; text-decoration: inherit;">retry_<wbr>count</a>
@@ -2736,8 +3022,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</p>
-</dd><dt class="property-optional"
+    <dd>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retry_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retry_interval_python" style="color: inherit; text-decoration: inherit;">retry_<wbr>interval</a>
@@ -2745,17 +3030,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shard_arguments_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shard_arguments_python" style="color: inherit; text-decoration: inherit;">shard_<wbr>arguments</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#taskshardargument">Task<wbr>Shard<wbr>Argument<wbr>Args]</a></span>
+        <span class="property-type"><a href="#taskshardargument">Sequence[Task<wbr>Shard<wbr>Argument<wbr>Args]</a></span>
     </dt>
-    <dd><p>Fragmentation parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Fragmentation parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shard_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shard_count_python" style="color: inherit; text-decoration: inherit;">shard_<wbr>count</a>
@@ -2763,8 +3046,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>number of shards.</p>
-</dd><dt class="property-optional"
+    <dd>number of shards.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_success_operator_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_success_operator_python" style="color: inherit; text-decoration: inherit;">success_<wbr>operator</a>
@@ -2772,8 +3054,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>the operator to judge the success of the task.</p>
-</dd><dt class="property-optional"
+    <dd>the operator to judge the success of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_success_ratio_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_success_ratio_python" style="color: inherit; text-decoration: inherit;">success_<wbr>ratio</a>
@@ -2781,8 +3062,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The threshold for judging the success rate of the task, such as 100.</p>
-</dd><dt class="property-optional"
+    <dd>The threshold for judging the success rate of the task, such as 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_task_argument_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_argument_python" style="color: inherit; text-decoration: inherit;">task_<wbr>argument</a>
@@ -2790,8 +3070,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>task parameters, the length limit is 10000 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task parameters, the length limit is 10000 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_task_content_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_content_python" style="color: inherit; text-decoration: inherit;">task_<wbr>content</a>
@@ -2799,8 +3078,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>task content, length limit 65536 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>task content, length limit 65536 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_task_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_id_python" style="color: inherit; text-decoration: inherit;">task_<wbr>id</a>
@@ -2808,8 +3086,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>task ID.</p>
-</dd><dt class="property-optional"
+    <dd>task ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_task_log_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_log_id_python" style="color: inherit; text-decoration: inherit;">task_<wbr>log_<wbr>id</a>
@@ -2817,8 +3094,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>task history ID.</p>
-</dd><dt class="property-optional"
+    <dd>task history ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_task_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_name_python" style="color: inherit; text-decoration: inherit;">task_<wbr>name</a>
@@ -2826,8 +3102,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>task name, task length 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task name, task length 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_task_rule_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_rule_python" style="color: inherit; text-decoration: inherit;">task_<wbr>rule</a>
@@ -2835,8 +3110,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tasktaskrule">Task<wbr>Task<wbr>Rule<wbr>Args</a></span>
     </dt>
-    <dd><p>trigger rule.</p>
-</dd><dt class="property-optional"
+    <dd>trigger rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_task_state_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_state_python" style="color: inherit; text-decoration: inherit;">task_<wbr>state</a>
@@ -2844,8 +3118,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to enable the task, ENABLED/DISABLED.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the task, ENABLED/DISABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_task_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_task_type_python" style="color: inherit; text-decoration: inherit;">task_<wbr>type</a>
@@ -2853,8 +3126,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>task type, java.</p>
-</dd><dt class="property-optional"
+    <dd>task type, java.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_time_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_time_out_python" style="color: inherit; text-decoration: inherit;">time_<wbr>out</a>
@@ -2862,8 +3134,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>task timeout, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>task timeout, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_trigger_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_trigger_type_python" style="color: inherit; text-decoration: inherit;">trigger_<wbr>type</a>
@@ -2871,8 +3142,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>trigger type.</p>
-</dd></dl>
+    <dd>trigger type.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2886,8 +3156,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#taskadvancesettings">Property Map</a></span>
     </dt>
-    <dd><p>advanced settings.</p>
-</dd><dt class="property-optional"
+    <dd>advanced settings.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_belongflowids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_belongflowids_yaml" style="color: inherit; text-decoration: inherit;">belong<wbr>Flow<wbr>Ids</a>
@@ -2895,8 +3164,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID of the workflow to which it belongs.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the workflow to which it belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_executetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_executetype_yaml" style="color: inherit; text-decoration: inherit;">execute<wbr>Type</a>
@@ -2904,8 +3172,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>execution type, unicast/broadcast.</p>
-</dd><dt class="property-optional"
+    <dd>execution type, unicast/broadcast.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_groupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_groupid_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Id</a>
@@ -2913,8 +3180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>deployment group ID.</p>
-</dd><dt class="property-optional"
+    <dd>deployment group ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_programidlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_programidlists_yaml" style="color: inherit; text-decoration: inherit;">program<wbr>Id<wbr>Lists</a>
@@ -2922,8 +3188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Program id list.</p>
-</dd><dt class="property-optional"
+    <dd>Program id list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retrycount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retrycount_yaml" style="color: inherit; text-decoration: inherit;">retry<wbr>Count</a>
@@ -2931,8 +3196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</p>
-</dd><dt class="property-optional"
+    <dd>number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retryinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retryinterval_yaml" style="color: inherit; text-decoration: inherit;">retry<wbr>Interval</a>
@@ -2940,8 +3204,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shardarguments_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shardarguments_yaml" style="color: inherit; text-decoration: inherit;">shard<wbr>Arguments</a>
@@ -2949,8 +3212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#taskshardargument">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Fragmentation parameters.</p>
-</dd><dt class="property-optional"
+    <dd>Fragmentation parameters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_shardcount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_shardcount_yaml" style="color: inherit; text-decoration: inherit;">shard<wbr>Count</a>
@@ -2958,8 +3220,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>number of shards.</p>
-</dd><dt class="property-optional"
+    <dd>number of shards.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_successoperator_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_successoperator_yaml" style="color: inherit; text-decoration: inherit;">success<wbr>Operator</a>
@@ -2967,8 +3228,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>the operator to judge the success of the task.</p>
-</dd><dt class="property-optional"
+    <dd>the operator to judge the success of the task.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_successratio_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_successratio_yaml" style="color: inherit; text-decoration: inherit;">success<wbr>Ratio</a>
@@ -2976,8 +3236,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The threshold for judging the success rate of the task, such as 100.</p>
-</dd><dt class="property-optional"
+    <dd>The threshold for judging the success rate of the task, such as 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskargument_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskargument_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Argument</a>
@@ -2985,8 +3244,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task parameters, the length limit is 10000 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task parameters, the length limit is 10000 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskcontent_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskcontent_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Content</a>
@@ -2994,8 +3252,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task content, length limit 65536 bytes.</p>
-</dd><dt class="property-optional"
+    <dd>task content, length limit 65536 bytes.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskid_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Id</a>
@@ -3003,8 +3260,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task ID.</p>
-</dd><dt class="property-optional"
+    <dd>task ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tasklogid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tasklogid_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Log<wbr>Id</a>
@@ -3012,8 +3268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task history ID.</p>
-</dd><dt class="property-optional"
+    <dd>task history ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskname_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Name</a>
@@ -3021,8 +3276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task name, task length 64 characters.</p>
-</dd><dt class="property-optional"
+    <dd>task name, task length 64 characters.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskrule_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskrule_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Rule</a>
@@ -3030,8 +3284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#tasktaskrule">Property Map</a></span>
     </dt>
-    <dd><p>trigger rule.</p>
-</dd><dt class="property-optional"
+    <dd>trigger rule.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_taskstate_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_taskstate_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>State</a>
@@ -3039,8 +3292,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable the task, ENABLED/DISABLED.</p>
-</dd><dt class="property-optional"
+    <dd>Whether to enable the task, ENABLED/DISABLED.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tasktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tasktype_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Type</a>
@@ -3048,8 +3300,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>task type, java.</p>
-</dd><dt class="property-optional"
+    <dd>task type, java.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_timeout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_timeout_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>Out</a>
@@ -3057,8 +3308,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>task timeout, time unit ms.</p>
-</dd><dt class="property-optional"
+    <dd>task timeout, time unit ms.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_triggertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_triggertype_yaml" style="color: inherit; text-decoration: inherit;">trigger<wbr>Type</a>
@@ -3066,8 +3316,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>trigger type.</p>
-</dd></dl>
+    <dd>trigger type.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -3082,7 +3331,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="taskadvancesettings">Task<wbr>Advance<wbr>Settings</h4>
+<h4 id="taskadvancesettings">
+Task<wbr>Advance<wbr>Settings<pulumi-choosable type="language" values="python,go" class="inline">, Task<wbr>Advance<wbr>Settings<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3094,8 +3345,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subtask single-machine concurrency limit, the default value is 2.</p>
-</dd></dl>
+    <dd>Subtask single-machine concurrency limit, the default value is 2.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3109,8 +3359,21 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subtask single-machine concurrency limit, the default value is 2.</p>
-</dd></dl>
+    <dd>Subtask single-machine concurrency limit, the default value is 2.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="sub_task_concurrency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sub_task_concurrency_hcl" style="color: inherit; text-decoration: inherit;">sub_<wbr>task_<wbr>concurrency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Subtask single-machine concurrency limit, the default value is 2.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3124,8 +3387,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Subtask single-machine concurrency limit, the default value is 2.</p>
-</dd></dl>
+    <dd>Subtask single-machine concurrency limit, the default value is 2.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3139,8 +3401,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Subtask single-machine concurrency limit, the default value is 2.</p>
-</dd></dl>
+    <dd>Subtask single-machine concurrency limit, the default value is 2.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3154,8 +3415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Subtask single-machine concurrency limit, the default value is 2.</p>
-</dd></dl>
+    <dd>Subtask single-machine concurrency limit, the default value is 2.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3169,12 +3429,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Subtask single-machine concurrency limit, the default value is 2.</p>
-</dd></dl>
+    <dd>Subtask single-machine concurrency limit, the default value is 2.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="taskshardargument">Task<wbr>Shard<wbr>Argument</h4>
+<h4 id="taskshardargument">
+Task<wbr>Shard<wbr>Argument<pulumi-choosable type="language" values="python,go" class="inline">, Task<wbr>Shard<wbr>Argument<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3186,8 +3447,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sharding parameter KEY, integer, range [1,1000].</p>
-</dd><dt class="property-required"
+    <dd>Sharding parameter KEY, integer, range [1,1000].</dd><dt class="property-required"
             title="Required">
         <span id="shardvalue_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardvalue_csharp" style="color: inherit; text-decoration: inherit;">Shard<wbr>Value</a>
@@ -3195,8 +3455,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Shard parameter VALUE.</p>
-</dd></dl>
+    <dd>Shard parameter VALUE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3210,8 +3469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sharding parameter KEY, integer, range [1,1000].</p>
-</dd><dt class="property-required"
+    <dd>Sharding parameter KEY, integer, range [1,1000].</dd><dt class="property-required"
             title="Required">
         <span id="shardvalue_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardvalue_go" style="color: inherit; text-decoration: inherit;">Shard<wbr>Value</a>
@@ -3219,8 +3477,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Shard parameter VALUE.</p>
-</dd></dl>
+    <dd>Shard parameter VALUE.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="shard_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_key_hcl" style="color: inherit; text-decoration: inherit;">shard_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Sharding parameter KEY, integer, range [1,1000].</dd><dt class="property-required"
+            title="Required">
+        <span id="shard_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_value_hcl" style="color: inherit; text-decoration: inherit;">shard_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Shard parameter VALUE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3234,8 +3513,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Sharding parameter KEY, integer, range [1,1000].</p>
-</dd><dt class="property-required"
+    <dd>Sharding parameter KEY, integer, range [1,1000].</dd><dt class="property-required"
             title="Required">
         <span id="shardvalue_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardvalue_java" style="color: inherit; text-decoration: inherit;">shard<wbr>Value</a>
@@ -3243,8 +3521,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Shard parameter VALUE.</p>
-</dd></dl>
+    <dd>Shard parameter VALUE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3258,8 +3535,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Sharding parameter KEY, integer, range [1,1000].</p>
-</dd><dt class="property-required"
+    <dd>Sharding parameter KEY, integer, range [1,1000].</dd><dt class="property-required"
             title="Required">
         <span id="shardvalue_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardvalue_nodejs" style="color: inherit; text-decoration: inherit;">shard<wbr>Value</a>
@@ -3267,8 +3543,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Shard parameter VALUE.</p>
-</dd></dl>
+    <dd>Shard parameter VALUE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3282,8 +3557,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Sharding parameter KEY, integer, range [1,1000].</p>
-</dd><dt class="property-required"
+    <dd>Sharding parameter KEY, integer, range [1,1000].</dd><dt class="property-required"
             title="Required">
         <span id="shard_value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shard_value_python" style="color: inherit; text-decoration: inherit;">shard_<wbr>value</a>
@@ -3291,8 +3565,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Shard parameter VALUE.</p>
-</dd></dl>
+    <dd>Shard parameter VALUE.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3306,8 +3579,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Sharding parameter KEY, integer, range [1,1000].</p>
-</dd><dt class="property-required"
+    <dd>Sharding parameter KEY, integer, range [1,1000].</dd><dt class="property-required"
             title="Required">
         <span id="shardvalue_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#shardvalue_yaml" style="color: inherit; text-decoration: inherit;">shard<wbr>Value</a>
@@ -3315,12 +3587,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Shard parameter VALUE.</p>
-</dd></dl>
+    <dd>Shard parameter VALUE.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="tasktaskrule">Task<wbr>Task<wbr>Rule</h4>
+<h4 id="tasktaskrule">
+Task<wbr>Task<wbr>Rule<pulumi-choosable type="language" values="python,go" class="inline">, Task<wbr>Task<wbr>Rule<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3332,8 +3605,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>trigger rule type, Cron/Repeat.</p>
-</dd><dt class="property-optional"
+    <dd>trigger rule type, Cron/Repeat.</dd><dt class="property-optional"
             title="Optional">
         <span id="expression_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expression_csharp" style="color: inherit; text-decoration: inherit;">Expression</a>
@@ -3341,8 +3613,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cron type rule, cron expression.</p>
-</dd><dt class="property-optional"
+    <dd>Cron type rule, cron expression.</dd><dt class="property-optional"
             title="Optional">
         <span id="repeatinterval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeatinterval_csharp" style="color: inherit; text-decoration: inherit;">Repeat<wbr>Interval</a>
@@ -3350,8 +3621,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>time interval, in milliseconds.</p>
-</dd></dl>
+    <dd>time interval, in milliseconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3365,8 +3635,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>trigger rule type, Cron/Repeat.</p>
-</dd><dt class="property-optional"
+    <dd>trigger rule type, Cron/Repeat.</dd><dt class="property-optional"
             title="Optional">
         <span id="expression_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expression_go" style="color: inherit; text-decoration: inherit;">Expression</a>
@@ -3374,8 +3643,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cron type rule, cron expression.</p>
-</dd><dt class="property-optional"
+    <dd>Cron type rule, cron expression.</dd><dt class="property-optional"
             title="Optional">
         <span id="repeatinterval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeatinterval_go" style="color: inherit; text-decoration: inherit;">Repeat<wbr>Interval</a>
@@ -3383,8 +3651,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>time interval, in milliseconds.</p>
-</dd></dl>
+    <dd>time interval, in milliseconds.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="rule_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_type_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>trigger rule type, Cron/Repeat.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="expression_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expression_hcl" style="color: inherit; text-decoration: inherit;">expression</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cron type rule, cron expression.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="repeat_interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeat_interval_hcl" style="color: inherit; text-decoration: inherit;">repeat_<wbr>interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>time interval, in milliseconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3398,8 +3695,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>trigger rule type, Cron/Repeat.</p>
-</dd><dt class="property-optional"
+    <dd>trigger rule type, Cron/Repeat.</dd><dt class="property-optional"
             title="Optional">
         <span id="expression_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expression_java" style="color: inherit; text-decoration: inherit;">expression</a>
@@ -3407,8 +3703,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cron type rule, cron expression.</p>
-</dd><dt class="property-optional"
+    <dd>Cron type rule, cron expression.</dd><dt class="property-optional"
             title="Optional">
         <span id="repeatinterval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeatinterval_java" style="color: inherit; text-decoration: inherit;">repeat<wbr>Interval</a>
@@ -3416,8 +3711,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>time interval, in milliseconds.</p>
-</dd></dl>
+    <dd>time interval, in milliseconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3431,8 +3725,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>trigger rule type, Cron/Repeat.</p>
-</dd><dt class="property-optional"
+    <dd>trigger rule type, Cron/Repeat.</dd><dt class="property-optional"
             title="Optional">
         <span id="expression_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expression_nodejs" style="color: inherit; text-decoration: inherit;">expression</a>
@@ -3440,8 +3733,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cron type rule, cron expression.</p>
-</dd><dt class="property-optional"
+    <dd>Cron type rule, cron expression.</dd><dt class="property-optional"
             title="Optional">
         <span id="repeatinterval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeatinterval_nodejs" style="color: inherit; text-decoration: inherit;">repeat<wbr>Interval</a>
@@ -3449,8 +3741,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>time interval, in milliseconds.</p>
-</dd></dl>
+    <dd>time interval, in milliseconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3464,8 +3755,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>trigger rule type, Cron/Repeat.</p>
-</dd><dt class="property-optional"
+    <dd>trigger rule type, Cron/Repeat.</dd><dt class="property-optional"
             title="Optional">
         <span id="expression_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expression_python" style="color: inherit; text-decoration: inherit;">expression</a>
@@ -3473,8 +3763,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cron type rule, cron expression.</p>
-</dd><dt class="property-optional"
+    <dd>Cron type rule, cron expression.</dd><dt class="property-optional"
             title="Optional">
         <span id="repeat_interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeat_interval_python" style="color: inherit; text-decoration: inherit;">repeat_<wbr>interval</a>
@@ -3482,8 +3771,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>time interval, in milliseconds.</p>
-</dd></dl>
+    <dd>time interval, in milliseconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3497,8 +3785,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>trigger rule type, Cron/Repeat.</p>
-</dd><dt class="property-optional"
+    <dd>trigger rule type, Cron/Repeat.</dd><dt class="property-optional"
             title="Optional">
         <span id="expression_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expression_yaml" style="color: inherit; text-decoration: inherit;">expression</a>
@@ -3506,8 +3793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cron type rule, cron expression.</p>
-</dd><dt class="property-optional"
+    <dd>Cron type rule, cron expression.</dd><dt class="property-optional"
             title="Optional">
         <span id="repeatinterval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#repeatinterval_yaml" style="color: inherit; text-decoration: inherit;">repeat<wbr>Interval</a>
@@ -3515,8 +3801,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>time interval, in milliseconds.</p>
-</dd></dl>
+    <dd>time interval, in milliseconds.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3532,6 +3817,9 @@ $ pulumi import tencentcloud:Tsf/task:Task task task-y37eqq95
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -3541,7 +3829,6 @@ $ pulumi import tencentcloud:Tsf/task:Task task task-y37eqq95
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

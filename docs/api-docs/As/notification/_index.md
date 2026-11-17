@@ -2,9 +2,11 @@
 ---
 title: "Notification"
 title_tag: "tencentcloud.As.Notification"
-meta_desc: "Documentation for the tencentcloud.As.Notification resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource for an AS (Auto scaling) notification."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,34 @@ Provides a resource for an AS (Auto scaling) notification.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
+const zones = tencentcloud.availability.getZonesByProduct({
     product: "as",
 });
-const image = tencentcloud.Images.getInstance({
+const image = tencentcloud.images.getInstance({
     imageTypes: ["PUBLIC_IMAGE"],
     osName: "TencentOS Server 3.2 (Final)",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     vpcId: vpc.id,
+    name: "subnet-example",
     cidrBlock: "10.0.0.0/16",
     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
 });
-const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
+const example = new tencentcloud.as.ScalingConfig("example", {
     configurationName: "tf-example",
     imageId: image.then(image => image.images?.[0]?.imageId),
     instanceTypes: [
@@ -48,16 +58,19 @@ const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingCo
         instanceName: "test-ins-name",
     },
 });
-const exampleScalingGroup = new tencentcloud.as.ScalingGroup("exampleScalingGroup", {
+const exampleScalingGroup = new tencentcloud.as.ScalingGroup("example", {
     scalingGroupName: "tf-example",
-    configurationId: exampleScalingConfig.id,
+    configurationId: example.id,
     maxSize: 1,
     minSize: 0,
     vpcId: vpc.id,
     subnetIds: [subnet.id],
 });
-const exampleGroup = new tencentcloud.cam.Group("exampleGroup", {remark: "desc."});
-const asNotification = new tencentcloud.as.Notification("asNotification", {
+const exampleGroup = new tencentcloud.cam.Group("example", {
+    name: "tf-example",
+    remark: "desc.",
+});
+const asNotification = new tencentcloud.as.Notification("as_notification", {
     scalingGroupId: exampleScalingGroup.id,
     notificationTypes: [
         "SCALE_OUT_SUCCESSFUL",
@@ -69,20 +82,28 @@ const asNotification = new tencentcloud.as.Notification("asNotification", {
     notificationUserGroupIds: [exampleGroup.id],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="as")
-image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+zones = tencentcloud.availability.get_zones_by_product(product="as")
+image = tencentcloud.images.get_instance(image_types=["PUBLIC_IMAGE"],
     os_name="TencentOS Server 3.2 (Final)")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     vpc_id=vpc.id,
+    name="subnet-example",
     cidr_block="10.0.0.0/16",
     availability_zone=zones.zones[0].name)
-example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+example = tencentcloud.as_.ScalingConfig("example",
     configuration_name="tf-example",
     image_id=image.images[0].image_id,
     instance_types=[
@@ -91,18 +112,20 @@ example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
         "SA2.SMALL2",
         "SA2.SMALL4",
     ],
-    instance_name_settings=tencentcloud.as_.ScalingConfigInstanceNameSettingsArgs(
-        instance_name="test-ins-name",
-    ))
-example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+    instance_name_settings={
+        "instance_name": "test-ins-name",
+    })
+example_scaling_group = tencentcloud.as_.ScalingGroup("example",
     scaling_group_name="tf-example",
-    configuration_id=example_scaling_config.id,
+    configuration_id=example.id,
     max_size=1,
     min_size=0,
     vpc_id=vpc.id,
     subnet_ids=[subnet.id])
-example_group = tencentcloud.cam.Group("exampleGroup", remark="desc.")
-as_notification = tencentcloud.as_.Notification("asNotification",
+example_group = tencentcloud.cam.Group("example",
+    name="tf-example",
+    remark="desc.")
+as_notification = tencentcloud.as_.Notification("as_notification",
     scaling_group_id=example_scaling_group.id,
     notification_types=[
         "SCALE_OUT_SUCCESSFUL",
@@ -113,11 +136,122 @@ as_notification = tencentcloud.as_.Notification("asNotification",
     ],
     notification_user_group_ids=[example_group.id])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cam"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "as",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		image, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			ImageTypes: []string{
+				"PUBLIC_IMAGE",
+			},
+			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			Name:             pulumi.String("subnet-example"),
+			CidrBlock:        pulumi.String("10.0.0.0/16"),
+			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+		})
+		if err != nil {
+			return err
+		}
+		example, err := as.NewScalingConfig(ctx, "example", &as.ScalingConfigArgs{
+			ConfigurationName: pulumi.String("tf-example"),
+			ImageId:           pulumi.String(image.Images[0].ImageId),
+			InstanceTypes: pulumi.StringArray{
+				pulumi.String("SA1.SMALL1"),
+				pulumi.String("SA2.SMALL1"),
+				pulumi.String("SA2.SMALL2"),
+				pulumi.String("SA2.SMALL4"),
+			},
+			InstanceNameSettings: &as.ScalingConfigInstanceNameSettingsArgs{
+				InstanceName: pulumi.String("test-ins-name"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		exampleScalingGroup, err := as.NewScalingGroup(ctx, "example", &as.ScalingGroupArgs{
+			ScalingGroupName: pulumi.String("tf-example"),
+			ConfigurationId:  example.ID().ToIDOutput().ToStringOutput(),
+			MaxSize:          pulumi.Int(1),
+			MinSize:          pulumi.Int(0),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetIds: pulumi.StringArray{
+				subnet2.ID().ToIDOutput().ToStringOutput(),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		exampleGroup, err := cam.NewGroup(ctx, "example", &cam.GroupArgs{
+			Name:   pulumi.String("tf-example"),
+			Remark: pulumi.String("desc."),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = as.NewNotification(ctx, "as_notification", &as.NotificationArgs{
+			ScalingGroupId: exampleScalingGroup.ID().ToIDOutput().ToStringOutput(),
+			NotificationTypes: pulumi.StringArray{
+				pulumi.String("SCALE_OUT_SUCCESSFUL"),
+				pulumi.String("SCALE_OUT_FAILED"),
+				pulumi.String("SCALE_IN_FAILED"),
+				pulumi.String("REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL"),
+				pulumi.String("REPLACE_UNHEALTHY_INSTANCE_FAILED"),
+			},
+			NotificationUserGroupIds: pulumi.StringArray{
+				exampleGroup.ID().ToIDOutput().ToStringOutput(),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -138,17 +272,19 @@ return await Deployment.RunAsync(() =>
 
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-example",
         CidrBlock = "10.0.0.0/16",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         VpcId = vpc.Id,
+        Name = "subnet-example",
         CidrBlock = "10.0.0.0/16",
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
     });
 
-    var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new()
+    var example = new Tencentcloud.As.ScalingConfig("example", new()
     {
         ConfigurationName = "tf-example",
         ImageId = image.Apply(getInstanceResult => getInstanceResult.Images[0]?.ImageId),
@@ -165,10 +301,10 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("exampleScalingGroup", new()
+    var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("example", new()
     {
         ScalingGroupName = "tf-example",
-        ConfigurationId = exampleScalingConfig.Id,
+        ConfigurationId = example.Id,
         MaxSize = 1,
         MinSize = 0,
         VpcId = vpc.Id,
@@ -178,12 +314,13 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleGroup = new Tencentcloud.Cam.Group("exampleGroup", new()
+    var exampleGroup = new Tencentcloud.Cam.Group("example", new()
     {
+        Name = "tf-example",
         Remark = "desc.",
     });
 
-    var asNotification = new Tencentcloud.As.Notification("asNotification", new()
+    var asNotification = new Tencentcloud.As.Notification("as_notification", new()
     {
         ScalingGroupId = exampleScalingGroup.Id,
         NotificationTypes = new[]
@@ -202,105 +339,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-			Product: "as",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		image, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-			ImageTypes: []string{
-				"PUBLIC_IMAGE",
-			},
-			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			VpcId:            vpc.ID(),
-			CidrBlock:        pulumi.String("10.0.0.0/16"),
-			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-		})
-		if err != nil {
-			return err
-		}
-		exampleScalingConfig, err := As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
-			ConfigurationName: pulumi.String("tf-example"),
-			ImageId:           pulumi.String(image.Images[0].ImageId),
-			InstanceTypes: pulumi.StringArray{
-				pulumi.String("SA1.SMALL1"),
-				pulumi.String("SA2.SMALL1"),
-				pulumi.String("SA2.SMALL2"),
-				pulumi.String("SA2.SMALL4"),
-			},
-			InstanceNameSettings: &as.ScalingConfigInstanceNameSettingsArgs{
-				InstanceName: pulumi.String("test-ins-name"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		exampleScalingGroup, err := As.NewScalingGroup(ctx, "exampleScalingGroup", &As.ScalingGroupArgs{
-			ScalingGroupName: pulumi.String("tf-example"),
-			ConfigurationId:  exampleScalingConfig.ID(),
-			MaxSize:          pulumi.Int(1),
-			MinSize:          pulumi.Int(0),
-			VpcId:            vpc.ID(),
-			SubnetIds: pulumi.StringArray{
-				subnet.ID(),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		exampleGroup, err := Cam.NewGroup(ctx, "exampleGroup", &Cam.GroupArgs{
-			Remark: pulumi.String("desc."),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = As.NewNotification(ctx, "asNotification", &As.NotificationArgs{
-			ScalingGroupId: exampleScalingGroup.ID(),
-			NotificationTypes: pulumi.StringArray{
-				pulumi.String("SCALE_OUT_SUCCESSFUL"),
-				pulumi.String("SCALE_OUT_FAILED"),
-				pulumi.String("SCALE_IN_FAILED"),
-				pulumi.String("REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL"),
-				pulumi.String("REPLACE_UNHEALTHY_INSTANCE_FAILED"),
-			},
-			NotificationUserGroupIds: pulumi.StringArray{
-				exampleGroup.ID(),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -311,10 +354,6 @@ import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
 import com.pulumi.tencentcloud.Images.ImagesFunctions;
 import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.As.ScalingConfig;
 import com.pulumi.tencentcloud.As.ScalingConfigArgs;
 import com.pulumi.tencentcloud.As.inputs.ScalingConfigInstanceNameSettingsArgs;
@@ -324,8 +363,8 @@ import com.pulumi.tencentcloud.Cam.Group;
 import com.pulumi.tencentcloud.Cam.GroupArgs;
 import com.pulumi.tencentcloud.As.Notification;
 import com.pulumi.tencentcloud.As.NotificationArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -346,19 +385,21 @@ public class App {
             .osName("TencentOS Server 3.2 (Final)")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .vpcId(vpc.id())
+            .name("subnet-example")
             .cidrBlock("10.0.0.0/16")
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+            .availabilityZone(zones.zones()[0].name())
             .build());
 
-        var exampleScalingConfig = new ScalingConfig("exampleScalingConfig", ScalingConfigArgs.builder()        
+        var example = new ScalingConfig("example", ScalingConfigArgs.builder()
             .configurationName("tf-example")
-            .imageId(image.applyValue(getInstanceResult -> getInstanceResult.images()[0].imageId()))
+            .imageId(image.images()[0].imageId())
             .instanceTypes(            
                 "SA1.SMALL1",
                 "SA2.SMALL1",
@@ -369,20 +410,21 @@ public class App {
                 .build())
             .build());
 
-        var exampleScalingGroup = new ScalingGroup("exampleScalingGroup", ScalingGroupArgs.builder()        
+        var exampleScalingGroup = new ScalingGroup("exampleScalingGroup", ScalingGroupArgs.builder()
             .scalingGroupName("tf-example")
-            .configurationId(exampleScalingConfig.id())
+            .configurationId(example.id())
             .maxSize(1)
             .minSize(0)
             .vpcId(vpc.id())
             .subnetIds(subnet.id())
             .build());
 
-        var exampleGroup = new Group("exampleGroup", GroupArgs.builder()        
+        var exampleGroup = new Group("exampleGroup", GroupArgs.builder()
+            .name("tf-example")
             .remark("desc.")
             .build());
 
-        var asNotification = new Notification("asNotification", NotificationArgs.builder()        
+        var asNotification = new Notification("asNotification", NotificationArgs.builder()
             .scalingGroupId(exampleScalingGroup.id())
             .notificationTypes(            
                 "SCALE_OUT_SUCCESSFUL",
@@ -396,19 +438,26 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-example
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       vpcId: ${vpc.id}
+      name: subnet-example
       cidrBlock: 10.0.0.0/16
       availabilityZone: ${zones.zones[0].name}
-  exampleScalingConfig:
+  example:
     type: tencentcloud:As:ScalingConfig
     properties:
       configurationName: tf-example
@@ -422,9 +471,10 @@ resources:
         instanceName: test-ins-name
   exampleScalingGroup:
     type: tencentcloud:As:ScalingGroup
+    name: example
     properties:
       scalingGroupName: tf-example
-      configurationId: ${exampleScalingConfig.id}
+      configurationId: ${example.id}
       maxSize: 1
       minSize: 0
       vpcId: ${vpc.id}
@@ -432,10 +482,13 @@ resources:
         - ${subnet.id}
   exampleGroup:
     type: tencentcloud:Cam:Group
+    name: example
     properties:
+      name: tf-example
       remark: desc.
   asNotification:
     type: tencentcloud:As:Notification
+    name: as_notification
     properties:
       scalingGroupId: ${exampleScalingGroup.id}
       notificationTypes:
@@ -449,79 +502,162 @@ resources:
 variables:
   zones:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: as
   image:
     fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments:
+      function: tencentcloud:Images:getInstance
+      arguments:
         imageTypes:
           - PUBLIC_IMAGE
         osName: TencentOS Server 3.2 (Final)
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "as"
+}
+data "tencentcloud_images_getinstance" "image" {
+  image_types = ["PUBLIC_IMAGE"]
+  os_name     = "TencentOS Server 3.2 (Final)"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  name              = "subnet-example"
+  cidr_block        = "10.0.0.0/16"
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[0].name
+}
+resource "tencentcloud_as_scalingconfig" "example" {
+  configuration_name = "tf-example"
+  image_id           = data.tencentcloud_images_getinstance.image.images[0].image_id
+  instance_types     = ["SA1.SMALL1", "SA2.SMALL1", "SA2.SMALL2", "SA2.SMALL4"]
+  instance_name_settings = {
+    instance_name = "test-ins-name"
+  }
+}
+resource "tencentcloud_as_scalinggroup" "example" {
+  scaling_group_name = "tf-example"
+  configuration_id   = tencentcloud_as_scalingconfig.example.id
+  max_size           = 1
+  min_size           = 0
+  vpc_id             = tencentcloud_vpc_instance.vpc.id
+  subnet_ids         = [tencentcloud_subnet_instance.subnet.id]
+}
+resource "tencentcloud_cam_group" "example" {
+  name   = "tf-example"
+  remark = "desc."
+}
+resource "tencentcloud_as_notification" "as_notification" {
+  scaling_group_id            = tencentcloud_as_scalinggroup.example.id
+  notification_types          = ["SCALE_OUT_SUCCESSFUL", "SCALE_OUT_FAILED", "SCALE_IN_FAILED", "REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL", "REPLACE_UNHEALTHY_INSTANCE_FAILED"]
+  notification_user_group_ids = [tencentcloud_cam_group.example.id]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateNotificationConfiguration](https://www.tencentcloud.com/document/api/377/33194)
+* Read: [DescribeNotificationConfigurations](https://www.tencentcloud.com/document/api/377/33192)
+* Update: [ModifyNotificationConfiguration](https://www.tencentcloud.com/document/api/377/33191)
+* Delete: [DeleteNotificationConfiguration](https://www.tencentcloud.com/document/api/377/33193)
 
 
 
 ## Create Notification Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Notification</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NotificationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Notification</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NotificationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Notification</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                 <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NotificationArgs</a></span><span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Notification</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                  <span class="nx">notification_types</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
                  <span class="nx">notification_user_group_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">scaling_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Notification</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                 <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NotificationArgs</a></span><span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                 <span class="nx">scaling_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewNotification</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">NotificationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Notification</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewNotification</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">NotificationArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Notification</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Notification</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NotificationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Notification</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NotificationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Notification</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NotificationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Notification</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NotificationArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:As:Notification</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:As:Notification</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_as_notification&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -542,7 +678,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -659,11 +795,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## Notification Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Notification resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -679,8 +823,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="notificationusergroupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationusergroupids_csharp" style="color: inherit; text-decoration: inherit;">Notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -688,8 +831,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A group of user IDs to be notified.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>A group of user IDs to be notified.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -697,8 +839,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -712,8 +853,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="notificationusergroupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationusergroupids_go" style="color: inherit; text-decoration: inherit;">Notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -721,8 +861,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A group of user IDs to be notified.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>A group of user IDs to be notified.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -730,8 +869,37 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="notification_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_types_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="notification_user_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_user_group_ids_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>user_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A group of user IDs to be notified.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -745,8 +913,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="notificationusergroupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationusergroupids_java" style="color: inherit; text-decoration: inherit;">notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -754,8 +921,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A group of user IDs to be notified.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>A group of user IDs to be notified.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -763,8 +929,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -778,8 +943,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="notificationusergroupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationusergroupids_nodejs" style="color: inherit; text-decoration: inherit;">notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -787,8 +951,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A group of user IDs to be notified.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>A group of user IDs to be notified.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -796,8 +959,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -811,8 +973,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="notification_user_group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notification_user_group_ids_python" style="color: inherit; text-decoration: inherit;">notification_<wbr>user_<wbr>group_<wbr>ids</a>
@@ -820,8 +981,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A group of user IDs to be notified.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>A group of user IDs to be notified.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scaling_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_id_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
@@ -829,8 +989,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -844,8 +1003,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</p>
-</dd><dt class="property-required"
+    <dd>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</dd><dt class="property-required"
             title="Required">
         <span id="notificationusergroupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notificationusergroupids_yaml" style="color: inherit; text-decoration: inherit;">notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -853,8 +1011,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A group of user IDs to be notified.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>A group of user IDs to be notified.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="scalinggroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -862,8 +1019,7 @@ The Notification resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -884,8 +1040,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -899,8 +1054,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -914,8 +1082,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -929,8 +1096,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -944,8 +1110,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -959,8 +1124,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -970,122 +1134,161 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Notification resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">NotificationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Notification</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">NotificationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Notification</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
         <span class="nx">notification_types</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">notification_user_group_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">scaling_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Notification</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetNotification<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">NotificationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Notification</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetNotification<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">NotificationState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Notification</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Notification</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NotificationState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Notification</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NotificationState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Notification</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NotificationState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Notification</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NotificationState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingNotification</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:As:Notification</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_as_notification</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NotificationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NotificationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1093,28 +1296,31 @@ Get an existing Notification resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NotificationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1122,28 +1328,31 @@ Get an existing Notification resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NotificationState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1163,8 +1372,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationusergroupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationusergroupids_csharp" style="color: inherit; text-decoration: inherit;">Notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -1172,8 +1380,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>A group of user IDs to be notified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A group of user IDs to be notified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -1181,8 +1388,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1196,8 +1402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationusergroupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationusergroupids_go" style="color: inherit; text-decoration: inherit;">Notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -1205,8 +1410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>A group of user IDs to be notified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A group of user IDs to be notified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Id</a>
@@ -1214,8 +1418,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_notification_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notification_types_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_notification_user_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notification_user_group_ids_hcl" style="color: inherit; text-decoration: inherit;">notification_<wbr>user_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>A group of user IDs to be notified.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1229,8 +1462,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationusergroupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationusergroupids_java" style="color: inherit; text-decoration: inherit;">notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -1238,8 +1470,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A group of user IDs to be notified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A group of user IDs to be notified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1247,8 +1478,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1262,8 +1492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationusergroupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationusergroupids_nodejs" style="color: inherit; text-decoration: inherit;">notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -1271,8 +1500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>A group of user IDs to be notified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A group of user IDs to be notified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1280,8 +1508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1295,8 +1522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notification_user_group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notification_user_group_ids_python" style="color: inherit; text-decoration: inherit;">notification_<wbr>user_<wbr>group_<wbr>ids</a>
@@ -1304,8 +1530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>A group of user IDs to be notified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A group of user IDs to be notified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scaling_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_group_id_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>id</a>
@@ -1313,8 +1538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1328,8 +1552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</p>
-</dd><dt class="property-optional"
+    <dd>A list of Notification Types that trigger notifications. Acceptable values are <code>SCALE_OUT_FAILED</code>, <code>SCALE_IN_SUCCESSFUL</code>, <code>SCALE_IN_FAILED</code>, <code>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL</code> and <code>REPLACE_UNHEALTHY_INSTANCE_FAILED</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notificationusergroupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notificationusergroupids_yaml" style="color: inherit; text-decoration: inherit;">notification<wbr>User<wbr>Group<wbr>Ids</a>
@@ -1337,8 +1560,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>A group of user IDs to be notified.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A group of user IDs to be notified.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_scalinggroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Id</a>
@@ -1346,8 +1568,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of a scaling group.</p>
-</dd></dl>
+    <dd>ID of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1366,7 +1587,6 @@ The following state arguments are supported:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

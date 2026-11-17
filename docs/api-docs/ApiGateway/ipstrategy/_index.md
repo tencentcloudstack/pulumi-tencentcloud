@@ -2,9 +2,11 @@
 ---
 title: "IpStrategy"
 title_tag: "tencentcloud.ApiGateway.IpStrategy"
-meta_desc: "Documentation for the tencentcloud.ApiGateway.IpStrategy resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Use this resource to create IP strategy of API gateway."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,7 +18,12 @@ Use this resource to create IP strategy of API gateway.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -38,11 +45,16 @@ const test = new tencentcloud.apigateway.IpStrategy("test", {
     strategyData: "9.9.9.9",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-service = tencentcloud.api_gateway.Service("service",
+service = tencentcloud.apigateway.Service("service",
     service_name="niceservice",
     protocol="http&https",
     service_desc="your nice service",
@@ -51,12 +63,58 @@ service = tencentcloud.api_gateway.Service("service",
         "OUTER",
     ],
     ip_version="IPv4")
-test = tencentcloud.api_gateway.IpStrategy("test",
+test = tencentcloud.apigateway.IpStrategy("test",
     service_id=service.id,
     strategy_name="tf_test",
     strategy_type="BLACK",
     strategy_data="9.9.9.9")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apigateway"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		service, err := apigateway.NewService(ctx, "service", &apigateway.ServiceArgs{
+			ServiceName: pulumi.String("niceservice"),
+			Protocol:    pulumi.String("http&https"),
+			ServiceDesc: pulumi.String("your nice service"),
+			NetTypes: pulumi.StringArray{
+				pulumi.String("INNER"),
+				pulumi.String("OUTER"),
+			},
+			IpVersion: pulumi.String("IPv4"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = apigateway.NewIpStrategy(ctx, "test", &apigateway.IpStrategyArgs{
+			ServiceId:    service.ID().ToIDOutput().ToStringOutput(),
+			StrategyName: pulumi.String("tf_test"),
+			StrategyType: pulumi.String("BLACK"),
+			StrategyData: pulumi.String("9.9.9.9"),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -88,42 +146,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
-			ServiceName: pulumi.String("niceservice"),
-			Protocol:    pulumi.String("http&https"),
-			ServiceDesc: pulumi.String("your nice service"),
-			NetTypes: pulumi.StringArray{
-				pulumi.String("INNER"),
-				pulumi.String("OUTER"),
-			},
-			IpVersion: pulumi.String("IPv4"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = ApiGateway.NewIpStrategy(ctx, "test", &ApiGateway.IpStrategyArgs{
-			ServiceId:    service.ID(),
-			StrategyName: pulumi.String("tf_test"),
-			StrategyType: pulumi.String("BLACK"),
-			StrategyData: pulumi.String("9.9.9.9"),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -134,8 +161,8 @@ import com.pulumi.tencentcloud.ApiGateway.Service;
 import com.pulumi.tencentcloud.ApiGateway.ServiceArgs;
 import com.pulumi.tencentcloud.ApiGateway.IpStrategy;
 import com.pulumi.tencentcloud.ApiGateway.IpStrategyArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -147,7 +174,7 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var service = new Service("service", ServiceArgs.builder()        
+        var service = new Service("service", ServiceArgs.builder()
             .serviceName("niceservice")
             .protocol("http&https")
             .serviceDesc("your nice service")
@@ -157,7 +184,7 @@ public class App {
             .ipVersion("IPv4")
             .build());
 
-        var test = new IpStrategy("test", IpStrategyArgs.builder()        
+        var test = new IpStrategy("test", IpStrategyArgs.builder()
             .serviceId(service.id())
             .strategyName("tf_test")
             .strategyType("BLACK")
@@ -167,6 +194,11 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   service:
@@ -187,68 +219,123 @@ resources:
       strategyType: BLACK
       strategyData: 9.9.9.9
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_apigateway_service" "service" {
+  service_name = "niceservice"
+  protocol     = "http&https"
+  service_desc = "your nice service"
+  net_types    = ["INNER", "OUTER"]
+  ip_version   = "IPv4"
+}
+resource "tencentcloud_apigateway_ipstrategy" "test" {
+  service_id    = tencentcloud_apigateway_service.service.id
+  strategy_name = "tf_test"
+  strategy_type = "BLACK"
+  strategy_data = "9.9.9.9"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateIPStrategy](https://www.tencentcloud.com/search/?wd=CreateIPStrategy&type=document&lang=en)
+  - [DescribeIPStrategy](https://www.tencentcloud.com/search/?wd=DescribeIPStrategy&type=document&lang=en)
+* Read: [DescribeIPStrategy](https://www.tencentcloud.com/search/?wd=DescribeIPStrategy&type=document&lang=en)
+* Update: [ModifyIPStrategy](https://www.tencentcloud.com/search/?wd=ModifyIPStrategy&type=document&lang=en)
+* Delete: [DeleteIPStrategy](https://www.tencentcloud.com/search/?wd=DeleteIPStrategy&type=document&lang=en)
 
 
 ## Create IpStrategy Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">IpStrategy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">IpStrategyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">IpStrategy</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">IpStrategyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">IpStrategy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">IpStrategyArgs</a></span><span class="p">,</span>
+               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">IpStrategy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
                <span class="nx">service_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">strategy_data</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                <span class="nx">strategy_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-               <span class="nx">strategy_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">IpStrategy</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-               <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">IpStrategyArgs</a></span><span class="p">,</span>
-               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+               <span class="nx">strategy_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewIpStrategy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">IpStrategyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">IpStrategy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewIpStrategy</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">IpStrategyArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">IpStrategy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">IpStrategy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">IpStrategyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">IpStrategy</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">IpStrategyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">IpStrategy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">IpStrategyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">IpStrategy</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">IpStrategyArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:IpStrategy</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:ApiGateway:IpStrategy</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_api_gateway_ip_strategy&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -269,7 +356,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -386,11 +473,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## IpStrategy Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The IpStrategy resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -406,8 +501,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the API gateway service.</dd><dt class="property-required"
             title="Required">
         <span id="strategydata_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategydata_csharp" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Data</a>
@@ -415,8 +509,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address data.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IP address data.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategyname_csharp" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Name</a>
@@ -424,8 +517,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User defined strategy name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>User defined strategy name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategytype_csharp" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Type</a>
@@ -433,8 +525,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Blacklist or whitelist.</p>
-</dd></dl>
+    <dd>Blacklist or whitelist.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -448,8 +539,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the API gateway service.</dd><dt class="property-required"
             title="Required">
         <span id="strategydata_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategydata_go" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Data</a>
@@ -457,8 +547,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address data.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IP address data.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategyname_go" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Name</a>
@@ -466,8 +555,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User defined strategy name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>User defined strategy name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategytype_go" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Type</a>
@@ -475,8 +563,45 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Blacklist or whitelist.</p>
-</dd></dl>
+    <dd>Blacklist or whitelist.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the API gateway service.</dd><dt class="property-required"
+            title="Required">
+        <span id="strategy_data_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategy_data_hcl" style="color: inherit; text-decoration: inherit;">strategy_<wbr>data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP address data.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="strategy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategy_name_hcl" style="color: inherit; text-decoration: inherit;">strategy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User defined strategy name.</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="strategy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategy_type_hcl" style="color: inherit; text-decoration: inherit;">strategy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Blacklist or whitelist.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -490,8 +615,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the API gateway service.</dd><dt class="property-required"
             title="Required">
         <span id="strategydata_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategydata_java" style="color: inherit; text-decoration: inherit;">strategy<wbr>Data</a>
@@ -499,8 +623,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address data.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IP address data.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategyname_java" style="color: inherit; text-decoration: inherit;">strategy<wbr>Name</a>
@@ -508,8 +631,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User defined strategy name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>User defined strategy name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategytype_java" style="color: inherit; text-decoration: inherit;">strategy<wbr>Type</a>
@@ -517,8 +639,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Blacklist or whitelist.</p>
-</dd></dl>
+    <dd>Blacklist or whitelist.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -532,8 +653,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the API gateway service.</dd><dt class="property-required"
             title="Required">
         <span id="strategydata_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategydata_nodejs" style="color: inherit; text-decoration: inherit;">strategy<wbr>Data</a>
@@ -541,8 +661,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address data.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IP address data.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategyname_nodejs" style="color: inherit; text-decoration: inherit;">strategy<wbr>Name</a>
@@ -550,8 +669,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User defined strategy name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>User defined strategy name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategytype_nodejs" style="color: inherit; text-decoration: inherit;">strategy<wbr>Type</a>
@@ -559,8 +677,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Blacklist or whitelist.</p>
-</dd></dl>
+    <dd>Blacklist or whitelist.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -574,8 +691,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the API gateway service.</dd><dt class="property-required"
             title="Required">
         <span id="strategy_data_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategy_data_python" style="color: inherit; text-decoration: inherit;">strategy_<wbr>data</a>
@@ -583,8 +699,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP address data.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IP address data.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategy_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategy_name_python" style="color: inherit; text-decoration: inherit;">strategy_<wbr>name</a>
@@ -592,8 +707,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User defined strategy name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>User defined strategy name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategy_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategy_type_python" style="color: inherit; text-decoration: inherit;">strategy_<wbr>type</a>
@@ -601,8 +715,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Blacklist or whitelist.</p>
-</dd></dl>
+    <dd>Blacklist or whitelist.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -616,8 +729,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-required"
+    <dd>The ID of the API gateway service.</dd><dt class="property-required"
             title="Required">
         <span id="strategydata_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategydata_yaml" style="color: inherit; text-decoration: inherit;">strategy<wbr>Data</a>
@@ -625,8 +737,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address data.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>IP address data.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategyname_yaml" style="color: inherit; text-decoration: inherit;">strategy<wbr>Name</a>
@@ -634,8 +745,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User defined strategy name.</p>
-</dd><dt class="property-required property-replacement"
+    <dd>User defined strategy name.</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="strategytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategytype_yaml" style="color: inherit; text-decoration: inherit;">strategy<wbr>Type</a>
@@ -643,8 +753,7 @@ The IpStrategy resource accepts the following [input](/docs/intro/concepts/input
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Blacklist or whitelist.</p>
-</dd></dl>
+    <dd>Blacklist or whitelist.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -665,8 +774,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -674,8 +782,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="strategyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategyid_csharp" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Id</a>
@@ -683,8 +790,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP policy ID.</p>
-</dd></dl>
+    <dd>IP policy ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -698,8 +804,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -707,8 +812,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="strategyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategyid_go" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Id</a>
@@ -716,8 +820,37 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP policy ID.</p>
-</dd></dl>
+    <dd>IP policy ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="strategy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategy_id_hcl" style="color: inherit; text-decoration: inherit;">strategy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP policy ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -731,8 +864,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -740,8 +872,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="strategyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategyid_java" style="color: inherit; text-decoration: inherit;">strategy<wbr>Id</a>
@@ -749,8 +880,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP policy ID.</p>
-</dd></dl>
+    <dd>IP policy ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -764,8 +894,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -773,8 +902,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="strategyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategyid_nodejs" style="color: inherit; text-decoration: inherit;">strategy<wbr>Id</a>
@@ -782,8 +910,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP policy ID.</p>
-</dd></dl>
+    <dd>IP policy ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -797,8 +924,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -806,8 +932,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="strategy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategy_id_python" style="color: inherit; text-decoration: inherit;">strategy_<wbr>id</a>
@@ -815,8 +940,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP policy ID.</p>
-</dd></dl>
+    <dd>IP policy ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -830,8 +954,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -839,8 +962,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="strategyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategyid_yaml" style="color: inherit; text-decoration: inherit;">strategy<wbr>Id</a>
@@ -848,8 +970,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP policy ID.</p>
-</dd></dl>
+    <dd>IP policy ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -859,18 +980,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing IpStrategy resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">IpStrategyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">IpStrategy</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">IpStrategyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">IpStrategy</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -880,104 +1001,143 @@ Get an existing IpStrategy resource's state with the given name, ID, and optiona
         <span class="nx">strategy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">strategy_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">strategy_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> IpStrategy</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetIpStrategy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">IpStrategyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">IpStrategy</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetIpStrategy<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">IpStrategyState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">IpStrategy</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">IpStrategy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">IpStrategyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">IpStrategy</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">IpStrategyState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">IpStrategy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">IpStrategyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">IpStrategy</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">IpStrategyState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingIpStrategy</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:ApiGateway:IpStrategy</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_api_gateway_ip_strategy</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">IpStrategyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">IpStrategyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -985,28 +1145,31 @@ Get an existing IpStrategy resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">IpStrategyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1014,28 +1177,31 @@ Get an existing IpStrategy resource's state with the given name, ID, and optiona
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">IpStrategyState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1055,8 +1221,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_csharp" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -1064,8 +1229,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_strategydata_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategydata_csharp" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Data</a>
@@ -1073,8 +1237,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address data.</p>
-</dd><dt class="property-optional"
+    <dd>IP address data.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_strategyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategyid_csharp" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Id</a>
@@ -1082,8 +1245,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP policy ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IP policy ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategyname_csharp" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Name</a>
@@ -1091,8 +1253,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User defined strategy name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User defined strategy name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategytype_csharp" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Type</a>
@@ -1100,8 +1261,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Blacklist or whitelist.</p>
-</dd></dl>
+    <dd>Blacklist or whitelist.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1115,8 +1275,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_go" style="color: inherit; text-decoration: inherit;">Service<wbr>Id</a>
@@ -1124,8 +1283,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_strategydata_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategydata_go" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Data</a>
@@ -1133,8 +1291,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address data.</p>
-</dd><dt class="property-optional"
+    <dd>IP address data.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_strategyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategyid_go" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Id</a>
@@ -1142,8 +1299,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP policy ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IP policy ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategyname_go" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Name</a>
@@ -1151,8 +1307,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User defined strategy name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User defined strategy name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategytype_go" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Type</a>
@@ -1160,8 +1315,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Blacklist or whitelist.</p>
-</dd></dl>
+    <dd>Blacklist or whitelist.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_service_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_id_hcl" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The ID of the API gateway service.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_strategy_data_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategy_data_hcl" style="color: inherit; text-decoration: inherit;">strategy_<wbr>data</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP address data.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_strategy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategy_id_hcl" style="color: inherit; text-decoration: inherit;">strategy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP policy ID.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_strategy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategy_name_hcl" style="color: inherit; text-decoration: inherit;">strategy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>User defined strategy name.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_strategy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategy_type_hcl" style="color: inherit; text-decoration: inherit;">strategy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Blacklist or whitelist.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1175,8 +1383,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_java" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1184,8 +1391,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_strategydata_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategydata_java" style="color: inherit; text-decoration: inherit;">strategy<wbr>Data</a>
@@ -1193,8 +1399,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address data.</p>
-</dd><dt class="property-optional"
+    <dd>IP address data.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_strategyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategyid_java" style="color: inherit; text-decoration: inherit;">strategy<wbr>Id</a>
@@ -1202,8 +1407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP policy ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IP policy ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategyname_java" style="color: inherit; text-decoration: inherit;">strategy<wbr>Name</a>
@@ -1211,8 +1415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User defined strategy name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User defined strategy name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategytype_java" style="color: inherit; text-decoration: inherit;">strategy<wbr>Type</a>
@@ -1220,8 +1423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Blacklist or whitelist.</p>
-</dd></dl>
+    <dd>Blacklist or whitelist.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1235,8 +1437,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_nodejs" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1244,8 +1445,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_strategydata_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategydata_nodejs" style="color: inherit; text-decoration: inherit;">strategy<wbr>Data</a>
@@ -1253,8 +1453,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP address data.</p>
-</dd><dt class="property-optional"
+    <dd>IP address data.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_strategyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategyid_nodejs" style="color: inherit; text-decoration: inherit;">strategy<wbr>Id</a>
@@ -1262,8 +1461,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP policy ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IP policy ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategyname_nodejs" style="color: inherit; text-decoration: inherit;">strategy<wbr>Name</a>
@@ -1271,8 +1469,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>User defined strategy name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User defined strategy name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategytype_nodejs" style="color: inherit; text-decoration: inherit;">strategy<wbr>Type</a>
@@ -1280,8 +1477,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Blacklist or whitelist.</p>
-</dd></dl>
+    <dd>Blacklist or whitelist.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1295,8 +1491,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_service_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_service_id_python" style="color: inherit; text-decoration: inherit;">service_<wbr>id</a>
@@ -1304,8 +1499,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_strategy_data_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategy_data_python" style="color: inherit; text-decoration: inherit;">strategy_<wbr>data</a>
@@ -1313,8 +1507,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP address data.</p>
-</dd><dt class="property-optional"
+    <dd>IP address data.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_strategy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategy_id_python" style="color: inherit; text-decoration: inherit;">strategy_<wbr>id</a>
@@ -1322,8 +1515,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP policy ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IP policy ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategy_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategy_name_python" style="color: inherit; text-decoration: inherit;">strategy_<wbr>name</a>
@@ -1331,8 +1523,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>User defined strategy name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User defined strategy name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategy_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategy_type_python" style="color: inherit; text-decoration: inherit;">strategy_<wbr>type</a>
@@ -1340,8 +1531,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Blacklist or whitelist.</p>
-</dd></dl>
+    <dd>Blacklist or whitelist.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1355,8 +1545,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_serviceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_serviceid_yaml" style="color: inherit; text-decoration: inherit;">service<wbr>Id</a>
@@ -1364,8 +1553,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The ID of the API gateway service.</p>
-</dd><dt class="property-optional"
+    <dd>The ID of the API gateway service.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_strategydata_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategydata_yaml" style="color: inherit; text-decoration: inherit;">strategy<wbr>Data</a>
@@ -1373,8 +1561,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP address data.</p>
-</dd><dt class="property-optional"
+    <dd>IP address data.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_strategyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategyid_yaml" style="color: inherit; text-decoration: inherit;">strategy<wbr>Id</a>
@@ -1382,8 +1569,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP policy ID.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>IP policy ID.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategyname_yaml" style="color: inherit; text-decoration: inherit;">strategy<wbr>Name</a>
@@ -1391,8 +1577,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>User defined strategy name.</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>User defined strategy name.</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_strategytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_strategytype_yaml" style="color: inherit; text-decoration: inherit;">strategy<wbr>Type</a>
@@ -1400,8 +1585,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Blacklist or whitelist.</p>
-</dd></dl>
+    <dd>Blacklist or whitelist.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1424,6 +1608,9 @@ $ pulumi import tencentcloud:ApiGateway/ipStrategy:IpStrategy test service-ohxqs
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1433,7 +1620,6 @@ $ pulumi import tencentcloud:ApiGateway/ipStrategy:IpStrategy test service-ohxqs
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

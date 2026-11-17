@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Rum.getTawArea"
 meta_desc: "Documentation for the tencentcloud.Rum.getTawArea function with examples, input properties, output properties, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -23,7 +25,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -31,9 +33,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getTawArea<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTawAreaArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetTawAreaResult</a></span>></span
+><span class="k">function </span>getTawArea<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTawAreaArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetTawAreaResult</a></span>></span
 ><span class="k">
-function </span>getTawAreaOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTawAreaOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetTawAreaResult</a></span>></span
+function </span>getTawAreaOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetTawAreaOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetTawAreaResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -48,11 +50,11 @@ function </span>getTawAreaOutput<span class="p">(</span><span class="nx">args</s
                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetTawAreaResult</span
 ><span class="k">
-def </span>get_taw_area_output<span class="p">(</span><span class="nx">area_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]</span> = None<span class="p">,</span>
-                 <span class="nx">area_keys</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                 <span class="nx">area_statuses</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetTawAreaResult]</span
+def </span>get_taw_area_output<span class="p">(</span><span class="nx">area_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[int]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">area_keys</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">area_statuses</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[int]]]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetTawAreaResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -77,7 +79,8 @@ func </span>GetTawAreaOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetTawArea </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetTawAreaResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetTawAreaArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetTawAreaResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTawAreaInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetTawAreaResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTawAreaInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetTawAreaResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetTawAreaInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -86,7 +89,8 @@ func </span>GetTawAreaOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetTawAreaResult</a></span>> </span>getTawArea<span class="p">(</span><span class="nx">GetTawAreaArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetTawAreaResult</a></span>> </span>getTawArea<span class="p">(</span><span class="nx">GetTawAreaArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetTawAreaResult</a></span>> </span>getTawArea<span class="p">(</span><span class="nx">GetTawAreaArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -98,6 +102,15 @@ func </span>GetTawAreaOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Rum/getTawArea:getTawArea
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_rum_get_taw_area&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -174,6 +187,44 @@ The following arguments are supported:
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="area_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_ids_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="area_keys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_keys_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>keys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="area_statuses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_statuses_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>statuses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -361,8 +412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="areaids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areaids_csharp" style="color: inherit; text-decoration: inherit;">Area<wbr>Ids</a>
@@ -416,8 +466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="areaids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areaids_go" style="color: inherit; text-decoration: inherit;">Area<wbr>Ids</a>
@@ -454,6 +503,60 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="area_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_sets_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gettawareaareaset">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="area_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_ids_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="area_keys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_keys_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>keys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="area_statuses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_statuses_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>statuses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -471,8 +574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="areaids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areaids_java" style="color: inherit; text-decoration: inherit;">area<wbr>Ids</a>
@@ -526,8 +628,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="areaids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areaids_nodejs" style="color: inherit; text-decoration: inherit;">area<wbr>Ids</a>
@@ -571,7 +672,7 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_sets_python" style="color: inherit; text-decoration: inherit;">area_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gettawareaareaset">Get<wbr>Taw<wbr>Area<wbr>Area<wbr>Set]</a></span>
+        <span class="property-type"><a href="#gettawareaareaset">Sequence[Get<wbr>Taw<wbr>Area<wbr>Area<wbr>Set]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -581,8 +682,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="area_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_ids_python" style="color: inherit; text-decoration: inherit;">area_<wbr>ids</a>
@@ -636,8 +736,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="areaids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areaids_yaml" style="color: inherit; text-decoration: inherit;">area<wbr>Ids</a>
@@ -693,8 +792,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region abbreviation.</p>
-</dd><dt class="property-required"
+    <dd>Region abbreviation.</dd><dt class="property-required"
             title="Required">
         <span id="areaid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areaid_csharp" style="color: inherit; text-decoration: inherit;">Area<wbr>Id</a>
@@ -702,8 +800,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Area id.</p>
-</dd><dt class="property-required"
+    <dd>Area id.</dd><dt class="property-required"
             title="Required">
         <span id="areakey_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areakey_csharp" style="color: inherit; text-decoration: inherit;">Area<wbr>Key</a>
@@ -711,8 +808,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Area key.</p>
-</dd><dt class="property-required"
+    <dd>Area key.</dd><dt class="property-required"
             title="Required">
         <span id="areaname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areaname_csharp" style="color: inherit; text-decoration: inherit;">Area<wbr>Name</a>
@@ -720,8 +816,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Area name.</p>
-</dd><dt class="property-required"
+    <dd>Area name.</dd><dt class="property-required"
             title="Required">
         <span id="arearegioncode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arearegioncode_csharp" style="color: inherit; text-decoration: inherit;">Area<wbr>Region<wbr>Code</a>
@@ -729,8 +824,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Area code.</p>
-</dd><dt class="property-required"
+    <dd>Area code.</dd><dt class="property-required"
             title="Required">
         <span id="arearegionid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arearegionid_csharp" style="color: inherit; text-decoration: inherit;">Area<wbr>Region<wbr>Id</a>
@@ -738,8 +832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Area code id.</p>
-</dd><dt class="property-required"
+    <dd>Area code id.</dd><dt class="property-required"
             title="Required">
         <span id="areastatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areastatus_csharp" style="color: inherit; text-decoration: inherit;">Area<wbr>Status</a>
@@ -747,8 +840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Area status <code>1</code>:&amp;#39;valid&amp;#39;; <code>2</code>:&amp;#39;invalid&amp;#39;.</p>
-</dd></dl>
+    <dd>Area status <code>1</code>:&amp;#39;valid&amp;#39;; <code>2</code>:&amp;#39;invalid&amp;#39;.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -762,8 +854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region abbreviation.</p>
-</dd><dt class="property-required"
+    <dd>Region abbreviation.</dd><dt class="property-required"
             title="Required">
         <span id="areaid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areaid_go" style="color: inherit; text-decoration: inherit;">Area<wbr>Id</a>
@@ -771,8 +862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Area id.</p>
-</dd><dt class="property-required"
+    <dd>Area id.</dd><dt class="property-required"
             title="Required">
         <span id="areakey_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areakey_go" style="color: inherit; text-decoration: inherit;">Area<wbr>Key</a>
@@ -780,8 +870,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Area key.</p>
-</dd><dt class="property-required"
+    <dd>Area key.</dd><dt class="property-required"
             title="Required">
         <span id="areaname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areaname_go" style="color: inherit; text-decoration: inherit;">Area<wbr>Name</a>
@@ -789,8 +878,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Area name.</p>
-</dd><dt class="property-required"
+    <dd>Area name.</dd><dt class="property-required"
             title="Required">
         <span id="arearegioncode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arearegioncode_go" style="color: inherit; text-decoration: inherit;">Area<wbr>Region<wbr>Code</a>
@@ -798,8 +886,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Area code.</p>
-</dd><dt class="property-required"
+    <dd>Area code.</dd><dt class="property-required"
             title="Required">
         <span id="arearegionid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arearegionid_go" style="color: inherit; text-decoration: inherit;">Area<wbr>Region<wbr>Id</a>
@@ -807,8 +894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Area code id.</p>
-</dd><dt class="property-required"
+    <dd>Area code id.</dd><dt class="property-required"
             title="Required">
         <span id="areastatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areastatus_go" style="color: inherit; text-decoration: inherit;">Area<wbr>Status</a>
@@ -816,8 +902,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Area status <code>1</code>:&amp;#39;valid&amp;#39;; <code>2</code>:&amp;#39;invalid&amp;#39;.</p>
-</dd></dl>
+    <dd>Area status <code>1</code>:&amp;#39;valid&amp;#39;; <code>2</code>:&amp;#39;invalid&amp;#39;.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="area_abbr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_abbr_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>abbr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region abbreviation.</dd><dt class="property-required"
+            title="Required">
+        <span id="area_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_id_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Area id.</dd><dt class="property-required"
+            title="Required">
+        <span id="area_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_key_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Area key.</dd><dt class="property-required"
+            title="Required">
+        <span id="area_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_name_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Area name.</dd><dt class="property-required"
+            title="Required">
+        <span id="area_region_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_region_code_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>region_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Area code.</dd><dt class="property-required"
+            title="Required">
+        <span id="area_region_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_region_id_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>region_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Area code id.</dd><dt class="property-required"
+            title="Required">
+        <span id="area_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_status_hcl" style="color: inherit; text-decoration: inherit;">area_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Area status <code>1</code>:&amp;#39;valid&amp;#39;; <code>2</code>:&amp;#39;invalid&amp;#39;.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -831,8 +978,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region abbreviation.</p>
-</dd><dt class="property-required"
+    <dd>Region abbreviation.</dd><dt class="property-required"
             title="Required">
         <span id="areaid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areaid_java" style="color: inherit; text-decoration: inherit;">area<wbr>Id</a>
@@ -840,8 +986,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Area id.</p>
-</dd><dt class="property-required"
+    <dd>Area id.</dd><dt class="property-required"
             title="Required">
         <span id="areakey_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areakey_java" style="color: inherit; text-decoration: inherit;">area<wbr>Key</a>
@@ -849,8 +994,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Area key.</p>
-</dd><dt class="property-required"
+    <dd>Area key.</dd><dt class="property-required"
             title="Required">
         <span id="areaname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areaname_java" style="color: inherit; text-decoration: inherit;">area<wbr>Name</a>
@@ -858,8 +1002,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Area name.</p>
-</dd><dt class="property-required"
+    <dd>Area name.</dd><dt class="property-required"
             title="Required">
         <span id="arearegioncode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arearegioncode_java" style="color: inherit; text-decoration: inherit;">area<wbr>Region<wbr>Code</a>
@@ -867,8 +1010,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Area code.</p>
-</dd><dt class="property-required"
+    <dd>Area code.</dd><dt class="property-required"
             title="Required">
         <span id="arearegionid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arearegionid_java" style="color: inherit; text-decoration: inherit;">area<wbr>Region<wbr>Id</a>
@@ -876,8 +1018,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Area code id.</p>
-</dd><dt class="property-required"
+    <dd>Area code id.</dd><dt class="property-required"
             title="Required">
         <span id="areastatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areastatus_java" style="color: inherit; text-decoration: inherit;">area<wbr>Status</a>
@@ -885,8 +1026,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Area status <code>1</code>:&amp;#39;valid&amp;#39;; <code>2</code>:&amp;#39;invalid&amp;#39;.</p>
-</dd></dl>
+    <dd>Area status <code>1</code>:&amp;#39;valid&amp;#39;; <code>2</code>:&amp;#39;invalid&amp;#39;.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -900,8 +1040,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region abbreviation.</p>
-</dd><dt class="property-required"
+    <dd>Region abbreviation.</dd><dt class="property-required"
             title="Required">
         <span id="areaid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areaid_nodejs" style="color: inherit; text-decoration: inherit;">area<wbr>Id</a>
@@ -909,8 +1048,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Area id.</p>
-</dd><dt class="property-required"
+    <dd>Area id.</dd><dt class="property-required"
             title="Required">
         <span id="areakey_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areakey_nodejs" style="color: inherit; text-decoration: inherit;">area<wbr>Key</a>
@@ -918,8 +1056,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Area key.</p>
-</dd><dt class="property-required"
+    <dd>Area key.</dd><dt class="property-required"
             title="Required">
         <span id="areaname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areaname_nodejs" style="color: inherit; text-decoration: inherit;">area<wbr>Name</a>
@@ -927,8 +1064,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Area name.</p>
-</dd><dt class="property-required"
+    <dd>Area name.</dd><dt class="property-required"
             title="Required">
         <span id="arearegioncode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arearegioncode_nodejs" style="color: inherit; text-decoration: inherit;">area<wbr>Region<wbr>Code</a>
@@ -936,8 +1072,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Area code.</p>
-</dd><dt class="property-required"
+    <dd>Area code.</dd><dt class="property-required"
             title="Required">
         <span id="arearegionid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arearegionid_nodejs" style="color: inherit; text-decoration: inherit;">area<wbr>Region<wbr>Id</a>
@@ -945,8 +1080,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Area code id.</p>
-</dd><dt class="property-required"
+    <dd>Area code id.</dd><dt class="property-required"
             title="Required">
         <span id="areastatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areastatus_nodejs" style="color: inherit; text-decoration: inherit;">area<wbr>Status</a>
@@ -954,8 +1088,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Area status <code>1</code>:&amp;#39;valid&amp;#39;; <code>2</code>:&amp;#39;invalid&amp;#39;.</p>
-</dd></dl>
+    <dd>Area status <code>1</code>:&amp;#39;valid&amp;#39;; <code>2</code>:&amp;#39;invalid&amp;#39;.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -969,8 +1102,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region abbreviation.</p>
-</dd><dt class="property-required"
+    <dd>Region abbreviation.</dd><dt class="property-required"
             title="Required">
         <span id="area_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_id_python" style="color: inherit; text-decoration: inherit;">area_<wbr>id</a>
@@ -978,8 +1110,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Area id.</p>
-</dd><dt class="property-required"
+    <dd>Area id.</dd><dt class="property-required"
             title="Required">
         <span id="area_key_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_key_python" style="color: inherit; text-decoration: inherit;">area_<wbr>key</a>
@@ -987,8 +1118,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Area key.</p>
-</dd><dt class="property-required"
+    <dd>Area key.</dd><dt class="property-required"
             title="Required">
         <span id="area_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_name_python" style="color: inherit; text-decoration: inherit;">area_<wbr>name</a>
@@ -996,8 +1126,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Area name.</p>
-</dd><dt class="property-required"
+    <dd>Area name.</dd><dt class="property-required"
             title="Required">
         <span id="area_region_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_region_code_python" style="color: inherit; text-decoration: inherit;">area_<wbr>region_<wbr>code</a>
@@ -1005,8 +1134,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Area code.</p>
-</dd><dt class="property-required"
+    <dd>Area code.</dd><dt class="property-required"
             title="Required">
         <span id="area_region_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_region_id_python" style="color: inherit; text-decoration: inherit;">area_<wbr>region_<wbr>id</a>
@@ -1014,8 +1142,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Area code id.</p>
-</dd><dt class="property-required"
+    <dd>Area code id.</dd><dt class="property-required"
             title="Required">
         <span id="area_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#area_status_python" style="color: inherit; text-decoration: inherit;">area_<wbr>status</a>
@@ -1023,8 +1150,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Area status <code>1</code>:&amp;#39;valid&amp;#39;; <code>2</code>:&amp;#39;invalid&amp;#39;.</p>
-</dd></dl>
+    <dd>Area status <code>1</code>:&amp;#39;valid&amp;#39;; <code>2</code>:&amp;#39;invalid&amp;#39;.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1038,8 +1164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region abbreviation.</p>
-</dd><dt class="property-required"
+    <dd>Region abbreviation.</dd><dt class="property-required"
             title="Required">
         <span id="areaid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areaid_yaml" style="color: inherit; text-decoration: inherit;">area<wbr>Id</a>
@@ -1047,8 +1172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Area id.</p>
-</dd><dt class="property-required"
+    <dd>Area id.</dd><dt class="property-required"
             title="Required">
         <span id="areakey_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areakey_yaml" style="color: inherit; text-decoration: inherit;">area<wbr>Key</a>
@@ -1056,8 +1180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Area key.</p>
-</dd><dt class="property-required"
+    <dd>Area key.</dd><dt class="property-required"
             title="Required">
         <span id="areaname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areaname_yaml" style="color: inherit; text-decoration: inherit;">area<wbr>Name</a>
@@ -1065,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Area name.</p>
-</dd><dt class="property-required"
+    <dd>Area name.</dd><dt class="property-required"
             title="Required">
         <span id="arearegioncode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arearegioncode_yaml" style="color: inherit; text-decoration: inherit;">area<wbr>Region<wbr>Code</a>
@@ -1074,8 +1196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Area code.</p>
-</dd><dt class="property-required"
+    <dd>Area code.</dd><dt class="property-required"
             title="Required">
         <span id="arearegionid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#arearegionid_yaml" style="color: inherit; text-decoration: inherit;">area<wbr>Region<wbr>Id</a>
@@ -1083,8 +1204,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Area code id.</p>
-</dd><dt class="property-required"
+    <dd>Area code id.</dd><dt class="property-required"
             title="Required">
         <span id="areastatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#areastatus_yaml" style="color: inherit; text-decoration: inherit;">area<wbr>Status</a>
@@ -1092,8 +1212,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Area status <code>1</code>:&amp;#39;valid&amp;#39;; <code>2</code>:&amp;#39;invalid&amp;#39;.</p>
-</dd></dl>
+    <dd>Area status <code>1</code>:&amp;#39;valid&amp;#39;; <code>2</code>:&amp;#39;invalid&amp;#39;.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1108,7 +1227,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

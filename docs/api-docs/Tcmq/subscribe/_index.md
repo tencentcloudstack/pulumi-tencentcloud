@@ -2,9 +2,11 @@
 ---
 title: "Subscribe"
 title_tag: "tencentcloud.Tcmq.Subscribe"
-meta_desc: "Documentation for the tencentcloud.Tcmq.Subscribe resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a tcmq subscribe"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -17,68 +19,83 @@ Provides a resource to create a tcmq subscribe
 
 
 ## Create Subscribe Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Subscribe</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SubscribeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Subscribe</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SubscribeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Subscribe</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SubscribeArgs</a></span><span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Subscribe</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-              <span class="nx">binding_keys</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
               <span class="nx">endpoint</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">subscription_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+              <span class="nx">binding_keys</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
               <span class="nx">filter_tags</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
               <span class="nx">notify_content_format</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">notify_strategy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">subscription_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-              <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Subscribe</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">SubscribeArgs</a></span><span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+              <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSubscribe</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SubscribeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Subscribe</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewSubscribe</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">SubscribeArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Subscribe</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Subscribe</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SubscribeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Subscribe</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SubscribeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Subscribe</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SubscribeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Subscribe</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">SubscribeArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcmq:Subscribe</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tcmq:Subscribe</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tcmq_subscribe&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -99,7 +116,7 @@ Provides a resource to create a tcmq subscribe
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -216,11 +233,19 @@ Provides a resource to create a tcmq subscribe
 </pulumi-choosable>
 </div>
 
+
+
 ## Subscribe Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -236,8 +261,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</p>
-</dd><dt class="property-required"
+    <dd><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -245,8 +269,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-required"
+    <dd>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-required"
             title="Required">
         <span id="subscriptionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionname_csharp" style="color: inherit; text-decoration: inherit;">Subscription<wbr>Name</a>
@@ -254,8 +277,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-required"
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -263,8 +285,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindingkeys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindingkeys_csharp" style="color: inherit; text-decoration: inherit;">Binding<wbr>Keys</a>
@@ -272,8 +293,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</p>
-</dd><dt class="property-optional"
+    <dd>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</dd><dt class="property-optional"
             title="Optional">
         <span id="filtertags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filtertags_csharp" style="color: inherit; text-decoration: inherit;">Filter<wbr>Tags</a>
@@ -281,8 +301,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</p>
-</dd><dt class="property-optional"
+    <dd>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</dd><dt class="property-optional"
             title="Optional">
         <span id="notifycontentformat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifycontentformat_csharp" style="color: inherit; text-decoration: inherit;">Notify<wbr>Content<wbr>Format</a>
@@ -290,8 +309,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notifystrategy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifystrategy_csharp" style="color: inherit; text-decoration: inherit;">Notify<wbr>Strategy</a>
@@ -299,17 +317,15 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -323,8 +339,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</p>
-</dd><dt class="property-required"
+    <dd><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -332,8 +347,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-required"
+    <dd>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-required"
             title="Required">
         <span id="subscriptionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionname_go" style="color: inherit; text-decoration: inherit;">Subscription<wbr>Name</a>
@@ -341,8 +355,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-required"
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -350,8 +363,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindingkeys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindingkeys_go" style="color: inherit; text-decoration: inherit;">Binding<wbr>Keys</a>
@@ -359,8 +371,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</p>
-</dd><dt class="property-optional"
+    <dd>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</dd><dt class="property-optional"
             title="Optional">
         <span id="filtertags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filtertags_go" style="color: inherit; text-decoration: inherit;">Filter<wbr>Tags</a>
@@ -368,8 +379,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</p>
-</dd><dt class="property-optional"
+    <dd>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</dd><dt class="property-optional"
             title="Optional">
         <span id="notifycontentformat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifycontentformat_go" style="color: inherit; text-decoration: inherit;">Notify<wbr>Content<wbr>Format</a>
@@ -377,8 +387,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notifystrategy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifystrategy_go" style="color: inherit; text-decoration: inherit;">Notify<wbr>Strategy</a>
@@ -386,17 +395,93 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="endpoint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endpoint_hcl" style="color: inherit; text-decoration: inherit;">endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</dd><dt class="property-required"
+            title="Required">
+        <span id="protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-required"
+            title="Required">
+        <span id="subscription_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscription_name_hcl" style="color: inherit; text-decoration: inherit;">subscription_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-required"
+            title="Required">
+        <span id="topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="binding_keys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#binding_keys_hcl" style="color: inherit; text-decoration: inherit;">binding_<wbr>keys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="filter_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_tags_hcl" style="color: inherit; text-decoration: inherit;">filter_<wbr>tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="notify_content_format_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notify_content_format_hcl" style="color: inherit; text-decoration: inherit;">notify_<wbr>content_<wbr>format</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="notify_strategy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notify_strategy_hcl" style="color: inherit; text-decoration: inherit;">notify_<wbr>strategy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -410,8 +495,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</p>
-</dd><dt class="property-required"
+    <dd><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -419,8 +503,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-required"
+    <dd>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-required"
             title="Required">
         <span id="subscriptionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionname_java" style="color: inherit; text-decoration: inherit;">subscription<wbr>Name</a>
@@ -428,8 +511,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-required"
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -437,8 +519,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindingkeys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindingkeys_java" style="color: inherit; text-decoration: inherit;">binding<wbr>Keys</a>
@@ -446,8 +527,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</p>
-</dd><dt class="property-optional"
+    <dd>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</dd><dt class="property-optional"
             title="Optional">
         <span id="filtertags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filtertags_java" style="color: inherit; text-decoration: inherit;">filter<wbr>Tags</a>
@@ -455,8 +535,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</p>
-</dd><dt class="property-optional"
+    <dd>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</dd><dt class="property-optional"
             title="Optional">
         <span id="notifycontentformat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifycontentformat_java" style="color: inherit; text-decoration: inherit;">notify<wbr>Content<wbr>Format</a>
@@ -464,8 +543,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notifystrategy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifystrategy_java" style="color: inherit; text-decoration: inherit;">notify<wbr>Strategy</a>
@@ -473,17 +551,15 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -497,8 +573,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</p>
-</dd><dt class="property-required"
+    <dd><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -506,8 +581,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-required"
+    <dd>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-required"
             title="Required">
         <span id="subscriptionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionname_nodejs" style="color: inherit; text-decoration: inherit;">subscription<wbr>Name</a>
@@ -515,8 +589,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-required"
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -524,8 +597,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindingkeys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindingkeys_nodejs" style="color: inherit; text-decoration: inherit;">binding<wbr>Keys</a>
@@ -533,8 +605,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</p>
-</dd><dt class="property-optional"
+    <dd>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</dd><dt class="property-optional"
             title="Optional">
         <span id="filtertags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filtertags_nodejs" style="color: inherit; text-decoration: inherit;">filter<wbr>Tags</a>
@@ -542,8 +613,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</p>
-</dd><dt class="property-optional"
+    <dd>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</dd><dt class="property-optional"
             title="Optional">
         <span id="notifycontentformat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifycontentformat_nodejs" style="color: inherit; text-decoration: inherit;">notify<wbr>Content<wbr>Format</a>
@@ -551,8 +621,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notifystrategy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifystrategy_nodejs" style="color: inherit; text-decoration: inherit;">notify<wbr>Strategy</a>
@@ -560,17 +629,15 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -584,8 +651,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</p>
-</dd><dt class="property-required"
+    <dd><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -593,8 +659,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-required"
+    <dd>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-required"
             title="Required">
         <span id="subscription_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscription_name_python" style="color: inherit; text-decoration: inherit;">subscription_<wbr>name</a>
@@ -602,8 +667,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-required"
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-required"
             title="Required">
         <span id="topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topic_name_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
@@ -611,8 +675,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="binding_keys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#binding_keys_python" style="color: inherit; text-decoration: inherit;">binding_<wbr>keys</a>
@@ -620,8 +683,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</p>
-</dd><dt class="property-optional"
+    <dd>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</dd><dt class="property-optional"
             title="Optional">
         <span id="filter_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filter_tags_python" style="color: inherit; text-decoration: inherit;">filter_<wbr>tags</a>
@@ -629,8 +691,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</p>
-</dd><dt class="property-optional"
+    <dd>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</dd><dt class="property-optional"
             title="Optional">
         <span id="notify_content_format_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notify_content_format_python" style="color: inherit; text-decoration: inherit;">notify_<wbr>content_<wbr>format</a>
@@ -638,8 +699,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notify_strategy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notify_strategy_python" style="color: inherit; text-decoration: inherit;">notify_<wbr>strategy</a>
@@ -647,17 +707,15 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -671,8 +729,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</p>
-</dd><dt class="property-required"
+    <dd><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</dd><dt class="property-required"
             title="Required">
         <span id="protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -680,8 +737,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-required"
+    <dd>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-required"
             title="Required">
         <span id="subscriptionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subscriptionname_yaml" style="color: inherit; text-decoration: inherit;">subscription<wbr>Name</a>
@@ -689,8 +745,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-required"
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-required"
             title="Required">
         <span id="topicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#topicname_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -698,8 +753,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="bindingkeys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bindingkeys_yaml" style="color: inherit; text-decoration: inherit;">binding<wbr>Keys</a>
@@ -707,8 +761,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</p>
-</dd><dt class="property-optional"
+    <dd>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</dd><dt class="property-optional"
             title="Optional">
         <span id="filtertags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filtertags_yaml" style="color: inherit; text-decoration: inherit;">filter<wbr>Tags</a>
@@ -716,8 +769,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</p>
-</dd><dt class="property-optional"
+    <dd>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</dd><dt class="property-optional"
             title="Optional">
         <span id="notifycontentformat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifycontentformat_yaml" style="color: inherit; text-decoration: inherit;">notify<wbr>Content<wbr>Format</a>
@@ -725,8 +777,7 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="notifystrategy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#notifystrategy_yaml" style="color: inherit; text-decoration: inherit;">notify<wbr>Strategy</a>
@@ -734,17 +785,15 @@ The Subscribe resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd></dl>
+    <dd>Tag description list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -765,8 +814,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -780,8 +828,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -795,8 +856,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -810,8 +870,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -825,8 +884,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -840,8 +898,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -851,18 +908,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Subscribe resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SubscribeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Subscribe</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">SubscribeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Subscribe</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -873,106 +930,145 @@ Get an existing Subscribe resource's state with the given name, ID, and optional
         <span class="nx">notify_strategy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">protocol</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">subscription_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">topic_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Subscribe</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSubscribe<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SubscribeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Subscribe</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetSubscribe<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">SubscribeState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Subscribe</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Subscribe</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SubscribeState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Subscribe</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SubscribeState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Subscribe</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SubscribeState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Subscribe</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">SubscribeState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingSubscribe</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tcmq:Subscribe</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tcmq_subscribe</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SubscribeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SubscribeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -980,28 +1076,31 @@ Get an existing Subscribe resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SubscribeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1009,28 +1108,31 @@ Get an existing Subscribe resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">SubscribeState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1050,8 +1152,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</p>
-</dd><dt class="property-optional"
+    <dd>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endpoint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endpoint_csharp" style="color: inherit; text-decoration: inherit;">Endpoint</a>
@@ -1059,8 +1160,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</p>
-</dd><dt class="property-optional"
+    <dd><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filtertags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filtertags_csharp" style="color: inherit; text-decoration: inherit;">Filter<wbr>Tags</a>
@@ -1068,8 +1168,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</p>
-</dd><dt class="property-optional"
+    <dd>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notifycontentformat_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notifycontentformat_csharp" style="color: inherit; text-decoration: inherit;">Notify<wbr>Content<wbr>Format</a>
@@ -1077,8 +1176,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notifystrategy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notifystrategy_csharp" style="color: inherit; text-decoration: inherit;">Notify<wbr>Strategy</a>
@@ -1086,8 +1184,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_csharp" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1095,8 +1192,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-optional"
+    <dd>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subscriptionname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subscriptionname_csharp" style="color: inherit; text-decoration: inherit;">Subscription<wbr>Name</a>
@@ -1104,17 +1200,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_csharp" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -1122,8 +1216,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd></dl>
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1137,8 +1230,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</p>
-</dd><dt class="property-optional"
+    <dd>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endpoint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endpoint_go" style="color: inherit; text-decoration: inherit;">Endpoint</a>
@@ -1146,8 +1238,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</p>
-</dd><dt class="property-optional"
+    <dd><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filtertags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filtertags_go" style="color: inherit; text-decoration: inherit;">Filter<wbr>Tags</a>
@@ -1155,8 +1246,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</p>
-</dd><dt class="property-optional"
+    <dd>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notifycontentformat_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notifycontentformat_go" style="color: inherit; text-decoration: inherit;">Notify<wbr>Content<wbr>Format</a>
@@ -1164,8 +1254,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notifystrategy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notifystrategy_go" style="color: inherit; text-decoration: inherit;">Notify<wbr>Strategy</a>
@@ -1173,8 +1262,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_go" style="color: inherit; text-decoration: inherit;">Protocol</a>
@@ -1182,8 +1270,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-optional"
+    <dd>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subscriptionname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subscriptionname_go" style="color: inherit; text-decoration: inherit;">Subscription<wbr>Name</a>
@@ -1191,17 +1278,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_go" style="color: inherit; text-decoration: inherit;">Topic<wbr>Name</a>
@@ -1209,8 +1294,85 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd></dl>
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_binding_keys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_binding_keys_hcl" style="color: inherit; text-decoration: inherit;">binding_<wbr>keys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_endpoint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endpoint_hcl" style="color: inherit; text-decoration: inherit;">endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_filter_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filter_tags_hcl" style="color: inherit; text-decoration: inherit;">filter_<wbr>tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_notify_content_format_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notify_content_format_hcl" style="color: inherit; text-decoration: inherit;">notify_<wbr>content_<wbr>format</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_notify_strategy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notify_strategy_hcl" style="color: inherit; text-decoration: inherit;">notify_<wbr>strategy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_protocol_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_hcl" style="color: inherit; text-decoration: inherit;">protocol</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subscription_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subscription_name_hcl" style="color: inherit; text-decoration: inherit;">subscription_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tag description list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_topic_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_name_hcl" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1224,8 +1386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</p>
-</dd><dt class="property-optional"
+    <dd>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endpoint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endpoint_java" style="color: inherit; text-decoration: inherit;">endpoint</a>
@@ -1233,8 +1394,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</p>
-</dd><dt class="property-optional"
+    <dd><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filtertags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filtertags_java" style="color: inherit; text-decoration: inherit;">filter<wbr>Tags</a>
@@ -1242,8 +1402,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</p>
-</dd><dt class="property-optional"
+    <dd>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notifycontentformat_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notifycontentformat_java" style="color: inherit; text-decoration: inherit;">notify<wbr>Content<wbr>Format</a>
@@ -1251,8 +1410,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notifystrategy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notifystrategy_java" style="color: inherit; text-decoration: inherit;">notify<wbr>Strategy</a>
@@ -1260,8 +1418,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_java" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1269,8 +1426,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-optional"
+    <dd>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subscriptionname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subscriptionname_java" style="color: inherit; text-decoration: inherit;">subscription<wbr>Name</a>
@@ -1278,17 +1434,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_java" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1296,8 +1450,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd></dl>
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1311,8 +1464,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</p>
-</dd><dt class="property-optional"
+    <dd>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endpoint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endpoint_nodejs" style="color: inherit; text-decoration: inherit;">endpoint</a>
@@ -1320,8 +1472,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</p>
-</dd><dt class="property-optional"
+    <dd><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filtertags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filtertags_nodejs" style="color: inherit; text-decoration: inherit;">filter<wbr>Tags</a>
@@ -1329,8 +1480,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</p>
-</dd><dt class="property-optional"
+    <dd>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notifycontentformat_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notifycontentformat_nodejs" style="color: inherit; text-decoration: inherit;">notify<wbr>Content<wbr>Format</a>
@@ -1338,8 +1488,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notifystrategy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notifystrategy_nodejs" style="color: inherit; text-decoration: inherit;">notify<wbr>Strategy</a>
@@ -1347,8 +1496,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_nodejs" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1356,8 +1504,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-optional"
+    <dd>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subscriptionname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subscriptionname_nodejs" style="color: inherit; text-decoration: inherit;">subscription<wbr>Name</a>
@@ -1365,17 +1512,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_nodejs" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1383,8 +1528,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd></dl>
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1398,8 +1542,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</p>
-</dd><dt class="property-optional"
+    <dd>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endpoint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endpoint_python" style="color: inherit; text-decoration: inherit;">endpoint</a>
@@ -1407,8 +1550,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</p>
-</dd><dt class="property-optional"
+    <dd><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filter_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filter_tags_python" style="color: inherit; text-decoration: inherit;">filter_<wbr>tags</a>
@@ -1416,8 +1558,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</p>
-</dd><dt class="property-optional"
+    <dd>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notify_content_format_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notify_content_format_python" style="color: inherit; text-decoration: inherit;">notify_<wbr>content_<wbr>format</a>
@@ -1425,8 +1566,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notify_strategy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notify_strategy_python" style="color: inherit; text-decoration: inherit;">notify_<wbr>strategy</a>
@@ -1434,8 +1574,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_python" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1443,8 +1582,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-optional"
+    <dd>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subscription_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subscription_name_python" style="color: inherit; text-decoration: inherit;">subscription_<wbr>name</a>
@@ -1452,17 +1590,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topic_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topic_name_python" style="color: inherit; text-decoration: inherit;">topic_<wbr>name</a>
@@ -1470,8 +1606,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd></dl>
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1485,8 +1620,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</p>
-</dd><dt class="property-optional"
+    <dd>The number of <code>BindingKey</code> cannot exceed 5, and the length of each <code>BindingKey</code> cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each <code>BindingKey</code> includes up to 15 dots (namely up to 16 segments).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_endpoint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_endpoint_yaml" style="color: inherit; text-decoration: inherit;">endpoint</a>
@@ -1494,8 +1628,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</p>
-</dd><dt class="property-optional"
+    <dd><code>Endpoint</code> for notification receipt, which is distinguished by <code>Protocol</code>. For <code>http</code>, <code>Endpoint</code> must begin with <code>http://</code> and <code>host</code> can be a domain name or IP. For <code>Queue</code>, enter <code>QueueName</code>. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for <code>Endpoint</code>, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_filtertags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_filtertags_yaml" style="color: inherit; text-decoration: inherit;">filter<wbr>Tags</a>
@@ -1503,8 +1636,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</p>
-</dd><dt class="property-optional"
+    <dd>Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the <code>MsgTag</code> parameter of <code>(Batch)PublishMessage</code>. Rules: 1. If <code>FilterTag</code> is not configured, no matter whether <code>MsgTag</code> is configured, the subscription will receive all messages published to the topic; 2. If the array of <code>FilterTag</code> values has a value, only when at least one of the values in the array also exists in the array of <code>MsgTag</code> values (i.e., <code>FilterTag</code> and <code>MsgTag</code> have an intersection) can the subscription receive messages published to the topic; 3. If the array of <code>FilterTag</code> values has a value, but <code>MsgTag</code> is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as <code>FilterTag</code> and <code>MsgTag</code> do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notifycontentformat_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notifycontentformat_yaml" style="color: inherit; text-decoration: inherit;">notify<wbr>Content<wbr>Format</a>
@@ -1512,8 +1644,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If <code>Protocol</code> is <code>queue</code>, this value must be <code>SIMPLIFIED</code>. If <code>Protocol</code> is <code>http</code>, both options are acceptable, and the default value is <code>JSON</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_notifystrategy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_notifystrategy_yaml" style="color: inherit; text-decoration: inherit;">notify<wbr>Strategy</a>
@@ -1521,8 +1652,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</p>
-</dd><dt class="property-optional"
+    <dd>CMQ push server retry policy in case an error occurs while pushing a message to <code>Endpoint</code>. Valid values: 1. <code>BACKOFF_RETRY</code>: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. <code>EXPONENTIAL_DECAY_RETRY</code>: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: <code>EXPONENTIAL_DECAY_RETRY</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_protocol_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_protocol_yaml" style="color: inherit; text-decoration: inherit;">protocol</a>
@@ -1530,8 +1660,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</p>
-</dd><dt class="property-optional"
+    <dd>ubscription protocol. Currently, two protocols are supported: <code>http</code> and <code>queue</code>. To use the <code>http</code> protocol, you need to build your own web server to receive messages. With the <code>queue</code> protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subscriptionname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subscriptionname_yaml" style="color: inherit; text-decoration: inherit;">subscription<wbr>Name</a>
@@ -1539,17 +1668,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd><dt class="property-optional"
+    <dd>Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tag description list.</p>
-</dd><dt class="property-optional"
+    <dd>Tag description list.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_topicname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_topicname_yaml" style="color: inherit; text-decoration: inherit;">topic<wbr>Name</a>
@@ -1557,8 +1684,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</p>
-</dd></dl>
+    <dd>Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1580,6 +1706,8 @@ $ pulumi import tencentcloud:Tcmq/subscribe:Subscribe subscribe subscribe_id
 ```
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
 
 
 
@@ -1590,7 +1718,6 @@ $ pulumi import tencentcloud:Tcmq/subscribe:Subscribe subscribe subscribe_id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

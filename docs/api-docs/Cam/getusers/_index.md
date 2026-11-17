@@ -2,9 +2,11 @@
 ---
 title: "getUsers"
 title_tag: "tencentcloud.Cam.getUsers"
-meta_desc: "Documentation for the tencentcloud.Cam.getUsers function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of CAM users"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,77 +18,76 @@ Use this data source to query detailed information of CAM users
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Cam.getUsers({
+// query by name
+const foo = tencentcloud.cam.getUsers({
     name: "cam-user-test",
 });
-const bar = tencentcloud.Cam.getUsers({
+// query by email
+const bar = tencentcloud.cam.getUsers({
     email: "hello@test.com",
 });
-const far = tencentcloud.Cam.getUsers({
+// query by phone
+const far = tencentcloud.cam.getUsers({
     phoneNum: "12345678910",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Cam.get_users(name="cam-user-test")
-bar = tencentcloud.Cam.get_users(email="hello@test.com")
-far = tencentcloud.Cam.get_users(phone_num="12345678910")
+# query by name
+foo = tencentcloud.cam.get_users(name="cam-user-test")
+# query by email
+bar = tencentcloud.cam.get_users(email="hello@test.com")
+# query by phone
+far = tencentcloud.cam.get_users(phone_num="12345678910")
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Cam.GetUsers.Invoke(new()
-    {
-        Name = "cam-user-test",
-    });
-
-    var bar = Tencentcloud.Cam.GetUsers.Invoke(new()
-    {
-        Email = "hello@test.com",
-    });
-
-    var far = Tencentcloud.Cam.GetUsers.Invoke(new()
-    {
-        PhoneNum = "12345678910",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cam"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cam.GetUsers(ctx, &cam.GetUsersArgs{
+		// query by name
+		_, err := cam.GetUsers(ctx, &cam.GetUsersArgs{
 			Name: pulumi.StringRef("cam-user-test"),
 		}, nil)
 		if err != nil {
 			return err
 		}
-		_, err = Cam.GetUsers(ctx, &cam.GetUsersArgs{
+		// query by email
+		_, err = cam.GetUsers(ctx, &cam.GetUsersArgs{
 			Email: pulumi.StringRef("hello@test.com"),
 		}, nil)
 		if err != nil {
 			return err
 		}
-		_, err = Cam.GetUsers(ctx, &cam.GetUsersArgs{
+		// query by phone
+		_, err = cam.GetUsers(ctx, &cam.GetUsersArgs{
 			PhoneNum: pulumi.StringRef("12345678910"),
 		}, nil)
 		if err != nil {
@@ -96,6 +97,44 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    // query by name
+    var foo = Tencentcloud.Cam.GetUsers.Invoke(new()
+    {
+        Name = "cam-user-test",
+    });
+
+    // query by email
+    var bar = Tencentcloud.Cam.GetUsers.Invoke(new()
+    {
+        Email = "hello@test.com",
+    });
+
+    // query by phone
+    var far = Tencentcloud.Cam.GetUsers.Invoke(new()
+    {
+        PhoneNum = "12345678910",
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -104,8 +143,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cam.CamFunctions;
 import com.pulumi.tencentcloud.Cam.inputs.GetUsersArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -117,14 +156,17 @@ public class App {
     }
 
     public static void stack(Context ctx) {
+        // query by name
         final var foo = CamFunctions.getUsers(GetUsersArgs.builder()
             .name("cam-user-test")
             .build());
 
+        // query by email
         final var bar = CamFunctions.getUsers(GetUsersArgs.builder()
             .email("hello@test.com")
             .build());
 
+        // query by phone
         final var far = CamFunctions.getUsers(GetUsersArgs.builder()
             .phoneNum("12345678910")
             .build());
@@ -132,26 +174,69 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
+  # query by name
   foo:
     fn::invoke:
-      Function: tencentcloud:Cam:getUsers
-      Arguments:
+      function: tencentcloud:Cam:getUsers
+      arguments:
         name: cam-user-test
+  # query by email
   bar:
     fn::invoke:
-      Function: tencentcloud:Cam:getUsers
-      Arguments:
+      function: tencentcloud:Cam:getUsers
+      arguments:
         email: hello@test.com
+  # query by phone
   far:
     fn::invoke:
-      Function: tencentcloud:Cam:getUsers
-      Arguments:
+      function: tencentcloud:Cam:getUsers
+      arguments:
         phoneNum: '12345678910'
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cam_getusers" "foo" {
+  name = "cam-user-test"
+}
+data "tencentcloud_cam_getusers" "bar" {
+  email = "hello@test.com"
+}
+data "tencentcloud_cam_getusers" "far" {
+  phone_num = "12345678910"
+}
+
+# query by name
+# query by email
+# query by phone
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [ListUsers](https://www.tencentcloud.com/document/api/598/32256)
 
 
 
@@ -163,7 +248,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -171,9 +256,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getUsers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUsersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>></span
+><span class="k">function </span>getUsers<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUsersArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>></span
 ><span class="k">
-function </span>getUsersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUsersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>></span
+function </span>getUsersOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUsersOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -193,16 +278,16 @@ function </span>getUsersOutput<span class="p">(</span><span class="nx">args</spa
               <span class="nx">uin</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetUsersResult</span
 ><span class="k">
-def </span>get_users_output<span class="p">(</span><span class="nx">console_login</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-              <span class="nx">country_code</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">email</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">phone_num</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-              <span class="nx">uid</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-              <span class="nx">uin</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetUsersResult]</span
+def </span>get_users_output<span class="p">(</span><span class="nx">console_login</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+              <span class="nx">country_code</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">email</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">phone_num</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">remark</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+              <span class="nx">uid</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+              <span class="nx">uin</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetUsersResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -227,7 +312,8 @@ func </span>GetUsersOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetUsers </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetUsersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetUsersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetUsersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetUsersInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -236,7 +322,8 @@ func </span>GetUsersOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>> </span>getUsers<span class="p">(</span><span class="nx">GetUsersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>> </span>getUsers<span class="p">(</span><span class="nx">GetUsersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetUsersResult</a></span>> </span>getUsers<span class="p">(</span><span class="nx">GetUsersArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -248,6 +335,15 @@ func </span>GetUsersOutput<span class="p">(</span><span class="nx">ctx</span><sp
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cam/getUsers:getUsers
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cam_get_users&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -266,8 +362,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the user can login in.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the user can login in.</dd><dt class="property-optional"
             title="Optional">
         <span id="countrycode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#countrycode_csharp" style="color: inherit; text-decoration: inherit;">Country<wbr>Code</a>
@@ -275,8 +370,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country code of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_csharp" style="color: inherit; text-decoration: inherit;">Email</a>
@@ -284,8 +378,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -293,8 +386,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_csharp" style="color: inherit; text-decoration: inherit;">Phone<wbr>Num</a>
@@ -302,8 +394,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone num of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Phone num of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -311,8 +402,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -320,8 +410,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="uid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_csharp" style="color: inherit; text-decoration: inherit;">Uid</a>
@@ -329,8 +418,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uid of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Uid of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="uin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_csharp" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -338,8 +426,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of the CAM user to be queried.</p>
-</dd></dl>
+    <dd>Uin of the CAM user to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -353,8 +440,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the user can login in.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the user can login in.</dd><dt class="property-optional"
             title="Optional">
         <span id="countrycode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#countrycode_go" style="color: inherit; text-decoration: inherit;">Country<wbr>Code</a>
@@ -362,8 +448,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country code of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_go" style="color: inherit; text-decoration: inherit;">Email</a>
@@ -371,8 +456,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -380,8 +464,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_go" style="color: inherit; text-decoration: inherit;">Phone<wbr>Num</a>
@@ -389,8 +472,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone num of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Phone num of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -398,8 +480,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -407,8 +488,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="uid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_go" style="color: inherit; text-decoration: inherit;">Uid</a>
@@ -416,8 +496,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uid of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Uid of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="uin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_go" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -425,8 +504,85 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of the CAM user to be queried.</p>
-</dd></dl>
+    <dd>Uin of the CAM user to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="console_login_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#console_login_hcl" style="color: inherit; text-decoration: inherit;">console_<wbr>login</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether the user can login in.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="country_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#country_code_hcl" style="color: inherit; text-decoration: inherit;">country_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Country code of the CAM user to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="email_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_hcl" style="color: inherit; text-decoration: inherit;">email</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Email of the CAM user to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CAM user to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="phone_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_num_hcl" style="color: inherit; text-decoration: inherit;">phone_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Phone num of the CAM user to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remark of the CAM user to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="uid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_hcl" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Uid of the CAM user to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_hcl" style="color: inherit; text-decoration: inherit;">uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Uin of the CAM user to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -440,8 +596,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether the user can login in.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the user can login in.</dd><dt class="property-optional"
             title="Optional">
         <span id="countrycode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#countrycode_java" style="color: inherit; text-decoration: inherit;">country<wbr>Code</a>
@@ -449,8 +604,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Country code of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_java" style="color: inherit; text-decoration: inherit;">email</a>
@@ -458,8 +612,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -467,8 +620,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_java" style="color: inherit; text-decoration: inherit;">phone<wbr>Num</a>
@@ -476,8 +628,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Phone num of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Phone num of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -485,8 +636,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -494,8 +644,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="uid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_java" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -503,8 +652,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Uid of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Uid of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="uin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_java" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -512,8 +660,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Uin of the CAM user to be queried.</p>
-</dd></dl>
+    <dd>Uin of the CAM user to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -527,8 +674,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether the user can login in.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the user can login in.</dd><dt class="property-optional"
             title="Optional">
         <span id="countrycode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#countrycode_nodejs" style="color: inherit; text-decoration: inherit;">country<wbr>Code</a>
@@ -536,8 +682,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country code of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_nodejs" style="color: inherit; text-decoration: inherit;">email</a>
@@ -545,8 +690,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -554,8 +698,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_nodejs" style="color: inherit; text-decoration: inherit;">phone<wbr>Num</a>
@@ -563,8 +706,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone num of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Phone num of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -572,8 +714,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -581,8 +722,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="uid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_nodejs" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -590,8 +730,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Uid of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Uid of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="uin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_nodejs" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -599,8 +738,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Uin of the CAM user to be queried.</p>
-</dd></dl>
+    <dd>Uin of the CAM user to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -614,8 +752,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the user can login in.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the user can login in.</dd><dt class="property-optional"
             title="Optional">
         <span id="country_code_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#country_code_python" style="color: inherit; text-decoration: inherit;">country_<wbr>code</a>
@@ -623,8 +760,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Country code of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_python" style="color: inherit; text-decoration: inherit;">email</a>
@@ -632,8 +768,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Email of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -641,8 +776,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="phone_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_num_python" style="color: inherit; text-decoration: inherit;">phone_<wbr>num</a>
@@ -650,8 +784,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Phone num of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Phone num of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -659,8 +792,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remark of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -668,8 +800,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="uid_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_python" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -677,8 +808,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uid of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Uid of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_python" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -686,8 +816,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of the CAM user to be queried.</p>
-</dd></dl>
+    <dd>Uin of the CAM user to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -701,8 +830,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether the user can login in.</p>
-</dd><dt class="property-optional"
+    <dd>Indicate whether the user can login in.</dd><dt class="property-optional"
             title="Optional">
         <span id="countrycode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#countrycode_yaml" style="color: inherit; text-decoration: inherit;">country<wbr>Code</a>
@@ -710,8 +838,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Country code of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Country code of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="email_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_yaml" style="color: inherit; text-decoration: inherit;">email</a>
@@ -719,8 +846,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Email of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -728,8 +854,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="phonenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_yaml" style="color: inherit; text-decoration: inherit;">phone<wbr>Num</a>
@@ -737,8 +862,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Phone num of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Phone num of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -746,8 +870,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Remark of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -755,8 +878,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="uid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_yaml" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -764,8 +886,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Uid of the CAM user to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Uid of the CAM user to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="uin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_yaml" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -773,8 +894,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Uin of the CAM user to be queried.</p>
-</dd></dl>
+    <dd>Uin of the CAM user to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -797,8 +917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="userlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userlists_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Lists</a>
@@ -806,8 +925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusersuserlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cam.<wbr>Outputs.<wbr>Get<wbr>Users<wbr>User<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of CAM users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="consolelogin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#consolelogin_csharp" style="color: inherit; text-decoration: inherit;">Console<wbr>Login</a>
@@ -823,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country code of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Country code of the CAM user.</dd><dt class="property-"
             title="">
         <span id="email_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_csharp" style="color: inherit; text-decoration: inherit;">Email</a>
@@ -832,8 +949,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Email of the CAM user.</dd><dt class="property-"
             title="">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -841,8 +957,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM user.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM user.</dd><dt class="property-"
             title="">
         <span id="phonenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_csharp" style="color: inherit; text-decoration: inherit;">Phone<wbr>Num</a>
@@ -850,8 +965,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone num of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Phone num of the CAM user.</dd><dt class="property-"
             title="">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -859,8 +973,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Remark of the CAM user.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -876,8 +989,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uid of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Uid of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_csharp" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -885,8 +997,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of the CAM user.</p>
-</dd></dl>
+    <dd>Uin of the CAM user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -900,8 +1011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="userlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userlists_go" style="color: inherit; text-decoration: inherit;">User<wbr>Lists</a>
@@ -909,8 +1019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusersuserlist">[]Get<wbr>Users<wbr>User<wbr>List</a></span>
     </dt>
-    <dd><p>A list of CAM users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="consolelogin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#consolelogin_go" style="color: inherit; text-decoration: inherit;">Console<wbr>Login</a>
@@ -926,8 +1035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country code of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Country code of the CAM user.</dd><dt class="property-"
             title="">
         <span id="email_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_go" style="color: inherit; text-decoration: inherit;">Email</a>
@@ -935,8 +1043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Email of the CAM user.</dd><dt class="property-"
             title="">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -944,8 +1051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM user.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM user.</dd><dt class="property-"
             title="">
         <span id="phonenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_go" style="color: inherit; text-decoration: inherit;">Phone<wbr>Num</a>
@@ -953,8 +1059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone num of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Phone num of the CAM user.</dd><dt class="property-"
             title="">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -962,8 +1067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Remark of the CAM user.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -979,8 +1083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uid of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Uid of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_go" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -988,8 +1091,101 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of the CAM user.</p>
-</dd></dl>
+    <dd>Uin of the CAM user.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="user_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_lists_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getusersuserlist">list(object)</a></span>
+    </dt>
+    <dd>A list of CAM users. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="console_login_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#console_login_hcl" style="color: inherit; text-decoration: inherit;">console_<wbr>login</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="country_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#country_code_hcl" style="color: inherit; text-decoration: inherit;">country_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Country code of the CAM user.</dd><dt class="property-"
+            title="">
+        <span id="email_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_hcl" style="color: inherit; text-decoration: inherit;">email</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Email of the CAM user.</dd><dt class="property-"
+            title="">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CAM user.</dd><dt class="property-"
+            title="">
+        <span id="phone_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_num_hcl" style="color: inherit; text-decoration: inherit;">phone_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Phone num of the CAM user.</dd><dt class="property-"
+            title="">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remark of the CAM user.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="uid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_hcl" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Uid of the CAM user.</dd><dt class="property-"
+            title="">
+        <span id="uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_hcl" style="color: inherit; text-decoration: inherit;">uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Uin of the CAM user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1003,8 +1199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="userlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userlists_java" style="color: inherit; text-decoration: inherit;">user<wbr>Lists</a>
@@ -1012,8 +1207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusersuserlist">List&lt;Get<wbr>Users<wbr>User<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of CAM users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="consolelogin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#consolelogin_java" style="color: inherit; text-decoration: inherit;">console<wbr>Login</a>
@@ -1029,8 +1223,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Country code of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Country code of the CAM user.</dd><dt class="property-"
             title="">
         <span id="email_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_java" style="color: inherit; text-decoration: inherit;">email</a>
@@ -1038,8 +1231,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Email of the CAM user.</dd><dt class="property-"
             title="">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1047,8 +1239,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CAM user.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM user.</dd><dt class="property-"
             title="">
         <span id="phonenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_java" style="color: inherit; text-decoration: inherit;">phone<wbr>Num</a>
@@ -1056,8 +1247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Phone num of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Phone num of the CAM user.</dd><dt class="property-"
             title="">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1065,8 +1255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Remark of the CAM user.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1082,8 +1271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Uid of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Uid of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_java" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1091,8 +1279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Uin of the CAM user.</p>
-</dd></dl>
+    <dd>Uin of the CAM user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1106,8 +1293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="userlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userlists_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Lists</a>
@@ -1115,8 +1301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusersuserlist">Get<wbr>Users<wbr>User<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of CAM users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="consolelogin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#consolelogin_nodejs" style="color: inherit; text-decoration: inherit;">console<wbr>Login</a>
@@ -1132,8 +1317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country code of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Country code of the CAM user.</dd><dt class="property-"
             title="">
         <span id="email_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_nodejs" style="color: inherit; text-decoration: inherit;">email</a>
@@ -1141,8 +1325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Email of the CAM user.</dd><dt class="property-"
             title="">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1150,8 +1333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM user.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM user.</dd><dt class="property-"
             title="">
         <span id="phonenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_nodejs" style="color: inherit; text-decoration: inherit;">phone<wbr>Num</a>
@@ -1159,8 +1341,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone num of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Phone num of the CAM user.</dd><dt class="property-"
             title="">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1168,8 +1349,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Remark of the CAM user.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1185,8 +1365,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Uid of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Uid of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_nodejs" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1194,8 +1373,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Uin of the CAM user.</p>
-</dd></dl>
+    <dd>Uin of the CAM user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1209,17 +1387,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="user_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_lists_python" style="color: inherit; text-decoration: inherit;">user_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getusersuserlist">Get<wbr>Users<wbr>User<wbr>List]</a></span>
+        <span class="property-type"><a href="#getusersuserlist">Sequence[Get<wbr>Users<wbr>User<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of CAM users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="console_login_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#console_login_python" style="color: inherit; text-decoration: inherit;">console_<wbr>login</a>
@@ -1235,8 +1411,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Country code of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Country code of the CAM user.</dd><dt class="property-"
             title="">
         <span id="email_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_python" style="color: inherit; text-decoration: inherit;">email</a>
@@ -1244,8 +1419,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Email of the CAM user.</dd><dt class="property-"
             title="">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1253,8 +1427,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CAM user.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM user.</dd><dt class="property-"
             title="">
         <span id="phone_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_num_python" style="color: inherit; text-decoration: inherit;">phone_<wbr>num</a>
@@ -1262,8 +1435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Phone num of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Phone num of the CAM user.</dd><dt class="property-"
             title="">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1271,8 +1443,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Remark of the CAM user.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1288,8 +1459,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uid of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Uid of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_python" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1297,8 +1467,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of the CAM user.</p>
-</dd></dl>
+    <dd>Uin of the CAM user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1312,8 +1481,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="userlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userlists_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Lists</a>
@@ -1321,8 +1489,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getusersuserlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of CAM users. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM users. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="consolelogin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#consolelogin_yaml" style="color: inherit; text-decoration: inherit;">console<wbr>Login</a>
@@ -1338,8 +1505,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Country code of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Country code of the CAM user.</dd><dt class="property-"
             title="">
         <span id="email_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_yaml" style="color: inherit; text-decoration: inherit;">email</a>
@@ -1347,8 +1513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Email of the CAM user.</dd><dt class="property-"
             title="">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1356,8 +1521,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CAM user.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM user.</dd><dt class="property-"
             title="">
         <span id="phonenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_yaml" style="color: inherit; text-decoration: inherit;">phone<wbr>Num</a>
@@ -1365,8 +1529,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Phone num of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Phone num of the CAM user.</dd><dt class="property-"
             title="">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1374,8 +1537,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Remark of the CAM user.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1391,8 +1553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Uid of the CAM user.</p>
-</dd><dt class="property-"
+    <dd>Uid of the CAM user.</dd><dt class="property-"
             title="">
         <span id="uin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_yaml" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1400,8 +1561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Uin of the CAM user.</p>
-</dd></dl>
+    <dd>Uin of the CAM user.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1425,8 +1585,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country code of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Country code of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="email_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_csharp" style="color: inherit; text-decoration: inherit;">Email</a>
@@ -1434,8 +1593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Email of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1443,8 +1601,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="phonenum_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_csharp" style="color: inherit; text-decoration: inherit;">Phone<wbr>Num</a>
@@ -1452,8 +1609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone num of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Phone num of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1461,8 +1617,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Remark of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="uid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_csharp" style="color: inherit; text-decoration: inherit;">Uid</a>
@@ -1470,8 +1625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uid of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Uid of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="uin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_csharp" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -1479,8 +1633,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Uin of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="userid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Id</a>
@@ -1488,8 +1641,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM user. Its value equals to <code>name</code> argument.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM user. Its value equals to <code>name</code> argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="consolelogin_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#consolelogin_csharp" style="color: inherit; text-decoration: inherit;">Console<wbr>Login</a>
@@ -1497,8 +1649,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the user can login in.</p>
-</dd></dl>
+    <dd>Indicate whether the user can login in.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1512,8 +1663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country code of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Country code of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="email_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_go" style="color: inherit; text-decoration: inherit;">Email</a>
@@ -1521,8 +1671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Email of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1530,8 +1679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="phonenum_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_go" style="color: inherit; text-decoration: inherit;">Phone<wbr>Num</a>
@@ -1539,8 +1687,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone num of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Phone num of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1548,8 +1695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Remark of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="uid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_go" style="color: inherit; text-decoration: inherit;">Uid</a>
@@ -1557,8 +1703,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uid of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Uid of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="uin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_go" style="color: inherit; text-decoration: inherit;">Uin</a>
@@ -1566,8 +1711,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Uin of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="userid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_go" style="color: inherit; text-decoration: inherit;">User<wbr>Id</a>
@@ -1575,8 +1719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM user. Its value equals to <code>name</code> argument.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM user. Its value equals to <code>name</code> argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="consolelogin_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#consolelogin_go" style="color: inherit; text-decoration: inherit;">Console<wbr>Login</a>
@@ -1584,8 +1727,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the user can login in.</p>
-</dd></dl>
+    <dd>Indicate whether the user can login in.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="country_code_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#country_code_hcl" style="color: inherit; text-decoration: inherit;">country_<wbr>code</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Country code of the CAM user to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="email_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_hcl" style="color: inherit; text-decoration: inherit;">email</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Email of the CAM user to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CAM user to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="phone_num_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_num_hcl" style="color: inherit; text-decoration: inherit;">phone_<wbr>num</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Phone num of the CAM user to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remark of the CAM user to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="uid_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_hcl" style="color: inherit; text-decoration: inherit;">uid</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Uid of the CAM user to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_hcl" style="color: inherit; text-decoration: inherit;">uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Uin of the CAM user to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="user_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CAM user. Its value equals to <code>name</code> argument.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="console_login_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#console_login_hcl" style="color: inherit; text-decoration: inherit;">console_<wbr>login</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicate whether the user can login in.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1599,8 +1819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Country code of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Country code of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="email_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_java" style="color: inherit; text-decoration: inherit;">email</a>
@@ -1608,8 +1827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Email of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1617,8 +1835,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="phonenum_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_java" style="color: inherit; text-decoration: inherit;">phone<wbr>Num</a>
@@ -1626,8 +1843,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Phone num of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Phone num of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1635,8 +1851,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Remark of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="uid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_java" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -1644,8 +1859,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Uid of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Uid of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="uin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_java" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1653,8 +1867,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Uin of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Uin of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="userid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_java" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -1662,8 +1875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CAM user. Its value equals to <code>name</code> argument.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM user. Its value equals to <code>name</code> argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="consolelogin_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#consolelogin_java" style="color: inherit; text-decoration: inherit;">console<wbr>Login</a>
@@ -1671,8 +1883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether the user can login in.</p>
-</dd></dl>
+    <dd>Indicate whether the user can login in.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1686,8 +1897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Country code of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Country code of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="email_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_nodejs" style="color: inherit; text-decoration: inherit;">email</a>
@@ -1695,8 +1905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Email of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Email of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1704,8 +1913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="phonenum_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_nodejs" style="color: inherit; text-decoration: inherit;">phone<wbr>Num</a>
@@ -1713,8 +1921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Phone num of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Phone num of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1722,8 +1929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remark of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Remark of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="uid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_nodejs" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -1731,8 +1937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Uid of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Uid of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="uin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_nodejs" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1740,8 +1945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Uin of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Uin of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="userid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -1749,8 +1953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM user. Its value equals to <code>name</code> argument.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM user. Its value equals to <code>name</code> argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="consolelogin_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#consolelogin_nodejs" style="color: inherit; text-decoration: inherit;">console<wbr>Login</a>
@@ -1758,8 +1961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicate whether the user can login in.</p>
-</dd></dl>
+    <dd>Indicate whether the user can login in.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1773,8 +1975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Country code of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Country code of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="email_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_python" style="color: inherit; text-decoration: inherit;">email</a>
@@ -1782,8 +1983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Email of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Email of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1791,8 +1991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="phone_num_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phone_num_python" style="color: inherit; text-decoration: inherit;">phone_<wbr>num</a>
@@ -1800,8 +1999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Phone num of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Phone num of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1809,8 +2007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remark of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Remark of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="uid_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_python" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -1818,8 +2015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uid of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Uid of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="uin_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_python" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1827,8 +2023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Uin of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Uin of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="user_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_python" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
@@ -1836,8 +2031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CAM user. Its value equals to <code>name</code> argument.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM user. Its value equals to <code>name</code> argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="console_login_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#console_login_python" style="color: inherit; text-decoration: inherit;">console_<wbr>login</a>
@@ -1845,8 +2039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicate whether the user can login in.</p>
-</dd></dl>
+    <dd>Indicate whether the user can login in.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1860,8 +2053,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Country code of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Country code of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="email_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#email_yaml" style="color: inherit; text-decoration: inherit;">email</a>
@@ -1869,8 +2061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Email of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Email of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1878,8 +2069,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="phonenum_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#phonenum_yaml" style="color: inherit; text-decoration: inherit;">phone<wbr>Num</a>
@@ -1887,8 +2077,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Phone num of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Phone num of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1896,8 +2085,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remark of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Remark of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="uid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uid_yaml" style="color: inherit; text-decoration: inherit;">uid</a>
@@ -1905,8 +2093,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Uid of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Uid of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="uin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uin_yaml" style="color: inherit; text-decoration: inherit;">uin</a>
@@ -1914,8 +2101,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Uin of the CAM user to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Uin of the CAM user to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="userid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -1923,8 +2109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CAM user. Its value equals to <code>name</code> argument.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM user. Its value equals to <code>name</code> argument.</dd><dt class="property-optional"
             title="Optional">
         <span id="consolelogin_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#consolelogin_yaml" style="color: inherit; text-decoration: inherit;">console<wbr>Login</a>
@@ -1932,8 +2117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicate whether the user can login in.</p>
-</dd></dl>
+    <dd>Indicate whether the user can login in.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1948,7 +2132,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

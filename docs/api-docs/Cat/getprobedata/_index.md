@@ -2,9 +2,11 @@
 ---
 title: "getProbeData"
 title_tag: "tencentcloud.Cat.getProbeData"
-meta_desc: "Documentation for the tencentcloud.Cat.getProbeData function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of cat probe data"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,90 +18,76 @@ Use this data source to query detailed information of cat probe data
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const probeData = tencentcloud.Cat.getProbeData({
-    ascending: true,
+const probeData = tencentcloud.cat.getProbeData({
     beginTime: 1667923200000,
     endTime: 1667996208428,
-    limit: 20,
-    offset: 0,
-    selectedFields: ["terraform"],
-    sortField: "ProbeTime",
-    taskIds: ["task-knare1mk"],
     taskType: "AnalyzeTaskType_Network",
+    sortField: "ProbeTime",
+    ascending: true,
+    selectedFields: ["terraform"],
+    offset: 0,
+    limit: 20,
+    taskIds: ["task-knare1mk"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-probe_data = tencentcloud.Cat.get_probe_data(ascending=True,
-    begin_time=1667923200000,
-    end_time=1667996208428,
-    limit=20,
-    offset=0,
-    selected_fields=["terraform"],
+probe_data = tencentcloud.cat.get_probe_data(begin_time=int(1667923200000),
+    end_time=int(1667996208428),
+    task_type="AnalyzeTaskType_Network",
     sort_field="ProbeTime",
-    task_ids=["task-knare1mk"],
-    task_type="AnalyzeTaskType_Network")
+    ascending=True,
+    selected_fields=["terraform"],
+    offset=0,
+    limit=20,
+    task_ids=["task-knare1mk"])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var probeData = Tencentcloud.Cat.GetProbeData.Invoke(new()
-    {
-        Ascending = true,
-        BeginTime = 1667923200000,
-        EndTime = 1667996208428,
-        Limit = 20,
-        Offset = 0,
-        SelectedFields = new[]
-        {
-            "terraform",
-        },
-        SortField = "ProbeTime",
-        TaskIds = new[]
-        {
-            "task-knare1mk",
-        },
-        TaskType = "AnalyzeTaskType_Network",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cat"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cat.GetProbeData(ctx, &cat.GetProbeDataArgs{
-			Ascending: true,
+		_, err := cat.GetProbeData(ctx, &cat.GetProbeDataArgs{
 			BeginTime: 1667923200000,
 			EndTime:   1667996208428,
-			Limit:     20,
-			Offset:    0,
+			TaskType:  "AnalyzeTaskType_Network",
+			SortField: "ProbeTime",
+			Ascending: true,
 			SelectedFields: []string{
 				"terraform",
 			},
-			SortField: "ProbeTime",
+			Offset: 0,
+			Limit:  20,
 			TaskIds: []string{
 				"task-knare1mk",
 			},
-			TaskType: "AnalyzeTaskType_Network",
 		}, nil)
 		if err != nil {
 			return err
@@ -108,6 +96,45 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var probeData = Tencentcloud.Cat.GetProbeData.Invoke(new()
+    {
+        BeginTime = 1667923200000,
+        EndTime = 1667996208428,
+        TaskType = "AnalyzeTaskType_Network",
+        SortField = "ProbeTime",
+        Ascending = true,
+        SelectedFields = new[]
+        {
+            "terraform",
+        },
+        Offset = 0,
+        Limit = 20,
+        TaskIds = new[]
+        {
+            "task-knare1mk",
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -116,8 +143,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cat.CatFunctions;
 import com.pulumi.tencentcloud.Cat.inputs.GetProbeDataArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -130,40 +157,78 @@ public class App {
 
     public static void stack(Context ctx) {
         final var probeData = CatFunctions.getProbeData(GetProbeDataArgs.builder()
-            .ascending(true)
             .beginTime(1667923200000)
             .endTime(1667996208428)
-            .limit(20)
-            .offset(0)
-            .selectedFields("terraform")
-            .sortField("ProbeTime")
-            .taskIds("task-knare1mk")
             .taskType("AnalyzeTaskType_Network")
+            .sortField("ProbeTime")
+            .ascending(true)
+            .selectedFields("terraform")
+            .offset(0)
+            .limit(20)
+            .taskIds("task-knare1mk")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   probeData:
     fn::invoke:
-      Function: tencentcloud:Cat:getProbeData
-      Arguments:
-        ascending: true
+      function: tencentcloud:Cat:getProbeData
+      arguments:
         beginTime: 1.6679232e+12
         endTime: 1.667996208428e+12
-        limit: 20
-        offset: 0
+        taskType: AnalyzeTaskType_Network
+        sortField: ProbeTime
+        ascending: true
         selectedFields:
           - terraform
-        sortField: ProbeTime
+        offset: 0
+        limit: 20
         taskIds:
           - task-knare1mk
-        taskType: AnalyzeTaskType_Network
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cat_getprobedata" "probeData" {
+  begin_time      = 1667923200000
+  end_time        = 1667996208428
+  task_type       = "AnalyzeTaskType_Network"
+  sort_field      = "ProbeTime"
+  ascending       = true
+  selected_fields = ["terraform"]
+  offset          = 0
+  limit           = 20
+  task_ids        = ["task-knare1mk"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDetailedSingleProbeData](https://www.tencentcloud.com/search/?wd=DescribeDetailedSingleProbeData&type=document&lang=en)
 
 
 
@@ -175,7 +240,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -183,9 +248,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getProbeData<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProbeDataArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProbeDataResult</a></span>></span
+><span class="k">function </span>getProbeData<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProbeDataArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetProbeDataResult</a></span>></span
 ><span class="k">
-function </span>getProbeDataOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProbeDataOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProbeDataResult</a></span>></span
+function </span>getProbeDataOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetProbeDataOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetProbeDataResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -211,22 +276,22 @@ function </span>getProbeDataOutput<span class="p">(</span><span class="nx">args<
                    <span class="nx">task_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetProbeDataResult</span
 ><span class="k">
-def </span>get_probe_data_output<span class="p">(</span><span class="nx">ascending</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[bool]]</span> = None<span class="p">,</span>
-                   <span class="nx">begin_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                   <span class="nx">cities</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                   <span class="nx">codes</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                   <span class="nx">districts</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                   <span class="nx">end_time</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                   <span class="nx">error_types</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                   <span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                   <span class="nx">offset</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                   <span class="nx">operators</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">selected_fields</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                   <span class="nx">sort_field</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">task_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                   <span class="nx">task_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProbeDataResult]</span
+def </span>get_probe_data_output<span class="p">(</span><span class="nx">ascending</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[bool]]</span> = None<span class="p">,</span>
+                   <span class="nx">begin_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                   <span class="nx">cities</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                   <span class="nx">codes</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                   <span class="nx">districts</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                   <span class="nx">end_time</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                   <span class="nx">error_types</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                   <span class="nx">limit</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                   <span class="nx">offset</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                   <span class="nx">operators</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">selected_fields</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                   <span class="nx">sort_field</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">task_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                   <span class="nx">task_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetProbeDataResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -251,7 +316,8 @@ func </span>GetProbeDataOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetProbeData </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetProbeDataResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetProbeDataArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetProbeDataResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProbeDataInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProbeDataResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProbeDataInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetProbeDataResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetProbeDataInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -260,7 +326,8 @@ func </span>GetProbeDataOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetProbeDataResult</a></span>> </span>getProbeData<span class="p">(</span><span class="nx">GetProbeDataArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProbeDataResult</a></span>> </span>getProbeData<span class="p">(</span><span class="nx">GetProbeDataArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetProbeDataResult</a></span>> </span>getProbeData<span class="p">(</span><span class="nx">GetProbeDataArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -272,6 +339,15 @@ func </span>GetProbeDataOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cat/getProbeData:getProbeData
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cat_get_probe_data&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -290,8 +366,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>true is Ascending.</p>
-</dd><dt class="property-required"
+    <dd>true is Ascending.</dd><dt class="property-required"
             title="Required">
         <span id="begintime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begintime_csharp" style="color: inherit; text-decoration: inherit;">Begin<wbr>Time</a>
@@ -299,8 +374,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start timestamp (in milliseconds).</p>
-</dd><dt class="property-required"
+    <dd>Start timestamp (in milliseconds).</dd><dt class="property-required"
             title="Required">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -308,8 +382,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End timestamp (in milliseconds).</p>
-</dd><dt class="property-required"
+    <dd>End timestamp (in milliseconds).</dd><dt class="property-required"
             title="Required">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -317,8 +390,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Limit.</p>
-</dd><dt class="property-required"
+    <dd>Limit.</dd><dt class="property-required"
             title="Required">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -326,8 +398,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset.</p>
-</dd><dt class="property-required"
+    <dd>Offset.</dd><dt class="property-required"
             title="Required">
         <span id="selectedfields_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#selectedfields_csharp" style="color: inherit; text-decoration: inherit;">Selected<wbr>Fields</a>
@@ -335,8 +406,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Selected Fields.</p>
-</dd><dt class="property-required"
+    <dd>Selected Fields.</dd><dt class="property-required"
             title="Required">
         <span id="sortfield_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sortfield_csharp" style="color: inherit; text-decoration: inherit;">Sort<wbr>Field</a>
@@ -344,8 +414,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fields to be sorted ProbeTime dial test time sorting can be filled in You can also fill in the selected fields in SelectedFields.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be sorted ProbeTime dial test time sorting can be filled in You can also fill in the selected fields in SelectedFields.</dd><dt class="property-required"
             title="Required">
         <span id="tasktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktype_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Type</a>
@@ -353,8 +422,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task Type in AnalyzeTaskType_Network,AnalyzeTaskType_Browse,AnalyzeTaskType_UploadDownload,AnalyzeTaskType_Transport,AnalyzeTaskType_MediaStream.</p>
-</dd><dt class="property-optional"
+    <dd>Task Type in AnalyzeTaskType_Network,AnalyzeTaskType_Browse,AnalyzeTaskType_UploadDownload,AnalyzeTaskType_Transport,AnalyzeTaskType_MediaStream.</dd><dt class="property-optional"
             title="Optional">
         <span id="cities_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cities_csharp" style="color: inherit; text-decoration: inherit;">Cities</a>
@@ -362,8 +430,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>City list.</p>
-</dd><dt class="property-optional"
+    <dd>City list.</dd><dt class="property-optional"
             title="Optional">
         <span id="codes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codes_csharp" style="color: inherit; text-decoration: inherit;">Codes</a>
@@ -371,8 +438,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Code list.</p>
-</dd><dt class="property-optional"
+    <dd>Code list.</dd><dt class="property-optional"
             title="Optional">
         <span id="districts_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#districts_csharp" style="color: inherit; text-decoration: inherit;">Districts</a>
@@ -380,8 +446,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Districts list.</p>
-</dd><dt class="property-optional"
+    <dd>Districts list.</dd><dt class="property-optional"
             title="Optional">
         <span id="errortypes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errortypes_csharp" style="color: inherit; text-decoration: inherit;">Error<wbr>Types</a>
@@ -389,8 +454,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ErrorTypes list.</p>
-</dd><dt class="property-optional"
+    <dd>ErrorTypes list.</dd><dt class="property-optional"
             title="Optional">
         <span id="operators_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operators_csharp" style="color: inherit; text-decoration: inherit;">Operators</a>
@@ -398,8 +462,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Operators list.</p>
-</dd><dt class="property-optional"
+    <dd>Operators list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -407,8 +470,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskids_csharp" style="color: inherit; text-decoration: inherit;">Task<wbr>Ids</a>
@@ -416,8 +478,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>TaskID list.</p>
-</dd></dl>
+    <dd>TaskID list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -431,8 +492,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>true is Ascending.</p>
-</dd><dt class="property-required"
+    <dd>true is Ascending.</dd><dt class="property-required"
             title="Required">
         <span id="begintime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begintime_go" style="color: inherit; text-decoration: inherit;">Begin<wbr>Time</a>
@@ -440,8 +500,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start timestamp (in milliseconds).</p>
-</dd><dt class="property-required"
+    <dd>Start timestamp (in milliseconds).</dd><dt class="property-required"
             title="Required">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -449,8 +508,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End timestamp (in milliseconds).</p>
-</dd><dt class="property-required"
+    <dd>End timestamp (in milliseconds).</dd><dt class="property-required"
             title="Required">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -458,8 +516,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Limit.</p>
-</dd><dt class="property-required"
+    <dd>Limit.</dd><dt class="property-required"
             title="Required">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -467,8 +524,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset.</p>
-</dd><dt class="property-required"
+    <dd>Offset.</dd><dt class="property-required"
             title="Required">
         <span id="selectedfields_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#selectedfields_go" style="color: inherit; text-decoration: inherit;">Selected<wbr>Fields</a>
@@ -476,8 +532,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Selected Fields.</p>
-</dd><dt class="property-required"
+    <dd>Selected Fields.</dd><dt class="property-required"
             title="Required">
         <span id="sortfield_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sortfield_go" style="color: inherit; text-decoration: inherit;">Sort<wbr>Field</a>
@@ -485,8 +540,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fields to be sorted ProbeTime dial test time sorting can be filled in You can also fill in the selected fields in SelectedFields.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be sorted ProbeTime dial test time sorting can be filled in You can also fill in the selected fields in SelectedFields.</dd><dt class="property-required"
             title="Required">
         <span id="tasktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktype_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Type</a>
@@ -494,8 +548,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task Type in AnalyzeTaskType_Network,AnalyzeTaskType_Browse,AnalyzeTaskType_UploadDownload,AnalyzeTaskType_Transport,AnalyzeTaskType_MediaStream.</p>
-</dd><dt class="property-optional"
+    <dd>Task Type in AnalyzeTaskType_Network,AnalyzeTaskType_Browse,AnalyzeTaskType_UploadDownload,AnalyzeTaskType_Transport,AnalyzeTaskType_MediaStream.</dd><dt class="property-optional"
             title="Optional">
         <span id="cities_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cities_go" style="color: inherit; text-decoration: inherit;">Cities</a>
@@ -503,8 +556,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>City list.</p>
-</dd><dt class="property-optional"
+    <dd>City list.</dd><dt class="property-optional"
             title="Optional">
         <span id="codes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codes_go" style="color: inherit; text-decoration: inherit;">Codes</a>
@@ -512,8 +564,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Code list.</p>
-</dd><dt class="property-optional"
+    <dd>Code list.</dd><dt class="property-optional"
             title="Optional">
         <span id="districts_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#districts_go" style="color: inherit; text-decoration: inherit;">Districts</a>
@@ -521,8 +572,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Districts list.</p>
-</dd><dt class="property-optional"
+    <dd>Districts list.</dd><dt class="property-optional"
             title="Optional">
         <span id="errortypes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errortypes_go" style="color: inherit; text-decoration: inherit;">Error<wbr>Types</a>
@@ -530,8 +580,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ErrorTypes list.</p>
-</dd><dt class="property-optional"
+    <dd>ErrorTypes list.</dd><dt class="property-optional"
             title="Optional">
         <span id="operators_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operators_go" style="color: inherit; text-decoration: inherit;">Operators</a>
@@ -539,8 +588,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Operators list.</p>
-</dd><dt class="property-optional"
+    <dd>Operators list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -548,8 +596,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskids_go" style="color: inherit; text-decoration: inherit;">Task<wbr>Ids</a>
@@ -557,8 +604,133 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>TaskID list.</p>
-</dd></dl>
+    <dd>TaskID list.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="ascending_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ascending_hcl" style="color: inherit; text-decoration: inherit;">ascending</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>true is Ascending.</dd><dt class="property-required"
+            title="Required">
+        <span id="begin_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begin_time_hcl" style="color: inherit; text-decoration: inherit;">begin_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Start timestamp (in milliseconds).</dd><dt class="property-required"
+            title="Required">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>End timestamp (in milliseconds).</dd><dt class="property-required"
+            title="Required">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Limit.</dd><dt class="property-required"
+            title="Required">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Offset.</dd><dt class="property-required"
+            title="Required">
+        <span id="selected_fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#selected_fields_hcl" style="color: inherit; text-decoration: inherit;">selected_<wbr>fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Selected Fields.</dd><dt class="property-required"
+            title="Required">
+        <span id="sort_field_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_field_hcl" style="color: inherit; text-decoration: inherit;">sort_<wbr>field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Fields to be sorted ProbeTime dial test time sorting can be filled in You can also fill in the selected fields in SelectedFields.</dd><dt class="property-required"
+            title="Required">
+        <span id="task_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_type_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Task Type in AnalyzeTaskType_Network,AnalyzeTaskType_Browse,AnalyzeTaskType_UploadDownload,AnalyzeTaskType_Transport,AnalyzeTaskType_MediaStream.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="cities_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cities_hcl" style="color: inherit; text-decoration: inherit;">cities</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>City list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="codes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codes_hcl" style="color: inherit; text-decoration: inherit;">codes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Code list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="districts_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#districts_hcl" style="color: inherit; text-decoration: inherit;">districts</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Districts list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="error_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_types_hcl" style="color: inherit; text-decoration: inherit;">error_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ErrorTypes list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="operators_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operators_hcl" style="color: inherit; text-decoration: inherit;">operators</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Operators list.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="task_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_ids_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>TaskID list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -572,8 +744,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>true is Ascending.</p>
-</dd><dt class="property-required"
+    <dd>true is Ascending.</dd><dt class="property-required"
             title="Required">
         <span id="begintime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begintime_java" style="color: inherit; text-decoration: inherit;">begin<wbr>Time</a>
@@ -581,8 +752,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Start timestamp (in milliseconds).</p>
-</dd><dt class="property-required"
+    <dd>Start timestamp (in milliseconds).</dd><dt class="property-required"
             title="Required">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -590,8 +760,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>End timestamp (in milliseconds).</p>
-</dd><dt class="property-required"
+    <dd>End timestamp (in milliseconds).</dd><dt class="property-required"
             title="Required">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -599,8 +768,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Limit.</p>
-</dd><dt class="property-required"
+    <dd>Limit.</dd><dt class="property-required"
             title="Required">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -608,8 +776,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Offset.</p>
-</dd><dt class="property-required"
+    <dd>Offset.</dd><dt class="property-required"
             title="Required">
         <span id="selectedfields_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#selectedfields_java" style="color: inherit; text-decoration: inherit;">selected<wbr>Fields</a>
@@ -617,8 +784,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Selected Fields.</p>
-</dd><dt class="property-required"
+    <dd>Selected Fields.</dd><dt class="property-required"
             title="Required">
         <span id="sortfield_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sortfield_java" style="color: inherit; text-decoration: inherit;">sort<wbr>Field</a>
@@ -626,8 +792,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fields to be sorted ProbeTime dial test time sorting can be filled in You can also fill in the selected fields in SelectedFields.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be sorted ProbeTime dial test time sorting can be filled in You can also fill in the selected fields in SelectedFields.</dd><dt class="property-required"
             title="Required">
         <span id="tasktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktype_java" style="color: inherit; text-decoration: inherit;">task<wbr>Type</a>
@@ -635,8 +800,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task Type in AnalyzeTaskType_Network,AnalyzeTaskType_Browse,AnalyzeTaskType_UploadDownload,AnalyzeTaskType_Transport,AnalyzeTaskType_MediaStream.</p>
-</dd><dt class="property-optional"
+    <dd>Task Type in AnalyzeTaskType_Network,AnalyzeTaskType_Browse,AnalyzeTaskType_UploadDownload,AnalyzeTaskType_Transport,AnalyzeTaskType_MediaStream.</dd><dt class="property-optional"
             title="Optional">
         <span id="cities_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cities_java" style="color: inherit; text-decoration: inherit;">cities</a>
@@ -644,8 +808,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>City list.</p>
-</dd><dt class="property-optional"
+    <dd>City list.</dd><dt class="property-optional"
             title="Optional">
         <span id="codes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codes_java" style="color: inherit; text-decoration: inherit;">codes</a>
@@ -653,8 +816,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Code list.</p>
-</dd><dt class="property-optional"
+    <dd>Code list.</dd><dt class="property-optional"
             title="Optional">
         <span id="districts_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#districts_java" style="color: inherit; text-decoration: inherit;">districts</a>
@@ -662,8 +824,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Districts list.</p>
-</dd><dt class="property-optional"
+    <dd>Districts list.</dd><dt class="property-optional"
             title="Optional">
         <span id="errortypes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errortypes_java" style="color: inherit; text-decoration: inherit;">error<wbr>Types</a>
@@ -671,8 +832,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ErrorTypes list.</p>
-</dd><dt class="property-optional"
+    <dd>ErrorTypes list.</dd><dt class="property-optional"
             title="Optional">
         <span id="operators_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operators_java" style="color: inherit; text-decoration: inherit;">operators</a>
@@ -680,8 +840,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Operators list.</p>
-</dd><dt class="property-optional"
+    <dd>Operators list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -689,8 +848,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskids_java" style="color: inherit; text-decoration: inherit;">task<wbr>Ids</a>
@@ -698,8 +856,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>TaskID list.</p>
-</dd></dl>
+    <dd>TaskID list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -713,8 +870,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>true is Ascending.</p>
-</dd><dt class="property-required"
+    <dd>true is Ascending.</dd><dt class="property-required"
             title="Required">
         <span id="begintime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begintime_nodejs" style="color: inherit; text-decoration: inherit;">begin<wbr>Time</a>
@@ -722,8 +878,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Start timestamp (in milliseconds).</p>
-</dd><dt class="property-required"
+    <dd>Start timestamp (in milliseconds).</dd><dt class="property-required"
             title="Required">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -731,8 +886,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>End timestamp (in milliseconds).</p>
-</dd><dt class="property-required"
+    <dd>End timestamp (in milliseconds).</dd><dt class="property-required"
             title="Required">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -740,8 +894,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Limit.</p>
-</dd><dt class="property-required"
+    <dd>Limit.</dd><dt class="property-required"
             title="Required">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -749,8 +902,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Offset.</p>
-</dd><dt class="property-required"
+    <dd>Offset.</dd><dt class="property-required"
             title="Required">
         <span id="selectedfields_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#selectedfields_nodejs" style="color: inherit; text-decoration: inherit;">selected<wbr>Fields</a>
@@ -758,8 +910,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Selected Fields.</p>
-</dd><dt class="property-required"
+    <dd>Selected Fields.</dd><dt class="property-required"
             title="Required">
         <span id="sortfield_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sortfield_nodejs" style="color: inherit; text-decoration: inherit;">sort<wbr>Field</a>
@@ -767,8 +918,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Fields to be sorted ProbeTime dial test time sorting can be filled in You can also fill in the selected fields in SelectedFields.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be sorted ProbeTime dial test time sorting can be filled in You can also fill in the selected fields in SelectedFields.</dd><dt class="property-required"
             title="Required">
         <span id="tasktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktype_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Type</a>
@@ -776,8 +926,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Task Type in AnalyzeTaskType_Network,AnalyzeTaskType_Browse,AnalyzeTaskType_UploadDownload,AnalyzeTaskType_Transport,AnalyzeTaskType_MediaStream.</p>
-</dd><dt class="property-optional"
+    <dd>Task Type in AnalyzeTaskType_Network,AnalyzeTaskType_Browse,AnalyzeTaskType_UploadDownload,AnalyzeTaskType_Transport,AnalyzeTaskType_MediaStream.</dd><dt class="property-optional"
             title="Optional">
         <span id="cities_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cities_nodejs" style="color: inherit; text-decoration: inherit;">cities</a>
@@ -785,8 +934,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>City list.</p>
-</dd><dt class="property-optional"
+    <dd>City list.</dd><dt class="property-optional"
             title="Optional">
         <span id="codes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codes_nodejs" style="color: inherit; text-decoration: inherit;">codes</a>
@@ -794,8 +942,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Code list.</p>
-</dd><dt class="property-optional"
+    <dd>Code list.</dd><dt class="property-optional"
             title="Optional">
         <span id="districts_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#districts_nodejs" style="color: inherit; text-decoration: inherit;">districts</a>
@@ -803,8 +950,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Districts list.</p>
-</dd><dt class="property-optional"
+    <dd>Districts list.</dd><dt class="property-optional"
             title="Optional">
         <span id="errortypes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errortypes_nodejs" style="color: inherit; text-decoration: inherit;">error<wbr>Types</a>
@@ -812,8 +958,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ErrorTypes list.</p>
-</dd><dt class="property-optional"
+    <dd>ErrorTypes list.</dd><dt class="property-optional"
             title="Optional">
         <span id="operators_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operators_nodejs" style="color: inherit; text-decoration: inherit;">operators</a>
@@ -821,8 +966,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Operators list.</p>
-</dd><dt class="property-optional"
+    <dd>Operators list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -830,8 +974,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskids_nodejs" style="color: inherit; text-decoration: inherit;">task<wbr>Ids</a>
@@ -839,8 +982,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>TaskID list.</p>
-</dd></dl>
+    <dd>TaskID list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -854,8 +996,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>true is Ascending.</p>
-</dd><dt class="property-required"
+    <dd>true is Ascending.</dd><dt class="property-required"
             title="Required">
         <span id="begin_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begin_time_python" style="color: inherit; text-decoration: inherit;">begin_<wbr>time</a>
@@ -863,8 +1004,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Start timestamp (in milliseconds).</p>
-</dd><dt class="property-required"
+    <dd>Start timestamp (in milliseconds).</dd><dt class="property-required"
             title="Required">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -872,8 +1012,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>End timestamp (in milliseconds).</p>
-</dd><dt class="property-required"
+    <dd>End timestamp (in milliseconds).</dd><dt class="property-required"
             title="Required">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -881,8 +1020,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Limit.</p>
-</dd><dt class="property-required"
+    <dd>Limit.</dd><dt class="property-required"
             title="Required">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -890,8 +1028,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Offset.</p>
-</dd><dt class="property-required"
+    <dd>Offset.</dd><dt class="property-required"
             title="Required">
         <span id="selected_fields_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#selected_fields_python" style="color: inherit; text-decoration: inherit;">selected_<wbr>fields</a>
@@ -899,8 +1036,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Selected Fields.</p>
-</dd><dt class="property-required"
+    <dd>Selected Fields.</dd><dt class="property-required"
             title="Required">
         <span id="sort_field_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_field_python" style="color: inherit; text-decoration: inherit;">sort_<wbr>field</a>
@@ -908,8 +1044,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Fields to be sorted ProbeTime dial test time sorting can be filled in You can also fill in the selected fields in SelectedFields.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be sorted ProbeTime dial test time sorting can be filled in You can also fill in the selected fields in SelectedFields.</dd><dt class="property-required"
             title="Required">
         <span id="task_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_type_python" style="color: inherit; text-decoration: inherit;">task_<wbr>type</a>
@@ -917,8 +1052,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Task Type in AnalyzeTaskType_Network,AnalyzeTaskType_Browse,AnalyzeTaskType_UploadDownload,AnalyzeTaskType_Transport,AnalyzeTaskType_MediaStream.</p>
-</dd><dt class="property-optional"
+    <dd>Task Type in AnalyzeTaskType_Network,AnalyzeTaskType_Browse,AnalyzeTaskType_UploadDownload,AnalyzeTaskType_Transport,AnalyzeTaskType_MediaStream.</dd><dt class="property-optional"
             title="Optional">
         <span id="cities_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cities_python" style="color: inherit; text-decoration: inherit;">cities</a>
@@ -926,8 +1060,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>City list.</p>
-</dd><dt class="property-optional"
+    <dd>City list.</dd><dt class="property-optional"
             title="Optional">
         <span id="codes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codes_python" style="color: inherit; text-decoration: inherit;">codes</a>
@@ -935,8 +1068,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Code list.</p>
-</dd><dt class="property-optional"
+    <dd>Code list.</dd><dt class="property-optional"
             title="Optional">
         <span id="districts_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#districts_python" style="color: inherit; text-decoration: inherit;">districts</a>
@@ -944,8 +1076,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Districts list.</p>
-</dd><dt class="property-optional"
+    <dd>Districts list.</dd><dt class="property-optional"
             title="Optional">
         <span id="error_types_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_types_python" style="color: inherit; text-decoration: inherit;">error_<wbr>types</a>
@@ -953,8 +1084,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ErrorTypes list.</p>
-</dd><dt class="property-optional"
+    <dd>ErrorTypes list.</dd><dt class="property-optional"
             title="Optional">
         <span id="operators_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operators_python" style="color: inherit; text-decoration: inherit;">operators</a>
@@ -962,8 +1092,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Operators list.</p>
-</dd><dt class="property-optional"
+    <dd>Operators list.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -971,8 +1100,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="task_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_ids_python" style="color: inherit; text-decoration: inherit;">task_<wbr>ids</a>
@@ -980,8 +1108,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>TaskID list.</p>
-</dd></dl>
+    <dd>TaskID list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -995,8 +1122,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>true is Ascending.</p>
-</dd><dt class="property-required"
+    <dd>true is Ascending.</dd><dt class="property-required"
             title="Required">
         <span id="begintime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begintime_yaml" style="color: inherit; text-decoration: inherit;">begin<wbr>Time</a>
@@ -1004,8 +1130,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Start timestamp (in milliseconds).</p>
-</dd><dt class="property-required"
+    <dd>Start timestamp (in milliseconds).</dd><dt class="property-required"
             title="Required">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1013,8 +1138,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>End timestamp (in milliseconds).</p>
-</dd><dt class="property-required"
+    <dd>End timestamp (in milliseconds).</dd><dt class="property-required"
             title="Required">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -1022,8 +1146,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Limit.</p>
-</dd><dt class="property-required"
+    <dd>Limit.</dd><dt class="property-required"
             title="Required">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -1031,8 +1154,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Offset.</p>
-</dd><dt class="property-required"
+    <dd>Offset.</dd><dt class="property-required"
             title="Required">
         <span id="selectedfields_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#selectedfields_yaml" style="color: inherit; text-decoration: inherit;">selected<wbr>Fields</a>
@@ -1040,8 +1162,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Selected Fields.</p>
-</dd><dt class="property-required"
+    <dd>Selected Fields.</dd><dt class="property-required"
             title="Required">
         <span id="sortfield_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sortfield_yaml" style="color: inherit; text-decoration: inherit;">sort<wbr>Field</a>
@@ -1049,8 +1170,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Fields to be sorted ProbeTime dial test time sorting can be filled in You can also fill in the selected fields in SelectedFields.</p>
-</dd><dt class="property-required"
+    <dd>Fields to be sorted ProbeTime dial test time sorting can be filled in You can also fill in the selected fields in SelectedFields.</dd><dt class="property-required"
             title="Required">
         <span id="tasktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tasktype_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Type</a>
@@ -1058,8 +1178,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Task Type in AnalyzeTaskType_Network,AnalyzeTaskType_Browse,AnalyzeTaskType_UploadDownload,AnalyzeTaskType_Transport,AnalyzeTaskType_MediaStream.</p>
-</dd><dt class="property-optional"
+    <dd>Task Type in AnalyzeTaskType_Network,AnalyzeTaskType_Browse,AnalyzeTaskType_UploadDownload,AnalyzeTaskType_Transport,AnalyzeTaskType_MediaStream.</dd><dt class="property-optional"
             title="Optional">
         <span id="cities_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cities_yaml" style="color: inherit; text-decoration: inherit;">cities</a>
@@ -1067,8 +1186,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>City list.</p>
-</dd><dt class="property-optional"
+    <dd>City list.</dd><dt class="property-optional"
             title="Optional">
         <span id="codes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codes_yaml" style="color: inherit; text-decoration: inherit;">codes</a>
@@ -1076,8 +1194,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Code list.</p>
-</dd><dt class="property-optional"
+    <dd>Code list.</dd><dt class="property-optional"
             title="Optional">
         <span id="districts_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#districts_yaml" style="color: inherit; text-decoration: inherit;">districts</a>
@@ -1085,8 +1202,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Districts list.</p>
-</dd><dt class="property-optional"
+    <dd>Districts list.</dd><dt class="property-optional"
             title="Optional">
         <span id="errortypes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#errortypes_yaml" style="color: inherit; text-decoration: inherit;">error<wbr>Types</a>
@@ -1094,8 +1210,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ErrorTypes list.</p>
-</dd><dt class="property-optional"
+    <dd>ErrorTypes list.</dd><dt class="property-optional"
             title="Optional">
         <span id="operators_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operators_yaml" style="color: inherit; text-decoration: inherit;">operators</a>
@@ -1103,8 +1218,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Operators list.</p>
-</dd><dt class="property-optional"
+    <dd>Operators list.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1112,8 +1226,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to save results.</dd><dt class="property-optional"
             title="Optional">
         <span id="taskids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#taskids_yaml" style="color: inherit; text-decoration: inherit;">task<wbr>Ids</a>
@@ -1121,8 +1234,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>TaskID list.</p>
-</dd></dl>
+    <dd>TaskID list.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1161,8 +1273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprobedatadetailedsingledatadefine">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cat.<wbr>Outputs.<wbr>Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define&gt;</a></span>
     </dt>
-    <dd><p>Probe node list.</p>
-</dd><dt class="property-"
+    <dd>Probe node list.</dd><dt class="property-"
             title="">
         <span id="endtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_csharp" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -1178,8 +1289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -1305,8 +1415,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprobedatadetailedsingledatadefine">[]Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define</a></span>
     </dt>
-    <dd><p>Probe node list.</p>
-</dd><dt class="property-"
+    <dd>Probe node list.</dd><dt class="property-"
             title="">
         <span id="endtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_go" style="color: inherit; text-decoration: inherit;">End<wbr>Time</a>
@@ -1322,8 +1431,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -1424,6 +1532,148 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="ascending_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ascending_hcl" style="color: inherit; text-decoration: inherit;">ascending</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="begin_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#begin_time_hcl" style="color: inherit; text-decoration: inherit;">begin_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="detailed_single_data_defines_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detailed_single_data_defines_hcl" style="color: inherit; text-decoration: inherit;">detailed_<wbr>single_<wbr>data_<wbr>defines</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getprobedatadetailedsingledatadefine">list(object)</a></span>
+    </dt>
+    <dd>Probe node list.</dd><dt class="property-"
+            title="">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="selected_fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#selected_fields_hcl" style="color: inherit; text-decoration: inherit;">selected_<wbr>fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="sort_field_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sort_field_hcl" style="color: inherit; text-decoration: inherit;">sort_<wbr>field</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="task_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_type_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="cities_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cities_hcl" style="color: inherit; text-decoration: inherit;">cities</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="codes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#codes_hcl" style="color: inherit; text-decoration: inherit;">codes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="districts_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#districts_hcl" style="color: inherit; text-decoration: inherit;">districts</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="error_types_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#error_types_hcl" style="color: inherit; text-decoration: inherit;">error_<wbr>types</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="operators_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#operators_hcl" style="color: inherit; text-decoration: inherit;">operators</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="task_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#task_ids_hcl" style="color: inherit; text-decoration: inherit;">task_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -1449,8 +1699,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprobedatadetailedsingledatadefine">List&lt;Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define&gt;</a></span>
     </dt>
-    <dd><p>Probe node list.</p>
-</dd><dt class="property-"
+    <dd>Probe node list.</dd><dt class="property-"
             title="">
         <span id="endtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_java" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1466,8 +1715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -1593,8 +1841,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprobedatadetailedsingledatadefine">Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define[]</a></span>
     </dt>
-    <dd><p>Probe node list.</p>
-</dd><dt class="property-"
+    <dd>Probe node list.</dd><dt class="property-"
             title="">
         <span id="endtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_nodejs" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1610,8 +1857,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -1735,10 +1981,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detailed_single_data_defines_python" style="color: inherit; text-decoration: inherit;">detailed_<wbr>single_<wbr>data_<wbr>defines</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getprobedatadetailedsingledatadefine">Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define]</a></span>
+        <span class="property-type"><a href="#getprobedatadetailedsingledatadefine">Sequence[Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define]</a></span>
     </dt>
-    <dd><p>Probe node list.</p>
-</dd><dt class="property-"
+    <dd>Probe node list.</dd><dt class="property-"
             title="">
         <span id="end_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_python" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
@@ -1754,8 +1999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -1881,8 +2125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprobedatadetailedsingledatadefine">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Probe node list.</p>
-</dd><dt class="property-"
+    <dd>Probe node list.</dd><dt class="property-"
             title="">
         <span id="endtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#endtime_yaml" style="color: inherit; text-decoration: inherit;">end<wbr>Time</a>
@@ -1898,8 +2141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -2019,8 +2261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprobedatadetailedsingledatadefinefield">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cat.<wbr>Inputs.<wbr>Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define<wbr>Field&gt;</a></span>
     </dt>
-    <dd><p>Fields.</p>
-</dd><dt class="property-required"
+    <dd>Fields.</dd><dt class="property-required"
             title="Required">
         <span id="labels_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_csharp" style="color: inherit; text-decoration: inherit;">Labels</a>
@@ -2028,8 +2269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprobedatadetailedsingledatadefinelabel">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cat.<wbr>Inputs.<wbr>Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define<wbr>Label&gt;</a></span>
     </dt>
-    <dd><p>Labels.</p>
-</dd><dt class="property-required"
+    <dd>Labels.</dd><dt class="property-required"
             title="Required">
         <span id="probetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probetime_csharp" style="color: inherit; text-decoration: inherit;">Probe<wbr>Time</a>
@@ -2037,8 +2277,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Probe time.</p>
-</dd></dl>
+    <dd>Probe time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2052,8 +2291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprobedatadetailedsingledatadefinefield">[]Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define<wbr>Field</a></span>
     </dt>
-    <dd><p>Fields.</p>
-</dd><dt class="property-required"
+    <dd>Fields.</dd><dt class="property-required"
             title="Required">
         <span id="labels_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_go" style="color: inherit; text-decoration: inherit;">Labels</a>
@@ -2061,8 +2299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprobedatadetailedsingledatadefinelabel">[]Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define<wbr>Label</a></span>
     </dt>
-    <dd><p>Labels.</p>
-</dd><dt class="property-required"
+    <dd>Labels.</dd><dt class="property-required"
             title="Required">
         <span id="probetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probetime_go" style="color: inherit; text-decoration: inherit;">Probe<wbr>Time</a>
@@ -2070,8 +2307,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Probe time.</p>
-</dd></dl>
+    <dd>Probe time.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fields_hcl" style="color: inherit; text-decoration: inherit;">fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getprobedatadetailedsingledatadefinefield">list(object)</a></span>
+    </dt>
+    <dd>Fields.</dd><dt class="property-required"
+            title="Required">
+        <span id="labels_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_hcl" style="color: inherit; text-decoration: inherit;">labels</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getprobedatadetailedsingledatadefinelabel">list(object)</a></span>
+    </dt>
+    <dd>Labels.</dd><dt class="property-required"
+            title="Required">
+        <span id="probe_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probe_time_hcl" style="color: inherit; text-decoration: inherit;">probe_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Probe time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2085,8 +2351,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprobedatadetailedsingledatadefinefield">List&lt;Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define<wbr>Field&gt;</a></span>
     </dt>
-    <dd><p>Fields.</p>
-</dd><dt class="property-required"
+    <dd>Fields.</dd><dt class="property-required"
             title="Required">
         <span id="labels_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_java" style="color: inherit; text-decoration: inherit;">labels</a>
@@ -2094,8 +2359,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprobedatadetailedsingledatadefinelabel">List&lt;Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define<wbr>Label&gt;</a></span>
     </dt>
-    <dd><p>Labels.</p>
-</dd><dt class="property-required"
+    <dd>Labels.</dd><dt class="property-required"
             title="Required">
         <span id="probetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probetime_java" style="color: inherit; text-decoration: inherit;">probe<wbr>Time</a>
@@ -2103,8 +2367,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Probe time.</p>
-</dd></dl>
+    <dd>Probe time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2118,8 +2381,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprobedatadetailedsingledatadefinefield">Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define<wbr>Field[]</a></span>
     </dt>
-    <dd><p>Fields.</p>
-</dd><dt class="property-required"
+    <dd>Fields.</dd><dt class="property-required"
             title="Required">
         <span id="labels_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_nodejs" style="color: inherit; text-decoration: inherit;">labels</a>
@@ -2127,8 +2389,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprobedatadetailedsingledatadefinelabel">Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define<wbr>Label[]</a></span>
     </dt>
-    <dd><p>Labels.</p>
-</dd><dt class="property-required"
+    <dd>Labels.</dd><dt class="property-required"
             title="Required">
         <span id="probetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probetime_nodejs" style="color: inherit; text-decoration: inherit;">probe<wbr>Time</a>
@@ -2136,8 +2397,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Probe time.</p>
-</dd></dl>
+    <dd>Probe time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2149,19 +2409,17 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fields_python" style="color: inherit; text-decoration: inherit;">fields</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getprobedatadetailedsingledatadefinefield">Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define<wbr>Field]</a></span>
+        <span class="property-type"><a href="#getprobedatadetailedsingledatadefinefield">Sequence[Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define<wbr>Field]</a></span>
     </dt>
-    <dd><p>Fields.</p>
-</dd><dt class="property-required"
+    <dd>Fields.</dd><dt class="property-required"
             title="Required">
         <span id="labels_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_python" style="color: inherit; text-decoration: inherit;">labels</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getprobedatadetailedsingledatadefinelabel">Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define<wbr>Label]</a></span>
+        <span class="property-type"><a href="#getprobedatadetailedsingledatadefinelabel">Sequence[Get<wbr>Probe<wbr>Data<wbr>Detailed<wbr>Single<wbr>Data<wbr>Define<wbr>Label]</a></span>
     </dt>
-    <dd><p>Labels.</p>
-</dd><dt class="property-required"
+    <dd>Labels.</dd><dt class="property-required"
             title="Required">
         <span id="probe_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probe_time_python" style="color: inherit; text-decoration: inherit;">probe_<wbr>time</a>
@@ -2169,8 +2427,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Probe time.</p>
-</dd></dl>
+    <dd>Probe time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2184,8 +2441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprobedatadetailedsingledatadefinefield">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Fields.</p>
-</dd><dt class="property-required"
+    <dd>Fields.</dd><dt class="property-required"
             title="Required">
         <span id="labels_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#labels_yaml" style="color: inherit; text-decoration: inherit;">labels</a>
@@ -2193,8 +2449,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getprobedatadetailedsingledatadefinelabel">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Labels.</p>
-</dd><dt class="property-required"
+    <dd>Labels.</dd><dt class="property-required"
             title="Required">
         <span id="probetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#probetime_yaml" style="color: inherit; text-decoration: inherit;">probe<wbr>Time</a>
@@ -2202,8 +2457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Probe time.</p>
-</dd></dl>
+    <dd>Probe time.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2221,8 +2475,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID.</p>
-</dd><dt class="property-required"
+    <dd>ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2230,8 +2483,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom Field Name/Description.</p>
-</dd><dt class="property-required"
+    <dd>Custom Field Name/Description.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2239,8 +2491,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">double</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2254,8 +2505,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID.</p>
-</dd><dt class="property-required"
+    <dd>ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2263,8 +2513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom Field Name/Description.</p>
-</dd><dt class="property-required"
+    <dd>Custom Field Name/Description.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2272,8 +2521,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float64</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom Field Name/Description.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2287,8 +2565,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID.</p>
-</dd><dt class="property-required"
+    <dd>ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2296,8 +2573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom Field Name/Description.</p>
-</dd><dt class="property-required"
+    <dd>Custom Field Name/Description.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2305,8 +2581,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Double</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2320,8 +2595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID.</p>
-</dd><dt class="property-required"
+    <dd>ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2329,8 +2603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom Field Name/Description.</p>
-</dd><dt class="property-required"
+    <dd>Custom Field Name/Description.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2338,8 +2611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2353,8 +2625,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID.</p>
-</dd><dt class="property-required"
+    <dd>ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2362,8 +2633,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom Field Name/Description.</p>
-</dd><dt class="property-required"
+    <dd>Custom Field Name/Description.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2371,8 +2641,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">float</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2386,8 +2655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID.</p>
-</dd><dt class="property-required"
+    <dd>ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2395,8 +2663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom Field Name/Description.</p>
-</dd><dt class="property-required"
+    <dd>Custom Field Name/Description.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2404,8 +2671,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2423,8 +2689,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID.</p>
-</dd><dt class="property-required"
+    <dd>ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2432,8 +2697,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom Field Name/Description.</p>
-</dd><dt class="property-required"
+    <dd>Custom Field Name/Description.</dd><dt class="property-required"
             title="Required">
         <span id="value_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_csharp" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2441,8 +2705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2456,8 +2719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID.</p>
-</dd><dt class="property-required"
+    <dd>ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -2465,8 +2727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom Field Name/Description.</p>
-</dd><dt class="property-required"
+    <dd>Custom Field Name/Description.</dd><dt class="property-required"
             title="Required">
         <span id="value_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_go" style="color: inherit; text-decoration: inherit;">Value</a>
@@ -2474,8 +2735,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Custom Field Name/Description.</dd><dt class="property-required"
+            title="Required">
+        <span id="value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_hcl" style="color: inherit; text-decoration: inherit;">value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2489,8 +2779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID.</p>
-</dd><dt class="property-required"
+    <dd>ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2498,8 +2787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom Field Name/Description.</p>
-</dd><dt class="property-required"
+    <dd>Custom Field Name/Description.</dd><dt class="property-required"
             title="Required">
         <span id="value_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_java" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2507,8 +2795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2522,8 +2809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID.</p>
-</dd><dt class="property-required"
+    <dd>ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2531,8 +2817,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Custom Field Name/Description.</p>
-</dd><dt class="property-required"
+    <dd>Custom Field Name/Description.</dd><dt class="property-required"
             title="Required">
         <span id="value_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_nodejs" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2540,8 +2825,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2555,8 +2839,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID.</p>
-</dd><dt class="property-required"
+    <dd>ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2564,8 +2847,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Custom Field Name/Description.</p>
-</dd><dt class="property-required"
+    <dd>Custom Field Name/Description.</dd><dt class="property-required"
             title="Required">
         <span id="value_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_python" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2573,8 +2855,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2588,8 +2869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID.</p>
-</dd><dt class="property-required"
+    <dd>ID.</dd><dt class="property-required"
             title="Required">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -2597,8 +2877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Custom Field Name/Description.</p>
-</dd><dt class="property-required"
+    <dd>Custom Field Name/Description.</dd><dt class="property-required"
             title="Required">
         <span id="value_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#value_yaml" style="color: inherit; text-decoration: inherit;">value</a>
@@ -2606,8 +2885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Value.</p>
-</dd></dl>
+    <dd>Value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2622,7 +2900,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

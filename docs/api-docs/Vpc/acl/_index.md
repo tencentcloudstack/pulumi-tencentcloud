@@ -2,9 +2,11 @@
 ---
 title: "Acl"
 title_tag: "tencentcloud.Vpc.Acl"
-meta_desc: "Documentation for the tencentcloud.Vpc.Acl resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a VPC ACL instance."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,40 +18,103 @@ Provide a resource to create a VPC ACL instance.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
 const example = new tencentcloud.vpc.Acl("example", {
     vpcId: vpc.id,
+    name: "tf-example",
     ingresses: [
         "ACCEPT#192.168.1.0/24#800#TCP",
-        "ACCEPT#192.168.1.0/24#800-900#TCP",
+        "ACCEPT#192.168.1.0/24#800-900#TCP#DESCRIPTION",
     ],
     egresses: [
         "ACCEPT#192.168.1.0/24#800#TCP",
-        "ACCEPT#192.168.1.0/24#800-900#TCP",
+        "ACCEPT#192.168.1.0/24#800-900#TCP#DESCRIPTION",
     ],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
 example = tencentcloud.vpc.Acl("example",
     vpc_id=vpc.id,
+    name="tf-example",
     ingresses=[
         "ACCEPT#192.168.1.0/24#800#TCP",
-        "ACCEPT#192.168.1.0/24#800-900#TCP",
+        "ACCEPT#192.168.1.0/24#800-900#TCP#DESCRIPTION",
     ],
     egresses=[
         "ACCEPT#192.168.1.0/24#800#TCP",
-        "ACCEPT#192.168.1.0/24#800-900#TCP",
+        "ACCEPT#192.168.1.0/24#800-900#TCP#DESCRIPTION",
     ])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = vpc.NewAcl(ctx, "example", &vpc.AclArgs{
+			VpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
+			Name:  pulumi.String("tf-example"),
+			Ingresses: pulumi.StringArray{
+				pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
+				pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP#DESCRIPTION"),
+			},
+			Egresses: pulumi.StringArray{
+				pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
+				pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP#DESCRIPTION"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -60,60 +125,33 @@ return await Deployment.RunAsync(() =>
 {
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-example",
         CidrBlock = "10.0.0.0/16",
     });
 
     var example = new Tencentcloud.Vpc.Acl("example", new()
     {
         VpcId = vpc.Id,
+        Name = "tf-example",
         Ingresses = new[]
         {
             "ACCEPT#192.168.1.0/24#800#TCP",
-            "ACCEPT#192.168.1.0/24#800-900#TCP",
+            "ACCEPT#192.168.1.0/24#800-900#TCP#DESCRIPTION",
         },
         Egresses = new[]
         {
             "ACCEPT#192.168.1.0/24#800#TCP",
-            "ACCEPT#192.168.1.0/24#800-900#TCP",
+            "ACCEPT#192.168.1.0/24#800-900#TCP#DESCRIPTION",
         },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Vpc.NewAcl(ctx, "example", &Vpc.AclArgs{
-			VpcId: vpc.ID(),
-			Ingresses: pulumi.StringArray{
-				pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
-				pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
-			},
-			Egresses: pulumi.StringArray{
-				pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),
-				pulumi.String("ACCEPT#192.168.1.0/24#800-900#TCP"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -124,8 +162,8 @@ import com.pulumi.tencentcloud.Vpc.Instance;
 import com.pulumi.tencentcloud.Vpc.InstanceArgs;
 import com.pulumi.tencentcloud.Vpc.Acl;
 import com.pulumi.tencentcloud.Vpc.AclArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -137,103 +175,173 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new Instance("vpc", InstanceArgs.builder()
+            .name("vpc-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var example = new Acl("example", AclArgs.builder()        
+        var example = new Acl("example", AclArgs.builder()
             .vpcId(vpc.id())
+            .name("tf-example")
             .ingresses(            
                 "ACCEPT#192.168.1.0/24#800#TCP",
-                "ACCEPT#192.168.1.0/24#800-900#TCP")
+                "ACCEPT#192.168.1.0/24#800-900#TCP#DESCRIPTION")
             .egresses(            
                 "ACCEPT#192.168.1.0/24#800#TCP",
-                "ACCEPT#192.168.1.0/24#800-900#TCP")
+                "ACCEPT#192.168.1.0/24#800-900#TCP#DESCRIPTION")
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-example
       cidrBlock: 10.0.0.0/16
   example:
     type: tencentcloud:Vpc:Acl
     properties:
       vpcId: ${vpc.id}
+      name: tf-example
       ingresses:
         - ACCEPT#192.168.1.0/24#800#TCP
-        - ACCEPT#192.168.1.0/24#800-900#TCP
+        - ACCEPT#192.168.1.0/24#800-900#TCP#DESCRIPTION
       egresses:
         - ACCEPT#192.168.1.0/24#800#TCP
-        - ACCEPT#192.168.1.0/24#800-900#TCP
+        - ACCEPT#192.168.1.0/24#800-900#TCP#DESCRIPTION
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_vpc_acl" "example" {
+  vpc_id    = tencentcloud_vpc_instance.vpc.id
+  name      = "tf-example"
+  ingresses = ["ACCEPT#192.168.1.0/24#800#TCP", "ACCEPT#192.168.1.0/24#800-900#TCP#DESCRIPTION"]
+  egresses  = ["ACCEPT#192.168.1.0/24#800#TCP", "ACCEPT#192.168.1.0/24#800-900#TCP#DESCRIPTION"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateNetworkAcl](https://www.tencentcloud.com/document/api/215/35622)
+  - [ModifyNetworkAclEntries](https://www.tencentcloud.com/document/api/215/35617)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Read:
+  - [DescribeNetworkAcls](https://www.tencentcloud.com/document/api/215/35620)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [ModifyNetworkAclAttribute](https://www.tencentcloud.com/document/api/215/35618)
+  - [ModifyNetworkAclEntries](https://www.tencentcloud.com/document/api/215/35617)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Delete:
+  - [DeleteNetworkAcl](https://www.tencentcloud.com/document/api/215/35621)
+  - [DescribeNetworkAcls](https://www.tencentcloud.com/document/api/215/35620)
+  - [DisassociateNetworkAclSubnets](https://www.tencentcloud.com/document/api/215/35619)
 
 
 ## Create Acl Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span>
+        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+        <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">egresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">ingresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-        <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-        <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span>
-        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAcl</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Acl</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewAcl</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">AclArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Acl</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Acl</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">AclArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vpc:Acl</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Vpc:Acl</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_vpc_acl&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -254,7 +362,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -371,11 +479,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Acl Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -391,8 +507,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="egresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_csharp" style="color: inherit; text-decoration: inherit;">Egresses</a>
@@ -400,8 +515,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of <code>protocol</code> is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the <code>port</code> must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_csharp" style="color: inherit; text-decoration: inherit;">Ingresses</a>
@@ -409,8 +523,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -418,17 +531,15 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the network ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the network ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the vpc acl.</p>
-</dd></dl>
+    <dd>Tags of the vpc acl.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -442,8 +553,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="egresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_go" style="color: inherit; text-decoration: inherit;">Egresses</a>
@@ -451,8 +561,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of <code>protocol</code> is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the <code>port</code> must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_go" style="color: inherit; text-decoration: inherit;">Ingresses</a>
@@ -460,8 +569,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -469,17 +577,61 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the network ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the network ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the vpc acl.</p>
-</dd></dl>
+    <dd>Tags of the vpc acl.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="egresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_hcl" style="color: inherit; text-decoration: inherit;">egresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of <code>protocol</code> is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the <code>port</code> must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="ingresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_hcl" style="color: inherit; text-decoration: inherit;">ingresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the network ACL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the vpc acl.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -493,8 +645,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="egresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_java" style="color: inherit; text-decoration: inherit;">egresses</a>
@@ -502,8 +653,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of <code>protocol</code> is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the <code>port</code> must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_java" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -511,8 +661,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -520,17 +669,15 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the network ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the network ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the vpc acl.</p>
-</dd></dl>
+    <dd>Tags of the vpc acl.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -544,8 +691,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="egresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_nodejs" style="color: inherit; text-decoration: inherit;">egresses</a>
@@ -553,8 +699,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of <code>protocol</code> is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the <code>port</code> must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_nodejs" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -562,8 +707,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -571,17 +715,15 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the network ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the network ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the vpc acl.</p>
-</dd></dl>
+    <dd>Tags of the vpc acl.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -595,8 +737,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="egresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_python" style="color: inherit; text-decoration: inherit;">egresses</a>
@@ -604,8 +745,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of <code>protocol</code> is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the <code>port</code> must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_python" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -613,8 +753,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -622,17 +761,15 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the network ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the network ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the vpc acl.</p>
-</dd></dl>
+    <dd>Tags of the vpc acl.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -646,8 +783,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC instance.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the VPC instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="egresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egresses_yaml" style="color: inherit; text-decoration: inherit;">egresses</a>
@@ -655,8 +791,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of <code>protocol</code> is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the <code>port</code> must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="ingresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ingresses_yaml" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -664,8 +799,7 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -673,17 +807,15 @@ The Acl resource accepts the following [input](/docs/intro/concepts/inputs-outpu
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the network ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the network ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the vpc acl.</p>
-</dd></dl>
+    <dd>Tags of the vpc acl.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -704,8 +836,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of ACL.</p>
-</dd><dt class="property-"
+    <dd>Creation time of ACL.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -713,8 +844,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -728,8 +858,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of ACL.</p>
-</dd><dt class="property-"
+    <dd>Creation time of ACL.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -737,8 +866,29 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of ACL.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -752,8 +902,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of ACL.</p>
-</dd><dt class="property-"
+    <dd>Creation time of ACL.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -761,8 +910,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -776,8 +924,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of ACL.</p>
-</dd><dt class="property-"
+    <dd>Creation time of ACL.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -785,8 +932,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -800,8 +946,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of ACL.</p>
-</dd><dt class="property-"
+    <dd>Creation time of ACL.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -809,8 +954,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -824,8 +968,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of ACL.</p>
-</dd><dt class="property-"
+    <dd>Creation time of ACL.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -833,8 +976,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -844,18 +986,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Acl resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AclState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Acl</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">AclState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Acl</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -863,106 +1005,145 @@ Get an existing Acl resource's state with the given name, ID, and optional extra
         <span class="nx">egresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">ingresses</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> Acl</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAcl<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AclState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Acl</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetAcl<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">AclState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Acl</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Acl</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AclState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Acl</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AclState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Acl</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AclState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Acl</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">AclState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingAcl</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Vpc:Acl</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_vpc_acl</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AclState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AclState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -970,28 +1151,31 @@ Get an existing Acl resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AclState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -999,28 +1183,31 @@ Get an existing Acl resource's state with the given name, ID, and optional extra
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">AclState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1040,8 +1227,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_egresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egresses_csharp" style="color: inherit; text-decoration: inherit;">Egresses</a>
@@ -1049,8 +1235,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of <code>protocol</code> is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the <code>port</code> must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ingresses_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingresses_csharp" style="color: inherit; text-decoration: inherit;">Ingresses</a>
@@ -1058,8 +1243,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_csharp" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1067,17 +1251,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the network ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the network ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of the vpc acl.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the vpc acl.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1085,8 +1267,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC instance.</p>
-</dd></dl>
+    <dd>ID of the VPC instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1100,8 +1281,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_egresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egresses_go" style="color: inherit; text-decoration: inherit;">Egresses</a>
@@ -1109,8 +1289,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of <code>protocol</code> is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the <code>port</code> must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ingresses_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingresses_go" style="color: inherit; text-decoration: inherit;">Ingresses</a>
@@ -1118,8 +1297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_go" style="color: inherit; text-decoration: inherit;">Name</a>
@@ -1127,17 +1305,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the network ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the network ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of the vpc acl.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the vpc acl.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1145,8 +1321,61 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC instance.</p>
-</dd></dl>
+    <dd>ID of the VPC instance.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time of ACL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_egresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egresses_hcl" style="color: inherit; text-decoration: inherit;">egresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of <code>protocol</code> is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the <code>port</code> must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_ingresses_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingresses_hcl" style="color: inherit; text-decoration: inherit;">ingresses</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_hcl" style="color: inherit; text-decoration: inherit;">name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the network ACL.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of the vpc acl.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1160,8 +1389,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_egresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egresses_java" style="color: inherit; text-decoration: inherit;">egresses</a>
@@ -1169,8 +1397,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of <code>protocol</code> is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the <code>port</code> must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ingresses_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingresses_java" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -1178,8 +1405,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_java" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1187,17 +1413,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the network ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the network ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of the vpc acl.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the vpc acl.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1205,8 +1429,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC instance.</p>
-</dd></dl>
+    <dd>ID of the VPC instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1220,8 +1443,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time of ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_egresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egresses_nodejs" style="color: inherit; text-decoration: inherit;">egresses</a>
@@ -1229,8 +1451,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of <code>protocol</code> is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the <code>port</code> must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ingresses_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingresses_nodejs" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -1238,8 +1459,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_nodejs" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1247,17 +1467,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the network ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the network ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of the vpc acl.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the vpc acl.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1265,8 +1483,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC instance.</p>
-</dd></dl>
+    <dd>ID of the VPC instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1280,8 +1497,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time of ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_egresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egresses_python" style="color: inherit; text-decoration: inherit;">egresses</a>
@@ -1289,8 +1505,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of <code>protocol</code> is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the <code>port</code> must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ingresses_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingresses_python" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -1298,8 +1513,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_python" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1307,17 +1521,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the network ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the network ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of the vpc acl.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the vpc acl.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1325,8 +1537,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC instance.</p>
-</dd></dl>
+    <dd>ID of the VPC instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1340,8 +1551,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time of ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Creation time of ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_egresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_egresses_yaml" style="color: inherit; text-decoration: inherit;">egresses</a>
@@ -1349,8 +1559,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Egress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of <code>protocol</code> is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the <code>port</code> must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_ingresses_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_ingresses_yaml" style="color: inherit; text-decoration: inherit;">ingresses</a>
@@ -1358,8 +1567,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Ingress rules. A rule must match the following format: [action]#[cidr_ip]#[port]#[protocol]. The available value of 'action' is <code>ACCEPT</code> and <code>DROP</code>. The 'cidr_ip' must be an IP address network or segment. The 'port' valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When 'protocol' is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of <code>action</code> is <code>ACCEPT</code> and <code>DROP</code>. The <code>cidrIp</code> must be an IP address network or segment. The <code>port</code> valid format is <code>80</code>, <code>80-90</code> or <code>ALL</code>. The available value of 'protocol' is <code>TCP</code>, <code>UDP</code>, <code>ICMP</code> and <code>ALL</code>. When <code>protocol</code> is <code>ICMP</code> or <code>ALL</code>, the 'port' must be <code>ALL</code>. The <code>description</code> content must be in uppercase.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_name_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_name_yaml" style="color: inherit; text-decoration: inherit;">name</a>
@@ -1367,17 +1575,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the network ACL.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the network ACL.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of the vpc acl.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of the vpc acl.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1385,8 +1591,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC instance.</p>
-</dd></dl>
+    <dd>ID of the VPC instance.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1404,9 +1609,12 @@ The following state arguments are supported:
 Vpc ACL can be imported, e.g.
 
 ```sh
-$ pulumi import tencentcloud:Vpc/acl:Acl default acl-id
+$ pulumi import tencentcloud:Vpc/acl:Acl example acl-mijp2oyu
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -1418,7 +1626,6 @@ $ pulumi import tencentcloud:Vpc/acl:Acl default acl-id
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

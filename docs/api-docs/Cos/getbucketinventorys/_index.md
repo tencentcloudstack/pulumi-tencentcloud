@@ -2,9 +2,11 @@
 ---
 title: "getBucketInventorys"
 title_tag: "tencentcloud.Cos.getBucketInventorys"
-meta_desc: "Documentation for the tencentcloud.Cos.getBucketInventorys function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query the COS bucket inventorys. NOTE: The current resource does not support cdc."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,28 +16,70 @@ no_edit_this_page: true
 
 Use this data source to query the COS bucket inventorys.
 
+> **NOTE:** The current resource does not support cdc.
+
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const cosBucketInventorys = tencentcloud.Cos.getBucketInventorys({
+const cosBucketInventorys = tencentcloud.cos.getBucketInventorys({
     bucket: "xxxxxx",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-cos_bucket_inventorys = tencentcloud.Cos.get_bucket_inventorys(bucket="xxxxxx")
+cos_bucket_inventorys = tencentcloud.cos.get_bucket_inventorys(bucket="xxxxxx")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := cos.GetBucketInventorys(ctx, &cos.GetBucketInventorysArgs{
+			Bucket: "xxxxxx",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +90,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cos.GetBucketInventorys(ctx, &cos.GetBucketInventorysArgs{
-			Bucket: "xxxxxx",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +103,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cos.CosFunctions;
 import com.pulumi.tencentcloud.Cos.inputs.GetBucketInventorysArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,15 +123,39 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   cosBucketInventorys:
     fn::invoke:
-      Function: tencentcloud:Cos:getBucketInventorys
-      Arguments:
+      function: tencentcloud:Cos:getBucketInventorys
+      arguments:
         bucket: xxxxxx
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cos_getbucketinventorys" "cosBucketInventorys" {
+  bucket = "xxxxxx"
+}
+```
+</pulumi-choosable>
+</div>
 
 
 
@@ -115,7 +168,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +176,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getBucketInventorys<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBucketInventorysArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBucketInventorysResult</a></span>></span
+><span class="k">function </span>getBucketInventorys<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBucketInventorysArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetBucketInventorysResult</a></span>></span
 ><span class="k">
-function </span>getBucketInventorysOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBucketInventorysOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBucketInventorysResult</a></span>></span
+function </span>getBucketInventorysOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetBucketInventorysOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetBucketInventorysResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -138,9 +191,9 @@ function </span>getBucketInventorysOutput<span class="p">(</span><span class="nx
                           <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetBucketInventorysResult</span
 ><span class="k">
-def </span>get_bucket_inventorys_output<span class="p">(</span><span class="nx">bucket</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBucketInventorysResult]</span
+def </span>get_bucket_inventorys_output<span class="p">(</span><span class="nx">bucket</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                          <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetBucketInventorysResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -165,7 +218,8 @@ func </span>GetBucketInventorysOutput<span class="p">(</span><span class="nx">ct
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetBucketInventorys </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetBucketInventorysResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetBucketInventorysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetBucketInventorysResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBucketInventorysInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBucketInventorysResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBucketInventorysInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetBucketInventorysResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetBucketInventorysInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -174,7 +228,8 @@ func </span>GetBucketInventorysOutput<span class="p">(</span><span class="nx">ct
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetBucketInventorysResult</a></span>> </span>getBucketInventorys<span class="p">(</span><span class="nx">GetBucketInventorysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBucketInventorysResult</a></span>> </span>getBucketInventorys<span class="p">(</span><span class="nx">GetBucketInventorysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetBucketInventorysResult</a></span>> </span>getBucketInventorys<span class="p">(</span><span class="nx">GetBucketInventorysArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -186,6 +241,15 @@ func </span>GetBucketInventorysOutput<span class="p">(</span><span class="nx">ct
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cos/getBucketInventorys:getBucketInventorys
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cos_get_bucket_inventorys&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -204,8 +268,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -213,8 +276,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -228,8 +290,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -237,8 +298,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bucket.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -252,8 +334,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -261,8 +342,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -276,8 +356,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -285,8 +364,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -300,8 +378,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -309,8 +386,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -324,8 +400,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-optional"
+    <dd>Bucket.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -333,8 +408,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -357,8 +431,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-"
+    <dd>Bucket name.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -366,8 +439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="inventorys_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inventorys_csharp" style="color: inherit; text-decoration: inherit;">Inventorys</a>
@@ -375,8 +447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventory">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Outputs.<wbr>Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory&gt;</a></span>
     </dt>
-    <dd><p>Multiple batch processing task information.</p>
-</dd><dt class="property-"
+    <dd>Multiple batch processing task information.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -398,8 +469,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-"
+    <dd>Bucket name.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -407,8 +477,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="inventorys_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inventorys_go" style="color: inherit; text-decoration: inherit;">Inventorys</a>
@@ -416,11 +485,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventory">[]Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory</a></span>
     </dt>
-    <dd><p>Multiple batch processing task information.</p>
-</dd><dt class="property-"
+    <dd>Multiple batch processing task information.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bucket name.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="inventorys_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inventorys_hcl" style="color: inherit; text-decoration: inherit;">inventorys</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketinventorysinventory">list(object)</a></span>
+    </dt>
+    <dd>Multiple batch processing task information.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -439,8 +545,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-"
+    <dd>Bucket name.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -448,8 +553,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="inventorys_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inventorys_java" style="color: inherit; text-decoration: inherit;">inventorys</a>
@@ -457,8 +561,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventory">List&lt;Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory&gt;</a></span>
     </dt>
-    <dd><p>Multiple batch processing task information.</p>
-</dd><dt class="property-"
+    <dd>Multiple batch processing task information.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -480,8 +583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-"
+    <dd>Bucket name.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -489,8 +591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="inventorys_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inventorys_nodejs" style="color: inherit; text-decoration: inherit;">inventorys</a>
@@ -498,8 +599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventory">Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory[]</a></span>
     </dt>
-    <dd><p>Multiple batch processing task information.</p>
-</dd><dt class="property-"
+    <dd>Multiple batch processing task information.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -521,8 +621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-"
+    <dd>Bucket name.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -530,17 +629,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="inventorys_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inventorys_python" style="color: inherit; text-decoration: inherit;">inventorys</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketinventorysinventory">Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory]</a></span>
+        <span class="property-type"><a href="#getbucketinventorysinventory">Sequence[Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory]</a></span>
     </dt>
-    <dd><p>Multiple batch processing task information.</p>
-</dd><dt class="property-"
+    <dd>Multiple batch processing task information.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -562,8 +659,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket name.</p>
-</dd><dt class="property-"
+    <dd>Bucket name.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -571,8 +667,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="inventorys_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#inventorys_yaml" style="color: inherit; text-decoration: inherit;">inventorys</a>
@@ -580,8 +675,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventory">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Multiple batch processing task information.</p>
-</dd><dt class="property-"
+    <dd>Multiple batch processing task information.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -613,8 +707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventorydestination">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Destination&gt;</a></span>
     </dt>
-    <dd><p>Information about the inventory result destination.</p>
-</dd><dt class="property-required"
+    <dd>Information about the inventory result destination.</dd><dt class="property-required"
             title="Required">
         <span id="filters_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_csharp" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -622,8 +715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryfilter">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filters objects prefixed with the specified value to analyze.</p>
-</dd><dt class="property-required"
+    <dd>Filters objects prefixed with the specified value to analyze.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -631,8 +723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable the inventory. true or false.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the inventory. true or false.</dd><dt class="property-required"
             title="Required">
         <span id="includedobjectversions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includedobjectversions_csharp" style="color: inherit; text-decoration: inherit;">Included<wbr>Object<wbr>Versions</a>
@@ -640,8 +731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to include object versions in the inventory. All or No.</p>
-</dd><dt class="property-required"
+    <dd>Whether to include object versions in the inventory. All or No.</dd><dt class="property-required"
             title="Required">
         <span id="isenabled_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isenabled_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Enabled</a>
@@ -649,8 +739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable the inventory. true or false.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the inventory. true or false.</dd><dt class="property-required"
             title="Required">
         <span id="schedules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedules_csharp" style="color: inherit; text-decoration: inherit;">Schedules</a>
@@ -658,8 +747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryschedule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Schedule&gt;</a></span>
     </dt>
-    <dd><p>Inventory job cycle.</p>
-</dd><dt class="property-optional"
+    <dd>Inventory job cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="optionalfields_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#optionalfields_csharp" style="color: inherit; text-decoration: inherit;">Optional<wbr>Fields</a>
@@ -667,8 +755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryoptionalfield">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Optional<wbr>Field&gt;</a></span>
     </dt>
-    <dd><p>Analysis items to include in the inventory result	.</p>
-</dd></dl>
+    <dd>Analysis items to include in the inventory result	.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -682,8 +769,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventorydestination">[]Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Destination</a></span>
     </dt>
-    <dd><p>Information about the inventory result destination.</p>
-</dd><dt class="property-required"
+    <dd>Information about the inventory result destination.</dd><dt class="property-required"
             title="Required">
         <span id="filters_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_go" style="color: inherit; text-decoration: inherit;">Filters</a>
@@ -691,8 +777,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryfilter">[]Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Filter</a></span>
     </dt>
-    <dd><p>Filters objects prefixed with the specified value to analyze.</p>
-</dd><dt class="property-required"
+    <dd>Filters objects prefixed with the specified value to analyze.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -700,8 +785,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable the inventory. true or false.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the inventory. true or false.</dd><dt class="property-required"
             title="Required">
         <span id="includedobjectversions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includedobjectversions_go" style="color: inherit; text-decoration: inherit;">Included<wbr>Object<wbr>Versions</a>
@@ -709,8 +793,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to include object versions in the inventory. All or No.</p>
-</dd><dt class="property-required"
+    <dd>Whether to include object versions in the inventory. All or No.</dd><dt class="property-required"
             title="Required">
         <span id="isenabled_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isenabled_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Enabled</a>
@@ -718,8 +801,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable the inventory. true or false.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the inventory. true or false.</dd><dt class="property-required"
             title="Required">
         <span id="schedules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedules_go" style="color: inherit; text-decoration: inherit;">Schedules</a>
@@ -727,8 +809,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryschedule">[]Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Schedule</a></span>
     </dt>
-    <dd><p>Inventory job cycle.</p>
-</dd><dt class="property-optional"
+    <dd>Inventory job cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="optionalfields_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#optionalfields_go" style="color: inherit; text-decoration: inherit;">Optional<wbr>Fields</a>
@@ -736,8 +817,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryoptionalfield">[]Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Optional<wbr>Field</a></span>
     </dt>
-    <dd><p>Analysis items to include in the inventory result	.</p>
-</dd></dl>
+    <dd>Analysis items to include in the inventory result	.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="destinations_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinations_hcl" style="color: inherit; text-decoration: inherit;">destinations</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketinventorysinventorydestination">list(object)</a></span>
+    </dt>
+    <dd>Information about the inventory result destination.</dd><dt class="property-required"
+            title="Required">
+        <span id="filters_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_hcl" style="color: inherit; text-decoration: inherit;">filters</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketinventorysinventoryfilter">list(object)</a></span>
+    </dt>
+    <dd>Filters objects prefixed with the specified value to analyze.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable the inventory. true or false.</dd><dt class="property-required"
+            title="Required">
+        <span id="included_object_versions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#included_object_versions_hcl" style="color: inherit; text-decoration: inherit;">included_<wbr>object_<wbr>versions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to include object versions in the inventory. All or No.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_enabled_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_enabled_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>enabled</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether to enable the inventory. true or false.</dd><dt class="property-required"
+            title="Required">
+        <span id="schedules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedules_hcl" style="color: inherit; text-decoration: inherit;">schedules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketinventorysinventoryschedule">list(object)</a></span>
+    </dt>
+    <dd>Inventory job cycle.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="optional_fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#optional_fields_hcl" style="color: inherit; text-decoration: inherit;">optional_<wbr>fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketinventorysinventoryoptionalfield">list(object)</a></span>
+    </dt>
+    <dd>Analysis items to include in the inventory result	.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -751,8 +893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventorydestination">List&lt;Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Destination&gt;</a></span>
     </dt>
-    <dd><p>Information about the inventory result destination.</p>
-</dd><dt class="property-required"
+    <dd>Information about the inventory result destination.</dd><dt class="property-required"
             title="Required">
         <span id="filters_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_java" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -760,8 +901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryfilter">List&lt;Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Filter&gt;</a></span>
     </dt>
-    <dd><p>Filters objects prefixed with the specified value to analyze.</p>
-</dd><dt class="property-required"
+    <dd>Filters objects prefixed with the specified value to analyze.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -769,8 +909,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable the inventory. true or false.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the inventory. true or false.</dd><dt class="property-required"
             title="Required">
         <span id="includedobjectversions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includedobjectversions_java" style="color: inherit; text-decoration: inherit;">included<wbr>Object<wbr>Versions</a>
@@ -778,8 +917,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to include object versions in the inventory. All or No.</p>
-</dd><dt class="property-required"
+    <dd>Whether to include object versions in the inventory. All or No.</dd><dt class="property-required"
             title="Required">
         <span id="isenabled_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isenabled_java" style="color: inherit; text-decoration: inherit;">is<wbr>Enabled</a>
@@ -787,8 +925,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable the inventory. true or false.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the inventory. true or false.</dd><dt class="property-required"
             title="Required">
         <span id="schedules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedules_java" style="color: inherit; text-decoration: inherit;">schedules</a>
@@ -796,8 +933,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryschedule">List&lt;Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Schedule&gt;</a></span>
     </dt>
-    <dd><p>Inventory job cycle.</p>
-</dd><dt class="property-optional"
+    <dd>Inventory job cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="optionalfields_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#optionalfields_java" style="color: inherit; text-decoration: inherit;">optional<wbr>Fields</a>
@@ -805,8 +941,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryoptionalfield">List&lt;Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Optional<wbr>Field&gt;</a></span>
     </dt>
-    <dd><p>Analysis items to include in the inventory result	.</p>
-</dd></dl>
+    <dd>Analysis items to include in the inventory result	.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -820,8 +955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventorydestination">Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Destination[]</a></span>
     </dt>
-    <dd><p>Information about the inventory result destination.</p>
-</dd><dt class="property-required"
+    <dd>Information about the inventory result destination.</dd><dt class="property-required"
             title="Required">
         <span id="filters_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_nodejs" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -829,8 +963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryfilter">Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Filter[]</a></span>
     </dt>
-    <dd><p>Filters objects prefixed with the specified value to analyze.</p>
-</dd><dt class="property-required"
+    <dd>Filters objects prefixed with the specified value to analyze.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -838,8 +971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable the inventory. true or false.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the inventory. true or false.</dd><dt class="property-required"
             title="Required">
         <span id="includedobjectversions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includedobjectversions_nodejs" style="color: inherit; text-decoration: inherit;">included<wbr>Object<wbr>Versions</a>
@@ -847,8 +979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to include object versions in the inventory. All or No.</p>
-</dd><dt class="property-required"
+    <dd>Whether to include object versions in the inventory. All or No.</dd><dt class="property-required"
             title="Required">
         <span id="isenabled_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isenabled_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Enabled</a>
@@ -856,8 +987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Whether to enable the inventory. true or false.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the inventory. true or false.</dd><dt class="property-required"
             title="Required">
         <span id="schedules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedules_nodejs" style="color: inherit; text-decoration: inherit;">schedules</a>
@@ -865,8 +995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryschedule">Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Schedule[]</a></span>
     </dt>
-    <dd><p>Inventory job cycle.</p>
-</dd><dt class="property-optional"
+    <dd>Inventory job cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="optionalfields_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#optionalfields_nodejs" style="color: inherit; text-decoration: inherit;">optional<wbr>Fields</a>
@@ -874,8 +1003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryoptionalfield">Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Optional<wbr>Field[]</a></span>
     </dt>
-    <dd><p>Analysis items to include in the inventory result	.</p>
-</dd></dl>
+    <dd>Analysis items to include in the inventory result	.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -887,19 +1015,17 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#destinations_python" style="color: inherit; text-decoration: inherit;">destinations</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketinventorysinventorydestination">Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Destination]</a></span>
+        <span class="property-type"><a href="#getbucketinventorysinventorydestination">Sequence[Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Destination]</a></span>
     </dt>
-    <dd><p>Information about the inventory result destination.</p>
-</dd><dt class="property-required"
+    <dd>Information about the inventory result destination.</dd><dt class="property-required"
             title="Required">
         <span id="filters_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_python" style="color: inherit; text-decoration: inherit;">filters</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketinventorysinventoryfilter">Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Filter]</a></span>
+        <span class="property-type"><a href="#getbucketinventorysinventoryfilter">Sequence[Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Filter]</a></span>
     </dt>
-    <dd><p>Filters objects prefixed with the specified value to analyze.</p>
-</dd><dt class="property-required"
+    <dd>Filters objects prefixed with the specified value to analyze.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -907,8 +1033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to enable the inventory. true or false.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the inventory. true or false.</dd><dt class="property-required"
             title="Required">
         <span id="included_object_versions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#included_object_versions_python" style="color: inherit; text-decoration: inherit;">included_<wbr>object_<wbr>versions</a>
@@ -916,8 +1041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to include object versions in the inventory. All or No.</p>
-</dd><dt class="property-required"
+    <dd>Whether to include object versions in the inventory. All or No.</dd><dt class="property-required"
             title="Required">
         <span id="is_enabled_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_enabled_python" style="color: inherit; text-decoration: inherit;">is_<wbr>enabled</a>
@@ -925,26 +1049,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Whether to enable the inventory. true or false.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the inventory. true or false.</dd><dt class="property-required"
             title="Required">
         <span id="schedules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedules_python" style="color: inherit; text-decoration: inherit;">schedules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketinventorysinventoryschedule">Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Schedule]</a></span>
+        <span class="property-type"><a href="#getbucketinventorysinventoryschedule">Sequence[Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Schedule]</a></span>
     </dt>
-    <dd><p>Inventory job cycle.</p>
-</dd><dt class="property-optional"
+    <dd>Inventory job cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="optional_fields_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#optional_fields_python" style="color: inherit; text-decoration: inherit;">optional_<wbr>fields</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketinventorysinventoryoptionalfield">Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Optional<wbr>Field]</a></span>
+        <span class="property-type"><a href="#getbucketinventorysinventoryoptionalfield">Sequence[Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Optional<wbr>Field]</a></span>
     </dt>
-    <dd><p>Analysis items to include in the inventory result	.</p>
-</dd></dl>
+    <dd>Analysis items to include in the inventory result	.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -958,8 +1079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventorydestination">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Information about the inventory result destination.</p>
-</dd><dt class="property-required"
+    <dd>Information about the inventory result destination.</dd><dt class="property-required"
             title="Required">
         <span id="filters_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#filters_yaml" style="color: inherit; text-decoration: inherit;">filters</a>
@@ -967,8 +1087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryfilter">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Filters objects prefixed with the specified value to analyze.</p>
-</dd><dt class="property-required"
+    <dd>Filters objects prefixed with the specified value to analyze.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -976,8 +1095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable the inventory. true or false.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the inventory. true or false.</dd><dt class="property-required"
             title="Required">
         <span id="includedobjectversions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#includedobjectversions_yaml" style="color: inherit; text-decoration: inherit;">included<wbr>Object<wbr>Versions</a>
@@ -985,8 +1103,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to include object versions in the inventory. All or No.</p>
-</dd><dt class="property-required"
+    <dd>Whether to include object versions in the inventory. All or No.</dd><dt class="property-required"
             title="Required">
         <span id="isenabled_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isenabled_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Enabled</a>
@@ -994,8 +1111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Whether to enable the inventory. true or false.</p>
-</dd><dt class="property-required"
+    <dd>Whether to enable the inventory. true or false.</dd><dt class="property-required"
             title="Required">
         <span id="schedules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#schedules_yaml" style="color: inherit; text-decoration: inherit;">schedules</a>
@@ -1003,8 +1119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryschedule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Inventory job cycle.</p>
-</dd><dt class="property-optional"
+    <dd>Inventory job cycle.</dd><dt class="property-optional"
             title="Optional">
         <span id="optionalfields_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#optionalfields_yaml" style="color: inherit; text-decoration: inherit;">optional<wbr>Fields</a>
@@ -1012,8 +1127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryoptionalfield">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Analysis items to include in the inventory result	.</p>
-</dd></dl>
+    <dd>Analysis items to include in the inventory result	.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1031,8 +1145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the bucket owner.</p>
-</dd><dt class="property-required"
+    <dd>ID of the bucket owner.</dd><dt class="property-required"
             title="Required">
         <span id="bucket_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_csharp" style="color: inherit; text-decoration: inherit;">Bucket</a>
@@ -1040,8 +1153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-required"
+    <dd>Bucket.</dd><dt class="property-required"
             title="Required">
         <span id="encryptions_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptions_csharp" style="color: inherit; text-decoration: inherit;">Encryptions</a>
@@ -1049,8 +1161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventorydestinationencryption">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Destination<wbr>Encryption&gt;</a></span>
     </dt>
-    <dd><p>Server-side encryption for the inventory result.</p>
-</dd><dt class="property-required"
+    <dd>Server-side encryption for the inventory result.</dd><dt class="property-required"
             title="Required">
         <span id="format_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_csharp" style="color: inherit; text-decoration: inherit;">Format</a>
@@ -1058,8 +1169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Format of the inventory result. Valid value: CSV.</p>
-</dd><dt class="property-required"
+    <dd>Format of the inventory result. Valid value: CSV.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_csharp" style="color: inherit; text-decoration: inherit;">Prefix</a>
@@ -1067,8 +1177,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix of the objects to analyze.</p>
-</dd></dl>
+    <dd>Prefix of the objects to analyze.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1082,8 +1191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the bucket owner.</p>
-</dd><dt class="property-required"
+    <dd>ID of the bucket owner.</dd><dt class="property-required"
             title="Required">
         <span id="bucket_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_go" style="color: inherit; text-decoration: inherit;">Bucket</a>
@@ -1091,8 +1199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-required"
+    <dd>Bucket.</dd><dt class="property-required"
             title="Required">
         <span id="encryptions_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptions_go" style="color: inherit; text-decoration: inherit;">Encryptions</a>
@@ -1100,8 +1207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventorydestinationencryption">[]Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Destination<wbr>Encryption</a></span>
     </dt>
-    <dd><p>Server-side encryption for the inventory result.</p>
-</dd><dt class="property-required"
+    <dd>Server-side encryption for the inventory result.</dd><dt class="property-required"
             title="Required">
         <span id="format_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_go" style="color: inherit; text-decoration: inherit;">Format</a>
@@ -1109,8 +1215,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Format of the inventory result. Valid value: CSV.</p>
-</dd><dt class="property-required"
+    <dd>Format of the inventory result. Valid value: CSV.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_go" style="color: inherit; text-decoration: inherit;">Prefix</a>
@@ -1118,8 +1223,53 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix of the objects to analyze.</p>
-</dd></dl>
+    <dd>Prefix of the objects to analyze.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="account_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#account_id_hcl" style="color: inherit; text-decoration: inherit;">account_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the bucket owner.</dd><dt class="property-required"
+            title="Required">
+        <span id="bucket_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_hcl" style="color: inherit; text-decoration: inherit;">bucket</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Bucket.</dd><dt class="property-required"
+            title="Required">
+        <span id="encryptions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptions_hcl" style="color: inherit; text-decoration: inherit;">encryptions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketinventorysinventorydestinationencryption">list(object)</a></span>
+    </dt>
+    <dd>Server-side encryption for the inventory result.</dd><dt class="property-required"
+            title="Required">
+        <span id="format_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_hcl" style="color: inherit; text-decoration: inherit;">format</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Format of the inventory result. Valid value: CSV.</dd><dt class="property-required"
+            title="Required">
+        <span id="prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_hcl" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Prefix of the objects to analyze.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1133,8 +1283,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the bucket owner.</p>
-</dd><dt class="property-required"
+    <dd>ID of the bucket owner.</dd><dt class="property-required"
             title="Required">
         <span id="bucket_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_java" style="color: inherit; text-decoration: inherit;">bucket</a>
@@ -1142,8 +1291,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-required"
+    <dd>Bucket.</dd><dt class="property-required"
             title="Required">
         <span id="encryptions_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptions_java" style="color: inherit; text-decoration: inherit;">encryptions</a>
@@ -1151,8 +1299,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventorydestinationencryption">List&lt;Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Destination<wbr>Encryption&gt;</a></span>
     </dt>
-    <dd><p>Server-side encryption for the inventory result.</p>
-</dd><dt class="property-required"
+    <dd>Server-side encryption for the inventory result.</dd><dt class="property-required"
             title="Required">
         <span id="format_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_java" style="color: inherit; text-decoration: inherit;">format</a>
@@ -1160,8 +1307,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Format of the inventory result. Valid value: CSV.</p>
-</dd><dt class="property-required"
+    <dd>Format of the inventory result. Valid value: CSV.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_java" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -1169,8 +1315,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Prefix of the objects to analyze.</p>
-</dd></dl>
+    <dd>Prefix of the objects to analyze.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1184,8 +1329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the bucket owner.</p>
-</dd><dt class="property-required"
+    <dd>ID of the bucket owner.</dd><dt class="property-required"
             title="Required">
         <span id="bucket_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_nodejs" style="color: inherit; text-decoration: inherit;">bucket</a>
@@ -1193,8 +1337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-required"
+    <dd>Bucket.</dd><dt class="property-required"
             title="Required">
         <span id="encryptions_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptions_nodejs" style="color: inherit; text-decoration: inherit;">encryptions</a>
@@ -1202,8 +1345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventorydestinationencryption">Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Destination<wbr>Encryption[]</a></span>
     </dt>
-    <dd><p>Server-side encryption for the inventory result.</p>
-</dd><dt class="property-required"
+    <dd>Server-side encryption for the inventory result.</dd><dt class="property-required"
             title="Required">
         <span id="format_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_nodejs" style="color: inherit; text-decoration: inherit;">format</a>
@@ -1211,8 +1353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Format of the inventory result. Valid value: CSV.</p>
-</dd><dt class="property-required"
+    <dd>Format of the inventory result. Valid value: CSV.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_nodejs" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -1220,8 +1361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix of the objects to analyze.</p>
-</dd></dl>
+    <dd>Prefix of the objects to analyze.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1235,8 +1375,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the bucket owner.</p>
-</dd><dt class="property-required"
+    <dd>ID of the bucket owner.</dd><dt class="property-required"
             title="Required">
         <span id="bucket_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_python" style="color: inherit; text-decoration: inherit;">bucket</a>
@@ -1244,17 +1383,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-required"
+    <dd>Bucket.</dd><dt class="property-required"
             title="Required">
         <span id="encryptions_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptions_python" style="color: inherit; text-decoration: inherit;">encryptions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketinventorysinventorydestinationencryption">Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Destination<wbr>Encryption]</a></span>
+        <span class="property-type"><a href="#getbucketinventorysinventorydestinationencryption">Sequence[Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Destination<wbr>Encryption]</a></span>
     </dt>
-    <dd><p>Server-side encryption for the inventory result.</p>
-</dd><dt class="property-required"
+    <dd>Server-side encryption for the inventory result.</dd><dt class="property-required"
             title="Required">
         <span id="format_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_python" style="color: inherit; text-decoration: inherit;">format</a>
@@ -1262,8 +1399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Format of the inventory result. Valid value: CSV.</p>
-</dd><dt class="property-required"
+    <dd>Format of the inventory result. Valid value: CSV.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_python" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -1271,8 +1407,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Prefix of the objects to analyze.</p>
-</dd></dl>
+    <dd>Prefix of the objects to analyze.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1286,8 +1421,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the bucket owner.</p>
-</dd><dt class="property-required"
+    <dd>ID of the bucket owner.</dd><dt class="property-required"
             title="Required">
         <span id="bucket_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#bucket_yaml" style="color: inherit; text-decoration: inherit;">bucket</a>
@@ -1295,8 +1429,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Bucket.</p>
-</dd><dt class="property-required"
+    <dd>Bucket.</dd><dt class="property-required"
             title="Required">
         <span id="encryptions_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#encryptions_yaml" style="color: inherit; text-decoration: inherit;">encryptions</a>
@@ -1304,8 +1437,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventorydestinationencryption">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Server-side encryption for the inventory result.</p>
-</dd><dt class="property-required"
+    <dd>Server-side encryption for the inventory result.</dd><dt class="property-required"
             title="Required">
         <span id="format_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#format_yaml" style="color: inherit; text-decoration: inherit;">format</a>
@@ -1313,8 +1445,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Format of the inventory result. Valid value: CSV.</p>
-</dd><dt class="property-required"
+    <dd>Format of the inventory result. Valid value: CSV.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_yaml" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -1322,8 +1453,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Prefix of the objects to analyze.</p>
-</dd></dl>
+    <dd>Prefix of the objects to analyze.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1341,8 +1471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encryption with COS-managed key. This field can be left empty.</p>
-</dd></dl>
+    <dd>Encryption with COS-managed key. This field can be left empty.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1356,8 +1485,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encryption with COS-managed key. This field can be left empty.</p>
-</dd></dl>
+    <dd>Encryption with COS-managed key. This field can be left empty.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="sse_cos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sse_cos_hcl" style="color: inherit; text-decoration: inherit;">sse_<wbr>cos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Encryption with COS-managed key. This field can be left empty.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1371,8 +1513,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Encryption with COS-managed key. This field can be left empty.</p>
-</dd></dl>
+    <dd>Encryption with COS-managed key. This field can be left empty.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1386,8 +1527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Encryption with COS-managed key. This field can be left empty.</p>
-</dd></dl>
+    <dd>Encryption with COS-managed key. This field can be left empty.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1401,8 +1541,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Encryption with COS-managed key. This field can be left empty.</p>
-</dd></dl>
+    <dd>Encryption with COS-managed key. This field can be left empty.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1416,8 +1555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Encryption with COS-managed key. This field can be left empty.</p>
-</dd></dl>
+    <dd>Encryption with COS-managed key. This field can be left empty.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1435,8 +1573,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryfilterperiod">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cos.<wbr>Inputs.<wbr>Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Filter<wbr>Period&gt;</a></span>
     </dt>
-    <dd><p>Creation time range of the objects to analyze.</p>
-</dd><dt class="property-required"
+    <dd>Creation time range of the objects to analyze.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_csharp" style="color: inherit; text-decoration: inherit;">Prefix</a>
@@ -1444,8 +1581,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix of the objects to analyze.</p>
-</dd></dl>
+    <dd>Prefix of the objects to analyze.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1459,8 +1595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryfilterperiod">[]Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Filter<wbr>Period</a></span>
     </dt>
-    <dd><p>Creation time range of the objects to analyze.</p>
-</dd><dt class="property-required"
+    <dd>Creation time range of the objects to analyze.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_go" style="color: inherit; text-decoration: inherit;">Prefix</a>
@@ -1468,8 +1603,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix of the objects to analyze.</p>
-</dd></dl>
+    <dd>Prefix of the objects to analyze.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="periods_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periods_hcl" style="color: inherit; text-decoration: inherit;">periods</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getbucketinventorysinventoryfilterperiod">list(object)</a></span>
+    </dt>
+    <dd>Creation time range of the objects to analyze.</dd><dt class="property-required"
+            title="Required">
+        <span id="prefix_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_hcl" style="color: inherit; text-decoration: inherit;">prefix</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Prefix of the objects to analyze.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1483,8 +1639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryfilterperiod">List&lt;Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Filter<wbr>Period&gt;</a></span>
     </dt>
-    <dd><p>Creation time range of the objects to analyze.</p>
-</dd><dt class="property-required"
+    <dd>Creation time range of the objects to analyze.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_java" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -1492,8 +1647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Prefix of the objects to analyze.</p>
-</dd></dl>
+    <dd>Prefix of the objects to analyze.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1507,8 +1661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryfilterperiod">Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Filter<wbr>Period[]</a></span>
     </dt>
-    <dd><p>Creation time range of the objects to analyze.</p>
-</dd><dt class="property-required"
+    <dd>Creation time range of the objects to analyze.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_nodejs" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -1516,8 +1669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Prefix of the objects to analyze.</p>
-</dd></dl>
+    <dd>Prefix of the objects to analyze.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1529,10 +1681,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#periods_python" style="color: inherit; text-decoration: inherit;">periods</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getbucketinventorysinventoryfilterperiod">Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Filter<wbr>Period]</a></span>
+        <span class="property-type"><a href="#getbucketinventorysinventoryfilterperiod">Sequence[Get<wbr>Bucket<wbr>Inventorys<wbr>Inventory<wbr>Filter<wbr>Period]</a></span>
     </dt>
-    <dd><p>Creation time range of the objects to analyze.</p>
-</dd><dt class="property-required"
+    <dd>Creation time range of the objects to analyze.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_python" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -1540,8 +1691,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Prefix of the objects to analyze.</p>
-</dd></dl>
+    <dd>Prefix of the objects to analyze.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1555,8 +1705,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getbucketinventorysinventoryfilterperiod">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Creation time range of the objects to analyze.</p>
-</dd><dt class="property-required"
+    <dd>Creation time range of the objects to analyze.</dd><dt class="property-required"
             title="Required">
         <span id="prefix_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prefix_yaml" style="color: inherit; text-decoration: inherit;">prefix</a>
@@ -1564,8 +1713,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Prefix of the objects to analyze.</p>
-</dd></dl>
+    <dd>Prefix of the objects to analyze.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1583,8 +1731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.</p>
-</dd><dt class="property-required"
+    <dd>Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_csharp" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -1592,8 +1739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.</p>
-</dd></dl>
+    <dd>Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1607,8 +1753,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.</p>
-</dd><dt class="property-required"
+    <dd>Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_go" style="color: inherit; text-decoration: inherit;">Start<wbr>Time</a>
@@ -1616,8 +1761,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.</p>
-</dd></dl>
+    <dd>Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="end_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#end_time_hcl" style="color: inherit; text-decoration: inherit;">end_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.</dd><dt class="property-required"
+            title="Required">
+        <span id="start_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_hcl" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1631,8 +1797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.</p>
-</dd><dt class="property-required"
+    <dd>Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_java" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1640,8 +1805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.</p>
-</dd></dl>
+    <dd>Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1655,8 +1819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.</p>
-</dd><dt class="property-required"
+    <dd>Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_nodejs" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1664,8 +1827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.</p>
-</dd></dl>
+    <dd>Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1679,8 +1841,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.</p>
-</dd><dt class="property-required"
+    <dd>Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.</dd><dt class="property-required"
             title="Required">
         <span id="start_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#start_time_python" style="color: inherit; text-decoration: inherit;">start_<wbr>time</a>
@@ -1688,8 +1849,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.</p>
-</dd></dl>
+    <dd>Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1703,8 +1863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.</p>
-</dd><dt class="property-required"
+    <dd>Creation end time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688762.</dd><dt class="property-required"
             title="Required">
         <span id="starttime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#starttime_yaml" style="color: inherit; text-decoration: inherit;">start<wbr>Time</a>
@@ -1712,8 +1871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.</p>
-</dd></dl>
+    <dd>Creation start time of the objects to analyze. The parameter is a timestamp in seconds, for example, 1568688761.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1731,8 +1889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.</p>
-</dd></dl>
+    <dd>Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1746,8 +1903,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.</p>
-</dd></dl>
+    <dd>Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="fields_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#fields_hcl" style="color: inherit; text-decoration: inherit;">fields</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1761,8 +1931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.</p>
-</dd></dl>
+    <dd>Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1776,8 +1945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.</p>
-</dd></dl>
+    <dd>Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1791,8 +1959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.</p>
-</dd></dl>
+    <dd>Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1806,8 +1973,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.</p>
-</dd></dl>
+    <dd>Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1825,8 +1991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Frequency of the inventory job. Enumerated values: Daily, Weekly.</p>
-</dd></dl>
+    <dd>Frequency of the inventory job. Enumerated values: Daily, Weekly.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1840,8 +2005,21 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Frequency of the inventory job. Enumerated values: Daily, Weekly.</p>
-</dd></dl>
+    <dd>Frequency of the inventory job. Enumerated values: Daily, Weekly.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="frequency_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#frequency_hcl" style="color: inherit; text-decoration: inherit;">frequency</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Frequency of the inventory job. Enumerated values: Daily, Weekly.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1855,8 +2033,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Frequency of the inventory job. Enumerated values: Daily, Weekly.</p>
-</dd></dl>
+    <dd>Frequency of the inventory job. Enumerated values: Daily, Weekly.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1870,8 +2047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Frequency of the inventory job. Enumerated values: Daily, Weekly.</p>
-</dd></dl>
+    <dd>Frequency of the inventory job. Enumerated values: Daily, Weekly.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1885,8 +2061,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Frequency of the inventory job. Enumerated values: Daily, Weekly.</p>
-</dd></dl>
+    <dd>Frequency of the inventory job. Enumerated values: Daily, Weekly.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1900,8 +2075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Frequency of the inventory job. Enumerated values: Daily, Weekly.</p>
-</dd></dl>
+    <dd>Frequency of the inventory job. Enumerated values: Daily, Weekly.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1916,7 +2090,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

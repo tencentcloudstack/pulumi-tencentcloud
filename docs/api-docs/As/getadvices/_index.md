@@ -2,9 +2,11 @@
 ---
 title: "getAdvices"
 title_tag: "tencentcloud.As.getAdvices"
-meta_desc: "Documentation for the tencentcloud.As.getAdvices function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of as advices"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,68 @@ Use this data source to query detailed information of as advices
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const advices = tencentcloud.As.getAdvices({
+const advices = tencentcloud.as.getAdvices({
     autoScalingGroupIds: ["asc-lo0b94oy"],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-advices = tencentcloud.As.get_advices(auto_scaling_group_ids=["asc-lo0b94oy"])
+advices = tencentcloud.as_.get_advices(auto_scaling_group_ids=["asc-lo0b94oy"])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := as.GetAdvices(ctx, &as.GetAdvicesArgs{
+			AutoScalingGroupIds: []string{
+				"asc-lo0b94oy",
+			},
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -49,28 +93,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := As.GetAdvices(ctx, &as.GetAdvicesArgs{
-			AutoScalingGroupIds: []string{
-				"asc-lo0b94oy",
-			},
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -79,8 +106,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.As.AsFunctions;
 import com.pulumi.tencentcloud.As.inputs.GetAdvicesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -99,17 +126,47 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   advices:
     fn::invoke:
-      Function: tencentcloud:As:getAdvices
-      Arguments:
+      function: tencentcloud:As:getAdvices
+      arguments:
         autoScalingGroupIds:
           - asc-lo0b94oy
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_as_getadvices" "advices" {
+  auto_scaling_group_ids = ["asc-lo0b94oy"]
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeAutoScalingAdvices](https://www.tencentcloud.com/document/api/377/44581)
 
 
 
@@ -121,7 +178,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -129,9 +186,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getAdvices<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAdvicesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAdvicesResult</a></span>></span
+><span class="k">function </span>getAdvices<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAdvicesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetAdvicesResult</a></span>></span
 ><span class="k">
-function </span>getAdvicesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAdvicesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAdvicesResult</a></span>></span
+function </span>getAdvicesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetAdvicesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetAdvicesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -144,9 +201,9 @@ function </span>getAdvicesOutput<span class="p">(</span><span class="nx">args</s
                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetAdvicesResult</span
 ><span class="k">
-def </span>get_advices_output<span class="p">(</span><span class="nx">auto_scaling_group_ids</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
-                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAdvicesResult]</span
+def </span>get_advices_output<span class="p">(</span><span class="nx">auto_scaling_group_ids</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[Sequence[pulumi.Input[str]]]]</span> = None<span class="p">,</span>
+                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetAdvicesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -171,7 +228,8 @@ func </span>GetAdvicesOutput<span class="p">(</span><span class="nx">ctx</span><
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetAdvices </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetAdvicesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetAdvicesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetAdvicesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAdvicesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAdvicesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAdvicesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetAdvicesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetAdvicesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -180,7 +238,8 @@ func </span>GetAdvicesOutput<span class="p">(</span><span class="nx">ctx</span><
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetAdvicesResult</a></span>> </span>getAdvices<span class="p">(</span><span class="nx">GetAdvicesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAdvicesResult</a></span>> </span>getAdvices<span class="p">(</span><span class="nx">GetAdvicesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetAdvicesResult</a></span>> </span>getAdvices<span class="p">(</span><span class="nx">GetAdvicesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -192,6 +251,15 @@ func </span>GetAdvicesOutput<span class="p">(</span><span class="nx">ctx</span><
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:As/getAdvices:getAdvices
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_as_get_advices&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -210,8 +278,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of scaling groups to be queried. Upper limit: 100.</p>
-</dd><dt class="property-optional"
+    <dd>List of scaling groups to be queried. Upper limit: 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -219,8 +286,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -234,8 +300,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of scaling groups to be queried. Upper limit: 100.</p>
-</dd><dt class="property-optional"
+    <dd>List of scaling groups to be queried. Upper limit: 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -243,8 +308,29 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="auto_scaling_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_scaling_group_ids_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of scaling groups to be queried. Upper limit: 100.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -258,8 +344,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of scaling groups to be queried. Upper limit: 100.</p>
-</dd><dt class="property-optional"
+    <dd>List of scaling groups to be queried. Upper limit: 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -267,8 +352,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -282,8 +366,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of scaling groups to be queried. Upper limit: 100.</p>
-</dd><dt class="property-optional"
+    <dd>List of scaling groups to be queried. Upper limit: 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -291,8 +374,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -306,8 +388,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of scaling groups to be queried. Upper limit: 100.</p>
-</dd><dt class="property-optional"
+    <dd>List of scaling groups to be queried. Upper limit: 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -315,8 +396,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -330,8 +410,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of scaling groups to be queried. Upper limit: 100.</p>
-</dd><dt class="property-optional"
+    <dd>List of scaling groups to be queried. Upper limit: 100.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -339,8 +418,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -363,8 +441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getadvicesautoscalingadviceset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Outputs.<wbr>Get<wbr>Advices<wbr>Auto<wbr>Scaling<wbr>Advice<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>A collection of suggestions for scaling group configurations.</p>
-</dd><dt class="property-"
+    <dd>A collection of suggestions for scaling group configurations.</dd><dt class="property-"
             title="">
         <span id="autoscalinggroupids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupids_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Group<wbr>Ids</a>
@@ -380,8 +457,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -403,8 +479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getadvicesautoscalingadviceset">[]Get<wbr>Advices<wbr>Auto<wbr>Scaling<wbr>Advice<wbr>Set</a></span>
     </dt>
-    <dd><p>A collection of suggestions for scaling group configurations.</p>
-</dd><dt class="property-"
+    <dd>A collection of suggestions for scaling group configurations.</dd><dt class="property-"
             title="">
         <span id="autoscalinggroupids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupids_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Group<wbr>Ids</a>
@@ -420,11 +495,48 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="auto_scaling_advice_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_scaling_advice_sets_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>advice_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getadvicesautoscalingadviceset">list(object)</a></span>
+    </dt>
+    <dd>A collection of suggestions for scaling group configurations.</dd><dt class="property-"
+            title="">
+        <span id="auto_scaling_group_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_scaling_group_ids_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>group_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -443,8 +555,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getadvicesautoscalingadviceset">List&lt;Get<wbr>Advices<wbr>Auto<wbr>Scaling<wbr>Advice<wbr>Set&gt;</a></span>
     </dt>
-    <dd><p>A collection of suggestions for scaling group configurations.</p>
-</dd><dt class="property-"
+    <dd>A collection of suggestions for scaling group configurations.</dd><dt class="property-"
             title="">
         <span id="autoscalinggroupids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupids_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Ids</a>
@@ -460,8 +571,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -483,8 +593,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getadvicesautoscalingadviceset">Get<wbr>Advices<wbr>Auto<wbr>Scaling<wbr>Advice<wbr>Set[]</a></span>
     </dt>
-    <dd><p>A collection of suggestions for scaling group configurations.</p>
-</dd><dt class="property-"
+    <dd>A collection of suggestions for scaling group configurations.</dd><dt class="property-"
             title="">
         <span id="autoscalinggroupids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupids_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Ids</a>
@@ -500,8 +609,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -521,10 +629,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_scaling_advice_sets_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>advice_<wbr>sets</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getadvicesautoscalingadviceset">Get<wbr>Advices<wbr>Auto<wbr>Scaling<wbr>Advice<wbr>Set]</a></span>
+        <span class="property-type"><a href="#getadvicesautoscalingadviceset">Sequence[Get<wbr>Advices<wbr>Auto<wbr>Scaling<wbr>Advice<wbr>Set]</a></span>
     </dt>
-    <dd><p>A collection of suggestions for scaling group configurations.</p>
-</dd><dt class="property-"
+    <dd>A collection of suggestions for scaling group configurations.</dd><dt class="property-"
             title="">
         <span id="auto_scaling_group_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_scaling_group_ids_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>group_<wbr>ids</a>
@@ -540,8 +647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -563,8 +669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getadvicesautoscalingadviceset">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A collection of suggestions for scaling group configurations.</p>
-</dd><dt class="property-"
+    <dd>A collection of suggestions for scaling group configurations.</dd><dt class="property-"
             title="">
         <span id="autoscalinggroupids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupids_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Ids</a>
@@ -580,8 +685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -613,8 +717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getadvicesautoscalingadvicesetadvice">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Get<wbr>Advices<wbr>Auto<wbr>Scaling<wbr>Advice<wbr>Set<wbr>Advice&gt;</a></span>
     </dt>
-    <dd><p>A collection of suggestions for scaling group configurations.</p>
-</dd><dt class="property-required"
+    <dd>A collection of suggestions for scaling group configurations.</dd><dt class="property-required"
             title="Required">
         <span id="autoscalinggroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Group<wbr>Id</a>
@@ -622,8 +725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="level_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_csharp" style="color: inherit; text-decoration: inherit;">Level</a>
@@ -631,8 +733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.</p>
-</dd></dl>
+    <dd>Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -646,8 +747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getadvicesautoscalingadvicesetadvice">[]Get<wbr>Advices<wbr>Auto<wbr>Scaling<wbr>Advice<wbr>Set<wbr>Advice</a></span>
     </dt>
-    <dd><p>A collection of suggestions for scaling group configurations.</p>
-</dd><dt class="property-required"
+    <dd>A collection of suggestions for scaling group configurations.</dd><dt class="property-required"
             title="Required">
         <span id="autoscalinggroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupid_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Group<wbr>Id</a>
@@ -655,8 +755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="level_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_go" style="color: inherit; text-decoration: inherit;">Level</a>
@@ -664,8 +763,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.</p>
-</dd></dl>
+    <dd>Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="advices_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#advices_hcl" style="color: inherit; text-decoration: inherit;">advices</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getadvicesautoscalingadvicesetadvice">list(object)</a></span>
+    </dt>
+    <dd>A collection of suggestions for scaling group configurations.</dd><dt class="property-required"
+            title="Required">
+        <span id="auto_scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Auto scaling group ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="level_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_hcl" style="color: inherit; text-decoration: inherit;">level</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -679,8 +807,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getadvicesautoscalingadvicesetadvice">List&lt;Get<wbr>Advices<wbr>Auto<wbr>Scaling<wbr>Advice<wbr>Set<wbr>Advice&gt;</a></span>
     </dt>
-    <dd><p>A collection of suggestions for scaling group configurations.</p>
-</dd><dt class="property-required"
+    <dd>A collection of suggestions for scaling group configurations.</dd><dt class="property-required"
             title="Required">
         <span id="autoscalinggroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupid_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Id</a>
@@ -688,8 +815,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="level_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_java" style="color: inherit; text-decoration: inherit;">level</a>
@@ -697,8 +823,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.</p>
-</dd></dl>
+    <dd>Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -712,8 +837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getadvicesautoscalingadvicesetadvice">Get<wbr>Advices<wbr>Auto<wbr>Scaling<wbr>Advice<wbr>Set<wbr>Advice[]</a></span>
     </dt>
-    <dd><p>A collection of suggestions for scaling group configurations.</p>
-</dd><dt class="property-required"
+    <dd>A collection of suggestions for scaling group configurations.</dd><dt class="property-required"
             title="Required">
         <span id="autoscalinggroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Id</a>
@@ -721,8 +845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="level_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_nodejs" style="color: inherit; text-decoration: inherit;">level</a>
@@ -730,8 +853,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.</p>
-</dd></dl>
+    <dd>Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -743,10 +865,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#advices_python" style="color: inherit; text-decoration: inherit;">advices</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getadvicesautoscalingadvicesetadvice">Get<wbr>Advices<wbr>Auto<wbr>Scaling<wbr>Advice<wbr>Set<wbr>Advice]</a></span>
+        <span class="property-type"><a href="#getadvicesautoscalingadvicesetadvice">Sequence[Get<wbr>Advices<wbr>Auto<wbr>Scaling<wbr>Advice<wbr>Set<wbr>Advice]</a></span>
     </dt>
-    <dd><p>A collection of suggestions for scaling group configurations.</p>
-</dd><dt class="property-required"
+    <dd>A collection of suggestions for scaling group configurations.</dd><dt class="property-required"
             title="Required">
         <span id="auto_scaling_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_scaling_group_id_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>group_<wbr>id</a>
@@ -754,8 +875,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="level_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_python" style="color: inherit; text-decoration: inherit;">level</a>
@@ -763,8 +883,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.</p>
-</dd></dl>
+    <dd>Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -778,8 +897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getadvicesautoscalingadvicesetadvice">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A collection of suggestions for scaling group configurations.</p>
-</dd><dt class="property-required"
+    <dd>A collection of suggestions for scaling group configurations.</dd><dt class="property-required"
             title="Required">
         <span id="autoscalinggroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Id</a>
@@ -787,8 +905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Auto scaling group ID.</p>
-</dd><dt class="property-required"
+    <dd>Auto scaling group ID.</dd><dt class="property-required"
             title="Required">
         <span id="level_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#level_yaml" style="color: inherit; text-decoration: inherit;">level</a>
@@ -796,8 +913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.</p>
-</dd></dl>
+    <dd>Scaling group warning level. Valid values: NORMAL, WARNING, CRITICAL.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -815,8 +931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Problem Details.</p>
-</dd><dt class="property-required"
+    <dd>Problem Details.</dd><dt class="property-required"
             title="Required">
         <span id="problem_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#problem_csharp" style="color: inherit; text-decoration: inherit;">Problem</a>
@@ -824,8 +939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Problem Description.</p>
-</dd><dt class="property-required"
+    <dd>Problem Description.</dd><dt class="property-required"
             title="Required">
         <span id="solution_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_csharp" style="color: inherit; text-decoration: inherit;">Solution</a>
@@ -833,8 +947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recommended resolutions.</p>
-</dd></dl>
+    <dd>Recommended resolutions.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -848,8 +961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Problem Details.</p>
-</dd><dt class="property-required"
+    <dd>Problem Details.</dd><dt class="property-required"
             title="Required">
         <span id="problem_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#problem_go" style="color: inherit; text-decoration: inherit;">Problem</a>
@@ -857,8 +969,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Problem Description.</p>
-</dd><dt class="property-required"
+    <dd>Problem Description.</dd><dt class="property-required"
             title="Required">
         <span id="solution_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_go" style="color: inherit; text-decoration: inherit;">Solution</a>
@@ -866,8 +977,37 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recommended resolutions.</p>
-</dd></dl>
+    <dd>Recommended resolutions.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="detail_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#detail_hcl" style="color: inherit; text-decoration: inherit;">detail</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Problem Details.</dd><dt class="property-required"
+            title="Required">
+        <span id="problem_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#problem_hcl" style="color: inherit; text-decoration: inherit;">problem</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Problem Description.</dd><dt class="property-required"
+            title="Required">
+        <span id="solution_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_hcl" style="color: inherit; text-decoration: inherit;">solution</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Recommended resolutions.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -881,8 +1021,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Problem Details.</p>
-</dd><dt class="property-required"
+    <dd>Problem Details.</dd><dt class="property-required"
             title="Required">
         <span id="problem_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#problem_java" style="color: inherit; text-decoration: inherit;">problem</a>
@@ -890,8 +1029,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Problem Description.</p>
-</dd><dt class="property-required"
+    <dd>Problem Description.</dd><dt class="property-required"
             title="Required">
         <span id="solution_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_java" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -899,8 +1037,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recommended resolutions.</p>
-</dd></dl>
+    <dd>Recommended resolutions.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -914,8 +1051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Problem Details.</p>
-</dd><dt class="property-required"
+    <dd>Problem Details.</dd><dt class="property-required"
             title="Required">
         <span id="problem_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#problem_nodejs" style="color: inherit; text-decoration: inherit;">problem</a>
@@ -923,8 +1059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Problem Description.</p>
-</dd><dt class="property-required"
+    <dd>Problem Description.</dd><dt class="property-required"
             title="Required">
         <span id="solution_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_nodejs" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -932,8 +1067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Recommended resolutions.</p>
-</dd></dl>
+    <dd>Recommended resolutions.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -947,8 +1081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Problem Details.</p>
-</dd><dt class="property-required"
+    <dd>Problem Details.</dd><dt class="property-required"
             title="Required">
         <span id="problem_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#problem_python" style="color: inherit; text-decoration: inherit;">problem</a>
@@ -956,8 +1089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Problem Description.</p>
-</dd><dt class="property-required"
+    <dd>Problem Description.</dd><dt class="property-required"
             title="Required">
         <span id="solution_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_python" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -965,8 +1097,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Recommended resolutions.</p>
-</dd></dl>
+    <dd>Recommended resolutions.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -980,8 +1111,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Problem Details.</p>
-</dd><dt class="property-required"
+    <dd>Problem Details.</dd><dt class="property-required"
             title="Required">
         <span id="problem_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#problem_yaml" style="color: inherit; text-decoration: inherit;">problem</a>
@@ -989,8 +1119,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Problem Description.</p>
-</dd><dt class="property-required"
+    <dd>Problem Description.</dd><dt class="property-required"
             title="Required">
         <span id="solution_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#solution_yaml" style="color: inherit; text-decoration: inherit;">solution</a>
@@ -998,8 +1127,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Recommended resolutions.</p>
-</dd></dl>
+    <dd>Recommended resolutions.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1014,7 +1142,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

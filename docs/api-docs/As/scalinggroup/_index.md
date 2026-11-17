@@ -2,9 +2,11 @@
 ---
 title: "ScalingGroup"
 title_tag: "tencentcloud.As.ScalingGroup"
-meta_desc: "Documentation for the tencentcloud.As.ScalingGroup resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource to create a group of AS (Auto scaling) instances. NOTE: If the resource management rule forwardBalancerId is used, resource."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -14,30 +16,40 @@ no_edit_this_page: true
 
 Provides a resource to create a group of AS (Auto scaling) instances.
 
+> **NOTE:** If the resource management rule `forwardBalancerId` is used, resource `tencentcloud.As.LoadBalancer` management cannot be used simultaneously under the same auto scaling group id
+
 ## Example Usage
 
 ### Create a basic Scaling Group
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const zones = tencentcloud.Availability.getZonesByProduct({
+const zones = tencentcloud.availability.getZonesByProduct({
     product: "as",
 });
-const image = tencentcloud.Images.getInstance({
+const image = tencentcloud.images.getInstance({
     imageTypes: ["PUBLIC_IMAGE"],
     osName: "TencentOS Server 3.2 (Final)",
 });
-const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+const vpc = new tencentcloud.vpc.Instance("vpc", {
+    name: "vpc-example",
+    cidrBlock: "10.0.0.0/16",
+});
 const subnet = new tencentcloud.subnet.Instance("subnet", {
     vpcId: vpc.id,
+    name: "subnet-example",
     cidrBlock: "10.0.0.0/16",
     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
 });
-const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
+const example = new tencentcloud.as.ScalingConfig("example", {
     configurationName: "tf-example",
     imageId: image.then(image => image.images?.[0]?.imageId),
     instanceTypes: [
@@ -50,29 +62,40 @@ const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingCo
         instanceName: "test-ins-name",
     },
 });
-const exampleScalingGroup = new tencentcloud.as.ScalingGroup("exampleScalingGroup", {
+const exampleScalingGroup = new tencentcloud.as.ScalingGroup("example", {
     scalingGroupName: "tf-example",
-    configurationId: exampleScalingConfig.id,
+    configurationId: example.id,
     maxSize: 1,
     minSize: 0,
     vpcId: vpc.id,
     subnetIds: [subnet.id],
+    healthCheckType: "CLB",
+    replaceLoadBalancerUnhealthy: true,
+    lbHealthCheckGracePeriod: 30,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-zones = tencentcloud.Availability.get_zones_by_product(product="as")
-image = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+zones = tencentcloud.availability.get_zones_by_product(product="as")
+image = tencentcloud.images.get_instance(image_types=["PUBLIC_IMAGE"],
     os_name="TencentOS Server 3.2 (Final)")
-vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+vpc = tencentcloud.vpc.Instance("vpc",
+    name="vpc-example",
+    cidr_block="10.0.0.0/16")
 subnet = tencentcloud.subnet.Instance("subnet",
     vpc_id=vpc.id,
+    name="subnet-example",
     cidr_block="10.0.0.0/16",
     availability_zone=zones.zones[0].name)
-example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
+example = tencentcloud.as_.ScalingConfig("example",
     configuration_name="tf-example",
     image_id=image.images[0].image_id,
     instance_types=[
@@ -81,22 +104,115 @@ example_scaling_config = tencentcloud.as_.ScalingConfig("exampleScalingConfig",
         "SA2.SMALL2",
         "SA2.SMALL4",
     ],
-    instance_name_settings=tencentcloud.as_.ScalingConfigInstanceNameSettingsArgs(
-        instance_name="test-ins-name",
-    ))
-example_scaling_group = tencentcloud.as_.ScalingGroup("exampleScalingGroup",
+    instance_name_settings={
+        "instance_name": "test-ins-name",
+    })
+example_scaling_group = tencentcloud.as_.ScalingGroup("example",
     scaling_group_name="tf-example",
-    configuration_id=example_scaling_config.id,
+    configuration_id=example.id,
     max_size=1,
     min_size=0,
     vpc_id=vpc.id,
-    subnet_ids=[subnet.id])
+    subnet_ids=[subnet.id],
+    health_check_type="CLB",
+    replace_load_balancer_unhealthy=True,
+    lb_health_check_grace_period=30)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/images"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+			Product: "as",
+		}, nil)
+		if err != nil {
+			return err
+		}
+		image, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+			ImageTypes: []string{
+				"PUBLIC_IMAGE",
+			},
+			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+			Name:      pulumi.String("vpc-example"),
+			CidrBlock: pulumi.String("10.0.0.0/16"),
+		})
+		if err != nil {
+			return err
+		}
+		subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			Name:             pulumi.String("subnet-example"),
+			CidrBlock:        pulumi.String("10.0.0.0/16"),
+			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+		})
+		if err != nil {
+			return err
+		}
+		example, err := as.NewScalingConfig(ctx, "example", &as.ScalingConfigArgs{
+			ConfigurationName: pulumi.String("tf-example"),
+			ImageId:           pulumi.String(image.Images[0].ImageId),
+			InstanceTypes: pulumi.StringArray{
+				pulumi.String("SA1.SMALL1"),
+				pulumi.String("SA2.SMALL1"),
+				pulumi.String("SA2.SMALL2"),
+				pulumi.String("SA2.SMALL4"),
+			},
+			InstanceNameSettings: &as.ScalingConfigInstanceNameSettingsArgs{
+				InstanceName: pulumi.String("test-ins-name"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = as.NewScalingGroup(ctx, "example", &as.ScalingGroupArgs{
+			ScalingGroupName: pulumi.String("tf-example"),
+			ConfigurationId:  example.ID().ToIDOutput().ToStringOutput(),
+			MaxSize:          pulumi.Int(1),
+			MinSize:          pulumi.Int(0),
+			VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+			SubnetIds: pulumi.StringArray{
+				subnet2.ID().ToIDOutput().ToStringOutput(),
+			},
+			HealthCheckType:              pulumi.String("CLB"),
+			ReplaceLoadBalancerUnhealthy: pulumi.Bool(true),
+			LbHealthCheckGracePeriod:     pulumi.Int(30),
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -117,17 +233,19 @@ return await Deployment.RunAsync(() =>
 
     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     {
+        Name = "vpc-example",
         CidrBlock = "10.0.0.0/16",
     });
 
     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     {
         VpcId = vpc.Id,
+        Name = "subnet-example",
         CidrBlock = "10.0.0.0/16",
         AvailabilityZone = zones.Apply(getZonesByProductResult => getZonesByProductResult.Zones[0]?.Name),
     });
 
-    var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new()
+    var example = new Tencentcloud.As.ScalingConfig("example", new()
     {
         ConfigurationName = "tf-example",
         ImageId = image.Apply(getInstanceResult => getInstanceResult.Images[0]?.ImageId),
@@ -144,10 +262,10 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("exampleScalingGroup", new()
+    var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("example", new()
     {
         ScalingGroupName = "tf-example",
-        ConfigurationId = exampleScalingConfig.Id,
+        ConfigurationId = example.Id,
         MaxSize = 1,
         MinSize = 0,
         VpcId = vpc.Id,
@@ -155,86 +273,18 @@ return await Deployment.RunAsync(() =>
         {
             subnet.Id,
         },
+        HealthCheckType = "CLB",
+        ReplaceLoadBalancerUnhealthy = true,
+        LbHealthCheckGracePeriod = 30,
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-			Product: "as",
-		}, nil)
-		if err != nil {
-			return err
-		}
-		image, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-			ImageTypes: []string{
-				"PUBLIC_IMAGE",
-			},
-			OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-			CidrBlock: pulumi.String("10.0.0.0/16"),
-		})
-		if err != nil {
-			return err
-		}
-		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-			VpcId:            vpc.ID(),
-			CidrBlock:        pulumi.String("10.0.0.0/16"),
-			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-		})
-		if err != nil {
-			return err
-		}
-		exampleScalingConfig, err := As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
-			ConfigurationName: pulumi.String("tf-example"),
-			ImageId:           pulumi.String(image.Images[0].ImageId),
-			InstanceTypes: pulumi.StringArray{
-				pulumi.String("SA1.SMALL1"),
-				pulumi.String("SA2.SMALL1"),
-				pulumi.String("SA2.SMALL2"),
-				pulumi.String("SA2.SMALL4"),
-			},
-			InstanceNameSettings: &as.ScalingConfigInstanceNameSettingsArgs{
-				InstanceName: pulumi.String("test-ins-name"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = As.NewScalingGroup(ctx, "exampleScalingGroup", &As.ScalingGroupArgs{
-			ScalingGroupName: pulumi.String("tf-example"),
-			ConfigurationId:  exampleScalingConfig.ID(),
-			MaxSize:          pulumi.Int(1),
-			MinSize:          pulumi.Int(0),
-			VpcId:            vpc.ID(),
-			SubnetIds: pulumi.StringArray{
-				subnet.ID(),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -245,17 +295,13 @@ import com.pulumi.tencentcloud.Availability.AvailabilityFunctions;
 import com.pulumi.tencentcloud.Availability.inputs.GetZonesByProductArgs;
 import com.pulumi.tencentcloud.Images.ImagesFunctions;
 import com.pulumi.tencentcloud.Images.inputs.GetInstanceArgs;
-import com.pulumi.tencentcloud.Vpc.Instance;
-import com.pulumi.tencentcloud.Vpc.InstanceArgs;
-import com.pulumi.tencentcloud.Subnet.Instance;
-import com.pulumi.tencentcloud.Subnet.InstanceArgs;
 import com.pulumi.tencentcloud.As.ScalingConfig;
 import com.pulumi.tencentcloud.As.ScalingConfigArgs;
 import com.pulumi.tencentcloud.As.inputs.ScalingConfigInstanceNameSettingsArgs;
 import com.pulumi.tencentcloud.As.ScalingGroup;
 import com.pulumi.tencentcloud.As.ScalingGroupArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -276,19 +322,21 @@ public class App {
             .osName("TencentOS Server 3.2 (Final)")
             .build());
 
-        var vpc = new Instance("vpc", InstanceArgs.builder()        
+        var vpc = new com.pulumi.tencentcloud.Vpc.Instance("vpc", com.pulumi.tencentcloud.Vpc.InstanceArgs.builder()
+            .name("vpc-example")
             .cidrBlock("10.0.0.0/16")
             .build());
 
-        var subnet = new Instance("subnet", InstanceArgs.builder()        
+        var subnet = new com.pulumi.tencentcloud.Subnet.Instance("subnet", com.pulumi.tencentcloud.Subnet.InstanceArgs.builder()
             .vpcId(vpc.id())
+            .name("subnet-example")
             .cidrBlock("10.0.0.0/16")
-            .availabilityZone(zones.applyValue(getZonesByProductResult -> getZonesByProductResult.zones()[0].name()))
+            .availabilityZone(zones.zones()[0].name())
             .build());
 
-        var exampleScalingConfig = new ScalingConfig("exampleScalingConfig", ScalingConfigArgs.builder()        
+        var example = new ScalingConfig("example", ScalingConfigArgs.builder()
             .configurationName("tf-example")
-            .imageId(image.applyValue(getInstanceResult -> getInstanceResult.images()[0].imageId()))
+            .imageId(image.images()[0].imageId())
             .instanceTypes(            
                 "SA1.SMALL1",
                 "SA2.SMALL1",
@@ -299,31 +347,41 @@ public class App {
                 .build())
             .build());
 
-        var exampleScalingGroup = new ScalingGroup("exampleScalingGroup", ScalingGroupArgs.builder()        
+        var exampleScalingGroup = new ScalingGroup("exampleScalingGroup", ScalingGroupArgs.builder()
             .scalingGroupName("tf-example")
-            .configurationId(exampleScalingConfig.id())
+            .configurationId(example.id())
             .maxSize(1)
             .minSize(0)
             .vpcId(vpc.id())
             .subnetIds(subnet.id())
+            .healthCheckType("CLB")
+            .replaceLoadBalancerUnhealthy(true)
+            .lbHealthCheckGracePeriod(30)
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   vpc:
     type: tencentcloud:Vpc:Instance
     properties:
+      name: vpc-example
       cidrBlock: 10.0.0.0/16
   subnet:
     type: tencentcloud:Subnet:Instance
     properties:
       vpcId: ${vpc.id}
+      name: subnet-example
       cidrBlock: 10.0.0.0/16
       availabilityZone: ${zones.zones[0].name}
-  exampleScalingConfig:
+  example:
     type: tencentcloud:As:ScalingConfig
     properties:
       configurationName: tf-example
@@ -337,33 +395,398 @@ resources:
         instanceName: test-ins-name
   exampleScalingGroup:
     type: tencentcloud:As:ScalingGroup
+    name: example
     properties:
       scalingGroupName: tf-example
-      configurationId: ${exampleScalingConfig.id}
+      configurationId: ${example.id}
       maxSize: 1
       minSize: 0
       vpcId: ${vpc.id}
       subnetIds:
         - ${subnet.id}
+      healthCheckType: CLB
+      replaceLoadBalancerUnhealthy: true
+      lbHealthCheckGracePeriod: 30
 variables:
   zones:
     fn::invoke:
-      Function: tencentcloud:Availability:getZonesByProduct
-      Arguments:
+      function: tencentcloud:Availability:getZonesByProduct
+      arguments:
         product: as
   image:
     fn::invoke:
-      Function: tencentcloud:Images:getInstance
-      Arguments:
+      function: tencentcloud:Images:getInstance
+      arguments:
         imageTypes:
           - PUBLIC_IMAGE
         osName: TencentOS Server 3.2 (Final)
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_availability_getzonesbyproduct" "zones" {
+  product = "as"
+}
+data "tencentcloud_images_getinstance" "image" {
+  image_types = ["PUBLIC_IMAGE"]
+  os_name     = "TencentOS Server 3.2 (Final)"
+}
+
+resource "tencentcloud_vpc_instance" "vpc" {
+  name       = "vpc-example"
+  cidr_block = "10.0.0.0/16"
+}
+resource "tencentcloud_subnet_instance" "subnet" {
+  vpc_id            = tencentcloud_vpc_instance.vpc.id
+  name              = "subnet-example"
+  cidr_block        = "10.0.0.0/16"
+  availability_zone = data.tencentcloud_availability_getzonesbyproduct.zones.zones[0].name
+}
+resource "tencentcloud_as_scalingconfig" "example" {
+  configuration_name = "tf-example"
+  image_id           = data.tencentcloud_images_getinstance.image.images[0].image_id
+  instance_types     = ["SA1.SMALL1", "SA2.SMALL1", "SA2.SMALL2", "SA2.SMALL4"]
+  instance_name_settings = {
+    instance_name = "test-ins-name"
+  }
+}
+resource "tencentcloud_as_scalinggroup" "example" {
+  scaling_group_name              = "tf-example"
+  configuration_id                = tencentcloud_as_scalingconfig.example.id
+  max_size                        = 1
+  min_size                        = 0
+  vpc_id                          = tencentcloud_vpc_instance.vpc.id
+  subnet_ids                      = [tencentcloud_subnet_instance.subnet.id]
+  health_check_type               = "CLB"
+  replace_load_balancer_unhealthy = true
+  lb_health_check_grace_period    = 30
+}
+```
+</pulumi-choosable>
+</div>
+
 
 ### Create a complete Scaling Group
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as tencentcloud from "@tencentcloud_iac/pulumi";
+
+const example = new tencentcloud.clb.Instance("example", {
+    networkType: "INTERNAL",
+    clbName: "clb-example",
+    projectId: 0,
+    vpcId: vpc.id,
+    subnetId: subnet.id,
+    tags: {
+        test: "tf",
+    },
+});
+const exampleListener = new tencentcloud.clb.Listener("example", {
+    clbId: example.id,
+    listenerName: "listener-example",
+    port: 80,
+    protocol: "HTTP",
+});
+const exampleListenerRule = new tencentcloud.clb.ListenerRule("example", {
+    listenerId: exampleListener.listenerId,
+    clbId: example.id,
+    domain: "foo.net",
+    url: "/bar",
+});
+const exampleScalingGroup = new tencentcloud.as.ScalingGroup("example", {
+    scalingGroupName: "tf-example",
+    configurationId: exampleTencentcloudAsScalingConfig.id,
+    maxSize: 1,
+    minSize: 0,
+    vpcId: vpc.id,
+    subnetIds: [subnet.id],
+    projectId: 0,
+    defaultCooldown: 400,
+    desiredCapacity: 1,
+    replaceMonitorUnhealthy: false,
+    scalingMode: "CLASSIC_SCALING",
+    replaceLoadBalancerUnhealthy: false,
+    replaceMode: "RECREATE",
+    desiredCapacitySyncWithMaxMinSize: false,
+    priorityScaleInUnhealthy: true,
+    terminationPolicies: "NEWEST_INSTANCE",
+    retryPolicy: "INCREMENTAL_INTERVALS",
+    forwardBalancerIds: [{
+        loadBalancerId: example.id,
+        listenerId: exampleListener.listenerId,
+        ruleId: exampleListenerRule.ruleId,
+        targetAttributes: [{
+            port: 80,
+            weight: 90,
+        }],
+    }],
+    tags: {
+        createBy: "tfExample",
+    },
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
+```python
+import pulumi
+import tencentcloud_iac_pulumi as tencentcloud
+
+example = tencentcloud.clb.Instance("example",
+    network_type="INTERNAL",
+    clb_name="clb-example",
+    project_id=0,
+    vpc_id=vpc["id"],
+    subnet_id=subnet["id"],
+    tags={
+        "test": "tf",
+    })
+example_listener = tencentcloud.clb.Listener("example",
+    clb_id=example.id,
+    listener_name="listener-example",
+    port=80,
+    protocol="HTTP")
+example_listener_rule = tencentcloud.clb.ListenerRule("example",
+    listener_id=example_listener.listener_id,
+    clb_id=example.id,
+    domain="foo.net",
+    url="/bar")
+example_scaling_group = tencentcloud.as_.ScalingGroup("example",
+    scaling_group_name="tf-example",
+    configuration_id=example_tencentcloud_as_scaling_config["id"],
+    max_size=1,
+    min_size=0,
+    vpc_id=vpc["id"],
+    subnet_ids=[subnet["id"]],
+    project_id=0,
+    default_cooldown=400,
+    desired_capacity=1,
+    replace_monitor_unhealthy=False,
+    scaling_mode="CLASSIC_SCALING",
+    replace_load_balancer_unhealthy=False,
+    replace_mode="RECREATE",
+    desired_capacity_sync_with_max_min_size=False,
+    priority_scale_in_unhealthy=True,
+    termination_policies="NEWEST_INSTANCE",
+    retry_policy="INCREMENTAL_INTERVALS",
+    forward_balancer_ids=[{
+        "load_balancer_id": example.id,
+        "listener_id": example_listener.listener_id,
+        "rule_id": example_listener_rule.rule_id,
+        "target_attributes": [{
+            "port": 80,
+            "weight": 90,
+        }],
+    }],
+    tags={
+        "createBy": "tfExample",
+    })
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/as"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example, err := clb.NewInstance(ctx, "example", &clb.InstanceArgs{
+			NetworkType: pulumi.String("INTERNAL"),
+			ClbName:     pulumi.String("clb-example"),
+			ProjectId:   pulumi.Int(0),
+			VpcId:       pulumi.Any(vpc.Id),
+			SubnetId:    pulumi.Any(subnet.Id),
+			Tags: pulumi.StringMap{
+				"test": pulumi.String("tf"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		exampleListener, err := clb.NewListener(ctx, "example", &clb.ListenerArgs{
+			ClbId:        example.ID().ToIDOutput().ToStringOutput(),
+			ListenerName: pulumi.String("listener-example"),
+			Port:         pulumi.Int(80),
+			Protocol:     pulumi.String("HTTP"),
+		})
+		if err != nil {
+			return err
+		}
+		exampleListenerRule, err := clb.NewListenerRule(ctx, "example", &clb.ListenerRuleArgs{
+			ListenerId: exampleListener.ListenerId,
+			ClbId:      example.ID().ToIDOutput().ToStringOutput(),
+			Domain:     pulumi.String("foo.net"),
+			Url:        pulumi.String("/bar"),
+		})
+		if err != nil {
+			return err
+		}
+		_, err = as.NewScalingGroup(ctx, "example", &as.ScalingGroupArgs{
+			ScalingGroupName: pulumi.String("tf-example"),
+			ConfigurationId:  pulumi.Any(exampleTencentcloudAsScalingConfig.Id),
+			MaxSize:          pulumi.Int(1),
+			MinSize:          pulumi.Int(0),
+			VpcId:            pulumi.Any(vpc.Id),
+			SubnetIds: pulumi.StringArray{
+				subnet.Id,
+			},
+			ProjectId:                         pulumi.Int(0),
+			DefaultCooldown:                   pulumi.Int(400),
+			DesiredCapacity:                   pulumi.Int(1),
+			ReplaceMonitorUnhealthy:           pulumi.Bool(false),
+			ScalingMode:                       pulumi.String("CLASSIC_SCALING"),
+			ReplaceLoadBalancerUnhealthy:      pulumi.Bool(false),
+			ReplaceMode:                       pulumi.String("RECREATE"),
+			DesiredCapacitySyncWithMaxMinSize: pulumi.Bool(false),
+			PriorityScaleInUnhealthy:          pulumi.Bool(true),
+			TerminationPolicies:               pulumi.String("NEWEST_INSTANCE"),
+			RetryPolicy:                       pulumi.String("INCREMENTAL_INTERVALS"),
+			ForwardBalancerIds: as.ScalingGroupForwardBalancerIdArray{
+				&as.ScalingGroupForwardBalancerIdArgs{
+					LoadBalancerId: example.ID().ToIDOutput().ToStringOutput(),
+					ListenerId:     exampleListener.ListenerId,
+					RuleId:         exampleListenerRule.RuleId,
+					TargetAttributes: as.ScalingGroupForwardBalancerIdTargetAttributeArray{
+						&as.ScalingGroupForwardBalancerIdTargetAttributeArgs{
+							Port:   pulumi.Int(80),
+							Weight: pulumi.Int(90),
+						},
+					},
+				},
+			},
+			Tags: pulumi.StringMap{
+				"createBy": pulumi.String("tfExample"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = new Tencentcloud.Clb.Instance("example", new()
+    {
+        NetworkType = "INTERNAL",
+        ClbName = "clb-example",
+        ProjectId = 0,
+        VpcId = vpc.Id,
+        SubnetId = subnet.Id,
+        Tags = 
+        {
+            { "test", "tf" },
+        },
+    });
+
+    var exampleListener = new Tencentcloud.Clb.Listener("example", new()
+    {
+        ClbId = example.Id,
+        ListenerName = "listener-example",
+        Port = 80,
+        Protocol = "HTTP",
+    });
+
+    var exampleListenerRule = new Tencentcloud.Clb.ListenerRule("example", new()
+    {
+        ListenerId = exampleListener.ListenerId,
+        ClbId = example.Id,
+        Domain = "foo.net",
+        Url = "/bar",
+    });
+
+    var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("example", new()
+    {
+        ScalingGroupName = "tf-example",
+        ConfigurationId = exampleTencentcloudAsScalingConfig.Id,
+        MaxSize = 1,
+        MinSize = 0,
+        VpcId = vpc.Id,
+        SubnetIds = new[]
+        {
+            subnet.Id,
+        },
+        ProjectId = 0,
+        DefaultCooldown = 400,
+        DesiredCapacity = 1,
+        ReplaceMonitorUnhealthy = false,
+        ScalingMode = "CLASSIC_SCALING",
+        ReplaceLoadBalancerUnhealthy = false,
+        ReplaceMode = "RECREATE",
+        DesiredCapacitySyncWithMaxMinSize = false,
+        PriorityScaleInUnhealthy = true,
+        TerminationPolicies = "NEWEST_INSTANCE",
+        RetryPolicy = "INCREMENTAL_INTERVALS",
+        ForwardBalancerIds = new[]
+        {
+            new Tencentcloud.As.Inputs.ScalingGroupForwardBalancerIdArgs
+            {
+                LoadBalancerId = example.Id,
+                ListenerId = exampleListener.ListenerId,
+                RuleId = exampleListenerRule.RuleId,
+                TargetAttributes = new[]
+                {
+                    new Tencentcloud.As.Inputs.ScalingGroupForwardBalancerIdTargetAttributeArgs
+                    {
+                        Port = 80,
+                        Weight = 90,
+                    },
+                },
+            },
+        },
+        Tags = 
+        {
+            { "createBy", "tfExample" },
+        },
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -379,8 +802,9 @@ import com.pulumi.tencentcloud.Clb.ListenerRuleArgs;
 import com.pulumi.tencentcloud.As.ScalingGroup;
 import com.pulumi.tencentcloud.As.ScalingGroupArgs;
 import com.pulumi.tencentcloud.As.inputs.ScalingGroupForwardBalancerIdArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.As.inputs.ScalingGroupForwardBalancerIdTargetAttributeArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -392,43 +816,49 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var exampleInstance = new Instance("exampleInstance", InstanceArgs.builder()        
+        var example = new Instance("example", InstanceArgs.builder()
             .networkType("INTERNAL")
             .clbName("clb-example")
             .projectId(0)
-            .vpcId(tencentcloud_vpc.vpc().id())
-            .subnetId(tencentcloud_subnet.subnet().id())
+            .vpcId(vpc.id())
+            .subnetId(subnet.id())
             .tags(Map.of("test", "tf"))
             .build());
 
-        var exampleListener = new Listener("exampleListener", ListenerArgs.builder()        
-            .clbId(exampleInstance.id())
+        var exampleListener = new Listener("exampleListener", ListenerArgs.builder()
+            .clbId(example.id())
             .listenerName("listener-example")
             .port(80)
             .protocol("HTTP")
             .build());
 
-        var exampleListenerRule = new ListenerRule("exampleListenerRule", ListenerRuleArgs.builder()        
+        var exampleListenerRule = new ListenerRule("exampleListenerRule", ListenerRuleArgs.builder()
             .listenerId(exampleListener.listenerId())
-            .clbId(exampleInstance.id())
+            .clbId(example.id())
             .domain("foo.net")
             .url("/bar")
             .build());
 
-        var exampleScalingGroup = new ScalingGroup("exampleScalingGroup", ScalingGroupArgs.builder()        
+        var exampleScalingGroup = new ScalingGroup("exampleScalingGroup", ScalingGroupArgs.builder()
             .scalingGroupName("tf-example")
-            .configurationId(tencentcloud_as_scaling_config.example().id())
+            .configurationId(exampleTencentcloudAsScalingConfig.id())
             .maxSize(1)
             .minSize(0)
-            .vpcId(tencentcloud_vpc.vpc().id())
-            .subnetIds(tencentcloud_subnet.subnet().id())
+            .vpcId(vpc.id())
+            .subnetIds(subnet.id())
             .projectId(0)
             .defaultCooldown(400)
             .desiredCapacity(1)
+            .replaceMonitorUnhealthy(false)
+            .scalingMode("CLASSIC_SCALING")
+            .replaceLoadBalancerUnhealthy(false)
+            .replaceMode("RECREATE")
+            .desiredCapacitySyncWithMaxMinSize(false)
+            .priorityScaleInUnhealthy(true)
             .terminationPolicies("NEWEST_INSTANCE")
             .retryPolicy("INCREMENTAL_INTERVALS")
             .forwardBalancerIds(ScalingGroupForwardBalancerIdArgs.builder()
-                .loadBalancerId(exampleInstance.id())
+                .loadBalancerId(example.id())
                 .listenerId(exampleListener.listenerId())
                 .ruleId(exampleListenerRule.ruleId())
                 .targetAttributes(ScalingGroupForwardBalancerIdTargetAttributeArgs.builder()
@@ -442,50 +872,63 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  exampleInstance:
+  example:
     type: tencentcloud:Clb:Instance
     properties:
       networkType: INTERNAL
       clbName: clb-example
       projectId: 0
-      vpcId: ${tencentcloud_vpc.vpc.id}
-      subnetId: ${tencentcloud_subnet.subnet.id}
+      vpcId: ${vpc.id}
+      subnetId: ${subnet.id}
       tags:
         test: tf
   exampleListener:
     type: tencentcloud:Clb:Listener
+    name: example
     properties:
-      clbId: ${exampleInstance.id}
+      clbId: ${example.id}
       listenerName: listener-example
       port: 80
       protocol: HTTP
   exampleListenerRule:
     type: tencentcloud:Clb:ListenerRule
+    name: example
     properties:
       listenerId: ${exampleListener.listenerId}
-      clbId: ${exampleInstance.id}
+      clbId: ${example.id}
       domain: foo.net
       url: /bar
   exampleScalingGroup:
     type: tencentcloud:As:ScalingGroup
+    name: example
     properties:
       scalingGroupName: tf-example
-      configurationId: ${tencentcloud_as_scaling_config.example.id}
+      configurationId: ${exampleTencentcloudAsScalingConfig.id}
       maxSize: 1
       minSize: 0
-      vpcId: ${tencentcloud_vpc.vpc.id}
+      vpcId: ${vpc.id}
       subnetIds:
-        - ${tencentcloud_subnet.subnet.id}
+        - ${subnet.id}
       projectId: 0
       defaultCooldown: 400
       desiredCapacity: 1
-      terminationPolicies:
-        - NEWEST_INSTANCE
+      replaceMonitorUnhealthy: false
+      scalingMode: CLASSIC_SCALING
+      replaceLoadBalancerUnhealthy: false
+      replaceMode: RECREATE
+      desiredCapacitySyncWithMaxMinSize: false
+      priorityScaleInUnhealthy: true
+      terminationPolicies: NEWEST_INSTANCE
       retryPolicy: INCREMENTAL_INTERVALS
       forwardBalancerIds:
-        - loadBalancerId: ${exampleInstance.id}
+        - loadBalancerId: ${example.id}
           listenerId: ${exampleListener.listenerId}
           ruleId: ${exampleListenerRule.ruleId}
           targetAttributes:
@@ -494,83 +937,193 @@ resources:
       tags:
         createBy: tfExample
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_clb_instance" "example" {
+  network_type = "INTERNAL"
+  clb_name     = "clb-example"
+  project_id   = 0
+  vpc_id       = vpc.id
+  subnet_id    = subnet.id
+  tags = {
+    "test" = "tf"
+  }
+}
+resource "tencentcloud_clb_listener" "example" {
+  clb_id        = tencentcloud_clb_instance.example.id
+  listener_name = "listener-example"
+  port          = 80
+  protocol      = "HTTP"
+}
+resource "tencentcloud_clb_listenerrule" "example" {
+  listener_id = tencentcloud_clb_listener.example.listener_id
+  clb_id      = tencentcloud_clb_instance.example.id
+  domain      = "foo.net"
+  url         = "/bar"
+}
+resource "tencentcloud_as_scalinggroup" "example" {
+  scaling_group_name                      = "tf-example"
+  configuration_id                        = exampleTencentcloudAsScalingConfig.id
+  max_size                                = 1
+  min_size                                = 0
+  vpc_id                                  = vpc.id
+  subnet_ids                              = [subnet.id]
+  project_id                              = 0
+  default_cooldown                        = 400
+  desired_capacity                        = 1
+  replace_monitor_unhealthy               = false
+  scaling_mode                            = "CLASSIC_SCALING"
+  replace_load_balancer_unhealthy         = false
+  replace_mode                            = "RECREATE"
+  desired_capacity_sync_with_max_min_size = false
+  priority_scale_in_unhealthy             = true
+  termination_policies                    = "NEWEST_INSTANCE"
+  retry_policy                            = "INCREMENTAL_INTERVALS"
+  forward_balancer_ids {
+    load_balancer_id = tencentcloud_clb_instance.example.id
+    listener_id      = tencentcloud_clb_listener.example.listener_id
+    rule_id          = tencentcloud_clb_listenerrule.example.rule_id
+    target_attributes {
+      port   = 80
+      weight = 90
+    }
+  }
+  tags = {
+    "createBy" = "tfExample"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [CreateAutoScalingGroup](https://www.tencentcloud.com/document/api/377/31016)
+  - [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/31013)
+* Read:
+  - [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/31013)
+  - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+* Update:
+  - [ModifyAutoScalingGroup](https://www.tencentcloud.com/document/api/377/31008)
+  - [ModifyLoadBalancers](https://www.tencentcloud.com/document/api/377/31006)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Delete:
+  - [DeleteAutoScalingGroup](https://www.tencentcloud.com/document/api/377/31015)
+  - [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/31013)
+  - [ModifyAutoScalingGroup](https://www.tencentcloud.com/document/api/377/31008)
 
 
 ## Create ScalingGroup Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ScalingGroup</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScalingGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">ScalingGroup</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScalingGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">ScalingGroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                 <span class="nx">configuration_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">default_cooldown</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                 <span class="nx">desired_capacity</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                 <span class="nx">forward_balancer_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[_as_.ScalingGroupForwardBalancerIdArgs]]</span> = None<span class="p">,</span>
-                 <span class="nx">load_balancer_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">max_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                 <span class="nx">min_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                 <span class="nx">multi_zone_subnet_policy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-                 <span class="nx">replace_load_balancer_unhealthy</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-                 <span class="nx">replace_monitor_unhealthy</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
-                 <span class="nx">retry_policy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">scaling_group_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">scaling_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">subnet_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
-                 <span class="nx">termination_policies</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-                 <span class="nx">zones</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">ScalingGroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                  <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">ScalingGroupArgs</a></span><span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">ScalingGroup</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                 <span class="nx">max_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                 <span class="nx">configuration_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">scaling_group_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">min_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                 <span class="nx">multi_zone_subnet_policy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">replace_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">instance_allocation_policy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">lb_health_check_grace_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                 <span class="nx">load_balancer_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">forward_balancer_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[ScalingGroupForwardBalancerIdArgs]]</span> = None<span class="p">,</span>
+                 <span class="nx">desired_capacity_sync_with_max_min_size</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                 <span class="nx">concurrent_scale_out_for_desired_capacity</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                 <span class="nx">priority_scale_in_unhealthy</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                 <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                 <span class="nx">replace_load_balancer_unhealthy</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                 <span class="nx">health_check_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">replace_monitor_unhealthy</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+                 <span class="nx">retry_policy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">desired_capacity</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                 <span class="nx">scaling_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">subnet_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
+                 <span class="nx">termination_policies</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+                 <span class="nx">default_cooldown</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+                 <span class="nx">zones</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewScalingGroup</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ScalingGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ScalingGroup</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewScalingGroup</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">ScalingGroupArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ScalingGroup</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ScalingGroup</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScalingGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">ScalingGroup</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScalingGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">ScalingGroup</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScalingGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">ScalingGroup</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">ScalingGroupArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:As:ScalingGroup</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:As:ScalingGroup</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_as_scaling_group&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -591,7 +1144,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -708,11 +1261,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## ScalingGroup Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -728,8 +1289,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An available ID for a launch configuration.</p>
-</dd><dt class="property-required"
+    <dd>An available ID for a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -737,8 +1297,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-required"
             title="Required">
         <span id="minsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
@@ -746,8 +1305,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-required"
+    <dd>Minimum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Name</a>
@@ -755,8 +1313,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Name of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -764,8 +1321,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="concurrentscaleoutfordesiredcapacity_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrentscaleoutfordesiredcapacity_csharp" style="color: inherit; text-decoration: inherit;">Concurrent<wbr>Scale<wbr>Out<wbr>For<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The concurrent expansion function that matches the expected number cannot be set when <code>instanceAllocationPolicy</code> is in bidding <code>SPOT_MIXED</code> mode, nor can it be set when <code>scalingMode</code> is in expansion priority boot mode(<code>WAKE_UP_STOPPED_SCALING</code>). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="defaultcooldown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultcooldown_csharp" style="color: inherit; text-decoration: inherit;">Default<wbr>Cooldown</a>
@@ -773,8 +1337,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Default cooldown time in second, and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Default cooldown time in second, and default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="desiredcapacity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacity_csharp" style="color: inherit; text-decoration: inherit;">Desired<wbr>Capacity</a>
@@ -782,17 +1345,49 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Desired volume of CVM instances, which is between <code>max_size</code> and <code>min_size</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Desired volume of CVM instances, which is between <code>maxSize</code> and <code>minSize</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="desiredcapacitysyncwithmaxminsize_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacitysyncwithmaxminsize_csharp" style="color: inherit; text-decoration: inherit;">Desired<wbr>Capacity<wbr>Sync<wbr>With<wbr>Max<wbr>Min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The expected number of instances is synchronized with the maximum and minimum values. The default value is <code>False</code>. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="forwardbalancerids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardbalancerids_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Balancer<wbr>Ids</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalinggroupforwardbalancerid">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#scalinggroupforwardbalancerid">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id&gt;</a></span>
     </dt>
-    <dd><p>List of application load balancers, which can't be specified with <code>load_balancer_ids</code> together.</p>
-</dd><dt class="property-optional"
+    <dd>List of application load balancers, which can't be specified with <code>loadBalancerIds</code> together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthchecktype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktype_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check type of instances in a scaling group.<!-- raw HTML omitted --><!-- raw HTML omitted -->CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see <a href="https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1">Instance Health Check</a><!-- raw HTML omitted --><!-- raw HTML omitted -->CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see <a href="https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1">Health Check Overview</a>.<!-- raw HTML omitted -->If the parameter is set to <code>CLB</code>, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY</code>. If the CLB health check indicates unhealthy, the <code>HealthStatus</code> field will return <code>CLB_UNHEALTHY</code>. If both checks indicate unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY|CLB_UNHEALTHY</code>. Default value: <code>CLB</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instanceallocationpolicy_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceallocationpolicy_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Allocation<wbr>Policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance allocation strategy, with values including <code>LAUNCH_CONFIGURATION</code> and <code>SPOT_MIXED</code>, defaults to <code>LAUNCH_CONFIGURATION</code>.
+<code>LAUNCH_CONFIGURATION</code>: Represents the traditional startup configuration mode;
+<code>SPOT_MIXED</code>: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lbhealthcheckgraceperiod_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbhealthcheckgraceperiod_csharp" style="color: inherit; text-decoration: inherit;">Lb<wbr>Health<wbr>Check<wbr>Grace<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Grace period of the CLB health check during which the <code>IN_SERVICE</code> instances added will not be marked as <code>CLB_UNHEALTHY</code>.<!-- raw HTML omitted -->Valid range: 0-7200, in seconds. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadbalancerids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerids_csharp" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Ids</a>
@@ -800,8 +1395,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of traditional load balancers.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of traditional load balancers.</dd><dt class="property-optional"
             title="Optional">
         <span id="multizonesubnetpolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizonesubnetpolicy_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -809,8 +1403,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi zone or subnet strategy, Valid values: <code>PRIORITY</code> and <code>EQUALITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priorityscaleinunhealthy_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priorityscaleinunhealthy_csharp" style="color: inherit; text-decoration: inherit;">Priority<wbr>Scale<wbr>In<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable priority for unhealthy instances during scale-in operations. If set to <code>true</code>, unhealthy instances will be removed first when scaling in.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -818,8 +1419,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies to which project the scaling group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies to which project the scaling group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="replaceloadbalancerunhealthy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replaceloadbalancerunhealthy_csharp" style="color: inherit; text-decoration: inherit;">Replace<wbr>Load<wbr>Balancer<wbr>Unhealthy</a>
@@ -827,8 +1427,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</p>
-</dd><dt class="property-optional"
+    <dd>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="replacemode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replacemode_csharp" style="color: inherit; text-decoration: inherit;">Replace<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="replacemonitorunhealthy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replacemonitorunhealthy_csharp" style="color: inherit; text-decoration: inherit;">Replace<wbr>Monitor<wbr>Unhealthy</a>
@@ -836,8 +1443,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</p>
-</dd><dt class="property-optional"
+    <dd>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</dd><dt class="property-optional"
             title="Optional">
         <span id="retrypolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrypolicy_csharp" style="color: inherit; text-decoration: inherit;">Retry<wbr>Policy</a>
@@ -845,8 +1451,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalingmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingmode_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Mode</a>
@@ -854,8 +1459,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -863,17 +1467,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="terminationpolicies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationpolicies_csharp" style="color: inherit; text-decoration: inherit;">Termination<wbr>Policies</a>
@@ -881,8 +1483,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_csharp" style="color: inherit; text-decoration: inherit;">Zones</a>
@@ -890,8 +1491,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -905,8 +1505,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An available ID for a launch configuration.</p>
-</dd><dt class="property-required"
+    <dd>An available ID for a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -914,8 +1513,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-required"
             title="Required">
         <span id="minsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
@@ -923,8 +1521,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-required"
+    <dd>Minimum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Name</a>
@@ -932,8 +1529,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Name of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -941,8 +1537,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="concurrentscaleoutfordesiredcapacity_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrentscaleoutfordesiredcapacity_go" style="color: inherit; text-decoration: inherit;">Concurrent<wbr>Scale<wbr>Out<wbr>For<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The concurrent expansion function that matches the expected number cannot be set when <code>instanceAllocationPolicy</code> is in bidding <code>SPOT_MIXED</code> mode, nor can it be set when <code>scalingMode</code> is in expansion priority boot mode(<code>WAKE_UP_STOPPED_SCALING</code>). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="defaultcooldown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultcooldown_go" style="color: inherit; text-decoration: inherit;">Default<wbr>Cooldown</a>
@@ -950,8 +1553,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Default cooldown time in second, and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Default cooldown time in second, and default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="desiredcapacity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacity_go" style="color: inherit; text-decoration: inherit;">Desired<wbr>Capacity</a>
@@ -959,8 +1561,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Desired volume of CVM instances, which is between <code>max_size</code> and <code>min_size</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Desired volume of CVM instances, which is between <code>maxSize</code> and <code>minSize</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="desiredcapacitysyncwithmaxminsize_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacitysyncwithmaxminsize_go" style="color: inherit; text-decoration: inherit;">Desired<wbr>Capacity<wbr>Sync<wbr>With<wbr>Max<wbr>Min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The expected number of instances is synchronized with the maximum and minimum values. The default value is <code>False</code>. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="forwardbalancerids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardbalancerids_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Balancer<wbr>Ids</a>
@@ -968,8 +1577,33 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalinggroupforwardbalancerid">[]Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Args</a></span>
     </dt>
-    <dd><p>List of application load balancers, which can't be specified with <code>load_balancer_ids</code> together.</p>
-</dd><dt class="property-optional"
+    <dd>List of application load balancers, which can't be specified with <code>loadBalancerIds</code> together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthchecktype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktype_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check type of instances in a scaling group.<!-- raw HTML omitted --><!-- raw HTML omitted -->CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see <a href="https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1">Instance Health Check</a><!-- raw HTML omitted --><!-- raw HTML omitted -->CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see <a href="https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1">Health Check Overview</a>.<!-- raw HTML omitted -->If the parameter is set to <code>CLB</code>, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY</code>. If the CLB health check indicates unhealthy, the <code>HealthStatus</code> field will return <code>CLB_UNHEALTHY</code>. If both checks indicate unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY|CLB_UNHEALTHY</code>. Default value: <code>CLB</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instanceallocationpolicy_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceallocationpolicy_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Allocation<wbr>Policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance allocation strategy, with values including <code>LAUNCH_CONFIGURATION</code> and <code>SPOT_MIXED</code>, defaults to <code>LAUNCH_CONFIGURATION</code>.
+<code>LAUNCH_CONFIGURATION</code>: Represents the traditional startup configuration mode;
+<code>SPOT_MIXED</code>: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lbhealthcheckgraceperiod_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbhealthcheckgraceperiod_go" style="color: inherit; text-decoration: inherit;">Lb<wbr>Health<wbr>Check<wbr>Grace<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Grace period of the CLB health check during which the <code>IN_SERVICE</code> instances added will not be marked as <code>CLB_UNHEALTHY</code>.<!-- raw HTML omitted -->Valid range: 0-7200, in seconds. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadbalancerids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerids_go" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Ids</a>
@@ -977,8 +1611,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of traditional load balancers.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of traditional load balancers.</dd><dt class="property-optional"
             title="Optional">
         <span id="multizonesubnetpolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizonesubnetpolicy_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -986,8 +1619,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi zone or subnet strategy, Valid values: <code>PRIORITY</code> and <code>EQUALITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priorityscaleinunhealthy_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priorityscaleinunhealthy_go" style="color: inherit; text-decoration: inherit;">Priority<wbr>Scale<wbr>In<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable priority for unhealthy instances during scale-in operations. If set to <code>true</code>, unhealthy instances will be removed first when scaling in.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -995,8 +1635,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies to which project the scaling group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies to which project the scaling group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="replaceloadbalancerunhealthy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replaceloadbalancerunhealthy_go" style="color: inherit; text-decoration: inherit;">Replace<wbr>Load<wbr>Balancer<wbr>Unhealthy</a>
@@ -1004,8 +1643,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</p>
-</dd><dt class="property-optional"
+    <dd>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="replacemode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replacemode_go" style="color: inherit; text-decoration: inherit;">Replace<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="replacemonitorunhealthy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replacemonitorunhealthy_go" style="color: inherit; text-decoration: inherit;">Replace<wbr>Monitor<wbr>Unhealthy</a>
@@ -1013,8 +1659,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</p>
-</dd><dt class="property-optional"
+    <dd>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</dd><dt class="property-optional"
             title="Optional">
         <span id="retrypolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrypolicy_go" style="color: inherit; text-decoration: inherit;">Retry<wbr>Policy</a>
@@ -1022,8 +1667,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalingmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingmode_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Mode</a>
@@ -1031,8 +1675,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -1040,17 +1683,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="terminationpolicies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationpolicies_go" style="color: inherit; text-decoration: inherit;">Termination<wbr>Policies</a>
@@ -1058,8 +1699,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_go" style="color: inherit; text-decoration: inherit;">Zones</a>
@@ -1067,8 +1707,223 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of available zones, for Basic network it is required.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="configuration_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configuration_id_hcl" style="color: inherit; text-decoration: inherit;">configuration_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An available ID for a launch configuration.</dd><dt class="property-required"
+            title="Required">
+        <span id="max_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-required"
+            title="Required">
+        <span id="min_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_size_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-required"
+            title="Required">
+        <span id="scaling_group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_name_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of a scaling group.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="concurrent_scale_out_for_desired_capacity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_scale_out_for_desired_capacity_hcl" style="color: inherit; text-decoration: inherit;">concurrent_<wbr>scale_<wbr>out_<wbr>for_<wbr>desired_<wbr>capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The concurrent expansion function that matches the expected number cannot be set when <code>instanceAllocationPolicy</code> is in bidding <code>SPOT_MIXED</code> mode, nor can it be set when <code>scalingMode</code> is in expansion priority boot mode(<code>WAKE_UP_STOPPED_SCALING</code>). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="default_cooldown_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_cooldown_hcl" style="color: inherit; text-decoration: inherit;">default_<wbr>cooldown</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Default cooldown time in second, and default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="desired_capacity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desired_capacity_hcl" style="color: inherit; text-decoration: inherit;">desired_<wbr>capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Desired volume of CVM instances, which is between <code>maxSize</code> and <code>minSize</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="desired_capacity_sync_with_max_min_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desired_capacity_sync_with_max_min_size_hcl" style="color: inherit; text-decoration: inherit;">desired_<wbr>capacity_<wbr>sync_<wbr>with_<wbr>max_<wbr>min_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The expected number of instances is synchronized with the maximum and minimum values. The default value is <code>False</code>. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forward_balancer_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_balancer_ids_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>balancer_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#scalinggroupforwardbalancerid">list(object)</a></span>
+    </dt>
+    <dd>List of application load balancers, which can't be specified with <code>loadBalancerIds</code> together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_type_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check type of instances in a scaling group.<!-- raw HTML omitted --><!-- raw HTML omitted -->CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see <a href="https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1">Instance Health Check</a><!-- raw HTML omitted --><!-- raw HTML omitted -->CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see <a href="https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1">Health Check Overview</a>.<!-- raw HTML omitted -->If the parameter is set to <code>CLB</code>, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY</code>. If the CLB health check indicates unhealthy, the <code>HealthStatus</code> field will return <code>CLB_UNHEALTHY</code>. If both checks indicate unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY|CLB_UNHEALTHY</code>. Default value: <code>CLB</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_allocation_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_allocation_policy_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>allocation_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance allocation strategy, with values including <code>LAUNCH_CONFIGURATION</code> and <code>SPOT_MIXED</code>, defaults to <code>LAUNCH_CONFIGURATION</code>.
+<code>LAUNCH_CONFIGURATION</code>: Represents the traditional startup configuration mode;
+<code>SPOT_MIXED</code>: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lb_health_check_grace_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lb_health_check_grace_period_hcl" style="color: inherit; text-decoration: inherit;">lb_<wbr>health_<wbr>check_<wbr>grace_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Grace period of the CLB health check during which the <code>IN_SERVICE</code> instances added will not be marked as <code>CLB_UNHEALTHY</code>.<!-- raw HTML omitted -->Valid range: 0-7200, in seconds. Default value: <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="load_balancer_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_ids_hcl" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of traditional load balancers.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="multi_zone_subnet_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_zone_subnet_policy_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>subnet_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Multi zone or subnet strategy, Valid values: <code>PRIORITY</code> and <code>EQUALITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priority_scale_in_unhealthy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_scale_in_unhealthy_hcl" style="color: inherit; text-decoration: inherit;">priority_<wbr>scale_<wbr>in_<wbr>unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable priority for unhealthy instances during scale-in operations. If set to <code>true</code>, unhealthy instances will be removed first when scaling in.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies to which project the scaling group belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="replace_load_balancer_unhealthy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replace_load_balancer_unhealthy_hcl" style="color: inherit; text-decoration: inherit;">replace_<wbr>load_<wbr>balancer_<wbr>unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="replace_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replace_mode_hcl" style="color: inherit; text-decoration: inherit;">replace_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="replace_monitor_unhealthy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replace_monitor_unhealthy_hcl" style="color: inherit; text-decoration: inherit;">replace_<wbr>monitor_<wbr>unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="retry_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retry_policy_hcl" style="color: inherit; text-decoration: inherit;">retry_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="scaling_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_mode_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="subnet_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_ids_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="termination_policies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#termination_policies_hcl" style="color: inherit; text-decoration: inherit;">termination_<wbr>policies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="zones_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_hcl" style="color: inherit; text-decoration: inherit;">zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1082,8 +1937,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An available ID for a launch configuration.</p>
-</dd><dt class="property-required"
+    <dd>An available ID for a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -1091,8 +1945,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-required"
             title="Required">
         <span id="minsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_java" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -1100,8 +1953,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Minimum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-required"
+    <dd>Minimum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -1109,8 +1961,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Name of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1118,8 +1969,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="concurrentscaleoutfordesiredcapacity_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrentscaleoutfordesiredcapacity_java" style="color: inherit; text-decoration: inherit;">concurrent<wbr>Scale<wbr>Out<wbr>For<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>The concurrent expansion function that matches the expected number cannot be set when <code>instanceAllocationPolicy</code> is in bidding <code>SPOT_MIXED</code> mode, nor can it be set when <code>scalingMode</code> is in expansion priority boot mode(<code>WAKE_UP_STOPPED_SCALING</code>). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="defaultcooldown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultcooldown_java" style="color: inherit; text-decoration: inherit;">default<wbr>Cooldown</a>
@@ -1127,8 +1985,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Default cooldown time in second, and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Default cooldown time in second, and default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="desiredcapacity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacity_java" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity</a>
@@ -1136,17 +1993,49 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Desired volume of CVM instances, which is between <code>max_size</code> and <code>min_size</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Desired volume of CVM instances, which is between <code>maxSize</code> and <code>minSize</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="desiredcapacitysyncwithmaxminsize_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacitysyncwithmaxminsize_java" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity<wbr>Sync<wbr>With<wbr>Max<wbr>Min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>The expected number of instances is synchronized with the maximum and minimum values. The default value is <code>False</code>. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="forwardbalancerids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardbalancerids_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Balancer<wbr>Ids</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalinggroupforwardbalancerid">List&lt;Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#scalinggroupforwardbalancerid">List&lt;Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id&gt;</a></span>
     </dt>
-    <dd><p>List of application load balancers, which can't be specified with <code>load_balancer_ids</code> together.</p>
-</dd><dt class="property-optional"
+    <dd>List of application load balancers, which can't be specified with <code>loadBalancerIds</code> together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthchecktype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktype_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Health check type of instances in a scaling group.<!-- raw HTML omitted --><!-- raw HTML omitted -->CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see <a href="https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1">Instance Health Check</a><!-- raw HTML omitted --><!-- raw HTML omitted -->CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see <a href="https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1">Health Check Overview</a>.<!-- raw HTML omitted -->If the parameter is set to <code>CLB</code>, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY</code>. If the CLB health check indicates unhealthy, the <code>HealthStatus</code> field will return <code>CLB_UNHEALTHY</code>. If both checks indicate unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY|CLB_UNHEALTHY</code>. Default value: <code>CLB</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instanceallocationpolicy_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceallocationpolicy_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Allocation<wbr>Policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance allocation strategy, with values including <code>LAUNCH_CONFIGURATION</code> and <code>SPOT_MIXED</code>, defaults to <code>LAUNCH_CONFIGURATION</code>.
+<code>LAUNCH_CONFIGURATION</code>: Represents the traditional startup configuration mode;
+<code>SPOT_MIXED</code>: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lbhealthcheckgraceperiod_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbhealthcheckgraceperiod_java" style="color: inherit; text-decoration: inherit;">lb<wbr>Health<wbr>Check<wbr>Grace<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Grace period of the CLB health check during which the <code>IN_SERVICE</code> instances added will not be marked as <code>CLB_UNHEALTHY</code>.<!-- raw HTML omitted -->Valid range: 0-7200, in seconds. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadbalancerids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerids_java" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Ids</a>
@@ -1154,8 +2043,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of traditional load balancers.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of traditional load balancers.</dd><dt class="property-optional"
             title="Optional">
         <span id="multizonesubnetpolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizonesubnetpolicy_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -1163,8 +2051,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi zone or subnet strategy, Valid values: <code>PRIORITY</code> and <code>EQUALITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priorityscaleinunhealthy_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priorityscaleinunhealthy_java" style="color: inherit; text-decoration: inherit;">priority<wbr>Scale<wbr>In<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable priority for unhealthy instances during scale-in operations. If set to <code>true</code>, unhealthy instances will be removed first when scaling in.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1172,8 +2067,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies to which project the scaling group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies to which project the scaling group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="replaceloadbalancerunhealthy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replaceloadbalancerunhealthy_java" style="color: inherit; text-decoration: inherit;">replace<wbr>Load<wbr>Balancer<wbr>Unhealthy</a>
@@ -1181,8 +2075,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</p>
-</dd><dt class="property-optional"
+    <dd>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="replacemode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replacemode_java" style="color: inherit; text-decoration: inherit;">replace<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="replacemonitorunhealthy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replacemonitorunhealthy_java" style="color: inherit; text-decoration: inherit;">replace<wbr>Monitor<wbr>Unhealthy</a>
@@ -1190,8 +2091,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</p>
-</dd><dt class="property-optional"
+    <dd>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</dd><dt class="property-optional"
             title="Optional">
         <span id="retrypolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrypolicy_java" style="color: inherit; text-decoration: inherit;">retry<wbr>Policy</a>
@@ -1199,8 +2099,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalingmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingmode_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Mode</a>
@@ -1208,8 +2107,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -1217,17 +2115,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="terminationpolicies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationpolicies_java" style="color: inherit; text-decoration: inherit;">termination<wbr>Policies</a>
@@ -1235,8 +2131,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_java" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -1244,8 +2139,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1259,8 +2153,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An available ID for a launch configuration.</p>
-</dd><dt class="property-required"
+    <dd>An available ID for a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -1268,8 +2161,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-required"
             title="Required">
         <span id="minsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -1277,8 +2169,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Minimum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-required"
+    <dd>Minimum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -1286,8 +2177,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Name of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1295,8 +2185,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="concurrentscaleoutfordesiredcapacity_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrentscaleoutfordesiredcapacity_nodejs" style="color: inherit; text-decoration: inherit;">concurrent<wbr>Scale<wbr>Out<wbr>For<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>The concurrent expansion function that matches the expected number cannot be set when <code>instanceAllocationPolicy</code> is in bidding <code>SPOT_MIXED</code> mode, nor can it be set when <code>scalingMode</code> is in expansion priority boot mode(<code>WAKE_UP_STOPPED_SCALING</code>). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="defaultcooldown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultcooldown_nodejs" style="color: inherit; text-decoration: inherit;">default<wbr>Cooldown</a>
@@ -1304,8 +2201,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Default cooldown time in second, and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Default cooldown time in second, and default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="desiredcapacity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacity_nodejs" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity</a>
@@ -1313,17 +2209,49 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Desired volume of CVM instances, which is between <code>max_size</code> and <code>min_size</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Desired volume of CVM instances, which is between <code>maxSize</code> and <code>minSize</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="desiredcapacitysyncwithmaxminsize_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacitysyncwithmaxminsize_nodejs" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity<wbr>Sync<wbr>With<wbr>Max<wbr>Min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>The expected number of instances is synchronized with the maximum and minimum values. The default value is <code>False</code>. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="forwardbalancerids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardbalancerids_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Balancer<wbr>Ids</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalinggroupforwardbalancerid">Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#scalinggroupforwardbalancerid">Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id[]</a></span>
     </dt>
-    <dd><p>List of application load balancers, which can't be specified with <code>load_balancer_ids</code> together.</p>
-</dd><dt class="property-optional"
+    <dd>List of application load balancers, which can't be specified with <code>loadBalancerIds</code> together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthchecktype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktype_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check type of instances in a scaling group.<!-- raw HTML omitted --><!-- raw HTML omitted -->CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see <a href="https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1">Instance Health Check</a><!-- raw HTML omitted --><!-- raw HTML omitted -->CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see <a href="https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1">Health Check Overview</a>.<!-- raw HTML omitted -->If the parameter is set to <code>CLB</code>, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY</code>. If the CLB health check indicates unhealthy, the <code>HealthStatus</code> field will return <code>CLB_UNHEALTHY</code>. If both checks indicate unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY|CLB_UNHEALTHY</code>. Default value: <code>CLB</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instanceallocationpolicy_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceallocationpolicy_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Allocation<wbr>Policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance allocation strategy, with values including <code>LAUNCH_CONFIGURATION</code> and <code>SPOT_MIXED</code>, defaults to <code>LAUNCH_CONFIGURATION</code>.
+<code>LAUNCH_CONFIGURATION</code>: Represents the traditional startup configuration mode;
+<code>SPOT_MIXED</code>: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lbhealthcheckgraceperiod_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbhealthcheckgraceperiod_nodejs" style="color: inherit; text-decoration: inherit;">lb<wbr>Health<wbr>Check<wbr>Grace<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Grace period of the CLB health check during which the <code>IN_SERVICE</code> instances added will not be marked as <code>CLB_UNHEALTHY</code>.<!-- raw HTML omitted -->Valid range: 0-7200, in seconds. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadbalancerids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerids_nodejs" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Ids</a>
@@ -1331,8 +2259,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of traditional load balancers.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of traditional load balancers.</dd><dt class="property-optional"
             title="Optional">
         <span id="multizonesubnetpolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizonesubnetpolicy_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -1340,8 +2267,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi zone or subnet strategy, Valid values: <code>PRIORITY</code> and <code>EQUALITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priorityscaleinunhealthy_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priorityscaleinunhealthy_nodejs" style="color: inherit; text-decoration: inherit;">priority<wbr>Scale<wbr>In<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable priority for unhealthy instances during scale-in operations. If set to <code>true</code>, unhealthy instances will be removed first when scaling in.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1349,8 +2283,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies to which project the scaling group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies to which project the scaling group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="replaceloadbalancerunhealthy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replaceloadbalancerunhealthy_nodejs" style="color: inherit; text-decoration: inherit;">replace<wbr>Load<wbr>Balancer<wbr>Unhealthy</a>
@@ -1358,8 +2291,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</p>
-</dd><dt class="property-optional"
+    <dd>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="replacemode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replacemode_nodejs" style="color: inherit; text-decoration: inherit;">replace<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="replacemonitorunhealthy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replacemonitorunhealthy_nodejs" style="color: inherit; text-decoration: inherit;">replace<wbr>Monitor<wbr>Unhealthy</a>
@@ -1367,8 +2307,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</p>
-</dd><dt class="property-optional"
+    <dd>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</dd><dt class="property-optional"
             title="Optional">
         <span id="retrypolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrypolicy_nodejs" style="color: inherit; text-decoration: inherit;">retry<wbr>Policy</a>
@@ -1376,8 +2315,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalingmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingmode_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Mode</a>
@@ -1385,8 +2323,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -1394,17 +2331,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="terminationpolicies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationpolicies_nodejs" style="color: inherit; text-decoration: inherit;">termination<wbr>Policies</a>
@@ -1412,8 +2347,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_nodejs" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -1421,8 +2355,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1436,8 +2369,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>An available ID for a launch configuration.</p>
-</dd><dt class="property-required"
+    <dd>An available ID for a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="max_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#max_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
@@ -1445,8 +2377,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-required"
             title="Required">
         <span id="min_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#min_size_python" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
@@ -1454,8 +2385,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-required"
+    <dd>Minimum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-required"
             title="Required">
         <span id="scaling_group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_group_name_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>name</a>
@@ -1463,8 +2393,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Name of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -1472,8 +2401,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="concurrent_scale_out_for_desired_capacity_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrent_scale_out_for_desired_capacity_python" style="color: inherit; text-decoration: inherit;">concurrent_<wbr>scale_<wbr>out_<wbr>for_<wbr>desired_<wbr>capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The concurrent expansion function that matches the expected number cannot be set when <code>instanceAllocationPolicy</code> is in bidding <code>SPOT_MIXED</code> mode, nor can it be set when <code>scalingMode</code> is in expansion priority boot mode(<code>WAKE_UP_STOPPED_SCALING</code>). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="default_cooldown_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#default_cooldown_python" style="color: inherit; text-decoration: inherit;">default_<wbr>cooldown</a>
@@ -1481,8 +2417,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Default cooldown time in second, and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Default cooldown time in second, and default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="desired_capacity_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desired_capacity_python" style="color: inherit; text-decoration: inherit;">desired_<wbr>capacity</a>
@@ -1490,17 +2425,49 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Desired volume of CVM instances, which is between <code>max_size</code> and <code>min_size</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Desired volume of CVM instances, which is between <code>maxSize</code> and <code>minSize</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="desired_capacity_sync_with_max_min_size_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desired_capacity_sync_with_max_min_size_python" style="color: inherit; text-decoration: inherit;">desired_<wbr>capacity_<wbr>sync_<wbr>with_<wbr>max_<wbr>min_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The expected number of instances is synchronized with the maximum and minimum values. The default value is <code>False</code>. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="forward_balancer_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_balancer_ids_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>balancer_<wbr>ids</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalinggroupforwardbalancerid">Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Args]</a></span>
+        <span class="property-type"><a href="#scalinggroupforwardbalancerid">Sequence[Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of application load balancers, which can't be specified with <code>load_balancer_ids</code> together.</p>
-</dd><dt class="property-optional"
+    <dd>List of application load balancers, which can't be specified with <code>loadBalancerIds</code> together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="health_check_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_type_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Health check type of instances in a scaling group.<!-- raw HTML omitted --><!-- raw HTML omitted -->CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see <a href="https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1">Instance Health Check</a><!-- raw HTML omitted --><!-- raw HTML omitted -->CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see <a href="https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1">Health Check Overview</a>.<!-- raw HTML omitted -->If the parameter is set to <code>CLB</code>, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY</code>. If the CLB health check indicates unhealthy, the <code>HealthStatus</code> field will return <code>CLB_UNHEALTHY</code>. If both checks indicate unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY|CLB_UNHEALTHY</code>. Default value: <code>CLB</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_allocation_policy_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_allocation_policy_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>allocation_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Instance allocation strategy, with values including <code>LAUNCH_CONFIGURATION</code> and <code>SPOT_MIXED</code>, defaults to <code>LAUNCH_CONFIGURATION</code>.
+<code>LAUNCH_CONFIGURATION</code>: Represents the traditional startup configuration mode;
+<code>SPOT_MIXED</code>: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lb_health_check_grace_period_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lb_health_check_grace_period_python" style="color: inherit; text-decoration: inherit;">lb_<wbr>health_<wbr>check_<wbr>grace_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Grace period of the CLB health check during which the <code>IN_SERVICE</code> instances added will not be marked as <code>CLB_UNHEALTHY</code>.<!-- raw HTML omitted -->Valid range: 0-7200, in seconds. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="load_balancer_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_ids_python" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>ids</a>
@@ -1508,8 +2475,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of traditional load balancers.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of traditional load balancers.</dd><dt class="property-optional"
             title="Optional">
         <span id="multi_zone_subnet_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multi_zone_subnet_policy_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>subnet_<wbr>policy</a>
@@ -1517,8 +2483,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi zone or subnet strategy, Valid values: <code>PRIORITY</code> and <code>EQUALITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priority_scale_in_unhealthy_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priority_scale_in_unhealthy_python" style="color: inherit; text-decoration: inherit;">priority_<wbr>scale_<wbr>in_<wbr>unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable priority for unhealthy instances during scale-in operations. If set to <code>true</code>, unhealthy instances will be removed first when scaling in.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -1526,8 +2499,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies to which project the scaling group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies to which project the scaling group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="replace_load_balancer_unhealthy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replace_load_balancer_unhealthy_python" style="color: inherit; text-decoration: inherit;">replace_<wbr>load_<wbr>balancer_<wbr>unhealthy</a>
@@ -1535,8 +2507,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</p>
-</dd><dt class="property-optional"
+    <dd>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="replace_mode_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replace_mode_python" style="color: inherit; text-decoration: inherit;">replace_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="replace_monitor_unhealthy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replace_monitor_unhealthy_python" style="color: inherit; text-decoration: inherit;">replace_<wbr>monitor_<wbr>unhealthy</a>
@@ -1544,8 +2523,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</p>
-</dd><dt class="property-optional"
+    <dd>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</dd><dt class="property-optional"
             title="Optional">
         <span id="retry_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retry_policy_python" style="color: inherit; text-decoration: inherit;">retry_<wbr>policy</a>
@@ -1553,8 +2531,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</dd><dt class="property-optional"
             title="Optional">
         <span id="scaling_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scaling_mode_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>mode</a>
@@ -1562,8 +2539,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnet_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_ids_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
@@ -1571,17 +2547,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="termination_policies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#termination_policies_python" style="color: inherit; text-decoration: inherit;">termination_<wbr>policies</a>
@@ -1589,8 +2563,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_python" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -1598,8 +2571,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1613,8 +2585,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An available ID for a launch configuration.</p>
-</dd><dt class="property-required"
+    <dd>An available ID for a launch configuration.</dd><dt class="property-required"
             title="Required">
         <span id="maxsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#maxsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -1622,8 +2593,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-required"
+    <dd>Maximum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-required"
             title="Required">
         <span id="minsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#minsize_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -1631,8 +2601,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Minimum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-required"
+    <dd>Minimum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-required"
             title="Required">
         <span id="scalinggroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalinggroupname_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -1640,8 +2609,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a scaling group.</p>
-</dd><dt class="property-required"
+    <dd>Name of a scaling group.</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1649,8 +2617,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="concurrentscaleoutfordesiredcapacity_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#concurrentscaleoutfordesiredcapacity_yaml" style="color: inherit; text-decoration: inherit;">concurrent<wbr>Scale<wbr>Out<wbr>For<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>The concurrent expansion function that matches the expected number cannot be set when <code>instanceAllocationPolicy</code> is in bidding <code>SPOT_MIXED</code> mode, nor can it be set when <code>scalingMode</code> is in expansion priority boot mode(<code>WAKE_UP_STOPPED_SCALING</code>). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.</dd><dt class="property-optional"
             title="Optional">
         <span id="defaultcooldown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#defaultcooldown_yaml" style="color: inherit; text-decoration: inherit;">default<wbr>Cooldown</a>
@@ -1658,8 +2633,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Default cooldown time in second, and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Default cooldown time in second, and default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="desiredcapacity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacity_yaml" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity</a>
@@ -1667,8 +2641,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Desired volume of CVM instances, which is between <code>max_size</code> and <code>min_size</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Desired volume of CVM instances, which is between <code>maxSize</code> and <code>minSize</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="desiredcapacitysyncwithmaxminsize_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#desiredcapacitysyncwithmaxminsize_yaml" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity<wbr>Sync<wbr>With<wbr>Max<wbr>Min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>The expected number of instances is synchronized with the maximum and minimum values. The default value is <code>False</code>. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="forwardbalancerids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardbalancerids_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Balancer<wbr>Ids</a>
@@ -1676,8 +2657,33 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalinggroupforwardbalancerid">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of application load balancers, which can't be specified with <code>load_balancer_ids</code> together.</p>
-</dd><dt class="property-optional"
+    <dd>List of application load balancers, which can't be specified with <code>loadBalancerIds</code> together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="healthchecktype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthchecktype_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Health check type of instances in a scaling group.<!-- raw HTML omitted --><!-- raw HTML omitted -->CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see <a href="https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1">Instance Health Check</a><!-- raw HTML omitted --><!-- raw HTML omitted -->CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see <a href="https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1">Health Check Overview</a>.<!-- raw HTML omitted -->If the parameter is set to <code>CLB</code>, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY</code>. If the CLB health check indicates unhealthy, the <code>HealthStatus</code> field will return <code>CLB_UNHEALTHY</code>. If both checks indicate unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY|CLB_UNHEALTHY</code>. Default value: <code>CLB</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instanceallocationpolicy_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceallocationpolicy_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Allocation<wbr>Policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance allocation strategy, with values including <code>LAUNCH_CONFIGURATION</code> and <code>SPOT_MIXED</code>, defaults to <code>LAUNCH_CONFIGURATION</code>.
+<code>LAUNCH_CONFIGURATION</code>: Represents the traditional startup configuration mode;
+<code>SPOT_MIXED</code>: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="lbhealthcheckgraceperiod_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#lbhealthcheckgraceperiod_yaml" style="color: inherit; text-decoration: inherit;">lb<wbr>Health<wbr>Check<wbr>Grace<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Grace period of the CLB health check during which the <code>IN_SERVICE</code> instances added will not be marked as <code>CLB_UNHEALTHY</code>.<!-- raw HTML omitted -->Valid range: 0-7200, in seconds. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="loadbalancerids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerids_yaml" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Ids</a>
@@ -1685,8 +2691,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of traditional load balancers.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of traditional load balancers.</dd><dt class="property-optional"
             title="Optional">
         <span id="multizonesubnetpolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#multizonesubnetpolicy_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -1694,8 +2699,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi zone or subnet strategy, Valid values: <code>PRIORITY</code> and <code>EQUALITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="priorityscaleinunhealthy_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#priorityscaleinunhealthy_yaml" style="color: inherit; text-decoration: inherit;">priority<wbr>Scale<wbr>In<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable priority for unhealthy instances during scale-in operations. If set to <code>true</code>, unhealthy instances will be removed first when scaling in.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1703,8 +2715,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies to which project the scaling group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies to which project the scaling group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="replaceloadbalancerunhealthy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replaceloadbalancerunhealthy_yaml" style="color: inherit; text-decoration: inherit;">replace<wbr>Load<wbr>Balancer<wbr>Unhealthy</a>
@@ -1712,8 +2723,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</p>
-</dd><dt class="property-optional"
+    <dd>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="replacemode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replacemode_yaml" style="color: inherit; text-decoration: inherit;">replace<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="replacemonitorunhealthy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#replacemonitorunhealthy_yaml" style="color: inherit; text-decoration: inherit;">replace<wbr>Monitor<wbr>Unhealthy</a>
@@ -1721,8 +2739,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</p>
-</dd><dt class="property-optional"
+    <dd>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</dd><dt class="property-optional"
             title="Optional">
         <span id="retrypolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retrypolicy_yaml" style="color: inherit; text-decoration: inherit;">retry<wbr>Policy</a>
@@ -1730,8 +2747,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</dd><dt class="property-optional"
             title="Optional">
         <span id="scalingmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scalingmode_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Mode</a>
@@ -1739,8 +2755,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="subnetids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetids_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -1748,17 +2763,15 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="terminationpolicies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#terminationpolicies_yaml" style="color: inherit; text-decoration: inherit;">termination<wbr>Policies</a>
@@ -1766,8 +2779,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="zones_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_yaml" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -1775,8 +2787,7 @@ The ScalingGroup resource accepts the following [input](/docs/intro/concepts/inp
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1791,14 +2802,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="autoscalinggroupid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-"
+            title="">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the AS group was created.</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1806,8 +2824,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -1815,8 +2832,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance number of a scaling group.</p>
-</dd><dt class="property-"
+    <dd>Instance number of a scaling group.</dd><dt class="property-"
             title="">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1824,8 +2840,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd></dl>
+    <dd>Current status of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1833,14 +2848,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="autoscalinggroupid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupid_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-"
+            title="">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the AS group was created.</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1848,8 +2870,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -1857,8 +2878,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance number of a scaling group.</p>
-</dd><dt class="property-"
+    <dd>Instance number of a scaling group.</dd><dt class="property-"
             title="">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1866,8 +2886,53 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd></dl>
+    <dd>Current status of a scaling group.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="auto_scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-"
+            title="">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time when the AS group was created.</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance number of a scaling group.</dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Current status of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1875,14 +2940,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="autoscalinggroupid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupid_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-"
+            title="">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the AS group was created.</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1890,8 +2962,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1899,8 +2970,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance number of a scaling group.</p>
-</dd><dt class="property-"
+    <dd>Instance number of a scaling group.</dd><dt class="property-"
             title="">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1908,8 +2978,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd></dl>
+    <dd>Current status of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1917,14 +2986,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="autoscalinggroupid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-"
+            title="">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the AS group was created.</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1932,8 +3008,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -1941,8 +3016,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance number of a scaling group.</p>
-</dd><dt class="property-"
+    <dd>Instance number of a scaling group.</dd><dt class="property-"
             title="">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1950,8 +3024,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd></dl>
+    <dd>Current status of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1959,14 +3032,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="auto_scaling_group_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_scaling_group_id_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-"
+            title="">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the AS group was created.</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1974,8 +3054,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_count_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
@@ -1983,8 +3062,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance number of a scaling group.</p>
-</dd><dt class="property-"
+    <dd>Instance number of a scaling group.</dd><dt class="property-"
             title="">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1992,8 +3070,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd></dl>
+    <dd>Current status of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2001,14 +3078,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-"
             title="">
+        <span id="autoscalinggroupid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#autoscalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-"
+            title="">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-"
+    <dd>The time when the AS group was created.</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2016,8 +3100,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancecount_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -2025,8 +3108,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance number of a scaling group.</p>
-</dd><dt class="property-"
+    <dd>Instance number of a scaling group.</dd><dt class="property-"
             title="">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2034,8 +3116,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd></dl>
+    <dd>Current status of a scaling group.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2045,141 +3126,188 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing ScalingGroup resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ScalingGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ScalingGroup</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">ScalingGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">ScalingGroup</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+        <span class="nx">auto_scaling_group_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">concurrent_scale_out_for_desired_capacity</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">configuration_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">create_time</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">default_cooldown</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">desired_capacity</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
-        <span class="nx">forward_balancer_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[_as_.ScalingGroupForwardBalancerIdArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">desired_capacity_sync_with_max_min_size</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">forward_balancer_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[ScalingGroupForwardBalancerIdArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">health_check_type</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">instance_allocation_policy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">instance_count</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
+        <span class="nx">lb_health_check_grace_period</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">load_balancer_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
         <span class="nx">max_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">min_size</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">multi_zone_subnet_policy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
+        <span class="nx">priority_scale_in_unhealthy</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">replace_load_balancer_unhealthy</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
+        <span class="nx">replace_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">replace_monitor_unhealthy</span><span class="p">:</span> <span class="nx">Optional[bool]</span> = None<span class="p">,</span>
         <span class="nx">retry_policy</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">scaling_group_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">scaling_mode</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">subnet_ids</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">,</span>
-        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, Any]]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Mapping[str, str]]</span> = None<span class="p">,</span>
         <span class="nx">termination_policies</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">vpc_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">zones</span><span class="p">:</span> <span class="nx">Optional[Sequence[str]]</span> = None<span class="p">) -&gt;</span> ScalingGroup</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetScalingGroup<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ScalingGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ScalingGroup</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetScalingGroup<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">ScalingGroupState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">ScalingGroup</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ScalingGroup</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScalingGroupState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">ScalingGroup</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScalingGroupState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ScalingGroup</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScalingGroupState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">ScalingGroup</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">ScalingGroupState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingScalingGroup</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:As:ScalingGroup</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_as_scaling_group</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScalingGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScalingGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2187,28 +3315,31 @@ Get an existing ScalingGroup resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScalingGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2216,28 +3347,31 @@ Get an existing ScalingGroup resource's state with the given name, ID, and optio
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">ScalingGroupState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -2251,14 +3385,29 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="csharp">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_autoscalinggroupid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalinggroupid_csharp" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_concurrentscaleoutfordesiredcapacity_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_concurrentscaleoutfordesiredcapacity_csharp" style="color: inherit; text-decoration: inherit;">Concurrent<wbr>Scale<wbr>Out<wbr>For<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The concurrent expansion function that matches the expected number cannot be set when <code>instanceAllocationPolicy</code> is in bidding <code>SPOT_MIXED</code> mode, nor can it be set when <code>scalingMode</code> is in expansion priority boot mode(<code>WAKE_UP_STOPPED_SCALING</code>). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_configurationid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_configurationid_csharp" style="color: inherit; text-decoration: inherit;">Configuration<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An available ID for a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>An available ID for a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2266,8 +3415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the AS group was created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultcooldown_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultcooldown_csharp" style="color: inherit; text-decoration: inherit;">Default<wbr>Cooldown</a>
@@ -2275,8 +3423,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Default cooldown time in second, and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Default cooldown time in second, and default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desiredcapacity_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desiredcapacity_csharp" style="color: inherit; text-decoration: inherit;">Desired<wbr>Capacity</a>
@@ -2284,17 +3431,41 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Desired volume of CVM instances, which is between <code>max_size</code> and <code>min_size</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Desired volume of CVM instances, which is between <code>maxSize</code> and <code>minSize</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_desiredcapacitysyncwithmaxminsize_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desiredcapacitysyncwithmaxminsize_csharp" style="color: inherit; text-decoration: inherit;">Desired<wbr>Capacity<wbr>Sync<wbr>With<wbr>Max<wbr>Min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The expected number of instances is synchronized with the maximum and minimum values. The default value is <code>False</code>. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardbalancerids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardbalancerids_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Balancer<wbr>Ids</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalinggroupforwardbalancerid">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#scalinggroupforwardbalancerid">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id&gt;</a></span>
     </dt>
-    <dd><p>List of application load balancers, which can't be specified with <code>load_balancer_ids</code> together.</p>
-</dd><dt class="property-optional"
+    <dd>List of application load balancers, which can't be specified with <code>loadBalancerIds</code> together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthchecktype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktype_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check type of instances in a scaling group.<!-- raw HTML omitted --><!-- raw HTML omitted -->CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see <a href="https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1">Instance Health Check</a><!-- raw HTML omitted --><!-- raw HTML omitted -->CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see <a href="https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1">Health Check Overview</a>.<!-- raw HTML omitted -->If the parameter is set to <code>CLB</code>, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY</code>. If the CLB health check indicates unhealthy, the <code>HealthStatus</code> field will return <code>CLB_UNHEALTHY</code>. If both checks indicate unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY|CLB_UNHEALTHY</code>. Default value: <code>CLB</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instanceallocationpolicy_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceallocationpolicy_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Allocation<wbr>Policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance allocation strategy, with values including <code>LAUNCH_CONFIGURATION</code> and <code>SPOT_MIXED</code>, defaults to <code>LAUNCH_CONFIGURATION</code>.
+<code>LAUNCH_CONFIGURATION</code>: Represents the traditional startup configuration mode;
+<code>SPOT_MIXED</code>: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -2302,8 +3473,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance number of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Instance number of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lbhealthcheckgraceperiod_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lbhealthcheckgraceperiod_csharp" style="color: inherit; text-decoration: inherit;">Lb<wbr>Health<wbr>Check<wbr>Grace<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Grace period of the CLB health check during which the <code>IN_SERVICE</code> instances added will not be marked as <code>CLB_UNHEALTHY</code>.<!-- raw HTML omitted -->Valid range: 0-7200, in seconds. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loadbalancerids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loadbalancerids_csharp" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Ids</a>
@@ -2311,8 +3489,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of traditional load balancers.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of traditional load balancers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_csharp" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -2320,8 +3497,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minsize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minsize_csharp" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
@@ -2329,8 +3505,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-optional"
+    <dd>Minimum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multizonesubnetpolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizonesubnetpolicy_csharp" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -2338,8 +3513,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi zone or subnet strategy, Valid values: <code>PRIORITY</code> and <code>EQUALITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_priorityscaleinunhealthy_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priorityscaleinunhealthy_csharp" style="color: inherit; text-decoration: inherit;">Priority<wbr>Scale<wbr>In<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable priority for unhealthy instances during scale-in operations. If set to <code>true</code>, unhealthy instances will be removed first when scaling in.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2347,8 +3529,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies to which project the scaling group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies to which project the scaling group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replaceloadbalancerunhealthy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replaceloadbalancerunhealthy_csharp" style="color: inherit; text-decoration: inherit;">Replace<wbr>Load<wbr>Balancer<wbr>Unhealthy</a>
@@ -2356,8 +3537,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</p>
-</dd><dt class="property-optional"
+    <dd>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replacemode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replacemode_csharp" style="color: inherit; text-decoration: inherit;">Replace<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replacemonitorunhealthy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replacemonitorunhealthy_csharp" style="color: inherit; text-decoration: inherit;">Replace<wbr>Monitor<wbr>Unhealthy</a>
@@ -2365,8 +3553,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</p>
-</dd><dt class="property-optional"
+    <dd>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retrypolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retrypolicy_csharp" style="color: inherit; text-decoration: inherit;">Retry<wbr>Policy</a>
@@ -2374,8 +3561,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalinggroupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupname_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Name</a>
@@ -2383,8 +3569,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalingmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalingmode_csharp" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Mode</a>
@@ -2392,8 +3577,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2401,8 +3585,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetids_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -2410,17 +3593,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>Tags of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_terminationpolicies_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_terminationpolicies_csharp" style="color: inherit; text-decoration: inherit;">Termination<wbr>Policies</a>
@@ -2428,8 +3609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2437,8 +3617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zones_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zones_csharp" style="color: inherit; text-decoration: inherit;">Zones</a>
@@ -2446,8 +3625,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2455,14 +3633,29 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="go">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_autoscalinggroupid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalinggroupid_go" style="color: inherit; text-decoration: inherit;">Auto<wbr>Scaling<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_concurrentscaleoutfordesiredcapacity_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_concurrentscaleoutfordesiredcapacity_go" style="color: inherit; text-decoration: inherit;">Concurrent<wbr>Scale<wbr>Out<wbr>For<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The concurrent expansion function that matches the expected number cannot be set when <code>instanceAllocationPolicy</code> is in bidding <code>SPOT_MIXED</code> mode, nor can it be set when <code>scalingMode</code> is in expansion priority boot mode(<code>WAKE_UP_STOPPED_SCALING</code>). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_configurationid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_configurationid_go" style="color: inherit; text-decoration: inherit;">Configuration<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An available ID for a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>An available ID for a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2470,8 +3663,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the AS group was created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultcooldown_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultcooldown_go" style="color: inherit; text-decoration: inherit;">Default<wbr>Cooldown</a>
@@ -2479,8 +3671,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Default cooldown time in second, and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Default cooldown time in second, and default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desiredcapacity_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desiredcapacity_go" style="color: inherit; text-decoration: inherit;">Desired<wbr>Capacity</a>
@@ -2488,8 +3679,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Desired volume of CVM instances, which is between <code>max_size</code> and <code>min_size</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Desired volume of CVM instances, which is between <code>maxSize</code> and <code>minSize</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_desiredcapacitysyncwithmaxminsize_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desiredcapacitysyncwithmaxminsize_go" style="color: inherit; text-decoration: inherit;">Desired<wbr>Capacity<wbr>Sync<wbr>With<wbr>Max<wbr>Min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The expected number of instances is synchronized with the maximum and minimum values. The default value is <code>False</code>. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardbalancerids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardbalancerids_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Balancer<wbr>Ids</a>
@@ -2497,8 +3695,25 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalinggroupforwardbalancerid">[]Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Args</a></span>
     </dt>
-    <dd><p>List of application load balancers, which can't be specified with <code>load_balancer_ids</code> together.</p>
-</dd><dt class="property-optional"
+    <dd>List of application load balancers, which can't be specified with <code>loadBalancerIds</code> together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthchecktype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktype_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check type of instances in a scaling group.<!-- raw HTML omitted --><!-- raw HTML omitted -->CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see <a href="https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1">Instance Health Check</a><!-- raw HTML omitted --><!-- raw HTML omitted -->CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see <a href="https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1">Health Check Overview</a>.<!-- raw HTML omitted -->If the parameter is set to <code>CLB</code>, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY</code>. If the CLB health check indicates unhealthy, the <code>HealthStatus</code> field will return <code>CLB_UNHEALTHY</code>. If both checks indicate unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY|CLB_UNHEALTHY</code>. Default value: <code>CLB</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instanceallocationpolicy_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceallocationpolicy_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Allocation<wbr>Policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance allocation strategy, with values including <code>LAUNCH_CONFIGURATION</code> and <code>SPOT_MIXED</code>, defaults to <code>LAUNCH_CONFIGURATION</code>.
+<code>LAUNCH_CONFIGURATION</code>: Represents the traditional startup configuration mode;
+<code>SPOT_MIXED</code>: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Count</a>
@@ -2506,8 +3721,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance number of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Instance number of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lbhealthcheckgraceperiod_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lbhealthcheckgraceperiod_go" style="color: inherit; text-decoration: inherit;">Lb<wbr>Health<wbr>Check<wbr>Grace<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Grace period of the CLB health check during which the <code>IN_SERVICE</code> instances added will not be marked as <code>CLB_UNHEALTHY</code>.<!-- raw HTML omitted -->Valid range: 0-7200, in seconds. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loadbalancerids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loadbalancerids_go" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Ids</a>
@@ -2515,8 +3737,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of traditional load balancers.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of traditional load balancers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_go" style="color: inherit; text-decoration: inherit;">Max<wbr>Size</a>
@@ -2524,8 +3745,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minsize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minsize_go" style="color: inherit; text-decoration: inherit;">Min<wbr>Size</a>
@@ -2533,8 +3753,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-optional"
+    <dd>Minimum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multizonesubnetpolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizonesubnetpolicy_go" style="color: inherit; text-decoration: inherit;">Multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -2542,8 +3761,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi zone or subnet strategy, Valid values: <code>PRIORITY</code> and <code>EQUALITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_priorityscaleinunhealthy_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priorityscaleinunhealthy_go" style="color: inherit; text-decoration: inherit;">Priority<wbr>Scale<wbr>In<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable priority for unhealthy instances during scale-in operations. If set to <code>true</code>, unhealthy instances will be removed first when scaling in.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2551,8 +3777,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies to which project the scaling group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies to which project the scaling group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replaceloadbalancerunhealthy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replaceloadbalancerunhealthy_go" style="color: inherit; text-decoration: inherit;">Replace<wbr>Load<wbr>Balancer<wbr>Unhealthy</a>
@@ -2560,8 +3785,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</p>
-</dd><dt class="property-optional"
+    <dd>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replacemode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replacemode_go" style="color: inherit; text-decoration: inherit;">Replace<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replacemonitorunhealthy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replacemonitorunhealthy_go" style="color: inherit; text-decoration: inherit;">Replace<wbr>Monitor<wbr>Unhealthy</a>
@@ -2569,8 +3801,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</p>
-</dd><dt class="property-optional"
+    <dd>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retrypolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retrypolicy_go" style="color: inherit; text-decoration: inherit;">Retry<wbr>Policy</a>
@@ -2578,8 +3809,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalinggroupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupname_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Group<wbr>Name</a>
@@ -2587,8 +3817,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalingmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalingmode_go" style="color: inherit; text-decoration: inherit;">Scaling<wbr>Mode</a>
@@ -2596,8 +3825,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2605,8 +3833,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetids_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Ids</a>
@@ -2614,17 +3841,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>Tags of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_terminationpolicies_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_terminationpolicies_go" style="color: inherit; text-decoration: inherit;">Termination<wbr>Policies</a>
@@ -2632,8 +3857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2641,8 +3865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zones_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zones_go" style="color: inherit; text-decoration: inherit;">Zones</a>
@@ -2650,8 +3873,255 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of available zones, for Basic network it is required.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_auto_scaling_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_scaling_group_id_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_concurrent_scale_out_for_desired_capacity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_concurrent_scale_out_for_desired_capacity_hcl" style="color: inherit; text-decoration: inherit;">concurrent_<wbr>scale_<wbr>out_<wbr>for_<wbr>desired_<wbr>capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The concurrent expansion function that matches the expected number cannot be set when <code>instanceAllocationPolicy</code> is in bidding <code>SPOT_MIXED</code> mode, nor can it be set when <code>scalingMode</code> is in expansion priority boot mode(<code>WAKE_UP_STOPPED_SCALING</code>). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_configuration_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_configuration_id_hcl" style="color: inherit; text-decoration: inherit;">configuration_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>An available ID for a launch configuration.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time when the AS group was created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_default_cooldown_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_default_cooldown_hcl" style="color: inherit; text-decoration: inherit;">default_<wbr>cooldown</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Default cooldown time in second, and default value is <code>300</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_desired_capacity_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desired_capacity_hcl" style="color: inherit; text-decoration: inherit;">desired_<wbr>capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Desired volume of CVM instances, which is between <code>maxSize</code> and <code>minSize</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_desired_capacity_sync_with_max_min_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desired_capacity_sync_with_max_min_size_hcl" style="color: inherit; text-decoration: inherit;">desired_<wbr>capacity_<wbr>sync_<wbr>with_<wbr>max_<wbr>min_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The expected number of instances is synchronized with the maximum and minimum values. The default value is <code>False</code>. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_forward_balancer_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forward_balancer_ids_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>balancer_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#scalinggroupforwardbalancerid">list(object)</a></span>
+    </dt>
+    <dd>List of application load balancers, which can't be specified with <code>loadBalancerIds</code> together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_type_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check type of instances in a scaling group.<!-- raw HTML omitted --><!-- raw HTML omitted -->CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see <a href="https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1">Instance Health Check</a><!-- raw HTML omitted --><!-- raw HTML omitted -->CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see <a href="https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1">Health Check Overview</a>.<!-- raw HTML omitted -->If the parameter is set to <code>CLB</code>, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY</code>. If the CLB health check indicates unhealthy, the <code>HealthStatus</code> field will return <code>CLB_UNHEALTHY</code>. If both checks indicate unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY|CLB_UNHEALTHY</code>. Default value: <code>CLB</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_allocation_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_allocation_policy_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>allocation_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance allocation strategy, with values including <code>LAUNCH_CONFIGURATION</code> and <code>SPOT_MIXED</code>, defaults to <code>LAUNCH_CONFIGURATION</code>.
+<code>LAUNCH_CONFIGURATION</code>: Represents the traditional startup configuration mode;
+<code>SPOT_MIXED</code>: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_count_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance number of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lb_health_check_grace_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lb_health_check_grace_period_hcl" style="color: inherit; text-decoration: inherit;">lb_<wbr>health_<wbr>check_<wbr>grace_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Grace period of the CLB health check during which the <code>IN_SERVICE</code> instances added will not be marked as <code>CLB_UNHEALTHY</code>.<!-- raw HTML omitted -->Valid range: 0-7200, in seconds. Default value: <code>0</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_load_balancer_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_load_balancer_ids_hcl" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of traditional load balancers.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_max_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_size_hcl" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Maximum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_min_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_min_size_hcl" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Minimum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_multi_zone_subnet_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multi_zone_subnet_policy_hcl" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>subnet_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Multi zone or subnet strategy, Valid values: <code>PRIORITY</code> and <code>EQUALITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_priority_scale_in_unhealthy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priority_scale_in_unhealthy_hcl" style="color: inherit; text-decoration: inherit;">priority_<wbr>scale_<wbr>in_<wbr>unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable priority for unhealthy instances during scale-in operations. If set to <code>true</code>, unhealthy instances will be removed first when scaling in.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Specifies to which project the scaling group belongs.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replace_load_balancer_unhealthy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replace_load_balancer_unhealthy_hcl" style="color: inherit; text-decoration: inherit;">replace_<wbr>load_<wbr>balancer_<wbr>unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replace_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replace_mode_hcl" style="color: inherit; text-decoration: inherit;">replace_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replace_monitor_unhealthy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replace_monitor_unhealthy_hcl" style="color: inherit; text-decoration: inherit;">replace_<wbr>monitor_<wbr>unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_retry_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retry_policy_hcl" style="color: inherit; text-decoration: inherit;">retry_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scaling_group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_group_name_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_scaling_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_mode_hcl" style="color: inherit; text-decoration: inherit;">scaling_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Current status of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_subnet_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_ids_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>Tags of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_termination_policies_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_termination_policies_hcl" style="color: inherit; text-decoration: inherit;">termination_<wbr>policies</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of VPC network.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_zones_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zones_hcl" style="color: inherit; text-decoration: inherit;">zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2659,14 +4129,29 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_autoscalinggroupid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalinggroupid_java" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_concurrentscaleoutfordesiredcapacity_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_concurrentscaleoutfordesiredcapacity_java" style="color: inherit; text-decoration: inherit;">concurrent<wbr>Scale<wbr>Out<wbr>For<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>The concurrent expansion function that matches the expected number cannot be set when <code>instanceAllocationPolicy</code> is in bidding <code>SPOT_MIXED</code> mode, nor can it be set when <code>scalingMode</code> is in expansion priority boot mode(<code>WAKE_UP_STOPPED_SCALING</code>). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_configurationid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_configurationid_java" style="color: inherit; text-decoration: inherit;">configuration<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An available ID for a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>An available ID for a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2674,8 +4159,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the AS group was created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultcooldown_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultcooldown_java" style="color: inherit; text-decoration: inherit;">default<wbr>Cooldown</a>
@@ -2683,8 +4167,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Default cooldown time in second, and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Default cooldown time in second, and default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desiredcapacity_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desiredcapacity_java" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity</a>
@@ -2692,17 +4175,41 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Desired volume of CVM instances, which is between <code>max_size</code> and <code>min_size</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Desired volume of CVM instances, which is between <code>maxSize</code> and <code>minSize</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_desiredcapacitysyncwithmaxminsize_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desiredcapacitysyncwithmaxminsize_java" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity<wbr>Sync<wbr>With<wbr>Max<wbr>Min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>The expected number of instances is synchronized with the maximum and minimum values. The default value is <code>False</code>. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardbalancerids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardbalancerids_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Balancer<wbr>Ids</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalinggroupforwardbalancerid">List&lt;Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#scalinggroupforwardbalancerid">List&lt;Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id&gt;</a></span>
     </dt>
-    <dd><p>List of application load balancers, which can't be specified with <code>load_balancer_ids</code> together.</p>
-</dd><dt class="property-optional"
+    <dd>List of application load balancers, which can't be specified with <code>loadBalancerIds</code> together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthchecktype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktype_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Health check type of instances in a scaling group.<!-- raw HTML omitted --><!-- raw HTML omitted -->CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see <a href="https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1">Instance Health Check</a><!-- raw HTML omitted --><!-- raw HTML omitted -->CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see <a href="https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1">Health Check Overview</a>.<!-- raw HTML omitted -->If the parameter is set to <code>CLB</code>, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY</code>. If the CLB health check indicates unhealthy, the <code>HealthStatus</code> field will return <code>CLB_UNHEALTHY</code>. If both checks indicate unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY|CLB_UNHEALTHY</code>. Default value: <code>CLB</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instanceallocationpolicy_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceallocationpolicy_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Allocation<wbr>Policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance allocation strategy, with values including <code>LAUNCH_CONFIGURATION</code> and <code>SPOT_MIXED</code>, defaults to <code>LAUNCH_CONFIGURATION</code>.
+<code>LAUNCH_CONFIGURATION</code>: Represents the traditional startup configuration mode;
+<code>SPOT_MIXED</code>: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -2710,8 +4217,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance number of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Instance number of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lbhealthcheckgraceperiod_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lbhealthcheckgraceperiod_java" style="color: inherit; text-decoration: inherit;">lb<wbr>Health<wbr>Check<wbr>Grace<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Grace period of the CLB health check during which the <code>IN_SERVICE</code> instances added will not be marked as <code>CLB_UNHEALTHY</code>.<!-- raw HTML omitted -->Valid range: 0-7200, in seconds. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loadbalancerids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loadbalancerids_java" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Ids</a>
@@ -2719,8 +4233,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of traditional load balancers.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of traditional load balancers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_java" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -2728,8 +4241,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Maximum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minsize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minsize_java" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -2737,8 +4249,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Minimum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-optional"
+    <dd>Minimum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multizonesubnetpolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizonesubnetpolicy_java" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -2746,8 +4257,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi zone or subnet strategy, Valid values: <code>PRIORITY</code> and <code>EQUALITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_priorityscaleinunhealthy_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priorityscaleinunhealthy_java" style="color: inherit; text-decoration: inherit;">priority<wbr>Scale<wbr>In<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable priority for unhealthy instances during scale-in operations. If set to <code>true</code>, unhealthy instances will be removed first when scaling in.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2755,8 +4273,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Specifies to which project the scaling group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies to which project the scaling group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replaceloadbalancerunhealthy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replaceloadbalancerunhealthy_java" style="color: inherit; text-decoration: inherit;">replace<wbr>Load<wbr>Balancer<wbr>Unhealthy</a>
@@ -2764,8 +4281,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</p>
-</dd><dt class="property-optional"
+    <dd>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replacemode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replacemode_java" style="color: inherit; text-decoration: inherit;">replace<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replacemonitorunhealthy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replacemonitorunhealthy_java" style="color: inherit; text-decoration: inherit;">replace<wbr>Monitor<wbr>Unhealthy</a>
@@ -2773,8 +4297,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</p>
-</dd><dt class="property-optional"
+    <dd>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retrypolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retrypolicy_java" style="color: inherit; text-decoration: inherit;">retry<wbr>Policy</a>
@@ -2782,8 +4305,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalinggroupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupname_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -2791,8 +4313,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalingmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalingmode_java" style="color: inherit; text-decoration: inherit;">scaling<wbr>Mode</a>
@@ -2800,8 +4321,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2809,8 +4329,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetids_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -2818,17 +4337,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>Tags of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_terminationpolicies_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_terminationpolicies_java" style="color: inherit; text-decoration: inherit;">termination<wbr>Policies</a>
@@ -2836,8 +4353,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2845,8 +4361,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zones_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zones_java" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -2854,8 +4369,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2863,14 +4377,29 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="javascript,typescript">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_autoscalinggroupid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalinggroupid_nodejs" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_concurrentscaleoutfordesiredcapacity_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_concurrentscaleoutfordesiredcapacity_nodejs" style="color: inherit; text-decoration: inherit;">concurrent<wbr>Scale<wbr>Out<wbr>For<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>The concurrent expansion function that matches the expected number cannot be set when <code>instanceAllocationPolicy</code> is in bidding <code>SPOT_MIXED</code> mode, nor can it be set when <code>scalingMode</code> is in expansion priority boot mode(<code>WAKE_UP_STOPPED_SCALING</code>). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_configurationid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_configurationid_nodejs" style="color: inherit; text-decoration: inherit;">configuration<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>An available ID for a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>An available ID for a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2878,8 +4407,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the AS group was created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultcooldown_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultcooldown_nodejs" style="color: inherit; text-decoration: inherit;">default<wbr>Cooldown</a>
@@ -2887,8 +4415,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Default cooldown time in second, and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Default cooldown time in second, and default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desiredcapacity_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desiredcapacity_nodejs" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity</a>
@@ -2896,17 +4423,41 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Desired volume of CVM instances, which is between <code>max_size</code> and <code>min_size</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Desired volume of CVM instances, which is between <code>maxSize</code> and <code>minSize</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_desiredcapacitysyncwithmaxminsize_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desiredcapacitysyncwithmaxminsize_nodejs" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity<wbr>Sync<wbr>With<wbr>Max<wbr>Min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>The expected number of instances is synchronized with the maximum and minimum values. The default value is <code>False</code>. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardbalancerids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardbalancerids_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Balancer<wbr>Ids</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalinggroupforwardbalancerid">Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#scalinggroupforwardbalancerid">Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id[]</a></span>
     </dt>
-    <dd><p>List of application load balancers, which can't be specified with <code>load_balancer_ids</code> together.</p>
-</dd><dt class="property-optional"
+    <dd>List of application load balancers, which can't be specified with <code>loadBalancerIds</code> together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthchecktype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktype_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Health check type of instances in a scaling group.<!-- raw HTML omitted --><!-- raw HTML omitted -->CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see <a href="https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1">Instance Health Check</a><!-- raw HTML omitted --><!-- raw HTML omitted -->CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see <a href="https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1">Health Check Overview</a>.<!-- raw HTML omitted -->If the parameter is set to <code>CLB</code>, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY</code>. If the CLB health check indicates unhealthy, the <code>HealthStatus</code> field will return <code>CLB_UNHEALTHY</code>. If both checks indicate unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY|CLB_UNHEALTHY</code>. Default value: <code>CLB</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instanceallocationpolicy_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceallocationpolicy_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Allocation<wbr>Policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance allocation strategy, with values including <code>LAUNCH_CONFIGURATION</code> and <code>SPOT_MIXED</code>, defaults to <code>LAUNCH_CONFIGURATION</code>.
+<code>LAUNCH_CONFIGURATION</code>: Represents the traditional startup configuration mode;
+<code>SPOT_MIXED</code>: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -2914,8 +4465,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance number of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Instance number of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lbhealthcheckgraceperiod_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lbhealthcheckgraceperiod_nodejs" style="color: inherit; text-decoration: inherit;">lb<wbr>Health<wbr>Check<wbr>Grace<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Grace period of the CLB health check during which the <code>IN_SERVICE</code> instances added will not be marked as <code>CLB_UNHEALTHY</code>.<!-- raw HTML omitted -->Valid range: 0-7200, in seconds. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loadbalancerids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loadbalancerids_nodejs" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Ids</a>
@@ -2923,8 +4481,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of traditional load balancers.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of traditional load balancers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_nodejs" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -2932,8 +4489,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Maximum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minsize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minsize_nodejs" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -2941,8 +4497,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Minimum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-optional"
+    <dd>Minimum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multizonesubnetpolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizonesubnetpolicy_nodejs" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -2950,8 +4505,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi zone or subnet strategy, Valid values: <code>PRIORITY</code> and <code>EQUALITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_priorityscaleinunhealthy_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priorityscaleinunhealthy_nodejs" style="color: inherit; text-decoration: inherit;">priority<wbr>Scale<wbr>In<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether to enable priority for unhealthy instances during scale-in operations. If set to <code>true</code>, unhealthy instances will be removed first when scaling in.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2959,8 +4521,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Specifies to which project the scaling group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies to which project the scaling group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replaceloadbalancerunhealthy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replaceloadbalancerunhealthy_nodejs" style="color: inherit; text-decoration: inherit;">replace<wbr>Load<wbr>Balancer<wbr>Unhealthy</a>
@@ -2968,8 +4529,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</p>
-</dd><dt class="property-optional"
+    <dd>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replacemode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replacemode_nodejs" style="color: inherit; text-decoration: inherit;">replace<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replacemonitorunhealthy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replacemonitorunhealthy_nodejs" style="color: inherit; text-decoration: inherit;">replace<wbr>Monitor<wbr>Unhealthy</a>
@@ -2977,8 +4545,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</p>
-</dd><dt class="property-optional"
+    <dd>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retrypolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retrypolicy_nodejs" style="color: inherit; text-decoration: inherit;">retry<wbr>Policy</a>
@@ -2986,8 +4553,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalinggroupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupname_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -2995,8 +4561,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalingmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalingmode_nodejs" style="color: inherit; text-decoration: inherit;">scaling<wbr>Mode</a>
@@ -3004,8 +4569,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3013,8 +4577,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetids_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -3022,17 +4585,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>Tags of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_terminationpolicies_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_terminationpolicies_nodejs" style="color: inherit; text-decoration: inherit;">termination<wbr>Policies</a>
@@ -3040,8 +4601,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3049,8 +4609,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zones_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zones_nodejs" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -3058,8 +4617,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3067,14 +4625,29 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="python">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_auto_scaling_group_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_auto_scaling_group_id_python" style="color: inherit; text-decoration: inherit;">auto_<wbr>scaling_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_concurrent_scale_out_for_desired_capacity_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_concurrent_scale_out_for_desired_capacity_python" style="color: inherit; text-decoration: inherit;">concurrent_<wbr>scale_<wbr>out_<wbr>for_<wbr>desired_<wbr>capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The concurrent expansion function that matches the expected number cannot be set when <code>instanceAllocationPolicy</code> is in bidding <code>SPOT_MIXED</code> mode, nor can it be set when <code>scalingMode</code> is in expansion priority boot mode(<code>WAKE_UP_STOPPED_SCALING</code>). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_configuration_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_configuration_id_python" style="color: inherit; text-decoration: inherit;">configuration_<wbr>id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>An available ID for a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>An available ID for a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -3082,8 +4655,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the AS group was created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_default_cooldown_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_default_cooldown_python" style="color: inherit; text-decoration: inherit;">default_<wbr>cooldown</a>
@@ -3091,8 +4663,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Default cooldown time in second, and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Default cooldown time in second, and default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desired_capacity_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desired_capacity_python" style="color: inherit; text-decoration: inherit;">desired_<wbr>capacity</a>
@@ -3100,17 +4671,41 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Desired volume of CVM instances, which is between <code>max_size</code> and <code>min_size</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Desired volume of CVM instances, which is between <code>maxSize</code> and <code>minSize</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_desired_capacity_sync_with_max_min_size_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desired_capacity_sync_with_max_min_size_python" style="color: inherit; text-decoration: inherit;">desired_<wbr>capacity_<wbr>sync_<wbr>with_<wbr>max_<wbr>min_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>The expected number of instances is synchronized with the maximum and minimum values. The default value is <code>False</code>. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forward_balancer_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forward_balancer_ids_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>balancer_<wbr>ids</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalinggroupforwardbalancerid">Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Args]</a></span>
+        <span class="property-type"><a href="#scalinggroupforwardbalancerid">Sequence[Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Args]</a></span>
     </dt>
-    <dd><p>List of application load balancers, which can't be specified with <code>load_balancer_ids</code> together.</p>
-</dd><dt class="property-optional"
+    <dd>List of application load balancers, which can't be specified with <code>loadBalancerIds</code> together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_health_check_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_health_check_type_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Health check type of instances in a scaling group.<!-- raw HTML omitted --><!-- raw HTML omitted -->CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see <a href="https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1">Instance Health Check</a><!-- raw HTML omitted --><!-- raw HTML omitted -->CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see <a href="https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1">Health Check Overview</a>.<!-- raw HTML omitted -->If the parameter is set to <code>CLB</code>, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY</code>. If the CLB health check indicates unhealthy, the <code>HealthStatus</code> field will return <code>CLB_UNHEALTHY</code>. If both checks indicate unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY|CLB_UNHEALTHY</code>. Default value: <code>CLB</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instance_allocation_policy_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_allocation_policy_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>allocation_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Instance allocation strategy, with values including <code>LAUNCH_CONFIGURATION</code> and <code>SPOT_MIXED</code>, defaults to <code>LAUNCH_CONFIGURATION</code>.
+<code>LAUNCH_CONFIGURATION</code>: Represents the traditional startup configuration mode;
+<code>SPOT_MIXED</code>: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instance_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instance_count_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>count</a>
@@ -3118,8 +4713,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance number of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Instance number of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lb_health_check_grace_period_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lb_health_check_grace_period_python" style="color: inherit; text-decoration: inherit;">lb_<wbr>health_<wbr>check_<wbr>grace_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Grace period of the CLB health check during which the <code>IN_SERVICE</code> instances added will not be marked as <code>CLB_UNHEALTHY</code>.<!-- raw HTML omitted -->Valid range: 0-7200, in seconds. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_load_balancer_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_load_balancer_ids_python" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>ids</a>
@@ -3127,8 +4729,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of traditional load balancers.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of traditional load balancers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_max_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_max_size_python" style="color: inherit; text-decoration: inherit;">max_<wbr>size</a>
@@ -3136,8 +4737,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Maximum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_min_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_min_size_python" style="color: inherit; text-decoration: inherit;">min_<wbr>size</a>
@@ -3145,8 +4745,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Minimum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-optional"
+    <dd>Minimum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multi_zone_subnet_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multi_zone_subnet_policy_python" style="color: inherit; text-decoration: inherit;">multi_<wbr>zone_<wbr>subnet_<wbr>policy</a>
@@ -3154,8 +4753,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi zone or subnet strategy, Valid values: <code>PRIORITY</code> and <code>EQUALITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_priority_scale_in_unhealthy_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priority_scale_in_unhealthy_python" style="color: inherit; text-decoration: inherit;">priority_<wbr>scale_<wbr>in_<wbr>unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether to enable priority for unhealthy instances during scale-in operations. If set to <code>true</code>, unhealthy instances will be removed first when scaling in.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -3163,8 +4769,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Specifies to which project the scaling group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies to which project the scaling group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replace_load_balancer_unhealthy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replace_load_balancer_unhealthy_python" style="color: inherit; text-decoration: inherit;">replace_<wbr>load_<wbr>balancer_<wbr>unhealthy</a>
@@ -3172,8 +4777,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</p>
-</dd><dt class="property-optional"
+    <dd>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replace_mode_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replace_mode_python" style="color: inherit; text-decoration: inherit;">replace_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replace_monitor_unhealthy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replace_monitor_unhealthy_python" style="color: inherit; text-decoration: inherit;">replace_<wbr>monitor_<wbr>unhealthy</a>
@@ -3181,8 +4793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</p>
-</dd><dt class="property-optional"
+    <dd>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retry_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retry_policy_python" style="color: inherit; text-decoration: inherit;">retry_<wbr>policy</a>
@@ -3190,8 +4801,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scaling_group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_group_name_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>group_<wbr>name</a>
@@ -3199,8 +4809,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scaling_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scaling_mode_python" style="color: inherit; text-decoration: inherit;">scaling_<wbr>mode</a>
@@ -3208,8 +4817,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3217,8 +4825,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnet_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnet_ids_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>ids</a>
@@ -3226,17 +4833,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>Tags of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_termination_policies_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_termination_policies_python" style="color: inherit; text-decoration: inherit;">termination_<wbr>policies</a>
@@ -3244,8 +4849,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -3253,8 +4857,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zones_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zones_python" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -3262,8 +4865,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3271,14 +4873,29 @@ The following state arguments are supported:
 <pulumi-choosable type="language" values="yaml">
 <dl class="resources-properties"><dt class="property-optional"
             title="Optional">
+        <span id="state_autoscalinggroupid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_autoscalinggroupid_yaml" style="color: inherit; text-decoration: inherit;">auto<wbr>Scaling<wbr>Group<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_concurrentscaleoutfordesiredcapacity_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_concurrentscaleoutfordesiredcapacity_yaml" style="color: inherit; text-decoration: inherit;">concurrent<wbr>Scale<wbr>Out<wbr>For<wbr>Desired<wbr>Capacity</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>The concurrent expansion function that matches the expected number cannot be set when <code>instanceAllocationPolicy</code> is in bidding <code>SPOT_MIXED</code> mode, nor can it be set when <code>scalingMode</code> is in expansion priority boot mode(<code>WAKE_UP_STOPPED_SCALING</code>). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.</dd><dt class="property-optional"
+            title="Optional">
         <span id="state_configurationid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_configurationid_yaml" style="color: inherit; text-decoration: inherit;">configuration<wbr>Id</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>An available ID for a launch configuration.</p>
-</dd><dt class="property-optional"
+    <dd>An available ID for a launch configuration.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3286,8 +4903,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time when the AS group was created.</p>
-</dd><dt class="property-optional"
+    <dd>The time when the AS group was created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_defaultcooldown_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_defaultcooldown_yaml" style="color: inherit; text-decoration: inherit;">default<wbr>Cooldown</a>
@@ -3295,8 +4911,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Default cooldown time in second, and default value is <code>300</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Default cooldown time in second, and default value is <code>300</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_desiredcapacity_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desiredcapacity_yaml" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity</a>
@@ -3304,8 +4919,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Desired volume of CVM instances, which is between <code>max_size</code> and <code>min_size</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Desired volume of CVM instances, which is between <code>maxSize</code> and <code>minSize</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_desiredcapacitysyncwithmaxminsize_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_desiredcapacitysyncwithmaxminsize_yaml" style="color: inherit; text-decoration: inherit;">desired<wbr>Capacity<wbr>Sync<wbr>With<wbr>Max<wbr>Min<wbr>Size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>The expected number of instances is synchronized with the maximum and minimum values. The default value is <code>False</code>. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_forwardbalancerids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_forwardbalancerids_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Balancer<wbr>Ids</a>
@@ -3313,8 +4935,25 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalinggroupforwardbalancerid">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of application load balancers, which can't be specified with <code>load_balancer_ids</code> together.</p>
-</dd><dt class="property-optional"
+    <dd>List of application load balancers, which can't be specified with <code>loadBalancerIds</code> together.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_healthchecktype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_healthchecktype_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Health check type of instances in a scaling group.<!-- raw HTML omitted --><!-- raw HTML omitted -->CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see <a href="https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1">Instance Health Check</a><!-- raw HTML omitted --><!-- raw HTML omitted -->CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see <a href="https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1">Health Check Overview</a>.<!-- raw HTML omitted -->If the parameter is set to <code>CLB</code>, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY</code>. If the CLB health check indicates unhealthy, the <code>HealthStatus</code> field will return <code>CLB_UNHEALTHY</code>. If both checks indicate unhealthy, the <code>HealthStatus</code> field will return <code>UNHEALTHY|CLB_UNHEALTHY</code>. Default value: <code>CLB</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_instanceallocationpolicy_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instanceallocationpolicy_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Allocation<wbr>Policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Instance allocation strategy, with values including <code>LAUNCH_CONFIGURATION</code> and <code>SPOT_MIXED</code>, defaults to <code>LAUNCH_CONFIGURATION</code>.
+<code>LAUNCH_CONFIGURATION</code>: Represents the traditional startup configuration mode;
+<code>SPOT_MIXED</code>: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_instancecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_instancecount_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Count</a>
@@ -3322,8 +4961,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance number of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Instance number of a scaling group.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_lbhealthcheckgraceperiod_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_lbhealthcheckgraceperiod_yaml" style="color: inherit; text-decoration: inherit;">lb<wbr>Health<wbr>Check<wbr>Grace<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Grace period of the CLB health check during which the <code>IN_SERVICE</code> instances added will not be marked as <code>CLB_UNHEALTHY</code>.<!-- raw HTML omitted -->Valid range: 0-7200, in seconds. Default value: <code>0</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_loadbalancerids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_loadbalancerids_yaml" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Ids</a>
@@ -3331,8 +4977,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of traditional load balancers.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of traditional load balancers.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_maxsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_maxsize_yaml" style="color: inherit; text-decoration: inherit;">max<wbr>Size</a>
@@ -3340,8 +4985,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Maximum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-optional"
+    <dd>Maximum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_minsize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_minsize_yaml" style="color: inherit; text-decoration: inherit;">min<wbr>Size</a>
@@ -3349,8 +4993,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Minimum number of CVM instances. Valid value ranges: (0~2000).</p>
-</dd><dt class="property-optional"
+    <dd>Minimum number of CVM instances. Valid value ranges: (0~2000).</dd><dt class="property-optional"
             title="Optional">
         <span id="state_multizonesubnetpolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_multizonesubnetpolicy_yaml" style="color: inherit; text-decoration: inherit;">multi<wbr>Zone<wbr>Subnet<wbr>Policy</a>
@@ -3358,8 +5001,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.</p>
-</dd><dt class="property-optional"
+    <dd>Multi zone or subnet strategy, Valid values: <code>PRIORITY</code> and <code>EQUALITY</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_priorityscaleinunhealthy_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_priorityscaleinunhealthy_yaml" style="color: inherit; text-decoration: inherit;">priority<wbr>Scale<wbr>In<wbr>Unhealthy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether to enable priority for unhealthy instances during scale-in operations. If set to <code>true</code>, unhealthy instances will be removed first when scaling in.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3367,8 +5017,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Specifies to which project the scaling group belongs.</p>
-</dd><dt class="property-optional"
+    <dd>Specifies to which project the scaling group belongs.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replaceloadbalancerunhealthy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replaceloadbalancerunhealthy_yaml" style="color: inherit; text-decoration: inherit;">replace<wbr>Load<wbr>Balancer<wbr>Unhealthy</a>
@@ -3376,8 +5025,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</p>
-</dd><dt class="property-optional"
+    <dd>Enable unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are found unhealthy in the CLB health check.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_replacemode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replacemode_yaml" style="color: inherit; text-decoration: inherit;">replace<wbr>Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_replacemonitorunhealthy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_replacemonitorunhealthy_yaml" style="color: inherit; text-decoration: inherit;">replace<wbr>Monitor<wbr>Unhealthy</a>
@@ -3385,8 +5041,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</p>
-</dd><dt class="property-optional"
+    <dd>Enables unhealthy instance replacement. If set to <code>true</code>, AS will replace instances that are flagged as unhealthy by Cloud Monitor.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retrypolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retrypolicy_yaml" style="color: inherit; text-decoration: inherit;">retry<wbr>Policy</a>
@@ -3394,8 +5049,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalinggroupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalinggroupname_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Group<wbr>Name</a>
@@ -3403,8 +5057,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Name of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_scalingmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_scalingmode_yaml" style="color: inherit; text-decoration: inherit;">scaling<wbr>Mode</a>
@@ -3412,8 +5065,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: <code>CLASSIC_SCALING</code>, <code>WAKE_UP_STOPPED_SCALING</code>. Default: <code>CLASSIC_SCALING</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3421,8 +5073,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Current status of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Current status of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_subnetids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_subnetids_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Ids</a>
@@ -3430,17 +5081,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of subnet, and for VPC it is required.</p>
-</dd><dt class="property-optional"
+    <dd>ID list of subnet, and for VPC it is required.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>Tags of a scaling group.</p>
-</dd><dt class="property-optional"
+    <dd>Tags of a scaling group.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_terminationpolicies_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_terminationpolicies_yaml" style="color: inherit; text-decoration: inherit;">termination<wbr>Policies</a>
@@ -3448,8 +5097,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</p>
-</dd><dt class="property-optional"
+    <dd>Available values for termination policies. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3457,8 +5105,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of VPC network.</p>
-</dd><dt class="property-optional"
+    <dd>ID of VPC network.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_zones_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_zones_yaml" style="color: inherit; text-decoration: inherit;">zones</a>
@@ -3466,8 +5113,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of available zones, for Basic network it is required.</p>
-</dd></dl>
+    <dd>List of available zones, for Basic network it is required.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -3482,7 +5128,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="scalinggroupforwardbalancerid">Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id</h4>
+<h4 id="scalinggroupforwardbalancerid">
+Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<pulumi-choosable type="language" values="python,go" class="inline">, Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3494,8 +5142,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener ID for application load balancers.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID for application load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerid_csharp" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Id</a>
@@ -3503,8 +5150,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of available load balancers.</p>
-</dd><dt class="property-required"
+    <dd>ID of available load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="targetattributes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetattributes_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Attributes</a>
@@ -3512,8 +5158,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalinggroupforwardbalanceridtargetattribute">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>As.<wbr>Inputs.<wbr>Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Target<wbr>Attribute&gt;</a></span>
     </dt>
-    <dd><p>Attribute list of target rules.</p>
-</dd><dt class="property-optional"
+    <dd>Attribute list of target rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_csharp" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -3521,8 +5166,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of forwarding rules.</p>
-</dd></dl>
+    <dd>ID of forwarding rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3536,8 +5180,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener ID for application load balancers.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID for application load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerid_go" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Id</a>
@@ -3545,8 +5188,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of available load balancers.</p>
-</dd><dt class="property-required"
+    <dd>ID of available load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="targetattributes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetattributes_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Attributes</a>
@@ -3554,8 +5196,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalinggroupforwardbalanceridtargetattribute">[]Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Target<wbr>Attribute</a></span>
     </dt>
-    <dd><p>Attribute list of target rules.</p>
-</dd><dt class="property-optional"
+    <dd>Attribute list of target rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_go" style="color: inherit; text-decoration: inherit;">Rule<wbr>Id</a>
@@ -3563,8 +5204,45 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of forwarding rules.</p>
-</dd></dl>
+    <dd>ID of forwarding rules.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Listener ID for application load balancers.</dd><dt class="property-required"
+            title="Required">
+        <span id="load_balancer_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_id_hcl" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of available load balancers.</dd><dt class="property-required"
+            title="Required">
+        <span id="target_attributes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_attributes_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>attributes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#scalinggroupforwardbalanceridtargetattribute">list(object)</a></span>
+    </dt>
+    <dd>Attribute list of target rules.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="rule_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_hcl" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of forwarding rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3578,8 +5256,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Listener ID for application load balancers.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID for application load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerid_java" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Id</a>
@@ -3587,8 +5264,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of available load balancers.</p>
-</dd><dt class="property-required"
+    <dd>ID of available load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="targetattributes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetattributes_java" style="color: inherit; text-decoration: inherit;">target<wbr>Attributes</a>
@@ -3596,8 +5272,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalinggroupforwardbalanceridtargetattribute">List&lt;Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Target<wbr>Attribute&gt;</a></span>
     </dt>
-    <dd><p>Attribute list of target rules.</p>
-</dd><dt class="property-optional"
+    <dd>Attribute list of target rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_java" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -3605,8 +5280,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of forwarding rules.</p>
-</dd></dl>
+    <dd>ID of forwarding rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3620,8 +5294,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Listener ID for application load balancers.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID for application load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerid_nodejs" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Id</a>
@@ -3629,8 +5302,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of available load balancers.</p>
-</dd><dt class="property-required"
+    <dd>ID of available load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="targetattributes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetattributes_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Attributes</a>
@@ -3638,8 +5310,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalinggroupforwardbalanceridtargetattribute">Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Target<wbr>Attribute[]</a></span>
     </dt>
-    <dd><p>Attribute list of target rules.</p>
-</dd><dt class="property-optional"
+    <dd>Attribute list of target rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_nodejs" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -3647,8 +5318,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of forwarding rules.</p>
-</dd></dl>
+    <dd>ID of forwarding rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3662,8 +5332,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Listener ID for application load balancers.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID for application load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="load_balancer_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_id_python" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>id</a>
@@ -3671,17 +5340,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of available load balancers.</p>
-</dd><dt class="property-required"
+    <dd>ID of available load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="target_attributes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_attributes_python" style="color: inherit; text-decoration: inherit;">target_<wbr>attributes</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#scalinggroupforwardbalanceridtargetattribute">Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Target<wbr>Attribute]</a></span>
+        <span class="property-type"><a href="#scalinggroupforwardbalanceridtargetattribute">Sequence[Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Target<wbr>Attribute]</a></span>
     </dt>
-    <dd><p>Attribute list of target rules.</p>
-</dd><dt class="property-optional"
+    <dd>Attribute list of target rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="rule_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rule_id_python" style="color: inherit; text-decoration: inherit;">rule_<wbr>id</a>
@@ -3689,8 +5356,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of forwarding rules.</p>
-</dd></dl>
+    <dd>ID of forwarding rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3704,8 +5370,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Listener ID for application load balancers.</p>
-</dd><dt class="property-required"
+    <dd>Listener ID for application load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="loadbalancerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerid_yaml" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Id</a>
@@ -3713,8 +5378,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of available load balancers.</p>
-</dd><dt class="property-required"
+    <dd>ID of available load balancers.</dd><dt class="property-required"
             title="Required">
         <span id="targetattributes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetattributes_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Attributes</a>
@@ -3722,8 +5386,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#scalinggroupforwardbalanceridtargetattribute">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Attribute list of target rules.</p>
-</dd><dt class="property-optional"
+    <dd>Attribute list of target rules.</dd><dt class="property-optional"
             title="Optional">
         <span id="ruleid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ruleid_yaml" style="color: inherit; text-decoration: inherit;">rule<wbr>Id</a>
@@ -3731,12 +5394,13 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of forwarding rules.</p>
-</dd></dl>
+    <dd>ID of forwarding rules.</dd></dl>
 </pulumi-choosable>
 </div>
 
-<h4 id="scalinggroupforwardbalanceridtargetattribute">Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Target<wbr>Attribute</h4>
+<h4 id="scalinggroupforwardbalanceridtargetattribute">
+Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Target<wbr>Attribute<pulumi-choosable type="language" values="python,go" class="inline">, Scaling<wbr>Group<wbr>Forward<wbr>Balancer<wbr>Id<wbr>Target<wbr>Attribute<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -3748,8 +5412,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number.</p>
-</dd><dt class="property-required"
+    <dd>Port number.</dd><dt class="property-required"
             title="Required">
         <span id="weight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -3757,8 +5420,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight.</p>
-</dd></dl>
+    <dd>Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3772,8 +5434,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number.</p>
-</dd><dt class="property-required"
+    <dd>Port number.</dd><dt class="property-required"
             title="Required">
         <span id="weight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -3781,8 +5442,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight.</p>
-</dd></dl>
+    <dd>Weight.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port number.</dd><dt class="property-required"
+            title="Required">
+        <span id="weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3796,8 +5478,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port number.</p>
-</dd><dt class="property-required"
+    <dd>Port number.</dd><dt class="property-required"
             title="Required">
         <span id="weight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -3805,8 +5486,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Weight.</p>
-</dd></dl>
+    <dd>Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3820,8 +5500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port number.</p>
-</dd><dt class="property-required"
+    <dd>Port number.</dd><dt class="property-required"
             title="Required">
         <span id="weight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -3829,8 +5508,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Weight.</p>
-</dd></dl>
+    <dd>Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3844,8 +5522,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port number.</p>
-</dd><dt class="property-required"
+    <dd>Port number.</dd><dt class="property-required"
             title="Required">
         <span id="weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -3853,8 +5530,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Weight.</p>
-</dd></dl>
+    <dd>Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3868,8 +5544,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port number.</p>
-</dd><dt class="property-required"
+    <dd>Port number.</dd><dt class="property-required"
             title="Required">
         <span id="weight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -3877,8 +5552,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Weight.</p>
-</dd></dl>
+    <dd>Weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3886,12 +5560,15 @@ The following state arguments are supported:
 
 
 
-AutoScaling Groups can be imported using the id, e.g.
+Auto scaling Group can be imported using the id, e.g.
 
 ```sh
-$ pulumi import tencentcloud:As/scalingGroup:ScalingGroup scaling_group asg-n32ymck2
+$ pulumi import tencentcloud:As/scalingGroup:ScalingGroup example asg-n32ymck2
 ```
 
+
+
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
 
 
 
@@ -3903,7 +5580,6 @@ $ pulumi import tencentcloud:As/scalingGroup:ScalingGroup scaling_group asg-n32y
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

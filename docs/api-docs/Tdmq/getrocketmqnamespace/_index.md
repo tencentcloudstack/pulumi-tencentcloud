@@ -2,9 +2,11 @@
 ---
 title: "getRocketmqNamespace"
 title_tag: "tencentcloud.Tdmq.getRocketmqNamespace"
-meta_desc: "Documentation for the tencentcloud.Tdmq.getRocketmqNamespace function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of tdmqRocketmq namespace"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,93 +18,73 @@ Use this data source to query detailed information of tdmqRocketmq namespace
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleRocketmqCluster = new tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster", {
+const exampleRocketmqCluster = new tencentcloud.tdmq.RocketmqCluster("example", {
     clusterName: "tf_example",
     remark: "remark.",
 });
-const exampleRocketmqNamespace = tencentcloud.Tdmq.getRocketmqNamespaceOutput({
-    clusterId: exampleRocketmqCluster.clusterId,
-    nameKeyword: exampleTdmq / rocketmqNamespaceRocketmqNamespace.namespaceName,
-});
-const exampleTdmq_rocketmqNamespaceRocketmqNamespace = new tencentcloud.tdmq.RocketmqNamespace("exampleTdmq/rocketmqNamespaceRocketmqNamespace", {
+const exampleRocketmqNamespace = new tencentcloud.tdmq.RocketmqNamespace("example", {
     clusterId: exampleRocketmqCluster.clusterId,
     namespaceName: "tf_example",
     remark: "remark.",
 });
+const example = tencentcloud.tdmq.getRocketmqNamespaceOutput({
+    clusterId: exampleRocketmqCluster.clusterId,
+    nameKeyword: exampleRocketmqNamespace.namespaceName,
+});
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_rocketmq_cluster = tencentcloud.tdmq.RocketmqCluster("exampleRocketmqCluster",
+example_rocketmq_cluster = tencentcloud.tdmq.RocketmqCluster("example",
     cluster_name="tf_example",
     remark="remark.")
-example_rocketmq_namespace = tencentcloud.Tdmq.get_rocketmq_namespace_output(cluster_id=example_rocketmq_cluster.cluster_id,
-    name_keyword=example_tdmq / rocketmq_namespace_rocketmq_namespace["namespaceName"])
-example_tdmq_rocketmq_namespace_rocketmq_namespace = tencentcloud.tdmq.RocketmqNamespace("exampleTdmq/rocketmqNamespaceRocketmqNamespace",
+example_rocketmq_namespace = tencentcloud.tdmq.RocketmqNamespace("example",
     cluster_id=example_rocketmq_cluster.cluster_id,
     namespace_name="tf_example",
     remark="remark.")
+example = tencentcloud.tdmq.get_rocketmq_namespace_output(cluster_id=example_rocketmq_cluster.cluster_id,
+    name_keyword=example_rocketmq_namespace.namespace_name)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
-using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new()
-    {
-        ClusterName = "tf_example",
-        Remark = "remark.",
-    });
-
-    var exampleRocketmqNamespace = Tencentcloud.Tdmq.GetRocketmqNamespace.Invoke(new()
-    {
-        ClusterId = exampleRocketmqCluster.ClusterId,
-        NameKeyword = exampleTdmq / rocketmqNamespaceRocketmqNamespace.NamespaceName,
-    });
-
-    var exampleTdmq_rocketmqNamespaceRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleTdmq/rocketmqNamespaceRocketmqNamespace", new()
-    {
-        ClusterId = exampleRocketmqCluster.ClusterId,
-        NamespaceName = "tf_example",
-        Remark = "remark.",
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tdmq"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		exampleRocketmqCluster, err := Tdmq.NewRocketmqCluster(ctx, "exampleRocketmqCluster", &Tdmq.RocketmqClusterArgs{
+		exampleRocketmqCluster, err := tdmq.NewRocketmqCluster(ctx, "example", &tdmq.RocketmqClusterArgs{
 			ClusterName: pulumi.String("tf_example"),
 			Remark:      pulumi.String("remark."),
 		})
 		if err != nil {
 			return err
 		}
-		_ = Tdmq.GetRocketmqNamespaceOutput(ctx, tdmq.GetRocketmqNamespaceOutputArgs{
-			ClusterId:   exampleRocketmqCluster.ClusterId,
-			NameKeyword: exampleTdmq / rocketmqNamespaceRocketmqNamespace.NamespaceName,
-		}, nil)
-		_, err = Tdmq.NewRocketmqNamespace(ctx, "exampleTdmq/rocketmqNamespaceRocketmqNamespace", &Tdmq.RocketmqNamespaceArgs{
+		exampleRocketmqNamespace, err := tdmq.NewRocketmqNamespace(ctx, "example", &tdmq.RocketmqNamespaceArgs{
 			ClusterId:     exampleRocketmqCluster.ClusterId,
 			NamespaceName: pulumi.String("tf_example"),
 			Remark:        pulumi.String("remark."),
@@ -110,10 +92,53 @@ func main() {
 		if err != nil {
 			return err
 		}
+		_ = tdmq.GetRocketmqNamespaceOutput(ctx, tdmq.GetRocketmqNamespaceOutputArgs{
+			ClusterId:   exampleRocketmqCluster.ClusterId,
+			NameKeyword: exampleRocketmqNamespace.NamespaceName,
+		}, nil)
 		return nil
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("example", new()
+    {
+        ClusterName = "tf_example",
+        Remark = "remark.",
+    });
+
+    var exampleRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("example", new()
+    {
+        ClusterId = exampleRocketmqCluster.ClusterId,
+        NamespaceName = "tf_example",
+        Remark = "remark.",
+    });
+
+    var example = Tencentcloud.Tdmq.GetRocketmqNamespace.Invoke(new()
+    {
+        ClusterId = exampleRocketmqCluster.ClusterId,
+        NameKeyword = exampleRocketmqNamespace.NamespaceName,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -122,12 +147,12 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Tdmq.RocketmqCluster;
 import com.pulumi.tencentcloud.Tdmq.RocketmqClusterArgs;
-import com.pulumi.tencentcloud.Tdmq.TdmqFunctions;
-import com.pulumi.tencentcloud.Tdmq.inputs.GetRocketmqNamespaceArgs;
 import com.pulumi.tencentcloud.Tdmq.RocketmqNamespace;
 import com.pulumi.tencentcloud.Tdmq.RocketmqNamespaceArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Tdmq.TdmqFunctions;
+import com.pulumi.tencentcloud.Tdmq.inputs.GetRocketmqNamespaceArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -139,27 +164,91 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var exampleRocketmqCluster = new RocketmqCluster("exampleRocketmqCluster", RocketmqClusterArgs.builder()        
+        var exampleRocketmqCluster = new RocketmqCluster("exampleRocketmqCluster", RocketmqClusterArgs.builder()
             .clusterName("tf_example")
             .remark("remark.")
             .build());
 
-        final var exampleRocketmqNamespace = TdmqFunctions.getRocketmqNamespace(GetRocketmqNamespaceArgs.builder()
-            .clusterId(exampleRocketmqCluster.clusterId())
-            .nameKeyword(exampleTdmq / rocketmqNamespaceRocketmqNamespace.namespaceName())
-            .build());
-
-        var exampleTdmq_rocketmqNamespaceRocketmqNamespace = new RocketmqNamespace("exampleTdmq/rocketmqNamespaceRocketmqNamespace", RocketmqNamespaceArgs.builder()        
+        var exampleRocketmqNamespace = new RocketmqNamespace("exampleRocketmqNamespace", RocketmqNamespaceArgs.builder()
             .clusterId(exampleRocketmqCluster.clusterId())
             .namespaceName("tf_example")
             .remark("remark.")
             .build());
 
+        final var example = TdmqFunctions.getRocketmqNamespace(GetRocketmqNamespaceArgs.builder()
+            .clusterId(exampleRocketmqCluster.clusterId())
+            .nameKeyword(exampleRocketmqNamespace.namespaceName())
+            .build());
+
     }
 }
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
 
+```yaml
+resources:
+  exampleRocketmqCluster:
+    type: tencentcloud:Tdmq:RocketmqCluster
+    name: example
+    properties:
+      clusterName: tf_example
+      remark: remark.
+  exampleRocketmqNamespace:
+    type: tencentcloud:Tdmq:RocketmqNamespace
+    name: example
+    properties:
+      clusterId: ${exampleRocketmqCluster.clusterId}
+      namespaceName: tf_example
+      remark: remark.
+variables:
+  example:
+    fn::invoke:
+      function: tencentcloud:Tdmq:getRocketmqNamespace
+      arguments:
+        clusterId: ${exampleRocketmqCluster.clusterId}
+        nameKeyword: ${exampleRocketmqNamespace.namespaceName}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
+
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_tdmq_getrocketmqnamespace" "example" {
+  cluster_id   = tencentcloud_tdmq_rocketmqcluster.example.cluster_id
+  name_keyword = tencentcloud_tdmq_rocketmqnamespace.example.namespace_name
+}
+
+resource "tencentcloud_tdmq_rocketmqcluster" "example" {
+  cluster_name = "tf_example"
+  remark       = "remark."
+}
+resource "tencentcloud_tdmq_rocketmqnamespace" "example" {
+  cluster_id     = tencentcloud_tdmq_rocketmqcluster.example.cluster_id
+  namespace_name = "tf_example"
+  remark         = "remark."
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeRocketMQNamespaces](https://www.tencentcloud.com/search/?wd=DescribeRocketMQNamespaces&type=document&lang=en)
 
 
 
@@ -171,7 +260,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -179,9 +268,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getRocketmqNamespace<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRocketmqNamespaceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRocketmqNamespaceResult</a></span>></span
+><span class="k">function </span>getRocketmqNamespace<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRocketmqNamespaceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetRocketmqNamespaceResult</a></span>></span
 ><span class="k">
-function </span>getRocketmqNamespaceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRocketmqNamespaceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRocketmqNamespaceResult</a></span>></span
+function </span>getRocketmqNamespaceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetRocketmqNamespaceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetRocketmqNamespaceResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -195,10 +284,10 @@ function </span>getRocketmqNamespaceOutput<span class="p">(</span><span class="n
                            <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                            <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetRocketmqNamespaceResult</span
 ><span class="k">
-def </span>get_rocketmq_namespace_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">name_keyword</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRocketmqNamespaceResult]</span
+def </span>get_rocketmq_namespace_output<span class="p">(</span><span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">name_keyword</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                           <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetRocketmqNamespaceResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -207,12 +296,12 @@ def </span>get_rocketmq_namespace_output<span class="p">(</span><span class="nx"
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetRocketmqNamespace<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetRocketmqNamespaceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetRocketmqNamespaceResult</a></span>, error)</span
+><span class="k">func </span>LookupRocketmqNamespace<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupRocketmqNamespaceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupRocketmqNamespaceResult</a></span>, error)</span
 ><span class="k">
-func </span>GetRocketmqNamespaceOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetRocketmqNamespaceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetRocketmqNamespaceResultOutput</span
+func </span>LookupRocketmqNamespaceOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupRocketmqNamespaceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupRocketmqNamespaceResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetRocketmqNamespace` in the Go SDK.
+&gt; Note: This function is named `LookupRocketmqNamespace` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -223,7 +312,8 @@ func </span>GetRocketmqNamespaceOutput<span class="p">(</span><span class="nx">c
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetRocketmqNamespace </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetRocketmqNamespaceResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetRocketmqNamespaceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetRocketmqNamespaceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRocketmqNamespaceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRocketmqNamespaceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRocketmqNamespaceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetRocketmqNamespaceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetRocketmqNamespaceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -232,7 +322,8 @@ func </span>GetRocketmqNamespaceOutput<span class="p">(</span><span class="nx">c
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetRocketmqNamespaceResult</a></span>> </span>getRocketmqNamespace<span class="p">(</span><span class="nx">GetRocketmqNamespaceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRocketmqNamespaceResult</a></span>> </span>getRocketmqNamespace<span class="p">(</span><span class="nx">GetRocketmqNamespaceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetRocketmqNamespaceResult</a></span>> </span>getRocketmqNamespace<span class="p">(</span><span class="nx">GetRocketmqNamespaceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -244,6 +335,15 @@ func </span>GetRocketmqNamespaceOutput<span class="p">(</span><span class="nx">c
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Tdmq/getRocketmqNamespace:getRocketmqNamespace
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_tdmq_get_rocketmq_namespace&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -262,8 +362,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namekeyword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namekeyword_csharp" style="color: inherit; text-decoration: inherit;">Name<wbr>Keyword</a>
@@ -271,8 +370,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Search by name.</p>
-</dd><dt class="property-optional"
+    <dd>Search by name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -280,8 +378,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -295,8 +392,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namekeyword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namekeyword_go" style="color: inherit; text-decoration: inherit;">Name<wbr>Keyword</a>
@@ -304,8 +400,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Search by name.</p>
-</dd><dt class="property-optional"
+    <dd>Search by name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -313,8 +408,37 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Cluster ID.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="name_keyword_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_keyword_hcl" style="color: inherit; text-decoration: inherit;">name_<wbr>keyword</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Search by name.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -328,8 +452,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namekeyword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namekeyword_java" style="color: inherit; text-decoration: inherit;">name<wbr>Keyword</a>
@@ -337,8 +460,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Search by name.</p>
-</dd><dt class="property-optional"
+    <dd>Search by name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -346,8 +468,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -361,8 +482,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namekeyword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namekeyword_nodejs" style="color: inherit; text-decoration: inherit;">name<wbr>Keyword</a>
@@ -370,8 +490,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Search by name.</p>
-</dd><dt class="property-optional"
+    <dd>Search by name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -379,8 +498,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -394,8 +512,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="name_keyword_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_keyword_python" style="color: inherit; text-decoration: inherit;">name_<wbr>keyword</a>
@@ -403,8 +520,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Search by name.</p>
-</dd><dt class="property-optional"
+    <dd>Search by name.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -412,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -427,8 +542,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Cluster ID.</p>
-</dd><dt class="property-optional"
+    <dd>Cluster ID.</dd><dt class="property-optional"
             title="Optional">
         <span id="namekeyword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namekeyword_yaml" style="color: inherit; text-decoration: inherit;">name<wbr>Keyword</a>
@@ -436,8 +550,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Search by name.</p>
-</dd><dt class="property-optional"
+    <dd>Search by name.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -445,8 +558,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -477,8 +589,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespaces_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaces_csharp" style="color: inherit; text-decoration: inherit;">Namespaces</a>
@@ -486,8 +597,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrocketmqnamespacenamespace">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tdmq.<wbr>Outputs.<wbr>Get<wbr>Rocketmq<wbr>Namespace<wbr>Namespace&gt;</a></span>
     </dt>
-    <dd><p>List of namespaces.</p>
-</dd><dt class="property-"
+    <dd>List of namespaces.</dd><dt class="property-"
             title="">
         <span id="namekeyword_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namekeyword_csharp" style="color: inherit; text-decoration: inherit;">Name<wbr>Keyword</a>
@@ -525,8 +635,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespaces_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaces_go" style="color: inherit; text-decoration: inherit;">Namespaces</a>
@@ -534,8 +643,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrocketmqnamespacenamespace">[]Get<wbr>Rocketmq<wbr>Namespace<wbr>Namespace</a></span>
     </dt>
-    <dd><p>List of namespaces.</p>
-</dd><dt class="property-"
+    <dd>List of namespaces.</dd><dt class="property-"
             title="">
         <span id="namekeyword_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namekeyword_go" style="color: inherit; text-decoration: inherit;">Name<wbr>Keyword</a>
@@ -547,6 +655,52 @@ The following output properties are available:
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="namespaces_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaces_hcl" style="color: inherit; text-decoration: inherit;">namespaces</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getrocketmqnamespacenamespace">list(object)</a></span>
+    </dt>
+    <dd>List of namespaces.</dd><dt class="property-"
+            title="">
+        <span id="name_keyword_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_keyword_hcl" style="color: inherit; text-decoration: inherit;">name_<wbr>keyword</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -573,8 +727,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespaces_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaces_java" style="color: inherit; text-decoration: inherit;">namespaces</a>
@@ -582,8 +735,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrocketmqnamespacenamespace">List&lt;Get<wbr>Rocketmq<wbr>Namespace<wbr>Namespace&gt;</a></span>
     </dt>
-    <dd><p>List of namespaces.</p>
-</dd><dt class="property-"
+    <dd>List of namespaces.</dd><dt class="property-"
             title="">
         <span id="namekeyword_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namekeyword_java" style="color: inherit; text-decoration: inherit;">name<wbr>Keyword</a>
@@ -621,8 +773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespaces_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaces_nodejs" style="color: inherit; text-decoration: inherit;">namespaces</a>
@@ -630,8 +781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrocketmqnamespacenamespace">Get<wbr>Rocketmq<wbr>Namespace<wbr>Namespace[]</a></span>
     </dt>
-    <dd><p>List of namespaces.</p>
-</dd><dt class="property-"
+    <dd>List of namespaces.</dd><dt class="property-"
             title="">
         <span id="namekeyword_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namekeyword_nodejs" style="color: inherit; text-decoration: inherit;">name<wbr>Keyword</a>
@@ -669,17 +819,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespaces_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaces_python" style="color: inherit; text-decoration: inherit;">namespaces</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getrocketmqnamespacenamespace">Get<wbr>Rocketmq<wbr>Namespace<wbr>Namespace]</a></span>
+        <span class="property-type"><a href="#getrocketmqnamespacenamespace">Sequence[Get<wbr>Rocketmq<wbr>Namespace<wbr>Namespace]</a></span>
     </dt>
-    <dd><p>List of namespaces.</p>
-</dd><dt class="property-"
+    <dd>List of namespaces.</dd><dt class="property-"
             title="">
         <span id="name_keyword_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#name_keyword_python" style="color: inherit; text-decoration: inherit;">name_<wbr>keyword</a>
@@ -717,8 +865,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="namespaces_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespaces_yaml" style="color: inherit; text-decoration: inherit;">namespaces</a>
@@ -726,8 +873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getrocketmqnamespacenamespace">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>List of namespaces.</p>
-</dd><dt class="property-"
+    <dd>List of namespaces.</dd><dt class="property-"
             title="">
         <span id="namekeyword_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namekeyword_yaml" style="color: inherit; text-decoration: inherit;">name<wbr>Keyword</a>
@@ -767,8 +913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.</dd><dt class="property-required"
             title="Required">
         <span id="publicendpoint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicendpoint_csharp" style="color: inherit; text-decoration: inherit;">Public<wbr>Endpoint</a>
@@ -776,8 +921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network access point address.</p>
-</dd><dt class="property-required"
+    <dd>Public network access point address.</dd><dt class="property-required"
             title="Required">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -785,8 +929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks (up to 128 characters).</p>
-</dd><dt class="property-required"
+    <dd>Remarks (up to 128 characters).</dd><dt class="property-required"
             title="Required">
         <span id="retentiontime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentiontime_csharp" style="color: inherit; text-decoration: inherit;">Retention<wbr>Time</a>
@@ -794,8 +937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retention time of persisted messages in milliseconds.</p>
-</dd><dt class="property-required"
+    <dd>Retention time of persisted messages in milliseconds.</dd><dt class="property-required"
             title="Required">
         <span id="ttl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_csharp" style="color: inherit; text-decoration: inherit;">Ttl</a>
@@ -803,8 +945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.</p>
-</dd><dt class="property-required"
+    <dd>Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.</dd><dt class="property-required"
             title="Required">
         <span id="vpcendpoint_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcendpoint_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Endpoint</a>
@@ -812,8 +953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC access point address.</p>
-</dd></dl>
+    <dd>VPC access point address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -827,8 +967,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.</dd><dt class="property-required"
             title="Required">
         <span id="publicendpoint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicendpoint_go" style="color: inherit; text-decoration: inherit;">Public<wbr>Endpoint</a>
@@ -836,8 +975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network access point address.</p>
-</dd><dt class="property-required"
+    <dd>Public network access point address.</dd><dt class="property-required"
             title="Required">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -845,8 +983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks (up to 128 characters).</p>
-</dd><dt class="property-required"
+    <dd>Remarks (up to 128 characters).</dd><dt class="property-required"
             title="Required">
         <span id="retentiontime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentiontime_go" style="color: inherit; text-decoration: inherit;">Retention<wbr>Time</a>
@@ -854,8 +991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retention time of persisted messages in milliseconds.</p>
-</dd><dt class="property-required"
+    <dd>Retention time of persisted messages in milliseconds.</dd><dt class="property-required"
             title="Required">
         <span id="ttl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_go" style="color: inherit; text-decoration: inherit;">Ttl</a>
@@ -863,8 +999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.</p>
-</dd><dt class="property-required"
+    <dd>Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.</dd><dt class="property-required"
             title="Required">
         <span id="vpcendpoint_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcendpoint_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Endpoint</a>
@@ -872,8 +1007,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC access point address.</p>
-</dd></dl>
+    <dd>VPC access point address.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="namespace_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#namespace_id_hcl" style="color: inherit; text-decoration: inherit;">namespace_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.</dd><dt class="property-required"
+            title="Required">
+        <span id="public_endpoint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_endpoint_hcl" style="color: inherit; text-decoration: inherit;">public_<wbr>endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Public network access point address.</dd><dt class="property-required"
+            title="Required">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Remarks (up to 128 characters).</dd><dt class="property-required"
+            title="Required">
+        <span id="retention_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retention_time_hcl" style="color: inherit; text-decoration: inherit;">retention_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Retention time of persisted messages in milliseconds.</dd><dt class="property-required"
+            title="Required">
+        <span id="ttl_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_hcl" style="color: inherit; text-decoration: inherit;">ttl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_endpoint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_endpoint_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VPC access point address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -887,8 +1075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.</dd><dt class="property-required"
             title="Required">
         <span id="publicendpoint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicendpoint_java" style="color: inherit; text-decoration: inherit;">public<wbr>Endpoint</a>
@@ -896,8 +1083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public network access point address.</p>
-</dd><dt class="property-required"
+    <dd>Public network access point address.</dd><dt class="property-required"
             title="Required">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -905,8 +1091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remarks (up to 128 characters).</p>
-</dd><dt class="property-required"
+    <dd>Remarks (up to 128 characters).</dd><dt class="property-required"
             title="Required">
         <span id="retentiontime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentiontime_java" style="color: inherit; text-decoration: inherit;">retention<wbr>Time</a>
@@ -914,8 +1099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Retention time of persisted messages in milliseconds.</p>
-</dd><dt class="property-required"
+    <dd>Retention time of persisted messages in milliseconds.</dd><dt class="property-required"
             title="Required">
         <span id="ttl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_java" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -923,8 +1107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.</p>
-</dd><dt class="property-required"
+    <dd>Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.</dd><dt class="property-required"
             title="Required">
         <span id="vpcendpoint_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcendpoint_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Endpoint</a>
@@ -932,8 +1115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC access point address.</p>
-</dd></dl>
+    <dd>VPC access point address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -947,8 +1129,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.</dd><dt class="property-required"
             title="Required">
         <span id="publicendpoint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicendpoint_nodejs" style="color: inherit; text-decoration: inherit;">public<wbr>Endpoint</a>
@@ -956,8 +1137,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network access point address.</p>
-</dd><dt class="property-required"
+    <dd>Public network access point address.</dd><dt class="property-required"
             title="Required">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -965,8 +1145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Remarks (up to 128 characters).</p>
-</dd><dt class="property-required"
+    <dd>Remarks (up to 128 characters).</dd><dt class="property-required"
             title="Required">
         <span id="retentiontime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentiontime_nodejs" style="color: inherit; text-decoration: inherit;">retention<wbr>Time</a>
@@ -974,8 +1153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Retention time of persisted messages in milliseconds.</p>
-</dd><dt class="property-required"
+    <dd>Retention time of persisted messages in milliseconds.</dd><dt class="property-required"
             title="Required">
         <span id="ttl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_nodejs" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -983,8 +1161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.</p>
-</dd><dt class="property-required"
+    <dd>Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.</dd><dt class="property-required"
             title="Required">
         <span id="vpcendpoint_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcendpoint_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Endpoint</a>
@@ -992,8 +1169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VPC access point address.</p>
-</dd></dl>
+    <dd>VPC access point address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1007,8 +1183,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.</dd><dt class="property-required"
             title="Required">
         <span id="public_endpoint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#public_endpoint_python" style="color: inherit; text-decoration: inherit;">public_<wbr>endpoint</a>
@@ -1016,8 +1191,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Public network access point address.</p>
-</dd><dt class="property-required"
+    <dd>Public network access point address.</dd><dt class="property-required"
             title="Required">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1025,8 +1199,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Remarks (up to 128 characters).</p>
-</dd><dt class="property-required"
+    <dd>Remarks (up to 128 characters).</dd><dt class="property-required"
             title="Required">
         <span id="retention_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retention_time_python" style="color: inherit; text-decoration: inherit;">retention_<wbr>time</a>
@@ -1034,8 +1207,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retention time of persisted messages in milliseconds.</p>
-</dd><dt class="property-required"
+    <dd>Retention time of persisted messages in milliseconds.</dd><dt class="property-required"
             title="Required">
         <span id="ttl_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_python" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -1043,8 +1215,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.</p>
-</dd><dt class="property-required"
+    <dd>Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.</dd><dt class="property-required"
             title="Required">
         <span id="vpc_endpoint_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_endpoint_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>endpoint</a>
@@ -1052,8 +1223,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VPC access point address.</p>
-</dd></dl>
+    <dd>VPC access point address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1067,8 +1237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.</p>
-</dd><dt class="property-required"
+    <dd>Namespace name, which can contain 3-64 letters, digits, hyphens, and underscores.</dd><dt class="property-required"
             title="Required">
         <span id="publicendpoint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#publicendpoint_yaml" style="color: inherit; text-decoration: inherit;">public<wbr>Endpoint</a>
@@ -1076,8 +1245,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public network access point address.</p>
-</dd><dt class="property-required"
+    <dd>Public network access point address.</dd><dt class="property-required"
             title="Required">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1085,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Remarks (up to 128 characters).</p>
-</dd><dt class="property-required"
+    <dd>Remarks (up to 128 characters).</dd><dt class="property-required"
             title="Required">
         <span id="retentiontime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentiontime_yaml" style="color: inherit; text-decoration: inherit;">retention<wbr>Time</a>
@@ -1094,8 +1261,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Retention time of persisted messages in milliseconds.</p>
-</dd><dt class="property-required"
+    <dd>Retention time of persisted messages in milliseconds.</dd><dt class="property-required"
             title="Required">
         <span id="ttl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ttl_yaml" style="color: inherit; text-decoration: inherit;">ttl</a>
@@ -1103,8 +1269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.</p>
-</dd><dt class="property-required"
+    <dd>Retention time of unconsumed messages in milliseconds. Value range: 60 seconds-15 days.</dd><dt class="property-required"
             title="Required">
         <span id="vpcendpoint_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcendpoint_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Endpoint</a>
@@ -1112,8 +1277,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VPC access point address.</p>
-</dd></dl>
+    <dd>VPC access point address.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1128,7 +1292,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

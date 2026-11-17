@@ -5,6 +5,8 @@ title_tag: "tencentcloud.Cam.getListAttachedUserPolicy"
 meta_desc: "Documentation for the tencentcloud.Cam.getListAttachedUserPolicy function with examples, input properties, output properties, and supporting types."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -23,7 +25,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -31,9 +33,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getListAttachedUserPolicy<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetListAttachedUserPolicyArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetListAttachedUserPolicyResult</a></span>></span
+><span class="k">function </span>getListAttachedUserPolicy<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetListAttachedUserPolicyArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetListAttachedUserPolicyResult</a></span>></span
 ><span class="k">
-function </span>getListAttachedUserPolicyOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetListAttachedUserPolicyOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetListAttachedUserPolicyResult</a></span>></span
+function </span>getListAttachedUserPolicyOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetListAttachedUserPolicyOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetListAttachedUserPolicyResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -49,12 +51,12 @@ function </span>getListAttachedUserPolicyOutput<span class="p">(</span><span cla
                                   <span class="nx">target_uin</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetListAttachedUserPolicyResult</span
 ><span class="k">
-def </span>get_list_attached_user_policy_output<span class="p">(</span><span class="nx">attach_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                                  <span class="nx">keyword</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                  <span class="nx">strategy_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                                  <span class="nx">target_uin</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetListAttachedUserPolicyResult]</span
+def </span>get_list_attached_user_policy_output<span class="p">(</span><span class="nx">attach_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                                  <span class="nx">keyword</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                  <span class="nx">strategy_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                                  <span class="nx">target_uin</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetListAttachedUserPolicyResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -79,7 +81,8 @@ func </span>GetListAttachedUserPolicyOutput<span class="p">(</span><span class="
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetListAttachedUserPolicy </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetListAttachedUserPolicyResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetListAttachedUserPolicyArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetListAttachedUserPolicyResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetListAttachedUserPolicyInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetListAttachedUserPolicyResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetListAttachedUserPolicyInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetListAttachedUserPolicyResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetListAttachedUserPolicyInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -88,7 +91,8 @@ func </span>GetListAttachedUserPolicyOutput<span class="p">(</span><span class="
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetListAttachedUserPolicyResult</a></span>> </span>getListAttachedUserPolicy<span class="p">(</span><span class="nx">GetListAttachedUserPolicyArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetListAttachedUserPolicyResult</a></span>> </span>getListAttachedUserPolicy<span class="p">(</span><span class="nx">GetListAttachedUserPolicyArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetListAttachedUserPolicyResult</a></span>> </span>getListAttachedUserPolicy<span class="p">(</span><span class="nx">GetListAttachedUserPolicyArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -100,6 +104,15 @@ func </span>GetListAttachedUserPolicyOutput<span class="p">(</span><span class="
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cam/getListAttachedUserPolicy:getListAttachedUserPolicy
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cam_get_list_attached_user_policy&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -195,6 +208,52 @@ The following arguments are supported:
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="attach_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attach_type_hcl" style="color: inherit; text-decoration: inherit;">attach_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-required"
+            title="Required">
+        <span id="target_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_uin_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="keyword_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_hcl" style="color: inherit; text-decoration: inherit;">keyword</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-optional"
+            title="Optional">
+        <span id="strategy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategy_type_hcl" style="color: inherit; text-decoration: inherit;">strategy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
     </dt>
     <dd></dd></dl>
 </pulumi-choosable>
@@ -411,8 +470,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policylists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policylists_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Lists</a>
@@ -474,8 +532,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policylists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policylists_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Lists</a>
@@ -520,6 +577,68 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="attach_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attach_type_hcl" style="color: inherit; text-decoration: inherit;">attach_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="policy_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_lists_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getlistattacheduserpolicypolicylist">list(object)</a></span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="target_uin_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_uin_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>uin</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="keyword_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#keyword_hcl" style="color: inherit; text-decoration: inherit;">keyword</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="strategy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategy_type_hcl" style="color: inherit; text-decoration: inherit;">strategy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -537,8 +656,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policylists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policylists_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Lists</a>
@@ -600,8 +718,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policylists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policylists_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Lists</a>
@@ -663,14 +780,13 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policy_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_lists_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getlistattacheduserpolicypolicylist">Get<wbr>List<wbr>Attached<wbr>User<wbr>Policy<wbr>Policy<wbr>List]</a></span>
+        <span class="property-type"><a href="#getlistattacheduserpolicypolicylist">Sequence[Get<wbr>List<wbr>Attached<wbr>User<wbr>Policy<wbr>Policy<wbr>List]</a></span>
     </dt>
     <dd></dd><dt class="property-"
             title="">
@@ -726,8 +842,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="policylists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policylists_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Lists</a>
@@ -791,8 +906,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="createmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Mode</a>
@@ -800,8 +914,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).</p>
-</dd><dt class="property-required"
+    <dd>Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).</dd><dt class="property-required"
             title="Required">
         <span id="deactived_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deactived_csharp" style="color: inherit; text-decoration: inherit;">Deactived</a>
@@ -809,8 +922,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="deactiveddetails_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deactiveddetails_csharp" style="color: inherit; text-decoration: inherit;">Deactived<wbr>Details</a>
@@ -818,8 +930,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="description_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_csharp" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -827,8 +938,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy Description.</p>
-</dd><dt class="property-required"
+    <dd>Policy Description.</dd><dt class="property-required"
             title="Required">
         <span id="groups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groups_csharp" style="color: inherit; text-decoration: inherit;">Groups</a>
@@ -836,8 +946,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlistattacheduserpolicypolicylistgroup">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cam.<wbr>Inputs.<wbr>Get<wbr>List<wbr>Attached<wbr>User<wbr>Policy<wbr>Policy<wbr>List<wbr>Group&gt;</a></span>
     </dt>
-    <dd><p>Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -845,8 +954,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy ID.</p>
-</dd><dt class="property-required"
+    <dd>Policy ID.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Name</a>
@@ -854,8 +962,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy Name.</p>
-</dd><dt class="property-required"
+    <dd>Policy Name.</dd><dt class="property-required"
             title="Required">
         <span id="strategytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategytype_csharp" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Type</a>
@@ -863,8 +970,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy type (1 represents custom policy, 2 represents preset policy).</p>
-</dd></dl>
+    <dd>Policy type (1 represents custom policy, 2 represents preset policy).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -878,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="createmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Mode</a>
@@ -887,8 +992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).</p>
-</dd><dt class="property-required"
+    <dd>Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).</dd><dt class="property-required"
             title="Required">
         <span id="deactived_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deactived_go" style="color: inherit; text-decoration: inherit;">Deactived</a>
@@ -896,8 +1000,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="deactiveddetails_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deactiveddetails_go" style="color: inherit; text-decoration: inherit;">Deactived<wbr>Details</a>
@@ -905,8 +1008,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="description_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_go" style="color: inherit; text-decoration: inherit;">Description</a>
@@ -914,8 +1016,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy Description.</p>
-</dd><dt class="property-required"
+    <dd>Policy Description.</dd><dt class="property-required"
             title="Required">
         <span id="groups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groups_go" style="color: inherit; text-decoration: inherit;">Groups</a>
@@ -923,8 +1024,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlistattacheduserpolicypolicylistgroup">[]Get<wbr>List<wbr>Attached<wbr>User<wbr>Policy<wbr>Policy<wbr>List<wbr>Group</a></span>
     </dt>
-    <dd><p>Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -932,8 +1032,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy ID.</p>
-</dd><dt class="property-required"
+    <dd>Policy ID.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Name</a>
@@ -941,8 +1040,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy Name.</p>
-</dd><dt class="property-required"
+    <dd>Policy Name.</dd><dt class="property-required"
             title="Required">
         <span id="strategytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategytype_go" style="color: inherit; text-decoration: inherit;">Strategy<wbr>Type</a>
@@ -950,8 +1048,85 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy type (1 represents custom policy, 2 represents preset policy).</p>
-</dd></dl>
+    <dd>Policy type (1 represents custom policy, 2 represents preset policy).</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="add_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#add_time_hcl" style="color: inherit; text-decoration: inherit;">add_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation time.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_mode_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).</dd><dt class="property-required"
+            title="Required">
+        <span id="deactived_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deactived_hcl" style="color: inherit; text-decoration: inherit;">deactived</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="deactived_details_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deactived_details_hcl" style="color: inherit; text-decoration: inherit;">deactived_<wbr>details</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="description_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_hcl" style="color: inherit; text-decoration: inherit;">description</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy Description.</dd><dt class="property-required"
+            title="Required">
+        <span id="groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groups_hcl" style="color: inherit; text-decoration: inherit;">groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getlistattacheduserpolicypolicylistgroup">list(object)</a></span>
+    </dt>
+    <dd>Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="policy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_name_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy Name.</dd><dt class="property-required"
+            title="Required">
+        <span id="strategy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategy_type_hcl" style="color: inherit; text-decoration: inherit;">strategy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Policy type (1 represents custom policy, 2 represents preset policy).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -965,8 +1140,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="createmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_java" style="color: inherit; text-decoration: inherit;">create<wbr>Mode</a>
@@ -974,8 +1148,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).</p>
-</dd><dt class="property-required"
+    <dd>Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).</dd><dt class="property-required"
             title="Required">
         <span id="deactived_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deactived_java" style="color: inherit; text-decoration: inherit;">deactived</a>
@@ -983,8 +1156,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="deactiveddetails_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deactiveddetails_java" style="color: inherit; text-decoration: inherit;">deactived<wbr>Details</a>
@@ -992,8 +1164,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="description_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_java" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1001,8 +1172,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy Description.</p>
-</dd><dt class="property-required"
+    <dd>Policy Description.</dd><dt class="property-required"
             title="Required">
         <span id="groups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groups_java" style="color: inherit; text-decoration: inherit;">groups</a>
@@ -1010,8 +1180,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlistattacheduserpolicypolicylistgroup">List&lt;Get<wbr>List<wbr>Attached<wbr>User<wbr>Policy<wbr>Policy<wbr>List<wbr>Group&gt;</a></span>
     </dt>
-    <dd><p>Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1019,8 +1188,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy ID.</p>
-</dd><dt class="property-required"
+    <dd>Policy ID.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -1028,8 +1196,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy Name.</p>
-</dd><dt class="property-required"
+    <dd>Policy Name.</dd><dt class="property-required"
             title="Required">
         <span id="strategytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategytype_java" style="color: inherit; text-decoration: inherit;">strategy<wbr>Type</a>
@@ -1037,8 +1204,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy type (1 represents custom policy, 2 represents preset policy).</p>
-</dd></dl>
+    <dd>Policy type (1 represents custom policy, 2 represents preset policy).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1052,8 +1218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="createmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Mode</a>
@@ -1061,8 +1226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).</p>
-</dd><dt class="property-required"
+    <dd>Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).</dd><dt class="property-required"
             title="Required">
         <span id="deactived_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deactived_nodejs" style="color: inherit; text-decoration: inherit;">deactived</a>
@@ -1070,8 +1234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="deactiveddetails_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deactiveddetails_nodejs" style="color: inherit; text-decoration: inherit;">deactived<wbr>Details</a>
@@ -1079,8 +1242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="description_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_nodejs" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1088,8 +1250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy Description.</p>
-</dd><dt class="property-required"
+    <dd>Policy Description.</dd><dt class="property-required"
             title="Required">
         <span id="groups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groups_nodejs" style="color: inherit; text-decoration: inherit;">groups</a>
@@ -1097,8 +1258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlistattacheduserpolicypolicylistgroup">Get<wbr>List<wbr>Attached<wbr>User<wbr>Policy<wbr>Policy<wbr>List<wbr>Group[]</a></span>
     </dt>
-    <dd><p>Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1106,8 +1266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy ID.</p>
-</dd><dt class="property-required"
+    <dd>Policy ID.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -1115,8 +1274,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy Name.</p>
-</dd><dt class="property-required"
+    <dd>Policy Name.</dd><dt class="property-required"
             title="Required">
         <span id="strategytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategytype_nodejs" style="color: inherit; text-decoration: inherit;">strategy<wbr>Type</a>
@@ -1124,8 +1282,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Policy type (1 represents custom policy, 2 represents preset policy).</p>
-</dd></dl>
+    <dd>Policy type (1 represents custom policy, 2 represents preset policy).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1139,8 +1296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="create_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_mode_python" style="color: inherit; text-decoration: inherit;">create_<wbr>mode</a>
@@ -1148,8 +1304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).</p>
-</dd><dt class="property-required"
+    <dd>Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).</dd><dt class="property-required"
             title="Required">
         <span id="deactived_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deactived_python" style="color: inherit; text-decoration: inherit;">deactived</a>
@@ -1157,8 +1312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="deactived_details_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deactived_details_python" style="color: inherit; text-decoration: inherit;">deactived_<wbr>details</a>
@@ -1166,8 +1320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="description_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_python" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1175,17 +1328,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy Description.</p>
-</dd><dt class="property-required"
+    <dd>Policy Description.</dd><dt class="property-required"
             title="Required">
         <span id="groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groups_python" style="color: inherit; text-decoration: inherit;">groups</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getlistattacheduserpolicypolicylistgroup">Get<wbr>List<wbr>Attached<wbr>User<wbr>Policy<wbr>Policy<wbr>List<wbr>Group]</a></span>
+        <span class="property-type"><a href="#getlistattacheduserpolicypolicylistgroup">Sequence[Get<wbr>List<wbr>Attached<wbr>User<wbr>Policy<wbr>Policy<wbr>List<wbr>Group]</a></span>
     </dt>
-    <dd><p>Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -1193,8 +1344,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy ID.</p>
-</dd><dt class="property-required"
+    <dd>Policy ID.</dd><dt class="property-required"
             title="Required">
         <span id="policy_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_name_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
@@ -1202,8 +1352,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy Name.</p>
-</dd><dt class="property-required"
+    <dd>Policy Name.</dd><dt class="property-required"
             title="Required">
         <span id="strategy_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategy_type_python" style="color: inherit; text-decoration: inherit;">strategy_<wbr>type</a>
@@ -1211,8 +1360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Policy type (1 represents custom policy, 2 represents preset policy).</p>
-</dd></dl>
+    <dd>Policy type (1 represents custom policy, 2 represents preset policy).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1226,8 +1374,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation time.</p>
-</dd><dt class="property-required"
+    <dd>Creation time.</dd><dt class="property-required"
             title="Required">
         <span id="createmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Mode</a>
@@ -1235,8 +1382,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).</p>
-</dd><dt class="property-required"
+    <dd>Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).</dd><dt class="property-required"
             title="Required">
         <span id="deactived_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deactived_yaml" style="color: inherit; text-decoration: inherit;">deactived</a>
@@ -1244,8 +1390,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="deactiveddetails_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deactiveddetails_yaml" style="color: inherit; text-decoration: inherit;">deactived<wbr>Details</a>
@@ -1253,8 +1398,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="description_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#description_yaml" style="color: inherit; text-decoration: inherit;">description</a>
@@ -1262,8 +1406,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy Description.</p>
-</dd><dt class="property-required"
+    <dd>Policy Description.</dd><dt class="property-required"
             title="Required">
         <span id="groups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groups_yaml" style="color: inherit; text-decoration: inherit;">groups</a>
@@ -1271,8 +1414,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getlistattacheduserpolicypolicylistgroup">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.</p>
-</dd><dt class="property-required"
+    <dd>Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1280,8 +1422,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy ID.</p>
-</dd><dt class="property-required"
+    <dd>Policy ID.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -1289,8 +1430,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy Name.</p>
-</dd><dt class="property-required"
+    <dd>Policy Name.</dd><dt class="property-required"
             title="Required">
         <span id="strategytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#strategytype_yaml" style="color: inherit; text-decoration: inherit;">strategy<wbr>Type</a>
@@ -1298,8 +1438,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Policy type (1 represents custom policy, 2 represents preset policy).</p>
-</dd></dl>
+    <dd>Policy type (1 represents custom policy, 2 represents preset policy).</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1317,8 +1456,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Group ID.</p>
-</dd><dt class="property-required"
+    <dd>Group ID.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_csharp" style="color: inherit; text-decoration: inherit;">Group<wbr>Name</a>
@@ -1326,8 +1464,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group Name.</p>
-</dd></dl>
+    <dd>Group Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1341,8 +1478,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Group ID.</p>
-</dd><dt class="property-required"
+    <dd>Group ID.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_go" style="color: inherit; text-decoration: inherit;">Group<wbr>Name</a>
@@ -1350,8 +1486,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group Name.</p>
-</dd></dl>
+    <dd>Group Name.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Group ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="group_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_name_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1365,8 +1522,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Group ID.</p>
-</dd><dt class="property-required"
+    <dd>Group ID.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_java" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -1374,8 +1530,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group Name.</p>
-</dd></dl>
+    <dd>Group Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1389,8 +1544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Group ID.</p>
-</dd><dt class="property-required"
+    <dd>Group ID.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_nodejs" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -1398,8 +1552,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group Name.</p>
-</dd></dl>
+    <dd>Group Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1413,8 +1566,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Group ID.</p>
-</dd><dt class="property-required"
+    <dd>Group ID.</dd><dt class="property-required"
             title="Required">
         <span id="group_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_name_python" style="color: inherit; text-decoration: inherit;">group_<wbr>name</a>
@@ -1422,8 +1574,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Group Name.</p>
-</dd></dl>
+    <dd>Group Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1437,8 +1588,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Group ID.</p>
-</dd><dt class="property-required"
+    <dd>Group ID.</dd><dt class="property-required"
             title="Required">
         <span id="groupname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#groupname_yaml" style="color: inherit; text-decoration: inherit;">group<wbr>Name</a>
@@ -1446,8 +1596,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group Name.</p>
-</dd></dl>
+    <dd>Group Name.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1462,7 +1611,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

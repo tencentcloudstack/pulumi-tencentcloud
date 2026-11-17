@@ -2,9 +2,11 @@
 ---
 title: "getUserPolicyAttachments"
 title_tag: "tencentcloud.Cam.getUserPolicyAttachments"
-meta_desc: "Documentation for the tencentcloud.Cam.getUserPolicyAttachments function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of CAM user policy attachments"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,67 +18,67 @@ Use this data source to query detailed information of CAM user policy attachment
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Cam.getUserPolicyAttachments({
-    userId: tencentcloud_cam_user.foo.id,
+// query by user_id
+const foo = tencentcloud.cam.getUserPolicyAttachments({
+    userId: fooTencentcloudCamUser.id,
 });
-const bar = tencentcloud.Cam.getUserPolicyAttachments({
-    userId: tencentcloud_cam_user.foo.id,
-    policyId: tencentcloud_cam_policy.foo.id,
+// query by user_id and policy_id
+const bar = tencentcloud.cam.getUserPolicyAttachments({
+    userId: fooTencentcloudCamUser.id,
+    policyId: fooTencentcloudCamPolicy.id,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Cam.get_user_policy_attachments(user_id=tencentcloud_cam_user["foo"]["id"])
-bar = tencentcloud.Cam.get_user_policy_attachments(user_id=tencentcloud_cam_user["foo"]["id"],
-    policy_id=tencentcloud_cam_policy["foo"]["id"])
+# query by user_id
+foo = tencentcloud.cam.get_user_policy_attachments(user_id=foo_tencentcloud_cam_user["id"])
+# query by user_id and policy_id
+bar = tencentcloud.cam.get_user_policy_attachments(user_id=foo_tencentcloud_cam_user["id"],
+    policy_id=foo_tencentcloud_cam_policy["id"])
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Cam.GetUserPolicyAttachments.Invoke(new()
-    {
-        UserId = tencentcloud_cam_user.Foo.Id,
-    });
-
-    var bar = Tencentcloud.Cam.GetUserPolicyAttachments.Invoke(new()
-    {
-        UserId = tencentcloud_cam_user.Foo.Id,
-        PolicyId = tencentcloud_cam_policy.Foo.Id,
-    });
-
-});
-```
 ```go
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cam"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Cam.GetUserPolicyAttachments(ctx, &cam.GetUserPolicyAttachmentsArgs{
-			UserId: pulumi.StringRef(tencentcloud_cam_user.Foo.Id),
+		// query by user_id
+		_, err := cam.GetUserPolicyAttachments(ctx, &cam.GetUserPolicyAttachmentsArgs{
+			UserId: pulumi.StringRef(fooTencentcloudCamUser.Id),
 		}, nil)
 		if err != nil {
 			return err
 		}
-		_, err = Cam.GetUserPolicyAttachments(ctx, &cam.GetUserPolicyAttachmentsArgs{
-			UserId:   pulumi.StringRef(tencentcloud_cam_user.Foo.Id),
-			PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
+		// query by user_id and policy_id
+		_, err = cam.GetUserPolicyAttachments(ctx, &cam.GetUserPolicyAttachmentsArgs{
+			UserId:   pulumi.StringRef(fooTencentcloudCamUser.Id),
+			PolicyId: pulumi.StringRef(fooTencentcloudCamPolicy.Id),
 		}, nil)
 		if err != nil {
 			return err
@@ -85,6 +87,39 @@ func main() {
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    // query by user_id
+    var foo = Tencentcloud.Cam.GetUserPolicyAttachments.Invoke(new()
+    {
+        UserId = fooTencentcloudCamUser.Id,
+    });
+
+    // query by user_id and policy_id
+    var bar = Tencentcloud.Cam.GetUserPolicyAttachments.Invoke(new()
+    {
+        UserId = fooTencentcloudCamUser.Id,
+        PolicyId = fooTencentcloudCamPolicy.Id,
+    });
+
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -93,8 +128,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Cam.CamFunctions;
 import com.pulumi.tencentcloud.Cam.inputs.GetUserPolicyAttachmentsArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -106,34 +141,77 @@ public class App {
     }
 
     public static void stack(Context ctx) {
+        // query by user_id
         final var foo = CamFunctions.getUserPolicyAttachments(GetUserPolicyAttachmentsArgs.builder()
-            .userId(tencentcloud_cam_user.foo().id())
+            .userId(fooTencentcloudCamUser.id())
             .build());
 
+        // query by user_id and policy_id
         final var bar = CamFunctions.getUserPolicyAttachments(GetUserPolicyAttachmentsArgs.builder()
-            .userId(tencentcloud_cam_user.foo().id())
-            .policyId(tencentcloud_cam_policy.foo().id())
+            .userId(fooTencentcloudCamUser.id())
+            .policyId(fooTencentcloudCamPolicy.id())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
+  # query by user_id
   foo:
     fn::invoke:
-      Function: tencentcloud:Cam:getUserPolicyAttachments
-      Arguments:
-        userId: ${tencentcloud_cam_user.foo.id}
+      function: tencentcloud:Cam:getUserPolicyAttachments
+      arguments:
+        userId: ${fooTencentcloudCamUser.id}
+  # query by user_id and policy_id
   bar:
     fn::invoke:
-      Function: tencentcloud:Cam:getUserPolicyAttachments
-      Arguments:
-        userId: ${tencentcloud_cam_user.foo.id}
-        policyId: ${tencentcloud_cam_policy.foo.id}
+      function: tencentcloud:Cam:getUserPolicyAttachments
+      arguments:
+        userId: ${fooTencentcloudCamUser.id}
+        policyId: ${fooTencentcloudCamPolicy.id}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_cam_getuserpolicyattachments" "foo" {
+  user_id = fooTencentcloudCamUser.id
+}
+data "tencentcloud_cam_getuserpolicyattachments" "bar" {
+  user_id   = fooTencentcloudCamUser.id
+  policy_id = fooTencentcloudCamPolicy.id
+}
+
+# query by user_id
+# query by user_id and policy_id
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read:
+  - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+  - [ListAttachedUserPolicies](https://www.tencentcloud.com/document/api/598/32242)
 
 
 
@@ -145,7 +223,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -153,9 +231,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getUserPolicyAttachments<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUserPolicyAttachmentsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetUserPolicyAttachmentsResult</a></span>></span
+><span class="k">function </span>getUserPolicyAttachments<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUserPolicyAttachmentsArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetUserPolicyAttachmentsResult</a></span>></span
 ><span class="k">
-function </span>getUserPolicyAttachmentsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUserPolicyAttachmentsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetUserPolicyAttachmentsResult</a></span>></span
+function </span>getUserPolicyAttachmentsOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetUserPolicyAttachmentsOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetUserPolicyAttachmentsResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -172,13 +250,13 @@ function </span>getUserPolicyAttachmentsOutput<span class="p">(</span><span clas
                                 <span class="nx">user_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetUserPolicyAttachmentsResult</span
 ><span class="k">
-def </span>get_user_policy_attachments_output<span class="p">(</span><span class="nx">create_mode</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                                <span class="nx">policy_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                <span class="nx">policy_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                <span class="nx">user_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                <span class="nx">user_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetUserPolicyAttachmentsResult]</span
+def </span>get_user_policy_attachments_output<span class="p">(</span><span class="nx">create_mode</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                                <span class="nx">policy_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                <span class="nx">policy_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                <span class="nx">user_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                <span class="nx">user_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                                <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetUserPolicyAttachmentsResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -203,7 +281,8 @@ func </span>GetUserPolicyAttachmentsOutput<span class="p">(</span><span class="n
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetUserPolicyAttachments </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetUserPolicyAttachmentsResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetUserPolicyAttachmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetUserPolicyAttachmentsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetUserPolicyAttachmentsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetUserPolicyAttachmentsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetUserPolicyAttachmentsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetUserPolicyAttachmentsResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetUserPolicyAttachmentsInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -212,7 +291,8 @@ func </span>GetUserPolicyAttachmentsOutput<span class="p">(</span><span class="n
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetUserPolicyAttachmentsResult</a></span>> </span>getUserPolicyAttachments<span class="p">(</span><span class="nx">GetUserPolicyAttachmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetUserPolicyAttachmentsResult</a></span>> </span>getUserPolicyAttachments<span class="p">(</span><span class="nx">GetUserPolicyAttachmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetUserPolicyAttachmentsResult</a></span>> </span>getUserPolicyAttachments<span class="p">(</span><span class="nx">GetUserPolicyAttachmentsArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -224,6 +304,15 @@ func </span>GetUserPolicyAttachmentsOutput<span class="p">(</span><span class="n
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Cam/getUserPolicyAttachments:getUserPolicyAttachments
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_cam_get_user_policy_attachments&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -242,8 +331,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-optional"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -251,8 +339,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Type</a>
@@ -260,8 +347,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -269,8 +355,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Used to save results.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="userid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Id</a>
@@ -278,9 +363,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of the attached CAM user to be queried.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of the attached CAM user to be queried.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="username_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -288,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the attached CAM user as unique key to be queried.</p>
-</dd></dl>
+    <dd>Name of the attached CAM user as unique key to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -303,8 +385,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-optional"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -312,8 +393,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Type</a>
@@ -321,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -330,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Used to save results.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="userid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_go" style="color: inherit; text-decoration: inherit;">User<wbr>Id</a>
@@ -339,9 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of the attached CAM user to be queried.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of the attached CAM user to be queried.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="username_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_go" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -349,8 +425,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the attached CAM user as unique key to be queried.</p>
-</dd></dl>
+    <dd>Name of the attached CAM user as unique key to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="create_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_mode_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="policy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_type_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="user_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of the attached CAM user to be queried.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="user_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the attached CAM user as unique key to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -364,8 +493,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-optional"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -373,8 +501,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
@@ -382,8 +509,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -391,8 +517,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Used to save results.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="userid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_java" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -400,9 +525,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of the attached CAM user to be queried.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of the attached CAM user to be queried.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="username_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_java" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -410,8 +533,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the attached CAM user as unique key to be queried.</p>
-</dd></dl>
+    <dd>Name of the attached CAM user as unique key to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -425,8 +547,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-optional"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -434,8 +555,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
@@ -443,8 +563,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -452,8 +571,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Used to save results.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="userid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -461,9 +579,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of the attached CAM user to be queried.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of the attached CAM user to be queried.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="username_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -471,8 +587,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the attached CAM user as unique key to be queried.</p>
-</dd></dl>
+    <dd>Name of the attached CAM user as unique key to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -486,8 +601,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-optional"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -495,8 +609,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policy_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_type_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>type</a>
@@ -504,8 +617,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -513,8 +625,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Used to save results.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="user_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_python" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
@@ -522,9 +633,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of the attached CAM user to be queried.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of the attached CAM user to be queried.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="user_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_python" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
@@ -532,8 +641,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the attached CAM user as unique key to be queried.</p>
-</dd></dl>
+    <dd>Name of the attached CAM user as unique key to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -547,8 +655,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-optional"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-optional"
             title="Optional">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -556,8 +663,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="policytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
@@ -565,8 +671,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-optional"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -574,8 +679,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Used to save results.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="userid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -583,9 +687,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of the attached CAM user to be queried.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of the attached CAM user to be queried.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="username_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -593,8 +695,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the attached CAM user as unique key to be queried.</p>
-</dd></dl>
+    <dd>Name of the attached CAM user as unique key to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -617,8 +718,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="userpolicyattachmentlists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userpolicyattachmentlists_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Policy<wbr>Attachment<wbr>Lists</a>
@@ -626,8 +726,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getuserpolicyattachmentsuserpolicyattachmentlist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Cam.<wbr>Outputs.<wbr>Get<wbr>User<wbr>Policy<wbr>Attachments<wbr>User<wbr>Policy<wbr>Attachment<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of CAM user policy attachments. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM user policy attachments. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="createmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Mode</a>
@@ -635,8 +734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the cam policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the cam policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-"
             title="">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -644,8 +742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM user.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM user.</dd><dt class="property-"
             title="">
         <span id="policytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Type</a>
@@ -653,8 +750,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -670,9 +766,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of CAM user.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of CAM user.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-"
             title="">
         <span id="username_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -680,8 +774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM user as unique key.</p>
-</dd></dl>
+    <dd>Name of CAM user as unique key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -695,8 +788,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="userpolicyattachmentlists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userpolicyattachmentlists_go" style="color: inherit; text-decoration: inherit;">User<wbr>Policy<wbr>Attachment<wbr>Lists</a>
@@ -704,8 +796,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getuserpolicyattachmentsuserpolicyattachmentlist">[]Get<wbr>User<wbr>Policy<wbr>Attachments<wbr>User<wbr>Policy<wbr>Attachment<wbr>List</a></span>
     </dt>
-    <dd><p>A list of CAM user policy attachments. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM user policy attachments. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="createmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Mode</a>
@@ -713,8 +804,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the cam policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the cam policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-"
             title="">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -722,8 +812,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM user.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM user.</dd><dt class="property-"
             title="">
         <span id="policytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Type</a>
@@ -731,8 +820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -748,9 +836,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of CAM user.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of CAM user.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-"
             title="">
         <span id="username_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_go" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -758,8 +844,77 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM user as unique key.</p>
-</dd></dl>
+    <dd>Name of CAM user as unique key.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="user_policy_attachment_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_policy_attachment_lists_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>policy_<wbr>attachment_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getuserpolicyattachmentsuserpolicyattachmentlist">list(object)</a></span>
+    </dt>
+    <dd>A list of CAM user policy attachments. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="create_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_mode_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the cam policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-"
+            title="">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CAM user.</dd><dt class="property-"
+            title="">
+        <span id="policy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_type_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property- property-deprecated"
+            title=", Deprecated">
+        <span id="user_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of CAM user.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-"
+            title="">
+        <span id="user_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CAM user as unique key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -773,8 +928,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="userpolicyattachmentlists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userpolicyattachmentlists_java" style="color: inherit; text-decoration: inherit;">user<wbr>Policy<wbr>Attachment<wbr>Lists</a>
@@ -782,8 +936,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getuserpolicyattachmentsuserpolicyattachmentlist">List&lt;Get<wbr>User<wbr>Policy<wbr>Attachments<wbr>User<wbr>Policy<wbr>Attachment<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of CAM user policy attachments. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM user policy attachments. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="createmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_java" style="color: inherit; text-decoration: inherit;">create<wbr>Mode</a>
@@ -791,8 +944,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the cam policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the cam policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-"
             title="">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -800,8 +952,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CAM user.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM user.</dd><dt class="property-"
             title="">
         <span id="policytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
@@ -809,8 +960,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -826,9 +976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of CAM user.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of CAM user.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-"
             title="">
         <span id="username_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_java" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -836,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CAM user as unique key.</p>
-</dd></dl>
+    <dd>Name of CAM user as unique key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -851,8 +998,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="userpolicyattachmentlists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userpolicyattachmentlists_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Policy<wbr>Attachment<wbr>Lists</a>
@@ -860,8 +1006,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getuserpolicyattachmentsuserpolicyattachmentlist">Get<wbr>User<wbr>Policy<wbr>Attachments<wbr>User<wbr>Policy<wbr>Attachment<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of CAM user policy attachments. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM user policy attachments. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="createmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Mode</a>
@@ -869,8 +1014,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the cam policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the cam policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-"
             title="">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -878,8 +1022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM user.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM user.</dd><dt class="property-"
             title="">
         <span id="policytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
@@ -887,8 +1030,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -904,9 +1046,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of CAM user.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of CAM user.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-"
             title="">
         <span id="username_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -914,8 +1054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CAM user as unique key.</p>
-</dd></dl>
+    <dd>Name of CAM user as unique key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -929,17 +1068,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="user_policy_attachment_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_policy_attachment_lists_python" style="color: inherit; text-decoration: inherit;">user_<wbr>policy_<wbr>attachment_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getuserpolicyattachmentsuserpolicyattachmentlist">Get<wbr>User<wbr>Policy<wbr>Attachments<wbr>User<wbr>Policy<wbr>Attachment<wbr>List]</a></span>
+        <span class="property-type"><a href="#getuserpolicyattachmentsuserpolicyattachmentlist">Sequence[Get<wbr>User<wbr>Policy<wbr>Attachments<wbr>User<wbr>Policy<wbr>Attachment<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of CAM user policy attachments. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM user policy attachments. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="create_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_mode_python" style="color: inherit; text-decoration: inherit;">create_<wbr>mode</a>
@@ -947,8 +1084,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the cam policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the cam policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-"
             title="">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -956,8 +1092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CAM user.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM user.</dd><dt class="property-"
             title="">
         <span id="policy_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_type_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>type</a>
@@ -965,8 +1100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -982,9 +1116,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of CAM user.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of CAM user.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-"
             title="">
         <span id="user_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_python" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
@@ -992,8 +1124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CAM user as unique key.</p>
-</dd></dl>
+    <dd>Name of CAM user as unique key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1007,8 +1138,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="userpolicyattachmentlists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userpolicyattachmentlists_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Policy<wbr>Attachment<wbr>Lists</a>
@@ -1016,8 +1146,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getuserpolicyattachmentsuserpolicyattachmentlist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of CAM user policy attachments. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of CAM user policy attachments. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="createmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createmode_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Mode</a>
@@ -1025,8 +1154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the cam policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the cam policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-"
             title="">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1034,8 +1162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CAM user.</p>
-</dd><dt class="property-"
+    <dd>Name of CAM user.</dd><dt class="property-"
             title="">
         <span id="policytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
@@ -1043,8 +1170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1060,9 +1186,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of CAM user.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-"
+    <dd>(<strong>Deprecated</strong>) It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of CAM user.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-"
             title="">
         <span id="username_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -1070,8 +1194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CAM user as unique key.</p>
-</dd></dl>
+    <dd>Name of CAM user as unique key.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1095,8 +1218,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-required"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1104,8 +1226,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The create time of the CAM user policy attachment.</p>
-</dd><dt class="property-required"
+    <dd>The create time of the CAM user policy attachment.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -1113,8 +1234,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Name</a>
@@ -1122,8 +1242,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the policy.</p>
-</dd><dt class="property-required"
+    <dd>The name of the policy.</dd><dt class="property-required"
             title="Required">
         <span id="policytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Type</a>
@@ -1131,8 +1250,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="userid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Id</a>
@@ -1140,9 +1258,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of the attached CAM user to be queried.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of the attached CAM user to be queried.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="username_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_csharp" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -1150,8 +1266,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the attached CAM user as unique key to be queried.</p>
-</dd></dl>
+    <dd>Name of the attached CAM user as unique key to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1165,8 +1280,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-required"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1174,8 +1288,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The create time of the CAM user policy attachment.</p>
-</dd><dt class="property-required"
+    <dd>The create time of the CAM user policy attachment.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -1183,8 +1296,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Name</a>
@@ -1192,8 +1304,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the policy.</p>
-</dd><dt class="property-required"
+    <dd>The name of the policy.</dd><dt class="property-required"
             title="Required">
         <span id="policytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Type</a>
@@ -1201,8 +1312,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="userid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_go" style="color: inherit; text-decoration: inherit;">User<wbr>Id</a>
@@ -1210,9 +1320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of the attached CAM user to be queried.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of the attached CAM user to be queried.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="username_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_go" style="color: inherit; text-decoration: inherit;">User<wbr>Name</a>
@@ -1220,8 +1328,69 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the attached CAM user as unique key to be queried.</p>
-</dd></dl>
+    <dd>Name of the attached CAM user as unique key to be queried.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="create_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_mode_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The create time of the CAM user policy attachment.</dd><dt class="property-required"
+            title="Required">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="policy_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_name_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of the policy.</dd><dt class="property-required"
+            title="Required">
+        <span id="policy_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_type_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-required property-deprecated"
+            title="Required, Deprecated">
+        <span id="user_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of the attached CAM user to be queried.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-required"
+            title="Required">
+        <span id="user_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_hcl" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the attached CAM user as unique key to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1235,8 +1404,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-required"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1244,8 +1412,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The create time of the CAM user policy attachment.</p>
-</dd><dt class="property-required"
+    <dd>The create time of the CAM user policy attachment.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1253,8 +1420,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -1262,8 +1428,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the policy.</p>
-</dd><dt class="property-required"
+    <dd>The name of the policy.</dd><dt class="property-required"
             title="Required">
         <span id="policytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
@@ -1271,8 +1436,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="userid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_java" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -1280,9 +1444,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of the attached CAM user to be queried.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of the attached CAM user to be queried.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="username_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_java" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -1290,8 +1452,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the attached CAM user as unique key to be queried.</p>
-</dd></dl>
+    <dd>Name of the attached CAM user as unique key to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1305,8 +1466,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-required"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1314,8 +1474,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The create time of the CAM user policy attachment.</p>
-</dd><dt class="property-required"
+    <dd>The create time of the CAM user policy attachment.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1323,8 +1482,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -1332,8 +1490,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of the policy.</p>
-</dd><dt class="property-required"
+    <dd>The name of the policy.</dd><dt class="property-required"
             title="Required">
         <span id="policytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
@@ -1341,8 +1498,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="userid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -1350,9 +1506,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of the attached CAM user to be queried.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of the attached CAM user to be queried.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="username_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_nodejs" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -1360,8 +1514,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the attached CAM user as unique key to be queried.</p>
-</dd></dl>
+    <dd>Name of the attached CAM user as unique key to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1375,8 +1528,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-required"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1384,8 +1536,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The create time of the CAM user policy attachment.</p>
-</dd><dt class="property-required"
+    <dd>The create time of the CAM user policy attachment.</dd><dt class="property-required"
             title="Required">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -1393,8 +1544,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policy_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_name_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>name</a>
@@ -1402,8 +1552,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of the policy.</p>
-</dd><dt class="property-required"
+    <dd>The name of the policy.</dd><dt class="property-required"
             title="Required">
         <span id="policy_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_type_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>type</a>
@@ -1411,8 +1560,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="user_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_id_python" style="color: inherit; text-decoration: inherit;">user_<wbr>id</a>
@@ -1420,9 +1568,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of the attached CAM user to be queried.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of the attached CAM user to be queried.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="user_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#user_name_python" style="color: inherit; text-decoration: inherit;">user_<wbr>name</a>
@@ -1430,8 +1576,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the attached CAM user as unique key to be queried.</p>
-</dd></dl>
+    <dd>Name of the attached CAM user as unique key to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1445,8 +1590,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</p>
-</dd><dt class="property-required"
+    <dd>Mode of Creation of the CAM user policy attachment. <code>1</code> means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1454,8 +1598,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The create time of the CAM user policy attachment.</p>
-</dd><dt class="property-required"
+    <dd>The create time of the CAM user policy attachment.</dd><dt class="property-required"
             title="Required">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1463,8 +1606,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CAM policy to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of CAM policy to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="policyname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyname_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Name</a>
@@ -1472,8 +1614,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of the policy.</p>
-</dd><dt class="property-required"
+    <dd>The name of the policy.</dd><dt class="property-required"
             title="Required">
         <span id="policytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policytype_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Type</a>
@@ -1481,8 +1622,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</p>
-</dd><dt class="property-required property-deprecated"
+    <dd>Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.</dd><dt class="property-required property-deprecated"
             title="Required, Deprecated">
         <span id="userid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#userid_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Id</a>
@@ -1490,9 +1630,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead. ID of the attached CAM user to be queried.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.59.6. Use <code>user_name</code> instead.</p>
-</p></dd><dt class="property-required"
+    <dd>It has been deprecated from version 1.59.6. Use <code>userName</code> instead. ID of the attached CAM user to be queried.<p class="property-message">Deprecated: It has been deprecated from version 1.59.6. Use <code>userName</code> instead.</p></dd><dt class="property-required"
             title="Required">
         <span id="username_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#username_yaml" style="color: inherit; text-decoration: inherit;">user<wbr>Name</a>
@@ -1500,8 +1638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the attached CAM user as unique key to be queried.</p>
-</dd></dl>
+    <dd>Name of the attached CAM user as unique key to be queried.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1516,7 +1653,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

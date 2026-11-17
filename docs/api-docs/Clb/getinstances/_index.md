@@ -2,9 +2,11 @@
 ---
 title: "getInstances"
 title_tag: "tencentcloud.Clb.getInstances"
-meta_desc: "Documentation for the tencentcloud.Clb.getInstances function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query detailed information of CLB"
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,72 +18,115 @@ Use this data source to query detailed information of CLB
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
+import * as std from "@pulumi/std";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const foo = tencentcloud.Clb.getInstances({
+const example = tencentcloud.clb.getInstances({
     clbId: "lb-k2zjp9lv",
-    clbName: "myclb",
     networkType: "OPEN",
+    clbName: "tf-example",
     projectId: 0,
-    resultOutputFile: "mytestpath",
+    resultOutputFile: "myOutputPath",
 });
+export const exclusiveClusterInfo = example.then(example => std.jsondecode({
+    input: example.clbLists?.[0]?.exclusiveCluster,
+})).then(invoke => invoke.result);
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
+import pulumi_std as std
 import pulumi_tencentcloud as tencentcloud
 
-foo = tencentcloud.Clb.get_instances(clb_id="lb-k2zjp9lv",
-    clb_name="myclb",
+example = tencentcloud.clb.get_instances(clb_id="lb-k2zjp9lv",
     network_type="OPEN",
+    clb_name="tf-example",
     project_id=0,
-    result_output_file="mytestpath")
+    result_output_file="myOutputPath")
+pulumi.export("exclusiveClusterInfo", std.jsondecode(input=example.clb_lists[0].exclusive_cluster).result)
 ```
-```csharp
-using System.Collections.Generic;
-using System.Linq;
-using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
 
-return await Deployment.RunAsync(() => 
-{
-    var foo = Tencentcloud.Clb.GetInstances.Invoke(new()
-    {
-        ClbId = "lb-k2zjp9lv",
-        ClbName = "myclb",
-        NetworkType = "OPEN",
-        ProjectId = 0,
-        ResultOutputFile = "mytestpath",
-    });
-
-});
-```
 ```go
 package main
 
 import (
+	"github.com/pulumi/pulumi-std/sdk/v2/go/std"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Clb.GetInstances(ctx, &clb.GetInstancesArgs{
+		example, err := clb.GetInstances(ctx, &clb.GetInstancesArgs{
 			ClbId:            pulumi.StringRef("lb-k2zjp9lv"),
-			ClbName:          pulumi.StringRef("myclb"),
 			NetworkType:      pulumi.StringRef("OPEN"),
+			ClbName:          pulumi.StringRef("tf-example"),
 			ProjectId:        pulumi.IntRef(0),
-			ResultOutputFile: pulumi.StringRef("mytestpath"),
+			ResultOutputFile: pulumi.StringRef("myOutputPath"),
 		}, nil)
 		if err != nil {
 			return err
 		}
+		ctx.Export("exclusiveClusterInfo", pulumi.Any(std.Jsondecode(ctx, &std.JsondecodeArgs{
+			Input: example.ClbLists[0].ExclusiveCluster,
+		}, nil).Result))
 		return nil
 	})
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
+```csharp
+using System.Collections.Generic;
+using System.Linq;
+using Pulumi;
+using Std = Pulumi.Std;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+
+return await Deployment.RunAsync(() => 
+{
+    var example = Tencentcloud.Clb.GetInstances.Invoke(new()
+    {
+        ClbId = "lb-k2zjp9lv",
+        NetworkType = "OPEN",
+        ClbName = "tf-example",
+        ProjectId = 0,
+        ResultOutputFile = "myOutputPath",
+    });
+
+    return new Dictionary<string, object?>
+    {
+        ["exclusiveClusterInfo"] = Std.Jsondecode.Invoke(new()
+        {
+            Input = example.Apply(getInstancesResult => getInstancesResult.ClbLists[0]?.ExclusiveCluster),
+        }).Apply(invoke => invoke.Result),
+    };
+});
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
+
 ```java
 package generated_program;
 
@@ -90,8 +135,10 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Clb.ClbFunctions;
 import com.pulumi.tencentcloud.Clb.inputs.GetInstancesArgs;
-import java.util.List;
+import com.pulumi.std.StdFunctions;
+import com.pulumi.std.inputs.JsondecodeArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -103,31 +150,84 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var foo = ClbFunctions.getInstances(GetInstancesArgs.builder()
+        final var example = ClbFunctions.getInstances(GetInstancesArgs.builder()
             .clbId("lb-k2zjp9lv")
-            .clbName("myclb")
             .networkType("OPEN")
+            .clbName("tf-example")
             .projectId(0)
-            .resultOutputFile("mytestpath")
+            .resultOutputFile("myOutputPath")
             .build());
 
+        ctx.export("exclusiveClusterInfo", StdFunctions.jsondecode(JsondecodeArgs.builder()
+            .input(example.clbLists()[0].exclusiveCluster())
+            .build()).result());
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
-  foo:
+  example:
     fn::invoke:
-      Function: tencentcloud:Clb:getInstances
-      Arguments:
+      function: tencentcloud:Clb:getInstances
+      arguments:
         clbId: lb-k2zjp9lv
-        clbName: myclb
         networkType: OPEN
+        clbName: tf-example
         projectId: 0
-        resultOutputFile: mytestpath
+        resultOutputFile: myOutputPath
+outputs:
+  # Parse JSON fields
+  exclusiveClusterInfo:
+    fn::invoke:
+      function: std:jsondecode
+      arguments:
+        input: ${example.clbLists[0].exclusiveCluster}
+      return: result
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    std = {
+      source = "pulumi/std"
+    }
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_clb_getinstances" "example" {
+  clb_id             = "lb-k2zjp9lv"
+  network_type       = "OPEN"
+  clb_name           = "tf-example"
+  project_id         = 0
+  result_output_file = "myOutputPath"
+}
+
+# Parse JSON fields
+output "exclusiveClusterInfo" {
+  value = jsondecode(data.tencentcloud_clb_getinstances.example.clb_lists[0].exclusive_cluster)
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
 
 
 
@@ -139,7 +239,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -147,9 +247,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+><span class="k">function </span>getInstances<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ><span class="k">
-function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
+function </span>getInstancesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstancesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -166,13 +266,13 @@ function </span>getInstancesOutput<span class="p">(</span><span class="nx">args<
                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstancesResult</span
 ><span class="k">
-def </span>get_instances_output<span class="p">(</span><span class="nx">clb_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">clb_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">master_zone</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">network_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">project_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
+def </span>get_instances_output<span class="p">(</span><span class="nx">clb_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">clb_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">master_zone</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">network_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">project_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                  <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstancesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -197,7 +297,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstances </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstancesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -206,7 +307,8 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstancesResult</a></span>> </span>getInstances<span class="p">(</span><span class="nx">GetInstancesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -218,6 +320,15 @@ func </span>GetInstancesOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Clb/getInstances:getInstances
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_clb_get_instances&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -236,8 +347,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="clbname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbname_csharp" style="color: inherit; text-decoration: inherit;">Clb<wbr>Name</a>
@@ -245,8 +355,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CLB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="masterzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzone_csharp" style="color: inherit; text-decoration: inherit;">Master<wbr>Zone</a>
@@ -254,8 +363,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master available zone id.</p>
-</dd><dt class="property-optional"
+    <dd>Master available zone id.</dd><dt class="property-optional"
             title="Optional">
         <span id="networktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -263,8 +371,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -272,8 +379,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -281,8 +387,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -296,8 +401,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="clbname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbname_go" style="color: inherit; text-decoration: inherit;">Clb<wbr>Name</a>
@@ -305,8 +409,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CLB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="masterzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzone_go" style="color: inherit; text-decoration: inherit;">Master<wbr>Zone</a>
@@ -314,8 +417,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master available zone id.</p>
-</dd><dt class="property-optional"
+    <dd>Master available zone id.</dd><dt class="property-optional"
             title="Optional">
         <span id="networktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -323,8 +425,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -332,8 +433,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -341,8 +441,61 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="clb_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_name_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CLB to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="master_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_zone_hcl" style="color: inherit; text-decoration: inherit;">master_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Master available zone id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="network_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID of the CLB.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -356,8 +509,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="clbname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbname_java" style="color: inherit; text-decoration: inherit;">clb<wbr>Name</a>
@@ -365,8 +517,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CLB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CLB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="masterzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzone_java" style="color: inherit; text-decoration: inherit;">master<wbr>Zone</a>
@@ -374,8 +525,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Master available zone id.</p>
-</dd><dt class="property-optional"
+    <dd>Master available zone id.</dd><dt class="property-optional"
             title="Optional">
         <span id="networktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_java" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -383,8 +533,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -392,8 +541,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -401,8 +549,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -416,8 +563,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="clbname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbname_nodejs" style="color: inherit; text-decoration: inherit;">clb<wbr>Name</a>
@@ -425,8 +571,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CLB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="masterzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzone_nodejs" style="color: inherit; text-decoration: inherit;">master<wbr>Zone</a>
@@ -434,8 +579,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Master available zone id.</p>
-</dd><dt class="property-optional"
+    <dd>Master available zone id.</dd><dt class="property-optional"
             title="Optional">
         <span id="networktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -443,8 +587,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -452,8 +595,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -461,8 +603,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -476,8 +617,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="clb_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_name_python" style="color: inherit; text-decoration: inherit;">clb_<wbr>name</a>
@@ -485,8 +625,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CLB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CLB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="master_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_zone_python" style="color: inherit; text-decoration: inherit;">master_<wbr>zone</a>
@@ -494,8 +633,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Master available zone id.</p>
-</dd><dt class="property-optional"
+    <dd>Master available zone id.</dd><dt class="property-optional"
             title="Optional">
         <span id="network_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_python" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
@@ -503,8 +641,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -512,8 +649,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -521,8 +657,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -536,8 +671,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="clbname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbname_yaml" style="color: inherit; text-decoration: inherit;">clb<wbr>Name</a>
@@ -545,8 +679,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CLB to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Name of the CLB to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="masterzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzone_yaml" style="color: inherit; text-decoration: inherit;">master<wbr>Zone</a>
@@ -554,8 +687,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Master available zone id.</p>
-</dd><dt class="property-optional"
+    <dd>Master available zone id.</dd><dt class="property-optional"
             title="Optional">
         <span id="networktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -563,8 +695,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -572,8 +703,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID of the CLB.</p>
-</dd><dt class="property-optional"
+    <dd>Project ID of the CLB.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -581,8 +711,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -605,8 +734,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesclblist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Outputs.<wbr>Get<wbr>Instances<wbr>Clb<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of cloud load balancers. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of cloud load balancers. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -614,8 +742,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="clbid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_csharp" style="color: inherit; text-decoration: inherit;">Clb<wbr>Id</a>
@@ -623,8 +750,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of CLB.</dd><dt class="property-"
             title="">
         <span id="clbname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbname_csharp" style="color: inherit; text-decoration: inherit;">Clb<wbr>Name</a>
@@ -632,8 +758,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CLB.</p>
-</dd><dt class="property-"
+    <dd>Name of CLB.</dd><dt class="property-"
             title="">
         <span id="masterzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzone_csharp" style="color: inherit; text-decoration: inherit;">Master<wbr>Zone</a>
@@ -649,8 +774,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of CLB.</p>
-</dd><dt class="property-"
+    <dd>Types of CLB.</dd><dt class="property-"
             title="">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -658,8 +782,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -681,8 +804,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesclblist">[]Get<wbr>Instances<wbr>Clb<wbr>List</a></span>
     </dt>
-    <dd><p>A list of cloud load balancers. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of cloud load balancers. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -690,8 +812,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="clbid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_go" style="color: inherit; text-decoration: inherit;">Clb<wbr>Id</a>
@@ -699,8 +820,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of CLB.</dd><dt class="property-"
             title="">
         <span id="clbname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbname_go" style="color: inherit; text-decoration: inherit;">Clb<wbr>Name</a>
@@ -708,8 +828,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CLB.</p>
-</dd><dt class="property-"
+    <dd>Name of CLB.</dd><dt class="property-"
             title="">
         <span id="masterzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzone_go" style="color: inherit; text-decoration: inherit;">Master<wbr>Zone</a>
@@ -725,8 +844,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of CLB.</p>
-</dd><dt class="property-"
+    <dd>Types of CLB.</dd><dt class="property-"
             title="">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -734,11 +852,80 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="clb_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_lists_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesclblist">list(object)</a></span>
+    </dt>
+    <dd>A list of cloud load balancers. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of CLB.</dd><dt class="property-"
+            title="">
+        <span id="clb_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_name_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of CLB.</dd><dt class="property-"
+            title="">
+        <span id="master_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_zone_hcl" style="color: inherit; text-decoration: inherit;">master_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="network_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Types of CLB.</dd><dt class="property-"
+            title="">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>ID of the project.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -757,8 +944,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesclblist">List&lt;Get<wbr>Instances<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of cloud load balancers. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of cloud load balancers. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -766,8 +952,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="clbid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_java" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -775,8 +960,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of CLB.</dd><dt class="property-"
             title="">
         <span id="clbname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbname_java" style="color: inherit; text-decoration: inherit;">clb<wbr>Name</a>
@@ -784,8 +968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CLB.</p>
-</dd><dt class="property-"
+    <dd>Name of CLB.</dd><dt class="property-"
             title="">
         <span id="masterzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzone_java" style="color: inherit; text-decoration: inherit;">master<wbr>Zone</a>
@@ -801,8 +984,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of CLB.</p>
-</dd><dt class="property-"
+    <dd>Types of CLB.</dd><dt class="property-"
             title="">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -810,8 +992,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -833,8 +1014,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesclblist">Get<wbr>Instances<wbr>Clb<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of cloud load balancers. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of cloud load balancers. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -842,8 +1022,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="clbid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_nodejs" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -851,8 +1030,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of CLB.</dd><dt class="property-"
             title="">
         <span id="clbname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbname_nodejs" style="color: inherit; text-decoration: inherit;">clb<wbr>Name</a>
@@ -860,8 +1038,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of CLB.</p>
-</dd><dt class="property-"
+    <dd>Name of CLB.</dd><dt class="property-"
             title="">
         <span id="masterzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzone_nodejs" style="color: inherit; text-decoration: inherit;">master<wbr>Zone</a>
@@ -877,8 +1054,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Types of CLB.</p>
-</dd><dt class="property-"
+    <dd>Types of CLB.</dd><dt class="property-"
             title="">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -886,8 +1062,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -907,10 +1082,9 @@ The following output properties are available:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_lists_python" style="color: inherit; text-decoration: inherit;">clb_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstancesclblist">Get<wbr>Instances<wbr>Clb<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstancesclblist">Sequence[Get<wbr>Instances<wbr>Clb<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of cloud load balancers. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of cloud load balancers. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -918,8 +1092,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="clb_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_python" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
@@ -927,8 +1100,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of CLB.</dd><dt class="property-"
             title="">
         <span id="clb_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_name_python" style="color: inherit; text-decoration: inherit;">clb_<wbr>name</a>
@@ -936,8 +1108,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of CLB.</p>
-</dd><dt class="property-"
+    <dd>Name of CLB.</dd><dt class="property-"
             title="">
         <span id="master_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_zone_python" style="color: inherit; text-decoration: inherit;">master_<wbr>zone</a>
@@ -953,8 +1124,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Types of CLB.</p>
-</dd><dt class="property-"
+    <dd>Types of CLB.</dd><dt class="property-"
             title="">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -962,8 +1132,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -985,8 +1154,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstancesclblist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of cloud load balancers. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of cloud load balancers. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -994,8 +1162,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="clbid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_yaml" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -1003,8 +1170,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of CLB.</p>
-</dd><dt class="property-"
+    <dd>ID of CLB.</dd><dt class="property-"
             title="">
         <span id="clbname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbname_yaml" style="color: inherit; text-decoration: inherit;">clb<wbr>Name</a>
@@ -1012,8 +1178,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of CLB.</p>
-</dd><dt class="property-"
+    <dd>Name of CLB.</dd><dt class="property-"
             title="">
         <span id="masterzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterzone_yaml" style="color: inherit; text-decoration: inherit;">master<wbr>Zone</a>
@@ -1029,8 +1194,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Types of CLB.</p>
-</dd><dt class="property-"
+    <dd>Types of CLB.</dd><dt class="property-"
             title="">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1038,8 +1202,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>ID of the project.</p>
-</dd><dt class="property-"
+    <dd>ID of the project.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1071,8 +1234,63 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-required"
+    <dd>IP version, only applicable to open CLB. Valid values are <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="addressipv6_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressipv6_csharp" style="color: inherit; text-decoration: inherit;">Address<wbr>Ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IPv6 address of the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="anycastzone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anycastzone_csharp" style="color: inherit; text-decoration: inherit;">Anycast<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Anycast CLB publishing region, returns empty string for non-anycast CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="associateendpoint_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#associateendpoint_csharp" style="color: inherit; text-decoration: inherit;">Associate<wbr>Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Endpoint ID associated with the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="attributeflags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attributeflags_csharp" style="color: inherit; text-decoration: inherit;">Attribute<wbr>Flags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>CLB attribute flags array.</dd><dt class="property-required"
+            title="Required">
+        <span id="availablezoneaffinityinfo_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablezoneaffinityinfo_csharp" style="color: inherit; text-decoration: inherit;">Available<wbr>Zone<wbr>Affinity<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone forwarding affinity information (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="backupzonesets_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupzonesets_csharp" style="color: inherit; text-decoration: inherit;">Backup<wbr>Zone<wbr>Sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesclblistbackupzoneset">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Clb.<wbr>Inputs.<wbr>Get<wbr>Instances<wbr>Clb<wbr>List<wbr>Backup<wbr>Zone<wbr>Set&gt;</a></span>
+    </dt>
+    <dd>Backup zone list, each element contains zone_id/zone/zone_name/zone_region/local_zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="chargetype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Billing type, PREPAID: Prepaid, POSTPAID_BY_HOUR: Pay-as-you-go.</dd><dt class="property-required"
             title="Required">
         <span id="clbid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_csharp" style="color: inherit; text-decoration: inherit;">Clb<wbr>Id</a>
@@ -1080,8 +1298,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clbname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbname_csharp" style="color: inherit; text-decoration: inherit;">Clb<wbr>Name</a>
@@ -1089,8 +1306,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clbvips_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbvips_csharp" style="color: inherit; text-decoration: inherit;">Clb<wbr>Vips</a>
@@ -1098,8 +1314,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="clusterid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="clusterids_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterids_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>Cluster ID list.</dd><dt class="property-required"
+            title="Required">
+        <span id="clustertag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertag_csharp" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Tag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Layer-7 exclusive tag.</dd><dt class="property-required"
+            title="Required">
+        <span id="configid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configid_csharp" style="color: inherit; text-decoration: inherit;">Config<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CLB dimension personalized configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1107,8 +1354,79 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CLB domain (only for public network Classic CLB), gradually deprecated.</dd><dt class="property-required"
+            title="Required">
+        <span id="egress_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egress_csharp" style="color: inherit; text-decoration: inherit;">Egress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network egress.</dd><dt class="property-required"
+            title="Required">
+        <span id="exclusive_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusive_csharp" style="color: inherit; text-decoration: inherit;">Exclusive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Whether the instance type is exclusive, 1: Exclusive, 0: Not exclusive.</dd><dt class="property-required"
+            title="Required">
+        <span id="exclusivecluster_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusivecluster_csharp" style="color: inherit; text-decoration: inherit;">Exclusive<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internal exclusive cluster information (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="expiretime_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_csharp" style="color: inherit; text-decoration: inherit;">Expire<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expiration time of the CLB instance, only for prepaid CLB, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="extrainfo_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extrainfo_csharp" style="color: inherit; text-decoration: inherit;">Extra<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reserved field, generally no need to pay attention (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="forward_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_csharp" style="color: inherit; text-decoration: inherit;">Forward</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>CLB type identifier, 1: CLB, 0: Classic CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="healthlogsetid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthlogsetid_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Log<wbr>Set<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log service (CLS) health check log set ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="healthlogtopicid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthlogtopicid_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Log<wbr>Topic<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log service (CLS) health check log topic ID.</dd><dt class="property-required"
             title="Required">
         <span id="internetbandwidthmaxout_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetbandwidthmaxout_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Bandwidth<wbr>Max<wbr>Out</a>
@@ -1116,8 +1434,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-required"
+    <dd>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -1125,8 +1442,79 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-required"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv6mode_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6mode_csharp" style="color: inherit; text-decoration: inherit;">Ipv6Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IPv6 mode when IP version is ipv6, IPv6Nat64 or IPv6FullChain.</dd><dt class="property-required"
+            title="Required">
+        <span id="isblock_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isblock_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the VIP is blocked.</dd><dt class="property-required"
+            title="Required">
+        <span id="isblocktime_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isblocktime_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Block<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Time of blocking or unblocking, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="isddos_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isddos_csharp" style="color: inherit; text-decoration: inherit;">Is<wbr>Ddos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Anti-DDoS Pro can be bound.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolatedtime_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatedtime_csharp" style="color: inherit; text-decoration: inherit;">Isolated<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Time when the CLB instance was isolated, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolation_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolation_csharp" style="color: inherit; text-decoration: inherit;">Isolation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Whether isolated, 0: Not isolated, 1: Isolated.</dd><dt class="property-required"
+            title="Required">
+        <span id="loadbalancerdomain_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerdomain_csharp" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="loadbalancerpasstotarget_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerpasstotarget_csharp" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Pass<wbr>To<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether backend services allow traffic from CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="localbgp_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localbgp_csharp" style="color: inherit; text-decoration: inherit;">Local<wbr>Bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the IP type is local BGP.</dd><dt class="property-required"
             title="Required">
         <span id="localzone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localzone_csharp" style="color: inherit; text-decoration: inherit;">Local<wbr>Zone</a>
@@ -1134,8 +1522,31 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="logsetid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Set<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log service (CLS) log set ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="logtopicid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtopicid_csharp" style="color: inherit; text-decoration: inherit;">Log<wbr>Topic<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log service (CLS) log topic ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="mixiptarget_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixiptarget_csharp" style="color: inherit; text-decoration: inherit;">Mix<wbr>Ip<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>IPv6FullChain CLB layer-7 listener supports mixed binding of IPv4/IPv6 targets.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_csharp" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -1143,8 +1554,47 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="nfvinfo_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nfvinfo_csharp" style="color: inherit; text-decoration: inherit;">Nfv<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether CLB is NFV, empty: No, l7nfv: Layer-7 is NFV.</dd><dt class="property-required"
+            title="Required">
+        <span id="numericalvpcid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numericalvpcid_csharp" style="color: inherit; text-decoration: inherit;">Numerical<wbr>Vpc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="openbgp_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openbgp_csharp" style="color: inherit; text-decoration: inherit;">Open<wbr>Bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Anti-DDoS Pro LB identifier, 1: Anti-DDoS Pro, 0: Not Anti-DDoS Pro.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaidperiod_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Prepaid purchase period, unit: month.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaidrenewflag_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_csharp" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Renew<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Prepaid renewal flag, NOTIFY_AND_AUTO_RENEW: Notify and auto-renew, NOTIFY_AND_MANUAL_RENEW: Notify but not auto-renew, DISABLE_NOTIFY_AND_MANUAL_RENEW: No notification and not auto-renew.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1152,8 +1602,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -1161,8 +1610,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID set of the security groups.</p>
-</dd><dt class="property-required"
+    <dd>ID set of the security groups.</dd><dt class="property-required"
+            title="Required">
+        <span id="slatype_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slatype_csharp" style="color: inherit; text-decoration: inherit;">Sla<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Performance capacity type specification (clb.c1.small/clb.c2.medium/clb.c3.small/clb.c3.medium/clb.c4.small/clb.c4.medium/clb.c4.large/clb.c4.xlarge or empty string).</dd><dt class="property-required"
+            title="Required">
+        <span id="snat_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_csharp" style="color: inherit; text-decoration: inherit;">Snat</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether SNAT is enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="snatips_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatips_csharp" style="color: inherit; text-decoration: inherit;">Snat<wbr>Ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SnatIp list after enabling SnatPro (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="snatpro_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatpro_csharp" style="color: inherit; text-decoration: inherit;">Snat<wbr>Pro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether SnatPro is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1170,8 +1650,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The status of CLB.</p>
-</dd><dt class="property-required"
+    <dd>The status of CLB.</dd><dt class="property-required"
             title="Required">
         <span id="statustime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statustime_csharp" style="color: inherit; text-decoration: inherit;">Status<wbr>Time</a>
@@ -1179,8 +1658,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Latest state transition time of CLB.</p>
-</dd><dt class="property-required"
+    <dd>Latest state transition time of CLB.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1188,17 +1666,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet.</dd><dt class="property-required"
             title="Required">
         <span id="tags_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Dictionary&lt;string, object&gt;</span>
+        <span class="property-type">Dictionary&lt;string, string&gt;</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-required"
+    <dd>The available tags within this CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="targetcount_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetcount_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Number of bound backend services.</dd><dt class="property-required"
             title="Required">
         <span id="targetregioninforegion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninforegion_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Region<wbr>Info<wbr>Region</a>
@@ -1206,8 +1690,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region information of backend service are attached the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Region information of backend service are attached the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="targetregioninfovpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninfovpcid_csharp" style="color: inherit; text-decoration: inherit;">Target<wbr>Region<wbr>Info<wbr>Vpc<wbr>Id</a>
@@ -1215,8 +1698,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VpcId information of backend service are attached the CLB.</p>
-</dd><dt class="property-required"
+    <dd>VpcId information of backend service are attached the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="vipisp_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vipisp_csharp" style="color: inherit; text-decoration: inherit;">Vip<wbr>Isp</a>
@@ -1224,8 +1706,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-required"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1233,8 +1714,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1242,8 +1722,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -1251,8 +1730,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Name</a>
@@ -1260,8 +1738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone name, This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone name, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zoneregion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneregion_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Region</a>
@@ -1269,8 +1746,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</p>
-</dd></dl>
+    <dd>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zones_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_csharp" style="color: inherit; text-decoration: inherit;">Zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;string&gt;</span>
+    </dt>
+    <dd>Zones where rules are deployed for VPC internal load balancers with nearby access mode. Note: This field may return null, indicating no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1284,8 +1768,63 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-required"
+    <dd>IP version, only applicable to open CLB. Valid values are <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="addressipv6_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressipv6_go" style="color: inherit; text-decoration: inherit;">Address<wbr>Ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IPv6 address of the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="anycastzone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anycastzone_go" style="color: inherit; text-decoration: inherit;">Anycast<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Anycast CLB publishing region, returns empty string for non-anycast CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="associateendpoint_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#associateendpoint_go" style="color: inherit; text-decoration: inherit;">Associate<wbr>Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Endpoint ID associated with the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="attributeflags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attributeflags_go" style="color: inherit; text-decoration: inherit;">Attribute<wbr>Flags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>CLB attribute flags array.</dd><dt class="property-required"
+            title="Required">
+        <span id="availablezoneaffinityinfo_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablezoneaffinityinfo_go" style="color: inherit; text-decoration: inherit;">Available<wbr>Zone<wbr>Affinity<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone forwarding affinity information (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="backupzonesets_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupzonesets_go" style="color: inherit; text-decoration: inherit;">Backup<wbr>Zone<wbr>Sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesclblistbackupzoneset">[]Get<wbr>Instances<wbr>Clb<wbr>List<wbr>Backup<wbr>Zone<wbr>Set</a></span>
+    </dt>
+    <dd>Backup zone list, each element contains zone_id/zone/zone_name/zone_region/local_zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="chargetype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Billing type, PREPAID: Prepaid, POSTPAID_BY_HOUR: Pay-as-you-go.</dd><dt class="property-required"
             title="Required">
         <span id="clbid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_go" style="color: inherit; text-decoration: inherit;">Clb<wbr>Id</a>
@@ -1293,8 +1832,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clbname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbname_go" style="color: inherit; text-decoration: inherit;">Clb<wbr>Name</a>
@@ -1302,8 +1840,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clbvips_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbvips_go" style="color: inherit; text-decoration: inherit;">Clb<wbr>Vips</a>
@@ -1311,8 +1848,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="clusterid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="clusterids_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterids_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>Cluster ID list.</dd><dt class="property-required"
+            title="Required">
+        <span id="clustertag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertag_go" style="color: inherit; text-decoration: inherit;">Cluster<wbr>Tag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Layer-7 exclusive tag.</dd><dt class="property-required"
+            title="Required">
+        <span id="configid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configid_go" style="color: inherit; text-decoration: inherit;">Config<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CLB dimension personalized configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -1320,8 +1888,79 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CLB domain (only for public network Classic CLB), gradually deprecated.</dd><dt class="property-required"
+            title="Required">
+        <span id="egress_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egress_go" style="color: inherit; text-decoration: inherit;">Egress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network egress.</dd><dt class="property-required"
+            title="Required">
+        <span id="exclusive_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusive_go" style="color: inherit; text-decoration: inherit;">Exclusive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Whether the instance type is exclusive, 1: Exclusive, 0: Not exclusive.</dd><dt class="property-required"
+            title="Required">
+        <span id="exclusivecluster_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusivecluster_go" style="color: inherit; text-decoration: inherit;">Exclusive<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internal exclusive cluster information (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="expiretime_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_go" style="color: inherit; text-decoration: inherit;">Expire<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expiration time of the CLB instance, only for prepaid CLB, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="extrainfo_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extrainfo_go" style="color: inherit; text-decoration: inherit;">Extra<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reserved field, generally no need to pay attention (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="forward_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_go" style="color: inherit; text-decoration: inherit;">Forward</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>CLB type identifier, 1: CLB, 0: Classic CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="healthlogsetid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthlogsetid_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Log<wbr>Set<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log service (CLS) health check log set ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="healthlogtopicid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthlogtopicid_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Log<wbr>Topic<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log service (CLS) health check log topic ID.</dd><dt class="property-required"
             title="Required">
         <span id="internetbandwidthmaxout_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetbandwidthmaxout_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Bandwidth<wbr>Max<wbr>Out</a>
@@ -1329,8 +1968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-required"
+    <dd>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Charge<wbr>Type</a>
@@ -1338,8 +1976,79 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-required"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv6mode_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6mode_go" style="color: inherit; text-decoration: inherit;">Ipv6Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IPv6 mode when IP version is ipv6, IPv6Nat64 or IPv6FullChain.</dd><dt class="property-required"
+            title="Required">
+        <span id="isblock_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isblock_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the VIP is blocked.</dd><dt class="property-required"
+            title="Required">
+        <span id="isblocktime_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isblocktime_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Block<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Time of blocking or unblocking, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="isddos_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isddos_go" style="color: inherit; text-decoration: inherit;">Is<wbr>Ddos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Anti-DDoS Pro can be bound.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolatedtime_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatedtime_go" style="color: inherit; text-decoration: inherit;">Isolated<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Time when the CLB instance was isolated, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolation_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolation_go" style="color: inherit; text-decoration: inherit;">Isolation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Whether isolated, 0: Not isolated, 1: Isolated.</dd><dt class="property-required"
+            title="Required">
+        <span id="loadbalancerdomain_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerdomain_go" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="loadbalancerpasstotarget_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerpasstotarget_go" style="color: inherit; text-decoration: inherit;">Load<wbr>Balancer<wbr>Pass<wbr>To<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether backend services allow traffic from CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="localbgp_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localbgp_go" style="color: inherit; text-decoration: inherit;">Local<wbr>Bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the IP type is local BGP.</dd><dt class="property-required"
             title="Required">
         <span id="localzone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localzone_go" style="color: inherit; text-decoration: inherit;">Local<wbr>Zone</a>
@@ -1347,8 +2056,31 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="logsetid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Set<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log service (CLS) log set ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="logtopicid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtopicid_go" style="color: inherit; text-decoration: inherit;">Log<wbr>Topic<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log service (CLS) log topic ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="mixiptarget_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixiptarget_go" style="color: inherit; text-decoration: inherit;">Mix<wbr>Ip<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>IPv6FullChain CLB layer-7 listener supports mixed binding of IPv4/IPv6 targets.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_go" style="color: inherit; text-decoration: inherit;">Network<wbr>Type</a>
@@ -1356,8 +2088,47 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="nfvinfo_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nfvinfo_go" style="color: inherit; text-decoration: inherit;">Nfv<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether CLB is NFV, empty: No, l7nfv: Layer-7 is NFV.</dd><dt class="property-required"
+            title="Required">
+        <span id="numericalvpcid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numericalvpcid_go" style="color: inherit; text-decoration: inherit;">Numerical<wbr>Vpc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="openbgp_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openbgp_go" style="color: inherit; text-decoration: inherit;">Open<wbr>Bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Anti-DDoS Pro LB identifier, 1: Anti-DDoS Pro, 0: Not Anti-DDoS Pro.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaidperiod_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Prepaid purchase period, unit: month.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaidrenewflag_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_go" style="color: inherit; text-decoration: inherit;">Prepaid<wbr>Renew<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Prepaid renewal flag, NOTIFY_AND_AUTO_RENEW: Notify and auto-renew, NOTIFY_AND_MANUAL_RENEW: Notify but not auto-renew, DISABLE_NOTIFY_AND_MANUAL_RENEW: No notification and not auto-renew.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -1365,8 +2136,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Groups</a>
@@ -1374,8 +2144,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID set of the security groups.</p>
-</dd><dt class="property-required"
+    <dd>ID set of the security groups.</dd><dt class="property-required"
+            title="Required">
+        <span id="slatype_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slatype_go" style="color: inherit; text-decoration: inherit;">Sla<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Performance capacity type specification (clb.c1.small/clb.c2.medium/clb.c3.small/clb.c3.medium/clb.c4.small/clb.c4.medium/clb.c4.large/clb.c4.xlarge or empty string).</dd><dt class="property-required"
+            title="Required">
+        <span id="snat_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_go" style="color: inherit; text-decoration: inherit;">Snat</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether SNAT is enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="snatips_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatips_go" style="color: inherit; text-decoration: inherit;">Snat<wbr>Ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SnatIp list after enabling SnatPro (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="snatpro_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatpro_go" style="color: inherit; text-decoration: inherit;">Snat<wbr>Pro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether SnatPro is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -1383,8 +2184,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The status of CLB.</p>
-</dd><dt class="property-required"
+    <dd>The status of CLB.</dd><dt class="property-required"
             title="Required">
         <span id="statustime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statustime_go" style="color: inherit; text-decoration: inherit;">Status<wbr>Time</a>
@@ -1392,8 +2192,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Latest state transition time of CLB.</p>
-</dd><dt class="property-required"
+    <dd>Latest state transition time of CLB.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -1401,17 +2200,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet.</dd><dt class="property-required"
             title="Required">
         <span id="tags_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">map[string]interface{}</span>
+        <span class="property-type">map[string]string</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-required"
+    <dd>The available tags within this CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="targetcount_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetcount_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Number of bound backend services.</dd><dt class="property-required"
             title="Required">
         <span id="targetregioninforegion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninforegion_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Region<wbr>Info<wbr>Region</a>
@@ -1419,8 +2224,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region information of backend service are attached the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Region information of backend service are attached the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="targetregioninfovpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninfovpcid_go" style="color: inherit; text-decoration: inherit;">Target<wbr>Region<wbr>Info<wbr>Vpc<wbr>Id</a>
@@ -1428,8 +2232,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VpcId information of backend service are attached the CLB.</p>
-</dd><dt class="property-required"
+    <dd>VpcId information of backend service are attached the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="vipisp_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vipisp_go" style="color: inherit; text-decoration: inherit;">Vip<wbr>Isp</a>
@@ -1437,8 +2240,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-required"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -1446,8 +2248,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -1455,8 +2256,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
@@ -1464,8 +2264,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Name</a>
@@ -1473,8 +2272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone name, This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone name, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zoneregion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneregion_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Region</a>
@@ -1482,8 +2280,549 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</p>
-</dd></dl>
+    <dd>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zones_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_go" style="color: inherit; text-decoration: inherit;">Zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">[]string</span>
+    </dt>
+    <dd>Zones where rules are deployed for VPC internal load balancers with nearby access mode. Note: This field may return null, indicating no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="address_ip_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_ip_version_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>ip_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP version, only applicable to open CLB. Valid values are <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="address_ipv6_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_ipv6_hcl" style="color: inherit; text-decoration: inherit;">address_<wbr>ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IPv6 address of the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="anycast_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anycast_zone_hcl" style="color: inherit; text-decoration: inherit;">anycast_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Anycast CLB publishing region, returns empty string for non-anycast CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="associate_endpoint_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#associate_endpoint_hcl" style="color: inherit; text-decoration: inherit;">associate_<wbr>endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Endpoint ID associated with the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="attribute_flags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attribute_flags_hcl" style="color: inherit; text-decoration: inherit;">attribute_<wbr>flags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>CLB attribute flags array.</dd><dt class="property-required"
+            title="Required">
+        <span id="available_zone_affinity_info_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_zone_affinity_info_hcl" style="color: inherit; text-decoration: inherit;">available_<wbr>zone_<wbr>affinity_<wbr>info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone forwarding affinity information (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="backup_zone_sets_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_zone_sets_hcl" style="color: inherit; text-decoration: inherit;">backup_<wbr>zone_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesclblistbackupzoneset">list(object)</a></span>
+    </dt>
+    <dd>Backup zone list, each element contains zone_id/zone/zone_name/zone_region/local_zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Billing type, PREPAID: Prepaid, POSTPAID_BY_HOUR: Pay-as-you-go.</dd><dt class="property-required"
+            title="Required">
+        <span id="clb_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="clb_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_name_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of the CLB to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="clb_vips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_vips_hcl" style="color: inherit; text-decoration: inherit;">clb_<wbr>vips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_ids_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Cluster ID list.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_tag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_tag_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>tag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Layer-7 exclusive tag.</dd><dt class="property-required"
+            title="Required">
+        <span id="config_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_id_hcl" style="color: inherit; text-decoration: inherit;">config_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CLB dimension personalized configuration ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Create time of the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CLB domain (only for public network Classic CLB), gradually deprecated.</dd><dt class="property-required"
+            title="Required">
+        <span id="egress_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egress_hcl" style="color: inherit; text-decoration: inherit;">egress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network egress.</dd><dt class="property-required"
+            title="Required">
+        <span id="exclusive_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusive_hcl" style="color: inherit; text-decoration: inherit;">exclusive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether the instance type is exclusive, 1: Exclusive, 0: Not exclusive.</dd><dt class="property-required"
+            title="Required">
+        <span id="exclusive_cluster_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusive_cluster_hcl" style="color: inherit; text-decoration: inherit;">exclusive_<wbr>cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internal exclusive cluster information (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="expire_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expire_time_hcl" style="color: inherit; text-decoration: inherit;">expire_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expiration time of the CLB instance, only for prepaid CLB, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="extra_info_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extra_info_hcl" style="color: inherit; text-decoration: inherit;">extra_<wbr>info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reserved field, generally no need to pay attention (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="forward_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_hcl" style="color: inherit; text-decoration: inherit;">forward</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>CLB type identifier, 1: CLB, 0: Classic CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_log_set_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_log_set_id_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>log_<wbr>set_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log service (CLS) health check log set ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_log_topic_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_log_topic_id_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>log_<wbr>topic_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log service (CLS) health check log topic ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="internet_bandwidth_max_out_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_bandwidth_max_out_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>bandwidth_<wbr>max_<wbr>out</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</dd><dt class="property-required"
+            title="Required">
+        <span id="internet_charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv6_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_mode_hcl" style="color: inherit; text-decoration: inherit;">ipv6_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IPv6 mode when IP version is ipv6, IPv6Nat64 or IPv6FullChain.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_block_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_block_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the VIP is blocked.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_block_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_block_time_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>block_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Time of blocking or unblocking, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_ddos_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_ddos_hcl" style="color: inherit; text-decoration: inherit;">is_<wbr>ddos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Anti-DDoS Pro can be bound.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolated_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolated_time_hcl" style="color: inherit; text-decoration: inherit;">isolated_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Time when the CLB instance was isolated, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolation_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolation_hcl" style="color: inherit; text-decoration: inherit;">isolation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether isolated, 0: Not isolated, 1: Isolated.</dd><dt class="property-required"
+            title="Required">
+        <span id="load_balancer_domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_domain_hcl" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="load_balancer_pass_to_target_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_pass_to_target_hcl" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>pass_<wbr>to_<wbr>target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether backend services allow traffic from CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="local_bgp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_bgp_hcl" style="color: inherit; text-decoration: inherit;">local_<wbr>bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the IP type is local BGP.</dd><dt class="property-required"
+            title="Required">
+        <span id="local_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_zone_hcl" style="color: inherit; text-decoration: inherit;">local_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="log_set_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_set_id_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>set_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log service (CLS) log set ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="log_topic_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_topic_id_hcl" style="color: inherit; text-decoration: inherit;">log_<wbr>topic_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log service (CLS) log topic ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="mix_ip_target_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mix_ip_target_hcl" style="color: inherit; text-decoration: inherit;">mix_<wbr>ip_<wbr>target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>IPv6FullChain CLB layer-7 listener supports mixed binding of IPv4/IPv6 targets.</dd><dt class="property-required"
+            title="Required">
+        <span id="network_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_hcl" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="nfv_info_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nfv_info_hcl" style="color: inherit; text-decoration: inherit;">nfv_<wbr>info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether CLB is NFV, empty: No, l7nfv: Layer-7 is NFV.</dd><dt class="property-required"
+            title="Required">
+        <span id="numerical_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numerical_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">numerical_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="open_bgp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_bgp_hcl" style="color: inherit; text-decoration: inherit;">open_<wbr>bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Anti-DDoS Pro LB identifier, 1: Anti-DDoS Pro, 0: Not Anti-DDoS Pro.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaid_period_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_period_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Prepaid purchase period, unit: month.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaid_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Prepaid renewal flag, NOTIFY_AND_AUTO_RENEW: Notify and auto-renew, NOTIFY_AND_MANUAL_RENEW: Notify but not auto-renew, DISABLE_NOTIFY_AND_MANUAL_RENEW: No notification and not auto-renew.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID of the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="security_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID set of the security groups.</dd><dt class="property-required"
+            title="Required">
+        <span id="sla_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sla_type_hcl" style="color: inherit; text-decoration: inherit;">sla_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Performance capacity type specification (clb.c1.small/clb.c2.medium/clb.c3.small/clb.c3.medium/clb.c4.small/clb.c4.medium/clb.c4.large/clb.c4.xlarge or empty string).</dd><dt class="property-required"
+            title="Required">
+        <span id="snat_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_hcl" style="color: inherit; text-decoration: inherit;">snat</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether SNAT is enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="snat_ips_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_ips_hcl" style="color: inherit; text-decoration: inherit;">snat_<wbr>ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SnatIp list after enabling SnatPro (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="snat_pro_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_pro_hcl" style="color: inherit; text-decoration: inherit;">snat_<wbr>pro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether SnatPro is enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The status of CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_time_hcl" style="color: inherit; text-decoration: inherit;">status_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Latest state transition time of CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the subnet.</dd><dt class="property-required"
+            title="Required">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">map(string)</span>
+    </dt>
+    <dd>The available tags within this CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="target_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_count_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of bound backend services.</dd><dt class="property-required"
+            title="Required">
+        <span id="target_region_info_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_region_info_region_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>region_<wbr>info_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region information of backend service are attached the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="target_region_info_vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_region_info_vpc_id_hcl" style="color: inherit; text-decoration: inherit;">target_<wbr>region_<wbr>info_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>VpcId information of backend service are attached the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="vip_isp_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_isp_hcl" style="color: inherit; text-decoration: inherit;">vip_<wbr>isp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the VPC.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_name_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone name, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_region_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zones_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_hcl" style="color: inherit; text-decoration: inherit;">zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>Zones where rules are deployed for VPC internal load balancers with nearby access mode. Note: This field may return null, indicating no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1497,8 +2836,63 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-required"
+    <dd>IP version, only applicable to open CLB. Valid values are <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="addressipv6_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressipv6_java" style="color: inherit; text-decoration: inherit;">address<wbr>Ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>IPv6 address of the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="anycastzone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anycastzone_java" style="color: inherit; text-decoration: inherit;">anycast<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Anycast CLB publishing region, returns empty string for non-anycast CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="associateendpoint_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#associateendpoint_java" style="color: inherit; text-decoration: inherit;">associate<wbr>Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Endpoint ID associated with the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="attributeflags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attributeflags_java" style="color: inherit; text-decoration: inherit;">attribute<wbr>Flags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>CLB attribute flags array.</dd><dt class="property-required"
+            title="Required">
+        <span id="availablezoneaffinityinfo_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablezoneaffinityinfo_java" style="color: inherit; text-decoration: inherit;">available<wbr>Zone<wbr>Affinity<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Available zone forwarding affinity information (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="backupzonesets_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupzonesets_java" style="color: inherit; text-decoration: inherit;">backup<wbr>Zone<wbr>Sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesclblistbackupzoneset">List&lt;Get<wbr>Instances<wbr>List<wbr>Backup<wbr>Zone<wbr>Set&gt;</a></span>
+    </dt>
+    <dd>Backup zone list, each element contains zone_id/zone/zone_name/zone_region/local_zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="chargetype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Billing type, PREPAID: Prepaid, POSTPAID_BY_HOUR: Pay-as-you-go.</dd><dt class="property-required"
             title="Required">
         <span id="clbid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_java" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -1506,8 +2900,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clbname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbname_java" style="color: inherit; text-decoration: inherit;">clb<wbr>Name</a>
@@ -1515,8 +2908,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clbvips_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbvips_java" style="color: inherit; text-decoration: inherit;">clb<wbr>Vips</a>
@@ -1524,8 +2916,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="clusterid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="clusterids_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterids_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Cluster ID list.</dd><dt class="property-required"
+            title="Required">
+        <span id="clustertag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertag_java" style="color: inherit; text-decoration: inherit;">cluster<wbr>Tag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Layer-7 exclusive tag.</dd><dt class="property-required"
+            title="Required">
+        <span id="configid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configid_java" style="color: inherit; text-decoration: inherit;">config<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CLB dimension personalized configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1533,8 +2956,79 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CLB domain (only for public network Classic CLB), gradually deprecated.</dd><dt class="property-required"
+            title="Required">
+        <span id="egress_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egress_java" style="color: inherit; text-decoration: inherit;">egress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Network egress.</dd><dt class="property-required"
+            title="Required">
+        <span id="exclusive_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusive_java" style="color: inherit; text-decoration: inherit;">exclusive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Whether the instance type is exclusive, 1: Exclusive, 0: Not exclusive.</dd><dt class="property-required"
+            title="Required">
+        <span id="exclusivecluster_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusivecluster_java" style="color: inherit; text-decoration: inherit;">exclusive<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Internal exclusive cluster information (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="expiretime_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_java" style="color: inherit; text-decoration: inherit;">expire<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Expiration time of the CLB instance, only for prepaid CLB, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="extrainfo_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extrainfo_java" style="color: inherit; text-decoration: inherit;">extra<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Reserved field, generally no need to pay attention (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="forward_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_java" style="color: inherit; text-decoration: inherit;">forward</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>CLB type identifier, 1: CLB, 0: Classic CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="healthlogsetid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthlogsetid_java" style="color: inherit; text-decoration: inherit;">health<wbr>Log<wbr>Set<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Log service (CLS) health check log set ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="healthlogtopicid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthlogtopicid_java" style="color: inherit; text-decoration: inherit;">health<wbr>Log<wbr>Topic<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Log service (CLS) health check log topic ID.</dd><dt class="property-required"
             title="Required">
         <span id="internetbandwidthmaxout_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetbandwidthmaxout_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Bandwidth<wbr>Max<wbr>Out</a>
@@ -1542,8 +3036,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-required"
+    <dd>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -1551,8 +3044,79 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-required"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv6mode_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6mode_java" style="color: inherit; text-decoration: inherit;">ipv6Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>IPv6 mode when IP version is ipv6, IPv6Nat64 or IPv6FullChain.</dd><dt class="property-required"
+            title="Required">
+        <span id="isblock_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isblock_java" style="color: inherit; text-decoration: inherit;">is<wbr>Block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the VIP is blocked.</dd><dt class="property-required"
+            title="Required">
+        <span id="isblocktime_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isblocktime_java" style="color: inherit; text-decoration: inherit;">is<wbr>Block<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Time of blocking or unblocking, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="isddos_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isddos_java" style="color: inherit; text-decoration: inherit;">is<wbr>Ddos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Anti-DDoS Pro can be bound.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolatedtime_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatedtime_java" style="color: inherit; text-decoration: inherit;">isolated<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Time when the CLB instance was isolated, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolation_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolation_java" style="color: inherit; text-decoration: inherit;">isolation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Whether isolated, 0: Not isolated, 1: Isolated.</dd><dt class="property-required"
+            title="Required">
+        <span id="loadbalancerdomain_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerdomain_java" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Domain of the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="loadbalancerpasstotarget_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerpasstotarget_java" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Pass<wbr>To<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether backend services allow traffic from CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="localbgp_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localbgp_java" style="color: inherit; text-decoration: inherit;">local<wbr>Bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the IP type is local BGP.</dd><dt class="property-required"
             title="Required">
         <span id="localzone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localzone_java" style="color: inherit; text-decoration: inherit;">local<wbr>Zone</a>
@@ -1560,8 +3124,31 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="logsetid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_java" style="color: inherit; text-decoration: inherit;">log<wbr>Set<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Log service (CLS) log set ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="logtopicid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtopicid_java" style="color: inherit; text-decoration: inherit;">log<wbr>Topic<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Log service (CLS) log topic ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="mixiptarget_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixiptarget_java" style="color: inherit; text-decoration: inherit;">mix<wbr>Ip<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>IPv6FullChain CLB layer-7 listener supports mixed binding of IPv4/IPv6 targets.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_java" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -1569,8 +3156,47 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="nfvinfo_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nfvinfo_java" style="color: inherit; text-decoration: inherit;">nfv<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Whether CLB is NFV, empty: No, l7nfv: Layer-7 is NFV.</dd><dt class="property-required"
+            title="Required">
+        <span id="numericalvpcid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numericalvpcid_java" style="color: inherit; text-decoration: inherit;">numerical<wbr>Vpc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="openbgp_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openbgp_java" style="color: inherit; text-decoration: inherit;">open<wbr>Bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Anti-DDoS Pro LB identifier, 1: Anti-DDoS Pro, 0: Not Anti-DDoS Pro.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaidperiod_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Prepaid purchase period, unit: month.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaidrenewflag_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_java" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Prepaid renewal flag, NOTIFY_AND_AUTO_RENEW: Notify and auto-renew, NOTIFY_AND_MANUAL_RENEW: Notify but not auto-renew, DISABLE_NOTIFY_AND_MANUAL_RENEW: No notification and not auto-renew.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1578,8 +3204,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_java" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1587,8 +3212,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID set of the security groups.</p>
-</dd><dt class="property-required"
+    <dd>ID set of the security groups.</dd><dt class="property-required"
+            title="Required">
+        <span id="slatype_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slatype_java" style="color: inherit; text-decoration: inherit;">sla<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Performance capacity type specification (clb.c1.small/clb.c2.medium/clb.c3.small/clb.c3.medium/clb.c4.small/clb.c4.medium/clb.c4.large/clb.c4.xlarge or empty string).</dd><dt class="property-required"
+            title="Required">
+        <span id="snat_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_java" style="color: inherit; text-decoration: inherit;">snat</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether SNAT is enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="snatips_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatips_java" style="color: inherit; text-decoration: inherit;">snat<wbr>Ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>SnatIp list after enabling SnatPro (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="snatpro_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatpro_java" style="color: inherit; text-decoration: inherit;">snat<wbr>Pro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether SnatPro is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1596,8 +3252,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The status of CLB.</p>
-</dd><dt class="property-required"
+    <dd>The status of CLB.</dd><dt class="property-required"
             title="Required">
         <span id="statustime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statustime_java" style="color: inherit; text-decoration: inherit;">status<wbr>Time</a>
@@ -1605,8 +3260,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Latest state transition time of CLB.</p>
-</dd><dt class="property-required"
+    <dd>Latest state transition time of CLB.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1614,17 +3268,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet.</dd><dt class="property-required"
             title="Required">
         <span id="tags_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;String,Object&gt;</span>
+        <span class="property-type">Map&lt;String,String&gt;</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-required"
+    <dd>The available tags within this CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="targetcount_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetcount_java" style="color: inherit; text-decoration: inherit;">target<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Number of bound backend services.</dd><dt class="property-required"
             title="Required">
         <span id="targetregioninforegion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninforegion_java" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Region</a>
@@ -1632,8 +3292,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region information of backend service are attached the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Region information of backend service are attached the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="targetregioninfovpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninfovpcid_java" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Vpc<wbr>Id</a>
@@ -1641,8 +3300,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VpcId information of backend service are attached the CLB.</p>
-</dd><dt class="property-required"
+    <dd>VpcId information of backend service are attached the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="vipisp_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vipisp_java" style="color: inherit; text-decoration: inherit;">vip<wbr>Isp</a>
@@ -1650,8 +3308,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-required"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1659,8 +3316,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1668,8 +3324,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -1677,8 +3332,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -1686,8 +3340,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available zone name, This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone name, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zoneregion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneregion_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Region</a>
@@ -1695,8 +3348,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</p>
-</dd></dl>
+    <dd>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zones_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_java" style="color: inherit; text-decoration: inherit;">zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Zones where rules are deployed for VPC internal load balancers with nearby access mode. Note: This field may return null, indicating no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1710,8 +3370,63 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-required"
+    <dd>IP version, only applicable to open CLB. Valid values are <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="addressipv6_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressipv6_nodejs" style="color: inherit; text-decoration: inherit;">address<wbr>Ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IPv6 address of the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="anycastzone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anycastzone_nodejs" style="color: inherit; text-decoration: inherit;">anycast<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Anycast CLB publishing region, returns empty string for non-anycast CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="associateendpoint_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#associateendpoint_nodejs" style="color: inherit; text-decoration: inherit;">associate<wbr>Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Endpoint ID associated with the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="attributeflags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attributeflags_nodejs" style="color: inherit; text-decoration: inherit;">attribute<wbr>Flags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>CLB attribute flags array.</dd><dt class="property-required"
+            title="Required">
+        <span id="availablezoneaffinityinfo_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablezoneaffinityinfo_nodejs" style="color: inherit; text-decoration: inherit;">available<wbr>Zone<wbr>Affinity<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone forwarding affinity information (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="backupzonesets_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupzonesets_nodejs" style="color: inherit; text-decoration: inherit;">backup<wbr>Zone<wbr>Sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesclblistbackupzoneset">Get<wbr>Instances<wbr>Clb<wbr>List<wbr>Backup<wbr>Zone<wbr>Set[]</a></span>
+    </dt>
+    <dd>Backup zone list, each element contains zone_id/zone/zone_name/zone_region/local_zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="chargetype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Billing type, PREPAID: Prepaid, POSTPAID_BY_HOUR: Pay-as-you-go.</dd><dt class="property-required"
             title="Required">
         <span id="clbid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_nodejs" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -1719,8 +3434,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clbname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbname_nodejs" style="color: inherit; text-decoration: inherit;">clb<wbr>Name</a>
@@ -1728,8 +3442,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clbvips_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbvips_nodejs" style="color: inherit; text-decoration: inherit;">clb<wbr>Vips</a>
@@ -1737,8 +3450,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="clusterid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="clusterids_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterids_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>Cluster ID list.</dd><dt class="property-required"
+            title="Required">
+        <span id="clustertag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertag_nodejs" style="color: inherit; text-decoration: inherit;">cluster<wbr>Tag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Layer-7 exclusive tag.</dd><dt class="property-required"
+            title="Required">
+        <span id="configid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configid_nodejs" style="color: inherit; text-decoration: inherit;">config<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CLB dimension personalized configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -1746,8 +3490,79 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Create time of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>CLB domain (only for public network Classic CLB), gradually deprecated.</dd><dt class="property-required"
+            title="Required">
+        <span id="egress_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egress_nodejs" style="color: inherit; text-decoration: inherit;">egress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Network egress.</dd><dt class="property-required"
+            title="Required">
+        <span id="exclusive_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusive_nodejs" style="color: inherit; text-decoration: inherit;">exclusive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether the instance type is exclusive, 1: Exclusive, 0: Not exclusive.</dd><dt class="property-required"
+            title="Required">
+        <span id="exclusivecluster_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusivecluster_nodejs" style="color: inherit; text-decoration: inherit;">exclusive<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Internal exclusive cluster information (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="expiretime_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_nodejs" style="color: inherit; text-decoration: inherit;">expire<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expiration time of the CLB instance, only for prepaid CLB, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="extrainfo_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extrainfo_nodejs" style="color: inherit; text-decoration: inherit;">extra<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Reserved field, generally no need to pay attention (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="forward_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_nodejs" style="color: inherit; text-decoration: inherit;">forward</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>CLB type identifier, 1: CLB, 0: Classic CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="healthlogsetid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthlogsetid_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Log<wbr>Set<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log service (CLS) health check log set ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="healthlogtopicid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthlogtopicid_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Log<wbr>Topic<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log service (CLS) health check log topic ID.</dd><dt class="property-required"
             title="Required">
         <span id="internetbandwidthmaxout_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetbandwidthmaxout_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Bandwidth<wbr>Max<wbr>Out</a>
@@ -1755,8 +3570,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-required"
+    <dd>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -1764,8 +3578,79 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-required"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv6mode_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6mode_nodejs" style="color: inherit; text-decoration: inherit;">ipv6Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IPv6 mode when IP version is ipv6, IPv6Nat64 or IPv6FullChain.</dd><dt class="property-required"
+            title="Required">
+        <span id="isblock_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isblock_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether the VIP is blocked.</dd><dt class="property-required"
+            title="Required">
+        <span id="isblocktime_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isblocktime_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Block<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Time of blocking or unblocking, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="isddos_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isddos_nodejs" style="color: inherit; text-decoration: inherit;">is<wbr>Ddos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether Anti-DDoS Pro can be bound.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolatedtime_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatedtime_nodejs" style="color: inherit; text-decoration: inherit;">isolated<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Time when the CLB instance was isolated, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolation_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolation_nodejs" style="color: inherit; text-decoration: inherit;">isolation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Whether isolated, 0: Not isolated, 1: Isolated.</dd><dt class="property-required"
+            title="Required">
+        <span id="loadbalancerdomain_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerdomain_nodejs" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="loadbalancerpasstotarget_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerpasstotarget_nodejs" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Pass<wbr>To<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether backend services allow traffic from CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="localbgp_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localbgp_nodejs" style="color: inherit; text-decoration: inherit;">local<wbr>Bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether the IP type is local BGP.</dd><dt class="property-required"
             title="Required">
         <span id="localzone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localzone_nodejs" style="color: inherit; text-decoration: inherit;">local<wbr>Zone</a>
@@ -1773,8 +3658,31 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="logsetid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Set<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log service (CLS) log set ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="logtopicid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtopicid_nodejs" style="color: inherit; text-decoration: inherit;">log<wbr>Topic<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Log service (CLS) log topic ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="mixiptarget_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixiptarget_nodejs" style="color: inherit; text-decoration: inherit;">mix<wbr>Ip<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>IPv6FullChain CLB layer-7 listener supports mixed binding of IPv4/IPv6 targets.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_nodejs" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -1782,8 +3690,47 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="nfvinfo_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nfvinfo_nodejs" style="color: inherit; text-decoration: inherit;">nfv<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Whether CLB is NFV, empty: No, l7nfv: Layer-7 is NFV.</dd><dt class="property-required"
+            title="Required">
+        <span id="numericalvpcid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numericalvpcid_nodejs" style="color: inherit; text-decoration: inherit;">numerical<wbr>Vpc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="openbgp_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openbgp_nodejs" style="color: inherit; text-decoration: inherit;">open<wbr>Bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Anti-DDoS Pro LB identifier, 1: Anti-DDoS Pro, 0: Not Anti-DDoS Pro.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaidperiod_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Prepaid purchase period, unit: month.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaidrenewflag_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_nodejs" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Prepaid renewal flag, NOTIFY_AND_AUTO_RENEW: Notify and auto-renew, NOTIFY_AND_MANUAL_RENEW: Notify but not auto-renew, DISABLE_NOTIFY_AND_MANUAL_RENEW: No notification and not auto-renew.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -1791,8 +3738,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -1800,8 +3746,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID set of the security groups.</p>
-</dd><dt class="property-required"
+    <dd>ID set of the security groups.</dd><dt class="property-required"
+            title="Required">
+        <span id="slatype_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slatype_nodejs" style="color: inherit; text-decoration: inherit;">sla<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Performance capacity type specification (clb.c1.small/clb.c2.medium/clb.c3.small/clb.c3.medium/clb.c4.small/clb.c4.medium/clb.c4.large/clb.c4.xlarge or empty string).</dd><dt class="property-required"
+            title="Required">
+        <span id="snat_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_nodejs" style="color: inherit; text-decoration: inherit;">snat</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether SNAT is enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="snatips_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatips_nodejs" style="color: inherit; text-decoration: inherit;">snat<wbr>Ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>SnatIp list after enabling SnatPro (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="snatpro_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatpro_nodejs" style="color: inherit; text-decoration: inherit;">snat<wbr>Pro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether SnatPro is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1809,8 +3786,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The status of CLB.</p>
-</dd><dt class="property-required"
+    <dd>The status of CLB.</dd><dt class="property-required"
             title="Required">
         <span id="statustime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statustime_nodejs" style="color: inherit; text-decoration: inherit;">status<wbr>Time</a>
@@ -1818,8 +3794,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Latest state transition time of CLB.</p>
-</dd><dt class="property-required"
+    <dd>Latest state transition time of CLB.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -1827,17 +3802,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet.</dd><dt class="property-required"
             title="Required">
         <span id="tags_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">{[key: string]: any}</span>
+        <span class="property-type">{[key: string]: string}</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-required"
+    <dd>The available tags within this CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="targetcount_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetcount_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of bound backend services.</dd><dt class="property-required"
             title="Required">
         <span id="targetregioninforegion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninforegion_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Region</a>
@@ -1845,8 +3826,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region information of backend service are attached the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Region information of backend service are attached the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="targetregioninfovpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninfovpcid_nodejs" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Vpc<wbr>Id</a>
@@ -1854,8 +3834,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>VpcId information of backend service are attached the CLB.</p>
-</dd><dt class="property-required"
+    <dd>VpcId information of backend service are attached the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="vipisp_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vipisp_nodejs" style="color: inherit; text-decoration: inherit;">vip<wbr>Isp</a>
@@ -1863,8 +3842,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-required"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -1872,8 +3850,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -1881,8 +3858,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -1890,8 +3866,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -1899,8 +3874,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Available zone name, This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone name, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zoneregion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneregion_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Region</a>
@@ -1908,8 +3882,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</p>
-</dd></dl>
+    <dd>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zones_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_nodejs" style="color: inherit; text-decoration: inherit;">zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string[]</span>
+    </dt>
+    <dd>Zones where rules are deployed for VPC internal load balancers with nearby access mode. Note: This field may return null, indicating no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1923,8 +3904,63 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-required"
+    <dd>IP version, only applicable to open CLB. Valid values are <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="address_ipv6_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#address_ipv6_python" style="color: inherit; text-decoration: inherit;">address_<wbr>ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>IPv6 address of the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="anycast_zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anycast_zone_python" style="color: inherit; text-decoration: inherit;">anycast_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Anycast CLB publishing region, returns empty string for non-anycast CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="associate_endpoint_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#associate_endpoint_python" style="color: inherit; text-decoration: inherit;">associate_<wbr>endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Endpoint ID associated with the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="attribute_flags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attribute_flags_python" style="color: inherit; text-decoration: inherit;">attribute_<wbr>flags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>CLB attribute flags array.</dd><dt class="property-required"
+            title="Required">
+        <span id="available_zone_affinity_info_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#available_zone_affinity_info_python" style="color: inherit; text-decoration: inherit;">available_<wbr>zone_<wbr>affinity_<wbr>info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Available zone forwarding affinity information (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="backup_zone_sets_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backup_zone_sets_python" style="color: inherit; text-decoration: inherit;">backup_<wbr>zone_<wbr>sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesclblistbackupzoneset">Sequence[Get<wbr>Instances<wbr>Clb<wbr>List<wbr>Backup<wbr>Zone<wbr>Set]</a></span>
+    </dt>
+    <dd>Backup zone list, each element contains zone_id/zone/zone_name/zone_region/local_zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="charge_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Billing type, PREPAID: Prepaid, POSTPAID_BY_HOUR: Pay-as-you-go.</dd><dt class="property-required"
             title="Required">
         <span id="clb_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_id_python" style="color: inherit; text-decoration: inherit;">clb_<wbr>id</a>
@@ -1932,8 +3968,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clb_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_name_python" style="color: inherit; text-decoration: inherit;">clb_<wbr>name</a>
@@ -1941,8 +3976,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clb_vips_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clb_vips_python" style="color: inherit; text-decoration: inherit;">clb_<wbr>vips</a>
@@ -1950,8 +3984,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>ID of the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_ids_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_ids_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>Cluster ID list.</dd><dt class="property-required"
+            title="Required">
+        <span id="cluster_tag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_tag_python" style="color: inherit; text-decoration: inherit;">cluster_<wbr>tag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Layer-7 exclusive tag.</dd><dt class="property-required"
+            title="Required">
+        <span id="config_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#config_id_python" style="color: inherit; text-decoration: inherit;">config_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>CLB dimension personalized configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -1959,8 +4024,79 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Create time of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>CLB domain (only for public network Classic CLB), gradually deprecated.</dd><dt class="property-required"
+            title="Required">
+        <span id="egress_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egress_python" style="color: inherit; text-decoration: inherit;">egress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Network egress.</dd><dt class="property-required"
+            title="Required">
+        <span id="exclusive_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusive_python" style="color: inherit; text-decoration: inherit;">exclusive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Whether the instance type is exclusive, 1: Exclusive, 0: Not exclusive.</dd><dt class="property-required"
+            title="Required">
+        <span id="exclusive_cluster_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusive_cluster_python" style="color: inherit; text-decoration: inherit;">exclusive_<wbr>cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Internal exclusive cluster information (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="expire_time_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expire_time_python" style="color: inherit; text-decoration: inherit;">expire_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Expiration time of the CLB instance, only for prepaid CLB, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="extra_info_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extra_info_python" style="color: inherit; text-decoration: inherit;">extra_<wbr>info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Reserved field, generally no need to pay attention (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="forward_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_python" style="color: inherit; text-decoration: inherit;">forward</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>CLB type identifier, 1: CLB, 0: Classic CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_log_set_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_log_set_id_python" style="color: inherit; text-decoration: inherit;">health_<wbr>log_<wbr>set_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Log service (CLS) health check log set ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_log_topic_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_log_topic_id_python" style="color: inherit; text-decoration: inherit;">health_<wbr>log_<wbr>topic_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Log service (CLS) health check log topic ID.</dd><dt class="property-required"
             title="Required">
         <span id="internet_bandwidth_max_out_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_bandwidth_max_out_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>bandwidth_<wbr>max_<wbr>out</a>
@@ -1968,8 +4104,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-required"
+    <dd>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</dd><dt class="property-required"
             title="Required">
         <span id="internet_charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_charge_type_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>charge_<wbr>type</a>
@@ -1977,8 +4112,79 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-required"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv6_mode_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6_mode_python" style="color: inherit; text-decoration: inherit;">ipv6_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>IPv6 mode when IP version is ipv6, IPv6Nat64 or IPv6FullChain.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_block_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_block_python" style="color: inherit; text-decoration: inherit;">is_<wbr>block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the VIP is blocked.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_block_time_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_block_time_python" style="color: inherit; text-decoration: inherit;">is_<wbr>block_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Time of blocking or unblocking, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="is_ddos_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#is_ddos_python" style="color: inherit; text-decoration: inherit;">is_<wbr>ddos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether Anti-DDoS Pro can be bound.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolated_time_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolated_time_python" style="color: inherit; text-decoration: inherit;">isolated_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Time when the CLB instance was isolated, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolation_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolation_python" style="color: inherit; text-decoration: inherit;">isolation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Whether isolated, 0: Not isolated, 1: Isolated.</dd><dt class="property-required"
+            title="Required">
+        <span id="load_balancer_domain_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_domain_python" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Domain of the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="load_balancer_pass_to_target_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#load_balancer_pass_to_target_python" style="color: inherit; text-decoration: inherit;">load_<wbr>balancer_<wbr>pass_<wbr>to_<wbr>target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether backend services allow traffic from CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="local_bgp_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_bgp_python" style="color: inherit; text-decoration: inherit;">local_<wbr>bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether the IP type is local BGP.</dd><dt class="property-required"
             title="Required">
         <span id="local_zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_zone_python" style="color: inherit; text-decoration: inherit;">local_<wbr>zone</a>
@@ -1986,8 +4192,31 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="log_set_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_set_id_python" style="color: inherit; text-decoration: inherit;">log_<wbr>set_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Log service (CLS) log set ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="log_topic_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#log_topic_id_python" style="color: inherit; text-decoration: inherit;">log_<wbr>topic_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Log service (CLS) log topic ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="mix_ip_target_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mix_ip_target_python" style="color: inherit; text-decoration: inherit;">mix_<wbr>ip_<wbr>target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>IPv6FullChain CLB layer-7 listener supports mixed binding of IPv4/IPv6 targets.</dd><dt class="property-required"
             title="Required">
         <span id="network_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#network_type_python" style="color: inherit; text-decoration: inherit;">network_<wbr>type</a>
@@ -1995,8 +4224,47 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="nfv_info_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nfv_info_python" style="color: inherit; text-decoration: inherit;">nfv_<wbr>info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Whether CLB is NFV, empty: No, l7nfv: Layer-7 is NFV.</dd><dt class="property-required"
+            title="Required">
+        <span id="numerical_vpc_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numerical_vpc_id_python" style="color: inherit; text-decoration: inherit;">numerical_<wbr>vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="open_bgp_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#open_bgp_python" style="color: inherit; text-decoration: inherit;">open_<wbr>bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Anti-DDoS Pro LB identifier, 1: Anti-DDoS Pro, 0: Not Anti-DDoS Pro.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaid_period_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_period_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Prepaid purchase period, unit: month.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaid_renew_flag_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaid_renew_flag_python" style="color: inherit; text-decoration: inherit;">prepaid_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Prepaid renewal flag, NOTIFY_AND_AUTO_RENEW: Notify and auto-renew, NOTIFY_AND_MANUAL_RENEW: Notify but not auto-renew, DISABLE_NOTIFY_AND_MANUAL_RENEW: No notification and not auto-renew.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -2004,8 +4272,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="security_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_groups_python" style="color: inherit; text-decoration: inherit;">security_<wbr>groups</a>
@@ -2013,8 +4280,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID set of the security groups.</p>
-</dd><dt class="property-required"
+    <dd>ID set of the security groups.</dd><dt class="property-required"
+            title="Required">
+        <span id="sla_type_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sla_type_python" style="color: inherit; text-decoration: inherit;">sla_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Performance capacity type specification (clb.c1.small/clb.c2.medium/clb.c3.small/clb.c3.medium/clb.c4.small/clb.c4.medium/clb.c4.large/clb.c4.xlarge or empty string).</dd><dt class="property-required"
+            title="Required">
+        <span id="snat_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_python" style="color: inherit; text-decoration: inherit;">snat</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether SNAT is enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="snat_ips_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_ips_python" style="color: inherit; text-decoration: inherit;">snat_<wbr>ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>SnatIp list after enabling SnatPro (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="snat_pro_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_pro_python" style="color: inherit; text-decoration: inherit;">snat_<wbr>pro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether SnatPro is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2022,8 +4320,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The status of CLB.</p>
-</dd><dt class="property-required"
+    <dd>The status of CLB.</dd><dt class="property-required"
             title="Required">
         <span id="status_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_time_python" style="color: inherit; text-decoration: inherit;">status_<wbr>time</a>
@@ -2031,8 +4328,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Latest state transition time of CLB.</p>
-</dd><dt class="property-required"
+    <dd>Latest state transition time of CLB.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -2040,17 +4336,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet.</dd><dt class="property-required"
             title="Required">
         <span id="tags_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Mapping[str, Any]</span>
+        <span class="property-type">Mapping[str, str]</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-required"
+    <dd>The available tags within this CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="target_count_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_count_python" style="color: inherit; text-decoration: inherit;">target_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Number of bound backend services.</dd><dt class="property-required"
             title="Required">
         <span id="target_region_info_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_region_info_region_python" style="color: inherit; text-decoration: inherit;">target_<wbr>region_<wbr>info_<wbr>region</a>
@@ -2058,8 +4360,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region information of backend service are attached the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Region information of backend service are attached the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="target_region_info_vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#target_region_info_vpc_id_python" style="color: inherit; text-decoration: inherit;">target_<wbr>region_<wbr>info_<wbr>vpc_<wbr>id</a>
@@ -2067,8 +4368,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>VpcId information of backend service are attached the CLB.</p>
-</dd><dt class="property-required"
+    <dd>VpcId information of backend service are attached the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="vip_isp_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vip_isp_python" style="color: inherit; text-decoration: inherit;">vip_<wbr>isp</a>
@@ -2076,8 +4376,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-required"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -2085,8 +4384,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2094,8 +4392,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zone_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
@@ -2103,8 +4400,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zone_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_name_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>name</a>
@@ -2112,8 +4408,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Available zone name, This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone name, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zone_region_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_region_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>region</a>
@@ -2121,8 +4416,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</p>
-</dd></dl>
+    <dd>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zones_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_python" style="color: inherit; text-decoration: inherit;">zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Sequence[str]</span>
+    </dt>
+    <dd>Zones where rules are deployed for VPC internal load balancers with nearby access mode. Note: This field may return null, indicating no valid values can be obtained.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2136,8 +4438,63 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP version, only applicable to open CLB. Valid values are <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code>.</p>
-</dd><dt class="property-required"
+    <dd>IP version, only applicable to open CLB. Valid values are <code>IPV4</code>, <code>IPV6</code> and <code>IPv6FullChain</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="addressipv6_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#addressipv6_yaml" style="color: inherit; text-decoration: inherit;">address<wbr>Ipv6</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>IPv6 address of the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="anycastzone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#anycastzone_yaml" style="color: inherit; text-decoration: inherit;">anycast<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Anycast CLB publishing region, returns empty string for non-anycast CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="associateendpoint_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#associateendpoint_yaml" style="color: inherit; text-decoration: inherit;">associate<wbr>Endpoint</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Endpoint ID associated with the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="attributeflags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#attributeflags_yaml" style="color: inherit; text-decoration: inherit;">attribute<wbr>Flags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>CLB attribute flags array.</dd><dt class="property-required"
+            title="Required">
+        <span id="availablezoneaffinityinfo_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#availablezoneaffinityinfo_yaml" style="color: inherit; text-decoration: inherit;">available<wbr>Zone<wbr>Affinity<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Available zone forwarding affinity information (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="backupzonesets_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#backupzonesets_yaml" style="color: inherit; text-decoration: inherit;">backup<wbr>Zone<wbr>Sets</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstancesclblistbackupzoneset">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>Backup zone list, each element contains zone_id/zone/zone_name/zone_region/local_zone.</dd><dt class="property-required"
+            title="Required">
+        <span id="chargetype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Billing type, PREPAID: Prepaid, POSTPAID_BY_HOUR: Pay-as-you-go.</dd><dt class="property-required"
             title="Required">
         <span id="clbid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbid_yaml" style="color: inherit; text-decoration: inherit;">clb<wbr>Id</a>
@@ -2145,8 +4502,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clbname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbname_yaml" style="color: inherit; text-decoration: inherit;">clb<wbr>Name</a>
@@ -2154,8 +4510,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of the CLB to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Name of the CLB to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="clbvips_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clbvips_yaml" style="color: inherit; text-decoration: inherit;">clb<wbr>Vips</a>
@@ -2163,8 +4518,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>The virtual service address table of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>The virtual service address table of the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="clusterid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterid_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>ID of the cluster.</dd><dt class="property-required"
+            title="Required">
+        <span id="clusterids_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clusterids_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Cluster ID list.</dd><dt class="property-required"
+            title="Required">
+        <span id="clustertag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#clustertag_yaml" style="color: inherit; text-decoration: inherit;">cluster<wbr>Tag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Layer-7 exclusive tag.</dd><dt class="property-required"
+            title="Required">
+        <span id="configid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#configid_yaml" style="color: inherit; text-decoration: inherit;">config<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CLB dimension personalized configuration ID.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2172,8 +4558,79 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Create time of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Create time of the CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>CLB domain (only for public network Classic CLB), gradually deprecated.</dd><dt class="property-required"
+            title="Required">
+        <span id="egress_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#egress_yaml" style="color: inherit; text-decoration: inherit;">egress</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Network egress.</dd><dt class="property-required"
+            title="Required">
+        <span id="exclusive_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusive_yaml" style="color: inherit; text-decoration: inherit;">exclusive</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Whether the instance type is exclusive, 1: Exclusive, 0: Not exclusive.</dd><dt class="property-required"
+            title="Required">
+        <span id="exclusivecluster_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#exclusivecluster_yaml" style="color: inherit; text-decoration: inherit;">exclusive<wbr>Cluster</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Internal exclusive cluster information (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="expiretime_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#expiretime_yaml" style="color: inherit; text-decoration: inherit;">expire<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Expiration time of the CLB instance, only for prepaid CLB, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="extrainfo_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#extrainfo_yaml" style="color: inherit; text-decoration: inherit;">extra<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Reserved field, generally no need to pay attention (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="forward_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_yaml" style="color: inherit; text-decoration: inherit;">forward</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>CLB type identifier, 1: CLB, 0: Classic CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="healthlogsetid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthlogsetid_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Log<wbr>Set<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Log service (CLS) health check log set ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="healthlogtopicid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthlogtopicid_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Log<wbr>Topic<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Log service (CLS) health check log topic ID.</dd><dt class="property-required"
             title="Required">
         <span id="internetbandwidthmaxout_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetbandwidthmaxout_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Bandwidth<wbr>Max<wbr>Out</a>
@@ -2181,8 +4638,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</p>
-</dd><dt class="property-required"
+    <dd>Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.</dd><dt class="property-required"
             title="Required">
         <span id="internetchargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetchargetype_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Charge<wbr>Type</a>
@@ -2190,8 +4646,79 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</p>
-</dd><dt class="property-required"
+    <dd>Internet charge type, only applicable to open CLB. Valid values are <code>TRAFFIC_POSTPAID_BY_HOUR</code>, <code>BANDWIDTH_POSTPAID_BY_HOUR</code> and <code>BANDWIDTH_PACKAGE</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="ipv6mode_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ipv6mode_yaml" style="color: inherit; text-decoration: inherit;">ipv6Mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>IPv6 mode when IP version is ipv6, IPv6Nat64 or IPv6FullChain.</dd><dt class="property-required"
+            title="Required">
+        <span id="isblock_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isblock_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Block</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the VIP is blocked.</dd><dt class="property-required"
+            title="Required">
+        <span id="isblocktime_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isblocktime_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Block<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Time of blocking or unblocking, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="isddos_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isddos_yaml" style="color: inherit; text-decoration: inherit;">is<wbr>Ddos</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether Anti-DDoS Pro can be bound.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolatedtime_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolatedtime_yaml" style="color: inherit; text-decoration: inherit;">isolated<wbr>Time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Time when the CLB instance was isolated, format: YYYY-MM-DD HH:mm:ss.</dd><dt class="property-required"
+            title="Required">
+        <span id="isolation_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#isolation_yaml" style="color: inherit; text-decoration: inherit;">isolation</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Whether isolated, 0: Not isolated, 1: Isolated.</dd><dt class="property-required"
+            title="Required">
+        <span id="loadbalancerdomain_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerdomain_yaml" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Domain of the CLB instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="loadbalancerpasstotarget_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#loadbalancerpasstotarget_yaml" style="color: inherit; text-decoration: inherit;">load<wbr>Balancer<wbr>Pass<wbr>To<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether backend services allow traffic from CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="localbgp_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localbgp_yaml" style="color: inherit; text-decoration: inherit;">local<wbr>Bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether the IP type is local BGP.</dd><dt class="property-required"
             title="Required">
         <span id="localzone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localzone_yaml" style="color: inherit; text-decoration: inherit;">local<wbr>Zone</a>
@@ -2199,8 +4726,31 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="logsetid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logsetid_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Set<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Log service (CLS) log set ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="logtopicid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#logtopicid_yaml" style="color: inherit; text-decoration: inherit;">log<wbr>Topic<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Log service (CLS) log topic ID.</dd><dt class="property-required"
+            title="Required">
+        <span id="mixiptarget_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mixiptarget_yaml" style="color: inherit; text-decoration: inherit;">mix<wbr>Ip<wbr>Target</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>IPv6FullChain CLB layer-7 listener supports mixed binding of IPv4/IPv6 targets.</dd><dt class="property-required"
             title="Required">
         <span id="networktype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#networktype_yaml" style="color: inherit; text-decoration: inherit;">network<wbr>Type</a>
@@ -2208,8 +4758,47 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</p>
-</dd><dt class="property-required"
+    <dd>Type of CLB instance, and available values include <code>OPEN</code> and <code>INTERNAL</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="nfvinfo_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#nfvinfo_yaml" style="color: inherit; text-decoration: inherit;">nfv<wbr>Info</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Whether CLB is NFV, empty: No, l7nfv: Layer-7 is NFV.</dd><dt class="property-required"
+            title="Required">
+        <span id="numericalvpcid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#numericalvpcid_yaml" style="color: inherit; text-decoration: inherit;">numerical<wbr>Vpc<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.</dd><dt class="property-required"
+            title="Required">
+        <span id="openbgp_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#openbgp_yaml" style="color: inherit; text-decoration: inherit;">open<wbr>Bgp</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Anti-DDoS Pro LB identifier, 1: Anti-DDoS Pro, 0: Not Anti-DDoS Pro.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaidperiod_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidperiod_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Period</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Prepaid purchase period, unit: month.</dd><dt class="property-required"
+            title="Required">
+        <span id="prepaidrenewflag_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#prepaidrenewflag_yaml" style="color: inherit; text-decoration: inherit;">prepaid<wbr>Renew<wbr>Flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Prepaid renewal flag, NOTIFY_AND_AUTO_RENEW: Notify and auto-renew, NOTIFY_AND_MANUAL_RENEW: Notify but not auto-renew, DISABLE_NOTIFY_AND_MANUAL_RENEW: No notification and not auto-renew.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2217,8 +4806,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID of the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Project ID of the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="securitygroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroups_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Groups</a>
@@ -2226,8 +4814,39 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID set of the security groups.</p>
-</dd><dt class="property-required"
+    <dd>ID set of the security groups.</dd><dt class="property-required"
+            title="Required">
+        <span id="slatype_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slatype_yaml" style="color: inherit; text-decoration: inherit;">sla<wbr>Type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Performance capacity type specification (clb.c1.small/clb.c2.medium/clb.c3.small/clb.c3.medium/clb.c4.small/clb.c4.medium/clb.c4.large/clb.c4.xlarge or empty string).</dd><dt class="property-required"
+            title="Required">
+        <span id="snat_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snat_yaml" style="color: inherit; text-decoration: inherit;">snat</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether SNAT is enabled.</dd><dt class="property-required"
+            title="Required">
+        <span id="snatips_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatips_yaml" style="color: inherit; text-decoration: inherit;">snat<wbr>Ips</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>SnatIp list after enabling SnatPro (JSON format).</dd><dt class="property-required"
+            title="Required">
+        <span id="snatpro_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#snatpro_yaml" style="color: inherit; text-decoration: inherit;">snat<wbr>Pro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether SnatPro is enabled.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2235,8 +4854,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The status of CLB.</p>
-</dd><dt class="property-required"
+    <dd>The status of CLB.</dd><dt class="property-required"
             title="Required">
         <span id="statustime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#statustime_yaml" style="color: inherit; text-decoration: inherit;">status<wbr>Time</a>
@@ -2244,8 +4862,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Latest state transition time of CLB.</p>
-</dd><dt class="property-required"
+    <dd>Latest state transition time of CLB.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2253,17 +4870,23 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the subnet.</p>
-</dd><dt class="property-required"
+    <dd>ID of the subnet.</dd><dt class="property-required"
             title="Required">
         <span id="tags_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type">Map&lt;Any&gt;</span>
+        <span class="property-type">Map&lt;String&gt;</span>
     </dt>
-    <dd><p>The available tags within this CLB.</p>
-</dd><dt class="property-required"
+    <dd>The available tags within this CLB.</dd><dt class="property-required"
+            title="Required">
+        <span id="targetcount_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetcount_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Number of bound backend services.</dd><dt class="property-required"
             title="Required">
         <span id="targetregioninforegion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninforegion_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Region</a>
@@ -2271,8 +4894,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region information of backend service are attached the CLB.</p>
-</dd><dt class="property-required"
+    <dd>Region information of backend service are attached the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="targetregioninfovpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#targetregioninfovpcid_yaml" style="color: inherit; text-decoration: inherit;">target<wbr>Region<wbr>Info<wbr>Vpc<wbr>Id</a>
@@ -2280,8 +4902,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>VpcId information of backend service are attached the CLB.</p>
-</dd><dt class="property-required"
+    <dd>VpcId information of backend service are attached the CLB.</dd><dt class="property-required"
             title="Required">
         <span id="vipisp_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vipisp_yaml" style="color: inherit; text-decoration: inherit;">vip<wbr>Isp</a>
@@ -2289,8 +4910,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</p>
-</dd><dt class="property-required"
+    <dd>Network operator, only applicable to open CLB. Valid values are <code>CMCC</code>(China Mobile), <code>CTCC</code>(Telecom), <code>CUCC</code>(China Unicom) and <code>BGP</code>. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2298,8 +4918,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the VPC.</p>
-</dd><dt class="property-required"
+    <dd>ID of the VPC.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2307,8 +4926,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zoneid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
@@ -2316,8 +4934,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zonename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
@@ -2325,8 +4942,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Available zone name, This field maybe null, means cannot get a valid value.</p>
-</dd><dt class="property-required"
+    <dd>Available zone name, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
             title="Required">
         <span id="zoneregion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneregion_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Region</a>
@@ -2334,8 +4950,341 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</p>
-</dd></dl>
+    <dd>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zones_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zones_yaml" style="color: inherit; text-decoration: inherit;">zones</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">List&lt;String&gt;</span>
+    </dt>
+    <dd>Zones where rules are deployed for VPC internal load balancers with nearby access mode. Note: This field may return null, indicating no valid values can be obtained.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="getinstancesclblistbackupzoneset">Get<wbr>Instances<wbr>Clb<wbr>List<wbr>Backup<wbr>Zone<wbr>Set</h4>
+
+
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="localzone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localzone_csharp" style="color: inherit; text-decoration: inherit;">Local<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zoneid_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zonename_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone name, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zoneregion_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneregion_csharp" style="color: inherit; text-decoration: inherit;">Zone<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="localzone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localzone_go" style="color: inherit; text-decoration: inherit;">Local<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zoneid_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zonename_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone name, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zoneregion_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneregion_go" style="color: inherit; text-decoration: inherit;">Zone<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="local_zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_zone_hcl" style="color: inherit; text-decoration: inherit;">local_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_name_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone name, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_region_hcl" style="color: inherit; text-decoration: inherit;">zone_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="localzone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localzone_java" style="color: inherit; text-decoration: inherit;">local<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zoneid_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Integer</span>
+    </dt>
+    <dd>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zonename_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Available zone name, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zoneregion_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneregion_java" style="color: inherit; text-decoration: inherit;">zone<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="localzone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localzone_nodejs" style="color: inherit; text-decoration: inherit;">local<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">boolean</span>
+    </dt>
+    <dd>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zoneid_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zonename_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Available zone name, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zoneregion_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneregion_nodejs" style="color: inherit; text-decoration: inherit;">zone<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="local_zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#local_zone_python" style="color: inherit; text-decoration: inherit;">local_<wbr>zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_id_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_id_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">int</span>
+    </dt>
+    <dd>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_name_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_name_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Available zone name, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_region_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_region_python" style="color: inherit; text-decoration: inherit;">zone_<wbr>region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="localzone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#localzone_yaml" style="color: inherit; text-decoration: inherit;">local<wbr>Zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Boolean</span>
+    </dt>
+    <dd>Whether this available zone is local zone, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Available zone unique id(string representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zoneid_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneid_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">Number</span>
+    </dt>
+    <dd>Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zonename_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zonename_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Available zone name, This field maybe null, means cannot get a valid value.</dd><dt class="property-required"
+            title="Required">
+        <span id="zoneregion_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zoneregion_yaml" style="color: inherit; text-decoration: inherit;">zone<wbr>Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Region that this available zone belong to, This field maybe null, means cannot get a valid value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2350,7 +5299,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

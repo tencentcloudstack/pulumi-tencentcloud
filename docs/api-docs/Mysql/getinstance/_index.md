@@ -2,9 +2,11 @@
 ---
 title: "getInstance"
 title_tag: "tencentcloud.Mysql.getInstance"
-meta_desc: "Documentation for the tencentcloud.Mysql.getInstance function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to get information about a MySQL instance."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,26 +18,66 @@ Use this data source to get information about a MySQL instance.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const mysql = tencentcloud.Mysql.getInstance({
+const mysql = tencentcloud.mysql.getInstance({
     mysqlId: "cdb-fitq5t9h",
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 
-mysql = tencentcloud.Mysql.get_instance(mysql_id="cdb-fitq5t9h")
+mysql = tencentcloud.mysql.get_instance(mysql_id="cdb-fitq5t9h")
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mysql"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		_, err := mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
+			MysqlId: pulumi.StringRef("cdb-fitq5t9h"),
+		}, nil)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
+using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
@@ -46,26 +88,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := Mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
-			MysqlId: pulumi.StringRef("cdb-fitq5t9h"),
-		}, nil)
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -74,8 +101,8 @@ import com.pulumi.Pulumi;
 import com.pulumi.core.Output;
 import com.pulumi.tencentcloud.Mysql.MysqlFunctions;
 import com.pulumi.tencentcloud.Mysql.inputs.GetInstanceArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -94,16 +121,46 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 variables:
   mysql:
     fn::invoke:
-      Function: tencentcloud:Mysql:getInstance
-      Arguments:
+      function: tencentcloud:Mysql:getInstance
+      arguments:
         mysqlId: cdb-fitq5t9h
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_mysql_getinstance" "mysql" {
+  mysql_id = "cdb-fitq5t9h"
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
 
 
 
@@ -115,7 +172,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -123,9 +180,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getInstance<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
+><span class="k">function </span>getInstance<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
 ><span class="k">
-function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
+function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -151,22 +208,22 @@ function </span>getInstanceOutput<span class="p">(</span><span class="nx">args</
                  <span class="nx">with_ro</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
                  <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetInstanceResult</span
 ><span class="k">
-def </span>get_instance_output<span class="p">(</span><span class="nx">charge_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">engine_version</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">init_flag</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                 <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">instance_role</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">limit</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                 <span class="nx">mysql_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">offset</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                 <span class="nx">pay_type</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">security_group_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                 <span class="nx">status</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                 <span class="nx">with_dr</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                 <span class="nx">with_master</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                 <span class="nx">with_ro</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[int]]</span> = None<span class="p">,</span>
-                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstanceResult]</span
+def </span>get_instance_output<span class="p">(</span><span class="nx">charge_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">engine_version</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">init_flag</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                 <span class="nx">instance_name</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">instance_role</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">limit</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                 <span class="nx">mysql_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">offset</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                 <span class="nx">pay_type</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                 <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">security_group_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                 <span class="nx">status</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                 <span class="nx">with_dr</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                 <span class="nx">with_master</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                 <span class="nx">with_ro</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[int]]</span> = None<span class="p">,</span>
+                 <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetInstanceResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -175,12 +232,12 @@ def </span>get_instance_output<span class="p">(</span><span class="nx">charge_ty
 <div>
 <pulumi-choosable type="language" values="go">
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"
-><span class="k">func </span>GetInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">GetInstanceResult</a></span>, error)</span
+><span class="k">func </span>LookupInstance<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupInstanceArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) (*<span class="nx"><a href="#result">LookupInstanceResult</a></span>, error)</span
 ><span class="k">
-func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">GetInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) GetInstanceResultOutput</span
+func </span>LookupInstanceOutput<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">args</span><span class="p"> *</span><span class="nx">LookupInstanceOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#InvokeOption">InvokeOption</a></span><span class="p">) LookupInstanceResultOutput</span
 ></code></pre></div>
 
-&gt; Note: This function is named `GetInstance` in the Go SDK.
+&gt; Note: This function is named `LookupInstance` in the Go SDK.
 
 </pulumi-choosable>
 </div>
@@ -191,7 +248,8 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetInstance </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetInstanceInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -200,7 +258,8 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetInstanceResult</a></span>> </span>getInstance<span class="p">(</span><span class="nx">GetInstanceArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -212,6 +271,15 @@ func </span>GetInstanceOutput<span class="p">(</span><span class="nx">ctx</span>
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Mysql/getInstance:getInstance
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_mysql_get_instance&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -230,8 +298,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -239,8 +306,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</p>
-</dd><dt class="property-optional"
+    <dd>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="initflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initflag_csharp" style="color: inherit; text-decoration: inherit;">Init<wbr>Flag</a>
@@ -248,8 +314,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-optional"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -257,8 +322,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of mysql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancerole_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Role</a>
@@ -266,8 +330,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -275,8 +338,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of results returned for a single request. Default is <code>20</code>, and maximum is 2000.</p>
-</dd><dt class="property-optional"
+    <dd>Number of results returned for a single request. Default is <code>20</code>, and maximum is 2000.</dd><dt class="property-optional"
             title="Optional">
         <span id="mysqlid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_csharp" style="color: inherit; text-decoration: inherit;">Mysql<wbr>Id</a>
@@ -284,8 +346,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -293,8 +354,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record offset. Default is 0.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Record offset. Default is 0.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="paytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_csharp" style="color: inherit; text-decoration: inherit;">Pay<wbr>Type</a>
@@ -302,9 +362,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -312,8 +370,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_csharp" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Id</a>
@@ -321,8 +378,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Security groups ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -330,8 +386,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-optional"
             title="Optional">
         <span id="withdr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withdr_csharp" style="color: inherit; text-decoration: inherit;">With<wbr>Dr</a>
@@ -339,8 +394,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether to query disaster recovery instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to query disaster recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="withmaster_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withmaster_csharp" style="color: inherit; text-decoration: inherit;">With<wbr>Master</a>
@@ -348,8 +402,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether to query master instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to query master instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="withro_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withro_csharp" style="color: inherit; text-decoration: inherit;">With<wbr>Ro</a>
@@ -357,8 +410,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether to query read-only instances.</p>
-</dd></dl>
+    <dd>Indicates whether to query read-only instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -372,8 +424,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -381,8 +432,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</p>
-</dd><dt class="property-optional"
+    <dd>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="initflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initflag_go" style="color: inherit; text-decoration: inherit;">Init<wbr>Flag</a>
@@ -390,8 +440,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-optional"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -399,8 +448,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of mysql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancerole_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Role</a>
@@ -408,8 +456,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -417,8 +464,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of results returned for a single request. Default is <code>20</code>, and maximum is 2000.</p>
-</dd><dt class="property-optional"
+    <dd>Number of results returned for a single request. Default is <code>20</code>, and maximum is 2000.</dd><dt class="property-optional"
             title="Optional">
         <span id="mysqlid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_go" style="color: inherit; text-decoration: inherit;">Mysql<wbr>Id</a>
@@ -426,8 +472,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -435,8 +480,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record offset. Default is 0.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Record offset. Default is 0.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="paytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_go" style="color: inherit; text-decoration: inherit;">Pay<wbr>Type</a>
@@ -444,9 +488,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -454,8 +496,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_go" style="color: inherit; text-decoration: inherit;">Security<wbr>Group<wbr>Id</a>
@@ -463,8 +504,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Security groups ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -472,8 +512,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-optional"
             title="Optional">
         <span id="withdr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withdr_go" style="color: inherit; text-decoration: inherit;">With<wbr>Dr</a>
@@ -481,8 +520,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether to query disaster recovery instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to query disaster recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="withmaster_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withmaster_go" style="color: inherit; text-decoration: inherit;">With<wbr>Master</a>
@@ -490,8 +528,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether to query master instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to query master instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="withro_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withro_go" style="color: inherit; text-decoration: inherit;">With<wbr>Ro</a>
@@ -499,8 +536,133 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether to query read-only instances.</p>
-</dd></dl>
+    <dd>Indicates whether to query read-only instances.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="engine_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="init_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#init_flag_hcl" style="color: inherit; text-decoration: inherit;">init_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of mysql instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="instance_role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_role_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Number of results returned for a single request. Default is <code>20</code>, and maximum is 2000.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="mysql_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysql_id_hcl" style="color: inherit; text-decoration: inherit;">mysql_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Record offset. Default is 0.</dd><dt class="property-optional property-deprecated"
+            title="Optional, Deprecated">
+        <span id="pay_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_type_hcl" style="color: inherit; text-decoration: inherit;">pay_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to store results.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="security_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_id_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Security groups ID of instance.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="with_dr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#with_dr_hcl" style="color: inherit; text-decoration: inherit;">with_<wbr>dr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Indicates whether to query disaster recovery instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="with_master_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#with_master_hcl" style="color: inherit; text-decoration: inherit;">with_<wbr>master</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Indicates whether to query master instances.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="with_ro_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#with_ro_hcl" style="color: inherit; text-decoration: inherit;">with_<wbr>ro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Indicates whether to query read-only instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -514,8 +676,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -523,8 +684,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</p>
-</dd><dt class="property-optional"
+    <dd>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="initflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initflag_java" style="color: inherit; text-decoration: inherit;">init<wbr>Flag</a>
@@ -532,8 +692,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-optional"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -541,8 +700,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of mysql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancerole_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Role</a>
@@ -550,8 +708,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -559,8 +716,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Number of results returned for a single request. Default is <code>20</code>, and maximum is 2000.</p>
-</dd><dt class="property-optional"
+    <dd>Number of results returned for a single request. Default is <code>20</code>, and maximum is 2000.</dd><dt class="property-optional"
             title="Optional">
         <span id="mysqlid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_java" style="color: inherit; text-decoration: inherit;">mysql<wbr>Id</a>
@@ -568,8 +724,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -577,8 +732,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Record offset. Default is 0.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Record offset. Default is 0.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="paytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_java" style="color: inherit; text-decoration: inherit;">pay<wbr>Type</a>
@@ -586,9 +740,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -596,8 +748,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_java" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Id</a>
@@ -605,8 +756,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Security groups ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -614,8 +764,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-optional"
             title="Optional">
         <span id="withdr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withdr_java" style="color: inherit; text-decoration: inherit;">with<wbr>Dr</a>
@@ -623,8 +772,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Indicates whether to query disaster recovery instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to query disaster recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="withmaster_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withmaster_java" style="color: inherit; text-decoration: inherit;">with<wbr>Master</a>
@@ -632,8 +780,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Indicates whether to query master instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to query master instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="withro_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withro_java" style="color: inherit; text-decoration: inherit;">with<wbr>Ro</a>
@@ -641,8 +788,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Indicates whether to query read-only instances.</p>
-</dd></dl>
+    <dd>Indicates whether to query read-only instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -656,8 +802,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -665,8 +810,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</p>
-</dd><dt class="property-optional"
+    <dd>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="initflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initflag_nodejs" style="color: inherit; text-decoration: inherit;">init<wbr>Flag</a>
@@ -674,8 +818,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-optional"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -683,8 +826,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of mysql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancerole_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Role</a>
@@ -692,8 +834,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -701,8 +842,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Number of results returned for a single request. Default is <code>20</code>, and maximum is 2000.</p>
-</dd><dt class="property-optional"
+    <dd>Number of results returned for a single request. Default is <code>20</code>, and maximum is 2000.</dd><dt class="property-optional"
             title="Optional">
         <span id="mysqlid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_nodejs" style="color: inherit; text-decoration: inherit;">mysql<wbr>Id</a>
@@ -710,8 +850,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -719,8 +858,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Record offset. Default is 0.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Record offset. Default is 0.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="paytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_nodejs" style="color: inherit; text-decoration: inherit;">pay<wbr>Type</a>
@@ -728,9 +866,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -738,8 +874,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_nodejs" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Id</a>
@@ -747,8 +882,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Security groups ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -756,8 +890,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-optional"
             title="Optional">
         <span id="withdr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withdr_nodejs" style="color: inherit; text-decoration: inherit;">with<wbr>Dr</a>
@@ -765,8 +898,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Indicates whether to query disaster recovery instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to query disaster recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="withmaster_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withmaster_nodejs" style="color: inherit; text-decoration: inherit;">with<wbr>Master</a>
@@ -774,8 +906,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Indicates whether to query master instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to query master instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="withro_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withro_nodejs" style="color: inherit; text-decoration: inherit;">with<wbr>Ro</a>
@@ -783,8 +914,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Indicates whether to query read-only instances.</p>
-</dd></dl>
+    <dd>Indicates whether to query read-only instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -798,8 +928,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="engine_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
@@ -807,8 +936,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</p>
-</dd><dt class="property-optional"
+    <dd>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="init_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#init_flag_python" style="color: inherit; text-decoration: inherit;">init_<wbr>flag</a>
@@ -816,8 +944,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-optional"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -825,8 +952,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of mysql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instance_role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_role_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>role</a>
@@ -834,8 +960,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -843,8 +968,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Number of results returned for a single request. Default is <code>20</code>, and maximum is 2000.</p>
-</dd><dt class="property-optional"
+    <dd>Number of results returned for a single request. Default is <code>20</code>, and maximum is 2000.</dd><dt class="property-optional"
             title="Optional">
         <span id="mysql_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysql_id_python" style="color: inherit; text-decoration: inherit;">mysql_<wbr>id</a>
@@ -852,8 +976,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -861,8 +984,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Record offset. Default is 0.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Record offset. Default is 0.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="pay_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_type_python" style="color: inherit; text-decoration: inherit;">pay_<wbr>type</a>
@@ -870,9 +992,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -880,8 +1000,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="security_group_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_id_python" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>id</a>
@@ -889,8 +1008,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Security groups ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -898,8 +1016,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-optional"
             title="Optional">
         <span id="with_dr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#with_dr_python" style="color: inherit; text-decoration: inherit;">with_<wbr>dr</a>
@@ -907,8 +1024,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether to query disaster recovery instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to query disaster recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="with_master_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#with_master_python" style="color: inherit; text-decoration: inherit;">with_<wbr>master</a>
@@ -916,8 +1032,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether to query master instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to query master instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="with_ro_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#with_ro_python" style="color: inherit; text-decoration: inherit;">with_<wbr>ro</a>
@@ -925,8 +1040,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Indicates whether to query read-only instances.</p>
-</dd></dl>
+    <dd>Indicates whether to query read-only instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -940,8 +1054,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</p>
-</dd><dt class="property-optional"
+    <dd>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</dd><dt class="property-optional"
             title="Optional">
         <span id="engineversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -949,8 +1062,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</p>
-</dd><dt class="property-optional"
+    <dd>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</dd><dt class="property-optional"
             title="Optional">
         <span id="initflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initflag_yaml" style="color: inherit; text-decoration: inherit;">init<wbr>Flag</a>
@@ -958,8 +1070,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-optional"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -967,8 +1078,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-optional"
+    <dd>Name of mysql instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="instancerole_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Role</a>
@@ -976,8 +1086,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-optional"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -985,8 +1094,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Number of results returned for a single request. Default is <code>20</code>, and maximum is 2000.</p>
-</dd><dt class="property-optional"
+    <dd>Number of results returned for a single request. Default is <code>20</code>, and maximum is 2000.</dd><dt class="property-optional"
             title="Optional">
         <span id="mysqlid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_yaml" style="color: inherit; text-decoration: inherit;">mysql<wbr>Id</a>
@@ -994,8 +1102,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-optional"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-optional"
             title="Optional">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -1003,8 +1110,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Record offset. Default is 0.</p>
-</dd><dt class="property-optional property-deprecated"
+    <dd>Record offset. Default is 0.</dd><dt class="property-optional property-deprecated"
             title="Optional, Deprecated">
         <span id="paytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_yaml" style="color: inherit; text-decoration: inherit;">pay<wbr>Type</a>
@@ -1012,9 +1118,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-optional"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1022,8 +1126,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to store results.</p>
-</dd><dt class="property-optional"
+    <dd>Used to store results.</dd><dt class="property-optional"
             title="Optional">
         <span id="securitygroupid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#securitygroupid_yaml" style="color: inherit; text-decoration: inherit;">security<wbr>Group<wbr>Id</a>
@@ -1031,8 +1134,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Security groups ID of instance.</p>
-</dd><dt class="property-optional"
+    <dd>Security groups ID of instance.</dd><dt class="property-optional"
             title="Optional">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -1040,8 +1142,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-optional"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-optional"
             title="Optional">
         <span id="withdr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withdr_yaml" style="color: inherit; text-decoration: inherit;">with<wbr>Dr</a>
@@ -1049,8 +1150,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Indicates whether to query disaster recovery instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to query disaster recovery instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="withmaster_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withmaster_yaml" style="color: inherit; text-decoration: inherit;">with<wbr>Master</a>
@@ -1058,8 +1158,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Indicates whether to query master instances.</p>
-</dd><dt class="property-optional"
+    <dd>Indicates whether to query master instances.</dd><dt class="property-optional"
             title="Optional">
         <span id="withro_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withro_yaml" style="color: inherit; text-decoration: inherit;">with<wbr>Ro</a>
@@ -1067,8 +1166,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Indicates whether to query read-only instances.</p>
-</dd></dl>
+    <dd>Indicates whether to query read-only instances.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1091,8 +1189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -1100,8 +1197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceinstancelist">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Outputs.<wbr>Get<wbr>Instance<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of instances. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of instances. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1109,8 +1205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of instance.</p>
-</dd><dt class="property-"
+    <dd>Pay type of instance.</dd><dt class="property-"
             title="">
         <span id="engineversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -1118,8 +1213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include <code>5.5</code>/<code>5.6</code>/<code>5.7</code>/<code>8.0</code>.</p>
-</dd><dt class="property-"
+    <dd>The version number of the database engine to use. Supported versions include <code>5.5</code>/<code>5.6</code>/<code>5.7</code>/<code>8.0</code>.</dd><dt class="property-"
             title="">
         <span id="initflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initflag_csharp" style="color: inherit; text-decoration: inherit;">Init<wbr>Flag</a>
@@ -1127,8 +1221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-"
             title="">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1136,8 +1229,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-"
+    <dd>Name of mysql instance.</dd><dt class="property-"
             title="">
         <span id="instancerole_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Role</a>
@@ -1145,8 +1237,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-"
             title="">
         <span id="limit_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_csharp" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -1162,8 +1253,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-"
             title="">
         <span id="offset_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_csharp" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -1179,9 +1269,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pay type of instance, <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-"
+    <dd>Pay type of instance, <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -1205,8 +1293,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-"
             title="">
         <span id="withdr_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withdr_csharp" style="color: inherit; text-decoration: inherit;">With<wbr>Dr</a>
@@ -1244,8 +1331,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Lists</a>
@@ -1253,8 +1339,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceinstancelist">[]Get<wbr>Instance<wbr>Instance<wbr>List</a></span>
     </dt>
-    <dd><p>A list of instances. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of instances. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -1262,8 +1347,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of instance.</p>
-</dd><dt class="property-"
+    <dd>Pay type of instance.</dd><dt class="property-"
             title="">
         <span id="engineversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -1271,8 +1355,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include <code>5.5</code>/<code>5.6</code>/<code>5.7</code>/<code>8.0</code>.</p>
-</dd><dt class="property-"
+    <dd>The version number of the database engine to use. Supported versions include <code>5.5</code>/<code>5.6</code>/<code>5.7</code>/<code>8.0</code>.</dd><dt class="property-"
             title="">
         <span id="initflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initflag_go" style="color: inherit; text-decoration: inherit;">Init<wbr>Flag</a>
@@ -1280,8 +1363,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-"
             title="">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -1289,8 +1371,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-"
+    <dd>Name of mysql instance.</dd><dt class="property-"
             title="">
         <span id="instancerole_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Role</a>
@@ -1298,8 +1379,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-"
             title="">
         <span id="limit_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_go" style="color: inherit; text-decoration: inherit;">Limit</a>
@@ -1315,8 +1395,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-"
             title="">
         <span id="offset_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_go" style="color: inherit; text-decoration: inherit;">Offset</a>
@@ -1332,9 +1411,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pay type of instance, <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-"
+    <dd>Pay type of instance, <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -1358,8 +1435,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-"
             title="">
         <span id="withdr_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withdr_go" style="color: inherit; text-decoration: inherit;">With<wbr>Dr</a>
@@ -1388,6 +1464,148 @@ The following output properties are available:
 </div>
 
 <div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="instance_lists_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstanceinstancelist">list(object)</a></span>
+    </dt>
+    <dd>A list of instances. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pay type of instance.</dd><dt class="property-"
+            title="">
+        <span id="engine_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The version number of the database engine to use. Supported versions include <code>5.5</code>/<code>5.6</code>/<code>5.7</code>/<code>8.0</code>.</dd><dt class="property-"
+            title="">
+        <span id="init_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#init_flag_hcl" style="color: inherit; text-decoration: inherit;">init_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-"
+            title="">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of mysql instance.</dd><dt class="property-"
+            title="">
+        <span id="instance_role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_role_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-"
+            title="">
+        <span id="limit_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_hcl" style="color: inherit; text-decoration: inherit;">limit</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="mysql_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysql_id_hcl" style="color: inherit; text-decoration: inherit;">mysql_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-"
+            title="">
+        <span id="offset_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_hcl" style="color: inherit; text-decoration: inherit;">offset</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property- property-deprecated"
+            title=", Deprecated">
+        <span id="pay_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_type_hcl" style="color: inherit; text-decoration: inherit;">pay_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Pay type of instance, <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="security_group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#security_group_id_hcl" style="color: inherit; text-decoration: inherit;">security_<wbr>group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-"
+            title="">
+        <span id="with_dr_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#with_dr_hcl" style="color: inherit; text-decoration: inherit;">with_<wbr>dr</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="with_master_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#with_master_hcl" style="color: inherit; text-decoration: inherit;">with_<wbr>master</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd><dt class="property-"
+            title="">
+        <span id="with_ro_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#with_ro_hcl" style="color: inherit; text-decoration: inherit;">with_<wbr>ro</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
 <pulumi-choosable type="language" values="java">
 <dl class="resources-properties"><dt class="property-"
             title="">
@@ -1397,8 +1615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -1406,8 +1623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceinstancelist">List&lt;Get<wbr>Instance<wbr>Instance<wbr>List&gt;</a></span>
     </dt>
-    <dd><p>A list of instances. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of instances. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1415,8 +1631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of instance.</p>
-</dd><dt class="property-"
+    <dd>Pay type of instance.</dd><dt class="property-"
             title="">
         <span id="engineversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1424,8 +1639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include <code>5.5</code>/<code>5.6</code>/<code>5.7</code>/<code>8.0</code>.</p>
-</dd><dt class="property-"
+    <dd>The version number of the database engine to use. Supported versions include <code>5.5</code>/<code>5.6</code>/<code>5.7</code>/<code>8.0</code>.</dd><dt class="property-"
             title="">
         <span id="initflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initflag_java" style="color: inherit; text-decoration: inherit;">init<wbr>Flag</a>
@@ -1433,8 +1647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-"
             title="">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1442,8 +1655,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-"
+    <dd>Name of mysql instance.</dd><dt class="property-"
             title="">
         <span id="instancerole_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Role</a>
@@ -1451,8 +1663,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-"
             title="">
         <span id="limit_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_java" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -1468,8 +1679,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-"
             title="">
         <span id="offset_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_java" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -1485,9 +1695,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Pay type of instance, <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-"
+    <dd>Pay type of instance, <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1511,8 +1719,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-"
             title="">
         <span id="withdr_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withdr_java" style="color: inherit; text-decoration: inherit;">with<wbr>Dr</a>
@@ -1550,8 +1757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -1559,8 +1765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceinstancelist">Get<wbr>Instance<wbr>Instance<wbr>List[]</a></span>
     </dt>
-    <dd><p>A list of instances. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of instances. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1568,8 +1773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of instance.</p>
-</dd><dt class="property-"
+    <dd>Pay type of instance.</dd><dt class="property-"
             title="">
         <span id="engineversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1577,8 +1781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include <code>5.5</code>/<code>5.6</code>/<code>5.7</code>/<code>8.0</code>.</p>
-</dd><dt class="property-"
+    <dd>The version number of the database engine to use. Supported versions include <code>5.5</code>/<code>5.6</code>/<code>5.7</code>/<code>8.0</code>.</dd><dt class="property-"
             title="">
         <span id="initflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initflag_nodejs" style="color: inherit; text-decoration: inherit;">init<wbr>Flag</a>
@@ -1586,8 +1789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-"
             title="">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1595,8 +1797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-"
+    <dd>Name of mysql instance.</dd><dt class="property-"
             title="">
         <span id="instancerole_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Role</a>
@@ -1604,8 +1805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-"
             title="">
         <span id="limit_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_nodejs" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -1621,8 +1821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-"
             title="">
         <span id="offset_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_nodejs" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -1638,9 +1837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Pay type of instance, <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-"
+    <dd>Pay type of instance, <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1664,8 +1861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-"
             title="">
         <span id="withdr_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withdr_nodejs" style="color: inherit; text-decoration: inherit;">with<wbr>Dr</a>
@@ -1703,17 +1899,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instance_lists_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_lists_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>lists</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstanceinstancelist">Get<wbr>Instance<wbr>Instance<wbr>List]</a></span>
+        <span class="property-type"><a href="#getinstanceinstancelist">Sequence[Get<wbr>Instance<wbr>Instance<wbr>List]</a></span>
     </dt>
-    <dd><p>A list of instances. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of instances. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -1721,8 +1915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pay type of instance.</p>
-</dd><dt class="property-"
+    <dd>Pay type of instance.</dd><dt class="property-"
             title="">
         <span id="engine_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
@@ -1730,8 +1923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include <code>5.5</code>/<code>5.6</code>/<code>5.7</code>/<code>8.0</code>.</p>
-</dd><dt class="property-"
+    <dd>The version number of the database engine to use. Supported versions include <code>5.5</code>/<code>5.6</code>/<code>5.7</code>/<code>8.0</code>.</dd><dt class="property-"
             title="">
         <span id="init_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#init_flag_python" style="color: inherit; text-decoration: inherit;">init_<wbr>flag</a>
@@ -1739,8 +1931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-"
             title="">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -1748,8 +1939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-"
+    <dd>Name of mysql instance.</dd><dt class="property-"
             title="">
         <span id="instance_role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_role_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>role</a>
@@ -1757,8 +1947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-"
             title="">
         <span id="limit_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_python" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -1774,8 +1963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-"
             title="">
         <span id="offset_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_python" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -1791,9 +1979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Pay type of instance, <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-"
+    <dd>Pay type of instance, <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1817,8 +2003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-"
             title="">
         <span id="with_dr_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#with_dr_python" style="color: inherit; text-decoration: inherit;">with_<wbr>dr</a>
@@ -1856,8 +2041,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="instancelists_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancelists_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Lists</a>
@@ -1865,8 +2049,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceinstancelist">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list of instances. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>A list of instances. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -1874,8 +2057,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of instance.</p>
-</dd><dt class="property-"
+    <dd>Pay type of instance.</dd><dt class="property-"
             title="">
         <span id="engineversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -1883,8 +2065,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include <code>5.5</code>/<code>5.6</code>/<code>5.7</code>/<code>8.0</code>.</p>
-</dd><dt class="property-"
+    <dd>The version number of the database engine to use. Supported versions include <code>5.5</code>/<code>5.6</code>/<code>5.7</code>/<code>8.0</code>.</dd><dt class="property-"
             title="">
         <span id="initflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initflag_yaml" style="color: inherit; text-decoration: inherit;">init<wbr>Flag</a>
@@ -1892,8 +2073,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-"
             title="">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -1901,8 +2081,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-"
+    <dd>Name of mysql instance.</dd><dt class="property-"
             title="">
         <span id="instancerole_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Role</a>
@@ -1910,8 +2089,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-"
             title="">
         <span id="limit_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#limit_yaml" style="color: inherit; text-decoration: inherit;">limit</a>
@@ -1927,8 +2105,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-"
             title="">
         <span id="offset_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#offset_yaml" style="color: inherit; text-decoration: inherit;">offset</a>
@@ -1944,9 +2121,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Pay type of instance, <code>0</code>: prepaid, <code>1</code>: postpaid.</p>
-<p class="property-message">Deprecated:<p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead.</p>
-</p></dd><dt class="property-"
+    <dd>Pay type of instance, <code>0</code>: prepaid, <code>1</code>: postpaid.<p class="property-message">Deprecated: It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead.</p></dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1970,8 +2145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-"
             title="">
         <span id="withdr_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#withdr_yaml" style="color: inherit; text-decoration: inherit;">with<wbr>Dr</a>
@@ -2019,8 +2193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepay instance.</p>
-</dd><dt class="property-required"
+    <dd>Auto renew flag. NOTES: Only supported prepay instance.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_csharp" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -2028,8 +2201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="cpucorecount_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_csharp" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Core<wbr>Count</a>
@@ -2037,8 +2209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CPU count.</p>
-</dd><dt class="property-required"
+    <dd>CPU count.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_csharp" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2046,8 +2217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time at which a instance is created.</p>
-</dd><dt class="property-required"
+    <dd>The time at which a instance is created.</dd><dt class="property-required"
             title="Required">
         <span id="deadlinetime_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadlinetime_csharp" style="color: inherit; text-decoration: inherit;">Dead<wbr>Line<wbr>Time</a>
@@ -2055,8 +2225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expire date of instance. NOTES: Only supported prepay instance.</p>
-</dd><dt class="property-required"
+    <dd>Expire date of instance. NOTES: Only supported prepay instance.</dd><dt class="property-required"
             title="Required">
         <span id="devicetype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_csharp" style="color: inherit; text-decoration: inherit;">Device<wbr>Type</a>
@@ -2064,8 +2233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Supported instance model. <code>HA</code> - high available version; <code>Basic</code> - basic version.</p>
-</dd><dt class="property-required"
+    <dd>Supported instance model. <code>HA</code> - high available version; <code>Basic</code> - basic version.</dd><dt class="property-required"
             title="Required">
         <span id="drinstanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drinstanceids_csharp" style="color: inherit; text-decoration: inherit;">Dr<wbr>Instance<wbr>Ids</a>
@@ -2073,8 +2241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of disaster-recovery type associated with the current instance.</p>
-</dd><dt class="property-required"
+    <dd>ID list of disaster-recovery type associated with the current instance.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_csharp" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -2082,8 +2249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</p>
-</dd><dt class="property-required"
+    <dd>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</dd><dt class="property-required"
             title="Required">
         <span id="initflag_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initflag_csharp" style="color: inherit; text-decoration: inherit;">Init<wbr>Flag</a>
@@ -2091,8 +2257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-required"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -2100,8 +2265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of mysql instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancerole_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Role</a>
@@ -2109,8 +2273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-required"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-required"
             title="Required">
         <span id="internethost_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internethost_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Host</a>
@@ -2118,8 +2281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network domain name.</p>
-</dd><dt class="property-required"
+    <dd>Public network domain name.</dd><dt class="property-required"
             title="Required">
         <span id="internetport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetport_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Port</a>
@@ -2127,8 +2289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public network port.</p>
-</dd><dt class="property-required"
+    <dd>Public network port.</dd><dt class="property-required"
             title="Required">
         <span id="internetstatus_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetstatus_csharp" style="color: inherit; text-decoration: inherit;">Internet<wbr>Status</a>
@@ -2136,8 +2297,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of public network.</p>
-</dd><dt class="property-required"
+    <dd>Status of public network.</dd><dt class="property-required"
             title="Required">
         <span id="intranetip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetip_csharp" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Ip</a>
@@ -2145,8 +2305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance IP for internal access.</p>
-</dd><dt class="property-required"
+    <dd>Instance IP for internal access.</dd><dt class="property-required"
             title="Required">
         <span id="intranetport_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetport_csharp" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Port</a>
@@ -2154,8 +2313,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Transport layer port number for internal purpose.</p>
-</dd><dt class="property-required"
+    <dd>Transport layer port number for internal purpose.</dd><dt class="property-required"
             title="Required">
         <span id="masterinstanceid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_csharp" style="color: inherit; text-decoration: inherit;">Master<wbr>Instance<wbr>Id</a>
@@ -2163,8 +2321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="memorysize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_csharp" style="color: inherit; text-decoration: inherit;">Memory<wbr>Size</a>
@@ -2172,8 +2329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in MB).</dd><dt class="property-required"
             title="Required">
         <span id="mysqlid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_csharp" style="color: inherit; text-decoration: inherit;">Mysql<wbr>Id</a>
@@ -2181,8 +2337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-required"
             title="Required">
         <span id="paytype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_csharp" style="color: inherit; text-decoration: inherit;">Pay<wbr>Type</a>
@@ -2190,8 +2345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</p>
-</dd><dt class="property-required"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_csharp" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2199,8 +2353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID to which the current instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>Project ID to which the current instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="rogroups_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroups_csharp" style="color: inherit; text-decoration: inherit;">Ro<wbr>Groups</a>
@@ -2208,8 +2361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceinstancelistrogroup">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Mysql.<wbr>Inputs.<wbr>Get<wbr>Instance<wbr>Instance<wbr>List<wbr>Ro<wbr>Group&gt;</a></span>
     </dt>
-    <dd><p>read-only instance group.</p>
-</dd><dt class="property-required"
+    <dd>read-only instance group.</dd><dt class="property-required"
             title="Required">
         <span id="roinstanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roinstanceids_csharp" style="color: inherit; text-decoration: inherit;">Ro<wbr>Instance<wbr>Ids</a>
@@ -2217,8 +2369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of read-only type associated with the current instance.</p>
-</dd><dt class="property-required"
+    <dd>ID list of read-only type associated with the current instance.</dd><dt class="property-required"
             title="Required">
         <span id="slavesyncmode_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavesyncmode_csharp" style="color: inherit; text-decoration: inherit;">Slave<wbr>Sync<wbr>Mode</a>
@@ -2226,8 +2377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Data replication mode. <code>0</code> - Async replication; <code>1</code> - Semisync replication; <code>2</code> - Strongsync replication.</p>
-</dd><dt class="property-required"
+    <dd>Data replication mode. <code>0</code> - Async replication; <code>1</code> - Semisync replication; <code>2</code> - Strongsync replication.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2235,8 +2385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-required"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_csharp" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2244,8 +2393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet to which the current instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of subnet to which the current instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="volumesize_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumesize_csharp" style="color: inherit; text-decoration: inherit;">Volume<wbr>Size</a>
@@ -2253,8 +2401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk capacity (in GB).</p>
-</dd><dt class="property-required"
+    <dd>Disk capacity (in GB).</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_csharp" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2262,8 +2409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of Virtual Private Cloud.</p>
-</dd><dt class="property-required"
+    <dd>ID of Virtual Private Cloud.</dd><dt class="property-required"
             title="Required">
         <span id="zone_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_csharp" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -2271,8 +2417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Information of available zone.</p>
-</dd></dl>
+    <dd>Information of available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2286,8 +2431,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepay instance.</p>
-</dd><dt class="property-required"
+    <dd>Auto renew flag. NOTES: Only supported prepay instance.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_go" style="color: inherit; text-decoration: inherit;">Charge<wbr>Type</a>
@@ -2295,8 +2439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="cpucorecount_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_go" style="color: inherit; text-decoration: inherit;">Cpu<wbr>Core<wbr>Count</a>
@@ -2304,8 +2447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CPU count.</p>
-</dd><dt class="property-required"
+    <dd>CPU count.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_go" style="color: inherit; text-decoration: inherit;">Create<wbr>Time</a>
@@ -2313,8 +2455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time at which a instance is created.</p>
-</dd><dt class="property-required"
+    <dd>The time at which a instance is created.</dd><dt class="property-required"
             title="Required">
         <span id="deadlinetime_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadlinetime_go" style="color: inherit; text-decoration: inherit;">Dead<wbr>Line<wbr>Time</a>
@@ -2322,8 +2463,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expire date of instance. NOTES: Only supported prepay instance.</p>
-</dd><dt class="property-required"
+    <dd>Expire date of instance. NOTES: Only supported prepay instance.</dd><dt class="property-required"
             title="Required">
         <span id="devicetype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_go" style="color: inherit; text-decoration: inherit;">Device<wbr>Type</a>
@@ -2331,8 +2471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Supported instance model. <code>HA</code> - high available version; <code>Basic</code> - basic version.</p>
-</dd><dt class="property-required"
+    <dd>Supported instance model. <code>HA</code> - high available version; <code>Basic</code> - basic version.</dd><dt class="property-required"
             title="Required">
         <span id="drinstanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drinstanceids_go" style="color: inherit; text-decoration: inherit;">Dr<wbr>Instance<wbr>Ids</a>
@@ -2340,8 +2479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of disaster-recovery type associated with the current instance.</p>
-</dd><dt class="property-required"
+    <dd>ID list of disaster-recovery type associated with the current instance.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_go" style="color: inherit; text-decoration: inherit;">Engine<wbr>Version</a>
@@ -2349,8 +2487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</p>
-</dd><dt class="property-required"
+    <dd>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</dd><dt class="property-required"
             title="Required">
         <span id="initflag_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initflag_go" style="color: inherit; text-decoration: inherit;">Init<wbr>Flag</a>
@@ -2358,8 +2495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-required"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Name</a>
@@ -2367,8 +2503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of mysql instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancerole_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Role</a>
@@ -2376,8 +2511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-required"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-required"
             title="Required">
         <span id="internethost_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internethost_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Host</a>
@@ -2385,8 +2519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network domain name.</p>
-</dd><dt class="property-required"
+    <dd>Public network domain name.</dd><dt class="property-required"
             title="Required">
         <span id="internetport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetport_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Port</a>
@@ -2394,8 +2527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public network port.</p>
-</dd><dt class="property-required"
+    <dd>Public network port.</dd><dt class="property-required"
             title="Required">
         <span id="internetstatus_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetstatus_go" style="color: inherit; text-decoration: inherit;">Internet<wbr>Status</a>
@@ -2403,8 +2535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of public network.</p>
-</dd><dt class="property-required"
+    <dd>Status of public network.</dd><dt class="property-required"
             title="Required">
         <span id="intranetip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetip_go" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Ip</a>
@@ -2412,8 +2543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance IP for internal access.</p>
-</dd><dt class="property-required"
+    <dd>Instance IP for internal access.</dd><dt class="property-required"
             title="Required">
         <span id="intranetport_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetport_go" style="color: inherit; text-decoration: inherit;">Intranet<wbr>Port</a>
@@ -2421,8 +2551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Transport layer port number for internal purpose.</p>
-</dd><dt class="property-required"
+    <dd>Transport layer port number for internal purpose.</dd><dt class="property-required"
             title="Required">
         <span id="masterinstanceid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_go" style="color: inherit; text-decoration: inherit;">Master<wbr>Instance<wbr>Id</a>
@@ -2430,8 +2559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="memorysize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_go" style="color: inherit; text-decoration: inherit;">Memory<wbr>Size</a>
@@ -2439,8 +2567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in MB).</dd><dt class="property-required"
             title="Required">
         <span id="mysqlid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_go" style="color: inherit; text-decoration: inherit;">Mysql<wbr>Id</a>
@@ -2448,8 +2575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-required"
             title="Required">
         <span id="paytype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_go" style="color: inherit; text-decoration: inherit;">Pay<wbr>Type</a>
@@ -2457,8 +2583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</p>
-</dd><dt class="property-required"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_go" style="color: inherit; text-decoration: inherit;">Project<wbr>Id</a>
@@ -2466,8 +2591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID to which the current instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>Project ID to which the current instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="rogroups_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroups_go" style="color: inherit; text-decoration: inherit;">Ro<wbr>Groups</a>
@@ -2475,8 +2599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceinstancelistrogroup">[]Get<wbr>Instance<wbr>Instance<wbr>List<wbr>Ro<wbr>Group</a></span>
     </dt>
-    <dd><p>read-only instance group.</p>
-</dd><dt class="property-required"
+    <dd>read-only instance group.</dd><dt class="property-required"
             title="Required">
         <span id="roinstanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roinstanceids_go" style="color: inherit; text-decoration: inherit;">Ro<wbr>Instance<wbr>Ids</a>
@@ -2484,8 +2607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of read-only type associated with the current instance.</p>
-</dd><dt class="property-required"
+    <dd>ID list of read-only type associated with the current instance.</dd><dt class="property-required"
             title="Required">
         <span id="slavesyncmode_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavesyncmode_go" style="color: inherit; text-decoration: inherit;">Slave<wbr>Sync<wbr>Mode</a>
@@ -2493,8 +2615,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Data replication mode. <code>0</code> - Async replication; <code>1</code> - Semisync replication; <code>2</code> - Strongsync replication.</p>
-</dd><dt class="property-required"
+    <dd>Data replication mode. <code>0</code> - Async replication; <code>1</code> - Semisync replication; <code>2</code> - Strongsync replication.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2502,8 +2623,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-required"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_go" style="color: inherit; text-decoration: inherit;">Subnet<wbr>Id</a>
@@ -2511,8 +2631,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet to which the current instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of subnet to which the current instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="volumesize_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumesize_go" style="color: inherit; text-decoration: inherit;">Volume<wbr>Size</a>
@@ -2520,8 +2639,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk capacity (in GB).</p>
-</dd><dt class="property-required"
+    <dd>Disk capacity (in GB).</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_go" style="color: inherit; text-decoration: inherit;">Vpc<wbr>Id</a>
@@ -2529,8 +2647,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of Virtual Private Cloud.</p>
-</dd><dt class="property-required"
+    <dd>ID of Virtual Private Cloud.</dd><dt class="property-required"
             title="Required">
         <span id="zone_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_go" style="color: inherit; text-decoration: inherit;">Zone</a>
@@ -2538,8 +2655,245 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Information of available zone.</p>
-</dd></dl>
+    <dd>Information of available zone.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="auto_renew_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#auto_renew_flag_hcl" style="color: inherit; text-decoration: inherit;">auto_<wbr>renew_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Auto renew flag. NOTES: Only supported prepay instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="charge_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_hcl" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="cpu_core_count_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_core_count_hcl" style="color: inherit; text-decoration: inherit;">cpu_<wbr>core_<wbr>count</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>CPU count.</dd><dt class="property-required"
+            title="Required">
+        <span id="create_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_hcl" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The time at which a instance is created.</dd><dt class="property-required"
+            title="Required">
+        <span id="dead_line_time_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dead_line_time_hcl" style="color: inherit; text-decoration: inherit;">dead_<wbr>line_<wbr>time</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Expire date of instance. NOTES: Only supported prepay instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="device_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_type_hcl" style="color: inherit; text-decoration: inherit;">device_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Supported instance model. <code>HA</code> - high available version; <code>Basic</code> - basic version.</dd><dt class="property-required"
+            title="Required">
+        <span id="dr_instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dr_instance_ids_hcl" style="color: inherit; text-decoration: inherit;">dr_<wbr>instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of disaster-recovery type associated with the current instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="engine_version_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_hcl" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</dd><dt class="property-required"
+            title="Required">
+        <span id="init_flag_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#init_flag_hcl" style="color: inherit; text-decoration: inherit;">init_<wbr>flag</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Name of mysql instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_role_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_role_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>role</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="internet_host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_host_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Public network domain name.</dd><dt class="property-required"
+            title="Required">
+        <span id="internet_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_port_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Public network port.</dd><dt class="property-required"
+            title="Required">
+        <span id="internet_status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_status_hcl" style="color: inherit; text-decoration: inherit;">internet_<wbr>status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Status of public network.</dd><dt class="property-required"
+            title="Required">
+        <span id="intranet_ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranet_ip_hcl" style="color: inherit; text-decoration: inherit;">intranet_<wbr>ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance IP for internal access.</dd><dt class="property-required"
+            title="Required">
+        <span id="intranet_port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranet_port_hcl" style="color: inherit; text-decoration: inherit;">intranet_<wbr>port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Transport layer port number for internal purpose.</dd><dt class="property-required"
+            title="Required">
+        <span id="master_instance_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_instance_id_hcl" style="color: inherit; text-decoration: inherit;">master_<wbr>instance_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-required"
+            title="Required">
+        <span id="memory_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_size_hcl" style="color: inherit; text-decoration: inherit;">memory_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Memory size (in MB).</dd><dt class="property-required"
+            title="Required">
+        <span id="mysql_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysql_id_hcl" style="color: inherit; text-decoration: inherit;">mysql_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-required"
+            title="Required">
+        <span id="pay_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_type_hcl" style="color: inherit; text-decoration: inherit;">pay_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</dd><dt class="property-required"
+            title="Required">
+        <span id="project_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_hcl" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Project ID to which the current instance belongs.</dd><dt class="property-required"
+            title="Required">
+        <span id="ro_groups_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_groups_hcl" style="color: inherit; text-decoration: inherit;">ro_<wbr>groups</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#getinstanceinstancelistrogroup">list(object)</a></span>
+    </dt>
+    <dd>read-only instance group.</dd><dt class="property-required"
+            title="Required">
+        <span id="ro_instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_instance_ids_hcl" style="color: inherit; text-decoration: inherit;">ro_<wbr>instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of read-only type associated with the current instance.</dd><dt class="property-required"
+            title="Required">
+        <span id="slave_sync_mode_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slave_sync_mode_hcl" style="color: inherit; text-decoration: inherit;">slave_<wbr>sync_<wbr>mode</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Data replication mode. <code>0</code> - Async replication; <code>1</code> - Semisync replication; <code>2</code> - Strongsync replication.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-required"
+            title="Required">
+        <span id="subnet_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_hcl" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of subnet to which the current instance belongs.</dd><dt class="property-required"
+            title="Required">
+        <span id="volume_size_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volume_size_hcl" style="color: inherit; text-decoration: inherit;">volume_<wbr>size</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Disk capacity (in GB).</dd><dt class="property-required"
+            title="Required">
+        <span id="vpc_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_hcl" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of Virtual Private Cloud.</dd><dt class="property-required"
+            title="Required">
+        <span id="zone_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_hcl" style="color: inherit; text-decoration: inherit;">zone</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Information of available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2553,8 +2907,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepay instance.</p>
-</dd><dt class="property-required"
+    <dd>Auto renew flag. NOTES: Only supported prepay instance.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_java" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2562,8 +2915,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="cpucorecount_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_java" style="color: inherit; text-decoration: inherit;">cpu<wbr>Core<wbr>Count</a>
@@ -2571,8 +2923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>CPU count.</p>
-</dd><dt class="property-required"
+    <dd>CPU count.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_java" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2580,8 +2931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time at which a instance is created.</p>
-</dd><dt class="property-required"
+    <dd>The time at which a instance is created.</dd><dt class="property-required"
             title="Required">
         <span id="deadlinetime_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadlinetime_java" style="color: inherit; text-decoration: inherit;">dead<wbr>Line<wbr>Time</a>
@@ -2589,8 +2939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expire date of instance. NOTES: Only supported prepay instance.</p>
-</dd><dt class="property-required"
+    <dd>Expire date of instance. NOTES: Only supported prepay instance.</dd><dt class="property-required"
             title="Required">
         <span id="devicetype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_java" style="color: inherit; text-decoration: inherit;">device<wbr>Type</a>
@@ -2598,8 +2947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Supported instance model. <code>HA</code> - high available version; <code>Basic</code> - basic version.</p>
-</dd><dt class="property-required"
+    <dd>Supported instance model. <code>HA</code> - high available version; <code>Basic</code> - basic version.</dd><dt class="property-required"
             title="Required">
         <span id="drinstanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drinstanceids_java" style="color: inherit; text-decoration: inherit;">dr<wbr>Instance<wbr>Ids</a>
@@ -2607,8 +2955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of disaster-recovery type associated with the current instance.</p>
-</dd><dt class="property-required"
+    <dd>ID list of disaster-recovery type associated with the current instance.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_java" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -2616,8 +2963,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</p>
-</dd><dt class="property-required"
+    <dd>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</dd><dt class="property-required"
             title="Required">
         <span id="initflag_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initflag_java" style="color: inherit; text-decoration: inherit;">init<wbr>Flag</a>
@@ -2625,8 +2971,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-required"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2634,8 +2979,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of mysql instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancerole_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Role</a>
@@ -2643,8 +2987,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-required"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-required"
             title="Required">
         <span id="internethost_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internethost_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Host</a>
@@ -2652,8 +2995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public network domain name.</p>
-</dd><dt class="property-required"
+    <dd>Public network domain name.</dd><dt class="property-required"
             title="Required">
         <span id="internetport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetport_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Port</a>
@@ -2661,8 +3003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Public network port.</p>
-</dd><dt class="property-required"
+    <dd>Public network port.</dd><dt class="property-required"
             title="Required">
         <span id="internetstatus_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetstatus_java" style="color: inherit; text-decoration: inherit;">internet<wbr>Status</a>
@@ -2670,8 +3011,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Status of public network.</p>
-</dd><dt class="property-required"
+    <dd>Status of public network.</dd><dt class="property-required"
             title="Required">
         <span id="intranetip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetip_java" style="color: inherit; text-decoration: inherit;">intranet<wbr>Ip</a>
@@ -2679,8 +3019,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance IP for internal access.</p>
-</dd><dt class="property-required"
+    <dd>Instance IP for internal access.</dd><dt class="property-required"
             title="Required">
         <span id="intranetport_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetport_java" style="color: inherit; text-decoration: inherit;">intranet<wbr>Port</a>
@@ -2688,8 +3027,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Transport layer port number for internal purpose.</p>
-</dd><dt class="property-required"
+    <dd>Transport layer port number for internal purpose.</dd><dt class="property-required"
             title="Required">
         <span id="masterinstanceid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_java" style="color: inherit; text-decoration: inherit;">master<wbr>Instance<wbr>Id</a>
@@ -2697,8 +3035,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="memorysize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_java" style="color: inherit; text-decoration: inherit;">memory<wbr>Size</a>
@@ -2706,8 +3043,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in MB).</dd><dt class="property-required"
             title="Required">
         <span id="mysqlid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_java" style="color: inherit; text-decoration: inherit;">mysql<wbr>Id</a>
@@ -2715,8 +3051,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-required"
             title="Required">
         <span id="paytype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_java" style="color: inherit; text-decoration: inherit;">pay<wbr>Type</a>
@@ -2724,8 +3059,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</p>
-</dd><dt class="property-required"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_java" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -2733,8 +3067,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Project ID to which the current instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>Project ID to which the current instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="rogroups_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroups_java" style="color: inherit; text-decoration: inherit;">ro<wbr>Groups</a>
@@ -2742,8 +3075,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceinstancelistrogroup">List&lt;Get<wbr>Instance<wbr>Instance<wbr>List<wbr>Ro<wbr>Group&gt;</a></span>
     </dt>
-    <dd><p>read-only instance group.</p>
-</dd><dt class="property-required"
+    <dd>read-only instance group.</dd><dt class="property-required"
             title="Required">
         <span id="roinstanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roinstanceids_java" style="color: inherit; text-decoration: inherit;">ro<wbr>Instance<wbr>Ids</a>
@@ -2751,8 +3083,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of read-only type associated with the current instance.</p>
-</dd><dt class="property-required"
+    <dd>ID list of read-only type associated with the current instance.</dd><dt class="property-required"
             title="Required">
         <span id="slavesyncmode_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavesyncmode_java" style="color: inherit; text-decoration: inherit;">slave<wbr>Sync<wbr>Mode</a>
@@ -2760,8 +3091,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Data replication mode. <code>0</code> - Async replication; <code>1</code> - Semisync replication; <code>2</code> - Strongsync replication.</p>
-</dd><dt class="property-required"
+    <dd>Data replication mode. <code>0</code> - Async replication; <code>1</code> - Semisync replication; <code>2</code> - Strongsync replication.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2769,8 +3099,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-required"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_java" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -2778,8 +3107,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of subnet to which the current instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of subnet to which the current instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="volumesize_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumesize_java" style="color: inherit; text-decoration: inherit;">volume<wbr>Size</a>
@@ -2787,8 +3115,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Disk capacity (in GB).</p>
-</dd><dt class="property-required"
+    <dd>Disk capacity (in GB).</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_java" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -2796,8 +3123,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of Virtual Private Cloud.</p>
-</dd><dt class="property-required"
+    <dd>ID of Virtual Private Cloud.</dd><dt class="property-required"
             title="Required">
         <span id="zone_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_java" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -2805,8 +3131,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Information of available zone.</p>
-</dd></dl>
+    <dd>Information of available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2820,8 +3145,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepay instance.</p>
-</dd><dt class="property-required"
+    <dd>Auto renew flag. NOTES: Only supported prepay instance.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_nodejs" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -2829,8 +3153,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="cpucorecount_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_nodejs" style="color: inherit; text-decoration: inherit;">cpu<wbr>Core<wbr>Count</a>
@@ -2838,8 +3161,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>CPU count.</p>
-</dd><dt class="property-required"
+    <dd>CPU count.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_nodejs" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -2847,8 +3169,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The time at which a instance is created.</p>
-</dd><dt class="property-required"
+    <dd>The time at which a instance is created.</dd><dt class="property-required"
             title="Required">
         <span id="deadlinetime_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadlinetime_nodejs" style="color: inherit; text-decoration: inherit;">dead<wbr>Line<wbr>Time</a>
@@ -2856,8 +3177,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Expire date of instance. NOTES: Only supported prepay instance.</p>
-</dd><dt class="property-required"
+    <dd>Expire date of instance. NOTES: Only supported prepay instance.</dd><dt class="property-required"
             title="Required">
         <span id="devicetype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_nodejs" style="color: inherit; text-decoration: inherit;">device<wbr>Type</a>
@@ -2865,8 +3185,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Supported instance model. <code>HA</code> - high available version; <code>Basic</code> - basic version.</p>
-</dd><dt class="property-required"
+    <dd>Supported instance model. <code>HA</code> - high available version; <code>Basic</code> - basic version.</dd><dt class="property-required"
             title="Required">
         <span id="drinstanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drinstanceids_nodejs" style="color: inherit; text-decoration: inherit;">dr<wbr>Instance<wbr>Ids</a>
@@ -2874,8 +3193,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of disaster-recovery type associated with the current instance.</p>
-</dd><dt class="property-required"
+    <dd>ID list of disaster-recovery type associated with the current instance.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_nodejs" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -2883,8 +3201,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</p>
-</dd><dt class="property-required"
+    <dd>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</dd><dt class="property-required"
             title="Required">
         <span id="initflag_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initflag_nodejs" style="color: inherit; text-decoration: inherit;">init<wbr>Flag</a>
@@ -2892,8 +3209,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-required"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -2901,8 +3217,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of mysql instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancerole_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Role</a>
@@ -2910,8 +3225,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-required"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-required"
             title="Required">
         <span id="internethost_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internethost_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Host</a>
@@ -2919,8 +3233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Public network domain name.</p>
-</dd><dt class="property-required"
+    <dd>Public network domain name.</dd><dt class="property-required"
             title="Required">
         <span id="internetport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetport_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Port</a>
@@ -2928,8 +3241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Public network port.</p>
-</dd><dt class="property-required"
+    <dd>Public network port.</dd><dt class="property-required"
             title="Required">
         <span id="internetstatus_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetstatus_nodejs" style="color: inherit; text-decoration: inherit;">internet<wbr>Status</a>
@@ -2937,8 +3249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Status of public network.</p>
-</dd><dt class="property-required"
+    <dd>Status of public network.</dd><dt class="property-required"
             title="Required">
         <span id="intranetip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetip_nodejs" style="color: inherit; text-decoration: inherit;">intranet<wbr>Ip</a>
@@ -2946,8 +3257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance IP for internal access.</p>
-</dd><dt class="property-required"
+    <dd>Instance IP for internal access.</dd><dt class="property-required"
             title="Required">
         <span id="intranetport_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetport_nodejs" style="color: inherit; text-decoration: inherit;">intranet<wbr>Port</a>
@@ -2955,8 +3265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Transport layer port number for internal purpose.</p>
-</dd><dt class="property-required"
+    <dd>Transport layer port number for internal purpose.</dd><dt class="property-required"
             title="Required">
         <span id="masterinstanceid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_nodejs" style="color: inherit; text-decoration: inherit;">master<wbr>Instance<wbr>Id</a>
@@ -2964,8 +3273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="memorysize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_nodejs" style="color: inherit; text-decoration: inherit;">memory<wbr>Size</a>
@@ -2973,8 +3281,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in MB).</dd><dt class="property-required"
             title="Required">
         <span id="mysqlid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_nodejs" style="color: inherit; text-decoration: inherit;">mysql<wbr>Id</a>
@@ -2982,8 +3289,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-required"
             title="Required">
         <span id="paytype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_nodejs" style="color: inherit; text-decoration: inherit;">pay<wbr>Type</a>
@@ -2991,8 +3297,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</p>
-</dd><dt class="property-required"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_nodejs" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3000,8 +3305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Project ID to which the current instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>Project ID to which the current instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="rogroups_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroups_nodejs" style="color: inherit; text-decoration: inherit;">ro<wbr>Groups</a>
@@ -3009,8 +3313,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceinstancelistrogroup">Get<wbr>Instance<wbr>Instance<wbr>List<wbr>Ro<wbr>Group[]</a></span>
     </dt>
-    <dd><p>read-only instance group.</p>
-</dd><dt class="property-required"
+    <dd>read-only instance group.</dd><dt class="property-required"
             title="Required">
         <span id="roinstanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roinstanceids_nodejs" style="color: inherit; text-decoration: inherit;">ro<wbr>Instance<wbr>Ids</a>
@@ -3018,8 +3321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of read-only type associated with the current instance.</p>
-</dd><dt class="property-required"
+    <dd>ID list of read-only type associated with the current instance.</dd><dt class="property-required"
             title="Required">
         <span id="slavesyncmode_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavesyncmode_nodejs" style="color: inherit; text-decoration: inherit;">slave<wbr>Sync<wbr>Mode</a>
@@ -3027,8 +3329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Data replication mode. <code>0</code> - Async replication; <code>1</code> - Semisync replication; <code>2</code> - Strongsync replication.</p>
-</dd><dt class="property-required"
+    <dd>Data replication mode. <code>0</code> - Async replication; <code>1</code> - Semisync replication; <code>2</code> - Strongsync replication.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3036,8 +3337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-required"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_nodejs" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3045,8 +3345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of subnet to which the current instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of subnet to which the current instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="volumesize_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumesize_nodejs" style="color: inherit; text-decoration: inherit;">volume<wbr>Size</a>
@@ -3054,8 +3353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Disk capacity (in GB).</p>
-</dd><dt class="property-required"
+    <dd>Disk capacity (in GB).</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_nodejs" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3063,8 +3361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of Virtual Private Cloud.</p>
-</dd><dt class="property-required"
+    <dd>ID of Virtual Private Cloud.</dd><dt class="property-required"
             title="Required">
         <span id="zone_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_nodejs" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -3072,8 +3369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Information of available zone.</p>
-</dd></dl>
+    <dd>Information of available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3087,8 +3383,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepay instance.</p>
-</dd><dt class="property-required"
+    <dd>Auto renew flag. NOTES: Only supported prepay instance.</dd><dt class="property-required"
             title="Required">
         <span id="charge_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#charge_type_python" style="color: inherit; text-decoration: inherit;">charge_<wbr>type</a>
@@ -3096,8 +3391,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="cpu_core_count_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpu_core_count_python" style="color: inherit; text-decoration: inherit;">cpu_<wbr>core_<wbr>count</a>
@@ -3105,8 +3399,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>CPU count.</p>
-</dd><dt class="property-required"
+    <dd>CPU count.</dd><dt class="property-required"
             title="Required">
         <span id="create_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#create_time_python" style="color: inherit; text-decoration: inherit;">create_<wbr>time</a>
@@ -3114,8 +3407,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The time at which a instance is created.</p>
-</dd><dt class="property-required"
+    <dd>The time at which a instance is created.</dd><dt class="property-required"
             title="Required">
         <span id="dead_line_time_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dead_line_time_python" style="color: inherit; text-decoration: inherit;">dead_<wbr>line_<wbr>time</a>
@@ -3123,8 +3415,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Expire date of instance. NOTES: Only supported prepay instance.</p>
-</dd><dt class="property-required"
+    <dd>Expire date of instance. NOTES: Only supported prepay instance.</dd><dt class="property-required"
             title="Required">
         <span id="device_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#device_type_python" style="color: inherit; text-decoration: inherit;">device_<wbr>type</a>
@@ -3132,8 +3423,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Supported instance model. <code>HA</code> - high available version; <code>Basic</code> - basic version.</p>
-</dd><dt class="property-required"
+    <dd>Supported instance model. <code>HA</code> - high available version; <code>Basic</code> - basic version.</dd><dt class="property-required"
             title="Required">
         <span id="dr_instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dr_instance_ids_python" style="color: inherit; text-decoration: inherit;">dr_<wbr>instance_<wbr>ids</a>
@@ -3141,8 +3431,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of disaster-recovery type associated with the current instance.</p>
-</dd><dt class="property-required"
+    <dd>ID list of disaster-recovery type associated with the current instance.</dd><dt class="property-required"
             title="Required">
         <span id="engine_version_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engine_version_python" style="color: inherit; text-decoration: inherit;">engine_<wbr>version</a>
@@ -3150,8 +3439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</p>
-</dd><dt class="property-required"
+    <dd>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</dd><dt class="property-required"
             title="Required">
         <span id="init_flag_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#init_flag_python" style="color: inherit; text-decoration: inherit;">init_<wbr>flag</a>
@@ -3159,8 +3447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-required"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-required"
             title="Required">
         <span id="instance_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_name_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>name</a>
@@ -3168,8 +3455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of mysql instance.</dd><dt class="property-required"
             title="Required">
         <span id="instance_role_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_role_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>role</a>
@@ -3177,8 +3463,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-required"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-required"
             title="Required">
         <span id="internet_host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_host_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>host</a>
@@ -3186,8 +3471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Public network domain name.</p>
-</dd><dt class="property-required"
+    <dd>Public network domain name.</dd><dt class="property-required"
             title="Required">
         <span id="internet_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_port_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>port</a>
@@ -3195,8 +3479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Public network port.</p>
-</dd><dt class="property-required"
+    <dd>Public network port.</dd><dt class="property-required"
             title="Required">
         <span id="internet_status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internet_status_python" style="color: inherit; text-decoration: inherit;">internet_<wbr>status</a>
@@ -3204,8 +3487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of public network.</p>
-</dd><dt class="property-required"
+    <dd>Status of public network.</dd><dt class="property-required"
             title="Required">
         <span id="intranet_ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranet_ip_python" style="color: inherit; text-decoration: inherit;">intranet_<wbr>ip</a>
@@ -3213,8 +3495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance IP for internal access.</p>
-</dd><dt class="property-required"
+    <dd>Instance IP for internal access.</dd><dt class="property-required"
             title="Required">
         <span id="intranet_port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranet_port_python" style="color: inherit; text-decoration: inherit;">intranet_<wbr>port</a>
@@ -3222,8 +3503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Transport layer port number for internal purpose.</p>
-</dd><dt class="property-required"
+    <dd>Transport layer port number for internal purpose.</dd><dt class="property-required"
             title="Required">
         <span id="master_instance_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#master_instance_id_python" style="color: inherit; text-decoration: inherit;">master_<wbr>instance_<wbr>id</a>
@@ -3231,8 +3511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="memory_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memory_size_python" style="color: inherit; text-decoration: inherit;">memory_<wbr>size</a>
@@ -3240,8 +3519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in MB).</dd><dt class="property-required"
             title="Required">
         <span id="mysql_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysql_id_python" style="color: inherit; text-decoration: inherit;">mysql_<wbr>id</a>
@@ -3249,8 +3527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-required"
             title="Required">
         <span id="pay_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#pay_type_python" style="color: inherit; text-decoration: inherit;">pay_<wbr>type</a>
@@ -3258,8 +3535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</p>
-</dd><dt class="property-required"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</dd><dt class="property-required"
             title="Required">
         <span id="project_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#project_id_python" style="color: inherit; text-decoration: inherit;">project_<wbr>id</a>
@@ -3267,17 +3543,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Project ID to which the current instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>Project ID to which the current instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="ro_groups_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_groups_python" style="color: inherit; text-decoration: inherit;">ro_<wbr>groups</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#getinstanceinstancelistrogroup">Get<wbr>Instance<wbr>Instance<wbr>List<wbr>Ro<wbr>Group]</a></span>
+        <span class="property-type"><a href="#getinstanceinstancelistrogroup">Sequence[Get<wbr>Instance<wbr>Instance<wbr>List<wbr>Ro<wbr>Group]</a></span>
     </dt>
-    <dd><p>read-only instance group.</p>
-</dd><dt class="property-required"
+    <dd>read-only instance group.</dd><dt class="property-required"
             title="Required">
         <span id="ro_instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ro_instance_ids_python" style="color: inherit; text-decoration: inherit;">ro_<wbr>instance_<wbr>ids</a>
@@ -3285,8 +3559,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of read-only type associated with the current instance.</p>
-</dd><dt class="property-required"
+    <dd>ID list of read-only type associated with the current instance.</dd><dt class="property-required"
             title="Required">
         <span id="slave_sync_mode_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slave_sync_mode_python" style="color: inherit; text-decoration: inherit;">slave_<wbr>sync_<wbr>mode</a>
@@ -3294,8 +3567,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Data replication mode. <code>0</code> - Async replication; <code>1</code> - Semisync replication; <code>2</code> - Strongsync replication.</p>
-</dd><dt class="property-required"
+    <dd>Data replication mode. <code>0</code> - Async replication; <code>1</code> - Semisync replication; <code>2</code> - Strongsync replication.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3303,8 +3575,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-required"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-required"
             title="Required">
         <span id="subnet_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnet_id_python" style="color: inherit; text-decoration: inherit;">subnet_<wbr>id</a>
@@ -3312,8 +3583,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of subnet to which the current instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of subnet to which the current instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="volume_size_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volume_size_python" style="color: inherit; text-decoration: inherit;">volume_<wbr>size</a>
@@ -3321,8 +3591,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Disk capacity (in GB).</p>
-</dd><dt class="property-required"
+    <dd>Disk capacity (in GB).</dd><dt class="property-required"
             title="Required">
         <span id="vpc_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpc_id_python" style="color: inherit; text-decoration: inherit;">vpc_<wbr>id</a>
@@ -3330,8 +3599,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of Virtual Private Cloud.</p>
-</dd><dt class="property-required"
+    <dd>ID of Virtual Private Cloud.</dd><dt class="property-required"
             title="Required">
         <span id="zone_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_python" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -3339,8 +3607,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Information of available zone.</p>
-</dd></dl>
+    <dd>Information of available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3354,8 +3621,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Auto renew flag. NOTES: Only supported prepay instance.</p>
-</dd><dt class="property-required"
+    <dd>Auto renew flag. NOTES: Only supported prepay instance.</dd><dt class="property-required"
             title="Required">
         <span id="chargetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#chargetype_yaml" style="color: inherit; text-decoration: inherit;">charge<wbr>Type</a>
@@ -3363,8 +3629,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</p>
-</dd><dt class="property-required"
+    <dd>Pay type of instance, valid values are <code>PREPAID</code> and <code>POSTPAID</code>.</dd><dt class="property-required"
             title="Required">
         <span id="cpucorecount_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cpucorecount_yaml" style="color: inherit; text-decoration: inherit;">cpu<wbr>Core<wbr>Count</a>
@@ -3372,8 +3637,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>CPU count.</p>
-</dd><dt class="property-required"
+    <dd>CPU count.</dd><dt class="property-required"
             title="Required">
         <span id="createtime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#createtime_yaml" style="color: inherit; text-decoration: inherit;">create<wbr>Time</a>
@@ -3381,8 +3645,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The time at which a instance is created.</p>
-</dd><dt class="property-required"
+    <dd>The time at which a instance is created.</dd><dt class="property-required"
             title="Required">
         <span id="deadlinetime_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#deadlinetime_yaml" style="color: inherit; text-decoration: inherit;">dead<wbr>Line<wbr>Time</a>
@@ -3390,8 +3653,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Expire date of instance. NOTES: Only supported prepay instance.</p>
-</dd><dt class="property-required"
+    <dd>Expire date of instance. NOTES: Only supported prepay instance.</dd><dt class="property-required"
             title="Required">
         <span id="devicetype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#devicetype_yaml" style="color: inherit; text-decoration: inherit;">device<wbr>Type</a>
@@ -3399,8 +3661,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Supported instance model. <code>HA</code> - high available version; <code>Basic</code> - basic version.</p>
-</dd><dt class="property-required"
+    <dd>Supported instance model. <code>HA</code> - high available version; <code>Basic</code> - basic version.</dd><dt class="property-required"
             title="Required">
         <span id="drinstanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#drinstanceids_yaml" style="color: inherit; text-decoration: inherit;">dr<wbr>Instance<wbr>Ids</a>
@@ -3408,8 +3669,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of disaster-recovery type associated with the current instance.</p>
-</dd><dt class="property-required"
+    <dd>ID list of disaster-recovery type associated with the current instance.</dd><dt class="property-required"
             title="Required">
         <span id="engineversion_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#engineversion_yaml" style="color: inherit; text-decoration: inherit;">engine<wbr>Version</a>
@@ -3417,8 +3677,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</p>
-</dd><dt class="property-required"
+    <dd>The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.</dd><dt class="property-required"
             title="Required">
         <span id="initflag_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#initflag_yaml" style="color: inherit; text-decoration: inherit;">init<wbr>Flag</a>
@@ -3426,8 +3685,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</p>
-</dd><dt class="property-required"
+    <dd>Initialization mark. Available values: <code>0</code> - Uninitialized; <code>1</code> - Initialized.</dd><dt class="property-required"
             title="Required">
         <span id="instancename_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancename_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Name</a>
@@ -3435,8 +3693,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Name of mysql instance.</p>
-</dd><dt class="property-required"
+    <dd>Name of mysql instance.</dd><dt class="property-required"
             title="Required">
         <span id="instancerole_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instancerole_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Role</a>
@@ -3444,8 +3701,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</p>
-</dd><dt class="property-required"
+    <dd>Instance type. Supported values include: <code>master</code> - master instance, <code>dr</code> - disaster recovery instance, and <code>ro</code> - read-only instance.</dd><dt class="property-required"
             title="Required">
         <span id="internethost_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internethost_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Host</a>
@@ -3453,8 +3709,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Public network domain name.</p>
-</dd><dt class="property-required"
+    <dd>Public network domain name.</dd><dt class="property-required"
             title="Required">
         <span id="internetport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetport_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Port</a>
@@ -3462,8 +3717,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Public network port.</p>
-</dd><dt class="property-required"
+    <dd>Public network port.</dd><dt class="property-required"
             title="Required">
         <span id="internetstatus_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#internetstatus_yaml" style="color: inherit; text-decoration: inherit;">internet<wbr>Status</a>
@@ -3471,8 +3725,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Status of public network.</p>
-</dd><dt class="property-required"
+    <dd>Status of public network.</dd><dt class="property-required"
             title="Required">
         <span id="intranetip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetip_yaml" style="color: inherit; text-decoration: inherit;">intranet<wbr>Ip</a>
@@ -3480,8 +3733,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance IP for internal access.</p>
-</dd><dt class="property-required"
+    <dd>Instance IP for internal access.</dd><dt class="property-required"
             title="Required">
         <span id="intranetport_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#intranetport_yaml" style="color: inherit; text-decoration: inherit;">intranet<wbr>Port</a>
@@ -3489,8 +3741,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Transport layer port number for internal purpose.</p>
-</dd><dt class="property-required"
+    <dd>Transport layer port number for internal purpose.</dd><dt class="property-required"
             title="Required">
         <span id="masterinstanceid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#masterinstanceid_yaml" style="color: inherit; text-decoration: inherit;">master<wbr>Instance<wbr>Id</a>
@@ -3498,8 +3749,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Indicates the master instance ID of recovery instances.</p>
-</dd><dt class="property-required"
+    <dd>Indicates the master instance ID of recovery instances.</dd><dt class="property-required"
             title="Required">
         <span id="memorysize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#memorysize_yaml" style="color: inherit; text-decoration: inherit;">memory<wbr>Size</a>
@@ -3507,8 +3757,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Memory size (in MB).</p>
-</dd><dt class="property-required"
+    <dd>Memory size (in MB).</dd><dt class="property-required"
             title="Required">
         <span id="mysqlid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#mysqlid_yaml" style="color: inherit; text-decoration: inherit;">mysql<wbr>Id</a>
@@ -3516,8 +3765,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</p>
-</dd><dt class="property-required"
+    <dd>Instance ID, such as <code>cdb-c1nl9rpv</code>. It is identical to the instance ID displayed in the database console page.</dd><dt class="property-required"
             title="Required">
         <span id="paytype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#paytype_yaml" style="color: inherit; text-decoration: inherit;">pay<wbr>Type</a>
@@ -3525,8 +3773,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>It has been deprecated from version 1.36.0. Please use <code>charge_type</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</p>
-</dd><dt class="property-required"
+    <dd>It has been deprecated from version 1.36.0. Please use <code>chargeType</code> instead. Pay type of instance, <code>0</code>: prepay, <code>1</code>: postpaid.</dd><dt class="property-required"
             title="Required">
         <span id="projectid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#projectid_yaml" style="color: inherit; text-decoration: inherit;">project<wbr>Id</a>
@@ -3534,8 +3781,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Project ID to which the current instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>Project ID to which the current instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="rogroups_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rogroups_yaml" style="color: inherit; text-decoration: inherit;">ro<wbr>Groups</a>
@@ -3543,8 +3789,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#getinstanceinstancelistrogroup">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>read-only instance group.</p>
-</dd><dt class="property-required"
+    <dd>read-only instance group.</dd><dt class="property-required"
             title="Required">
         <span id="roinstanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#roinstanceids_yaml" style="color: inherit; text-decoration: inherit;">ro<wbr>Instance<wbr>Ids</a>
@@ -3552,8 +3797,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of read-only type associated with the current instance.</p>
-</dd><dt class="property-required"
+    <dd>ID list of read-only type associated with the current instance.</dd><dt class="property-required"
             title="Required">
         <span id="slavesyncmode_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#slavesyncmode_yaml" style="color: inherit; text-decoration: inherit;">slave<wbr>Sync<wbr>Mode</a>
@@ -3561,8 +3805,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Data replication mode. <code>0</code> - Async replication; <code>1</code> - Semisync replication; <code>2</code> - Strongsync replication.</p>
-</dd><dt class="property-required"
+    <dd>Data replication mode. <code>0</code> - Async replication; <code>1</code> - Semisync replication; <code>2</code> - Strongsync replication.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -3570,8 +3813,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</p>
-</dd><dt class="property-required"
+    <dd>Instance status. Available values: <code>0</code> - Creating; <code>1</code> - Running; <code>4</code> - Isolating; <code>5</code> - Isolated.</dd><dt class="property-required"
             title="Required">
         <span id="subnetid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#subnetid_yaml" style="color: inherit; text-decoration: inherit;">subnet<wbr>Id</a>
@@ -3579,8 +3821,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of subnet to which the current instance belongs.</p>
-</dd><dt class="property-required"
+    <dd>ID of subnet to which the current instance belongs.</dd><dt class="property-required"
             title="Required">
         <span id="volumesize_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#volumesize_yaml" style="color: inherit; text-decoration: inherit;">volume<wbr>Size</a>
@@ -3588,8 +3829,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Disk capacity (in GB).</p>
-</dd><dt class="property-required"
+    <dd>Disk capacity (in GB).</dd><dt class="property-required"
             title="Required">
         <span id="vpcid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#vpcid_yaml" style="color: inherit; text-decoration: inherit;">vpc<wbr>Id</a>
@@ -3597,8 +3837,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of Virtual Private Cloud.</p>
-</dd><dt class="property-required"
+    <dd>ID of Virtual Private Cloud.</dd><dt class="property-required"
             title="Required">
         <span id="zone_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#zone_yaml" style="color: inherit; text-decoration: inherit;">zone</a>
@@ -3606,8 +3845,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Information of available zone.</p>
-</dd></dl>
+    <dd>Information of available zone.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3625,8 +3863,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group ID, such as <code>cdbrg-pz7vg37p</code>.</p>
-</dd><dt class="property-required"
+    <dd>Group ID, such as <code>cdbrg-pz7vg37p</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instanceids_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_csharp" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -3634,8 +3871,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;string&gt;</span>
     </dt>
-    <dd><p>ID list of read-only type associated with the current instance.</p>
-</dd></dl>
+    <dd>ID list of read-only type associated with the current instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3649,8 +3885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group ID, such as <code>cdbrg-pz7vg37p</code>.</p>
-</dd><dt class="property-required"
+    <dd>Group ID, such as <code>cdbrg-pz7vg37p</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instanceids_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_go" style="color: inherit; text-decoration: inherit;">Instance<wbr>Ids</a>
@@ -3658,8 +3893,29 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]string</span>
     </dt>
-    <dd><p>ID list of read-only type associated with the current instance.</p>
-</dd></dl>
+    <dd>ID list of read-only type associated with the current instance.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="group_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#group_id_hcl" style="color: inherit; text-decoration: inherit;">group_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Group ID, such as <code>cdbrg-pz7vg37p</code>.</dd><dt class="property-required"
+            title="Required">
+        <span id="instance_ids_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_hcl" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(string)</span>
+    </dt>
+    <dd>ID list of read-only type associated with the current instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3673,8 +3929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group ID, such as <code>cdbrg-pz7vg37p</code>.</p>
-</dd><dt class="property-required"
+    <dd>Group ID, such as <code>cdbrg-pz7vg37p</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instanceids_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_java" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -3682,8 +3937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of read-only type associated with the current instance.</p>
-</dd></dl>
+    <dd>ID list of read-only type associated with the current instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3697,8 +3951,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Group ID, such as <code>cdbrg-pz7vg37p</code>.</p>
-</dd><dt class="property-required"
+    <dd>Group ID, such as <code>cdbrg-pz7vg37p</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instanceids_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_nodejs" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -3706,8 +3959,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string[]</span>
     </dt>
-    <dd><p>ID list of read-only type associated with the current instance.</p>
-</dd></dl>
+    <dd>ID list of read-only type associated with the current instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3721,8 +3973,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Group ID, such as <code>cdbrg-pz7vg37p</code>.</p>
-</dd><dt class="property-required"
+    <dd>Group ID, such as <code>cdbrg-pz7vg37p</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instance_ids_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instance_ids_python" style="color: inherit; text-decoration: inherit;">instance_<wbr>ids</a>
@@ -3730,8 +3981,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[str]</span>
     </dt>
-    <dd><p>ID list of read-only type associated with the current instance.</p>
-</dd></dl>
+    <dd>ID list of read-only type associated with the current instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3745,8 +3995,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Group ID, such as <code>cdbrg-pz7vg37p</code>.</p>
-</dd><dt class="property-required"
+    <dd>Group ID, such as <code>cdbrg-pz7vg37p</code>.</dd><dt class="property-required"
             title="Required">
         <span id="instanceids_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#instanceids_yaml" style="color: inherit; text-decoration: inherit;">instance<wbr>Ids</a>
@@ -3754,8 +4003,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;String&gt;</span>
     </dt>
-    <dd><p>ID list of read-only type associated with the current instance.</p>
-</dd></dl>
+    <dd>ID list of read-only type associated with the current instance.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -3770,7 +4018,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

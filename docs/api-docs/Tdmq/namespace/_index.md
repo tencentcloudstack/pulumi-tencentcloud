@@ -2,9 +2,11 @@
 ---
 title: "Namespace"
 title_tag: "tencentcloud.Tdmq.Namespace"
-meta_desc: "Documentation for the tencentcloud.Tdmq.Namespace resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provide a resource to create a TDMQ namespace."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,49 +18,120 @@ Provide a resource to create a TDMQ namespace.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const exampleInstance = new tencentcloud.tdmq.Instance("exampleInstance", {
+const example = new tencentcloud.tdmq.Instance("example", {
     clusterName: "tf_example",
     remark: "remark.",
     tags: {
         createdBy: "terraform",
     },
 });
-const exampleNamespace = new tencentcloud.tdmq.Namespace("exampleNamespace", {
+const exampleNamespace = new tencentcloud.tdmq.Namespace("example", {
     environName: "tf_example",
     msgTtl: 300,
-    clusterId: exampleInstance.id,
+    clusterId: example.id,
     retentionPolicy: {
         timeInMinutes: 60,
         sizeInMb: 10,
     },
     remark: "remark.",
+    tags: [{
+        tagKey: "createdBy",
+        tagValue: "terraform",
+    }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import tencentcloud_iac_pulumi as tencentcloud
 
-example_instance = tencentcloud.tdmq.Instance("exampleInstance",
+example = tencentcloud.tdmq.Instance("example",
     cluster_name="tf_example",
     remark="remark.",
     tags={
         "createdBy": "terraform",
     })
-example_namespace = tencentcloud.tdmq.Namespace("exampleNamespace",
+example_namespace = tencentcloud.tdmq.Namespace("example",
     environ_name="tf_example",
     msg_ttl=300,
-    cluster_id=example_instance.id,
-    retention_policy=tencentcloud.tdmq.NamespaceRetentionPolicyArgs(
-        time_in_minutes=60,
-        size_in_mb=10,
-    ),
-    remark="remark.")
+    cluster_id=example.id,
+    retention_policy={
+        "time_in_minutes": 60,
+        "size_in_mb": 10,
+    },
+    remark="remark.",
+    tags=[{
+        "tag_key": "createdBy",
+        "tag_value": "terraform",
+    }])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tdmq"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		example, err := tdmq.NewInstance(ctx, "example", &tdmq.InstanceArgs{
+			ClusterName: pulumi.String("tf_example"),
+			Remark:      pulumi.String("remark."),
+			Tags: pulumi.StringMap{
+				"createdBy": pulumi.String("terraform"),
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_, err = tdmq.NewNamespace(ctx, "example", &tdmq.NamespaceArgs{
+			EnvironName: pulumi.String("tf_example"),
+			MsgTtl:      pulumi.Int(300),
+			ClusterId:   example.ID().ToIDOutput().ToStringOutput(),
+			RetentionPolicy: &tdmq.NamespaceRetentionPolicyArgs{
+				TimeInMinutes: pulumi.Int(60),
+				SizeInMb:      pulumi.Int(10),
+			},
+			Remark: pulumi.String("remark."),
+			Tags: tdmq.NamespaceTagArray{
+				&tdmq.NamespaceTagArgs{
+					TagKey:   pulumi.String("createdBy"),
+					TagValue: pulumi.String("terraform"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
@@ -67,7 +140,7 @@ using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new()
+    var example = new Tencentcloud.Tdmq.Instance("example", new()
     {
         ClusterName = "tf_example",
         Remark = "remark.",
@@ -77,58 +150,34 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new()
+    var exampleNamespace = new Tencentcloud.Tdmq.Namespace("example", new()
     {
         EnvironName = "tf_example",
         MsgTtl = 300,
-        ClusterId = exampleInstance.Id,
+        ClusterId = example.Id,
         RetentionPolicy = new Tencentcloud.Tdmq.Inputs.NamespaceRetentionPolicyArgs
         {
             TimeInMinutes = 60,
             SizeInMb = 10,
         },
         Remark = "remark.",
+        Tags = new[]
+        {
+            new Tencentcloud.Tdmq.Inputs.NamespaceTagArgs
+            {
+                TagKey = "createdBy",
+                TagValue = "terraform",
+            },
+        },
     });
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		exampleInstance, err := Tdmq.NewInstance(ctx, "exampleInstance", &Tdmq.InstanceArgs{
-			ClusterName: pulumi.String("tf_example"),
-			Remark:      pulumi.String("remark."),
-			Tags: pulumi.Map{
-				"createdBy": pulumi.Any("terraform"),
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_, err = Tdmq.NewNamespace(ctx, "exampleNamespace", &Tdmq.NamespaceArgs{
-			EnvironName: pulumi.String("tf_example"),
-			MsgTtl:      pulumi.Int(300),
-			ClusterId:   exampleInstance.ID(),
-			RetentionPolicy: &tdmq.NamespaceRetentionPolicyArgs{
-				TimeInMinutes: pulumi.Int(60),
-				SizeInMb:      pulumi.Int(10),
-			},
-			Remark: pulumi.String("remark."),
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -140,8 +189,9 @@ import com.pulumi.tencentcloud.Tdmq.InstanceArgs;
 import com.pulumi.tencentcloud.Tdmq.Namespace;
 import com.pulumi.tencentcloud.Tdmq.NamespaceArgs;
 import com.pulumi.tencentcloud.Tdmq.inputs.NamespaceRetentionPolicyArgs;
-import java.util.List;
+import com.pulumi.tencentcloud.Tdmq.inputs.NamespaceTagArgs;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -153,29 +203,38 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var exampleInstance = new Instance("exampleInstance", InstanceArgs.builder()        
+        var example = new Instance("example", InstanceArgs.builder()
             .clusterName("tf_example")
             .remark("remark.")
             .tags(Map.of("createdBy", "terraform"))
             .build());
 
-        var exampleNamespace = new Namespace("exampleNamespace", NamespaceArgs.builder()        
+        var exampleNamespace = new Namespace("exampleNamespace", NamespaceArgs.builder()
             .environName("tf_example")
             .msgTtl(300)
-            .clusterId(exampleInstance.id())
+            .clusterId(example.id())
             .retentionPolicy(NamespaceRetentionPolicyArgs.builder()
                 .timeInMinutes(60)
                 .sizeInMb(10)
                 .build())
             .remark("remark.")
+            .tags(NamespaceTagArgs.builder()
+                .tagKey("createdBy")
+                .tagValue("terraform")
+                .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
-  exampleInstance:
+  example:
     type: tencentcloud:Tdmq:Instance
     properties:
       clusterName: tf_example
@@ -184,78 +243,146 @@ resources:
         createdBy: terraform
   exampleNamespace:
     type: tencentcloud:Tdmq:Namespace
+    name: example
     properties:
       environName: tf_example
       msgTtl: 300
-      clusterId: ${exampleInstance.id}
+      clusterId: ${example.id}
       retentionPolicy:
         timeInMinutes: 60
         sizeInMb: 10
       remark: remark.
+      tags:
+        - tagKey: createdBy
+          tagValue: terraform
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+resource "tencentcloud_tdmq_instance" "example" {
+  cluster_name = "tf_example"
+  remark       = "remark."
+  tags = {
+    "createdBy" = "terraform"
+  }
+}
+resource "tencentcloud_tdmq_namespace" "example" {
+  environ_name = "tf_example"
+  msg_ttl      = 300
+  cluster_id   = tencentcloud_tdmq_instance.example.id
+  retention_policy = {
+    time_in_minutes = 60
+    size_in_mb      = 10
+  }
+  remark = "remark."
+  tags {
+    tag_key   = "createdBy"
+    tag_value = "terraform"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create: [CreateEnvironment](https://www.tencentcloud.com/search/?wd=CreateEnvironment&type=document&lang=en)
+* Read: [DescribeEnvironments](https://www.tencentcloud.com/search/?wd=DescribeEnvironments&type=document&lang=en)
+* Update:
+  - [ModifyEnvironmentAttributes](https://www.tencentcloud.com/search/?wd=ModifyEnvironmentAttributes&type=document&lang=en)
+  - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+* Delete: [DeleteEnvironments](https://www.tencentcloud.com/search/?wd=DeleteEnvironments&type=document&lang=en)
 
 
 ## Create Namespace Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span>
+              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
               <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
               <span class="nx">cluster_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">environ_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
               <span class="nx">msg_ttl</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
               <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-              <span class="nx">retention_policy</span><span class="p">:</span> <span class="nx">Optional[_tdmq.NamespaceRetentionPolicyArgs]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-              <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span>
-              <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+              <span class="nx">retention_policy</span><span class="p">:</span> <span class="nx">Optional[NamespaceRetentionPolicyArgs]</span> = None<span class="p">,</span>
+              <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Sequence[NamespaceTagArgs]]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewNamespace</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Namespace</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewNamespace</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Namespace</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">Namespace</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">NamespaceArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tdmq:Namespace</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Tdmq:Namespace</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_tdmq_namespace&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -276,7 +403,7 @@ resources:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -393,11 +520,19 @@ resources:
 </pulumi-choosable>
 </div>
 
+
+
 ## Namespace Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The Namespace resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -413,8 +548,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-required"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-required"
             title="Required">
         <span id="environname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environname_csharp" style="color: inherit; text-decoration: inherit;">Environ<wbr>Name</a>
@@ -422,8 +556,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of namespace to be created.</p>
-</dd><dt class="property-required"
+    <dd>The name of namespace to be created.</dd><dt class="property-required"
             title="Required">
         <span id="msgttl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgttl_csharp" style="color: inherit; text-decoration: inherit;">Msg<wbr>Ttl</a>
@@ -431,8 +564,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The expiration time of unconsumed message.</p>
-</dd><dt class="property-optional"
+    <dd>The expiration time of unconsumed message.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -440,17 +572,23 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="retentionpolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentionpolicy_csharp" style="color: inherit; text-decoration: inherit;">Retention<wbr>Policy</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#namespaceretentionpolicy">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tdmq.<wbr>Inputs.<wbr>Namespace<wbr>Retention<wbr>Policy<wbr>Args</a></span>
+        <span class="property-type"><a href="#namespaceretentionpolicy">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tdmq.<wbr>Inputs.<wbr>Namespace<wbr>Retention<wbr>Policy</a></span>
     </dt>
-    <dd><p>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>time_in_minutes</code>: the time of message to retain; <code>size_in_mb</code>: the size of message to retain.</p>
-</dd></dl>
+    <dd>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>timeInMinutes</code>: the time of message to retain; <code>sizeInMb</code>: the size of message to retain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespacetag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tdmq.<wbr>Inputs.<wbr>Namespace<wbr>Tag&gt;</a></span>
+    </dt>
+    <dd>The tags of the tencentcloud_tdmq_namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -464,8 +602,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-required"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-required"
             title="Required">
         <span id="environname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environname_go" style="color: inherit; text-decoration: inherit;">Environ<wbr>Name</a>
@@ -473,8 +610,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of namespace to be created.</p>
-</dd><dt class="property-required"
+    <dd>The name of namespace to be created.</dd><dt class="property-required"
             title="Required">
         <span id="msgttl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgttl_go" style="color: inherit; text-decoration: inherit;">Msg<wbr>Ttl</a>
@@ -482,8 +618,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The expiration time of unconsumed message.</p>
-</dd><dt class="property-optional"
+    <dd>The expiration time of unconsumed message.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -491,8 +626,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="retentionpolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentionpolicy_go" style="color: inherit; text-decoration: inherit;">Retention<wbr>Policy</a>
@@ -500,8 +634,69 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#namespaceretentionpolicy">Namespace<wbr>Retention<wbr>Policy<wbr>Args</a></span>
     </dt>
-    <dd><p>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>time_in_minutes</code>: the time of message to retain; <code>size_in_mb</code>: the size of message to retain.</p>
-</dd></dl>
+    <dd>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>timeInMinutes</code>: the time of message to retain; <code>sizeInMb</code>: the size of message to retain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespacetag">[]Namespace<wbr>Tag<wbr>Args</a></span>
+    </dt>
+    <dd>The tags of the tencentcloud_tdmq_namespace.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-required"
+            title="Required">
+        <span id="environ_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environ_name_hcl" style="color: inherit; text-decoration: inherit;">environ_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of namespace to be created.</dd><dt class="property-required"
+            title="Required">
+        <span id="msg_ttl_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_ttl_hcl" style="color: inherit; text-decoration: inherit;">msg_<wbr>ttl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The expiration time of unconsumed message.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the namespace.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="retention_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retention_policy_hcl" style="color: inherit; text-decoration: inherit;">retention_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespaceretentionpolicy">object</a></span>
+    </dt>
+    <dd>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>timeInMinutes</code>: the time of message to retain; <code>sizeInMb</code>: the size of message to retain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespacetag">list(object)</a></span>
+    </dt>
+    <dd>The tags of the tencentcloud_tdmq_namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -515,8 +710,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-required"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-required"
             title="Required">
         <span id="environname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environname_java" style="color: inherit; text-decoration: inherit;">environ<wbr>Name</a>
@@ -524,8 +718,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of namespace to be created.</p>
-</dd><dt class="property-required"
+    <dd>The name of namespace to be created.</dd><dt class="property-required"
             title="Required">
         <span id="msgttl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgttl_java" style="color: inherit; text-decoration: inherit;">msg<wbr>Ttl</a>
@@ -533,8 +726,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The expiration time of unconsumed message.</p>
-</dd><dt class="property-optional"
+    <dd>The expiration time of unconsumed message.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -542,17 +734,23 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="retentionpolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentionpolicy_java" style="color: inherit; text-decoration: inherit;">retention<wbr>Policy</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#namespaceretentionpolicy">Namespace<wbr>Retention<wbr>Policy<wbr>Args</a></span>
+        <span class="property-type"><a href="#namespaceretentionpolicy">Namespace<wbr>Retention<wbr>Policy</a></span>
     </dt>
-    <dd><p>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>time_in_minutes</code>: the time of message to retain; <code>size_in_mb</code>: the size of message to retain.</p>
-</dd></dl>
+    <dd>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>timeInMinutes</code>: the time of message to retain; <code>sizeInMb</code>: the size of message to retain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespacetag">List&lt;Namespace<wbr>Tag&gt;</a></span>
+    </dt>
+    <dd>The tags of the tencentcloud_tdmq_namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -566,8 +764,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-required"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-required"
             title="Required">
         <span id="environname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environname_nodejs" style="color: inherit; text-decoration: inherit;">environ<wbr>Name</a>
@@ -575,8 +772,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of namespace to be created.</p>
-</dd><dt class="property-required"
+    <dd>The name of namespace to be created.</dd><dt class="property-required"
             title="Required">
         <span id="msgttl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgttl_nodejs" style="color: inherit; text-decoration: inherit;">msg<wbr>Ttl</a>
@@ -584,8 +780,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The expiration time of unconsumed message.</p>
-</dd><dt class="property-optional"
+    <dd>The expiration time of unconsumed message.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -593,17 +788,23 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="retentionpolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentionpolicy_nodejs" style="color: inherit; text-decoration: inherit;">retention<wbr>Policy</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#namespaceretentionpolicy">Namespace<wbr>Retention<wbr>Policy<wbr>Args</a></span>
+        <span class="property-type"><a href="#namespaceretentionpolicy">Namespace<wbr>Retention<wbr>Policy</a></span>
     </dt>
-    <dd><p>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>time_in_minutes</code>: the time of message to retain; <code>size_in_mb</code>: the size of message to retain.</p>
-</dd></dl>
+    <dd>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>timeInMinutes</code>: the time of message to retain; <code>sizeInMb</code>: the size of message to retain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespacetag">Namespace<wbr>Tag[]</a></span>
+    </dt>
+    <dd>The tags of the tencentcloud_tdmq_namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -617,8 +818,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-required"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-required"
             title="Required">
         <span id="environ_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environ_name_python" style="color: inherit; text-decoration: inherit;">environ_<wbr>name</a>
@@ -626,8 +826,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of namespace to be created.</p>
-</dd><dt class="property-required"
+    <dd>The name of namespace to be created.</dd><dt class="property-required"
             title="Required">
         <span id="msg_ttl_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msg_ttl_python" style="color: inherit; text-decoration: inherit;">msg_<wbr>ttl</a>
@@ -635,8 +834,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The expiration time of unconsumed message.</p>
-</dd><dt class="property-optional"
+    <dd>The expiration time of unconsumed message.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -644,8 +842,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="retention_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retention_policy_python" style="color: inherit; text-decoration: inherit;">retention_<wbr>policy</a>
@@ -653,8 +850,15 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#namespaceretentionpolicy">Namespace<wbr>Retention<wbr>Policy<wbr>Args</a></span>
     </dt>
-    <dd><p>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>time_in_minutes</code>: the time of message to retain; <code>size_in_mb</code>: the size of message to retain.</p>
-</dd></dl>
+    <dd>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>timeInMinutes</code>: the time of message to retain; <code>sizeInMb</code>: the size of message to retain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespacetag">Sequence[Namespace<wbr>Tag<wbr>Args]</a></span>
+    </dt>
+    <dd>The tags of the tencentcloud_tdmq_namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -668,8 +872,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-required"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-required"
             title="Required">
         <span id="environname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#environname_yaml" style="color: inherit; text-decoration: inherit;">environ<wbr>Name</a>
@@ -677,8 +880,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of namespace to be created.</p>
-</dd><dt class="property-required"
+    <dd>The name of namespace to be created.</dd><dt class="property-required"
             title="Required">
         <span id="msgttl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#msgttl_yaml" style="color: inherit; text-decoration: inherit;">msg<wbr>Ttl</a>
@@ -686,8 +888,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The expiration time of unconsumed message.</p>
-</dd><dt class="property-optional"
+    <dd>The expiration time of unconsumed message.</dd><dt class="property-optional"
             title="Optional">
         <span id="remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -695,8 +896,7 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="retentionpolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#retentionpolicy_yaml" style="color: inherit; text-decoration: inherit;">retention<wbr>Policy</a>
@@ -704,8 +904,15 @@ The Namespace resource accepts the following [input](/docs/intro/concepts/inputs
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#namespaceretentionpolicy">Property Map</a></span>
     </dt>
-    <dd><p>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>time_in_minutes</code>: the time of message to retain; <code>size_in_mb</code>: the size of message to retain.</p>
-</dd></dl>
+    <dd>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>timeInMinutes</code>: the time of message to retain; <code>sizeInMb</code>: the size of message to retain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="tags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespacetag">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>The tags of the tencentcloud_tdmq_namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -726,8 +933,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -741,8 +947,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -756,8 +975,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -771,8 +989,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -786,8 +1003,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -801,8 +1017,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -812,18 +1027,18 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing Namespace resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">NamespaceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Namespace</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">NamespaceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">Namespace</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
@@ -831,105 +1046,145 @@ Get an existing Namespace resource's state with the given name, ID, and optional
         <span class="nx">environ_name</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
         <span class="nx">msg_ttl</span><span class="p">:</span> <span class="nx">Optional[int]</span> = None<span class="p">,</span>
         <span class="nx">remark</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
-        <span class="nx">retention_policy</span><span class="p">:</span> <span class="nx">Optional[_tdmq.NamespaceRetentionPolicyArgs]</span> = None<span class="p">) -&gt;</span> Namespace</code></pre></div>
-</pulumi-choosable>
+        <span class="nx">retention_policy</span><span class="p">:</span> <span class="nx">Optional[NamespaceRetentionPolicyArgs]</span> = None<span class="p">,</span>
+        <span class="nx">tags</span><span class="p">:</span> <span class="nx">Optional[Sequence[NamespaceTagArgs]]</span> = None<span class="p">) -&gt;</span> Namespace</code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetNamespace<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">NamespaceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Namespace</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetNamespace<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">NamespaceState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">Namespace</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Namespace</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NamespaceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">Namespace</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NamespaceState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Namespace</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NamespaceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">Namespace</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">NamespaceState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingNamespace</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Tdmq:Namespace</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_tdmq_namespace</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NamespaceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NamespaceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -937,28 +1192,31 @@ Get an existing Namespace resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NamespaceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -966,28 +1224,31 @@ Get an existing Namespace resource's state with the given name, ID, and optional
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">NamespaceState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1007,8 +1268,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-optional"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environname_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environname_csharp" style="color: inherit; text-decoration: inherit;">Environ<wbr>Name</a>
@@ -1016,8 +1276,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of namespace to be created.</p>
-</dd><dt class="property-optional"
+    <dd>The name of namespace to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_msgttl_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_msgttl_csharp" style="color: inherit; text-decoration: inherit;">Msg<wbr>Ttl</a>
@@ -1025,8 +1284,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The expiration time of unconsumed message.</p>
-</dd><dt class="property-optional"
+    <dd>The expiration time of unconsumed message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_csharp" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1034,17 +1292,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retentionpolicy_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retentionpolicy_csharp" style="color: inherit; text-decoration: inherit;">Retention<wbr>Policy</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#namespaceretentionpolicy">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tdmq.<wbr>Inputs.<wbr>Namespace<wbr>Retention<wbr>Policy<wbr>Args</a></span>
+        <span class="property-type"><a href="#namespaceretentionpolicy">Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tdmq.<wbr>Inputs.<wbr>Namespace<wbr>Retention<wbr>Policy</a></span>
     </dt>
-    <dd><p>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>time_in_minutes</code>: the time of message to retain; <code>size_in_mb</code>: the size of message to retain.</p>
-</dd></dl>
+    <dd>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>timeInMinutes</code>: the time of message to retain; <code>sizeInMb</code>: the size of message to retain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_csharp" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespacetag">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Tdmq.<wbr>Inputs.<wbr>Namespace<wbr>Tag&gt;</a></span>
+    </dt>
+    <dd>The tags of the tencentcloud_tdmq_namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1058,8 +1322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-optional"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environname_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environname_go" style="color: inherit; text-decoration: inherit;">Environ<wbr>Name</a>
@@ -1067,8 +1330,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of namespace to be created.</p>
-</dd><dt class="property-optional"
+    <dd>The name of namespace to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_msgttl_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_msgttl_go" style="color: inherit; text-decoration: inherit;">Msg<wbr>Ttl</a>
@@ -1076,8 +1338,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The expiration time of unconsumed message.</p>
-</dd><dt class="property-optional"
+    <dd>The expiration time of unconsumed message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_go" style="color: inherit; text-decoration: inherit;">Remark</a>
@@ -1085,8 +1346,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retentionpolicy_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retentionpolicy_go" style="color: inherit; text-decoration: inherit;">Retention<wbr>Policy</a>
@@ -1094,8 +1354,69 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#namespaceretentionpolicy">Namespace<wbr>Retention<wbr>Policy<wbr>Args</a></span>
     </dt>
-    <dd><p>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>time_in_minutes</code>: the time of message to retain; <code>size_in_mb</code>: the size of message to retain.</p>
-</dd></dl>
+    <dd>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>timeInMinutes</code>: the time of message to retain; <code>sizeInMb</code>: the size of message to retain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_go" style="color: inherit; text-decoration: inherit;">Tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespacetag">[]Namespace<wbr>Tag<wbr>Args</a></span>
+    </dt>
+    <dd>The tags of the tencentcloud_tdmq_namespace.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="state_cluster_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_cluster_id_hcl" style="color: inherit; text-decoration: inherit;">cluster_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_environ_name_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environ_name_hcl" style="color: inherit; text-decoration: inherit;">environ_<wbr>name</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The name of namespace to be created.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_msg_ttl_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_msg_ttl_hcl" style="color: inherit; text-decoration: inherit;">msg_<wbr>ttl</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>The expiration time of unconsumed message.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_remark_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_hcl" style="color: inherit; text-decoration: inherit;">remark</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Description of the namespace.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_retention_policy_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retention_policy_hcl" style="color: inherit; text-decoration: inherit;">retention_<wbr>policy</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespaceretentionpolicy">object</a></span>
+    </dt>
+    <dd>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>timeInMinutes</code>: the time of message to retain; <code>sizeInMb</code>: the size of message to retain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_hcl" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespacetag">list(object)</a></span>
+    </dt>
+    <dd>The tags of the tencentcloud_tdmq_namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1109,8 +1430,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-optional"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environname_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environname_java" style="color: inherit; text-decoration: inherit;">environ<wbr>Name</a>
@@ -1118,8 +1438,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of namespace to be created.</p>
-</dd><dt class="property-optional"
+    <dd>The name of namespace to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_msgttl_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_msgttl_java" style="color: inherit; text-decoration: inherit;">msg<wbr>Ttl</a>
@@ -1127,8 +1446,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>The expiration time of unconsumed message.</p>
-</dd><dt class="property-optional"
+    <dd>The expiration time of unconsumed message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_java" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1136,17 +1454,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retentionpolicy_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retentionpolicy_java" style="color: inherit; text-decoration: inherit;">retention<wbr>Policy</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#namespaceretentionpolicy">Namespace<wbr>Retention<wbr>Policy<wbr>Args</a></span>
+        <span class="property-type"><a href="#namespaceretentionpolicy">Namespace<wbr>Retention<wbr>Policy</a></span>
     </dt>
-    <dd><p>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>time_in_minutes</code>: the time of message to retain; <code>size_in_mb</code>: the size of message to retain.</p>
-</dd></dl>
+    <dd>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>timeInMinutes</code>: the time of message to retain; <code>sizeInMb</code>: the size of message to retain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_java" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespacetag">List&lt;Namespace<wbr>Tag&gt;</a></span>
+    </dt>
+    <dd>The tags of the tencentcloud_tdmq_namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1160,8 +1484,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-optional"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environname_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environname_nodejs" style="color: inherit; text-decoration: inherit;">environ<wbr>Name</a>
@@ -1169,8 +1492,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The name of namespace to be created.</p>
-</dd><dt class="property-optional"
+    <dd>The name of namespace to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_msgttl_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_msgttl_nodejs" style="color: inherit; text-decoration: inherit;">msg<wbr>Ttl</a>
@@ -1178,8 +1500,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>The expiration time of unconsumed message.</p>
-</dd><dt class="property-optional"
+    <dd>The expiration time of unconsumed message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_nodejs" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1187,17 +1508,23 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retentionpolicy_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retentionpolicy_nodejs" style="color: inherit; text-decoration: inherit;">retention<wbr>Policy</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#namespaceretentionpolicy">Namespace<wbr>Retention<wbr>Policy<wbr>Args</a></span>
+        <span class="property-type"><a href="#namespaceretentionpolicy">Namespace<wbr>Retention<wbr>Policy</a></span>
     </dt>
-    <dd><p>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>time_in_minutes</code>: the time of message to retain; <code>size_in_mb</code>: the size of message to retain.</p>
-</dd></dl>
+    <dd>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>timeInMinutes</code>: the time of message to retain; <code>sizeInMb</code>: the size of message to retain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_nodejs" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespacetag">Namespace<wbr>Tag[]</a></span>
+    </dt>
+    <dd>The tags of the tencentcloud_tdmq_namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1211,8 +1538,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-optional"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environ_name_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environ_name_python" style="color: inherit; text-decoration: inherit;">environ_<wbr>name</a>
@@ -1220,8 +1546,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The name of namespace to be created.</p>
-</dd><dt class="property-optional"
+    <dd>The name of namespace to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_msg_ttl_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_msg_ttl_python" style="color: inherit; text-decoration: inherit;">msg_<wbr>ttl</a>
@@ -1229,8 +1554,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>The expiration time of unconsumed message.</p>
-</dd><dt class="property-optional"
+    <dd>The expiration time of unconsumed message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_python" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1238,8 +1562,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retention_policy_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retention_policy_python" style="color: inherit; text-decoration: inherit;">retention_<wbr>policy</a>
@@ -1247,8 +1570,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#namespaceretentionpolicy">Namespace<wbr>Retention<wbr>Policy<wbr>Args</a></span>
     </dt>
-    <dd><p>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>time_in_minutes</code>: the time of message to retain; <code>size_in_mb</code>: the size of message to retain.</p>
-</dd></dl>
+    <dd>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>timeInMinutes</code>: the time of message to retain; <code>sizeInMb</code>: the size of message to retain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_python" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespacetag">Sequence[Namespace<wbr>Tag<wbr>Args]</a></span>
+    </dt>
+    <dd>The tags of the tencentcloud_tdmq_namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1262,8 +1592,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The Dedicated Cluster Id.</p>
-</dd><dt class="property-optional"
+    <dd>The Dedicated Cluster Id.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_environname_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_environname_yaml" style="color: inherit; text-decoration: inherit;">environ<wbr>Name</a>
@@ -1271,8 +1600,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The name of namespace to be created.</p>
-</dd><dt class="property-optional"
+    <dd>The name of namespace to be created.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_msgttl_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_msgttl_yaml" style="color: inherit; text-decoration: inherit;">msg<wbr>Ttl</a>
@@ -1280,8 +1608,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>The expiration time of unconsumed message.</p>
-</dd><dt class="property-optional"
+    <dd>The expiration time of unconsumed message.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_remark_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_remark_yaml" style="color: inherit; text-decoration: inherit;">remark</a>
@@ -1289,8 +1616,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Description of the namespace.</p>
-</dd><dt class="property-optional"
+    <dd>Description of the namespace.</dd><dt class="property-optional"
             title="Optional">
         <span id="state_retentionpolicy_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_retentionpolicy_yaml" style="color: inherit; text-decoration: inherit;">retention<wbr>Policy</a>
@@ -1298,8 +1624,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#namespaceretentionpolicy">Property Map</a></span>
     </dt>
-    <dd><p>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>time_in_minutes</code>: the time of message to retain; <code>size_in_mb</code>: the size of message to retain.</p>
-</dd></dl>
+    <dd>The Policy of message to retain. Format like: <code>{time_in_minutes: Int, size_in_mb: Int}</code>. <code>timeInMinutes</code>: the time of message to retain; <code>sizeInMb</code>: the size of message to retain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="state_tags_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_tags_yaml" style="color: inherit; text-decoration: inherit;">tags</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#namespacetag">List&lt;Property Map&gt;</a></span>
+    </dt>
+    <dd>The tags of the tencentcloud_tdmq_namespace.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1314,7 +1647,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="namespaceretentionpolicy">Namespace<wbr>Retention<wbr>Policy</h4>
+<h4 id="namespaceretentionpolicy">
+Namespace<wbr>Retention<wbr>Policy<pulumi-choosable type="language" values="python,go" class="inline">, Namespace<wbr>Retention<wbr>Policy<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1326,8 +1661,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the size of message to retain.</p>
-</dd><dt class="property-optional"
+    <dd>the size of message to retain.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeinminutes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeinminutes_csharp" style="color: inherit; text-decoration: inherit;">Time<wbr>In<wbr>Minutes</a>
@@ -1335,8 +1669,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the time of message to retain.</p>
-</dd></dl>
+    <dd>the time of message to retain.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1350,8 +1683,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the size of message to retain.</p>
-</dd><dt class="property-optional"
+    <dd>the size of message to retain.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeinminutes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeinminutes_go" style="color: inherit; text-decoration: inherit;">Time<wbr>In<wbr>Minutes</a>
@@ -1359,8 +1691,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the time of message to retain.</p>
-</dd></dl>
+    <dd>the time of message to retain.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional"
+            title="Optional">
+        <span id="size_in_mb_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#size_in_mb_hcl" style="color: inherit; text-decoration: inherit;">size_<wbr>in_<wbr>mb</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>the size of message to retain.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="time_in_minutes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_in_minutes_hcl" style="color: inherit; text-decoration: inherit;">time_<wbr>in_<wbr>minutes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>the time of message to retain.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1374,8 +1727,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>the size of message to retain.</p>
-</dd><dt class="property-optional"
+    <dd>the size of message to retain.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeinminutes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeinminutes_java" style="color: inherit; text-decoration: inherit;">time<wbr>In<wbr>Minutes</a>
@@ -1383,8 +1735,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>the time of message to retain.</p>
-</dd></dl>
+    <dd>the time of message to retain.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1398,8 +1749,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>the size of message to retain.</p>
-</dd><dt class="property-optional"
+    <dd>the size of message to retain.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeinminutes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeinminutes_nodejs" style="color: inherit; text-decoration: inherit;">time<wbr>In<wbr>Minutes</a>
@@ -1407,8 +1757,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>the time of message to retain.</p>
-</dd></dl>
+    <dd>the time of message to retain.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1422,8 +1771,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the size of message to retain.</p>
-</dd><dt class="property-optional"
+    <dd>the size of message to retain.</dd><dt class="property-optional"
             title="Optional">
         <span id="time_in_minutes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#time_in_minutes_python" style="color: inherit; text-decoration: inherit;">time_<wbr>in_<wbr>minutes</a>
@@ -1431,8 +1779,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>the time of message to retain.</p>
-</dd></dl>
+    <dd>the time of message to retain.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1446,8 +1793,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>the size of message to retain.</p>
-</dd><dt class="property-optional"
+    <dd>the size of message to retain.</dd><dt class="property-optional"
             title="Optional">
         <span id="timeinminutes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#timeinminutes_yaml" style="color: inherit; text-decoration: inherit;">time<wbr>In<wbr>Minutes</a>
@@ -1455,8 +1801,165 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>the time of message to retain.</p>
-</dd></dl>
+    <dd>the time of message to retain.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<h4 id="namespacetag">
+Namespace<wbr>Tag<pulumi-choosable type="language" values="python,go" class="inline">, Namespace<wbr>Tag<wbr>Args</pulumi-choosable>
+</h4>
+
+<div>
+<pulumi-choosable type="language" values="csharp">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tagkey_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tagvalue_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_csharp" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="go">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tagkey_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tagvalue_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_go" style="color: inherit; text-decoration: inherit;">Tag<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tag_key_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tag_value_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_hcl" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="java">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tagkey_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tagvalue_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_java" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tagkey_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tagvalue_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_nodejs" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="python">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tag_key_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_key_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tag_value_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tag_value_python" style="color: inherit; text-decoration: inherit;">tag_<wbr>value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="yaml">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="tagkey_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagkey_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Key</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag key.</dd><dt class="property-required"
+            title="Required">
+        <span id="tagvalue_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#tagvalue_yaml" style="color: inherit; text-decoration: inherit;">tag<wbr>Value</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Tag value.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1472,6 +1975,9 @@ $ pulumi import tencentcloud:Tdmq/namespace:Namespace example tf_example#pulsar-
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1481,7 +1987,6 @@ $ pulumi import tencentcloud:Tdmq/namespace:Namespace example tf_example#pulsar-
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

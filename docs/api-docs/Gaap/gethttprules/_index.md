@@ -2,9 +2,11 @@
 ---
 title: "getHttpRules"
 title_tag: "tencentcloud.Gaap.getHttpRules"
-meta_desc: "Documentation for the tencentcloud.Gaap.getHttpRules function with examples, input properties, output properties, and supporting types."
+meta_desc: "Use this data source to query forward rule of layer7 listeners."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,25 +18,34 @@ Use this data source to query forward rule of layer7 listeners.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+const fooProxy = new tencentcloud.gaap.Proxy("foo", {
+    name: "ci-test-gaap-proxy",
     bandwidth: 10,
     concurrent: 2,
     accessRegion: "SouthChina",
     realserverRegion: "NorthChina",
 });
-const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("fooLayer7Listener", {
+const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("foo", {
     protocol: "HTTP",
+    name: "ci-test-gaap-l7-listener",
     port: 80,
     proxyId: fooProxy.id,
 });
-const fooRealserver = new tencentcloud.gaap.Realserver("fooRealserver", {ip: "1.1.1.1"});
-const fooHttpRule = new tencentcloud.gaap.HttpRule("fooHttpRule", {
+const fooRealserver = new tencentcloud.gaap.Realserver("foo", {
+    ip: "1.1.1.1",
+    name: "ci-test-gaap-realserver",
+});
+const fooHttpRule = new tencentcloud.gaap.HttpRule("foo", {
     listenerId: fooLayer7Listener.id,
     domain: "www.qq.com",
     path: "/",
@@ -46,70 +57,152 @@ const fooHttpRule = new tencentcloud.gaap.HttpRule("fooHttpRule", {
         port: 80,
     }],
 });
-const fooHttpRules = tencentcloud.Gaap.getHttpRulesOutput({
+const foo = tencentcloud.gaap.getHttpRulesOutput({
     listenerId: fooLayer7Listener.id,
     domain: fooHttpRule.domain,
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-foo_proxy = tencentcloud.gaap.Proxy("fooProxy",
+foo_proxy = tencentcloud.gaap.Proxy("foo",
+    name="ci-test-gaap-proxy",
     bandwidth=10,
     concurrent=2,
     access_region="SouthChina",
     realserver_region="NorthChina")
-foo_layer7_listener = tencentcloud.gaap.Layer7Listener("fooLayer7Listener",
+foo_layer7_listener = tencentcloud.gaap.Layer7Listener("foo",
     protocol="HTTP",
+    name="ci-test-gaap-l7-listener",
     port=80,
     proxy_id=foo_proxy.id)
-foo_realserver = tencentcloud.gaap.Realserver("fooRealserver", ip="1.1.1.1")
-foo_http_rule = tencentcloud.gaap.HttpRule("fooHttpRule",
+foo_realserver = tencentcloud.gaap.Realserver("foo",
+    ip="1.1.1.1",
+    name="ci-test-gaap-realserver")
+foo_http_rule = tencentcloud.gaap.HttpRule("foo",
     listener_id=foo_layer7_listener.id,
     domain="www.qq.com",
     path="/",
     realserver_type="IP",
     health_check=True,
-    realservers=[tencentcloud.gaap.HttpRuleRealserverArgs(
-        id=foo_realserver.id,
-        ip=foo_realserver.ip,
-        port=80,
-    )])
-foo_http_rules = tencentcloud.Gaap.get_http_rules_output(listener_id=foo_layer7_listener.id,
+    realservers=[{
+        "id": foo_realserver.id,
+        "ip": foo_realserver.ip,
+        "port": 80,
+    }])
+foo = tencentcloud.gaap.get_http_rules_output(listener_id=foo_layer7_listener.id,
     domain=foo_http_rule.domain)
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/gaap"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		fooProxy, err := gaap.NewProxy(ctx, "foo", &gaap.ProxyArgs{
+			Name:             pulumi.String("ci-test-gaap-proxy"),
+			Bandwidth:        pulumi.Int(10),
+			Concurrent:       pulumi.Int(2),
+			AccessRegion:     pulumi.String("SouthChina"),
+			RealserverRegion: pulumi.String("NorthChina"),
+		})
+		if err != nil {
+			return err
+		}
+		fooLayer7Listener, err := gaap.NewLayer7Listener(ctx, "foo", &gaap.Layer7ListenerArgs{
+			Protocol: pulumi.String("HTTP"),
+			Name:     pulumi.String("ci-test-gaap-l7-listener"),
+			Port:     pulumi.Int(80),
+			ProxyId:  fooProxy.ID().ToIDOutput().ToStringOutput(),
+		})
+		if err != nil {
+			return err
+		}
+		fooRealserver, err := gaap.NewRealserver(ctx, "foo", &gaap.RealserverArgs{
+			Ip:   pulumi.String("1.1.1.1"),
+			Name: pulumi.String("ci-test-gaap-realserver"),
+		})
+		if err != nil {
+			return err
+		}
+		fooHttpRule, err := gaap.NewHttpRule(ctx, "foo", &gaap.HttpRuleArgs{
+			ListenerId:     fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
+			Domain:         pulumi.String("www.qq.com"),
+			Path:           pulumi.String("/"),
+			RealserverType: pulumi.String("IP"),
+			HealthCheck:    pulumi.Bool(true),
+			Realservers: gaap.HttpRuleRealserverArray{
+				&gaap.HttpRuleRealserverArgs{
+					Id:   fooRealserver.ID().ToIDOutput().ToStringOutput(),
+					Ip:   fooRealserver.Ip,
+					Port: pulumi.Int(80),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		_ = gaap.GetHttpRulesOutput(ctx, gaap.GetHttpRulesOutputArgs{
+			ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
+			Domain:     fooHttpRule.Domain,
+		}, nil)
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
 {
-    var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
+    var fooProxy = new Tencentcloud.Gaap.Proxy("foo", new()
     {
+        Name = "ci-test-gaap-proxy",
         Bandwidth = 10,
         Concurrent = 2,
         AccessRegion = "SouthChina",
         RealserverRegion = "NorthChina",
     });
 
-    var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
+    var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("foo", new()
     {
         Protocol = "HTTP",
+        Name = "ci-test-gaap-l7-listener",
         Port = 80,
         ProxyId = fooProxy.Id,
     });
 
-    var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new()
+    var fooRealserver = new Tencentcloud.Gaap.Realserver("foo", new()
     {
         Ip = "1.1.1.1",
+        Name = "ci-test-gaap-realserver",
     });
 
-    var fooHttpRule = new Tencentcloud.Gaap.HttpRule("fooHttpRule", new()
+    var fooHttpRule = new Tencentcloud.Gaap.HttpRule("foo", new()
     {
         ListenerId = fooLayer7Listener.Id,
         Domain = "www.qq.com",
@@ -127,7 +220,7 @@ return await Deployment.RunAsync(() =>
         },
     });
 
-    var fooHttpRules = Tencentcloud.Gaap.GetHttpRules.Invoke(new()
+    var foo = Tencentcloud.Gaap.GetHttpRules.Invoke(new()
     {
         ListenerId = fooLayer7Listener.Id,
         Domain = fooHttpRule.Domain,
@@ -135,64 +228,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-			Bandwidth:        pulumi.Int(10),
-			Concurrent:       pulumi.Int(2),
-			AccessRegion:     pulumi.String("SouthChina"),
-			RealserverRegion: pulumi.String("NorthChina"),
-		})
-		if err != nil {
-			return err
-		}
-		fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
-			Protocol: pulumi.String("HTTP"),
-			Port:     pulumi.Int(80),
-			ProxyId:  fooProxy.ID(),
-		})
-		if err != nil {
-			return err
-		}
-		fooRealserver, err := Gaap.NewRealserver(ctx, "fooRealserver", &Gaap.RealserverArgs{
-			Ip: pulumi.String("1.1.1.1"),
-		})
-		if err != nil {
-			return err
-		}
-		fooHttpRule, err := Gaap.NewHttpRule(ctx, "fooHttpRule", &Gaap.HttpRuleArgs{
-			ListenerId:     fooLayer7Listener.ID(),
-			Domain:         pulumi.String("www.qq.com"),
-			Path:           pulumi.String("/"),
-			RealserverType: pulumi.String("IP"),
-			HealthCheck:    pulumi.Bool(true),
-			Realservers: gaap.HttpRuleRealserverArray{
-				&gaap.HttpRuleRealserverArgs{
-					Id:   fooRealserver.ID(),
-					Ip:   fooRealserver.Ip,
-					Port: pulumi.Int(80),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		_ = Gaap.GetHttpRulesOutput(ctx, gaap.GetHttpRulesOutputArgs{
-			ListenerId: fooLayer7Listener.ID(),
-			Domain:     fooHttpRule.Domain,
-		}, nil)
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -210,8 +250,8 @@ import com.pulumi.tencentcloud.Gaap.HttpRuleArgs;
 import com.pulumi.tencentcloud.Gaap.inputs.HttpRuleRealserverArgs;
 import com.pulumi.tencentcloud.Gaap.GaapFunctions;
 import com.pulumi.tencentcloud.Gaap.inputs.GetHttpRulesArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -223,24 +263,27 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        var fooProxy = new Proxy("fooProxy", ProxyArgs.builder()        
+        var fooProxy = new Proxy("fooProxy", ProxyArgs.builder()
+            .name("ci-test-gaap-proxy")
             .bandwidth(10)
             .concurrent(2)
             .accessRegion("SouthChina")
             .realserverRegion("NorthChina")
             .build());
 
-        var fooLayer7Listener = new Layer7Listener("fooLayer7Listener", Layer7ListenerArgs.builder()        
+        var fooLayer7Listener = new Layer7Listener("fooLayer7Listener", Layer7ListenerArgs.builder()
             .protocol("HTTP")
+            .name("ci-test-gaap-l7-listener")
             .port(80)
             .proxyId(fooProxy.id())
             .build());
 
-        var fooRealserver = new Realserver("fooRealserver", RealserverArgs.builder()        
+        var fooRealserver = new Realserver("fooRealserver", RealserverArgs.builder()
             .ip("1.1.1.1")
+            .name("ci-test-gaap-realserver")
             .build());
 
-        var fooHttpRule = new HttpRule("fooHttpRule", HttpRuleArgs.builder()        
+        var fooHttpRule = new HttpRule("fooHttpRule", HttpRuleArgs.builder()
             .listenerId(fooLayer7Listener.id())
             .domain("www.qq.com")
             .path("/")
@@ -253,7 +296,7 @@ public class App {
                 .build())
             .build());
 
-        final var fooHttpRules = GaapFunctions.getHttpRules(GetHttpRulesArgs.builder()
+        final var foo = GaapFunctions.getHttpRules(GetHttpRulesArgs.builder()
             .listenerId(fooLayer7Listener.id())
             .domain(fooHttpRule.domain())
             .build());
@@ -261,27 +304,39 @@ public class App {
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   fooProxy:
     type: tencentcloud:Gaap:Proxy
+    name: foo
     properties:
+      name: ci-test-gaap-proxy
       bandwidth: 10
       concurrent: 2
       accessRegion: SouthChina
       realserverRegion: NorthChina
   fooLayer7Listener:
     type: tencentcloud:Gaap:Layer7Listener
+    name: foo
     properties:
       protocol: HTTP
+      name: ci-test-gaap-l7-listener
       port: 80
       proxyId: ${fooProxy.id}
   fooRealserver:
     type: tencentcloud:Gaap:Realserver
+    name: foo
     properties:
       ip: 1.1.1.1
+      name: ci-test-gaap-realserver
   fooHttpRule:
     type: tencentcloud:Gaap:HttpRule
+    name: foo
     properties:
       listenerId: ${fooLayer7Listener.id}
       domain: www.qq.com
@@ -293,15 +348,71 @@ resources:
           ip: ${fooRealserver.ip}
           port: 80
 variables:
-  fooHttpRules:
+  foo:
     fn::invoke:
-      Function: tencentcloud:Gaap:getHttpRules
-      Arguments:
+      function: tencentcloud:Gaap:getHttpRules
+      arguments:
         listenerId: ${fooLayer7Listener.id}
         domain: ${fooHttpRule.domain}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_gaap_gethttprules" "foo" {
+  listener_id = tencentcloud_gaap_layer7listener.foo.id
+  domain      = tencentcloud_gaap_httprule.foo.domain
+}
+
+resource "tencentcloud_gaap_proxy" "foo" {
+  name              = "ci-test-gaap-proxy"
+  bandwidth         = 10
+  concurrent        = 2
+  access_region     = "SouthChina"
+  realserver_region = "NorthChina"
+}
+resource "tencentcloud_gaap_layer7listener" "foo" {
+  protocol = "HTTP"
+  name     = "ci-test-gaap-l7-listener"
+  port     = 80
+  proxy_id = tencentcloud_gaap_proxy.foo.id
+}
+resource "tencentcloud_gaap_realserver" "foo" {
+  ip   = "1.1.1.1"
+  name = "ci-test-gaap-realserver"
+}
+resource "tencentcloud_gaap_httprule" "foo" {
+  listener_id     = tencentcloud_gaap_layer7listener.foo.id
+  domain          = "www.qq.com"
+  path            = "/"
+  realserver_type = "IP"
+  health_check    = true
+  realservers {
+    id   = tencentcloud_gaap_realserver.foo.id
+    ip   = tencentcloud_gaap_realserver.foo.ip
+    port = 80
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This data source queries the following TencentCloud APIs:
+
+* Read: [DescribeRules](https://www.tencentcloud.com/document/api/608/33041)
 
 
 
@@ -313,7 +424,7 @@ returns a Promise-wrapped result. The output form accepts
 Input-wrapped arguments and returns an Output-wrapped result.
 
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
@@ -321,9 +432,9 @@ Input-wrapped arguments and returns an Output-wrapped result.
 <pulumi-choosable type="language" values="javascript,typescript">
 <div class="highlight"
 ><pre class="chroma"><code class="language-typescript" data-lang="typescript"
-><span class="k">function </span>getHttpRules<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetHttpRulesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetHttpRulesResult</a></span>></span
+><span class="k">function </span>getHttpRules<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetHttpRulesArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOptions.html">InvokeOptions</a></span><span class="p">): Promise&lt;<span class="nx"><a href="#result">GetHttpRulesResult</a></span>></span
 ><span class="k">
-function </span>getHttpRulesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetHttpRulesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#InvokeOptions">InvokeOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetHttpRulesResult</a></span>></span
+function </span>getHttpRulesOutput<span class="p">(</span><span class="nx">args</span><span class="p">:</span> <span class="nx">GetHttpRulesOutputArgs</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p">): Output&lt;<span class="nx"><a href="#result">GetHttpRulesResult</a></span>></span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -339,12 +450,12 @@ function </span>getHttpRulesOutput<span class="p">(</span><span class="nx">args<
                    <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">,</span>
                    <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>GetHttpRulesResult</span
 ><span class="k">
-def </span>get_http_rules_output<span class="p">(</span><span class="nx">domain</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">forward_host</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">path</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">Optional[pulumi.Input[str]]</span> = None<span class="p">,</span>
-                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOptions">Optional[InvokeOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetHttpRulesResult]</span
+def </span>get_http_rules_output<span class="p">(</span><span class="nx">domain</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">forward_host</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">listener_id</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">path</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">result_output_file</span><span class="p">:</span> <span class="nx">pulumi.Input[Optional[str]]</span> = None<span class="p">,</span>
+                   <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.InvokeOutputOptions">Optional[InvokeOutputOptions]</a></span> = None<span class="p">) -&gt;</span> <span>Output[GetHttpRulesResult]</span
 ></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -369,7 +480,8 @@ func </span>GetHttpRulesOutput<span class="p">(</span><span class="nx">ctx</span
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">GetHttpRules </span><span class="p">
 {</span><span class="k">
     public static </span>Task&lt;<span class="nx"><a href="#result">GetHttpRulesResult</a></span>> <span class="p">InvokeAsync(</span><span class="nx">GetHttpRulesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
-    public static </span>Output&lt;<span class="nx"><a href="#result">GetHttpRulesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetHttpRulesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="p">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetHttpRulesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetHttpRulesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOptions.html">InvokeOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span><span class="k">
+    public static </span>Output&lt;<span class="nx"><a href="#result">GetHttpRulesResult</a></span>> <span class="p">Invoke(</span><span class="nx">GetHttpRulesInvokeArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.InvokeOutputOptions.html">InvokeOutputOptions</a></span><span class="p"> </span><span class="nx">opts<span class="p">)</span><span class="p">
 }</span></code></pre></div>
 </pulumi-choosable>
 </div>
@@ -378,7 +490,8 @@ func </span>GetHttpRulesOutput<span class="p">(</span><span class="nx">ctx</span
 <div>
 <pulumi-choosable type="language" values="java">
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static CompletableFuture&lt;<span class="nx"><a href="#result">GetHttpRulesResult</a></span>> </span>getHttpRules<span class="p">(</span><span class="nx">GetHttpRulesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-<span class="c">// Output-based functions aren't available in Java yet</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetHttpRulesResult</a></span>> </span>getHttpRules<span class="p">(</span><span class="nx">GetHttpRulesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
+<span class="k">public static Output&lt;<span class="nx"><a href="#result">GetHttpRulesResult</a></span>> </span>getHttpRules<span class="p">(</span><span class="nx">GetHttpRulesArgs</span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">InvokeOutputOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
 </code></pre></div>
 </pulumi-choosable>
 </div>
@@ -390,6 +503,15 @@ func </span>GetHttpRulesOutput<span class="p">(</span><span class="nx">ctx</span
 <span class="k">&nbsp;&nbsp;function:</span> tencentcloud:Gaap/getHttpRules:getHttpRules
 <span class="k">&nbsp;&nbsp;arguments:</span>
 <span class="c">&nbsp;&nbsp;&nbsp;&nbsp;# arguments dictionary</span></code></pre></div>
+</pulumi-choosable>
+</div>
+
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">data</span> <span class="s2">&#34;tencentcloud_gaap_get_http_rules&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # arguments</span>
+<span class="p">}</span></code></pre></div>
 </pulumi-choosable>
 </div>
 
@@ -408,8 +530,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -417,8 +538,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="forwardhost_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardhost_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Host</a>
@@ -426,8 +546,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Requested host which is forwarded to the realserver by the listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_csharp" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -435,8 +554,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of the forward rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Path of the forward rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -444,8 +562,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -459,8 +576,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -468,8 +584,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="forwardhost_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardhost_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Host</a>
@@ -477,8 +592,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Requested host which is forwarded to the realserver by the listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_go" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -486,8 +600,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of the forward rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Path of the forward rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -495,8 +608,53 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="forward_host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_host_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Requested host which is forwarded to the realserver by the listener to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_hcl" style="color: inherit; text-decoration: inherit;">path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Path of the forward rule to be queried.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -510,8 +668,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -519,8 +676,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="forwardhost_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardhost_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Host</a>
@@ -528,8 +684,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Requested host which is forwarded to the realserver by the listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_java" style="color: inherit; text-decoration: inherit;">path</a>
@@ -537,8 +692,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Path of the forward rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Path of the forward rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -546,8 +700,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -561,8 +714,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -570,8 +722,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="forwardhost_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardhost_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Host</a>
@@ -579,8 +730,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Requested host which is forwarded to the realserver by the listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_nodejs" style="color: inherit; text-decoration: inherit;">path</a>
@@ -588,8 +738,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of the forward rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Path of the forward rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -597,8 +746,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -612,8 +760,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -621,8 +768,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="forward_host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_host_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>host</a>
@@ -630,8 +776,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Requested host which is forwarded to the realserver by the listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_python" style="color: inherit; text-decoration: inherit;">path</a>
@@ -639,8 +784,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Path of the forward rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Path of the forward rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -648,8 +792,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -663,8 +806,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -672,8 +814,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="forwardhost_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardhost_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Host</a>
@@ -681,8 +822,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Requested host which is forwarded to the realserver by the listener to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="path_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_yaml" style="color: inherit; text-decoration: inherit;">path</a>
@@ -690,8 +830,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Path of the forward rule to be queried.</p>
-</dd><dt class="property-optional"
+    <dd>Path of the forward rule to be queried.</dd><dt class="property-optional"
             title="Optional">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -699,8 +838,7 @@ The following arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Used to save results.</p>
-</dd></dl>
+    <dd>Used to save results.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -723,8 +861,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -732,8 +869,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="rules_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_csharp" style="color: inherit; text-decoration: inherit;">Rules</a>
@@ -741,8 +877,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gethttprulesrule">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Outputs.<wbr>Get<wbr>Http<wbr>Rules<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>An information list of forward rule of the layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of forward rule of the layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -750,8 +885,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Domain of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="forwardhost_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardhost_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Host</a>
@@ -759,8 +893,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener.</p>
-</dd><dt class="property-"
+    <dd>Requested host which is forwarded to the realserver by the listener.</dd><dt class="property-"
             title="">
         <span id="path_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_csharp" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -768,8 +901,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of the forward rule.</p>
-</dd><dt class="property-"
+    <dd>Path of the forward rule.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_csharp" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
@@ -791,8 +923,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -800,8 +931,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="rules_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_go" style="color: inherit; text-decoration: inherit;">Rules</a>
@@ -809,8 +939,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gethttprulesrule">[]Get<wbr>Http<wbr>Rules<wbr>Rule</a></span>
     </dt>
-    <dd><p>An information list of forward rule of the layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of forward rule of the layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -818,8 +947,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Domain of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="forwardhost_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardhost_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Host</a>
@@ -827,8 +955,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener.</p>
-</dd><dt class="property-"
+    <dd>Requested host which is forwarded to the realserver by the listener.</dd><dt class="property-"
             title="">
         <span id="path_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_go" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -836,11 +963,72 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of the forward rule.</p>
-</dd><dt class="property-"
+    <dd>Path of the forward rule.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_go" style="color: inherit; text-decoration: inherit;">Result<wbr>Output<wbr>File</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd></dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
+            title="">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the layer7 listener.</dd><dt class="property-"
+            title="">
+        <span id="rules_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_hcl" style="color: inherit; text-decoration: inherit;">rules</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gethttprulesrule">list(object)</a></span>
+    </dt>
+    <dd>An information list of forward rule of the layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
+            title="">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Domain of the GAAP realserver.</dd><dt class="property-"
+            title="">
+        <span id="forward_host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_host_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Requested host which is forwarded to the realserver by the listener.</dd><dt class="property-"
+            title="">
+        <span id="path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_hcl" style="color: inherit; text-decoration: inherit;">path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Path of the forward rule.</dd><dt class="property-"
+            title="">
+        <span id="result_output_file_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_hcl" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
 </span>
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
@@ -859,8 +1047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -868,8 +1055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="rules_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_java" style="color: inherit; text-decoration: inherit;">rules</a>
@@ -877,8 +1063,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gethttprulesrule">List&lt;Get<wbr>Http<wbr>Rules<wbr>Rule&gt;</a></span>
     </dt>
-    <dd><p>An information list of forward rule of the layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of forward rule of the layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -886,8 +1071,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Domain of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="forwardhost_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardhost_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Host</a>
@@ -895,8 +1079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener.</p>
-</dd><dt class="property-"
+    <dd>Requested host which is forwarded to the realserver by the listener.</dd><dt class="property-"
             title="">
         <span id="path_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_java" style="color: inherit; text-decoration: inherit;">path</a>
@@ -904,8 +1087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Path of the forward rule.</p>
-</dd><dt class="property-"
+    <dd>Path of the forward rule.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_java" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -927,8 +1109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -936,8 +1117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="rules_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_nodejs" style="color: inherit; text-decoration: inherit;">rules</a>
@@ -945,8 +1125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gethttprulesrule">Get<wbr>Http<wbr>Rules<wbr>Rule[]</a></span>
     </dt>
-    <dd><p>An information list of forward rule of the layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of forward rule of the layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -954,8 +1133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Domain of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="forwardhost_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardhost_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Host</a>
@@ -963,8 +1141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener.</p>
-</dd><dt class="property-"
+    <dd>Requested host which is forwarded to the realserver by the listener.</dd><dt class="property-"
             title="">
         <span id="path_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_nodejs" style="color: inherit; text-decoration: inherit;">path</a>
@@ -972,8 +1149,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of the forward rule.</p>
-</dd><dt class="property-"
+    <dd>Path of the forward rule.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_nodejs" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -995,8 +1171,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -1004,17 +1179,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="rules_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_python" style="color: inherit; text-decoration: inherit;">rules</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gethttprulesrule">Get<wbr>Http<wbr>Rules<wbr>Rule]</a></span>
+        <span class="property-type"><a href="#gethttprulesrule">Sequence[Get<wbr>Http<wbr>Rules<wbr>Rule]</a></span>
     </dt>
-    <dd><p>An information list of forward rule of the layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of forward rule of the layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1022,8 +1195,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Domain of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="forward_host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_host_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>host</a>
@@ -1031,8 +1203,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener.</p>
-</dd><dt class="property-"
+    <dd>Requested host which is forwarded to the realserver by the listener.</dd><dt class="property-"
             title="">
         <span id="path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_python" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1040,8 +1211,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Path of the forward rule.</p>
-</dd><dt class="property-"
+    <dd>Path of the forward rule.</dd><dt class="property-"
             title="">
         <span id="result_output_file_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#result_output_file_python" style="color: inherit; text-decoration: inherit;">result_<wbr>output_<wbr>file</a>
@@ -1063,8 +1233,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd><dt class="property-"
+    <dd>The provider-assigned unique ID for this managed resource.</dd><dt class="property-"
             title="">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1072,8 +1241,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener.</p>
-</dd><dt class="property-"
+    <dd>ID of the layer7 listener.</dd><dt class="property-"
             title="">
         <span id="rules_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#rules_yaml" style="color: inherit; text-decoration: inherit;">rules</a>
@@ -1081,8 +1249,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gethttprulesrule">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of forward rule of the layer7 listeners. Each element contains the following attributes:</p>
-</dd><dt class="property-"
+    <dd>An information list of forward rule of the layer7 listeners. Each element contains the following attributes:</dd><dt class="property-"
             title="">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1090,8 +1257,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Domain of the GAAP realserver.</p>
-</dd><dt class="property-"
+    <dd>Domain of the GAAP realserver.</dd><dt class="property-"
             title="">
         <span id="forwardhost_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardhost_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Host</a>
@@ -1099,8 +1265,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener.</p>
-</dd><dt class="property-"
+    <dd>Requested host which is forwarded to the realserver by the listener.</dd><dt class="property-"
             title="">
         <span id="path_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_yaml" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1108,8 +1273,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Path of the forward rule.</p>
-</dd><dt class="property-"
+    <dd>Path of the forward rule.</dd><dt class="property-"
             title="">
         <span id="resultoutputfile_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#resultoutputfile_yaml" style="color: inherit; text-decoration: inherit;">result<wbr>Output<wbr>File</a>
@@ -1141,8 +1305,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the health check response.</p>
-</dd><dt class="property-required"
+    <dd>Timeout of the health check response.</dd><dt class="property-required"
             title="Required">
         <span id="domain_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_csharp" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1150,8 +1313,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="forwardhost_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardhost_csharp" style="color: inherit; text-decoration: inherit;">Forward<wbr>Host</a>
@@ -1159,8 +1321,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Requested host which is forwarded to the realserver by the listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheck_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check</a>
@@ -1168,8 +1329,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enable.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckmethod_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckmethod_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Method</a>
@@ -1177,8 +1337,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Method of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Method of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckpath_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckpath_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Path</a>
@@ -1186,8 +1345,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of health check.</p>
-</dd><dt class="property-required"
+    <dd>Path of health check.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckstatuscodes_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckstatuscodes_csharp" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Status<wbr>Codes</a>
@@ -1195,8 +1353,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;int&gt;</span>
     </dt>
-    <dd><p>Return code of confirmed normal.</p>
-</dd><dt class="property-required"
+    <dd>Return code of confirmed normal.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1204,8 +1361,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="interval_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_csharp" style="color: inherit; text-decoration: inherit;">Interval</a>
@@ -1213,8 +1369,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Interval of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_csharp" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -1222,8 +1377,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="path_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_csharp" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -1231,8 +1385,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of the forward rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Path of the forward rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="realservertype_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservertype_csharp" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Type</a>
@@ -1240,8 +1393,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the realserver.</p>
-</dd><dt class="property-required"
+    <dd>Type of the realserver.</dd><dt class="property-required"
             title="Required">
         <span id="realservers_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservers_csharp" style="color: inherit; text-decoration: inherit;">Realservers</a>
@@ -1249,8 +1401,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gethttprulesrulerealserver">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Gaap.<wbr>Inputs.<wbr>Get<wbr>Http<wbr>Rules<wbr>Rule<wbr>Realserver&gt;</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of GAAP realserver. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_csharp" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -1258,8 +1409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling policy of the forward rule.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling policy of the forward rule.</dd><dt class="property-required"
             title="Required">
         <span id="sni_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sni_csharp" style="color: inherit; text-decoration: inherit;">Sni</a>
@@ -1267,8 +1417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ServerNameIndication (SNI).</p>
-</dd><dt class="property-required"
+    <dd>ServerNameIndication (SNI).</dd><dt class="property-required"
             title="Required">
         <span id="sniswitch_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sniswitch_csharp" style="color: inherit; text-decoration: inherit;">Sni<wbr>Switch</a>
@@ -1276,8 +1425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ServerNameIndication (SNI) switch.</p>
-</dd></dl>
+    <dd>ServerNameIndication (SNI) switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1291,8 +1439,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the health check response.</p>
-</dd><dt class="property-required"
+    <dd>Timeout of the health check response.</dd><dt class="property-required"
             title="Required">
         <span id="domain_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_go" style="color: inherit; text-decoration: inherit;">Domain</a>
@@ -1300,8 +1447,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="forwardhost_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardhost_go" style="color: inherit; text-decoration: inherit;">Forward<wbr>Host</a>
@@ -1309,8 +1455,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Requested host which is forwarded to the realserver by the listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheck_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check</a>
@@ -1318,8 +1463,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enable.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckmethod_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckmethod_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Method</a>
@@ -1327,8 +1471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Method of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Method of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckpath_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckpath_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Path</a>
@@ -1336,8 +1479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of health check.</p>
-</dd><dt class="property-required"
+    <dd>Path of health check.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckstatuscodes_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckstatuscodes_go" style="color: inherit; text-decoration: inherit;">Health<wbr>Check<wbr>Status<wbr>Codes</a>
@@ -1345,8 +1487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">[]int</span>
     </dt>
-    <dd><p>Return code of confirmed normal.</p>
-</dd><dt class="property-required"
+    <dd>Return code of confirmed normal.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -1354,8 +1495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="interval_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_go" style="color: inherit; text-decoration: inherit;">Interval</a>
@@ -1363,8 +1503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Interval of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_go" style="color: inherit; text-decoration: inherit;">Listener<wbr>Id</a>
@@ -1372,8 +1511,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="path_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_go" style="color: inherit; text-decoration: inherit;">Path</a>
@@ -1381,8 +1519,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of the forward rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Path of the forward rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="realservertype_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservertype_go" style="color: inherit; text-decoration: inherit;">Realserver<wbr>Type</a>
@@ -1390,8 +1527,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the realserver.</p>
-</dd><dt class="property-required"
+    <dd>Type of the realserver.</dd><dt class="property-required"
             title="Required">
         <span id="realservers_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservers_go" style="color: inherit; text-decoration: inherit;">Realservers</a>
@@ -1399,8 +1535,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gethttprulesrulerealserver">[]Get<wbr>Http<wbr>Rules<wbr>Rule<wbr>Realserver</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of GAAP realserver. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_go" style="color: inherit; text-decoration: inherit;">Scheduler</a>
@@ -1408,8 +1543,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling policy of the forward rule.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling policy of the forward rule.</dd><dt class="property-required"
             title="Required">
         <span id="sni_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sni_go" style="color: inherit; text-decoration: inherit;">Sni</a>
@@ -1417,8 +1551,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ServerNameIndication (SNI).</p>
-</dd><dt class="property-required"
+    <dd>ServerNameIndication (SNI).</dd><dt class="property-required"
             title="Required">
         <span id="sniswitch_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sniswitch_go" style="color: inherit; text-decoration: inherit;">Sni<wbr>Switch</a>
@@ -1426,8 +1559,141 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ServerNameIndication (SNI) switch.</p>
-</dd></dl>
+    <dd>ServerNameIndication (SNI) switch.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="connect_timeout_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#connect_timeout_hcl" style="color: inherit; text-decoration: inherit;">connect_<wbr>timeout</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Timeout of the health check response.</dd><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="forward_host_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_host_hcl" style="color: inherit; text-decoration: inherit;">forward_<wbr>host</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Requested host which is forwarded to the realserver by the listener to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_check_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">bool</span>
+    </dt>
+    <dd>Indicates whether health check is enable.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_check_method_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_method_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>method</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Method of the health check.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_check_path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_path_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Path of health check.</dd><dt class="property-required"
+            title="Required">
+        <span id="health_check_status_codes_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_status_codes_hcl" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>status_<wbr>codes</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">list(number)</span>
+    </dt>
+    <dd>Return code of confirmed normal.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
+            title="Required">
+        <span id="interval_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_hcl" style="color: inherit; text-decoration: inherit;">interval</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Interval of the health check.</dd><dt class="property-required"
+            title="Required">
+        <span id="listener_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_hcl" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="path_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_hcl" style="color: inherit; text-decoration: inherit;">path</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Path of the forward rule to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="realserver_type_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_type_hcl" style="color: inherit; text-decoration: inherit;">realserver_<wbr>type</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Type of the realserver.</dd><dt class="property-required"
+            title="Required">
+        <span id="realservers_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservers_hcl" style="color: inherit; text-decoration: inherit;">realservers</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#gethttprulesrulerealserver">list(object)</a></span>
+    </dt>
+    <dd>An information list of GAAP realserver. Each element contains the following attributes:</dd><dt class="property-required"
+            title="Required">
+        <span id="scheduler_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_hcl" style="color: inherit; text-decoration: inherit;">scheduler</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Scheduling policy of the forward rule.</dd><dt class="property-required"
+            title="Required">
+        <span id="sni_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sni_hcl" style="color: inherit; text-decoration: inherit;">sni</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ServerNameIndication (SNI).</dd><dt class="property-required"
+            title="Required">
+        <span id="sni_switch_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sni_switch_hcl" style="color: inherit; text-decoration: inherit;">sni_<wbr>switch</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ServerNameIndication (SNI) switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1441,8 +1707,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Timeout of the health check response.</p>
-</dd><dt class="property-required"
+    <dd>Timeout of the health check response.</dd><dt class="property-required"
             title="Required">
         <span id="domain_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_java" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1450,8 +1715,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="forwardhost_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardhost_java" style="color: inherit; text-decoration: inherit;">forward<wbr>Host</a>
@@ -1459,8 +1723,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Requested host which is forwarded to the realserver by the listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheck_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
@@ -1468,8 +1731,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enable.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckmethod_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckmethod_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Method</a>
@@ -1477,8 +1739,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Method of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Method of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckpath_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckpath_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Path</a>
@@ -1486,8 +1747,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Path of health check.</p>
-</dd><dt class="property-required"
+    <dd>Path of health check.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckstatuscodes_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckstatuscodes_java" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Status<wbr>Codes</a>
@@ -1495,8 +1755,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Integer&gt;</span>
     </dt>
-    <dd><p>Return code of confirmed normal.</p>
-</dd><dt class="property-required"
+    <dd>Return code of confirmed normal.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1504,8 +1763,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="interval_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_java" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1513,8 +1771,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Interval of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Interval of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_java" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1522,8 +1779,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="path_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_java" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1531,8 +1787,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Path of the forward rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Path of the forward rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="realservertype_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservertype_java" style="color: inherit; text-decoration: inherit;">realserver<wbr>Type</a>
@@ -1540,8 +1795,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the realserver.</p>
-</dd><dt class="property-required"
+    <dd>Type of the realserver.</dd><dt class="property-required"
             title="Required">
         <span id="realservers_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservers_java" style="color: inherit; text-decoration: inherit;">realservers</a>
@@ -1549,8 +1803,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gethttprulesrulerealserver">List&lt;Get<wbr>Http<wbr>Rules<wbr>Rule<wbr>Realserver&gt;</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of GAAP realserver. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_java" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -1558,8 +1811,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling policy of the forward rule.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling policy of the forward rule.</dd><dt class="property-required"
             title="Required">
         <span id="sni_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sni_java" style="color: inherit; text-decoration: inherit;">sni</a>
@@ -1567,8 +1819,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ServerNameIndication (SNI).</p>
-</dd><dt class="property-required"
+    <dd>ServerNameIndication (SNI).</dd><dt class="property-required"
             title="Required">
         <span id="sniswitch_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sniswitch_java" style="color: inherit; text-decoration: inherit;">sni<wbr>Switch</a>
@@ -1576,8 +1827,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ServerNameIndication (SNI) switch.</p>
-</dd></dl>
+    <dd>ServerNameIndication (SNI) switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1591,8 +1841,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Timeout of the health check response.</p>
-</dd><dt class="property-required"
+    <dd>Timeout of the health check response.</dd><dt class="property-required"
             title="Required">
         <span id="domain_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_nodejs" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1600,8 +1849,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="forwardhost_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardhost_nodejs" style="color: inherit; text-decoration: inherit;">forward<wbr>Host</a>
@@ -1609,8 +1857,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Requested host which is forwarded to the realserver by the listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheck_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
@@ -1618,8 +1865,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enable.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckmethod_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckmethod_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Method</a>
@@ -1627,8 +1873,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Method of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Method of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckpath_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckpath_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Path</a>
@@ -1636,8 +1881,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of health check.</p>
-</dd><dt class="property-required"
+    <dd>Path of health check.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckstatuscodes_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckstatuscodes_nodejs" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Status<wbr>Codes</a>
@@ -1645,8 +1889,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number[]</span>
     </dt>
-    <dd><p>Return code of confirmed normal.</p>
-</dd><dt class="property-required"
+    <dd>Return code of confirmed normal.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1654,8 +1897,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="interval_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_nodejs" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1663,8 +1905,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Interval of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Interval of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_nodejs" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1672,8 +1913,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="path_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_nodejs" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1681,8 +1921,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Path of the forward rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Path of the forward rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="realservertype_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservertype_nodejs" style="color: inherit; text-decoration: inherit;">realserver<wbr>Type</a>
@@ -1690,8 +1929,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Type of the realserver.</p>
-</dd><dt class="property-required"
+    <dd>Type of the realserver.</dd><dt class="property-required"
             title="Required">
         <span id="realservers_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservers_nodejs" style="color: inherit; text-decoration: inherit;">realservers</a>
@@ -1699,8 +1937,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gethttprulesrulerealserver">Get<wbr>Http<wbr>Rules<wbr>Rule<wbr>Realserver[]</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of GAAP realserver. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_nodejs" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -1708,8 +1945,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Scheduling policy of the forward rule.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling policy of the forward rule.</dd><dt class="property-required"
             title="Required">
         <span id="sni_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sni_nodejs" style="color: inherit; text-decoration: inherit;">sni</a>
@@ -1717,8 +1953,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ServerNameIndication (SNI).</p>
-</dd><dt class="property-required"
+    <dd>ServerNameIndication (SNI).</dd><dt class="property-required"
             title="Required">
         <span id="sniswitch_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sniswitch_nodejs" style="color: inherit; text-decoration: inherit;">sni<wbr>Switch</a>
@@ -1726,8 +1961,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ServerNameIndication (SNI) switch.</p>
-</dd></dl>
+    <dd>ServerNameIndication (SNI) switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1741,8 +1975,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Timeout of the health check response.</p>
-</dd><dt class="property-required"
+    <dd>Timeout of the health check response.</dd><dt class="property-required"
             title="Required">
         <span id="domain_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_python" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1750,8 +1983,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="forward_host_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forward_host_python" style="color: inherit; text-decoration: inherit;">forward_<wbr>host</a>
@@ -1759,8 +1991,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Requested host which is forwarded to the realserver by the listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="health_check_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check</a>
@@ -1768,8 +1999,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">bool</span>
     </dt>
-    <dd><p>Indicates whether health check is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enable.</dd><dt class="property-required"
             title="Required">
         <span id="health_check_method_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_method_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>method</a>
@@ -1777,8 +2007,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Method of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Method of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="health_check_path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_path_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>path</a>
@@ -1786,8 +2015,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Path of health check.</p>
-</dd><dt class="property-required"
+    <dd>Path of health check.</dd><dt class="property-required"
             title="Required">
         <span id="health_check_status_codes_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#health_check_status_codes_python" style="color: inherit; text-decoration: inherit;">health_<wbr>check_<wbr>status_<wbr>codes</a>
@@ -1795,8 +2023,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Sequence[int]</span>
     </dt>
-    <dd><p>Return code of confirmed normal.</p>
-</dd><dt class="property-required"
+    <dd>Return code of confirmed normal.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1804,8 +2031,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="interval_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_python" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1813,8 +2039,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Interval of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Interval of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="listener_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listener_id_python" style="color: inherit; text-decoration: inherit;">listener_<wbr>id</a>
@@ -1822,8 +2047,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="path_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_python" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1831,8 +2055,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Path of the forward rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Path of the forward rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="realserver_type_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realserver_type_python" style="color: inherit; text-decoration: inherit;">realserver_<wbr>type</a>
@@ -1840,17 +2063,15 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Type of the realserver.</p>
-</dd><dt class="property-required"
+    <dd>Type of the realserver.</dd><dt class="property-required"
             title="Required">
         <span id="realservers_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservers_python" style="color: inherit; text-decoration: inherit;">realservers</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#gethttprulesrulerealserver">Get<wbr>Http<wbr>Rules<wbr>Rule<wbr>Realserver]</a></span>
+        <span class="property-type"><a href="#gethttprulesrulerealserver">Sequence[Get<wbr>Http<wbr>Rules<wbr>Rule<wbr>Realserver]</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of GAAP realserver. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_python" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -1858,8 +2079,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Scheduling policy of the forward rule.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling policy of the forward rule.</dd><dt class="property-required"
             title="Required">
         <span id="sni_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sni_python" style="color: inherit; text-decoration: inherit;">sni</a>
@@ -1867,8 +2087,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ServerNameIndication (SNI).</p>
-</dd><dt class="property-required"
+    <dd>ServerNameIndication (SNI).</dd><dt class="property-required"
             title="Required">
         <span id="sni_switch_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sni_switch_python" style="color: inherit; text-decoration: inherit;">sni_<wbr>switch</a>
@@ -1876,8 +2095,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ServerNameIndication (SNI) switch.</p>
-</dd></dl>
+    <dd>ServerNameIndication (SNI) switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1891,8 +2109,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Timeout of the health check response.</p>
-</dd><dt class="property-required"
+    <dd>Timeout of the health check response.</dd><dt class="property-required"
             title="Required">
         <span id="domain_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_yaml" style="color: inherit; text-decoration: inherit;">domain</a>
@@ -1900,8 +2117,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="forwardhost_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#forwardhost_yaml" style="color: inherit; text-decoration: inherit;">forward<wbr>Host</a>
@@ -1909,8 +2125,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Requested host which is forwarded to the realserver by the listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Requested host which is forwarded to the realserver by the listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheck_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheck_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check</a>
@@ -1918,8 +2133,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Boolean</span>
     </dt>
-    <dd><p>Indicates whether health check is enable.</p>
-</dd><dt class="property-required"
+    <dd>Indicates whether health check is enable.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckmethod_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckmethod_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Method</a>
@@ -1927,8 +2141,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Method of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Method of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckpath_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckpath_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Path</a>
@@ -1936,8 +2149,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Path of health check.</p>
-</dd><dt class="property-required"
+    <dd>Path of health check.</dd><dt class="property-required"
             title="Required">
         <span id="healthcheckstatuscodes_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#healthcheckstatuscodes_yaml" style="color: inherit; text-decoration: inherit;">health<wbr>Check<wbr>Status<wbr>Codes</a>
@@ -1945,8 +2157,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">List&lt;Number&gt;</span>
     </dt>
-    <dd><p>Return code of confirmed normal.</p>
-</dd><dt class="property-required"
+    <dd>Return code of confirmed normal.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -1954,8 +2165,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="interval_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#interval_yaml" style="color: inherit; text-decoration: inherit;">interval</a>
@@ -1963,8 +2173,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Interval of the health check.</p>
-</dd><dt class="property-required"
+    <dd>Interval of the health check.</dd><dt class="property-required"
             title="Required">
         <span id="listenerid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#listenerid_yaml" style="color: inherit; text-decoration: inherit;">listener<wbr>Id</a>
@@ -1972,8 +2181,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>ID of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="path_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#path_yaml" style="color: inherit; text-decoration: inherit;">path</a>
@@ -1981,8 +2189,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Path of the forward rule to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Path of the forward rule to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="realservertype_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservertype_yaml" style="color: inherit; text-decoration: inherit;">realserver<wbr>Type</a>
@@ -1990,8 +2197,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Type of the realserver.</p>
-</dd><dt class="property-required"
+    <dd>Type of the realserver.</dd><dt class="property-required"
             title="Required">
         <span id="realservers_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#realservers_yaml" style="color: inherit; text-decoration: inherit;">realservers</a>
@@ -1999,8 +2205,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#gethttprulesrulerealserver">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>An information list of GAAP realserver. Each element contains the following attributes:</p>
-</dd><dt class="property-required"
+    <dd>An information list of GAAP realserver. Each element contains the following attributes:</dd><dt class="property-required"
             title="Required">
         <span id="scheduler_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#scheduler_yaml" style="color: inherit; text-decoration: inherit;">scheduler</a>
@@ -2008,8 +2213,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Scheduling policy of the forward rule.</p>
-</dd><dt class="property-required"
+    <dd>Scheduling policy of the forward rule.</dd><dt class="property-required"
             title="Required">
         <span id="sni_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sni_yaml" style="color: inherit; text-decoration: inherit;">sni</a>
@@ -2017,8 +2221,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ServerNameIndication (SNI).</p>
-</dd><dt class="property-required"
+    <dd>ServerNameIndication (SNI).</dd><dt class="property-required"
             title="Required">
         <span id="sniswitch_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#sniswitch_yaml" style="color: inherit; text-decoration: inherit;">sni<wbr>Switch</a>
@@ -2026,8 +2229,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ServerNameIndication (SNI) switch.</p>
-</dd></dl>
+    <dd>ServerNameIndication (SNI) switch.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2045,8 +2247,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="id_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_csharp" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2054,8 +2255,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_csharp" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -2063,8 +2263,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="port_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_csharp" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2072,8 +2271,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>Port of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="status_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_csharp" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2081,8 +2279,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>Status of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="weight_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_csharp" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -2090,8 +2287,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Scheduling weight.</p>
-</dd></dl>
+    <dd>Scheduling weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2105,8 +2301,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="id_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_go" style="color: inherit; text-decoration: inherit;">Id</a>
@@ -2114,8 +2309,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_go" style="color: inherit; text-decoration: inherit;">Ip</a>
@@ -2123,8 +2317,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="port_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_go" style="color: inherit; text-decoration: inherit;">Port</a>
@@ -2132,8 +2325,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>Port of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="status_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_go" style="color: inherit; text-decoration: inherit;">Status</a>
@@ -2141,8 +2333,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>Status of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="weight_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_go" style="color: inherit; text-decoration: inherit;">Weight</a>
@@ -2150,8 +2341,61 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Scheduling weight.</p>
-</dd></dl>
+    <dd>Scheduling weight.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required"
+            title="Required">
+        <span id="domain_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#domain_hcl" style="color: inherit; text-decoration: inherit;">domain</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
+            title="Required">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
+            title="Required">
+        <span id="ip_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_hcl" style="color: inherit; text-decoration: inherit;">ip</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>IP of the GAAP realserver.</dd><dt class="property-required"
+            title="Required">
+        <span id="port_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_hcl" style="color: inherit; text-decoration: inherit;">port</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Port of the GAAP realserver.</dd><dt class="property-required"
+            title="Required">
+        <span id="status_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_hcl" style="color: inherit; text-decoration: inherit;">status</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Status of the GAAP realserver.</dd><dt class="property-required"
+            title="Required">
+        <span id="weight_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_hcl" style="color: inherit; text-decoration: inherit;">weight</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">number</span>
+    </dt>
+    <dd>Scheduling weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2165,8 +2409,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="id_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_java" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2174,8 +2417,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_java" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2183,8 +2425,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="port_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_java" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2192,8 +2433,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Port of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>Port of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="status_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_java" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2201,8 +2441,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Status of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>Status of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="weight_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_java" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2210,8 +2449,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Integer</span>
     </dt>
-    <dd><p>Scheduling weight.</p>
-</dd></dl>
+    <dd>Scheduling weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2225,8 +2463,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="id_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_nodejs" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2234,8 +2471,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_nodejs" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2243,8 +2479,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="port_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_nodejs" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2252,8 +2487,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Port of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>Port of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="status_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_nodejs" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2261,8 +2495,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Status of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>Status of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="weight_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_nodejs" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2270,8 +2503,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">number</span>
     </dt>
-    <dd><p>Scheduling weight.</p>
-</dd></dl>
+    <dd>Scheduling weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2285,8 +2517,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_python" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2294,8 +2525,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_python" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2303,8 +2533,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="port_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_python" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2312,8 +2541,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Port of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>Port of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="status_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_python" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2321,8 +2549,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Status of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>Status of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="weight_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_python" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2330,8 +2557,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">int</span>
     </dt>
-    <dd><p>Scheduling weight.</p>
-</dd></dl>
+    <dd>Scheduling weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2345,8 +2571,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Forward domain of the layer7 listener to be queried.</p>
-</dd><dt class="property-required"
+    <dd>Forward domain of the layer7 listener to be queried.</dd><dt class="property-required"
             title="Required">
         <span id="id_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_yaml" style="color: inherit; text-decoration: inherit;">id</a>
@@ -2354,8 +2579,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>ID of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>ID of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="ip_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#ip_yaml" style="color: inherit; text-decoration: inherit;">ip</a>
@@ -2363,8 +2587,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>IP of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>IP of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="port_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#port_yaml" style="color: inherit; text-decoration: inherit;">port</a>
@@ -2372,8 +2595,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Port of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>Port of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="status_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#status_yaml" style="color: inherit; text-decoration: inherit;">status</a>
@@ -2381,8 +2603,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Status of the GAAP realserver.</p>
-</dd><dt class="property-required"
+    <dd>Status of the GAAP realserver.</dd><dt class="property-required"
             title="Required">
         <span id="weight_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#weight_yaml" style="color: inherit; text-decoration: inherit;">weight</a>
@@ -2390,8 +2611,7 @@ The following output properties are available:
         <span class="property-indicator"></span>
         <span class="property-type">Number</span>
     </dt>
-    <dd><p>Scheduling weight.</p>
-</dd></dl>
+    <dd>Scheduling weight.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -2406,7 +2626,6 @@ The following output properties are available:
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 

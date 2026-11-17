@@ -2,9 +2,11 @@
 ---
 title: "PolicyBindingObject"
 title_tag: "tencentcloud.Monitor.PolicyBindingObject"
-meta_desc: "Documentation for the tencentcloud.Monitor.PolicyBindingObject resource with examples, input properties, output properties, lookup functions, and supporting types."
+meta_desc: "Provides a resource for bind objects to a alarm policy resource."
 layout: api
 no_edit_this_page: true
+outputs:
+    - HTML
 ---
 
 
@@ -16,13 +18,17 @@ Provides a resource for bind objects to a alarm policy resource.
 
 ## Example Usage
 
-<!--Start PulumiCodeChooser -->
+<div>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
+</div>
+<div>
+<pulumi-choosable type="language" values="javascript,typescript">
+
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
 import * as tencentcloud from "@tencentcloud_iac/pulumi";
-import * as tencentcloud from "@tencentcloud_iac/pulumi";
 
-const instances = tencentcloud.Instances.getInstance({});
+const instances = tencentcloud.instances.getInstance({});
 const policy = new tencentcloud.monitor.AlarmPolicy("policy", {
     policyName: "hello",
     monitorType: "MT_QCE",
@@ -63,55 +69,141 @@ const binding = new tencentcloud.monitor.PolicyBindingObject("binding", {
     }],
 });
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="python">
+
 ```python
 import pulumi
 import pulumi_tencentcloud as tencentcloud
 import tencentcloud_iac_pulumi as tencentcloud
 
-instances = tencentcloud.Instances.get_instance()
+instances = tencentcloud.instances.get_instance()
 policy = tencentcloud.monitor.AlarmPolicy("policy",
     policy_name="hello",
     monitor_type="MT_QCE",
     enable=1,
     project_id=1244035,
     namespace="cvm_device",
-    conditions=tencentcloud.monitor.AlarmPolicyConditionsArgs(
-        is_union_rule=1,
-        rules=[tencentcloud.monitor.AlarmPolicyConditionsRuleArgs(
-            metric_name="CpuUsage",
-            period=60,
-            operator="ge",
-            value="89.9",
-            continue_period=1,
-            notice_frequency=3600,
-            is_power_notice=0,
-        )],
-    ),
+    conditions={
+        "is_union_rule": 1,
+        "rules": [{
+            "metric_name": "CpuUsage",
+            "period": 60,
+            "operator": "ge",
+            "value": "89.9",
+            "continue_period": 1,
+            "notice_frequency": 3600,
+            "is_power_notice": 0,
+        }],
+    },
     event_conditions=[
-        tencentcloud.monitor.AlarmPolicyEventConditionArgs(
-            metric_name="ping_unreachable",
-        ),
-        tencentcloud.monitor.AlarmPolicyEventConditionArgs(
-            metric_name="guest_reboot",
-        ),
+        {
+            "metric_name": "ping_unreachable",
+        },
+        {
+            "metric_name": "guest_reboot",
+        },
     ],
     notice_ids=["notice-l9ziyxw6"],
-    trigger_tasks=[tencentcloud.monitor.AlarmPolicyTriggerTaskArgs(
-        type="AS",
-        task_config="{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
-    )])
+    trigger_tasks=[{
+        "type": "AS",
+        "task_config": "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
+    }])
 #for cvm
 binding = tencentcloud.monitor.PolicyBindingObject("binding",
     policy_id=policy.id,
-    dimensions=[tencentcloud.monitor.PolicyBindingObjectDimensionArgs(
-        dimensions_json=f"{{\"unInstanceId\":\"{instances.instance_lists[0].instance_id}\"}}",
-    )])
+    dimensions=[{
+        "dimensions_json": f"{{\"unInstanceId\":\"{instances.instance_lists[0].instance_id}\"}}",
+    }])
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="go">
+
+```go
+package main
+
+import (
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/instances"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+)
+
+func main() {
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		instances2, err := instances.GetInstance(ctx, &instances.GetInstanceArgs{}, nil)
+		if err != nil {
+			return err
+		}
+		policy, err := monitor.NewAlarmPolicy(ctx, "policy", &monitor.AlarmPolicyArgs{
+			PolicyName:  pulumi.String("hello"),
+			MonitorType: pulumi.String("MT_QCE"),
+			Enable:      pulumi.Int(1),
+			ProjectId:   pulumi.Int(1244035),
+			Namespace:   pulumi.String("cvm_device"),
+			Conditions: &monitor.AlarmPolicyConditionsArgs{
+				IsUnionRule: pulumi.Int(1),
+				Rules: monitor.AlarmPolicyConditionsRuleArray{
+					&monitor.AlarmPolicyConditionsRuleArgs{
+						MetricName:      pulumi.String("CpuUsage"),
+						Period:          pulumi.Int(60),
+						Operator:        pulumi.String("ge"),
+						Value:           pulumi.String("89.9"),
+						ContinuePeriod:  pulumi.Int(1),
+						NoticeFrequency: pulumi.Int(3600),
+						IsPowerNotice:   pulumi.Int(0),
+					},
+				},
+			},
+			EventConditions: monitor.AlarmPolicyEventConditionArray{
+				&monitor.AlarmPolicyEventConditionArgs{
+					MetricName: pulumi.String("ping_unreachable"),
+				},
+				&monitor.AlarmPolicyEventConditionArgs{
+					MetricName: pulumi.String("guest_reboot"),
+				},
+			},
+			NoticeIds: pulumi.StringArray{
+				pulumi.String("notice-l9ziyxw6"),
+			},
+			TriggerTasks: monitor.AlarmPolicyTriggerTaskArray{
+				&monitor.AlarmPolicyTriggerTaskArgs{
+					Type:       pulumi.String("AS"),
+					TaskConfig: pulumi.String("{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}"),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		// for cvm
+		_, err = monitor.NewPolicyBindingObject(ctx, "binding", &monitor.PolicyBindingObjectArgs{
+			PolicyId: policy.ID().ToIDOutput().ToStringOutput(),
+			Dimensions: monitor.PolicyBindingObjectDimensionArray{
+				&monitor.PolicyBindingObjectDimensionArgs{
+					DimensionsJson: pulumi.Sprintf("{\"unInstanceId\":\"%v\"}", instances2.InstanceLists[0].InstanceId),
+				},
+			},
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+}
+```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="csharp">
+
 ```csharp
 using System.Collections.Generic;
 using System.Linq;
 using Pulumi;
-using Tencentcloud = Pulumi.Tencentcloud;
 using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
 
 return await Deployment.RunAsync(() => 
@@ -182,80 +274,11 @@ return await Deployment.RunAsync(() =>
 
 });
 ```
-```go
-package main
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="java">
 
-import (
-	"fmt"
-
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instances"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-)
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		instances, err := Instances.GetInstance(ctx, nil, nil)
-		if err != nil {
-			return err
-		}
-		policy, err := Monitor.NewAlarmPolicy(ctx, "policy", &Monitor.AlarmPolicyArgs{
-			PolicyName:  pulumi.String("hello"),
-			MonitorType: pulumi.String("MT_QCE"),
-			Enable:      pulumi.Int(1),
-			ProjectId:   pulumi.Int(1244035),
-			Namespace:   pulumi.String("cvm_device"),
-			Conditions: &monitor.AlarmPolicyConditionsArgs{
-				IsUnionRule: pulumi.Int(1),
-				Rules: monitor.AlarmPolicyConditionsRuleArray{
-					&monitor.AlarmPolicyConditionsRuleArgs{
-						MetricName:      pulumi.String("CpuUsage"),
-						Period:          pulumi.Int(60),
-						Operator:        pulumi.String("ge"),
-						Value:           pulumi.String("89.9"),
-						ContinuePeriod:  pulumi.Int(1),
-						NoticeFrequency: pulumi.Int(3600),
-						IsPowerNotice:   pulumi.Int(0),
-					},
-				},
-			},
-			EventConditions: monitor.AlarmPolicyEventConditionArray{
-				&monitor.AlarmPolicyEventConditionArgs{
-					MetricName: pulumi.String("ping_unreachable"),
-				},
-				&monitor.AlarmPolicyEventConditionArgs{
-					MetricName: pulumi.String("guest_reboot"),
-				},
-			},
-			NoticeIds: pulumi.StringArray{
-				pulumi.String("notice-l9ziyxw6"),
-			},
-			TriggerTasks: monitor.AlarmPolicyTriggerTaskArray{
-				&monitor.AlarmPolicyTriggerTaskArgs{
-					Type:       pulumi.String("AS"),
-					TaskConfig: pulumi.String("{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}"),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		// for cvm
-		_, err = Monitor.NewPolicyBindingObject(ctx, "binding", &Monitor.PolicyBindingObjectArgs{
-			PolicyId: policy.ID(),
-			Dimensions: monitor.PolicyBindingObjectDimensionArray{
-				&monitor.PolicyBindingObjectDimensionArgs{
-					DimensionsJson: pulumi.String(fmt.Sprintf("{\"unInstanceId\":\"%v\"}", instances.InstanceLists[0].InstanceId)),
-				},
-			},
-		})
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-}
-```
 ```java
 package generated_program;
 
@@ -267,13 +290,14 @@ import com.pulumi.tencentcloud.Instances.inputs.GetInstanceArgs;
 import com.pulumi.tencentcloud.Monitor.AlarmPolicy;
 import com.pulumi.tencentcloud.Monitor.AlarmPolicyArgs;
 import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyConditionsArgs;
+import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyConditionsRuleArgs;
 import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyEventConditionArgs;
 import com.pulumi.tencentcloud.Monitor.inputs.AlarmPolicyTriggerTaskArgs;
 import com.pulumi.tencentcloud.Monitor.PolicyBindingObject;
 import com.pulumi.tencentcloud.Monitor.PolicyBindingObjectArgs;
 import com.pulumi.tencentcloud.Monitor.inputs.PolicyBindingObjectDimensionArgs;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.File;
 import java.nio.file.Files;
@@ -285,9 +309,10 @@ public class App {
     }
 
     public static void stack(Context ctx) {
-        final var instances = InstancesFunctions.getInstance();
+        final var instances = InstancesFunctions.getInstance(GetInstanceArgs.builder()
+            .build());
 
-        var policy = new AlarmPolicy("policy", AlarmPolicyArgs.builder()        
+        var policy = new AlarmPolicy("policy", AlarmPolicyArgs.builder()
             .policyName("hello")
             .monitorType("MT_QCE")
             .enable(1)
@@ -320,16 +345,21 @@ public class App {
             .build());
 
         //for cvm
-        var binding = new PolicyBindingObject("binding", PolicyBindingObjectArgs.builder()        
+        var binding = new PolicyBindingObject("binding", PolicyBindingObjectArgs.builder()
             .policyId(policy.id())
             .dimensions(PolicyBindingObjectDimensionArgs.builder()
-                .dimensionsJson(String.format("{{\"unInstanceId\":\"%s\"}}", instances.applyValue(getInstanceResult -> getInstanceResult.instanceLists()[0].instanceId())))
+                .dimensionsJson(String.format("{{\"unInstanceId\":\"%s\"}}", instances.instanceLists()[0].instanceId()))
                 .build())
             .build());
 
     }
 }
 ```
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="yaml">
+
 ```yaml
 resources:
   policy:
@@ -368,69 +398,155 @@ resources:
 variables:
   instances:
     fn::invoke:
-      Function: tencentcloud:Instances:getInstance
-      Arguments: {}
+      function: tencentcloud:Instances:getInstance
+      arguments: {}
 ```
-<!--End PulumiCodeChooser -->
+</pulumi-choosable>
+</div>
+<div>
+<pulumi-choosable type="language" values="hcl">
 
+```hcl
+pulumi {
+  required_providers {
+    tencentcloud = {
+      source = "pulumi/tencentcloud"
+    }
+  }
+}
+
+data "tencentcloud_instances_getinstance" "instances" {
+}
+
+resource "tencentcloud_monitor_alarmpolicy" "policy" {
+  policy_name  = "hello"
+  monitor_type = "MT_QCE"
+  enable       = 1
+  project_id   = 1244035
+  namespace    = "cvm_device"
+  conditions = {
+    is_union_rule = 1
+    rules = [{
+      "metricName"      = "CpuUsage"
+      "period"          = 60
+      "operator"        = "ge"
+      "value"           = "89.9"
+      "continuePeriod"  = 1
+      "noticeFrequency" = 3600
+      "isPowerNotice"   = 0
+    }]
+  }
+  event_conditions {
+    metric_name = "ping_unreachable"
+  }
+  event_conditions {
+    metric_name = "guest_reboot"
+  }
+  notice_ids = ["notice-l9ziyxw6"]
+  trigger_tasks {
+    type        = "AS"
+    task_config = "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}"
+  }
+}
+#for cvm
+resource "tencentcloud_monitor_policybindingobject" "binding" {
+  policy_id = tencentcloud_monitor_alarmpolicy.policy.id
+  dimensions {
+    dimensions_json ="{"unInstanceId":"${data.tencentcloud_instances_getinstance.instances.instance_lists[0].instance_id}"}"
+  }
+}
+```
+</pulumi-choosable>
+</div>
+
+
+## API Reference
+
+This resource interacts with the following TencentCloud APIs:
+
+* Create:
+  - [BindingPolicyObject](https://www.tencentcloud.com/document/api/248/35985)
+  - [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+* Read:
+  - [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+  - [DescribeBindingPolicyObjectList](https://www.tencentcloud.com/document/api/248/35980)
+  - [DescribePolicyObjectCount](https://www.tencentcloud.com/search/?wd=DescribePolicyObjectCount&type=document&lang=en)
+* Delete:
+  - [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+  - [DescribePolicyObjectCount](https://www.tencentcloud.com/search/?wd=DescribePolicyObjectCount&type=document&lang=en)
 
 
 ## Create PolicyBindingObject Resource {#create}
+
+Resources are created with functions called constructors. To learn more about declaring and configuring resources, see [Resources](/docs/concepts/resources/).
+
+### Constructor syntax
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">PolicyBindingObject</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PolicyBindingObjectArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">new </span><span class="nx">PolicyBindingObject</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PolicyBindingObjectArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">);</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
-<span class="k">def </span><span class="nx">PolicyBindingObject</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
-                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-                        <span class="nx">dimensions</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.PolicyBindingObjectDimensionArgs]]</span> = None<span class="p">,</span>
-                        <span class="nx">policy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span>
-<span class=nd>@overload</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@overload</span>
 <span class="k">def </span><span class="nx">PolicyBindingObject</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
                         <span class="nx">args</span><span class="p">:</span> <span class="nx"><a href="#inputs">PolicyBindingObjectArgs</a></span><span class="p">,</span>
-                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">)</span>
+<span></span>
+<span class=nd>@overload</span>
+<span class="k">def </span><span class="nx">PolicyBindingObject</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
+                        <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
+                        <span class="nx">dimensions</span><span class="p">:</span> <span class="nx">Optional[Sequence[PolicyBindingObjectDimensionArgs]]</span> = None<span class="p">,</span>
+                        <span class="nx">policy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewPolicyBindingObject</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">PolicyBindingObjectArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PolicyBindingObject</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span><span class="nx">NewPolicyBindingObject</span><span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="p"> </span><span class="nx"><a href="#inputs">PolicyBindingObjectArgs</a></span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PolicyBindingObject</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">PolicyBindingObject</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PolicyBindingObjectArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public </span><span class="nx">PolicyBindingObject</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PolicyBindingObjectArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma">
+<div class="no-copy"><div class="highlight"><pre class="chroma">
 <code class="language-java" data-lang="java"><span class="k">public </span><span class="nx">PolicyBindingObject</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PolicyBindingObjectArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">)</span>
 <span class="k">public </span><span class="nx">PolicyBindingObject</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="#inputs">PolicyBindingObjectArgs</a></span><span class="p"> </span><span class="nx">args<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Monitor:PolicyBindingObject</span><span class="p"></span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">type: <span class="nx">tencentcloud:Monitor:PolicyBindingObject</span><span class="p"></span>
 <span class="p">properties</span><span class="p">: </span><span class="c">#&nbsp;The arguments to resource properties.</span>
 <span class="p"></span><span class="p">options</span><span class="p">: </span><span class="c">#&nbsp;Bag of options to control resource&#39;s behavior.</span>
 <span class="p"></span>
-</code></pre></div>
+</code></pre></div></div>
 </pulumi-choosable>
 </div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">resource</span> <span class="s2">&#34;tencentcloud_monitor_policy_binding_object&#34;</span> <span class="s2">&#34;name&#34;</span> <span class="p">{</span>
+<span class="c">    # resource properties</span>
+<span class="p">}</span></code></pre></div></div>
+</pulumi-choosable>
+</div>
+
+#### Parameters
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
@@ -451,7 +567,7 @@ variables:
         class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
     <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
@@ -568,11 +684,19 @@ variables:
 </pulumi-choosable>
 </div>
 
+
+
 ## PolicyBindingObject Resource Properties {#properties}
 
 To learn more about resource properties and how to use them, see [Inputs and Outputs](/docs/intro/concepts/inputs-outputs) in the Architecture and Concepts docs.
 
 ### Inputs
+
+<pulumi-choosable type="language" values="python">
+<p>
+In Python, inputs that are objects can be passed either as <a href="/docs/languages-sdks/python/#inputs-and-outputs">argument classes or as dictionary literals</a>.
+</p>
+</pulumi-choosable>
 
 The PolicyBindingObject resource accepts the following [input](/docs/intro/concepts/inputs-outputs) properties:
 
@@ -586,10 +710,9 @@ The PolicyBindingObject resource accepts the following [input](/docs/intro/conce
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_csharp" style="color: inherit; text-decoration: inherit;">Dimensions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#policybindingobjectdimension">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Policy<wbr>Binding<wbr>Object<wbr>Dimension<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#policybindingobjectdimension">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Policy<wbr>Binding<wbr>Object<wbr>Dimension&gt;</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-required property-replacement"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -597,8 +720,7 @@ The PolicyBindingObject resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alarm policy ID for binding objects.</p>
-</dd></dl>
+    <dd>Alarm policy ID for binding objects.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -612,8 +734,7 @@ The PolicyBindingObject resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#policybindingobjectdimension">[]Policy<wbr>Binding<wbr>Object<wbr>Dimension<wbr>Args</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-required property-replacement"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -621,8 +742,29 @@ The PolicyBindingObject resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alarm policy ID for binding objects.</p>
-</dd></dl>
+    <dd>Alarm policy ID for binding objects.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="dimensions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_hcl" style="color: inherit; text-decoration: inherit;">dimensions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#policybindingobjectdimension">list(object)</a></span>
+    </dt>
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-required property-replacement"
+            title="Required">
+        <span id="policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alarm policy ID for binding objects.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -634,10 +776,9 @@ The PolicyBindingObject resource accepts the following [input](/docs/intro/conce
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_java" style="color: inherit; text-decoration: inherit;">dimensions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#policybindingobjectdimension">List&lt;Policy<wbr>Binding<wbr>Object<wbr>Dimension<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#policybindingobjectdimension">List&lt;Policy<wbr>Binding<wbr>Object<wbr>Dimension&gt;</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-required property-replacement"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -645,8 +786,7 @@ The PolicyBindingObject resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alarm policy ID for binding objects.</p>
-</dd></dl>
+    <dd>Alarm policy ID for binding objects.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -658,10 +798,9 @@ The PolicyBindingObject resource accepts the following [input](/docs/intro/conce
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_nodejs" style="color: inherit; text-decoration: inherit;">dimensions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#policybindingobjectdimension">Policy<wbr>Binding<wbr>Object<wbr>Dimension<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#policybindingobjectdimension">Policy<wbr>Binding<wbr>Object<wbr>Dimension[]</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-required property-replacement"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -669,8 +808,7 @@ The PolicyBindingObject resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alarm policy ID for binding objects.</p>
-</dd></dl>
+    <dd>Alarm policy ID for binding objects.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -682,10 +820,9 @@ The PolicyBindingObject resource accepts the following [input](/docs/intro/conce
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_python" style="color: inherit; text-decoration: inherit;">dimensions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#policybindingobjectdimension">Policy<wbr>Binding<wbr>Object<wbr>Dimension<wbr>Args]</a></span>
+        <span class="property-type"><a href="#policybindingobjectdimension">Sequence[Policy<wbr>Binding<wbr>Object<wbr>Dimension<wbr>Args]</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-required property-replacement"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -693,8 +830,7 @@ The PolicyBindingObject resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Alarm policy ID for binding objects.</p>
-</dd></dl>
+    <dd>Alarm policy ID for binding objects.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -708,8 +844,7 @@ The PolicyBindingObject resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#policybindingobjectdimension">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-required property-replacement"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-required property-replacement"
             title="Required">
         <span id="policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -717,8 +852,7 @@ The PolicyBindingObject resource accepts the following [input](/docs/intro/conce
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alarm policy ID for binding objects.</p>
-</dd></dl>
+    <dd>Alarm policy ID for binding objects.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -739,8 +873,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -754,8 +887,21 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-"
+            title="">
+        <span id="id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#id_hcl" style="color: inherit; text-decoration: inherit;">id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -769,8 +915,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -784,8 +929,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -799,8 +943,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -814,8 +957,7 @@ All [input](#inputs) properties are implicitly available as output properties. A
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>The provider-assigned unique ID for this managed resource.</p>
-</dd></dl>
+    <dd>The provider-assigned unique ID for this managed resource.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -825,121 +967,160 @@ All [input](#inputs) properties are implicitly available as output properties. A
 
 Get an existing PolicyBindingObject resource's state with the given name, ID, and optional extra properties used to qualify the lookup.
 <div>
-<pulumi-chooser type="language" options="typescript,python,go,csharp,java,yaml"></pulumi-chooser>
+<pulumi-chooser type="language" options="csharp,go,typescript,python,yaml,java,hcl"></pulumi-chooser>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#ID">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">PolicyBindingObjectState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/#CustomResourceOptions">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">PolicyBindingObject</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">public static </span><span class="nf">get</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span><span class="p">,</span> <span class="nx">state</span><span class="p">?:</span> <span class="nx">PolicyBindingObjectState</span><span class="p">,</span> <span class="nx">opts</span><span class="p">?:</span> <span class="nx"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">): </span><span class="nx">PolicyBindingObject</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class=nd>@staticmethod</span>
 <span class="k">def </span><span class="nf">get</span><span class="p">(</span><span class="nx">resource_name</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">id</span><span class="p">:</span> <span class="nx">str</span><span class="p">,</span>
         <span class="nx">opts</span><span class="p">:</span> <span class="nx"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">Optional[ResourceOptions]</a></span> = None<span class="p">,</span>
-        <span class="nx">dimensions</span><span class="p">:</span> <span class="nx">Optional[Sequence[_monitor.PolicyBindingObjectDimensionArgs]]</span> = None<span class="p">,</span>
+        <span class="nx">dimensions</span><span class="p">:</span> <span class="nx">Optional[Sequence[PolicyBindingObjectDimensionArgs]]</span> = None<span class="p">,</span>
         <span class="nx">policy_id</span><span class="p">:</span> <span class="nx">Optional[str]</span> = None<span class="p">) -&gt;</span> PolicyBindingObject</code></pre></div>
-</pulumi-choosable>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetPolicyBindingObject<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">PolicyBindingObjectState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PolicyBindingObject</span>, error)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">func </span>GetPolicyBindingObject<span class="p">(</span><span class="nx">ctx</span><span class="p"> *</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span><span class="p">,</span> <span class="nx">name</span><span class="p"> </span><span class="nx">string</span><span class="p">,</span> <span class="nx">id</span><span class="p"> </span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span><span class="p">,</span> <span class="nx">state</span><span class="p"> *</span><span class="nx">PolicyBindingObjectState</span><span class="p">,</span> <span class="nx">opts</span><span class="p"> ...</span><span class="nx"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span><span class="p">) (*<span class="nx">PolicyBindingObject</span>, error)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
-<div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">PolicyBindingObject</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PolicyBindingObjectState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static </span><span class="nx">PolicyBindingObject</span><span class="nf"> Get</span><span class="p">(</span><span class="nx">string</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PolicyBindingObjectState</span><span class="p">? </span><span class="nx">state<span class="p">,</span> <span class="nx"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span><span class="p">? </span><span class="nx">opts = null<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="java">
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">PolicyBindingObject</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PolicyBindingObjectState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
-</pulumi-choosable>
+<div class="no-copy"><div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">public static </span><span class="nx">PolicyBindingObject</span><span class="nf"> get</span><span class="p">(</span><span class="nx">String</span><span class="p"> </span><span class="nx">name<span class="p">,</span> <span class="nx">Output&lt;String&gt;</span><span class="p"> </span><span class="nx">id<span class="p">,</span> <span class="nx">PolicyBindingObjectState</span><span class="p"> </span><span class="nx">state<span class="p">,</span> <span class="nx">CustomResourceOptions</span><span class="p"> </span><span class="nx">options<span class="p">)</span></code></pre></div>
+</div></pulumi-choosable>
 </div>
 
 <div>
-<pulumi-choosable type="language" values="yaml">
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">Resource lookup is not supported in YAML</code></pre></div>
-</pulumi-choosable>
+  <pulumi-choosable type="language" values="yaml">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">resources</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">existingPolicyBindingObject</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l"><span class="nx">tencentcloud:Monitor:PolicyBindingObject</span></span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w"></span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">${id}</span><span class="w"></span></span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
+</div>
+
+<div>
+  <pulumi-choosable type="language" values="hcl">
+    <div class="no-copy">
+      <div class="highlight">
+        <pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">import</span> {
+</span></span><span class="line"><span class="cl">  <span class="n">to</span> <span class="o">=</span> <span class="nx">tencentcloud_monitor_policy_binding_object</span>.<span class="n">example</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="o">=</span> <span class="s2">&#34;${id}&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre>
+      </div>
+    </div>
+  </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="javascript,typescript">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/types/ID.html">Input&lt;ID&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PolicyBindingObjectState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/nodejs/pulumi/pulumi/interfaces/CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="python">
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>resource_name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Optional">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">str</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-</dl>
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
+        <span>opts</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/python/pulumi/#pulumi.ResourceOptions">ResourceOptions</a></span>
+    </dt>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
+
 </pulumi-choosable>
 </div>
 
 <div>
 <pulumi-choosable type="language" values="go">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-optional" title="Optional">
+        <span>ctx</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#Context">Context</a></span>
+    </dt>
+    <dd>Context object for the current deployment.</dd><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#IDInput">IDInput</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PolicyBindingObjectState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="https://pkg.go.dev/github.com/pulumi/pulumi/sdk/v3/go/pulumi?tab=doc#ResourceOption">ResourceOption</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -947,28 +1128,31 @@ Get an existing PolicyBindingObject resource's state with the given name, ID, an
 <div>
 <pulumi-choosable type="language" values="csharp">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">string</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.Input-1.html">Input&lt;string&gt;</a></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PolicyBindingObjectState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
         <span>opts</span>
         <span class="property-indicator"></span>
+        <span class="property-type"><a href="/docs/reference/pkg/dotnet/Pulumi/Pulumi.CustomResourceOptions.html">CustomResourceOptions</a></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -976,28 +1160,31 @@ Get an existing PolicyBindingObject resource's state with the given name, ID, an
 <div>
 <pulumi-choosable type="language" values="java">
 
-<dl class="resources-properties">
-    <dt class="property-required" title="Required">
+<dl class="resources-properties"><dt
+        class="property-required" title="Required">
         <span>name</span>
         <span class="property-indicator"></span>
+        <span class="property-type">String</span>
     </dt>
-    <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dd>The unique name of the resulting resource.</dd><dt
+        class="property-required" title="Required">
         <span>id</span>
         <span class="property-indicator"></span>
+        <span class="property-type">Output&lt;String&gt;</span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The unique provider ID of the resource to look up.</dd><dt
+        class="property-optional" title="Optional">
         <span>state</span>
         <span class="property-indicator"></span>
+        <span class="property-type">PolicyBindingObjectState</span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>
-    <dt class="property-optional" title="Optional">
-        <span>opts</span>
+    <dd>Known property values the provider needs, along with the ID, to find the resource. Usually not required.</dd><dt
+        class="property-optional" title="Optional">
+        <span>options</span>
         <span class="property-indicator"></span>
+        <span class="property-type">CustomResourceOptions</span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>
-</dl>
+    <dd>Bag of options to control resource&#39;s behavior.</dd></dl>
 
 </pulumi-choosable>
 </div>
@@ -1015,10 +1202,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dimensions_csharp" style="color: inherit; text-decoration: inherit;">Dimensions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#policybindingobjectdimension">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Policy<wbr>Binding<wbr>Object<wbr>Dimension<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#policybindingobjectdimension">List&lt;Tencent<wbr>Cloud<wbr>IAC.<wbr>Pulumi<wbr>Package.<wbr>Tencentcloud.<wbr>Monitor.<wbr>Inputs.<wbr>Policy<wbr>Binding<wbr>Object<wbr>Dimension&gt;</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_policyid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyid_csharp" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -1026,8 +1212,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alarm policy ID for binding objects.</p>
-</dd></dl>
+    <dd>Alarm policy ID for binding objects.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1041,8 +1226,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#policybindingobjectdimension">[]Policy<wbr>Binding<wbr>Object<wbr>Dimension<wbr>Args</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_policyid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyid_go" style="color: inherit; text-decoration: inherit;">Policy<wbr>Id</a>
@@ -1050,8 +1234,29 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alarm policy ID for binding objects.</p>
-</dd></dl>
+    <dd>Alarm policy ID for binding objects.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_dimensions_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dimensions_hcl" style="color: inherit; text-decoration: inherit;">dimensions</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type"><a href="#policybindingobjectdimension">list(object)</a></span>
+    </dt>
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="state_policy_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_id_hcl" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Alarm policy ID for binding objects.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1063,10 +1268,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dimensions_java" style="color: inherit; text-decoration: inherit;">dimensions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#policybindingobjectdimension">List&lt;Policy<wbr>Binding<wbr>Object<wbr>Dimension<wbr>Args&gt;</a></span>
+        <span class="property-type"><a href="#policybindingobjectdimension">List&lt;Policy<wbr>Binding<wbr>Object<wbr>Dimension&gt;</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_policyid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyid_java" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1074,8 +1278,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alarm policy ID for binding objects.</p>
-</dd></dl>
+    <dd>Alarm policy ID for binding objects.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1087,10 +1290,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dimensions_nodejs" style="color: inherit; text-decoration: inherit;">dimensions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#policybindingobjectdimension">Policy<wbr>Binding<wbr>Object<wbr>Dimension<wbr>Args[]</a></span>
+        <span class="property-type"><a href="#policybindingobjectdimension">Policy<wbr>Binding<wbr>Object<wbr>Dimension[]</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_policyid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyid_nodejs" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1098,8 +1300,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Alarm policy ID for binding objects.</p>
-</dd></dl>
+    <dd>Alarm policy ID for binding objects.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1111,10 +1312,9 @@ The following state arguments are supported:
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_dimensions_python" style="color: inherit; text-decoration: inherit;">dimensions</a>
 </span>
         <span class="property-indicator"></span>
-        <span class="property-type"><a href="#policybindingobjectdimension">Policy<wbr>Binding<wbr>Object<wbr>Dimension<wbr>Args]</a></span>
+        <span class="property-type"><a href="#policybindingobjectdimension">Sequence[Policy<wbr>Binding<wbr>Object<wbr>Dimension<wbr>Args]</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_policy_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policy_id_python" style="color: inherit; text-decoration: inherit;">policy_<wbr>id</a>
@@ -1122,8 +1322,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Alarm policy ID for binding objects.</p>
-</dd></dl>
+    <dd>Alarm policy ID for binding objects.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1137,8 +1336,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type"><a href="#policybindingobjectdimension">List&lt;Property Map&gt;</a></span>
     </dt>
-    <dd><p>A list objects. Each element contains the following attributes:</p>
-</dd><dt class="property-optional property-replacement"
+    <dd>A list objects. Each element contains the following attributes:</dd><dt class="property-optional property-replacement"
             title="Optional">
         <span id="state_policyid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#state_policyid_yaml" style="color: inherit; text-decoration: inherit;">policy<wbr>Id</a>
@@ -1146,8 +1344,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Alarm policy ID for binding objects.</p>
-</dd></dl>
+    <dd>Alarm policy ID for binding objects.</dd></dl>
 </pulumi-choosable>
 </div>
 </pulumi-choosable>
@@ -1162,7 +1359,9 @@ The following state arguments are supported:
 
 
 
-<h4 id="policybindingobjectdimension">Policy<wbr>Binding<wbr>Object<wbr>Dimension</h4>
+<h4 id="policybindingobjectdimension">
+Policy<wbr>Binding<wbr>Object<wbr>Dimension<pulumi-choosable type="language" values="python,go" class="inline">, Policy<wbr>Binding<wbr>Object<wbr>Dimension<wbr>Args</pulumi-choosable>
+</h4>
 
 <div>
 <pulumi-choosable type="language" values="csharp">
@@ -1174,8 +1373,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Represents a collection of dimensions of an object instance, json format.eg:'{&quot;unInstanceId&quot;:&quot;ins-ot3cq4bi&quot;}'.</p>
-</dd><dt class="property-optional"
+    <dd>Represents a collection of dimensions of an object instance, json format.eg:'{&quot;unInstanceId&quot;:&quot;ins-ot3cq4bi&quot;}'.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="region_csharp">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_csharp" style="color: inherit; text-decoration: inherit;">Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqueid_csharp">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqueid_csharp" style="color: inherit; text-decoration: inherit;">Unique<wbr>Id</a>
@@ -1183,8 +1389,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object unique ID.</p>
-</dd></dl>
+    <dd>Object unique ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1198,8 +1403,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Represents a collection of dimensions of an object instance, json format.eg:'{&quot;unInstanceId&quot;:&quot;ins-ot3cq4bi&quot;}'.</p>
-</dd><dt class="property-optional"
+    <dd>Represents a collection of dimensions of an object instance, json format.eg:'{&quot;unInstanceId&quot;:&quot;ins-ot3cq4bi&quot;}'.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="region_go">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_go" style="color: inherit; text-decoration: inherit;">Region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqueid_go">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqueid_go" style="color: inherit; text-decoration: inherit;">Unique<wbr>Id</a>
@@ -1207,8 +1419,37 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object unique ID.</p>
-</dd></dl>
+    <dd>Object unique ID.</dd></dl>
+</pulumi-choosable>
+</div>
+
+<div>
+<pulumi-choosable type="language" values="hcl">
+<dl class="resources-properties"><dt class="property-required property-replacement"
+            title="Required">
+        <span id="dimensions_json_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#dimensions_json_hcl" style="color: inherit; text-decoration: inherit;">dimensions_<wbr>json</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Represents a collection of dimensions of an object instance, json format.eg:'{&quot;unInstanceId&quot;:&quot;ins-ot3cq4bi&quot;}'.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="region_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_hcl" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region.</dd><dt class="property-optional"
+            title="Optional">
+        <span id="unique_id_hcl">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unique_id_hcl" style="color: inherit; text-decoration: inherit;">unique_<wbr>id</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Object unique ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1222,8 +1463,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Represents a collection of dimensions of an object instance, json format.eg:'{&quot;unInstanceId&quot;:&quot;ins-ot3cq4bi&quot;}'.</p>
-</dd><dt class="property-optional"
+    <dd>Represents a collection of dimensions of an object instance, json format.eg:'{&quot;unInstanceId&quot;:&quot;ins-ot3cq4bi&quot;}'.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="region_java">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_java" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqueid_java">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqueid_java" style="color: inherit; text-decoration: inherit;">unique<wbr>Id</a>
@@ -1231,8 +1479,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Object unique ID.</p>
-</dd></dl>
+    <dd>Object unique ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1246,8 +1493,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Represents a collection of dimensions of an object instance, json format.eg:'{&quot;unInstanceId&quot;:&quot;ins-ot3cq4bi&quot;}'.</p>
-</dd><dt class="property-optional"
+    <dd>Represents a collection of dimensions of an object instance, json format.eg:'{&quot;unInstanceId&quot;:&quot;ins-ot3cq4bi&quot;}'.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="region_nodejs">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_nodejs" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">string</span>
+    </dt>
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqueid_nodejs">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqueid_nodejs" style="color: inherit; text-decoration: inherit;">unique<wbr>Id</a>
@@ -1255,8 +1509,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">string</span>
     </dt>
-    <dd><p>Object unique ID.</p>
-</dd></dl>
+    <dd>Object unique ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1270,8 +1523,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Represents a collection of dimensions of an object instance, json format.eg:'{&quot;unInstanceId&quot;:&quot;ins-ot3cq4bi&quot;}'.</p>
-</dd><dt class="property-optional"
+    <dd>Represents a collection of dimensions of an object instance, json format.eg:'{&quot;unInstanceId&quot;:&quot;ins-ot3cq4bi&quot;}'.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="region_python">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_python" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">str</span>
+    </dt>
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="unique_id_python">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#unique_id_python" style="color: inherit; text-decoration: inherit;">unique_<wbr>id</a>
@@ -1279,8 +1539,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">str</span>
     </dt>
-    <dd><p>Object unique ID.</p>
-</dd></dl>
+    <dd>Object unique ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1294,8 +1553,15 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Represents a collection of dimensions of an object instance, json format.eg:'{&quot;unInstanceId&quot;:&quot;ins-ot3cq4bi&quot;}'.</p>
-</dd><dt class="property-optional"
+    <dd>Represents a collection of dimensions of an object instance, json format.eg:'{&quot;unInstanceId&quot;:&quot;ins-ot3cq4bi&quot;}'.</dd><dt class="property-optional property-replacement"
+            title="Optional">
+        <span id="region_yaml">
+<a data-swiftype-name="resource-property" data-swiftype-type="text" href="#region_yaml" style="color: inherit; text-decoration: inherit;">region</a>
+</span>
+        <span class="property-indicator"></span>
+        <span class="property-type">String</span>
+    </dt>
+    <dd>Region.</dd><dt class="property-optional"
             title="Optional">
         <span id="uniqueid_yaml">
 <a data-swiftype-name="resource-property" data-swiftype-type="text" href="#uniqueid_yaml" style="color: inherit; text-decoration: inherit;">unique<wbr>Id</a>
@@ -1303,8 +1569,7 @@ The following state arguments are supported:
         <span class="property-indicator"></span>
         <span class="property-type">String</span>
     </dt>
-    <dd><p>Object unique ID.</p>
-</dd></dl>
+    <dd>Object unique ID.</dd></dl>
 </pulumi-choosable>
 </div>
 
@@ -1320,6 +1585,9 @@ $ pulumi import tencentcloud:Monitor/policyBindingObject:PolicyBindingObject bin
 
 
 
+To learn more about importing existing cloud resources, see [Importing resources](/docs/using-pulumi/adopting-pulumi/import/).
+
+
 
 
 <h2 id="package-details">Package Details</h2>
@@ -1329,7 +1597,6 @@ $ pulumi import tencentcloud:Monitor/policyBindingObject:PolicyBindingObject bin
 	<dt>License</dt>
 	<dd>Apache-2.0</dd>
 	<dt>Notes</dt>
-	<dd><p>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</p>
-</dd>
+	<dd>This Pulumi package is based on the <a href="https://github.com/tencentcloudstack/terraform-provider-tencentcloud"><code>tencentcloud</code> Terraform Provider</a>.</dd>
 </dl>
 
